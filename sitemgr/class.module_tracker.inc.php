@@ -1,0 +1,29 @@
+<?php
+/**
+ * Tracker - Universal tracker (bugs, feature requests, ...) with voting and bounties
+ *
+ * @link http://www.egroupware.org
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @package tracker
+ * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$ 
+ */
+
+require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.sitemgr_module.inc.php');
+
+/**
+ * SiteMgr module for the new tracker
+ *
+ */
+class module_tracker extends sitemgr_module  
+{
+	function module_tracker()
+	{
+		$this->arguments = array();
+		$this->title = lang('Tracker');
+		$this->description = lang('This module displays information from the Tracker.');
+		
+		$this->etemplate_method = 'tracker.uitracker.index';
+	}
+}

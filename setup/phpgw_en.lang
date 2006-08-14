@@ -1,0 +1,106 @@
+--> enter new name	tracker	en	--> enter new name
+1 - lowest	tracker	en	1 - lowest
+5 - medium	tracker	en	5 - medium
+9 - highest	tracker	en	9 - highest
+accepted	tracker	en	Accepted
+actions	tracker	en	Actions
+add comment	tracker	en	Add comment
+after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
+after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
+allow editing by	tracker	en	Allow editing by
+allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
+allow voting	tracker	en	Allow voting
+allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
+assigned to	tracker	en	Assigned to
+assigning groups	tracker	en	Assigning groups
+attachments & links	tracker	en	Attachments & Links
+autoassign to	tracker	en	Autoassign to
+canned response	tracker	en	Canned response
+close pending	tracker	en	Close pending
+closed	tracker	en	Closed
+comment by %1 at %2:	tracker	en	Comment by %1 at %2:
+comments	tracker	en	Comments
+completed	tracker	en	Completed
+configuration for all trackers	tracker	en	Configuration for all trackers
+configuration updated.	tracker	en	Configuration updated.
+copy to	tracker	en	Copy to
+create new links	tracker	en	Create new links
+created	tracker	en	Created
+date opened	tracker	en	Date opened
+delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
+deleted	tracker	en	Deleted
+duplicate	tracker	en	Duplicate
+e-mail address to which a copy of all tracker-notifications should be send	tracker	en	E-Mail address to which a copy of all tracker-notifications should be send
+e-mail notifications	tracker	en	E-Mail notifications
+edit %1	tracker	en	Edit %1
+entry saved	tracker	en	Entry saved
+error adding the new tracker!	tracker	en	Error adding the new tracker!
+error saving the entry!!!	tracker	en	Error saving the entry!!!
+everybody	tracker	en	Everybody
+existing links	tracker	en	Existing links
+field	tracker	en	Field
+fixed	tracker	en	Fixed
+from	tracker	en	From
+history	tracker	en	History
+id	tracker	en	ID
+if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
+invalid	tracker	en	Invalid
+item assignee	tracker	en	Item assignee
+item creator	tracker	en	Item creator
+language for the copy	tracker	en	Language for the copy
+last modified	tracker	en	Last modified
+later	tracker	en	Later
+new %1	tracker	en	New %1
+new items	tracker	en	New items
+new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
+non-anonymous users	tracker	en	Non-anonymous users
+noone	tracker	en	Noone
+notification	tracker	en	Notification
+open	tracker	en	Open
+out of date	tracker	en	Out of date
+overdue after	tracker	en	Overdue after
+pending	tracker	en	Pending
+permission denied !!!	tracker	en	Permission denied !!!
+postponed	tracker	en	Postponed
+receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
+receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
+rejected	tracker	en	Rejected
+remind	tracker	en	Remind
+resolution	tracker	en	Resolution
+sender address	tracker	en	Sender address
+sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+summary	tracker	en	Summary
+technicians	tracker	en	Technicians
+thank you for voting.	tracker	en	Thank you for voting.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
+tracker	common	en	Tracker
+tracker added	tracker	en	Tracker added
+tracker admins	tracker	en	Tracker admins
+tracker configuration	tracker	en	Tracker configuration
+tracker deleted	tracker	en	Tracker deleted
+tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
+tracker item not found !!!	tracker	en	Tracker item not found !!!
+tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
+tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
+tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.
+url of the tracker	tracker	en	URL of the tracker
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	en	URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW
+versions	tracker	en	Versions
+vote for it!	tracker	en	Vote for it!
+votes	tracker	en	Votes
+wont fix	tracker	en	Wont fix
+works for me	tracker	en	Works for me
+yes, display groups first	tracker	en	Yes, display groups first
+yes, display users first	tracker	en	Yes, display users first
+you can respond by visiting:	tracker	en	You can respond by visiting:
+you need to enter a name	tracker	en	You need to enter a name
+you need to login to vote!	tracker	en	You need to login to vote!
+you voted %1.	tracker	en	You voted %1.
+2	tracker	en	2
+3	tracker	en	3
+4	tracker	en	4
+6	tracker	en	6
+7	tracker	en	7
+8	tracker	en	8

@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<overlay>
+	<template id="tracker.edit.description" template="" lang="" group="0" version="0.1.002">
+		<grid height="250" overflow="auto">
+			<columns>
+				<column width="100"/>
+				<column/>
+			</columns>
+			<rows>
+				<row valign="top">
+					<description value="Description"/>
+					<textbox multiline="true" rows="15" cols="70" span="3" id="tr_description" needed="1"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.comments" template="" lang="" group="0" version="0.1.002">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column width="100"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description value="Comments"/>
+					<int id="num_replies" readonly="true"/>
+				</row>
+				<row class="row" valign="top">
+					<vbox orient=",0,0">
+						<date-time id="replies[$row][reply_created]" readonly="true"/>
+						<menulist>
+							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
+						</menulist>
+					</vbox>
+					<textbox multiline="true" span="3" id="replies[$row][reply_message]" readonly="true"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="0.1.002">
+		<grid height="250">
+			<columns>
+				<column width="100"/>
+				<column/>
+			</columns>
+			<rows>
+				<row disabled="@no_canned">
+					<description options=",,,canned_response" value="Canned response" class="3"/>
+					<menulist>
+						<menupopup id="canned_response"/>
+					</menulist>
+				</row>
+				<row valign="top" disabled="@no_reply">
+					<description options=",,,reply_message" value="Comment"/>
+					<textbox multiline="true" rows="15" cols="70" span="3" id="reply_message"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.links" template="" lang="" group="0" version="0.1.002">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column width="100"/>
+				<column/>
+			</columns>
+			<rows>
+				<row class="th" disabled="@no_links">
+					<description span="all" value="Create new links"/>
+				</row>
+				<row class="row" disabled="@status_only">
+					<link-to span="all" id="link_to"/>
+				</row>
+				<row class="th">
+					<description span="all" value="Existing links"/>
+				</row>
+				<row class="row_off" valign="top">
+					<link-list span="all" id="link_to"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.history" template="" lang="" group="0" version="0.1.002">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row valign="top">
+					<historylog id="history"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit" template="" lang="" group="0" version="0.1.002">
+		<grid>
+			<columns>
+				<column width="105"/>
+				<column/>
+				<column/>
+				<column/>
+			</columns>
+			<rows>
+				<row disabled="!@msg">
+					<description span="all" class="redItalic" align="center" id="msg" no_lang="1"/>
+					<description/>
+					<description/>
+					<description/>
+				</row>
+				<row>
+					<description options=",,,tr_tracker" value="Tracker"/>
+					<menulist>
+						<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
+					</menulist>
+					<description options=",,,tr_private" value="Private"/>
+					<checkbox id="tr_private"/>
+				</row>
+				<row>
+					<description options=",,,cat_id" value="Category"/>
+					<menulist>
+						<menupopup id="cat_id" options="Select one" no_lang="1"/>
+					</menulist>
+					<description options=",,,tr_version" value="Version"/>
+					<menulist>
+						<menupopup id="tr_version" no_lang="1"/>
+					</menulist>
+				</row>
+				<row>
+					<description options=",,,tr_assigned" value="Assigned to"/>
+					<menulist>
+						<menupopup id="tr_assigned" options="Not assigned" no_lang="1"/>
+					</menulist>
+					<description options="tr_priority" value="Priority"/>
+					<menulist>
+						<menupopup id="tr_priority"/>
+					</menulist>
+				</row>
+				<row disabled="!@tr_id">
+					<description options=",,,tr_status" value="Status"/>
+					<hbox orient=",0,0">
+						<menulist>
+							<menupopup id="tr_status"/>
+						</menulist>
+						<date-time id="tr_closed" label=" "/>
+					</hbox>
+					<description value="Resolution" options=",,,tr_resolution"/>
+					<hbox orient=",0,0">
+						<menulist>
+							<menupopup id="tr_resolution"/>
+						</menulist>
+						<menulist>
+							<menupopup type="select-percent" id="tr_completion" label="-"/>
+						</menulist>
+					</hbox>
+				</row>
+				<row>
+					<description options=",,,tr_summary" value="Summary"/>
+					<textbox size="80" maxlength="80" span="3" id="tr_summary" needed="1"/>
+				</row>
+				<row valign="top">
+					<tabbox span="all">
+						<tabs>
+							<tab label="Description" statustext=""/>
+							<tab label="Comments" statustext=""/>
+							<tab label="Add comment" statustext=""/>
+							<tab label="Attachments &amp; Links" statustext=""/>
+							<tab label="History" statustext=""/>
+						</tabs>
+						<tabpanels>
+							<template id="tracker.edit.description"/>
+							<template id="tracker.edit.comments"/>
+							<template id="tracker.edit.add_comment"/>
+							<template id="tracker.edit.links"/>
+							<template id="tracker.edit.history"/>
+						</tabpanels>
+					</tabbox>
+				</row>
+				<row disabled="!@tr_id">
+					<description value="Created by"/>
+					<hbox orient=",0,0">
+						<menulist>
+							<menupopup type="select-account" id="tr_creator" readonly="true"/>
+						</menulist>
+						<date-time id="tr_created" label="," readonly="true"/>
+					</hbox>
+					<description value="Last modified"/>
+					<hbox orient=",0,0">
+						<menulist>
+							<menupopup type="select-account" id="tr_modifier" readonly="true"/>
+						</menulist>
+						<date-time id="tr_modified" label="," readonly="true"/>
+					</hbox>
+				</row>
+				<row>
+					<button label="Save" id="button[save]"/>
+					<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
+					<description/>
+					<vbox align="right" orient=",0,0">
+						<button label="Vote for it!" align="right" id="button[vote]" statustext="If this item is important for you, please vote for it."/>
+						<description id="no_vote" class="redItalic" no_lang="1" align="right"/>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>
