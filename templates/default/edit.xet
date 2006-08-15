@@ -118,11 +118,11 @@
 				<row>
 					<description options=",,,cat_id" value="Category"/>
 					<menulist>
-						<menupopup id="cat_id" options="Select one" no_lang="1"/>
+						<menupopup id="cat_id" options="Select one" no_lang="1" needed="1"/>
 					</menulist>
 					<description options=",,,tr_version" value="Version"/>
 					<menulist>
-						<menupopup id="tr_version" no_lang="1"/>
+						<menupopup id="tr_version" no_lang="1" options="Select one" needed="1"/>
 					</menulist>
 				</row>
 				<row>
@@ -139,7 +139,7 @@
 					<description options=",,,tr_status" value="Status"/>
 					<hbox orient=",0,0">
 						<menulist>
-							<menupopup id="tr_status"/>
+							<menupopup id="tr_status" statustext="@status_help"/>
 						</menulist>
 						<date-time id="tr_closed" label=" "/>
 					</hbox>

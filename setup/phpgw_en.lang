@@ -1,3 +1,4 @@
+%1 entries updated.	tracker	en	%1 entries updated.
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
 5 - medium	tracker	en	5 - medium
@@ -18,6 +19,7 @@ autoassign to	tracker	en	Autoassign to
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
+check all	tracker	en	Check all
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
@@ -60,6 +62,7 @@ later	tracker	en	Later
 new %1	tracker	en	New %1
 new items	tracker	en	New items
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
+no change	tracker	en	No change
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	Noone
 notification	tracker	en	Notification
@@ -67,6 +70,8 @@ open	tracker	en	Open
 out of date	tracker	en	Out of date
 overdue after	tracker	en	Overdue after
 pending	tracker	en	Pending
+pending items never get close automatic.	tracker	en	Pending items never get close automatic.
+pending items will be closed automatic after %1 days without response.	tracker	en	Pending items will be closed automatic after %1 days without response.
 permission denied !!!	tracker	en	Permission denied !!!
 postponed	tracker	en	Postponed
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
@@ -83,6 +88,7 @@ summary	tracker	en	Summary
 technicians	tracker	en	Technicians
 thank you for voting.	tracker	en	Thank you for voting.
 the canned response will be prefix the text you type.	tracker	en	The canned response will be prefix the text you type.
+this module displays information from the tracker.	tracker	en	This module displays information from the Tracker.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
 tracker	common	en	Tracker
 tracker added	tracker	en	Tracker added
@@ -107,6 +113,7 @@ yes, display users first	tracker	en	Yes, display users first
 you can respond by visiting:	tracker	en	You can respond by visiting:
 you need to enter a name	tracker	en	You need to enter a name
 you need to login to vote!	tracker	en	You need to login to vote!
+you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
 you voted %1.	tracker	en	You voted %1.
 2	tracker	en	2
 3	tracker	en	3

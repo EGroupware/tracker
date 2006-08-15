@@ -1,3 +1,4 @@
+%1 entries updated.	tracker	de	%1 Einträge aktualisiert.
 --> enter new name	tracker	de	--> neuen Namen eingeben
 1 - lowest	tracker	de	1 - niedrigste
 5 - medium	tracker	de	5 - mittlere
@@ -18,8 +19,9 @@ autoassign to	tracker	de	Automatisch zuweisen an
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
+check all	tracker	de	Alle auswählen
 close pending	tracker	de	Schließe schwebend
-closed	tracker	de	Erledigt
+closed	tracker	de	Geschlossen
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Prozent erledigt
@@ -60,6 +62,7 @@ later	tracker	de	Später
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
 new tracker item submitted by %1 at %2	tracker	de	Neuer Eintrag im Verfolgungsystem erstellt von %1 am %2
+no change	tracker	de	Keine Änderung
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
 notification	tracker	de	Benachrichtigung
@@ -67,6 +70,8 @@ open	tracker	de	Offen
 out of date	tracker	de	Nicht mehr aktuell
 overdue after	tracker	de	Überfällig nach
 pending	tracker	de	Schwebend
+pending items never get close automatic.	tracker	de	Schwebende Einträge werden nie automatisch geschlossen.
+pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch gelossen.
 permission denied !!!	tracker	de	Zugriff verweigert !!!
 postponed	tracker	de	Vertagt
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
@@ -83,6 +88,7 @@ summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
+this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 tracker	common	de	Verfolgungssystem
 tracker added	tracker	de	Verfolgungssystem hinzugefügt
@@ -107,6 +113,7 @@ yes, display users first	tracker	de	Ja, zeige Benutzer zuerst an
 you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis antworten:
 you need to enter a name	tracker	de	Sie müssen einen Namen angeben
 you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu können!
+you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
 2	tracker	de	2
 3	tracker	de	3

@@ -169,13 +169,14 @@ class uitracker extends botracker
 				'to_id' => $tr_id,
 				'to_app' => 'tracker',
 			),
+			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
+				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
 			'history' => array(
 				'id'  => $tr_id,
 				'app' => 'tracker',
 				'status-widgets' => array(
 					'Co' => 'select-percent',
 					'St' => &$this->stati,
-					'Pr' => &$this->priorities,
 					'Ca' => 'select-category',
 					'Tr' => 'select-category',
 					'Ve' => 'select-category',
@@ -309,6 +310,12 @@ class uitracker extends botracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
 		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
 		$rows['sel_options']['filter2'] = array(lang('All'))+$this->get_tracker_labels('version',$tracker);
+		if ($this->is_admin($tracker))
+		{
+			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
+			$rows['sel_options']['cat_id'] =& $rows['sel_options']['filter'];
+			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
+		}
 		$rows['allow_voting'] = $this->allow_voting;
 		$rows['no_cat'] = $query['col_filter']['cat_id'];
 		
@@ -342,6 +349,32 @@ class uitracker extends botracker
 			if (!$msg && $_GET['msg']) $msg = $_GET['msg'];
 			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
 		}
+		elseif ($content['update'])
+		{
+			unset($content['update']);
+			$checked = $content['nm']['rows']['checked']; unset($content['nm']);
+			// remove all 'No change'
+			foreach($content as $name => $value) if ($value === '') unset($content[$name]);
+			
+			if (!count($checked) || !count($content))
+			{
+				$msg = lang('You need to select something to change AND some tracker items!');
+			}
+			else
+			{
+				$n = 0;
+				foreach($checked as $tr_id)
+				{
+					if (!$this->read($tr_id)) continue;
+					foreach($content as $name => $value)
+					{
+						if ($value !== '') $this->data[$name] = $value;
+					}
+					if (!$this->save()) $n++;
+				}
+				$msg = lang('%1 entries updated.',$n);
+			}
+		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 
 		$sel_options = array(
@@ -349,9 +382,12 @@ class uitracker extends botracker
 			'tr_priority' => &$this->priorities,
 			'tr_status'   => &$this->stati,
 		);
-		$content = array(
+		if (!is_array($content)) $content = array();
+		$content += array(
 			'nm' => $GLOBALS['egw']->session->appsession('index','tracker'),
 			'msg' => $msg,
+			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
+				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
 		);		
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 		if (!$tracker) list($tracker) = @each($this->trackers);
@@ -361,10 +397,10 @@ class uitracker extends botracker
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.uitracker.get_rows',
 				'no_cat'         => true,
-				'filter2'        => '',	// all
+				'filter2'        => 0,	// all
 				'filter2_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
-				'filter'         => '', // all
+				'filter'         => 0, // all
 				'filter_label'   => lang('Category'),
 				'filter_no_lang' => true,
 				'order'          =>	$this->allow_voting ? 'votes' : 'tr_id',// IO name of the column to sort after (optional for the sortheaders)
@@ -374,9 +410,11 @@ class uitracker extends botracker
 					'tr_status'  => 'o',	// default filter: open
 				),
 	 			'header_left'    =>	'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
+	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 			);
 		}
 		$content['nm']['col_filter']['tr_tracker'] = $tracker;
+		$content['is_admin'] = $this->is_admin($tracker);
 		
 		$readonlys['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
 

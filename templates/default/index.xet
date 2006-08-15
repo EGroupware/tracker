@@ -6,7 +6,10 @@
 			<menupopup data="" rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1"/>
 		</menulist>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="0.1.001">
+	<template id="tracker.index.right" template="" lang="" group="0" version="0.1.002">
+		<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
+	</template>
+	<template id="tracker.index.rows" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -18,6 +21,7 @@
 				<column/>
 				<column/>
 				<column disabled="!@allow_voting"/>
+				<column/>
 			</columns>
 			<rows>
 				<row class="th">
@@ -30,6 +34,7 @@
 					<nextmatch-filterheader id="tr_assigned" options="All" label="Assigned to" no_lang="1"/>
 					<nextmatch-accountfilter options="All" id="tr_creator" label="Created by"/>
 					<nextmatch-sortheader label="Votes" id="votes"/>
+					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1"/>
 				</row>
 				<row class="row">
 					<description id="${row}[tr_id]"/>
@@ -40,7 +45,7 @@
 					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					<int align="center" id="${row}[tr_priority]" readonly="true"/>
 					<menulist>
-						<menupopup no_lang="1" id="${row}[tr_status]" readonly="true"/>
+						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>
 					<menulist>
 						<menupopup type="select-account" id="${row}[tr_assigned]" readonly="true"/>
@@ -49,27 +54,73 @@
 						<menupopup type="select-account" id="${row}[tr_creator]" readonly="true"/>
 					</menulist>
 					<int align="center" id="${row}[votes]" readonly="true"/>
+					<checkbox options="$row_cont[tr_id]" id="checked[]" align="center"/>
 				</row>
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="0.1.001">
+	<template id="tracker.index" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%">
 			<columns>
+				<column/>
 				<column/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
 					<description align="center" id="msg" span="all" class="redItalic" no_lang="1"/>
+					<description/>
 				</row>
 				<row disabled="1">
 					<template id="tracker.index.left"/>
+					<template align="right" id="tracker.index.right"/>
 				</row>
 				<row>
-					<nextmatch options="tracker.index.rows" id="nm"/>
+					<nextmatch options="tracker.index.rows" id="nm" span="all"/>
 				</row>
-				<row>
+				<row disabled="!@is_admin">
+					<hbox span="all">
+						<menulist>
+							<menupopup id="cat_id" options="No change" label="Category" no_lang="1"/>
+						</menulist>
+						<menulist>
+							<menupopup id="tr_version" options="No change" label="Version" no_lang="1"/>
+						</menulist>
+						<menulist>
+							<menupopup id="tr_priority" options="No change" label="Priority"/>
+						</menulist>
+						<menulist>
+							<menupopup id="tr_status" options="No change" label="Status" statustext="@status_help"/>
+						</menulist>
+						<menulist>
+							<menupopup id="tr_assigned" options="No change" label="Assigned to" no_lang="1"/>
+						</menulist>
+						<button id="update" label="Update"/>
+						<button image="arrow_ltr" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('nm[rows][checked][]')); return false;" needed="1" class="check_all_arrow" align="right"/>
+					</hbox>
+				</row>
+				<row disabled="!@is_admin">
+					<grid>
+						<columns>
+							<column/>
+							<column/>
+						</columns>
+						<rows>
+							<row>
+								<description value="Canned response"/>
+								<description value="Comment"/>
+							</row>
+							<row valign="top">
+								<menulist>
+									<menupopup id="canned_response" options="Select one" no_lang="1" statustext="The canned response will be prefix the text you type."/>
+								</menulist>
+								<textbox multiline="true" rows="3" cols="60" id="reply_message"/>
+							</row>
+						</rows>
+					</grid>
+				</row>
+				<row disabled="@is_admin">
 					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
+					<description/>
 				</row>
 			</rows>
 		</grid>
