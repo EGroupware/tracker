@@ -16,18 +16,25 @@ assigning groups	tracker	de	Gruppen zuweisen
 attachments & links	tracker	de	Anhänge & Verknüpfungen
 autoassign to	tracker	de	Automatisch zuweisen an
 canned response	tracker	de	Standardantwort
+canned responses	tracker	de	Standardantworten
+categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
 close pending	tracker	de	Schließe schwebend
 closed	tracker	de	Erledigt
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
-completed	tracker	de	Erledigt
+completed	tracker	de	Prozent erledigt
+configuration	tracker	de	Konfiguration
 configuration for all trackers	tracker	de	Konfiguration für alle Verfolgungssysteme
 configuration updated.	tracker	de	Konfiguration aktualisiert.
+configuration, acl, notifications	tracker	de	Konfiguration, Zugriffskontrolle, Benachrichtigungen
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
 date opened	tracker	de	Datum angelegt
+delete this canned response	tracker	de	Diese Standardantwort löschen
+delete this category	tracker	de	Diese Kategorie löschen
 delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
+delete this version	tracker	de	Diese Version löschen
 deleted	tracker	de	Gelöscht
 duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
@@ -71,13 +78,16 @@ sender address	tracker	de	Absender Adresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
+staff	tracker	de	Mitarbeiter
 summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
+the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 tracker	common	de	Verfolgungssystem
 tracker added	tracker	de	Verfolgungssystem hinzugefügt
 tracker admins	tracker	de	Administratoren des Verfolgungssystems
+tracker admins & technicians	tracker	de	Administratoren & Techniker des Verfolgungssystems
 tracker configuration	tracker	de	Konfiguration des Verfolgungssystems
 tracker deleted	tracker	de	Verfolgungssystem gelöscht
 tracker item modified by %1 at %2	tracker	de	Verfolgungssystem Eintrag geändert von %1 am %2

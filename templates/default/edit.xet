@@ -48,7 +48,7 @@
 				<row disabled="@no_canned">
 					<description options=",,,canned_response" value="Canned response" class="3"/>
 					<menulist>
-						<menupopup id="canned_response"/>
+						<menupopup id="canned_response" options="Select one" no_lang="1" statustext="The canned response will be prefix the text you type."/>
 					</menulist>
 				</row>
 				<row valign="top" disabled="@no_reply">

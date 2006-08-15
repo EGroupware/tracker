@@ -389,7 +389,8 @@ class botracker extends sotracker
 			{
 				if ($this->data['canned_response'])
 				{
-					$this->data['reply_message'] .= $this->get_canned_response($this->data['canned_response']);
+					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).
+						($this->data['reply_message'] ? "\n\n".$this->data['reply_message'] : '');
 				}
 				$this->data['reply_created'] = $this->now;
 				$this->data['reply_creator'] = $this->user;
@@ -854,7 +855,7 @@ class botracker extends sotracker
 		}
 		natcasesort($labels);
 		
-		//echo "botracker::get_tracker_labels('$type,$tracker')"; _debug_array($labels);
+		//echo "botracker::get_tracker_labels('$type',$tracker)"; _debug_array($labels);
 		return $labels;
 	}
 	
@@ -866,6 +867,24 @@ class botracker extends sotracker
 	{
 		unset($this->all_cats);
 		$this->trackers = $this->get_tracker_labels();
+	}
+	
+	/**
+	 * Get the canned response via it's id
+	 *
+	 * @param int $id
+	 * @return string/boolean string with the response or false if id not found
+	 */
+	function get_canned_response($id)
+	{
+		foreach($this->all_cats as $cat)
+		{
+			if ($cat_type == 'response' && $cat['id'] == $id)
+			{
+				return $cat['description'];
+			}
+		}
+		return false;
 	}
 	
 	/**

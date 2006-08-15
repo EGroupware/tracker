@@ -212,6 +212,7 @@ class uitracker extends botracker
 			'tr_status'   => &$this->stati,
 			'tr_resolution' => &$this->resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'canned_response' => $this->get_tracker_labels('response'),
 		);
 		foreach($this->field2history as $field => $status)
 		{
@@ -243,12 +244,12 @@ class uitracker extends botracker
 					lang('You need to login to vote!');
 			}
 		}
-		$content['no_links'] = $readonlys['link_to'];
-		// ToDo: implement canned responses
-		if (true || $readonlys['canned_response'])
+		if ($readonlys['canned_response'])
 		{
 			$content['no_canned'] = true;
 		}
+		$content['no_links'] = $readonlys['link_to'];
+
 		$what = $tracker ? $this->trackers[$tracker] : lang('Tracker');
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
@@ -392,6 +393,8 @@ class uitracker extends botracker
 	 */
 	function admin($content=null,$msg='')
 	{
+		$tabs = 'cats|staff|config';
+
 		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$GLOBALS['egw']->common->egw_header();
@@ -400,7 +403,7 @@ class uitracker extends botracker
 			$GLOBALS['egw']->common->egw_footer();
 			return;
 		}
-		_debug_array($content);
+		//_debug_array($content);
 		$tracker = (int) $content['tracker'];
 
 		if (is_array($content))
@@ -489,7 +492,11 @@ class uitracker extends botracker
 						$msg = lang('Configuration updated.').' ';
 					}
 					$need_update = false;
-					foreach(array('cats','versions') as $name)
+					foreach(array(
+						'cats'      => lang('Category'),
+						'versions'  => lang('Version'),
+						'responses' => lang('Canned response'),
+					) as $name => $what)
 					{
 						foreach($content[$name] as $cat)
 						{
@@ -499,8 +506,8 @@ class uitracker extends botracker
 								'main'   => $tracker,
 								'parent' => $tracker,
 								'access' => 'public',
-								'data'   => array('type' => $name == 'cats' ? 'cat' : 'version'),
-								'descr'  => 'tracker-'.($name == 'cats' ? 'cat' : 'version'),
+								'data'   => array('type' => substr($name,0,-1)),
+								'description'  => 'tracker-'.($name == 'cats' ? 'cat' : 'version'),
 							);
 							// search cat in existing ones
 							foreach($this->all_cats as $c)
@@ -514,16 +521,25 @@ class uitracker extends botracker
 							}
 							// check if new cat or changed
 							if (!$old_cat || $cat['name'] != $old_cat['name'] || 
-								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'])
+								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
+								$name == 'responses' && $cat['description'] != $old_cat['description'])
 							{
 								$old_cat['name'] = $cat['name'];
-								if ($cat['autoassign']) $old_cat['data']['autoassign'] = $cat['autoassign'];
+								switch($name)
+								{
+									case 'cats':
+										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										break;
+									case 'responses':
+										$old_cat['description'] = $cat['description'];
+										break;
+								}
 								//echo "update to"; _debug_array($old_cat);
 								$old_cat['data'] = serialize($old_cat['data']);
+								$old_cat['descr'] = $old_cat['description'];	// stupid old cat-class returns 'description' and expects 'descr' as parameter
 								$GLOBALS['egw']->categories->account_id = -1;	// global cat!
 								if (($id = $GLOBALS['egw']->categories->add($old_cat)))
 								{
-									$what = $name == 'cats' ? lang('Category') : lang('Version');
 									$msg .= $old_cat['id'] ? lang("Tracker-%1 '%2' updated.",$what,$cat['name']) : lang("Tracker-%1 '%2' added.",$what,$cat['name']);
 									$need_update = true;
 								}
@@ -544,7 +560,11 @@ class uitracker extends botracker
 					break;
 					
 				default:
-					foreach(array('cats','versions') as $name)
+					foreach(array(
+						'cats'      => lang('Category'),
+						'versions'  => lang('Version'),
+						'responses' => lang('Canned response'),
+					) as $name => $what)
 					{
 						if (isset($content[$name]['delete']))
 						{
@@ -552,7 +572,7 @@ class uitracker extends botracker
 							if ((int)$id)
 							{
 								$GLOBALS['egw']->categories->delete($id);
-								$msg = lang('Tracker-%1 deleted.',$name == 'cats' ? lang('Category') : lang('Version'));
+								$msg = lang('Tracker-%1 deleted.',$what);
 								$this->reload_labels();
 							}
 						}
@@ -566,33 +586,39 @@ class uitracker extends botracker
 			'tracker' => $tracker,
 			'admins' => $this->admins[$tracker],
 			'technicians' => $this->technicians[$tracker],
+			$tabs => $content[$tabs],
 		);
 		foreach($this->config_names as $name)
 		{
 			if (!isset($content[$name])) $content[$name] = $this->$name;
 		}
 		// cats & versions
-		$v = $c = 1;
+		$v = $c = $r = 1;
 		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 		foreach($this->all_cats as $cat)
 		{
-			if (!($data = unserialize($cat['data']))) $data = array();
+			if (!is_array($data = unserialize($cat['data']))) $data = array('type' => $data);
 			//echo "<p>$cat[name] ($cat[id]/$cat[parent]/$cat[main]): ".print_r($data,true)."</p>\n";
 
 			if ($cat['parent'] == $tracker && $data['type'] != 'tracker')
 			{
-				if ($data['type'] == 'version')
+				switch ($data['type'])
 				{
-					$content['versions'][$v++] = $cat + $data;
-				}
-				else // cat
-				{
-					$data['type'] = 'cat';
-					$content['cats'][$c++] = $cat + $data;
+					case 'version':
+						$content['versions'][$v++] = $cat + $data;
+						break;
+					case 'response':
+						$content['responses'][$r++] = $cat;
+						break;
+					default:	// cat
+						$data['type'] = 'cat';
+						$content['cats'][$c++] = $cat + $data;
+						break;
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = array('id' => 0,'name' => '');	// one empty line for adding
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = 
+			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;
 		foreach($this->field2label as $name => $label)
@@ -627,8 +653,9 @@ class uitracker extends botracker
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
+			$tabs => array('config' => !!$tracker),
 		);
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration');
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl =& new etemplate('tracker.admin');
 
 		return $tpl->exec('tracker.uitracker.admin',$content,$sel_options,$readonlys,$content);

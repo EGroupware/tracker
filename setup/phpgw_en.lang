@@ -16,18 +16,25 @@ assigning groups	tracker	en	Assigning groups
 attachments & links	tracker	en	Attachments & Links
 autoassign to	tracker	en	Autoassign to
 canned response	tracker	en	Canned response
+canned responses	tracker	en	Canned responses
+categories, versions, canned responses	tracker	en	Categories, versions, canned responses
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
+configuration	tracker	en	Configuration
 configuration for all trackers	tracker	en	Configuration for all trackers
 configuration updated.	tracker	en	Configuration updated.
+configuration, acl, notifications	tracker	en	Configuration, ACL, Notifications
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
 created	tracker	en	Created
 date opened	tracker	en	Date opened
+delete this canned response	tracker	en	Delete this canned response
+delete this category	tracker	en	Delete this category
 delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
+delete this version	tracker	en	Delete this version
 deleted	tracker	en	Deleted
 duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	E-Mail address to which a copy of all tracker-notifications should be send
@@ -71,13 +78,16 @@ sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+staff	tracker	en	Staff
 summary	tracker	en	Summary
 technicians	tracker	en	Technicians
 thank you for voting.	tracker	en	Thank you for voting.
+the canned response will be prefix the text you type.	tracker	en	The canned response will be prefix the text you type.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
 tracker	common	en	Tracker
 tracker added	tracker	en	Tracker added
 tracker admins	tracker	en	Tracker admins
+tracker admins & technicians	tracker	en	Tracker admins & technicians
 tracker configuration	tracker	en	Tracker configuration
 tracker deleted	tracker	en	Tracker deleted
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
