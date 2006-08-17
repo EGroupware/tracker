@@ -8,14 +8,20 @@ actions	tracker	de	Befehle
 add comment	tracker	de	Kommentar hinzufügen
 after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
 after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
+allow bounties	tracker	de	Prämien erlauben
 allow editing by	tracker	de	Bearbeiten erlauben von
 allow to assign groups to tracker items	tracker	de	Erlaube Einträgen Gruppen zuzuweisen
 allow voting	tracker	de	Erlaube Abstimmungen
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Einträge des Verfolgungssystem, zeige und sortiere nach den Stimmen
+amount	tracker	de	Betrag
 assigned to	tracker	de	Zugewiesen an
 assigning groups	tracker	de	Gruppen zuweisen
 attachments & links	tracker	de	Anhänge & Verknüpfungen
 autoassign to	tracker	de	Automatisch zuweisen an
+bounties	tracker	de	Prämien
+bounty confirmed	tracker	de	Prämie bestätigt
+bounty deleted	tracker	de	Prämie gelöscht
+bounty set	tracker	de	Prämie gesetzt
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
@@ -29,19 +35,25 @@ configuration	tracker	de	Konfiguration
 configuration for all trackers	tracker	de	Konfiguration für alle Verfolgungssysteme
 configuration updated.	tracker	de	Konfiguration aktualisiert.
 configuration, acl, notifications	tracker	de	Konfiguration, Zugriffskontrolle, Benachrichtigungen
+confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie zahlen, für die Implementation oder Behebung dieses Themas
+confirm the receipt of money for this bounty	tracker	de	Bestätigen Sie den Zahlungseingang dieser Prämie
+confirmed	tracker	de	Bestätigt
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
 date opened	tracker	de	Datum angelegt
+delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
 delete this category	tracker	de	Diese Kategorie löschen
 delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
 delete this version	tracker	de	Diese Version löschen
 deleted	tracker	de	Gelöscht
+donator name to show	tracker	de	Name des Spenders zum anzeigen
 duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
 e-mail notifications	tracker	de	E-Mail Benachrichtigungen
 edit %1	tracker	de	%1 bearbeiten
+email address to contact you	tracker	de	Email addresse um Sie zu kontaktieren
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
@@ -52,6 +64,7 @@ fixed	tracker	de	Gelöst
 from	tracker	de	Von
 history	tracker	de	Historie
 id	tracker	de	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	de	Wenn dieser Punkt für Sie wichtig ist, können Sie dafür eine Prämie setzen!
 if this item is important for you, please vote for it.	tracker	de	Wenn dieser Punkt für Sie wichtig ist, stimmen Sie bitte dafür ab.
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
@@ -71,7 +84,7 @@ out of date	tracker	de	Nicht mehr aktuell
 overdue after	tracker	de	Überfällig nach
 pending	tracker	de	Schwebend
 pending items never get close automatic.	tracker	de	Schwebende Einträge werden nie automatisch geschlossen.
-pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch gelossen.
+pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch geschlossen.
 permission denied !!!	tracker	de	Zugriff verweigert !!!
 postponed	tracker	de	Vertagt
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
@@ -81,12 +94,16 @@ remind	tracker	de	Erinnern
 resolution	tracker	de	Lösung
 sender address	tracker	de	Absender Adresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
+set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
+set bounty	tracker	de	Prämie setzen
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
 staff	tracker	de	Mitarbeiter
 summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
+thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetzt haben.
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
+the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
@@ -114,6 +131,7 @@ you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis a
 you need to enter a name	tracker	de	Sie müssen einen Namen angeben
 you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu können!
 you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
+you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und Email des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
 2	tracker	de	2
 3	tracker	de	3

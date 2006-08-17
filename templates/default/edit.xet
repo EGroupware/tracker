@@ -92,7 +92,50 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.edit.bounties" template="" lang="" group="0" version="0.1.003">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column/>
+				<column/>
+				<column/>
+				<column/>
+				<column/>
+				<column/>
+			</columns>
+			<rows>
+				<row disabled="@no_set_bounty">
+					<description span="2" value="Set an own bounty (in %s)" id="currency" no_lang="1"/>
+					<textbox type="float" id="new[bounty_amount]"/>
+					<textbox size="16" maxlength="64" id="new[bounty_name]" statustext="Donator name to show" blur="@user_name"/>
+					<textbox size="24" maxlength="64" id="new[bounty_email]" statustext="Email address to contact you" blur="@user_email"/>
+					<button span="all" label="Set bounty" id="bounty" statustext="If this item is important for you, please consider to set a bounty for it!" onclick="return confirm('Confirm that you pay the specified bounty to implement or fix the issue');"/>
+				</row>
+				<row class="th">
+					<description value="Datum"/>
+					<description value="User"/>
+					<textbox type="float" label="Amount" id="total" readonly="true"/>
+					<description value="Name"/>
+					<description value="Email"/>
+					<description value="Confirmed"/>
+				</row>
+				<row class="row" disabled="!@num_bounties">
+					<date-time id="${row}[bounty_created]" readonly="true"/>
+					<menulist>
+						<menupopup type="select-account" id="${row}[bounty_creator]" readonly="true"/>
+					</menulist>
+					<textbox type="float" id="${row}[bounty_amount]" readonly="true" label="@currency" no_lang="1"/>
+					<description id="${row}[bounty_name]" no_lang="1"/>
+					<description id="${row}[bounty_email]" no_lang="1"/>
+					<hbox align="center" orient=",0,0">
+						<date-time id="${row}[bounty_confirmed]" readonly="true"/>
+						<button image="edit" label="Confirm" align="center" id="confirm[$row_cont[bounty_id]]" statustext="Confirm the receipt of money for this bounty" onclick="return confirm('Confirm the receipt of money for this bounty');"/>
+						<button image="delete" label="Delete" align="center" id="delete[$row_cont[bounty_id]]" statustext="Delete this bounty" onclick="return confirm('Delete this bounty');"/>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit" template="" lang="" group="0" version="0.1.003">
 		<grid>
 			<columns>
 				<column width="105"/>
@@ -160,11 +203,12 @@
 				<row valign="top">
 					<tabbox span="all">
 						<tabs>
-							<tab label="Description" statustext=""/>
-							<tab label="Comments" statustext=""/>
-							<tab label="Add comment" statustext=""/>
-							<tab label="Attachments &amp; Links" statustext=""/>
-							<tab label="History" statustext=""/>
+							<tab label="Description" statustext="Description"/>
+							<tab label="Comments" statustext="Comments"/>
+							<tab label="Add comment" statustext="Add comment"/>
+							<tab label="Attachments &amp; Links" statustext="Attachments &amp; Links"/>
+							<tab label="History" statustext="History"/>
+							<tab label="Bounties" statustext="If this item is important for you, please consider to set a bounty for it!"/>
 						</tabs>
 						<tabpanels>
 							<template id="tracker.edit.description"/>
@@ -172,6 +216,7 @@
 							<template id="tracker.edit.add_comment"/>
 							<template id="tracker.edit.links"/>
 							<template id="tracker.edit.history"/>
+							<template id="tracker.edit.bounties"/>
 						</tabpanels>
 					</tabbox>
 				</row>
@@ -194,9 +239,8 @@
 				<row>
 					<button label="Save" id="button[save]"/>
 					<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
-					<description/>
-					<vbox align="right" orient=",0,0">
-						<button label="Vote for it!" align="right" id="button[vote]" statustext="If this item is important for you, please vote for it."/>
+					<vbox align="right" span="2" orient=",0,0">
+						<button label="Vote for it!" id="button[vote]" statustext="If this item is important for you, please vote for it." align="right" onclick="return confirm('Do you want to vote for this item');"/>
 						<description id="no_vote" class="redItalic" no_lang="1" align="right"/>
 					</vbox>
 				</row>

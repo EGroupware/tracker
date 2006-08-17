@@ -21,6 +21,7 @@
 				<column/>
 				<column/>
 				<column disabled="!@allow_voting"/>
+				<column disabled="!@allow_bounties"/>
 				<column/>
 			</columns>
 			<rows>
@@ -34,6 +35,7 @@
 					<nextmatch-filterheader id="tr_assigned" options="All" label="Assigned to" no_lang="1"/>
 					<nextmatch-accountfilter options="All" id="tr_creator" label="Created by"/>
 					<nextmatch-sortheader label="Votes" id="votes"/>
+					<nextmatch-sortheader label="Bounties" id="bounties"/>
 					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1"/>
 				</row>
 				<row class="row">
@@ -54,6 +56,7 @@
 						<menupopup type="select-account" id="${row}[tr_creator]" readonly="true"/>
 					</menulist>
 					<int align="center" id="${row}[votes]" readonly="true"/>
+					<textbox type="float" align="center" id="${row}[bounties]" readonly="true" label="$row_cont[currency]" no_lang="1"/>
 					<checkbox options="$row_cont[tr_id]" id="checked[]" align="center"/>
 				</row>
 			</rows>

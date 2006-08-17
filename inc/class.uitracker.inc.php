@@ -28,6 +28,12 @@ class uitracker extends botracker
 		'index' => true,
 		'admin' => true,
 	);
+	/**
+	 * Displayed instead of the '@' in email-addresses
+	 * 
+	 * @var string
+	 */
+	var $mangle_at = ' -at- ';
 
 	/**
 	 * Constructor
@@ -49,7 +55,7 @@ class uitracker extends botracker
 	 */
 	function edit($content=null,$msg='',$popup=true)
 	{
-		$tabs = 'description|comments|add_comment|links|history';
+		$tabs = 'description|comments|add_comment|links|history|bounties';
 
 		if (!is_array($content))
 		{
@@ -98,9 +104,11 @@ class uitracker extends botracker
 		else	// submitted form
 		{
 			list($button) = @each($content['button']); unset($content['button']);
+			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
 
 			$this->data = $content;
+			unset($this->data['bounties']['new']); 
 
 			switch($button)
 			{
@@ -145,7 +153,7 @@ class uitracker extends botracker
 					break;
 
 				case 'vote':
-					if ($button == 'vote' && $this->cast_vote())
+					if ($this->cast_vote())
 					{
 						$msg = lang('Thank you for voting.');
 						if ($popup)
@@ -155,13 +163,107 @@ class uitracker extends botracker
 						}
 					}
 					break;
+					
+				case 'bounty':
+					if (!$this->allow_bounties) break;
+					$bounty = $content['bounties']['new'];
+					if (!$this->is_anonymous())
+					{
+						if (!$bounty['bounty_name']) $bounty['bounty_name'] = $GLOBALS['egw_info']['user']['account_fullname'];
+						if (!$bounty['bounty_email']) $bounty['bounty_email'] = $GLOBALS['egw_info']['user']['account_email'];
+					}
+					if (!$bounty['bounty_amount'] || !$bounty['bounty_name'] || !$bounty['bounty_email'])
+					{
+						$msg = lang('You need to specify amount, donators name AND email address!');
+					}
+					elseif ($this->save_bounty($bounty))
+					{
+						$msg = lang('Thank you for setting this bounty.').
+							' '.lang('The bounty will NOT be shown, until the money is received.');
+						array_unshift($this->data['bounties'],$bounty);
+						unset($content['bounties']['new']);
+					}
+					break;
+					
+				default:
+					if (!$this->allow_bounties) break;
+					// check delete bounty
+					list($id) = @each($this->data['bounties']['delete']);
+					if ($id)
+					{
+						unset($this->data['bounties']['delete']);
+						if ($this->delete_bounty($id))
+						{
+							$msg = lang('Bounty deleted.');
+							foreach($this->data['bounties'] as $n => $bounty)
+							{
+								if ($bounty['bounty_id'] == $id)
+								{
+									unset($this->data['bounties'][$n]);
+									break;
+								}
+							}
+						}
+						else
+						{
+							$msg = lang('Permission denied !!!');
+						}
+					}
+					else
+					{
+						// check confirm bounty
+						list($id) = @each($this->data['bounties']['confirm']);
+						if ($id)
+						{
+							unset($this->data['bounties']['confirm']);
+							foreach($this->data['bounties'] as $n => $bounty)
+							{
+								if ($bounty['bounty_id'] == $id)
+								{
+									if ($this->save_bounty($this->data['bounties'][$n]))
+									{
+										$msg = lang('Bounty confirmed.');
+										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=$msg';";
+										$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
+									}
+									else
+									{
+										$msg = lang('Permission denied !!!');
+									}
+									break;
+								}
+							}
+						}
+					}
+					break;
 			}
 		}
 		$tr_id = $this->data['tr_id'];
 		if (!($tracker = $this->data['tr_tracker'])) list($tracker) = @each($this->trackers);
 
+		$readonlys = $this->readonlys_from_acl();
 		$preserv = $content = $this->data;
 		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
+		if ($this->allow_bounties)
+		{
+			if (is_array($content['bounties']))
+			{
+				$total = 0;
+				foreach($content['bounties'] as $bounty)
+				{
+					$total += $bounty['bounty_amount'];
+					// confirmed bounties cant be deleted and need no confirm button
+					$readonlys['delete['.$bounty['bounty_id'].']'] = 
+						$readonlys['confirm['.$bounty['bounty_id'].']'] = !$this->is_admin($tracker) || $bounty['bounty_confirmed'];
+				}
+				$content['bounties']['num_bounties'] = count($content['bounties']);
+				array_unshift($content['bounties'],false);	// we need the array index to start with 2!
+				array_unshift($content['bounties'],false);
+				$content['bounties']['total'] = $total ? sprintf('%4.2lf',$total) : '';
+			}
+			$content['bounties']['currency'] = $this->currency;
+			$content['bounties']['is_admin'] = $this->is_admin($tracker);
+		}
 		$content += array(
 			'msg' => $msg,
 			'on_cancel' => $popup ? 'window.close();' : '',
@@ -188,6 +290,11 @@ class uitracker extends botracker
 				),
 			),
 		);
+		if ($this->allow_bounties && !$this->is_anonymous())
+		{
+			$content['bounties']['user_name'] = $GLOBALS['egw_info']['user']['account_fullname'];
+			$content['bounties']['user_email'] = $GLOBALS['egw_info']['user']['account_email'];
+		}
 		$preserv['popup'] = $popup;
 
 		if (!$tr_id && isset($_REQUEST['link_app']) && isset($_REQUEST['link_id']) && !is_array($content['link_to']['to_id']))
@@ -220,11 +327,15 @@ class uitracker extends botracker
 		{
 			$sel_options['status'][$status] = $this->field2label[$field];
 		}
-		$readonlys = $this->readonlys_from_acl();
+		$sel_options['status']['xb'] = 'Bounty deleted';
+		$sel_options['status']['bo'] = 'Bounty set';
+		$sel_options['status']['Bo'] = 'Bounty confirmed';
+		
 		$readonlys[$tabs] = array(
 			'comments' => !$tr_id || !$content['num_replies'],
 			'add_comment' => !$tr_id || $readonlys['reply_message'],
 			'history'  => !$tr_id,
+			'bounties' => !$this->allow_bounties,
 		);
 		if ($tr_id && $readonlys['reply_message'])
 		{
@@ -251,6 +362,7 @@ class uitracker extends botracker
 			$content['no_canned'] = true;
 		}
 		$content['no_links'] = $readonlys['link_to'];
+		$content['bounties']['no_set_bounties'] = $readonlys['bounty'];
 
 		$what = $tracker ? $this->trackers[$tracker] : lang('Tracker');
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
@@ -301,11 +413,12 @@ class uitracker extends botracker
 			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
 		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
-		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting);	// true = join votes table
+		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		
 		foreach($rows as $n => $row)
 		{
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
+			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 		}
 		// set the options for assigned to depending on the tracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
@@ -318,8 +431,9 @@ class uitracker extends botracker
 			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
 		}
 		$rows['allow_voting'] = $this->allow_voting;
+		$rows['allow_bounties'] = $this->allow_bounties;
 		$rows['no_cat'] = $query['col_filter']['cat_id'];
-		
+	
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.$this->trackers[$tracker];
 
 		return $total;
@@ -420,7 +534,7 @@ class uitracker extends botracker
 				'filter'         => 0, // all
 				'filter_label'   => lang('Category'),
 				'filter_no_lang' => true,
-				'order'          =>	$this->allow_voting ? 'votes' : 'tr_id',// IO name of the column to sort after (optional for the sortheaders)
+				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),
 				'col_filter'     => array(
@@ -500,7 +614,7 @@ class uitracker extends botracker
 					{
 						foreach(array_diff($this->config_names,array('field_acl','technicians','admins')) as $name)
 						{
-							if ($this->$name != $content[$name])
+							if ((string) $this->$name !== $content[$name])
 							{
 								$this->$name = $content[$name];
 								$need_update = true;
@@ -703,6 +817,7 @@ class uitracker extends botracker
 				2 => lang('Yes, display users first'),
 			),
 			'allow_voting' => array('No','Yes'),
+			'allow_bounties' => array('No','Yes'),
 			'autoassign' => $this->get_staff($tracker),
 			'notification_lang' => $GLOBALS['egw']->translation->get_installed_langs(),
 		);

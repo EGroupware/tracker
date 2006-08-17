@@ -119,6 +119,14 @@
 					</menulist>
 				</row>
 				<row class="row">
+					<description options=",,,allow_bounties" value="Allow bounties"/>
+					<menulist>
+						<menupopup id="allow_bounties"/>
+					</menulist>
+					<description options=",,,currency" value="Currency"/>
+					<textbox id="currency"/>
+				</row>
+				<row class="row">
 					<description options=",,,overdue_days" value="Overdue after"/>
 					<menulist>
 						<menupopup type="select-number" options="Never,1,30" id="overdue_days" statustext="After how many days a not replied item should be marked overdue?"/>
@@ -133,7 +141,7 @@
 				</row>
 				<row class="row" valign="top">
 					<description value="Allow editing by"/>
-					<grid width="100%" height="240" overflow="auto">
+					<grid width="100%" height="230" overflow="auto">
 						<columns>
 							<column/>
 							<column/>

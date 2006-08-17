@@ -8,14 +8,20 @@ actions	tracker	en	Actions
 add comment	tracker	en	Add comment
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
+allow bounties	tracker	en	Allow bounties
 allow editing by	tracker	en	Allow editing by
 allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
+amount	tracker	en	Amount
 assigned to	tracker	en	Assigned to
 assigning groups	tracker	en	Assigning groups
 attachments & links	tracker	en	Attachments & Links
 autoassign to	tracker	en	Autoassign to
+bounties	tracker	en	Bounties
+bounty confirmed	tracker	en	Bounty confirmed
+bounty deleted	tracker	en	Bounty deleted
+bounty set	tracker	en	Bounty set
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
@@ -26,22 +32,28 @@ comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
 configuration	tracker	en	Configuration
-configuration for all trackers	tracker	en	Configuration for all trackers
+configuration for all trackers	tracker	en	Configuration for all tracker queues
 configuration updated.	tracker	en	Configuration updated.
 configuration, acl, notifications	tracker	en	Configuration, ACL, Notifications
+confirm that you pay the specified bounty to implement or fix the issue	tracker	en	Confirm that you pay the specified bounty to implement or fix the issue
+confirm the receipt of money for this bounty	tracker	en	Confirm the receipt of money for this bounty
+confirmed	tracker	en	Confirmed
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
 created	tracker	en	Created
 date opened	tracker	en	Date opened
+delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
 delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
 delete this version	tracker	en	Delete this version
 deleted	tracker	en	Deleted
+donator name to show	tracker	en	Donator name to show
 duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	E-Mail address to which a copy of all tracker-notifications should be send
 e-mail notifications	tracker	en	E-Mail notifications
 edit %1	tracker	en	Edit %1
+email address to contact you	tracker	en	Email address to contact you
 entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
 error saving the entry!!!	tracker	en	Error saving the entry!!!
@@ -52,6 +64,7 @@ fixed	tracker	en	Fixed
 from	tracker	en	From
 history	tracker	en	History
 id	tracker	en	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	en	If this item is important for you, please consider to set a bounty for it!
 if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
 invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
@@ -81,21 +94,25 @@ remind	tracker	en	Remind
 resolution	tracker	en	Resolution
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
+set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
+set bounty	tracker	en	Set bounty
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
 staff	tracker	en	Staff
 summary	tracker	en	Summary
 technicians	tracker	en	Technicians
+thank you for setting this bounty.	tracker	en	Thank you for setting this bounty.
 thank you for voting.	tracker	en	Thank you for voting.
+the bounty will not be shown, until the money is received.	tracker	en	The bounty will NOT be shown, until the money is received.
 the canned response will be prefix the text you type.	tracker	en	The canned response will be prefix the text you type.
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
-tracker	common	en	Tracker
-tracker added	tracker	en	Tracker added
+tracker	common	en	Tracking System
+tracker added	tracker	en	Tracker queue added
 tracker admins	tracker	en	Tracker admins
 tracker admins & technicians	tracker	en	Tracker admins & technicians
 tracker configuration	tracker	en	Tracker configuration
-tracker deleted	tracker	en	Tracker deleted
+tracker deleted	tracker	en	Tracker queue deleted
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found !!!
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
@@ -114,6 +131,7 @@ you can respond by visiting:	tracker	en	You can respond by visiting:
 you need to enter a name	tracker	en	You need to enter a name
 you need to login to vote!	tracker	en	You need to login to vote!
 you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
+you need to specify amount, donators name and email address!	tracker	en	You need to specify amount, donators name AND email address!
 you voted %1.	tracker	en	You voted %1.
 2	tracker	en	2
 3	tracker	en	3

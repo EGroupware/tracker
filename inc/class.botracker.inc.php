@@ -152,6 +152,7 @@ class botracker extends sotracker
 		'reply_message'  => 'Add comment',
 		'add'            => 'Add',
 		'vote'           => 'Vote for it!',
+		'bounty'         => 'Set bounty',
 	);
 	/**
 	 * Translate field-name history status char
@@ -172,6 +173,11 @@ class botracker extends sotracker
 		'tr_priority'    => 'Pr',
 		'tr_closed'      => 'Cl',
 		'tr_resolution'  => 'Re',
+/* the following bounty-stati are only for reference
+		'bounty-set'     => 'bo',
+		'bounty-deleted' => 'xb',
+		'bounty-confirmed'=> 'Bo',
+*/
 	);
 	/**
 	 * Allow to assign tracker items to groups:  0=no; 1=yes, display groups+users; 2=yes, display users+groups
@@ -208,6 +214,7 @@ class botracker extends sotracker
 		'technicians','admins',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
 		'notification_copy','notification_lang','notification_sender','notification_link',
+		'allow_bounties','currency',
 	);
 	/**
 	 * E-Mail to which a copy of every notification is send, eg. a mailinglist
@@ -233,6 +240,18 @@ class botracker extends sotracker
 	 * @var string
 	 */
 	var $notification_link;
+	/**
+	 * Allow bounties to be set on tracker items
+	 * 
+	 * @var string
+	 */
+	var $allow_bounties = true;
+	/**
+	 * Currency used by the bounties
+	 * 
+	 * @var string
+	 */
+	var $currency = 'Euro';
 
 	/**
 	 * Constructor
@@ -1034,9 +1053,11 @@ class botracker extends sotracker
 	function save_config()
 	{
 		$config =& CreateObject('phpgwapi.config','tracker');
+		$config->read_repository();
 
 		foreach($this->config_names as $name)
 		{
+			//echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
 			$config->save_value($name,$this->$name,'tracker');
 		}
 		$this->set_async_job($this->pending_close_days > 0);
@@ -1083,6 +1104,7 @@ class botracker extends sotracker
 			'reply_message'  => TRACKER_USER,
 			'add'            => TRACKER_USER,
 			'vote'           => TRACKER_EVERYBODY,	// TRACKER_USER for NO anon user
+			'bounty'         => TRACKER_EVERYBODY,
 		) as $name => $value)
 		{
 			if (!isset($this->field_acl[$name])) $this->field_acl[$name] = $value;
@@ -1149,5 +1171,142 @@ class botracker extends sotracker
 				$GLOBALS['egw']->translation->init();
 			}
 		}
+	}
+
+	/**
+	 * Read bounties specified by the given keys
+	 * 
+	 * Reimplement to convert to user-time
+	 * 
+	 * @param array/int $keys array with key(s) or integer bounty-id
+	 * @return array with bounties
+	 */
+	function read_bounties($keys)
+	{
+		if (!$this->allow_bounties) return array();
+
+		if (($bounties = parent::read_bounties($keys)))
+		{
+			foreach($bounties as $n => $bounty)
+			{
+				foreach(array('bounty_created','bounty_confirmed') as $name)
+				{
+					if ($bounty[$name]) $bounties[$n][$name] += $this->tz_offset_s;
+				}
+			}
+		}
+		return $bounties;
+	}
+	
+	/**
+	 * Save or update a bounty
+	 * 
+	 * @param array &$data
+	 * @return int/boolean integer bounty_id or false on error
+	 */
+	function save_bounty(&$data)
+	{
+		if (!$this->allow_bounties) return false;
+
+		if (($new = !$data['bounty_id']))	// new bounty
+		{
+			if (!$data['bounty_amount'] || !$data['bounty_name'] || !$data['bounty_email']) return false;
+			
+			$data['bounty_creator'] = $this->user;
+			$data['bounty_created'] = $this->now;
+			if (!$data['tr_id']) $data['tr_id'] = $this->data['tr_id'];
+		}
+		else
+		{
+			if (!$this->is_admin($this->data['tr_tracker']) ||
+				!($bounties = $this->read_bounties(array('bounty_id' => $data['bounty_id']))))
+			{
+				return false;
+			}
+			$old = $bounties[0];
+
+			$data['bounty_confirmer'] = $this->user;
+			$data['bounty_confirmed'] = $this->now;
+		}
+		// convert to server-time
+		foreach(array('bounty_created','bounty_confirmed') as $name)
+		{
+			if ($data[$name]) $data[$name] -= $this->tz_offset_s;
+		}
+		if (($data['bounty_id'] = parent::save_bounty($data)))
+		{
+			$this->_bounty2history($data,$old);
+		}
+		// convert back to user-time
+		foreach(array('bounty_created','bounty_confirmed') as $name)
+		{
+			if ($data[$name]) $data[$name] += $this->tz_offset_s;
+		}
+		return $data['bounty_id'];
+	}
+	
+	/**
+	 * Delete a bounty, the bounty must not be confirmed and you must be an tracker-admin!
+	 * 
+	 * @param int $bounty_id
+	 * @return boolean true on success or false otherwise
+	 */
+	function delete_bounty($id)
+	{
+		//echo "<p>botracker::delete_bounty($id)</p>\n";
+		if (!($bounties = $this->read_bounties(array('bounty_id' => $id))) || 
+			$bounties[0]['bounty_confirmed'] || !$this->is_admin($this->data['tr_tracker']))
+		{
+			return false;
+		}
+		if (parent::delete_bounty($id))
+		{
+			$this->_bounty2history(null,$bounties[0]);
+
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Historylog a bounty
+	 *
+	 * @internal 
+	 * @param array $new new value
+	 * @param array $old=null old value
+	 */
+	function _bounty2history($new,$old=null)
+	{
+		if (!is_object($this->historylog))
+		{
+			$this->historylog =& CreateObject('phpgwapi.historylog','tracker');
+		}
+		if (is_null($new) && $old)
+		{
+			$status = 'xb';	// bounty deleted
+		}
+		elseif ($new['bounty_confirmed'])
+		{
+			$status = 'Bo';	// bounty confirmed
+		}
+		else
+		{
+			$status = 'bo';	// bounty set
+		}
+		$this->historylog->add($status,$this->data['tr_id'],$this->_serialize_bounty($new),$this->_serialize_bounty($old));
+	}
+	
+	/**
+	 * Serialize the bounty for the historylog
+	 *
+	 * @internal 
+	 * @param array $bounty
+	 * @return string
+	 */
+	function _serialize_bounty($bounty)
+	{
+		return !is_array($bounty) ? $bounty : '#'.$bounty['bounty_id'].', '.$bounty['bounty_name'].' <'.$bounty['bounty_email'].
+			'> ('.$GLOBALS['egw']->accounts->id2name($bounty['bounty_creator']).') '.
+			$bounty['bounty_amount'].' '.$this->currency.($bounty['bounty_confirmed'] ? ' Ok' : '');
 	}
 }

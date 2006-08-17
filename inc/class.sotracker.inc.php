@@ -29,6 +29,12 @@ class sotracker extends so_sql
 	 * @var string
 	 */
 	var $votes_table = 'egw_tracker_votes';
+	/**
+	 * Table-name for the bounties
+	 *
+	 * @var string
+	 */
+	var $bounties_table = 'egw_tracker_bounties';
 
 	/**
 	 * Constructor
@@ -43,7 +49,7 @@ class sotracker extends so_sql
 	/**
 	 * Read a tracker item
 	 *
-	 * Reimplemented to read the replies to
+	 * Reimplemented to read the replies and bounties (non-admin only confirmed ones) too
 	 * 
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
 	 * @param string/array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
@@ -61,6 +67,13 @@ class sotracker extends so_sql
 				$this->data['replies'][] = $row;
 			}
 			$this->data['num_replies'] = count($this->data['replies']);
+			
+			$bounty_where = array('tr_id' => $this->data['tr_id']);
+			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker']))
+			{
+				$bounty_where[] = 'bounty_confirmed IS NOT NULL';
+			}
+			$this->data['bounties'] = $this->read_bounties($bounty_where);
 		}
 		return $ret;
 	}
@@ -121,12 +134,29 @@ class sotracker extends so_sql
 	{
 		if ($join === true || $join == 1)
 		{
-			$join = " LEFT JOIN $this->votes_table ON $this->table_name.tr_id=$this->votes_table.tr_id";
 			if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
-			$extra_cols[] = 'COUNT(vote_time) AS votes';
-			$only_keys = $this->table_name.'.*';
-			if (strstr($order_by,'tr_id')) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
-			$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
+			
+			if ($this->db->capabilities['sub_queries'])	// everything, but old MySQL
+			{
+				$extra_cols[] = "(SELECT COUNT(*) FROM $this->votes_table WHERE $this->table_name.tr_id=$this->votes_table.tr_id) AS votes";
+				$extra_cols[] = "(SELECT SUM(bounty_amount) FROM $this->bounties_table WHERE $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL) AS bounties";
+				$join = false;
+			}
+			else	// MySQL < 4.1
+			{
+				// join with votes
+				$join = " LEFT JOIN $this->votes_table ON $this->table_name.tr_id=$this->votes_table.tr_id";
+				$extra_cols[] = 'COUNT(vote_time) AS votes';
+				// join with bounties
+				$join .= " LEFT JOIN $this->bounties_table ON $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL";
+				$extra_cols[] = 'SUM(bounty_amount) AS bounties';
+				// fixes to get tr_id non-ambigues
+				$only_keys = $this->table_name.'.*';
+				if (strstr($order_by,'tr_id')) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
+				// group by the tr_id of the two join tables to count the votes and sum the bounties
+				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
+			}
+			$order_by .= ($order_by ? ',' : '').'bounties DESC,votes DESC';	// default sort is after bountes and votes
 		}
 		// private ACL: private items are only visible for create, assiged or tracker admins
 		if (method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
@@ -163,6 +193,7 @@ class sotracker extends so_sql
 		{
 			$this->db->delete($this->replies_table,$where,__LINE__,__FILE__);
 			$this->db->delete($this->votes_table,$where,__LINE__,__FILE__);
+			$this->db->delete($this->bounties_table,$where,__LINE__,__FILE__);
 		}
 		return parent::delete($keys);
 	}
@@ -203,5 +234,62 @@ class sotracker extends so_sql
 			'vote_ip'   => $ip,
 			'vote_time' => time(),
 		),false,__LINE__,__FILE__);
+	}
+	
+	/**
+	 * Save or update a bounty
+	 * 
+	 * @param array $data
+	 * @return int/boolean integer bounty_id or false on error
+	 */
+	function save_bounty($data)
+	{
+		if ((int) $data['bounty_id'])
+		{
+			$where = array('bounty_id' => $data['bounty_id']);
+			unset($data['bounty_id']);
+			if ($this->db->update($this->bounties_table,$data,$where,__LINE__,__FILE__))
+			{
+				return $where['bounty_id'];
+			}
+		}
+		else
+		{
+			if ($this->db->insert($this->bounties_table,$data,false,__LINE__,__FILE__))
+			{
+				return $this->db->get_last_insert_id($this->bounties_table,'bounty_id');
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Delete a bounty
+	 * 
+	 * @param int $bounty_id
+	 * @return int number of deleted rows: 1 = success, 0 = failure
+	 */
+	function delete_bounty($id)
+	{
+		return $this->db->delete($this->bounties_table,array('bounty_id' => $id),__LINE__,__FILE__);
+	}
+	
+	/**
+	 * Read bounties specified by the given keys
+	 * 
+	 * @param array/int $keys array with key(s) or integer bounty-id
+	 * @return array with bounties
+	 */
+	function read_bounties($keys)
+	{
+		if (!is_array($keys)) $keys = array('bounty_id' => $keys);
+
+		$this->db->select($this->bounties_table,'*',$keys,__LINE__,__FILE__,false,'ORDER BY bounty_created DESC');
+		$bounties = array();
+		while (($row = $this->db->row(true)))
+		{
+			$bounties[] = $row;
+		}
+		return $bounties;
 	}
 }

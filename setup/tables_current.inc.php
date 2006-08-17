@@ -63,5 +63,24 @@
 			'fk' => array(),
 			'ix' => array(),
 			'uc' => array()
+		),
+		'egw_tracker_bounties' => array(
+			'fd' => array(
+				'bounty_id' => array('type' => 'auto','nullable' => False),
+				'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+				'bounty_creator' => array('type' => 'int','precision' => '4','nullable' => False),
+				'bounty_created' => array('type' => 'int','precision' => '8','nullable' => False),
+				'bounty_amount' => array('type' => 'decimal','precision' => '20','scale' => '2','nullable' => False),
+				'bounty_name' => array('type' => 'varchar','precision' => '64'),
+				'bounty_email' => array('type' => 'varchar','precision' => '128'),
+				'bounty_confirmer' => array('type' => 'int','precision' => '4'),
+				'bounty_confirmed' => array('type' => 'int','precision' => '8'),
+				'bounty_payedto' => array('type' => 'varchar','precision' => '128'),
+				'bounty_payed' => array('type' => 'int','precision' => '8')
+			),
+			'pk' => array('bounty_id'),
+			'fk' => array(),
+			'ix' => array('tr_id'),
+			'uc' => array()
 		)
 	);
