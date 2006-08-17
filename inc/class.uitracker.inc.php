@@ -45,6 +45,7 @@ class uitracker extends botracker
 	 * @param array $content=null eTemplate content
 	 * @param string $msg=''
 	 * @param boolean $popup=true use or not use a popup
+	 * @return string html-content, if sitemgr otherwise null
 	 */
 	function edit($content=null,$msg='',$popup=true)
 	{
@@ -287,7 +288,7 @@ class uitracker extends botracker
 	 */
 	function get_rows(&$query_in,&$rows,&$readonlys)
 	{
-		$GLOBALS['egw']->session->appsession('index','tracker',$query=$query_in);
+		$GLOBALS['egw']->session->appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
 
 		//if (!$query['tr_tracker']) list($query['tr_tracker']) = each($this->trackers);
 		$tracker = $query['col_filter']['tr_tracker'];// = $query['tr_tracker'];
@@ -330,8 +331,10 @@ class uitracker extends botracker
 	 * @param array $content=null eTemplate content
 	 * @param int $tracker=null id of tracker
 	 * @param string $msg=''
+	 * @param int $only_tracker=null show only the given tracker and not tracker-selection
+	 * @return string html-content, if sitemgr otherwise null
 	 */
-	function index($content=null,$tracker=null,$msg='')
+	function index($content=null,$tracker=null,$msg='',$only_tracker=null)
 	{
 		if (!is_array($content))
 		{
@@ -347,32 +350,46 @@ class uitracker extends botracker
 				}
 			}
 			if (!$msg && $_GET['msg']) $msg = $_GET['msg'];
-			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
-		}
-		elseif ($content['update'])
-		{
-			unset($content['update']);
-			$checked = $content['nm']['rows']['checked']; unset($content['nm']);
-			// remove all 'No change'
-			foreach($content as $name => $value) if ($value === '') unset($content[$name]);
-			
-			if (!count($checked) || !count($content))
+			if ($only_tracker && isset($this->trackers[$only_tracker]))
 			{
-				$msg = lang('You need to select something to change AND some tracker items!');
+				$tracker = $only_tracker;
 			}
 			else
 			{
-				$n = 0;
-				foreach($checked as $tr_id)
+				$only_tracker = null;
+			}
+			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
+		}
+		else
+		{
+			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
+
+			if ($content['update'])
+
+			{
+				unset($content['update']);
+				$checked = $content['nm']['rows']['checked']; unset($content['nm']);
+				// remove all 'No change'
+				foreach($content as $name => $value) if ($value === '') unset($content[$name]);
+				
+				if (!count($checked) || !count($content))
 				{
-					if (!$this->read($tr_id)) continue;
-					foreach($content as $name => $value)
-					{
-						if ($value !== '') $this->data[$name] = $value;
-					}
-					if (!$this->save()) $n++;
+					$msg = lang('You need to select something to change AND some tracker items!');
 				}
-				$msg = lang('%1 entries updated.',$n);
+				else
+				{
+					$n = 0;
+					foreach($checked as $tr_id)
+					{
+						if (!$this->read($tr_id)) continue;
+						foreach($content as $name => $value)
+						{
+							if ($value !== '') $this->data[$name] = $value;
+						}
+						if (!$this->save()) $n++;
+					}
+					$msg = lang('%1 entries updated.',$n);
+				}
 			}
 		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
@@ -383,12 +400,12 @@ class uitracker extends botracker
 			'tr_status'   => &$this->stati,
 		);
 		if (!is_array($content)) $content = array();
-		$content += array(
-			'nm' => $GLOBALS['egw']->session->appsession('index','tracker'),
+		$content = array_merge($content,array(
+			'nm' => $GLOBALS['egw']->session->appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
 			'msg' => $msg,
 			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
-		);		
+		));		
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 		if (!$tracker) list($tracker) = @each($this->trackers);
 
@@ -409,7 +426,8 @@ class uitracker extends botracker
 				'col_filter'     => array(
 					'tr_status'  => 'o',	// default filter: open
 				),
-	 			'header_left'    =>	'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
+	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
+	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 			);
 		}
@@ -420,7 +438,7 @@ class uitracker extends botracker
 
 		$tpl =& new etemplate('tracker.index');
 
-		return $tpl->exec('tracker.uitracker.index',$content,$sel_options,$readonlys);
+		return $tpl->exec('tracker.uitracker.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker));
 	}
 	
 	/**
