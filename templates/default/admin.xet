@@ -89,9 +89,9 @@
 			<rows>
 				<row class="row" valign="top">
 					<description options=",,,technicians" value="Technicians"/>
-					<listbox type="select-account" id="technicians" rows="28"/>
+					<listbox type="select-account" id="technicians" rows="28" options="both"/>
 					<description value="Tracker admins"/>
-					<listbox type="select-account" rows="28" id="admins"/>
+					<listbox type="select-account" rows="28" options="both" id="admins"/>
 				</row>
 			</rows>
 		</grid>
