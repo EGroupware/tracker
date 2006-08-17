@@ -20,7 +20,15 @@ class module_tracker extends sitemgr_module
 {
 	function module_tracker()
 	{
-		$this->arguments = array();
+		$this->arguments = array(
+			'arg3' => array(		// will be passed as $only_tracker argument to uitracker::index()
+				'type' => 'select', 
+				'label' => lang('Tracker'),
+				'options' => array(
+					'' => lang('All'),
+				)+ExecMethod2('tracker.botracker.get_tracker_labels','tracker')
+			),
+		);
 		$this->title = lang('Tracker');
 		$this->description = lang('This module displays information from the Tracker.');
 		
