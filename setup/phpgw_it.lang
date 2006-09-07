@@ -1,0 +1,131 @@
+%1 entries updated.	tracker	it	%1 voci aggiornate.
+--> enter new name	tracker	it	->> inserisci nuovo nome
+1 - lowest	tracker	it	1 - più bassa
+5 - medium	tracker	it	5 - media
+9 - highest	tracker	it	9 - più alta
+accepted	tracker	it	Accettato
+actions	tracker	it	Azioni
+add comment	tracker	it	Aggiungi commento
+after how many days a not replied item should be marked overdue?	tracker	it	Dopo quanti giorni un oggetto senza risposta sarà marcato scaduto?
+after how many days pending items should be closed automatic	tracker	it	Dopo quanti giorni gli oggetti in sospeso saranno chiusi automaticamente?
+allow bounties	tracker	it	Permetti bounty (donazioni)
+allow editing by	tracker	it	Permetti modifica di
+allow to assign groups to tracker items	tracker	it	Permetti di assegnare i gruppi agli oggetti tracker
+allow voting	tracker	it	Permetti valutazione
+allow voting on tracker items, show and sort after the votes	tracker	it	Permetti valutazione degli oggetti tracker, mostra e ordina in base alle valutazioni
+amount	tracker	it	Ammontare
+assigned to	tracker	it	Assegnato a
+assigning groups	tracker	it	Gruppi assegnazione
+attachments & links	tracker	it	Allegati e Collegamenti
+autoassign to	tracker	it	Autoassegna a
+bounties	tracker	it	Bounty (donazioni)
+bounty confirmed	tracker	it	Bounty confermato
+bounty deleted	tracker	it	Bounty cancellato
+bounty set	tracker	it	Bounty impostato
+canned response	tracker	it	Risposta sbagliata
+canned responses	tracker	it	Risposte sbagliate
+categories, versions, canned responses	tracker	it	Categorie, versioni, risposte sbagliate
+check all	tracker	it	Seleziona tutto
+close pending	tracker	it	Chiudi pendenti
+closed	tracker	it	Chiuso
+comment by %1 at %2:	tracker	it	Commento di %1 il %2:
+comments	tracker	it	Commenti
+completed	tracker	it	Completato
+configuration	tracker	it	Configurazione
+configuration for all trackers	tracker	it	Configurazione per tutte le code di tracker
+configuration updated.	tracker	it	Configurazione aggiornata
+configuration, acl, notifications	tracker	it	Configurazione, ACL, Notifiche
+confirm that you pay the specified bounty to implement or fix the issue	tracker	it	Conferma che paghi il bounty specificato per implementare o correggere il problema
+confirm the receipt of money for this bounty	tracker	it	Conferma il ricevimento del denaro per questo bounty
+confirmed	tracker	it	Confermato
+copy to	tracker	it	Copia a
+create new links	tracker	it	Crea nuovi collegamenti
+created	tracker	it	Creato
+date opened	tracker	it	Data apertura
+delete this bounty	tracker	it	Cancella questo bounty
+delete this canned response	tracker	it	Cancella questa risposta sbagliata
+delete this category	tracker	it	Elimina questa categoria
+delete this tracker including all it's items and categories	tracker	it	Elimina questo tracker inclusi tutti i suoi oggetti e categorie
+delete this version	tracker	it	Elimina questa versione
+deleted	tracker	it	Eliminato
+donator name to show	tracker	it	Nome donatore da mostrare
+duplicate	tracker	it	Duplica
+e-mail address to which a copy of all tracker-notifications should be send	tracker	it	Indirizzo e-mail al quale inviare una copia di tutte le notifiche tracker
+e-mail notifications	tracker	it	Notifiche e-mail
+edit %1	tracker	it	Modifica %1
+email address to contact you	tracker	it	Indirizzo e-mail per contattarti
+entry saved	tracker	it	Voce salvata
+error adding the new tracker!	tracker	it	Errore durante aggiunta nuovo tracker!
+error saving the entry!!!	tracker	it	Errore durante salvataggio voce!!!
+everybody	tracker	it	Tutti
+existing links	tracker	it	Collegamenti esistenti
+field	tracker	it	Campo
+fixed	tracker	it	Corretto
+from	tracker	it	Da
+history	tracker	it	Cronologia
+id	tracker	it	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	it	Se questo oggetto è importante per te, per favore considera la possibilità di mettere un Bounty sullo stesso!
+if this item is important for you, please vote for it.	tracker	it	Se questo oggetto è importante per te, per favore votalo.
+invalid	tracker	it	Non valido
+item assignee	tracker	it	Assegnatario oggetto
+item creator	tracker	it	Creatore oggetto
+language for the copy	tracker	it	Lingua per la copia
+last modified	tracker	it	Ultima modifica
+later	tracker	it	Più tardi
+new %1	tracker	it	Nuovo %1
+new items	tracker	it	Nuovi oggetti
+new tracker item submitted by %1 at %2	tracker	it	Nuovo oggetto tracker aggiunto da %1 il %2
+no change	tracker	it	Nessuna modifica
+non-anonymous users	tracker	it	Utenti non-anonimi
+noone	tracker	it	Nessuno
+notification	tracker	it	Notifica
+open	tracker	it	Aperto
+out of date	tracker	it	Scaduto
+overdue after	tracker	it	Scaduto dopo
+pending	tracker	it	In sospeso
+pending items never get close automatic.	tracker	it	Gli oggetti in sospeso non vengono mai chiusi automaticamente.
+pending items will be closed automatic after %1 days without response.	tracker	it	Gli oggetti in sospeso saranno chiusi automaticamente dopo %1 giorni senza risposta.
+permission denied !!!	tracker	it	Permesso negato
+postponed	tracker	it	Posticipato
+receive notifications about assigned tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker assegnati
+receive notifications about created tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker creati
+rejected	tracker	it	Rifiutato
+remind	tracker	it	Ricorda
+resolution	tracker	it	Risoluzione
+sender address	tracker	it	Indirizzo mittente
+sender address for all notifications, eg. noreply@egroupware.org	tracker	it	Indirizzo mittente per tutte le notifiche, es. nonrispondere@egroupware.org
+set an own bounty (in %s)	tracker	it	Imposta un proprio bounty (in %s)
+set bounty	tracker	it	Imposta bounty
+staff	tracker	it	Staff
+summary	tracker	it	Riepilogo
+technicians	tracker	it	Tecnici
+thank you for setting this bounty.	tracker	it	Grazie per avere impostato questo bounty.
+thank you for voting.	tracker	it	Grazie per avere votato.
+the bounty will not be shown, until the money is received.	tracker	it	Il bounty NON sarà mostrato, fino al ricevimento del denaro.
+this module displays information from the tracker.	tracker	it	Questo modulo mostra informazioni dal Tracker
+tracker	common	it	Sistema di Tracking
+tracker added	tracker	it	Coda Tracker aggiunta
+tracker admins	tracker	it	Gestione Tracker
+tracker admins & technicians	tracker	it	Amministratori e tecnici tracker
+tracker configuration	tracker	it	Configurazione Tracker
+tracker deleted	tracker	it	Coda Tracker eliminata
+tracker item modified by %1 at %2	tracker	it	Oggetto tracker modificato da %1 il %2
+tracker item not found !!!	tracker	it	Oggetto Tracker non trovato !!!
+url of the tracker	tracker	it	URL del tracker
+versions	tracker	it	Versioni
+vote for it!	tracker	it	Votalo!
+votes	tracker	it	Voti
+wont fix	tracker	it	Non funzionerà
+works for me	tracker	it	Funziona per me
+yes, display groups first	tracker	it	Sì, mostra prima i gruppi
+yes, display users first	tracker	it	Sì, mostra prima gli utenti
+you can respond by visiting:	tracker	it	Puoi rispondere visitando:
+you need to enter a name	tracker	it	Devi inserire un nome
+you need to login to vote!	tracker	it	Devi fare il login per votare!
+you voted %1.	tracker	it	Hai votato %1.
+2	tracker	it	2
+3	tracker	it	3
+4	tracker	it	4
+6	tracker	it	6
+7	tracker	it	7
+8	tracker	it	8

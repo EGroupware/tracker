@@ -1,0 +1,129 @@
+%1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
+--> enter new name	tracker	es-es	--> introduzca un nombre nuevo
+1 - lowest	tracker	es-es	1 - la más baja
+5 - medium	tracker	es-es	5 - media
+9 - highest	tracker	es-es	9 - la más alta
+accepted	tracker	es-es	Aceptada
+actions	tracker	es-es	Acciones
+add comment	tracker	es-es	Añadir comentario
+after how many days a not replied item should be marked overdue?	tracker	es-es	¿Después de cuántos días un elemento sin respuesta debe quedar marcado como obsoleto?
+after how many days pending items should be closed automatic	tracker	es-es	Después de cuantos días los elementos pendientes deben cerrarse automáticamente
+allow bounties	tracker	es-es	Permitir recompensas
+allow editing by	tracker	es-es	Permitir edición por
+allow to assign groups to tracker items	tracker	es-es	Permitir asignar grupos para seguimiento de elementos
+allow voting	tracker	es-es	Permitir votar
+allow voting on tracker items, show and sort after the votes	tracker	es-es	Permitir votar en elementos de seguimiento. Mostrar y ordenar después de los votos
+amount	tracker	es-es	Cantidad
+assigned to	tracker	es-es	Asiganado a
+assigning groups	tracker	es-es	Grupos asignados
+attachments & links	tracker	es-es	Adjuntos y enlaces
+autoassign to	tracker	es-es	Asignar automáticamente a
+bounties	tracker	es-es	Recompensas
+bounty confirmed	tracker	es-es	Recompensa confirmada
+bounty deleted	tracker	es-es	Recompensa borrada
+bounty set	tracker	es-es	Recompensa fijada
+canned response	tracker	es-es	Respuesta automatizada
+canned responses	tracker	es-es	Respuestas automatizadas
+categories, versions, canned responses	tracker	es-es	Categorías, versiones, respuestas automatizadas
+check all	tracker	es-es	Comprobar todo
+close pending	tracker	es-es	Cerrar elementos pendientes
+closed	tracker	es-es	Cerrado
+comment by %1 at %2:	tracker	es-es	Comentario por %1 a las %2:
+comments	tracker	es-es	Comentarios
+completed	tracker	es-es	Completado
+configuration	tracker	es-es	Configuración
+configuration for all trackers	tracker	es-es	Configuración para todos los seguimientos
+configuration updated.	tracker	es-es	Se ha actualizado la configuración
+configuration, acl, notifications	tracker	es-es	Configuración, ACL, notificaciones
+confirm that you pay the specified bounty to implement or fix the issue	tracker	es-es	Confirme que paga la recompensa especificada para implementar or corregir el problema
+confirm the receipt of money for this bounty	tracker	es-es	Confirme la recepción del dinero para esta recompensa
+confirmed	tracker	es-es	Confirmado
+copy to	tracker	es-es	Copiar a
+create new links	tracker	es-es	Crear enlaces nuevos
+created	tracker	es-es	Creado
+date opened	tracker	es-es	Fecha de apertura
+delete this bounty	tracker	es-es	Borrar esta recompensa
+delete this canned response	tracker	es-es	Borrar esta respuesta automatizada
+delete this category	tracker	es-es	Borrar esta categoría
+delete this tracker including all it's items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
+delete this version	tracker	es-es	Borrar esta versión
+deleted	tracker	es-es	Borrado
+donator name to show	tracker	es-es	Nombre del donante a mostrar
+duplicate	tracker	es-es	Duplicado
+e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
+e-mail notifications	tracker	es-es	Notificaciones por correo
+edit %1	tracker	es-es	Editar %1
+email address to contact you	tracker	es-es	Dirección de correo electrónico de contacto
+entry saved	tracker	es-es	Se ha guardado la entrada
+error adding the new tracker!	tracker	es-es	¡Error al añadir el nuevo informe!
+error saving the entry!!!	tracker	es-es	¡Error al guardar la entrada!
+everybody	tracker	es-es	Todos
+existing links	tracker	es-es	Enlaces existentes
+field	tracker	es-es	Campo
+fixed	tracker	es-es	Corregido
+from	tracker	es-es	De
+history	tracker	es-es	Historial
+id	tracker	es-es	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	es-es	Si este elemento es importante para usted, por favor, considere establecer una recompensa.
+if this item is important for you, please vote for it.	tracker	es-es	Si este elemento es importante para usted, por favor, vote por él.
+invalid	tracker	es-es	No es válido
+item assignee	tracker	es-es	Elemento asignado a
+item creator	tracker	es-es	Elemento creado por
+language for the copy	tracker	es-es	Idioma para la copia
+last modified	tracker	es-es	Última modificación
+later	tracker	es-es	Más tarde
+new %1	tracker	es-es	Nuevo %1
+new items	tracker	es-es	Nuevos elementos
+new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de informe enviado por %1 a las %2
+no change	tracker	es-es	Sin cambios
+non-anonymous users	tracker	es-es	Usuarios no anónimos
+noone	tracker	es-es	Nadie
+notification	tracker	es-es	Notificación
+open	tracker	es-es	Abierto
+out of date	tracker	es-es	Fuera de fecha
+overdue after	tracker	es-es	Vencimiento después de
+pending	tracker	es-es	Pendiente
+pending items never get close automatic.	tracker	es-es	Los elementos pendientes nunca se cierran automáticamente
+pending items will be closed automatic after %1 days without response.	tracker	es-es	Los elementos pendientes se cerrarán automáticamente después de %1 días sin respuesta.
+permission denied !!!	tracker	es-es	¡No tiene permiso de acceso!
+postponed	tracker	es-es	Pospuesto
+receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
+receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
+rejected	tracker	es-es	Rechazado
+remind	tracker	es-es	Recordar
+resolution	tracker	es-es	Resolución
+sender address	tracker	es-es	Dirección del remitente
+sender address for all notifications, eg. noreply@egroupware.org	tracker	es-es	Dirección del remitente para todas las notificaciones, p. ej. sinrespuesta@ejemplo.com
+set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
+set bounty	tracker	es-es	Fijar recompensa
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
+staff	tracker	es-es	Equipo
+summary	tracker	es-es	Resumen
+technicians	tracker	es-es	Técnicos
+thank you for setting this bounty.	tracker	es-es	Gracias por fijar esta recompensa.
+thank you for voting.	tracker	es-es	Gracias por votar
+the bounty will not be shown, until the money is received.	tracker	es-es	La recompensa NO se mostrará hasta que se reciba el dinero.
+the canned response will be prefix the text you type.	tracker	es-es	La respuesta automatizada precederá al texto que escriba
+this module displays information from the tracker.	tracker	es-es	Este módulo muestra información de los informes
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	es-es	El sistema cerró este elemento automáticamente. Anteriormente estaba en estado Pendiente, y el remitente original no respondió durante %1 días.
+tracker	common	es-es	Seguimiento
+versions	tracker	es-es	Versiones
+vote for it!	tracker	es-es	¡Vote por él!
+votes	tracker	es-es	Votos
+wont fix	tracker	es-es	No se va a solucionar
+works for me	tracker	es-es	A mí me funciona
+yes, display groups first	tracker	es-es	Sí, mostrar los grupos primero
+yes, display users first	tracker	es-es	Sí, mostrar los usuarios primero
+you can respond by visiting:	tracker	es-es	Puede responder visitando:
+you need to enter a name	tracker	es-es	Necesita introducir un nombre
+you need to login to vote!	tracker	es-es	¡Necesita iniciar la sesión para votar!
+you need to select something to change and some tracker items!	tracker	es-es	Necesita seleccionar algo para cambiar Y algunos elementos
+you need to specify amount, donators name and email address!	tracker	es-es	¡Necesita especificar la cantidad, nombre de donante Y dirección de correo electrónico!
+you voted %1.	tracker	es-es	Ha votado %1.
+2	tracker	es-es	2
+3	tracker	es-es	3
+4	tracker	es-es	4
+6	tracker	es-es	6
+7	tracker	es-es	7
+8	tracker	es-es	8
