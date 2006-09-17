@@ -130,7 +130,7 @@ class uitracker extends botracker
 							}
 							$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=$msg&tracker=$content[tr_tracker]';";
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
 					}
 					else
 					{
@@ -158,7 +158,7 @@ class uitracker extends botracker
 						$msg = lang('Thank you for voting.');
 						if ($popup)
 						{
-							$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=$msg';";
+							$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
 							$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
 						}
 					}
@@ -223,7 +223,7 @@ class uitracker extends botracker
 									if ($this->save_bounty($this->data['bounties'][$n]))
 									{
 										$msg = lang('Bounty confirmed.');
-										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=$msg';";
+										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
 										$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
 									}
 									else
@@ -644,7 +644,8 @@ class uitracker extends botracker
 							}
 						}
 					}
-					foreach(array('technicians','admins') as $name)
+					// tracker specific config
+					foreach(array('technicians','admins','notification') as $name)
 					{
 						$staff =& $this->$name;
 						if (!isset($staff[$tracker])) $staff[$tracker] = array();
@@ -824,7 +825,6 @@ class uitracker extends botracker
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
-			$tabs => array('config' => !!$tracker),
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl =& new etemplate('tracker.admin');

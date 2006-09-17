@@ -208,38 +208,19 @@ class botracker extends sotracker
 	/**
 	 * Names of all config vars 
 	 *
-	 * @var unknown_type
+	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins',	// tracker specific
+		'technicians','admins','notification',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
-		'notification_copy','notification_lang','notification_sender','notification_link',
 		'allow_bounties','currency',
 	);
 	/**
-	 * E-Mail to which a copy of every notification is send, eg. a mailinglist
+	 * Notification settings (tracker specific, keys: sender, link, copy, lang)
 	 *
-	 * @var string
+	 * @var array
 	 */
-	var $notification_copy;
-	/**
-	 * Language of the notification-copy, 2- or 5-char lang-code
-	 *
-	 * @var string
-	 */
-	var $notification_lang;
-	/**
-	 * Sender address (from) for notification mails, eg. noreply@egroupware.org
-	 *
-	 * @var string
-	 */
-	var $notification_sender;
-	/**
-	 * Link to be include in the notifications (plus &tr_id=xx added), default empty = tracker inside eGW
-	 *
-	 * @var string
-	 */
-	var $notification_link;
+	var $notification;
 	/**
 	 * Allow bounties to be set on tracker items
 	 * 
@@ -462,9 +443,9 @@ class botracker extends sotracker
 	function do_notifications($old)
 	{
 		// notification copy (only not-private items)
-		if ($this->notification_copy && !$this->data['tr_private'])
+		if (!$this->data['tr_private'] && ($email = $this->notification_config('copy')))
 		{
-			$this->send_notification($old,$this->notification_copy,$this->notification_lang);
+			$this->send_notification($old,$email,$this->notification_config('lang'));
 		}
 		// item creator
 		if (($email = $GLOBALS['egw']->accounts->id2name($this->data['tr_creator'],'account_email')))
@@ -547,7 +528,7 @@ class botracker extends sotracker
 			$body = lang('Tracker item modified by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
 				date($datetime_format,$data['tr_modified']-$this->tz_offset_s+$tz_offset_s))."\n";
 		}
-		if (!($link = $this->notification_link))
+		if (!($link = $this->notification_config('link')))
 		{
 			$link = ($GLOBALS['egw_info']['server']['webserver_url']{0} != 'h' ? 
 				($_SERVER['HTTPS'] || $GLOBALS['egw_info']['server']['enforce_ssl'] ? 'https://' : 'http://').
@@ -607,14 +588,15 @@ class botracker extends sotracker
 			$send->AddAddress($email,is_numeric($user_or_lang) ? $GLOBALS['egw']->accounts->id2name($user_or_lang,'account_fullname') : '');
 		}
 		$send->AddCustomHeader('X-eGroupWare-type: trackerupdate');
-		if (preg_match('/^(.+) *<(.+)>/',$this->notification_sender,$matches))	// allow to use eg. "Ralf Becker <ralf@egw.org>" as sender
+		$sender = $this->notification_config('sender');
+		if (preg_match('/^(.+) *<(.+)>/',$sender,$matches))	// allow to use eg. "Ralf Becker <ralf@egw.org>" as sender
 		{
 			$send->From = $matches[2];
 			$send->FromName = $matches[1];
 		}
 		else
 		{
-			$send->From = $this->notification_sender;
+			$send->From = $sender;
 			$send->FromName = lang('Tracker').': '.$this->trackers[$data['tr_tracker']];
 		}
 		$send->Subject = $subject;
@@ -625,6 +607,19 @@ class botracker extends sotracker
 			die("Error while notifying $email: ".$send->ErrorInfo);
 		}
 		return true;
+	}
+	
+	/**
+	 * Get a notification-config value
+	 *
+	 * @param string $what
+	 * @param int $tracker=null
+	 */
+	function notification_config($name,$tracker=null)
+	{
+		if (is_null($tracker)) $tracker = $this->data['tr_tracker'];
+		
+		return $this->notification[$tracker] ? $this->notification[$tracker] : $this->notification[0];
 	}
 
 	/**
@@ -1070,13 +1065,26 @@ class botracker extends sotracker
 	function load_config()
 	{
 		$config =& CreateObject('phpgwapi.config','tracker');
+		$migrate_config = false;	// update old config-values, can be removed soon
 		foreach($config->read_repository() as $name => $value)
 		{
+			if (substr($name,0,13) == 'notification_')	// update old config-values, can be removed soon
+			{
+				$this->notification[0][substr($name,13)] = $value;
+				$config->delete_value($name);
+				$migrate_config = true;
+				continue;
+			}
 			$this->$name = $value;
+		}
+		if ($migrate_config)	// update old config-values, can be removed soon
+		{
+			$config->value('notification',$this->notification);
+			$config->save_repository();
 		}
 		unset($config);
 		
-		if (!$this->notification_lang) $this->notification_lang = $GLOBALS['egw']->preferences->default['common']['lang'];
+		if (!$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
 
 		foreach(array(
 			'tr_summary'     => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
