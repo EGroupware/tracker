@@ -612,7 +612,7 @@ class uitracker extends botracker
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins')) as $name)
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','notification')) as $name)
 						{
 							if ((string) $this->$name !== $content[$name])
 							{
@@ -757,11 +757,12 @@ class uitracker extends botracker
 			'tracker' => $tracker,
 			'admins' => $this->admins[$tracker],
 			'technicians' => $this->technicians[$tracker],
+			'notification' => $this->notification[$tracker],
 			$tabs => $content[$tabs],
 		);
-		foreach($this->config_names as $name)
+		foreach(array_diff($this->config_names,array('admins','technicians','notification')) as $name)
 		{
-			if (!isset($content[$name])) $content[$name] = $this->$name;
+			$content[$name] = $this->$name;
 		}
 		// cats & versions
 		$v = $c = $r = 1;
@@ -820,7 +821,7 @@ class uitracker extends botracker
 			'allow_voting' => array('No','Yes'),
 			'allow_bounties' => array('No','Yes'),
 			'autoassign' => $this->get_staff($tracker),
-			'notification_lang' => $GLOBALS['egw']->translation->get_installed_langs(),
+			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
 		);
 		$readonlys = array(
 			'button[delete]' => !$tracker,
