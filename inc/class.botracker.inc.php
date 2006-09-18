@@ -619,7 +619,7 @@ class botracker extends sotracker
 	{
 		if (is_null($tracker)) $tracker = $this->data['tr_tracker'];
 		
-		return $this->notification[$tracker] ? $this->notification[$tracker] : $this->notification[0];
+		return $this->notification[$tracker] ? $this->notification[$tracker][$name] : $this->notification[0][$name];
 	}
 
 	/**
