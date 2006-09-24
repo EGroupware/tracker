@@ -402,10 +402,11 @@ class uitracker extends botracker
 	{
 		$GLOBALS['egw']->session->appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
 
-		//if (!$query['tr_tracker']) list($query['tr_tracker']) = each($this->trackers);
-		$tracker = $query['col_filter']['tr_tracker'];// = $query['tr_tracker'];
+		$tracker = $query['col_filter']['tr_tracker'];
 		if (!($query['col_filter']['cat_id'] = $query['filter'])) unset($query['col_filter']['cat_id']);
 		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
+		
+		if (!($query['col_filter']['tr_creator'])) unset($query['col_filter']['tr_creator']);
 
 		if ($query['col_filter']['tr_assigned'] < 0)	// resolve groups with it's members
 		{
