@@ -2,7 +2,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.3.001">
-		<menulist span=",bold">
+		<menulist class="bold">
 			<menupopup data="" rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1"/>
 		</menulist>
 	</template>
@@ -26,17 +26,17 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<nextmatch-sortheader label="ID" id="tr_id"/>
-					<nextmatch-sortheader label="Category" id="cat_id"/>
-					<nextmatch-sortheader label="Summary" id="tr_summary"/>
-					<nextmatch-sortheader label="Date opened" id="tr_created"/>
-					<nextmatch-sortheader label="Priority" id="tr_priority"/>
-					<nextmatch-filterheader options="All" id="tr_status" label="Status"/>
-					<nextmatch-filterheader id="tr_assigned" options="All" label="Assigned to" no_lang="1"/>
-					<nextmatch-accountfilter options="All" id="tr_creator" label="Created by"/>
-					<nextmatch-sortheader label="Votes" id="votes"/>
-					<nextmatch-sortheader label="Bounties" id="bounties"/>
-					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1"/>
+					<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id"/>
+					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
+					<nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
+					<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
+					<nextmatch-sortheader label="Priority" id="tr_priority" class="tracker-priority"/>
+					<nextmatch-filterheader options="All" id="tr_status" label="Status" class="tracker-status"/>
+					<nextmatch-filterheader id="tr_assigned" options="All" label="Assigned to" no_lang="1" class="tracker-assigned"/>
+					<nextmatch-accountfilter options="All" id="tr_creator" label="Created by" class="tracker-creator"/>
+					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes"/>
+					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties"/>
+					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1" class="tracker-checkall"/>
 				</row>
 				<row class="row">
 					<description id="${row}[tr_id]"/>
@@ -63,7 +63,7 @@
 		</grid>
 	</template>
 	<template id="tracker.index" template="" lang="" group="0" version="0.1.002">
-		<grid width="100%">
+		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
 				<column/>
