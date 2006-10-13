@@ -400,6 +400,9 @@ class uitracker extends botracker
 	 */
 	function get_rows(&$query_in,&$rows,&$readonlys)
 	{
+		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
+			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
+
 		$GLOBALS['egw']->session->appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
 
 		$tracker = $query['col_filter']['tr_tracker'];
@@ -431,10 +434,10 @@ class uitracker extends botracker
 			$rows['sel_options']['cat_id'] =& $rows['sel_options']['filter'];
 			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
 		}
-		$rows['allow_voting'] = $this->allow_voting;
-		$rows['allow_bounties'] = $this->allow_bounties;
+		$rows['allow_voting'] = !!$this->allow_voting;
+		$rows['allow_bounties'] = !!$this->allow_bounties;
 		$rows['no_cat'] = $query['col_filter']['cat_id'];
-	
+		
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.$this->trackers[$tracker];
 
 		return $total;
@@ -549,7 +552,7 @@ class uitracker extends botracker
 		$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		$content['is_admin'] = $this->is_admin($tracker);
 		
-		$readonlys['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
+		$readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
 
 		$tpl =& new etemplate('tracker.index');
 
