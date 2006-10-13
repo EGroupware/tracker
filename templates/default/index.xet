@@ -39,7 +39,7 @@
 					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1" class="tracker-checkall"/>
 				</row>
 				<row class="row">
-					<description id="${row}[tr_id]"/>
+					<description id="${row}[tr_id]" no_lang="1"/>
 					<menulist>
 						<menupopup type="select-cat" options="None" id="${row}[cat_id]" readonly="true"/>
 					</menulist>
