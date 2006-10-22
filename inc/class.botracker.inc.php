@@ -457,11 +457,33 @@ class botracker extends sotracker
 		{
 			$this->send_notification($old,$email,$this->data['tr_assigned'],'notify_assigned');
 		}
-		// old assignee, if changed now
+		// item assignee (for groups)
+		if ($this->data['tr_assigned'] < 0)
+		{
+			foreach($GLOBALS['egw']->accounts->members($this->data['tr_assigned'],true) as $u)
+			{
+				if ($email = $GLOBALS['egw']->accounts->id2name($u,'account_email'))
+				{
+					$this->send_notification($old,$email,$u,'notify_assigned');
+				}
+			}
+		}
+		// old assignee, if changed now (for users)
 		if ($old && $old['tr_assigned'] > 0 && $old['tr_assigned'] != $this->data['tr_assigned']  &&
 			($email = $GLOBALS['egw']->accounts->id2name($old['tr_assigned'],'account_email')))
 		{
 			$this->send_notification($old,$email,$old['tr_assigned'],'notify_assigned');
+		}
+		// old assignee, if changed now (for groups)
+		if ($old && $old['tr_assigned'] < 0 && $old['tr_assigned'] != $this->data['tr_assigned'])
+		{
+			foreach($GLOBALS['egw']->accounts->members($old['tr_assigned'],true) as $u)
+			{
+				if ($email = $GLOBALS['egw']->accounts->id2name($u,'account_email'))
+				{
+					$this->send_notification($old,$email,$u,'notify_assigned');
+				}
+			}
 		}
 		// restore the user enviroment
 		if ($this->save_prefs) $GLOBALS['egw_info']['user'] = $this->save_prefs; unset($this->save_prefs);
