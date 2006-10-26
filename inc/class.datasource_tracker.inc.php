@@ -17,12 +17,12 @@ include_once(EGW_INCLUDE_ROOT.'/projectmanager/inc/class.datasource.inc.php');
  *
  * The Tracker datasource set's only real start- and endtimes and the assigned user as resources.
  */
-class datasource_infolog extends datasource
+class datasource_tracker extends datasource
 {
 	/**
 	 * Constructor
 	 */
-	function datasource_infolog()
+	function datasource_tracker()
 	{
 		$this->datasource('tracker');
 		
@@ -40,8 +40,8 @@ class datasource_infolog extends datasource
 		// we use $GLOBALS['boinfolog'] as an already running instance might be availible there
 		if (!is_object($GLOBALS['botracker']))
 		{
-			include_once(EGW_INCLUDE_ROOT.'/infolog/inc/class.botracker.inc.php');
-			$GLOBALS['botracker'] =& new boinfolog();
+			include_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.botracker.inc.php');
+			$GLOBALS['botracker'] =& new botracker();
 		}
 		if (!is_array($data_id))
 		{
