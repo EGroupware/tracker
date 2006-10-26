@@ -287,7 +287,8 @@ class botracker extends sotracker
 		// check if item is overdue
 		$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
 		$limit = $this->now - $this->overdue_days * 24*60*60;
-		$data['overdue'] = (!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+		$data['overdue'] = $data['tr_status'] == 'o' && 	// only open items can be overdue
+			(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
 
 		return $data;
 	}
@@ -968,7 +969,7 @@ class botracker extends sotracker
 	}
 
 	/**
-	 * query tracker for entries matching $pattern
+	 * query tracker for entries matching $pattern, we search only open entries
 	 *
 	 * Is called as hook to participate in the linking
 	 *
@@ -977,15 +978,10 @@ class botracker extends sotracker
 	 */
 	function link_query( $pattern )
 	{
-		$criteria = array();
-		foreach(array('tr_id','tr_summary','tr_description','reply_message') as $col)
-		{
-			$criteria[$col] = $pattern;
-		}
 		$result = array();
-		foreach((array) $this->search($criteria,false,'','','%',false,'OR') as $item )
+		foreach((array) $this->search($pattern,false,'','','%',false,'OR',false,array('tr_status' => 'o')) as $item )
 		{
-			$result[$item['tr_id']] = $this->link_title($item);
+			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
 		return $result;
 	}
@@ -1015,6 +1011,26 @@ class botracker extends sotracker
 		);
 	}
 	
+	/**
+	 * query rows for the nextmatch widget
+	 *
+	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
+	 *	For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
+	 * @param array &$rows returned rows/competitions
+	 * @param array &$readonlys eg. to disable buttons based on acl, not use here, maybe in a derived class
+	 * @param string $join='' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or 
+	 *	"LEFT JOIN table2 ON (x=y)", Note: there's no quoting done on $join!
+	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
+	 * @return int total number of rows
+	 */
+	function get_rows($query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
+	{
+		$rows = (array) $this->search($query['search'],false,$query['order']?$query['order'].' '.$query['sort']:'',
+			'','%',false,'OR',(int)$query['start'],$query['col_filter'],$join,$need_full_no_count);
+
+		return $this->total;
+	}
+
 	/**
 	 * Add a new tracker
 	 *

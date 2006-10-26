@@ -126,13 +126,25 @@ class sotracker extends so_sql
 	 * @param string $op='AND' defaults to 'AND', can be set to 'OR' too, then criteria's are OR'ed together
 	 * @param mixed $start=false if != false, return only maxmatch rows begining with start, or array($start,$num), or 'UNION' for a part of a union query
 	 * @param array $filter=null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
-	 * @param string $join='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
+	 * @param string $join_in='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
 	 *	"LEFT JOIN table2 ON (x=y AND z=o)", Note: there's no quoting done on $join, you are responsible for it!!!
 	 * @return boolean/array of matching rows (the row is an array of the cols) or False
 	 */
-	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join=true)
+	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true)
 	{
-		if ($join === true || $join == 1)
+		$join = $join_in && $join_in != 1 ? $join_in : '';
+		if (is_string($criteria) && $criteria)
+		{
+			$pattern = $criteria;
+			$criteria = array();
+			foreach(array($this->table_name.'.tr_id','tr_summary','tr_description','reply_message') as $col)
+			{
+				$criteria[$col] = $pattern;
+			}
+			$join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
+			if ($this->db->capabilities['distinct_on_text']) $only_keys = 'DISTINCT '.$this->table_name.'.*';
+		}
+		if ($join_in === true || $join_in == 1)
 		{
 			if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
 			
@@ -140,18 +152,17 @@ class sotracker extends so_sql
 			{
 				$extra_cols[] = "(SELECT COUNT(*) FROM $this->votes_table WHERE $this->table_name.tr_id=$this->votes_table.tr_id) AS votes";
 				$extra_cols[] = "(SELECT SUM(bounty_amount) FROM $this->bounties_table WHERE $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL) AS bounties";
-				$join = false;
 			}
 			else	// MySQL < 4.1
 			{
 				// join with votes
-				$join = " LEFT JOIN $this->votes_table ON $this->table_name.tr_id=$this->votes_table.tr_id";
+				$join .= " LEFT JOIN $this->votes_table ON $this->table_name.tr_id=$this->votes_table.tr_id";
 				$extra_cols[] = 'COUNT(vote_time) AS votes';
 				// join with bounties
 				$join .= " LEFT JOIN $this->bounties_table ON $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL";
 				$extra_cols[] = 'SUM(bounty_amount) AS bounties';
 				// fixes to get tr_id non-ambigues
-				$only_keys = $this->table_name.'.*';
+				if (is_bool($only_keys)) $only_keys = $this->table_name.($only_keys ? '.tr_id' : '.*');
 				if (strstr($order_by,'tr_id')) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
 				// group by the tr_id of the two join tables to count the votes and sum the bounties
 				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
