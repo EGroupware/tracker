@@ -552,7 +552,7 @@ class uitracker extends botracker
 		$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		$content['is_admin'] = $this->is_admin($tracker);
 		
-		$readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
+		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
 
 		$tpl =& new etemplate('tracker.index');
 
