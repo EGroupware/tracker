@@ -107,7 +107,19 @@ the bounty will not be shown, until the money is received.	tracker	es-es	La reco
 the canned response will be prefix the text you type.	tracker	es-es	La respuesta automatizada precederá al texto que escriba
 this module displays information from the tracker.	tracker	es-es	Este módulo muestra información de los informes
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	es-es	El sistema cerró este elemento automáticamente. Anteriormente estaba en estado Pendiente, y el remitente original no respondió durante %1 días.
-tracker	common	es-es	Seguimiento
+tracker	common	es-es	Sistema de seguimiento
+tracker added	tracker	es-es	Se ha añadido una nueva cola de seguimiento
+tracker admins	tracker	es-es	Administradores de la cola
+tracker admins & technicians	tracker	es-es	Administradores y técnicos de la cola
+tracker configuration	tracker	es-es	Configuración de la cola
+tracker deleted	tracker	es-es	Se ha borrado la cola de seguimiento
+tracker item modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
+tracker item not found !!!	tracker	es-es	¡No se encontró el elemento a seguir!
+tracker-%1 '%2' added.	tracker	es-es	Seguimiento - %1 '%2' añadido
+tracker-%1 '%2' updated.	tracker	es-es	Seguimiento - %1 '%2' actualizado
+tracker-%1 deleted.	tracker	es-es	Seguimiento - %1 borrado
+url of the tracker	tracker	es-es	URL del seguimiento
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	es-es	URL a incluir en la notificación. Por ejemplo, a la págigna con el módulo del Administrador de sitios web, el seguimiento predeterminado dentro de eGroupWare.
 versions	tracker	es-es	Versiones
 vote for it!	tracker	es-es	¡Vote por él!
 votes	tracker	es-es	Votos
