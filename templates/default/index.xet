@@ -22,7 +22,7 @@
 				<column/>
 				<column disabled="!@allow_voting"/>
 				<column disabled="!@allow_bounties"/>
-				<column/>
+				<column disabled="!@is_admin"/>
 			</columns>
 			<rows>
 				<row class="th">

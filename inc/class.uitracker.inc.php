@@ -437,6 +437,7 @@ class uitracker extends botracker
 		$rows['allow_voting'] = !!$this->allow_voting;
 		$rows['allow_bounties'] = !!$this->allow_bounties;
 		$rows['no_cat'] = $query['col_filter']['cat_id'];
+		$rows['is_admin'] = $this->is_admin($tracker);
 		
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.$this->trackers[$tracker];
 
