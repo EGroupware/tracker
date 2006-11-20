@@ -1,0 +1,122 @@
+%1 entries updated.	tracker	sl	%1 vnosov posodobljenih.
+--> enter new name	tracker	sl	--> vnesite novo ime
+1 - lowest	tracker	sl	1 - najnižja
+5 - medium	tracker	sl	5 - srednja
+9 - highest	tracker	sl	9 - najvišja
+accepted	tracker	sl	Sprejeto
+actions	tracker	sl	Dejanja
+add comment	tracker	sl	Dodaj komentar
+after how many days pending items should be closed automatic	tracker	sl	Po koliko dneh naj se nerešeni elementi samodejno zaprejo
+allow bounties	tracker	sl	Dovoli nagrade
+allow editing by	tracker	sl	Dovoli urejanje
+allow to assign groups to tracker items	tracker	sl	Dovoli dodelitev skupin elementom Trackerja
+allow voting	tracker	sl	Dovoli glasovanje
+allow voting on tracker items, show and sort after the votes	tracker	sl	Dovoli glasovanje za elemente Trackerja, po glasovanju prikaži glasove in uredi
+amount	tracker	sl	Količina
+assigned to	tracker	sl	Komu dodeliti
+assigning groups	tracker	sl	Dodeljevanje skupin
+attachments & links	tracker	sl	Priloge in povezave
+autoassign to	tracker	sl	Samodejno dodeli
+bounties	tracker	sl	Nagrade
+bounty confirmed	tracker	sl	Nagrada potrjena
+bounty deleted	tracker	sl	Nagrada izbrisana
+bounty set	tracker	sl	Nagrada nastavljena
+canned response	tracker	sl	Avtomatični odgovor
+canned responses	tracker	sl	Avtomatični odgovori
+categories, versions, canned responses	tracker	sl	Kategorije, različice, avtomatični odgovori
+check all	tracker	sl	Preveri vse
+close pending	tracker	sl	Zapri nerešene
+closed	tracker	sl	Zaprto
+comment by %1 at %2:	tracker	sl	Komentarji od %1 pri %2
+comments	tracker	sl	Komentarji
+completed	tracker	sl	Zaključeno
+configuration	tracker	sl	Konfiguracija
+configuration for all trackers	tracker	sl	Konfiguracija za vse čakalne vrste
+configuration updated.	tracker	sl	Konfiguracija posodobljena.
+configuration, acl, notifications	tracker	sl	Konfiguracija, ACL, Obveščanje
+confirm that you pay the specified bounty to implement or fix the issue	tracker	sl	Potrdite, da boste plačali navedeno nagrado za implementacijo ali reševanje napake
+confirm the receipt of money for this bounty	tracker	sl	Potrdi prejem denarja za to nagrado
+confirmed	tracker	sl	Potrjeno
+copy to	tracker	sl	Kopiraj v
+create new links	tracker	sl	Ustvari nove povezave
+created	tracker	sl	Ustvarjeno
+date opened	tracker	sl	Datum odprtja
+delete this bounty	tracker	sl	Izbriši to nagrado
+delete this canned response	tracker	sl	Izriši ta avtomatični odgovor
+delete this category	tracker	sl	izbriši to kategorijo
+delete this version	tracker	sl	Zbriši to različico
+deleted	tracker	sl	Zbrisano
+donator name to show	tracker	sl	Ime donatorja za prikaz
+duplicate	tracker	sl	Podvoji
+e-mail notifications	tracker	sl	E-poštni opomnik
+edit %1	tracker	sl	Uredi %1
+email address to contact you	tracker	sl	Vaš kontaktni elektronski naslov
+entry saved	tracker	sl	Vnos shranjen
+error saving the entry!!!	tracker	sl	Napaka pri shranjevanju vnosa!
+everybody	tracker	sl	Vsi
+existing links	tracker	sl	Obstoječe povezave
+field	tracker	sl	Polje
+fixed	tracker	sl	Popravljeno
+from	tracker	sl	Od
+history	tracker	sl	Zgodovina
+id	tracker	sl	ID
+invalid	tracker	sl	Napačno
+item assignee	tracker	sl	Kdo je dodelil element
+item creator	tracker	sl	Lastnik elementa
+language for the copy	tracker	sl	Jezik kopije
+last modified	tracker	sl	Zadnjič spremenjeno
+later	tracker	sl	Pozneje
+new %1	tracker	sl	Nov %1
+new items	tracker	sl	Novi elementi
+no change	tracker	sl	Brez sprememb
+non-anonymous users	tracker	sl	Ne-anonimni uporabnik
+noone	tracker	sl	Poldne
+notification	tracker	sl	Obvestilo
+open	tracker	sl	Odprto
+out of date	tracker	sl	Izven roka
+pending	tracker	sl	V teku
+pending items never get close automatic.	tracker	sl	Elementi v teku naj se nikoli ne zaprejo samodejno.
+rejected	tracker	sl	Zavrnjeno
+remind	tracker	sl	Opomni
+resolution	tracker	sl	Ločljivost
+sender address	tracker	sl	Naslov pošiljatelja
+sender address for all notifications, eg. noreply@egroupware.org	tracker	sl	Naslov pošiljatelja za vsa obvestila, npr. brez-odgovora@egroupware.org
+set an own bounty (in %s)	tracker	sl	Nastavite lastno nagrado (v %s)
+set bounty	tracker	sl	Nastavite nagrado
+staff	tracker	sl	Osebje
+summary	tracker	sl	Povzetek
+technicians	tracker	sl	Tehniki
+thank you for setting this bounty.	tracker	sl	Hvala, ker ste ponudili nagrado.
+thank you for voting.	tracker	sl	Hvala za glas.
+the bounty will not be shown, until the money is received.	tracker	sl	Nagrada ne bo prikazana, dokler denar ne bo prejet.
+tracker	common	sl	Sistem za sledenje
+tracker added	tracker	sl	Dodana je bila čakalna vrsta
+tracker admins	tracker	sl	Nadzorniki Trackerja
+tracker admins & technicians	tracker	sl	Nadzorniki in tehniki Trackerja
+tracker configuration	tracker	sl	Konfiguracija Trackerja
+tracker deleted	tracker	sl	Čakalna vrsta je bila izbrisana
+tracker item modified by %1 at %2	tracker	sl	Element Trackerja je bil spremenjen od %1 ob %2
+tracker item not found !!!	tracker	sl	Element Trackerja ni bil najden!
+tracker-%1 '%2' added.	tracker	sl	Tracker-%1 '%2' dodan.
+tracker-%1 '%2' updated.	tracker	sl	Tracker-%1 '%2' posodobljen.
+tracker-%1 deleted.	tracker	sl	Tracker-%1 '%2' izbrisan.
+url of the tracker	tracker	sl	Naslov URL trackerja
+versions	tracker	sl	Različice
+vote for it!	tracker	sl	Glasuj!
+votes	tracker	sl	Glasovi
+wont fix	tracker	sl	Ne bo popravljeno
+works for me	tracker	sl	Meni dela
+yes, display groups first	tracker	sl	Da, najprej prikaži skupine
+yes, display users first	tracker	sl	Da, najprej prikaži uporabnike
+you can respond by visiting:	tracker	sl	Odgovorite lahko z obiskom strani:
+you need to enter a name	tracker	sl	Vnesti morate ime
+you need to login to vote!	tracker	sl	Za glasovanje se morate pirjaviti
+you need to select something to change and some tracker items!	tracker	sl	Izbrati morate nekaj za spremeniti IN nekaj elementov!
+you need to specify amount, donators name and email address!	tracker	sl	Določiti morate vrednost, ime donatorja IN elektronski naslov!
+you voted %1.	tracker	sl	Glasovali ste %1.
+2	tracker	sl	2
+3	tracker	sl	3
+4	tracker	sl	4
+6	tracker	sl	6
+7	tracker	sl	7
+8	tracker	sl	8

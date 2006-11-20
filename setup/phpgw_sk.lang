@@ -1,0 +1,112 @@
+%1 entries updated.	tracker	sk	%1 polo¾iek aktualizovaných
+--> enter new name	tracker	sk	--> zadajte nový názov
+1 - lowest	tracker	sk	1 - najni¾¹ia
+5 - medium	tracker	sk	5 - priemerná
+9 - highest	tracker	sk	9 - najvy¹¹ia
+accepted	tracker	sk	Prijaté
+actions	tracker	sk	Akcie
+add comment	tracker	sk	Prida» poznámku
+after how many days a not replied item should be marked overdue?	tracker	sk	Po koµkých dòoch sa má nezodpovedaná zále¾itos» oznaèi» ako me¹kajúce?
+after how many days pending items should be closed automatic	tracker	sk	Po koµkých dòoch sa majú vybavované zále¾itosti automaticky uzavrie»
+allow bounties	tracker	sk	Povoli» odmeny
+allow editing by	tracker	sk	Komu povoli» úpravy
+allow voting	tracker	sk	Povoli» hlasovanie
+amount	tracker	sk	Mno¾stvo
+assigned to	tracker	sk	Priradené (komu)
+assigning groups	tracker	sk	Priraïovanie skupín
+attachments & links	tracker	sk	Prílohy a Odkazy
+autoassign to	tracker	sk	Automaticky priradi» (komu)
+bounties	tracker	sk	Odmeny
+bounty confirmed	tracker	sk	Odmena potvrdená
+bounty deleted	tracker	sk	Odmena zmazaná
+bounty set	tracker	sk	Odmena nastavená
+canned response	tracker	sk	©ablónová odpoveï
+canned responses	tracker	sk	©ablónové odpovede
+categories, versions, canned responses	tracker	sk	Kategórie, verzie, ¹ablónové odpovede
+check all	tracker	sk	Oznaèi» v¹etko
+close pending	tracker	sk	Uzavrie» nedorie¹ené
+closed	tracker	sk	Uzavreté
+comment by %1 at %2:	tracker	sk	Poznámka od %1 k %2:
+comments	tracker	sk	Poznámky
+completed	tracker	sk	Hotovo
+configuration	tracker	sk	Nastavenia
+configuration, acl, notifications	tracker	sk	Nastavenia, ACL, Upozornenia
+confirm that you pay the specified bounty to implement or fix the issue	tracker	sk	Potvrïte, ¾e zaplatíte uvedenú odmenu za vyrie¹enie tejto zále¾itosti
+confirm the receipt of money for this bounty	tracker	sk	Potvrïte prevzatie peòazí vo veci tejto odmeny
+confirmed	tracker	sk	Potvrdené
+copy to	tracker	sk	Kopírova» (kam)
+create new links	tracker	sk	Vytvori» nové odkazy
+created	tracker	sk	Vytvorené
+date opened	tracker	sk	Dátum otvorenia
+delete this bounty	tracker	sk	Vymaza» túto odmenu
+delete this canned response	tracker	sk	Vymaza» túto ¹ablónovú odpoveï
+delete this category	tracker	sk	Vymaza» túto kategóriu
+delete this version	tracker	sk	Vymaza» túto verziu
+deleted	tracker	sk	Vymazané
+donator name to show	tracker	sk	Aké meno darcu sa má zobrazi»
+duplicate	tracker	sk	Duplikát
+e-mail notifications	tracker	sk	E-mailové pripomienky
+edit %1	tracker	sk	Upravi» %1
+email address to contact you	tracker	sk	Va¹a emailová adresa
+entry saved	tracker	sk	Záznam ulo¾ený
+error saving the entry!!!	tracker	sk	Chyba pri ukladaní záznamu!
+everybody	tracker	sk	V¹etci
+existing links	tracker	sk	Existujúce odkazy
+field	tracker	sk	Polo¾ka
+fixed	tracker	sk	Vyrie¹ené
+from	tracker	sk	Od
+history	tracker	sk	História
+id	tracker	sk	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím zvá¾te vypísanie odmeny za jej vyrie¹enie!
+if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím hlasujte za òu.
+invalid	tracker	sk	Neplatné
+item assignee	tracker	sk	Za zále¾itos» je zodpovedný
+item creator	tracker	sk	Ohlasovateµ zále¾itosti
+language for the copy	tracker	sk	Jazyk kópie
+last modified	tracker	sk	Naposledy upravené
+later	tracker	sk	Neskôr
+new %1	tracker	sk	Nové %1
+new items	tracker	sk	Nové zále¾itosti
+no change	tracker	sk	Bezo zmien
+non-anonymous users	tracker	sk	Ne-anonymný pou¾ívateµ
+noone	tracker	sk	Nikto
+notification	tracker	sk	Pripomienka
+open	tracker	sk	Otvorené
+out of date	tracker	sk	Zame¹kané
+overdue after	tracker	sk	Me¹ká po
+pending	tracker	sk	Vybavuje sa
+pending items never get close automatic.	tracker	sk	Vybavované zále¾itosti sa nikdy automaticky neuzatvárajú
+pending items will be closed automatic after %1 days without response.	tracker	sk	Vybavované zále¾itosti sa automaticky uzatvárajú po %1 dòoch bez odpovede.
+permission denied !!!	tracker	sk	Prístup odopretý !!!
+postponed	tracker	sk	Odlo¾ené
+rejected	tracker	sk	Odmietnuté
+remind	tracker	sk	Pripomenú»
+sender address	tracker	sk	Adresa odosielateµa
+sender address for all notifications, eg. noreply@egroupware.org	tracker	sk	Adresa odosielateµa pre v¹etky pripomienky, napr. noreply@egroupware.org
+set an own bounty (in %s)	tracker	sk	Zada» vlastnú odmenu (v %s)
+set bounty	tracker	sk	Zada» odmenu
+staff	tracker	sk	Personál
+summary	tracker	sk	Zhrnutie
+technicians	tracker	sk	Technici
+thank you for setting this bounty.	tracker	sk	Ïakujeme za zadanie tejto odmeny.
+thank you for voting.	tracker	sk	Ïakujeme za Vá¹ hlas.
+the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa NEBUDE zobrazova», a¾ kým nebudú prijaté peniaze.
+the canned response will be prefix the text you type.	tracker	sk	©ablónová odpoveï sa zobrazí pred textom ktorý napí¹ete.
+versions	tracker	sk	Verzie
+vote for it!	tracker	sk	Hlasova» za vyrie¹enie
+votes	tracker	sk	Hlasy
+wont fix	tracker	sk	Nebude sa rie¹i»
+works for me	tracker	sk	Mne to funguje
+yes, display groups first	tracker	sk	Áno, najprv zobrazi» skupiny
+yes, display users first	tracker	sk	Áno, najprv zobrazi» pou¾ívateµov
+you can respond by visiting:	tracker	sk	Mô¾ete odpoveda» kliknutím na:
+you need to enter a name	tracker	sk	Musíte zada» názov
+you need to login to vote!	tracker	sk	Ak chcete hlasova», musíte sa prihlási» do systému!
+you need to specify amount, donators name and email address!	tracker	sk	Musíte zada» obnos, meno darcu A emailovú adresu!
+you voted %1.	tracker	sk	Hlasovali ste %1.
+2	tracker	sk	2
+3	tracker	sk	3
+4	tracker	sk	4
+6	tracker	sk	6
+7	tracker	sk	7
+8	tracker	sk	8
