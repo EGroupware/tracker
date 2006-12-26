@@ -89,8 +89,7 @@ class uitracker extends botracker
 				$msg = lang('Permission denied !!!');
 				if ($popup)
 				{
-					$GLOBALS['egw']->common->egw_header();
-					echo $msg;
+					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
 					$GLOBALS['egw']->common->egw_exit();
 				}
 				else
@@ -577,10 +576,7 @@ class uitracker extends botracker
 
 		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
 		{
-			$GLOBALS['egw']->common->egw_header();
-			parse_navbar();
-			echo '<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n";
-			$GLOBALS['egw']->common->egw_footer();
+			$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n",null,true);
 			return;
 		}
 		//_debug_array($content);
