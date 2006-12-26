@@ -371,7 +371,7 @@ class botracker extends sotracker
 			}
 			if (!$changed)
 			{
-				echo "<p>botracker::save() no change --> no save needed</p>\n";
+				//echo "<p>botracker::save() no change --> no save needed</p>\n";
 				return false;
 			}
 			$this->data['tr_modified'] = $this->now;
@@ -1164,6 +1164,8 @@ class botracker extends sotracker
 	 */
 	function set_async_job($start=true)
 	{
+		//echo "<p>botracker::set_async_job(".($start?'true':'false').")</p>\n";
+
 		require_once(EGW_API_INC.'/class.asyncservice.inc.php');
 		
 		$async =& new asyncservice();
@@ -1190,7 +1192,7 @@ class botracker extends sotracker
 
 		if (($ids = $this->query_list('tr_id','tr_id',array(
 			'tr_status' => 'p',
-			'tr_modified < '.time()-$this->pending_close_days*24*60*60,
+			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
 		))))
 		{
 			if ($GLOBALS['egw']->preferences->default['common']['lang'] &&	// load the system default language
