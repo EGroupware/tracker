@@ -3,11 +3,11 @@
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.3.001">
 		<menulist class="bold">
-			<menupopup data="" rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1"/>
+			<menupopup rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1"/>
 		</menulist>
 	</template>
-	<template id="tracker.index.right" template="" lang="" group="0" version="0.1.002">
-		<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
+	<template id="tracker.index.right" template="" lang="" group="0" version="0.1.003">
+		<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
 	</template>
 	<template id="tracker.index.rows" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%">
@@ -62,7 +62,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.index" template="" lang="" group="0" version="0.1.003">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
@@ -122,7 +122,7 @@
 					</grid>
 				</row>
 				<row disabled="@is_admin">
-					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
+					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.uitracker.edit&amp;tracker={$cont[nm][col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
 					<description/>
 				</row>
 			</rows>
