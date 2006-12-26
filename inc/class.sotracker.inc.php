@@ -170,7 +170,7 @@ class sotracker extends so_sql
 			$order_by .= ($order_by ? ',' : '').'bounties DESC,votes DESC';	// default sort is after bountes and votes
 		}
 		// private ACL: private items are only visible for create, assiged or tracker admins
-		if (method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
+		if ($this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
 		{
 			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
 		}
