@@ -916,7 +916,7 @@ class botracker extends sotracker
 	{
 		foreach($this->all_cats as $cat)
 		{
-			if ($cat_type == 'response' && $cat['id'] == $id)
+			if (($data = unserialize($cat['data'])) && $data['type'] == 'response' && $cat['id'] == $id)
 			{
 				return $cat['description'];
 			}
