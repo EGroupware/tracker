@@ -416,6 +416,11 @@ class uitracker extends botracker
 			$query['col_filter']['tr_assigned'] = $GLOBALS['egw']->accounts->members($query['col_filter']['tr_assigned'],true);
 			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
 		}
+		elseif($query['col_filter']['tr_assigned'] === 'not')
+		{
+			$query['col_filter'][] = 'tr_assigned IS NULL';
+			unset($query['col_filter']['tr_assigned']);
+		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		
@@ -503,7 +508,7 @@ class uitracker extends botracker
 						if (!$this->read($tr_id)) continue;
 						foreach($content as $name => $value)
 						{
-							if ($value !== '') $this->data[$name] = $value;
+							if ($value !== '') $this->data[$name] = $name == 'tr_assigned' && $value === 'not' ? NULL : $value;
 						}
 						if (!$this->save()) $n++;
 					}
