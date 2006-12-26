@@ -27,7 +27,7 @@
 					<int id="num_replies" readonly="true"/>
 				</row>
 				<row class="row" valign="top">
-					<vbox orient=",0,0">
+					<vbox options="0,0">
 						<date-time id="replies[$row][reply_created]" readonly="true"/>
 						<menulist>
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
@@ -126,7 +126,7 @@
 					<textbox type="float" id="${row}[bounty_amount]" readonly="true" label="@currency" no_lang="1"/>
 					<description id="${row}[bounty_name]" no_lang="1"/>
 					<description id="${row}[bounty_email]" no_lang="1"/>
-					<hbox align="center" orient=",0,0">
+					<hbox options="0,0" align="center">
 						<date-time id="${row}[bounty_confirmed]" readonly="true"/>
 						<button image="edit" label="Confirm" align="center" id="confirm[$row_cont[bounty_id]]" statustext="Confirm the receipt of money for this bounty" onclick="return confirm('Confirm the receipt of money for this bounty');"/>
 						<button image="delete" label="Delete" align="center" id="delete[$row_cont[bounty_id]]" statustext="Delete this bounty" onclick="return confirm('Delete this bounty');"/>
@@ -135,7 +135,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.1.003">
+	<template id="tracker.edit" template="" lang="" group="0" version="0.1.004">
 		<grid>
 			<columns>
 				<column width="105"/>
@@ -152,9 +152,12 @@
 				</row>
 				<row>
 					<description options=",,,tr_tracker" value="Tracker"/>
-					<menulist>
-						<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
-					</menulist>
+					<hbox onchange="1" options="0,0">
+						<menulist>
+							<menupopup id="tr_tracker" no_lang="1"/>
+						</menulist>
+						<int id="tr_id" class="trIdEdit" readonly="true"/>
+					</hbox>
 					<description options=",,,tr_private" value="Private"/>
 					<checkbox id="tr_private"/>
 				</row>
@@ -180,14 +183,14 @@
 				</row>
 				<row disabled="!@tr_id">
 					<description options=",,,tr_status" value="Status"/>
-					<hbox orient=",0,0">
+					<hbox options="0,0">
 						<menulist>
 							<menupopup id="tr_status" statustext="@status_help"/>
 						</menulist>
 						<date-time id="tr_closed" label=" "/>
 					</hbox>
 					<description value="Resolution" options=",,,tr_resolution"/>
-					<hbox orient=",0,0">
+					<hbox options="0,0">
 						<menulist>
 							<menupopup id="tr_resolution"/>
 						</menulist>
@@ -222,14 +225,14 @@
 				</row>
 				<row disabled="!@tr_id">
 					<description value="Created by"/>
-					<hbox orient=",0,0">
+					<hbox options="0,0">
 						<menulist>
 							<menupopup type="select-account" id="tr_creator" readonly="true"/>
 						</menulist>
 						<date-time id="tr_created" label="," readonly="true"/>
 					</hbox>
 					<description value="Last modified"/>
-					<hbox orient=",0,0">
+					<hbox options="0,0">
 						<menulist>
 							<menupopup type="select-account" id="tr_modifier" readonly="true"/>
 						</menulist>
@@ -239,7 +242,7 @@
 				<row>
 					<button label="Save" id="button[save]"/>
 					<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
-					<vbox align="right" span="2" orient=",0,0">
+					<vbox options="0,0" align="right" span="2">
 						<button label="Vote for it!" id="button[vote]" statustext="If this item is important for you, please vote for it." align="right" onclick="return confirm('Do you want to vote for this item');"/>
 						<description id="no_vote" class="redItalic" no_lang="1" align="right"/>
 					</vbox>

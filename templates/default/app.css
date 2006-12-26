@@ -1,3 +1,6 @@
 .redItalic { color: red; font-style: italic; }
 .noWrap { white-space: nowrap; }
 .overdue,.bold { font-weight: bold; }
+.leftPad5 { padding-left: 5px; }
+.trIdEdit { padding-left: 10px; }
+.trIdEdit:before { content: "#"; }
