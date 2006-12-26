@@ -96,8 +96,8 @@ sender address	tracker	pt-br	Endereço do remetente
 sender address for all notifications, eg. noreply@egroupware.org	tracker	pt-br	Endereço do remetente para todas as notificações, por exemplo: nao_responda@egroupware.org
 set an own bounty (in %s)	tracker	pt-br	Definir um pagamento (em %s)
 set bounty	tracker	pt-br	Definir pagamento
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O SAT deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado ?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O SAT deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado ?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado ?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado ?
 staff	tracker	pt-br	Equipe
 summary	tracker	pt-br	Resumo
 technicians	tracker	pt-br	Técnicos
@@ -105,18 +105,20 @@ thank you for setting this bounty.	tracker	pt-br	Obrigado por definir este pagam
 thank you for voting.	tracker	pt-br	Obrigado por votar
 the bounty will not be shown, until the money is received.	tracker	pt-br	O pagamento NÃO será exibido, até o dinheiro ser recebido.
 the canned response will be prefix the text you type.	tracker	pt-br	A resposta automática precederá o texto que você digitar.
-this module displays information from the tracker.	tracker	pt-br	Este módulo exibe informação sobre o SAT
+this module displays information from the tracker.	tracker	pt-br	Este módulo exibe informação sobre o Sistema de Tickets
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pt-br	Este ticket foi fechado automaticamente pelo sistema. O mesmo foi, previamente, definido como Pendente e o criador não respondeu em %1 dia(s).
-tracker	common	pt-br	SAT - Sistema Avançado de Tickets
-tracker admins	tracker	pt-br	Administradores do SAT
-tracker admins & technicians	tracker	pt-br	Administradores e Técnicos do SAT
-tracker configuration	tracker	pt-br	Configuração do SAT
+tracker	common	pt-br	Sistema de Tickets
+tracker added	tracker	pt-br	Fila do Sistema de Tickets adicionada
+tracker admins	tracker	pt-br	Administradores do Sistema de Tickets
+tracker admins & technicians	tracker	pt-br	Administradores e Técnicos do Sistema de Tickets
+tracker configuration	tracker	pt-br	Configuração do Sistema de Tickets
+tracker deleted	tracker	pt-br	Fila do Sistema de Tickets removida
 tracker item modified by %1 at %2	tracker	pt-br	Ticket modificado por %1 em %2
 tracker item not found !!!	tracker	pt-br	Ticket não encontrado !!!
 tracker-%1 '%2' added.	tracker	pt-br	Tipo de Ticket - %1 '%2' adicionado
 tracker-%1 '%2' updated.	tracker	pt-br	Tipo de Ticket - %1 '%2' atualizado
 tracker-%1 deleted.	tracker	pt-br	Tipo de Ticket - %1 removido
-url of the tracker	tracker	pt-br	URL do SAT
+url of the tracker	tracker	pt-br	URL do Sistema de Tickets
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	pt-br	URL para ser inclusa nas notificações
 versions	tracker	pt-br	Versões
 vote for it!	tracker	pt-br	Vote !

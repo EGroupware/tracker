@@ -43,15 +43,18 @@ created	tracker	sl	Ustvarjeno
 date opened	tracker	sl	Datum odprtja
 delete this bounty	tracker	sl	Izbriši to nagrado
 delete this canned response	tracker	sl	Izriši ta avtomatični odgovor
-delete this category	tracker	sl	izbriši to kategorijo
+delete this category	tracker	sl	Izbriši to kategorijo
+delete this tracker including all it's items and categories	tracker	sl	Izbriš ta tracker vključno z vsemi elementi in lategorijami
 delete this version	tracker	sl	Zbriši to različico
 deleted	tracker	sl	Zbrisano
 donator name to show	tracker	sl	Ime donatorja za prikaz
 duplicate	tracker	sl	Podvoji
+e-mail address to which a copy of all tracker-notifications should be send	tracker	sl	E-naslov, na katerega se pošljejo kopije vseh obvestil o trackerjih
 e-mail notifications	tracker	sl	E-poštni opomnik
 edit %1	tracker	sl	Uredi %1
 email address to contact you	tracker	sl	Vaš kontaktni elektronski naslov
 entry saved	tracker	sl	Vnos shranjen
+error adding the new tracker!	tracker	sl	Napaka pri dodajanju novega trackerja!
 error saving the entry!!!	tracker	sl	Napaka pri shranjevanju vnosa!
 everybody	tracker	sl	Vsi
 existing links	tracker	sl	Obstoječe povezave
@@ -60,6 +63,7 @@ fixed	tracker	sl	Popravljeno
 from	tracker	sl	Od
 history	tracker	sl	Zgodovina
 id	tracker	sl	ID
+if this item is important for you, please vote for it.	tracker	sl	Če je ta element za vas pomemben, lahko glasujete zanj.
 invalid	tracker	sl	Napačno
 item assignee	tracker	sl	Kdo je dodelil element
 item creator	tracker	sl	Lastnik elementa
@@ -68,6 +72,7 @@ last modified	tracker	sl	Zadnjič spremenjeno
 later	tracker	sl	Pozneje
 new %1	tracker	sl	Nov %1
 new items	tracker	sl	Novi elementi
+new tracker item submitted by %1 at %2	tracker	sl	Nov element trackerja je ustvaril %1 ob %2
 no change	tracker	sl	Brez sprememb
 non-anonymous users	tracker	sl	Ne-anonimni uporabnik
 noone	tracker	sl	Poldne
@@ -76,6 +81,7 @@ open	tracker	sl	Odprto
 out of date	tracker	sl	Izven roka
 pending	tracker	sl	V teku
 pending items never get close automatic.	tracker	sl	Elementi v teku naj se nikoli ne zaprejo samodejno.
+permission denied !!!	tracker	sl	Dostop zavrnjen!
 rejected	tracker	sl	Zavrnjeno
 remind	tracker	sl	Opomni
 resolution	tracker	sl	Ločljivost
