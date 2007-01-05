@@ -571,7 +571,7 @@ class botracker extends sotracker
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($this->stati[$data['tr_status']]),
 			'tr_resolution'  => lang($this->resolutions[$data['tr_resolution']]),
-			'tr_completion'  => (int)$data['tr_completition'].'%',
+			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($this->priorities[$data['tr_priority']]),
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
 			'tr_assigned'    => $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
