@@ -594,7 +594,9 @@ class botracker extends sotracker
 				$body .= $reply['reply_message']."\n";
 			}
 		}
-		if(!is_object($GLOBALS['egw']->send))
+		// PHPMailer aka send-class, seens not to be able to send more then one mail, IF we need to authenticate to the SMTP server
+		// There for the object is newly created for ever mail, 'til this get fixed in PHPMailer.
+		//if(!is_object($GLOBALS['egw']->send))
 		{
 			$GLOBALS['egw']->send =& CreateObject('phpgwapi.send');
 		}
