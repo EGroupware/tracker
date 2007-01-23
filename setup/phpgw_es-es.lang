@@ -14,7 +14,7 @@ allow to assign groups to tracker items	tracker	es-es	Permitir asignar grupos pa
 allow voting	tracker	es-es	Permitir votar
 allow voting on tracker items, show and sort after the votes	tracker	es-es	Permitir votar en elementos de seguimiento. Mostrar y ordenar después de los votos
 amount	tracker	es-es	Cantidad
-assigned to	tracker	es-es	Asiganado a
+assigned to	tracker	es-es	Asignado a
 assigning groups	tracker	es-es	Grupos asignados
 attachments & links	tracker	es-es	Adjuntos y enlaces
 autoassign to	tracker	es-es	Asignar automáticamente a
@@ -45,6 +45,7 @@ date opened	tracker	es-es	Fecha de apertura
 delete this bounty	tracker	es-es	Borrar esta recompensa
 delete this canned response	tracker	es-es	Borrar esta respuesta automatizada
 delete this category	tracker	es-es	Borrar esta categoría
+delete this status	tracker	es-es	Borrar este estado
 delete this tracker including all it's items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
 delete this version	tracker	es-es	Borrar esta versión
 deleted	tracker	es-es	Borrado

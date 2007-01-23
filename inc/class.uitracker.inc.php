@@ -263,6 +263,7 @@ class uitracker extends botracker
 			$content['bounties']['currency'] = $this->currency;
 			$content['bounties']['is_admin'] = $this->is_admin($tracker);
 		}
+		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$content += array(
 			'msg' => $msg,
 			'on_cancel' => $popup ? 'window.close();' : '',
@@ -278,7 +279,7 @@ class uitracker extends botracker
 				'app' => 'tracker',
 				'status-widgets' => array(
 					'Co' => 'select-percent',
-					'St' => &$this->stati,
+					'St' => &$statis,
 					'Ca' => 'select-category',
 					'Tr' => 'select-category',
 					'Ve' => 'select-category',
@@ -317,7 +318,7 @@ class uitracker extends botracker
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => &$this->priorities,
-			'tr_status'   => &$this->stati,
+			'tr_status'   => &$statis,
 			'tr_resolution' => &$this->resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
 			'canned_response' => $this->get_tracker_labels('response'),
@@ -432,6 +433,7 @@ class uitracker extends botracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
 		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
 		$rows['sel_options']['filter2'] = array(lang('All'))+$this->get_tracker_labels('version',$tracker);
+		$rows['sel_options']['tr_status'] = $this->stati+$this->get_tracker_labels('stati',$tracker);
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
@@ -517,10 +519,11 @@ class uitracker extends botracker
 		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 
+		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'tr_priority' => &$this->priorities,
-			'tr_status'   => &$this->stati,
+			'tr_status'   => &$statis,
 		);
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
@@ -547,7 +550,7 @@ class uitracker extends botracker
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),
 				'col_filter'     => array(
-					'tr_status'  => 'o',	// default filter: open
+					'tr_status'  => '-100',	// default filter: open
 				),
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
@@ -672,6 +675,7 @@ class uitracker extends botracker
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
+						'statis'    => lang('Stati'),						
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
@@ -679,12 +683,25 @@ class uitracker extends botracker
 						{
 							if (!$cat['name']) continue;	// ignore empty (new) cats
 
+							$new_cat_descr = 'tracker-';
+							switch($name)
+							{
+								case 'cats':
+									$new_cat_descr .= 'cat';
+									break;
+								case 'versions':
+									$new_cat_descr .= 'version';
+									break;
+								case 'statis':
+									$new_cat_descr .= 'stati';
+									break;
+							}
 							$old_cat = array(	// some defaults for new cats
 								'main'   => $tracker,
 								'parent' => $tracker,
 								'access' => 'public',
 								'data'   => array('type' => substr($name,0,-1)),
-								'description'  => 'tracker-'.($name == 'cats' ? 'cat' : 'version'),
+								'description'  => $new_cat_descr,
 							);
 							// search cat in existing ones
 							foreach($this->all_cats as $c)
@@ -740,6 +757,7 @@ class uitracker extends botracker
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
+						'statis'    => lang('State'),						
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
@@ -771,7 +789,7 @@ class uitracker extends botracker
 			$content[$name] = $this->$name;
 		}
 		// cats & versions
-		$v = $c = $r = 1;
+		$v = $c = $r = $s = 1;
 		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 		foreach($this->all_cats as $cat)
 		{
@@ -788,6 +806,9 @@ class uitracker extends botracker
 					case 'response':
 						$content['responses'][$r++] = $cat;
 						break;
+					case 'stati':
+						$content['statis'][$s++] = $cat + $data;
+						break;
 					default:	// cat
 						$data['type'] = 'cat';
 						$content['cats'][$c++] = $cat + $data;
@@ -795,7 +816,7 @@ class uitracker extends botracker
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = 
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['statis'][$s++] =
 			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;

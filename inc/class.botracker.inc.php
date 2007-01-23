@@ -82,10 +82,10 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $stati = array(
-		'o' => 'Open',
-		'c' => 'Closed',
-		'd' => 'Deleted',
-		'p' => 'Pending',
+		'-100' => 'Open',
+		'-101' => 'Closed',
+		'-102' => 'Deleted',
+		'-103' => 'Pending',
 	);
 	/**
 	 * Resolutions used by all trackers
@@ -153,6 +153,7 @@ class botracker extends sotracker
 		'add'            => 'Add',
 		'vote'           => 'Vote for it!',
 		'bounty'         => 'Set bounty',
+		'tr_cc'			 => 'CC',
 	);
 	/**
 	 * Translate field-name history status char
@@ -173,6 +174,7 @@ class botracker extends sotracker
 		'tr_priority'    => 'Pr',
 		'tr_closed'      => 'Cl',
 		'tr_resolution'  => 'Re',
+		'tr_cc'			 => 'Cc',
 /* the following bounty-stati are only for reference
 		'bounty-set'     => 'bo',
 		'bounty-deleted' => 'xb',
@@ -348,7 +350,7 @@ class botracker extends sotracker
 		{
 			$this->data['tr_created'] = $this->now;
 			$this->data['tr_creator'] = $this->user;
-			$this->data['tr_status'] = 'o';
+			$this->data['tr_status'] = -100;
 			
 			if ($this->data['cat_id'] && !$this->data['tr_assigned'])
 			{
@@ -377,12 +379,12 @@ class botracker extends sotracker
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			// set close-date if status is closed and not yet set
-			if ($this->data['tr_status'] == 'c' && is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] == -101 && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
 			}
 			// unset closed date, if item is re-opend
-			if ($this->data['tr_status'] != 'c' && !is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] != '-101' && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
 			}
@@ -397,9 +399,9 @@ class botracker extends sotracker
 				$this->data['reply_creator'] = $this->user;
 				
 				// replies set status pending back to open
-				if ($this->data['old_status'] == 'p' && $this->data['old_status'] == $this->data['tr_status'])
+				if ($this->data['old_status'] = -103 && $this->data['old_status'] == $this->data['tr_status'])
 				{
-					$this->data['tr_status'] = 'o';
+					$this->data['tr_status'] = -100;
 				}
 			}
 		}
@@ -443,20 +445,33 @@ class botracker extends sotracker
 	 */
 	function do_notifications($old)
 	{
+		$email_sent = array();
 		// notification copy (only not-private items)
 		if (!$this->data['tr_private'] && ($email = $this->notification_config('copy')))
 		{
-			$this->send_notification($old,$email,$this->notification_config('lang'));
+			if (!in_array($email, $email_sent)) 
+			{
+				$this->send_notification($old,$email,$this->notification_config('lang'));
+				$email_sent[] = $email;
+			}
 		}
 		// item creator
 		if (($email = $GLOBALS['egw']->accounts->id2name($this->data['tr_creator'],'account_email')))
 		{
-			$this->send_notification($old,$email,$this->data['tr_creator'],'notify_creator');
+			if (!in_array($email, $email_sent)) 
+			{
+				$this->send_notification($old,$email,$this->data['tr_creator'],'notify_creator');
+				$email_sent[] = $email;	
+			}
 		}
 		// item assignee (only if user)
 		if ($this->data['tr_assigned'] > 0 && ($email = $GLOBALS['egw']->accounts->id2name($this->data['tr_assigned'],'account_email')))
 		{
-			$this->send_notification($old,$email,$this->data['tr_assigned'],'notify_assigned');
+			if (!in_array($email, $email_sent)) 
+			{
+				$this->send_notification($old,$email,$this->data['tr_assigned'],'notify_assigned');
+				$email_sent[] = $email;	
+			}
 		}
 		// item assignee (for groups)
 		if ($this->data['tr_assigned'] < 0)
@@ -465,7 +480,11 @@ class botracker extends sotracker
 			{
 				if ($email = $GLOBALS['egw']->accounts->id2name($u,'account_email'))
 				{
-					$this->send_notification($old,$email,$u,'notify_assigned');
+					if (!in_array($email, $email_sent)) 
+					{
+						$this->send_notification($old,$email,$u,'notify_assigned');
+						$email_sent[] = $email;
+					}
 				}
 			}
 		}
@@ -473,7 +492,11 @@ class botracker extends sotracker
 		if ($old && $old['tr_assigned'] > 0 && $old['tr_assigned'] != $this->data['tr_assigned']  &&
 			($email = $GLOBALS['egw']->accounts->id2name($old['tr_assigned'],'account_email')))
 		{
-			$this->send_notification($old,$email,$old['tr_assigned'],'notify_assigned');
+			if (!in_array($email, $email_sent)) 
+			{
+				$this->send_notification($old,$email,$old['tr_assigned'],'notify_assigned');
+				$email_sent[] = $email;
+			}
 		}
 		// old assignee, if changed now (for groups)
 		if ($old && $old['tr_assigned'] < 0 && $old['tr_assigned'] != $this->data['tr_assigned'])
@@ -482,10 +505,29 @@ class botracker extends sotracker
 			{
 				if ($email = $GLOBALS['egw']->accounts->id2name($u,'account_email'))
 				{
-					$this->send_notification($old,$email,$u,'notify_assigned');
+					if (!in_array($email, $email_sent)) 
+					{
+						$this->send_notification($old,$email,$u,'notify_assigned');
+						$email_sent[] = $email;
+					}
 				}
 			}
 		}
+		// Send CC emails
+		if ($this->data['tr_cc'])
+		{
+			// split the mails (coma separated)
+			$emails = explode(',', $this->data['tr_cc']);
+			foreach($emails as $email)
+			{
+				if (!in_array($email, $email_sent)) 
+				{
+					$this->send_notification($old,$email,$this->data['tr_creator']);
+					$email_sent[] = $email;
+				}				
+			}
+		}
+
 		// restore the user enviroment
 		if ($this->save_prefs) $GLOBALS['egw_info']['user'] = $this->save_prefs; unset($this->save_prefs);
 		if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != $GLOBALS['egw']->translation->userlang)
@@ -511,7 +553,7 @@ class botracker extends sotracker
 		//echo "old"; _debug_array($old);
 		//echo "data"; _debug_array($data);
 		
-		$subject = $this->trackers[$data['tr_tracker']].'-'.$data['tr_id'].': '.$data['tr_summary'];
+		$subject = $this->trackers[$data['tr_tracker']].' - '.$data['tr_id'].': '.$data['tr_summary'];
 		
 		if (is_numeric($user_or_lang))	// user --> read everything from his prefs
 		{
@@ -541,15 +583,58 @@ class botracker extends sotracker
 		{
 			$GLOBALS['egw']->translation->init();
 		}
-		if (!$data['tr_modified'] || !$old)
+		if ($GLOBALS['egw_info']['user']['preferences']['tracker']['notify_html'])
 		{
-			$body = lang('New tracker item submitted by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
-				date($datetime_format,$data['tr_created']-$this->tz_offset_s+$tz_offset_s))."\n";
+			$html_email = True;		
+		}
+		if ($html_email)
+		{	
+			$body ='<html><head>'.
+				'<style>a:hover,a:active {	cursor:pointer;	color: #ff9933;	text-decoration: underline;};'.
+				'body,td { font-family: Arial, Verdana, Helvetica, sans-serif; }</style>'.
+				'</head><body>';
 		}
 		else
 		{
-			$body = lang('Tracker item modified by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
-				date($datetime_format,$data['tr_modified']-$this->tz_offset_s+$tz_offset_s))."\n";
+			$body ='';
+		}
+		if (!$data['tr_modified'] || !$old)
+		{
+			if ($html_email)
+			{
+				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'.
+					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>';
+			}
+			$body .= lang('New tracker item submitted by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
+				date($datetime_format,$data['tr_created']-$this->tz_offset_s+$tz_offset_s));
+			if ($html_email)
+			{
+				$body .='</b></td></tr>'.
+						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+			}
+			else
+			{
+				$body .= "\n";
+			}
+		}
+		else
+		{
+			if ($html_email)
+			{
+				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'.
+					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>';
+			}
+			$body .= lang('Tracker item modified by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
+				date($datetime_format,$data['tr_modified']-$this->tz_offset_s+$tz_offset_s));
+			if ($html_email)
+			{
+				$body .='</b></td></tr>'.
+						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+			}
+			else
+			{
+				$body .= "\n";
+			}
 		}
 		if (!($link = $this->notification_config('link')))
 		{
@@ -558,42 +643,106 @@ class botracker extends sotracker
 				($GLOBALS['egw_info']['server']['hostname'] ? $GLOBALS['egw_info']['server']['hostname'] : $_SERVER['HTTP_HOST']) : '').
 				$GLOBALS['egw_info']['server']['webserver_url'].'/index.php?menuaction=tracker.uitracker.edit&nopopup=1';
 		}
-		$body .= lang('You can respond by visiting:').' '.$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
+		
+		$body .= lang('You can respond by visiting:').' ';
+		if ($html_email)
+		{
+			$body .='<a style="hover" href="'.$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
+					$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>';
+		}
+		else
+		{
+			$body .= $link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
+		}
 		
 		static $cats,$versions;
 		if (!$cats)
 		{
 			$cats = $this->get_tracker_labels('cat',$data['tr_tracker']);
 			$versions = $this->get_tracker_labels('version',$data['tr_tracker']);
+			$statis = $this->stati + $this->get_tracker_labels('stati',$data['tr_tracker']);
 		}
 		foreach(array(
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
-			'tr_status'      => lang($this->stati[$data['tr_status']]),
+			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($this->resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($this->priorities[$data['tr_priority']]),
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
-			'tr_assigned'    => $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
-			'tr_summary'     => $data['tr_summary'],
-			'tr_description' => "\n".$data['tr_description'],
+			'tr_assigned'	 => $data['tr_assigned'] == "" ? lang('Not assigned') : $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
+			'tr_cc'			 => $data['tr_cc'],
 		) as $name => $value)
 		{
-			if ($old && $old[$name] != $data[$name]) $body .= '> ';
-
-			$body .= lang($this->field2label[$name]).': '.$value."\n";
+			if ($html_email)
+			{
+				$body .='<tr style="color: #000000; background-color: #FFFFF1;"><td style="font-size: 10px;';
+				if ($old && $old[$name] != $data[$name]) 
+				{
+					$body .= ' color:red;">';
+				}
+				else
+				{
+					$body .= '">';
+				}
+			}
+			else
+			{
+				if ($old && $old[$name] != $data[$name]) $body .= '> ';
+			}
+			$body .= lang($this->field2label[$name]);
+			if ($html_email)
+			{
+				$body .=': '.$value."</td></tr>";
+			}
+			else
+			{
+				$body .= ': '.$value."\n";
+			}
 		}
+		if ($html_email)
+		{
+			$body .='<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'.
+					'<b>'.lang('Summary').': '.$data['tr_id'].' - '.$data['tr_summary'].'</td></tr>'.
+					'<tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'.
+					nl2br($data['tr_description']).'<br><br><br></td></tr>';
+		}
+		else
+		{
+			$body .= lang('Summary').': '.$data['tr_summary']."\n".
+					$data['tr_description']."\n\n";
+		}		
 		if ($data['replies'])
 		{
 			foreach($data['replies'] as $n => $reply)
 			{
-				$body .= "\n".str_repeat('-',64)."\n\n";
+				if ($html_email)
+				{
+					$body .= '<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+				}
+				else
+				{
+					$body .= "\n".str_repeat('-',64)."\n\n";
+				}
 				if (!$n && (!is_array($old['replies']) || $reply != $old['replies'][0])) $body .= '> ';
 				$body .= lang('Comment by %1 at %2:',$GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']),
-					date($datetime_format,$reply['reply_created']-$this->tz_offset_s+$tz_offset_s))."\n\n";
-				$body .= $reply['reply_message']."\n";
+					date($datetime_format,$reply['reply_created']-$this->tz_offset_s+$tz_offset_s));
+				if ($html_email)
+				{
+					$body .= '</td></tr><tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'.
+							nl2br($reply['reply_message']).
+							'</td></tr>';
+				}
+				else
+				{
+					$body .= "\n\n".$reply['reply_message']."\n\n";
+				}									
 			}
 		}
+		if ($html_email)
+		{
+			$body .= '</table></body></html>';
+		}		
 		// PHPMailer aka send-class, seens not to be able to send more then one mail, IF we need to authenticate to the SMTP server
 		// There for the object is newly created for ever mail, 'til this get fixed in PHPMailer.
 		//if(!is_object($GLOBALS['egw']->send))
@@ -603,7 +752,14 @@ class botracker extends sotracker
 		$send = &$GLOBALS['egw']->send;
 		$send->ClearAddresses();
 		$send->ClearAttachments();
-		$send->IsHTML(False);
+		if ($html_email)
+		{
+			$send->IsHTML(True);		
+		}
+		else
+		{
+			$send->IsHTML(False);
+		}
 		if (preg_match('/^(.+) *<(.+)>/',$email,$matches))	// allow to use eg. "Ralf Becker <ralf@egw.org>" as address
 		{
 			$send->AddAddress($matches[2],$matches[1]);
@@ -981,7 +1137,7 @@ class botracker extends sotracker
 	function link_query( $pattern )
 	{
 		$result = array();
-		foreach((array) $this->search($pattern,false,'','','%',false,'OR',false,array('tr_status' => 'o')) as $item )
+		foreach((array) $this->search($pattern,false,'','','%',false,'OR',false,array('tr_status' => -100)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
@@ -1139,6 +1295,7 @@ class botracker extends sotracker
 			'tr_resolution'  => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_completion'  => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_priority'    => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
+			'tr_cc'			 => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			// set automatic by botracker::save()
 			'tr_id'          => 0,
 			'tr_creator'     => 0,
@@ -1193,7 +1350,7 @@ class botracker extends sotracker
 		$this->user = 0;	// we dont want to run under the id of the current or the user created the async job
 
 		if (($ids = $this->query_list('tr_id','tr_id',array(
-			'tr_status' => 'p',
+			'tr_status' => -103,
 			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
 		))))
 		{
@@ -1210,7 +1367,7 @@ class botracker extends sotracker
 			{
 				if ($this->read($tr_id))
 				{
-					$this->data['tr_status'] = 'c';
+					$this->data['tr_status'] = -101;
 					$this->data['reply_message'] = lang('This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.',$this->pending_close_days);
 					$this->save();
 				}

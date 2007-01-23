@@ -93,6 +93,14 @@ class tr_admin_prefs_sidebox_hooks
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
+		$GLOBALS['settings']['notify_html'] = array(
+			'type'   => 'check',
+			'label'  => 'Receive notifications in html',
+			'name'   => 'notify_html',
+			'help'   => 'Should the Tracker send you notification mails in html?',
+			'xmlrpc' => True,
+			'admin'  => False,
+		);
 		return true;	// otherwise prefs say it cant find the file ;-)
 	}
 	
@@ -114,6 +122,7 @@ class tr_admin_prefs_sidebox_hooks
 		$defaults = array(
 			'notify_creator'  => 1,
 			'notify_assigned' => 1,
+			'notify_html'	  => 1,
 		);
 		foreach($defaults as $var => $default)
 		{

@@ -45,6 +45,7 @@ date opened	tracker	en	Date opened
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
+delete this status	tracker	en	Delete this status
 delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
 delete this version	tracker	en	Delete this version
 deleted	tracker	en	Deleted

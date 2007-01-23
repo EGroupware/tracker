@@ -20,7 +20,7 @@
 				'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False),
 				'cat_id' => array('type' => 'int','precision' => '4'),
 				'tr_version' => array('type' => 'int','precision' => '4'),
-				'tr_status' => array('type' => 'char','precision' => '1','default' => 'o'),
+				'tr_status' => array('type' => 'int','precision' => '4','default' => '-100'),
 				'tr_description' => array('type' => 'text'),
 				'tr_assigned' => array('type' => 'int','precision' => '4'),
 				'tr_private' => array('type' => 'int','precision' => '2','default' => '0'),
@@ -31,7 +31,8 @@
 				'tr_modifier' => array('type' => 'int','precision' => '4'),
 				'tr_modified' => array('type' => 'int','precision' => '8'),
 				'tr_closed' => array('type' => 'int','precision' => '8'),
-				'tr_priority' => array('type' => 'int','precision' => '2','default' => '5')
+				'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
+				'tr_cc'       => array('type' => 'text'), 
 			),
 			'pk' => array('tr_id'),
 			'fk' => array(),
