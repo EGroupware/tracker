@@ -655,7 +655,7 @@ class botracker extends sotracker
 			$body .= $link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
 		}
 		
-		static $cats,$versions;
+		static $cats,$versions,$statis;
 		if (!$cats)
 		{
 			$cats = $this->get_tracker_labels('cat',$data['tr_tracker']);
