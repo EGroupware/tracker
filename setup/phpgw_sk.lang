@@ -45,6 +45,7 @@ date opened	tracker	sk	Dátum otvorenia
 delete this bounty	tracker	sk	Vymaza» túto odmenu
 delete this canned response	tracker	sk	Vymaza» túto ¹ablónovú odpoveï
 delete this category	tracker	sk	Vymaza» túto kategóriu
+delete this status	tracker	sk	Vymaza» tento stav
 delete this tracker including all it's items and categories	tracker	sk	Zmaza» tento sledovaè vrátane v¹etkých zále¾itostí a kategórií
 delete this version	tracker	sk	Vymaza» túto verziu
 deleted	tracker	sk	Vymazané

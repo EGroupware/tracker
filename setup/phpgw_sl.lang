@@ -44,6 +44,7 @@ date opened	tracker	sl	Datum odprtja
 delete this bounty	tracker	sl	Izbriši to nagrado
 delete this canned response	tracker	sl	Izriši ta avtomatični odgovor
 delete this category	tracker	sl	Izbriši to kategorijo
+delete this status	tracker	sl	Izbriši ta status
 delete this tracker including all it's items and categories	tracker	sl	Izbriš ta tracker vključno z vsemi elementi in lategorijami
 delete this version	tracker	sl	Zbriši to različico
 deleted	tracker	sl	Zbrisano
@@ -63,6 +64,7 @@ fixed	tracker	sl	Popravljeno
 from	tracker	sl	Od
 history	tracker	sl	Zgodovina
 id	tracker	sl	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	sl	Če je zadeva za vas pomembna, premislite o nagradi za jneno izvedbo!
 if this item is important for you, please vote for it.	tracker	sl	Če je ta element za vas pomemben, lahko glasujete zanj.
 invalid	tracker	sl	Napačno
 item assignee	tracker	sl	Kdo je dodelil element
@@ -82,6 +84,8 @@ out of date	tracker	sl	Izven roka
 pending	tracker	sl	V teku
 pending items never get close automatic.	tracker	sl	Elementi v teku naj se nikoli ne zaprejo samodejno.
 permission denied !!!	tracker	sl	Dostop zavrnjen!
+receive notifications about assigned tracker-items	tracker	sl	Prejmi obvestila o dodeljenih nalogah
+receive notifications about created tracker-items	tracker	sl	Prejmi obvestila o ustvarjenih nalogah
 rejected	tracker	sl	Zavrnjeno
 remind	tracker	sl	Opomni
 resolution	tracker	sl	Ločljivost
@@ -95,6 +99,7 @@ technicians	tracker	sl	Tehniki
 thank you for setting this bounty.	tracker	sl	Hvala, ker ste ponudili nagrado.
 thank you for voting.	tracker	sl	Hvala za glas.
 the bounty will not be shown, until the money is received.	tracker	sl	Nagrada ne bo prikazana, dokler denar ne bo prejet.
+this module displays information from the tracker.	tracker	sl	Ta modul prikaže informacije iz Sistema za sledenje.
 tracker	common	sl	Sistem za sledenje
 tracker added	tracker	sl	Dodana je bila čakalna vrsta
 tracker admins	tracker	sl	Nadzorniki Trackerja

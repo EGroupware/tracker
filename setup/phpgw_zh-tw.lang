@@ -45,6 +45,7 @@ date opened	tracker	zh-tw	開啟日期
 delete this bounty	tracker	zh-tw	刪除這個獎金
 delete this canned response	tracker	zh-tw	刪除這個制式回應
 delete this category	tracker	zh-tw	刪除這個類別
+delete this status	tracker	zh-tw	刪除這個狀態
 delete this tracker including all it's items and categories	tracker	zh-tw	刪除這個服務台，包含其中的所有項目與類別
 delete this version	tracker	zh-tw	刪除這個版本
 deleted	tracker	zh-tw	已刪除
