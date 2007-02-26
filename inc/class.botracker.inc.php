@@ -592,7 +592,7 @@ class botracker extends sotracker
 			$body ='<html><head>'.
 				'<style>a:hover,a:active {	cursor:pointer;	color: #ff9933;	text-decoration: underline;};'.
 				'body,td { font-family: Arial, Verdana, Helvetica, sans-serif; }</style>'.
-				'</head><body>';
+				'</head><body>'."\n";
 		}
 		else
 		{
@@ -602,15 +602,15 @@ class botracker extends sotracker
 		{
 			if ($html_email)
 			{
-				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'.
-					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>';
+				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'."\n".
+					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>'."\n";
 			}
 			$body .= lang('New tracker item submitted by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
 				date($datetime_format,$data['tr_created']-$this->tz_offset_s+$tz_offset_s));
 			if ($html_email)
 			{
-				$body .='</b></td></tr>'.
-						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+				$body .='</b></td></tr>\n'.
+						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n";
 			}
 			else
 			{
@@ -621,15 +621,15 @@ class botracker extends sotracker
 		{
 			if ($html_email)
 			{
-				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'.
-					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>';
+				$body .='<table cellspacing="2" cellpadding="0" border="0" width="100%">'."\n".
+					   '<tr style="color: #000000; background-color: #D3DCE3;"><td align="left" style="font-size: 12px"><b>'."\n";
 			}
 			$body .= lang('Tracker item modified by %1 at %2',$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
 				date($datetime_format,$data['tr_modified']-$this->tz_offset_s+$tz_offset_s));
 			if ($html_email)
 			{
-				$body .='</b></td></tr>'.
-						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+				$body .='</b></td></tr>'."\n".
+						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n";
 			}
 			else
 			{
@@ -648,7 +648,7 @@ class botracker extends sotracker
 		if ($html_email)
 		{
 			$body .='<a style="hover" href="'.$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
-					$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>';
+					$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>'."\n";
 		}
 		else
 		{
@@ -693,7 +693,7 @@ class botracker extends sotracker
 			$body .= lang($this->field2label[$name]);
 			if ($html_email)
 			{
-				$body .=': '.$value."</td></tr>";
+				$body .=': '.$value."</td></tr>"."\n";
 			}
 			else
 			{
@@ -702,10 +702,10 @@ class botracker extends sotracker
 		}
 		if ($html_email)
 		{
-			$body .='<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'.
-					'<b>'.lang('Summary').': '.$data['tr_id'].' - '.$data['tr_summary'].'</td></tr>'.
-					'<tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'.
-					nl2br($data['tr_description']).'<br><br><br></td></tr>';
+			$body .='<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n".
+					'<b>'.lang('Summary').': '.$data['tr_id'].' - '.$data['tr_summary'].'</td></tr>'."\n".
+					'<tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'."\n".
+					nl2br($data['tr_description']).'<br><br><br></td></tr>'."\n";
 		}
 		else
 		{
@@ -718,7 +718,7 @@ class botracker extends sotracker
 			{
 				if ($html_email)
 				{
-					$body .= '<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">';
+					$body .= '<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n";
 				}
 				else
 				{
@@ -729,9 +729,9 @@ class botracker extends sotracker
 					date($datetime_format,$reply['reply_created']-$this->tz_offset_s+$tz_offset_s));
 				if ($html_email)
 				{
-					$body .= '</td></tr><tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'.
+					$body .= '</td></tr><tr style="color: #000000; background-color: #FFFFF1;"><td align="left" style="font-size: 12px">'."\n".
 							nl2br($reply['reply_message']).
-							'</td></tr>';
+							'</td></tr>'."\n";
 				}
 				else
 				{
