@@ -439,11 +439,19 @@ class uitracker extends botracker
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
 			$rows['sel_options']['cat_id'] =& $rows['sel_options']['filter'];
 			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
+			$rows['is_admin'] = true;
 		}
-		$rows['allow_voting'] = !!$this->allow_voting;
-		$rows['allow_bounties'] = !!$this->allow_bounties;
-		$rows['no_cat'] = $query['col_filter']['cat_id'];
-		$rows['is_admin'] = $this->is_admin($tracker);
+		if (!$this->allow_voting)
+		{
+			$rows['no_votes'] = true;
+			$query_in['options-selectcols']['votes'] = false;
+		}
+		if (!$this->allow_bounties)
+		{
+			$rows['no_bounties'] = true;
+			$query_in['options-selectcols']['bounties'] = false;
+		}
+		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 		
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.$this->trackers[$tracker];
 
