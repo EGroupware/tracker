@@ -45,6 +45,7 @@ date opened	tracker	pt-br	Data de abertura
 delete this bounty	tracker	pt-br	Remover este pagamento
 delete this canned response	tracker	pt-br	Remover esta resposta automática
 delete this category	tracker	pt-br	Remover esta categoria
+delete this status	tracker	pt-br	Remover este status
 delete this tracker including all it's items and categories	tracker	pt-br	Remover este tipo de ticket, incluindo todas suas categorias e tickets
 delete this version	tracker	pt-br	Remover esta versão
 deleted	tracker	pt-br	Removido
