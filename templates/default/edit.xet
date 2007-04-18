@@ -93,7 +93,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.bounties" template="" lang="" group="0" version="0.1.003">
-		<grid width="100%" height="250" overflow="auto">
+		<grid width="100%" height="250" overflow="auto" id="bounties">
 			<columns>
 				<column/>
 				<column/>
@@ -135,7 +135,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.1.004">
+	<template id="tracker.edit" template="" lang="" group="0" version="0.1.006">
 		<grid>
 			<columns>
 				<column width="105"/>
@@ -154,7 +154,7 @@
 					<description options=",,,tr_tracker" value="Tracker"/>
 					<hbox onchange="1" options="0,0">
 						<menulist>
-							<menupopup id="tr_tracker" no_lang="1"/>
+							<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
 						</menulist>
 						<int id="tr_id" class="trIdEdit" readonly="true"/>
 					</hbox>
@@ -198,6 +198,10 @@
 							<menupopup type="select-percent" id="tr_completion" label="-"/>
 						</menulist>
 					</hbox>
+				</row>
+				<row>
+					<description value="Cc" statustext="List of coma separated email address"/>
+					<textbox size="80" maxlength="80" id="tr_cc" span="3"/>
 				</row>
 				<row>
 					<description options=",,,tr_summary" value="Summary"/>

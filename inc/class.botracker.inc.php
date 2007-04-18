@@ -609,7 +609,7 @@ class botracker extends sotracker
 				date($datetime_format,$data['tr_created']-$this->tz_offset_s+$tz_offset_s));
 			if ($html_email)
 			{
-				$body .='</b></td></tr>\n'.
+				$body .='</b></td></tr>'."\n".
 						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n";
 			}
 			else
