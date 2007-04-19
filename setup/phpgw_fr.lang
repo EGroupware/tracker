@@ -25,7 +25,7 @@ bounty set	tracker	fr	Prime fixée
 canned response	tracker	fr	Réponse standard
 canned responses	tracker	fr	Réponses standard
 categories, versions, canned responses	tracker	fr	Catégories, versions, réponses standard
-check all	tracker	fr	Vérifier tout
+check all	tracker	fr	Tout sélectionner
 close pending	tracker	fr	Fermer en attente
 closed	tracker	fr	Fermé
 comment by %1 at %2:	tracker	fr	Commentaire par %1 à %2:
