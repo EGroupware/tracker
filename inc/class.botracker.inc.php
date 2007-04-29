@@ -647,12 +647,12 @@ class botracker extends sotracker
 		$body .= lang('You can respond by visiting:').' ';
 		if ($html_email)
 		{
-			$body .='<a style="hover" href="'.$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
-					$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>'."\n";
+			$body .='<a style="hover" href="'.$link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
+					$link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>'."\n";
 		}
 		else
 		{
-			$body .= $link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
+			$body .= $link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
 		}
 		
 		static $cats,$versions,$statis;
