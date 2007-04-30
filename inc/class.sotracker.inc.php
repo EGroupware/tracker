@@ -163,7 +163,7 @@ class sotracker extends so_sql
 				$extra_cols[] = 'SUM(bounty_amount) AS bounties';
 				// fixes to get tr_id non-ambigues
 				if (is_bool($only_keys)) $only_keys = $this->table_name.($only_keys ? '.tr_id' : '.*');
-				if (strstr($order_by,'tr_id')) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
+				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
 				// group by the tr_id of the two join tables to count the votes and sum the bounties
 				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
 			}

@@ -609,7 +609,7 @@ class botracker extends sotracker
 				date($datetime_format,$data['tr_created']-$this->tz_offset_s+$tz_offset_s));
 			if ($html_email)
 			{
-				$body .='</b></td></tr>\n'.
+				$body .='</b></td></tr>'."\n".
 						'<tr style="color: #000000; background-color: #F1F1F1;"><td align="left" style="font-size: 12px">'."\n";
 			}
 			else
@@ -647,12 +647,12 @@ class botracker extends sotracker
 		$body .= lang('You can respond by visiting:').' ';
 		if ($html_email)
 		{
-			$body .='<a style="hover" href="'.$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
-					$link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>'."\n";
+			$body .='<a style="hover" href="'.$link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id'].'">'.
+					$link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id'].'</a></td></tr>'."\n";
 		}
 		else
 		{
-			$body .= $link.(strstr($link,'?') ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
+			$body .= $link.(strpos($link,'?') !== false ? '&' : '?').'tr_id='.$data['tr_id']."\n\n";
 		}
 		
 		static $cats,$versions,$statis;

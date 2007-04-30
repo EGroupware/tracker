@@ -53,7 +53,7 @@ duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
 e-mail notifications	tracker	de	E-Mail Benachrichtigungen
 edit %1	tracker	de	%1 bearbeiten
-email address to contact you	tracker	de	Email addresse um Sie zu kontaktieren
+email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
@@ -131,7 +131,7 @@ you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis a
 you need to enter a name	tracker	de	Sie müssen einen Namen angeben
 you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu können!
 you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
-you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und Email des Spenders angeben!
+you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und E-Mail des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
 2	tracker	de	2
 3	tracker	de	3

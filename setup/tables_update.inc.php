@@ -139,4 +139,10 @@
 
         return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.010';
     }
+    
+    $test[] = '0.1.010';
+    function tracker_upgrade0_1_010()
+    {
+         return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4';
+    }
 ?>
