@@ -12,7 +12,7 @@
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '0.1.010';
+$setup_info['tracker']['version']   = '1.4';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties');
 $setup_info['tracker']['enable']    = 1;
@@ -37,11 +37,11 @@ $setup_info['tracker']['hooks']['search_link'] = 'tracker.botracker.search_link'
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'phpgwapi',
-	 'versions' => Array('1.2','1.3')
+	 'versions' => Array('1.3','1.4','1.5')
 );
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'etemplate',
-	 'versions' => Array('1.2','1.3')
+	 'versions' => Array('1.3','1.4','1.5')
 );
 
 
