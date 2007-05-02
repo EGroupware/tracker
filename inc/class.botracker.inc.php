@@ -876,7 +876,7 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$admins =& $this->get_staff($tracker,false);
+		$admins =& $this->get_staff($tracker,0,false);
 
 		return isset($admins[$user]);
 	}
@@ -892,7 +892,7 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$technicians =& $this->get_staff($tracker,true);
+		$technicians =& $this->get_staff($tracker,0,true);
 
 		return isset($technicians[$user]);
 	}
