@@ -1225,7 +1225,7 @@ class botracker extends sotracker
 		{
 			$this->historylog =& CreateObject('phpgwapi.historylog','tracker');
 		}
-		$ids = $this->query_list('tr_id','',array('tr_tracker' => $tracker));
+		$ids = $this->query_list($this->table_name.'.tr_id','',array('tr_tracker' => $tracker));
 		if ($ids) $this->historylog->delete($ids);
 	
 		$GLOBALS['egw']->categories->delete($tracker,true);
