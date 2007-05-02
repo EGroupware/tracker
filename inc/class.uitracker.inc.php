@@ -725,7 +725,7 @@ class uitracker extends botracker
 							// check if new cat or changed
 							if (!$old_cat || $cat['name'] != $old_cat['name'] || 
 								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
-								$name == 'responses' && $cat['description'] != $old_cat['description'])
+								$name == 'responses' && $cat['description'] != $old_cat['data']['response'])
 							{
 								$old_cat['name'] = $cat['name'];
 								switch($name)
@@ -734,12 +734,11 @@ class uitracker extends botracker
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
 										break;
 									case 'responses':
-										$old_cat['description'] = $cat['description'];
+										$old_cat['data']['response'] = $cat['description'];
 										break;
 								}
 								//echo "update to"; _debug_array($old_cat);
 								$old_cat['data'] = serialize($old_cat['data']);
-								$old_cat['descr'] = $old_cat['description'];	// stupid old cat-class returns 'description' and expects 'descr' as parameter
 								$GLOBALS['egw']->categories->account_id = -1;	// global cat!
 								if (($id = $GLOBALS['egw']->categories->add($old_cat)))
 								{
@@ -813,6 +812,7 @@ class uitracker extends botracker
 						$content['versions'][$v++] = $cat + $data;
 						break;
 					case 'response':
+						if ($data['response']) $cat['description'] = $data['response'];
 						$content['responses'][$r++] = $cat;
 						break;
 					case 'stati':

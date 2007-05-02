@@ -1066,6 +1066,8 @@ class botracker extends sotracker
 	
 	/**
 	 * Get the canned response via it's id
+	 * 
+	 * Canned responses are now saved in the the data array, as the description is limited to 255 chars, which is to small.
 	 *
 	 * @param int $id
 	 * @return string/boolean string with the response or false if id not found
@@ -1076,7 +1078,7 @@ class botracker extends sotracker
 		{
 			if (($data = unserialize($cat['data'])) && $data['type'] == 'response' && $cat['id'] == $id)
 			{
-				return $cat['description'];
+				return $data['response'] ? $data['response'] : $cat['description'];
 			}
 		}
 		return false;
