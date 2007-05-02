@@ -167,7 +167,9 @@ class sotracker extends so_sql
 				// group by the tr_id of the two join tables to count the votes and sum the bounties
 				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
 			}
-			$order_by .= ($order_by ? ',' : '').'bounties DESC,votes DESC';	// default sort is after bountes and votes
+			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
+			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
+			if (strpos($order_by,'votes') === false) $order_by .= ($order_by ? ',' : '').'votes DESC';
 		}
 		// private ACL: private items are only visible for create, assiged or tracker admins
 		if ($this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
