@@ -45,6 +45,7 @@ date opened	tracker	de	Datum angelegt
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
 delete this category	tracker	de	Diese Kategorie löschen
+delete this status	tracker	de	Diesen Status löschen
 delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
 delete this version	tracker	de	Diese Version löschen
 deleted	tracker	de	Gelöscht
@@ -89,6 +90,7 @@ permission denied !!!	tracker	de	Zugriff verweigert !!!
 postponed	tracker	de	Vertagt
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
+receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Mail
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 resolution	tracker	de	Lösung
@@ -99,6 +101,8 @@ set bounty	tracker	de	Prämie setzen
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
 staff	tracker	de	Mitarbeiter
+state	tracker	de	Status
+stati	tracker	de	Stati
 summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
 thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetzt haben.
@@ -133,9 +137,3 @@ you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu k
 you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
 you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und E-Mail des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
-2	tracker	de	2
-3	tracker	de	3
-4	tracker	de	4
-6	tracker	de	6
-7	tracker	de	7
-8	tracker	de	8

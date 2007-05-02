@@ -90,6 +90,7 @@ permission denied !!!	tracker	en	Permission denied !!!
 postponed	tracker	en	Postponed
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
+receive notifications in html	tracker	en	Receive notifications in html
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 resolution	tracker	en	Resolution
@@ -100,6 +101,8 @@ set bounty	tracker	en	Set bounty
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
 staff	tracker	en	Staff
+state	tracker	en	State
+stati	tracker	en	Stati
 summary	tracker	en	Summary
 technicians	tracker	en	Technicians
 thank you for setting this bounty.	tracker	en	Thank you for setting this bounty.
@@ -134,9 +137,3 @@ you need to login to vote!	tracker	en	You need to login to vote!
 you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
 you need to specify amount, donators name and email address!	tracker	en	You need to specify amount, donators name AND email address!
 you voted %1.	tracker	en	You voted %1.
-2	tracker	en	2
-3	tracker	en	3
-4	tracker	en	4
-6	tracker	en	6
-7	tracker	en	7
-8	tracker	en	8
