@@ -49,6 +49,7 @@ delete this status	tracker	es-es	Borrar este estado
 delete this tracker including all it's items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
 delete this version	tracker	es-es	Borrar esta versión
 deleted	tracker	es-es	Borrado
+do you want to vote for this item	tracker	es-es	¿Desea votar por este elemento?
 donator name to show	tracker	es-es	Nombre del donante a mostrar
 duplicate	tracker	es-es	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
@@ -73,6 +74,7 @@ item creator	tracker	es-es	Elemento creado por
 language for the copy	tracker	es-es	Idioma para la copia
 last modified	tracker	es-es	Última modificación
 later	tracker	es-es	Más tarde
+list of coma separated email address	tracker	es-es	Lista de direcciones de correo electrónico separadas por comas
 new %1	tracker	es-es	Nuevo %1
 new items	tracker	es-es	Nuevos elementos
 new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de informe enviado por %1 a las %2
@@ -90,6 +92,7 @@ permission denied !!!	tracker	es-es	¡No tiene permiso de acceso!
 postponed	tracker	es-es	Pospuesto
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
+receive notifications in html	tracker	es-es	Recibir notificaciones en html
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 resolution	tracker	es-es	Resolución
@@ -100,6 +103,8 @@ set bounty	tracker	es-es	Fijar recompensa
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
 staff	tracker	es-es	Equipo
+state	tracker	es-es	Estado
+stati	tracker	es-es	Estados
 summary	tracker	es-es	Resumen
 technicians	tracker	es-es	Técnicos
 thank you for setting this bounty.	tracker	es-es	Gracias por fijar esta recompensa.
