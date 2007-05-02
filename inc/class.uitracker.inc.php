@@ -86,6 +86,7 @@ class uitracker extends botracker
 				{
 					$this->data['tr_tracker'] = (int)$_GET['tracker'];
 				}
+				$this->data['tr_priority'] = 5;
 			}
 			if ($_GET['nopopup']) $popup = false;
 			
@@ -396,7 +397,6 @@ class uitracker extends botracker
 		{
 			$readonlys[$name] = !$this->check_rights($rigths);
 		}
-		//_debug_array($readonlys);
 		return $readonlys;
 	}
 	
