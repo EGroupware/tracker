@@ -49,6 +49,7 @@ delete this status	tracker	en	Delete this status
 delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
 delete this version	tracker	en	Delete this version
 deleted	tracker	en	Deleted
+do you want to vote for this item	tracker	en	Do you want to vote for this item
 donator name to show	tracker	en	Donator name to show
 duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	E-Mail address to which a copy of all tracker-notifications should be send
@@ -73,6 +74,7 @@ item creator	tracker	en	Item creator
 language for the copy	tracker	en	Language for the copy
 last modified	tracker	en	Last modified
 later	tracker	en	Later
+list of coma separated email address	tracker	en	List of coma separated email address
 new %1	tracker	en	New %1
 new items	tracker	en	New items
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
