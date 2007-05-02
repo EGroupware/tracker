@@ -194,7 +194,7 @@ class uitracker extends botracker
 						unset($this->data['bounties']['delete']);
 						if ($this->delete_bounty($id))
 						{
-							$msg = lang('Bounty deleted.');
+							$msg = lang('Bounty deleted');
 							foreach($this->data['bounties'] as $n => $bounty)
 							{
 								if ($bounty['bounty_id'] == $id)
@@ -222,7 +222,7 @@ class uitracker extends botracker
 								{
 									if ($this->save_bounty($this->data['bounties'][$n]))
 									{
-										$msg = lang('Bounty confirmed.');
+										$msg = lang('Bounty confirmed');
 										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
 										$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
 									}
@@ -281,9 +281,9 @@ class uitracker extends botracker
 				'status-widgets' => array(
 					'Co' => 'select-percent',
 					'St' => &$statis,
-					'Ca' => 'select-category',
-					'Tr' => 'select-category',
-					'Ve' => 'select-category',
+					'Ca' => 'select-cat',
+					'Tr' => 'select-cat',
+					'Ve' => 'select-cat',
 					'As' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
