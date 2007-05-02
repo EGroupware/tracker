@@ -72,10 +72,20 @@ class uitracker extends botracker
 			{
 				$this->init();
 			}
-			// for new items use tracker from URL, if availible
-			if (!$this->data['tr_id'] && isset($this->trackers[(int)$_GET['tracker']]))
+			// for new items we use the session-state or $_GET['tracker']
+			if (!$this->data['tr_id'])
 			{
-				$this->data['tr_tracker'] = (int)$_GET['tracker'];
+				if (($state = $GLOBALS['egw']->session->appsession('index','tracker'.(isset($this->trackers[(int)$_GET['only_tracker']]) ? 
+					'-'.$_GET['only_tracker'] : ''))))
+				{
+					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'];
+					$this->data['cat_id']     = $state['filter'];
+					$this->data['tr_version'] = $state['filter2'];
+				}			
+				if (isset($this->trackers[(int)$_GET['tracker']]))
+				{
+					$this->data['tr_tracker'] = (int)$_GET['tracker'];
+				}
 			}
 			if ($_GET['nopopup']) $popup = false;
 			
