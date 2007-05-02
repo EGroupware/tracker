@@ -129,7 +129,8 @@ class uitracker extends botracker
 							}
 							$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".
+							addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
 					}
 					else
 					{
