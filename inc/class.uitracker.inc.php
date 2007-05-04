@@ -72,10 +72,21 @@ class uitracker extends botracker
 			{
 				$this->init();
 			}
-			// for new items use tracker from URL, if availible
-			if (!$this->data['tr_id'] && isset($this->trackers[(int)$_GET['tracker']]))
+			// for new items we use the session-state or $_GET['tracker']
+			if (!$this->data['tr_id'])
 			{
-				$this->data['tr_tracker'] = (int)$_GET['tracker'];
+				if (($state = $GLOBALS['egw']->session->appsession('index','tracker'.(isset($this->trackers[(int)$_GET['only_tracker']]) ? 
+					'-'.$_GET['only_tracker'] : ''))))
+				{
+					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'];
+					$this->data['cat_id']     = $state['filter'];
+					$this->data['tr_version'] = $state['filter2'];
+				}			
+				if (isset($this->trackers[(int)$_GET['tracker']]))
+				{
+					$this->data['tr_tracker'] = (int)$_GET['tracker'];
+				}
+				$this->data['tr_priority'] = 5;
 			}
 			if ($_GET['nopopup']) $popup = false;
 			
@@ -129,7 +140,8 @@ class uitracker extends botracker
 							}
 							$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".
+							addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
 					}
 					else
 					{
@@ -193,7 +205,7 @@ class uitracker extends botracker
 						unset($this->data['bounties']['delete']);
 						if ($this->delete_bounty($id))
 						{
-							$msg = lang('Bounty deleted.');
+							$msg = lang('Bounty deleted');
 							foreach($this->data['bounties'] as $n => $bounty)
 							{
 								if ($bounty['bounty_id'] == $id)
@@ -221,7 +233,7 @@ class uitracker extends botracker
 								{
 									if ($this->save_bounty($this->data['bounties'][$n]))
 									{
-										$msg = lang('Bounty confirmed.');
+										$msg = lang('Bounty confirmed');
 										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
 										$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
 									}
@@ -280,9 +292,9 @@ class uitracker extends botracker
 				'status-widgets' => array(
 					'Co' => 'select-percent',
 					'St' => &$statis,
-					'Ca' => 'select-category',
-					'Tr' => 'select-category',
-					'Ve' => 'select-category',
+					'Ca' => 'select-cat',
+					'Tr' => 'select-cat',
+					'Ve' => 'select-cat',
 					'As' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
@@ -385,7 +397,6 @@ class uitracker extends botracker
 		{
 			$readonlys[$name] = !$this->check_rights($rigths);
 		}
-		//_debug_array($readonlys);
 		return $readonlys;
 	}
 	
@@ -724,7 +735,7 @@ class uitracker extends botracker
 							// check if new cat or changed
 							if (!$old_cat || $cat['name'] != $old_cat['name'] || 
 								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
-								$name == 'responses' && $cat['description'] != $old_cat['description'])
+								$name == 'responses' && $cat['description'] != $old_cat['data']['response'])
 							{
 								$old_cat['name'] = $cat['name'];
 								switch($name)
@@ -733,12 +744,11 @@ class uitracker extends botracker
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
 										break;
 									case 'responses':
-										$old_cat['description'] = $cat['description'];
+										$old_cat['data']['response'] = $cat['description'];
 										break;
 								}
 								//echo "update to"; _debug_array($old_cat);
 								$old_cat['data'] = serialize($old_cat['data']);
-								$old_cat['descr'] = $old_cat['description'];	// stupid old cat-class returns 'description' and expects 'descr' as parameter
 								$GLOBALS['egw']->categories->account_id = -1;	// global cat!
 								if (($id = $GLOBALS['egw']->categories->add($old_cat)))
 								{
@@ -812,6 +822,7 @@ class uitracker extends botracker
 						$content['versions'][$v++] = $cat + $data;
 						break;
 					case 'response':
+						if ($data['response']) $cat['description'] = $data['response'];
 						$content['responses'][$r++] = $cat;
 						break;
 					case 'stati':

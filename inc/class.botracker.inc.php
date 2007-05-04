@@ -876,7 +876,7 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$admins =& $this->get_staff($tracker,false);
+		$admins =& $this->get_staff($tracker,0,false);
 
 		return isset($admins[$user]);
 	}
@@ -892,7 +892,7 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$technicians =& $this->get_staff($tracker,true);
+		$technicians =& $this->get_staff($tracker,0,true);
 
 		return isset($technicians[$user]);
 	}
@@ -1066,6 +1066,8 @@ class botracker extends sotracker
 	
 	/**
 	 * Get the canned response via it's id
+	 * 
+	 * Canned responses are now saved in the the data array, as the description is limited to 255 chars, which is to small.
 	 *
 	 * @param int $id
 	 * @return string/boolean string with the response or false if id not found
@@ -1076,7 +1078,7 @@ class botracker extends sotracker
 		{
 			if (($data = unserialize($cat['data'])) && $data['type'] == 'response' && $cat['id'] == $id)
 			{
-				return $cat['description'];
+				return $data['response'] ? $data['response'] : $cat['description'];
 			}
 		}
 		return false;
@@ -1225,7 +1227,7 @@ class botracker extends sotracker
 		{
 			$this->historylog =& CreateObject('phpgwapi.historylog','tracker');
 		}
-		$ids = $this->query_list('tr_id','',array('tr_tracker' => $tracker));
+		$ids = $this->query_list($this->table_name.'.tr_id','',array('tr_tracker' => $tracker));
 		if ($ids) $this->historylog->delete($ids);
 	
 		$GLOBALS['egw']->categories->delete($tracker,true);

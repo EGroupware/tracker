@@ -45,9 +45,11 @@ date opened	tracker	de	Datum angelegt
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
 delete this category	tracker	de	Diese Kategorie löschen
+delete this status	tracker	de	Diesen Status löschen
 delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
 delete this version	tracker	de	Diese Version löschen
 deleted	tracker	de	Gelöscht
+do you want to vote for this item	tracker	de	Wollen Sie für diesen Eintrag stimmen
 donator name to show	tracker	de	Name des Spenders zum anzeigen
 duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
@@ -72,6 +74,7 @@ item creator	tracker	de	Eintrag Ersteller
 language for the copy	tracker	de	Sprache für die Kopie
 last modified	tracker	de	Zuletzt geändert
 later	tracker	de	Später
+list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
 new tracker item submitted by %1 at %2	tracker	de	Neuer Eintrag im Verfolgungsystem erstellt von %1 am %2
@@ -89,6 +92,7 @@ permission denied !!!	tracker	de	Zugriff verweigert !!!
 postponed	tracker	de	Vertagt
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
+receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Mail
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 resolution	tracker	de	Lösung
@@ -99,6 +103,8 @@ set bounty	tracker	de	Prämie setzen
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachricktigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
 staff	tracker	de	Mitarbeiter
+state	tracker	de	Status
+stati	tracker	de	Stati
 summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
 thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetzt haben.
