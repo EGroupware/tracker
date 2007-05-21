@@ -668,10 +668,9 @@ class botracker extends sotracker
 			$cats = $this->get_tracker_labels('cat',$data['tr_tracker']);
 			$versions = $this->get_tracker_labels('version',$data['tr_tracker']);
 			$statis = $this->stati + $this->get_tracker_labels('stati',$data['tr_tracker']);
-			$trackers = $this->get_tracker_labels('tracker');
 		}
 		foreach(array(
-			'tr_tracker'     => $trackers[$data['tr_tracker']],
+			'tr_tracker'     => $this->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($statis[$data['tr_status']]),
