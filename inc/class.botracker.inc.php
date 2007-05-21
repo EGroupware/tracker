@@ -668,8 +668,10 @@ class botracker extends sotracker
 			$cats = $this->get_tracker_labels('cat',$data['tr_tracker']);
 			$versions = $this->get_tracker_labels('version',$data['tr_tracker']);
 			$statis = $this->stati + $this->get_tracker_labels('stati',$data['tr_tracker']);
+			$trackers = $this->get_tracker_labels('tracker');
 		}
 		foreach(array(
+			'tr_tracker'     => $trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($statis[$data['tr_status']]),
@@ -732,7 +734,7 @@ class botracker extends sotracker
 					$body .= "\n".str_repeat('-',64)."\n\n";
 				}
 				if (!$n && (!is_array($old['replies']) || $reply != $old['replies'][0])) $body .= '> ';
-				$body .= lang('Comment by %1 at %2:',$GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']),
+				$body .= lang('Comment by %1 at %2:',$reply['reply_creator'] ? $GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']) : lang('Tracker'),
 					date($datetime_format,$reply['reply_created']-$this->tz_offset_s+$tz_offset_s));
 				if ($html_email)
 				{
