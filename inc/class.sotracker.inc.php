@@ -165,7 +165,7 @@ class sotracker extends so_sql
 				if (is_bool($only_keys)) $only_keys = $this->table_name.($only_keys ? '.tr_id' : '.*');
 				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
 				// group by the tr_id of the two join tables to count the votes and sum the bounties
-				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.$order_by;
+				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 			}
 			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
