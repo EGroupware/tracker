@@ -49,6 +49,7 @@ delete this status	tracker	pt-br	Remover este status
 delete this tracker including all it's items and categories	tracker	pt-br	Remover este tipo de ticket, incluindo todas suas categorias e tickets
 delete this version	tracker	pt-br	Remover esta versão
 deleted	tracker	pt-br	Removido
+do you want to vote for this item	tracker	pt-br	Você deseja votar neste ticket ?
 donator name to show	tracker	pt-br	Nome do doador a ser exibido
 duplicate	tracker	pt-br	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	pt-br	E-mail para o qual uma cópia de todas as notificações deverá ser enviada
@@ -73,6 +74,7 @@ item creator	tracker	pt-br	Criador do ticket
 language for the copy	tracker	pt-br	Idioma para a cópia
 last modified	tracker	pt-br	Última alteração
 later	tracker	pt-br	Depois
+list of coma separated email address	tracker	pt-br	Lista de e-mails separados por vírgulas
 new %1	tracker	pt-br	Novo %1
 new items	tracker	pt-br	Novos tickets
 new tracker item submitted by %1 at %2	tracker	pt-br	Novo ticket adicionado por %1 em %2
@@ -90,6 +92,7 @@ permission denied !!!	tracker	pt-br	Permissão negada !!!
 postponed	tracker	pt-br	Prorrogado
 receive notifications about assigned tracker-items	tracker	pt-br	Receber notificações sobre designamento de tickets
 receive notifications about created tracker-items	tracker	pt-br	Receber notificações sobre criação de tickets
+receive notifications in html	tracker	pt-br	Receber notificações em HTML
 rejected	tracker	pt-br	Rejeitado
 remind	tracker	pt-br	Lembrar
 resolution	tracker	pt-br	Resolução
@@ -100,6 +103,8 @@ set bounty	tracker	pt-br	Definir pagamento
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado ?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado ?
 staff	tracker	pt-br	Equipe
+state	tracker	pt-br	Estado
+stati	tracker	pt-br	Estado
 summary	tracker	pt-br	Resumo
 technicians	tracker	pt-br	Técnicos
 thank you for setting this bounty.	tracker	pt-br	Obrigado por definir este pagamento

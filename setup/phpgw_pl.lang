@@ -49,6 +49,7 @@ delete this status	tracker	pl	Usuñ wskazany status
 delete this tracker including all it's items and categories	tracker	pl	Usuñ kolejkê ¶ledzenia wraz ze wszystkimi zg³oszeniami i kategoriami
 delete this version	tracker	pl	Usuñ wskazan± wersjê
 deleted	tracker	pl	Usuniêto
+do you want to vote for this item	tracker	pl	Czy chcesz zag³osowaæ na to zg³oszenie?
 donator name to show	tracker	pl	Nazwisko fundatora do pokazania
 duplicate	tracker	pl	Kopia
 e-mail address to which a copy of all tracker-notifications should be send	tracker	pl	Adres poczty elektronicznej, na który wysy³ane bêd± kopie wszystkich powiadomieñ aplikacji System ¶ledzenia
@@ -73,6 +74,7 @@ item creator	tracker	pl	Kreator elementu
 language for the copy	tracker	pl	Jêzyk dla kopii
 last modified	tracker	pl	Ostatnio zmodyfikowano
 later	tracker	pl	Pó¼niej
+list of coma separated email address	tracker	pl	Lista adresów e-mail, rozdzielona przecinkami
 new %1	tracker	pl	Nowy %1
 new items	tracker	pl	Nowe elementy
 new tracker item submitted by %1 at %2	tracker	pl	Nowy element wprowadzony %2, przez %1
@@ -80,7 +82,7 @@ no change	tracker	pl	Brak zmian
 non-anonymous users	tracker	pl	U¿ytkownik nie anonimowy
 noone	tracker	pl	Nikt
 notification	tracker	pl	Powiadomienie
-open	tracker	pl	Otwórz
+open	tracker	pl	Otwarto
 out of date	tracker	pl	Przeterminowany
 overdue after	tracker	pl	Zaznacz jako zaleg³e po
 pending	tracker	pl	W toku
@@ -90,6 +92,7 @@ permission denied !!!	tracker	pl	Brak dostêpu!
 postponed	tracker	pl	Od³o¿ony
 receive notifications about assigned tracker-items	tracker	pl	Otrzymuj powiadomienia zwi±zane z przydzielonymi elementami.
 receive notifications about created tracker-items	tracker	pl	Otrzymuj powiadomienia zwi±zane z utworzonymi elementami
+receive notifications in html	tracker	pl	Otrzymuj powiadomienia w HTML
 rejected	tracker	pl	Odrzucono
 remind	tracker	pl	Przypomnij
 resolution	tracker	pl	Postanowienie
@@ -100,6 +103,7 @@ set bounty	tracker	pl	Ustal premiê
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pl	Czy system ¶ledzenia powinien wysy³aæ Ci maile, je¿eli elementy przypisane do Ciebie s± aktualizowane?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	pl	Czy system ¶ledzenia powinien wysy³aæ Ci maile, je¿eli elementy utworzone przez Ciebie s± aktualizowane?
 staff	tracker	pl	Personel
+state	tracker	pl	Stan
 summary	tracker	pl	Podsumowanie
 technicians	tracker	pl	Technicy
 thank you for setting this bounty.	tracker	pl	Dziêkujemy za ustalenie premii

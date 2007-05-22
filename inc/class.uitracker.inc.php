@@ -569,7 +569,7 @@ class uitracker extends botracker
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),
 				'col_filter'     => array(
-					'tr_status'  => '-100',	// default filter: open
+					'tr_status'  => TRACKER_STATUS_OPEN,	// default filter: open
 				),
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,

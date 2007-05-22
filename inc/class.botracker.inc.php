@@ -22,6 +22,13 @@ define('TRACKER_EVERYBODY',8);	// everyone incl. anonymous user
 define('TRACKER_ITEM_CREATOR',16);
 define('TRACKER_ITEM_ASSIGNEE',32);
 define('TRACKER_ITEM_NEW',64);
+/**
+ * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
+ */
+define('TRACKER_STATUS_OPEN','-100');
+define('TRACKER_STATUS_CLOSED','-101');
+define('TRACKER_STATUS_DELETED','-102');
+define('TRACKER_STATUS_PENDING','-103');
 
 /**
  * Business Object of the tracker
@@ -82,10 +89,10 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $stati = array(
-		'-100' => 'Open',
-		'-101' => 'Closed',
-		'-102' => 'Deleted',
-		'-103' => 'Pending',
+		TRACKER_STATUS_OPEN => 'Open',
+		TRACKER_STATUS_CLOSED => 'Closed',
+		TRACKER_STATUS_DELETED => 'Deleted',
+		TRACKER_STATUS_PENDING => 'Pending',
 	);
 	/**
 	 * Resolutions used by all trackers
@@ -350,7 +357,7 @@ class botracker extends sotracker
 		{
 			$this->data['tr_created'] = $this->now;
 			$this->data['tr_creator'] = $this->user;
-			$this->data['tr_status'] = -100;
+			$this->data['tr_status'] = TRACKER_STATUS_OPEN;
 			
 			if ($this->data['cat_id'] && !$this->data['tr_assigned'])
 			{
@@ -379,12 +386,12 @@ class botracker extends sotracker
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			// set close-date if status is closed and not yet set
-			if ($this->data['tr_status'] == -101 && is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] == TRACKER_STATUS_CLOSED && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
 			}
 			// unset closed date, if item is re-opend
-			if ($this->data['tr_status'] != '-101' && !is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] != TRACKER_STATUS_CLOSED && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
 			}
@@ -399,9 +406,9 @@ class botracker extends sotracker
 				$this->data['reply_creator'] = $this->user;
 				
 				// replies set status pending back to open
-				if ($this->data['old_status'] = -103 && $this->data['old_status'] == $this->data['tr_status'])
+				if ($this->data['old_status'] == TRACKER_STATUS_PENDING && $this->data['old_status'] == $this->data['tr_status'])
 				{
-					$this->data['tr_status'] = -100;
+					$this->data['tr_status'] = TRACKER_STATUS_OPEN;
 				}
 			}
 		}
@@ -663,6 +670,7 @@ class botracker extends sotracker
 			$statis = $this->stati + $this->get_tracker_labels('stati',$data['tr_tracker']);
 		}
 		foreach(array(
+			'tr_tracker'     => $this->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($statis[$data['tr_status']]),
@@ -725,7 +733,7 @@ class botracker extends sotracker
 					$body .= "\n".str_repeat('-',64)."\n\n";
 				}
 				if (!$n && (!is_array($old['replies']) || $reply != $old['replies'][0])) $body .= '> ';
-				$body .= lang('Comment by %1 at %2:',$GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']),
+				$body .= lang('Comment by %1 at %2:',$reply['reply_creator'] ? $GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']) : lang('Tracker'),
 					date($datetime_format,$reply['reply_created']-$this->tz_offset_s+$tz_offset_s));
 				if ($html_email)
 				{
@@ -1139,7 +1147,7 @@ class botracker extends sotracker
 	function link_query( $pattern )
 	{
 		$result = array();
-		foreach((array) $this->search($pattern,false,'','','%',false,'OR',false,array('tr_status' => -100)) as $item )
+		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status' => TRACKER_STATUS_OPEN)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
@@ -1352,7 +1360,7 @@ class botracker extends sotracker
 		$this->user = 0;	// we dont want to run under the id of the current or the user created the async job
 
 		if (($ids = $this->query_list('tr_id','tr_id',array(
-			'tr_status' => -103,
+			'tr_status' => TRACKER_STATUS_PENDING,
 			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
 		))))
 		{
@@ -1369,7 +1377,7 @@ class botracker extends sotracker
 			{
 				if ($this->read($tr_id))
 				{
-					$this->data['tr_status'] = -101;
+					$this->data['tr_status'] = TRACKER_STATUS_CLOSED;
 					$this->data['reply_message'] = lang('This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.',$this->pending_close_days);
 					$this->save();
 				}

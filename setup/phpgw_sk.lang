@@ -49,6 +49,7 @@ delete this status	tracker	sk	Vymaza» tento stav
 delete this tracker including all it's items and categories	tracker	sk	Zmaza» tento sledovaè vrátane v¹etkých zále¾itostí a kategórií
 delete this version	tracker	sk	Vymaza» túto verziu
 deleted	tracker	sk	Vymazané
+do you want to vote for this item	tracker	sk	Chcete hlasova» za túto zále¾itos»
 donator name to show	tracker	sk	Aké meno darcu sa má zobrazi»
 duplicate	tracker	sk	Duplikát
 e-mail address to which a copy of all tracker-notifications should be send	tracker	sk	E-mailová adresa, na ktorú sa má posiela» kópia v¹etkých pripomienok Sledovaèa
@@ -73,6 +74,7 @@ item creator	tracker	sk	Ohlasovateµ zále¾itosti
 language for the copy	tracker	sk	Jazyk kópie
 last modified	tracker	sk	Naposledy upravené
 later	tracker	sk	Neskôr
+list of coma separated email address	tracker	sk	Zoznam emailových adries oddelených èiarkami
 new %1	tracker	sk	Nové %1
 new items	tracker	sk	Nové zále¾itosti
 new tracker item submitted by %1 at %2	tracker	sk	Novú zále¾itos» Sledovaèa podal %1 o %2
@@ -90,6 +92,7 @@ permission denied !!!	tracker	sk	Prístup odopretý !!!
 postponed	tracker	sk	Odlo¾ené
 receive notifications about assigned tracker-items	tracker	sk	Dostáva» pripomienky o priradených zále¾itostiach Sledovaèa
 receive notifications about created tracker-items	tracker	sk	Dostáva» pripomienky o vytvorených zále¾itostiach Sledovaèa
+receive notifications in html	tracker	sk	Dostáva» pripomienky vo formáte HTML
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenú»
 resolution	tracker	sk	Rie¹enie
@@ -100,6 +103,7 @@ set bounty	tracker	sk	Zada» odmenu
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovaè posielal pripomienkové správy, keï sa zaktualizuje niektorá zále¾itos» ktorá Vám bola priradená?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovaè posielal pripomienkové správy, keï sa zaktualizuje niektorá zále¾itos» ktorú ste vytvorili?
 staff	tracker	sk	Personál
+state	tracker	sk	Stav
 summary	tracker	sk	Zhrnutie
 technicians	tracker	sk	Technici
 thank you for setting this bounty.	tracker	sk	Ïakujeme za vypísanie tejto odmeny.
