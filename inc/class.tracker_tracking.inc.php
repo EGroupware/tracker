@@ -1,0 +1,198 @@
+<?php
+/**
+ * Tracker - history and notifications
+ *
+ * @link http://www.egroupware.org
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @package tracker
+ * @copyright (c) 2006/7 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$ 
+ */
+
+require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.bo_tracking.inc.php');
+
+/**
+ * Tracker - tracking object for the tracker
+ */
+class tracker_tracking extends bo_tracking
+{
+	/**
+	 * Application we are tracking (required!)
+	 *
+	 * @var string
+	 */
+	var $app = 'tracker';
+	/**
+	 * Name of the id-field, used as id in the history log (required!)
+	 *
+	 * @var string
+	 */
+	var $id_field = 'tr_id';
+	/**
+	 * Name of the field with the creator id, if the creator of an entry should be notified
+	 *
+	 * @var string
+	 */
+	var $creator_field = 'tr_creator';
+	/**
+	 * Name of the field with the id(s) of assinged users, if they should be notified
+	 *
+	 * @var string
+	 */
+	var $assigned_field = 'tr_assigned';
+	/**
+	 * Translate field-name to 2-char history status
+	 *
+	 * @var array
+	 */
+	var $field2history = array(
+		'tr_summary'     => 'Su',
+		'tr_tracker'     => 'Tr',
+		'cat_id'         => 'Ca',
+		'tr_version'     => 'Ve',
+		'tr_status'      => 'St',
+		'tr_description' => 'De',
+		'tr_assigned'    => 'As',
+		'tr_private'     => 'pr',
+//		'tr_budget'      => 'Bu',
+		'tr_completion'  => 'Co',
+		'tr_priority'    => 'Pr',
+		'tr_closed'      => 'Cl',
+		'tr_resolution'  => 'Re',
+		'tr_cc'			 => 'Cc',
+/* the following bounty-stati are only for reference
+		'bounty-set'     => 'bo',
+		'bounty-deleted' => 'xb',
+		'bounty-confirmed'=> 'Bo',
+*/
+	);
+	/**
+	 * Instance of the botracker class calling us
+	 * 
+	 * @access private
+	 * @var botracker
+	 */
+	var $tracker;
+
+	/**
+	 * Constructor
+	 *
+	 * @param botracker $botracker
+	 * @return tracker_tracking
+	 */
+	function tracker_tracking(&$botracker)
+	{
+		$this->tracker =& $botracker;
+	}
+	
+	/**
+	 * Get a notification-config value
+	 *
+	 * @param string $what
+	 * 	- 'copy' array of email addresses notifications should be copied too, can depend on $data
+	 *  - 'lang' string lang code for copy mail
+	 *  - 'sender' string send email address
+	 * @param array $data current entry
+	 * @param array $old=null old/last state of the entry or null for a new entry
+	 * @return mixed
+	 */
+	function get_config($name,$data,$old)
+	{
+		$tracker = $data['tr_tracker'];
+		
+		$config = $this->tracker->notification[$tracker] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
+		
+		switch($name)
+		{
+			case 'copy':	// include the tr_cc addresses
+				if ($data['tr_private']) return array();	// no copies for private entries
+				$config = $config ? split(', ?',$config) : array();
+				if ($data['tr_cc'])
+				{
+					$config = array_merge($config,split(', ?',$data['tr_cc']));
+				}
+				break;
+		}
+		return $config;
+	}
+	
+	/**
+	 * Get the modified / new message (1. line of mail body) for a given entry, can be reimplemented
+	 * 
+	 * @param array $data
+	 * @param array $old
+	 * @return string
+	 */
+	function get_message($data,$old)
+	{
+		if (!$data['tr_modified'] || !$old)
+		{
+			return lang('New ticket submitted by %1 at %2',
+				$GLOBALS['egw']->grab_owner_name($data['tr_creator']),
+				$this->datetime($data['tr_created']-$this->tracker->tz_offset_s));
+		}
+		return array('Ticket modified by %1 at %2',
+			$GLOBALS['egw']->grab_owner_name($data['tr_modifier']),
+			$this->datetime($data['tr_modified']-$this->tracker->tz_offset_s));
+	}
+	
+	/**
+	 * Get the details of an entry
+	 * 
+	 * @param array $data
+	 * @param string $datetime_format of user to notify, eg. 'Y-m-d H:i'
+	 * @param int $tz_offset_s offset in sec to be add to server-time to get the user-time of the user to notify
+	 * @return array of details as array with values for keys 'label','value','type'
+	 */
+	function get_details($data)
+	{
+		static $cats,$versions,$statis;
+		if (!$cats)
+		{
+			$cats = $this->tracker->get_tracker_labels('cat',$data['tr_tracker']);
+			$versions = $this->tracker->get_tracker_labels('version',$data['tr_tracker']);
+			$statis = $this->tracker->stati + $this->tracker->get_tracker_labels('stati',$data['tr_tracker']);
+		}
+		foreach(array(
+			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
+			'cat_id'         => $cats[$data['cat_id']],
+			'tr_version'     => $versions[$data['tr_version']],
+			'tr_status'      => lang($statis[$data['tr_status']]),
+			'tr_resolution'  => lang($this->tracker->resolutions[$data['tr_resolution']]),
+			'tr_completion'  => (int)$data['tr_completion'].'%',
+			'tr_priority'    => lang($this->tracker->priorities[$data['tr_priority']]),
+			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
+			'tr_assigned'	 => $data['tr_assigned'] == "" ? lang('Not assigned') : $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
+			'tr_cc'			 => $data['tr_cc'],
+			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
+		) as $name => $value)
+		{
+			$details[$name] = array(
+				'label' => lang($this->tracker->field2label[$name]),
+				'value' => $value,
+			);
+			if ($name == 'tr_summary') $details[$name]['type'] = 'summary';
+		}
+		$details['tr_description'] = array(
+			'value' => $data['tr_description'],
+			'type'  => 'multiline',
+		);
+		if ($data['replies'])
+		{
+			foreach($data['replies'] as $n => $reply)
+			{
+				$details[$n ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
+					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? $GLOBALS['egw']->common->grab_owner_name($reply['reply_creator']) : lang('Tracker'),
+						$this->datetime($reply['reply_created']-$this->tracker->tz_offset_s)),
+					'type'  => 'reply',
+				);
+				$details[2*$n+1] = array(
+					'value' => $reply['reply_message'],
+					'type'  => 'multiline',
+				);
+			}
+		}
+		return $details;
+	}
+}
