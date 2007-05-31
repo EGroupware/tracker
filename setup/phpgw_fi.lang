@@ -42,11 +42,13 @@ create new links	tracker	fi	Luo uusi linkki
 created	tracker	fi	Luotu
 date opened	tracker	fi	Avauspäivä
 delete this bounty	tracker	fi	Poista tämä maksullinen kehitys
+delete this canned response	tracker	fi	Poista tämä säilytetty vastaus
 delete this category	tracker	fi	Poista tämä kategoria
 delete this status	tracker	fi	Poista tämä tila
 delete this tracker including all it's items and categories	tracker	fi	Poista laukaisin, sisältää kaikki sen kohteet ja kategoriat.
 delete this version	tracker	fi	Poista tämä versio
 deleted	tracker	fi	Poistettu
+do you want to vote for this item	tracker	fi	Haluatko äänestää tästä kohteesta
 donator name to show	tracker	fi	Näytä lahjoittajan nimi
 duplicate	tracker	fi	Kaksoiskappale
 e-mail address to which a copy of all tracker-notifications should be send	tracker	fi	Sähköpostiosoite kopioidaan huomautus laukaisimeen, joka lähettää viestit
@@ -66,10 +68,12 @@ id	tracker	fi	Tunniste
 if this item is important for you, please consider to set a bounty for it!	tracker	fi	Jos tämä kohde on sinulle tärkeä, harkitse sen tekemistä maksullisena lisätyönä!
 if this item is important for you, please vote for it.	tracker	fi	Jos tämä kohde on sinulle tärkeä, äänestä sen puolesta.
 invalid	tracker	fi	Kelpaamaton
+item assignee	tracker	fi	Kohde valtuutettu
 item creator	tracker	fi	Kohteen luonti
 language for the copy	tracker	fi	Kopioitava kieli
 last modified	tracker	fi	Viimeksi muokattu
 later	tracker	fi	Viimeisin
+list of coma separated email address	tracker	fi	Lista pilkulla erotetuista sähköpostiosoitteista
 new %1	tracker	fi	Uusi %1
 new items	tracker	fi	Uusi kohde
 new tracker item submitted by %1 at %2	tracker	fi	Uusi kohteen laukaisin toimitettu %1 %2
@@ -84,8 +88,10 @@ pending	tracker	fi	Vireillä
 pending items never get close automatic.	tracker	fi	Vireillä oleva kohde ei koskaan sulkeudu automaattisesti
 pending items will be closed automatic after %1 days without response.	tracker	fi	Vireillä oleva kohde suljetaan automaattisesti jos %1 päivän kuluessa ei tule vastausta.
 permission denied !!!	tracker	fi	Pääsy estetty !!!
+postponed	tracker	fi	Lykätty
 receive notifications about assigned tracker-items	tracker	fi	Vastaanota huomautuksia käsittelijästä
 receive notifications about created tracker-items	tracker	fi	Vastaanota huomautuksia pyynnön luonneista
+receive notifications in html	tracker	fi	Vastaanota huomautukset html muodossa
 rejected	tracker	fi	Kielletty
 remind	tracker	fi	Muistuta
 resolution	tracker	fi	Resoluutio
@@ -96,6 +102,7 @@ set bounty	tracker	fi	Aseta palkkio
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähettääkö laukaisin sinulle huomautusviestin, jos kohteen käsittelijä päivittää tilannetta?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähettääkö laukaisin sinulle huomautusviestin, jos luomasi kohteen tila päivittyy?
 staff	tracker	fi	Henkilökunta
+state	tracker	fi	Tila
 summary	tracker	fi	Tiivistelmä
 technicians	tracker	fi	Tekninentuki
 thank you for setting this bounty.	tracker	fi	Kiitos kun asetit palkkion

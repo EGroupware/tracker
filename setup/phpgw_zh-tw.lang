@@ -49,6 +49,7 @@ delete this status	tracker	zh-tw	刪除這個狀態
 delete this tracker including all it's items and categories	tracker	zh-tw	刪除這個服務台，包含其中的所有項目與類別
 delete this version	tracker	zh-tw	刪除這個版本
 deleted	tracker	zh-tw	已刪除
+do you want to vote for this item	tracker	zh-tw	您是否要為這個項目投票
 donator name to show	tracker	zh-tw	要顯示的贊助者名稱
 duplicate	tracker	zh-tw	複製
 e-mail address to which a copy of all tracker-notifications should be send	tracker	zh-tw	所有服務台提醒通知的副本要寄送的信箱
@@ -73,6 +74,7 @@ item creator	tracker	zh-tw	項目建立者
 language for the copy	tracker	zh-tw	副本的語言
 last modified	tracker	zh-tw	最後更新日期
 later	tracker	zh-tw	晚一點
+list of coma separated email address	tracker	zh-tw	逗點分隔信箱列表
 new %1	tracker	zh-tw	新 %1
 new items	tracker	zh-tw	新項目
 new tracker item submitted by %1 at %2	tracker	zh-tw	%1 在 %2 建立新的服務台項目
@@ -90,6 +92,7 @@ permission denied !!!	tracker	zh-tw	沒有權限！
 postponed	tracker	zh-tw	延期
 receive notifications about assigned tracker-items	tracker	zh-tw	在被指派服務台項目時發出通知
 receive notifications about created tracker-items	tracker	zh-tw	在服務台項目建立時發出通知
+receive notifications in html	tracker	zh-tw	接收 html 格式通知
 rejected	tracker	zh-tw	拒絕
 remind	tracker	zh-tw	提醒
 resolution	tracker	zh-tw	決議
@@ -100,6 +103,8 @@ set bounty	tracker	zh-tw	設定獎金
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh-tw	如果指派給您的服務台項目更新了，是否要寄送通知給您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh-tw	如果您建立的服務台項目更新了，是否要寄送通知給您？
 staff	tracker	zh-tw	工作團隊
+state	tracker	zh-tw	狀態
+stati	tracker	zh-tw	狀態
 summary	tracker	zh-tw	摘要
 technicians	tracker	zh-tw	技術人員
 thank you for setting this bounty.	tracker	zh-tw	感謝您設定這個獎金。
