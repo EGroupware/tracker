@@ -68,6 +68,12 @@ class tracker_tracking extends bo_tracking
 */
 	);
 	/**
+	 * Should the user (passed to the track method or current user if not passed) be used as sender or get_config('sender')
+	 *
+	 * @var boolean
+	 */
+	var $prefer_user_as_sender = false;
+	/**
 	 * Instance of the botracker class calling us
 	 * 
 	 * @access private
