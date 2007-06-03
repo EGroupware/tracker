@@ -57,6 +57,7 @@ class tr_admin_prefs_sidebox_hooks
 		{
 			$file = Array(
 				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.uitracker.admin'),
+				'Import TTS tickets' => $GLOBALS['egw']->link('/tracker/import_tts.php'),
 //				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
 			if ($location == 'admin')
