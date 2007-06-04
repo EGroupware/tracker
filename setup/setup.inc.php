@@ -8,7 +8,7 @@
  * @subpackage setup
  * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id: class.bocontacts.inc.php 22159 2006-07-22 18:02:15Z ralfbecker $ 
+ * @version $Id$ 
  */
 
 $setup_info['tracker']['name']      = 'tracker';

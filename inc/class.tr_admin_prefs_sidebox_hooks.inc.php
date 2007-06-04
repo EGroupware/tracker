@@ -7,7 +7,7 @@
  * @package tracker
  * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id: class.bocontacts.inc.php 22159 2006-07-22 18:02:15Z ralfbecker $ 
+ * @version $Id$ 
  */
 
 /**
@@ -57,6 +57,7 @@ class tr_admin_prefs_sidebox_hooks
 		{
 			$file = Array(
 				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.uitracker.admin'),
+				'Import TTS tickets' => $GLOBALS['egw']->link('/tracker/import_tts.php'),
 //				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
 			if ($location == 'admin')
