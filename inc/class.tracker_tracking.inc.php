@@ -107,7 +107,7 @@ class tracker_tracking extends bo_tracking
 	{
 		$tracker = $data['tr_tracker'];
 		
-		$config = $this->tracker->notification[$tracker] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
+		$config = $this->tracker->notification[$tracker][$name] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
 		
 		switch($name)
 		{
