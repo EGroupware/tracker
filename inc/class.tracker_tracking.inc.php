@@ -138,7 +138,7 @@ class tracker_tracking extends bo_tracking
 				$GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
 				$this->datetime($data['tr_created']-$this->tracker->tz_offset_s));
 		}
-		return array('Ticket modified by %1 at %2',
+		return lang('Ticket modified by %1 at %2',
 			$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
 			$this->datetime($data['tr_modified']-$this->tracker->tz_offset_s));
 	}
