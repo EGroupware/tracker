@@ -420,6 +420,14 @@ class botracker extends sotracker
 		}
 		if (!($err = parent::save()))
 		{
+			if (!is_object($GLOBALS['egw']->link))
+			{
+				require_once(EGW_API_INC.'/class.bolink.inc.php');
+				$GLOBALS['egw']->link =& new bolink();
+			}
+			// so other apps can update eg. their titles and the cached title gets unset
+			$GLOBALS['egw']->link->notify_update('tracker',$this->data['tr_id'],$this->data);
+			
 			if (!is_object($this->tracking))
 			{
 				require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_tracking.inc.php');
