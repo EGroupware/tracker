@@ -27,9 +27,15 @@ $GLOBALS['egw_info'] = array(
 		'currentapp' => 'tracker',
 		'admin_only' => true,
 		'noheader'   => true,
+		'enable_categories_class' => true,
 	),
 );
 include('../header.inc.php');
+
+if ($_POST['cancel'])
+{
+	$GLOBALS['egw']->redirect_link('/tracker/index.php');
+}
 
 $_confirmation = '';
 if($_POST['submit'])
@@ -84,7 +90,7 @@ function TTSCONV_ticket_overview ($_confirmation = '') {
 
 	$GLOBALS['egw']->template->set_block('convert','form');
 
-	$GLOBALS['egw']->template->set_var('form_action', $GLOBALS['egw']->link('/tts/convert.php'));
+	$GLOBALS['egw']->template->set_var('form_action', $GLOBALS['egw']->link('/tracker/import_tts.php'));
 
 	$GLOBALS['egw']->template->set_var('confirmation', $_confirmation);
 	$GLOBALS['egw']->template->set_var('lang_total', lang('ticket count'));
