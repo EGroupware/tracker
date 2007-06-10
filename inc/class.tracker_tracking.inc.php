@@ -89,6 +89,8 @@ class tracker_tracking extends bo_tracking
 	 */
 	function tracker_tracking(&$botracker)
 	{
+		$this->bo_tracking();	// calling the constructor of the extended class
+
 		$this->tracker =& $botracker;
 	}
 	
@@ -139,7 +141,7 @@ class tracker_tracking extends bo_tracking
 				$this->datetime($data['tr_created']-$this->tracker->tz_offset_s));
 		}
 		return lang('Ticket modified by %1 at %2',
-			$GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']),
+			$data['tr_modifier'] ? $GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']) : lang('Tracker'),
 			$this->datetime($data['tr_modified']-$this->tracker->tz_offset_s));
 	}
 	
