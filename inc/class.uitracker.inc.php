@@ -432,6 +432,26 @@ class uitracker extends botracker
 			$query['col_filter'][] = 'tr_assigned IS NULL';
 			unset($query['col_filter']['tr_assigned']);
 		}
+		// save the state of the index page (filters) in the user prefs
+		$state = serialize(array(
+			'filter'     => $query['filter'],	// cat
+			'filter2'    => $query['filter2'],	// version
+			'order'      => $query['order'],
+			'sort'       => $query['sort'],
+			'num_rows'   => $query['num_rows'],
+			'col_filter' => array(
+				'tr_tracker'  => $query['col_filter']['tr_tracker'],
+				'tr_creator'  => $query['col_filter']['tr_creator'],
+				'tr_assigned' => $query['col_filter']['tr_assigned'],
+				'tr_status'   => $query['col_filter']['tr_status'],
+			),
+		));
+		if ($state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
+		{
+			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
+			// save prefs, but do NOT invalid the cache (unnecessary)
+			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
+		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		
@@ -575,6 +595,11 @@ class uitracker extends botracker
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 			);
+			// use the state of the last session stored in the user prefs
+			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
+			{
+				$content['nm'] = array_merge($content['nm'],$state);
+			}
 		}
 		$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		$content['is_admin'] = $this->is_admin($tracker);
