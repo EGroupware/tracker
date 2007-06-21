@@ -46,27 +46,7 @@ class tracker_tracking extends bo_tracking
 	 *
 	 * @var array
 	 */
-	var $field2history = array(
-		'tr_summary'     => 'Su',
-		'tr_tracker'     => 'Tr',
-		'cat_id'         => 'Ca',
-		'tr_version'     => 'Ve',
-		'tr_status'      => 'St',
-		'tr_description' => 'De',
-		'tr_assigned'    => 'As',
-		'tr_private'     => 'pr',
-//		'tr_budget'      => 'Bu',
-		'tr_completion'  => 'Co',
-		'tr_priority'    => 'Pr',
-		'tr_closed'      => 'Cl',
-		'tr_resolution'  => 'Re',
-		'tr_cc'			 => 'Cc',
-/* the following bounty-stati are only for reference
-		'bounty-set'     => 'bo',
-		'bounty-deleted' => 'xb',
-		'bounty-confirmed'=> 'Bo',
-*/
-	);
+	var $field2history = array();
 	/**
 	 * Should the user (passed to the track method or current user if not passed) be used as sender or get_config('sender')
 	 *
@@ -92,6 +72,7 @@ class tracker_tracking extends bo_tracking
 		$this->bo_tracking();	// calling the constructor of the extended class
 
 		$this->tracker =& $botracker;
+		$this->field2history =& $botracker->field2history;
 	}
 	
 	/**
