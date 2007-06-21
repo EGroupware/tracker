@@ -571,9 +571,6 @@ class uitracker extends botracker
 			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
 		));		
-		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
-		if (!$tracker) list($tracker) = @each($this->trackers);
-
 		if (!is_array($content['nm']))
 		{
 			$content['nm'] = array(
@@ -601,6 +598,9 @@ class uitracker extends botracker
 				$content['nm'] = array_merge($content['nm'],$state);
 			}
 		}
+		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
+		if (!$tracker) list($tracker) = @each($this->trackers);
+
 		$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		$content['is_admin'] = $this->is_admin($tracker);
 		
