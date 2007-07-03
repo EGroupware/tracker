@@ -446,7 +446,8 @@ class uitracker extends botracker
 				'tr_status'   => $query['col_filter']['tr_status'],
 			),
 		));
-		if ($state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
+		if ($GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
+			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
 		{
 			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
 			// save prefs, but do NOT invalid the cache (unnecessary)
