@@ -95,10 +95,15 @@ class tr_admin_prefs_sidebox_hooks
 			'admin'  => False,
 		);
 		$GLOBALS['settings']['notify_html'] = array(
-			'type'   => 'check',
+			'type'   => 'select',
 			'label'  => 'Receive notifications in html',
 			'name'   => 'notify_html',
 			'help'   => 'Should the Tracker send you notification mails in html?',
+			'values' => array(
+				'0'  => lang('No'),
+				'1'  => lang('Yes'),
+				'medium' => lang('Yes, with larger fontsize'),
+			),
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
