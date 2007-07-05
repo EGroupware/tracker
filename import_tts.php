@@ -37,6 +37,8 @@ if ($_POST['cancel'])
 	$GLOBALS['egw']->redirect_link('/tracker/index.php');
 }
 
+TTSCONV_check_update_tts();
+
 $_confirmation = '';
 if($_POST['submit'])
 {
@@ -46,7 +48,37 @@ if($_POST['submit'])
 }
 TTSCONV_ticket_overview($_confirmation);
 
-		
+function TTSCONV_check_update_tts()
+{
+	if (version_compare($GLOBALS['egw_info']['apps']['tts']['version'],'1.2.008') < 0)
+	{
+		die('This tool can only update from the 1.2 Version of TTS, for older versions you have to (install and) update TTS first!');
+	}
+	if (version_compare($GLOBALS['egw_info']['apps']['tts']['version'],'1.3.002') < 0)
+	{
+		// we are running a small instant update here
+		require_once(EGW_API_INC.'/class.schema_proc.inc.php');
+		$schema_proc = new schema_proc();
+		$schema_proc->AddColumn('phpgw_tts_tickets','ticket_converted',array(
+			'type' => 'char',
+			'precision' => '1',
+			'nullable' => False,
+			'default' => 'N'
+		));
+		$schema_proc->AddColumn('phpgw_tts_tickets','tracker_id',array(
+			'type' => 'int',
+			'precision' => '4',
+			'nullable' => False,
+			'default' => -1
+		));
+		$GLOBALS['egw_info']['apps']['tts']['version'] = '1.3.002';		// just in case we use 'php4-restore' sessions
+
+		$GLOBALS['egw']->db->update('egw_applications',array('app_version' => '1.3.002'),array('app_name' => 'tts'),__LINE__,__FILE__);
+
+		echo "<p>Updated TTS to last version 1.3.002!</p>\n";
+	}
+}
+
 function TTSCONV_ticket_overview ($_confirmation = '') {
 /*
  * Display the amount of tickets that can be converted and give the user
