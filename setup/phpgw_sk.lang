@@ -69,7 +69,7 @@ id	tracker	sk	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím zvá¾te vypísanie odmeny za jej vyrie¹enie!
 if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím hlasujte za òu.
 invalid	tracker	sk	Neplatné
-item assignee	tracker	sk	Za zále¾itos» je zodpovedný
+item assignee	tracker	sk	Zodpovedný za zále¾itos»
 item creator	tracker	sk	Ohlasovateµ zále¾itosti
 language for the copy	tracker	sk	Jazyk kópie
 last modified	tracker	sk	Naposledy zmenené
@@ -123,7 +123,7 @@ tracker item not found !!!	tracker	sk	Zále¾itos» Sledovaèa sa nena¹la !!!
 tracker-%1 '%2' added.	tracker	sk	Sledovaè-%1 '%2' pridané.
 tracker-%1 '%2' updated.	tracker	sk	Sledovaè-%1 '%2' aktualizované.
 tracker-%1 deleted.	tracker	sk	Sledovaè-%1 '%2' odstránené.
-url of the tracker	tracker	sk	URL adresa Stopovaèa
+url of the tracker	tracker	sk	URL adresa Sledovaèa
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sk	URL adresa, ktorá má by» uvedená v pripomienke, napr. na stránku s modulom SiteMgr, predvolené: Sledovaè v rámci eGroupWare
 versions	tracker	sk	Verzie
 vote for it!	tracker	sk	Hlasova» za vyrie¹enie
