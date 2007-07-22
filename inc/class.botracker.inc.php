@@ -456,11 +456,11 @@ class botracker extends sotracker
 		//echo "botracker::get_staff($tracker,$return_groups,$technicians)";
 
 		// some caching
-		if (isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][$return_groups]) && 
-			isset($staff_cache[$tracker][$return_groups][(int)$technicians]))
+		if (isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][(int)$return_groups]) && 
+			isset($staff_cache[$tracker][(int)$return_groups][(int)$technicians]))
 		{
 			//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][(int)$technicians]);
-			return $staff_cache[$tracker][$return_groups][(int)$technicians];
+			return $staff_cache[$tracker][(int)$return_groups][(int)$technicians];
 		}
 		$staff = array();
 		if (is_array($this->admins[0])) $staff = $this->admins[0];
@@ -500,7 +500,7 @@ class botracker extends sotracker
 			}
 		}
 		//_debug_array($staff);
-		return $staff_cache[$tracker][$return_groups][(int)$technicians] = $staff;
+		return $staff_cache[$tracker][(int)$return_groups][(int)$technicians] = $staff;
 	}
 
 	/**
