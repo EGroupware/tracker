@@ -107,6 +107,22 @@ class tr_admin_prefs_sidebox_hooks
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
+		$GLOBALS['settings']['show_actions'] = array(
+			'type'   => 'check',
+			'label'  => 'Show actions in tracker listing',
+			'name'   => 'show_actions',
+			'help'   => 'Should the actions column in the tracker list-view be shown?',
+			'xmlrpc' => True,
+			'admin'  => False,
+		);
+		$GLOBALS['settings']['allow_defaultproject'] = array(
+			'type'   => 'check',
+			'label'  => 'Allow default projects for tracker',
+			'name'   => 'allow_defaultproject',
+			'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
+			'xmlrpc' => True,
+			'admin'  => False,
+		);
 		return true;	// otherwise prefs say it cant find the file ;-)
 	}
 	
@@ -129,6 +145,8 @@ class tr_admin_prefs_sidebox_hooks
 			'notify_creator'  => 1,
 			'notify_assigned' => 1,
 			'notify_html'	  => 1,
+			'show_actions' => 1,
+			'allow_defaultproject' => 1,
 		);
 		foreach($defaults as $var => $default)
 		{

@@ -36,6 +36,13 @@ class uitracker extends botracker
 	var $mangle_at = ' -at- ';
 
 	/**
+	 * reference to the preferences of the user
+	 *
+	 * @var array
+	 */
+	var $prefs;
+
+	/**
 	 * Constructor
 	 *
 	 * @return botracker
@@ -43,6 +50,7 @@ class uitracker extends botracker
 	function uitracker()
 	{
 		$this->botracker();
+		$this->prefs =& $GLOBALS['egw_info']['user']['preferences']['tracker'];
 	}
 	
 	/**
@@ -56,7 +64,7 @@ class uitracker extends botracker
 	function edit($content=null,$msg='',$popup=true)
 	{
 		$tabs = 'description|comments|add_comment|links|history|bounties';
-
+		//_debug_array($content);
 		if (!is_array($content))
 		{
 			// edit or new?
@@ -113,6 +121,7 @@ class uitracker extends botracker
 		}
 		else	// submitted form
 		{
+			//_debug_array($content);
 			list($button) = @each($content['button']); unset($content['button']);
 			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
@@ -131,17 +140,34 @@ class uitracker extends botracker
 					if ($this->save() == 0)
 					{
 						$msg = lang('Entry saved');
-
+						
+						if (!is_object($GLOBALS['egw']->link))
+						{
+							$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
+						}
+						//apply defaultlinks
+						usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
+						foreach($this->all_cats as $cat)
+						{
+							if (!is_array($data = unserialize($cat['data']))) $data = array('type' => $data);
+							//echo "<p>".$this->data['tr_tracker'].": $cat[name] ($cat[id]/$cat[parent]/$cat[main]): ".print_r($data,true)."</p>\n";
+				
+							if ($cat['parent'] == $this->data['tr_tracker'] && $data['type'] != 'tracker' && $data['type']=='project')
+							{
+								if (!$GLOBALS['egw']->link->get_link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']))
+								{
+									$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']);
+								}
+							}
+						}
+	
+						
 						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
 						{
-							if (!is_object($GLOBALS['egw']->link))
-							{
-								$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
-							}
 							$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".
-							addslashes(urlencode($msg))."&tracker=$content[tr_tracker]';";
+
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg))."&tracker=".$this->data['tr_tracker']."';";
 					}
 					else
 					{
@@ -411,6 +437,11 @@ class uitracker extends botracker
 	 */
 	function get_rows(&$query_in,&$rows,&$readonlys)
 	{
+		// KL 20070129 is object -> create object
+		if (!is_object($GLOBALS['egw']->link))
+		{
+			$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
+		}
 		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
@@ -449,18 +480,43 @@ class uitracker extends botracker
 		if ($GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
 			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
 		{
+			//$msg .= "save the index state <br>";
 			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
 			// save prefs, but do NOT invalid the cache (unnecessary)
 			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
-		
 		foreach($rows as $n => $row)
 		{
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
+			// prepare links, so timesheet can use them for linking 
+			unset($links);
+			if (($links = $GLOBALS['egw']->link->get_links('tracker',$row['tr_id'])) &&
+				isset($GLOBALS['egw_info']['user']['apps']['timesheet']))		
+			{
+				// loop through all links of the entries
+				foreach ($links as $link)
+				{
+					if ($link['app'] == 'projectmanager')
+					{
+						//$info['pm_id'] = $link['id'];
+					}
+					if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
+					if ($link['app'] != 'timesheet' && $link['app'] != $this->link->vfs_appname)
+					{
+						$rows[$n]['extra_links'] .= '&link_app[]='.$link['app'].'&link_id[]='.$link['id'];
+					}
+				}
+			} 
+			//_debug_array($rows[$n]);
+			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
+			$id=$row['tr_id'];
+			$readonlys["timesheet[$id]"]= !($this->is_admin($row['tr_tracker'])) or ($this->is_technician('tr_tracker'));
+			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician('tr_tracker'));
 		}
+			
 		// set the options for assigned to depending on the tracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
 		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
@@ -484,8 +540,11 @@ class uitracker extends botracker
 			$query_in['options-selectcols']['bounties'] = false;
 		}
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
-		
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.$this->trackers[$tracker];
+		// enable the Actions (timesheet)  column
+		$rows['allow_actions'] = isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_actions'];
+		// enable tracker column if all trackers are shown
+		if ($tracker) $rows['no_tr_tracker'] = true;
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
 
 		return $total;
 	}
@@ -501,6 +560,7 @@ class uitracker extends botracker
 	 */
 	function index($content=null,$tracker=null,$msg='',$only_tracker=null)
 	{
+		//_debug_array($this->trackers);
 		if (!is_array($content))
 		{
 			if ($_GET['tr_id'])
@@ -523,14 +583,20 @@ class uitracker extends botracker
 			{
 				$only_tracker = null;
 			}
+			// if there is no tracker specified, try the tracker submitted
 			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
+			// if there is still no tracker, use the last tracker that was applied and saved to/with the view
+			if (!$tracker && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
+			{
+			      $tracker=$state['col_filter']['tr_tracker']; 
+			}
+
 		}
 		else
 		{
 			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
 
 			if ($content['update'])
-
 			{
 				unset($content['update']);
 				$checked = $content['nm']['rows']['checked']; unset($content['nm']);
@@ -558,7 +624,6 @@ class uitracker extends botracker
 			}
 		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
-
 		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
@@ -571,7 +636,8 @@ class uitracker extends botracker
 			'msg' => $msg,
 			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
-		));		
+		));
+
 		if (!is_array($content['nm']))
 		{
 			$content['nm'] = array(
@@ -593,18 +659,26 @@ class uitracker extends botracker
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 			);
+			// KL20070124 on first enter of the tracker system, show the first entry
+			if (!$tracker) list($tracker) = @each($this->trackers);
 			// use the state of the last session stored in the user prefs
 			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
 			{
 				$content['nm'] = array_merge($content['nm'],$state);
+				$tracker=$content['nm']['col_filter']['tr_tracker'];
 			}
 		}
-		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
-		if (!$tracker) list($tracker) = @each($this->trackers);
+		if (!$tracker)
+		{
+			$tracker = $content['nm']['col_filter']['tr_tracker']=$tracker='';
+		}
+		else
+		{
+			$content['nm']['col_filter']['tr_tracker'] = $tracker;
+		}
 
-		$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		$content['is_admin'] = $this->is_admin($tracker);
-		
+		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
 
 		$tpl =& new etemplate('tracker.index');
@@ -620,15 +694,21 @@ class uitracker extends botracker
 	 */
 	function admin($content=null,$msg='')
 	{
+		//_debug_array($content);
 		$tabs = 'cats|staff|config';
-
 		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n",null,true);
 			return;
 		}
-		//_debug_array($content);
+
 		$tracker = (int) $content['tracker'];
+
+		// apply preferences for assigning of defaultprojects, and provide the project list
+		if ($this->prefs['allow_defaultproject'] && $tracker) 
+		{
+			$allow_defaultproject = $this->prefs['allow_defaultproject'];
+		}
 
 		if (is_array($content))
 		{
@@ -720,12 +800,14 @@ class uitracker extends botracker
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
+						'projects'  => lang('Projects'),
 						'statis'    => lang('Stati'),						
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
 						foreach($content[$name] as $cat)
 						{
+							//_debug_array($cat);
 							if (!$cat['name']) continue;	// ignore empty (new) cats
 
 							$new_cat_descr = 'tracker-';
@@ -739,6 +821,9 @@ class uitracker extends botracker
 									break;
 								case 'statis':
 									$new_cat_descr .= 'stati';
+									break;
+								case 'projects':
+									$new_cat_descr .= 'project';
 									break;
 							}
 							$old_cat = array(	// some defaults for new cats
@@ -758,9 +843,10 @@ class uitracker extends botracker
 									break;
 								}
 							}
-							// check if new cat or changed
+							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] || 
 								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
+								$name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist'] ||
 								$name == 'responses' && $cat['description'] != $old_cat['data']['response'])
 							{
 								$old_cat['name'] = $cat['name'];
@@ -768,6 +854,9 @@ class uitracker extends botracker
 								{
 									case 'cats':
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										break;
+									case 'projects':
+										$old_cat['data']['projectlist'] = $cat['projectlist'];
 										break;
 									case 'responses':
 										$old_cat['data']['response'] = $cat['description'];
@@ -798,9 +887,11 @@ class uitracker extends botracker
 					break;
 					
 				default:
+
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
+						'projects'  => lang('Projects'),
 						'statis'    => lang('State'),						
 						'responses' => lang('Canned response'),
 					) as $name => $what)
@@ -828,12 +919,13 @@ class uitracker extends botracker
 			'notification' => $this->notification[$tracker],
 			$tabs => $content[$tabs],
 		);
+
 		foreach(array_diff($this->config_names,array('admins','technicians','notification')) as $name)
 		{
 			$content[$name] = $this->$name;
 		}
-		// cats & versions
-		$v = $c = $r = $s = 1;
+		// cats & versions & responses & projects
+		$v = $c = $r = $s = $p = 1;
 		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 		foreach($this->all_cats as $cat)
 		{
@@ -851,6 +943,9 @@ class uitracker extends botracker
 						if ($data['response']) $cat['description'] = $data['response'];
 						$content['responses'][$r++] = $cat;
 						break;
+					case 'project':
+						$content['projects'][$p++] = $cat + $data;
+						break;						
 					case 'stati':
 						$content['statis'][$s++] = $cat + $data;
 						break;
@@ -861,7 +956,7 @@ class uitracker extends botracker
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['statis'][$s++] =
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] =
 			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;
@@ -883,6 +978,7 @@ class uitracker extends botracker
 			);
 		}
 		//_debug_array($content);
+		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		$sel_options = array(
 			'tracker' => &$this->trackers,
 			'allow_assign_groups' => array(
@@ -901,7 +997,6 @@ class uitracker extends botracker
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl =& new etemplate('tracker.admin');
-
 		return $tpl->exec('tracker.uitracker.admin',$content,$sel_options,$readonlys,$content);
 	}
 }

@@ -226,7 +226,7 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','notification',	// tracker specific
+		'technicians','admins','notification','projects',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
 		'allow_bounties','currency',
 	);
@@ -693,7 +693,7 @@ class botracker extends sotracker
 	}
 	
 	/**
-	 * Reload the labels (tracker, cats, versions)
+	 * Reload the labels (tracker, cats, versions, projects)
 	 *
 	 */
 	function reload_labels()

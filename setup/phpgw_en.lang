@@ -1,4 +1,5 @@
 %1 entries updated.	tracker	en	%1 entries updated.
+--> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
 5 - medium	tracker	en	5 - medium
@@ -6,26 +7,33 @@
 accepted	tracker	en	Accepted
 actions	tracker	en	Actions
 add comment	tracker	en	Add comment
+add timesheet entry	tracker	en	Add timesheet entry
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
 allow bounties	tracker	en	Allow bounties
+allow default projects for tracker	tracker	en	Allow default projects for tracker
 allow editing by	tracker	en	Allow editing by
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	en	Allow the predefinition of projects that will be assigned to new tracker-items.
 allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
 amount	tracker	en	Amount
+assign to project	tracker	en	Assign to project
 assigned to	tracker	en	Assigned to
 assigning groups	tracker	en	Assigning groups
 attachments & links	tracker	en	Attachments & Links
 autoassign to	tracker	en	Autoassign to
 bounties	tracker	en	Bounties
 bounty confirmed	tracker	en	Bounty confirmed
+bounty confirmed.	tracker	en	Bounty confirmed.
 bounty deleted	tracker	en	Bounty deleted
+bounty deleted.	tracker	en	Bounty deleted.
 bounty set	tracker	en	Bounty set
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
 check all	tracker	en	Check all
+choose a project from the drop-down list	tracker	en	choose a project from the drop-down list
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
@@ -45,6 +53,7 @@ date opened	tracker	en	Date opened
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
+delete this entry	tracker	en	Delete this entry
 delete this status	tracker	en	Delete this status
 delete this tracker including all it's items and categories	tracker	en	Delete this tracker including all it's items and categories
 delete this version	tracker	en	Delete this version
@@ -90,18 +99,23 @@ pending items never get close automatic.	tracker	en	Pending items never get clos
 pending items will be closed automatic after %1 days without response.	tracker	en	Pending items will be closed automatic after %1 days without response.
 permission denied !!!	tracker	en	Permission denied !!!
 postponed	tracker	en	Postponed
+project selection	tracker	en	Project selection
+projects	tracker	en	Projects
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
 receive notifications in html	tracker	en	Receive notifications in html
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 resolution	tracker	en	Resolution
+select tracker queue	tracker	en	select tracker queue
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
 set bounty	tracker	en	Set bounty
+should the actions column in the tracker list-view be shown?	tracker	en	Should the actions column in the tracker list-view be shown?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+show actions in tracker listing	tracker	en	Show actions in tracker listing
 staff	tracker	en	Staff
 state	tracker	en	State
 stati	tracker	en	Stati
@@ -121,6 +135,7 @@ tracker configuration	tracker	en	Tracker configuration
 tracker deleted	tracker	en	Tracker queue deleted
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found !!!
+tracker queue	tracker	en	Tracker Queue
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
 tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
 tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.
