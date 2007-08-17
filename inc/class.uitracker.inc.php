@@ -483,7 +483,7 @@ class uitracker extends botracker
 			//$msg .= "save the index state <br>";
 			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
 			// save prefs, but do NOT invalid the cache (unnecessary)
-			$GLOBALS['egw']->preferences->save_repository(true,'user',true);
+			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
@@ -585,8 +585,8 @@ class uitracker extends botracker
 			}
 			// if there is no tracker specified, try the tracker submitted
 			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
-			// if there is still no tracker, use the last tracker that was applied and saved to/with the view
-			if (!$tracker && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
+			// if there is still no tracker, use the last tracker that was applied and saved to/with the view with the appsession
+			if (!$tracker && ($state=$GLOBALS['egw']->session->appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''))))
 			{
 			      $tracker=$state['col_filter']['tr_tracker']; 
 			}
