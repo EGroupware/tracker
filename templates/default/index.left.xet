@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<!-- $Id$ -->
-<overlay>
-	<template id="tracker.index.left" template="" lang="" group="0" version="1.3.003">
-		<menulist class="bold">
-			<menupopup rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" options="All" label="Tracker Queue"/>
-		</menulist>
-	</template>
-</overlay>

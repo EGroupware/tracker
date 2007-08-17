@@ -483,7 +483,7 @@ class uitracker extends botracker
 			//$msg .= "save the index state <br>";
 			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
 			// save prefs, but do NOT invalid the cache (unnecessary)
-			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
+			$GLOBALS['egw']->preferences->save_repository(true,'user',true);
 		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
