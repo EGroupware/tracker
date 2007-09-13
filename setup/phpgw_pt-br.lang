@@ -1,4 +1,5 @@
 %1 entries updated.	tracker	pt-br	%1 registro(s) atualizado(s).
+--> choose a project from the drop-down list	tracker	pt-br	--> escolha um projeto da lista
 --> enter new name	tracker	pt-br	--> informe o novo nome
 1 - lowest	tracker	pt-br	1 - menor
 5 - medium	tracker	pt-br	5 - média
@@ -6,26 +7,33 @@
 accepted	tracker	pt-br	Aceito
 actions	tracker	pt-br	Ações
 add comment	tracker	pt-br	Adicionar comentário
+add timesheet entry	tracker	pt-br	Adicionar registro da Planilha de Tempo
 after how many days a not replied item should be marked overdue?	tracker	pt-br	Após quantos dias um ticket sem resposta deverá ser marcado como arquivado ?
 after how many days pending items should be closed automatic	tracker	pt-br	Após quantos dias pendente tickets deverão ser fechados automaticamente ?
 allow bounties	tracker	pt-br	Permitir pagamento
+allow default projects for tracker	tracker	pt-br	Permitir projetos padrões para o Sistema de Tickets
 allow editing by	tracker	pt-br	Permitir edição por
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	pt-br	Permitir a definição prévia de projetos que serão designados para novos tickets.
 allow to assign groups to tracker items	tracker	pt-br	Permitir designar grupos para tickets
 allow voting	tracker	pt-br	Permitir votação
 allow voting on tracker items, show and sort after the votes	tracker	pt-br	Permitir votação nos tickets, exibir e ordenar após o voto
 amount	tracker	pt-br	Quantidade
+assign to project	tracker	pt-br	Designar para projeto
 assigned to	tracker	pt-br	Designado para
 assigning groups	tracker	pt-br	Grupos designados
 attachments & links	tracker	pt-br	Anexos e links
 autoassign to	tracker	pt-br	Auto designar para
 bounties	tracker	pt-br	Pagamentos
 bounty confirmed	tracker	pt-br	Pagamento confirmado
+bounty confirmed.	tracker	pt-br	Pagamento confirmado
 bounty deleted	tracker	pt-br	Pagamento removido
+bounty deleted.	tracker	pt-br	Pagamento removido
 bounty set	tracker	pt-br	Definição de pagamento
 canned response	tracker	pt-br	Resposta automática
 canned responses	tracker	pt-br	Respostas automáticas
 categories, versions, canned responses	tracker	pt-br	Categorias, versões, respostas automáticas
 check all	tracker	pt-br	Marcar todos
+choose a project from the drop-down list	tracker	pt-br	escolha um projeto da lista
 close pending	tracker	pt-br	Fechar pendentes em quantos dias ?
 closed	tracker	pt-br	Fechado
 comment by %1 at %2:	tracker	pt-br	Comentário feito por %1 em %2:
@@ -45,6 +53,7 @@ date opened	tracker	pt-br	Data de abertura
 delete this bounty	tracker	pt-br	Remover este pagamento
 delete this canned response	tracker	pt-br	Remover esta resposta automática
 delete this category	tracker	pt-br	Remover esta categoria
+delete this entry	tracker	pt-br	Remover este registro
 delete this status	tracker	pt-br	Remover este status
 delete this tracker including all it's items and categories	tracker	pt-br	Remover este tipo de ticket, incluindo todas suas categorias e tickets
 delete this version	tracker	pt-br	Remover esta versão
@@ -90,18 +99,23 @@ pending items never get close automatic.	tracker	pt-br	Tickets pendentes nunca s
 pending items will be closed automatic after %1 days without response.	tracker	pt-br	Tickets pendentes serão fechados automaticamente após %1 dia(s) sem reposta.
 permission denied !!!	tracker	pt-br	Permissão negada !!!
 postponed	tracker	pt-br	Prorrogado
+project selection	tracker	pt-br	Seleção de projeto
+projects	tracker	pt-br	Projetos
 receive notifications about assigned tracker-items	tracker	pt-br	Receber notificações sobre designamento de tickets
 receive notifications about created tracker-items	tracker	pt-br	Receber notificações sobre criação de tickets
 receive notifications in html	tracker	pt-br	Receber notificações em HTML
 rejected	tracker	pt-br	Rejeitado
 remind	tracker	pt-br	Lembrar
 resolution	tracker	pt-br	Resolução
+select tracker queue	tracker	pt-br	selecionar elemento do Sistema de Tickets
 sender address	tracker	pt-br	Endereço do remetente
 sender address for all notifications, eg. noreply@egroupware.org	tracker	pt-br	Endereço do remetente para todas as notificações, por exemplo: nao_responda@egroupware.org
 set an own bounty (in %s)	tracker	pt-br	Definir um pagamento (em %s)
 set bounty	tracker	pt-br	Definir pagamento
+should the actions column in the tracker list-view be shown?	tracker	pt-br	As colunas de ações na lista de tickets deverão ser exibidas?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado ?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado ?
+show actions in tracker listing	tracker	pt-br	Exibir ações na lista de tickets
 staff	tracker	pt-br	Equipe
 state	tracker	pt-br	Estado
 stati	tracker	pt-br	Estado
@@ -114,13 +128,14 @@ the canned response will be prefix the text you type.	tracker	pt-br	A resposta a
 this module displays information from the tracker.	tracker	pt-br	Este módulo exibe informação sobre o Sistema de Tickets
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pt-br	Este ticket foi fechado automaticamente pelo sistema. O mesmo foi, previamente, definido como Pendente e o criador não respondeu em %1 dia(s).
 tracker	common	pt-br	Sistema de Tickets
-tracker added	tracker	pt-br	Fila do Sistema de Tickets adicionada
+tracker added	tracker	pt-br	Elemento do Sistema de Tickets adicionado
 tracker admins	tracker	pt-br	Administradores do Sistema de Tickets
 tracker admins & technicians	tracker	pt-br	Administradores e Técnicos do Sistema de Tickets
 tracker configuration	tracker	pt-br	Configuração do Sistema de Tickets
-tracker deleted	tracker	pt-br	Fila do Sistema de Tickets removida
+tracker deleted	tracker	pt-br	Elemento do Sistema de Tickets removido
 tracker item modified by %1 at %2	tracker	pt-br	Ticket modificado por %1 em %2
 tracker item not found !!!	tracker	pt-br	Ticket não encontrado !!!
+tracker queue	tracker	pt-br	Elemento do Sistema de Tickets
 tracker-%1 '%2' added.	tracker	pt-br	Tipo de Ticket - %1 '%2' adicionado
 tracker-%1 '%2' updated.	tracker	pt-br	Tipo de Ticket - %1 '%2' atualizado
 tracker-%1 deleted.	tracker	pt-br	Tipo de Ticket - %1 removido
