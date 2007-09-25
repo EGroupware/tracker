@@ -1,4 +1,5 @@
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
+--> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable
 --> enter new name	tracker	es-es	--> introduzca un nombre nuevo
 1 - lowest	tracker	es-es	1 - la más baja
 5 - medium	tracker	es-es	5 - media
@@ -6,26 +7,33 @@
 accepted	tracker	es-es	Aceptada
 actions	tracker	es-es	Acciones
 add comment	tracker	es-es	Añadir comentario
+add timesheet entry	tracker	es-es	Añadir entrada de la hoja de tiempos
 after how many days a not replied item should be marked overdue?	tracker	es-es	¿Después de cuántos días un elemento sin respuesta debe quedar marcado como obsoleto?
 after how many days pending items should be closed automatic	tracker	es-es	Después de cuantos días los elementos pendientes deben cerrarse automáticamente
 allow bounties	tracker	es-es	Permitir recompensas
+allow default projects for tracker	tracker	es-es	Permitir proyectos predeterminados para el seguimiento
 allow editing by	tracker	es-es	Permitir edición por
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	es-es	Permitir predefinir proyectos que se asignarán a elementos nuevos de seguimiento.
 allow to assign groups to tracker items	tracker	es-es	Permitir asignar grupos para seguimiento de elementos
 allow voting	tracker	es-es	Permitir votar
 allow voting on tracker items, show and sort after the votes	tracker	es-es	Permitir votar en elementos de seguimiento. Mostrar y ordenar después de los votos
 amount	tracker	es-es	Cantidad
+assign to project	tracker	es-es	Asignar al proyecto
 assigned to	tracker	es-es	Asignado a
 assigning groups	tracker	es-es	Grupos asignados
 attachments & links	tracker	es-es	Adjuntos y enlaces
 autoassign to	tracker	es-es	Asignar automáticamente a
 bounties	tracker	es-es	Recompensas
 bounty confirmed	tracker	es-es	Recompensa confirmada
+bounty confirmed.	tracker	es-es	Recompensa confirmada
 bounty deleted	tracker	es-es	Recompensa borrada
+bounty deleted.	tracker	es-es	Recompensa borrada
 bounty set	tracker	es-es	Recompensa fijada
 canned response	tracker	es-es	Respuesta automatizada
 canned responses	tracker	es-es	Respuestas automatizadas
 categories, versions, canned responses	tracker	es-es	Categorías, versiones, respuestas automatizadas
 check all	tracker	es-es	Comprobar todo
+choose a project from the drop-down list	tracker	es-es	Elegir un proyecto de la lista desplegable
 close pending	tracker	es-es	Cerrar elementos pendientes
 closed	tracker	es-es	Cerrado
 comment by %1 at %2:	tracker	es-es	Comentario por %1 a las %2:
@@ -45,6 +53,7 @@ date opened	tracker	es-es	Fecha de apertura
 delete this bounty	tracker	es-es	Borrar esta recompensa
 delete this canned response	tracker	es-es	Borrar esta respuesta automatizada
 delete this category	tracker	es-es	Borrar esta categoría
+delete this entry	tracker	es-es	Borrar esta entrada
 delete this status	tracker	es-es	Borrar este estado
 delete this tracker including all it's items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
 delete this version	tracker	es-es	Borrar esta versión
@@ -90,18 +99,23 @@ pending items never get close automatic.	tracker	es-es	Los elementos pendientes 
 pending items will be closed automatic after %1 days without response.	tracker	es-es	Los elementos pendientes se cerrarán automáticamente después de %1 días sin respuesta.
 permission denied !!!	tracker	es-es	¡No tiene permiso de acceso!
 postponed	tracker	es-es	Pospuesto
+project selection	tracker	es-es	Selección de proyecto
+projects	tracker	es-es	Proyectos
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
 receive notifications in html	tracker	es-es	Recibir notificaciones en html
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 resolution	tracker	es-es	Resolución
+select tracker queue	tracker	es-es	Seleccionar cola de seguimiento
 sender address	tracker	es-es	Dirección del remitente
 sender address for all notifications, eg. noreply@egroupware.org	tracker	es-es	Dirección del remitente para todas las notificaciones, p. ej. sinrespuesta@ejemplo.com
 set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
 set bounty	tracker	es-es	Fijar recompensa
+should the actions column in the tracker list-view be shown?	tracker	es-es	¿Debe verse la columna de acciones en la vista de lista de seguimiento?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
+show actions in tracker listing	tracker	es-es	Mostrar acciones en el listado de seguimiento
 staff	tracker	es-es	Equipo
 state	tracker	es-es	Estado
 stati	tracker	es-es	Estados
@@ -121,6 +135,7 @@ tracker configuration	tracker	es-es	Configuración de la cola
 tracker deleted	tracker	es-es	Se ha borrado la cola de seguimiento
 tracker item modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
 tracker item not found !!!	tracker	es-es	¡No se encontró el elemento a seguir!
+tracker queue	tracker	es-es	Cola de seguimiento
 tracker-%1 '%2' added.	tracker	es-es	Seguimiento - %1 '%2' añadido
 tracker-%1 '%2' updated.	tracker	es-es	Seguimiento - %1 '%2' actualizado
 tracker-%1 deleted.	tracker	es-es	Seguimiento - %1 borrado

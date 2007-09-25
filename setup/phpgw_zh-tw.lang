@@ -1,4 +1,5 @@
 %1 entries updated.	tracker	zh-tw	%1 筆資料更新了。
+--> choose a project from the drop-down list	tracker	zh-tw	--> 選擇一個專案
 --> enter new name	tracker	zh-tw	--> 輸入新名稱
 1 - lowest	tracker	zh-tw	1 - 最低
 5 - medium	tracker	zh-tw	5 - 中等
@@ -6,26 +7,33 @@
 accepted	tracker	zh-tw	接受
 actions	tracker	zh-tw	操作
 add comment	tracker	zh-tw	新增意見
+add timesheet entry	tracker	zh-tw	新增時間表資料
 after how many days a not replied item should be marked overdue?	tracker	zh-tw	在多少天後沒有回應的項目要視為過期？
 after how many days pending items should be closed automatic	tracker	zh-tw	在多少天後等候回應的項目要自動關閉？
 allow bounties	tracker	zh-tw	允許使用獎金
+allow default projects for tracker	tracker	zh-tw	允許在服務台使用預設專案
 allow editing by	tracker	zh-tw	允許編輯
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	zh-tw	允許指定新服務需求指派的預設專案。
 allow to assign groups to tracker items	tracker	zh-tw	允許指派群組到服務台項目
 allow voting	tracker	zh-tw	允許評價
 allow voting on tracker items, show and sort after the votes	tracker	zh-tw	允許為服務中心項目投票，在投票後顯示與排序
 amount	tracker	zh-tw	金額
+assign to project	tracker	zh-tw	指派到專案
 assigned to	tracker	zh-tw	負責人
 assigning groups	tracker	zh-tw	指派給群組
 attachments & links	tracker	zh-tw	附加檔案與連結
 autoassign to	tracker	zh-tw	自動指派給
 bounties	tracker	zh-tw	獎金
 bounty confirmed	tracker	zh-tw	獎金確認了
+bounty confirmed.	tracker	zh-tw	獎金確認了。
 bounty deleted	tracker	zh-tw	獎金刪除了
+bounty deleted.	tracker	zh-tw	獎金刪除了。
 bounty set	tracker	zh-tw	獎金設定
 canned response	tracker	zh-tw	制式回應
 canned responses	tracker	zh-tw	制式回應
 categories, versions, canned responses	tracker	zh-tw	類別、版本、制式回應
 check all	tracker	zh-tw	全選
+choose a project from the drop-down list	tracker	zh-tw	選擇一個專案
 close pending	tracker	zh-tw	關閉等待的
 closed	tracker	zh-tw	關閉的
 comment by %1 at %2:	tracker	zh-tw	%1 在 %2 提出意見：
@@ -45,6 +53,7 @@ date opened	tracker	zh-tw	開啟日期
 delete this bounty	tracker	zh-tw	刪除這個獎金
 delete this canned response	tracker	zh-tw	刪除這個制式回應
 delete this category	tracker	zh-tw	刪除這個類別
+delete this entry	tracker	zh-tw	刪除這筆資料
 delete this status	tracker	zh-tw	刪除這個狀態
 delete this tracker including all it's items and categories	tracker	zh-tw	刪除這個服務台，包含其中的所有項目與類別
 delete this version	tracker	zh-tw	刪除這個版本
@@ -90,18 +99,23 @@ pending items never get close automatic.	tracker	zh-tw	等待中的項目永遠�
 pending items will be closed automatic after %1 days without response.	tracker	zh-tw	等待中的項目在 %1 天後如果沒有回應就會自動關閉。
 permission denied !!!	tracker	zh-tw	沒有權限！
 postponed	tracker	zh-tw	延期
+project selection	tracker	zh-tw	選擇專案
+projects	tracker	zh-tw	專案
 receive notifications about assigned tracker-items	tracker	zh-tw	在被指派服務台項目時發出通知
 receive notifications about created tracker-items	tracker	zh-tw	在服務台項目建立時發出通知
 receive notifications in html	tracker	zh-tw	接收 html 格式通知
 rejected	tracker	zh-tw	拒絕
 remind	tracker	zh-tw	提醒
 resolution	tracker	zh-tw	決議
+select tracker queue	tracker	zh-tw	選擇服務需求佇列
 sender address	tracker	zh-tw	寄件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh-tw	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
 set an own bounty (in %s)	tracker	zh-tw	設定一個自己的獎金（在 %s）
 set bounty	tracker	zh-tw	設定獎金
+should the actions column in the tracker list-view be shown?	tracker	zh-tw	在服務台列表中是否要顯示操作欄位？
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh-tw	如果指派給您的服務台項目更新了，是否要寄送通知給您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh-tw	如果您建立的服務台項目更新了，是否要寄送通知給您？
+show actions in tracker listing	tracker	zh-tw	在服務台列表中顯示操作
 staff	tracker	zh-tw	工作團隊
 state	tracker	zh-tw	狀態
 stati	tracker	zh-tw	狀態
