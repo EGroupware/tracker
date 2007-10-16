@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.admin.cats" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.admin.cats" template="" lang="" group="0" version="0.1.004">
 		<grid width="100%" height="400" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -12,7 +12,7 @@
 			<rows>
 				<row class="row" valign="top">
 					<description value="Categories"/>
-					<grid width="100%" height="140" overflow="auto">
+					<grid width="100%" height="140" overflow="auto" id="cats">
 						<columns>
 							<column/>
 							<column/>
@@ -36,7 +36,7 @@
 				</row>
 				<row class="row" valign="top">
 					<description value="Versions"/>
-					<grid width="100%" height="100" overflow="auto">
+					<grid width="100%" height="100" overflow="auto" id="versions">
 						<columns>
 							<column/>
 							<column width="5%"/>
@@ -54,8 +54,27 @@
 					</grid>
 				</row>
 				<row class="row" valign="top">
+					<description value="Status"/>
+					<grid width="100%" height="100" overflow="auto" id="statis">
+						<columns>
+							<column/>
+							<column width="5%"/>
+						</columns>
+						<rows>
+							<row class="th">
+								<description value="Name"/>
+								<description value="Actions"/>
+							</row>
+							<row class="row">
+								<textbox size="80" maxlength="150" blur="--&gt; enter new name" id="${row}[name]"/>
+								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" statustext="Delete this status" onclick="return confirm('Delete this status');"/>
+							</row>
+						</rows>
+					</grid>
+				</row>
+				<row class="row" valign="top">
 					<description value="Canned responses"/>
-					<grid width="100%" height="140" overflow="auto">
+					<grid width="100%" id="responses">
 						<columns>
 							<column/>
 							<column/>
@@ -71,6 +90,28 @@
 								<textbox size="30" id="${row}[name]" blur="--&gt; enter new name"/>
 								<textbox multiline="true" rows="3" cols="50" id="${row}[description]"/>
 								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this canned response');" statustext="Delete this canned response"/>
+							</row>
+						</rows>
+					</grid>
+				</row>
+				<row class="row" valign="top" disabled="!@allow_defaultproject">
+					<description value="Assign to project"/>
+					<grid width="100%" height="90" overflow="auto" id="projects">
+						<columns>
+							<column/>
+							<column/>
+							<column/>
+						</columns>
+						<rows>
+							<row class="th">
+								<description value="Name"/>
+								<description value="Project selection"/>
+								<description value="Actions"/>
+							</row>
+							<row class="row" valign="top">
+								<textbox size="40" maxlength="40" id="${row}[name]" blur="--&gt; enter new name"/>
+								<projectmanager-select options="--&gt; choose a project from the drop-down list" no_lang="1" id="${row}[projectlist]"/>
+								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this entry');" statustext="Delete this entry"/>
 							</row>
 						</rows>
 					</grid>
@@ -141,7 +182,7 @@
 				</row>
 				<row class="row" valign="top" disabled="@tracker">
 					<description value="Allow editing by"/>
-					<grid width="100%" height="200" overflow="auto">
+					<grid width="100%" height="200" overflow="auto" id="field_acl">
 						<columns>
 							<column/>
 							<column/>
@@ -196,10 +237,10 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.admin" template="" lang="" group="0" version="0.1.003">
 		<grid width="100%">
 			<columns>
-				<column width="104"/>
+				<column width="1"/>
 				<column/>
 				<column/>
 			</columns>
@@ -210,9 +251,9 @@
 					<description/>
 				</row>
 				<row>
-					<description options=",,,tracker" value="Tracker" class="bold"/>
+					<description options=",,,tracker" value="tracker" class="bold" disabled="true"/>
 					<menulist class="bold">
-						<menupopup options="All" id="tracker" no_lang="1" onchange="1"/>
+						<menupopup options="All" id="tracker" no_lang="1" onchange="1" label="Tracker Queue"/>
 					</menulist>
 					<hbox align="right">
 						<textbox id="add_name" blur="--&gt; enter new name" size="32" maxlength="150"/>
