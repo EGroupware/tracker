@@ -513,8 +513,8 @@ class uitracker extends botracker
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
-			$readonlys["timesheet[$id]"]= !($this->is_admin($row['tr_tracker'])) or ($this->is_technician('tr_tracker'));
-			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician('tr_tracker'));
+			$readonlys["timesheet[$id]"]= !($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker'])));
+			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
 			
 		// set the options for assigned to depending on the tracker
