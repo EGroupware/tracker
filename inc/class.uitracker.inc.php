@@ -463,6 +463,10 @@ class uitracker extends botracker
 			$query['col_filter'][] = 'tr_assigned IS NULL';
 			unset($query['col_filter']['tr_assigned']);
 		}
+		elseif(!$query['col_filter']['tr_assigned'])
+		{
+			unset($query['col_filter']['tr_assigned']);
+		}
 		// save the state of the index page (filters) in the user prefs
 		$state = serialize(array(
 			'filter'     => $query['filter'],	// cat
