@@ -22,6 +22,7 @@ define('TRACKER_EVERYBODY',8);	// everyone incl. anonymous user
 define('TRACKER_ITEM_CREATOR',16);
 define('TRACKER_ITEM_ASSIGNEE',32);
 define('TRACKER_ITEM_NEW',64);
+define('TRACKER_ITEM_GROUP',128);
 /**
  * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
  */
@@ -134,6 +135,12 @@ class botracker extends sotracker
 	 */
 	var $field_acl;
 	/**
+	 * Restricions settings (tracker specific, keys: group, creator)
+	 *
+	 * @var array
+	 */
+	var $restrictions;
+	/**
 	 * Translates field / acl-names to labels
 	 *
 	 * @var array
@@ -153,6 +160,7 @@ class botracker extends sotracker
 		'tr_priority'    => 'Priority',
 		'tr_closed'      => 'Closed',
 		'tr_creator'     => 'Created by',
+		'tr_group'		 => 'Owned by group',
 		// pseudo fields used in edit
 		'link_to'        => 'Attachments & Links',
 		'canned_response' => 'Canned response',
@@ -182,6 +190,7 @@ class botracker extends sotracker
 		'tr_closed'      => 'Cl',
 		'tr_resolution'  => 'Re',
 		'tr_cc'			 => 'Cc',
+		'tr_group'		 => 'Gr',
 /* the following bounty-stati are only for reference
 		'bounty-set'     => 'bo',
 		'bounty-deleted' => 'xb',
@@ -226,7 +235,11 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $config_names = array(
+<<<<<<< .mine
+		'technicians','admins','notification','restrictions','projects',	// tracker specific
+=======
 		'technicians','admins','notification','projects',	// tracker specific
+>>>>>>> .r24608
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
 		'allow_bounties','currency',
 	);
@@ -365,6 +378,11 @@ class botracker extends sotracker
 			$this->data['tr_creator'] = $this->user;
 			$this->data['tr_status'] = TRACKER_STATUS_OPEN;
 			
+			if (!$this->data['tr_group'])
+			{
+				$this->data['tr_group'] = $GLOBALS['egw']->accounts->data['account_primary_group'];
+			}
+
 			if ($this->data['cat_id'] && !$this->data['tr_assigned'])
 			{
 				$this->autoassign();
@@ -441,6 +459,44 @@ class botracker extends sotracker
 		return $err;
 	}
 	
+	/**
+	 * Get a list of all groups
+	 *
+	 * @param boolean $primary=false, when not ACL to change the group, return primary group only on new tickets
+	 * @return array with gid => group-name pairs
+	 */
+	function &get_groups($primary=false)
+	{
+		static $groups;
+		static $primary_group;
+
+		if($primary)
+		{
+			if (isset($primary_group))
+			{
+				return $primary_group;
+			}
+		}
+		else
+		{
+			if(isset($groups))
+			{
+				return $groups;
+			}
+		}
+
+		$groups = array();
+		$primary_group = array();
+		$group_list = $GLOBALS['egw']->accounts->search(array('type' => 'groups'));
+		foreach($group_list as $gid)
+		{
+			$groups[$gid['account_id']] = $gid['account_lid'];
+		}
+		$primary_group[$GLOBALS['egw']->accounts->data['account_primary_group']] = $groups[$GLOBALS['egw']->accounts->data['account_primary_group']];
+
+		return ($primary ? $primary_group : $groups);
+	}
+
 	/**
 	 * Get the staff (technicians or admins) of a tracker
 	 *
@@ -536,6 +592,20 @@ class botracker extends sotracker
 	}
 	
 	/**
+	 * Check if a user (default current user) is staff member for the given tracker
+	 *
+	 * @param int $tracker ID of tracker
+	 * @param int $user=null ID of user, default current user $this->user
+	 * @return boolean
+	 */
+	function is_staff($tracker,$user=null)
+	{
+		if (is_null($user)) $user = $this->user;
+
+		return ($this->is_technician($tracker,$user) || $this->is_admin($tracker,$user));
+	}
+	
+	/**
 	 * Check if current user is anonymous
 	 *
 	 * @return boolean
@@ -566,6 +636,11 @@ class botracker extends sotracker
 		
 		// item creator
 		if (!$check_only_tracker && $needed & TRACKER_ITEM_CREATOR && $this->user == $this->data['tr_creator'])
+		{
+			return true;
+		}
+		// item group
+		if (!$check_only_tracker && $needed & TRACKER_ITEM_GROUP && in_array($this->data['tr_group'],$GLOBALS['egw']->accounts->memberships($this->user,true)))
 		{
 			return true;
 		}
@@ -936,6 +1011,7 @@ class botracker extends sotracker
 			'tr_completion'  => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_priority'    => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_cc'			 => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
+			'tr_group'		 => TRACKER_TECHNICIAN|TRACKER_ADMIN,
 			// set automatic by botracker::save()
 			'tr_id'          => 0,
 			'tr_creator'     => 0,

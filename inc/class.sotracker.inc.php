@@ -171,6 +171,67 @@ class sotracker extends so_sql
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
 			if (strpos($order_by,'votes') === false) $order_by .= ($order_by ? ',' : '').'votes DESC';
 		}
+
+		// Check for Tracker restrictions, OvE, 20071012
+		if ($filter['tr_tracker'])
+		{
+			// Single tracker
+			if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'])))
+			{
+				$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))'; 
+			}
+			if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
+			{
+				$filter[] = '(tr_creator = ' . $this->user . ')'; 
+			} 
+		}
+		else
+		{
+			// All trackers
+			$group_restrictions = array(); 
+			$creator_restrictions = array();
+			$all_restricions = array();
+			$restrict = array();
+			foreach($this->restrictions as $tracker => $restrictions)
+			{
+				if($tracker == 0)
+				{
+					continue; // Not implemented for 'all trackers'				
+				}
+				if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker)))
+				{
+					if ($restrictions['group'])
+					{
+						array_push($group_restrictions, $tracker);
+						array_push($all_restricions, $tracker);
+					}
+					if ($restrictions['creator'])
+					{
+						array_push($creator_restrictions, $tracker);
+						array_push($all_restricions, $tracker);
+					}
+				}
+			}
+	
+			if (!empty($group_restrictions))
+			{
+				$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';				
+			}
+			if (!empty($creator_restrictions))
+			{
+				$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND tr_creator = ' . $this->user . ')';
+			}
+			if (!empty($all_restricions))
+			{
+				$restrict[] = '(tr_tracker NOT IN (' . implode(',', $all_restricions) . '))';
+			}
+			if (!empty($restrict))
+			{
+				$filter[] = '(' . implode(' OR ', $restrict) . ')';
+			}
+		} 
+		//$this->debug = 4;
+
 		// private ACL: private items are only visible for create, assiged or tracker admins
 		if ($this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
 		{

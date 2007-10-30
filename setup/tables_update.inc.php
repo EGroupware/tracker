@@ -145,4 +145,45 @@
     {
          return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4';
     }
+
+
+	$test[] = '1.4';
+	function tracker_upgrade1_4()
+	{
+		/* done by RefreshTable() anyway
+		$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_group',array(
+			'type' => 'int',
+			'precision' => '4'
+		));*/
+		$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker',array(
+			'fd' => array(
+				'tr_id' => array('type' => 'auto','nullable' => False),
+				'tr_summary' => array('type' => 'varchar','precision' => '80','nullable' => False),
+				'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False),
+				'cat_id' => array('type' => 'int','precision' => '4'),
+				'tr_version' => array('type' => 'int','precision' => '4'),
+				'tr_status' => array('type' => 'int','precision' => '4','default' => '-100'),
+				'tr_description' => array('type' => 'text'),
+				'tr_assigned' => array('type' => 'int','precision' => '4'),
+				'tr_private' => array('type' => 'int','precision' => '2','default' => '0'),
+				'tr_budget' => array('type' => 'decimal','precision' => '20','scale' => '2'),
+				'tr_completion' => array('type' => 'int','precision' => '2','default' => '0'),
+				'tr_creator' => array('type' => 'int','precision' => '4','nullable' => False),
+				'tr_created' => array('type' => 'int','precision' => '8','nullable' => False),
+				'tr_modifier' => array('type' => 'int','precision' => '4'),
+				'tr_modified' => array('type' => 'int','precision' => '8'),
+				'tr_closed' => array('type' => 'int','precision' => '8'),
+				'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
+				'tr_resolution' => array('type' => 'char','precision' => '1','default' => ''),
+				'tr_cc' => array('type' => 'text'),
+				'tr_group' => array('type' => 'int','precision' => '4')
+			),
+			'pk' => array('tr_id'),
+			'fk' => array(),
+			'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_assigned','tr_group',array('cat_id','tr_status','tr_assigned')),
+			'uc' => array()
+		));
+		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_group=(select account_primary_group from egw_accounts where egw_accounts.account_id=egw_tracker.tr_creator)",__LINE__,__FILE__);
+		return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.001';
+	}
 ?>

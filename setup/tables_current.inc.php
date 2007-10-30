@@ -33,11 +33,12 @@
 				'tr_closed' => array('type' => 'int','precision' => '8'),
 				'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
 				'tr_resolution' => array('type' => 'char','precision' => '1','default' => ''),
-				'tr_cc'       => array('type' => 'text'),
+				'tr_cc' => array('type' => 'text'),
+				'tr_group' => array('type' => 'int','precision' => '11')
 			),
 			'pk' => array('tr_id'),
 			'fk' => array(),
-			'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_assigned',array('cat_id','tr_status','tr_assigned')),
+			'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_assigned','tr_group',array('cat_id','tr_status','tr_assigned')),
 			'uc' => array()
 		),
 		'egw_tracker_replies' => array(

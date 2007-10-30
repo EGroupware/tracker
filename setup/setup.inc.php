@@ -12,7 +12,7 @@
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '1.4';
+$setup_info['tracker']['version']   = '1.4.001';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties');
 $setup_info['tracker']['enable']    = 1;
