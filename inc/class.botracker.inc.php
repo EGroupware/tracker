@@ -235,11 +235,7 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $config_names = array(
-<<<<<<< .mine
-		'technicians','admins','notification','restrictions','projects',	// tracker specific
-=======
 		'technicians','admins','notification','projects',	// tracker specific
->>>>>>> .r24608
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
 		'allow_bounties','currency',
 	);

@@ -577,20 +577,11 @@ class uitracker extends botracker
 			$query_in['options-selectcols']['bounties'] = false;
 		}
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
-<<<<<<< .mine
 		// enable the Actions (timesheet)  column
 		$rows['allow_actions'] = isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_actions'];
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
-=======
-		// enable the Actions (timesheet)  column
-		$rows['allow_actions'] = isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_actions'];
-		// enable tracker column if all trackers are shown
-		if ($tracker) $rows['no_tr_tracker'] = true;
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
-
->>>>>>> .r24608
 		return $total;
 	}
 
@@ -966,13 +957,8 @@ class uitracker extends botracker
 			'restrictions' => $this->restrictions[$tracker],
 			$tabs => $content[$tabs],
 		);
-<<<<<<< .mine
 
 		foreach(array_diff($this->config_names,array('admins','technicians','notification','restrictions')) as $name)
-=======
-
-		foreach(array_diff($this->config_names,array('admins','technicians','notification')) as $name)
->>>>>>> .r24608
 		{
 			$content[$name] = $this->$name;
 		}
