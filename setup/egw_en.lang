@@ -1,4 +1,10 @@
 %1 entries updated.	tracker	en	%1 entries updated.
+%1 tickets have been converted	tracker	en	%1 tickets have been converted
+&#9830; not closed	tracker	en	&#9830; Not closed
+&#9830; own not closed	tracker	en	&#9830; Own not closed
+&#9830; own without reply not closed	tracker	en	&#9830; Own without reply not closed
+&#9830; without 30 days reply not closed	tracker	en	&#9830; Without 30 days reply not closed
+&#9830; without reply not closed	tracker	en	&#9830; Without reply not closed
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
@@ -10,6 +16,7 @@ add comment	tracker	en	Add comment
 add timesheet entry	tracker	en	Add timesheet entry
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
+all tickets are already converted to tracker	tracker	en	all tickets are already converted to Tracker
 allow bounties	tracker	en	Allow bounties
 allow default projects for tracker	tracker	en	Allow default projects for tracker
 allow editing by	tracker	en	Allow editing by
@@ -46,6 +53,9 @@ configuration, acl, notifications	tracker	en	Configuration, ACL, Notifications
 confirm that you pay the specified bounty to implement or fix the issue	tracker	en	Confirm that you pay the specified bounty to implement or fix the issue
 confirm the receipt of money for this bounty	tracker	en	Confirm the receipt of money for this bounty
 confirmed	tracker	en	Confirmed
+convert all closed tickets	tracker	en	convert all closed tickets
+convert all open tickets	tracker	en	convert all open tickets
+converted count	tracker	en	converted count
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
 created	tracker	en	Created
@@ -77,6 +87,7 @@ history	tracker	en	History
 id	tracker	en	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	en	If this item is important for you, please consider to set a bounty for it!
 if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
+import tts tickets	tracker	en	Import TTS tickets
 invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
 item creator	tracker	en	Item creator
@@ -86,8 +97,10 @@ later	tracker	en	Later
 list of coma separated email address	tracker	en	List of coma separated email address
 new %1	tracker	en	New %1
 new items	tracker	en	New items
+new ticket submitted by %1 at %2	tracker	en	New ticket submitted by %1 at %2
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
 no change	tracker	en	No change
+no trackers found, aborting	tracker	en	No Trackers found, aborting
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	Noone
 notification	tracker	en	Notification
@@ -108,6 +121,7 @@ rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 resolution	tracker	en	Resolution
 select tracker queue	tracker	en	select tracker queue
+select which categories should be used in tracker for the tts categories	tracker	en	select which categories should be used in Tracker for the TTS categories
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
@@ -127,6 +141,8 @@ the bounty will not be shown, until the money is received.	tracker	en	The bounty
 the canned response will be prefix the text you type.	tracker	en	The canned response will be prefix the text you type.
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
+ticket count	tracker	en	ticket count
+ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
 tracker	common	en	Tracking System
 tracker added	tracker	en	Tracker queue added
 tracker admins	tracker	en	Tracker admins
@@ -148,6 +164,7 @@ wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
 yes, display groups first	tracker	en	Yes, display groups first
 yes, display users first	tracker	en	Yes, display users first
+yes, with larger fontsize	tracker	en	Yes, with larger fontsize
 you can respond by visiting:	tracker	en	You can respond by visiting:
 you need to enter a name	tracker	en	You need to enter a name
 you need to login to vote!	tracker	en	You need to login to vote!

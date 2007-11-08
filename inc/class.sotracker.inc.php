@@ -192,6 +192,7 @@ class sotracker extends so_sql
 			$creator_restrictions = array();
 			$all_restricions = array();
 			$restrict = array();
+			if (!$this->restrictions) $this->restrictions = array();
 			foreach($this->restrictions as $tracker => $restrictions)
 			{
 				if($tracker == 0)
@@ -237,6 +238,76 @@ class sotracker extends so_sql
 		{
 			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
 		}
+       // Handle the special filters
+       switch ($filter['tr_status'])
+       {
+               case 'not-closed':
+                       unset($filter['tr_status']);
+                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+                       break;
+               case 'own-not-closed':
+                       unset($filter['tr_status']);
+                       unset($filter['tr_creator']);
+                       $filter[] = "(tr_creator=".$this->user.")";
+                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+                       break;
+               case 'without-reply-not-closed':
+                       unset($filter['tr_status']);
+                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+                       {
+                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id) = 0)";
+                       }
+                       else    // MySQL < 4.1
+                       {
+                               // Not allready join comments tables
+                               if (!$criteria and !$this->db->capabilities['sub_queries'])
+                               {
+                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
+                               }
+                               $extra_cols[] = 'COUNT(reply_id) AS replies';
+                               $filter[] = "(replies = 0)";
+                       }
+                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+                       break;
+               case 'own-without-reply-not-closed':
+                       unset($filter['tr_status']);
+                       unset($filter['tr_creator']);
+                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+                       {
+                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id) = 0)";
+                       }
+                       else    // MySQL < 4.1
+                       {
+                               // Not allready join comments tables
+                               if (!$criteria and !$this->db->capabilities['sub_queries'])
+                               {
+                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
+                               }
+                               $extra_cols[] = 'COUNT(reply_id) AS replies';
+                               $filter[] = "(replies = 0)";
+                       }
+                       $filter[] = "(tr_creator=".$this->user.")";
+                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+                       break;
+               case 'without-30-days-reply-not-closed':
+                       unset($filter['tr_status']);
+                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+                       {
+                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id and reply_created > ".mktime(0, 0, 0, date("m")-1, date("d"),date("Y")).") = 0)";
+                       }
+                       else    // MySQL < 4.1
+                       {
+                               // Not allready join comments tables
+                               if (!$criteria and !$this->db->capabilities['sub_queries'])
+                               {
+                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
+                               }
+                               $extra_cols[] = 'COUNT(reply_id) AS replies';
+                               $filter[] = "(replies = 0)";
+                       }
+                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+                       break;
+       }		
 		return parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 	}
 	

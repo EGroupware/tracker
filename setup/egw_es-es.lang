@@ -1,4 +1,10 @@
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
+%1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
+&#9830; not closed	tracker	es-es	&#9830; No cerrado
+&#9830; own not closed	tracker	es-es	&#9830; Propio no cerrado
+&#9830; own without reply not closed	tracker	es-es	&#9830; Propio sin contestación no cerrado
+&#9830; without 30 days reply not closed	tracker	es-es	&#9830; Sin contestación en 30 días no cerrado
+&#9830; without reply not closed	tracker	es-es	&#9830; Sin contestación no cerrado
 --> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable
 --> enter new name	tracker	es-es	--> introduzca un nombre nuevo
 1 - lowest	tracker	es-es	1 - la más baja
@@ -10,6 +16,7 @@ add comment	tracker	es-es	Añadir comentario
 add timesheet entry	tracker	es-es	Añadir entrada de la hoja de tiempos
 after how many days a not replied item should be marked overdue?	tracker	es-es	¿Después de cuántos días un elemento sin respuesta debe quedar marcado como obsoleto?
 after how many days pending items should be closed automatic	tracker	es-es	Después de cuantos días los elementos pendientes deben cerrarse automáticamente
+all tickets are already converted to tracker	tracker	es-es	Todos los tickets se han convertido al sistema de seguimiento
 allow bounties	tracker	es-es	Permitir recompensas
 allow default projects for tracker	tracker	es-es	Permitir proyectos predeterminados para el seguimiento
 allow editing by	tracker	es-es	Permitir edición por
@@ -46,6 +53,9 @@ configuration, acl, notifications	tracker	es-es	Configuración, ACL, notificacion
 confirm that you pay the specified bounty to implement or fix the issue	tracker	es-es	Confirme que paga la recompensa especificada para implementar or corregir el problema
 confirm the receipt of money for this bounty	tracker	es-es	Confirme la recepción del dinero para esta recompensa
 confirmed	tracker	es-es	Confirmado
+convert all closed tickets	tracker	es-es	Convertir todos los tickets
+convert all open tickets	tracker	es-es	Convertir todos los tickets abiertos
+converted count	tracker	es-es	Cuenta de convertidos
 copy to	tracker	es-es	Copiar a
 create new links	tracker	es-es	Crear enlaces nuevos
 created	tracker	es-es	Creado
@@ -77,6 +87,7 @@ history	tracker	es-es	Historial
 id	tracker	es-es	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	es-es	Si este elemento es importante para usted, por favor, considere establecer una recompensa.
 if this item is important for you, please vote for it.	tracker	es-es	Si este elemento es importante para usted, por favor, vote por él.
+import tts tickets	tracker	es-es	Importar tickets de TTS
 invalid	tracker	es-es	No es válido
 item assignee	tracker	es-es	Elemento asignado a
 item creator	tracker	es-es	Elemento creado por
@@ -86,8 +97,10 @@ later	tracker	es-es	Más tarde
 list of coma separated email address	tracker	es-es	Lista de direcciones de correo electrónico separadas por comas
 new %1	tracker	es-es	Nuevo %1
 new items	tracker	es-es	Nuevos elementos
-new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de informe enviado por %1 a las %2
+new ticket submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
+new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
 no change	tracker	es-es	Sin cambios
+no trackers found, aborting	tracker	es-es	No se ha encontrado sistemas de seguimiento, abortando
 non-anonymous users	tracker	es-es	Usuarios no anónimos
 noone	tracker	es-es	Nadie
 notification	tracker	es-es	Notificación
@@ -108,6 +121,7 @@ rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 resolution	tracker	es-es	Resolución
 select tracker queue	tracker	es-es	Seleccionar cola de seguimiento
+select which categories should be used in tracker for the tts categories	tracker	es-es	Seleccionar que categorías se deberían de usar en el sistema de seguimiento para las categorías de TTS
 sender address	tracker	es-es	Dirección del remitente
 sender address for all notifications, eg. noreply@egroupware.org	tracker	es-es	Dirección del remitente para todas las notificaciones, p. ej. sinrespuesta@ejemplo.com
 set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
@@ -127,6 +141,8 @@ the bounty will not be shown, until the money is received.	tracker	es-es	La reco
 the canned response will be prefix the text you type.	tracker	es-es	La respuesta automatizada precederá al texto que escriba
 this module displays information from the tracker.	tracker	es-es	Este módulo muestra información de los informes
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	es-es	El sistema cerró este elemento automáticamente. Anteriormente estaba en estado Pendiente, y el remitente original no respondió durante %1 días.
+ticket count	tracker	es-es	Cuenta de tickets
+ticket modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
 tracker	common	es-es	Sistema de seguimiento
 tracker added	tracker	es-es	Se ha añadido una nueva cola de seguimiento
 tracker admins	tracker	es-es	Administradores de la cola
@@ -148,6 +164,7 @@ wont fix	tracker	es-es	No se va a solucionar
 works for me	tracker	es-es	A mí me funciona
 yes, display groups first	tracker	es-es	Sí, mostrar los grupos primero
 yes, display users first	tracker	es-es	Sí, mostrar los usuarios primero
+yes, with larger fontsize	tracker	es-es	Sí, con fuentes grandes
 you can respond by visiting:	tracker	es-es	Puede responder visitando:
 you need to enter a name	tracker	es-es	Necesita introducir un nombre
 you need to login to vote!	tracker	es-es	¡Necesita iniciar la sesión para votar!

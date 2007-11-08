@@ -94,6 +94,14 @@ class tr_admin_prefs_sidebox_hooks
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
+		$GLOBALS['settings']['notify_own_modification'] = array(
+			'type'   => 'check',
+			'label'  => 'Recieve notifications about own changes in tracker-items',
+			'name'   => 'notify_own_modification',
+			'help'   => 'Show the Tracker send you notification mails, in tracker items that you updates?',
+			'xmlrpc' => True,
+			'admin'  => False,
+		);
 		$GLOBALS['settings']['notify_html'] = array(
 			'type'   => 'select',
 			'label'  => 'Receive notifications in html',
@@ -123,6 +131,14 @@ class tr_admin_prefs_sidebox_hooks
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
+		$GLOBALS['settings']['show_sum_timesheet'] = array(
+			'type'   => 'check',
+			'label'  => 'Show the acumulated times of timesheet entries',
+			'name'   => 'show_sum_timesheet',
+			'help'   => 'Show a new column that calculated the acumulated times of timesheet entries.',
+			'xmlrpc' => True,
+			'admin'  => False,
+		);
 		return true;	// otherwise prefs say it cant find the file ;-)
 	}
 	
@@ -147,6 +163,8 @@ class tr_admin_prefs_sidebox_hooks
 			'notify_html'	  => 1,
 			'show_actions' => 1,
 			'allow_defaultproject' => 1,
+			'show_sum_timesheet' => 0,
+			'notify_own_modification' => 0,
 		);
 		foreach($defaults as $var => $default)
 		{

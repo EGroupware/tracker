@@ -257,6 +257,16 @@ class botracker extends sotracker
 	 * @var string
 	 */
 	var $currency = 'Euro';
+	/**
+	 * Filters to manage advanced logical statis
+	 */
+	var $filters = array(
+		'not-closed'						=> '&#9830; Not closed',
+		'own-not-closed'					=> '&#9830; Own not closed',
+		'without-reply-not-closed' 			=> '&#9830; Without reply not closed',
+		'own-without-reply-not-closed' 		=> '&#9830; Own without reply not closed',
+		'without-30-days-reply-not-closed'	=> '&#9830; Without 30 days reply not closed',
+	);
 
 	/**
 	 * Constructor
@@ -446,6 +456,10 @@ class botracker extends sotracker
 			{
 				require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_tracking.inc.php');
 				$this->tracking = new tracker_tracking($this);
+				if($this->prefs['notify_own_modification'])
+				{
+					$this->tracking->notify_current_user = true;
+				}
 			}
 			if (!$this->tracking->track($this->data,$old,$this->user))
 			{

@@ -34,13 +34,19 @@ class uitracker extends botracker
 	 * @var string
 	 */
 	var $mangle_at = ' -at- ';
-
 	/**
 	 * reference to the preferences of the user
 	 *
 	 * @var array
 	 */
 	var $prefs;
+
+	/**
+	 * allowed units and hours per day, can be overwritten by the projectmanager configuration, default all units, 8h
+	 * 
+	 * @var string
+	 */
+	var $duration_format = ',';	// comma is necessary!
 
 	/**
 	 * Constructor
@@ -51,6 +57,15 @@ class uitracker extends botracker
 	{
 		$this->botracker();
 		$this->prefs =& $GLOBALS['egw_info']['user']['preferences']['tracker'];
+
+		// read the duration format from project-manager
+		if ($GLOBALS['egw_info']['apps']['projectmanager'])
+		{
+			$pm_config =& CreateObject('phpgwapi.config','projectmanager');
+			$pm_config->read_repository();
+			$this->duration_format = str_replace(',','',$pm_config->config_data['duration_units']).','.$pm_config->config_data['hours_per_workday'];
+			unset($pm_config);
+		}
 	}
 	
 	/**
@@ -528,37 +543,47 @@ class uitracker extends botracker
 		{
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
-			// prepare links, so timesheet can use them for linking 
-			unset($links);
-			if (($links = $GLOBALS['egw']->link->get_links('tracker',$row['tr_id'])) &&
-				isset($GLOBALS['egw_info']['user']['apps']['timesheet']))		
+			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
 			{
-				// loop through all links of the entries
-				foreach ($links as $link)
+				unset($links);
+				if (($links = $GLOBALS['egw']->link->get_links('tracker',$row['tr_id'])) &&
+					isset($GLOBALS['egw_info']['user']['apps']['timesheet']))		
 				{
-					if ($link['app'] == 'projectmanager')
+					// loop through all links of the entries
+					$timesheets = array();
+					foreach ($links as $link)
 					{
-						//$info['pm_id'] = $link['id'];
+						if ($link['app'] == 'projectmanager')
+						{
+							//$info['pm_id'] = $link['id'];
+						}
+						if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
+						if ($link['app'] != 'timesheet' && $link['app'] != $this->link->vfs_appname)
+						{
+							$rows[$n]['extra_links'] .= '&link_app[]='.$link['app'].'&link_id[]='.$link['id'];
+						}
 					}
-					if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
-					if ($link['app'] != 'timesheet' && $link['app'] != $this->link->vfs_appname)
+					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $timesheets && $this->prefs['show_sum_timesheet'])
 					{
-						$rows[$n]['extra_links'] .= '&link_app[]='.$link['app'].'&link_id[]='.$link['id'];
-					}
+						$sum = ExecMethod('timesheet.botimesheet.sum',$timesheets);
+						$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
+					}				
 				}
-			} 
+			}
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
 			$readonlys["timesheet[$id]"]= !($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker'])));
 			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
-			
+		
+		$rows['duration_format'] = ','.$this->duration_format.',,1';	
+		
 		// set the options for assigned to depending on the tracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
 		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
 		$rows['sel_options']['filter2'] = array(lang('All'))+$this->get_tracker_labels('version',$tracker);
-		$rows['sel_options']['tr_status'] = $this->stati+$this->get_tracker_labels('stati',$tracker);
+		$rows['sel_options']['tr_status'] = $this->filters+$this->stati+$this->get_tracker_labels('stati',$tracker);
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
@@ -579,6 +604,7 @@ class uitracker extends botracker
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 		// enable the Actions (timesheet)  column
 		$rows['allow_actions'] = isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_actions'];
+		$rows['allow_sum_timesheet'] =  isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'];
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
@@ -660,7 +686,7 @@ class uitracker extends botracker
 			}
 		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
-		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
+		$statis = $this->filters + $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'tr_priority' => &$this->priorities,
@@ -690,7 +716,7 @@ class uitracker extends botracker
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),
 				'col_filter'     => array(
-					'tr_status'  => TRACKER_STATUS_OPEN,	// default filter: open
+					'tr_status'  => 'not-closed',	// default filter: not closed
 				),
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
