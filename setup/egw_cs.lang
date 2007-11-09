@@ -1,143 +1,158 @@
-%1 entries updated.	tracker	cs	%1 polo¾ek zaktualizováno.
---> enter new name	tracker	cs	--> zadejte nové jméno
-1 - lowest	tracker	cs	1 - nejni¾¹í
-5 - medium	tracker	cs	5 - støední
-9 - highest	tracker	cs	9 - nejvy¹¹í
-accepted	tracker	cs	Pøijato
+%1 entries updated.	tracker	cs	%1 poloÅ¾ek zaktualizovÃ¡no.
+--> choose a project from the drop-down list	tracker	cs	--> vyberte projekt z rozevÃ­racÃ­ho seznamu
+--> enter new name	tracker	cs	--> zadejte novÃ© jmÃ©no
+1 - lowest	tracker	cs	1 - nejniÅ¾Å¡Ã­
+5 - medium	tracker	cs	5 - stÅ™ednÃ­
+9 - highest	tracker	cs	9 - nejvyÅ¡Å¡Ã­
+accepted	tracker	cs	PÅ™ijato
 actions	tracker	cs	Akce
-add comment	tracker	cs	Pøidat komentáø
-after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se má nezodpovìzená polo¾ka oznaèit jako zme¹kaná?
-after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech mají bıt polo¾ky ve stavu "vyøizuje se" automaticky uzavøeny
-allow bounties	tracker	cs	Povolit odmìny
-allow editing by	tracker	cs	Povolit editaci (kım)
-allow to assign groups to tracker items	tracker	cs	Povolit pøiøazení skupin polo¾kám ve sledovacím systému
-allow voting	tracker	cs	Povolit hlasování
-allow voting on tracker items, show and sort after the votes	tracker	cs	Povolit hlasování o polo¾kách ve sledovacím systému, zobrazit je a setøídit podle hlasù
-amount	tracker	cs	Mno¾ství
-assigned to	tracker	cs	Pøidìleno (komu)
-assigning groups	tracker	cs	Pøidìlování skupin
-attachments & links	tracker	cs	Pøílohy a odkazy
-autoassign to	tracker	cs	Automaticky pøidìlit (komu)
-bounties	tracker	cs	Odmìny
-bounty confirmed	tracker	cs	Odmìna potvrzena
-bounty deleted	tracker	cs	Odmìna smazána
-bounty set	tracker	cs	Odmìna vypsána
-canned response	tracker	cs	Pøedpøipravená odpovìï
-canned responses	tracker	cs	Pøedpøipravené odpovìdi
-categories, versions, canned responses	tracker	cs	Kategorie, verze, pøedpøipravené odpovìdi
-check all	tracker	cs	Vybrat v¹e
-close pending	tracker	cs	Uzavøít vyøizované
-closed	tracker	cs	Uzavøenı
+add comment	tracker	cs	PÅ™idat komentÃ¡Å™
+add timesheet entry	tracker	cs	PÅ™idat zÃ¡znam do harmonogramu
+after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se mÃ¡ nezodpovÄ›zenÃ¡ poloÅ¾ka oznaÄit jako po termÃ­nu?
+after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech majÃ­ bÃ½t poloÅ¾ky ve stavu "vyÅ™izuje se" automaticky uzavÅ™eny
+allow bounties	tracker	cs	Povolit odmÄ›ny
+allow default projects for tracker	tracker	cs	Povolit vÃ½chozÃ­ projekty pro sledovacÃ­ systÃ©m
+allow editing by	tracker	cs	Povolit editaci (kÃ½m)
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	cs	Povolit pÅ™eddefinovÃ¡nÃ­ projektÅ¯, kterÃ© budou pÅ™idÄ›leny novÃ½m poloÅ¾kÃ¡m sledovacÃ­ho systÃ©mu.
+allow to assign groups to tracker items	tracker	cs	Povolit pÅ™iÅ™azenÃ­ skupin poloÅ¾kÃ¡m ve sledovacÃ­m systÃ©mu
+allow voting	tracker	cs	Povolit hlasovÃ¡nÃ­
+allow voting on tracker items, show and sort after the votes	tracker	cs	Povolit hlasovÃ¡nÃ­ o poloÅ¾kÃ¡ch ve sledovacÃ­m systÃ©mu, zobrazit je a setÅ™Ã­dit podle hlasÅ¯
+amount	tracker	cs	MnoÅ¾stvÃ­
+assign to project	tracker	cs	PÅ™idÄ›lit projektu
+assigned to	tracker	cs	PÅ™idÄ›leno (komu)
+assigning groups	tracker	cs	PÅ™idÄ›lovÃ¡nÃ­ skupin
+attachments & links	tracker	cs	PÅ™Ã­lohy a odkazy
+autoassign to	tracker	cs	Automaticky pÅ™idÄ›lit (komu)
+bounties	tracker	cs	OdmÄ›ny
+bounty confirmed	tracker	cs	OdmÄ›na potvrzena
+bounty confirmed.	tracker	cs	OdmÄ›na potvrzena.
+bounty deleted	tracker	cs	OdmÄ›na smazÃ¡na
+bounty deleted.	tracker	cs	OdmÄ›na smazÃ¡na.
+bounty set	tracker	cs	OdmÄ›na vypsÃ¡na
+canned response	tracker	cs	PÅ™edpÅ™ipravenÃ¡ odpovÄ›Ä
+canned responses	tracker	cs	PÅ™edpÅ™ipravenÃ© odpovÄ›di
+categories, versions, canned responses	tracker	cs	Kategorie, verze, pÅ™edpÅ™ipravenÃ© odpovÄ›di
+check all	tracker	cs	Vybrat vÅ¡e
+choose a project from the drop-down list	tracker	cs	vyberte projekt z rozevÃ­racÃ­ho seznamu
+close pending	tracker	cs	UzavÅ™Ã­t vyÅ™izovanÃ©
+closed	tracker	cs	UzavÅ™enÃ½
 comment by %1 at %2:	tracker	cs	Komentoval(a) %1 v %2:
-comments	tracker	cs	Komentáøe
+comments	tracker	cs	KomentÃ¡Å™e
 completed	tracker	cs	Hotovo
 configuration	tracker	cs	Konfigurace
-configuration for all trackers	tracker	cs	Konfigurace pro v¹echny fronty Sledovacího systému
-configuration updated.	tracker	cs	Konfigurace zaktualizována.
-configuration, acl, notifications	tracker	cs	Konfigurace, ACL, Upozornìní
-confirm that you pay the specified bounty to implement or fix the issue	tracker	cs	Potvrïte zaplacení uvedené odmìny za implementaci nebo opravu této polo¾ky
-confirm the receipt of money for this bounty	tracker	cs	Potvrïte pøijetí penìz z této odmìny
+configuration for all trackers	tracker	cs	Konfigurace pro vÅ¡echny fronty SledovacÃ­ho systÃ©mu
+configuration updated.	tracker	cs	Konfigurace zaktualizovÃ¡na.
+configuration, acl, notifications	tracker	cs	Konfigurace, ACL, UpozornÄ›nÃ­
+confirm that you pay the specified bounty to implement or fix the issue	tracker	cs	PotvrÄte zaplacenÃ­ uvedenÃ© odmÄ›ny za implementaci nebo opravu tÃ©to poloÅ¾ky
+confirm the receipt of money for this bounty	tracker	cs	PotvrÄte pÅ™ijetÃ­ penÄ›z z tÃ©to odmÄ›ny
 confirmed	tracker	cs	Potvrzeno
-copy to	tracker	cs	Kopírovat do
-create new links	tracker	cs	Vytvoøit nové odkazy
-created	tracker	cs	Vytvoøeno
-date opened	tracker	cs	Datum otevøení
-delete this bounty	tracker	cs	Smazat tuto odmìnu
-delete this canned response	tracker	cs	Smazat tuto pøedpøipravenou odpovìï
+copy to	tracker	cs	KopÃ­rovat do
+create new links	tracker	cs	VytvoÅ™it novÃ© odkazy
+created	tracker	cs	VytvoÅ™eno
+date opened	tracker	cs	Datum otevÅ™enÃ­
+delete this bounty	tracker	cs	Smazat tuto odmÄ›nu
+delete this canned response	tracker	cs	Smazat tuto pÅ™edpÅ™ipravenou odpovÄ›Ä
 delete this category	tracker	cs	Smazat tuto kategorii
+delete this entry	tracker	cs	Smazat tento zÃ¡znam
 delete this status	tracker	cs	Smazat tento stav
-delete this tracker including all it's items and categories	tracker	cs	Smazat tento sledovací systém vèetnì v¹ech polo¾ek a kategorií
+delete this tracker including all it's items and categories	tracker	cs	Smazat tento sledovacÃ­ systÃ©m vÄetnÄ› vÅ¡ech poloÅ¾ek a kategoriÃ­
 delete this version	tracker	cs	Smazat tuto verzi
-deleted	tracker	cs	Smazáno
-do you want to vote for this item	tracker	cs	Chcete hlasovat pro tuto polo¾ku?
-donator name to show	tracker	cs	Jaké jméno dárce se má zobrazit
-duplicate	tracker	cs	Duplikát
-e-mail address to which a copy of all tracker-notifications should be send	tracker	cs	E-mailová adresa, na kterou mají bıt zasílány kopie v¹ech upozornìní sledovacího systému
-e-mail notifications	tracker	cs	E-mailová upozornìní
+deleted	tracker	cs	SmazÃ¡no
+do you want to vote for this item	tracker	cs	Chcete hlasovat pro tuto poloÅ¾ku?
+donator name to show	tracker	cs	JakÃ© jmÃ©no dÃ¡rce se mÃ¡ zobrazit
+duplicate	tracker	cs	DuplikÃ¡t
+e-mail address to which a copy of all tracker-notifications should be send	tracker	cs	E-mailovÃ¡ adresa, na kterou majÃ­ bÃ½t zasÃ­lÃ¡ny kopie vÅ¡ech upozornÄ›nÃ­ sledovacÃ­ho systÃ©mu
+e-mail notifications	tracker	cs	E-mailovÃ¡ upozornÄ›nÃ­
 edit %1	tracker	cs	Editovat %1
-email address to contact you	tracker	cs	Va¹e kontaktní e-mailová adresa
-entry saved	tracker	cs	Záznam ulo¾en
-error adding the new tracker!	tracker	cs	Chyba pøi pøidávání nového sledovacího systému!
-error saving the entry!!!	tracker	cs	Chyba pøi ukládání záznamu!!!
-everybody	tracker	cs	V¹ichni
-existing links	tracker	cs	Stávající odkazy
-field	tracker	cs	Polo¾ka
-fixed	tracker	cs	Pevnı
+email address to contact you	tracker	cs	VaÅ¡e kontaktnÃ­ e-mailovÃ¡ adresa
+entry saved	tracker	cs	ZÃ¡znam uloÅ¾en
+error adding the new tracker!	tracker	cs	Chyba pÅ™i pÅ™idÃ¡vÃ¡nÃ­ novÃ©ho sledovacÃ­ho systÃ©mu!
+error saving the entry!!!	tracker	cs	Chyba pÅ™i uklÃ¡dÃ¡nÃ­ zÃ¡znamu!!!
+everybody	tracker	cs	VÅ¡ichni
+existing links	tracker	cs	StÃ¡vajÃ­cÃ­ odkazy
+field	tracker	cs	PoloÅ¾ka
+fixed	tracker	cs	PevnÃ½
 from	tracker	cs	Od
 history	tracker	cs	Historie
 id	tracker	cs	ID
-if this item is important for you, please consider to set a bounty for it!	tracker	cs	Pokud je pro Vás tato polo¾ka dùle¾itá, zva¾te prosím vypsání odmìny za její vyøe¹ení!
-if this item is important for you, please vote for it.	tracker	cs	Pokud je pro Vás tato polo¾ka dùle¾itá, dejte ji prosím svùj hlas.
-invalid	tracker	cs	Neplatnı
-item assignee	tracker	cs	Osoba zodpovìdná za polo¾ku
-item creator	tracker	cs	Tvùrce polo¾ky
+if this item is important for you, please consider to set a bounty for it!	tracker	cs	Pokud je pro VÃ¡s tato poloÅ¾ka dÅ¯leÅ¾itÃ¡, zvaÅ¾te prosÃ­m vypsÃ¡nÃ­ odmÄ›ny za jejÃ­ vyÅ™eÅ¡enÃ­!
+if this item is important for you, please vote for it.	tracker	cs	Pokud je pro VÃ¡s tato poloÅ¾ka dÅ¯leÅ¾itÃ¡, dejte ji prosÃ­m svÅ¯j hlas.
+invalid	tracker	cs	NeplatnÃ½
+item assignee	tracker	cs	Osoba zodpovÄ›dnÃ¡ za poloÅ¾ku
+item creator	tracker	cs	TvÅ¯rce poloÅ¾ky
 language for the copy	tracker	cs	Jazyk kopie
-last modified	tracker	cs	Naposledy zmìnìno
-later	tracker	cs	Pozdìji
-list of coma separated email address	tracker	cs	Seznam e-mailovıch adres oddìlenıch èárkami
-new %1	tracker	cs	Nové %1
-new items	tracker	cs	Nové polo¾ky
-new tracker item submitted by %1 at %2	tracker	cs	Novou polo¾ku ke sledování odeslal %1 v %2
-no change	tracker	cs	Beze zmìny
-non-anonymous users	tracker	cs	Ne-anonymní u¾ivatel
+last modified	tracker	cs	Naposledy zmÄ›nÄ›no
+later	tracker	cs	PozdÄ›ji
+list of coma separated email address	tracker	cs	Seznam e-mailovÃ½ch adres oddÄ›lenÃ½ch ÄÃ¡rkami
+new %1	tracker	cs	NovÃ© %1
+new items	tracker	cs	NovÃ© poloÅ¾ky
+new tracker item submitted by %1 at %2	tracker	cs	Novou poloÅ¾ku ke sledovÃ¡nÃ­ odeslal %1 v %2
+no change	tracker	cs	Beze zmÄ›ny
+non-anonymous users	tracker	cs	Ne-anonymnÃ­ uÅ¾ivatel
 noone	tracker	cs	Nikdo
-notification	tracker	cs	Upozornìní
-open	tracker	cs	Otevøené
-out of date	tracker	cs	Po termínu
-overdue after	tracker	cs	Zme¹kané po
-pending	tracker	cs	Vyøizuje se
-pending items never get close automatic.	tracker	cs	Vyøizované polo¾ky nebudou nikdy automaticky uzavøeny
-pending items will be closed automatic after %1 days without response.	tracker	cs	Vyøizované polo¾ky budou automaticky uzavøeny po %1 dnech bez odpovìdi.
-permission denied !!!	tracker	cs	Pøístup zablokován!!!
-postponed	tracker	cs	Odlo¾ené
-receive notifications about assigned tracker-items	tracker	cs	Pøijímat upozornìní na polo¾ky pøidìlené ve sled. systému
-receive notifications about created tracker-items	tracker	cs	Pøijimat upozornìní na polo¾ky vytvoøené ve sled. systému
-receive notifications in html	tracker	cs	Pøijímat upozornìní v HTML
-rejected	tracker	cs	Odmítnuté
-remind	tracker	cs	Pøipomenout
-resolution	tracker	cs	Øe¹ení
-sender address	tracker	cs	Adresa odesílatele
-sender address for all notifications, eg. noreply@egroupware.org	tracker	cs	Adresa odesílatele pro v¹echna upozornìní, napø. noreply@egroupware.org
-set an own bounty (in %s)	tracker	cs	Vypsat vlastní odmìnu (v %s)
-set bounty	tracker	cs	Vypsat odmìnu
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozornìním, pokud dojde k aktualizaci Vám pøidìlenıch polo¾ek?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozornìním, pokud dojde k aktualizaci Vámi vytvoøenıch polo¾ek?
-staff	tracker	cs	Personál
+notification	tracker	cs	UpozornÄ›nÃ­
+open	tracker	cs	OtevÅ™enÃ©
+out of date	tracker	cs	Po termÃ­nu
+overdue after	tracker	cs	Po termÃ­nu k
+pending	tracker	cs	VyÅ™izuje se
+pending items never get close automatic.	tracker	cs	VyÅ™izovanÃ© poloÅ¾ky nebudou nikdy automaticky uzavÅ™eny
+pending items will be closed automatic after %1 days without response.	tracker	cs	VyÅ™izovanÃ© poloÅ¾ky budou automaticky uzavÅ™eny po %1 dnech bez odpovÄ›di.
+permission denied !!!	tracker	cs	PÅ™Ã­stup zablokovÃ¡n!!!
+postponed	tracker	cs	OdloÅ¾enÃ©
+project selection	tracker	cs	VÃ½bÄ›r projektu
+projects	tracker	cs	Projekty
+receive notifications about assigned tracker-items	tracker	cs	PÅ™ijÃ­mat upozornÄ›nÃ­ na poloÅ¾ky pÅ™idÄ›lenÃ© ve sled. systÃ©mu
+receive notifications about created tracker-items	tracker	cs	PÅ™ijimat upozornÄ›nÃ­ na poloÅ¾ky vytvoÅ™enÃ© ve sled. systÃ©mu
+receive notifications in html	tracker	cs	PÅ™ijÃ­mat upozornÄ›nÃ­ v HTML
+rejected	tracker	cs	OdmÃ­tnutÃ©
+remind	tracker	cs	PÅ™ipomenout
+resolution	tracker	cs	Å˜eÅ¡enÃ­
+select tracker queue	tracker	cs	vybrat frontu sledovacÃ­ho systÃ©mu
+sender address	tracker	cs	Adresa odesÃ­latele
+sender address for all notifications, eg. noreply@egroupware.org	tracker	cs	Adresa odesÃ­latele pro vÅ¡echna upozornÄ›nÃ­, napÅ™. noreply@egroupware.org
+set an own bounty (in %s)	tracker	cs	Vypsat vlastnÃ­ odmÄ›nu (v %s)
+set bounty	tracker	cs	Vypsat odmÄ›nu
+should the actions column in the tracker list-view be shown?	tracker	cs	MÃ¡ se sloupec akcÃ­ ukazovat v seznamovÃ©m zobrazenÃ­?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	MÃ¡ VÃ¡m sledovacÃ­ systÃ©m zaslat e-mail s upozornÄ›nÃ­m, pokud dojde k aktualizaci VÃ¡m pÅ™idÄ›lenÃ½ch poloÅ¾ek?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	MÃ¡ VÃ¡m sledovacÃ­ systÃ©m zaslat e-mail s upozornÄ›nÃ­m, pokud dojde k aktualizaci VÃ¡mi vytvoÅ™enÃ½ch poloÅ¾ek?
+show actions in tracker listing	tracker	cs	Zobrazovat akce ve vÃ½pisech sledovacÃ­ho systÃ©mu
+staff	tracker	cs	PersonÃ¡l
 state	tracker	cs	Stav
 stati	tracker	cs	Stavy
-summary	tracker	cs	Shrnutí
+summary	tracker	cs	ShrnutÃ­
 technicians	tracker	cs	Technici
-thank you for setting this bounty.	tracker	cs	Dìkujeme Vám za vypsání odmìny.
-thank you for voting.	tracker	cs	Dìkujeme Vám za hlasování.
-the bounty will not be shown, until the money is received.	tracker	cs	Odmìna NEBUDE zobrazena, dokud nedojde k pøijetí penìz.
-the canned response will be prefix the text you type.	tracker	cs	Pøedpøipravená odpovìï bude vlo¾ena na zaèátek textu, kterı napí¹ete.
-this module displays information from the tracker.	tracker	cs	Tento modul zobrazuje informace ze Sledovacího systému.
-this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	cs	Tato polo¾ka sledovacího systému byla automaticky uzavøena. Pøedtím byla ve stavu vyøizuje se, ale pùvodní odesílatel nezareagoval ve stanovené lhùtì %1 dnù.
-tracker	common	cs	Sledovací systém
-tracker added	tracker	cs	Pøidána fronta sledovacího systému
-tracker admins	tracker	cs	Administrátoøi sledovacího systému
-tracker admins & technicians	tracker	cs	Administrátoøi a technici sledovacího systému
-tracker configuration	tracker	cs	Konfigurace sledovacího systému
-tracker deleted	tracker	cs	Fronta sledovacího systému smazána
-tracker item modified by %1 at %2	tracker	cs	Polo¾ku sledovacího systému zmìnil(a) %1 v %2
-tracker item not found !!!	tracker	cs	Polo¾ka sledovacího systému nebyla nalezena !!!
-tracker-%1 '%2' added.	tracker	cs	Sledovací systém-%1 '%2' pøidán.
-tracker-%1 '%2' updated.	tracker	cs	Sledovací systém-%1 '%2' aktualizován.
-tracker-%1 deleted.	tracker	cs	Sledovací systém-%1 smazán.
-url of the tracker	tracker	cs	URL sledovacího systému
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	cs	URL, které má bıt obsa¾eno v upozornìní, napø. URL modulu Správce webu, vıchozí URL je Sledovací systém v rámci eGroupWare
+thank you for setting this bounty.	tracker	cs	DÄ›kujeme VÃ¡m za vypsÃ¡nÃ­ odmÄ›ny.
+thank you for voting.	tracker	cs	DÄ›kujeme VÃ¡m za hlasovÃ¡nÃ­.
+the bounty will not be shown, until the money is received.	tracker	cs	OdmÄ›na NEBUDE zobrazena, dokud nedojde k pÅ™ijetÃ­ penÄ›z.
+the canned response will be prefix the text you type.	tracker	cs	PÅ™edpÅ™ipravenÃ¡ odpovÄ›Ä bude vloÅ¾ena na zaÄÃ¡tek textu, kterÃ½ napÃ­Å¡ete.
+this module displays information from the tracker.	tracker	cs	Tento modul zobrazuje informace ze SledovacÃ­ho systÃ©mu.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	cs	Tato poloÅ¾ka sledovacÃ­ho systÃ©mu byla automaticky uzavÅ™ena. PÅ™edtÃ­m byla ve stavu vyÅ™izuje se, ale pÅ¯vodnÃ­ odesÃ­latel nezareagoval ve stanovenÃ© lhÅ¯tÄ› %1 dnÅ¯.
+tracker	common	cs	SledovacÃ­ systÃ©m
+tracker added	tracker	cs	PÅ™idÃ¡na fronta sledovacÃ­ho systÃ©mu
+tracker admins	tracker	cs	AdministrÃ¡toÅ™i sledovacÃ­ho systÃ©mu
+tracker admins & technicians	tracker	cs	AdministrÃ¡toÅ™i a technici sledovacÃ­ho systÃ©mu
+tracker configuration	tracker	cs	Konfigurace sledovacÃ­ho systÃ©mu
+tracker deleted	tracker	cs	Fronta sledovacÃ­ho systÃ©mu smazÃ¡na
+tracker item modified by %1 at %2	tracker	cs	PoloÅ¾ku sledovacÃ­ho systÃ©mu zmÄ›nil(a) %1 v %2
+tracker item not found !!!	tracker	cs	PoloÅ¾ka sledovacÃ­ho systÃ©mu nebyla nalezena !!!
+tracker queue	tracker	cs	Fronta sledovacÃ­ho systÃ©mu
+tracker-%1 '%2' added.	tracker	cs	SledovacÃ­ systÃ©m-%1 '%2' pÅ™idÃ¡n.
+tracker-%1 '%2' updated.	tracker	cs	SledovacÃ­ systÃ©m-%1 '%2' aktualizovÃ¡n.
+tracker-%1 deleted.	tracker	cs	SledovacÃ­ systÃ©m-%1 smazÃ¡n.
+url of the tracker	tracker	cs	URL sledovacÃ­ho systÃ©mu
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	cs	URL, kterÃ© mÃ¡ bÃ½t obsaÅ¾eno v upozornÄ›nÃ­, napÅ™. URL modulu SprÃ¡vce webu, vÃ½chozÃ­ URL je SledovacÃ­ systÃ©m v rÃ¡mci eGroupWare
 versions	tracker	cs	Verze
 vote for it!	tracker	cs	Hlasovat pro ni!
-votes	tracker	cs	Hlasù
+votes	tracker	cs	HlasÅ¯
 wont fix	tracker	cs	Nebude se opravovat
-works for me	tracker	cs	Mnì funguje
+works for me	tracker	cs	MnÄ› funguje
 yes, display groups first	tracker	cs	Ano, zobrazovat nejprve skupiny
-yes, display users first	tracker	cs	Ano, zobrazovat nejprve u¾ivatele
-you can respond by visiting:	tracker	cs	Mù¾ete odpovìdìt nav¹tívením:
-you need to enter a name	tracker	cs	Musíte zadat jméno
-you need to login to vote!	tracker	cs	Musíte se pøihlásit, aby jste mohl(a) hlasovat!
-you need to select something to change and some tracker items!	tracker	cs	Musíte vybrat nìco, co chcete zmìnit A ZÁROVEÒ nìjaké polo¾ky sledovacího systému!
-you need to specify amount, donators name and email address!	tracker	cs	Musíte specifikovat mno¾ství, dárce A ZÁROVEÒ e-mailovou adresu!
+yes, display users first	tracker	cs	Ano, zobrazovat nejprve uÅ¾ivatele
+you can respond by visiting:	tracker	cs	MÅ¯Å¾ete odpovÄ›dÄ›t navÅ¡tÃ­venÃ­m:
+you need to enter a name	tracker	cs	MusÃ­te zadat jmÃ©no
+you need to login to vote!	tracker	cs	MusÃ­te se pÅ™ihlÃ¡sit, aby jste mohl(a) hlasovat!
+you need to select something to change and some tracker items!	tracker	cs	MusÃ­te vybrat nÄ›co, co chcete zmÄ›nit A ZÃROVEÅ‡ nÄ›jakÃ© poloÅ¾ky sledovacÃ­ho systÃ©mu!
+you need to specify amount, donators name and email address!	tracker	cs	MusÃ­te specifikovat mnoÅ¾stvÃ­, dÃ¡rce A ZÃROVEÅ‡ e-mailovou adresu!
 you voted %1.	tracker	cs	Hlasoval(a) jste %1.
 2	tracker	cs	2
 3	tracker	cs	3
