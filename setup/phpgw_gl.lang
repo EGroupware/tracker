@@ -1,0 +1,156 @@
+%1 entries updated.	tracker	gl	%1 entradas actualizadas.
+%1 tickets have been converted	tracker	gl	Convertéronse %1 tickets
+--> enter new name	tracker	gl	--> introduza o novo nome
+1 - lowest	tracker	gl	1 - mínimo
+5 - medium	tracker	gl	5 - medio
+9 - highest	tracker	gl	9 - máximo
+accepted	tracker	gl	Aceptado
+actions	tracker	gl	Accións
+add comment	tracker	gl	Engadir comentario
+after how many days a not replied item should be marked overdue?	tracker	gl	Despois de cantos días debe marcarse un elemento non respondido como atrasado?
+after how many days pending items should be closed automatic	tracker	gl	Despois de cantos días deben pecharse automaticamente os elementos pendentes?
+all tickets are already converted to tracker	tracker	gl	Convertéronse todos os tickets ao sistema de seguimento
+allow bounties	tracker	gl	Permitir recompensas
+allow editing by	tracker	gl	Permitir edición por
+allow to assign groups to tracker items	tracker	gl	Permitir asignar grupos aos elementos de seguimento
+allow voting	tracker	gl	Permitir votación
+allow voting on tracker items, show and sort after the votes	tracker	gl	Permitir votación nos elementos de seguimento, mostrar e ordenar após as votacións
+amount	tracker	gl	Cantidade
+assigned to	tracker	gl	Asignado a
+assigning groups	tracker	gl	Asignación de grupos
+attachments & links	tracker	gl	Anexos e ligazóns
+autoassign to	tracker	gl	Asignar automaticamente a
+bounties	tracker	gl	Recompensas
+bounty confirmed	tracker	gl	Recompensa confirmada
+bounty deleted	tracker	gl	Recompensa eliminada
+bounty set	tracker	gl	Recompensa definida
+canned response	tracker	gl	Resposta predefinida
+canned responses	tracker	gl	Respostas predefinidas
+categories, versions, canned responses	tracker	gl	Categorías, versións, respostas  predefinidas
+check all	tracker	gl	Marcar todo
+close pending	tracker	gl	Pechar pendente
+closed	tracker	gl	Pechado
+comment by %1 at %2:	tracker	gl	Comentario por %1 ás %2:
+comments	tracker	gl	Comentarios
+completed	tracker	gl	Concluído
+configuration	tracker	gl	Configuración
+configuration for all trackers	tracker	gl	Configuración para todas as filas de seguimento
+configuration updated.	tracker	gl	Configuración actualizada.
+configuration, acl, notifications	tracker	gl	Configuración, ACL, Notificacións
+confirm that you pay the specified bounty to implement or fix the issue	tracker	gl	Confirme que pagou a recompensa especificada para implementar ou corrixir o asunto
+confirm the receipt of money for this bounty	tracker	gl	Confirme o recibo do diñeiro para esta recompensa
+confirmed	tracker	gl	Confirmado
+convert all closed tickets	tracker	gl	convertir todos os tickets pechados
+convert all open tickets	tracker	gl	convertir todos os tickets abertos
+converted count	tracker	gl	Nùmero de conversións
+copy to	tracker	gl	Copiar en
+create new links	tracker	gl	Crear novas ligazóns
+created	tracker	gl	Creado
+date opened	tracker	gl	Data aberta
+delete this bounty	tracker	gl	Eliminar esta recompensa
+delete this canned response	tracker	gl	Eliminar esta resposta predefinida
+delete this category	tracker	gl	Eliminar esta categoría
+delete this status	tracker	gl	Eliminar este estado
+delete this tracker including all it's items and categories	tracker	gl	Eliminar esta fila de seguimento inclusive todos os seus elementos e categorías
+delete this version	tracker	gl	Eliminar esta versión
+deleted	tracker	gl	Eliminado
+do you want to vote for this item	tracker	gl	Desexa votar por este elemento
+donator name to show	tracker	gl	Nome do doador para mostrar
+duplicate	tracker	gl	Duplicar
+e-mail address to which a copy of all tracker-notifications should be send	tracker	gl	Enderezo de correo electrónico a que desexa enviar unha copia de todas as notificacións de seguimento
+e-mail notifications	tracker	gl	Notificacións de correo electrónico
+edit %1	tracker	gl	Editar %1
+email address to contact you	tracker	gl	Enderezo de correo electrónico de contacto
+entry saved	tracker	gl	Entrada gardada
+error adding the new tracker!	tracker	gl	Erro ao engadir a nova fila de seguimento.
+error saving the entry!!!	tracker	gl	Erro ao gardar a entrada.
+everybody	tracker	gl	Todos
+existing links	tracker	gl	Ligazóns existentes
+field	tracker	gl	Campo
+fixed	tracker	gl	Fixado
+from	tracker	gl	De
+history	tracker	gl	Historia
+id	tracker	gl	id
+if this item is important for you, please consider to set a bounty for it!	tracker	gl	Se este elemento é importante, pense en establecer unha recompensa.
+if this item is important for you, please vote for it.	tracker	gl	Se este elemento é importante, vote por el.
+import tts tickets	tracker	gl	Importar tickets TTS
+invalid	tracker	gl	Non válido
+item assignee	tracker	gl	Receptor do elemento
+item creator	tracker	gl	Creador do elemento
+language for the copy	tracker	gl	Idioma para a copia
+last modified	tracker	gl	Última modificación
+later	tracker	gl	Máis tarde
+list of coma separated email address	tracker	gl	Lista de enderezos de correo electrónico separados por comas
+new %1	tracker	gl	Novo %1
+new items	tracker	gl	Novos elementos
+new tracker item submitted by %1 at %2	tracker	gl	Novo elemento de seguimento enviado por %1 ás %2
+no change	tracker	gl	Sen modificacións
+no trackers found, aborting	tracker	gl	Non se atoparon filas de seguimento, cancelando
+non-anonymous users	tracker	gl	Usuarios non anónimos
+noone	tracker	gl	Ningún
+notification	tracker	gl	Notificación
+open	tracker	gl	Aberto
+out of date	tracker	gl	Desactualizado
+overdue after	tracker	gl	Atrasado após
+pending	tracker	gl	Pendente
+pending items never get close automatic.	tracker	gl	Os elementos pendentes nunca se pechan automaticamente
+pending items will be closed automatic after %1 days without response.	tracker	gl	Os elementos pendentes péchanse automaticamente após %1 días sen resposta.
+permission denied !!!	tracker	gl	Permiso negado!
+postponed	tracker	gl	Adiado
+receive notifications about assigned tracker-items	tracker	gl	Recibir notificacións acerca dos elementos de seguimento atribuídos
+receive notifications about created tracker-items	tracker	gl	Recibir notificacións acerca dos elementos de seguimento creados
+receive notifications in html	tracker	gl	Recibir notificacións en HTML
+rejected	tracker	gl	Rexeitado
+remind	tracker	gl	Lembrar
+resolution	tracker	gl	Resolución
+select which categories should be used in tracker for the tts categories	tracker	gl	seleccionar que categorías se deberían usar no sistema de seguimento para as categorías do TTS
+sender address	tracker	gl	Enderezo do remitente
+sender address for all notifications, eg. noreply@egroupware.org	tracker	gl	Enderezo do remitente para todas as notificacións, p. ex. noreply@egroupware.org
+set an own bounty (in %s)	tracker	gl	Establecer unha recompensa propia (en %s)
+set bounty	tracker	gl	Establecer unha recompensa
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	gl	Se os elementos de seguimento que ten asignados se actualizan, debe enviarlle o sistema correos de notificación?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	gl	Se os elementos do seguimento que creou se actualizan, debe enviarlle o sistema correos de notificación?
+staff	tracker	gl	Persoal
+state	tracker	gl	Estado
+stati	tracker	gl	Estati
+summary	tracker	gl	Sumario
+technicians	tracker	gl	Técnicos
+thank you for setting this bounty.	tracker	gl	Grazas por establecer esta recompensa.
+thank you for voting.	tracker	gl	Grazas por votar.
+the bounty will not be shown, until the money is received.	tracker	gl	A recompensa non se verá até que se reciba o diñeiro.
+the canned response will be prefix the text you type.	tracker	gl	A resposta predefinida precederá o texto que introduza.
+this module displays information from the tracker.	tracker	gl	Este módulo mostra información do sistema de seguimento.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	gl	Este elemento de seguimento foi pechado automaticamente polo sistema. O seu estado estableceuse anteriormente a Pendente e o remitente orixinal non respondeu en %1 días.
+ticket count	tracker	gl	número de tickets
+tracker	common	gl	Sistema de seguimento
+tracker added	tracker	gl	Fila de seguimento engadida
+tracker admins	tracker	gl	Administradores da fila de seguimento
+tracker admins & technicians	tracker	gl	Administradores e técnicos da fila de seguimento
+tracker configuration	tracker	gl	Configuración da fila de seguimento
+tracker deleted	tracker	gl	Fila de seguimento eliminada
+tracker item modified by %1 at %2	tracker	gl	Elemento de seguimento modificado por %1 ás %2
+tracker item not found !!!	tracker	gl	Elemento de seguimento non localizado.
+tracker-%1 '%2' added.	tracker	gl	Fila de seguimento-%1 "%2" engadida.
+tracker-%1 '%2' updated.	tracker	gl	Fila de seguimento-%1 "%2" actualizado.
+tracker-%1 deleted.	tracker	gl	Fila de seguimento-%1 eliminado.
+url of the tracker	tracker	gl	URL da fila de seguimento
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	gl	URL para incluír na notificación, p. ex. á páxina co módulo SiteMgr, fila de seguimento predefinida do eGW
+versions	tracker	gl	Versións
+vote for it!	tracker	gl	Vote por el!
+votes	tracker	gl	Votos
+wont fix	tracker	gl	Non vou decidir
+works for me	tracker	gl	Traballa para min
+yes, display groups first	tracker	gl	Si, primeiro mostrar grupos
+yes, display users first	tracker	gl	Si, primeiro mostrar usuarios
+you can respond by visiting:	tracker	gl	Pode responder visitando:
+you need to enter a name	tracker	gl	Introduza un nome
+you need to login to vote!	tracker	gl	Inicie sesión para votar!
+you need to select something to change and some tracker items!	tracker	gl	Seleccione algo para modificar E algún elemento de seguimento.
+you need to specify amount, donators name and email address!	tracker	gl	Especifique a cantidade, o nome do doador E o enderezo de correo electrónico
+you voted %1.	tracker	gl	Votou por %1
+2	tracker	gl	2
+3	tracker	gl	3
+4	tracker	gl	4
+6	tracker	gl	6
+7	tracker	gl	7
+8	tracker	gl	8
