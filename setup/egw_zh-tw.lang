@@ -135,6 +135,7 @@ tracker configuration	tracker	zh-tw	服務台設定
 tracker deleted	tracker	zh-tw	服務台山除了
 tracker item modified by %1 at %2	tracker	zh-tw	%1 在 %2 修改了服務台
 tracker item not found !!!	tracker	zh-tw	找不到服務台項目！
+tracker queue	tracker	zh-tw	等候服務項目
 tracker-%1 '%2' added.	tracker	zh-tw	服務台 -%1 '%2' 新增了。
 tracker-%1 '%2' updated.	tracker	zh-tw	服務台 -%1 '%2' 更新了。
 tracker-%1 deleted.	tracker	zh-tw	服務台 -%1 刪除了。
