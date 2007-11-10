@@ -1,142 +1,142 @@
-%1 entries updated.	tracker	sk	%1 polo¾iek bolo aktualizovanıch
---> enter new name	tracker	sk	--> zadajte novı názov
-1 - lowest	tracker	sk	1 - najni¾¹ia
-5 - medium	tracker	sk	5 - priemerná
-9 - highest	tracker	sk	9 - najvy¹¹ia
-accepted	tracker	sk	Prijaté
+%1 entries updated.	tracker	sk	%1 poloÅ¾iek bolo aktualizovanÃ½ch
+--> enter new name	tracker	sk	--> zadajte novÃ½ nÃ¡zov
+1 - lowest	tracker	sk	1 - najniÅ¾Å¡ia
+5 - medium	tracker	sk	5 - priemernÃ¡
+9 - highest	tracker	sk	9 - najvyÅ¡Å¡ia
+accepted	tracker	sk	PrijatÃ©
 actions	tracker	sk	Akcie
-add comment	tracker	sk	Prida» poznámku
-after how many days a not replied item should be marked overdue?	tracker	sk	Po koµkıch dòoch sa má 'nezodpovedaná' zále¾itos» oznaèi» ako 'me¹kajúca'?
-after how many days pending items should be closed automatic	tracker	sk	Po koµkıch dòoch sa majú 'vybavované' zále¾itosti automaticky uzavrie»
-allow bounties	tracker	sk	Povoli» odmeny
-allow editing by	tracker	sk	Komu povoli» úpravy
-allow to assign groups to tracker items	tracker	sk	Povoli» priradenie skupín polo¾kám Sledovaèa
-allow voting	tracker	sk	Povoli» hlasovanie
-allow voting on tracker items, show and sort after the votes	tracker	sk	Povoli» hlasovanie o zále¾itostiach sledovaèa, zobrazi» a zoradi» podµa hlasovania
-amount	tracker	sk	Mno¾stvo
-assigned to	tracker	sk	Priradené (komu)
-assigning groups	tracker	sk	Priraïovanie skupín
-attachments & links	tracker	sk	Prílohy a Odkazy
-autoassign to	tracker	sk	Automaticky priradi» (komu)
+add comment	tracker	sk	PridaÅ¥ poznÃ¡mku
+after how many days a not replied item should be marked overdue?	tracker	sk	Po koÄ¾kÃ½ch dÅˆoch sa mÃ¡ 'nezodpovedanÃ¡' zÃ¡leÅ¾itosÅ¥ oznaÄiÅ¥ ako 'meÅ¡kajÃºca'?
+after how many days pending items should be closed automatic	tracker	sk	Po koÄ¾kÃ½ch dÅˆoch sa majÃº 'vybavovanÃ©' zÃ¡leÅ¾itosti automaticky uzavrieÅ¥
+allow bounties	tracker	sk	PovoliÅ¥ odmeny
+allow editing by	tracker	sk	Komu povoliÅ¥ Ãºpravy
+allow to assign groups to tracker items	tracker	sk	PovoliÅ¥ priradenie skupÃ­n poloÅ¾kÃ¡m SledovaÄa
+allow voting	tracker	sk	PovoliÅ¥ hlasovanie
+allow voting on tracker items, show and sort after the votes	tracker	sk	PovoliÅ¥ hlasovanie o zÃ¡leÅ¾itostiach sledovaÄa, zobraziÅ¥ a zoradiÅ¥ podÄ¾a hlasovania
+amount	tracker	sk	MnoÅ¾stvo
+assigned to	tracker	sk	PriradenÃ© (komu)
+assigning groups	tracker	sk	PriraÄovanie skupÃ­n
+attachments & links	tracker	sk	PrÃ­lohy a Odkazy
+autoassign to	tracker	sk	Automaticky priradiÅ¥ (komu)
 bounties	tracker	sk	Odmeny
-bounty confirmed	tracker	sk	Odmena bola potvrdená
-bounty deleted	tracker	sk	Odmena bola odstránená
-bounty set	tracker	sk	Odmena bola vypísaná
-canned response	tracker	sk	©ablónová odpoveï
-canned responses	tracker	sk	©ablónové odpovede
-categories, versions, canned responses	tracker	sk	Kategórie, verzie, ¹ablónové odpovede
-check all	tracker	sk	Oznaèi» v¹etko
-close pending	tracker	sk	Uzavrie» 'vybavované'
-closed	tracker	sk	Uzavreté
-comment by %1 at %2:	tracker	sk	Poznámka od %1 k %2:
-comments	tracker	sk	Poznámky
+bounty confirmed	tracker	sk	Odmena bola potvrdenÃ¡
+bounty deleted	tracker	sk	Odmena bola odstrÃ¡nenÃ¡
+bounty set	tracker	sk	Odmena bola vypÃ­sanÃ¡
+canned response	tracker	sk	Å ablÃ³novÃ¡ odpoveÄ
+canned responses	tracker	sk	Å ablÃ³novÃ© odpovede
+categories, versions, canned responses	tracker	sk	KategÃ³rie, verzie, Å¡ablÃ³novÃ© odpovede
+check all	tracker	sk	OznaÄiÅ¥ vÅ¡etko
+close pending	tracker	sk	UzavrieÅ¥ 'vybavovanÃ©'
+closed	tracker	sk	UzavretÃ©
+comment by %1 at %2:	tracker	sk	PoznÃ¡mka od %1 k %2:
+comments	tracker	sk	PoznÃ¡mky
 completed	tracker	sk	Hotovo
-configuration	tracker	sk	Konfigurácia
-configuration for all trackers	tracker	sk	Konfigurácia pre v¹etky fronty Sledovaèa
-configuration updated.	tracker	sk	Konfigurácia bola aktualizovaná.
-configuration, acl, notifications	tracker	sk	Konfigurácia, ACL, Pripomienky
-confirm that you pay the specified bounty to implement or fix the issue	tracker	sk	Potvrïte, ¾e zaplatíte uvedenú odmenu za vyrie¹enie tejto zále¾itosti
-confirm the receipt of money for this bounty	tracker	sk	Potvrïte prevzatie peòazí tıkajúcich sa tejto odmeny
-confirmed	tracker	sk	Potvrdené
-copy to	tracker	sk	Kopírova» (kam)
-create new links	tracker	sk	Vytvori» nové odkazy
-created	tracker	sk	Vytvorené
-date opened	tracker	sk	Dátum otvorenia
-delete this bounty	tracker	sk	Odstráni» túto odmenu
-delete this canned response	tracker	sk	Odstráni» túto ¹ablónovú odpoveï
-delete this category	tracker	sk	Odstráni» túto kategóriu
-delete this status	tracker	sk	Odstráni» tento stav
-delete this tracker including all it's items and categories	tracker	sk	Odstráni» tento sledovaè vrátane v¹etkıch zále¾itostí a kategórií
-delete this version	tracker	sk	Odstráni» túto verziu
-deleted	tracker	sk	Odstránené
-do you want to vote for this item	tracker	sk	Chcete hlasova» za túto zále¾itos»
-donator name to show	tracker	sk	Aké meno darcu sa má zobrazi»
-duplicate	tracker	sk	Duplikát
-e-mail address to which a copy of all tracker-notifications should be send	tracker	sk	E-mailová adresa, na ktorú sa má posiela» kópia v¹etkıch pripomienok Sledovaèa
-e-mail notifications	tracker	sk	E-mailové pripomienky
-edit %1	tracker	sk	Upravi» %1
-email address to contact you	tracker	sk	Va¹a E-mailová adresa
-entry saved	tracker	sk	Polo¾ka bola ulo¾ená
-error adding the new tracker!	tracker	sk	Chyba pri pridávaní nového sledovaèa!
-error saving the entry!!!	tracker	sk	Chyba pri ukladaní polo¾ky!
-everybody	tracker	sk	V¹etci
-existing links	tracker	sk	Existujúce odkazy
+configuration	tracker	sk	KonfigurÃ¡cia
+configuration for all trackers	tracker	sk	KonfigurÃ¡cia pre vÅ¡etky fronty SledovaÄa
+configuration updated.	tracker	sk	KonfigurÃ¡cia bola aktualizovanÃ¡.
+configuration, acl, notifications	tracker	sk	KonfigurÃ¡cia, ACL, Pripomienky
+confirm that you pay the specified bounty to implement or fix the issue	tracker	sk	PotvrÄte, Å¾e zaplatÃ­te uvedenÃº odmenu za vyrieÅ¡enie tejto zÃ¡leÅ¾itosti
+confirm the receipt of money for this bounty	tracker	sk	PotvrÄte prevzatie peÅˆazÃ­ tÃ½kajÃºcich sa tejto odmeny
+confirmed	tracker	sk	PotvrdenÃ©
+copy to	tracker	sk	KopÃ­rovaÅ¥ (kam)
+create new links	tracker	sk	VytvoriÅ¥ novÃ© odkazy
+created	tracker	sk	VytvorenÃ©
+date opened	tracker	sk	DÃ¡tum otvorenia
+delete this bounty	tracker	sk	OdstrÃ¡niÅ¥ tÃºto odmenu
+delete this canned response	tracker	sk	OdstrÃ¡niÅ¥ tÃºto Å¡ablÃ³novÃº odpoveÄ
+delete this category	tracker	sk	OdstrÃ¡niÅ¥ tÃºto kategÃ³riu
+delete this status	tracker	sk	OdstrÃ¡niÅ¥ tento stav
+delete this tracker including all it's items and categories	tracker	sk	OdstrÃ¡niÅ¥ tento sledovaÄ vrÃ¡tane vÅ¡etkÃ½ch zÃ¡leÅ¾itostÃ­ a kategÃ³riÃ­
+delete this version	tracker	sk	OdstrÃ¡niÅ¥ tÃºto verziu
+deleted	tracker	sk	OdstrÃ¡nenÃ©
+do you want to vote for this item	tracker	sk	Chcete hlasovaÅ¥ za tÃºto zÃ¡leÅ¾itosÅ¥
+donator name to show	tracker	sk	AkÃ© meno darcu sa mÃ¡ zobraziÅ¥
+duplicate	tracker	sk	DuplikÃ¡t
+e-mail address to which a copy of all tracker-notifications should be send	tracker	sk	E-mailovÃ¡ adresa, na ktorÃº sa mÃ¡ posielaÅ¥ kÃ³pia vÅ¡etkÃ½ch pripomienok SledovaÄa
+e-mail notifications	tracker	sk	E-mailovÃ© pripomienky
+edit %1	tracker	sk	UpraviÅ¥ %1
+email address to contact you	tracker	sk	VaÅ¡a E-mailovÃ¡ adresa
+entry saved	tracker	sk	PoloÅ¾ka bola uloÅ¾enÃ¡
+error adding the new tracker!	tracker	sk	Chyba pri pridÃ¡vanÃ­ novÃ©ho sledovaÄa!
+error saving the entry!!!	tracker	sk	Chyba pri ukladanÃ­ poloÅ¾ky!
+everybody	tracker	sk	VÅ¡etci
+existing links	tracker	sk	ExistujÃºce odkazy
 field	tracker	sk	Pole
-fixed	tracker	sk	Vyrie¹ené
+fixed	tracker	sk	VyrieÅ¡enÃ©
 from	tracker	sk	Od
-history	tracker	sk	História
+history	tracker	sk	HistÃ³ria
 id	tracker	sk	ID
-if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím zvá¾te vypísanie odmeny za jej vyrie¹enie!
-if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto zále¾itos» dôle¾itá, prosím hlasujte za òu.
-invalid	tracker	sk	Neplatné
-item assignee	tracker	sk	Zodpovednı za zále¾itos»
-item creator	tracker	sk	Ohlasovateµ zále¾itosti
-language for the copy	tracker	sk	Jazyk kópie
-last modified	tracker	sk	Naposledy zmenené
-later	tracker	sk	Neskôr
-list of coma separated email address	tracker	sk	Zoznam E-mailovıch adries oddelenıch èiarkami
-new %1	tracker	sk	Nové %1
-new items	tracker	sk	Nové zále¾itosti
-new tracker item submitted by %1 at %2	tracker	sk	Novú zále¾itos» Sledovaèa odoslal %1 o %2
+if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre VÃ¡s tÃ¡to zÃ¡leÅ¾itosÅ¥ dÃ´leÅ¾itÃ¡, prosÃ­m zvÃ¡Å¾te vypÃ­sanie odmeny za jej vyrieÅ¡enie!
+if this item is important for you, please vote for it.	tracker	sk	Ak je pre VÃ¡s tÃ¡to zÃ¡leÅ¾itosÅ¥ dÃ´leÅ¾itÃ¡, prosÃ­m hlasujte za Åˆu.
+invalid	tracker	sk	NeplatnÃ©
+item assignee	tracker	sk	ZodpovednÃ½ za zÃ¡leÅ¾itosÅ¥
+item creator	tracker	sk	OhlasovateÄ¾ zÃ¡leÅ¾itosti
+language for the copy	tracker	sk	Jazyk kÃ³pie
+last modified	tracker	sk	Naposledy zmenenÃ©
+later	tracker	sk	NeskÃ´r
+list of coma separated email address	tracker	sk	Zoznam E-mailovÃ½ch adries oddelenÃ½ch Äiarkami
+new %1	tracker	sk	NovÃ© %1
+new items	tracker	sk	NovÃ© zÃ¡leÅ¾itosti
+new tracker item submitted by %1 at %2	tracker	sk	NovÃº zÃ¡leÅ¾itosÅ¥ SledovaÄa odoslal %1 o %2
 no change	tracker	sk	Bezo zmien
-non-anonymous users	tracker	sk	Ne-anonymnı pou¾ívateµ
+non-anonymous users	tracker	sk	Ne-anonymnÃ½ pouÅ¾Ã­vateÄ¾
 noone	tracker	sk	Nikto
 notification	tracker	sk	Pripomienka
-open	tracker	sk	Otvorené
-out of date	tracker	sk	Zame¹kané
-overdue after	tracker	sk	Me¹ká po
+open	tracker	sk	OtvorenÃ©
+out of date	tracker	sk	ZameÅ¡kanÃ©
+overdue after	tracker	sk	MeÅ¡kÃ¡ po
 pending	tracker	sk	Vybavuje sa
-pending items never get close automatic.	tracker	sk	'Vybavované' zále¾itosti sa neuzatvárajú automaticky.
-pending items will be closed automatic after %1 days without response.	tracker	sk	'Vybavované' zále¾itosti sa automaticky uzatvárajú po %1 dòoch bez odpovede.
-permission denied !!!	tracker	sk	Prístup bol odmietnutı !!!
-postponed	tracker	sk	Odlo¾ené
-receive notifications about assigned tracker-items	tracker	sk	Dostáva» pripomienky o priradenıch zále¾itostiach Sledovaèa
-receive notifications about created tracker-items	tracker	sk	Dostáva» pripomienky o vytvorenıch zále¾itostiach Sledovaèa
-receive notifications in html	tracker	sk	Dostáva» pripomienky vo formáte HTML
-rejected	tracker	sk	Odmietnuté
-remind	tracker	sk	Pripomenú»
-resolution	tracker	sk	Rie¹enie
-sender address	tracker	sk	Adresa odosielateµa
-sender address for all notifications, eg. noreply@egroupware.org	tracker	sk	Adresa odosielateµa pre v¹etky pripomienky, napr. bezodpovede@egroupware.org
-set an own bounty (in %s)	tracker	sk	Zada» vlastnú odmenu (v %s)
-set bounty	tracker	sk	Zada» odmenu
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovaè posielal pripomienkové správy, keï sa zaktualizuje niektorá zále¾itos» ktorá Vám bola priradená?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovaè posielal pripomienkové správy, keï sa zaktualizuje niektorá zále¾itos» ktorú ste vytvorili?
-staff	tracker	sk	Personál
+pending items never get close automatic.	tracker	sk	'VybavovanÃ©' zÃ¡leÅ¾itosti sa neuzatvÃ¡rajÃº automaticky.
+pending items will be closed automatic after %1 days without response.	tracker	sk	'VybavovanÃ©' zÃ¡leÅ¾itosti sa automaticky uzatvÃ¡rajÃº po %1 dÅˆoch bez odpovede.
+permission denied !!!	tracker	sk	PrÃ­stup bol odmietnutÃ½ !!!
+postponed	tracker	sk	OdloÅ¾enÃ©
+receive notifications about assigned tracker-items	tracker	sk	DostÃ¡vaÅ¥ pripomienky o priradenÃ½ch zÃ¡leÅ¾itostiach SledovaÄa
+receive notifications about created tracker-items	tracker	sk	DostÃ¡vaÅ¥ pripomienky o vytvorenÃ½ch zÃ¡leÅ¾itostiach SledovaÄa
+receive notifications in html	tracker	sk	DostÃ¡vaÅ¥ pripomienky vo formÃ¡te HTML
+rejected	tracker	sk	OdmietnutÃ©
+remind	tracker	sk	PripomenÃºÅ¥
+resolution	tracker	sk	RieÅ¡enie
+sender address	tracker	sk	Adresa odosielateÄ¾a
+sender address for all notifications, eg. noreply@egroupware.org	tracker	sk	Adresa odosielateÄ¾a pre vÅ¡etky pripomienky, napr. bezodpovede@egroupware.org
+set an own bounty (in %s)	tracker	sk	ZadaÅ¥ vlastnÃº odmenu (v %s)
+set bounty	tracker	sk	ZadaÅ¥ odmenu
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby VÃ¡m SledovaÄ posielal pripomienkovÃ© sprÃ¡vy, keÄ sa zaktualizuje niektorÃ¡ zÃ¡leÅ¾itosÅ¥ ktorÃ¡ VÃ¡m bola priradenÃ¡?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby VÃ¡m SledovaÄ posielal pripomienkovÃ© sprÃ¡vy, keÄ sa zaktualizuje niektorÃ¡ zÃ¡leÅ¾itosÅ¥ ktorÃº ste vytvorili?
+staff	tracker	sk	PersonÃ¡l
 state	tracker	sk	Stav
 summary	tracker	sk	Zhrnutie
 technicians	tracker	sk	Technici
-thank you for setting this bounty.	tracker	sk	Ïakujeme za vypísanie tejto odmeny.
-thank you for voting.	tracker	sk	Ïakujeme za Vá¹ hlas.
-the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa NEBUDE zobrazova», a¾ kım nebudú prijaté peniaze.
-the canned response will be prefix the text you type.	tracker	sk	©ablónová odpoveï sa zobrazí pred textom, ktorı napí¹ete.
-this module displays information from the tracker.	tracker	sk	Tento modul zobrazuje informácie zo Stopovaèa.
-this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sk	Táto zále¾itos» Sledovaèa bola automaticky uzavretá systémom. Pôvodne bola v stave 'Vybavuje sa', av¹ak pôvodnı ohlasovateµ neodpovedal do %1 dní.
-tracker	common	sk	Sledovaè
-tracker added	tracker	sk	Fronta Sledovaèa pridaná.
-tracker admins	tracker	sk	Správci Sledovaèa
-tracker admins & technicians	tracker	sk	Správci a technici Sledovaèa
-tracker configuration	tracker	sk	Nastavenia Sledovaèa
-tracker deleted	tracker	sk	Fronta Sledovaèa bola odstránená
-tracker item modified by %1 at %2	tracker	sk	Zále¾itos» Sledovaèa upravil %1 o %2
-tracker item not found !!!	tracker	sk	Zále¾itos» Sledovaèa sa nena¹la !!!
-tracker-%1 '%2' added.	tracker	sk	Sledovaè-%1 '%2' pridané.
-tracker-%1 '%2' updated.	tracker	sk	Sledovaè-%1 '%2' aktualizované.
-tracker-%1 deleted.	tracker	sk	Sledovaè-%1 '%2' odstránené.
-url of the tracker	tracker	sk	URL adresa Sledovaèa
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sk	URL adresa, ktorá má by» uvedená v pripomienke, napr. na stránku s modulom SiteMgr, predvolené: Sledovaè v rámci eGroupWare
+thank you for setting this bounty.	tracker	sk	Äakujeme za vypÃ­sanie tejto odmeny.
+thank you for voting.	tracker	sk	Äakujeme za VÃ¡Å¡ hlas.
+the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa NEBUDE zobrazovaÅ¥, aÅ¾ kÃ½m nebudÃº prijatÃ© peniaze.
+the canned response will be prefix the text you type.	tracker	sk	Å ablÃ³novÃ¡ odpoveÄ sa zobrazÃ­ pred textom, ktorÃ½ napÃ­Å¡ete.
+this module displays information from the tracker.	tracker	sk	Tento modul zobrazuje informÃ¡cie zo StopovaÄa.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sk	TÃ¡to zÃ¡leÅ¾itosÅ¥ SledovaÄa bola automaticky uzavretÃ¡ systÃ©mom. PÃ´vodne bola v stave 'Vybavuje sa', avÅ¡ak pÃ´vodnÃ½ ohlasovateÄ¾ neodpovedal do %1 dnÃ­.
+tracker	common	sk	SledovaÄ
+tracker added	tracker	sk	Fronta SledovaÄa pridanÃ¡.
+tracker admins	tracker	sk	SprÃ¡vci SledovaÄa
+tracker admins & technicians	tracker	sk	SprÃ¡vci a technici SledovaÄa
+tracker configuration	tracker	sk	Nastavenia SledovaÄa
+tracker deleted	tracker	sk	Fronta SledovaÄa bola odstrÃ¡nenÃ¡
+tracker item modified by %1 at %2	tracker	sk	ZÃ¡leÅ¾itosÅ¥ SledovaÄa upravil %1 o %2
+tracker item not found !!!	tracker	sk	ZÃ¡leÅ¾itosÅ¥ SledovaÄa sa nenaÅ¡la !!!
+tracker-%1 '%2' added.	tracker	sk	SledovaÄ-%1 '%2' pridanÃ©.
+tracker-%1 '%2' updated.	tracker	sk	SledovaÄ-%1 '%2' aktualizovanÃ©.
+tracker-%1 deleted.	tracker	sk	SledovaÄ-%1 '%2' odstrÃ¡nenÃ©.
+url of the tracker	tracker	sk	URL adresa SledovaÄa
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sk	URL adresa, ktorÃ¡ mÃ¡ byÅ¥ uvedenÃ¡ v pripomienke, napr. na strÃ¡nku s modulom SiteMgr, predvolenÃ©: SledovaÄ v rÃ¡mci eGroupWare
 versions	tracker	sk	Verzie
-vote for it!	tracker	sk	Hlasova» za vyrie¹enie
+vote for it!	tracker	sk	HlasovaÅ¥ za vyrieÅ¡enie
 votes	tracker	sk	Hlasy
-wont fix	tracker	sk	Nebude sa rie¹i»
+wont fix	tracker	sk	Nebude sa rieÅ¡iÅ¥
 works for me	tracker	sk	Mne to funguje
-yes, display groups first	tracker	sk	Áno, najprv zobrazi» skupiny
-yes, display users first	tracker	sk	Áno, najprv zobrazi» pou¾ívateµov
-you can respond by visiting:	tracker	sk	Mô¾ete odpoveda» kliknutím na:
-you need to enter a name	tracker	sk	Musíte zada» názov
-you need to login to vote!	tracker	sk	Ak chcete hlasova», musíte sa prihlási» do systému!
-you need to select something to change and some tracker items!	tracker	sk	Mali by ste vybra», èo chcete zmeni», a tie¾ niektoré zále¾itosti Sledovaèa!
-you need to specify amount, donators name and email address!	tracker	sk	Musíte zada» obnos, meno darcu A E-mailovú adresu!
+yes, display groups first	tracker	sk	Ãno, najprv zobraziÅ¥ skupiny
+yes, display users first	tracker	sk	Ãno, najprv zobraziÅ¥ pouÅ¾Ã­vateÄ¾ov
+you can respond by visiting:	tracker	sk	MÃ´Å¾ete odpovedaÅ¥ kliknutÃ­m na:
+you need to enter a name	tracker	sk	MusÃ­te zadaÅ¥ nÃ¡zov
+you need to login to vote!	tracker	sk	Ak chcete hlasovaÅ¥, musÃ­te sa prihlÃ¡siÅ¥ do systÃ©mu!
+you need to select something to change and some tracker items!	tracker	sk	Mali by ste vybraÅ¥, Äo chcete zmeniÅ¥, a tieÅ¾ niektorÃ© zÃ¡leÅ¾itosti SledovaÄa!
+you need to specify amount, donators name and email address!	tracker	sk	MusÃ­te zadaÅ¥ obnos, meno darcu A E-mailovÃº adresu!
 you voted %1.	tracker	sk	Hlasovali ste %1.
 2	tracker	sk	2
 3	tracker	sk	3

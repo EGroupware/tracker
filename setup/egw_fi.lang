@@ -1,21 +1,21 @@
-%1 entries updated.	tracker	fi	%1 merkint‰‰ p‰ivitetty.
+%1 entries updated.	tracker	fi	%1 merkint√§√§ p√§ivitetty.
 --> enter new name	tracker	fi	--> anna uusi nimi
 1 - lowest	tracker	fi	1 - alin
 5 - medium	tracker	fi	5 - normaali
-9 - highest	tracker	fi	9 - t‰rkein
-accepted	tracker	fi	Hyv‰ksytty
+9 - highest	tracker	fi	9 - t√§rkein
+accepted	tracker	fi	Hyv√§ksytty
 actions	tracker	fi	Toiminnot
-add comment	tracker	fi	Lis‰‰ kommentti
-after how many days a not replied item should be marked overdue?	tracker	fi	Montako p‰iv‰‰ voi olla vastaamatta ennen kuin kohde merkit‰‰n er‰‰ntyneeksi?
-after how many days pending items should be closed automatic	tracker	fi	Monenko p‰iv‰n vireill‰ olon j‰lkeen kohde suljetaan automaattisesti
+add comment	tracker	fi	Lis√§√§ kommentti
+after how many days a not replied item should be marked overdue?	tracker	fi	Montako p√§iv√§√§ voi olla vastaamatta ennen kuin kohde merkit√§√§n er√§√§ntyneeksi?
+after how many days pending items should be closed automatic	tracker	fi	Monenko p√§iv√§n vireill√§ olon j√§lkeen kohde suljetaan automaattisesti
 allow bounties	tracker	fi	Salli maksullinen kehitys
 allow editing by	tracker	fi	Salli muokkaaminen:
-allow to assign groups to tracker items	tracker	fi	Salli kohteen seuraamisen ohjaaminen ryhm‰lle
-allow voting	tracker	fi	Salli ‰‰nest‰minen
-allow voting on tracker items, show and sort after the votes	tracker	fi	Salli ‰‰nest‰minen seurattavista kohteista, n‰yt‰ ja lajittele ‰‰net
+allow to assign groups to tracker items	tracker	fi	Salli kohteen seuraamisen ohjaaminen ryhm√§lle
+allow voting	tracker	fi	Salli √§√§nest√§minen
+allow voting on tracker items, show and sort after the votes	tracker	fi	Salli √§√§nest√§minen seurattavista kohteista, n√§yt√§ ja lajittele √§√§net
 amount	tracker	fi	Summa
 assigned to	tracker	fi	Ohjattu
-assigning groups	tracker	fi	Ohjattu ryhm‰lle
+assigning groups	tracker	fi	Ohjattu ryhm√§lle
 attachments & links	tracker	fi	Liitteet ja linkit
 autoassign to	tracker	fi	Ohjaa automaattisesti
 bounties	tracker	fi	Maksullinen kehitys
@@ -26,112 +26,112 @@ canned response	tracker	fi	Vastaus tallennettu
 canned responses	tracker	fi	Vastaus tallennettu
 categories, versions, canned responses	tracker	fi	Kategoriat, versiot, tallennetut vastaukset
 check all	tracker	fi	Tarkista kaikki
-close pending	tracker	fi	Sulje vireill‰ olevat
+close pending	tracker	fi	Sulje vireill√§ olevat
 closed	tracker	fi	Suljetut
 comment by %1 at %2:	tracker	fi	Kommentoinut %1 %2
 comments	tracker	fi	Kommentit
 completed	tracker	fi	Valmis
 configuration	tracker	fi	Konfiguraatio
-configuration updated.	tracker	fi	Konfiguraatio p‰ivitetty
+configuration updated.	tracker	fi	Konfiguraatio p√§ivitetty
 configuration, acl, notifications	tracker	fi	Konfiguraatio, ACL, huomautukset
-confirm that you pay the specified bounty to implement or fix the issue	tracker	fi	Vahvista ett‰ maksat m‰‰rittelem‰si summa jotta kyseinen ominaisuus kehitet‰‰n tai ongelma ratkaistaan.
-confirm the receipt of money for this bounty	tracker	fi	Vahvista vastaanottavasi rahat kyseisest‰ teht‰v‰st‰
+confirm that you pay the specified bounty to implement or fix the issue	tracker	fi	Vahvista ett√§ maksat m√§√§rittelem√§si summa jotta kyseinen ominaisuus kehitet√§√§n tai ongelma ratkaistaan.
+confirm the receipt of money for this bounty	tracker	fi	Vahvista vastaanottavasi rahat kyseisest√§ teht√§v√§st√§
 confirmed	tracker	fi	Vahvistettu
-copy to	tracker	fi	L‰het‰ kopio
+copy to	tracker	fi	L√§het√§ kopio
 create new links	tracker	fi	Luo uusi linkki
 created	tracker	fi	Luotu
-date opened	tracker	fi	Avausp‰iv‰
-delete this bounty	tracker	fi	Poista t‰m‰ maksullinen kehitys
-delete this canned response	tracker	fi	Poista t‰m‰ s‰ilytetty vastaus
-delete this category	tracker	fi	Poista t‰m‰ kategoria
-delete this status	tracker	fi	Poista t‰m‰ tila
-delete this tracker including all it's items and categories	tracker	fi	Poista laukaisin, sis‰lt‰‰ kaikki sen kohteet ja kategoriat.
-delete this version	tracker	fi	Poista t‰m‰ versio
+date opened	tracker	fi	Avausp√§iv√§
+delete this bounty	tracker	fi	Poista t√§m√§ maksullinen kehitys
+delete this canned response	tracker	fi	Poista t√§m√§ s√§ilytetty vastaus
+delete this category	tracker	fi	Poista t√§m√§ kategoria
+delete this status	tracker	fi	Poista t√§m√§ tila
+delete this tracker including all it's items and categories	tracker	fi	Poista laukaisin, sis√§lt√§√§ kaikki sen kohteet ja kategoriat.
+delete this version	tracker	fi	Poista t√§m√§ versio
 deleted	tracker	fi	Poistettu
-do you want to vote for this item	tracker	fi	Haluatko ‰‰nest‰‰ t‰st‰ kohteesta
-donator name to show	tracker	fi	N‰yt‰ lahjoittajan nimi
+do you want to vote for this item	tracker	fi	Haluatko √§√§nest√§√§ t√§st√§ kohteesta
+donator name to show	tracker	fi	N√§yt√§ lahjoittajan nimi
 duplicate	tracker	fi	Kaksoiskappale
-e-mail address to which a copy of all tracker-notifications should be send	tracker	fi	S‰hkˆpostiosoite kopioidaan huomautus laukaisimeen, joka l‰hett‰‰ viestit
-e-mail notifications	tracker	fi	S‰hkˆpostin huomautukset
+e-mail address to which a copy of all tracker-notifications should be send	tracker	fi	S√§hk√∂postiosoite kopioidaan huomautus laukaisimeen, joka l√§hett√§√§ viestit
+e-mail notifications	tracker	fi	S√§hk√∂postin huomautukset
 edit %1	tracker	fi	Muokkaa %1
-email address to contact you	tracker	fi	S‰hkˆpostiosoite jolla sinut tavoittaa
-entry saved	tracker	fi	Merkint‰ tallennettu
-error adding the new tracker!	tracker	fi	Virhe lis‰tess‰ uutta laukaisinta!
-error saving the entry!!!	tracker	fi	Virhe tallentaessa merkint‰‰ !!!
+email address to contact you	tracker	fi	S√§hk√∂postiosoite jolla sinut tavoittaa
+entry saved	tracker	fi	Merkint√§ tallennettu
+error adding the new tracker!	tracker	fi	Virhe lis√§tess√§ uutta laukaisinta!
+error saving the entry!!!	tracker	fi	Virhe tallentaessa merkint√§√§ !!!
 everybody	tracker	fi	Kenelle tahansa
 existing links	tracker	fi	Olemassa olevat linkit
-field	tracker	fi	Kentt‰
+field	tracker	fi	Kentt√§
 fixed	tracker	fi	Korjattu
-from	tracker	fi	Kenelt‰
+from	tracker	fi	Kenelt√§
 history	tracker	fi	Historia
 id	tracker	fi	Tunniste
-if this item is important for you, please consider to set a bounty for it!	tracker	fi	Jos t‰m‰ kohde on sinulle t‰rke‰, harkitse sen tekemist‰ maksullisena lis‰tyˆn‰!
-if this item is important for you, please vote for it.	tracker	fi	Jos t‰m‰ kohde on sinulle t‰rke‰, ‰‰nest‰ sen puolesta.
+if this item is important for you, please consider to set a bounty for it!	tracker	fi	Jos t√§m√§ kohde on sinulle t√§rke√§, harkitse sen tekemist√§ maksullisena lis√§ty√∂n√§!
+if this item is important for you, please vote for it.	tracker	fi	Jos t√§m√§ kohde on sinulle t√§rke√§, √§√§nest√§ sen puolesta.
 invalid	tracker	fi	Kelpaamaton
 item assignee	tracker	fi	Kohde valtuutettu
 item creator	tracker	fi	Kohteen luonti
 language for the copy	tracker	fi	Kopioitava kieli
 last modified	tracker	fi	Viimeksi muokattu
 later	tracker	fi	Viimeisin
-list of coma separated email address	tracker	fi	Lista pilkulla erotetuista s‰hkˆpostiosoitteista
+list of coma separated email address	tracker	fi	Lista pilkulla erotetuista s√§hk√∂postiosoitteista
 new %1	tracker	fi	Uusi %1
 new items	tracker	fi	Uusi kohde
 new tracker item submitted by %1 at %2	tracker	fi	Uusi kohteen laukaisin toimitettu %1 %2
 no change	tracker	fi	Ei muutosta
-non-anonymous users	tracker	fi	Ei anonyymit k‰ytt‰j‰t
-noone	tracker	fi	Ei mit‰‰n
+non-anonymous users	tracker	fi	Ei anonyymit k√§ytt√§j√§t
+noone	tracker	fi	Ei mit√§√§n
 notification	tracker	fi	Huomautus
 open	tracker	fi	Avoin
-out of date	tracker	fi	Myˆh‰stynyt
-overdue after	tracker	fi	Ylitt‰v‰ aika ylitˆin‰
-pending	tracker	fi	Vireill‰
-pending items never get close automatic.	tracker	fi	Vireill‰ oleva kohde ei koskaan sulkeudu automaattisesti
-pending items will be closed automatic after %1 days without response.	tracker	fi	Vireill‰ oleva kohde suljetaan automaattisesti jos %1 p‰iv‰n kuluessa ei tule vastausta.
-permission denied !!!	tracker	fi	P‰‰sy estetty !!!
-postponed	tracker	fi	Lyk‰tty
-receive notifications about assigned tracker-items	tracker	fi	Vastaanota huomautuksia k‰sittelij‰st‰
-receive notifications about created tracker-items	tracker	fi	Vastaanota huomautuksia pyynnˆn luonneista
+out of date	tracker	fi	My√∂h√§stynyt
+overdue after	tracker	fi	Ylitt√§v√§ aika ylit√∂in√§
+pending	tracker	fi	Vireill√§
+pending items never get close automatic.	tracker	fi	Vireill√§ oleva kohde ei koskaan sulkeudu automaattisesti
+pending items will be closed automatic after %1 days without response.	tracker	fi	Vireill√§ oleva kohde suljetaan automaattisesti jos %1 p√§iv√§n kuluessa ei tule vastausta.
+permission denied !!!	tracker	fi	P√§√§sy estetty !!!
+postponed	tracker	fi	Lyk√§tty
+receive notifications about assigned tracker-items	tracker	fi	Vastaanota huomautuksia k√§sittelij√§st√§
+receive notifications about created tracker-items	tracker	fi	Vastaanota huomautuksia pyynn√∂n luonneista
 receive notifications in html	tracker	fi	Vastaanota huomautukset html muodossa
 rejected	tracker	fi	Kielletty
 remind	tracker	fi	Muistuta
 resolution	tracker	fi	Resoluutio
-sender address	tracker	fi	L‰hett‰j‰n osoite
-sender address for all notifications, eg. noreply@egroupware.org	tracker	fi	L‰hett‰j‰n osoite kaikille huomautuksille, esim. noreply@egroupware.org
-set an own bounty (in %s)	tracker	fi	Aseta oma maksullinen lis‰tyˆ (%s)
+sender address	tracker	fi	L√§hett√§j√§n osoite
+sender address for all notifications, eg. noreply@egroupware.org	tracker	fi	L√§hett√§j√§n osoite kaikille huomautuksille, esim. noreply@egroupware.org
+set an own bounty (in %s)	tracker	fi	Aseta oma maksullinen lis√§ty√∂ (%s)
 set bounty	tracker	fi	Aseta palkkio
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	L‰hett‰‰kˆ laukaisin sinulle huomautusviestin, jos kohteen k‰sittelij‰ p‰ivitt‰‰ tilannetta?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	L‰hett‰‰kˆ laukaisin sinulle huomautusviestin, jos luomasi kohteen tila p‰ivittyy?
-staff	tracker	fi	Henkilˆkunta
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	L√§hett√§√§k√∂ laukaisin sinulle huomautusviestin, jos kohteen k√§sittelij√§ p√§ivitt√§√§ tilannetta?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	L√§hett√§√§k√∂ laukaisin sinulle huomautusviestin, jos luomasi kohteen tila p√§ivittyy?
+staff	tracker	fi	Henkil√∂kunta
 state	tracker	fi	Tila
-summary	tracker	fi	Tiivistelm‰
+summary	tracker	fi	Tiivistelm√§
 technicians	tracker	fi	Tekninentuki
 thank you for setting this bounty.	tracker	fi	Kiitos kun asetit palkkion
-thank you for voting.	tracker	fi	Kiitos kun ‰‰nestit
-the bounty will not be shown, until the money is received.	tracker	fi	Ratkaisua EI n‰ytet‰ ennen kuin palkkio on maksettu.
-this module displays information from the tracker.	tracker	fi	T‰m‰ moduuli n‰ytt‰‰ tietoa Laukaisimesta.
-this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fi	T‰m‰ laukaisin sulkeutui automaattisesti j‰rjestelm‰st‰. Se oli viimeksi asetettu ratkaisematon tilaan, eik‰ alkuper‰inen l‰hett‰j‰ vastannut siihen %1 p‰iv‰n kuluessa.
+thank you for voting.	tracker	fi	Kiitos kun √§√§nestit
+the bounty will not be shown, until the money is received.	tracker	fi	Ratkaisua EI n√§ytet√§ ennen kuin palkkio on maksettu.
+this module displays information from the tracker.	tracker	fi	T√§m√§ moduuli n√§ytt√§√§ tietoa Laukaisimesta.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fi	T√§m√§ laukaisin sulkeutui automaattisesti j√§rjestelm√§st√§. Se oli viimeksi asetettu ratkaisematon tilaan, eik√§ alkuper√§inen l√§hett√§j√§ vastannut siihen %1 p√§iv√§n kuluessa.
 tracker	common	fi	Helpdesk
-tracker admins	tracker	fi	Helpdeskin yll‰pitj‰t
-tracker admins & technicians	tracker	fi	Helpdeskin yll‰pit‰j‰t ja tekniset tuet
+tracker admins	tracker	fi	Helpdeskin yll√§pitj√§t
+tracker admins & technicians	tracker	fi	Helpdeskin yll√§pit√§j√§t ja tekniset tuet
 tracker configuration	tracker	fi	Laukaisimen konfigurointi
 tracker item modified by %1 at %2	tracker	fi	Laukaisimen kohdetta muokattu %1 %2
-tracker item not found !!!	tracker	fi	Laukaisimen kohdetta ei lˆytynyt
-tracker-%1 '%2' added.	tracker	fi	Laukaisin-%1 '%2' lis‰tty.
-tracker-%1 '%2' updated.	tracker	fi	Laukaisin-%1 '%2' p‰ivitetty.
+tracker item not found !!!	tracker	fi	Laukaisimen kohdetta ei l√∂ytynyt
+tracker-%1 '%2' added.	tracker	fi	Laukaisin-%1 '%2' lis√§tty.
+tracker-%1 '%2' updated.	tracker	fi	Laukaisin-%1 '%2' p√§ivitetty.
 tracker-%1 deleted.	tracker	fi	Laukaisin-%1 poistettu
 url of the tracker	tracker	fi	Laukaisimen URL
 versions	tracker	fi	Versiot
-vote for it!	tracker	fi	ƒ‰nest‰ sit‰!
-votes	tracker	fi	ƒ‰net
+vote for it!	tracker	fi	√Ñ√§nest√§ sit√§!
+votes	tracker	fi	√Ñ√§net
 wont fix	tracker	fi	Ei korjaannu
 works for me	tracker	fi	Toimii minulla
-yes, display groups first	tracker	fi	Kyll‰, n‰yt‰ ryhm‰n ensin
-yes, display users first	tracker	fi	Kyll‰, n‰yt‰ k‰ytt‰j‰n ensin
+yes, display groups first	tracker	fi	Kyll√§, n√§yt√§ ryhm√§n ensin
+yes, display users first	tracker	fi	Kyll√§, n√§yt√§ k√§ytt√§j√§n ensin
 you need to enter a name	tracker	fi	Sinun tarvitsee antaa nimi
-you need to login to vote!	tracker	fi	Sinun tarvitsee kirjautua ‰‰nestyst‰ varten!
-you need to select something to change and some tracker items!	tracker	fi	Sinun pit‰‰ valita jotain muutettavaa JA joku laukaisimen kohde!
-you need to specify amount, donators name and email address!	tracker	fi	Sinun pit‰‰ antaa summa, lahjoittajan nimi JA s‰hkˆpostiosoitteesi!
-you voted %1.	tracker	fi	Annoit ‰‰nesi %1.
+you need to login to vote!	tracker	fi	Sinun tarvitsee kirjautua √§√§nestyst√§ varten!
+you need to select something to change and some tracker items!	tracker	fi	Sinun pit√§√§ valita jotain muutettavaa JA joku laukaisimen kohde!
+you need to specify amount, donators name and email address!	tracker	fi	Sinun pit√§√§ antaa summa, lahjoittajan nimi JA s√§hk√∂postiosoitteesi!
+you voted %1.	tracker	fi	Annoit √§√§nesi %1.
 2	tracker	fi	2
 3	tracker	fi	3
 4	tracker	fi	4

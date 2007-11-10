@@ -1,64 +1,64 @@
-%1 entries updated.	tracker	de	%1 Einträge aktualisiert.
---> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
+%1 entries updated.	tracker	de	%1 EintrÃ¤ge aktualisiert.
+--> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wÃ¤hlen
 --> enter new name	tracker	de	--> neuen Namen eingeben
 1 - lowest	tracker	de	1 - niedrigste
 5 - medium	tracker	de	5 - mittlere
-9 - highest	tracker	de	9 - höchste
+9 - highest	tracker	de	9 - hÃ¶chste
 accepted	tracker	de	Akzeptiert
 actions	tracker	de	Befehle
-add comment	tracker	de	Kommentar hinzufügen
-add timesheet entry	tracker	de	Stundenzettel hinzufügen
-after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
-after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
-allow bounties	tracker	de	Prämien erlauben
+add comment	tracker	de	Kommentar hinzufÃ¼gen
+add timesheet entry	tracker	de	Stundenzettel hinzufÃ¼gen
+after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als Ã¼berfÃ¤llig markiert werden?
+after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende EintrÃ¤ge automatisch geschlossen werden?
+allow bounties	tracker	de	PrÃ¤mien erlauben
 allow default projects for tracker	tracker	de	Erlaube Zuordnung von Projekten in der Tracker Konfiguration
 allow editing by	tracker	de	Bearbeiten erlauben von
-allow the predefinition of projects that will be assigned to new tracker-items.	tracker	de	Erlaube die Voreinstellung von Projektzuordnungen für Trackereinträge.
-allow to assign groups to tracker items	tracker	de	Erlaube Einträgen Gruppen zuzuweisen
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	de	Erlaube die Voreinstellung von Projektzuordnungen fÃ¼r TrackereintrÃ¤ge.
+allow to assign groups to tracker items	tracker	de	Erlaube EintrÃ¤gen Gruppen zuzuweisen
 allow voting	tracker	de	Erlaube Abstimmungen
-allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Einträge des Verfolgungssystem, zeige und sortiere nach den Stimmen
+allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen Ã¼ber EintrÃ¤ge des Verfolgungssystem, zeige und sortiere nach den Stimmen
 amount	tracker	de	Betrag
 assign to project	tracker	de	Projektzuweisung
 assigned to	tracker	de	Zugewiesen an
 assigning groups	tracker	de	Gruppen zuweisen
-attachments & links	tracker	de	Anhänge & Verknüpfungen
+attachments & links	tracker	de	AnhÃ¤nge & VerknÃ¼pfungen
 autoassign to	tracker	de	Automatisch zuweisen an
-bounties	tracker	de	Prämien
-bounty confirmed	tracker	de	Prämie bestätigt
-bounty confirmed.	tracker	de	Prämie bestätigt.
-bounty deleted	tracker	de	Prämie gelöscht
-bounty deleted.	tracker	de	Prämie gelöscht.
-bounty set	tracker	de	Prämie gesetzt
+bounties	tracker	de	PrÃ¤mien
+bounty confirmed	tracker	de	PrÃ¤mie bestÃ¤tigt
+bounty confirmed.	tracker	de	PrÃ¤mie bestÃ¤tigt.
+bounty deleted	tracker	de	PrÃ¤mie gelÃ¶scht
+bounty deleted.	tracker	de	PrÃ¤mie gelÃ¶scht.
+bounty set	tracker	de	PrÃ¤mie gesetzt
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
-check all	tracker	de	Alle auswählen
-choose a project from the drop-down list	tracker	de	ein Projekt aus der Auswahlliste wählen
-close pending	tracker	de	Schließe schwebend
+check all	tracker	de	Alle auswÃ¤hlen
+choose a project from the drop-down list	tracker	de	ein Projekt aus der Auswahlliste wÃ¤hlen
+close pending	tracker	de	SchlieÃŸe schwebend
 closed	tracker	de	Geschlossen
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Prozent erledigt
 configuration	tracker	de	Konfiguration
-configuration for all trackers	tracker	de	Konfiguration für alle Verfolgungssysteme
+configuration for all trackers	tracker	de	Konfiguration fÃ¼r alle Verfolgungssysteme
 configuration updated.	tracker	de	Konfiguration aktualisiert.
 configuration, acl, notifications	tracker	de	Konfiguration, Zugriffskontrolle, Benachrichtigungen
-confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie zahlen, für die Implementation oder Behebung dieses Themas
-confirm the receipt of money for this bounty	tracker	de	Bestätigen Sie den Zahlungseingang dieser Prämie
-confirmed	tracker	de	Bestätigt
+confirm that you pay the specified bounty to implement or fix the issue	tracker	de	BestÃ¤tigen Sie, dass Sie die angegebenen PrÃ¤mie zahlen, fÃ¼r die Implementation oder Behebung dieses Themas
+confirm the receipt of money for this bounty	tracker	de	BestÃ¤tigen Sie den Zahlungseingang dieser PrÃ¤mie
+confirmed	tracker	de	BestÃ¤tigt
 copy to	tracker	de	Kopie an
-create new links	tracker	de	Neue Verknüpfung anlegen
+create new links	tracker	de	Neue VerknÃ¼pfung anlegen
 created	tracker	de	Erstellt
 date opened	tracker	de	Datum angelegt
-delete this bounty	tracker	de	Diese Prämie löschen
-delete this canned response	tracker	de	Diese Standardantwort löschen
-delete this category	tracker	de	Diese Kategorie löschen
-delete this entry	tracker	de	Diesen Eintrag löschen
-delete this status	tracker	de	Diesen Status löschen
-delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
-delete this version	tracker	de	Diese Version löschen
-deleted	tracker	de	Gelöscht
-do you want to vote for this item	tracker	de	Wollen Sie für diesen Eintrag stimmen
+delete this bounty	tracker	de	Diese PrÃ¤mie lÃ¶schen
+delete this canned response	tracker	de	Diese Standardantwort lÃ¶schen
+delete this category	tracker	de	Diese Kategorie lÃ¶schen
+delete this entry	tracker	de	Diesen Eintrag lÃ¶schen
+delete this status	tracker	de	Diesen Status lÃ¶schen
+delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschlieÃŸlich aller EintrÃ¤ge und Kategorien lÃ¶schen
+delete this version	tracker	de	Diese Version lÃ¶schen
+deleted	tracker	de	GelÃ¶scht
+do you want to vote for this item	tracker	de	Wollen Sie fÃ¼r diesen Eintrag stimmen
 donator name to show	tracker	de	Name des Spenders zum anzeigen
 duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
@@ -69,90 +69,90 @@ entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
 everybody	tracker	de	Jeder
-existing links	tracker	de	Bestehende Verknüpfungen
+existing links	tracker	de	Bestehende VerknÃ¼pfungen
 field	tracker	de	Feld
-fixed	tracker	de	Gelöst
+fixed	tracker	de	GelÃ¶st
 from	tracker	de	Von
 history	tracker	de	Historie
 id	tracker	de	ID
-if this item is important for you, please consider to set a bounty for it!	tracker	de	Wenn dieser Punkt für Sie wichtig ist, können Sie dafür eine Prämie setzen!
-if this item is important for you, please vote for it.	tracker	de	Wenn dieser Punkt für Sie wichtig ist, stimmen Sie bitte dafür ab.
-invalid	tracker	de	Ungültig
+if this item is important for you, please consider to set a bounty for it!	tracker	de	Wenn dieser Punkt fÃ¼r Sie wichtig ist, kÃ¶nnen Sie dafÃ¼r eine PrÃ¤mie setzen!
+if this item is important for you, please vote for it.	tracker	de	Wenn dieser Punkt fÃ¼r Sie wichtig ist, stimmen Sie bitte dafÃ¼r ab.
+invalid	tracker	de	UngÃ¼ltig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
-language for the copy	tracker	de	Sprache für die Kopie
-last modified	tracker	de	Zuletzt geändert
-later	tracker	de	Später
+language for the copy	tracker	de	Sprache fÃ¼r die Kopie
+last modified	tracker	de	Zuletzt geÃ¤ndert
+later	tracker	de	SpÃ¤ter
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
-new %1	tracker	de	%1 hinzfügen
-new items	tracker	de	Neue Einträge
+new %1	tracker	de	%1 hinzfÃ¼gen
+new items	tracker	de	Neue EintrÃ¤ge
 new tracker item submitted by %1 at %2	tracker	de	Neuer Eintrag im Verfolgungsystem erstellt von %1 am %2
-no change	tracker	de	Keine Änderung
+no change	tracker	de	Keine Ã„nderung
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
 notification	tracker	de	Benachrichtigung
 open	tracker	de	Offen
 out of date	tracker	de	Nicht mehr aktuell
-overdue after	tracker	de	Überfällig nach
+overdue after	tracker	de	ÃœberfÃ¤llig nach
 pending	tracker	de	Schwebend
-pending items never get close automatic.	tracker	de	Schwebende Einträge werden nie automatisch geschlossen.
-pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch geschlossen.
+pending items never get close automatic.	tracker	de	Schwebende EintrÃ¤ge werden nie automatisch geschlossen.
+pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende EintrÃ¤ge werden nach %1 Tagen ohne Antwort automatisch geschlossen.
 permission denied !!!	tracker	de	Zugriff verweigert !!!
 postponed	tracker	de	Vertagt
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
-receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
-receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
+receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen Ã¼ber zugewiesene EintrÃ¤ge
+receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen Ã¼ber selbst angelegte EintrÃ¤ge
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Mail
-rejected	tracker	de	Zurückgewiesen
+rejected	tracker	de	ZurÃ¼ckgewiesen
 remind	tracker	de	Erinnern
-resolution	tracker	de	Lösung
-select tracker queue	tracker	de	Tracker Queue auswählen
+resolution	tracker	de	LÃ¶sung
+select tracker queue	tracker	de	Tracker Queue auswÃ¤hlen
 sender address	tracker	de	Absender Adresse
-sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
-set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
-set bounty	tracker	de	Prämie setzen
-should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der Trackerübersicht angezeigt werden?
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
-show actions in tracker listing	tracker	de	Zeige Befehle in der Trackerübersicht
+sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse fÃ¼r alle Benachrichtigungen, z.B. noreply@egroupware.org
+set an own bounty (in %s)	tracker	de	Eigene PrÃ¤mie setzen (in %s)
+set bounty	tracker	de	PrÃ¤mie setzen
+should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der TrackerÃ¼bersicht angezeigt werden?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn EintrÃ¤ge die Ihnen zugewiesen sind aktualisiert werden?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn EintrÃ¤ge die von Ihnen angelegt wurden aktualisiert werden?
+show actions in tracker listing	tracker	de	Zeige Befehle in der TrackerÃ¼bersicht
 staff	tracker	de	Mitarbeiter
 state	tracker	de	Status
 stati	tracker	de	Stati
 summary	tracker	de	Zusammenfassung
 technicians	tracker	de	Techniker
-thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetzt haben.
+thank you for setting this bounty.	tracker	de	Danke das Sie diese PrÃ¤mie gesetzt haben.
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
-the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
+the bounty will not be shown, until the money is received.	tracker	de	Die PrÃ¤mie wird NICHT angezeigt, bis das Geld eingegangen ist.
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 tracker	common	de	Verfolgungssystem
-tracker added	tracker	de	Verfolgungssystem hinzugefügt
+tracker added	tracker	de	Verfolgungssystem hinzugefÃ¼gt
 tracker admins	tracker	de	Administratoren des Verfolgungssystems
 tracker admins & technicians	tracker	de	Administratoren & Techniker des Verfolgungssystems
 tracker configuration	tracker	de	Konfiguration des Verfolgungssystems
-tracker deleted	tracker	de	Verfolgungssystem gelöscht
-tracker item modified by %1 at %2	tracker	de	Verfolgungssystem Eintrag geändert von %1 am %2
+tracker deleted	tracker	de	Verfolgungssystem gelÃ¶scht
+tracker item modified by %1 at %2	tracker	de	Verfolgungssystem Eintrag geÃ¤ndert von %1 am %2
 tracker item not found !!!	tracker	de	Eintrag im Verfolgungssystem nicht gefunden !!!
 tracker queue	tracker	de	Verfolgungs Queue
-tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.
+tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefÃ¼gt.
 tracker-%1 '%2' updated.	tracker	de	Verfolgungssystem-%1 '%2' aktualisiert.
-tracker-%1 deleted.	tracker	de	Verfolgungssystem-%1 gelöscht.
+tracker-%1 deleted.	tracker	de	Verfolgungssystem-%1 gelÃ¶scht.
 url of the tracker	tracker	de	Internetadresse des Verfolgungssystems
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der eGW
 versions	tracker	de	Versionen
-vote for it!	tracker	de	Dafür abstimmen!
+vote for it!	tracker	de	DafÃ¼r abstimmen!
 votes	tracker	de	Stimmen
-wont fix	tracker	de	Ändere ich nicht
+wont fix	tracker	de	Ã„ndere ich nicht
 works for me	tracker	de	Funktioniert bei mir
 yes, display groups first	tracker	de	Ja, zeige Gruppen zuerst an
 yes, display users first	tracker	de	Ja, zeige Benutzer zuerst an
-you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis antworten:
-you need to enter a name	tracker	de	Sie müssen einen Namen angeben
-you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu können!
-you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
-you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und E-Mail des Spenders angeben!
+you can respond by visiting:	tracker	de	Sie kÃ¶nnen unter dem folgenden Verweis antworten:
+you need to enter a name	tracker	de	Sie mÃ¼ssen einen Namen angeben
+you need to login to vote!	tracker	de	Sie mÃ¼ssen sich anmelden um Abstimmen zu kÃ¶nnen!
+you need to select something to change and some tracker items!	tracker	de	Sie mÃ¼ssen etwas zum Ã„ndern UND einige EintrÃ¤ge auswÃ¤hlen!
+you need to specify amount, donators name and email address!	tracker	de	Sie mÃ¼ssen Betrag, Name und E-Mail des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
 2	tracker	de	2
 3	tracker	de	3

@@ -1,12 +1,12 @@
 %1 entries updated.	tracker	it	%1 voci aggiornate.
 --> enter new name	tracker	it	->> inserisci nuovo nome
-1 - lowest	tracker	it	1 - pi˘ bassa
+1 - lowest	tracker	it	1 - pi√π bassa
 5 - medium	tracker	it	5 - media
-9 - highest	tracker	it	9 - pi˘ alta
+9 - highest	tracker	it	9 - pi√π alta
 accepted	tracker	it	Accettato
 actions	tracker	it	Azioni
 add comment	tracker	it	Aggiungi commento
-after how many days a not replied item should be marked overdue?	tracker	it	Dopo quanti giorni un oggetto senza risposta sar‡ considerato scaduto?
+after how many days a not replied item should be marked overdue?	tracker	it	Dopo quanti giorni un oggetto senza risposta sar√† considerato scaduto?
 after how many days pending items should be closed automatic	tracker	it	Dopo quanti giorni gli oggetti in sospeso saranno chiusi automaticamente?
 allow bounties	tracker	it	Consenti bounty
 allow editing by	tracker	it	Consenti modifica di
@@ -64,14 +64,14 @@ fixed	tracker	it	Corretto
 from	tracker	it	Da
 history	tracker	it	Cronologia
 id	tracker	it	ID
-if this item is important for you, please consider to set a bounty for it!	tracker	it	Se questo oggetto Ë importante per te, per favore considera la possibilit‡ di mettere un Bounty sullo stesso!
-if this item is important for you, please vote for it.	tracker	it	Se questo oggetto Ë importante per te, per favore votalo.
+if this item is important for you, please consider to set a bounty for it!	tracker	it	Se questo oggetto √® importante per te, per favore considera la possibilit√† di mettere un Bounty sullo stesso!
+if this item is important for you, please vote for it.	tracker	it	Se questo oggetto √® importante per te, per favore votalo.
 invalid	tracker	it	Non valido
 item assignee	tracker	it	Assegnatario oggetto
 item creator	tracker	it	Creatore oggetto
 language for the copy	tracker	it	Lingua per la copia
 last modified	tracker	it	Ultima modifica
-later	tracker	it	Pi˘ tardi
+later	tracker	it	Pi√π tardi
 new %1	tracker	it	Nuovo %1
 new items	tracker	it	Nuovi oggetti
 new tracker item submitted by %1 at %2	tracker	it	Nuovo oggetto tracker aggiunto da %1 il %2
@@ -96,17 +96,17 @@ sender address	tracker	it	Indirizzo mittente
 sender address for all notifications, eg. noreply@egroupware.org	tracker	it	Indirizzo mittente per tutte le notifiche, es. nonrispondere@egroupware.org
 set an own bounty (in %s)	tracker	it	Imposta un bounty (in %s)
 set bounty	tracker	it	Imposta bounty
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovr‡ inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovr‡ inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovr√† inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovr√† inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
 staff	tracker	it	Staff
 summary	tracker	it	Riepilogo
 technicians	tracker	it	Tecnici
 thank you for setting this bounty.	tracker	it	Grazie per avere impostato questo bounty.
 thank you for voting.	tracker	it	Grazie per avere votato.
-the bounty will not be shown, until the money is received.	tracker	it	Il bounty NON sar‡ mostrato fino al ricevimento del denaro.
-the canned response will be prefix the text you type.	tracker	it	La risposta preconfezionata sar‡ premessa al testo che scrivi.
+the bounty will not be shown, until the money is received.	tracker	it	Il bounty NON sar√† mostrato fino al ricevimento del denaro.
+the canned response will be prefix the text you type.	tracker	it	La risposta preconfezionata sar√† premessa al testo che scrivi.
 this module displays information from the tracker.	tracker	it	Questo modulo mostra informazioni dal Tracker
-this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	it	Questo oggetto Tracker Ë stato chiuso automaticamente dal sistema. E' stato precedentemente sospeso e il creatore dell'oggetto non ha risposto in %1 giorni.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	it	Questo oggetto Tracker √® stato chiuso automaticamente dal sistema. E' stato precedentemente sospeso e il creatore dell'oggetto non ha risposto in %1 giorni.
 tracker	common	it	Tracking
 tracker added	tracker	it	Coda Tracker aggiunta
 tracker admins	tracker	it	Gestione Tracker
@@ -123,10 +123,10 @@ url to be included in the notification, eg. to the page with the sitemgr module,
 versions	tracker	it	Versioni
 vote for it!	tracker	it	Votalo!
 votes	tracker	it	Voti
-wont fix	tracker	it	Non funzioner‡
+wont fix	tracker	it	Non funzioner√†
 works for me	tracker	it	Funziona per me
-yes, display groups first	tracker	it	SÏ, mostra prima i gruppi
-yes, display users first	tracker	it	SÏ, mostra prima gli utenti
+yes, display groups first	tracker	it	S√¨, mostra prima i gruppi
+yes, display users first	tracker	it	S√¨, mostra prima gli utenti
 you can respond by visiting:	tracker	it	Puoi rispondere visitando:
 you need to enter a name	tracker	it	Devi inserire un nome
 you need to login to vote!	tracker	it	Devi fare il login per votare!
