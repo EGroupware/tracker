@@ -324,6 +324,8 @@ class botracker extends sotracker
 		$data['overdue'] = $data['tr_status'] == 'o' && 	// only open items can be overdue
 			(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
 
+		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
+
 		return $data;
 	}
 
@@ -346,6 +348,8 @@ class botracker extends sotracker
 		{
 			if (isset($data[$name]) && $data[$name]) $data[$name] -= $this->tz_offset_s;
 		}
+		if (substr($data['tr_completion'],-1) == '%') $data['tr_completion'] = (int) round(substr($data['tr_completion'],0,-1));
+		
 		return $data;
 	}
 	

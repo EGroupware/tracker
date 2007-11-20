@@ -2,15 +2,15 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="0.1.002">
-		<grid height="250" overflow="auto">
+		<grid width="100%" height="250" overflow="auto">
 			<columns>
 				<column width="100"/>
 				<column/>
 			</columns>
 			<rows>
-				<row valign="top">
+				<row class="row" valign="top">
 					<description value="Description"/>
-					<textbox multiline="true" rows="15" cols="70" span="3" id="tr_description" needed="1"/>
+					<textbox multiline="true" rows="14" cols="67" span="3" id="tr_description" needed="1"/>
 				</row>
 			</rows>
 		</grid>
@@ -22,7 +22,7 @@
 				<column/>
 			</columns>
 			<rows>
-				<row>
+				<row class="th">
 					<description value="Comments"/>
 					<int id="num_replies" readonly="true"/>
 				</row>
@@ -39,21 +39,21 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="0.1.002">
-		<grid height="250">
+		<grid width="100%" height="250">
 			<columns>
 				<column width="100"/>
 				<column/>
 			</columns>
 			<rows>
-				<row disabled="@no_canned">
+				<row class="th" disabled="@no_canned">
 					<description options=",,,canned_response" value="Canned response" class="3"/>
 					<menulist>
 						<menupopup id="canned_response" options="Select one" no_lang="1" statustext="The canned response will be prefix the text you type."/>
 					</menulist>
 				</row>
-				<row valign="top" disabled="@no_reply">
+				<row class="row" valign="top" disabled="@no_reply">
 					<description options=",,,reply_message" value="Comment"/>
-					<textbox multiline="true" rows="15" cols="70" span="3" id="reply_message"/>
+					<textbox multiline="true" rows="14" cols="67" span="3" id="reply_message"/>
 				</row>
 			</rows>
 		</grid>
@@ -135,13 +135,13 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.1.007">
-		<grid>
+	<template id="tracker.edit" template="" lang="" group="0" version="0.1.009">
+		<grid width="100%">
 			<columns>
 				<column width="105"/>
-				<column/>
-				<column/>
-				<column/>
+				<column width="260"/>
+				<column width="105"/>
+				<column width="220"/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
@@ -150,10 +150,10 @@
 					<description/>
 					<description/>
 				</row>
-				<row>
+				<row class="th" height="28">
 					<description options=",,,tr_tracker" value="Tracker Queue"/>
-					<hbox onchange="1" options="0,0">
-						<menulist>
+					<hbox onchange="1" options="0,0" class="user_filter">
+						<menulist class="user_select">
 							<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
 						</menulist>
 						<int id="tr_id" class="trIdEdit" readonly="true"/>
@@ -161,19 +161,19 @@
 					<description options=",,,tr_private" value="Private"/>
 					<checkbox id="tr_private"/>
 				</row>
-				<row>
+				<row class="row">
 					<description options=",,,cat_id" value="Category"/>
-					<menulist>
+					<menulist class="user_select">
 						<menupopup id="cat_id" options="Select one" no_lang="1" needed="1"/>
 					</menulist>
 					<description options=",,,tr_version" value="Version"/>
-					<menulist>
+					<menulist class="user_select">
 						<menupopup id="tr_version" no_lang="1" options="Select one" needed="1"/>
 					</menulist>
 				</row>
-				<row>
+				<row class="row">
 					<description options=",,,tr_assigned" value="Assigned to"/>
-					<menulist>
+					<menulist class="user_select">
 						<menupopup id="tr_assigned" options="Not assigned" no_lang="1"/>
 					</menulist>
 					<description options="tr_priority" value="Priority"/>
@@ -181,10 +181,10 @@
 						<menupopup id="tr_priority"/>
 					</menulist>
 				</row>
-				<row disabled="!@tr_id">
+				<row class="row" disabled="!@tr_id">
 					<description options=",,,tr_status" value="Status"/>
 					<hbox options="0,0">
-						<menulist>
+						<menulist class="user_select">
 							<menupopup id="tr_status" statustext="@status_help"/>
 						</menulist>
 						<date-time id="tr_closed" label=" "/>
@@ -199,11 +199,15 @@
 						</menulist>
 					</hbox>
 				</row>
-				<row>
+				<row class="row">
 					<description value="Cc" statustext="List of coma separated email address"/>
-					<textbox size="80" maxlength="80" id="tr_cc" span="3"/>
+					<textbox size="40" maxlength="80" id="tr_cc"/>
+					<description value="Group"/>
+					<menulist>
+						<menupopup no_lang="1" id="tr_group" statustext="Ownership of the ticket"/>
+					</menulist>
 				</row>
-				<row>
+				<row class="row">
 					<description options=",,,tr_summary" value="Summary"/>
 					<textbox size="80" maxlength="80" span="3" id="tr_summary" needed="1"/>
 				</row>
