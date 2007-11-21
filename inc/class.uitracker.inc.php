@@ -27,6 +27,7 @@ class uitracker extends botracker
 		'edit'  => true,
 		'index' => true,
 		'admin' => true,
+		'tprint'=> true,
 	);
 	/**
 	 * Displayed instead of the '@' in email-addresses
@@ -66,6 +67,43 @@ class uitracker extends botracker
 			$this->duration_format = str_replace(',','',$pm_config->config_data['duration_units']).','.$pm_config->config_data['hours_per_workday'];
 			unset($pm_config);
 		}
+	}
+
+	/**
+	 * Print a tracker item
+	 *
+	 * @param array $content=null eTemplate content
+	 * @return string html-content, if sitemgr otherwise null
+	 */
+	function tprint($content=null)
+	{
+		// Check if exists
+		if ((int)$_GET['tr_id'])
+		{
+			if (!$this->read($_GET['tr_id']))
+			{
+				return lang('Tracker item not found !!!');
+			}
+		}
+		else	// new item
+		{
+			return lang('Tracker item not found !!!');
+		}
+		if (!is_object($this->tracking))
+		{
+			require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_tracking.inc.php');
+			$this->tracking = new tracker_tracking($this);
+		}
+
+		$details = $this->tracking->get_body(true,$this->data,$this->data);
+		if (!$details)
+		{
+			return implode(', ',$this->tracking->errors);
+		}
+		// Adding Automatic print func
+		$details = str_replace('<body>','<body onload="window.print()">',$details);
+		
+		echo $details;
 	}
 	
 	/**
