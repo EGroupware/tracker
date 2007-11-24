@@ -173,63 +173,66 @@ class sotracker extends so_sql
 		}
 
 		// Check for Tracker restrictions, OvE, 20071012
-		if ($filter['tr_tracker'])
+		if ($this->user != 0) // Skip this in the cron- runs (close_pending(), OvE, 20071124)
 		{
-			// Single tracker
-			if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'])))
+			if ($filter['tr_tracker'])
 			{
-				$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))'; 
-			}
-			if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
-			{
-				$filter[] = '(tr_creator = ' . $this->user . ')'; 
-			} 
-		}
-		else
-		{
-			// All trackers
-			$group_restrictions = array(); 
-			$creator_restrictions = array();
-			$all_restricions = array();
-			$restrict = array();
-			if (!$this->restrictions) $this->restrictions = array();
-			foreach($this->restrictions as $tracker => $restrictions)
-			{
-				if($tracker == 0)
+				// Single tracker
+				if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'])))
 				{
-					continue; // Not implemented for 'all trackers'				
+					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))'; 
 				}
-				if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker)))
+				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
 				{
-					if ($restrictions['group'])
+					$filter[] = '(tr_creator = ' . $this->user . ')'; 
+				} 
+			}
+			else
+			{
+				// All trackers
+				$group_restrictions = array(); 
+				$creator_restrictions = array();
+				$all_restricions = array();
+				$restrict = array();
+				if (!$this->restrictions) $this->restrictions = array();
+				foreach($this->restrictions as $tracker => $restrictions)
+				{
+					if($tracker == 0)
 					{
-						array_push($group_restrictions, $tracker);
-						array_push($all_restricions, $tracker);
+						continue; // Not implemented for 'all trackers'				
 					}
-					if ($restrictions['creator'])
+					if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker)))
 					{
-						array_push($creator_restrictions, $tracker);
-						array_push($all_restricions, $tracker);
+						if ($restrictions['group'])
+						{
+							array_push($group_restrictions, $tracker);
+							array_push($all_restricions, $tracker);
+						}
+						if ($restrictions['creator'])
+						{
+							array_push($creator_restrictions, $tracker);
+							array_push($all_restricions, $tracker);
+						}
 					}
 				}
-			}
 	
-			if (!empty($group_restrictions))
-			{
-				$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';				
-			}
-			if (!empty($creator_restrictions))
-			{
-				$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND tr_creator = ' . $this->user . ')';
-			}
-			if (!empty($all_restricions))
-			{
-				$restrict[] = '(tr_tracker NOT IN (' . implode(',', $all_restricions) . '))';
-			}
-			if (!empty($restrict))
-			{
-				$filter[] = '(' . implode(' OR ', $restrict) . ')';
-			}
+				if (!empty($group_restrictions))
+				{
+					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';				
+				}
+				if (!empty($creator_restrictions))
+				{
+					$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND tr_creator = ' . $this->user . ')';
+				}
+				if (!empty($all_restricions))
+				{
+					$restrict[] = '(tr_tracker NOT IN (' . implode(',', $all_restricions) . '))';
+				}
+				if (!empty($restrict))
+				{
+					$filter[] = '(' . implode(' OR ', $restrict) . ')';
+				}
+			} 
 		} 
 		//$this->debug = 4;
 
