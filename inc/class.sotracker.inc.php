@@ -106,6 +106,7 @@ class sotracker extends so_sql
 					'reply_created' => $this->data['reply_created'],
 					'reply_message' => $this->data['reply_message'],
 				));
+				$this->data['num_replies'] = (int)$this->data['num_replies'] + 1;
 			}
 		}
 		return $ret;

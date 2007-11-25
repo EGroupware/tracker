@@ -169,6 +169,7 @@ class botracker extends sotracker
 		'vote'           => 'Vote for it!',
 		'bounty'         => 'Set bounty',
 		'tr_cc'			 => 'CC',
+		'num_replies'    => 'Number of replies',
 	);
 	/**
 	 * Translate field-name to 2-char history status
@@ -191,6 +192,7 @@ class botracker extends sotracker
 		'tr_resolution'  => 'Re',
 		'tr_cc'			 => 'Cc',
 		'tr_group'		 => 'Gr',
+		'num_replies'    => 'Nr',
 /* the following bounty-stati are only for reference
 		'bounty-set'     => 'bo',
 		'bounty-deleted' => 'xb',
