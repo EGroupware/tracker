@@ -223,6 +223,10 @@ class botracker extends sotracker
 	 * @var int
 	 */
 	var $pending_close_days=7;
+	/**
+	 * Permit html editing on details and comments
+	 */
+	var $htmledit = false;
 	var $all_cats;
 	var $historylog;
 	/**
@@ -238,7 +242,7 @@ class botracker extends sotracker
 	 */
 	var $config_names = array(
 		'technicians','admins','notification','projects',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days',	// tracker unspecific
+		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit',	// tracker unspecific
 		'allow_bounties','currency',
 	);
 	/**
@@ -466,6 +470,10 @@ class botracker extends sotracker
 				{
 					$this->tracking->notify_current_user = true;
 				}
+				if ($this->data['tr_edit_mode'] == 'html') 
+				{
+					$this->tracking->html_content_allow = true;	
+				}				
 			}
 			if (!$this->tracking->track($this->data,$old,$this->user))
 			{

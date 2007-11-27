@@ -186,4 +186,19 @@
 		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_group=(select account_primary_group from egw_accounts where egw_accounts.account_id=egw_tracker.tr_creator)",__LINE__,__FILE__);
 		return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.001';
 	}
+	
+	$test[] = '1.4.001';
+	function tracker_upgrade1_4_001()
+	{
+		$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_edit_mode',array(
+			'type'      => 'varchar',
+			'precision' => '5',
+			'default'   => 'ascii',
+		));
+		
+		// Set all the current intems to ascii mode
+		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_edit_mode='ascii'",__LINE__,__FILE__);
+		
+		return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.002';
+	}	
 ?>

@@ -137,7 +137,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.config" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.admin.config" template="" lang="" group="0" version="0.1.004">
 		<grid width="100%" height="400" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -177,6 +177,27 @@
 						<menupopup type="select-number" options="Never,1,30" id="pending_close_days" statustext="After how many days pending items should be closed automatic"/>
 					</menulist>
 				</row>
+				<row class="row" disabled="@tracker">
+					<description value="Html editing"/>
+					<checkbox statustext="Permit html editing in overview and comments" id="htmledit"/>
+					<description/>
+					<description/>
+				</row>
+				<row class="th" disabled="!@tracker">
+					<description value="Restrict tracker items to staff and:" span="all"/>
+				</row>
+				<row disabled="!@tracker">
+					<description options=",,,restricted" value="Group" statustext="Restict tracker items to the creators primary group and the staff only"/>
+					<checkbox statustext="Restict tracker items to the creators primary group and the staff only" id="restrictions[group]"/>
+					<description/>
+					<description/>
+				</row>
+				<row disabled="!@tracker">
+					<description options=",,,restricted" value="Creator" statustext="Restict tracker items to the creators primary group and the staff only"/>
+					<checkbox statustext="Restict tracker items to the creator and the staff only" id="restrictions[creator]"/>
+					<description/>
+					<description/>
+				</row>
 				<row class="th" disabled="@tracker">
 					<description span="all" value="ACL"/>
 				</row>
@@ -184,6 +205,7 @@
 					<description value="Allow editing by"/>
 					<grid width="100%" height="200" overflow="auto" id="field_acl">
 						<columns>
+							<column/>
 							<column/>
 							<column/>
 							<column/>
@@ -201,6 +223,7 @@
 								<description value="Non-anonymous users" align="center"/>
 								<description value="Everybody" align="center"/>
 								<description value="Item creator" align="center"/>
+								<description value="Group"/>
 								<description value="Item assignee" align="center"/>
 								<description value="New items" align="center"/>
 							</row>
@@ -211,6 +234,7 @@
 								<checkbox align="center" id="${row}[TRACKER_USER]"/>
 								<checkbox align="center" id="${row}[TRACKER_EVERYBODY]"/>
 								<checkbox align="center" id="${row}[TRACKER_ITEM_CREATOR]"/>
+								<checkbox align="center" id="${row}[TRACKER_ITEM_GROUP]"/>
 								<checkbox align="center" id="${row}[TRACKER_ITEM_ASSIGNEE]"/>
 								<checkbox align="center" id="${row}[TRACKER_ITEM_NEW]"/>
 							</row>
@@ -237,7 +261,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="0.1.003">
+	<template id="tracker.admin" template="" lang="" group="0" version="0.1.005">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>

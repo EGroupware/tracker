@@ -34,7 +34,8 @@
 				'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
 				'tr_resolution' => array('type' => 'char','precision' => '1','default' => ''),
 				'tr_cc' => array('type' => 'text'),
-				'tr_group' => array('type' => 'int','precision' => '11')
+				'tr_group' => array('type' => 'int','precision' => '11'),
+				'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii'),
 			),
 			'pk' => array('tr_id'),
 			'fk' => array(),

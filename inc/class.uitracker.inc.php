@@ -95,13 +95,19 @@ class uitracker extends botracker
 			$this->tracking = new tracker_tracking($this);
 		}
 
+		if ($this->data['tr_edit_mode'] == 'html') 
+		{
+			$this->tracking->html_content_allow = true;	
+		}
+
 		$details = $this->tracking->get_body(true,$this->data,$this->data);
 		if (!$details)
 		{
 			return implode(', ',$this->tracking->errors);
 		}
 		// Adding Automatic print func
-		$details = str_replace('<body>','<body onload="window.print()">',$details);
+		//$details = str_replace('<body>','<body onload="window.print()">',$details);
+		$details = '<html><body onload="window.print()">'.$details.'</body></html>';
 		
 		echo $details;
 	}
@@ -117,6 +123,18 @@ class uitracker extends botracker
 	function edit($content=null,$msg='',$popup=true)
 	{
 		$tabs = 'description|comments|add_comment|links|history|bounties';
+		
+		if ($this->htmledit)
+		{
+			$tr_description_options = 'simple,240px,100%,false';
+			$tr_reply_options = 'simple,215px,100%,false';
+		}
+		else
+		{
+			$tr_description_options = 'ascii,230px,540px';
+			$tr_reply_options = 'ascii,205px,540px';
+		}		
+		
 		//_debug_array($content);
 		if (!is_array($content))
 		{
@@ -127,6 +145,30 @@ class uitracker extends botracker
 				{
 					$msg = lang('Tracker item not found !!!');
 					$this->init();
+				}
+				else
+				{
+					// editing, preventing/fixing mixed ascii-html
+					if ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
+					{
+						// non html items edited by html (add nl2br)
+						$tr_description_options = 'simple,240px,100%,false,,1';
+					}
+					if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
+					{
+						// html items edited in ascii mode (prevent changing to html)
+						$tr_description_options = 'simple,240px,100%,false';
+						$tr_reply_options = 'simple,215px,100%,false';
+					}
+					// Ascii Replies are converted to html.
+					foreach ($this->data['replies'] as $n => $reply)
+					{
+						$pos = strpos($this->data['replies'][$n]['reply_message'], '<br');
+						if ($pos===false) 
+						{
+							$this->data['replies'][$n]['reply_message'] = nl2br($this->data['replies'][$n]['reply_message']);	
+						}					
+					}								
 				}
 			}
 			else	// new item
@@ -222,6 +264,22 @@ class uitracker extends botracker
 						$msg = lang('Permission denied !!!');
 						break;
 					}
+					
+					$readonlys = $this->readonlys_from_acl();
+
+					// Save Current edition mode preventing mixed types
+					if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
+					{						
+						$this->data['tr_edit_mode'] = 'html';
+					}
+					elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit && $readonlys['tr_description'])
+					{
+						$this->data['tr_edit_mode'] = 'ascii';
+					}
+					else
+					{
+						$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
+					}										
 					if ($this->save() == 0)
 					{
 						$msg = lang('Entry saved');
@@ -363,7 +421,14 @@ class uitracker extends botracker
 		$tr_id = $this->data['tr_id'];
 		if (!($tracker = $this->data['tr_tracker'])) list($tracker) = @each($this->trackers);
 
-		$readonlys = $this->readonlys_from_acl();
+		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
+		
+		if ($this->data['tr_edit_mode'] == 'ascii' && $this->data['tr_description'] && $readonlys['tr_description'])
+		{
+			// non html view in a readonly htmlarea (div) needs nl2br
+			$tr_description_options = 'simple,240px,100%,false,,1';
+		}		
+		
 		$preserv = $content = $this->data;
 		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
 		if ($this->allow_bounties)
@@ -389,6 +454,9 @@ class uitracker extends botracker
 		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$content += array(
 			'msg' => $msg,
+			'tr_description_options' => $tr_description_options,
+			'tr_description_mode'    => $readonlys['tr_description'],
+			'tr_reply_options' => $tr_reply_options,
 			'on_cancel' => $popup ? 'window.close();' : '',
 			'no_vote' => '',
 			'link_to' => array(
@@ -663,6 +731,10 @@ class uitracker extends botracker
 		{
 			$rows['no_bounties'] = true;
 			$query_in['options-selectcols']['bounties'] = false;
+		}
+		if (!$this->prefs['show_sum_timesheet'] || !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+		{			
+			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
 		}
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 		// enable the Actions (timesheet)  column
