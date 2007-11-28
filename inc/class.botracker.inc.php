@@ -470,10 +470,7 @@ class botracker extends sotracker
 				{
 					$this->tracking->notify_current_user = true;
 				}
-				if ($this->data['tr_edit_mode'] == 'html') 
-				{
-					$this->tracking->html_content_allow = true;	
-				}				
+				$this->tracking->html_content_allow = true;
 			}
 			if (!$this->tracking->track($this->data,$old,$this->user))
 			{

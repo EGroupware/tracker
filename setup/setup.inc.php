@@ -43,6 +43,7 @@ $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'etemplate',
 	 'versions' => Array('1.3','1.4','1.5')
 );
-
-
-
+$setup_info['tracker']['depends'][] = array(
+	 'appname' => 'notifications',
+	 'versions' => Array('1.4')
+);
