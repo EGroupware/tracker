@@ -102,19 +102,6 @@ class tr_admin_prefs_sidebox_hooks
 			'xmlrpc' => True,
 			'admin'  => False,
 		);
-		$GLOBALS['settings']['notify_html'] = array(
-			'type'   => 'select',
-			'label'  => 'Receive notifications in html',
-			'name'   => 'notify_html',
-			'help'   => 'Should the Tracker send you notification mails in html?',
-			'values' => array(
-				'0'  => lang('No'),
-				'1'  => lang('Yes'),
-				'medium' => lang('Yes, with larger fontsize'),
-			),
-			'xmlrpc' => True,
-			'admin'  => False,
-		);
 		$GLOBALS['settings']['show_actions'] = array(
 			'type'   => 'check',
 			'label'  => 'Show actions in tracker listing',
@@ -160,7 +147,6 @@ class tr_admin_prefs_sidebox_hooks
 		$defaults = array(
 			'notify_creator'  => 1,
 			'notify_assigned' => 1,
-			'notify_html'	  => 1,
 			'show_actions' => 1,
 			'allow_defaultproject' => 1,
 			'show_sum_timesheet' => 0,
