@@ -59,6 +59,7 @@ converted count	tracker	en	converted count
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
 created	tracker	en	Created
+creator	tracker	en	Creator
 date opened	tracker	en	Date opened
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
@@ -74,6 +75,7 @@ duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	E-Mail address to which a copy of all tracker-notifications should be send
 e-mail notifications	tracker	en	E-Mail notifications
 edit %1	tracker	en	Edit %1
+edit entry	tracker	en	Edit entry
 email address to contact you	tracker	en	Email address to contact you
 entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
@@ -84,6 +86,7 @@ field	tracker	en	Field
 fixed	tracker	en	Fixed
 from	tracker	en	From
 history	tracker	en	History
+html editing	tracker	en	Html editing
 id	tracker	en	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	en	If this item is important for you, please consider to set a bounty for it!
 if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
@@ -107,11 +110,14 @@ notification	tracker	en	Notification
 open	tracker	en	Open
 out of date	tracker	en	Out of date
 overdue after	tracker	en	Overdue after
+ownership of the ticket	tracker	en	Ownership of the ticket
 pending	tracker	en	Pending
 pending items never get close automatic.	tracker	en	Pending items never get close automatic.
 pending items will be closed automatic after %1 days without response.	tracker	en	Pending items will be closed automatic after %1 days without response.
 permission denied !!!	tracker	en	Permission denied !!!
+permit html editing in overview and comments	tracker	en	Permit html editing in overview and comments
 postponed	tracker	en	Postponed
+print entry	tracker	en	Print entry
 project selection	tracker	en	Project selection
 projects	tracker	en	Projects
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
@@ -120,6 +126,9 @@ receive notifications in html	tracker	en	Receive notifications in html
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 resolution	tracker	en	Resolution
+restict tracker items to the creator and the staff only	tracker	en	Restict tracker items to the creator and the staff only
+restict tracker items to the creators primary group and the staff only	tracker	en	Restict tracker items to the creators primary group and the staff only
+restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
 select tracker queue	tracker	en	select tracker queue
 select which categories should be used in tracker for the tts categories	tracker	en	select which categories should be used in Tracker for the TTS categories
 sender address	tracker	en	Sender address
@@ -143,6 +152,7 @@ this module displays information from the tracker.	tracker	en	This module displa
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
 ticket count	tracker	en	ticket count
 ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
+times	tracker	en	Times
 tracker	common	en	Tracking System
 tracker added	tracker	en	Tracker queue added
 tracker admins	tracker	en	Tracker admins

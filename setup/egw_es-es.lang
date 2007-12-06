@@ -59,6 +59,7 @@ converted count	tracker	es-es	Cuenta de convertidos
 copy to	tracker	es-es	Copiar a
 create new links	tracker	es-es	Crear enlaces nuevos
 created	tracker	es-es	Creado
+creator	tracker	es-es	Creador
 date opened	tracker	es-es	Fecha de apertura
 delete this bounty	tracker	es-es	Borrar esta recompensa
 delete this canned response	tracker	es-es	Borrar esta respuesta automatizada
@@ -74,6 +75,7 @@ duplicate	tracker	es-es	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
 e-mail notifications	tracker	es-es	Notificaciones por correo
 edit %1	tracker	es-es	Editar %1
+edit entry	tracker	es-es	Editar entrada
 email address to contact you	tracker	es-es	Dirección de correo electrónico de contacto
 entry saved	tracker	es-es	Se ha guardado la entrada
 error adding the new tracker!	tracker	es-es	¡Error al añadir el nuevo informe!
@@ -84,6 +86,7 @@ field	tracker	es-es	Campo
 fixed	tracker	es-es	Corregido
 from	tracker	es-es	De
 history	tracker	es-es	Historial
+html editing	tracker	es-es	Edición html
 id	tracker	es-es	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	es-es	Si este elemento es importante para usted, por favor, considere establecer una recompensa.
 if this item is important for you, please vote for it.	tracker	es-es	Si este elemento es importante para usted, por favor, vote por él.
@@ -107,11 +110,14 @@ notification	tracker	es-es	Notificación
 open	tracker	es-es	Abierto
 out of date	tracker	es-es	Fuera de fecha
 overdue after	tracker	es-es	Vencimiento después de
+ownership of the ticket	tracker	es-es	Propietario del elemento de seguimiento
 pending	tracker	es-es	Pendiente
 pending items never get close automatic.	tracker	es-es	Los elementos pendientes nunca se cierran automáticamente
 pending items will be closed automatic after %1 days without response.	tracker	es-es	Los elementos pendientes se cerrarán automáticamente después de %1 días sin respuesta.
 permission denied !!!	tracker	es-es	¡No tiene permiso de acceso!
+permit html editing in overview and comments	tracker	es-es	Permitir edición html en la descripción y comentarios
 postponed	tracker	es-es	Pospuesto
+print entry	tracker	es-es	Imprimir
 project selection	tracker	es-es	Selección de proyecto
 projects	tracker	es-es	Proyectos
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
@@ -120,6 +126,9 @@ receive notifications in html	tracker	es-es	Recibir notificaciones en html
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 resolution	tracker	es-es	Resolución
+restict tracker items to the creator and the staff only	tracker	es-es	Restringir elementos de seguimiento al creador y equipo solo
+restict tracker items to the creators primary group and the staff only	tracker	es-es	Restringir elementos de seguimiento al grupo primario del creador y equipo solo
+restrict tracker items to staff and:	tracker	es-es	Restringir elementos de seguimiento al equipo y:
 select tracker queue	tracker	es-es	Seleccionar cola de seguimiento
 select which categories should be used in tracker for the tts categories	tracker	es-es	Seleccionar que categorías se deberían de usar en el sistema de seguimiento para las categorías de TTS
 sender address	tracker	es-es	Dirección del remitente
@@ -143,6 +152,7 @@ this module displays information from the tracker.	tracker	es-es	Este módulo mu
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	es-es	El sistema cerró este elemento automáticamente. Anteriormente estaba en estado Pendiente, y el remitente original no respondió durante %1 días.
 ticket count	tracker	es-es	Cuenta de tickets
 ticket modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
+times	tracker	es-es	Tiempos
 tracker	common	es-es	Sistema de seguimiento
 tracker added	tracker	es-es	Se ha añadido una nueva cola de seguimiento
 tracker admins	tracker	es-es	Administradores de la cola
