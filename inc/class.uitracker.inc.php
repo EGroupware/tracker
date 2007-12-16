@@ -147,7 +147,7 @@ class uitracker extends botracker
 					$this->init();
 				}
 				else
-				{
+				{				
 					// editing, preventing/fixing mixed ascii-html
 					if ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
 					{
@@ -168,7 +168,7 @@ class uitracker extends botracker
 						{
 							$this->data['replies'][$n]['reply_message'] = nl2br($this->data['replies'][$n]['reply_message']);	
 						}					
-					}								
+					}
 				}
 			}
 			else	// new item
@@ -229,7 +229,12 @@ class uitracker extends botracker
 					{
 						$restrict = true;
 					}
-				}
+					// Check queue access if enabled and that no has access to queue 0 (All)
+					if ($this->enabled_queue_acl_access && !$this->trackers[$this->data['tr_tracker']] && !$this->is_user(0,$this->user))
+					{
+						$restrict = true;					
+					}					
+				}				
 			}
 			if ($restrict)
 			{
@@ -709,7 +714,7 @@ class uitracker extends botracker
 		}
 		else
 		{
-			$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
+			$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,'technicians');
 		}
 		
 		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
@@ -943,7 +948,7 @@ class uitracker extends botracker
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','notification')) as $name)
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification')) as $name)
 						{
 							if ((string) $this->$name !== $content[$name])
 							{
@@ -977,7 +982,7 @@ class uitracker extends botracker
 						}
 					}
 					// tracker specific config
-					foreach(array('technicians','admins','notification','restrictions') as $name)
+					foreach(array('technicians','admins','users','notification','restrictions') as $name)
 					{
 						$staff =& $this->$name;
 						if (!isset($staff[$tracker])) $staff[$tracker] = array();
@@ -1114,12 +1119,13 @@ class uitracker extends botracker
 			'tracker' => $tracker,
 			'admins' => $this->admins[$tracker],
 			'technicians' => $this->technicians[$tracker],
+			'users' => $this->users[$tracker],
 			'notification' => $this->notification[$tracker],
 			'restrictions' => $this->restrictions[$tracker],
 			$tabs => $content[$tabs],
 		);
 
-		foreach(array_diff($this->config_names,array('admins','technicians','notification','restrictions')) as $name)
+		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions')) as $name)
 		{
 			$content[$name] = $this->$name;
 		}
@@ -1177,6 +1183,9 @@ class uitracker extends botracker
 				'TRACKER_ITEM_GROUP'    => !!($rights & TRACKER_ITEM_GROUP),
 			);
 		}
+		$this->enabled_queue_acl_access ? $queue_access_enabled_label = lang("Enabled") : $queue_access_enabled_label = lang("Disabled");		
+		$content['queue_access_enabled_label'] = lang('Users').': '.lang('Restriction')." ".$queue_access_enabled_label;
+		$content['queue_access_enabled_label_help'] = lang('You can enable/disable the queue access restrictions in the configuration tab (for all queues)');
 		//_debug_array($content);
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		$sel_options = array(

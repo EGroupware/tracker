@@ -135,13 +135,13 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.2.002">
+	<template id="tracker.edit" template="" lang="" group="0" version="0.2.004">
 		<grid width="100%">
 			<columns>
-				<column width="105"/>
-				<column width="260"/>
-				<column width="105"/>
-				<column width="220"/>
+				<column width="95"/>
+				<column width="270"/>
+				<column width="95"/>
+				<column width="230"/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
@@ -195,13 +195,13 @@
 							<menupopup id="tr_resolution"/>
 						</menulist>
 						<menulist>
-							<menupopup type="select-percent" id="tr_completion" label="-"/>
+							<menupopup type="select-percent" id="tr_completion"/>
 						</menulist>
 					</hbox>
 				</row>
 				<row class="row">
 					<description value="Cc" statustext="List of coma separated email address"/>
-					<textbox size="40" maxlength="80" id="tr_cc"/>
+					<textbox size="40" maxlength="254" id="tr_cc"/>
 					<description value="Group"/>
 					<menulist>
 						<menupopup no_lang="1" id="tr_group" statustext="Ownership of the ticket"/>
@@ -209,7 +209,7 @@
 				</row>
 				<row class="row">
 					<description options=",,,tr_summary" value="Summary"/>
-					<textbox size="80" maxlength="80" span="3" id="tr_summary" needed="1"/>
+					<textbox size="90" maxlength="80" span="3" id="tr_summary" needed="1"/>
 				</row>
 				<row valign="top">
 					<tabbox span="all">

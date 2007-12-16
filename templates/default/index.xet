@@ -34,7 +34,7 @@
 					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
 					<nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
 					<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
-					<nextmatch-sortheader label="Priority" id="tr_priority" class="tracker-priority"/>
+					<nextmatch-sortheader label="Priority" id="tr_priority" class="tracker-priority" align="center"/>
 					<vbox options="0,0">
 						<nextmatch-filterheader options="All" id="tr_status" label="Status" class="user_select"/>
 					</vbox>
@@ -91,7 +91,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="0.1.004">
+	<template id="tracker.index" template="" lang="" group="0" version="0.1.005">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>

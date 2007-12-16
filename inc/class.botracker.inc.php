@@ -127,6 +127,12 @@ class botracker extends sotracker
 	 */
 	var $admins;
 	/**
+	 * Users by tracker or key=0 for all trackers
+	 * 
+	 * @var array
+	 */
+	var $users;
+	/**
 	 * ACL for the fields of the tracker
 	 *
 	 * field-name is the key with values or'ed together from the TRACKER_ constants
@@ -140,6 +146,12 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $restrictions;
+	/**
+	 * Enabled the acl queue access?
+	 * 
+	 * @var boolean
+	 */
+	var $enabled_queue_acl_access = false;
 	/**
 	 * Translates field / acl-names to labels
 	 *
@@ -241,9 +253,9 @@ class botracker extends sotracker
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','notification','projects',	// tracker specific
+		'technicians','admins','users','notification','projects',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit',	// tracker unspecific
-		'allow_bounties','currency',
+		'allow_bounties','currency','enabled_queue_acl_access',
 	);
 	/**
 	 * Notification settings (tracker specific, keys: sender, link, copy, lang)
@@ -523,10 +535,10 @@ class botracker extends sotracker
 	 *
 	 * @param int $tracker
 	 * @param int $return_groups=2 0=users, 1=groups+users, 2=users+groups
-	 * @param boolean $technicians=true true=technicians (incl. admins), false=only admins
+	 * @param string $what='technicians' technicians=technicians (incl. admins), admins=only admins, users=only users
 	 * @return array with uid => user-name pairs
 	 */
-	function &get_staff($tracker,$return_groups=2,$technicians=true)
+	function &get_staff($tracker,$return_groups=2,$what='technicians')
 	{
 		static $staff_cache;
 		
@@ -534,16 +546,25 @@ class botracker extends sotracker
 
 		// some caching
 		if (isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][(int)$return_groups]) && 
-			isset($staff_cache[$tracker][(int)$return_groups][(int)$technicians]))
+			isset($staff_cache[$tracker][(int)$return_groups][$what]))
 		{
-			//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][(int)$technicians]);
-			return $staff_cache[$tracker][(int)$return_groups][(int)$technicians];
+			//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
+			return $staff_cache[$tracker][(int)$return_groups][$what];
 		}
 		$staff = array();
-		if (is_array($this->admins[0])) $staff = $this->admins[0];
-		if (is_array($this->admins[$tracker])) $staff = array_merge($staff,$this->admins[$tracker]);
-		if ($technicians && is_array($this->technicians[0])) $staff = array_merge($staff,$this->technicians[0]);
-		if ($technicians && is_array($this->technicians[$tracker])) $staff = array_merge($staff,$this->technicians[$tracker]);
+		if ($what == "users")
+		{
+			if (is_array($this->users[0])) $staff = $this->users[0];
+			if (is_array($this->users[$tracker])) $staff = array_merge($staff,$this->users[$tracker]);
+		}
+		else
+		{
+			if (is_array($this->admins[0])) $staff = $this->admins[0];
+			if (is_array($this->admins[$tracker])) $staff = array_merge($staff,$this->admins[$tracker]);
+			if ($what == 'technicians' && is_array($this->technicians[0])) $staff = array_merge($staff,$this->technicians[0]);
+			if ($what == 'technicians' && is_array($this->technicians[$tracker])) $staff = array_merge($staff,$this->technicians[$tracker]);			
+		}
+
 
 		// split users and groups and resolve the groups into there users
 		$users = $groups = array();
@@ -577,7 +598,7 @@ class botracker extends sotracker
 			}
 		}
 		//_debug_array($staff);
-		return $staff_cache[$tracker][(int)$return_groups][(int)$technicians] = $staff;
+		return $staff_cache[$tracker][(int)$return_groups][$what] = $staff;
 	}
 
 	/**
@@ -591,7 +612,7 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$admins =& $this->get_staff($tracker,0,false);
+		$admins =& $this->get_staff($tracker,0,'admins');
 
 		return isset($admins[$user]);
 	}
@@ -607,9 +628,25 @@ class botracker extends sotracker
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$technicians =& $this->get_staff($tracker,0,true);
+		$technicians =& $this->get_staff($tracker,0,'technicians');
 
 		return isset($technicians[$user]);
+	}
+
+	/**
+	 * Check if a user (default current user) is an tecnichan for the given tracker
+	 *
+	 * @param int $tracker ID of tracker
+	 * @param int $user=null ID of user, default current user $this->user
+	 * @return boolean
+	 */
+	function is_user($tracker,$user=null)
+	{
+		if (is_null($user)) $user = $this->user;
+
+		$users =& $this->get_staff($tracker,0,'users');
+
+		return isset($users[$user]);
 	}
 	
 	/**
@@ -782,9 +819,21 @@ class botracker extends sotracker
 				$labels[$cat['id']] = $cat['name'];
 			}
 		}
+		$this->load_config();
+		if ($type == 'tracker' && !$GLOBALS['egw_info']['user']['apps']['admin'] && $this->enabled_queue_acl_access)
+		{			
+			foreach ($labels as $tracker_id => $tracker_name)
+			{				
+				if (!$this->is_user($tracker_id,$this->user) && !$this->is_technician($tracker_id,$this->user) && !$this->is_admin($tracker_id,$this->user))
+				{
+					unset($labels[$tracker_id]);
+				}
+			}		
+		}
+		
 		natcasesort($labels);
 		
-		//echo "botracker::get_tracker_labels('$type',$tracker)"; _debug_array($labels);
+		//echo "botracker::get_tracker_labels('$type',$tracker)"; _debug_array($labels);		
 		return $labels;
 	}
 	
@@ -968,6 +1017,7 @@ class botracker extends sotracker
 		$this->reload_labels();
 		unset($this->admins[$tracker]);
 		unset($this->technicians[$tracker]);
+		unset($this->users[$tracker]);
 		$this->delete(array('tr_tracker' => $tracker));
 		$this->save_config();
 
@@ -981,10 +1031,11 @@ class botracker extends sotracker
 	{
 		$config =& CreateObject('phpgwapi.config','tracker');
 		$config->read_repository();
-
+		
 		foreach($this->config_names as $name)
 		{
 			//echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
+		
 			$config->save_value($name,$this->$name,'tracker');
 		}
 		$this->set_async_job($this->pending_close_days > 0);

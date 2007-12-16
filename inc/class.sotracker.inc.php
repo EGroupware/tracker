@@ -186,7 +186,7 @@ class sotracker extends so_sql
 				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
 				{
 					$filter[] = '(tr_creator = ' . $this->user . ')'; 
-				} 
+				}				 
 			}
 			else
 			{
@@ -194,6 +194,7 @@ class sotracker extends so_sql
 				$group_restrictions = array(); 
 				$creator_restrictions = array();
 				$all_restricions = array();
+				$access_restrictions = array();
 				$restrict = array();
 				if (!$this->restrictions) $this->restrictions = array();
 				foreach($this->restrictions as $tracker => $restrictions)
@@ -216,7 +217,21 @@ class sotracker extends so_sql
 						}
 					}
 				}
-	
+				// Queue Access Control, has to be enabled in config
+				if ($this->enabled_queue_acl_access && !$this->is_user(0,$this->user))
+				{
+					if (!empty($this->trackers))
+					{
+						foreach ($this->trackers as $tracker_id => $tracker_name)
+						{
+							array_push($access_restrictions, $tracker_id);
+						}												
+					}
+					else
+					{
+						array_push($access_restrictions, -1);
+					}
+				}
 				if (!empty($group_restrictions))
 				{
 					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';				
@@ -229,12 +244,16 @@ class sotracker extends so_sql
 				{
 					$restrict[] = '(tr_tracker NOT IN (' . implode(',', $all_restricions) . '))';
 				}
+				if (!empty($access_restrictions))
+				{
+					$restrict[] = '(tr_tracker IN (' . implode(',', $access_restrictions) . '))';
+				}
 				if (!empty($restrict))
 				{
 					$filter[] = '(' . implode(' OR ', $restrict) . ')';
 				}
-			} 
-		} 
+			}
+		} 		
 		//$this->debug = 4;
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
