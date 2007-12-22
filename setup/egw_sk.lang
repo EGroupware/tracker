@@ -1,4 +1,11 @@
 %1 entries updated.	tracker	sk	%1 položiek bolo aktualizovaných
+%1 tickets have been converted	tracker	sk	%1 položiek bolo skonvertovaných
+&#9830; not closed	tracker	sk	♦ Neuzavreté
+&#9830; own not closed	tracker	sk	♦ Vlastné neuzavreté
+&#9830; own without reply not closed	tracker	sk	♦ Vlastné bez odpovede neuzavreté
+&#9830; without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
+&#9830; without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
+--> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu
 --> enter new name	tracker	sk	--> zadajte nový názov
 1 - lowest	tracker	sk	1 - najnižšia
 5 - medium	tracker	sk	5 - priemerná
@@ -6,26 +13,34 @@
 accepted	tracker	sk	Prijaté
 actions	tracker	sk	Akcie
 add comment	tracker	sk	Pridať poznámku
+add timesheet entry	tracker	sk	Pridať položku harmonogramu
 after how many days a not replied item should be marked overdue?	tracker	sk	Po koľkých dňoch sa má 'nezodpovedaná' záležitosť označiť ako 'meškajúca'?
 after how many days pending items should be closed automatic	tracker	sk	Po koľkých dňoch sa majú 'vybavované' záležitosti automaticky uzavrieť
+all tickets are already converted to tracker	tracker	sk	Všetky položky už boli skonvertované do Sledovača
 allow bounties	tracker	sk	Povoliť odmeny
+allow default projects for tracker	tracker	sk	Povoliť predvolené projekty pre sledovač
 allow editing by	tracker	sk	Komu povoliť úpravy
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	sk	Povoliť preddefinovanie projektov ktoré budú pripojené k novým položkám sledovača.
 allow to assign groups to tracker items	tracker	sk	Povoliť priradenie skupín položkám Sledovača
 allow voting	tracker	sk	Povoliť hlasovanie
 allow voting on tracker items, show and sort after the votes	tracker	sk	Povoliť hlasovanie o záležitostiach sledovača, zobraziť a zoradiť podľa hlasovania
 amount	tracker	sk	Množstvo
+assign to project	tracker	sk	Priradiť k projektu
 assigned to	tracker	sk	Priradené (komu)
 assigning groups	tracker	sk	Priraďovanie skupín
 attachments & links	tracker	sk	Prílohy a Odkazy
 autoassign to	tracker	sk	Automaticky priradiť (komu)
 bounties	tracker	sk	Odmeny
 bounty confirmed	tracker	sk	Odmena bola potvrdená
+bounty confirmed.	tracker	sk	Odmena bola potvrdená.
 bounty deleted	tracker	sk	Odmena bola odstránená
+bounty deleted.	tracker	sk	Odmena bola odstránená.
 bounty set	tracker	sk	Odmena bola vypísaná
 canned response	tracker	sk	Šablónová odpoveď
 canned responses	tracker	sk	Šablónové odpovede
 categories, versions, canned responses	tracker	sk	Kategórie, verzie, šablónové odpovede
 check all	tracker	sk	Označiť všetko
+choose a project from the drop-down list	tracker	sk	Vyberte projekt z rozbaľovacieho zoznamu
 close pending	tracker	sk	Uzavrieť 'vybavované'
 closed	tracker	sk	Uzavreté
 comment by %1 at %2:	tracker	sk	Poznámka od %1 k %2:
@@ -38,6 +53,9 @@ configuration, acl, notifications	tracker	sk	Konfigurácia, ACL, Pripomienky
 confirm that you pay the specified bounty to implement or fix the issue	tracker	sk	Potvrďte, že zaplatíte uvedenú odmenu za vyriešenie tejto záležitosti
 confirm the receipt of money for this bounty	tracker	sk	Potvrďte prevzatie peňazí týkajúcich sa tejto odmeny
 confirmed	tracker	sk	Potvrdené
+convert all closed tickets	tracker	sk	skonvertovať všetky uzavreté záznamy
+convert all open tickets	tracker	sk	skonvertovať všetky otvorené záznamy
+converted count	tracker	sk	počet skonvertovaných záznamov
 copy to	tracker	sk	Kopírovať (kam)
 create new links	tracker	sk	Vytvoriť nové odkazy
 created	tracker	sk	Vytvorené
@@ -45,6 +63,7 @@ date opened	tracker	sk	Dátum otvorenia
 delete this bounty	tracker	sk	Odstrániť túto odmenu
 delete this canned response	tracker	sk	Odstrániť túto šablónovú odpoveď
 delete this category	tracker	sk	Odstrániť túto kategóriu
+delete this entry	tracker	sk	Odstrániť túto položku
 delete this status	tracker	sk	Odstrániť tento stav
 delete this tracker including all it's items and categories	tracker	sk	Odstrániť tento sledovač vrátane všetkých záležitostí a kategórií
 delete this version	tracker	sk	Odstrániť túto verziu
@@ -68,6 +87,7 @@ history	tracker	sk	História
 id	tracker	sk	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím zvážte vypísanie odmeny za jej vyriešenie!
 if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím hlasujte za ňu.
+import tts tickets	tracker	sk	Importovať TTS záznamy
 invalid	tracker	sk	Neplatné
 item assignee	tracker	sk	Zodpovedný za záležitosť
 item creator	tracker	sk	Ohlasovateľ záležitosti
@@ -77,8 +97,10 @@ later	tracker	sk	Neskôr
 list of coma separated email address	tracker	sk	Zoznam E-mailových adries oddelených čiarkami
 new %1	tracker	sk	Nové %1
 new items	tracker	sk	Nové záležitosti
+new ticket submitted by %1 at %2	tracker	sk	Nový záznam odoslaný %1 k %2
 new tracker item submitted by %1 at %2	tracker	sk	Novú záležitosť Sledovača odoslal %1 o %2
 no change	tracker	sk	Bezo zmien
+no trackers found, aborting	tracker	sk	Nenašli sa žiadne Sledovače, končím.
 non-anonymous users	tracker	sk	Ne-anonymný používateľ
 noone	tracker	sk	Nikto
 notification	tracker	sk	Pripomienka
@@ -90,18 +112,24 @@ pending items never get close automatic.	tracker	sk	'Vybavované' záležitosti 
 pending items will be closed automatic after %1 days without response.	tracker	sk	'Vybavované' záležitosti sa automaticky uzatvárajú po %1 dňoch bez odpovede.
 permission denied !!!	tracker	sk	Prístup bol odmietnutý !!!
 postponed	tracker	sk	Odložené
+project selection	tracker	sk	Výber projektov
+projects	tracker	sk	Projekty
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
 receive notifications about created tracker-items	tracker	sk	Dostávať pripomienky o vytvorených záležitostiach Sledovača
 receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenúť
 resolution	tracker	sk	Riešenie
+select tracker queue	tracker	sk	vyberte frontu sledovača
+select which categories should be used in tracker for the tts categories	tracker	sk	Vyberte, ktoré kategórie sa majú v Sledovači použiť pre kategórie TTS
 sender address	tracker	sk	Adresa odosielateľa
 sender address for all notifications, eg. noreply@egroupware.org	tracker	sk	Adresa odosielateľa pre všetky pripomienky, napr. bezodpovede@egroupware.org
 set an own bounty (in %s)	tracker	sk	Zadať vlastnú odmenu (v %s)
 set bounty	tracker	sk	Zadať odmenu
+should the actions column in the tracker list-view be shown?	tracker	sk	Má sa zobrazovať stĺpec akcií v pohľade na zoznam Sledovača?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorá Vám bola priradená?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorú ste vytvorili?
+show actions in tracker listing	tracker	sk	obraziť akcie v zozname Sledovača
 staff	tracker	sk	Personál
 state	tracker	sk	Stav
 summary	tracker	sk	Zhrnutie
@@ -112,6 +140,8 @@ the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa 
 the canned response will be prefix the text you type.	tracker	sk	Šablónová odpoveď sa zobrazí pred textom, ktorý napíšete.
 this module displays information from the tracker.	tracker	sk	Tento modul zobrazuje informácie zo Stopovača.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sk	Táto záležitosť Sledovača bola automaticky uzavretá systémom. Pôvodne bola v stave 'Vybavuje sa', avšak pôvodný ohlasovateľ neodpovedal do %1 dní.
+ticket count	tracker	sk	počet záznamov
+ticket modified by %1 at %2	tracker	sk	Záznam zmenil %1 k %2
 tracker	common	sk	Sledovač
 tracker added	tracker	sk	Fronta Sledovača pridaná.
 tracker admins	tracker	sk	Správci Sledovača
@@ -120,6 +150,7 @@ tracker configuration	tracker	sk	Nastavenia Sledovača
 tracker deleted	tracker	sk	Fronta Sledovača bola odstránená
 tracker item modified by %1 at %2	tracker	sk	Záležitosť Sledovača upravil %1 o %2
 tracker item not found !!!	tracker	sk	Záležitosť Sledovača sa nenašla !!!
+tracker queue	tracker	sk	Fronta Sledovača
 tracker-%1 '%2' added.	tracker	sk	Sledovač-%1 '%2' pridané.
 tracker-%1 '%2' updated.	tracker	sk	Sledovač-%1 '%2' aktualizované.
 tracker-%1 deleted.	tracker	sk	Sledovač-%1 '%2' odstránené.
@@ -132,6 +163,7 @@ wont fix	tracker	sk	Nebude sa riešiť
 works for me	tracker	sk	Mne to funguje
 yes, display groups first	tracker	sk	Áno, najprv zobraziť skupiny
 yes, display users first	tracker	sk	Áno, najprv zobraziť používateľov
+yes, with larger fontsize	tracker	sk	Áno, s väčším písmom
 you can respond by visiting:	tracker	sk	Môžete odpovedať kliknutím na:
 you need to enter a name	tracker	sk	Musíte zadať názov
 you need to login to vote!	tracker	sk	Ak chcete hlasovať, musíte sa prihlásiť do systému!
