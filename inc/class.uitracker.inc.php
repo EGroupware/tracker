@@ -523,16 +523,32 @@ class uitracker extends botracker
 			
 		// set the options for assigned to depending on the tracker
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,true);
-		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
-		$rows['sel_options']['filter2'] = array(lang('All'))+$this->get_tracker_labels('version',$tracker);
+//		$rows['sel_options']['filter'] = array(lang('All'))+$this->get_tracker_labels('cat',$tracker);
+//		$rows['sel_options']['filter2'] = array(lang('All'))+$this->get_tracker_labels('version',$tracker);
 		$rows['sel_options']['tr_status'] = $this->stati+$this->get_tracker_labels('stati',$tracker);
+//		if ($this->is_admin($tracker))
+//		{
+//			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
+//			$rows['sel_options']['cat_id'] =& $rows['sel_options']['filter'];
+//			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
+//			$rows['is_admin'] = true;
+//		}
+		
+		$versions = $this->get_tracker_labels('version',$tracker);
+		$cats = $this->get_tracker_labels('cat',$tracker);
+		//$statis = $this->stati+$this->get_tracker_labels('stati',$tracker);
+		
+		//$rows['sel_options']['tr_status'] = $this->filters+$statis;
+		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
+		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
-			$rows['sel_options']['cat_id'] =& $rows['sel_options']['filter'];
-			$rows['sel_options']['tr_version'] =& $rows['sel_options']['filter2'];
+			$rows['sel_options']['cat_id'] =& $cats;
+			$rows['sel_options']['tr_version'] =& $versions;
+			//$rows['sel_options']['tr_status_admin'] =& $statis;
 			$rows['is_admin'] = true;
-		}
+		}		
 		if (!$this->allow_voting)
 		{
 			$rows['no_votes'] = true;
@@ -599,7 +615,8 @@ class uitracker extends botracker
 		else
 		{
 			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
-
+			$tracker = $content['nm']['col_filter']['tr_tracker'];
+			
 			if ($content['update'])
 			{
 				unset($content['update']);
