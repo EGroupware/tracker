@@ -91,7 +91,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="0.1.005">
+	<template id="tracker.index" template="" lang="" group="0" version="0.1.007">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
@@ -121,7 +121,7 @@
 							<menupopup id="tr_priority" options="No change" label="Priority"/>
 						</menulist>
 						<menulist>
-							<menupopup id="tr_status" options="No change" label="Status" statustext="@status_help"/>
+							<menupopup id="tr_status_admin" options="No change" label="Status" statustext="@status_help"/>
 						</menulist>
 						<menulist>
 							<menupopup id="tr_assigned" options="No change" label="Assigned to" no_lang="1"/>
