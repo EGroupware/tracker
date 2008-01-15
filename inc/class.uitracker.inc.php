@@ -724,11 +724,11 @@ class uitracker extends botracker
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
+		$rows['sel_options']['tr_version'] =& $versions;		
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
-			$rows['sel_options']['cat_id'] =& $cats;
-			$rows['sel_options']['tr_version'] =& $versions;
+			$rows['sel_options']['cat_id'] =& $cats;			
 			$rows['sel_options']['tr_status_admin'] =& $statis;
 			$rows['is_admin'] = true;
 		}
