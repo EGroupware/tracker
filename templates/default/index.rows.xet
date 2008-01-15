@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.3.010">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.3.011">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -52,7 +52,7 @@
 						<menupopup type="select-cat" options="None" readonly="true" id="${row}[cat_id]"/>
 					</menulist>
 					<menulist>
-						<menupopup no_lang="1" id="${row}[tr_version]" readonly="true"/>
+						<menupopup type="select-cat" options="None" readonly="true" id="${row}[tr_version]"/>
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" options="b,tracker.uitracker.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535"/>
 					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
