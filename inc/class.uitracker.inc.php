@@ -684,7 +684,7 @@ class uitracker extends botracker
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
-			$readonlys["timesheet[$id]"]= !($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker'])));
+			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));			
 			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
 		
@@ -747,8 +747,8 @@ class uitracker extends botracker
 			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
 		}
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
-		// enable the Actions (timesheet)  column
-		$rows['allow_actions'] = isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_actions'];
+		// enable the Actions column
+		$this->prefs['show_actions'] ? $rows['allow_actions'] = $this->prefs['show_actions'] : $rows['allow_actions'] = null;
 		$rows['allow_sum_timesheet'] =  isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'];
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
