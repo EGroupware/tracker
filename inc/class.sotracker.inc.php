@@ -5,12 +5,10 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$ 
  */
-
-require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.so_sql.inc.php');
 
 /**
  * Storage Object of the tracker
@@ -43,7 +41,7 @@ class sotracker extends so_sql
 	 */
 	function sotracker()
 	{
-		$this->so_sql('tracker','egw_tracker');
+		$this->so_sql('tracker','egw_tracker',null,'',true);
 	}
 	
 	/**
@@ -60,9 +58,9 @@ class sotracker extends so_sql
 	{
 		if (($ret = parent::read($keys,$extra_cols,$join)))
 		{
-			$this->db->select($this->replies_table,'*',array('tr_id' => $this->data['tr_id']),__LINE__,__FILE__,false,'ORDER BY reply_created DESC');
 			$this->data['replies'] = array();
-			while (($row = $this->db->row(true)))
+			foreach($this->db->select($this->replies_table,'*',array('tr_id' => $this->data['tr_id']),
+				__LINE__,__FILE__,false,'ORDER BY reply_created DESC','tracker') as $row)
 			{
 				$this->data['replies'][] = $row;
 			}
@@ -96,7 +94,7 @@ class sotracker extends so_sql
 		{
 			if ($this->data['reply_message'])
 			{
-				$this->db->insert($this->replies_table,$this->data,false,__LINE__,__FILE__);
+				$this->db->insert($this->replies_table,$this->data,false,__LINE__,__FILE__,'tracker');
 				// add the new replies to this->data[replies]
 				if (!is_array($this->data['replies'])) $this->data['replies'] = array();
 				array_unshift($this->data['replies'],array(
@@ -349,19 +347,18 @@ class sotracker extends so_sql
 		$where = "tr_id IN ($ids)";
 		if (!$this->db->capabilities['sub_queries'])
 		{
-			$this->db->query($ids,__LINE__,__FILE__);
 			$ids = array();
-			while ($this->db->next_record())
+			foreach($this->db->query($ids,__LINE__,__FILE__) as $row)
 			{
-				$ids[] = $this->db->f(0);
+				$ids[] = $row['tr_id'];
 			}
 			$where = 'tr_id IN ('.implode(',',$ids).')';
 		}
 		if ($ids)
 		{
-			$this->db->delete($this->replies_table,$where,__LINE__,__FILE__);
-			$this->db->delete($this->votes_table,$where,__LINE__,__FILE__);
-			$this->db->delete($this->bounties_table,$where,__LINE__,__FILE__);
+			$this->db->delete($this->replies_table,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete($this->votes_table,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete($this->bounties_table,$where,__LINE__,__FILE__,'tracker');
 		}
 		return parent::delete($keys);
 	}
@@ -381,9 +378,7 @@ class sotracker extends so_sql
 		);
 		if ($ip) $where['vote_ip'] = $ip;
 		
-		$this->db->select($this->votes_table,'vote_time',$where,__LINE__,__FILE__);
-		
-		return $this->db->next_record() ? $this->db->f(0) : null;
+		return $this->db->select($this->votes_table,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchSingle();
 	}
 
 	/**
@@ -401,7 +396,7 @@ class sotracker extends so_sql
 			'vote_uid'  => $user,
 			'vote_ip'   => $ip,
 			'vote_time' => time(),
-		),false,__LINE__,__FILE__);
+		),false,__LINE__,__FILE__,'tracker');
 	}
 	
 	/**
@@ -416,14 +411,14 @@ class sotracker extends so_sql
 		{
 			$where = array('bounty_id' => $data['bounty_id']);
 			unset($data['bounty_id']);
-			if ($this->db->update($this->bounties_table,$data,$where,__LINE__,__FILE__))
+			if ($this->db->update($this->bounties_table,$data,$where,__LINE__,__FILE__,'tracker'))
 			{
 				return $where['bounty_id'];
 			}
 		}
 		else
 		{
-			if ($this->db->insert($this->bounties_table,$data,false,__LINE__,__FILE__))
+			if ($this->db->insert($this->bounties_table,$data,false,__LINE__,__FILE__,'tracker'))
 			{
 				return $this->db->get_last_insert_id($this->bounties_table,'bounty_id');
 			}
@@ -439,7 +434,7 @@ class sotracker extends so_sql
 	 */
 	function delete_bounty($id)
 	{
-		return $this->db->delete($this->bounties_table,array('bounty_id' => $id),__LINE__,__FILE__);
+		return $this->db->delete($this->bounties_table,array('bounty_id' => $id),__LINE__,__FILE__,'tracker');
 	}
 	
 	/**
@@ -452,9 +447,8 @@ class sotracker extends so_sql
 	{
 		if (!is_array($keys)) $keys = array('bounty_id' => $keys);
 
-		$this->db->select($this->bounties_table,'*',$keys,__LINE__,__FILE__,false,'ORDER BY bounty_created DESC');
 		$bounties = array();
-		while (($row = $this->db->row(true)))
+		foreach($this->db->select($this->bounties_table,'*',$keys,__LINE__,__FILE__,false,'ORDER BY bounty_created DESC','tracker') as $row)
 		{
 			$bounties[] = $row;
 		}

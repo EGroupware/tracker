@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$ 
  */
@@ -466,13 +466,8 @@ class botracker extends sotracker
 		}
 		if (!($err = parent::save()))
 		{
-			if (!is_object($GLOBALS['egw']->link))
-			{
-				require_once(EGW_API_INC.'/class.bolink.inc.php');
-				$GLOBALS['egw']->link =& new bolink();
-			}
 			// so other apps can update eg. their titles and the cached title gets unset
-			$GLOBALS['egw']->link->notify_update('tracker',$this->data['tr_id'],$this->data);
+			egw_link::notify_update('tracker',$this->data['tr_id'],$this->data);
 			
 			if (!is_object($this->tracking))
 			{
@@ -896,7 +891,7 @@ class botracker extends sotracker
 	 * Is called as hook to participate in the linking
 	 *
 	 * @param int/array $entry int ts_id or array with tracker item
-	 * @param string/boolean string with title, null if tracker item not found, false if no perms to view it
+	 * @return string/boolean string with title, null if tracker item not found, false if no perms to view it
 	 */
 	function link_title( $entry )
 	{
@@ -909,6 +904,30 @@ class botracker extends sotracker
 			return $entry;
 		}
 		return $this->trackers[$entry['tr_tracker']].' #'.$entry['tr_id'].': '.$entry['tr_summary'];
+	}
+
+	/**
+	 * get titles for multiple tracker items
+	 * 
+	 * Is called as hook to participate in the linking
+	 *
+	 * @param array $ids array with tracker id's
+	 * @return array with titles, see link_title
+	 */
+	function link_titles( $ids )
+	{
+		$titles = array();
+		$tickets = $this->search(array('tr_id' => $ids),'tr_id,tr_tracker,tr_summary');
+		if ($items) foreach($tickets as $ticket)
+		{
+			$titles[$ticket['tr_id']] = $this->link_title($ticket);
+		}
+		// we assume all not returned tickets are not readable by the user, as we notify egw_link about each deleted ticket
+		foreach($ids as $id)
+		{
+			if (!isset($titles[$id])) $titles[$id] = false;
+		}
+		return $titles;
 	}
 
 	/**
@@ -940,6 +959,7 @@ class botracker extends sotracker
 		return array(
 			'query' => 'tracker.botracker.link_query',
 			'title' => 'tracker.botracker.link_title',
+			'titles' => 'tracker.botracker.link_titles',
 			'view'  => array(
 				'menuaction' => 'tracker.uitracker.edit',
 			),
@@ -1047,14 +1067,13 @@ class botracker extends sotracker
 	 */
 	function load_config()
 	{
-		$config =& CreateObject('phpgwapi.config','tracker');
 		$migrate_config = false;	// update old config-values, can be removed soon
-		foreach($config->read_repository() as $name => $value)
+		foreach(config::read('tracker') as $name => $value)
 		{
 			if (substr($name,0,13) == 'notification_')	// update old config-values, can be removed soon
 			{
 				$this->notification[0][substr($name,13)] = $value;
-				$config->delete_value($name);
+				config::save_value($name,null,'tracker');
 				$migrate_config = true;
 				continue;
 			}
@@ -1062,11 +1081,11 @@ class botracker extends sotracker
 		}
 		if ($migrate_config)	// update old config-values, can be removed soon
 		{
-			$config->value('notification',$this->notification);
-			$config->save_repository();
+			foreach($this->notification as $name => $value)
+			{
+				config::save_value($name,$value,'tracker');
+			}
 		}
-		unset($config);
-		
 		if (!$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
 
 		foreach(array(

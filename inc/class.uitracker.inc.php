@@ -62,9 +62,8 @@ class uitracker extends botracker
 		// read the duration format from project-manager
 		if ($GLOBALS['egw_info']['apps']['projectmanager'])
 		{
-			$pm_config =& CreateObject('phpgwapi.config','projectmanager');
-			$pm_config->read_repository();
-			$this->duration_format = str_replace(',','',$pm_config->config_data['duration_units']).','.$pm_config->config_data['hours_per_workday'];
+			$pm_config = config::read('projectmanager');
+			$this->duration_format = str_replace(',','',$pm_config['duration_units']).','.$pm_config['hours_per_workday'];
 			unset($pm_config);
 		}
 	}
@@ -106,10 +105,12 @@ class uitracker extends botracker
 			return implode(', ',$this->tracking->errors);
 		}
 		// Adding Automatic print func
-		//$details = str_replace('<body>','<body onload="window.print()">',$details);
-		$details = '<html><body onload="window.print()">'.$details.'</body></html>';
-		
-		echo $details;
+		if (!is_object($GLOBALS['egw']->js))
+		{
+			$GLOBALS['egw']->js = new javascript();
+		}
+		$GLOBALS['egw']->js->set_onload('window.print();');
+		$GLOBALS['egw']->framework->render($details,'',false);
 	}
 	
 	/**
@@ -289,10 +290,6 @@ class uitracker extends botracker
 					{
 						$msg = lang('Entry saved');
 						
-						if (!is_object($GLOBALS['egw']->link))
-						{
-							$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
-						}
 						//apply defaultlinks
 						usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 						foreach($this->all_cats as $cat)
@@ -302,9 +299,9 @@ class uitracker extends botracker
 				
 							if ($cat['parent'] == $this->data['tr_tracker'] && $data['type'] != 'tracker' && $data['type']=='project')
 							{
-								if (!$GLOBALS['egw']->link->get_link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']))
+								if (!egw_link::get_link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']))
 								{
-									$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']);
+									egw_link::link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']);
 								}
 							}
 						}
@@ -312,7 +309,7 @@ class uitracker extends botracker
 						
 						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
 						{
-							$GLOBALS['egw']->link->link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
+							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
 
 						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg))."&tracker=".$this->data['tr_tracker']."';";
@@ -505,7 +502,7 @@ class uitracker extends botracker
 				$link_id = $link_ids[$n];
 				if (preg_match('/^[a-z_0-9-]+:[:a-z_0-9-]+$/i',$link_app.':'.$link_id))	// gard against XSS
 				{
-					$GLOBALS['egw']->link->link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
+					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
 			}
 		}
@@ -657,7 +654,7 @@ class uitracker extends botracker
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
 			{
 				unset($links);
-				if (($links = $GLOBALS['egw']->link->get_links('tracker',$row['tr_id'])) &&
+				if (($links = egw_link::get_links('tracker',$row['tr_id'])) &&
 					isset($GLOBALS['egw_info']['user']['apps']['timesheet']))		
 				{
 					// loop through all links of the entries
@@ -669,7 +666,7 @@ class uitracker extends botracker
 							//$info['pm_id'] = $link['id'];
 						}
 						if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
-						if ($link['app'] != 'timesheet' && $link['app'] != $this->link->vfs_appname)
+						if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
 						{
 							$rows[$n]['extra_links'] .= '&link_app[]='.$link['app'].'&link_id[]='.$link['id'];
 						}
