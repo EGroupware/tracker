@@ -295,10 +295,6 @@ class botracker extends sotracker
 	{
 		$this->sotracker();
 
-		if (!is_object($GLOBALS['egw']->datetime))
-		{
-			$GLOBALS['egw']->datetime =& CreateObject('phpgwapi.datetime');
-		}
 		$this->tz_offset_s = $GLOBALS['egw']->datetime->tz_offset;
 		$this->now = time() + $this->tz_offset_s;	// time() is server-time and we need a user-time
 		
@@ -790,13 +786,13 @@ class botracker extends sotracker
 			{
 				$GLOBALS['egw']->categories =& CreateObject('phpgwapi.categories',$this->user,'tracker');
 			}
-			if (is_object($GLOBALS['egw']->categories) && $GLOBALS['egw']->categories->app_name == 'tracker')
+			if (isset($GLOBALS['egw']->categories) && $GLOBALS['egw']->categories->app_name == 'tracker')
 			{
-				$cats =& $GLOBALS['egw']->categories;
+				$cats = $GLOBALS['egw']->categories;
 			}
 			else
 			{
-				$cats =& CreateObject('phpgwapi.categories',$this->user,'tracker');
+				$cats = new categories($this->user,'tracker');
 			}
 			$this->all_cats = $cats->return_array('all',0,false);
 			if (!is_array($this->all_cats)) $this->all_cats = array();

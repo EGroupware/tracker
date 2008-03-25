@@ -492,10 +492,6 @@ class uitracker extends botracker
 
 		if (!$tr_id && isset($_REQUEST['link_app']) && isset($_REQUEST['link_id']) && !is_array($content['link_to']['to_id']))
 		{
-			if (!is_object($GLOBALS['egw']->link))
-			{
-				$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
-			}
 			$link_ids = is_array($_REQUEST['link_id']) ? $_REQUEST['link_id'] : array($_REQUEST['link_id']);
 			foreach(is_array($_REQUEST['link_app']) ? $_REQUEST['link_app'] : array($_REQUEST['link_app']) as $n => $link_app)
 			{
@@ -594,11 +590,6 @@ class uitracker extends botracker
 	 */
 	function get_rows(&$query_in,&$rows,&$readonlys)
 	{
-		// KL 20070129 is object -> create object
-		if (!is_object($GLOBALS['egw']->link))
-		{
-			$GLOBALS['egw']->link =& CreateObject('phpgwapi.bolink');
-		}
 		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
