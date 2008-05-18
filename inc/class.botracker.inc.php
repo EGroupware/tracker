@@ -20,7 +20,7 @@ class botracker extends tracker_bo
 	function run_update()
 	{
 		// register all hooks
-		ExecMethod('phpgwapi.hooks.register_hooks');
+		ExecMethod('phpgwapi.hooks.register_hooks','tracker');
 
 		if ($this->pending_close_days > 0)
 		{
