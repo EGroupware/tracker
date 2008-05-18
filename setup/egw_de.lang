@@ -1,4 +1,10 @@
 %1 entries updated.	tracker	de	%1 Einträge aktualisiert.
+%1 tickets have been converted	tracker	de	%1 Tickets konvertiert
+&#9830; not closed	tracker	de	♦ Offen
+&#9830; own not closed	tracker	de	♦ Eigene offen
+&#9830; own without reply not closed	tracker	de	♦ Eigene offen ohne Antwort
+&#9830; without 30 days reply not closed	tracker	de	♦ Offen ohne antwort für 30 Tage
+&#9830; without reply not closed	tracker	de	♦ Offen ohne Antwort
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
 --> enter new name	tracker	de	--> neuen Namen eingeben
 1 - lowest	tracker	de	1 - niedrigste
@@ -6,10 +12,12 @@
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
 actions	tracker	de	Befehle
+activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem aktivieren
 add comment	tracker	de	Kommentar hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
 after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
 after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
+all tickets are already converted to tracker	tracker	de	alle Tickets sinde bereits konvertiert
 allow bounties	tracker	de	Prämien erlauben
 allow default projects for tracker	tracker	de	Erlaube Zuordnung von Projekten in der Tracker Konfiguration
 allow editing by	tracker	de	Bearbeiten erlauben von
@@ -46,9 +54,13 @@ configuration, acl, notifications	tracker	de	Konfiguration, Zugriffskontrolle, B
 confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie zahlen, für die Implementation oder Behebung dieses Themas
 confirm the receipt of money for this bounty	tracker	de	Bestätigen Sie den Zahlungseingang dieser Prämie
 confirmed	tracker	de	Bestätigt
+convert all closed tickets	tracker	de	konvertiere geschlossene Tickets
+convert all open tickets	tracker	de	konvertiere alle offenen Tickets
+converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
+creator	tracker	de	Ersteller
 date opened	tracker	de	Datum angelegt
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
@@ -64,6 +76,7 @@ duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
 e-mail notifications	tracker	de	E-Mail Benachrichtigungen
 edit %1	tracker	de	%1 bearbeiten
+edit entry	tracker	de	Ticket bearbeiten
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
@@ -74,9 +87,11 @@ field	tracker	de	Feld
 fixed	tracker	de	Gelöst
 from	tracker	de	Von
 history	tracker	de	Historie
+html editing	tracker	de	Formatierte Textbearbeitung
 id	tracker	de	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	de	Wenn dieser Punkt für Sie wichtig ist, können Sie dafür eine Prämie setzen!
 if this item is important for you, please vote for it.	tracker	de	Wenn dieser Punkt für Sie wichtig ist, stimmen Sie bitte dafür ab.
+import tts tickets	tracker	de	TTS Tickets importieren
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
@@ -86,19 +101,24 @@ later	tracker	de	Später
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
+new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
 new tracker item submitted by %1 at %2	tracker	de	Neuer Eintrag im Verfolgungsystem erstellt von %1 am %2
 no change	tracker	de	Keine Änderung
+no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
 notification	tracker	de	Benachrichtigung
 open	tracker	de	Offen
 out of date	tracker	de	Nicht mehr aktuell
 overdue after	tracker	de	Überfällig nach
+ownership of the ticket	tracker	de	Besitzer der Tickets
 pending	tracker	de	Schwebend
 pending items never get close automatic.	tracker	de	Schwebende Einträge werden nie automatisch geschlossen.
 pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch geschlossen.
 permission denied !!!	tracker	de	Zugriff verweigert !!!
+permit html editing in overview and comments	tracker	de	Formatierte Textbearbeitung im Überblick und den Antworten
 postponed	tracker	de	Vertagt
+print entry	tracker	de	Ticket drucken
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
@@ -107,7 +127,12 @@ receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Ma
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 resolution	tracker	de	Lösung
+restict tracker items to the creator and the staff only	tracker	de	Tickets auf Ersteller und Mitarbeiter einschränken
+restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Grupper des Ersteller und Mitarbeiter einschränken
+restrict tracker items to staff and:	tracker	de	Tickets einschränken auf Mitarbeiter und:
+restriction	tracker	de	Einschränkungen
 select tracker queue	tracker	de	Tracker Queue auswählen
+select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Tracker für die TTS Kategorien verwendet werden
 sender address	tracker	de	Absender Adresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
 set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
@@ -127,6 +152,9 @@ the bounty will not be shown, until the money is received.	tracker	de	Die Prämi
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
+ticket count	tracker	de	Anzahl Tickets
+ticket modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
+times	tracker	de	Zeiten
 tracker	common	de	Verfolgungssystem
 tracker added	tracker	de	Verfolgungssystem hinzugefügt
 tracker admins	tracker	de	Administratoren des Verfolgungssystems
@@ -148,6 +176,8 @@ wont fix	tracker	de	Ändere ich nicht
 works for me	tracker	de	Funktioniert bei mir
 yes, display groups first	tracker	de	Ja, zeige Gruppen zuerst an
 yes, display users first	tracker	de	Ja, zeige Benutzer zuerst an
+yes, with larger fontsize	tracker	de	Ja, mit einer größeren Schrift
+you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	de	Sie können die Zugriffskontrolle des Verfolgungssystem im Kartenreiter Konfiguration (für alle Systeme) ein- oder ausschalten
 you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis antworten:
 you need to enter a name	tracker	de	Sie müssen einen Namen angeben
 you need to login to vote!	tracker	de	Sie müssen sich anmelden um Abstimmen zu können!

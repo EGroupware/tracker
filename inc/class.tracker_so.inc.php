@@ -7,13 +7,13 @@
  * @package tracker
  * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$ 
+ * @version $Id$
  */
 
 /**
  * Storage Object of the tracker
  */
-class sotracker extends so_sql
+class tracker_so extends so_sql
 {
 	/**
 	 * Table-name for the replies
@@ -37,21 +37,21 @@ class sotracker extends so_sql
 	/**
 	 * Constructor
 	 *
-	 * @return sotracker
+	 * @return tracker_so
 	 */
-	function sotracker()
+	function __construct()
 	{
 		$this->so_sql('tracker','egw_tracker',null,'',true);
 	}
-	
+
 	/**
 	 * Read a tracker item
 	 *
 	 * Reimplemented to read the replies and bounties (non-admin only confirmed ones) too
-	 * 
+	 *
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
 	 * @param string/array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
-	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or 
+	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
 	 * @return array/boolean data if row could be retrived else False
 	*/
 	function read($keys,$extra_cols='',$join='')
@@ -65,7 +65,7 @@ class sotracker extends so_sql
 				$this->data['replies'][] = $row;
 			}
 			$this->data['num_replies'] = count($this->data['replies']);
-			
+
 			$bounty_where = array('tr_id' => $this->data['tr_id']);
 			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker']))
 			{
@@ -80,7 +80,7 @@ class sotracker extends so_sql
 	 * Save a tracker item
 	 *
 	 * Reimplemented to save the reply too
-	 * 
+	 *
 	 * @param array $keys if given $keys are copied to data before saveing => allows a save as
 	 * @return int 0 on success and errno != 0 else
 	 */
@@ -109,14 +109,14 @@ class sotracker extends so_sql
 		}
 		return $ret;
 	}
-	
+
 	/**
 	 * Searches / lists tracker items
 	 *
 	 * Reimplemented to join with the votes table and respect the private attribute
 	 *
 	 * @param array/string $criteria array of key and data cols, OR a SQL query (content for WHERE), fully quoted (!)
-	 * @param boolean/string/array $only_keys=true True returns only keys, False returns all cols. or 
+	 * @param boolean/string/array $only_keys=true True returns only keys, False returns all cols. or
 	 *	comma seperated list or array of columns to return
 	 * @param string $order_by='' fieldnames + {ASC|DESC} separated by colons ',', can also contain a GROUP BY (if it contains ORDER BY)
 	 * @param string/array $extra_cols='' string or array of strings to be added to the SELECT, eg. "count(*) as num"
@@ -146,7 +146,7 @@ class sotracker extends so_sql
 		if ($join_in === true || $join_in == 1)
 		{
 			if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
-			
+
 			if ($this->db->capabilities['sub_queries'])	// everything, but old MySQL
 			{
 				$extra_cols[] = "(SELECT COUNT(*) FROM $this->votes_table WHERE $this->table_name.tr_id=$this->votes_table.tr_id) AS votes";
@@ -179,17 +179,17 @@ class sotracker extends so_sql
 				// Single tracker
 				if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'])))
 				{
-					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))'; 
+					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';
 				}
 				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
 				{
-					$filter[] = '(tr_creator = ' . $this->user . ')'; 
-				}				 
+					$filter[] = '(tr_creator = ' . $this->user . ')';
+				}
 			}
 			else
 			{
 				// All trackers
-				$group_restrictions = array(); 
+				$group_restrictions = array();
 				$creator_restrictions = array();
 				$all_restricions = array();
 				$access_restrictions = array();
@@ -199,7 +199,7 @@ class sotracker extends so_sql
 				{
 					if($tracker == 0)
 					{
-						continue; // Not implemented for 'all trackers'				
+						continue; // Not implemented for 'all trackers'
 					}
 					if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker)))
 					{
@@ -223,7 +223,7 @@ class sotracker extends so_sql
 						foreach ($this->trackers as $tracker_id => $tracker_name)
 						{
 							array_push($access_restrictions, $tracker_id);
-						}												
+						}
 					}
 					else
 					{
@@ -232,7 +232,7 @@ class sotracker extends so_sql
 				}
 				if (!empty($group_restrictions))
 				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';				
+					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';
 				}
 				if (!empty($creator_restrictions))
 				{
@@ -251,7 +251,7 @@ class sotracker extends so_sql
 					$filter[] = '(' . implode(' OR ', $restrict) . ')';
 				}
 			}
-		} 		
+		}
 		//$this->debug = 4;
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
@@ -328,10 +328,10 @@ class sotracker extends so_sql
                        }
                        $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
                        break;
-       }		
+       }
 		return parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 	}
-	
+
 	/**
 	 * Delete tracker items with the given keys
 	 *
@@ -342,7 +342,7 @@ class sotracker extends so_sql
 	{
 		if (!$keys) $keys = array('tr_id' => $this->data['tr_id']);
 		elseif (!is_array($keys)) $keys = array('tr_id' => $keys);
-		
+
 		$ids = "SELECT tr_id FROM $this->table_name WHERE ".$this->db->expression($this->table_name,$keys);
 		$where = "tr_id IN ($ids)";
 		if (!$this->db->capabilities['sub_queries'])
@@ -362,7 +362,7 @@ class sotracker extends so_sql
 		}
 		return parent::delete($keys);
 	}
-	
+
 	/**
 	 * Check if users is allowed to vote - has not already voted
 	 *
@@ -377,7 +377,7 @@ class sotracker extends so_sql
 			'vote_uid' => $user,
 		);
 		if ($ip) $where['vote_ip'] = $ip;
-		
+
 		return $this->db->select($this->votes_table,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchSingle();
 	}
 
@@ -398,10 +398,10 @@ class sotracker extends so_sql
 			'vote_time' => time(),
 		),false,__LINE__,__FILE__,'tracker');
 	}
-	
+
 	/**
 	 * Save or update a bounty
-	 * 
+	 *
 	 * @param array $data
 	 * @return int/boolean integer bounty_id or false on error
 	 */
@@ -425,10 +425,10 @@ class sotracker extends so_sql
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Delete a bounty
-	 * 
+	 *
 	 * @param int $bounty_id
 	 * @return int number of deleted rows: 1 = success, 0 = failure
 	 */
@@ -436,10 +436,10 @@ class sotracker extends so_sql
 	{
 		return $this->db->delete($this->bounties_table,array('bounty_id' => $id),__LINE__,__FILE__,'tracker');
 	}
-	
+
 	/**
 	 * Read bounties specified by the given keys
-	 * 
+	 *
 	 * @param array/int $keys array with key(s) or integer bounty-id
 	 * @return array with bounties
 	 */

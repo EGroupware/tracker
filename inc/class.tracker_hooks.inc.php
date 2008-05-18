@@ -5,19 +5,40 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$ 
+ * @version $Id$
  */
 
 /**
- * Admin-, Prefs- and Sidebox-Menu hooks
+ * diverse tracker hooks, all static
  */
-class tr_admin_prefs_sidebox_hooks
+class tracker_hooks
 {
-	function tr_admin_prefs_sidebox_hooks()
+	/**
+	 * Hook called by link-class to include tracker in the appregistry of the linkage
+	 *
+	 * @param array/string $location location and other parameters (not used)
+	 * @return array with method-names
+	 */
+	static function search_link($location)
 	{
-		$this->check_set_default_prefs();
+		return array(
+			'query' => 'tracker.tracker_bo.link_query',
+			'title' => 'tracker.tracker_bo.link_title',
+			'titles' => 'tracker.tracker_bo.link_titles',
+			'view'  => array(
+				'menuaction' => 'tracker.tracker_ui.edit',
+			),
+			'view_id' => 'tr_id',
+			'view_popup'  => '700x500',
+			'add' => array(
+				'menuaction' => 'tracker.tracker_ui.edit',
+			),
+			'add_app'    => 'link_app',
+			'add_id'     => 'link_id',
+			'add_popup'  => '700x480',
+		);
 	}
 
 	/**
@@ -25,7 +46,7 @@ class tr_admin_prefs_sidebox_hooks
 	 *
 	 * @param string/array $args hook args
 	 */
-	function all_hooks($args)
+	static function all_hooks($args)
 	{
 		$appname = 'tracker';
 		$location = is_array($args) ? $args['location'] : $args;
@@ -56,7 +77,7 @@ class tr_admin_prefs_sidebox_hooks
 		if ($GLOBALS['egw_info']['user']['apps']['admin'] && $location != 'preferences')
 		{
 			$file = Array(
-				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.uitracker.admin'),
+				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_ui.admin'),
 				'Import TTS tickets' => $GLOBALS['egw']->link('/tracker/import_tts.php'),
 //				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
@@ -70,14 +91,12 @@ class tr_admin_prefs_sidebox_hooks
 			}
 		}
 	}
-	
+
 	/**
 	 * populates $GLOBALS['settings'] for the preferences
 	 */
-	function settings()
+	static function settings()
 	{
-		$this->check_set_default_prefs();
-
 		$GLOBALS['settings']['notify_creator'] = array(
 			'type'   => 'check',
 			'label'  => 'Receive notifications about created tracker-items',
@@ -128,13 +147,13 @@ class tr_admin_prefs_sidebox_hooks
 		);
 		return true;	// otherwise prefs say it cant find the file ;-)
 	}
-	
+
 	/**
 	 * Check if reasonable default preferences are set and set them if not
 	 *
 	 * It sets a flag in the app-session-data to be called only once per session
 	 */
-	function check_set_default_prefs()
+	static function check_set_default_prefs()
 	{
 		if ($GLOBALS['egw']->session->appsession('default_prefs_set','tracker'))
 		{
@@ -166,3 +185,4 @@ class tr_admin_prefs_sidebox_hooks
 		}
 	}
 }
+tracker_hooks::check_set_default_prefs();

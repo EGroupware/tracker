@@ -12,6 +12,7 @@
 9 - highest	tracker	en	9 - highest
 accepted	tracker	en	Accepted
 actions	tracker	en	Actions
+activate users queue access control	tracker	en	Activate users queue access control
 add comment	tracker	en	Add comment
 add timesheet entry	tracker	en	Add timesheet entry
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
@@ -129,6 +130,7 @@ resolution	tracker	en	Resolution
 restict tracker items to the creator and the staff only	tracker	en	Restict tracker items to the creator and the staff only
 restict tracker items to the creators primary group and the staff only	tracker	en	Restict tracker items to the creators primary group and the staff only
 restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
+restriction	tracker	en	Restriction
 select tracker queue	tracker	en	select tracker queue
 select which categories should be used in tracker for the tts categories	tracker	en	select which categories should be used in Tracker for the TTS categories
 sender address	tracker	en	Sender address
@@ -175,6 +177,7 @@ works for me	tracker	en	Works for me
 yes, display groups first	tracker	en	Yes, display groups first
 yes, display users first	tracker	en	Yes, display users first
 yes, with larger fontsize	tracker	en	Yes, with larger fontsize
+you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	en	You can enable/disable the queue access restrictions in the configuration tab (for all queues)
 you can respond by visiting:	tracker	en	You can respond by visiting:
 you need to enter a name	tracker	en	You need to enter a name
 you need to login to vote!	tracker	en	You need to login to vote!

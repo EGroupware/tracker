@@ -5,12 +5,10 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006/7 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$ 
+ * @version $Id$
  */
-
-require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.bo_tracking.inc.php');
 
 /**
  * Tracker - tracking object for the tracker
@@ -55,26 +53,26 @@ class tracker_tracking extends bo_tracking
 	var $prefer_user_as_sender = false;
 	/**
 	 * Instance of the botracker class calling us
-	 * 
+	 *
 	 * @access private
-	 * @var botracker
+	 * @var tracker_bo
 	 */
 	var $tracker;
 
 	/**
 	 * Constructor
 	 *
-	 * @param botracker $botracker
+	 * @param tracker_bo $botracker
 	 * @return tracker_tracking
 	 */
-	function tracker_tracking(&$botracker)
+	function __construct(&$botracker)
 	{
-		$this->bo_tracking();	// calling the constructor of the extended class
+		parent::__construct();	// calling the constructor of the extended class
 
 		$this->tracker =& $botracker;
 		$this->field2history =& $botracker->field2history;
 	}
-	
+
 	/**
 	 * Get a notification-config value
 	 *
@@ -89,9 +87,9 @@ class tracker_tracking extends bo_tracking
 	function get_config($name,$data,$old)
 	{
 		$tracker = $data['tr_tracker'];
-		
+
 		$config = $this->tracker->notification[$tracker][$name] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
-		
+
 		switch($name)
 		{
 			case 'copy':	// include the tr_cc addresses
@@ -105,10 +103,10 @@ class tracker_tracking extends bo_tracking
 		}
 		return $config;
 	}
-	
+
 	/**
 	 * Get the modified / new message (1. line of mail body) for a given entry, can be reimplemented
-	 * 
+	 *
 	 * @param array $data
 	 * @param array $old
 	 * @return string
@@ -125,10 +123,10 @@ class tracker_tracking extends bo_tracking
 			$data['tr_modifier'] ? $GLOBALS['egw']->common->grab_owner_name($data['tr_modifier']) : lang('Tracker'),
 			$this->datetime($data['tr_modified']-$this->tracker->tz_offset_s));
 	}
-	
+
 	/**
 	 * Get the details of an entry
-	 * 
+	 *
 	 * @param array $data
 	 * @param string $datetime_format of user to notify, eg. 'Y-m-d H:i'
 	 * @param int $tz_offset_s offset in sec to be add to server-time to get the user-time of the user to notify

@@ -2,7 +2,7 @@
 
 	/**
 	 * eGroupWare - Setup
-	 * http://www.egroupware.org 
+	 * http://www.egroupware.org
 	 * Created by eTemplates DB-Tools written by ralfbecker@outdoor-training.de
 	 *
 	 * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
@@ -69,15 +69,15 @@
 		return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.008';
 	}
     $test[] = '0.1.008';
-    
+
     function tracker_upgrade0_1_008()
     {
         // Add configurable statis (stored as egw_tracker global cats)
-        // Needs a int tr_status (migrate actual data to the new $stati array    
-    	
+        // Needs a int tr_status (migrate actual data to the new $stati array
+
 		// Rename actual tr_status column
         $GLOBALS['egw_setup']->oProc->RenameColumn('egw_tracker','tr_status','char_tr_status');
-        
+
         // Create the new (int) tr_status column
         $GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_status',array(
                 'type' => 'int',
@@ -85,7 +85,7 @@
                 'nullable' => False,
                 'default'  => -100, // Open State
 		));
-	
+
         // Update the data
 		//		'-100' => 'Open',
 		//		'-101' => 'Closed',
@@ -95,7 +95,7 @@
         $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-101 where char_tr_status='c'",__LINE__,__FILE__);
         $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-102 where char_tr_status='d'",__LINE__,__FILE__);
         $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-103 where char_tr_status='p'",__LINE__,__FILE__);
-        			
+
 		// Drop the old char tr_status column
 		$GLOBALS['egw_setup']->oProc->DropColumn('egw_tracker',array(
 			'fd' => array(
@@ -122,16 +122,16 @@
 			'fk' => array(),
 			'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_assigned',array('cat_id','tr_status','tr_assigned')),
 			'uc' => array()
-		),'char_tr_status');			
+		),'char_tr_status');
 
         return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.009';
     }
-    
+
     $test[] = '0.1.009';
     function tracker_upgrade0_1_009()
     {
-        // Add CC to tracker table    
-        
+        // Add CC to tracker table
+
         // Create the new (text) tr_cc column
         $GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_cc',array(
                 'type' => 'text',
@@ -139,7 +139,7 @@
 
         return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.010';
     }
-    
+
     $test[] = '0.1.010';
     function tracker_upgrade0_1_010()
     {
@@ -186,7 +186,7 @@
 		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_group=(select account_primary_group from egw_accounts where egw_accounts.account_id=egw_tracker.tr_creator)",__LINE__,__FILE__);
 		return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.001';
 	}
-	
+
 	$test[] = '1.4.001';
 	function tracker_upgrade1_4_001()
 	{
@@ -195,10 +195,9 @@
 			'precision' => '5',
 			'default'   => 'ascii',
 		));
-		
+
 		// Set all the current intems to ascii mode
-		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_edit_mode='ascii'",__LINE__,__FILE__);
-		
+		$GLOBALS['egw_setup']->oProc->query("UPDATE egw_tracker SET tr_edit_mode='ascii'",__LINE__,__FILE__);
+
 		return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.002';
-	}	
-?>
+	}
