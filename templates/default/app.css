@@ -24,4 +24,5 @@ table.fullWidth { width: 100%; }
 .fixedHeight { line-height: 12px; }
 .noWrap { white-space: nowrap; }
 .user_filter select { width: 150px; }
-.user_select select { width: 100%; }
+.user_select select { width: 230px; }
+.cat_select select  { width: 100%; }

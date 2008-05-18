@@ -135,7 +135,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="0.2.004">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.5.001">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -153,7 +153,7 @@
 				<row class="th" height="28">
 					<description options=",,,tr_tracker" value="Tracker Queue"/>
 					<hbox onchange="1" options="0,0" class="user_filter">
-						<menulist class="user_select">
+						<menulist class="width100">
 							<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
 						</menulist>
 						<int id="tr_id" class="trIdEdit" readonly="true"/>
@@ -163,7 +163,7 @@
 				</row>
 				<row class="row">
 					<description options=",,,cat_id" value="Category"/>
-					<menulist class="user_select">
+					<menulist class="cat_select">
 						<menupopup id="cat_id" options="Select one" no_lang="1" needed="1"/>
 					</menulist>
 					<description options=",,,tr_version" value="Version"/>
@@ -173,9 +173,12 @@
 				</row>
 				<row class="row">
 					<description options=",,,tr_assigned" value="Assigned to"/>
-					<menulist class="user_select">
-						<menupopup id="tr_assigned" options="Not assigned" no_lang="1"/>
-					</menulist>
+					<hbox options="0,0">
+						<menulist class="user_select">
+							<menupopup id="tr_assigned" options="Not assigned" no_lang="1"/>
+						</menulist>
+						<buttononly options="users" label="Select multiple" align="right" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;"/>
+					</hbox>
 					<description options="tr_priority" value="Priority"/>
 					<menulist>
 						<menupopup id="tr_priority"/>

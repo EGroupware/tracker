@@ -551,7 +551,10 @@ class tracker_ui extends tracker_bo
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
 		$tpl =& new etemplate('tracker.edit');
-
+		if (count($content['tr_assigned']) > 1)
+		{
+			$tpl->set_cell_attribute('tr_assigned','size','3+');
+		}
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
 	}
 
@@ -599,8 +602,9 @@ class tracker_ui extends tracker_bo
 		}
 		elseif($query['col_filter']['tr_assigned'] === 'not')
 		{
-			$query['col_filter'][] = 'tr_assigned IS NULL';
-			unset($query['col_filter']['tr_assigned']);
+			//$query['col_filter'][] = 'tr_assigned IS NULL';
+			//unset($query['col_filter']['tr_assigned']);
+			$query['col_filter']['tr_assigned'] = null;
 		}
 		elseif(!$query['col_filter']['tr_assigned'])
 		{

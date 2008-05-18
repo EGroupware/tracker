@@ -16,23 +16,25 @@
 class tracker_so extends so_sql
 {
 	/**
-	 * Table-name for the replies
-	 *
-	 * @var string
+	 * Table-name of the main tracker table
 	 */
-	var $replies_table = 'egw_tracker_replies';
+	const TRACKER_TABLE = 'egw_tracker';
+	/**
+	 * Table-name for the replies
+	 */
+	const REPLIES_TABLE = 'egw_tracker_replies';
 	/**
 	 * Table-name for the votes
-	 *
-	 * @var string
 	 */
-	var $votes_table = 'egw_tracker_votes';
+	const VOTES_TABLE = 'egw_tracker_votes';
 	/**
 	 * Table-name for the bounties
-	 *
-	 * @var string
 	 */
-	var $bounties_table = 'egw_tracker_bounties';
+	const BOUNTIES_TABLE = 'egw_tracker_bounties';
+	/**
+	 * Table-name for the assignee
+	 */
+	const ASSIGNEE_TABLE = 'egw_tracker_assignee';
 
 	/**
 	 * Constructor
@@ -41,7 +43,7 @@ class tracker_so extends so_sql
 	 */
 	function __construct()
 	{
-		$this->so_sql('tracker','egw_tracker',null,'',true);
+		$this->so_sql('tracker',self::TRACKER_TABLE,null,'',true);
 	}
 
 	/**
@@ -59,7 +61,7 @@ class tracker_so extends so_sql
 		if (($ret = parent::read($keys,$extra_cols,$join)))
 		{
 			$this->data['replies'] = array();
-			foreach($this->db->select($this->replies_table,'*',array('tr_id' => $this->data['tr_id']),
+			foreach($this->db->select(self::REPLIES_TABLE,'*',array('tr_id' => $this->data['tr_id']),
 				__LINE__,__FILE__,false,'ORDER BY reply_created DESC','tracker') as $row)
 			{
 				$this->data['replies'][] = $row;
@@ -72,6 +74,13 @@ class tracker_so extends so_sql
 				$bounty_where[] = 'bounty_confirmed IS NOT NULL';
 			}
 			$this->data['bounties'] = $this->read_bounties($bounty_where);
+
+			$this->data['tr_assigned'] = array();
+			foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_assigned',array('tr_id' => $this->data['tr_id']),
+				__LINE__,__FILE__,false,'','tracker') as $row)
+			{
+				$this->data['tr_assigned'][] = $row['tr_assigned'];
+			}
 		}
 		return $ret;
 	}
@@ -94,17 +103,33 @@ class tracker_so extends so_sql
 		{
 			if ($this->data['reply_message'])
 			{
-				$this->db->insert($this->replies_table,$this->data,false,__LINE__,__FILE__,'tracker');
+				$this->db->insert(self::REPLIES_TABLE,$this->data,false,__LINE__,__FILE__,'tracker');
 				// add the new replies to this->data[replies]
 				if (!is_array($this->data['replies'])) $this->data['replies'] = array();
 				array_unshift($this->data['replies'],array(
-					'reply_id'      => $this->db->get_last_insert_id($this->replies_table,'reply_id'),
+					'reply_id'      => $this->db->get_last_insert_id(self::REPLIES_TABLE,'reply_id'),
 					'tr_id'         => $this->data['tr_id'],
 					'reply_creator' => $this->data['reply_creator'],
 					'reply_created' => $this->data['reply_created'],
 					'reply_message' => $this->data['reply_message'],
 				));
 				$this->data['num_replies'] = (int)$this->data['num_replies'] + 1;
+			}
+			$this->db->delete(self::ASSIGNEE_TABLE,array('tr_id'=>$this->data['tr_id']),__LINE__,__FILE__,'tracker');
+			if ($this->data['tr_assigned'])
+			{
+				if (!is_array($this->data['tr_assigned']))
+				{
+					$this->data['tr_assigned'] = explode(',',$this->data['tr_assigned']);
+				}
+				_debug_array($this->data['tr_assigned']);
+				foreach($this->data['tr_assigned'] as $assignee)
+				{
+					$this->db->insert(self::ASSIGNEE_TABLE,array(
+						'tr_id' => $this->data['tr_id'],
+						'tr_assigned' => $assignee,
+					),false,__LINE__,__FILE__,'tracker');
+				}
 			}
 		}
 		return $ret;
@@ -132,16 +157,32 @@ class tracker_so extends so_sql
 	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true)
 	{
 		$join = $join_in && $join_in != 1 ? $join_in : '';
+
+		if (array_key_exists('tr_assigned',$filter))
+		{
+			if (is_null($filter['tr_assigned']))
+			{
+				$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
+				$filter[] = 'tr_assigned IS NULL';
+				$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise ASSIGNEE_TABLE.tr_id, which is NULL, hides tr_id
+			}
+			else
+			{
+				$join .= ' JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id AND '.
+					$this->db->expression(self::ASSIGNEE_TABLE,array('tr_assigned' => $filter['tr_assigned']));
+			}
+			unset($filter['tr_assigned']);
+		}
 		if (is_string($criteria) && $criteria)
 		{
 			$pattern = $criteria;
 			$criteria = array();
-			foreach(array($this->table_name.'.tr_id','tr_summary','tr_description','reply_message') as $col)
+			foreach(array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','reply_message') as $col)
 			{
 				$criteria[$col] = $pattern;
 			}
-			$join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
-			if ($this->db->capabilities['distinct_on_text']) $only_keys = 'DISTINCT '.$this->table_name.'.*';
+			$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
+			if ($this->db->capabilities['distinct_on_text']) $only_keys = 'DISTINCT '.self::TRACKER_TABLE.'.*';
 		}
 		if ($join_in === true || $join_in == 1)
 		{
@@ -149,22 +190,22 @@ class tracker_so extends so_sql
 
 			if ($this->db->capabilities['sub_queries'])	// everything, but old MySQL
 			{
-				$extra_cols[] = "(SELECT COUNT(*) FROM $this->votes_table WHERE $this->table_name.tr_id=$this->votes_table.tr_id) AS votes";
-				$extra_cols[] = "(SELECT SUM(bounty_amount) FROM $this->bounties_table WHERE $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL) AS bounties";
+				$extra_cols[] = '(SELECT COUNT(*) FROM '.self::VOTES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::VOTES_TABLE.'.tr_id) AS votes';
+				$extra_cols[] = '(SELECT SUM(bounty_amount) FROM '.self::BOUNTIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::BOUNTIES_TABLE.'.tr_id AND bounty_confirmed IS NOT NULL) AS bounties';
 			}
 			else	// MySQL < 4.1
 			{
 				// join with votes
-				$join .= " LEFT JOIN $this->votes_table ON $this->table_name.tr_id=$this->votes_table.tr_id";
+				$join .= ' LEFT JOIN '.self::VOTES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::VOTES_TABLE.'.tr_id';
 				$extra_cols[] = 'COUNT(vote_time) AS votes';
 				// join with bounties
-				$join .= " LEFT JOIN $this->bounties_table ON $this->table_name.tr_id=$this->bounties_table.tr_id AND bounty_confirmed IS NOT NULL";
+				$join .= ' LEFT JOIN '.self::BOUNTIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::BOUNTIES_TABLE.'.tr_id AND bounty_confirmed IS NOT NULL';
 				$extra_cols[] = 'SUM(bounty_amount) AS bounties';
 				// fixes to get tr_id non-ambigues
-				if (is_bool($only_keys)) $only_keys = $this->table_name.($only_keys ? '.tr_id' : '.*');
-				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',$this->table_name.'.tr_id',$order_by);
+				if (is_bool($only_keys)) $only_keys = self::TRACKER_TABLE.($only_keys ? '.tr_id' : '.*');
+				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
 				// group by the tr_id of the two join tables to count the votes and sum the bounties
-				$order_by = ' GROUP BY '.$this->table_name.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 			}
 			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
@@ -259,77 +300,95 @@ class tracker_so extends so_sql
 		{
 			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
 		}
-       // Handle the special filters
-       switch ($filter['tr_status'])
-       {
-               case 'not-closed':
-                       unset($filter['tr_status']);
-                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-                       break;
-               case 'own-not-closed':
-                       unset($filter['tr_status']);
-                       unset($filter['tr_creator']);
-                       $filter[] = "(tr_creator=".$this->user.")";
-                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-                       break;
-               case 'without-reply-not-closed':
-                       unset($filter['tr_status']);
-                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
-                       {
-                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id) = 0)";
-                       }
-                       else    // MySQL < 4.1
-                       {
-                               // Not allready join comments tables
-                               if (!$criteria and !$this->db->capabilities['sub_queries'])
-                               {
-                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
-                               }
-                               $extra_cols[] = 'COUNT(reply_id) AS replies';
-                               $filter[] = "(replies = 0)";
-                       }
-                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-                       break;
-               case 'own-without-reply-not-closed':
-                       unset($filter['tr_status']);
-                       unset($filter['tr_creator']);
-                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
-                       {
-                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id) = 0)";
-                       }
-                       else    // MySQL < 4.1
-                       {
-                               // Not allready join comments tables
-                               if (!$criteria and !$this->db->capabilities['sub_queries'])
-                               {
-                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
-                               }
-                               $extra_cols[] = 'COUNT(reply_id) AS replies';
-                               $filter[] = "(replies = 0)";
-                       }
-                       $filter[] = "(tr_creator=".$this->user.")";
-                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-                       break;
-               case 'without-30-days-reply-not-closed':
-                       unset($filter['tr_status']);
-                       if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
-                       {
-                               $filter[] = "((SELECT COUNT(*) FROM egw_tracker_replies WHERE egw_tracker.tr_id=egw_tracker_replies.tr_id and reply_created > ".mktime(0, 0, 0, date("m")-1, date("d"),date("Y")).") = 0)";
-                       }
-                       else    // MySQL < 4.1
-                       {
-                               // Not allready join comments tables
-                               if (!$criteria and !$this->db->capabilities['sub_queries'])
-                               {
-                                       $join .= " LEFT JOIN $this->replies_table ON $this->table_name.tr_id=$this->replies_table.tr_id";
-                               }
-                               $extra_cols[] = 'COUNT(reply_id) AS replies';
-                               $filter[] = "(replies = 0)";
-                       }
-                       $filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-                       break;
-       }
-		return parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
+		// Handle the special filters
+		switch ($filter['tr_status'])
+		{
+			case 'not-closed':
+				unset($filter['tr_status']);
+				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+			break;
+			case 'own-not-closed':
+				unset($filter['tr_status']);
+				unset($filter['tr_creator']);
+				$filter[] = "(tr_creator=".$this->user.")";
+				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				break;
+			case 'without-reply-not-closed':
+				unset($filter['tr_status']);
+				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+				{
+					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)';
+				}
+				else    // MySQL < 4.1
+				{
+					// Not allready join comments tables
+					if (!$criteria and !$this->db->capabilities['sub_queries'])
+					{
+						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
+					}
+					$extra_cols[] = 'COUNT(reply_id) AS replies';
+					$filter[] = '(replies = 0)';
+				}
+				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				break;
+			case 'own-without-reply-not-closed':
+				unset($filter['tr_status']);
+				unset($filter['tr_creator']);
+				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+				{
+					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)';
+				}
+				else    // MySQL < 4.1
+				{
+					// Not allready join comments tables
+					if (!$criteria and !$this->db->capabilities['sub_queries'])
+					{
+						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
+					}
+					$extra_cols[] = 'COUNT(reply_id) AS replies';
+					$filter[] = '(replies = 0)';
+				}
+				$filter[] = "(tr_creator=".$this->user.")";
+				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				break;
+			case 'without-30-days-reply-not-closed':
+				unset($filter['tr_status']);
+				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
+				{
+					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id and reply_created > '.mktime(0, 0, 0, date('m')-1, date('d'),date('Y')).') = 0)';
+				}
+				else    // MySQL < 4.1
+				{
+					// Not allready join comments tables
+					if (!$criteria and !$this->db->capabilities['sub_queries'])
+					{
+						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
+					}
+					$extra_cols[] = 'COUNT(reply_id) AS replies';
+					$filter[] = '(replies = 0)';
+				}
+				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				break;
+		}
+		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
+
+		if ($rows)
+		{
+			foreach($rows as $key => &$row)
+			{
+				$ids[$key] = $row['tr_id'];
+				$row['tr_assigned'] = array();
+			}
+			if ($ids)
+			{
+				$id2key = array_flip($ids);
+				foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_id,tr_assigned',array('tr_id' => $ids),__LINE__,__FILE__,false,'','tracker') as $assignee)
+				{
+					$rows[$id2key[$assignee['tr_id']]]['tr_assigned'][] = $assignee['tr_assigned'];
+				}
+			}
+		}
+		return $rows;
 	}
 
 	/**
@@ -340,10 +399,15 @@ class tracker_so extends so_sql
 	 */
 	function delete($keys)
 	{
-		if (!$keys) $keys = array('tr_id' => $this->data['tr_id']);
-		elseif (!is_array($keys)) $keys = array('tr_id' => $keys);
-
-		$ids = "SELECT tr_id FROM $this->table_name WHERE ".$this->db->expression($this->table_name,$keys);
+		if (!$keys)
+		{
+			$keys = array('tr_id' => $this->data['tr_id']);
+		}
+		elseif (!is_array($keys))
+		{
+			$keys = array('tr_id' => $keys);
+		}
+		$ids = "SELECT tr_id FROM self::TRACKER_TABLE WHERE ".$this->db->expression(self::TRACKER_TABLE,$keys);
 		$where = "tr_id IN ($ids)";
 		if (!$this->db->capabilities['sub_queries'])
 		{
@@ -356,9 +420,10 @@ class tracker_so extends so_sql
 		}
 		if ($ids)
 		{
-			$this->db->delete($this->replies_table,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete($this->votes_table,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete($this->bounties_table,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete(self::REPLIES_TABLE,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete(self::VOTES_TABLE,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete(self::BOUNTIES_TABLE,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete(self::ASSIGNEE_TABLE,$where,__LINE__,__FILE__,'tracker');
 		}
 		return parent::delete($keys);
 	}
@@ -378,7 +443,7 @@ class tracker_so extends so_sql
 		);
 		if ($ip) $where['vote_ip'] = $ip;
 
-		return $this->db->select($this->votes_table,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchSingle();
+		return $this->db->select(self::VOTES_TABLE,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchSingle();
 	}
 
 	/**
@@ -391,7 +456,7 @@ class tracker_so extends so_sql
 	 */
 	function cast_vote($tr_id,$user,$ip)
 	{
-		return !!$this->db->insert($this->votes_table,array(
+		return !!$this->db->insert(self::VOTES_TABLE,array(
 			'tr_id'     => $tr_id,
 			'vote_uid'  => $user,
 			'vote_ip'   => $ip,
@@ -411,16 +476,16 @@ class tracker_so extends so_sql
 		{
 			$where = array('bounty_id' => $data['bounty_id']);
 			unset($data['bounty_id']);
-			if ($this->db->update($this->bounties_table,$data,$where,__LINE__,__FILE__,'tracker'))
+			if ($this->db->update(self::BOUNTIES_TABLE,$data,$where,__LINE__,__FILE__,'tracker'))
 			{
 				return $where['bounty_id'];
 			}
 		}
 		else
 		{
-			if ($this->db->insert($this->bounties_table,$data,false,__LINE__,__FILE__,'tracker'))
+			if ($this->db->insert(self::BOUNTIES_TABLE,$data,false,__LINE__,__FILE__,'tracker'))
 			{
-				return $this->db->get_last_insert_id($this->bounties_table,'bounty_id');
+				return $this->db->get_last_insert_id(self::BOUNTIES_TABLE,'bounty_id');
 			}
 		}
 		return false;
@@ -434,7 +499,7 @@ class tracker_so extends so_sql
 	 */
 	function delete_bounty($id)
 	{
-		return $this->db->delete($this->bounties_table,array('bounty_id' => $id),__LINE__,__FILE__,'tracker');
+		return $this->db->delete(self::BOUNTIES_TABLE,array('bounty_id' => $id),__LINE__,__FILE__,'tracker');
 	}
 
 	/**
@@ -448,7 +513,7 @@ class tracker_so extends so_sql
 		if (!is_array($keys)) $keys = array('bounty_id' => $keys);
 
 		$bounties = array();
-		foreach($this->db->select($this->bounties_table,'*',$keys,__LINE__,__FILE__,false,'ORDER BY bounty_created DESC','tracker') as $row)
+		foreach($this->db->select(self::BOUNTIES_TABLE,'*',$keys,__LINE__,__FILE__,false,'ORDER BY bounty_created DESC','tracker') as $row)
 		{
 			$bounties[] = $row;
 		}
