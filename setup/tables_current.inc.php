@@ -37,7 +37,7 @@ $phpgw_baseline = array(
 		),
 		'pk' => array('tr_id'),
 		'fk' => array(),
-		'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_assigned','tr_group',array('cat_id','tr_status','tr_assigned')),
+		'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_group',array('cat_id','tr_status')),
 		'uc' => array()
 	),
 	'egw_tracker_replies' => array(
