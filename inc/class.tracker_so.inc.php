@@ -158,6 +158,9 @@ class tracker_so extends so_sql
 	{
 		$join = $join_in && $join_in != 1 ? $join_in : '';
 
+		// private ACL: private items are only visible for create, assiged or tracker admins
+		$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']);
+
 		if (array_key_exists('tr_assigned',$filter))
 		{
 			if (is_null($filter['tr_assigned']))
@@ -172,6 +175,19 @@ class tracker_so extends so_sql
 					$this->db->expression(self::ASSIGNEE_TABLE,array('tr_assigned' => $filter['tr_assigned']));
 			}
 			unset($filter['tr_assigned']);
+		}
+		elseif($need_private_acl)
+		{
+			$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
+			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise ASSIGNEE_TABLE.tr_id, which is NULL, hides tr_id
+		}
+		// group by tr_id, as we get one row per assignee!
+		$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+
+		if ($need_private_acl)
+		{
+			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
+				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
 		}
 		if (is_string($criteria) && $criteria)
 		{
@@ -204,8 +220,6 @@ class tracker_so extends so_sql
 				// fixes to get tr_id non-ambigues
 				if (is_bool($only_keys)) $only_keys = self::TRACKER_TABLE.($only_keys ? '.tr_id' : '.*');
 				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
-				// group by the tr_id of the two join tables to count the votes and sum the bounties
-				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 			}
 			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
@@ -295,11 +309,6 @@ class tracker_so extends so_sql
 		}
 		//$this->debug = 4;
 
-		// private ACL: private items are only visible for create, assiged or tracker admins
-		if ($this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']))
-		{
-			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
-		}
 		// Handle the special filters
 		switch ($filter['tr_status'])
 		{
