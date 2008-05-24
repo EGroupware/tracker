@@ -25,6 +25,7 @@ class tracker_ui extends tracker_bo
 		'index' => true,
 		'admin' => true,
 		'tprint'=> true,
+		'escalations' => true,
 	);
 	/**
 	 * Displayed instead of the '@' in email-addresses
@@ -171,8 +172,8 @@ class tracker_ui extends tracker_bo
 			// for new items we use the session-state or $_GET['tracker']
 			if (!$this->data['tr_id'])
 			{
-				if (($state = $GLOBALS['egw']->session->appsession('index','tracker'.(isset($this->trackers[(int)$_GET['only_tracker']]) ?
-					'-'.$_GET['only_tracker'] : ''))))
+				if (($state = $GLOBALS['egw']->session->appsession('index','tracker'.
+					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
 					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'];
 					$this->data['cat_id']     = $state['filter'];
@@ -445,7 +446,7 @@ class tracker_ui extends tracker_bo
 			$content['bounties']['currency'] = $this->currency;
 			$content['bounties']['is_admin'] = $this->is_admin($tracker);
 		}
-		$statis = $this->stati + $this->get_tracker_labels('stati',$tracker);
+		$statis = $this->get_tracker_stati($tracker);
 		$content += array(
 			'msg' => $msg,
 			'tr_description_options' => $tr_description_options,
@@ -498,7 +499,7 @@ class tracker_ui extends tracker_bo
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => &$this->priorities,
+			'tr_priority' => self::$priorities,
 			'tr_status'   => &$statis,
 			'tr_resolution' => &$this->resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
@@ -698,12 +699,12 @@ class tracker_ui extends tracker_bo
 		}
 		else
 		{
-			$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,'technicians');
+			$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker);
 		}
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
-		$statis = $this->stati+$this->get_tracker_labels('stati',$tracker);
+		$statis = $this->get_tracker_stati($tracker);
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
@@ -817,11 +818,10 @@ class tracker_ui extends tracker_bo
 			}
 		}
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
-		$statis = $this->filters + $this->stati + $this->get_tracker_labels('stati',$tracker);
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'tr_priority' => &$this->priorities,
-			'tr_status'   => &$statis,
+			'tr_priority' => self::$priorities,
+			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 		);
 
 		if (!is_array($content)) $content = array();
@@ -1198,5 +1198,109 @@ class tracker_ui extends tracker_bo
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl =& new etemplate('tracker.admin');
 		return $tpl->exec('tracker.tracker_ui.admin',$content,$sel_options,$readonlys,$content);
+	}
+
+	/**
+	 * Define escalations
+	 *
+	 * @param array $content
+	 * @param string $msg
+	 */
+	function escalations(array $content=null,$msg='')
+	{
+		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
+		{
+			$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n",null,true);
+			return;
+		}
+		$escalations = new tracker_escalations();
+
+		if (!is_array($content))
+		{
+			$content['nm'] = array(
+				'get_rows'       =>	'tracker.tracker_escalations.get_rows',
+				'no_cat'         => true,
+				'no_filter2'=> true,
+				'no_filter' => true,
+				'order'          =>	'esc_time',
+				'sort'           =>	'ASC',// IO direction of the sort: 'ASC' or 'DESC'
+			);
+		}
+		else
+		{
+			//_debug_array($content);
+			list($button) = @each($content['button']);
+			unset($content['button']);
+			$escalations->init($content);
+
+			switch($button)
+			{
+				case 'save':
+				case 'apply':
+					if ($escalations->not_unique())
+					{
+						$msg = lang('There already an escalation for that filter!');
+						$button = '';
+					}
+					elseif (($err = $escalations->save()) == 0)
+					{
+						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
+					}
+					if ($button == 'apply' || $err) break;
+					// fall-through
+				case 'cancel':
+					$escalations->init();
+					break;
+			}
+			if ($content['nm']['rows']['edit'])
+			{
+				list($id) = each($content['nm']['rows']['edit']);
+				unset($content['nm']['rows']);
+				if (!$escalations->read($id))
+				{
+					$msg = lang('Escalation not found!');
+					$escalations->init();
+				}
+			}
+			elseif($content['nm']['rows']['edit'])
+			{
+				list($id) = each($content['nm']['rows']['delete']);
+				unset($content['nm']['rows']);
+				if (!$escalations->delete($id))
+				{
+					$msg = lang('Error deleting escalation!');
+				}
+				else
+				{
+					$msg = lang('Escalation deleted.');
+				}
+			}
+		}
+		$content = $escalations->data + array(
+			'nm' => $content['nm'],
+			'msg' => $msg,
+		);
+		$preserv['esc_id'] = $content['esc_id'];
+		$preserv['nm'] = $content['nm'];
+
+		$tracker = $content['tr_tracker'];
+		$sel_options = array(
+			'tr_tracker'  => &$this->trackers,
+			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
+			'tr_version'  => $this->get_tracker_labels('version',$tracker),
+			'tr_priority' => $this->get_tracker_priorities($tracker),
+			'tr_status'   => $this->get_tracker_stati($tracker),
+			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'esc_type'    => array(
+				tracker_escalations::CREATION => lang('creation date'),
+				tracker_escalations::MODIFICATION => lang('last modified'),
+				tracker_escalations::REPLIED => lang('last reply'),
+			),
+		);
+		$tpl = new etemplate('tracker.escalations');
+
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
+		//_debug_array($content);
+		return $tpl->exec('tracker.tracker_ui.escalations',$content,$sel_options,$readonlys,$preserv);
 	}
 }

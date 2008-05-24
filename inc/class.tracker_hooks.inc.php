@@ -78,7 +78,7 @@ class tracker_hooks
 		{
 			$file = Array(
 				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_ui.admin'),
-				'Import TTS tickets' => $GLOBALS['egw']->link('/tracker/import_tts.php'),
+				'Define escalations' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_ui.escalations'),
 //				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
 			if ($location == 'admin')

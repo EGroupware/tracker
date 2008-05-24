@@ -21,13 +21,6 @@ define('TRACKER_ITEM_CREATOR',16);
 define('TRACKER_ITEM_ASSIGNEE',32);
 define('TRACKER_ITEM_NEW',64);
 define('TRACKER_ITEM_GROUP',128);
-/**
- * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
- */
-define('TRACKER_STATUS_OPEN','-100');
-define('TRACKER_STATUS_CLOSED','-101');
-define('TRACKER_STATUS_DELETED','-102');
-define('TRACKER_STATUS_PENDING','-103');
 
 /**
  * Business Object of the tracker
@@ -71,7 +64,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @var array
 	 */
-	var $priorities = array(
+	static $priorities = array(
 		1 => '1 - lowest',
 		2 => '2',
 		3 => '3',
@@ -83,22 +76,30 @@ class tracker_bo extends tracker_so
 		9 => '9 - highest',
 	);
 	/**
+	 * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
+	 */
+	const STATUS_OPEN    = -100;
+	const STATUS_CLOSED  = -101;
+	const STATUS_DELETED = -102;
+	const STATUS_PENDING = -103;
+
+	/**
 	 * Stati used by all trackers
 	 *
 	 * @var array
 	 */
-	var $stati = array(
-		TRACKER_STATUS_OPEN => 'Open',
-		TRACKER_STATUS_CLOSED => 'Closed',
-		TRACKER_STATUS_DELETED => 'Deleted',
-		TRACKER_STATUS_PENDING => 'Pending',
+	static $stati = array(
+		self::STATUS_OPEN    => 'Open',
+		self::STATUS_CLOSED  => 'Closed',
+		self::STATUS_DELETED => 'Deleted',
+		self::STATUS_PENDING => 'Pending',
 	);
 	/**
 	 * Resolutions used by all trackers
 	 *
 	 * @var array
 	 */
-	var $resolutions = array(
+	static $resolutions = array(
 		''  => 'None',
 		'a' => 'Accepted',
 		'd' => 'Duplicate',
@@ -398,7 +399,7 @@ class tracker_bo extends tracker_so
 		{
 			$this->data['tr_created'] = $this->now;
 			$this->data['tr_creator'] = $this->user;
-			$this->data['tr_status'] = TRACKER_STATUS_OPEN;
+			$this->data['tr_status'] = self::STATUS_OPEN;
 
 			if (!$this->data['tr_group'])
 			{
@@ -432,12 +433,12 @@ class tracker_bo extends tracker_so
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			// set close-date if status is closed and not yet set
-			if ($this->data['tr_status'] == TRACKER_STATUS_CLOSED && is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] == self::STATUS_CLOSED && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
 			}
 			// unset closed date, if item is re-opend
-			if ($this->data['tr_status'] != TRACKER_STATUS_CLOSED && !is_null($this->data['tr_closed']))
+			if ($this->data['tr_status'] != self::STATUS_CLOSED && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
 			}
@@ -452,9 +453,9 @@ class tracker_bo extends tracker_so
 				$this->data['reply_creator'] = $this->user;
 
 				// replies set status pending back to open
-				if ($this->data['old_status'] == TRACKER_STATUS_PENDING && $this->data['old_status'] == $this->data['tr_status'])
+				if ($this->data['old_status'] == self::STATUS_PENDING && $this->data['old_status'] == $this->data['tr_status'])
 				{
-					$this->data['tr_status'] = TRACKER_STATUS_OPEN;
+					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
 			}
 		}
@@ -827,6 +828,30 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
+	 * Get tracker specific stati
+	 *
+	 * There's a bunch of pre-defined stati, plus statis stored as labels, which can be per tracker
+	 *
+	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 */
+	function get_tracker_stati($tracker=null)
+	{
+		return self::$stati + $this->get_tracker_labels('stati',$tracker);
+	}
+
+	/**
+	 * Get tracker specific priorities
+	 *
+	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys
+	 *
+	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 */
+	function get_tracker_priorities($tracker=null)
+	{
+		return self::$priorities;
+	}
+
+	/**
 	 * Reload the labels (tracker, cats, versions, projects)
 	 *
 	 */
@@ -935,7 +960,7 @@ class tracker_bo extends tracker_so
 	function link_query( $pattern )
 	{
 		$result = array();
-		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status' => TRACKER_STATUS_OPEN)) as $item )
+		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status' => self::STATUS_OPEN)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
@@ -1123,7 +1148,7 @@ class tracker_bo extends tracker_so
 		$this->user = 0;	// we dont want to run under the id of the current or the user created the async job
 
 		if (($ids = $this->query_list('tr_id','tr_id',array(
-			'tr_status' => TRACKER_STATUS_PENDING,
+			'tr_status' => self::STATUS_PENDING,
 			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
 		))))
 		{
@@ -1140,7 +1165,7 @@ class tracker_bo extends tracker_so
 			{
 				if ($this->read($tr_id))
 				{
-					$this->data['tr_status'] = TRACKER_STATUS_CLOSED;
+					$this->data['tr_status'] = self::STATUS_CLOSED;
 					$this->data['reply_message'] = lang('This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.',$this->pending_close_days);
 					$this->save();
 				}

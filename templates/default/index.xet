@@ -62,7 +62,7 @@
 					<menulist>
 						<menupopup type="select-cat" options="None" readonly="true" id="${row}[tr_version]"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" options="b,tracker.uitracker.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535"/>
+					<description id="${row}[tr_summary]" no_lang="1" options="b,tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535"/>
 					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					<int align="center" id="${row}[tr_priority]" readonly="true"/>
 					<menulist>

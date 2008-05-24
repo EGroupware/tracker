@@ -13,8 +13,11 @@
 accepted	tracker	de	Akzeptiert
 actions	tracker	de	Befehle
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem aktivieren
+add additionally	tracker	de	zusätzlich hinzufügen
+add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
+after	tracker	de	nach
 after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
 after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
 all tickets are already converted to tracker	tracker	de	alle Tickets sinde bereits konvertiert
@@ -60,8 +63,10 @@ converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
+creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
 date opened	tracker	de	Datum angelegt
+define escalations	tracker	de	Eskalierung definieren
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
 delete this category	tracker	de	Diese Kategorie löschen
@@ -80,7 +85,12 @@ edit entry	tracker	de	Ticket bearbeiten
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
+error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalierung!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
+escalation added.	tracker	de	Eskalierung hinzugefügt.
+escalation deleted.	tracker	de	Eskalierung gelöscht.
+escalation not found!	tracker	de	Eskalierung nicht gefunden!
+escalation saved.	tracker	de	Eskalierung gespeichert.
 everybody	tracker	de	Jeder
 existing links	tracker	de	Bestehende Verknüpfungen
 field	tracker	de	Feld
@@ -97,6 +107,7 @@ item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
 language for the copy	tracker	de	Sprache für die Kopie
 last modified	tracker	de	Zuletzt geändert
+last reply	tracker	de	letzte Antwort
 later	tracker	de	Später
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
 new %1	tracker	de	%1 hinzfügen
@@ -121,6 +132,7 @@ postponed	tracker	de	Vertagt
 print entry	tracker	de	Ticket drucken
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
+queue	tracker	de	Queue
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Mail
@@ -131,10 +143,12 @@ restict tracker items to the creator and the staff only	tracker	de	Tickets auf E
 restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Grupper des Ersteller und Mitarbeiter einschränken
 restrict tracker items to staff and:	tracker	de	Tickets einschränken auf Mitarbeiter und:
 restriction	tracker	de	Einschränkungen
+select multiple	tracker	de	Mehrere Auswählen
 select tracker queue	tracker	de	Tracker Queue auswählen
 select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Tracker für die TTS Kategorien verwendet werden
 sender address	tracker	de	Absender Adresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
+set %1	tracker	de	%1 setzen
 set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
 set bounty	tracker	de	Prämie setzen
 should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der Trackerübersicht angezeigt werden?
@@ -150,6 +164,7 @@ thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetz
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
 the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
+there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalierung für diesen Filter!
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 ticket count	tracker	de	Anzahl Tickets
@@ -167,6 +182,7 @@ tracker queue	tracker	de	Verfolgungs Queue
 tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.
 tracker-%1 '%2' updated.	tracker	de	Verfolgungssystem-%1 '%2' aktualisiert.
 tracker-%1 deleted.	tracker	de	Verfolgungssystem-%1 gelöscht.
+unchanged	tracker	de	Unverändert
 url of the tracker	tracker	de	Internetadresse des Verfolgungssystems
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der eGW
 versions	tracker	de	Versionen

@@ -13,8 +13,11 @@
 accepted	tracker	en	Accepted
 actions	tracker	en	Actions
 activate users queue access control	tracker	en	Activate users queue access control
+add additionally	tracker	en	add additionally
+add assigned	tracker	en	Add assigned
 add comment	tracker	en	Add comment
 add timesheet entry	tracker	en	Add timesheet entry
+after	tracker	en	after
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
 all tickets are already converted to tracker	tracker	en	all tickets are already converted to Tracker
@@ -60,8 +63,10 @@ converted count	tracker	en	converted count
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
 created	tracker	en	Created
+creation date	tracker	en	creation date
 creator	tracker	en	Creator
 date opened	tracker	en	Date opened
+define escalations	tracker	en	Define escalations
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
@@ -80,7 +85,12 @@ edit entry	tracker	en	Edit entry
 email address to contact you	tracker	en	Email address to contact you
 entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
+error deleting escalation!	tracker	en	Error deleting escalation!
 error saving the entry!!!	tracker	en	Error saving the entry!!!
+escalation added.	tracker	en	Escalation added.
+escalation deleted.	tracker	en	Escalation deleted.
+escalation not found!	tracker	en	Escalation not found!
+escalation saved.	tracker	en	Escalation saved.
 everybody	tracker	en	Everybody
 existing links	tracker	en	Existing links
 field	tracker	en	Field
@@ -97,6 +107,7 @@ item assignee	tracker	en	Item assignee
 item creator	tracker	en	Item creator
 language for the copy	tracker	en	Language for the copy
 last modified	tracker	en	Last modified
+last reply	tracker	en	last reply
 later	tracker	en	Later
 list of coma separated email address	tracker	en	List of coma separated email address
 new %1	tracker	en	New %1
@@ -121,6 +132,7 @@ postponed	tracker	en	Postponed
 print entry	tracker	en	Print entry
 project selection	tracker	en	Project selection
 projects	tracker	en	Projects
+queue	tracker	en	Queue
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
 receive notifications in html	tracker	en	Receive notifications in html
@@ -131,10 +143,12 @@ restict tracker items to the creator and the staff only	tracker	en	Restict track
 restict tracker items to the creators primary group and the staff only	tracker	en	Restict tracker items to the creators primary group and the staff only
 restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
 restriction	tracker	en	Restriction
+select multiple	tracker	en	Select multiple
 select tracker queue	tracker	en	select tracker queue
 select which categories should be used in tracker for the tts categories	tracker	en	select which categories should be used in Tracker for the TTS categories
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
+set %1	tracker	en	Set %1
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
 set bounty	tracker	en	Set bounty
 should the actions column in the tracker list-view be shown?	tracker	en	Should the actions column in the tracker list-view be shown?
@@ -150,6 +164,7 @@ thank you for setting this bounty.	tracker	en	Thank you for setting this bounty.
 thank you for voting.	tracker	en	Thank you for voting.
 the bounty will not be shown, until the money is received.	tracker	en	The bounty will NOT be shown, until the money is received.
 the canned response will be prefix the text you type.	tracker	en	The canned response will be prefix the text you type.
+there already an escalation for that filter!	tracker	en	There already an escalation for that filter!
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a Pending status, and the original submitter did not respond within %1 days.
 ticket count	tracker	en	ticket count
@@ -167,6 +182,7 @@ tracker queue	tracker	en	Tracker Queue
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
 tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
 tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.
+unchanged	tracker	en	Unchanged
 url of the tracker	tracker	en	URL of the tracker
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	en	URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW
 versions	tracker	en	Versions

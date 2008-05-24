@@ -12,9 +12,9 @@
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '1.5.001';
+$setup_info['tracker']['version']   = '1.5.002';
 $setup_info['tracker']['app_order'] = 5;
-$setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee');
+$setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee','egw_tracker_escalations');
 $setup_info['tracker']['enable']    = 1;
 
 $setup_info['tracker']['author'] =
@@ -47,3 +47,7 @@ $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'notifications',
 	 'versions' => Array('1.4','1.5','1.6','1.7')
 );
+
+
+
+

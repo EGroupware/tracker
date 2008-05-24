@@ -134,12 +134,13 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_details($data)
 	{
-		static $cats,$versions,$statis;
+		static $cats,$versions,$statis,$priorities;
 		if (!$cats)
 		{
 			$cats = $this->tracker->get_tracker_labels('cat',$data['tr_tracker']);
 			$versions = $this->tracker->get_tracker_labels('version',$data['tr_tracker']);
-			$statis = $this->tracker->stati + $this->tracker->get_tracker_labels('stati',$data['tr_tracker']);
+			$statis = $this->tracker->get_tracker_stati($data['tr_tracker']);
+			$priorities = $this->tracker->get_tracker_priorities($data['tr_tracker']);
 		}
 		foreach(array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
@@ -148,7 +149,7 @@ class tracker_tracking extends bo_tracking
 			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($this->tracker->resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
-			'tr_priority'    => lang($this->tracker->priorities[$data['tr_priority']]),
+			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
 			'tr_assigned'	 => $data['tr_assigned'] == "" ? lang('Not assigned') : $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
 			'tr_cc'			 => $data['tr_cc'],

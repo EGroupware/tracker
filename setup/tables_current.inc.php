@@ -10,7 +10,6 @@
  * @version $Id$
  */
 
-
 $phpgw_baseline = array(
 	'egw_tracker' => array(
 		'fd' => array(
@@ -94,5 +93,30 @@ $phpgw_baseline = array(
 		'fk' => array(),
 		'ix' => array('tr_tracker'),
 		'uc' => array()
+	),
+	'egw_tracker_escalations' => array(
+		'fd' => array(
+			'esc_id' => array('type' => 'auto','nullable' => False),
+			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'cat_id' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_version' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_status' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_priority' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
+			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),
+			'esc_type' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0'),
+			'esc_tr_assigned' => array('type' => 'varchar','precision' => '255'),
+			'esc_add_assigned' => array('type' => 'bool'),
+			'esc_tr_tracker' => array('type' => 'int','precision' => '4'),
+			'esc_cat_id' => array('type' => 'int','precision' => '4'),
+			'esc_tr_version' => array('type' => 'int','precision' => '4'),
+			'esc_tr_status' => array('type' => 'int','precision' => '4'),
+			'esc_tr_priority' => array('type' => 'int','precision' => '4'),
+			'esc_reply_message' => array('type' => 'text')
+		),
+		'pk' => array('esc_id'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority'))
 	)
 );
