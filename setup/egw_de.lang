@@ -66,7 +66,7 @@ created	tracker	de	Erstellt
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
 date opened	tracker	de	Datum angelegt
-define escalations	tracker	de	Eskalierung definieren
+define escalations	tracker	de	Eskalation definieren
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen
 delete this category	tracker	de	Diese Kategorie löschen
@@ -85,12 +85,12 @@ edit entry	tracker	de	Ticket bearbeiten
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
-error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalierung!
+error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
-escalation added.	tracker	de	Eskalierung hinzugefügt.
-escalation deleted.	tracker	de	Eskalierung gelöscht.
-escalation not found!	tracker	de	Eskalierung nicht gefunden!
-escalation saved.	tracker	de	Eskalierung gespeichert.
+escalation added.	tracker	de	Eskalation hinzugefügt.
+escalation deleted.	tracker	de	Eskalation gelöscht.
+escalation not found!	tracker	de	Eskalation nicht gefunden!
+escalation saved.	tracker	de	Eskalation gespeichert.
 everybody	tracker	de	Jeder
 existing links	tracker	de	Bestehende Verknüpfungen
 field	tracker	de	Feld
@@ -164,7 +164,7 @@ thank you for setting this bounty.	tracker	de	Danke das Sie diese Prämie gesetz
 thank you for voting.	tracker	de	Danke das Sie abgestimmt haben.
 the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
 the canned response will be prefix the text you type.	tracker	de	Die Standardantwort wird dem Text, den Sie eingeben, vorangestellt.
-there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalierung für diesen Filter!
+there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalation für diesen Filter!
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieser Eintrag im Verfolgungssystem wurde automatisch geschlossen. Er wurde zuvor auf den Status Schwebend gesetzt, und derjenige der den Eintrag angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 ticket count	tracker	de	Anzahl Tickets
