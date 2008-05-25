@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	de	%1 Einträge aktualisiert.
 %1 tickets have been converted	tracker	de	%1 Tickets konvertiert
-&#9830; not closed	tracker	de	♦ Offen
-&#9830; own not closed	tracker	de	♦ Eigene offen
-&#9830; own without reply not closed	tracker	de	♦ Eigene offen ohne Antwort
-&#9830; without 30 days reply not closed	tracker	de	♦ Offen ohne antwort für 30 Tage
-&#9830; without reply not closed	tracker	de	♦ Offen ohne Antwort
+&#9830; not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
+&#9830; own not closed	tracker	de	♦ Eigene nicht geschlossen
+&#9830; own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
+&#9830; without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
+&#9830; without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
 --> enter new name	tracker	de	--> neuen Namen eingeben
 1 - lowest	tracker	de	1 - niedrigste
@@ -28,6 +28,7 @@ allow the predefinition of projects that will be assigned to new tracker-items.	
 allow to assign groups to tracker items	tracker	de	Erlaube Einträgen Gruppen zuzuweisen
 allow voting	tracker	de	Erlaube Abstimmungen
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Einträge des Verfolgungssystem, zeige und sortiere nach den Stimmen
+already escalated	tracker	de	bereits eskaliert
 amount	tracker	de	Betrag
 assign to project	tracker	de	Projektzuweisung
 assigned to	tracker	de	Zugewiesen an
@@ -87,6 +88,7 @@ entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
+escalation	tracker	de	Eskalation
 escalation added.	tracker	de	Eskalation hinzugefügt.
 escalation deleted.	tracker	de	Eskalation gelöscht.
 escalation not found!	tracker	de	Eskalation nicht gefunden!
@@ -110,6 +112,7 @@ last modified	tracker	de	Zuletzt geändert
 last reply	tracker	de	letzte Antwort
 later	tracker	de	Später
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
+matching filter	tracker	de	Filter zutreffend
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
 new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2

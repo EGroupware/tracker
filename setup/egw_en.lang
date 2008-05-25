@@ -28,6 +28,7 @@ allow the predefinition of projects that will be assigned to new tracker-items.	
 allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
+already escalated	tracker	en	already escalated
 amount	tracker	en	Amount
 assign to project	tracker	en	Assign to project
 assigned to	tracker	en	Assigned to
@@ -87,6 +88,7 @@ entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
 error deleting escalation!	tracker	en	Error deleting escalation!
 error saving the entry!!!	tracker	en	Error saving the entry!!!
+escalation	tracker	en	Escalation
 escalation added.	tracker	en	Escalation added.
 escalation deleted.	tracker	en	Escalation deleted.
 escalation not found!	tracker	en	Escalation not found!
@@ -110,6 +112,7 @@ last modified	tracker	en	Last modified
 last reply	tracker	en	last reply
 later	tracker	en	Later
 list of coma separated email address	tracker	en	List of coma separated email address
+matching filter	tracker	en	matching filter
 new %1	tracker	en	New %1
 new items	tracker	en	New items
 new ticket submitted by %1 at %2	tracker	en	New ticket submitted by %1 at %2

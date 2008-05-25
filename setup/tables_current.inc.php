@@ -118,5 +118,16 @@ $phpgw_baseline = array(
 		'fk' => array(),
 		'ix' => array(),
 		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority'))
+	),
+	'egw_tracker_escalated' => array(
+		'fd' => array(
+			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'esc_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'esc_created' => array('type' => 'timestamp','nullable' => False,'default' => 'current_timestamp')
+		),
+		'pk' => array('tr_id','esc_id'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array()
 	)
 );

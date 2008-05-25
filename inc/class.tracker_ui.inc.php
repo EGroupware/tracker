@@ -823,7 +823,12 @@ class tracker_ui extends tracker_bo
 			'tr_priority' => self::$priorities,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 		);
-
+		$escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id');
+		$sel_options['esc_id']['already escalated'] = $escalations;
+		foreach($escalations as $esc_id => $label)
+		{
+			$sel_options['esc_id']['matching filter']['-'.$esc_id] = $label;
+		}
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
 			'nm' => $GLOBALS['egw']->session->appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
@@ -852,6 +857,7 @@ class tracker_ui extends tracker_bo
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
+	 			'default_cols'   => '!esc_id',
 			);
 			// KL20070124 on first enter of the tracker system, show the first entry
 			if (!$tracker) list($tracker) = @each($this->trackers);
@@ -870,7 +876,6 @@ class tracker_ui extends tracker_bo
 		{
 			$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		}
-
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);

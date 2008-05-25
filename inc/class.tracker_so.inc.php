@@ -35,6 +35,19 @@ class tracker_so extends so_sql
 	 * Table-name for the assignee
 	 */
 	const ASSIGNEE_TABLE = 'egw_tracker_assignee';
+	/**
+	 * Table-name for the already done escalations
+	 */
+	const ESCALATED_TABLE = 'egw_tracker_escalated';
+
+	/**
+	 * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
+	 */
+	const STATUS_OPEN    = '-100';
+	const STATUS_CLOSED  = '-101';
+	const STATUS_DELETED = '-102';
+	const STATUS_PENDING = '-103';
+	const SQL_NOT_CLOSED = "(tr_status != '-101' AND tr_status != '-102')";
 
 	/**
 	 * Constructor
@@ -122,7 +135,7 @@ class tracker_so extends so_sql
 				{
 					$this->data['tr_assigned'] = explode(',',$this->data['tr_assigned']);
 				}
-				_debug_array($this->data['tr_assigned']);
+				//_debug_array($this->data['tr_assigned']);
 				foreach($this->data['tr_assigned'] as $assignee)
 				{
 					$this->db->insert(self::ASSIGNEE_TABLE,array(
@@ -167,7 +180,6 @@ class tracker_so extends so_sql
 			{
 				$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
 				$filter[] = 'tr_assigned IS NULL';
-				$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise ASSIGNEE_TABLE.tr_id, which is NULL, hides tr_id
 			}
 			else
 			{
@@ -179,11 +191,27 @@ class tracker_so extends so_sql
 		elseif($need_private_acl)
 		{
 			$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
-			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise ASSIGNEE_TABLE.tr_id, which is NULL, hides tr_id
 		}
 		// group by tr_id, as we get one row per assignee!
 		$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 
+		if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
+
+		if (array_key_exists('esc_id',$filter))
+		{
+			if ($filter['esc_id'])
+			{
+				// we left join with the escalated timestamp table, to check if the escalation is not alread done
+				$join .= ' LEFT JOIN '.self::ESCALATED_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ESCALATED_TABLE.'.tr_id AND esc_id='.abs($filter['esc_id']);
+				$filter[] = $filter['esc_id'] > 0 ? 'esc_created IS NOT NULL' : 'esc_created IS NULL';
+
+				$escalation = new tracker_escalations(abs($filter['esc_id']));
+				$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE,$f = $escalation->get_filter());
+				//echo "filter($filter[esc_id])='$fs'="; _debug_array($f);
+				$extra_cols[] = $escalation->get_time_col().' AS esc_start';
+			}
+			unset($filter['esc_id']);
+		}
 		if ($need_private_acl)
 		{
 			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
@@ -202,8 +230,6 @@ class tracker_so extends so_sql
 		}
 		if ($join_in === true || $join_in == 1)
 		{
-			if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
-
 			if ($this->db->capabilities['sub_queries'])	// everything, but old MySQL
 			{
 				$extra_cols[] = '(SELECT COUNT(*) FROM '.self::VOTES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::VOTES_TABLE.'.tr_id) AS votes';
@@ -314,13 +340,12 @@ class tracker_so extends so_sql
 		{
 			case 'not-closed':
 				unset($filter['tr_status']);
-				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
-			break;
+				$filter[] = self::SQL_NOT_CLOSED;
+				break;
 			case 'own-not-closed':
 				unset($filter['tr_status']);
-				unset($filter['tr_creator']);
-				$filter[] = "(tr_creator=".$this->user.")";
-				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				$filter['tr_creator'] = $this->user;
+				$filter[] = self::SQL_NOT_CLOSED;
 				break;
 			case 'without-reply-not-closed':
 				unset($filter['tr_status']);
@@ -336,13 +361,12 @@ class tracker_so extends so_sql
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = '(replies = 0)';
+					$filter[] = 'replies=0';
 				}
-				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				$filter[] = self::SQL_NOT_CLOSED;
 				break;
 			case 'own-without-reply-not-closed':
 				unset($filter['tr_status']);
-				unset($filter['tr_creator']);
 				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
 				{
 					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)';
@@ -355,10 +379,10 @@ class tracker_so extends so_sql
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = '(replies = 0)';
+					$filter[] = 'replies=0';
 				}
-				$filter[] = "(tr_creator=".$this->user.")";
-				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				$filter['tr_creator'] = $this->user;
+				$filter[] = self::SQL_NOT_CLOSED;
 				break;
 			case 'without-30-days-reply-not-closed':
 				unset($filter['tr_status']);
@@ -374,10 +398,14 @@ class tracker_so extends so_sql
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = '(replies = 0)';
+					$filter[] = 'replies=0';
 				}
-				$filter[] = "((tr_status != '-101') and (tr_status != '-102'))";
+				$filter[] = self::SQL_NOT_CLOSED;
 				break;
+		}
+		if (strpos($join,'LEFT JOIN') !== false)
+		{
+			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
 		}
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
@@ -433,6 +461,7 @@ class tracker_so extends so_sql
 			$this->db->delete(self::VOTES_TABLE,$where,__LINE__,__FILE__,'tracker');
 			$this->db->delete(self::BOUNTIES_TABLE,$where,__LINE__,__FILE__,'tracker');
 			$this->db->delete(self::ASSIGNEE_TABLE,$where,__LINE__,__FILE__,'tracker');
+			$this->db->delete(self::ESCALATED_TABLE,$where,__LINE__,__FILE__,'tracker');
 		}
 		return parent::delete($keys);
 	}

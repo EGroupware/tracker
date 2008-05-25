@@ -45,7 +45,7 @@
 					</menulist>
 					<textbox multiline="true" id="${row}[esc_action_label]" readonly="true"/>
 					<vbox options="0,0">
-						<date-duration id="${row}[esc_time]" readonly="true"/>
+						<date-duration id="${row}[esc_time]" readonly="true" options=",dhm,24"/>
 						<menulist>
 							<menupopup id="${row}[esc_type]" readonly="true" label="after"/>
 						</menulist>
@@ -84,7 +84,7 @@
 				<row>
 					<description value="Time"/>
 					<hbox options="0,0">
-						<date-duration id="esc_time" options=",dhm"/>
+						<date-duration id="esc_time" options=",dhm,24"/>
 						<menulist class="leftPad5">
 							<menupopup label="after" id="esc_type"/>
 						</menulist>

@@ -15,7 +15,7 @@
 /**
  * Escalation of tickets
  */
-class tracker_escalations extends so_sql
+class tracker_escalations extends so_sql2
 {
 	/**
 	 * Name of escalations table
@@ -33,9 +33,14 @@ class tracker_escalations extends so_sql
 	 *
 	 * @return tracker_ui
 	 */
-	function __construct()
+	function __construct($id = null)
 	{
 		parent::so_sql('tracker',self::ESCALATIONS_TABLE,null,'',true);
+
+		if (!is_null($id) && !$this->read($id))
+		{
+			throw new egw_exception_not_found();
+		}
 	}
 
 	/**
@@ -171,5 +176,49 @@ class tracker_escalations extends so_sql
 		//_debug_array($rows);
 
 		return $Ok;
+	}
+
+	/**
+	 * Get an SQL filter to include in a tracker search returning only matches of a given escalation
+	 *
+	 * @param boolean $due=false true = return only tickets due to escalate, default false = return all tickets matching the escalation filter
+	 * @return array|boolean array with filter or false if escalation not found
+	 */
+	function get_filter($due=false)
+	{
+		$filter = array();
+
+		if ($this->tr_tracker)  $filter['tr_tracker'] = $this->tr_tracker;
+		if ($this->tr_status)   $filter['tr_status'] = $this->tr_status;
+		if ($this->tr_priority) $filter['tr_priority'] = $this->tr_priority;
+		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
+		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
+
+		if ($due)
+		{
+			//echo "<p>time=".time()."=".date('Y-m-d H:i:s').", esc_time=$this->esc_time, time()-esc_time*60=".(time()-$this->esc_time*60).'='.date('Y-m-d H:i:s',time()-$this->esc_time*60)."</p>\n";
+			$filter[] = $this->get_time_col().' < '.(time()-$this->esc_time*60);
+		}
+
+		return $filter;
+	}
+
+	/**
+	 * Get SQL (usable as extra column) of time relevant for the escalation
+	 *
+	 * @return string
+	 */
+	function get_time_col()
+	{
+		switch($this->esc_type)
+		{
+			default:
+			case self::CREATION:
+				return 'tr_created';
+			case self::MODIFICATION:
+				return 'tr_modified';
+			case self::REPLIED:
+				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r WHERE r.tr_id = egw_tracker.tr_id)";
+		}
 	}
 }

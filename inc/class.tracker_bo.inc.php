@@ -76,14 +76,6 @@ class tracker_bo extends tracker_so
 		9 => '9 - highest',
 	);
 	/**
-	 * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
-	 */
-	const STATUS_OPEN    = -100;
-	const STATUS_CLOSED  = -101;
-	const STATUS_DELETED = -102;
-	const STATUS_PENDING = -103;
-
-	/**
 	 * Stati used by all trackers
 	 *
 	 * @var array
