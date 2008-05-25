@@ -221,4 +221,145 @@ class tracker_escalations extends so_sql2
 				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r WHERE r.tr_id = egw_tracker.tr_id)";
 		}
 	}
+
+	/**
+	 * Private tracker_bo instance to run the escalations
+	 *
+	 * @var tracker_bo
+	 */
+	private static $tracker;
+
+	/**
+	 * Escalate a given ticket, using this escalation
+	 *
+	 * @param int|array $ticket
+	 */
+	function escalate_ticket($ticket)
+	{
+		error_log(__METHOD__.'('.array2string($ticket).')');
+		if (is_null(self::$tracker))
+		{
+			self::$tracker = new tracker_bo();
+			self::$tracker->user = 0;
+		}
+		if (!is_array($ticket) && !($ticket = self::$tracker->read($ticket)))
+		{
+			return false;
+		}
+		foreach($this->set as $name => $value)
+		{
+			if (!is_null($value) && $value)
+			{
+				switch($name)
+				{
+					case 'add_assigned':
+						break;
+					case 'tr_assigned':
+						if ($this->set['add_assigned'])
+						{
+							$ticket['tr_assigned'] = array_unique(array_merge($ticket['tr_assigned'],$value));
+							break;
+						}
+						// fall through for SET assigned
+					default:
+						$ticket[$name] = $value;
+						break;
+				}
+			}
+		}
+		self::$tracker->init($ticket);
+
+		if (self::$tracker->save() != 0)
+		{
+			return false;	// error saving the ticket
+		}
+		$this->db->insert(self::ESCALATED_TABLE,array(),array(
+			'tr_id' =>  $ticket['tr_id'],
+			'esc_id' => $this->id,
+		),__LINE__,__FILE__,'tracker');
+
+		return true;
+	}
+
+	/**
+	 * Test and escalate all due tickets for this escalation
+	 *
+	 */
+	function do_escalation()
+	{
+		error_log(__METHOD__."() esc_id=$this->esc_id, esc_title=$this->esc_title");
+		if (is_null(self::$tracker))
+		{
+			self::$tracker = new tracker_bo();
+			self::$tracker->user = 0;
+		}
+		if (($due_tickets = self::$tracker->search(array(),false,'esc_start','','',false,'AND',false,array('esc_id' => -$this->id))))
+		{
+			foreach($due_tickets as $ticket)
+			{
+				$this->escalate_ticket($ticket);
+			}
+		}
+	}
+
+	/**
+	 * Async job running all escalations
+	 *
+	 */
+	function do_all_escalations()
+	{
+		error_log(__METHOD__.'()');
+		if (($escalations = $this->search(array(),false)))
+		{
+			foreach($escalations as $escalation)
+			{
+				$this->init($escalation);
+				$this->do_escalation();
+			}
+		}
+		else	// no escalations (any more) --> delete async job
+		{
+			self::set_async_job(false);
+		}
+	}
+
+	const ASYNC_JOB_NAME = 'tracker-escalations';
+
+	/**
+	 * Check if exist and if not start or stop an async job to close pending items
+	 *
+	 * @param boolean $start=true true=start, false=stop
+	 */
+	static function set_async_job($start=true)
+	{
+		//echo '<p>'.__METHOD__.'('.($start?'true':'false').")</p>\n";
+
+		$async =& new asyncservice();
+
+		if ($start === !$async->read(self::ASYNC_JOB_NAME))
+		{
+			if ($start)
+			{
+				$async->set_timer(array('min' => '*/5'),self::ASYNC_JOB_NAME,'tracker.tracker_escalations.do_all_escalations',null);
+			}
+			else
+			{
+				$async->cancel_timer(self::ASYNC_JOB_NAME);
+			}
+		}
+	}
+
+	/**
+	 * Reimplemented save to start the async job
+	 *
+	 * @param array $keys
+	 * @param array $extra_where
+	 * @return int
+	 */
+	function save($keys=null,$extra_where=null)
+	{
+		self::set_async_job(true);
+
+		return parent::save($keys,$extra_where);
+	}
 }
