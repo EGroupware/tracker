@@ -198,6 +198,11 @@ class tracker_so extends so_sql
 		{
 			$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
 		}
+		// check if we order by tr_id, replace it with egr_tracker.tr_id, as tr_id is ambigues
+		if (strpos($order_by,'tr_id') !== false && strpos($order_by,self::TRACKER_TABLE.'.tr_id') === false)
+		{
+			$order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
+		}
 		// group by tr_id, as we get one row per assignee!
 		$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 
@@ -250,7 +255,6 @@ class tracker_so extends so_sql
 				$extra_cols[] = 'SUM(bounty_amount) AS bounties';
 				// fixes to get tr_id non-ambigues
 				if (is_bool($only_keys)) $only_keys = self::TRACKER_TABLE.($only_keys ? '.tr_id' : '.*');
-				if (strpos($order_by,'tr_id') !== false) $order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
 			}
 			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
