@@ -472,7 +472,7 @@ class tracker_ui extends tracker_bo
 					'As' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
-					'Re' => &$this->resolutions,
+					'Re' => self::$resolutions,
 				),
 			),
 		);
@@ -501,7 +501,7 @@ class tracker_ui extends tracker_bo
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => self::$priorities,
 			'tr_status'   => &$statis,
-			'tr_resolution' => &$this->resolutions,
+			'tr_resolution' => self::$resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
 			// New items default to primary group is no right to change the group
 			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker) && !$this->data['tr_id']),
