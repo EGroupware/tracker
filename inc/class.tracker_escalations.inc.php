@@ -27,6 +27,12 @@ class tracker_escalations extends so_sql2
 	const CREATION = 0;
 	const MODIFICATION = 1;
 	const REPLIED = 2;
+	/**
+	 * Fields not in the main table, which need to be merged or set
+	 *
+	 * @var array
+	 */
+	var $non_db_cols = array('set');
 
 	/**
 	 * Constructor
@@ -35,7 +41,7 @@ class tracker_escalations extends so_sql2
 	 */
 	function __construct($id = null)
 	{
-		parent::so_sql('tracker',self::ESCALATIONS_TABLE,null,'',true);
+		parent::__construct('tracker',self::ESCALATIONS_TABLE,null,'',true);
 
 		if (!is_null($id) && !$this->read($id))
 		{
@@ -236,7 +242,6 @@ class tracker_escalations extends so_sql2
 	 */
 	function escalate_ticket($ticket)
 	{
-		error_log(__METHOD__.'('.array2string($ticket).')');
 		if (is_null(self::$tracker))
 		{
 			self::$tracker = new tracker_bo();
@@ -273,7 +278,7 @@ class tracker_escalations extends so_sql2
 		{
 			return false;	// error saving the ticket
 		}
-		$this->db->insert(self::ESCALATED_TABLE,array(),array(
+		$this->db->insert(tracker_so::ESCALATED_TABLE,array(),array(
 			'tr_id' =>  $ticket['tr_id'],
 			'esc_id' => $this->id,
 		),__LINE__,__FILE__,'tracker');
@@ -287,13 +292,12 @@ class tracker_escalations extends so_sql2
 	 */
 	function do_escalation()
 	{
-		error_log(__METHOD__."() esc_id=$this->esc_id, esc_title=$this->esc_title");
 		if (is_null(self::$tracker))
 		{
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
-		if (($due_tickets = self::$tracker->search(array(),false,'esc_start','','',false,'AND',false,array('esc_id' => -$this->id))))
+		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start','',false,'AND',false,$this->get_filter(true))))
 		{
 			foreach($due_tickets as $ticket)
 			{
@@ -308,7 +312,6 @@ class tracker_escalations extends so_sql2
 	 */
 	function do_all_escalations()
 	{
-		error_log(__METHOD__.'()');
 		if (($escalations = $this->search(array(),false)))
 		{
 			foreach($escalations as $escalation)

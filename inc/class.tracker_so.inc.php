@@ -48,6 +48,12 @@ class tracker_so extends so_sql
 	const STATUS_DELETED = '-102';
 	const STATUS_PENDING = '-103';
 	const SQL_NOT_CLOSED = "(tr_status != '-101' AND tr_status != '-102')";
+	/**
+	 * Fields which are not part of the main table, but need to be merged and init()
+	 *
+	 * @var array
+	 */
+	var $non_db_cols = array('tr_assigned','reply_message');
 
 	/**
 	 * Constructor
@@ -56,7 +62,7 @@ class tracker_so extends so_sql
 	 */
 	function __construct()
 	{
-		$this->so_sql('tracker',self::TRACKER_TABLE,null,'',true);
+		parent::__construct('tracker',self::TRACKER_TABLE,null,'',true);
 	}
 
 	/**
