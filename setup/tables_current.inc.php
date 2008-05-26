@@ -86,12 +86,11 @@ $phpgw_baseline = array(
 	'egw_tracker_assignee' => array(
 		'fd' => array(
 			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
-			'tr_assigned' => array('type' => 'int','precision' => '4','nullable' => False),
-			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False)
+			'tr_assigned' => array('type' => 'int','precision' => '4','nullable' => False)
 		),
 		'pk' => array('tr_id','tr_assigned'),
 		'fk' => array(),
-		'ix' => array('tr_tracker'),
+		'ix' => array(),
 		'uc' => array()
 	),
 	'egw_tracker_escalations' => array(

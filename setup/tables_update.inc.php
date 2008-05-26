@@ -285,3 +285,21 @@ function tracker_upgrade1_5_002()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.003';
 }
+
+function tracker_upgrade1_5_003()
+{
+	// drop not used egw_tracker_assignee.tr_tracker column
+	$GLOBALS['egw_setup']->oProc->DropColumn('egw_tracker_assignee',array(
+		'fd' => array(
+			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'tr_assigned' => array('type' => 'int','precision' => '4','nullable' => False)
+		),
+		'pk' => array('tr_id','tr_assigned'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array()
+	),'tr_tracker');
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.004';
+}
+
