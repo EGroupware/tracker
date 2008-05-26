@@ -142,6 +142,14 @@ class tracker_tracking extends bo_tracking
 			$statis = $this->tracker->get_tracker_stati($data['tr_tracker']);
 			$priorities = $this->tracker->get_tracker_priorities($data['tr_tracker']);
 		}
+		if ($data['tr_assigned'])
+		{
+			foreach($data['tr_assigned'] as $uid)
+			{
+				$assigned[] = $GLOBALS['egw']->common->grab_owner_name($uid);
+			}
+			$assigned = implode(', ',$assigned);
+		}
 		foreach(array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
@@ -151,7 +159,7 @@ class tracker_tracking extends bo_tracking
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
-			'tr_assigned'	 => $data['tr_assigned'] == "" ? lang('Not assigned') : $GLOBALS['egw']->common->grab_owner_name($data['tr_assigned']),
+			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
 			'tr_cc'			 => $data['tr_cc'],
 			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
 		) as $name => $value)
