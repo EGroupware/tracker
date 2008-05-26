@@ -208,8 +208,7 @@ class tracker_so extends so_sql
 			if ($filter['esc_id'])
 			{
 				// we left join with the escalated timestamp table, to check if the escalation is not alread done
-				$join .= ' LEFT JOIN '.self::ESCALATED_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ESCALATED_TABLE.'.tr_id AND esc_id='.abs($filter['esc_id']);
-				$filter[] = $filter['esc_id'] > 0 ? 'esc_created IS NOT NULL' : 'esc_created IS NULL';
+				$filter[] = self::escalated_filter(abs($filter['esc_id']),$join,$filter['esc_id'] > 0);
 
 				$escalation = new tracker_escalations(abs($filter['esc_id']));
 				$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE,$f = $escalation->get_filter());
@@ -432,6 +431,21 @@ class tracker_so extends so_sql
 			}
 		}
 		return $rows;
+	}
+
+	/**
+	 * Filter by a certain escalation (either done or not done)
+	 *
+	 * @param int $esc_id
+	 * @param string &$join join with escalation table is added there
+	 * @param boolean $escalated=true default true=return only escalated tickets, false = return not escalated ticktes
+	 * @return string filter
+	 */
+	function escalated_filter($esc_id,&$join,$escalated=true)
+	{
+		$join .= ' LEFT JOIN '.self::ESCALATED_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ESCALATED_TABLE.'.tr_id AND esc_id='.(int)$esc_id;
+
+		return $escalated ? 'esc_created IS NOT NULL' : 'esc_created IS NULL';
 	}
 
 	/**

@@ -297,7 +297,13 @@ class tracker_escalations extends so_sql2
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
-		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start','',false,'AND',false,$this->get_filter(true))))
+		// filter only due tickets
+		$filter = $this->get_filter(true);
+		// not having this escalation already done
+		$filter[] = tracker_bo::escalated_filter($this->id,$join,false);
+
+		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
+			'',false,'AND',false,$filter,$join)))
 		{
 			foreach($due_tickets as $ticket)
 			{
