@@ -823,11 +823,13 @@ class tracker_ui extends tracker_bo
 			'tr_priority' => self::$priorities,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 		);
-		$escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id');
-		$sel_options['esc_id']['already escalated'] = $escalations;
-		foreach($escalations as $esc_id => $label)
+		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
-			$sel_options['esc_id']['matching filter']['-'.$esc_id] = $label;
+			$sel_options['esc_id']['already escalated'] = $escalations;
+			foreach($escalations as $esc_id => $label)
+			{
+				$sel_options['esc_id']['matching filter']['-'.$esc_id] = $label;
+			}
 		}
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
