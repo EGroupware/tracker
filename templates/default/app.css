@@ -26,3 +26,4 @@ table.fullWidth { width: 100%; }
 .user_filter select { width: 150px; }
 .user_select select { width: 230px; }
 .cat_select select  { width: 100%; }
+.status_filter select { width: 100px; }

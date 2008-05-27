@@ -39,7 +39,7 @@
 					<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
 					<nextmatch-sortheader label="Priority" id="tr_priority" class="tracker-priority" align="center"/>
 					<vbox options="0,0">
-						<nextmatch-filterheader options="All" id="tr_status" label="Status" class="user_select"/>
+						<nextmatch-filterheader options="All" id="tr_status" label="Status" class="status_filter"/>
 					</vbox>
 					<nextmatch-sortheader label="Completed" id="tr_completion" class="tracker-completion" align="center"/>
 					<vbox options="0,0">
