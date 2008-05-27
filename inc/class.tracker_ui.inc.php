@@ -1165,7 +1165,7 @@ class tracker_ui extends tracker_bo
 		$f = 1;
 		foreach($this->field2label as $name => $label)
 		{
-			if ($name == 'tr_creator') continue;
+			if (in_array($name,array('tr_creator','num_replies'))) continue;
 
 			$rights = $this->field_acl[$name];
 			$content['field_acl'][$f++] = array(
