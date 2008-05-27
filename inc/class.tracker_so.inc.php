@@ -180,7 +180,7 @@ class tracker_so extends so_sql
 		// private ACL: private items are only visible for create, assiged or tracker admins
 		$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']);
 
-		if (array_key_exists('tr_assigned',$filter))
+		if (is_array($filter) && array_key_exists('tr_assigned',$filter))
 		{
 			if (is_null($filter['tr_assigned']))
 			{
@@ -208,7 +208,7 @@ class tracker_so extends so_sql
 
 		if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
 
-		if (array_key_exists('esc_id',$filter))
+		if (is_array($filter) && array_key_exists('esc_id',$filter))
 		{
 			if ($filter['esc_id'])
 			{
@@ -237,6 +237,11 @@ class tracker_so extends so_sql
 			}
 			$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 			if ($this->db->capabilities['distinct_on_text']) $only_keys = 'DISTINCT '.self::TRACKER_TABLE.'.*';
+		}
+		elseif(isset($criteria['tr_id']))
+		{
+			$criteria[self::TRACKER_TABLE.'.tr_id'] = $criteria['tr_id'];
+			unset($criteria['tr_id']);
 		}
 		if ($join_in === true || $join_in == 1)
 		{
@@ -415,6 +420,20 @@ class tracker_so extends so_sql
 		if (strpos($join,'LEFT JOIN') !== false)
 		{
 			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
+		}
+		// avoid ambigues tr_id
+		if (is_bool($only_keys))
+		{
+			$only_keys = $only_keys ? self::TRACKER_TABLE.'.tr_id' : self::TRACKER_TABLE.'.*';
+		}
+		else
+		{
+			$only_keys = explode(',',$only_keys);
+			if (($id_key = array_search('tr_id',$only_keys)) !== false)
+			{
+				$only_keys[] = self::TRACKER_TABLE.'.tr_id';
+				unset($only_keys[$id_key]);
+			}
 		}
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
