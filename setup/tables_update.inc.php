@@ -303,3 +303,33 @@ function tracker_upgrade1_5_003()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.004';
 }
 
+function tracker_upgrade1_5_004()
+{
+	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker_escalations',array(
+		'fd' => array(
+			'esc_id' => array('type' => 'auto','nullable' => False),
+			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'cat_id' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_version' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_status' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_priority' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
+			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),
+			'esc_type' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0'),
+			'esc_tr_assigned' => array('type' => 'varchar','precision' => '255'),
+			'esc_add_assigned' => array('type' => 'bool'),
+			'esc_tr_tracker' => array('type' => 'int','precision' => '4'),
+			'esc_cat_id' => array('type' => 'int','precision' => '4'),
+			'esc_tr_version' => array('type' => 'int','precision' => '4'),
+			'esc_tr_status' => array('type' => 'int','precision' => '4'),
+			'esc_tr_priority' => array('type' => 'int','precision' => '4'),
+			'esc_reply_message' => array('type' => 'text')
+		),
+		'pk' => array('esc_id'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority','esc_time','esc_type'))
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.005';
+}

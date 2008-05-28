@@ -116,7 +116,7 @@ $phpgw_baseline = array(
 		'pk' => array('esc_id'),
 		'fk' => array(),
 		'ix' => array(),
-		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority'))
+		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority','esc_time','esc_type'))
 	),
 	'egw_tracker_escalated' => array(
 		'fd' => array(
