@@ -1244,7 +1244,7 @@ class tracker_ui extends tracker_bo
 			{
 				case 'save':
 				case 'apply':
-					if ($escalations->not_unique())
+					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
