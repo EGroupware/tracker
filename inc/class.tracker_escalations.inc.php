@@ -262,7 +262,7 @@ class tracker_escalations extends so_sql2
 					case 'tr_assigned':
 						if ($this->set['add_assigned'])
 						{
-							$ticket['tr_assigned'] = array_unique(array_merge($ticket['tr_assigned'],$value));
+							$ticket['tr_assigned'] = array_unique(array_merge($ticket['tr_assigned'],(array)$value));
 							break;
 						}
 						// fall through for SET assigned
