@@ -88,6 +88,10 @@ class tracker_escalations extends so_sql2
 		{
 			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type')))
 			{
+				if ($key == 'esc_tr_assigned')
+				{
+					$value = $value ? explode(',',$value) : array();
+				}
 				$data['set'][substr($key,4)] = $value;
 				if (!is_null($value))
 				{
@@ -106,7 +110,7 @@ class tracker_escalations extends so_sql2
 					$action = lang('Set %1',$col2action[$key]).': ';
 					switch($key)
 					{
-						case 'esc_tr_assigned':	// actions with (multiple) users in data
+						case 'esc_tr_assigned':
 							if ($data['esc_add_assigned']) $action = lang('Add assigned').': ';
 							$users = array();
 							foreach((array)$value as $uid)

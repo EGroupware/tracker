@@ -1305,7 +1305,10 @@ class tracker_ui extends tracker_bo
 			),
 		);
 		$tpl = new etemplate('tracker.escalations');
-
+		if (count($content['set']['tr_assigned']) > 1)
+		{
+			$tpl->set_cell_attribute('tr_assigned','size','3+');
+		}
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
 		return $tpl->exec('tracker.tracker_ui.escalations',$content,$sel_options,$readonlys,$preserv);

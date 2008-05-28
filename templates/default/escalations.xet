@@ -52,7 +52,7 @@
 					</vbox>
 					<hbox options="0,0">
 						<button image="edit" label="Edit" id="edit[$row_cont[esc_id]]"/>
-						<button image="delete" label="Delete" id="delete[$row_cont[esc_id]]"/>
+						<button image="delete" label="Delete" id="delete[$row_cont[esc_id]]" statustext="Delete this escalation" onclick="return confirm('Delete this escalation');"/>
 					</hbox>
 				</row>
 			</rows>
