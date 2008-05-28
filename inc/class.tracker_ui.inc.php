@@ -1269,11 +1269,11 @@ class tracker_ui extends tracker_bo
 					$escalations->init();
 				}
 			}
-			elseif($content['nm']['rows']['edit'])
+			elseif($content['nm']['rows']['delete'])
 			{
 				list($id) = each($content['nm']['rows']['delete']);
 				unset($content['nm']['rows']);
-				if (!$escalations->delete($id))
+				if (!$escalations->delete(array('esc_id' => $id)))
 				{
 					$msg = lang('Error deleting escalation!');
 				}
