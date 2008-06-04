@@ -333,3 +333,16 @@ function tracker_upgrade1_5_004()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.005';
 }
+
+function tracker_upgrade1_5_005()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_status',array(
+		'type' => 'varchar',
+		'precision' => '255',
+		'nullable' => False,
+		'default' => '0'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.006';
+}
+

@@ -84,6 +84,10 @@ class tracker_escalations extends so_sql2
 		{
 			$data = &$this->data;
 		}
+		if (isset($data['tr_status']) && strpos($data['tr_status'],',') !== false)
+		{
+			$data['tr_status'] = explode(',',$data['tr_status']);
+		}
 		foreach($data as $key => &$value)
 		{
 			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type')))
@@ -175,6 +179,10 @@ class tracker_escalations extends so_sql2
 				$data['esc_'.$key] = is_array($value) ? implode(',',$value) : $value;
 			}
 			unset($data['set']);
+		}
+		if (is_array($data['tr_status']))
+		{
+			$data['tr_status'] = implode(',',$data['tr_status']);
 		}
 		return parent::db2data($data);
 	}

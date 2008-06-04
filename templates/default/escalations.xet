@@ -120,9 +120,12 @@
 								</row>
 								<row>
 									<description value="Status"/>
-									<menulist>
-										<menupopup options="All" id="tr_status"/>
-									</menulist>
+									<hbox options="0,0">
+										<menulist>
+											<menupopup options="All" id="tr_status"/>
+										</menulist>
+										<buttononly options="navbar" label="Select multiple" class="mStatus" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;"/>
+									</hbox>
 									<description value="Priority"/>
 									<menulist>
 										<menupopup options="All" id="tr_priority"/>
@@ -202,6 +205,7 @@
 		</grid>
 		<styles>
 			.reply textarea { width: 100%; }
+.mStatus img { width: 16px; height: 16px; padding-left: 5px; }
 		</styles>
 	</template>
 </overlay>

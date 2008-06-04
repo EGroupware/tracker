@@ -99,7 +99,7 @@ $phpgw_baseline = array(
 			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
 			'cat_id' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
 			'tr_version' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
-			'tr_status' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_status' => array('type' => 'varchar','precision' => '255','nullable' => False,'default' => '0'),
 			'tr_priority' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
 			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
 			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),

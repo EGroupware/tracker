@@ -1309,6 +1309,10 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->set_cell_attribute('tr_assigned','size','3+');
 		}
+		if (count($content['tr_status']) > 1)
+		{
+			$tpl->set_cell_attribute('tr_status','size','3+');
+		}
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
 		return $tpl->exec('tracker.tracker_ui.escalations',$content,$sel_options,$readonlys,$preserv);
