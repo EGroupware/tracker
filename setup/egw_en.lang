@@ -66,6 +66,7 @@ create new links	tracker	en	Create new links
 created	tracker	en	Created
 creation date	tracker	en	creation date
 creator	tracker	en	Creator
+custom tracker priorities	tracker	en	Custom tracker priorities
 date opened	tracker	en	Date opened
 define escalations	tracker	en	Define escalations
 delete this bounty	tracker	en	Delete this bounty
@@ -134,6 +135,8 @@ permission denied !!!	tracker	en	Permission denied !!!
 permit html editing in overview and comments	tracker	en	Permit html editing in overview and comments
 postponed	tracker	en	Postponed
 print entry	tracker	en	Print entry
+priorities	tracker	en	Priorities
+priorities with empty label are not available to the user	tracker	en	Priorities with empty label are not available to the user
 project selection	tracker	en	Project selection
 projects	tracker	en	Projects
 queue	tracker	en	Queue

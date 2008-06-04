@@ -499,7 +499,7 @@ class tracker_ui extends tracker_bo
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => self::$priorities,
+			'tr_priority' => $this->get_tracker_priorities($tracker),
 			'tr_status'   => &$statis,
 			'tr_resolution' => self::$resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
@@ -710,6 +710,11 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
+		$rows['sel_options']['tr_priority'] = $this->get_tracker_priorities($tracker);
+		if ($rows['sel_options']['tr_priority'] === self::$stock_priorities)	// show only the numbers for the stock priorities
+		{
+			$rows['sel_options']['tr_priority'] = array_combine(array_keys(self::$stock_priorities),array_keys(self::$stock_priorities));
+		}
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
@@ -820,7 +825,6 @@ class tracker_ui extends tracker_bo
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'tr_priority' => self::$priorities,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
@@ -895,7 +899,7 @@ class tracker_ui extends tracker_bo
 	function admin($content=null,$msg='')
 	{
 		//_debug_array($content);
-		$tabs = 'cats|staff|config';
+		$tabs = 'cats|priorities|staff|config';
 		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n",null,true);
@@ -946,7 +950,7 @@ class tracker_ui extends tracker_bo
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification')) as $name)
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification','priorities')) as $name)
 						{
 							if ((string) $this->$name !== $content[$name])
 							{
@@ -991,6 +995,25 @@ class tracker_ui extends tracker_bo
 							$staff[$tracker] = $content[$name];
 							$need_update = true;
 						}
+					}
+					// priorities are only stores if they differ from the stock-priorities
+					$prios = array();
+					foreach($content['priorities'] as $value => $data)
+					{
+						$prios[(int)$value] = (string)$data['label'];
+					}
+					if ($prios === self::$stock_priorities || $tracker && $prios === $this->priorities[0] || !array_diff($prios,array('')))
+					{
+						//_debug_array($prios);
+						//echo "<p>using default prios: prios===stock_prios=".(int)($prios === self::$stock_priorities)."</p>\n";
+						//echo "<p>using default prios: tracker && prios===priorities[0]=".(int)($tracker && $prios === $this->priorities[0])."</p>\n";
+						//echo "<p>using default prios: !array_diff(prios,array(''))=".(int)!array_diff($prios,array(''))."</p>\n";
+						$prios = null;
+					}
+					if ($prios !== $this->priorities[$tracker])	// priorities changed
+					{
+						$this->priorities[$tracker] = $prios;
+						$need_update = true;
 					}
 					if ($need_update)
 					{
@@ -1123,7 +1146,7 @@ class tracker_ui extends tracker_bo
 			$tabs => $content[$tabs],
 		);
 
-		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions')) as $name)
+		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','priorities')) as $name)
 		{
 			$content[$name] = $this->$name;
 		}
@@ -1184,6 +1207,14 @@ class tracker_ui extends tracker_bo
 		$this->enabled_queue_acl_access ? $queue_access_enabled_label = lang("Enabled") : $queue_access_enabled_label = lang("Disabled");
 		$content['queue_access_enabled_label'] = lang('Users').': '.lang('Restriction')." ".$queue_access_enabled_label;
 		$content['queue_access_enabled_label_help'] = lang('You can enable/disable the queue access restrictions in the configuration tab (for all queues)');
+
+		foreach($this->get_tracker_priorities($tracker,false) as $value => $label)
+		{
+			$content['priorities'][$value] = array(
+				'value' => self::$stock_priorities[$value],
+				'label' => $label,
+			);
+		}
 		//_debug_array($content);
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		$sel_options = array(

@@ -66,6 +66,7 @@ create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
+custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 date opened	tracker	de	Datum angelegt
 define escalations	tracker	de	Eskalation definieren
 delete this bounty	tracker	de	Diese Prämie löschen
@@ -134,6 +135,8 @@ permission denied !!!	tracker	de	Zugriff verweigert !!!
 permit html editing in overview and comments	tracker	de	Formatierte Textbearbeitung im Überblick und den Antworten
 postponed	tracker	de	Vertagt
 print entry	tracker	de	Ticket drucken
+priorities	tracker	de	Prioritäten
+priorities with empty label are not available to the user	tracker	de	Prioritäten mit leerer Beschriftung sind für den Benutzer nicht verfügbar
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 queue	tracker	de	Queue

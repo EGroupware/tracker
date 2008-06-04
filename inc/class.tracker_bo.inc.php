@@ -64,7 +64,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @var array
 	 */
-	static $priorities = array(
+	static $stock_priorities = array(
 		1 => '1 - lowest',
 		2 => '2',
 		3 => '3',
@@ -75,6 +75,14 @@ class tracker_bo extends tracker_so
 		8 => '8',
 		9 => '9 - highest',
 	);
+	/**
+	 * Priorities by tracker or key=0 for all trackers
+	 *
+	 * Not set trackers use the key=0 or if that's not set the stock priorities
+	 *
+	 * @var array
+	 */
+	protected $priorities;
 	/**
 	 * Stati used by all trackers
 	 *
@@ -244,7 +252,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','users','notification','projects',	// tracker specific
+		'technicians','admins','users','notification','projects','priorities',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access',
 	);
@@ -837,10 +845,32 @@ class tracker_bo extends tracker_so
 	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys
 	 *
 	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param boolean $remove_empty=true should empty labels be displayed, default no
+	 * @return array
 	 */
-	function get_tracker_priorities($tracker=null)
+	function get_tracker_priorities($tracker=null,$remove_empty=true)
 	{
-		return self::$priorities;
+		if (isset($this->priorities[$tracker]))
+		{
+			$prios = $this->priorities[$tracker];
+		}
+		elseif(isset($this->priorities[0]))
+		{
+			$prios = $this->priorities[0];
+		}
+		else
+		{
+			$prios = self::$stock_priorities;
+		}
+		if ($remove_empty)
+		{
+			foreach($prios as $key => $val)
+			{
+				if ($val === '') unset($prios[$key]);
+			}
+		}
+		//echo "<p>".__METHOD__."(tracker=$tracker,$remove_empty) prios=".array2string($prios)."</p>\n";
+		return $prios;
 	}
 
 	/**
