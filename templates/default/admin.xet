@@ -127,6 +127,12 @@
 				<column/>
 			</columns>
 			<rows>
+				<row height="20">
+					<description options=",,,cat_id" value="Category"/>
+					<menulist span="all">
+						<menupopup options="All" id="cat_id" onchange="1" statustext="Changes made below will be lost, if not applied before!"/>
+					</menulist>
+				</row>
 				<row class="th" height="20">
 					<description value="Value" class="leftPad5"/>
 					<description value="Label"/>

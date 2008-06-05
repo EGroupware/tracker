@@ -44,6 +44,7 @@ bounty set	tracker	de	Prämie gesetzt
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
+changes made below will be lost, if not applied before!	tracker	de	Änderungen darunter gehen verloren, wenn sie nicht vorher übernommen werden!
 check all	tracker	de	Alle auswählen
 choose a project from the drop-down list	tracker	de	ein Projekt aus der Auswahlliste wählen
 close pending	tracker	de	Schließe schwebend

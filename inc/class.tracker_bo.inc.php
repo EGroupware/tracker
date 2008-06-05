@@ -840,19 +840,28 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Get tracker specific priorities
+	 * Get tracker and category specific priorities
 	 *
-	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys
+	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys and customizable labels
 	 *
-	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param int $tracker=null tracker to use or null to use tracker unspecific priorities
+	 * @param int $cat_id=null category to use or null to use categorie unspecific priorities
 	 * @param boolean $remove_empty=true should empty labels be displayed, default no
 	 * @return array
 	 */
-	function get_tracker_priorities($tracker=null,$remove_empty=true)
+	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true)
 	{
-		if (isset($this->priorities[$tracker]))
+		if (isset($this->priorities[$tracker.'-'.$cat_id]))
+		{
+			$prios = $this->priorities[$tracker.'-'.$cat_id];
+		}
+		elseif (isset($this->priorities[$tracker]))
 		{
 			$prios = $this->priorities[$tracker];
+		}
+		elseif (isset($this->priorities['0-'.$cat_id]))
+		{
+			$prios = $this->priorities['0-'.$cat_id];
 		}
 		elseif(isset($this->priorities[0]))
 		{
@@ -871,6 +880,22 @@ class tracker_bo extends tracker_so
 		}
 		//echo "<p>".__METHOD__."(tracker=$tracker,$remove_empty) prios=".array2string($prios)."</p>\n";
 		return $prios;
+	}
+
+	/**
+	 * Check if the given tracker uses category specific priorities and eg. need to reload of user changes the cat
+	 *
+	 * @param int $tracker
+	 */
+	function tracker_has_cat_specific_priorities($tracker)
+	{
+		$prefix = (int)$tracker.'-';
+		$len = strlen($prefix);
+		foreach(array_keys($this->priorities) as $key)
+		{
+			if (substr($key,0,$len) == $prefix) return true;
+		}
+		return false;
 	}
 
 	/**

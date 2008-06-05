@@ -150,23 +150,24 @@ class tracker_admin extends tracker_bo
 							$need_update = true;
 						}
 					}
-					// priorities are only stores if they differ from the stock-priorities
+					// build the (normalized!) priority array
 					$prios = array();
 					foreach($content['priorities'] as $value => $data)
 					{
+						if ($value == 'cat_id')
+						{
+							$cat_id = $data;
+							continue;
+						}
+						$value = (int) $data['value'];
 						$prios[(int)$value] = (string)$data['label'];
 					}
-					if ($prios === self::$stock_priorities || $tracker && $prios === $this->priorities[0] || !array_diff($prios,array('')))
+					// priorities are only stored if they differ from the stock-priorities or the default chain of get_tracker_priorities()
+					if ($prios !== $this->get_tracker_priorities($tracker,$cat_id,false))
 					{
-						//_debug_array($prios);
-						//echo "<p>using default prios: prios===stock_prios=".(int)($prios === self::$stock_priorities)."</p>\n";
-						//echo "<p>using default prios: tracker && prios===priorities[0]=".(int)($tracker && $prios === $this->priorities[0])."</p>\n";
-						//echo "<p>using default prios: !array_diff(prios,array(''))=".(int)!array_diff($prios,array(''))."</p>\n";
-						$prios = null;
-					}
-					if ($prios !== $this->priorities[$tracker])	// priorities changed
-					{
-						$this->priorities[$tracker] = $prios;
+						$key = (int)$tracker;
+						if ($cat_id) $key .= '-'.$cat_id;
+						$this->priorities[$key] = $prios;
 						$need_update = true;
 					}
 					if ($need_update)
@@ -259,7 +260,7 @@ class tracker_admin extends tracker_bo
 					// fall-through for save
 				case 'cancel':
 					$GLOBALS['egw']->redirect_link('/index.php',array(
-						'menuaction' => 'tracker.tracker_admin.index',
+						'menuaction' => 'tracker.tracker_ui.index',
 						'msg' => $msg,
 					));
 					break;
@@ -298,6 +299,8 @@ class tracker_admin extends tracker_bo
 			'notification' => $this->notification[$tracker],
 			'restrictions' => $this->restrictions[$tracker],
 			$tabs => $content[$tabs],
+			// keep priority cat only if tracker is unchanged, otherwise reset it
+			'priorities' => $tracker == $content['tracker'] ? array('cat_id' => $content['priorities']['cat_id']) : array(),
 		);
 
 		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','priorities')) as $name)
@@ -362,9 +365,10 @@ class tracker_admin extends tracker_bo
 		$content['queue_access_enabled_label'] = lang('Users').': '.lang('Restriction')." ".$queue_access_enabled_label;
 		$content['queue_access_enabled_label_help'] = lang('You can enable/disable the queue access restrictions in the configuration tab (for all queues)');
 
-		foreach($this->get_tracker_priorities($tracker,false) as $value => $label)
+		$n = 2;	// cat selection + table header
+		foreach($this->get_tracker_priorities($tracker,$content['priorities']['cat_id'],false) as $value => $label)
 		{
-			$content['priorities'][$value] = array(
+			$content['priorities'][$n++] = array(
 				'value' => self::$stock_priorities[$value],
 				'label' => $label,
 			);
@@ -382,6 +386,7 @@ class tracker_admin extends tracker_bo
 			'allow_bounties' => array('No','Yes'),
 			'autoassign' => $this->get_staff($tracker),
 			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
+			'cat_id' => $this->get_tracker_labels('cat',$tracker),
 		);
 		$readonlys = array(
 			'button[delete]' => !$tracker,

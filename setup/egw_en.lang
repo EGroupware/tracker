@@ -44,6 +44,7 @@ bounty set	tracker	en	Bounty set
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
+changes made below will be lost, if not applied before!	tracker	en	Changes made below will be lost, if not applied before!
 check all	tracker	en	Check all
 choose a project from the drop-down list	tracker	en	choose a project from the drop-down list
 close pending	tracker	en	Close pending
