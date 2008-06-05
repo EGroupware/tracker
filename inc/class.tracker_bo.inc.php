@@ -886,6 +886,7 @@ class tracker_bo extends tracker_so
 	 * Check if the given tracker uses category specific priorities and eg. need to reload of user changes the cat
 	 *
 	 * @param int $tracker
+	 * @return boolean
 	 */
 	function tracker_has_cat_specific_priorities($tracker)
 	{
@@ -895,7 +896,7 @@ class tracker_bo extends tracker_so
 		$len = strlen($prefix);
 		foreach(array_keys($this->priorities) as $key)
 		{
-			if (substr($key,0,$len) == $prefix) return true;
+			if (substr($key,0,$len) == $prefix || substr($key,0,2) == '0-') return true;
 		}
 		return false;
 	}
