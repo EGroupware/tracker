@@ -554,6 +554,10 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->set_cell_attribute('cat_id','onchange',true);
 		}
+		if ($content['tr_assigned'] && !is_array($content['tr_assigned']))
+		{
+			$content['tr_assigned'] = explode(',',$content['tr_assigned']);
+		}
 		if (count($content['tr_assigned']) > 1)
 		{
 			$tpl->set_cell_attribute('tr_assigned','size','3+');
@@ -639,6 +643,19 @@ class tracker_ui extends tracker_bo
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
 		{
+			// show the right tracker and/or cat specific priority label
+			if ($row['tr_priority'])
+			{
+				if (is_null($prio_labels) || $this->priorities && ($row['tr_tracker'] != $prio_tracker || $row['cat_id'] != $prio_cat))
+				{
+					$prio_labels = $this->get_tracker_priorities($prio_tracker=$row['tr_tracker'],$prio_cat = $row['cat_id']);
+					if ($prio_labels === self::$stock_priorities)	// show only the numbers for the stock priorities
+					{
+						$prio_labels = array_combine(array_keys(self::$stock_priorities),array_keys(self::$stock_priorities));
+					}
+				}
+				$rows[$n]['prio_label'] = $prio_labels[$row['tr_priority']];
+			}
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
@@ -712,11 +729,6 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
-		$rows['sel_options']['tr_priority'] = $this->get_tracker_priorities($tracker);
-		if ($rows['sel_options']['tr_priority'] === self::$stock_priorities)	// show only the numbers for the stock priorities
-		{
-			$rows['sel_options']['tr_priority'] = array_combine(array_keys(self::$stock_priorities),array_keys(self::$stock_priorities));
-		}
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);

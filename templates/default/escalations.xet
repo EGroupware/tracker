@@ -40,9 +40,7 @@
 					<menulist>
 						<menupopup options="All" id="${row}[tr_status]" readonly="true"/>
 					</menulist>
-					<menulist>
-						<menupopup options="All" id="${row}[tr_priority]" readonly="true"/>
-					</menulist>
+					<description id="${row}[prio_label]"/>
 					<textbox multiline="true" id="${row}[esc_action_label]" readonly="true"/>
 					<vbox options="0,0">
 						<date-duration id="${row}[esc_time]" readonly="true" options=",dhm,24"/>

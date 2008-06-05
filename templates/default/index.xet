@@ -66,9 +66,7 @@
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" options="b,tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535"/>
 					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
-					<menulist class="indexPrio">
-						<menupopup align="center" id="${row}[tr_priority]" readonly="true"/>
-					</menulist>
+					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>

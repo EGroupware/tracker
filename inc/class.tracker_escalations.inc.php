@@ -187,15 +187,6 @@ class tracker_escalations extends so_sql2
 		return parent::db2data($data);
 	}
 
-	function get_rows($query,&$rows,&$readonlys)
-	{
-		$Ok = parent::get_rows($query,$rows,$readonlys);
-
-		//_debug_array($rows);
-
-		return $Ok;
-	}
-
 	/**
 	 * Get an SQL filter to include in a tracker search returning only matches of a given escalation
 	 *

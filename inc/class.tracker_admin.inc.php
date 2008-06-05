@@ -409,6 +409,37 @@ class tracker_admin extends tracker_bo
 	}
 
 	/**
+	 * Get escalation rows
+	 *
+	 * @param array $query
+	 * @param array &$rows
+	 * @param array &$readonlys
+	 * @return int|boolean
+	 */
+	function get_rows($query,&$rows,&$readonlys)
+	{
+		$escalations = new tracker_escalations();
+		$Ok = $escalations->get_rows($query,$rows,$readonlys);
+
+		if ($rows)
+		{
+			foreach($rows as &$row)
+			{
+				// show the right tracker and/or cat specific priority label
+				if ($row['tr_priority'])
+				{
+					if (is_null($prio_labels) || $row['tr_tracker'] != $prio_tracker || $row['cat_id'] != $prio_cat)
+					{
+						$prio_labels = $this->get_tracker_priorities($prio_tracker=$row['tr_tracker'],$prio_cat = $row['cat_id']);
+					}
+					$row['prio_label'] = $prio_labels[$row['tr_priority']];
+				}
+			}
+		}
+		return $Ok;
+	}
+
+	/**
 	 * Define escalations
 	 *
 	 * @param array $content
@@ -421,7 +452,7 @@ class tracker_admin extends tracker_bo
 		if (!is_array($content))
 		{
 			$content['nm'] = array(
-				'get_rows'       =>	'tracker.tracker_escalations.get_rows',
+				'get_rows'       =>	'tracker.tracker_admin.get_rows',
 				'no_cat'         => true,
 				'no_filter2'=> true,
 				'no_filter' => true,
@@ -491,7 +522,7 @@ class tracker_admin extends tracker_bo
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => $this->get_tracker_priorities($tracker),
+			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => $this->get_tracker_stati($tracker),
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
 			'esc_type'    => array(
@@ -501,13 +532,28 @@ class tracker_admin extends tracker_bo
 			),
 		);
 		$tpl = new etemplate('tracker.escalations');
+		if ($content['set']['tr_assigned'] && !is_array($content['set']['tr_assigned']))
+		{
+			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
+		}
 		if (count($content['set']['tr_assigned']) > 1)
 		{
-			$tpl->set_cell_attribute('tr_assigned','size','3+');
+			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
+			$widget['size'] = '3+';
+		}
+		if ($content['tr_status'] && !is_array($content['tr_status']))
+		{
+			$content['tr_status'] = explode(',',$content['tr_status']);
 		}
 		if (count($content['tr_status']) > 1)
 		{
-			$tpl->set_cell_attribute('tr_status','size','3+');
+			$widget =& $tpl->get_widget_by_name('tr_status');
+			$widget['size'] = '3+';
+		}
+		if ($this->tracker_has_cat_specific_priorities($tracker))
+		{
+			$widget =& $tpl->get_widget_by_name('cat_id');
+			$widget['onchange'] = true;
 		}
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
