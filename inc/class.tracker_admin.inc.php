@@ -58,7 +58,7 @@ class tracker_admin extends tracker_bo
 	function admin($content=null,$msg='')
 	{
 		//_debug_array($content);
-		$tabs = 'cats|priorities|staff|config';
+		$tabs = 'cats|priorities|staff|config|mail';
 
 		$tracker = (int) $content['tracker'];
 
@@ -104,7 +104,7 @@ class tracker_admin extends tracker_bo
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification','priorities')) as $name)
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification','mailhandling','priorities')) as $name)
 						{
 							if ((string) $this->$name !== $content[$name])
 							{
@@ -137,8 +137,8 @@ class tracker_admin extends tracker_bo
 							}
 						}
 					}
-					// tracker specific config
-					foreach(array('technicians','admins','users','notification','restrictions') as $name)
+					// tracker specific config and mail handling
+					foreach(array('technicians','admins','users','notification','restrictions','mailhandling') as $name)
 					{
 						$staff =& $this->$name;
 						if (!isset($staff[$tracker])) $staff[$tracker] = array();
@@ -309,12 +309,13 @@ class tracker_admin extends tracker_bo
 			'users' => $this->users[$tracker],
 			'notification' => $this->notification[$tracker],
 			'restrictions' => $this->restrictions[$tracker],
+			'mailhandling' => $this->mailhandling[$tracker],
 			$tabs => $content[$tabs],
 			// keep priority cat only if tracker is unchanged, otherwise reset it
 			'priorities' => $tracker == $content['tracker'] ? array('cat_id' => $content['priorities']['cat_id']) : array(),
 		);
 
-		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','priorities')) as $name)
+		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
 		{
 			$content[$name] = $this->$name;
 		}
@@ -398,7 +399,18 @@ class tracker_admin extends tracker_bo
 			'autoassign' => $this->get_staff($tracker),
 			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker),
+			// Mail handling
+			'servertype' => array(),
+			'default_tracker' => &$this->trackers,
+			'unrec_reply' => array(
+				0 => 'Creator',
+				1 => 'Nobody',
+			),
 		);
+		foreach($this->mailservertypes as $ind => $typ)
+		{
+			$sel_options['servertype'][] = $typ[1];
+		}
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,

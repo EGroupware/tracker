@@ -152,6 +152,39 @@ class tracker_bo extends tracker_so
 	 */
 	var $enabled_queue_acl_access = false;
 	/**
+	 * Mailhandler settings (tracker unspecific)
+	 *  Keys:
+	 *   interval
+	 *   address
+	 *   server
+	 *   servertype
+	 *   serverport
+	 *   folder
+	 *   username
+	 *   password
+	 *   delete_from_server (true/false)
+	 *   default_tracker (<empty>=reject new tickets|TrackerID)
+	 *   unrecognized_mails (ignore/delete/forward/default)
+	 *   unrec_reply (0=Creator/1=Nobody)
+	 *   unrec_mail (<empty>=ignore|UID)
+	 *   forward_to
+	 * 
+	 * @var array
+	 */
+	var $mailhandling = array();
+	/**
+	 * Supported server types for mail handling as an array of arrays with spec => descr
+	 * 
+	 * @var array
+	 */
+	var $mailservertypes = array(
+		0 => array('imap/notls', 'Standard IMap'),
+		1 => array('imap/tls', 'IMap, TLS secured'),
+		2 => array('imap/ssl', 'IMap, SSH secured'),
+		3 => array('pop3', 'POP3'),
+	);
+
+	/**
 	 * Translates field / acl-names to labels
 	 *
 	 * @var array
@@ -253,7 +286,7 @@ class tracker_bo extends tracker_so
 	 */
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit',	// tracker unspecific
+		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit', 'mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access',
 	);
 	/**
@@ -1102,6 +1135,9 @@ class tracker_bo extends tracker_so
 			$config->save_value($name,$this->$name,'tracker');
 		}
 		self::set_async_job($this->pending_close_days > 0);
+
+		$mailhandler =& CreateObject('tracker.tracker_mailhandler','tracker');
+		$mailhandler->set_async_job($this->mailhandling[0]['interval']);
 	}
 
 	/**
