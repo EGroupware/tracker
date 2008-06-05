@@ -162,12 +162,23 @@ class tracker_admin extends tracker_bo
 						$value = (int) $data['value'];
 						$prios[(int)$value] = (string)$data['label'];
 					}
+					if(!array_diff($prios,array('')))	// user deleted all label --> use the one from the next level above
+					{
+						$prios = null;
+					}
 					// priorities are only stored if they differ from the stock-priorities or the default chain of get_tracker_priorities()
 					if ($prios !== $this->get_tracker_priorities($tracker,$cat_id,false))
 					{
 						$key = (int)$tracker;
 						if ($cat_id) $key .= '-'.$cat_id;
-						$this->priorities[$key] = $prios;
+						if (is_null($prios))
+						{
+							unset($this->priorities[$key]);
+						}
+						else
+						{
+							$this->priorities[$key] = $prios;
+						}
 						$need_update = true;
 					}
 					if ($need_update)
