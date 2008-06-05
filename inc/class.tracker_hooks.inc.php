@@ -77,8 +77,8 @@ class tracker_hooks
 		if ($GLOBALS['egw_info']['user']['apps']['admin'] && $location != 'preferences')
 		{
 			$file = Array(
-				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_ui.admin'),
-				'Define escalations' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_ui.escalations'),
+				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_admin.admin'),
+				'Define escalations' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_admin.escalations'),
 //				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
 			if ($location == 'admin')

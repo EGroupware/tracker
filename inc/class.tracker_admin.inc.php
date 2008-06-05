@@ -1,0 +1,500 @@
+<?php
+/**
+ * Tracker - Universal tracker (bugs, feature requests, ...) - Admin Interface
+ *
+ * @link http://www.egroupware.org
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @package tracker
+ * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$
+ */
+
+/**
+ * Admin User Interface of the tracker
+ */
+class tracker_admin extends tracker_bo
+{
+	/**
+	 * Functions callable via menuaction
+	 *
+	 * @var array
+	 */
+	var $public_functions = array(
+		'admin' => true,
+		'escalations' => true,
+	);
+	/**
+	 * reference to the preferences of the user
+	 *
+	 * @var array
+	 */
+	var $prefs;
+
+	/**
+	 * Constructor
+	 *
+	 * @return tracker_admin
+	 */
+	function __construct()
+	{
+		// check if user has admin rights and bail out if not
+		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
+		{
+			$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.lang('Permission denied !!!')."</h1>\n",null,true);
+			return;
+		}
+		parent::__construct();
+
+		$this->prefs =& $GLOBALS['egw_info']['user']['preferences']['tracker'];
+	}
+
+	/**
+	 * Site configuration
+	 *
+	 * @param array $content=null
+	 * @return string
+	 */
+	function admin($content=null,$msg='')
+	{
+		//_debug_array($content);
+		$tabs = 'cats|priorities|staff|config';
+
+		$tracker = (int) $content['tracker'];
+
+		// apply preferences for assigning of defaultprojects, and provide the project list
+		if ($this->prefs['allow_defaultproject'] && $tracker)
+		{
+			$allow_defaultproject = $this->prefs['allow_defaultproject'];
+		}
+
+		if (is_array($content))
+		{
+			list($button) = @each($content['button']);
+
+			switch($button)
+			{
+				case 'add':
+					if (!$content['add_name'])
+					{
+						$msg = lang('You need to enter a name');
+					}
+					elseif (($id = $this->add_tracker($content['add_name'])))
+					{
+						$tracker = $id;
+						$msg = lang('Tracker added');
+					}
+					else
+					{
+						$msg = lang('Error adding the new tracker!');
+					}
+					break;
+
+				case 'delete':
+					if ($tracker && isset($this->trackers[$tracker]))
+					{
+						$this->delete_tracker($tracker);
+						$tracker = 0;
+						$msg = lang('Tracker deleted');
+					}
+					break;
+
+				case 'apply':
+				case 'save':
+					$need_update = false;
+					if (!$tracker)	// tracker unspecific config
+					{
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification','priorities')) as $name)
+						{
+							if ((string) $this->$name !== $content[$name])
+							{
+								$this->$name = $content[$name];
+								$need_update = true;
+							}
+						}
+						// field_acl
+						foreach($content['field_acl'] as $row)
+						{
+							$rights = 0;
+							foreach(array(
+								'TRACKER_ADMIN'         => TRACKER_ADMIN,
+								'TRACKER_TECHNICIAN'    => TRACKER_TECHNICIAN,
+								'TRACKER_USER'          => TRACKER_USER,
+								'TRACKER_EVERYBODY'     => TRACKER_EVERYBODY,
+								'TRACKER_ITEM_CREATOR'  => TRACKER_ITEM_CREATOR,
+								'TRACKER_ITEM_ASSIGNEE' => TRACKER_ITEM_ASSIGNEE,
+								'TRACKER_ITEM_NEW'      => TRACKER_ITEM_NEW,
+								'TRACKER_ITEM_GROUP'    => TRACKER_ITEM_GROUP,
+							) as $name => $right)
+							{
+								if ($row[$name]) $rights |= $right;
+							}
+							if ($this->field_acl[$row['name']] != $rights)
+							{
+								//echo "<p>$row[name] / $row[label]: rights: ".$this->field_acl[$row['name']]." => $rights</p>\n";
+								$this->field_acl[$row['name']] = $rights;
+								$need_update = true;
+							}
+						}
+					}
+					// tracker specific config
+					foreach(array('technicians','admins','users','notification','restrictions') as $name)
+					{
+						$staff =& $this->$name;
+						if (!isset($staff[$tracker])) $staff[$tracker] = array();
+						if (!isset($content[$name])) $content[$name] = array();
+
+						if ($staff[$tracker] != $content[$name])
+						{
+							$staff[$tracker] = $content[$name];
+							$need_update = true;
+						}
+					}
+					// priorities are only stores if they differ from the stock-priorities
+					$prios = array();
+					foreach($content['priorities'] as $value => $data)
+					{
+						$prios[(int)$value] = (string)$data['label'];
+					}
+					if ($prios === self::$stock_priorities || $tracker && $prios === $this->priorities[0] || !array_diff($prios,array('')))
+					{
+						//_debug_array($prios);
+						//echo "<p>using default prios: prios===stock_prios=".(int)($prios === self::$stock_priorities)."</p>\n";
+						//echo "<p>using default prios: tracker && prios===priorities[0]=".(int)($tracker && $prios === $this->priorities[0])."</p>\n";
+						//echo "<p>using default prios: !array_diff(prios,array(''))=".(int)!array_diff($prios,array(''))."</p>\n";
+						$prios = null;
+					}
+					if ($prios !== $this->priorities[$tracker])	// priorities changed
+					{
+						$this->priorities[$tracker] = $prios;
+						$need_update = true;
+					}
+					if ($need_update)
+					{
+						$this->save_config();
+						$msg = lang('Configuration updated.').' ';
+					}
+					$need_update = false;
+					foreach(array(
+						'cats'      => lang('Category'),
+						'versions'  => lang('Version'),
+						'projects'  => lang('Projects'),
+						'statis'    => lang('Stati'),
+						'responses' => lang('Canned response'),
+					) as $name => $what)
+					{
+						foreach($content[$name] as $cat)
+						{
+							//_debug_array($cat);
+							if (!$cat['name']) continue;	// ignore empty (new) cats
+
+							$new_cat_descr = 'tracker-';
+							switch($name)
+							{
+								case 'cats':
+									$new_cat_descr .= 'cat';
+									break;
+								case 'versions':
+									$new_cat_descr .= 'version';
+									break;
+								case 'statis':
+									$new_cat_descr .= 'stati';
+									break;
+								case 'projects':
+									$new_cat_descr .= 'project';
+									break;
+							}
+							$old_cat = array(	// some defaults for new cats
+								'main'   => $tracker,
+								'parent' => $tracker,
+								'access' => 'public',
+								'data'   => array('type' => substr($name,0,-1)),
+								'description'  => $new_cat_descr,
+							);
+							// search cat in existing ones
+							foreach($this->all_cats as $c)
+							{
+								if ($cat['id'] == $c['id'])
+								{
+									$old_cat = $c;
+									$old_cat['data'] = unserialize($old_cat['data']);
+									break;
+								}
+							}
+							// check if new cat or changed, in case of projects the id and a free name is stored
+							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
+								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
+								$name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist'] ||
+								$name == 'responses' && $cat['description'] != $old_cat['data']['response'])
+							{
+								$old_cat['name'] = $cat['name'];
+								switch($name)
+								{
+									case 'cats':
+										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										break;
+									case 'projects':
+										$old_cat['data']['projectlist'] = $cat['projectlist'];
+										break;
+									case 'responses':
+										$old_cat['data']['response'] = $cat['description'];
+										break;
+								}
+								//echo "update to"; _debug_array($old_cat);
+								$old_cat['data'] = serialize($old_cat['data']);
+								$GLOBALS['egw']->categories->account_id = -1;	// global cat!
+								if (($id = $GLOBALS['egw']->categories->add($old_cat)))
+								{
+									$msg .= $old_cat['id'] ? lang("Tracker-%1 '%2' updated.",$what,$cat['name']) : lang("Tracker-%1 '%2' added.",$what,$cat['name']);
+									$need_update = true;
+								}
+							}
+						}
+					}
+					if ($need_update)
+					{
+						$this->reload_labels();
+					}
+					if ($button == 'apply') break;
+					// fall-through for save
+				case 'cancel':
+					$GLOBALS['egw']->redirect_link('/index.php',array(
+						'menuaction' => 'tracker.tracker_admin.index',
+						'msg' => $msg,
+					));
+					break;
+
+				default:
+
+					foreach(array(
+						'cats'      => lang('Category'),
+						'versions'  => lang('Version'),
+						'projects'  => lang('Projects'),
+						'statis'    => lang('State'),
+						'responses' => lang('Canned response'),
+					) as $name => $what)
+					{
+						if (isset($content[$name]['delete']))
+						{
+							list($id) = each($content[$name]['delete']);
+							if ((int)$id)
+							{
+								$GLOBALS['egw']->categories->delete($id);
+								$msg = lang('Tracker-%1 deleted.',$what);
+								$this->reload_labels();
+							}
+						}
+					}
+					break;
+			}
+
+		}
+		$content = array(
+			'msg' => $msg,
+			'tracker' => $tracker,
+			'admins' => $this->admins[$tracker],
+			'technicians' => $this->technicians[$tracker],
+			'users' => $this->users[$tracker],
+			'notification' => $this->notification[$tracker],
+			'restrictions' => $this->restrictions[$tracker],
+			$tabs => $content[$tabs],
+		);
+
+		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','priorities')) as $name)
+		{
+			$content[$name] = $this->$name;
+		}
+		// cats & versions & responses & projects
+		$v = $c = $r = $s = $p = 1;
+		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
+		foreach($this->all_cats as $cat)
+		{
+			if (!is_array($data = unserialize($cat['data']))) $data = array('type' => $data);
+			//echo "<p>$cat[name] ($cat[id]/$cat[parent]/$cat[main]): ".print_r($data,true)."</p>\n";
+
+			if ($cat['parent'] == $tracker && $data['type'] != 'tracker')
+			{
+				switch ($data['type'])
+				{
+					case 'version':
+						$content['versions'][$v++] = $cat + $data;
+						break;
+					case 'response':
+						if ($data['response']) $cat['description'] = $data['response'];
+						$content['responses'][$r++] = $cat;
+						break;
+					case 'project':
+						$content['projects'][$p++] = $cat + $data;
+						break;
+					case 'stati':
+						$content['statis'][$s++] = $cat + $data;
+						break;
+					default:	// cat
+						$data['type'] = 'cat';
+						$content['cats'][$c++] = $cat + $data;
+						break;
+				}
+			}
+		}
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] =
+			array('id' => 0,'name' => '');	// one empty line for adding
+		// field_acl
+		$f = 1;
+		foreach($this->field2label as $name => $label)
+		{
+			if (in_array($name,array('tr_creator','num_replies'))) continue;
+
+			$rights = $this->field_acl[$name];
+			$content['field_acl'][$f++] = array(
+				'label'                 => $label,
+				'name'                  => $name,
+				'TRACKER_ADMIN'         => !!($rights & TRACKER_ADMIN),
+				'TRACKER_TECHNICIAN'    => !!($rights & TRACKER_TECHNICIAN),
+				'TRACKER_USER'          => !!($rights & TRACKER_USER),
+				'TRACKER_EVERYBODY'     => !!($rights & TRACKER_EVERYBODY),
+				'TRACKER_ITEM_CREATOR'  => !!($rights & TRACKER_ITEM_CREATOR),
+				'TRACKER_ITEM_ASSIGNEE' => !!($rights & TRACKER_ITEM_ASSIGNEE),
+				'TRACKER_ITEM_NEW'      => !!($rights & TRACKER_ITEM_NEW),
+				'TRACKER_ITEM_GROUP'    => !!($rights & TRACKER_ITEM_GROUP),
+			);
+		}
+		$this->enabled_queue_acl_access ? $queue_access_enabled_label = lang("Enabled") : $queue_access_enabled_label = lang("Disabled");
+		$content['queue_access_enabled_label'] = lang('Users').': '.lang('Restriction')." ".$queue_access_enabled_label;
+		$content['queue_access_enabled_label_help'] = lang('You can enable/disable the queue access restrictions in the configuration tab (for all queues)');
+
+		foreach($this->get_tracker_priorities($tracker,false) as $value => $label)
+		{
+			$content['priorities'][$value] = array(
+				'value' => self::$stock_priorities[$value],
+				'label' => $label,
+			);
+		}
+		//_debug_array($content);
+		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
+		$sel_options = array(
+			'tracker' => &$this->trackers,
+			'allow_assign_groups' => array(
+				0 => lang('No'),
+				1 => lang('Yes, display groups first'),
+				2 => lang('Yes, display users first'),
+			),
+			'allow_voting' => array('No','Yes'),
+			'allow_bounties' => array('No','Yes'),
+			'autoassign' => $this->get_staff($tracker),
+			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
+		);
+		$readonlys = array(
+			'button[delete]' => !$tracker,
+			'delete[0]' => true,
+		);
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
+		$tpl =& new etemplate('tracker.admin');
+		return $tpl->exec('tracker.tracker_admin.admin',$content,$sel_options,$readonlys,$content);
+	}
+
+	/**
+	 * Define escalations
+	 *
+	 * @param array $content
+	 * @param string $msg
+	 */
+	function escalations(array $content=null,$msg='')
+	{
+		$escalations = new tracker_escalations();
+
+		if (!is_array($content))
+		{
+			$content['nm'] = array(
+				'get_rows'       =>	'tracker.tracker_escalations.get_rows',
+				'no_cat'         => true,
+				'no_filter2'=> true,
+				'no_filter' => true,
+				'order'          =>	'esc_time',
+				'sort'           =>	'ASC',// IO direction of the sort: 'ASC' or 'DESC'
+			);
+		}
+		else
+		{
+			//_debug_array($content);
+			list($button) = @each($content['button']);
+			unset($content['button']);
+			$escalations->init($content);
+
+			switch($button)
+			{
+				case 'save':
+				case 'apply':
+					if (($err = $escalations->not_unique()))
+					{
+						$msg = lang('There already an escalation for that filter!');
+						$button = '';
+					}
+					elseif (($err = $escalations->save()) == 0)
+					{
+						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
+					}
+					if ($button == 'apply' || $err) break;
+					// fall-through
+				case 'cancel':
+					$escalations->init();
+					break;
+			}
+			if ($content['nm']['rows']['edit'])
+			{
+				list($id) = each($content['nm']['rows']['edit']);
+				unset($content['nm']['rows']);
+				if (!$escalations->read($id))
+				{
+					$msg = lang('Escalation not found!');
+					$escalations->init();
+				}
+			}
+			elseif($content['nm']['rows']['delete'])
+			{
+				list($id) = each($content['nm']['rows']['delete']);
+				unset($content['nm']['rows']);
+				if (!$escalations->delete(array('esc_id' => $id)))
+				{
+					$msg = lang('Error deleting escalation!');
+				}
+				else
+				{
+					$msg = lang('Escalation deleted.');
+				}
+			}
+		}
+		$content = $escalations->data + array(
+			'nm' => $content['nm'],
+			'msg' => $msg,
+		);
+		$preserv['esc_id'] = $content['esc_id'];
+		$preserv['nm'] = $content['nm'];
+
+		$tracker = $content['tr_tracker'];
+		$sel_options = array(
+			'tr_tracker'  => &$this->trackers,
+			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
+			'tr_version'  => $this->get_tracker_labels('version',$tracker),
+			'tr_priority' => $this->get_tracker_priorities($tracker),
+			'tr_status'   => $this->get_tracker_stati($tracker),
+			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'esc_type'    => array(
+				tracker_escalations::CREATION => lang('creation date'),
+				tracker_escalations::MODIFICATION => lang('last modified'),
+				tracker_escalations::REPLIED => lang('last reply'),
+			),
+		);
+		$tpl = new etemplate('tracker.escalations');
+		if (count($content['set']['tr_assigned']) > 1)
+		{
+			$tpl->set_cell_attribute('tr_assigned','size','3+');
+		}
+		if (count($content['tr_status']) > 1)
+		{
+			$tpl->set_cell_attribute('tr_status','size','3+');
+		}
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
+		//_debug_array($content);
+		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);
+	}
+}
