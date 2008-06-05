@@ -889,6 +889,8 @@ class tracker_bo extends tracker_so
 	 */
 	function tracker_has_cat_specific_priorities($tracker)
 	{
+		if (!$this->priorities) return false;
+
 		$prefix = (int)$tracker.'-';
 		$len = strlen($prefix);
 		foreach(array_keys($this->priorities) as $key)
