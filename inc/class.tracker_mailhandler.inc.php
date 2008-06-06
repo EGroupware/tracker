@@ -166,7 +166,7 @@ class tracker_mailhandler extends tracker_bo
 			$_cnt = count ($this->msgList);
 			for ($_idx = 0; $_idx < $_cnt; $_idx++)
 			{
-				if (self::process_message($this->msgList[$_idx]) && ($this->mailhandling[0]['delete_from_server'] === true))
+				if (self::process_message($this->msgList[$_idx]) && $this->mailhandling[0]['delete_from_server'])
 				{
 					@imap_delete($this->mbox, $this->msgList[$_idx]);
 				}
@@ -186,7 +186,18 @@ class tracker_mailhandler extends tracker_bo
 		$this->mailBody = null; // Clear previous message
 		$msgHeader = imap_headerinfo ($this->mbox, $mid);
 
-		// TODO How to handle read/seen mails?
+
+		if ($msgHeader->Deleted == 'D')
+		{
+			return false; // Already deleted
+		}
+
+		if ($msgHeader->Recent == 'R' ||		// Recent and seen or	
+				($msgHeader->Recent == ' ' &&	// not recent but
+				$msgHeader->Unseen == ' '))		// seen
+		{
+			return false;
+		}
 		
 		// Try several headers to identify the sender
 		$try_addr = array(
@@ -389,9 +400,6 @@ class tracker_mailhandler extends tracker_bo
 		// Make sure an existing timer is cancelled
 		$async->cancel_timer('tracker-check-mail');
 
-		// The return here is to prevent this class from being executed at all.
-		// It will be enabled when all module tests succeeded, but this way nobody will
-		// 
 		if ($interval > 0)
 		{
 			if ($interval == 60)
