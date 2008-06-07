@@ -65,6 +65,13 @@ class tracker_mailhandler extends tracker_bo
 	var $ticketId;
 	
 	/**
+	 * User ID currently executing. Used in case we execute in fallback
+	 * 
+	 * @var int
+	 */
+	var $originalUser;
+	
+	/**
 	 * Supported mailservertypes, extracted from parent::mailservertypes
 	 * 
 	 * @var array
@@ -78,6 +85,9 @@ class tracker_mailhandler extends tracker_bo
 	{
 		parent::__construct();
 
+		// In case we run in fallback, make sure the original user gets restored
+		$this->originalUser = $this->user;
+
 		foreach($this->mailservertypes as $ind => $typ)
 		{
 			$this->serverTypes[] = $typ[0];
@@ -89,13 +99,12 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
-	 * Destructor, expunge deleted messages, if any, and close the stream.
+	 * Destructor, close the stream if not done before.
 	 */
 	function __destruct()
 	{
 		if($this->mbox)
 		{
-			@imap_expunge($this->mbox);
 			@imap_close($this->mbox);
 		}
 	}
@@ -172,6 +181,14 @@ class tracker_mailhandler extends tracker_bo
 				}
 			}
 		}
+		// Expunge delete mails, if any
+		@imap_expunge($this->mbox);
+
+		// Close the stream
+		@imap_close($this->mbox);
+
+		// Restore original user (for fallback)
+		$this->user = $this->originalUser;
 	}
 
 	/**
