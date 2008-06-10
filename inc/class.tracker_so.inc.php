@@ -236,7 +236,6 @@ class tracker_so extends so_sql
 				$criteria[$col] = $pattern;
 			}
 			$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
-			if ($this->db->capabilities['distinct_on_text']) $only_keys = 'DISTINCT '.self::TRACKER_TABLE.'.*';
 		}
 		elseif(isset($criteria['tr_id']))
 		{
