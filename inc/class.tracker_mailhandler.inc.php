@@ -249,7 +249,7 @@ class tracker_mailhandler extends tracker_bo
 					return false;	// Prevent from a second delete attempt
 					break;
 				case 'forward' :	// Return the status of the forward attempt
-					return(self::forward_message($mid));
+					return(self::forward_message($mid, $msgHeader));
 					break;
 				case 'default' :	// Save as default user; handled below
 				default :			// Duh ??
@@ -385,7 +385,9 @@ class tracker_mailhandler extends tracker_bo
 		$tracker_id = $tr_id[0][0];
 
 		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
-		if ($trackerData[0]['tr_summary'] != $tr_data[3][0])
+
+		// Use strncmp() here, since a Fwd might add a sqr bracket.
+		if (strncmp($trackerData[0]['tr_summary'], $tr_data[3][0], strlen($trackerData[0]['tr_summary'])))
 		{
 			return 0; // Summary doesn't match. Should this be ok?
 		}
@@ -398,10 +400,21 @@ class tracker_mailhandler extends tracker_bo
 	 * @param int message ID from the server
 	 * @return boolean status
 	 */
-	function forward_message($mid)
+	function forward_message($mid=0, &$headers=null)
 	{
-		// This function is not yet implemented, so for now, return status false
-		return false;
+		if ($mid == 0 || $headers == null) // no data
+		{
+			return false;
+		}
+		
+		// Sending mail is not implemented using notifations, since it's pretty straight forward here
+		$to   = $this->mailhandling[0]['forward_to'];
+		$subj = $headers->subject;
+		$body = imap_body ($this->mbox, $mid, FK_INTERNAL);
+		$hdrs = 'From: ' . $headers->fromaddress . "\r\n" .
+				'Reply-To: ' . $headers->reply_toaddress . "\r\n";
+
+		return (mail ($to, $subj, $body, $hdrs));
 	}
 
 

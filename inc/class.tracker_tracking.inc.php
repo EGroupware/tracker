@@ -161,6 +161,8 @@ class tracker_tracking extends bo_tracking
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
 			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
 			'tr_cc'			 => $data['tr_cc'],
+			// The layout of tr_summary should NOT be changed in order for
+			// tracker.tracker_mailhandler.get_ticketId() to work!
 			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
 		) as $name => $value)
 		{
