@@ -3,6 +3,8 @@
 .redItalic { color: red; font-style: italic; }
 .noWrap { white-space: nowrap; }
 .overdue,.bold { font-weight: bold; }
+.unseen { font-weight: bold; }
+.seen { font-weight: normal; }
 .leftPad5 { padding-left: 5px; }
 .trIdEdit { padding-left: 10px; }
 .trIdEdit:before { content: "#"; }

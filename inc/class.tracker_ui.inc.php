@@ -140,6 +140,9 @@ class tracker_ui extends tracker_bo
 				}
 				else
 				{
+					// Set the ticket as seen by this user
+					$seen = self::seen($this->data, true);
+
 					// editing, preventing/fixing mixed ascii-html
 					if ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
 					{
@@ -643,6 +646,16 @@ class tracker_ui extends tracker_bo
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
 		{
+			// Check if this is a new (unseen) ticket for the current user
+			if (self::seen($row, false))
+			{
+				$rows[$n]['seen_class'] = 'seen';
+			}
+			else
+			{
+				$rows[$n]['seen_class'] = 'unseen';
+			}
+
 			// show the right tracker and/or cat specific priority label
 			if ($row['tr_priority'])
 			{
@@ -758,6 +771,31 @@ class tracker_ui extends tracker_bo
 		if ($tracker) $rows['no_tr_tracker'] = true;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
 		return $total;
+	}
+
+	/**
+	 * Check if a ticket has already been seen
+	 *
+	 * @param array $data=null Ticket data
+	 * @param boolean $update=false Set ticket as seen when true
+	 * @return boolean true=seen before false=new ticket
+	 */
+	function seen (&$data, $update=false)
+	{
+		$seen = array();
+		if ($data['tr_seen']) $seen = unserialize($data['tr_seen']); 	
+		if (in_array($this->user, $seen))
+		{
+			return true;
+		}
+		if ($update === false)
+		{
+			return false;
+		}
+		$seen[] = $this->user;
+		$this->db->update('egw_tracker', array('tr_seen' => serialize($seen)),
+			array('tr_id' => $data['tr_id']),__LINE__,__FILE__,'tracker');
+		return false; // This time still false...
 	}
 
 	/**
