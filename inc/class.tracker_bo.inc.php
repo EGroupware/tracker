@@ -433,6 +433,7 @@ class tracker_bo extends tracker_so
 			$this->data['tr_created'] = $this->now;
 			$this->data['tr_creator'] = $this->user;
 			$this->data['tr_status'] = self::STATUS_OPEN;
+			$this->data['tr_seen'] = serialize(array($this->user));
 
 			if (!$this->data['tr_group'])
 			{
@@ -477,6 +478,13 @@ class tracker_bo extends tracker_so
 			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
+				// Replies mark the ticke unseen for everbody but the current
+				// user if the ticket wasn't closed at the same time
+				if ($this->data['tr_status'] != self::STATUS_CLOSED)
+				{				
+					$this->data['tr_seen'] = serialize(array($this->user));
+				}
+
 				if ($this->data['canned_response'])
 				{
 					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).

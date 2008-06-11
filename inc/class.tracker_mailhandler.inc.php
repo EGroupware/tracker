@@ -313,7 +313,7 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['reply_message'] = $this->mailBody;
 
 		}
-		$this->data['tr_status'] = 'o'; // If the ticket isn't new, (re)open it anyway
+		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
 		return ($this->save() == 0);
 	}
 
