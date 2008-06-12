@@ -346,3 +346,13 @@ function tracker_upgrade1_5_005()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.006';
 }
 
+
+function tracker_upgrade1_5_006()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_seen',array(
+		'type' => 'text'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.007';
+}
+
