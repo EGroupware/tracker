@@ -59,6 +59,7 @@ converted count	tracker	sk	počet skonvertovaných záznamov
 copy to	tracker	sk	Kopírovať (kam)
 create new links	tracker	sk	Vytvoriť nové odkazy
 created	tracker	sk	Vytvorené
+creator	tracker	sk	Vytvoril
 date opened	tracker	sk	Dátum otvorenia
 delete this bounty	tracker	sk	Odstrániť túto odmenu
 delete this canned response	tracker	sk	Odstrániť túto šablónovú odpoveď
@@ -74,6 +75,7 @@ duplicate	tracker	sk	Duplikát
 e-mail address to which a copy of all tracker-notifications should be send	tracker	sk	E-mailová adresa, na ktorú sa má posielať kópia všetkých pripomienok Sledovača
 e-mail notifications	tracker	sk	E-mailové pripomienky
 edit %1	tracker	sk	Upraviť %1
+edit entry	tracker	sk	Upraviť položku
 email address to contact you	tracker	sk	Vaša E-mailová adresa
 entry saved	tracker	sk	Položka bola uložená
 error adding the new tracker!	tracker	sk	Chyba pri pridávaní nového sledovača!
@@ -84,6 +86,7 @@ field	tracker	sk	Pole
 fixed	tracker	sk	Vyriešené
 from	tracker	sk	Od
 history	tracker	sk	História
+html editing	tracker	sk	Úprava HTML
 id	tracker	sk	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím zvážte vypísanie odmeny za jej vyriešenie!
 if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím hlasujte za ňu.
@@ -107,11 +110,14 @@ notification	tracker	sk	Pripomienka
 open	tracker	sk	Otvorené
 out of date	tracker	sk	Zameškané
 overdue after	tracker	sk	Mešká po
+ownership of the ticket	tracker	sk	Vlastníctvo záležitosti
 pending	tracker	sk	Vybavuje sa
 pending items never get close automatic.	tracker	sk	'Vybavované' záležitosti sa neuzatvárajú automaticky.
 pending items will be closed automatic after %1 days without response.	tracker	sk	'Vybavované' záležitosti sa automaticky uzatvárajú po %1 dňoch bez odpovede.
 permission denied !!!	tracker	sk	Prístup bol odmietnutý !!!
+permit html editing in overview and comments	tracker	sk	Povoliť úpravu HTML v náhľade a poznámkach
 postponed	tracker	sk	Odložené
+print entry	tracker	sk	Vytlačiť položku
 project selection	tracker	sk	Výber projektov
 projects	tracker	sk	Projekty
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
@@ -120,6 +126,9 @@ receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenúť
 resolution	tracker	sk	Riešenie
+restict tracker items to the creator and the staff only	tracker	sk	Obmedziť záležitosti na ich tvorcu a personál
+restict tracker items to the creators primary group and the staff only	tracker	sk	Obmedziť záležitosti na primárnu skupinu ich tvorcu a personál
+restrict tracker items to staff and:	tracker	sk	Obmedziť záležitosti na personál a:
 select tracker queue	tracker	sk	vyberte frontu sledovača
 select which categories should be used in tracker for the tts categories	tracker	sk	Vyberte, ktoré kategórie sa majú v Sledovači použiť pre kategórie TTS
 sender address	tracker	sk	Adresa odosielateľa
