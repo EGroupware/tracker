@@ -1,4 +1,10 @@
 %1 entries updated.	tracker	cs	%1 položek zaktualizováno.
+%1 tickets have been converted	tracker	cs	%1 ohlášení bylo zkonvertováno
+&#9830; not closed	tracker	cs	Neuzavřené
+&#9830; own not closed	tracker	cs	Vlastní neuzavřené
+&#9830; own without reply not closed	tracker	cs	Vlastní bez odpovědi neuzavřené
+&#9830; without 30 days reply not closed	tracker	cs	30 dní bez odpovědi neuzavřené
+&#9830; without reply not closed	tracker	cs	Bez odpovědi neuzavřené
 --> choose a project from the drop-down list	tracker	cs	--> vyberte projekt z rozevíracího seznamu
 --> enter new name	tracker	cs	--> zadejte nové jméno
 1 - lowest	tracker	cs	1 - nejnižší
@@ -10,6 +16,7 @@ add comment	tracker	cs	Přidat komentář
 add timesheet entry	tracker	cs	Přidat záznam do harmonogramu
 after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se má nezodpovězená položka označit jako po termínu?
 after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech mají být položky ve stavu "vyřizuje se" automaticky uzavřeny
+all tickets are already converted to tracker	tracker	cs	všechna ohlášení jsou již zkonvertována do Sledovacího systému
 allow bounties	tracker	cs	Povolit odměny
 allow default projects for tracker	tracker	cs	Povolit výchozí projekty pro sledovací systém
 allow editing by	tracker	cs	Povolit editaci (kým)
@@ -46,9 +53,13 @@ configuration, acl, notifications	tracker	cs	Konfigurace, ACL, Upozornění
 confirm that you pay the specified bounty to implement or fix the issue	tracker	cs	Potvrďte zaplacení uvedené odměny za implementaci nebo opravu této položky
 confirm the receipt of money for this bounty	tracker	cs	Potvrďte přijetí peněz z této odměny
 confirmed	tracker	cs	Potvrzeno
+convert all closed tickets	tracker	cs	konvertovat všechna uzavřená ohlášení
+convert all open tickets	tracker	cs	konvertovat všechna otevřená ohlášení
+converted count	tracker	cs	počet zkonvertovaných
 copy to	tracker	cs	Kopírovat do
 create new links	tracker	cs	Vytvořit nové odkazy
 created	tracker	cs	Vytvořeno
+creator	tracker	cs	Tvůrce
 date opened	tracker	cs	Datum otevření
 delete this bounty	tracker	cs	Smazat tuto odměnu
 delete this canned response	tracker	cs	Smazat tuto předpřipravenou odpověď
@@ -64,6 +75,7 @@ duplicate	tracker	cs	Duplikát
 e-mail address to which a copy of all tracker-notifications should be send	tracker	cs	E-mailová adresa, na kterou mají být zasílány kopie všech upozornění sledovacího systému
 e-mail notifications	tracker	cs	E-mailová upozornění
 edit %1	tracker	cs	Editovat %1
+edit entry	tracker	cs	Editovat záznam
 email address to contact you	tracker	cs	Vaše kontaktní e-mailová adresa
 entry saved	tracker	cs	Záznam uložen
 error adding the new tracker!	tracker	cs	Chyba při přidávání nového sledovacího systému!
@@ -74,9 +86,11 @@ field	tracker	cs	Položka
 fixed	tracker	cs	Pevný
 from	tracker	cs	Od
 history	tracker	cs	Historie
+html editing	tracker	cs	HTML editace
 id	tracker	cs	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	cs	Pokud je pro Vás tato položka důležitá, zvažte prosím vypsání odměny za její vyřešení!
 if this item is important for you, please vote for it.	tracker	cs	Pokud je pro Vás tato položka důležitá, dejte ji prosím svůj hlas.
+import tts tickets	tracker	cs	Importovat TTS ohlášení
 invalid	tracker	cs	Neplatný
 item assignee	tracker	cs	Osoba zodpovědná za položku
 item creator	tracker	cs	Tvůrce položky
@@ -86,19 +100,24 @@ later	tracker	cs	Později
 list of coma separated email address	tracker	cs	Seznam e-mailových adres oddělených čárkami
 new %1	tracker	cs	Nové %1
 new items	tracker	cs	Nové položky
+new ticket submitted by %1 at %2	tracker	cs	Nové ohlášení odeslal %1 v %2
 new tracker item submitted by %1 at %2	tracker	cs	Novou položku ke sledování odeslal %1 v %2
 no change	tracker	cs	Beze změny
+no trackers found, aborting	tracker	cs	Nebyly nalezeny sledovací systémy, končím
 non-anonymous users	tracker	cs	Ne-anonymní uživatel
 noone	tracker	cs	Nikdo
 notification	tracker	cs	Upozornění
 open	tracker	cs	Otevřené
 out of date	tracker	cs	Po termínu
 overdue after	tracker	cs	Po termínu k
+ownership of the ticket	tracker	cs	Vlastnictví ohlášení
 pending	tracker	cs	Vyřizuje se
 pending items never get close automatic.	tracker	cs	Vyřizované položky nebudou nikdy automaticky uzavřeny
 pending items will be closed automatic after %1 days without response.	tracker	cs	Vyřizované položky budou automaticky uzavřeny po %1 dnech bez odpovědi.
 permission denied !!!	tracker	cs	Přístup zablokován!!!
+permit html editing in overview and comments	tracker	cs	Povolit HTML editaci v přehledu a komentářích
 postponed	tracker	cs	Odložené
+print entry	tracker	cs	Tisknout záznam
 project selection	tracker	cs	Výběr projektu
 projects	tracker	cs	Projekty
 receive notifications about assigned tracker-items	tracker	cs	Přijímat upozornění na položky přidělené ve sled. systému
@@ -107,7 +126,11 @@ receive notifications in html	tracker	cs	Přijímat upozornění v HTML
 rejected	tracker	cs	Odmítnuté
 remind	tracker	cs	Připomenout
 resolution	tracker	cs	Řešení
+restict tracker items to the creator and the staff only	tracker	cs	Omezit položky sledovacího systému jen na tvůrce a personál
+restict tracker items to the creators primary group and the staff only	tracker	cs	Omezit položky sledovacího systému jen na primární skupinu tvůrce a personál
+restrict tracker items to staff and:	tracker	cs	Omezit položky sledovacího systému na personál a:
 select tracker queue	tracker	cs	vybrat frontu sledovacího systému
+select which categories should be used in tracker for the tts categories	tracker	cs	Vyberte, které kategorie mají být ve sledovacím systému použity pro kategorie z TTS
 sender address	tracker	cs	Adresa odesílatele
 sender address for all notifications, eg. noreply@egroupware.org	tracker	cs	Adresa odesílatele pro všechna upozornění, např. noreply@egroupware.org
 set an own bounty (in %s)	tracker	cs	Vypsat vlastní odměnu (v %s)
@@ -127,6 +150,9 @@ the bounty will not be shown, until the money is received.	tracker	cs	Odměna NE
 the canned response will be prefix the text you type.	tracker	cs	Předpřipravená odpověď bude vložena na začátek textu, který napíšete.
 this module displays information from the tracker.	tracker	cs	Tento modul zobrazuje informace ze Sledovacího systému.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	cs	Tato položka sledovacího systému byla automaticky uzavřena. Předtím byla ve stavu vyřizuje se, ale původní odesílatel nezareagoval ve stanovené lhůtě %1 dnů.
+ticket count	tracker	cs	počet ohlášení
+ticket modified by %1 at %2	tracker	cs	Ohlášní modifikoval(a) %1 v %2
+times	tracker	cs	Časy
 tracker	common	cs	Sledovací systém
 tracker added	tracker	cs	Přidána fronta sledovacího systému
 tracker admins	tracker	cs	Administrátoři sledovacího systému
@@ -148,6 +174,7 @@ wont fix	tracker	cs	Nebude se opravovat
 works for me	tracker	cs	Mně funguje
 yes, display groups first	tracker	cs	Ano, zobrazovat nejprve skupiny
 yes, display users first	tracker	cs	Ano, zobrazovat nejprve uživatele
+yes, with larger fontsize	tracker	cs	Ano, s větší velikostí písma
 you can respond by visiting:	tracker	cs	Můžete odpovědět navštívením:
 you need to enter a name	tracker	cs	Musíte zadat jméno
 you need to login to vote!	tracker	cs	Musíte se přihlásit, aby jste mohl(a) hlasovat!
