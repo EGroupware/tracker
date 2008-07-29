@@ -168,13 +168,13 @@ class tracker_bo extends tracker_so
 	 *   unrec_reply (0=Creator/1=Nobody)
 	 *   unrec_mail (<empty>=ignore|UID)
 	 *   forward_to
-	 * 
+	 *
 	 * @var array
 	 */
 	var $mailhandling = array();
 	/**
 	 * Supported server types for mail handling as an array of arrays with spec => descr
-	 * 
+	 *
 	 * @var array
 	 */
 	var $mailservertypes = array(
@@ -507,7 +507,6 @@ class tracker_bo extends tracker_so
 
 			if (!is_object($this->tracking))
 			{
-				require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_tracking.inc.php');
 				$this->tracking = new tracker_tracking($this);
 				if($this->prefs['notify_own_modification'])
 				{

@@ -30,3 +30,4 @@ table.fullWidth { width: 100%; }
 .cat_select select  { width: 100%; }
 .status_filter select { width: 100px; }
 .indexPrio:first-letter { font-weight: bold; }
+.inputFullWidth input { width: 100%; }
