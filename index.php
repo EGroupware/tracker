@@ -10,4 +10,5 @@
  * @version $Id$
  */
 
-header('Location: ../index.php?menuaction=tracker.tracker_ui.index');
+header('Location: ../index.php?menuaction=tracker.tracker_ui.index'.
+	(isset($_GET['sessionid']) ? '&sessionid='.$_GET['sessionid'].'&kp3='.$_GET['kp3'] : ''));
