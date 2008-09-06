@@ -490,7 +490,7 @@ class tracker_so extends so_sql
 		{
 			$keys = array('tr_id' => $keys);
 		}
-		$ids = "SELECT tr_id FROM self::TRACKER_TABLE WHERE ".$this->db->expression(self::TRACKER_TABLE,$keys);
+		$ids = 'SELECT tr_id FROM '.self::TRACKER_TABLE.' WHERE '.$this->db->expression(self::TRACKER_TABLE,$keys);
 		$where = "tr_id IN ($ids)";
 		if (!$this->db->capabilities['sub_queries'])
 		{
