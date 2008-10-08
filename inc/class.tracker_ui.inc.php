@@ -693,7 +693,7 @@ class tracker_ui extends tracker_bo
 					}
 					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $timesheets && $this->prefs['show_sum_timesheet'])
 					{
-						$sum = ExecMethod('timesheet.botimesheet.sum',$timesheets);
+						$sum = ExecMethod('timesheet.timesheet_bo.sum',$timesheets);
 						$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
 					}
 				}
