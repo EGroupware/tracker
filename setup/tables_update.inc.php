@@ -26,6 +26,7 @@ function tracker_upgrade0_1_005()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.006';
 }
 
+
 function tracker_upgrade0_1_006()
 {
 	$GLOBALS['egw_setup']->oProc->CreateTable('egw_tracker_bounties',array(
@@ -49,6 +50,7 @@ function tracker_upgrade0_1_006()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.007';
 }
 
+
 function tracker_upgrade0_1_007()
 {
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_bounties','bounty_payedto',array(
@@ -62,6 +64,7 @@ function tracker_upgrade0_1_007()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.008';
 }
+
 
 function tracker_upgrade0_1_008()
 {
@@ -120,6 +123,7 @@ function tracker_upgrade0_1_008()
     return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.009';
 }
 
+
 function tracker_upgrade0_1_009()
 {
     // Add CC to tracker table
@@ -132,10 +136,12 @@ function tracker_upgrade0_1_009()
     return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.010';
 }
 
+
 function tracker_upgrade0_1_010()
 {
      return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4';
 }
+
 
 function tracker_upgrade1_4()
 {
@@ -176,6 +182,7 @@ function tracker_upgrade1_4()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.001';
 }
 
+
 function tracker_upgrade1_4_001()
 {
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_edit_mode',array(
@@ -189,6 +196,7 @@ function tracker_upgrade1_4_001()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4.002';
 }
+
 
 function tracker_upgrade1_4_002()
 {
@@ -238,6 +246,7 @@ function tracker_upgrade1_4_002()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.001';
 }
 
+
 function tracker_upgrade1_5_001()
 {
 	$GLOBALS['egw_setup']->oProc->CreateTable('egw_tracker_escalations',array(
@@ -269,6 +278,7 @@ function tracker_upgrade1_5_001()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.002';
 }
 
+
 function tracker_upgrade1_5_002()
 {
 	$GLOBALS['egw_setup']->oProc->CreateTable('egw_tracker_escalated',array(
@@ -286,6 +296,7 @@ function tracker_upgrade1_5_002()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.003';
 }
 
+
 function tracker_upgrade1_5_003()
 {
 	// drop not used egw_tracker_assignee.tr_tracker column
@@ -302,6 +313,7 @@ function tracker_upgrade1_5_003()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.004';
 }
+
 
 function tracker_upgrade1_5_004()
 {
@@ -334,6 +346,7 @@ function tracker_upgrade1_5_004()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.005';
 }
 
+
 function tracker_upgrade1_5_005()
 {
 	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_status',array(
@@ -356,3 +369,8 @@ function tracker_upgrade1_5_006()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.5.007';
 }
 
+
+function tracker_upgrade1_5_007()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.6';
+}
