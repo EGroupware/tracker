@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.5.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.5.002">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.5.004">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -46,7 +46,7 @@
 						<nextmatch-accountfilter options="Created by" id="tr_creator" class="user_filter"/>
 						<nextmatch-filterheader id="tr_assigned" options="Assigned to" no_lang="1" class="user_filter"/>
 					</vbox>
-					<nextmatch-sortheader label="Times" id="tr_sum_timesheets" class="tracker-times" align="center"/>
+					<nextmatch-header label="Times" id="tr_sum_timesheets" class="tracker-times" align="center"/>
 					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes"/>
 					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties"/>
 					<nextmatch-filterheader options="Escalation" id="esc_id"/>
@@ -64,7 +64,7 @@
 					<menulist>
 						<menupopup type="select-cat" options="None" readonly="true" id="${row}[tr_version]"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" options="b,tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535"/>
+					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535" class="$row_cont[seen_class]"/>
 					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
