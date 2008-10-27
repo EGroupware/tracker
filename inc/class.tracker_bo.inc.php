@@ -478,10 +478,10 @@ class tracker_bo extends tracker_so
 			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
-				// Replies mark the ticke unseen for everbody but the current
+				// Replies mark the ticket unseen for everbody but the current
 				// user if the ticket wasn't closed at the same time
 				if ($this->data['tr_status'] != self::STATUS_CLOSED)
-				{				
+				{
 					$this->data['tr_seen'] = serialize(array($this->user));
 				}
 
@@ -1026,10 +1026,12 @@ class tracker_bo extends tracker_so
 	function link_titles( $ids )
 	{
 		$titles = array();
-		$tickets = $this->search(array('tr_id' => $ids),'tr_id,tr_tracker,tr_summary');
-		if ($items) foreach($tickets as $ticket)
+		if (($tickets = $this->search(array('tr_id' => $ids),'tr_id,tr_tracker,tr_summary')))
 		{
-			$titles[$ticket['tr_id']] = $this->link_title($ticket);
+			foreach($tickets as $ticket)
+			{
+				$titles[$ticket['tr_id']] = $this->link_title($ticket);
+			}
 		}
 		// we assume all not returned tickets are not readable by the user, as we notify egw_link about each deleted ticket
 		foreach($ids as $id)
