@@ -755,14 +755,17 @@ class tracker_bo extends tracker_so
 			return !!($needed & (TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW));
 		}
 		// assignee
-		if (!$check_only_tracker && ($needed & TRACKER_ITEM_ASSIGNEE))
+		if (!$check_only_tracker && ($needed & TRACKER_ITEM_ASSIGNEE) && $this->data['tr_assigned'])
 		{
-			if ($this->user == $this->data['tr_assigned']) return true;
-			// group assinged
-			if ($this->allow_assign_groups && $this->data['tr_assigned'] < 0)
+			foreach((array)$this->data['tr_assigned'] as $assignee)
 			{
-				$members = $GLOBALS['egw']->accounts->members($this->data['tr_assigned'],true);
-				if (in_array($this->user,$members)) return true;
+				if ($this->user == $assignee) return true;
+				// group assinged
+				if ($this->allow_assign_groups && $assignee < 0)
+				{
+					$members = $GLOBALS['egw']->accounts->members($assignee,true);
+					if (in_array($this->user,$members)) return true;
+				}
 			}
 		}
 		return false;
