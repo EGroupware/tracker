@@ -59,6 +59,7 @@ existing links	tracker	et	Eksisteerivad lingid
 field	tracker	et	Väli
 fixed	tracker	et	Parandatud
 history	tracker	et	Ajalugu
+id	tracker	et	ID
 invalid	tracker	et	Vigane
 item assignee	tracker	et	Vastutaja
 item creator	tracker	et	Autor
