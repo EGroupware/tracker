@@ -420,10 +420,7 @@ class tracker_so extends so_sql
 				$filter[] = self::SQL_NOT_CLOSED;
 				break;
 		}
-		if (strpos($join,'LEFT JOIN') !== false)
-		{
-			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
-		}
+		$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
 		// avoid ambigues tr_id
 		if (is_bool($only_keys))
 		{
