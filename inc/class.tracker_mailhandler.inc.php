@@ -153,10 +153,11 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function check_mail()
 	{
-		if (!($this->mbox = imap_open ($this->mailBox,
+		if (!($this->mbox = @imap_open($this->mailBox,
 									$this->mailhandling[0]['username'],
 									$this->mailhandling[0]['password'])))
 		{
+			error_log(__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
 			return false; // Open mailbox failed, don't we wanna log this?
 		}
 
