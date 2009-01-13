@@ -105,6 +105,20 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
+	 * Get the subject for a given entry, reimplementation for get_subject in bo_tracking
+	 *
+	 * Default implementation uses the link-title
+	 *
+	 * @param array $data
+	 * @param array $old
+	 * @return string
+	 */
+	function get_subject($data,$old)
+	{
+		return '#'.$data['tr_id'].' - '.$data['tr_summary'];
+	}
+
+	/**
 	 * Get the modified / new message (1. line of mail body) for a given entry, can be reimplemented
 	 *
 	 * @param array $data
