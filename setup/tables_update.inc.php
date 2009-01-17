@@ -374,3 +374,21 @@ function tracker_upgrade1_5_007()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.6';
 }
+
+function tracker_upgrade1_6()
+{
+	$GLOBALS['egw_setup']->oProc->CreateTable('egw_tracker_extra',array(
+		'fd' => array(
+			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'tr_extra_name' => array('type' => 'varchar','precision' => '64','nullable' => False),
+			'tr_extra_value' => array('type' => 'text')
+		),
+		'pk' => array('tr_id','tr_extra_name'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array()
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.7.001';
+}
+

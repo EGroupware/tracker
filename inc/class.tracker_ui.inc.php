@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -114,7 +114,7 @@ class tracker_ui extends tracker_bo
 	 */
 	function edit($content=null,$msg='',$popup=true)
 	{
-		$tabs = 'description|comments|add_comment|links|history|bounties';
+		$tabs = 'description|comments|add_comment|links|custom|history|bounties';
 
 		if ($this->htmledit)
 		{
@@ -521,6 +521,7 @@ class tracker_ui extends tracker_bo
 			'add_comment' => !$tr_id || $readonlys['reply_message'],
 			'history'  => !$tr_id,
 			'bounties' => !$this->allow_bounties,
+			'custom'   => !$this->customfields,
 		);
 		if ($tr_id && $readonlys['reply_message'])
 		{
@@ -580,6 +581,13 @@ class tracker_ui extends tracker_bo
 		foreach($this->field_acl as $name => $rigths)
 		{
 			$readonlys[$name] = !$this->check_rights($rigths);
+		}
+		if ($this->customfields && $readonlys['customfields'])
+		{
+			foreach($this->customfields as $name => $data)
+			{
+				$readonlys['#'.$name] = $readonlys['customfields'];
+			}
 		}
 		return $readonlys;
 	}

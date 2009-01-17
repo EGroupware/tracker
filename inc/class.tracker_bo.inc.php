@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -214,6 +214,7 @@ class tracker_bo extends tracker_so
 		'bounty'         => 'Set bounty',
 		'tr_cc'			 => 'CC',
 		'num_replies'    => 'Number of replies',
+		'customfields'   => 'Custom fields',
 	);
 	/**
 	 * Translate field-name to 2-char history status
@@ -1076,10 +1077,7 @@ class tracker_bo extends tracker_so
 	 */
 	function get_rows($query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
 	{
-		$rows = (array) $this->search($query['search'],false,$query['order']?$query['order'].' '.$query['sort']:'',
-			'','%',false,'OR',(int)$query['start'],$query['col_filter'],$join,$need_full_no_count);
-
-		return $this->total;
+		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count);
 	}
 
 	/**
@@ -1194,6 +1192,7 @@ class tracker_bo extends tracker_so
 			'tr_priority'    => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_cc'			 => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_group'		 => TRACKER_TECHNICIAN|TRACKER_ADMIN,
+			'customfields'   => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			// set automatic by botracker::save()
 			'tr_id'          => 0,
 			'tr_creator'     => 0,

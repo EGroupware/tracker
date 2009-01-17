@@ -129,5 +129,16 @@ $phpgw_baseline = array(
 		'fk' => array(),
 		'ix' => array(),
 		'uc' => array()
+	),
+	'egw_tracker_extra' => array(
+		'fd' => array(
+			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'tr_extra_name' => array('type' => 'varchar','precision' => '64','nullable' => False),
+			'tr_extra_value' => array('type' => 'text')
+		),
+		'pk' => array('tr_id','tr_extra_name'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array()
 	)
 );

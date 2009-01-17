@@ -80,6 +80,18 @@
 			</rows>
 		</grid>
 	</template>
+	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.7.001">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row class="row" valign="top">
+					<customfields/>
+				</row>
+			</rows>
+		</grid>
+	</template>
 	<template id="tracker.edit.history" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%" height="250" overflow="auto">
 			<columns>
@@ -135,7 +147,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.5.002">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.7.001">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -220,7 +232,8 @@
 							<tab label="Description" statustext="Description"/>
 							<tab label="Comments" statustext="Comments"/>
 							<tab label="Add comment" statustext="Add comment"/>
-							<tab label="Attachments &amp; Links" statustext="Attachments &amp; Links"/>
+							<tab label="Links" statustext="Attachments &amp; Links"/>
+							<tab label="Custom" statustext="Custom fields"/>
 							<tab label="History" statustext="History"/>
 							<tab label="Bounties" statustext="If this item is important for you, please consider to set a bounty for it!"/>
 						</tabs>
@@ -229,6 +242,7 @@
 							<template id="tracker.edit.comments"/>
 							<template id="tracker.edit.add_comment"/>
 							<template id="tracker.edit.links"/>
+							<template id="tracker.edit.custom"/>
 							<template id="tracker.edit.history"/>
 							<template id="tracker.edit.bounties"/>
 						</tabpanels>

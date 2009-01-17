@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -13,7 +13,7 @@
 /**
  * Storage Object of the tracker
  */
-class tracker_so extends so_sql
+class tracker_so extends so_sql_cf
 {
 	/**
 	 * Table-name of the main tracker table
@@ -39,6 +39,10 @@ class tracker_so extends so_sql
 	 * Table-name for the already done escalations
 	 */
 	const ESCALATED_TABLE = 'egw_tracker_escalated';
+	/**
+	 * Table-name for custom fields
+	 */
+	const EXTRA_TABLE = 'egw_tracker_extra';
 
 	/**
 	 * Tracker's default stati (they are strings as some php versions have problems with negative array indexes)
@@ -62,7 +66,7 @@ class tracker_so extends so_sql
 	 */
 	function __construct()
 	{
-		parent::__construct('tracker',self::TRACKER_TABLE,null,'',true);
+		parent::__construct('tracker',self::TRACKER_TABLE,self::EXTRA_TABLE,'','tr_extra_name','tr_extra_value','tr_id');
 	}
 
 	/**

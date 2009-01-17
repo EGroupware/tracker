@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.5.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.5.004">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.7.001">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -25,6 +25,7 @@
 				<column disabled="!@allow_sum_timesheet"/>
 				<column disabled="@no_votes"/>
 				<column disabled="@no_bounties"/>
+				<column/>
 				<column/>
 				<column width="3%" disabled="!@allow_actions"/>
 				<column disabled="!@is_admin"/>
@@ -50,6 +51,7 @@
 					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes"/>
 					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties"/>
 					<nextmatch-filterheader options="Escalation" id="esc_id"/>
+					<nextmatch-customfields id="customfields"/>
 					<description class="noPrint" value="Actions" align="center"/>
 					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1" class="tracker-checkall"/>
 				</row>
@@ -89,6 +91,7 @@
 					<int align="center" id="${row}[votes]" readonly="true"/>
 					<textbox type="float" align="center" id="${row}[bounties]" readonly="true" label="$row_cont[currency]" no_lang="1"/>
 					<date-since id="${row}[esc_start]"/>
+					<customfields-list id="$row"/>
 					<hbox options="0" align="center" class="noPrint" orient="0">
 						<button image="timesheet" class="noPrint" label="Add timesheet entry" align="center" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]$row_cont[extra_links]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;"/>
 						<button image="print" class="noPrint" label="Print entry" align="center" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;"/>
