@@ -655,11 +655,11 @@ class tracker_bo extends tracker_so
 	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_technician($tracker,$user=null)
+	function is_technician($tracker,$user=null,$checkgroups=false)
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$technicians =& $this->get_staff($tracker,0,'technicians');
+		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),'technicians');
 
 		return isset($technicians[$user]);
 	}
@@ -989,7 +989,7 @@ class tracker_bo extends tracker_so
 				$data = unserialize($cat['data']);
 				$user = $data['autoassign'];
 
-				if ($user && $this->is_technician($this->data['tr_tracker'],$user))
+				if ($user && $this->is_technician($this->data['tr_tracker'],$user,true))
 				{
 					return $this->data['tr_assigned'] = $user;
 				}
