@@ -147,7 +147,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.7.001">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.7.002">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -227,7 +227,7 @@
 					<textbox maxlength="80" span="3" class="inputFullWidth" id="tr_summary" needed="1"/>
 				</row>
 				<row valign="top">
-					<tabbox span="all">
+					<tabbox span="all" id="tabs">
 						<tabs>
 							<tab label="Description" statustext="Description"/>
 							<tab label="Comments" statustext="Comments"/>

@@ -114,8 +114,6 @@ class tracker_ui extends tracker_bo
 	 */
 	function edit($content=null,$msg='',$popup=true)
 	{
-		$tabs = 'description|comments|add_comment|links|custom|history|bounties';
-
 		if ($this->htmledit)
 		{
 			$tr_description_options = 'simple,240px,100%,false';
@@ -516,7 +514,7 @@ class tracker_ui extends tracker_bo
 		$sel_options['status']['bo'] = 'Bounty set';
 		$sel_options['status']['Bo'] = 'Bounty confirmed';
 
-		$readonlys[$tabs] = array(
+		$readonlys['tabs'] = array(
 			'comments' => !$tr_id || !$content['num_replies'],
 			'add_comment' => !$tr_id || $readonlys['reply_message'],
 			'history'  => !$tr_id,
