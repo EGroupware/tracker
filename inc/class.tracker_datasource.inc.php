@@ -17,7 +17,7 @@ include_once(EGW_INCLUDE_ROOT.'/projectmanager/inc/class.datasource.inc.php');
  *
  * The Tracker datasource set's only real start- and endtimes and the assigned user as resources.
  */
-class datasource_tracker extends datasource
+class tracker_datasource extends datasource
 {
 	/**
 	 * Constructor
