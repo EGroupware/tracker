@@ -789,7 +789,7 @@ class tracker_ui extends tracker_bo
 	function seen (&$data, $update=false)
 	{
 		$seen = array();
-		if ($data['tr_seen']) $seen = unserialize($data['tr_seen']); 	
+		if ($data['tr_seen']) $seen = unserialize($data['tr_seen']);
 		if (in_array($this->user, $seen))
 		{
 			return true;
@@ -943,7 +943,15 @@ class tracker_ui extends tracker_bo
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
-		$tpl =& new etemplate('tracker.index');
+		$tpl = new etemplate();
+		if (!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
+		{
+			$tpl->read('tracker.index');
+		}
+		else
+		{
+			$tpl =& new etemplate('tracker.index.sitemgr');
+		}
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker));
 	}
