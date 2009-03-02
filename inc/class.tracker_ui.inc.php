@@ -948,10 +948,6 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->read('tracker.index');
 		}
-		else
-		{
-			$tpl =& new etemplate('tracker.index.sitemgr');
-		}
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker));
 	}
