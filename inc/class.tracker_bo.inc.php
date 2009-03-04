@@ -286,7 +286,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','users','notification','projects','priorities',	// tracker specific
+		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit', 'mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access',
 	);
@@ -1140,7 +1140,7 @@ class tracker_bo extends tracker_so
 
 		foreach($this->config_names as $name)
 		{
-			//echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
+			#echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
 
 			$config->save_value($name,$this->$name,'tracker');
 		}
