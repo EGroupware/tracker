@@ -564,7 +564,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Get the staff (technicians or admins) of a tracker
 	 *
-	 * @param int $tracker
+	 * @param int $tracker tracker-id or 0, 0 = staff of all trackers!
 	 * @param int $return_groups=2 0=users, 1=groups+users, 2=users+groups
 	 * @param string $what='technicians' technicians=technicians (incl. admins), admins=only admins, users=only users
 	 * @return array with uid => user-name pairs
@@ -583,19 +583,27 @@ class tracker_bo extends tracker_so
 			return $staff_cache[$tracker][(int)$return_groups][$what];
 		}
 		$staff = array();
-		if ($what == "users")
+		switch($what)
 		{
-			if (is_array($this->users[0])) $staff = $this->users[0];
-			if (is_array($this->users[$tracker])) $staff = array_merge($staff,$this->users[$tracker]);
+			case 'users':
+				foreach($tracker ? array(0,$tracker) : array_keys($this->users) as $t)
+				{
+					if (is_array($this->users[$t])) $staff = array_merge($staff,$this->users[$t]);
+				}
+				break;
+			case 'technicians':
+				foreach($tracker ? array(0,$tracker) : array_keys($this->technicians) as $t)
+				{
+					if (is_array($this->technicians[$t])) $staff = array_merge($staff,$this->technicians[$t]);
+				}
+				// fall through, as technicians include admins
+			case 'admins':
+				foreach($tracker ? array(0,$tracker) : array_keys($this->admins) as $t)
+				{
+					if (is_array($this->admins[$t])) $staff = array_merge($staff,$this->admins[$t]);
+				}
+				break;
 		}
-		else
-		{
-			if (is_array($this->admins[0])) $staff = $this->admins[0];
-			if (is_array($this->admins[$tracker])) $staff = array_merge($staff,$this->admins[$tracker]);
-			if ($what == 'technicians' && is_array($this->technicians[0])) $staff = array_merge($staff,$this->technicians[0]);
-			if ($what == 'technicians' && is_array($this->technicians[$tracker])) $staff = array_merge($staff,$this->technicians[$tracker]);
-		}
-
 
 		// split users and groups and resolve the groups into there users
 		$users = $groups = array();

@@ -708,37 +708,11 @@ class tracker_ui extends tracker_bo
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
-			$readonlys["checked"]=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
+			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
 
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
-
-		// set the options for assigned to depending on the tracker,
-		// if no tracker selected, we permit select all users (the all users config staff is not always selected)
-		if (!$tracker)
-		{
-			$this->allow_assign_groups == 1 ? $type = 'both' : $type = 'accounts';
-			$accs = $GLOBALS['egw']->accounts->get_list(empty($type) ? 'accounts' : $type);
-			$rows['sel_options']['tr_assigned'] = $users = $groups = array();
-			foreach($accs as $acc)
-			{
-				if ($acc['account_type'] == 'u')
-				{
-					$users[$acc['account_id']] = $GLOBALS['egw']->common->grab_owner_name($acc['account_id']);
-				}
-				elseif ($acc['account_type'] == 'g' && $this->allow_assign_groups == 1)
-				{
-					$groups[$acc['account_id']] = $GLOBALS['egw']->common->grab_owner_name($acc['account_id']);
-				}
-			}
-			asort($users);
-			asort($groups);
-			$rows['sel_options']['tr_assigned'] = array ('not' => lang('Not assigned')) + $groups + $users;
-		}
-		else
-		{
-			$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker);
-		}
+		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker);
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
