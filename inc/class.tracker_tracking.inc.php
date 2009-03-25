@@ -169,7 +169,7 @@ class tracker_tracking extends bo_tracking
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($statis[$data['tr_status']]),
-			'tr_resolution'  => lang($this->tracker->resolutions[$data['tr_resolution']]),
+			'tr_resolution'  => lang(tracker_bo::$resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => $GLOBALS['egw']->common->grab_owner_name($data['tr_creator']),
