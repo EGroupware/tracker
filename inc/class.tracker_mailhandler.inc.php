@@ -278,8 +278,29 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		// By the time we get here, we know this ticket will be updated or created
+		$struct = imap_bodystruct ($this->mbox, $mid, "1");
 		$this->mailBody = imap_fetchbody ($this->mbox, $mid, "1");
-		quoted_printable_decode($this->mailBody);
+		
+		switch ($struct->encoding)
+		{
+			case 0:
+				break;
+			case 1:
+				$this->mailBody = imap_8bit ($this->mailBody);
+				break;
+			case 2:
+				$this->mailBody = imap_binary ($this->mailBody);
+				break;
+			case 3:
+				$this->mailBody = imap_base64 ($this->mailBody);
+				break;
+			case 4:
+				$this->mailBody = quoted_printable_decode ($this->mailBody);
+				break;
+			case 5:
+			default:
+				break;
+		}
 
 		if ($this->ticketId == 0)
 		{
