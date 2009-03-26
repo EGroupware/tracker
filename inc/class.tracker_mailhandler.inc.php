@@ -193,6 +193,56 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * Retrieve and decode a bodypart
+	 * 
+	 * @param int Message ID from the server
+	 * @param string The body part, defaults to "1"
+	 * @return string The decoded bodypart
+	 */
+	function get_mailbody ($mid, $section=1)
+	{
+		$struct = imap_bodystruct ($this->mbox, $mid, "$section");
+		$body = imap_fetchbody ($this->mbox, $mid, "$section");
+
+		switch ($struct->encoding)
+		{
+			case 0:
+			case 1:
+//				return (imap_8bit ($body));
+				return ($body);
+				break;
+			case 2:
+				return (imap_binary ($body));
+				break;
+			case 3:
+				return (imap_base64 ($body));
+				break;
+			case 4:
+				return (quoted_printable_decode ($body));
+				break;
+			case 5:
+			default:
+				return ($body);
+				break;
+		}
+	}
+
+	/**
+	 * Decode a mail header
+	 * 
+	 * @param string Pointer to the (possibly) encoded header that will be changes
+	 */
+	function decode_header (&$header)
+	{
+		$header = preg_replace_callback('/=\?(.*)\?([BQ])\?(.*)\?=/U', create_function (
+					'$matches',
+					'if ($matches[2] == "q" || $matches[2] == "Q") { return quoted_printable_decode ($matches[3]); } ' .
+					'elseif ($matches[2] == "b" || $matches[2] == "B") { return base64_decode ($matches[3]); } ' .
+					'else { return $matches[3]; } '
+			),  $header);
+	}
+
+	/**
 	 * Process a messages from the mailbox
 	 * 
 	 * @param int Message ID from the server
@@ -223,11 +273,20 @@ class tracker_mailhandler extends tracker_bo
 			1 => $msgHeader->sender[0],
 			2 => $msgHeader->return_path[0],
 			3 => $msgHeader->reply_to[0],
+			// Users mentioned addresses where not recognized. That was not
+			// reproducable by me, so these headers are a trial-and-error apprach :-S
+			4 => $msgHeader->fromaddress,
+			5 => $msgHeader->senderaddress,
+			6 => $msgHeader->return_pathaddress,
+			7 => $msgHeader->reply_toaddress,
 		);
 
 		foreach ($try_addr as $id => $sender)
 		{
-			if (($extracted = self::extract_mailaddress ($sender->mailbox.'@'.$sender->host)) !== false)
+			if (($extracted = self::extract_mailaddress (
+					(is_object($sender)
+						? $sender->mailbox.'@'.$sender->host
+						: $sender))) !== false)
 			{
 				$senderIdentified = self::search_user($extracted);
 			}
@@ -259,8 +318,9 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		$this->mailSubject = $msgHeader->subject;
+		$this->decode_header ($this->mailSubject);
 		$this->ticketId = self::get_ticketId($this->mailSubject);
-
+		
 		if ($this->ticketId == 0) // Create new ticket?
 		{
 			if (empty($this->mailhandling[0]['default_tracker']))
@@ -278,29 +338,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		// By the time we get here, we know this ticket will be updated or created
-		$struct = imap_bodystruct ($this->mbox, $mid, "1");
-		$this->mailBody = imap_fetchbody ($this->mbox, $mid, "1");
-		
-		switch ($struct->encoding)
-		{
-			case 0:
-				break;
-			case 1:
-				$this->mailBody = imap_8bit ($this->mailBody);
-				break;
-			case 2:
-				$this->mailBody = imap_binary ($this->mailBody);
-				break;
-			case 3:
-				$this->mailBody = imap_base64 ($this->mailBody);
-				break;
-			case 4:
-				$this->mailBody = quoted_printable_decode ($this->mailBody);
-				break;
-			case 5:
-			default:
-				break;
-		}
+		$this->mailBody = $this->get_mailbody ($mid);
 
 		if ($this->ticketId == 0)
 		{
@@ -463,5 +501,5 @@ class tracker_mailhandler extends tracker_bo
 				$async->set_timer(array('min' => "*/$interval"),'tracker-check-mail','tracker.tracker_mailhandler.check_mail',null);
 			}
 		}
-	}
+	}	
 }
