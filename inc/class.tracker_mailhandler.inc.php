@@ -193,6 +193,21 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * Decode a mail header
+	 * 
+	 * @param string Pointer to the (possibly) encoded header that will be changes
+	 */
+	function decode_header (&$header)
+	{
+		$header = preg_replace_callback('/=\?(.*)\?([BQ])\?(.*)\?=/U', create_function (
+					'$matches',
+					'if ($matches[2] == "q" || $matches[2] == "Q") { return quoted_printable_decode ($matches[3]); } ' .
+					'elseif ($matches[2] == "b" || $matches[2] == "B") { return base64_decode ($matches[3]); } ' .
+					'else { return $matches[3]; } '
+			),  $header);
+	}
+
+	/**
 	 * Process a messages from the mailbox
 	 * 
 	 * @param int Message ID from the server
@@ -223,11 +238,20 @@ class tracker_mailhandler extends tracker_bo
 			1 => $msgHeader->sender[0],
 			2 => $msgHeader->return_path[0],
 			3 => $msgHeader->reply_to[0],
+			// Users mentioned addresses where not recognized. That was not
+			// reproducable by me, so these headers are a trial-and-error apprach :-S
+			4 => $msgHeader->fromaddress,
+			5 => $msgHeader->senderaddress,
+			6 => $msgHeader->return_pathaddress,
+			7 => $msgHeader->reply_toaddress,
 		);
 
 		foreach ($try_addr as $id => $sender)
 		{
-			if (($extracted = self::extract_mailaddress ($sender->mailbox.'@'.$sender->host)) !== false)
+			if (($extracted = self::extract_mailaddress (
+					(is_object($sender)
+						? $sender->mailbox.'@'.$sender->host
+						: $sender))) !== false)
 			{
 				$senderIdentified = self::search_user($extracted);
 			}
@@ -259,6 +283,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		$this->mailSubject = $msgHeader->subject;
+		$this->decode_header ($this->mailSubject);
 		$this->ticketId = self::get_ticketId($this->mailSubject);
 
 		if ($this->ticketId == 0) // Create new ticket?
@@ -284,9 +309,8 @@ class tracker_mailhandler extends tracker_bo
 		switch ($struct->encoding)
 		{
 			case 0:
-				break;
 			case 1:
-				$this->mailBody = imap_8bit ($this->mailBody);
+//				$this->mailBody = imap_8bit ($this->mailBody);
 				break;
 			case 2:
 				$this->mailBody = imap_binary ($this->mailBody);
