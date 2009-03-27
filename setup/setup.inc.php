@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -46,4 +46,10 @@ $setup_info['tracker']['depends'][] = array(
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'notifications',
 	 'versions' => Array('1.4','1.5','1.6','1.7')
+);
+// installation checks / requirements for tracker
+$setup_info['tracker']['check_install'] = array(
+	'imap' => array(
+		'func' => 'extension_check',
+	),
 );
