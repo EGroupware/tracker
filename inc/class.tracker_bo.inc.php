@@ -178,9 +178,9 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $mailservertypes = array(
-		0 => array('imap/notls', 'Standard IMap'),
-		1 => array('imap/tls', 'IMap, TLS secured'),
-		2 => array('imap/ssl', 'IMap, SSH secured'),
+		0 => array('imap/notls', 'Standard IMAP'),
+		1 => array('imap/tls', 'IMAP, TLS secured'),
+		2 => array('imap/ssl', 'IMAP, SSL secured'),
 		3 => array('pop3', 'POP3'),
 	);
 
