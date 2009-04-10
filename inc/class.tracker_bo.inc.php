@@ -100,7 +100,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	static $resolutions = array(
-		''  => 'None',
+		'n' => 'None',
 		'a' => 'Accepted',
 		'd' => 'Duplicate',
 		'f' => 'Fixed',

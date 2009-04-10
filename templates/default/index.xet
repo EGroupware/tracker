@@ -21,6 +21,7 @@
 				<column/>
 				<column width="10%"/>
 				<column/>
+				<column/>
 				<column width="18%"/>
 				<column disabled="!@allow_sum_timesheet"/>
 				<column disabled="@no_votes"/>
@@ -42,6 +43,7 @@
 					<vbox options="0,0">
 						<nextmatch-filterheader options="All" id="tr_status" label="Status" class="status_filter"/>
 					</vbox>
+					<nextmatch-filterheader options="All" id="tr_resolution" label="Resolution" class="status_filter"/>
 					<nextmatch-sortheader label="Completed" id="tr_completion" class="tracker-completion" align="center"/>
 					<vbox options="0,0">
 						<nextmatch-accountfilter options="Created by" id="tr_creator" class="user_filter"/>
@@ -71,6 +73,9 @@
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
+					</menulist>
+					<menulist>
+						<menupopup id="${row}[tr_resolution]" readonly="true"/>
 					</menulist>
 					<image src="${row}[tr_completion]" label="$row_cont[tr_completion]" no_lang="1" align="center"/>
 					<vbox options="0,0">
@@ -114,8 +119,8 @@
 					<description/>
 				</row>
 				<row disabled="1">
-					<template id="tracker.index.left"/>
-					<template align="right" id="tracker.index.right"/>
+					<template id="left"/>
+					<template align="right" id="right"/>
 				</row>
 				<row>
 					<nextmatch options="tracker.index.rows" id="nm" span="all"/>

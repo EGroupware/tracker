@@ -12,7 +12,7 @@
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '1.7.001';
+$setup_info['tracker']['version']   = '1.7.002';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee','egw_tracker_escalations','egw_tracker_escalated','egw_tracker_extra');
 $setup_info['tracker']['enable']    = 1;
@@ -54,3 +54,4 @@ $setup_info['tracker']['check_install'] = array(
 		'func' => 'extension_check',
 	),
 );
+

@@ -29,7 +29,7 @@ $phpgw_baseline = array(
 			'tr_modified' => array('type' => 'int','precision' => '8'),
 			'tr_closed' => array('type' => 'int','precision' => '8'),
 			'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
-			'tr_resolution' => array('type' => 'char','precision' => '1','default' => ''),
+			'tr_resolution' => array('type' => 'char','precision' => '1','default' => 'n'),
 			'tr_cc' => array('type' => 'text'),
 			'tr_group' => array('type' => 'int','precision' => '11'),
 			'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii'),

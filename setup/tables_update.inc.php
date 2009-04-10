@@ -392,3 +392,20 @@ function tracker_upgrade1_6()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.7.001';
 }
 
+/**
+ * Setting default for tr_resolution to 'n'
+ *
+ * @return string '1.7.002'
+ */
+function tracker_upgrade1_7_001()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker','tr_resolution',array(
+		'type' => 'char',
+		'precision' => '1',
+		'default' => 'n'
+	));
+	$GLOBALS['egw_setup']->oProc->query("UPDATE egw_tracker SET tr_resolution='n' WHERE tr_resolution IS NULL OR tr_resolution=''",__LINE__,__FILE__);
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.7.002';
+}
+

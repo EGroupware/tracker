@@ -171,7 +171,7 @@ class tracker_ui extends tracker_bo
 			// for new items we use the session-state or $_GET['tracker']
 			if (!$this->data['tr_id'])
 			{
-				if (($state = $GLOBALS['egw']->session->appsession('index','tracker'.
+				if (($state = egw_session::appsession('index','tracker'.
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
 					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'];
@@ -297,14 +297,14 @@ class tracker_ui extends tracker_bo
 								}
 							}
 						}
-
-
 						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
 						{
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg))."&tracker=".$this->data['tr_tracker']."';";
+						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
+							// only change to current tracker, if not all trackers displayed
+							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
 					}
 					else
 					{
@@ -604,7 +604,7 @@ class tracker_ui extends tracker_bo
 		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
-		$GLOBALS['egw']->session->appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
+		egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
 		$tracker = $query['col_filter']['tr_tracker'];
 		if (!($query['col_filter']['cat_id'] = $query['filter'])) unset($query['col_filter']['cat_id']);
 		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
@@ -815,7 +815,7 @@ class tracker_ui extends tracker_bo
 			// if there is no tracker specified, try the tracker submitted
 			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
 			// if there is still no tracker, use the last tracker that was applied and saved to/with the view with the appsession
-			if (!$tracker && ($state=$GLOBALS['egw']->session->appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''))))
+			if (!$tracker && ($state=egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''))))
 			{
 			      $tracker=$state['col_filter']['tr_tracker'];
 			}
@@ -858,6 +858,7 @@ class tracker_ui extends tracker_bo
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
+			'tr_resolution' => self::$resolutions,
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
@@ -869,7 +870,7 @@ class tracker_ui extends tracker_bo
 		}
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
-			'nm' => $GLOBALS['egw']->session->appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
+			'nm' => egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
 			'msg' => $msg,
 			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
