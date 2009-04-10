@@ -3,7 +3,7 @@
  * eGroupWare Tracker - Handle incoming mails
  *
  * This class handles incoming mails in the async services.
- * It is an addition for the eGW Tracker app by Ralf Becker 
+ * It is an addition for the eGW Tracker app by Ralf Becker
  *
  * @link http://www.egroupware.org
  * @author Oscar van Eijk <oscar.van.eijk-AT-oveas.com>
@@ -17,63 +17,63 @@ class tracker_mailhandler extends tracker_bo
 {
 	/*
 	 * UID of the mailsender, 0 if not recognized
-	 * 
+	 *
 	 * @var int
 	 */
 	var $mailSender;
-	
+
 	/**
 	 * Subject line of the incoming mail
-	 * 
+	 *
 	 * @var string
 	 */
 	var $mailSubject;
-	
+
 	/**
 	 * Text from the mailbody (1st part)
-	 * 
+	 *
 	 * @var string
 	 */
 	var $mailBody;
-	
+
 	/**
 	 * Identification of the mailbox
-	 * 
+	 *
 	 * @var string
 	 */
 	var $mailBox;
-	
+
 	/**
 	 * List with all messages retrieved from the server
-	 * 
+	 *
 	 * @var array
 	 */
 	var $msgList = array();
 
 	/**
 	 * Mailbox stream
-	 * 
+	 *
 	 * @var int
 	 */
 	var $mbox;
-	
+
 	/**
 	 * Ticket ID or 0 if not recognize
-	 * 
+	 *
 	 * @var int
 	 */
 	var $ticketId;
-	
+
 	/**
 	 * User ID currently executing. Used in case we execute in fallback
-	 * 
+	 *
 	 * @var int
 	 */
 	var $originalUser;
-	
+
 	/**
 	 * Supported mailservertypes, extracted from parent::mailservertypes
-	 * 
+	 *
 	 * @var array
 	 */
 	var $serverTypes = array();
@@ -111,7 +111,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Compose the mailbox identification
-	 * 
+	 *
 	 * @return string mailbox identification as '{server[:port]/type}folder'
 	 */
 	function get_mailbox()
@@ -119,7 +119,7 @@ class tracker_mailhandler extends tracker_bo
 		if (empty($this->mailhandling[0]['server']))
 		{
 			return false; // Or should we default to 'localhost'?
-		}		
+		}
 
 		$mBox = '{'.$this->mailhandling[0]['server'];	// Set the servername
 
@@ -128,7 +128,7 @@ class tracker_mailhandler extends tracker_bo
 			// If set, add the portnumber
 			$mBox .= (':'.$this->mailhandling[0]['serverport']);
 		}
-		// Add the Servertype 
+		// Add the Servertype
 		$mBox .= ('/'.$this->serverTypes[($this->mailhandling[0]['servertype'])]);
 
 		// Close the server ID
@@ -148,7 +148,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Get all mails from the server. Invoked by the async timer
-	 * 
+	 *
 	 * @return boolean true=run finished, false=an error occured
 	 */
 	function check_mail()
@@ -194,7 +194,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Retrieve and decode a bodypart
-	 * 
+	 *
 	 * @param int Message ID from the server
 	 * @param string The body part, defaults to "1"
 	 * @return string The decoded bodypart
@@ -229,7 +229,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Decode a mail header
-	 * 
+	 *
 	 * @param string Pointer to the (possibly) encoded header that will be changes
 	 */
 	function decode_header (&$header)
@@ -244,7 +244,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Process a messages from the mailbox
-	 * 
+	 *
 	 * @param int Message ID from the server
 	 * @return boolean true=message successfully processed, false=message couldn't or shouldn't be processed
 	 */
@@ -260,13 +260,13 @@ class tracker_mailhandler extends tracker_bo
 			return false; // Already deleted
 		}
 
-		if ($msgHeader->Recent == 'R' ||		// Recent and seen or	
+		if ($msgHeader->Recent == 'R' ||		// Recent and seen or
 				($msgHeader->Recent == ' ' &&	// not recent but
 				$msgHeader->Unseen == ' '))		// seen
 		{
 			return false;
 		}
-		
+
 		// Try several headers to identify the sender
 		$try_addr = array(
 			0 => $msgHeader->from[0],
@@ -320,7 +320,7 @@ class tracker_mailhandler extends tracker_bo
 		$this->mailSubject = $msgHeader->subject;
 		$this->decode_header ($this->mailSubject);
 		$this->ticketId = self::get_ticketId($this->mailSubject);
-		
+
 		if ($this->ticketId == 0) // Create new ticket?
 		{
 			if (empty($this->mailhandling[0]['default_tracker']))
@@ -332,7 +332,7 @@ class tracker_mailhandler extends tracker_bo
 				if (empty($this->mailhandling[0]['unrec_mail']))
 				{
 					return false; // Not allowed for unknown users
-				} 
+				}
 				$this->mailSender = $this->mailhandling[0]['unrec_mail']; // Ok, set default user
 			}
 		}
@@ -379,7 +379,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Get an email address in plain format, no matter how the address was specified
-	 * 
+	 *
 	 * @param string $addr a string (probably) containing an email address
 	 */
 	function extract_mailaddress($addr='')
@@ -394,7 +394,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Retrieve the user ID based on the mail address that was extracted from the mailheaders
-	 * 
+	 *
 	 * @param string $mail_addr, the mail address.
 	 */
 	function search_user($mail_addr='')
@@ -414,15 +414,15 @@ class tracker_mailhandler extends tracker_bo
 			// No matches (0) or ambigious (>1)
 			return false;
 		}
-		
-		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work 
+
+		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work
 		$this->mailSender = $first_match['account_id'];
 		return true;
 	}
 
 	/**
 	 * Try to extract a ticket number from a subject line
-	 * 
+	 *
 	 * @param string the subjectline from the incoming message
 	 * @return int ticket ID, or 0 of no ticket ID was recognized
 	 */
@@ -435,10 +435,11 @@ class tracker_mailhandler extends tracker_bo
 
 		// The subject line is expected to be in the format:
 		// [Re: |Fwd: |etc ]<Tracker name> #<id>: <Summary>
-		preg_match_all("/(.*?)( #[0-9]+: )(.*?)$/",$subj, $tr_data);
+		// allow colon or dash to separate Id from summary, as our notifications use a dash (' - ') and not a colon (': ')
+		preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data);
 		if (!$tr_data[2])
 		{
-			return 0; // 
+			return 0; //
 		}
 
 		preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id);
@@ -456,7 +457,7 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Forward a mail that was not recognized
-	 * 
+	 *
 	 * @param int message ID from the server
 	 * @return boolean status
 	 */
@@ -466,7 +467,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false;
 		}
-		
+
 		// Sending mail is not implemented using notifations, since it's pretty straight forward here
 		$to   = $this->mailhandling[0]['forward_to'];
 		$subj = $headers->subject;
@@ -501,5 +502,5 @@ class tracker_mailhandler extends tracker_bo
 				$async->set_timer(array('min' => "*/$interval"),'tracker-check-mail','tracker.tracker_mailhandler.check_mail',null);
 			}
 		}
-	}	
+	}
 }
