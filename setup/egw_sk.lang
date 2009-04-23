@@ -72,7 +72,7 @@ creation date	tracker	sk	Dátum vytvorenia
 creator	tracker	sk	Vytvoril
 custom tracker priorities	tracker	sk	Používateľské priority Sledovača
 date opened	tracker	sk	Dátum otvorenia
-define escalations	tracker	sk	Definovať stupňovanie
+define escalations	common	sk	Definovať stupňovanie
 delete mails from server	tracker	sk	Odstrániť E-maily zo servera
 delete this bounty	tracker	sk	Odstrániť túto odmenu
 delete this canned response	tracker	sk	Odstrániť túto šablónovú odpoveď

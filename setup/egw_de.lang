@@ -72,7 +72,7 @@ creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
 custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 date opened	tracker	de	Datum angelegt
-define escalations	admin	de	Eskalation definieren
+define escalations	common	de	Eskalation definieren
 delete mails from server	tracker	de	Mails auf dem Server löschen
 delete this bounty	tracker	de	Diese Prämie löschen
 delete this canned response	tracker	de	Diese Standardantwort löschen

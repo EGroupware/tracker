@@ -71,7 +71,7 @@ creation date	tracker	it	date di creazione
 creator	tracker	it	Creatore
 custom tracker priorities	tracker	it	Priorità del tracker personalizzate
 date opened	tracker	it	Data apertura
-define escalations	tracker	it	Definisci azioni
+define escalations	common	it	Definisci azioni
 delete mails from server	tracker	it	Cancella mail dal server
 delete this bounty	tracker	it	Cancella questo bounty
 delete this canned response	tracker	it	Cancella questa risposta preconfezionata

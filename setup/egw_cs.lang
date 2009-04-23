@@ -72,7 +72,7 @@ creation date	tracker	cs	datum vytvoření
 creator	tracker	cs	Tvůrce
 custom tracker priorities	tracker	cs	Uživatelsky definované priority sledovacího systému
 date opened	tracker	cs	Datum otevření
-define escalations	admin	cs	Definovat eskalace
+define escalations	common	cs	Definovat eskalace
 delete mails from server	tracker	cs	Smazat e-maily ze serveru
 delete this bounty	tracker	cs	Smazat tuto odměnu
 delete this canned response	tracker	cs	Smazat tuto předpřipravenou odpověď

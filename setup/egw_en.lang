@@ -72,7 +72,7 @@ creation date	tracker	en	creation date
 creator	tracker	en	Creator
 custom tracker priorities	tracker	en	Custom tracker priorities
 date opened	tracker	en	Date opened
-define escalations	admin	en	Define escalations
+define escalations	common	en	Define escalations
 delete mails from server	tracker	en	Delete mails from server
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response

@@ -72,7 +72,7 @@ creation date	tracker	nl	datum aangemaakt
 creator	tracker	nl	Melder
 custom tracker priorities	tracker	nl	Aangepaste tracker eigenschappen
 date opened	tracker	nl	Datum geopend
-define escalations	tracker	nl	Defineer escalaties
+define escalations	common	nl	Defineer escalaties
 delete mails from server	tracker	nl	Verwijder mails van de server
 delete this bounty	tracker	nl	Verwijder deze gift
 delete this canned response	tracker	nl	Verwijder dit standaard antwoord

@@ -72,7 +72,7 @@ creation date	tracker	ru	даты создания
 creator	tracker	ru	Создатель
 custom tracker priorities	tracker	ru	Пользовательские приоритеты трекера
 date opened	tracker	ru	Дата открытия
-define escalations	tracker	ru	Назначение эскалаций
+define escalations	common	ru	Назначение эскалаций
 delete mails from server	tracker	ru	Удаление писем с сервера
 delete this bounty	tracker	ru	Удалить эту премию
 delete this canned response	tracker	ru	Удалить этот готовый ответ

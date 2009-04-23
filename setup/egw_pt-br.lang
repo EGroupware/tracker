@@ -72,7 +72,7 @@ creation date	tracker	pt-br	data de criação
 creator	tracker	pt-br	Criador
 custom tracker priorities	tracker	pt-br	Prioridades personalizadas para tipos de ticket
 date opened	tracker	pt-br	Data de abertura
-define escalations	admin	pt-br	Definir escalas
+define escalations	common	pt-br	Definir escalas
 delete mails from server	tracker	pt-br	Remover emails do servidor
 delete this bounty	tracker	pt-br	Remover este pagamento
 delete this canned response	tracker	pt-br	Remover esta resposta automática

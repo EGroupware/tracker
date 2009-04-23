@@ -72,7 +72,7 @@ creation date	tracker	es-es	fecha de creación
 creator	tracker	es-es	Creador
 custom tracker priorities	tracker	es-es	Prioridades del elemento personalizado
 date opened	tracker	es-es	Fecha de apertura
-define escalations	admin	es-es	Definir escalados
+define escalations	common	es-es	Definir escalados
 delete mails from server	tracker	es-es	Borrar correos del servidor
 delete this bounty	tracker	es-es	Borrar esta recompensa
 delete this canned response	tracker	es-es	Borrar esta respuesta automatizada
