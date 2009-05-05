@@ -207,7 +207,7 @@ class tracker_so extends so_sql_cf
 		{
 			$order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
 		}
-		if ($join)	// group by tr_id, as we get one row per assignee!
+		if ($join && stristr($order_by,'GROUP BY') === false)	// group by tr_id, as we get one row per assignee!
 		{
 			if ($this->db->Type == 'mysql')
 			{
