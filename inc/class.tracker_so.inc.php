@@ -75,9 +75,9 @@ class tracker_so extends so_sql_cf
 	 * Reimplemented to read the replies and bounties (non-admin only confirmed ones) too
 	 *
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
-	 * @param string/array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
+	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
-	 * @return array/boolean data if row could be retrived else False
+	 * @return array|boolean data if row could be retrived else False
 	*/
 	function read($keys,$extra_cols='',$join='')
 	{
@@ -163,11 +163,11 @@ class tracker_so extends so_sql_cf
 	 *
 	 * Reimplemented to join with the votes table and respect the private attribute
 	 *
-	 * @param array/string $criteria array of key and data cols, OR a SQL query (content for WHERE), fully quoted (!)
-	 * @param boolean/string/array $only_keys=true True returns only keys, False returns all cols. or
+	 * @param array|string $criteria array of key and data cols, OR a SQL query (content for WHERE), fully quoted (!)
+	 * @param boolean|string|array $only_keys=true True returns only keys, False returns all cols. or
 	 *	comma seperated list or array of columns to return
 	 * @param string $order_by='' fieldnames + {ASC|DESC} separated by colons ',', can also contain a GROUP BY (if it contains ORDER BY)
-	 * @param string/array $extra_cols='' string or array of strings to be added to the SELECT, eg. "count(*) as num"
+	 * @param string|array $extra_cols='' string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $wildcard='' appended befor and after each criteria
 	 * @param boolean $empty=false False=empty criteria are ignored in query, True=empty have to be empty in row
 	 * @param string $op='AND' defaults to 'AND', can be set to 'OR' too, then criteria's are OR'ed together
@@ -175,7 +175,7 @@ class tracker_so extends so_sql_cf
 	 * @param array $filter=null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
 	 * @param string $join_in='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
 	 *	"LEFT JOIN table2 ON (x=y AND z=o)", Note: there's no quoting done on $join, you are responsible for it!!!
-	 * @return boolean/array of matching rows (the row is an array of the cols) or False
+	 * @return array|NULL arra of matching rows (the row is an array of the cols) or NULL if nothing found
 	 */
 	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true)
 	{
@@ -207,11 +207,16 @@ class tracker_so extends so_sql_cf
 		{
 			$order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
 		}
-		// group by tr_id, as we get one row per assignee!
-		if ($this->db->Type == 'mysql') {
-			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
-		} else {
-			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'.	tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+		if ($join)	// group by tr_id, as we get one row per assignee!
+		{
+			if ($this->db->Type == 'mysql')
+			{
+				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+			}
+			else
+			{
+				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'.	tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+			}
 		}
 		if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
 
@@ -395,7 +400,7 @@ class tracker_so extends so_sql_cf
 				else    // MySQL < 4.1
 				{
 					// Not allready join comments tables
-					if (!$criteria and !$this->db->capabilities['sub_queries'])
+					if (!$criteria && !$this->db->capabilities['sub_queries'])
 					{
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
@@ -423,19 +428,31 @@ class tracker_so extends so_sql_cf
 				}
 				$filter[] = self::SQL_NOT_CLOSED;
 				break;
+			case 'open':
+				$filter['tr_status'] = self::STATUS_OPEN;
+				break;
+			case 'closed':
+				$filter['tr_status'] = self::STATUS_CLOSED;
+				break;
+			case 'pending':
+				$filter['tr_status'] = self::STATUS_PENDING;
+				break;
+			case 'deleted':
+				$filter['tr_status'] = self::STATUS_DELETED;
+				break;
 		}
-		$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
 		// avoid ambigues tr_id
 		if (is_bool($only_keys))
 		{
 			$only_keys = $only_keys ? self::TRACKER_TABLE.'.tr_id' : self::TRACKER_TABLE.'.*';
+			$extra_cols[] = self::TRACKER_TABLE.'.tr_id AS tr_id';	// otherwise the joined tables tr_id, which might be NULL, can hide tr_id
 		}
 		else
 		{
-			$only_keys = explode(',',$only_keys);
+			if(!is_array($only_keys)) $only_keys = explode(',',$only_keys);
 			if (($id_key = array_search('tr_id',$only_keys)) !== false)
 			{
-				$only_keys[] = self::TRACKER_TABLE.'.tr_id';
+				$only_keys[] = self::TRACKER_TABLE.'.tr_id AS tr_id';
 				unset($only_keys[$id_key]);
 			}
 		}
@@ -445,7 +462,7 @@ class tracker_so extends so_sql_cf
 		{
 			foreach($rows as $key => &$row)
 			{
-				$ids[$key] = $row['tr_id'];
+				if (isset($row['tr_id'])) $ids[$key] = $row['tr_id'];
 				$row['tr_assigned'] = array();
 			}
 			if ($ids)
@@ -553,7 +570,7 @@ class tracker_so extends so_sql_cf
 	 * Save or update a bounty
 	 *
 	 * @param array $data
-	 * @return int/boolean integer bounty_id or false on error
+	 * @return int|boolean integer bounty_id or false on error
 	 */
 	function save_bounty($data)
 	{
@@ -590,7 +607,7 @@ class tracker_so extends so_sql_cf
 	/**
 	 * Read bounties specified by the given keys
 	 *
-	 * @param array/int $keys array with key(s) or integer bounty-id
+	 * @param array|int $keys array with key(s) or integer bounty-id
 	 * @return array with bounties
 	 */
 	function read_bounties($keys)
