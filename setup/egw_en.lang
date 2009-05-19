@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	en	%1 entries updated.
 %1 tickets have been converted	tracker	en	%1 tickets have been converted
-&#9830; not closed	tracker	en	&#9830; Not closed
-&#9830; own not closed	tracker	en	&#9830; Own not closed
-&#9830; own without reply not closed	tracker	en	&#9830; Own without reply not closed
-&#9830; without 30 days reply not closed	tracker	en	&#9830; Without 30 days reply not closed
-&#9830; without reply not closed	tracker	en	&#9830; Without reply not closed
+&#9830; not closed	tracker	en	♦ Not closed
+&#9830; own not closed	tracker	en	♦ Own not closed
+&#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
+&#9830; without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
+&#9830; without reply not closed	tracker	en	♦ Without reply not closed
 (new tickets as	tracker	en	(New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
 --> enter new name	tracker	en	--> enter new name
@@ -164,6 +164,7 @@ read mail address	tracker	en	Read mail address
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
 receive notifications in html	tracker	en	Receive notifications in html
+recieve notifications about own changes in tracker-items	tracker	en	Recieve notifications about own changes in tracker-items
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 resolution	tracker	en	Resolution
@@ -186,7 +187,10 @@ set bounty	tracker	en	Set bounty
 should the actions column in the tracker list-view be shown?	tracker	en	Should the actions column in the tracker list-view be shown?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	en	Show a new column that calculated the acumulated times of timesheet entries.
 show actions in tracker listing	tracker	en	Show actions in tracker listing
+show the acumulated times of timesheet entries	tracker	en	Show the acumulated times of timesheet entries
+show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?
 staff	tracker	en	Staff
 state	tracker	en	State
 stati	tracker	en	Stati
