@@ -208,23 +208,24 @@ class tracker_mailhandler extends tracker_bo
 		{
 			case 0:
 			case 1:
-//				return (imap_8bit ($body));
-				return ($body);
+				#return (imap_8bit ($body));
+				#return ($body);
 				break;
 			case 2:
-				return (imap_binary ($body));
+				$body = imap_binary($body);
 				break;
 			case 3:
-				return (imap_base64 ($body));
+				$body = imap_base64($body);
 				break;
 			case 4:
-				return (quoted_printable_decode ($body));
+				$body = quoted_printable_decode($body);
 				break;
 			case 5:
 			default:
-				return ($body);
+				#return ($body);
 				break;
 		}
+		return html::purify($body);
 	}
 
 	/**
