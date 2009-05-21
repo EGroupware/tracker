@@ -67,6 +67,7 @@ create new links	tracker	de	Neue Verknüpfung anlegen
 created	tracker	de	Erstellt
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
+custom fields	tracker	de	Benutzerdefinierte Felder
 custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 date opened	tracker	de	Datum angelegt
 define escalations	tracker	de	Eskalation definieren
@@ -144,6 +145,7 @@ queue	tracker	de	Queue
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Mail
+recieve notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigne Einträge
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 resolution	tracker	de	Lösung
@@ -162,7 +164,10 @@ set bounty	tracker	de	Prämie setzen
 should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der Trackerübersicht angezeigt werden?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	de	Zeige eine neue Spalte mit den zusammengefasten Zeiten der Stundenzettel
 show actions in tracker listing	tracker	de	Zeige Befehle in der Trackerübersicht
+show the acumulated times of timesheet entries	tracker	de	Zeige die zusammengefassten Zeiten der Stundenzettel
+show the tracker send you notification mails, in tracker items that you updates?	tracker	de	Empfange Sie Benachrichtigungen über Einträge die Sie selbst geändert haben
 staff	tracker	de	Mitarbeiter
 state	tracker	de	Status
 stati	tracker	de	Stati
