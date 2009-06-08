@@ -41,7 +41,7 @@ class tracker_datasource extends datasource
 		if (!is_object($GLOBALS['botracker']))
 		{
 			include_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.botracker.inc.php');
-			$GLOBALS['botracker'] =& new botracker();
+			$GLOBALS['botracker'] = new botracker();
 		}
 		if (!is_array($data_id))
 		{

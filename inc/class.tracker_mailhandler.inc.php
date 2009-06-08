@@ -487,7 +487,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	static function set_async_job($interval=0)
 	{
-		$async =& new asyncservice();
+		$async = new asyncservice();
 
 		// Make sure an existing timer is cancelled
 		$async->cancel_timer('tracker-check-mail');

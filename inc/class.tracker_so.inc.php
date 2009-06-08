@@ -545,7 +545,7 @@ class tracker_so extends so_sql_cf
 		);
 		if ($ip) $where['vote_ip'] = $ip;
 
-		return $this->db->select(self::VOTES_TABLE,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchSingle();
+		return $this->db->select(self::VOTES_TABLE,'vote_time',$where,__LINE__,__FILE__,false,'','tracker')->fetchColumn();
 	}
 
 	/**
