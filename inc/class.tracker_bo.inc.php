@@ -243,6 +243,8 @@ class tracker_bo extends tracker_so
 		'bounty-deleted' => 'xb',
 		'bounty-confirmed'=> 'Bo',
 */
+		// all custom fields together
+		'customfields'	=> '#c',
 	);
 	/**
 	 * Allow to assign tracker items to groups:  0=no; 1=yes, display groups+users; 2=yes, display users+groups
@@ -514,6 +516,17 @@ class tracker_bo extends tracker_so
 					$this->tracking->notify_current_user = true;
 				}
 				$this->tracking->html_content_allow = true;
+			}
+			if ($this->customfields)
+			{
+				$data_custom = $old_custom = array();
+				foreach($this->customfields as $name => $custom)
+				{
+					if (isset($this->data['#'.$name]) && (string)$this->data['#'.$name]!=='') $data_custom[] = $custom['label'].': '.$this->data['#'.$name];
+					if (isset($old['#'.$name]) && (string)$old['#'.$name]!=='') $old_custom[] = $custom['label'].': '.$old['#'.$name];
+				}
+				$this->data['customfields'] = implode("\n",$data_custom);
+				$old['customfields'] = implode("\n",$old_custom);
 			}
 			if (!$this->tracking->track($this->data,$old,$this->user))
 			{
