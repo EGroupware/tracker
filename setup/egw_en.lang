@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	en	%1 entries updated.
 %1 tickets have been converted	tracker	en	%1 tickets have been converted
-&#9830; not closed	tracker	en	♦ Not closed
-&#9830; own not closed	tracker	en	♦ Own not closed
-&#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
-&#9830; without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
-&#9830; without reply not closed	tracker	en	♦ Without reply not closed
+&#9830; not closed	tracker	en	? Not closed
+&#9830; own not closed	tracker	en	? Own not closed
+&#9830; own without reply not closed	tracker	en	? Own without reply not closed
+&#9830; without 30 days reply not closed	tracker	en	? Without 30 days reply not closed
+&#9830; without reply not closed	tracker	en	? Without reply not closed
 (new tickets as	tracker	en	(New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
 --> enter new name	tracker	en	--> enter new name
@@ -18,6 +18,7 @@ add additionally	tracker	en	add additionally
 add assigned	tracker	en	Add assigned
 add comment	tracker	en	Add comment
 add timesheet entry	tracker	en	Add timesheet entry
+add unrecognized mail address to the cc field	tracker	en	Add unrecognized mail address to the CC field
 after	tracker	en	after
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
@@ -46,6 +47,7 @@ bounty set	tracker	en	Bounty set
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
+category for new tickets	tracker	en	Category for new tickets
 changes made below will be lost, if not applied before!	tracker	en	Changes made below will be lost, if not applied before!
 check all	tracker	en	Check all
 check mail interval	tracker	en	Check mail interval
@@ -132,6 +134,7 @@ language for the copy	tracker	en	Language for the copy
 last modified	tracker	en	Last modified
 last reply	tracker	en	last reply
 later	tracker	en	Later
+links	tracker	en	Links
 list of coma separated email address	tracker	en	List of coma separated email address
 mail handling	tracker	en	Mail handling
 matching filter	tracker	en	matching filter
@@ -229,6 +232,7 @@ use a default user for mails that where not recognized	tracker	en	Use a default 
 versions	tracker	en	Versions
 vote for it!	tracker	en	Vote for it!
 votes	tracker	en	Votes
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	en	When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled.
 wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
 yes, display groups first	tracker	en	Yes, display groups first

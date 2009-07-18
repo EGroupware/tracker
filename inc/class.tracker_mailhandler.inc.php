@@ -289,6 +289,12 @@ class tracker_mailhandler extends tracker_bo
 						? $sender->mailbox.'@'.$sender->host
 						: $sender))) !== false)
 			{
+				if ($id == 3)
+				{
+					// Save the reply-to address in case the mailaddress should be
+					// added to the CC field.
+					$replytoAddress = $extracted;
+				}
 				$senderIdentified = self::search_user($extracted);
 			}
 			if ($senderIdentified === true)
@@ -347,11 +353,14 @@ class tracker_mailhandler extends tracker_bo
 			$this->user = $this->mailSender;
 			$this->data['tr_summary'] = $this->mailSubject;
 			$this->data['tr_tracker'] = $this->mailhandling[0]['default_tracker'];
-//			** Required?? It's not in eTemplate yet...
-//			$this->data['tr_cat'] = $this->mailhandling[0]['default_cat'];
+			$this->data['cat_id'] = $this->mailhandling[0]['default_cat'];
 //			$this->data['tr_version'] = $this->mailhandling[0]['default_version'];
 			$this->data['tr_priority'] = 5;
 			$this->data['tr_description'] = $this->mailBody;
+			if (!$senderIdentified && $this->mailhandling[0]['auto_cc'])
+			{
+				$this->data['tr_cc'] = $replytoAddress;
+			}
 		}
 		else
 		{
@@ -370,6 +379,10 @@ class tracker_mailhandler extends tracker_bo
 						$this->user = 0;
 						break;
 				}
+			}
+			if ($this->mailhandling[0]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
+			{
+				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
 			$this->data['reply_message'] = $this->mailBody;
 
@@ -478,7 +491,6 @@ class tracker_mailhandler extends tracker_bo
 
 		return (mail ($to, $subj, $body, $hdrs));
 	}
-
 
 	/**
 	 * Check if exist and if not start or stop an async job to check incoming mails

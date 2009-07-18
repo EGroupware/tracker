@@ -402,6 +402,8 @@ class tracker_admin extends tracker_bo
 			// Mail handling
 			'servertype' => array(),
 			'default_tracker' => &$this->trackers,
+			// TODO; enable the default_trackers onChange() to reload categories
+			'default_cat' => $this->get_tracker_labels('cat',$content['mailhandling']['default_tracker']),
 			'unrec_reply' => array(
 				0 => 'Creator',
 				1 => 'Nobody',
