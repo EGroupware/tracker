@@ -207,9 +207,12 @@ class tracker_mailhandler extends tracker_bo
 		switch ($struct->encoding)
 		{
 			case 0:
+//				$body = imap_utf7_decode($body);
+				break;
 			case 1:
-				#return (imap_8bit ($body));
-				#return ($body);
+				if ($struct->subtype == 'PLAIN') {
+					$body = utf8_decode ($body);
+				}
 				break;
 			case 2:
 				$body = imap_binary($body);
@@ -222,7 +225,6 @@ class tracker_mailhandler extends tracker_bo
 				break;
 			case 5:
 			default:
-				#return ($body);
 				break;
 		}
 		return html::purify($body);
