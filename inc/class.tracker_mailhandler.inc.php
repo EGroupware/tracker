@@ -79,6 +79,16 @@ class tracker_mailhandler extends tracker_bo
 	var $serverTypes = array();
 
 	/**
+	 * How much should be logged to the apache error-log
+	 *
+	 * 0 = Nothing
+	 * 1 = only errors
+	 * 2 = more debug info
+	 * 3 = complete debug info
+	 */
+	const LOG_LEVEL = 0;
+
+	/**
 	 * Constructor
 	 */
 	function __construct()
@@ -157,7 +167,7 @@ class tracker_mailhandler extends tracker_bo
 									$this->mailhandling[0]['username'],
 									$this->mailhandling[0]['password'])))
 		{
-			error_log(__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
+			error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
 			return false; // Open mailbox failed, don't we wanna log this?
 		}
 
@@ -193,6 +203,19 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * determines the mime type of a eMail in accordance to the imap_fetchstructure 
+	 * found at http://www.linuxscope.net/articles/mailAttachmentsPHP.html
+	 * by Kevin Steffer
+	 */
+	function get_mime_type(&$structure) {
+		$primary_mime_type = array("TEXT", "MULTIPART","MESSAGE", "APPLICATION", "AUDIO","IMAGE", "VIDEO", "OTHER");
+		if($structure->subtype) {
+			return $primary_mime_type[(int) $structure->type] . '/' .$structure->subtype;
+		}
+		return "TEXT/PLAIN";
+	}
+
+	/**
 	 * Retrieve and decode a bodypart
 	 *
 	 * @param int Message ID from the server
@@ -201,33 +224,50 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function get_mailbody ($mid, $section=1)
 	{
+		$charset = $GLOBALS['egw']->translation->charset(); // set some default charset, for translation to use
+		if(function_exists(mb_decode_mimeheader)) {
+			mb_internal_encoding($charset);
+		}
+
 		$struct = imap_bodystruct ($this->mbox, $mid, "$section");
 		$body = imap_fetchbody ($this->mbox, $mid, "$section");
-
+		$structure = imap_fetchstructure($this->mbox, $mid);
+		if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($structure,true));
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.print_r($struct,true));
+		if (self::LOG_LEVEL) error_log(__METHOD__.print_r($body,true)); 
+		if (isset($struct->ifparameters) && $struct->ifparameters == 1)
+		{
+			while(list($index, $param) = each($struct->parameters)) 
+			{
+				if (strtoupper($param->attribute) == 'CHARSET') $charset = $param->value;
+			}
+		}
 		switch ($struct->encoding)
 		{
-			case 0:
+			case 0: // 7 BIT
 //				$body = imap_utf7_decode($body);
 				break;
-			case 1:
+			case 1: // 8 BIT
 				if ($struct->subtype == 'PLAIN') {
 					$body = utf8_decode ($body);
 				}
 				break;
-			case 2:
+			case 2: // Binary
 				$body = imap_binary($body);
 				break;
-			case 3:
+			case 3: //BASE64
 				$body = imap_base64($body);
 				break;
-			case 4:
+			case 4: // QUOTED Printable
 				$body = quoted_printable_decode($body);
 				break;
-			case 5:
+			case 5: // other
 			default:
 				break;
 		}
-		return html::purify($body);
+		$GLOBALS['egw']->translation->convert($body,$charset);
+
+		return $GLOBALS['egw']->translation->convertHTMLToText(html::purify($body));
 	}
 
 	/**
@@ -237,12 +277,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function decode_header (&$header)
 	{
-		$header = preg_replace_callback('/=\?(.*)\?([BQ])\?(.*)\?=/U', create_function (
-					'$matches',
-					'if ($matches[2] == "q" || $matches[2] == "Q") { return quoted_printable_decode ($matches[3]); } ' .
-					'elseif ($matches[2] == "b" || $matches[2] == "B") { return base64_decode ($matches[3]); } ' .
-					'else { return $matches[3]; } '
-			),  $header);
+		$header = translation::decodeMailHeader($header);
 	}
 
 	/**
@@ -255,21 +290,42 @@ class tracker_mailhandler extends tracker_bo
 	{
 		$senderIdentified = false;
 		$this->mailBody = null; // Clear previous message
-		$msgHeader = imap_headerinfo ($this->mbox, $mid);
-
+		$msgHeader = imap_headerinfo($this->mbox, $mid);
+		/*
+		 # Recent - R if recent and seen (Read), N if recent and unseen (New), ' ' if not recent
+		 # Unseen - U if not recent AND unseen, ' ' if seen  OR unseen and recent.
+		 # Flagged - F if marked as important/urgent, else ' '
+		 # Answered - A if Answered, else ' '
+		 # Deleted - D if marked for deletion, else ' '
+		 # Draft - X if marked as draft, else ' ' 
+		 */
 
 		if ($msgHeader->Deleted == 'D')
 		{
 			return false; // Already deleted
 		}
-
+		/*
 		if ($msgHeader->Recent == 'R' ||		// Recent and seen or
 				($msgHeader->Recent == ' ' &&	// not recent but
 				$msgHeader->Unseen == ' '))		// seen
+		*/
+		// should do the same, but is more robust as recent is a flag with some sideeffects
+		// message should be marked/flagged as seen after processing 
+		// (don't forget to flag the message if forwarded; as forwarded is not supported with all IMAP use Seen instead)
+		if ((($msgHeader->Recent == 'R' || $msgHeader->Recent == ' ') && $msgHeader->Unseen == ' ') || 
+			($msgHeader->Answered == 'A' && $msgHeader->Unseen == ' ') || // is answered and seen
+			$msgHeader->Draft == 'X') // is Draft
 		{
+			if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.':'."\n".' Subject:'.print_r($msgHeader->subject,true).
+				"\n Date:".print_r($msgHeader->Date,true).
+	            "\n Recent:".print_r($msgHeader->Recent,true).
+	            "\n Unseen:".print_r($msgHeader->Unseen,true).
+	            "\n Flagged:".print_r($msgHeader->Flagged,true).
+	            "\n Answered:".print_r($msgHeader->Answered,true).
+	            "\n Deleted:".print_r($msgHeader->Deleted,true)."\n Stopped processing Mail. Not recent, new, or already answered, or deleted");
 			return false;
 		}
-
+		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Subject:'.print_r($msgHeader,true));
 		// Try several headers to identify the sender
 		$try_addr = array(
 			0 => $msgHeader->from[0],
@@ -318,7 +374,9 @@ class tracker_mailhandler extends tracker_bo
 					return false;	// Prevent from a second delete attempt
 					break;
 				case 'forward' :	// Return the status of the forward attempt
-					return(self::forward_message($mid, $msgHeader));
+					$returnVal = self::forward_message($mid, $msgHeader);
+					if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
+					return $returnVal;
 					break;
 				case 'default' :	// Save as default user; handled below
 				default :			// Duh ??
@@ -348,6 +406,8 @@ class tracker_mailhandler extends tracker_bo
 
 		// By the time we get here, we know this ticket will be updated or created
 		$this->mailBody = $this->get_mailbody ($mid);
+		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
+		$status = $this->flagMessageAsSeen($mid, $msgHeader);
 
 		if ($this->ticketId == 0)
 		{
@@ -391,6 +451,15 @@ class tracker_mailhandler extends tracker_bo
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
 		return ($this->save() == 0);
+	}
+
+	/**
+	 * flag message after processing
+	 *
+	 */
+	function flagMessageAsSeen($mid, $messageHeader)
+	{
+		return imap_setflag_full($this->mbox, $mid, "\\Seen".($messageHeader->Flagged == 'F' ? "\\Flagged" : ""));
 	}
 
 	/**
@@ -487,11 +556,11 @@ class tracker_mailhandler extends tracker_bo
 		// Sending mail is not implemented using notifations, since it's pretty straight forward here
 		$to   = $this->mailhandling[0]['forward_to'];
 		$subj = $headers->subject;
-		$body = imap_body ($this->mbox, $mid, FK_INTERNAL);
+		$body = imap_body($this->mbox, $mid, FK_INTERNAL);
 		$hdrs = 'From: ' . $headers->fromaddress . "\r\n" .
 				'Reply-To: ' . $headers->reply_toaddress . "\r\n";
 
-		return (mail ($to, $subj, $body, $hdrs));
+		return (mail($to, $subj, $body, $hdrs));
 	}
 
 	/**
