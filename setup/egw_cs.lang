@@ -17,7 +17,7 @@ activate users queue access control	tracker	cs	Aktivovat přístupovou kontrolu 
 add additionally	tracker	cs	přidat dodatečně
 add assigned	tracker	cs	Přidat přidělené
 add comment	tracker	cs	Přidat komentář
-add timesheet entry	tracker	cs	Přidat záznam do harmonogramu
+add timesheet entry	tracker	cs	Přidat pracovní výkaz
 after	tracker	cs	po
 after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se má nezodpovězená položka označit jako po termínu?
 after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech mají být položky ve stavu "vyřizuje se" automaticky uzavřeny
@@ -72,7 +72,7 @@ creation date	tracker	cs	datum vytvoření
 creator	tracker	cs	Tvůrce
 custom tracker priorities	tracker	cs	Uživatelsky definované priority sledovacího systému
 date opened	tracker	cs	Datum otevření
-define escalations	common	cs	Definovat eskalace
+define escalations	admin	cs	Definovat eskalace
 delete mails from server	tracker	cs	Smazat e-maily ze serveru
 delete this bounty	tracker	cs	Smazat tuto odměnu
 delete this canned response	tracker	cs	Smazat tuto předpřipravenou odpověď
@@ -236,3 +236,9 @@ you need to login to vote!	tracker	cs	Musíte se přihlásit, aby jste mohl(a) h
 you need to select something to change and some tracker items!	tracker	cs	Musíte vybrat něco, co chcete změnit A ZÁROVEŇ nějaké položky sledovacího systému!
 you need to specify amount, donators name and email address!	tracker	cs	Musíte specifikovat množství, dárce A ZÁROVEŇ e-mailovou adresu!
 you voted %1.	tracker	cs	Hlasoval(a) jste %1.
+2	tracker	cs	2
+3	tracker	cs	3
+4	tracker	cs	4
+6	tracker	cs	6
+7	tracker	cs	7
+8	tracker	cs	8
