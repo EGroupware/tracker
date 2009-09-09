@@ -17,7 +17,7 @@ activate users queue access control	tracker	cs	Aktivovat přístupovou kontrolu 
 add additionally	tracker	cs	přidat dodatečně
 add assigned	tracker	cs	Přidat přidělené
 add comment	tracker	cs	Přidat komentář
-add timesheet entry	tracker	cs	Přidat záznam do harmonogramu
+add timesheet entry	tracker	cs	Přidat pracovní výkaz
 after	tracker	cs	po
 after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se má nezodpovězená položka označit jako po termínu?
 after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech mají být položky ve stavu "vyřizuje se" automaticky uzavřeny
