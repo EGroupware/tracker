@@ -1,31 +1,55 @@
 %1 entries updated.	tracker	hu	%1 bejegyzés frissítve.
+%1 tickets have been converted	tracker	hu	%1 hibajegy konvertálva
+&#9830; not closed	tracker	hu	♦ Nincs lezárva
+&#9830; own not closed	tracker	hu	♦ Saját jegy nincs lezárva
+&#9830; own without reply not closed	tracker	hu	♦ Saját megválaszolatlan nincs lezárva
+&#9830; without 30 days reply not closed	tracker	hu	♦ 30 napja válasz nélkül nincs lezárva
+&#9830; without reply not closed	tracker	hu	♦ Válasz nélkül nincs lezárva
+(new tickets as	tracker	hu	(Új jegy mint
+--> choose a project from the drop-down list	tracker	hu	--> Válasszon ki egy projektet a legördülő menüből
 --> enter new name	tracker	hu	-> Adjon meg új nevet
 1 - lowest	tracker	hu	1 - legalacsonyabb
 5 - medium	tracker	hu	5 - közepes
 9 - highest	tracker	hu	9 - legmagasabb
 accepted	tracker	hu	Elfogadva
 actions	tracker	hu	Műveletek
+activate users queue access control	tracker	hu	Felhasználói hozzáférés kontrol bekapcsolása
+add additionally	tracker	hu	További hozzáadása
+add assigned	tracker	hu	Hozzárendeltség hozzáadása
 add comment	tracker	hu	Megjegyzés hozzáadása
+add timesheet entry	tracker	hu	Timesheet bejegyzés hozzáadása
+after	tracker	hu	után
 after how many days a not replied item should be marked overdue?	tracker	hu	A nem megválaszolt bejegyzést hány nap után jelöljük Lejártnak?
 after how many days pending items should be closed automatic	tracker	hu	A függőben lévő bejegyzést hány nap után zárjuk le automatikusan?
+all tickets are already converted to tracker	tracker	hu	az összes hibajegy konvertálása már megtörtént Tracker-be
 allow bounties	tracker	hu	Pénzjutalom engedélyezve
-allow editing by	tracker	hu	Szerkeszthető általa:
-allow to assign groups to tracker items	tracker	hu	Tracker bejegyzések csoportokhoz rendelhetősége engedélyezve
-allow voting	tracker	hu	Szavazás engedélyezve
+allow default projects for tracker	tracker	hu	Alapértelmezett projektek engedélyezése a hibajegykezelő számára
+allow editing by	tracker	hu	Szerkesztés engedélyezése
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	hu	Beállíthatóak előre meghatározott projektek, melyeket az új tracker bejegyzésekhez lehet rendelni.
+allow to assign groups to tracker items	tracker	hu	Tracker bejegyzések csoportokhoz rendelhetőségének engedélyezése
+allow voting	tracker	hu	Szavazás engedélyezése
 allow voting on tracker items, show and sort after the votes	tracker	hu	Engedélyezi a Tracker bejegyzésekre szavazást, megjelenítést és rendezést a szavazás szerint
+already escalated	tracker	hu	már eszkalálódott
 amount	tracker	hu	Mennyiség
+assign to project	tracker	hu	Projekthez rendel
 assigned to	tracker	hu	Megbízva
 assigning groups	tracker	hu	Csoportokhoz rendelés
 attachments & links	tracker	hu	Mellékletek és hivatkozások
-autoassign to	tracker	hu	Auto hozzárendelés
+autoassign to	tracker	hu	Automatikus hozzárendelés
+automatic email handling	tracker	hu	Automatikus email kezelés
 bounties	tracker	hu	Pénzjutalmak
 bounty confirmed	tracker	hu	Pénzjutalom megerősítve
+bounty confirmed.	tracker	hu	Pénzjutalom megerősítve.
 bounty deleted	tracker	hu	Pénzjutalom törölve
+bounty deleted.	tracker	hu	Pénzjutalom törölve.
 bounty set	tracker	hu	Pénzjutalom beállítása
 canned response	tracker	hu	Instant válasz
 canned responses	tracker	hu	Instant válaszok
 categories, versions, canned responses	tracker	hu	Kategóriák, verziók, instant válaszok
+changes made below will be lost, if not applied before!	tracker	hu	Ha nem alkalmazza a változtatásokat, a módosítások elvesznek!
 check all	tracker	hu	Összes kijelölése
+check mail interval	tracker	hu	Email ellenőrzés gyakorisága
+choose a project from the drop-down list	tracker	hu	Válasszon ki egy projektet a legördülő menüből
 close pending	tracker	hu	Függő tétel lezárása
 closed	tracker	hu	Lezárt
 comment by %1 at %2:	tracker	hu	%1 megjegyzése ekkor %2:
@@ -37,36 +61,185 @@ configuration updated.	tracker	hu	Konfiguráció frissítve.
 configuration, acl, notifications	tracker	hu	Konfiguráció, ACL, Értesítések
 confirm that you pay the specified bounty to implement or fix the issue	tracker	hu	Erősítse meg, hogy hajlandó kifizetni a jutalmat a megvalósításért vagy a hiba kijavításáért
 confirm the receipt of money for this bounty	tracker	hu	Erősítse meg a pénz átvételét ehhez a pénzjutalomhoz
-copy to	tracker	hu	Másold ide:
+confirmed	tracker	hu	Megerősítve
+convert all closed tickets	tracker	hu	összes lezárt hibajegy konvertálása
+convert all open tickets	tracker	hu	összes nyitott hibajegy konvertálása
+converted count	tracker	hu	konvertálás számláló
+copy to	tracker	hu	Másolat
 create new links	tracker	hu	Új hivatkozások létrehozása
 created	tracker	hu	Létrehozva
+creation date	tracker	hu	Létrehozás dátuma
+creator	tracker	hu	Tulajdonos
+custom fields	tracker	hu	Egyedi mezők
+custom tracker priorities	tracker	hu	Egyedi tracker prioritások
 date opened	tracker	hu	Megnyitás dátuma
-delete this category	tracker	hu	Kategória törlése
-deleted	tracker	hu	Törölt
+define escalations	admin	hu	Eszkaláció definiálása
+delete mails from server	tracker	hu	Törölje a leveleket a szerverről
+delete this bounty	tracker	hu	Aktuális pénzjutalom törlése
+delete this canned response	tracker	hu	Aktuális instant válasz törlése
+delete this category	tracker	hu	Aktuális kategória törlése
+delete this entry	tracker	hu	Aktuális bejegyzés törlése
+delete this escalation	tracker	hu	Aktuális eszkaláció törlése
+delete this status	tracker	hu	Aktuális állapot törlése
+delete this tracker including all it's items and categories	tracker	hu	Aktuális tracker bejegyzés és az összes hozzárendelt bejegyzés és kategória törlése
+delete this version	tracker	hu	Aktuális verzió törlése
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	hu	Törölje az összes fel nem ismert levelet a szerverről még akkor is, ha a 'Levéltörlés' nincs bekapcsolva.
+deleted	tracker	hu	Törölve
+do you want to vote for this item	tracker	hu	Szeretne szavazni erre a bejegyzésre
+donator name to show	tracker	hu	Felajánló név megjelenítése
 duplicate	tracker	hu	Duplikál
-e-mail notifications	tracker	hu	Email értesítés
+e-mail address to which a copy of all tracker-notifications should be send	tracker	hu	e-Mail cím a kiküldendő tracker emlékeztetőkről, ahová egy másolat mindig elküldésre kerül
+e-mail notifications	tracker	hu	Email értesítések
 edit %1	tracker	hu	%1 szerkesztése
+edit entry	tracker	hu	Bejegyzés szerkesztése
+email address to contact you	tracker	hu	Az ön elérhetőségének az email címe
+email handling can be configured only for all trackers	tracker	hu	Az email kezelés konfigurálása csak az összes trackerre lehetséges, egyedi sorokra nem
+enter an email address here if unrecognized mails should be forwarded	tracker	hu	Adjon meg egy email címet, ahová a fel nem ismert levelek továbbküldésre kerülnek
+enter the imap server from which emails should be fetched	tracker	hu	Adja meg annak az IMAP szervernek az elérhetőségét, ahonnan a leveleket le kell majd tölteni
+enter the mail address that will be read.	tracker	hu	Adja meg azt az email címet, amiből olvasni kell majd a leveleket.
 entry saved	tracker	hu	Bejegyzés elmentve
+error adding the new tracker!	tracker	hu	Hiba történt az új tracker bejegyzés hozzáadásakor!
+error deleting escalation!	tracker	hu	Hiba történt az eszkaláció törlésekor!
 error saving the entry!!!	tracker	hu	Hiba történt a bejegyzés mentése közben !!!
+escalation	tracker	hu	Eszkaláció
+escalation added.	tracker	hu	Eszkaláció hozzáadva.
+escalation deleted.	tracker	hu	Eszkaláció törölve.
+escalation not found!	tracker	hu	Eszkaláció nem található.
+escalation saved.	tracker	hu	Eszkaláció elmentve.
 everybody	tracker	hu	Mindenki
-existing links	tracker	hu	Létezõ hivatkozások
+existing links	tracker	hu	Meglévő hivatkozások
 field	tracker	hu	Mező
-history	tracker	hu	Történet
+fixed	tracker	hu	Lezárva
+forward to	tracker	hu	Továbbítás ide
+forward unrecognized mails to the email address that has to be specified here.	tracker	hu	Ismeretlen email-ek továbbítása a megadott email címre.
+from	tracker	hu	Feladó
+history	tracker	hu	Napló
+html editing	tracker	hu	Html szerkesztés
 id	tracker	hu	Azonosító
+if this item is important for you, please consider to set a bounty for it!	tracker	hu	Ha ez a bejegyzés fontos önnek, akkor gondolja meg pénzjutalom felajánlását a megoldásért!
+if this item is important for you, please vote for it.	tracker	hu	Ha ez a bejegyzés fontos önnek, kérem szavazzon rá.
+ignore	tracker	hu	Elvetés
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	hu	Ismeretlen email-ek figyelmen kívül hagyása. Ezek a levelek nem lesznek törölve még abban az esetben sem, ha a 'Levelek törlése' be lenne kapcsolva.
+import tts tickets	tracker	hu	TTS hibajegyek importálása
+incoming mail folder	tracker	hu	Bejövő levélmappa
+incoming mail rules	tracker	hu	Bejövő levél szabályok
+incoming mail server	tracker	hu	Bejövő levél szerver
+interval in minutes for checking the incoming mails	tracker	hu	Bejövő levelek ellenőrzésének gyakorisága
 invalid	tracker	hu	Érvénytelen
+item assignee	tracker	hu	Bejegyzés felelőse
+item creator	tracker	hu	Bejegyzés tulajdonosa
+language for the copy	tracker	hu	A másolat nyelve
 last modified	tracker	hu	Utolsó módosítás
+last reply	tracker	hu	Utolsó válasz
 later	tracker	hu	Később
+list of coma separated email address	tracker	hu	Vesszővel elválasztott email címek
+mail handling	tracker	hu	Email kezelés
+matching filter	tracker	hu	egyező szűrő
 new %1	tracker	hu	Új %1
 new items	tracker	hu	Új tételek
+new ticket submitted by %1 at %2	tracker	hu	%1 új hibajegyet küldött be %2-én
+new tracker item submitted by %1 at %2	tracker	hu	%1 új tracker bejegyzést küldött be %2-én
 no change	tracker	hu	Nincs változás
+no trackers found, aborting	tracker	hu	Nem található Tracker, művelet megszakítva
+non-anonymous users	tracker	hu	Nem anonymous felhasználók
+noone	tracker	hu	Senki
+notification	tracker	hu	Értesítés
 open	tracker	hu	Nyitott
+out of date	tracker	hu	Elavult
+overdue after	tracker	hu	Automatikusan lejár
+ownership of the ticket	tracker	hu	A jegy tulajdonosa
 pending	tracker	hu	Függőben
+pending items never get close automatic.	tracker	hu	A függőben lévő bejegyzések soha nem kerülnek automatikusan lezárásra.
+pending items will be closed automatic after %1 days without response.	tracker	hu	A függőben lévő bejegyzések automatikusan lezárásra kerülnek %1 nap után, ha nem érkezik rájuk válasz.
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
+permit html editing in overview and comments	tracker	hu	Html szerkesztő engedélyezése az összefoglaló és megjegyzések számára
+port number	tracker	hu	Portszám
+postponed	tracker	hu	Elhalasztva
+print entry	tracker	hu	Bejegyzés nyomtatása
+priorities	tracker	hu	Prioritások
+priorities with empty label are not available to the user	tracker	hu	Üres címkével ellátott prioritások nem érhetőek el a felhasználóknak
+project selection	tracker	hu	Projekt kiválasztása
+projects	tracker	hu	Projektek
+queue	tracker	hu	Sor
+read mail address	tracker	hu	Email cím olvasása
+receive notifications about assigned tracker-items	tracker	hu	Email értesítés kérése hozzám rendelt tracker bejegyzésekről
+receive notifications about created tracker-items	tracker	hu	Email értesítés kérése újonnan létrehozott tracker bejegyzésekről
+receive notifications in html	tracker	hu	Értesítések html formátumban
+recieve notifications about own changes in tracker-items	tracker	hu	Értesítés a saját maga által módosított tracker bejegyzésekről
 rejected	tracker	hu	Elutasított
 remind	tracker	hu	Emlékeztető
-resolution	tracker	hu	Határozat
+resolution	tracker	hu	Megoldás
+restict tracker items to the creator and the staff only	tracker	hu	A tracker bejegyzések korlátozása a Tulajdonosra és a szakértők számára
+restict tracker items to the creators primary group and the staff only	tracker	hu	A tracker bejegyzések korlátozása a Tulajdonos elsődleges csoportjára és a szakértők számára
+restrict tracker items to staff and:	tracker	hu	A tracker bejegyzések korlátozása a szakértők számára és:
+restriction	tracker	hu	Korlátozás
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	hu	Válasszon ki egy alapértelmezett tracker sort az új jegyek számára vagy 'Elutasítás' az email-en érkező kérések tiltására (nem lesz belőle jegy automatikusan).
+select multiple	tracker	hu	Többszörös kiválasztása
+select tracker queue	tracker	hu	tracker sor kiválasztása
+select which categories should be used in tracker for the tts categories	tracker	hu	válassza ki azt a kategóriát, ami a TTS jegyek kategóriája lesz
+select which username should be used when unrecognized mails are handled.	tracker	hu	Válassza ki azt a felhasználónevet, amelyet az ismeretlen email címmel rendelkező levelek kezelésekor felhasználunk majd.
+select which username should be used when unrecognized replies are handled	tracker	hu	Válassza ki azt a felhasználónevet, amelyet az ismeretlen email címmel rendelkező válaszok kezelésekor felhasználunk majd.
+sender address	tracker	hu	Küldő címe
+sender address for all notifications, eg. noreply@egroupware.org	tracker	hu	Feladó címe az összes értesítőre, például noreply@egroupware.org
+server type	tracker	hu	Szerver típusa
+set %1	tracker	hu	%1 beállítása
+set an own bounty (in %s)	tracker	hu	Saját pénzjutalom beállítása (%s)
+set bounty	tracker	hu	Pénzjutalom beállítása
+should the actions column in the tracker list-view be shown?	tracker	hu	A tracker listanézetben látható legyen a műveletek oszlop?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	hu	Küldjön értesítőt önnek a tracker, ha a felelősségébe tartozó bejegyzést frissítették?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	hu	Küldjön értesítőt önnek a tracker, ha az ön által létrehozott bejegyzést frissítették?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	hu	Új oszlop megjelenítése, amely oszlop az összegzett felhasznált időt mutatja, amit a Timesheet bejegyzések alapján számol a rendszer.
+show actions in tracker listing	tracker	hu	Műveletek megjelenítése a tracker listában
+show the acumulated times of timesheet entries	tracker	hu	Jelenítse meg a Timesheet bejegyzések összesített idejét
+show the tracker send you notification mails, in tracker items that you updates?	tracker	hu	Küldjön email értesítést a Tracker azokról a bejegyzésekről, amiket ön módosított?
+staff	tracker	hu	Személyzet
 state	tracker	hu	Állapot
+store as	tracker	hu	Tárol mint
 summary	tracker	hu	Összefoglaló
+technicians	tracker	hu	Támogató csapat
+thank you for setting this bounty.	tracker	hu	Köszönjük a pénzjutalom beállítását!
+thank you for voting.	tracker	hu	Köszönjük a szavazatát!
+the bounty will not be shown, until the money is received.	tracker	hu	A pénjutalom addig NEM jelenik meg, amíg a pénz meg nem érkezik.
+the canned response will be prefix the text you type.	tracker	hu	Az instant válasz a begépelt szöveg előtt fog megjelenni.
+there already an escalation for that filter!	tracker	hu	Ehhez a szűrőhöz már tartozik egy eszkaláció!
+this module displays information from the tracker.	tracker	hu	Ez a modul információkat jelenít meg a Tracker alkalmazásból.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	hu	Ez a tracker bejegyzést a rendszer automatikusan lezárta. Korábban függő státusza volt, amire a bejegyzés beküldője nem válaszolt %1 napon belül.
+ticket count	tracker	hu	jegy számláló
+ticket modified by %1 at %2	tracker	hu	A Tracker-t %1 módosította %2-án
+times	tracker	hu	Alkalmak
+tracker	common	hu	Tracker
+tracker added	tracker	hu	Tracker sor létrehozva
+tracker admins	tracker	hu	Tracker adminisztrátorok
+tracker admins & technicians	tracker	hu	Tracker adminisztrátorok és szakemberek
+tracker configuration	tracker	hu	Tracker konfiguráció
+tracker deleted	tracker	hu	Tracker sor törölve
+tracker for new tickets	tracker	hu	Tracker sor az új jegyek számára
+tracker item modified by %1 at %2	tracker	hu	A Tracker bejegyzést %1 módosított %2-án
+tracker item not found !!!	tracker	hu	Tracker bejegyzés nem található!!!
+tracker queue	tracker	hu	Tracker Sor
+tracker-%1 '%2' added.	tracker	hu	Tracker-%1 '%2' hozzáadása megtörtént.
+tracker-%1 '%2' updated.	tracker	hu	Tracker-%1 '%2' frissítése megtörtént.
+tracker-%1 deleted.	tracker	hu	Tracker-%1 törlése megtörtént.
+unchanged	tracker	hu	Változatlan
+unrecognized mails	tracker	hu	Ismeretlen email-ek
+url of the tracker	tracker	hu	A tracker URL elérhetősége
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	hu	Az értesítőben szereplő URL, például az a SiteMGR oldal, ahol az alapértelmezett tracker található
+use a default user for mails that where not recognized	tracker	hu	Használja az alapértelmezett felhasználót azon email-ekhez, amelyek nem ismerhetők fel
+versions	tracker	hu	Verziók
+vote for it!	tracker	hu	Szavazz rá!
+votes	tracker	hu	Szavazatok
+wont fix	tracker	hu	Megszokott javítás
+works for me	tracker	hu	Nálam működik
+yes, display groups first	tracker	hu	Igen, elsőnek a csoportok jelenjenek meg
+yes, display users first	tracker	hu	Igen, elsőnek a felhasználók jelenjenek meg
+yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
+you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	hu	Engedélyezheti vagy tilthatja a tracker sor hozzáférési jogosultságokat a konfigurációs fülön (az összes sorra).
+you can respond by visiting:	tracker	hu	Ide látogatva válaszolhat rá:
+you need to enter a name	tracker	hu	Meg kell adnia egy nevet
+you need to login to vote!	tracker	hu	Be kell jelentkeznie, hogy szavazhasson!
+you need to select something to change and some tracker items!	tracker	hu	Ki kell választania valamit, hogy megváltoztassa és néhány tracker bejegyzést is!
+you need to specify amount, donators name and email address!	tracker	hu	Meg kell adnia az összeget, a felajánló nevét és email címét!
+you voted %1.	tracker	hu	Ön a %1-re szavazott.
 2	tracker	hu	2
 3	tracker	hu	3
 4	tracker	hu	4
