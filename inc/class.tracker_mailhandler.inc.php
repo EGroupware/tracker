@@ -207,13 +207,56 @@ class tracker_mailhandler extends tracker_bo
 	 * found at http://www.linuxscope.net/articles/mailAttachmentsPHP.html
 	 * by Kevin Steffer
 	 */
-	function get_mime_type(&$structure) {
+	function get_mime_type(&$structure) 
+	{
 		$primary_mime_type = array("TEXT", "MULTIPART","MESSAGE", "APPLICATION", "AUDIO","IMAGE", "VIDEO", "OTHER");
 		if($structure->subtype) {
 			return $primary_mime_type[(int) $structure->type] . '/' .$structure->subtype;
 		}
 		return "TEXT/PLAIN";
 	}
+
+	function get_part($stream, $msg_number, $mime_type, $structure = false,$part_number = false) 
+	{
+		//error_log(__METHOD__." getting body for ID: $msg_number, $mime_type, $part_number");
+		if(!$structure) {
+			//error_log(__METHOD__." fetching structure, as no structure passed.");
+			$structure = imap_fetchstructure($stream, $msg_number);
+		}
+		if($structure) 
+		{
+			if($mime_type == $this->get_mime_type($structure)) 
+			{
+				if(!$part_number) 
+				{
+					$part_number = "1";
+				}
+				//error_log(__METHOD__." mime type matched. Part $part_number.");
+				$struct = imap_bodystruct ($stream, $msg_number, "$part_number");
+				$body = imap_fetchbody($stream, $msg_number, $part_number);
+				return array('struct'=> $struct, 
+							 'body'=>$body,
+							);
+			}
+
+			if($structure->type == 1) /* multipart */ 
+			{
+				while(list($index, $sub_structure) = each($structure->parts)) 
+				{
+					if($part_number) 
+					{
+						$prefix = $part_number . '.';
+					}
+					$data = $this->get_part($stream, $msg_number, $mime_type, $sub_structure,$prefix.($index + 1));
+					if($data && !empty($data['body'])) 
+					{
+						return $data;
+					}
+				} // END OF WHILE
+			} // END OF MULTIPART
+		} // END OF STRUTURE
+		return false;
+	} // END OF FUNCTION
 
 	/**
 	 * Retrieve and decode a bodypart
@@ -222,52 +265,186 @@ class tracker_mailhandler extends tracker_bo
 	 * @param string The body part, defaults to "1"
 	 * @return string The decoded bodypart
 	 */
-	function get_mailbody ($mid, $section=1)
+	function get_mailbody ($mid, $section=false, $structure = false)
 	{
+		//error_log(__METHOD__." Fetching body for ID $mid, Section $section with Structure: ".print_r($structure,true));
 		$charset = $GLOBALS['egw']->translation->charset(); // set some default charset, for translation to use
+		$mailbodyasAttachment = false;
 		if(function_exists(mb_decode_mimeheader)) {
 			mb_internal_encoding($charset);
 		}
-
-		$struct = imap_bodystruct ($this->mbox, $mid, "$section");
-		$body = imap_fetchbody ($this->mbox, $mid, "$section");
-		$structure = imap_fetchstructure($this->mbox, $mid);
-		if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($structure,true));
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.print_r($struct,true));
-		if (self::LOG_LEVEL) error_log(__METHOD__.print_r($body,true)); 
-		if (isset($struct->ifparameters) && $struct->ifparameters == 1)
+		if ($section === false) 
 		{
-			while(list($index, $param) = each($struct->parameters)) 
+			$part_number = 1;
+		}
+		else
+		{
+			$part_number = $section;
+			$mailbodyasAttachment = true;
+		}
+		if ($structure === false) $structure = imap_fetchstructure($this->mbox, $mid);
+		if($structure) {
+			$rv = $this->get_part($this->mbox, $mid, 'TEXT/PLAIN', $structure,($section ? $part_number:false));
+			$struct = $rv['struct'];
+			$body = $rv['body'];
+			if (empty($body))
 			{
-				if (strtoupper($param->attribute) == 'CHARSET') $charset = $param->value;
+				$rv = $this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,($section ? $part_number:false));
+				$struct = $rv['struct'];
+				$body = $rv['body'];
+			}
+			//error_log(__METHOD__. "->get_part returned: ".print_r($rv,true));
+			/*
+			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,2));
+			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,"2.1"));
+			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,3));
+			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,"3.1"));
+			*/
+			if (self::LOG_LEVEL) error_log(__METHOD__.print_r($structure,true));
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.print_r($struct,true));
+			if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($body,true)); 
+			if (isset($struct->ifparameters) && $struct->ifparameters == 1)
+			{
+				//error_log(__METHOD__.__LINE__.print_r($param,true));
+				while(list($index, $param) = each($struct->parameters)) 
+				{
+					if (strtoupper($param->attribute) == 'CHARSET') $charset = $param->value;
+				}
+			}
+			switch ($struct->encoding)
+			{
+				case 0: // 7 BIT
+	//				$body = imap_utf7_decode($body);
+					break;
+				case 1: // 8 BIT
+					if ($struct->subtype == 'PLAIN') {
+						$body = utf8_decode ($body);
+					}
+					break;
+				case 2: // Binary
+					$body = imap_binary($body);
+					break;
+				case 3: //BASE64
+					$body = imap_base64($body);
+					break;
+				case 4: // QUOTED Printable
+					$body = quoted_printable_decode($body);
+					break;
+				case 5: // other
+				default:
+					break;
+			}
+			$GLOBALS['egw']->translation->convert($body,$charset);
+
+			// handle Attachments
+			$contentParts = count($structure->parts);
+			$additionalAttachments = array();
+			$attachments = array();
+			if($structure->type == 1 && $contentParts >=2) /* multipart */ 
+			{
+				$att = array();
+				$partNumber = array();
+				for ($i=2;$i<=$contentParts;$i++)
+				{
+					//error_log(__METHOD__. " --> part ".$i);
+					$att[$i-2] = imap_bodystruct($this->mbox,$mid,$i);
+					$partNumber[$i-2] = array('number' => $i,
+											'substruct' => $structure->parts[$i-1],
+										);
+				}
+				for ($k=0; $k<sizeof($att);$k++)
+				{
+					//error_log(__METHOD__. " processing part->".$k." Message Part:".print_r($partNumber[$k],true));
+					if ($att[$k]->ifdisposition == 1 && $att[$k]->disposition == 'ATTACHMENT') 
+					{
+						//$num = count($attachments) - 1;
+						$num = $k;
+						if ($num < 0) $num = 0;
+						$attachments[$num]['type'] = $this->get_mime_type($att[$k]);
+						//error_log(__METHOD__. " part:".print_r($att[$k],true));
+						// type2 = Message; get mail as attachment, with its attachments too
+						if ($att[$k]->type == 2)
+						{ 
+							//error_log(__METHOD__. " part $k ->".($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number'])." is MESSAGE:".print_r($partNumber[$k]['substruct']->parts[0],true));
+							$rv = $this->get_mailbody($mid,($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number']) , $partNumber[$k]['substruct']->parts[0]);
+							$attachments[$num]['attachment'] = $rv['body'];
+							$attachments[$num]['type'] = $this->get_mime_type($rv['struct']);
+							if ($att[$k]->ifparameters)
+							{
+								//error_log(__METHOD__. " parameters exist:");
+								while(list($index, $param) = each($att[$k]->parameters)) 
+								{
+									//error_log(__METHOD__.__LINE__.print_r($param,true));
+									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
+								}							
+							}
+							if ($att[$k]->ifdparameters)
+							{
+								//error_log(__METHOD__. " dparameters exist:");
+								while(list($index, $param) = each($att[$k]->dparameters)) 
+								{
+									//error_log(__METHOD__.__LINE__.print_r($param,true));
+									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
+								}							
+							}
+							$att[$k] = $rv['struct'];
+							if (!empty($rv['attachments'])) for ($a=0; $a<sizeof($rv['attachments']);$a++) $additionalAttachments[] = $rv['attachments'][$a];
+							if (empty($attachments[$num]['attachment']) && empty($rv['attachments'])) 
+							{
+								unset($attachments[$num]);
+								continue;  // no content -> skip
+							}
+						} 
+						else
+						{
+							$attachments[$num]['attachment'] = imap_fetchbody($this->mbox,$mid,$k+2);
+							if (empty($attachments[$num]['attachment'])) 
+							{
+								unset($attachments[$num]);
+								continue; // no content -> skip
+							}
+							if ($att[$k]->ifparameters)
+							{
+								//error_log(__METHOD__. " parameters exist:");
+								while(list($index, $param) = each($att[$k]->parameters)) 
+								{
+									//error_log(__METHOD__.__LINE__.print_r($param,true));
+									if (strtoupper($param->attribute) == 'CHARSET') $attachments[$num]['charset'] = $param->value;
+									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
+								}							
+							}
+							if ($att[$k]->ifdparameters)
+							{
+								//error_log(__METHOD__. " dparameters exist:");
+								while(list($index, $param) = each($att[$k]->dparameters)) 
+								{
+									//error_log(__METHOD__.__LINE__.print_r($param,true));
+									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
+								}							
+							}
+						}
+						$this->decode_header($attachments[$num]['filename']);
+						$this->decode_header($attachments[$num]['name']);
+						$attachments[$num]['tmp_name'] = tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+						$tmpfile = fopen($attachments[$num]['tmp_name'],'w');
+						fwrite($tmpfile,((substr(strtolower($attachments[$num]['type']),0,4) == "text") ? $attachments[$num]['attachment']: imap_base64($attachments[$num]['attachment'])));
+						fclose($tmpfile);
+						unset($attachments[$num]['attachment']);
+						//error_log(__METHOD__.print_r($attachments[$num],true));
+					}
+				}
 			}
 		}
-		switch ($struct->encoding)
+		//if (!empty($attachments)) error_log(__METHOD__." Attachments with this mail:".print_r($attachments,true));
+		if (!empty($additionalAttachments)) 
 		{
-			case 0: // 7 BIT
-//				$body = imap_utf7_decode($body);
-				break;
-			case 1: // 8 BIT
-				if ($struct->subtype == 'PLAIN') {
-					$body = utf8_decode ($body);
-				}
-				break;
-			case 2: // Binary
-				$body = imap_binary($body);
-				break;
-			case 3: //BASE64
-				$body = imap_base64($body);
-				break;
-			case 4: // QUOTED Printable
-				$body = quoted_printable_decode($body);
-				break;
-			case 5: // other
-			default:
-				break;
+			//error_log(__METHOD__." Attachments retrieved with attachments:".print_r($additionalAttachments,true));
+			for ($a=0; $a<sizeof($additionalAttachments);$a++) $attachments[] = $additionalAttachments[$a];
 		}
-		$GLOBALS['egw']->translation->convert($body,$charset);
-
-		return $GLOBALS['egw']->translation->convertHTMLToText(html::purify($body));
+		return array('body' => $GLOBALS['egw']->translation->convertHTMLToText(html::purify($body)),
+					 'struct' => $struct,
+					 'attachments' =>  $attachments
+					);
 	}
 
 	/**
@@ -405,7 +582,9 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		// By the time we get here, we know this ticket will be updated or created
-		$this->mailBody = $this->get_mailbody ($mid);
+		$rv = $this->get_mailbody ($mid);
+		//error_log(__METHOD__.print_r($rv,true));
+		$this->mailBody = $rv['body'];
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
 
@@ -450,7 +629,19 @@ class tracker_mailhandler extends tracker_bo
 
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
-		return ($this->save() == 0);
+		$saverv = $this->save();
+		if (($saverv==0) && is_array($rv['attachments']))
+		{
+			foreach ($rv['attachments'] as $attachment)
+			{
+				if(is_readable($attachment['tmp_name']))
+				{
+					egw_link::attach_file('tracker',$this->data['tr_id'],$attachment);
+				}
+			}
+		}
+		return !$saverv;
+
 	}
 
 	/**
