@@ -62,7 +62,7 @@ class tracker_hooks
 		if ($GLOBALS['egw_info']['user']['apps']['preferences'] && $location != 'admin')
 		{
 			$file = array(
-				'Preferences'     => $GLOBALS['egw']->link('/index.php','menuaction=preferences.uisettings.index&appname='.$appname),
+				'Preferences'     => egw::link('/index.php','menuaction=preferences.uisettings.index&appname='.$appname),
 			);
 			if ($location == 'preferences')
 			{
@@ -77,9 +77,9 @@ class tracker_hooks
 		if ($GLOBALS['egw_info']['user']['apps']['admin'] && $location != 'preferences')
 		{
 			$file = Array(
-				'Site configuration' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_admin.admin'),
-				'Define escalations' => $GLOBALS['egw']->link('/index.php','menuaction=tracker.tracker_admin.escalations'),
-				'Custom fields' => $GLOBALS['egw']->link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
+				'Site configuration' => egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
+				'Define escalations' => egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
+				'Custom fields' => egw::link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
 			);
 			if ($location == 'admin')
 			{
@@ -97,98 +97,61 @@ class tracker_hooks
 	 */
 	static function settings()
 	{
-		$GLOBALS['settings']['notify_creator'] = array(
-			'type'   => 'check',
-			'label'  => 'Receive notifications about created tracker-items',
-			'name'   => 'notify_creator',
-			'help'   => 'Should the Tracker send you notification mails, if tracker items you created get updated?',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'default'=> true,
+		return array(
+			'notify_creator' => array(
+				'type'   => 'check',
+				'label'  => 'Receive notifications about created tracker-items',
+				'name'   => 'notify_creator',
+				'help'   => 'Should the Tracker send you notification mails, if tracker items you created get updated?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> true,
+			),
+			'notify_assigned' => array(
+				'type'   => 'check',
+				'label'  => 'Receive notifications about assigned tracker-items',
+				'name'   => 'notify_assigned',
+				'help'   => 'Should the Tracker send you notification mails, if tracker items assigned to you get updated?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> true,
+			),
+			'notify_own_modification' => array(
+				'type'   => 'check',
+				'label'  => 'Recieve notifications about own changes in tracker-items',
+				'name'   => 'notify_own_modification',
+				'help'   => 'Show the Tracker send you notification mails, in tracker items that you updates?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> false,
+			),
+			'show_actions' => array(
+				'type'   => 'check',
+				'label'  => 'Show actions in tracker listing',
+				'name'   => 'show_actions',
+				'help'   => 'Should the actions column in the tracker list-view be shown?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'forced' => true,
+			),
+			'allow_defaultproject' => array(
+				'type'   => 'check',
+				'label'  => 'Allow default projects for tracker',
+				'name'   => 'allow_defaultproject',
+				'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'forced' => true,
+			),
+			'show_sum_timesheet' => array(
+				'type'   => 'check',
+				'label'  => 'Show the acumulated times of timesheet entries',
+				'name'   => 'show_sum_timesheet',
+				'help'   => 'Show a new column that calculated the acumulated times of timesheet entries.',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'forced' => true,
+			),
 		);
-		$GLOBALS['settings']['notify_assigned'] = array(
-			'type'   => 'check',
-			'label'  => 'Receive notifications about assigned tracker-items',
-			'name'   => 'notify_assigned',
-			'help'   => 'Should the Tracker send you notification mails, if tracker items assigned to you get updated?',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'default'=> true,
-		);
-		$GLOBALS['settings']['notify_own_modification'] = array(
-			'type'   => 'check',
-			'label'  => 'Recieve notifications about own changes in tracker-items',
-			'name'   => 'notify_own_modification',
-			'help'   => 'Show the Tracker send you notification mails, in tracker items that you updates?',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'default'=> false,
-		);
-		$GLOBALS['settings']['show_actions'] = array(
-			'type'   => 'check',
-			'label'  => 'Show actions in tracker listing',
-			'name'   => 'show_actions',
-			'help'   => 'Should the actions column in the tracker list-view be shown?',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'forced' => true,
-		);
-		$GLOBALS['settings']['allow_defaultproject'] = array(
-			'type'   => 'check',
-			'label'  => 'Allow default projects for tracker',
-			'name'   => 'allow_defaultproject',
-			'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'forced' => true,
-		);
-		$GLOBALS['settings']['show_sum_timesheet'] = array(
-			'type'   => 'check',
-			'label'  => 'Show the acumulated times of timesheet entries',
-			'name'   => 'show_sum_timesheet',
-			'help'   => 'Show a new column that calculated the acumulated times of timesheet entries.',
-			'xmlrpc' => True,
-			'admin'  => False,
-			'forced' => true,
-		);
-		return true;	// otherwise prefs say it cant find the file ;-)
-	}
-
-	/**
-	 * Check if reasonable default preferences are set and set them if not
-	 *
-	 * It sets a flag in the app-session-data to be called only once per session
-	 */
-	static function check_set_default_prefs()
-	{
-		if ($GLOBALS['egw']->session->appsession('default_prefs_set','tracker'))
-		{
-			return;
-		}
-		$GLOBALS['egw']->session->appsession('default_prefs_set','tracker','set');
-
-		$default_prefs =& $GLOBALS['egw']->preferences->default['tracker'];
-
-		$defaults = array(
-			'notify_creator'  => 1,
-			'notify_assigned' => 1,
-			'show_actions' => 1,
-			'allow_defaultproject' => 1,
-			'show_sum_timesheet' => 0,
-			'notify_own_modification' => 0,
-		);
-		foreach($defaults as $var => $default)
-		{
-			if (!isset($default_prefs[$var]) || $default_prefs[$var] === '')
-			{
-				$GLOBALS['egw']->preferences->add('tracker',$var,$default,'default');
-				$need_save = True;
-			}
-		}
-		if ($need_save)
-		{
-			$GLOBALS['egw']->preferences->save_repository(False,'default');
-		}
 	}
 }
-tracker_hooks::check_set_default_prefs();
