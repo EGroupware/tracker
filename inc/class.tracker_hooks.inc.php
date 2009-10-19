@@ -104,6 +104,7 @@ class tracker_hooks
 			'help'   => 'Should the Tracker send you notification mails, if tracker items you created get updated?',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'default'=> true,
 		);
 		$GLOBALS['settings']['notify_assigned'] = array(
 			'type'   => 'check',
@@ -112,6 +113,7 @@ class tracker_hooks
 			'help'   => 'Should the Tracker send you notification mails, if tracker items assigned to you get updated?',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'default'=> true,
 		);
 		$GLOBALS['settings']['notify_own_modification'] = array(
 			'type'   => 'check',
@@ -120,6 +122,7 @@ class tracker_hooks
 			'help'   => 'Show the Tracker send you notification mails, in tracker items that you updates?',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'default'=> false,
 		);
 		$GLOBALS['settings']['show_actions'] = array(
 			'type'   => 'check',
@@ -128,6 +131,7 @@ class tracker_hooks
 			'help'   => 'Should the actions column in the tracker list-view be shown?',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'forced' => true,
 		);
 		$GLOBALS['settings']['allow_defaultproject'] = array(
 			'type'   => 'check',
@@ -136,6 +140,7 @@ class tracker_hooks
 			'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'forced' => true,
 		);
 		$GLOBALS['settings']['show_sum_timesheet'] = array(
 			'type'   => 'check',
@@ -144,6 +149,7 @@ class tracker_hooks
 			'help'   => 'Show a new column that calculated the acumulated times of timesheet entries.',
 			'xmlrpc' => True,
 			'admin'  => False,
+			'forced' => true,
 		);
 		return true;	// otherwise prefs say it cant find the file ;-)
 	}
