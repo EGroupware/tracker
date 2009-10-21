@@ -161,7 +161,10 @@ class tracker_mailhandler extends tracker_bo
 			return false; // Open mailbox failed, don't we wanna log this?
 		}
 
-		if (empty($this->mailhandling[0]['address']))
+		// There seems to be a bug in imap_seach() (#48619) that causes a SegFault if all msg match
+		// This was introduced in v5.2.10 and fixed in v5.2.11, so use a workaround in 5.2.10
+		//
+		if (empty($this->mailhandling[0]['address']) || (version_compare(PHP_VERSION, '5.2.10') === 0))
 		{
 			// Use sort here to ensure the format returned equals search
 			$this->msgList = imap_sort ($this->mbox, SORTARRIVAL, 1);
@@ -257,7 +260,16 @@ class tracker_mailhandler extends tracker_bo
 		$this->mailBody = null; // Clear previous message
 		$msgHeader = imap_headerinfo ($this->mbox, $mid);
 
-
+		// Workaround for PHP bug#48619
+		//
+		if (!empty($this->mailhandling[0]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
+		{
+			if (strstr($msgHeader->toaddress, $msgHeader->toaddress) === false)
+			{
+				return false;
+			}
+		}
+		
 		if ($msgHeader->Deleted == 'D')
 		{
 			return false; // Already deleted
@@ -365,13 +377,17 @@ class tracker_mailhandler extends tracker_bo
 					case 0 :
 						$this->user = $this->data['tr_creator'];
 						break;
-					case 0 :
+					case 1 :
 						$this->user = 0;
 						break;
 					default :
 						$this->user = 0;
 						break;
 				}
+			}
+			else
+			{
+				$this->user = $this->mailSender;
 			}
 			$this->data['reply_message'] = $this->mailBody;
 
