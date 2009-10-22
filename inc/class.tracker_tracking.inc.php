@@ -74,6 +74,41 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
+	 * Sendan autoreply to the ticket creator or replier by the mailhandler
+	 * @param array $data current entry
+	 * @param array $autoreply values for:
+	 *			'reply_text' => Texline to add to the mail message
+	 *			'reply_to' => UserID or email address
+	 * @param array $old=null old/last state of the entry or null for a new entry
+	 */
+	function autoreply($data,$autoreply,$old=null)
+	{
+		if (is_integer($autoreply['reply_to'])) // Mail from a known user
+		{
+			if ($this->notify_current_user)
+			{
+				return; // Already notified while saving
+			}
+			else
+			{
+				$this->notify_current_user = true; // Ensure send_notification() doesn't fail this check
+			}
+			$email = $GLOBALS['egw']->accounts->id2name($this->user,'account_email');
+		}
+		else
+		{
+			$email = $autoreply['reply_to']; // mail from an unknown user (set here, so we need to send a notification)
+		}
+		if ($autoreply['reply_text'])
+		{
+			$data['reply_text'] = $autoreply['reply_text'];
+		}
+		// Send notification to the creator only; assignee, CC etc have been notified already
+		$this->send_notification($data,$old,$email,$data[$this->creator_field]);
+
+	}
+	
+	/**
 	 * Get a notification-config value
 	 *
 	 * @param string $what
@@ -163,6 +198,13 @@ class tracker_tracking extends bo_tracking
 				$assigned[] = $GLOBALS['egw']->common->grab_owner_name($uid);
 			}
 			$assigned = implode(', ',$assigned);
+		}
+		if ($data['reply_text'])
+		{
+			$details['reply_text'] = array(
+				'value' => $data['reply_text'],
+				'type' => 'message',
+			);
 		}
 		foreach(array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],

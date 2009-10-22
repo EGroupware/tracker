@@ -97,6 +97,7 @@ edit entry	tracker	en	Edit entry
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers
 enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address here if unrecognized mails should be forwarded
+enter an opening text for the reply message	tracker	en	Enter an opening text for the reply message
 enter the imap server from which emails should be fetched	tracker	en	Enter the IMAP server from which emails should be fetched
 enter the mail address that will be read.	tracker	en	Enter the mail address that will be read.
 entry saved	tracker	en	Entry saved
@@ -127,6 +128,7 @@ incoming mail folder	tracker	en	Incoming mail folder
 incoming mail rules	tracker	en	Incoming mail rules
 incoming mail server	tracker	en	Incoming mail server
 interval in minutes for checking the incoming mails	tracker	en	Interval in minutes for checking the incoming mails
+introduction message	tracker	en	Introduction message
 invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
 item creator	tracker	en	Item creator
@@ -171,12 +173,14 @@ receive notifications in html	tracker	en	Receive notifications in html
 recieve notifications about own changes in tracker-items	tracker	en	Recieve notifications about own changes in tracker-items
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
+reply also to unknown addresses	tracker	en	Reply also to unknown addresses
 resolution	tracker	en	Resolution
 restict tracker items to the creator and the staff only	tracker	en	Restict tracker items to the creator and the staff only
 restict tracker items to the creators primary group and the staff only	tracker	en	Restict tracker items to the creators primary group and the staff only
 restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
 restriction	tracker	en	Restriction
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
+select how autoreplies should be sent when mails are received	tracker	en	Select how autoreplies should be sent when mails are received
 select multiple	tracker	en	Select multiple
 select tracker queue	tracker	en	select tracker queue
 select which categories should be used in tracker for the tts categories	tracker	en	select which categories should be used in Tracker for the TTS categories
@@ -184,6 +188,7 @@ select which username should be used when unrecognized mails are handled.	tracke
 select which username should be used when unrecognized replies are handled	tracker	en	Select which username should be used when unrecognized replies are handled
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications, eg. noreply@egroupware.org
+sent autoreplies	tracker	en	Sent autoreplies
 server type	tracker	en	Server type
 set %1	tracker	en	Set %1
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)

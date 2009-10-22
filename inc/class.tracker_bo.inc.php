@@ -168,6 +168,9 @@ class tracker_bo extends tracker_so
 	 *   unrec_reply (0=Creator/1=Nobody)
 	 *   unrec_mail (<empty>=ignore|UID)
 	 *   forward_to
+	 *   auto_reply (0=Never/1=New/2=Always)
+	 *   reply_unknown (1=Yes/0=No)
+	 *   reply_text (text message)
 	 *
 	 * @var array
 	 */
@@ -425,9 +428,11 @@ class tracker_bo extends tracker_so
 	 * saves the content of data to the db
 	 *
 	 * @param array $keys if given $keys are copied to data before saveing => allows a save as
+	 * @param array $autoreply when called from the mailhandler, contains data for the autoreply
+	 * (only for forwarding to tracling)
 	 * @return int 0 on success and errno != 0 else
 	 */
-	function save($keys=null)
+	function save($keys=null, $autoreply=null)
 	{
 		if ($keys) $this->data_merge($keys);
 
@@ -528,9 +533,13 @@ class tracker_bo extends tracker_so
 				$this->data['customfields'] = implode("\n",$data_custom);
 				$old['customfields'] = implode("\n",$old_custom);
 			}
-			if (!$this->tracking->track($this->data,$old,$this->user))
+			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$autoreply))
 			{
 				return implode(', ',$this->tracking->errors);
+			}
+			if ($autoreply)
+			{
+				$this->tracking->autoreply($this->data,$autoreply,$old);
 			}
 		}
 		return $err;

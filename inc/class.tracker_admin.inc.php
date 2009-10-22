@@ -408,6 +408,15 @@ class tracker_admin extends tracker_bo
 				0 => 'Creator',
 				1 => 'Nobody',
 			),
+			'auto_reply' => array(
+				0 => lang('Never'),
+				1 => lang('Yes, new tickets only'),
+				2 => lang('Yes, always'),
+			),
+			'reply_unknown' => array(
+				0 => 'Creator',
+				1 => 'Nobody',
+			),
 		);
 		foreach($this->mailservertypes as $ind => $typ)
 		{

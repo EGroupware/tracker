@@ -15,7 +15,7 @@
 
 class tracker_mailhandler extends tracker_bo
 {
-	/*
+	/**
 	 * UID of the mailsender, 0 if not recognized
 	 *
 	 * @var int
@@ -97,7 +97,6 @@ class tracker_mailhandler extends tracker_bo
 
 		// In case we run in fallback, make sure the original user gets restored
 		$this->originalUser = $this->user;
-
 		foreach($this->mailservertypes as $ind => $typ)
 		{
 			$this->serverTypes[] = $typ[0];
@@ -130,7 +129,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false; // Or should we default to 'localhost'?
 		}
-
+		
 		$mBox = '{'.$this->mailhandling[0]['server'];	// Set the servername
 
 		if(!empty($this->mailhandling[0]['serverport']))
@@ -168,17 +167,20 @@ class tracker_mailhandler extends tracker_bo
 									$this->mailhandling[0]['password'])))
 		{
 			error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
-			return false; // Open mailbox failed, don't we wanna log this?
+			return false;
 		}
 
-		if (empty($this->mailhandling[0]['address']))
+		// There seems to be a bug in imap_seach() (#48619) that causes a SegFault if all msg match
+		// This was introduced in v5.2.10 and fixed in v5.2.11, so use a workaround in 5.2.10
+		//
+		if (empty($this->mailhandling[0]['address']) || (version_compare(PHP_VERSION, '5.2.10') === 0))
 		{
 			// Use sort here to ensure the format returned equals search
 			$this->msgList = imap_sort ($this->mbox, SORTARRIVAL, 1);
 		}
 		else
 		{
-			$this->msgList = imap_search ($this->mbox, 'TO ' . $this->mailhandling[0]['address']);
+			$this->msgList = imap_search ($this->mbox, 'TO "' . $this->mailhandling[0]['address'] . '"');
 		}
 
 		if ($this->msgList)
@@ -186,6 +188,7 @@ class tracker_mailhandler extends tracker_bo
 			$_cnt = count ($this->msgList);
 			for ($_idx = 0; $_idx < $_cnt; $_idx++)
 			{
+				if ($this->msgList[$_idx])
 				if (self::process_message($this->msgList[$_idx]) && $this->mailhandling[0]['delete_from_server'])
 				{
 					@imap_delete($this->mbox, $this->msgList[$_idx]);
@@ -216,7 +219,7 @@ class tracker_mailhandler extends tracker_bo
 		return "TEXT/PLAIN";
 	}
 
-	function get_part($stream, $msg_number, $mime_type, $structure = false,$part_number = false) 
+	function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) 
 	{
 		//error_log(__METHOD__." getting body for ID: $msg_number, $mime_type, $part_number");
 		if(!$structure) {
@@ -468,6 +471,16 @@ class tracker_mailhandler extends tracker_bo
 		$senderIdentified = false;
 		$this->mailBody = null; // Clear previous message
 		$msgHeader = imap_headerinfo($this->mbox, $mid);
+
+		// Workaround for PHP bug#48619
+		//
+		if (!empty($this->mailhandling[0]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
+		{
+			if (strstr($msgHeader->toaddress, $msgHeader->toaddress) === false)
+			{
+				return false;
+			}
+		}
 		/*
 		 # Recent - R if recent and seen (Read), N if recent and unseen (New), ' ' if not recent
 		 # Unseen - U if not recent AND unseen, ' ' if seen  OR unseen and recent.
@@ -530,7 +543,12 @@ class tracker_mailhandler extends tracker_bo
 					// added to the CC field.
 					$replytoAddress = $extracted;
 				}
-				$senderIdentified = self::search_user($extracted);
+				if (($senderIdentified = self::search_user($extracted)) === true)
+				{
+					// Save the reply-to address if we found match for use with the
+					// auto-reply
+					$replytoAddress = $extracted;
+				}
 			}
 			if ($senderIdentified === true)
 			{
@@ -613,13 +631,17 @@ class tracker_mailhandler extends tracker_bo
 					case 0 :
 						$this->user = $this->data['tr_creator'];
 						break;
-					case 0 :
+					case 1 :
 						$this->user = 0;
 						break;
 					default :
 						$this->user = 0;
 						break;
 				}
+			}
+			else
+			{
+				$this->user = $this->mailSender;
 			}
 			if ($this->mailhandling[0]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
 			{
@@ -629,7 +651,25 @@ class tracker_mailhandler extends tracker_bo
 
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
-		$saverv = $this->save();
+
+		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
+		$saverv = $this->save(null,
+			(($this->mailhandling[0]['auto_reply'] == 2		// Always reply or
+			|| ($this->mailhandling[0]['auto_reply'] == 1	// only new tickets
+				&& $this->ticketId == 0)					// and this is a new one
+				) && (										// AND
+					$senderIdentified		 				// we know this user
+				|| (!$senderIdentified						// or we don't and
+				&& $this->mailhandling[0]['reply_unknown'] == 1 // don't care
+			))) == true
+				? array(
+					'reply_text' => $this->mailhandling[0]['reply_text'],
+					// UserID or mail address
+					'reply_to' => ($this->user ? $this->user : $replytoAddress),
+				)
+				: null
+		);
+
 		if (($saverv==0) && is_array($rv['attachments']))
 		{
 			foreach ($rv['attachments'] as $attachment)
@@ -640,8 +680,8 @@ class tracker_mailhandler extends tracker_bo
 				}
 			}
 		}
-		return !$saverv;
 
+		return !$saverv;
 	}
 
 	/**
