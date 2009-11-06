@@ -150,7 +150,7 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_subject($data,$old)
 	{
-		return '#'.$data['tr_id'].' - '.$data['tr_summary'];
+		return $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
 	}
 
 	/**
