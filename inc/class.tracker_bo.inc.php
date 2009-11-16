@@ -1231,7 +1231,7 @@ class tracker_bo extends tracker_so
 	{
 		//echo '<p>'.__METHOD__.'('.($start?'true':'false').")</p>\n";
 
-		$async =& new asyncservice();
+		$async = new asyncservice();
 
 		if ($start === !$async->read('tracker-close-pending'))
 		{

@@ -94,7 +94,7 @@ class tracker_tracking extends bo_tracking
 		{
 			case 'copy':	// include the tr_cc addresses
 				if ($data['tr_private']) return array();	// no copies for private entries
-				$config = $config ? split(', ?',$config) : array();
+				$config = $config ? preg_split('/, ?/',$config) : array();
 				if ($data['tr_cc'])
 				{
 					$config = array_merge($config,split(', ?',$data['tr_cc']));

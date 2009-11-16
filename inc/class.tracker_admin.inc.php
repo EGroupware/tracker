@@ -416,7 +416,7 @@ class tracker_admin extends tracker_bo
 			'delete[0]' => true,
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
-		$tpl =& new etemplate('tracker.admin');
+		$tpl = new etemplate('tracker.admin');
 		return $tpl->exec('tracker.tracker_admin.admin',$content,$sel_options,$readonlys,$content);
 	}
 

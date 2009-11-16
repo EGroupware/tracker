@@ -346,7 +346,7 @@ class tracker_escalations extends so_sql2
 	{
 		//echo '<p>'.__METHOD__.'('.($start?'true':'false').")</p>\n";
 
-		$async =& new asyncservice();
+		$async = new asyncservice();
 
 		if ($start === !$async->read(self::ASYNC_JOB_NAME))
 		{

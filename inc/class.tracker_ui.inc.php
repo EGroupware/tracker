@@ -552,7 +552,7 @@ class tracker_ui extends tracker_bo
 		$what = $tracker ? $this->trackers[$tracker] : lang('Tracker');
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
-		$tpl =& new etemplate('tracker.edit');
+		$tpl = new etemplate('tracker.edit');
 		if ($this->tracker_has_cat_specific_priorities($tracker))
 		{
 			$tpl->set_cell_attribute('cat_id','onchange',true);
@@ -911,7 +911,7 @@ class tracker_ui extends tracker_bo
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
-		$tpl =& new etemplate('tracker.index');
+		$tpl = new etemplate('tracker.index');
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker));
 	}
