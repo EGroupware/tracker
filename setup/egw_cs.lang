@@ -18,6 +18,7 @@ add additionally	tracker	cs	přidat dodatečně
 add assigned	tracker	cs	Přidat přidělené
 add comment	tracker	cs	Přidat komentář
 add timesheet entry	tracker	cs	Přidat pracovní výkaz
+add unrecognized mail address to the cc field	tracker	cs	Přidat nerozpoznanou e-mailovou adresu do pole CC (kopie)
 after	tracker	cs	po
 after how many days a not replied item should be marked overdue?	tracker	cs	Po kolika dnech se má nezodpovězená položka označit jako po termínu?
 after how many days pending items should be closed automatic	tracker	cs	Po kolika dnech mají být položky ve stavu "vyřizuje se" automaticky uzavřeny
@@ -46,6 +47,7 @@ bounty set	tracker	cs	Odměna vypsána
 canned response	tracker	cs	Předpřipravená odpověď
 canned responses	tracker	cs	Předpřipravené odpovědi
 categories, versions, canned responses	tracker	cs	Kategorie, verze, předpřipravené odpovědi
+category for new tickets	tracker	cs	Kategorie pro nová ohlášení
 changes made below will be lost, if not applied before!	tracker	cs	Níže provedené změny budou ztraceny, pokud nebyly použity už dříve!
 check all	tracker	cs	Vybrat vše
 check mail interval	tracker	cs	Interval kontroly pošty
@@ -70,9 +72,10 @@ create new links	tracker	cs	Vytvořit nové odkazy
 created	tracker	cs	Vytvořeno
 creation date	tracker	cs	datum vytvoření
 creator	tracker	cs	Tvůrce
+custom fields	tracker	cs	Uživatelsky definované položky
 custom tracker priorities	tracker	cs	Uživatelsky definované priority sledovacího systému
 date opened	tracker	cs	Datum otevření
-define escalations	admin	cs	Definovat eskalace
+define escalations	common	cs	Definovat eskalace
 delete mails from server	tracker	cs	Smazat e-maily ze serveru
 delete this bounty	tracker	cs	Smazat tuto odměnu
 delete this canned response	tracker	cs	Smazat tuto předpřipravenou odpověď
@@ -94,6 +97,7 @@ edit entry	tracker	cs	Editovat záznam
 email address to contact you	tracker	cs	Vaše kontaktní e-mailová adresa
 email handling can be configured only for all trackers	tracker	cs	Zpracování e-mailů může být nakonfigurováno jen pro všechny sledovací systémy.
 enter an email address here if unrecognized mails should be forwarded	tracker	cs	Zde zadejte e-mailovou adresu, pokud mají být nerozpoznané e-maily přeposílány
+enter an opening text for the reply message	tracker	cs	Zadejte úvodní text pro odpověď na zprávu
 enter the imap server from which emails should be fetched	tracker	cs	Zadejte IMAP server, ze kterého mají být stahovány e-maily
 enter the mail address that will be read.	tracker	cs	Zadejte e-mailovou adresu, která bude čtena.
 entry saved	tracker	cs	Záznam uložen
@@ -124,6 +128,7 @@ incoming mail folder	tracker	cs	Složka příchozí pošty
 incoming mail rules	tracker	cs	Pravidla příchozí pošty
 incoming mail server	tracker	cs	Server příchozí pošty
 interval in minutes for checking the incoming mails	tracker	cs	Interval kontroly příchozích e-mailů v minutách
+introduction message	tracker	cs	Úvodní zpráva
 invalid	tracker	cs	Neplatný
 item assignee	tracker	cs	Osoba zodpovědná za položku
 item creator	tracker	cs	Tvůrce položky
@@ -131,6 +136,7 @@ language for the copy	tracker	cs	Jazyk kopie
 last modified	tracker	cs	Naposledy změněno
 last reply	tracker	cs	poslední odpověď
 later	tracker	cs	Později
+links	tracker	cs	Odkazy
 list of coma separated email address	tracker	cs	Seznam e-mailových adres oddělených čárkami
 mail handling	tracker	cs	Zpracování pošty
 matching filter	tracker	cs	filtr shody
@@ -164,14 +170,17 @@ read mail address	tracker	cs	Přečíst e-mailovou adresu
 receive notifications about assigned tracker-items	tracker	cs	Přijímat upozornění na položky přidělené ve sled. systému
 receive notifications about created tracker-items	tracker	cs	Přijimat upozornění na položky vytvořené ve sled. systému
 receive notifications in html	tracker	cs	Přijímat upozornění v HTML
+recieve notifications about own changes in tracker-items	tracker	cs	Přijímat upozornění na vlastní změny v položkách sledovacího systému
 rejected	tracker	cs	Odmítnuté
 remind	tracker	cs	Připomenout
+reply also to unknown addresses	tracker	cs	Odpovídat také na neznámé adresy
 resolution	tracker	cs	Řešení
 restict tracker items to the creator and the staff only	tracker	cs	Omezit položky sledovacího systému jen na tvůrce a personál
 restict tracker items to the creators primary group and the staff only	tracker	cs	Omezit položky sledovacího systému jen na primární skupinu tvůrce a personál
 restrict tracker items to staff and:	tracker	cs	Omezit položky sledovacího systému na personál a:
 restriction	tracker	cs	Omezení
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	cs	Vyberte výchozí sledovací systém pro nová ohlášení nebo zadejte 'Odmítnout' pokud nechcete povolit vytváření ohlášení prostřednictvím e-mailu.
+select how autoreplies should be sent when mails are received	tracker	cs	Vyberte jak mají být odesílány automatické odpovědi při příjetí zpráv
 select multiple	tracker	cs	Vybrat více
 select tracker queue	tracker	cs	vybrat frontu sledovacího systému
 select which categories should be used in tracker for the tts categories	tracker	cs	Vyberte, které kategorie mají být ve sledovacím systému použity pro kategorie z TTS
@@ -179,6 +188,7 @@ select which username should be used when unrecognized mails are handled.	tracke
 select which username should be used when unrecognized replies are handled	tracker	cs	Vyberte které uživatelské jméno by mělo být použito pro zpracování nerozpoznaných odpovědí.
 sender address	tracker	cs	Adresa odesílatele
 sender address for all notifications, eg. noreply@egroupware.org	tracker	cs	Adresa odesílatele pro všechna upozornění, např. noreply@egroupware.org
+sent autoreplies	tracker	cs	Posílat automatické odpovědi
 server type	tracker	cs	Typ serveru
 set %1	tracker	cs	Nastavit %1
 set an own bounty (in %s)	tracker	cs	Vypsat vlastní odměnu (v %s)
@@ -186,7 +196,10 @@ set bounty	tracker	cs	Vypsat odměnu
 should the actions column in the tracker list-view be shown?	tracker	cs	Má se sloupec akcí ukazovat v seznamovém zobrazení?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vám přidělených položek?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vámi vytvořených položek?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	cs	Zobrazovat nový sloupec, který ukazuje kumulované časy položek pracovního výkazu.
 show actions in tracker listing	tracker	cs	Zobrazovat akce ve výpisech sledovacího systému
+show the acumulated times of timesheet entries	tracker	cs	Zobrazovat kumulované časy položek pracovního výkazu.
+show the tracker send you notification mails, in tracker items that you updates?	tracker	cs	Měl by Vám sledovací systém zasílat upozornění na položky, které jste aktualizoval(a)?
 staff	tracker	cs	Personál
 state	tracker	cs	Stav
 stati	tracker	cs	Stavy
@@ -219,11 +232,12 @@ tracker-%1 deleted.	tracker	cs	Sledovací systém-%1 smazán.
 unchanged	tracker	cs	Nezměněno
 unrecognized mails	tracker	cs	Nerozpoznané e-maily
 url of the tracker	tracker	cs	URL sledovacího systému
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	cs	URL, které má být obsaženo v upozornění, např. URL modulu Správce webu, výchozí URL je Sledovací systém v rámci eGroupWare
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	cs	URL, které má být obsaženo v upozornění, např. URL modulu Správce webu, výchozí URL je Sledovací systém v rámci eGroupWaru
 use a default user for mails that where not recognized	tracker	cs	Použít výchozího uživatele pro nerozpoznané e-maily
 versions	tracker	cs	Verze
 vote for it!	tracker	cs	Hlasovat pro ni!
 votes	tracker	cs	Hlasů
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	cs	Když jsou přijaty e-maily z neznámé adresy, zaškrtněte tuto položku, aby byly automaticky přidány do CC pole sledovacího systému. Tato položka je ignorována, pokud nejsou zpracovávány neznámé e-mailové adresy.
 wont fix	tracker	cs	Nebude se opravovat
 works for me	tracker	cs	Mně funguje
 yes, display groups first	tracker	cs	Ano, zobrazovat nejprve skupiny
@@ -236,9 +250,3 @@ you need to login to vote!	tracker	cs	Musíte se přihlásit, aby jste mohl(a) h
 you need to select something to change and some tracker items!	tracker	cs	Musíte vybrat něco, co chcete změnit A ZÁROVEŇ nějaké položky sledovacího systému!
 you need to specify amount, donators name and email address!	tracker	cs	Musíte specifikovat množství, dárce A ZÁROVEŇ e-mailovou adresu!
 you voted %1.	tracker	cs	Hlasoval(a) jste %1.
-2	tracker	cs	2
-3	tracker	cs	3
-4	tracker	cs	4
-6	tracker	cs	6
-7	tracker	cs	7
-8	tracker	cs	8
