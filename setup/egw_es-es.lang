@@ -70,6 +70,7 @@ create new links	tracker	es-es	Crear enlaces nuevos
 created	tracker	es-es	Creado
 creation date	tracker	es-es	fecha de creación
 creator	tracker	es-es	Creador
+custom fields	tracker	es-es	Campos personalizados
 custom tracker priorities	tracker	es-es	Prioridades del elemento personalizado
 date opened	tracker	es-es	Fecha de apertura
 define escalations	admin	es-es	Definir escalados
@@ -164,6 +165,7 @@ read mail address	tracker	es-es	Leer dirección de correo
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
 receive notifications in html	tracker	es-es	Recibir notificaciones en html
+recieve notifications about own changes in tracker-items	tracker	es-es	Recibir notificaciones sobre los cambios propios en elementos de seguimiento
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 resolution	tracker	es-es	Resolución
@@ -186,7 +188,10 @@ set bounty	tracker	es-es	Fijar recompensa
 should the actions column in the tracker list-view be shown?	tracker	es-es	¿Debe verse la columna de acciones en la vista de lista de seguimiento?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	es-es	Mostrar una columna nueva que calcula los tiempos acumulados de las entradas de la hoja de tiempos.
 show actions in tracker listing	tracker	es-es	Mostrar acciones en el listado de seguimiento
+show the acumulated times of timesheet entries	tracker	es-es	Mostrar los tiempos acumulados de las entradas de la hoja de tiempos
+show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Debe el sistema de seguimiento enviarle a usted correos de notificación sobre elementos actualizados por usted?
 staff	tracker	es-es	Equipo
 state	tracker	es-es	Estado
 stati	tracker	es-es	Estados
