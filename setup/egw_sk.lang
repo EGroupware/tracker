@@ -1,8 +1,8 @@
 %1 entries updated.	tracker	sk	%1 položiek bolo aktualizovaných
 %1 tickets have been converted	tracker	sk	%1 položiek bolo skonvertovaných
 &#9830; not closed	tracker	sk	♦ Neuzavreté
-&#9830; own not closed	tracker	sk	♦ Vlastné neuzavreté
-&#9830; own without reply not closed	tracker	sk	♦ Vlastné bez odpovede neuzavreté
+&#9830; own not closed	tracker	sk	♦ Moje neuzavreté
+&#9830; own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté
 &#9830; without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
 &#9830; without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
 (new tickets as	tracker	sk	(Novú položku ako
@@ -13,19 +13,19 @@
 9 - highest	tracker	sk	9 - najvyššia
 accepted	tracker	sk	Prijaté
 actions	tracker	sk	Akcie
-activate users queue access control	tracker	sk	Zapnúť kontrolu prístupu k používateľským frontám
+activate users queue access control	tracker	sk	Zapnúť používateľskú kontrolu prístupu k frontám
 add additionally	tracker	sk	pridať dodatočne
 add assigned	tracker	sk	Pridať priradené
 add comment	tracker	sk	Pridať poznámku
 add timesheet entry	tracker	sk	Pridať položku harmonogramu
 after	tracker	sk	po
-after how many days a not replied item should be marked overdue?	tracker	sk	Po koľkých dňoch sa má 'nezodpovedaná' záležitosť označiť ako 'meškajúca'?
-after how many days pending items should be closed automatic	tracker	sk	Po koľkých dňoch sa majú 'vybavované' záležitosti automaticky uzavrieť
+after how many days a not replied item should be marked overdue?	tracker	sk	Po koľkých dňoch sa má nezodpovedaná záležitosť označiť ako meškajúca?
+after how many days pending items should be closed automatic	tracker	sk	Po koľkých dňoch sa majú vybavované záležitosti automaticky uzavrieť?
 all tickets are already converted to tracker	tracker	sk	Všetky položky už boli skonvertované do Sledovača
 allow bounties	tracker	sk	Povoliť odmeny
 allow default projects for tracker	tracker	sk	Povoliť predvolené projekty pre sledovač
 allow editing by	tracker	sk	Komu povoliť úpravy
-allow the predefinition of projects that will be assigned to new tracker-items.	tracker	sk	Povoliť preddefinovanie projektov ktoré budú pripojené k novým položkám sledovača.
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	sk	Povolí preddefinovanie projektov, ktoré budú priradené k novým položkám sledovača.
 allow to assign groups to tracker items	tracker	sk	Povoliť priradenie skupín položkám Sledovača
 allow voting	tracker	sk	Povoliť hlasovanie
 allow voting on tracker items, show and sort after the votes	tracker	sk	Povoliť hlasovanie o záležitostiach sledovača, zobraziť a zoradiť podľa hlasovania
@@ -70,6 +70,7 @@ create new links	tracker	sk	Vytvoriť nové odkazy
 created	tracker	sk	Vytvorené
 creation date	tracker	sk	Dátum vytvorenia
 creator	tracker	sk	Vytvoril
+custom fields	tracker	sk	Používateľské polia
 custom tracker priorities	tracker	sk	Používateľské priority Sledovača
 date opened	tracker	sk	Dátum otvorenia
 define escalations	common	sk	Definovať stupňovanie
@@ -115,8 +116,8 @@ from	tracker	sk	Od
 history	tracker	sk	História
 html editing	tracker	sk	Úprava HTML
 id	tracker	sk	ID
-if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím zvážte vypísanie odmeny za jej vyriešenie!
-if this item is important for you, please vote for it.	tracker	sk	Ak je pre Vás táto záležitosť dôležitá, prosím hlasujte za ňu.
+if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre vás táto záležitosť dôležitá, prosím zvážte vypísanie odmeny za jej vyriešenie!
+if this item is important for you, please vote for it.	tracker	sk	Ak je pre vás táto záležitosť dôležitá, prosím hlasujte za ňu.
 ignore	tracker	sk	Ignorovať
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	sk	Ignorovať nerozpoznané E-maily. Nebudú odstránené zo servera, dokonca ani keď je aktivovaná vyššieuvedená značka 'Odstrániť E-maily'.
 import tts tickets	tracker	sk	Importovať TTS záznamy
@@ -149,7 +150,7 @@ overdue after	tracker	sk	Mešká po
 ownership of the ticket	tracker	sk	Vlastníctvo záležitosti
 pending	tracker	sk	Vybavuje sa
 pending items never get close automatic.	tracker	sk	'Vybavované' záležitosti sa neuzatvárajú automaticky.
-pending items will be closed automatic after %1 days without response.	tracker	sk	'Vybavované' záležitosti sa automaticky uzatvárajú po %1 dňoch bez odpovede.
+pending items will be closed automatic after %1 days without response.	tracker	sk	Vybavované záležitosti sa automaticky uzatvárajú po %1 dňoch bez odpovede.
 permission denied !!!	tracker	sk	Prístup bol odmietnutý !!!
 permit html editing in overview and comments	tracker	sk	Povoliť úpravu HTML v náhľade a poznámkach
 port number	tracker	sk	Číslo portu
@@ -160,9 +161,11 @@ priorities with empty label are not available to the user	tracker	sk	Priority s 
 project selection	tracker	sk	Výber projektov
 projects	tracker	sk	Projekty
 queue	tracker	sk	Fronta
+read mail address	tracker	sk	Prečítať E-mailovú adresu
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
 receive notifications about created tracker-items	tracker	sk	Dostávať pripomienky o vytvorených záležitostiach Sledovača
 receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
+recieve notifications about own changes in tracker-items	tracker	sk	Dostávať pripomienky o svojich vlastných zmenách v položkách Sledovača
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenúť
 resolution	tracker	sk	Riešenie
@@ -170,7 +173,7 @@ restict tracker items to the creator and the staff only	tracker	sk	Obmedziť zá
 restict tracker items to the creators primary group and the staff only	tracker	sk	Obmedziť záležitosti na primárnu skupinu ich tvorcu a personál
 restrict tracker items to staff and:	tracker	sk	Obmedziť záležitosti na personál a:
 restriction	tracker	sk	Obmedzenie
-select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	sk	Zadajte predvolený sledovač pre nové položky alebo 'Odmietnuť' ak sa má zamedziť vytváraniu položky cez E-mail.
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	sk	Zadajte predvolený sledovač pre nové položky, alebo 'Odmietnuť', ak sa má zamedziť vytváraniu položky cez E-mail.
 select multiple	tracker	sk	Vybrať viacero
 select tracker queue	tracker	sk	vyberte frontu sledovača
 select which categories should be used in tracker for the tts categories	tracker	sk	Vyberte, ktoré kategórie sa majú v Sledovači použiť pre kategórie TTS
@@ -183,9 +186,12 @@ set %1	tracker	sk	Zadať %1
 set an own bounty (in %s)	tracker	sk	Zadať vlastnú odmenu (v %s)
 set bounty	tracker	sk	Zadať odmenu
 should the actions column in the tracker list-view be shown?	tracker	sk	Má sa zobrazovať stĺpec akcií v pohľade na zoznam Sledovača?
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorá Vám bola priradená?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorú ste vytvorili?
-show actions in tracker listing	tracker	sk	obraziť akcie v zozname Sledovača
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v niektorej záležitosti Sledovača, ktorá Vám bola priradená?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v záležitosti Sledovača, ktorú ste vytvorili?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	sk	Zobrazí nový stĺpec, ktorý spočíta kumulované časy položiek Sledovača.
+show actions in tracker listing	tracker	sk	Zobraziť akcie v zozname Sledovača
+show the acumulated times of timesheet entries	tracker	sk	Zobraziť kumulované časy položiek Sledovača
+show the tracker send you notification mails, in tracker items that you updates?	tracker	sk	Chcete, aby vám Sledovač posielal oznámenia o položkách Sledovača, ktoré ste sami zmenili?
 staff	tracker	sk	Personál
 state	tracker	sk	Stav
 store as	tracker	sk	Uložiť ako
