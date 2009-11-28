@@ -232,7 +232,7 @@ class tracker_so extends so_sql_cf
 		{
 			$pattern = $criteria;
 			$criteria = array();
-			foreach(array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','reply_message','tr_extra_value') as $col)
+			foreach(array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','reply_message') as $col)
 			{
 				$criteria[$col] = $pattern;
 			}
