@@ -1,0 +1,140 @@
+%1 entries updated.	tracker	pl	%1 wpisów zostało zaktualizowanych
+--> enter new name	tracker	pl	--> podaj nową nazwę
+1 - lowest	tracker	pl	1 - w ogóle nie warto się przejmować
+5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
+9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
+accepted	tracker	pl	Zaakceptowany
+actions	tracker	pl	Akcje
+add comment	tracker	pl	Dodaj komentarz
+after how many days a not replied item should be marked overdue?	tracker	pl	Po ilu dniach zgłoszenie bez odpowiedzi powinno być oznaczone jako zaległe?
+after how many days pending items should be closed automatic	tracker	pl	Po ilu dniach zgłoszenia będące w toku powinny być automatycznie zamknięte?
+allow bounties	tracker	pl	Zezwalaj na przypisywanie premii
+allow editing by	tracker	pl	Zezwalaj na edycję przez
+allow to assign groups to tracker items	tracker	pl	Zezwalaj na przypisywanie grup do wspisów śledzenia
+allow voting	tracker	pl	Zezwalaj na głosowanie
+allow voting on tracker items, show and sort after the votes	tracker	pl	Zezwalaj na głosowanie zgłoszeń, pokazuj i sortuj według wyniku głosowania
+amount	tracker	pl	Kwota
+assigned to	tracker	pl	Przypisany do
+assigning groups	tracker	pl	Przypisywanie grup
+attachments & links	tracker	pl	Załączniki i odnośniki
+autoassign to	tracker	pl	Automatycznie przypisuj do
+bounties	tracker	pl	Premie
+bounty confirmed	tracker	pl	Premia zatwierdzona
+bounty deleted	tracker	pl	Premia usunięta
+bounty set	tracker	pl	Premia ustanowiona
+canned response	tracker	pl	Odpowiedź predefiniowana
+canned responses	tracker	pl	Odpowiedzi predefiniowane
+categories, versions, canned responses	tracker	pl	Kategorie, wersje, odpowiedzi predefiniowane
+check all	tracker	pl	Sprawdź wszystkie
+close pending	tracker	pl	Zamknij będące w toku
+closed	tracker	pl	Zamknięto
+comment by %1 at %2:	tracker	pl	Komentarz dodany %2, przez %1
+comments	tracker	pl	Komentarze
+completed	tracker	pl	Zakończono
+configuration	tracker	pl	Konfiguracja
+configuration for all trackers	tracker	pl	Konfiguracja dla wszystkich kolejek śledzenia
+configuration updated.	tracker	pl	Konfiguracja została zaktualizowana
+configuration, acl, notifications	tracker	pl	Konfiguracja, listy ACL, powiadomienia
+confirm that you pay the specified bounty to implement or fix the issue	tracker	pl	Potwierdź, że zapłacisz wskazaną premię za utworzenie lub poprawę wskazanego zagadnienia
+confirm the receipt of money for this bounty	tracker	pl	Potwierdź otrzymanie pieniędzy za tą premię
+confirmed	tracker	pl	Potwierdzono
+copy to	tracker	pl	Skopiuj do
+create new links	tracker	pl	Utwórz nowe odnośniki
+created	tracker	pl	Utworzono
+date opened	tracker	pl	Data utworzenia
+delete this bounty	tracker	pl	Usuń wskazaną premię
+delete this canned response	tracker	pl	Usuń wskazaną odpowiedź predefiniowaną
+delete this category	tracker	pl	Usuń wskazaną kategorię
+delete this status	tracker	pl	Usuń wskazany status
+delete this tracker including all it's items and categories	tracker	pl	Usuń kolejkę śledzenia wraz ze wszystkimi zgłoszeniami i kategoriami
+delete this version	tracker	pl	Usuń wskazaną wersję
+deleted	tracker	pl	Usunięto
+do you want to vote for this item	tracker	pl	Czy chcesz zagłosować na to zgłoszenie?
+donator name to show	tracker	pl	Nazwisko fundatora do pokazania
+duplicate	tracker	pl	Kopia
+e-mail address to which a copy of all tracker-notifications should be send	tracker	pl	Adres poczty elektronicznej, na który wysyłane będą kopie wszystkich powiadomień aplikacji System śledzenia
+e-mail notifications	tracker	pl	Powiadomienia poczty elektronicznej
+edit %1	tracker	pl	Edytuj %1
+email address to contact you	tracker	pl	Adres poczty elektronicznej do kontaktu
+entry saved	tracker	pl	Wpis został zachowany
+error adding the new tracker!	tracker	pl	Błąd przy dodawaniu nowej kolejki śledzenia!
+error saving the entry!!!	tracker	pl	Błąd przy zapisywaniu nowego zgłoszenia!
+everybody	tracker	pl	Każdy
+existing links	tracker	pl	Istniejące odnośniki
+field	tracker	pl	Pole
+fixed	tracker	pl	Rozwiązany
+from	tracker	pl	Od
+history	tracker	pl	Historia
+id	tracker	pl	ID
+if this item is important for you, please consider to set a bounty for it!	tracker	pl	Jeżeli jest to ważne zgłoszenie, rozważ ustanowienie dla niego premii.
+if this item is important for you, please vote for it.	tracker	pl	Jeżeli ten element jest dla Ciebie ważny, zagłosuj na niego.
+invalid	tracker	pl	Nieprawidłowe
+item assignee	tracker	pl	Osoba przypisująca element
+item creator	tracker	pl	Kreator elementu
+language for the copy	tracker	pl	Język dla kopii
+last modified	tracker	pl	Ostatnio zmodyfikowano
+later	tracker	pl	Później
+list of coma separated email address	tracker	pl	Lista adresów e-mail, rozdzielona przecinkami
+new %1	tracker	pl	Nowy %1
+new items	tracker	pl	Nowe elementy
+new tracker item submitted by %1 at %2	tracker	pl	Nowy element wprowadzony %2, przez %1
+no change	tracker	pl	Brak zmian
+non-anonymous users	tracker	pl	Użytkownik nie anonimowy
+noone	tracker	pl	Nikt
+notification	tracker	pl	Powiadomienie
+open	tracker	pl	Otwarto
+out of date	tracker	pl	Przeterminowany
+overdue after	tracker	pl	Zaznacz jako zaległe po
+pending	tracker	pl	W toku
+pending items never get close automatic.	tracker	pl	Elementy w toku nigdy nie będą zamknięte automatycznie.
+pending items will be closed automatic after %1 days without response.	tracker	pl	Elementy w toku będą zamknięte automatycznie po %1 dni bez odpowiedzi.
+permission denied !!!	tracker	pl	Brak dostępu!
+postponed	tracker	pl	Odłożony
+receive notifications about assigned tracker-items	tracker	pl	Otrzymuj powiadomienia związane z przydzielonymi elementami.
+receive notifications about created tracker-items	tracker	pl	Otrzymuj powiadomienia związane z utworzonymi elementami
+receive notifications in html	tracker	pl	Otrzymuj powiadomienia w HTML
+rejected	tracker	pl	Odrzucono
+remind	tracker	pl	Przypomnij
+resolution	tracker	pl	Postanowienie
+sender address	tracker	pl	Adres nadawcy
+sender address for all notifications, eg. noreply@egroupware.org	tracker	pl	Adres nadawcy dla wszystkich powiadomień, np. nieodpowiadaj@domena.pl
+set an own bounty (in %s)	tracker	pl	Ustal własną premię (w %s)
+set bounty	tracker	pl	Ustal premię
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy przypisane do Ciebie są aktualizowane?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy utworzone przez Ciebie są aktualizowane?
+staff	tracker	pl	Personel
+state	tracker	pl	Stan
+summary	tracker	pl	Podsumowanie
+technicians	tracker	pl	Technicy
+thank you for setting this bounty.	tracker	pl	Dziękujemy za ustalenie premii
+thank you for voting.	tracker	pl	Dziękujemy za głosowanie
+the bounty will not be shown, until the money is received.	tracker	pl	Premia nie będzie pokazana przed uiszczeniem opłaty.
+the canned response will be prefix the text you type.	tracker	pl	Odpowiedź predefiniowana będzie prefiksem dla tekstu, który wpiszesz.
+this module displays information from the tracker.	tracker	pl	Ten moduł wyświetla informacje z systemu śledzenia.
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pl	To zgłoszenie zostało automatycznie zamknięte przez system. Wcześniej było w toku ale osoba zgłaszająca nie odpowiedziała w czasie %1 dni.
+tracker	common	pl	System śledzenia
+tracker added	tracker	pl	Kolejka śledzenia została dodana
+tracker admins	tracker	pl	Administratorzy systemu śledzenia
+tracker admins & technicians	tracker	pl	Administratorzy i technicy systemu śledzenia
+tracker configuration	tracker	pl	Konifguracja systemu śledzenia
+tracker deleted	tracker	pl	Kolejka śledzenia została usunięta
+tracker item modified by %1 at %2	tracker	pl	Zgłoszenie zmodyfikowane %2, przez %1
+tracker item not found !!!	tracker	pl	Zgłoszenie systemu śledzenia nie został znaleziony!
+tracker-%1 '%2' added.	tracker	pl	System śledzenia - %1 '%2' dodano.
+tracker-%1 '%2' updated.	tracker	pl	System śledzenia - %1 '%2' zaktualizowano.
+tracker-%1 deleted.	tracker	pl	System śledzenia - %1 usunięto.
+url of the tracker	tracker	pl	Odnośnik URL do systemu śledzenia
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	pl	Odnośnik URL do dołączenia w powiadomieniu - np. do strony modułu SiteMgr, domyślnego systemu śledzenia w eGW
+versions	tracker	pl	Wersje
+vote for it!	tracker	pl	Zagłosuj na to!
+votes	tracker	pl	Głosy
+wont fix	tracker	pl	Nie będzie poprawione
+works for me	tracker	pl	Dla mnie działa
+yes, display groups first	tracker	pl	Tak, pokazuj wpierw grupy
+yes, display users first	tracker	pl	Tak, pokazuj wpierw użytkowników
+you can respond by visiting:	tracker	pl	Możesz odpowiedzieć odwiedzając stronę:
+you need to enter a name	tracker	pl	Musisz wpisać nazwę
+you need to login to vote!	tracker	pl	Musisz być zalogowany aby móc głosować
+you need to select something to change and some tracker items!	tracker	pl	Musisz wybrać coś do zmiany ORAZ jakieś zgłoszenia systemu śledzenia!
+you need to specify amount, donators name and email address!	tracker	pl	Musisz określić kwotę, nazwisko ofiarodawcy ORAZ adres poczty elektronicznej!
+you voted %1.	tracker	pl	Zagłosowano %1
