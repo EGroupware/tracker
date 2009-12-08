@@ -1081,15 +1081,21 @@ class tracker_bo extends tracker_so
 	 * Is called as hook to participate in the linking
 	 *
 	 * @param string $pattern pattern to search
+	 * @param array $options Array of options for the search
 	 * @return array with ts_id - title pairs of the matching entries
 	 */
-	function link_query( $pattern )
+	function link_query( $pattern, Array &$options = array() )
 	{
+		$limit = false;
 		$result = array();
-		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status' => self::STATUS_OPEN)) as $item )
+		if($options['start'] || $options['num_rows']) {
+			$limit = array($options['start'], $options['num_rows']);
+		}
+		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',$limit,array('tr_status' => self::STATUS_OPEN)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
+		$options['total'] = $this->total;
 		return $result;
 	}
 
