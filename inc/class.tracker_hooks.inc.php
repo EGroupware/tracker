@@ -32,6 +32,7 @@ class tracker_hooks
 			),
 			'view_id' => 'tr_id',
 			'view_popup'  => '700x500',
+			'view_list' => 'tracker.tracker_ui.index',
 			'add' => array(
 				'menuaction' => 'tracker.tracker_ui.edit',
 			),

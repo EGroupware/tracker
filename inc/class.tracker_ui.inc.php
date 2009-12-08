@@ -907,6 +907,9 @@ class tracker_ui extends tracker_bo
 				$tracker=$content['nm']['col_filter']['tr_tracker'];
 			}
 		}
+		if($_GET['search']) {
+			$content['nm']['search'] = $_GET['search'];
+		}
 		if (!$tracker)
 		{
 			$tracker = $content['nm']['col_filter']['tr_tracker']=$tracker='';
