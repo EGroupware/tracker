@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -253,9 +253,11 @@ class tracker_admin extends tracker_bo
 										break;
 								}
 								//echo "update to"; _debug_array($old_cat);
-								$old_cat['data'] = serialize($old_cat['data']);
-								$GLOBALS['egw']->categories->account_id = -1;	// global cat!
-								if (($id = $GLOBALS['egw']->categories->add($old_cat)))
+								if (!isset($cats))
+								{
+									$cats = new categories(categories::GLOBAL_OWNER,'tracker');
+								}
+								if (($id = $cats->add($old_cat)))
 								{
 									$msg .= $old_cat['id'] ? lang("Tracker-%1 '%2' updated.",$what,$cat['name']) : lang("Tracker-%1 '%2' added.",$what,$cat['name']);
 									$need_update = true;
