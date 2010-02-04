@@ -83,6 +83,7 @@ class tracker_so extends so_sql_cf
 	{
 		if (($ret = parent::read($keys,$extra_cols,$join)))
 		{
+			$this->data2db();
 			$this->data['replies'] = array();
 			foreach($this->db->select(self::REPLIES_TABLE,'*',array('tr_id' => $this->data['tr_id']),
 				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
@@ -104,6 +105,7 @@ class tracker_so extends so_sql_cf
 			{
 				$this->data['tr_assigned'][] = $row['tr_assigned'];
 			}
+			$this->db2data();
 		}
 		return $ret;
 	}
@@ -124,6 +126,7 @@ class tracker_so extends so_sql_cf
 		}
 		if (($ret = parent::save()) == 0)
 		{
+			$this->data2db();
 			if ($this->data['reply_message'])
 			{
 				$this->db->insert(self::REPLIES_TABLE,$this->data,false,__LINE__,__FILE__,'tracker');
@@ -154,6 +157,7 @@ class tracker_so extends so_sql_cf
 					),false,__LINE__,__FILE__,'tracker');
 				}
 			}
+			$this->db2data();
 		}
 		return $ret;
 	}
