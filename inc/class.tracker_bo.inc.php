@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -33,19 +33,6 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $timestamps = array('tr_created','tr_modified','tr_closed','reply_created');
-	/**
-	 * offset in secconds between user and server-time,
-	 *	it need to be add to a server-time to get the user-time or substracted from a user-time to get the server-time
-	 *
-	 * @var int
-	 */
-	var $tz_offset_s;
-	/**
-	 * Timestamp with actual user-time
-	 *
-	 * @var int
-	 */
-	var $now;
 	/**
 	 * Current user
 	 *
@@ -333,9 +320,6 @@ class tracker_bo extends tracker_so
 	{
 		parent::__construct();
 
-		$this->tz_offset_s = $GLOBALS['egw']->datetime->tz_offset;
-		$this->now = time() + $this->tz_offset_s;	// time() is server-time and we need a user-time
-
 		$this->user = $GLOBALS['egw_info']['user']['account_id'];
 
 		$this->trackers = $this->get_tracker_labels();
@@ -345,29 +329,22 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * changes the data from the db-format to your work-format
-	 *
-	 * reimplemented to adjust the timezone of the timestamps (adding $this->tz_offset_s to get user-time)
-	 * Please note, we do NOT call the method of the parent so_sql !!!
+	 * Changes the data from the db-format to your work-format
 	 *
 	 * @param array $data if given works on that array and returns result, else works on internal data-array
 	 * @return array with changed data
 	 */
 	function db2data($data=null)
 	{
-		if (!is_array($data))
-		{
-			$data = &$this->data;
-		}
-		foreach($this->timestamps as $name)
-		{
-			if (isset($data[$name]) && $data[$name]) $data[$name] += $this->tz_offset_s;
-		}
+		if (($intern = !is_array($data)))
+ 		{
+ 			$data =& $this->data;
+ 		}
 		if (is_array($data['replies']))
 		{
-			foreach($data['replies'] as $n => $reply)
+			foreach($data['replies'] as &$reply)
 			{
-				$data['replies'][$n]['reply_created'] += $this->tz_offset_s;
+				$reply['reply_created'] = egw_time::server2user($reply['reply_created'],$this->timestamp_type);
 			}
 		}
 		// check if item is overdue
@@ -378,31 +355,26 @@ class tracker_bo extends tracker_so
 
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
 
-		return $data;
+		// will run all regular timestamps ($this->timestamps) trough egw_time::server2user()
+		return parent::db2data($intern ? null : $data);	// important to use null, if $intern!
 	}
 
 	/**
-	 * changes the data from your work-format to the db-format
-	 *
-	 * reimplemented to adjust the timezone of the timestamps (subtraction $this->tz_offset_s to get server-time)
-	 * Please note, we do NOT call the method of the parent so_sql !!!
+	 * Changes the data from your work-format to the db-format
 	 *
 	 * @param array $data if given works on that array and returns result, else works on internal data-array
 	 * @return array with changed data
 	 */
 	function data2db($data=null)
 	{
-		if ($intern = !is_array($data))
+		if (($intern = !is_array($data)))
 		{
 			$data = &$this->data;
 		}
-		foreach($this->timestamps as $name)
-		{
-			if (isset($data[$name]) && $data[$name]) $data[$name] -= $this->tz_offset_s;
-		}
 		if (substr($data['tr_completion'],-1) == '%') $data['tr_completion'] = (int) round(substr($data['tr_completion'],0,-1));
 
-		return $data;
+		// will run all regular timestamps ($this->timestamps) trough egw_time::user2server()
+		return parent::data2db($intern ? null : $data);	// important to use null, if $intern!
 	}
 
 	/**
@@ -855,9 +827,9 @@ class tracker_bo extends tracker_so
 	{
 		if (is_null($this->all_cats))
 		{
-			if (!is_object($GLOBALS['egw']->categories))
+			if (!isset($GLOBALS['egw']->categories))
 			{
-				$GLOBALS['egw']->categories =& CreateObject('phpgwapi.categories',$this->user,'tracker');
+				$GLOBALS['egw']->categories = new categories($this->user,'tracker');
 			}
 			if (isset($GLOBALS['egw']->categories) && $GLOBALS['egw']->categories->app_name == 'tracker')
 			{
@@ -1124,8 +1096,8 @@ class tracker_bo extends tracker_so
 	 */
 	function add_tracker($name)
 	{
-		$GLOBALS['egw']->categories->account_id = -1;	// global cat!
-		if ($name && ($id = $GLOBALS['egw']->categories->add(array(
+		$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
+		if ($name && ($id = $cats->add(array(
 			'name'   => $name,
 			'descr'  => 'tracker',
 			'data'   => serialize(array('type' => 'tracker')),
@@ -1171,18 +1143,15 @@ class tracker_bo extends tracker_so
 	 */
 	function save_config()
 	{
-		$config =& CreateObject('phpgwapi.config','tracker');
-		$config->read_repository();
-
 		foreach($this->config_names as $name)
 		{
 			#echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
 
-			$config->save_value($name,$this->$name,'tracker');
+			config::save_value($name,$this->$name,'tracker');
 		}
 		self::set_async_job($this->pending_close_days > 0);
 
-		$mailhandler =& CreateObject('tracker.tracker_mailhandler','tracker');
+		$mailhandler = new tracker_mailhandler();
 		$mailhandler->set_async_job($this->mailhandling[0]['interval']);
 	}
 
