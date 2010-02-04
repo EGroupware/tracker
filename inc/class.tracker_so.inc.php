@@ -85,7 +85,7 @@ class tracker_so extends so_sql_cf
 		{
 			$this->data['replies'] = array();
 			foreach($this->db->select(self::REPLIES_TABLE,'*',array('tr_id' => $this->data['tr_id']),
-				__LINE__,__FILE__,false,'ORDER BY reply_created DESC','tracker') as $row)
+				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
 			{
 				$this->data['replies'][] = $row;
 			}
