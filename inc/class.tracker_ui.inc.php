@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -128,6 +128,8 @@ class tracker_ui extends tracker_bo
 		//_debug_array($content);
 		if (!is_array($content))
 		{
+			if ($_GET['msg']) $msg = strip_tags($_GET['msg']);
+
 			// edit or new?
 			if ((int)$_GET['tr_id'])
 			{
