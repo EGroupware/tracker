@@ -344,6 +344,7 @@ class tracker_bo extends tracker_so
 		{
 			foreach($data['replies'] as &$reply)
 			{
+				$reply['reply_servertime'] = $reply['reply_created'];
 				$reply['reply_created'] = egw_time::server2user($reply['reply_created'],$this->timestamp_type);
 			}
 		}
@@ -354,6 +355,11 @@ class tracker_bo extends tracker_so
 			(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
 
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
+
+		// Keep a copy of the timestamps in server time, so notifications can change them for each user
+		foreach($this->timestamps as $field) {
+			$data[$field . '_servertime'] = $data[$field];
+		}
 
 		// will run all regular timestamps ($this->timestamps) trough egw_time::server2user()
 		return parent::db2data($intern ? null : $data);	// important to use null, if $intern!

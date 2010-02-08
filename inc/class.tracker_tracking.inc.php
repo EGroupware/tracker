@@ -166,11 +166,11 @@ class tracker_tracking extends bo_tracking
 		{
 			return lang('New ticket submitted by %1 at %2',
 				common::grab_owner_name($data['tr_creator']),
-				$this->datetime($data['tr_created']));
+				$this->datetime($data['tr_created_servertime']));
 		}
 		return lang('Ticket modified by %1 at %2',
 			$data['tr_modifier'] ? common::grab_owner_name($data['tr_modifier']) : lang('Tracker'),
-			$this->datetime($data['tr_modified']));
+			$this->datetime($data['tr_modified_servertime']));
 	}
 
 	/**
@@ -238,7 +238,7 @@ class tracker_tracking extends bo_tracking
 			{
 				$details[$n ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
 					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? common::grab_owner_name($reply['reply_creator']) : lang('Tracker'),
-						$this->datetime($reply['reply_created'])),
+						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
 				);
 				$details[2*$n+1] = array(
