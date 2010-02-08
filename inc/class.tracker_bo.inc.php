@@ -511,7 +511,7 @@ class tracker_bo extends tracker_so
 				$this->data['customfields'] = implode("\n",$data_custom);
 				$old['customfields'] = implode("\n",$old_custom);
 			}
-			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$autoreply))
+			if (!$this->data['no_notifications'] && !$this->tracking->track($this->data,$old,$this->user,null,null,$autoreply))
 			{
 				return implode(', ',$this->tracking->errors);
 			}
