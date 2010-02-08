@@ -211,6 +211,14 @@ class tracker_so extends so_sql_cf
 		{
 			$order_by = str_replace('tr_id',self::TRACKER_TABLE.'.tr_id',$order_by);
 		}
+
+		// Check if we order by tr_modified, and use tr_created for null rows
+		$order_replace = 'IF(tr_modified IS NULL, tr_created, tr_modified)';
+		if (strpos($order_by,'tr_modified') !== false && strpos($order_by,$order_replace) === false)
+		{
+			$order_by = str_replace('tr_modified',$order_replace,$order_by);
+		}
+		
 		if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
 
 		if (is_array($filter) && array_key_exists('esc_id',$filter))
