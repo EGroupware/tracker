@@ -104,7 +104,7 @@ class tracker_admin extends tracker_bo
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','notification','mailhandling','priorities')) as $name)
+						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','restrictions','notification','mailhandling','priorities')) as $name)
 						{
 							if ((string) $this->$name !== $content[$name])
 							{
