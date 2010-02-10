@@ -133,6 +133,7 @@ class tracker_ui extends tracker_bo
 			// edit or new?
 			if ((int)$_GET['tr_id'])
 			{
+				$own_referer = $GLOBALS['egw']->common->get_referer();
 				if (!$this->read($_GET['tr_id']))
 				{
 					$msg = lang('Tracker item not found !!!');
@@ -186,7 +187,7 @@ class tracker_ui extends tracker_bo
 				}
 				$this->data['tr_priority'] = 5;
 			}
-			if ($_GET['nopopup']) $popup = false;
+			if ($_GET['no_popup'] || $_GET['nopopup']) $popup = false;
 
 			if ($popup)
 			{
@@ -253,6 +254,7 @@ class tracker_ui extends tracker_bo
 			list($button) = @each($content['button']); unset($content['button']);
 			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
+			$own_referer = $content['own_referer']; unset($content['own_referer']);
 
 			$this->data = $content;
 			unset($this->data['bounties']['new']);
@@ -324,7 +326,12 @@ class tracker_ui extends tracker_bo
 					else
 					{
 						unset($_GET['tr_id']);	// in case it's still set
-						return $this->index(null,$this->data['tr_tracker'],$msg);
+						if($own_referer) {
+							// Go back to where you came from
+							egw::redirect_link($own_referer);
+						} else {
+							return $this->index(null,$this->data['tr_tracker'],$msg);
+						}
 					}
 					break;
 
@@ -483,6 +490,7 @@ class tracker_ui extends tracker_bo
 			$content['bounties']['user_email'] = $GLOBALS['egw_info']['user']['account_email'];
 		}
 		$preserv['popup'] = $popup;
+		$preserv['own_referer'] = $own_referer;
 
 		if (!$tr_id && isset($_REQUEST['link_app']) && isset($_REQUEST['link_id']) && !is_array($content['link_to']['to_id']))
 		{
