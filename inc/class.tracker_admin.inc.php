@@ -255,7 +255,7 @@ class tracker_admin extends tracker_bo
 								//echo "update to"; _debug_array($old_cat);
 								if (!isset($cats))
 								{
-									$cats = new categories(categories::GLOBAL_OWNER,'tracker');
+									$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');
 								}
 								if (($id = $cats->add($old_cat)))
 								{
