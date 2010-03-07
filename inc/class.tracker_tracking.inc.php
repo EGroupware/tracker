@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-8 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -74,7 +74,8 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
-	 * Sendan autoreply to the ticket creator or replier by the mailhandler
+	 * Send an autoreply to the ticket creator or replier by the mailhandler
+	 *
 	 * @param array $data current entry
 	 * @param array $autoreply values for:
 	 *			'reply_text' => Texline to add to the mail message
@@ -105,7 +106,6 @@ class tracker_tracking extends bo_tracking
 		}
 		// Send notification to the creator only; assignee, CC etc have been notified already
 		$this->send_notification($data,$old,$email,$data[$this->creator_field]);
-
 	}
 
 	/**
