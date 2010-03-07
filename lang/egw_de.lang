@@ -18,6 +18,7 @@ add additionally	tracker	de	zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
+add unrecognized mail address to the cc field	tracker	de	Nicht erkannte Mail Adresse zu CC hinzufügen
 after	tracker	de	nach
 after how many days a not replied item should be marked overdue?	tracker	de	Nach wievielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
 after how many days pending items should be closed automatic	tracker	de	Nach wievielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
@@ -46,6 +47,7 @@ bounty set	tracker	de	Prämie gesetzt
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
+category for new tickets	tracker	de	Kategorie für neue Tickets
 changes made below will be lost, if not applied before!	tracker	de	Änderungen darunter gehen verloren, wenn sie nicht vorher übernommen werden!
 check all	tracker	de	Alle auswählen
 check mail interval	tracker	de	Überprüfungsinterval für Mails
@@ -95,6 +97,7 @@ edit entry	tracker	de	Ticket bearbeiten
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die Mail Behandlung kann nur für alle Verfolgungssystem konfiguriert werden.
 enter an email address here if unrecognized mails should be forwarded	tracker	de	Mail Adresse zu der nicht zuordenbare Mails weitergeleitet werden
+enter an opening text for the reply message	tracker	de	Geben Sie einen Anfangstext für die Antwort Nachricht ein
 enter the imap server from which emails should be fetched	tracker	de	IMAP Server von dem Mail gelesen werden sollen
 enter the mail address that will be read.	tracker	de	Mail Adresse die gelesen wird.
 entry saved	tracker	de	Eintrag gespeichert
@@ -125,6 +128,7 @@ incoming mail folder	tracker	de	Ordner für eingehende Mail
 incoming mail rules	tracker	de	Regeln für eingehende Mail
 incoming mail server	tracker	de	Server für eingehende Mail
 interval in minutes for checking the incoming mails	tracker	de	Interval in Minute zur Überprüfung der eingehenden Mails
+introduction message	tracker	de	Willkomensnachricht
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
@@ -132,6 +136,7 @@ language for the copy	tracker	de	Sprache für die Kopie
 last modified	tracker	de	Zuletzt geändert
 last reply	tracker	de	letzte Antwort
 later	tracker	de	Später
+links	tracker	de	Verknüpfungen
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
 mail handling	tracker	de	Mail Behandlung
 matching filter	tracker	de	Filter zutreffend
@@ -168,12 +173,14 @@ receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML Ma
 recieve notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigne Einträge
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
+reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten
 resolution	tracker	de	Lösung
 restict tracker items to the creator and the staff only	tracker	de	Tickets auf Ersteller und Mitarbeiter einschränken
 restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Grupper des Ersteller und Mitarbeiter einschränken
 restrict tracker items to staff and:	tracker	de	Tickets einschränken auf Mitarbeiter und:
 restriction	tracker	de	Einschränkungen
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	de	Einen Tracker für neue Tickets auswählen oder 'Zurückweisen' um das Erzeugen von Tickets per Mail zu verbieten.
+select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworden gesendet werden, wenn Mails empfangen werden
 select multiple	tracker	de	Mehrere Auswählen
 select tracker queue	tracker	de	Tracker Queue auswählen
 select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Tracker für die TTS Kategorien verwendet werden
@@ -181,6 +188,7 @@ select which username should be used when unrecognized mails are handled.	tracke
 select which username should be used when unrecognized replies are handled	tracker	de	Auswählen welcher Benutzer für nicht zuordenbare Antworten verwendet wird.
 sender address	tracker	de	Absender Adresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
+sent autoreplies	tracker	de	Automatische Antworten senden
 server type	tracker	de	Server Type
 set %1	tracker	de	%1 setzen
 set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
@@ -229,6 +237,7 @@ use a default user for mails that where not recognized	tracker	de	Verwende einen
 versions	tracker	de	Versionen
 vote for it!	tracker	de	Dafür abstimmen!
 votes	tracker	de	Stimmen
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn Emails von einer unbekannten Email Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld CC hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte Email Adressen nicht behandelt werden.
 wont fix	tracker	de	Ändere ich nicht
 works for me	tracker	de	Funktioniert bei mir
 yes, display groups first	tracker	de	Ja, zeige Gruppen zuerst an
