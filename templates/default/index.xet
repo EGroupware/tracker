@@ -38,7 +38,10 @@
 					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
 					<nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
 					<nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
-					<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
+					<vbox>
+						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
+						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
+					</vbox>
 					<nextmatch-sortheader label="Priority" id="tr_priority" class="tracker-priority" align="center"/>
 					<vbox options="0,0">
 						<nextmatch-filterheader options="All" id="tr_status" label="Status" class="status_filter"/>
@@ -69,7 +72,13 @@
 						<menupopup type="select-cat" options="None" readonly="true" id="${row}[tr_version]"/>
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535" class="$row_cont[seen_class]"/>
-					<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
+					<vbox readonly="true">
+						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
+						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
+						<menulist class="noWrap">
+							<menupopup type="select-account" id="${row}[tr_modifier]" readonly="true"/>
+						</menulist>
+					</vbox>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
@@ -107,7 +116,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="1.5.001">
+	<template id="tracker.index" template="" lang="" group="0" version="1.7.001">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
@@ -142,6 +151,7 @@
 						<menulist>
 							<menupopup id="tr_assigned" options="No change" label="Assigned to" no_lang="1"/>
 						</menulist>
+						<checkbox id="no_notifications" label="Do not notify of these changes"/>
 						<button id="update" label="Update"/>
 						<button image="arrow_ltr" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('nm[rows][checked][]')); return false;" needed="1" class="check_all_arrow" align="right"/>
 					</hbox>
