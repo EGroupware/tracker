@@ -166,8 +166,18 @@ class tracker_mailhandler extends tracker_bo
 									$this->mailhandling[0]['username'],
 									$this->mailhandling[0]['password'])))
 		{
-			error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
-			return false;
+			$show_failed = true;
+			// try novalidate cert, in case of ssl connection
+			if ($this->mailhandling[0]['servertype']==2) 
+			{
+				$this->mailBox = str_replace('/ssl','/ssl/novalidate-cert',$this->mailBox);
+				if (($this->mbox = @imap_open($this->mailBox,$this->mailhandling[0]['username'],$this->mailhandling[0]['password']))) $show_failed=false;
+			}
+			if ($show_failed)
+			{
+				error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
+				return false;
+			}
 		}
 
 		// There seems to be a bug in imap_seach() (#48619) that causes a SegFault if all msg match
