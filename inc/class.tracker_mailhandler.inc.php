@@ -280,6 +280,10 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function get_mailbody ($mid, $section=false, $structure = false)
 	{
+		$nonDisplayAbleCharacters = array('[\016]','[\017]',
+			'[\020]','[\021]','[\022]','[\023]','[\024]','[\025]','[\026]','[\027]',
+			'[\030]','[\031]','[\032]','[\033]','[\034]','[\035]','[\036]','[\037]');
+
 		//error_log(__METHOD__." Fetching body for ID $mid, Section $section with Structure: ".print_r($structure,true));
 		$charset = $GLOBALS['egw']->translation->charset(); // set some default charset, for translation to use
 		$mailbodyasAttachment = false;
@@ -297,12 +301,14 @@ class tracker_mailhandler extends tracker_bo
 		}
 		if ($structure === false) $structure = imap_fetchstructure($this->mbox, $mid);
 		if($structure) {
-			$rv = $this->get_part($this->mbox, $mid, 'TEXT/PLAIN', $structure,($section ? $part_number:false));
+			$mimeType = 'TEXT/PLAIN';
+			$rv = $this->get_part($this->mbox, $mid, $mimeType, $structure,($section ? $part_number:false));
 			$struct = $rv['struct'];
 			$body = $rv['body'];
 			if (empty($body))
 			{
-				$rv = $this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,($section ? $part_number:false));
+				$mimeType = 'TEXT/HTML';
+				$rv = $this->get_part($this->mbox, $mid, $mimeType, $structure,($section ? $part_number:false));
 				$struct = $rv['struct'];
 				$body = $rv['body'];
 			}
@@ -327,10 +333,12 @@ class tracker_mailhandler extends tracker_bo
 			switch ($struct->encoding)
 			{
 				case 0: // 7 BIT
-	//				$body = imap_utf7_decode($body);
+					//dont try to decode, as we do use convert anyway later on
+					//$body = imap_utf7_decode($body);
 					break;
 				case 1: // 8 BIT
-					if ($struct->subtype == 'PLAIN') {
+					if ($struct->subtype == 'PLAIN' && strtolower($charset) != 'iso-8859-1') {
+						// only decode if we are at utf-8, not sure that we should decode at all, since we use convert anyway
 						$body = utf8_decode ($body);
 					}
 					break;
@@ -348,6 +356,16 @@ class tracker_mailhandler extends tracker_bo
 					break;
 			}
 			$GLOBALS['egw']->translation->convert($body,$charset);
+			if ($mimeType=='TEXT/PLAIN')
+			{
+				$newBody    = @htmlentities($body,ENT_QUOTES, strtoupper($charset));
+				// if empty and charset is utf8 try sanitizing the string in question
+				if (empty($newBody) && strtolower($charset)=='utf-8') $newBody = @htmlentities(iconv('utf-8', 'utf-8', $body),ENT_QUOTES, strtoupper($charset));
+				// if the conversion to htmlentities fails somehow, try without specifying the charset, which defaults to iso-
+				if (empty($newBody)) $newBody    = htmlentities($body,ENT_QUOTES);
+				$body = $newBody;
+			}
+			$body = preg_replace($nonDisplayAbleCharacters,'',$body);
 
 			// handle Attachments
 			$contentParts = count($structure->parts);
