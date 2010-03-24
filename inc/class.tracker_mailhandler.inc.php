@@ -101,7 +101,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			$this->serverTypes[] = $typ[0];
 		}
-		if (($this->mailBox = self::get_mailbox()) === false)
+		if (($this->mailBox = self::get_mailbox(0)) === false)
 		{
 			return false;
 		}
@@ -123,34 +123,34 @@ class tracker_mailhandler extends tracker_bo
 	 *
 	 * @return string mailbox identification as '{server[:port]/type}folder'
 	 */
-	function get_mailbox()
+	function get_mailbox($queue = 0)
 	{
-		if (empty($this->mailhandling[0]['server']))
+		if (empty($this->mailhandling[$queue]['server']))
 		{
 			return false; // Or should we default to 'localhost'?
 		}
 		
-		$mBox = '{'.$this->mailhandling[0]['server'];	// Set the servername
+		$mBox = '{'.$this->mailhandling[$queue]['server'];	// Set the servername
 
-		if(!empty($this->mailhandling[0]['serverport']))
+		if(!empty($this->mailhandling[$queue]['serverport']))
 		{
 			// If set, add the portnumber
-			$mBox .= (':'.$this->mailhandling[0]['serverport']);
+			$mBox .= (':'.$this->mailhandling[$queue]['serverport']);
 		}
 		// Add the Servertype
-		$mBox .= ('/'.$this->serverTypes[($this->mailhandling[0]['servertype'])]);
+		$mBox .= ('/'.$this->serverTypes[($this->mailhandling[$queue]['servertype'])]);
 
 		// Close the server ID
 		$mBox .= '}';
 
 		// Add the default incoming folder or the one specified
-		if(empty($this->mailhandling[0]['folder']))
+		if(empty($this->mailhandling[$queue]['folder']))
 		{
 			$mBox .= 'INBOX';
 		}
 		else
 		{
-			$mBox .= $this->mailhandling[0]['folder'];
+			$mBox .= $this->mailhandling[$queue]['folder'];
 		}
 		return $mBox;
 	}
@@ -158,20 +158,28 @@ class tracker_mailhandler extends tracker_bo
 	/**
 	 * Get all mails from the server. Invoked by the async timer
 	 *
+	 * @param int Which tracker queue to check mail for
 	 * @return boolean true=run finished, false=an error occured
 	 */
-	function check_mail()
-	{
+	function check_mail($queue = 0) {
+		// Config for all passes null
+		if(!$queue) {
+			$queue = 0;
+		} else {
+			// Mailbox for all is pre-loaded, for others we have to change it
+			$this->mailBox = self::get_mailbox($queue);
+		}
+
 		if (!($this->mbox = @imap_open($this->mailBox,
-									$this->mailhandling[0]['username'],
-									$this->mailhandling[0]['password'])))
+									$this->mailhandling[$queue]['username'],
+									$this->mailhandling[$queue]['password'])))
 		{
 			$show_failed = true;
 			// try novalidate cert, in case of ssl connection
-			if ($this->mailhandling[0]['servertype']==2) 
+			if ($this->mailhandling[$queue]['servertype']==2) 
 			{
 				$this->mailBox = str_replace('/ssl','/ssl/novalidate-cert',$this->mailBox);
-				if (($this->mbox = @imap_open($this->mailBox,$this->mailhandling[0]['username'],$this->mailhandling[0]['password']))) $show_failed=false;
+				if (($this->mbox = imap_open($this->mailBox,$this->mailhandling[$queue]['username'],$this->mailhandling[$queue]['password']))) $show_failed=false;
 			}
 			if ($show_failed)
 			{
@@ -183,14 +191,14 @@ class tracker_mailhandler extends tracker_bo
 		// There seems to be a bug in imap_seach() (#48619) that causes a SegFault if all msg match
 		// This was introduced in v5.2.10 and fixed in v5.2.11, so use a workaround in 5.2.10
 		//
-		if (empty($this->mailhandling[0]['address']) || (version_compare(PHP_VERSION, '5.2.10') === 0))
+		if (empty($this->mailhandling[$queue]['address']) || (version_compare(PHP_VERSION, '5.2.10') === 0))
 		{
 			// Use sort here to ensure the format returned equals search
 			$this->msgList = imap_sort ($this->mbox, SORTARRIVAL, 1);
 		}
 		else
 		{
-			$this->msgList = imap_search ($this->mbox, 'TO "' . $this->mailhandling[0]['address'] . '"');
+			$this->msgList = imap_search ($this->mbox, 'TO "' . $this->mailhandling[$queue]['address'] . '"');
 		}
 
 		if ($this->msgList)
@@ -199,7 +207,7 @@ class tracker_mailhandler extends tracker_bo
 			for ($_idx = 0; $_idx < $_cnt; $_idx++)
 			{
 				if ($this->msgList[$_idx])
-				if (self::process_message($this->msgList[$_idx]) && $this->mailhandling[0]['delete_from_server'])
+				if (self::process_message($this->msgList[$_idx], $queue) && $this->mailhandling[$queue]['delete_from_server'])
 				{
 					@imap_delete($this->mbox, $this->msgList[$_idx]);
 				}
@@ -213,6 +221,8 @@ class tracker_mailhandler extends tracker_bo
 
 		// Restore original user (for fallback)
 		$this->user = $this->originalUser;
+
+		return true;
 	}
 
 	/**
@@ -494,7 +504,7 @@ class tracker_mailhandler extends tracker_bo
 	 * @param int Message ID from the server
 	 * @return boolean true=message successfully processed, false=message couldn't or shouldn't be processed
 	 */
-	function process_message ($mid)
+	function process_message ($mid, $queue)
 	{
 		$senderIdentified = false;
 		$this->mailBody = null; // Clear previous message
@@ -502,7 +512,7 @@ class tracker_mailhandler extends tracker_bo
 
 		// Workaround for PHP bug#48619
 		//
-		if (!empty($this->mailhandling[0]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
+		if (!empty($this->mailhandling[$queue]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
 		{
 			if (strstr($msgHeader->toaddress, $msgHeader->toaddress) === false)
 			{
@@ -587,7 +597,7 @@ class tracker_mailhandler extends tracker_bo
 		// Handle unrecognized mails
 		if (!$senderIdentified)
 		{
-			switch ($this->mailhandling[0]['unrecognized_mails'])
+			switch ($this->mailhandling[$queue]['unrecognized_mails'])
 			{
 				case 'ignore' :		// Do nothing
 					return false;
@@ -597,7 +607,7 @@ class tracker_mailhandler extends tracker_bo
 					return false;	// Prevent from a second delete attempt
 					break;
 				case 'forward' :	// Return the status of the forward attempt
-					$returnVal = self::forward_message($mid, $msgHeader);
+					$returnVal = self::forward_message($mid, $msgHeader, $queue);
 					if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
 					return $returnVal;
 					break;
@@ -613,17 +623,17 @@ class tracker_mailhandler extends tracker_bo
 
 		if ($this->ticketId == 0) // Create new ticket?
 		{
-			if (empty($this->mailhandling[0]['default_tracker']))
+			if (empty($this->mailhandling[$queue]['default_tracker']))
 			{
 				return false; // Not allowed
 			}
 			if (!$senderIdentified) // Unknown user
 			{
-				if (empty($this->mailhandling[0]['unrec_mail']))
+				if (empty($this->mailhandling[$queue]['unrec_mail']))
 				{
 					return false; // Not allowed for unknown users
 				}
-				$this->mailSender = $this->mailhandling[0]['unrec_mail']; // Ok, set default user
+				$this->mailSender = $this->mailhandling[$queue]['unrec_mail']; // Ok, set default user
 			}
 		}
 
@@ -639,12 +649,12 @@ class tracker_mailhandler extends tracker_bo
 			$this->init();
 			$this->user = $this->mailSender;
 			$this->data['tr_summary'] = $this->mailSubject;
-			$this->data['tr_tracker'] = $this->mailhandling[0]['default_tracker'];
-			$this->data['cat_id'] = $this->mailhandling[0]['default_cat'];
-//			$this->data['tr_version'] = $this->mailhandling[0]['default_version'];
+			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
+			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
+//			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
 			$this->data['tr_description'] = $this->mailBody;
-			if (!$senderIdentified && $this->mailhandling[0]['auto_cc'])
+			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
 			{
 				$this->data['tr_cc'] = $replytoAddress;
 			}
@@ -654,7 +664,7 @@ class tracker_mailhandler extends tracker_bo
 			$this->read($this->ticketId);
 			if (!$senderIdentified)
 			{
-				switch ($this->mailhandling[0]['unrec_reply'])
+				switch ($this->mailhandling[$queue]['unrec_reply'])
 				{
 					case 0 :
 						$this->user = $this->data['tr_creator'];
@@ -671,7 +681,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$this->user = $this->mailSender;
 			}
-			if ($this->mailhandling[0]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
+			if ($this->mailhandling[$queue]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
 			{
 				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
@@ -682,16 +692,16 @@ class tracker_mailhandler extends tracker_bo
 
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
-			(($this->mailhandling[0]['auto_reply'] == 2		// Always reply or
-			|| ($this->mailhandling[0]['auto_reply'] == 1	// only new tickets
+			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
+			|| ($this->mailhandling[$queue]['auto_reply'] == 1	// only new tickets
 				&& $this->ticketId == 0)					// and this is a new one
 				) && (										// AND
 					$senderIdentified		 				// we know this user
 				|| (!$senderIdentified						// or we don't and
-				&& $this->mailhandling[0]['reply_unknown'] == 1 // don't care
+				&& $this->mailhandling[$queue]['reply_unknown'] == 1 // don't care
 			))) == true
 				? array(
-					'reply_text' => $this->mailhandling[0]['reply_text'],
+					'reply_text' => $this->mailhandling[$queue]['reply_text'],
 					// UserID or mail address
 					'reply_to' => ($this->user ? $this->user : $replytoAddress),
 				)
@@ -805,7 +815,7 @@ class tracker_mailhandler extends tracker_bo
 	 * @param int message ID from the server
 	 * @return boolean status
 	 */
-	function forward_message($mid=0, &$headers=null)
+	function forward_message($mid=0, &$headers=null, $queue=0)
 	{
 		if ($mid == 0 || $headers == null) // no data
 		{
@@ -813,7 +823,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		// Sending mail is not implemented using notifations, since it's pretty straight forward here
-		$to   = $this->mailhandling[0]['forward_to'];
+		$to   = $this->mailhandling[$queue]['forward_to'];
 		$subj = $headers->subject;
 		$body = imap_body($this->mbox, $mid, FK_INTERNAL);
 		$hdrs = 'From: ' . $headers->fromaddress . "\r\n" .
@@ -825,24 +835,26 @@ class tracker_mailhandler extends tracker_bo
 	/**
 	 * Check if exist and if not start or stop an async job to check incoming mails
 	 *
+	 * @param int $queue ID of the queue to check email for
 	 * @param int $interval=1 >0=start, 0=stop
 	 */
-	static function set_async_job($interval=0)
+	static function set_async_job($queue=0, $interval=0)
 	{
 		$async = new asyncservice();
+		$job_id = 'tracker-check_mail' . ($queue ? '-'.$queue : '');
 
 		// Make sure an existing timer is cancelled
-		$async->cancel_timer('tracker-check-mail');
+		$async->cancel_timer($job_id);
 
 		if ($interval > 0)
 		{
 			if ($interval == 60)
 			{
-				$async->set_timer(array('hour' => '*'),'tracker-check-mail','tracker.tracker_mailhandler.check_mail',null);
+				$async->set_timer(array('hour' => '*'),$job_id,'tracker.tracker_mailhandler.check_mail',(int)$queue);
 			}
 			else
 			{
-				$async->set_timer(array('min' => "*/$interval"),'tracker-check-mail','tracker.tracker_mailhandler.check_mail',null);
+				$async->set_timer(array('min' => "*/$interval"),$job_id,'tracker.tracker_mailhandler.check_mail',$queue);
 			}
 		}
 	}

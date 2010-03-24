@@ -1158,7 +1158,9 @@ class tracker_bo extends tracker_so
 		self::set_async_job($this->pending_close_days > 0);
 
 		$mailhandler = new tracker_mailhandler();
-		$mailhandler->set_async_job($this->mailhandling[0]['interval']);
+		foreach($this->mailhandling as $queue_id => $handling) {
+			$mailhandler->set_async_job($queue_id, $handling['interval']);
+		}
 	}
 
 	/**

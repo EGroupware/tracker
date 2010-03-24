@@ -150,6 +150,7 @@ class tracker_admin extends tracker_bo
 							$need_update = true;
 						}
 					}
+
 					// build the (normalized!) priority array
 					$prios = array();
 					foreach($content['priorities'] as $value => $data)
@@ -403,7 +404,7 @@ class tracker_admin extends tracker_bo
 			'cat_id' => $this->get_tracker_labels('cat',$tracker),
 			// Mail handling
 			'servertype' => array(),
-			'default_tracker' => &$this->trackers,
+			'default_tracker' => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
 			// TODO; enable the default_trackers onChange() to reload categories
 			'default_cat' => $this->get_tracker_labels('cat',$content['mailhandling']['default_tracker']),
 			'unrec_reply' => array(
