@@ -153,6 +153,19 @@ class tracker_hooks
 				'admin'  => False,
 				'forced' => true,
 			),
+			'homepage_display' => array(
+				'type'   => 'check',
+				'label'  => 'Tracker for the main screen',
+				'name'   => 'homepage_display',
+				'values' => array(
+					'no'  => 'No',
+					'yes' => 'Yes'
+				),
+				'help'   => 'Should there be a tracker-box on main screen?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> false
+			),
 		);
 	}
 }

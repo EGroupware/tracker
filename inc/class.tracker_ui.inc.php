@@ -795,9 +795,10 @@ class tracker_ui extends tracker_bo
 	 * @param int $tracker=null id of tracker
 	 * @param string $msg=''
 	 * @param int $only_tracker=null show only the given tracker and not tracker-selection
+	 * @param boolean $return_html=false if set to true, html content returned
 	 * @return string html-content, if sitemgr otherwise null
 	 */
-	function index($content=null,$tracker=null,$msg='',$only_tracker=null)
+	function index($content=null,$tracker=null,$msg='',$only_tracker=null, $return_html=false)
 	{
 		//_debug_array($this->trackers);
 		if (!is_array($content))
@@ -937,6 +938,6 @@ class tracker_ui extends tracker_bo
 			$tpl->read('tracker.index');
 		}
 
-		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker));
+		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
 	}
 }

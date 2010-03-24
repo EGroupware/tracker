@@ -34,6 +34,7 @@ $setup_info['tracker']['hooks']['settings'] = 'tracker_hooks::settings';
 $setup_info['tracker']['hooks']['admin'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['search_link'] = 'tracker_hooks::search_link';
+$setup_info['tracker']['hooks'][] = 'home';
 
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
