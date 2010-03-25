@@ -349,7 +349,7 @@ class tracker_mailhandler extends tracker_bo
 				case 1: // 8 BIT
 					if ($struct->subtype == 'PLAIN' && strtolower($charset) != 'iso-8859-1') {
 						// only decode if we are at utf-8, not sure that we should decode at all, since we use convert anyway
-						$body = utf8_decode ($body);
+						//$body = utf8_decode ($body);
 					}
 					break;
 				case 2: // Binary
