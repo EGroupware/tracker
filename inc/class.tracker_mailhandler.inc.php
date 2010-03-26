@@ -489,6 +489,86 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * Check if this is an automated message (bounce, autoreply...)
+	 * @TODO This is currently a very basic implementation, the intention is to implement more checks,
+	 * eg, filter failing addresses and remove them from CC.
+	 * 
+	 * @param int $mid Message ID
+	 * @param array $msgHeader IMap header
+	 * @return boolean
+	 */
+	function is_automail($mid, $msgHeader)
+	{
+		// This array can be filled with checks that should be made.
+		// 'bounces' and 'autoreplies' (level 1) are the keys coded below, the level 2 arrays
+		// must match $msgHeader properties.
+		//
+		$autoMails = array(
+			 'bounces' => array(
+				 'subject' => array(
+				)
+				,'fromaddress' => array(
+					 'mailer-daemon'
+				)
+			)
+			,'autoreplies' => array(
+				 'subject' => array(
+					 'out of the office'
+					,'autoreply'
+					)
+				,'fromaddress' => array(
+				)
+			)
+		);
+
+		// Check for bounced messages
+		foreach ($autoMails['bounces'] as $_k => $_v) {
+			if (count($_v) == 0) {
+				continue;
+			}
+			$_re = '/(' . implode('|', $_v) . ')/i';
+			if (preg_match($_re, $msgHeader->$_k)) {
+				switch ($this->mailhandling[0]['bounces']) {
+					case 'delete' :		// Delete, whatever the overall delete setting is
+						@imap_delete($this->mbox, $mid);
+						break;
+					case 'forward' :	// Return the status of the forward attempt
+						$returnVal = self::forward_message($mid, $msgHeader);
+						if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
+					default :			// default: 'ignore'
+						break;
+				}
+				return true;
+			}
+		}
+
+		// Check for autoreplies
+		foreach ($autoMails['autoreplies'] as $_k => $_v) {
+			if (count($_v) == 0) {
+				continue;
+			}
+			$_re = '/(' . implode('|', $_v) . ')/i';
+			if (preg_match($_re, $msgHeader->$_k)) {
+				switch ($this->mailhandling[0]['autoreplies']) {
+					case 'delete' :		// Delete, whatever the overall delete setting is
+						@imap_delete($this->mbox, $mid);
+						break;
+					case 'forward' :	// Return the status of the forward attempt
+						$returnVal = self::forward_message($mid, $msgHeader);
+						if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
+						break;
+					case 'process' :	// Process normally...
+						return false;	// ...so act as if it's no automail
+						break;
+					default :			// default: 'ignore'
+						break;
+				}
+				return true;
+			}
+		}
+	}
+
+	/**
 	 * Decode a mail header
 	 *
 	 * @param string Pointer to the (possibly) encoded header that will be changes
@@ -514,7 +594,7 @@ class tracker_mailhandler extends tracker_bo
 		//
 		if (!empty($this->mailhandling[$queue]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
 		{
-			if (strstr($msgHeader->toaddress, $msgHeader->toaddress) === false)
+			if (strstr($msgHeader->toaddress, $this->mailhandling[0]['address']) === false)
 			{
 				return false;
 			}
@@ -553,6 +633,11 @@ class tracker_mailhandler extends tracker_bo
 	            "\n Deleted:".print_r($msgHeader->Deleted,true)."\n Stopped processing Mail. Not recent, new, or already answered, or deleted");
 			return false;
 		}
+		
+		if (is_automail($mid, $msgHeader)) {
+			return false;
+		}
+		
 		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Subject:'.print_r($msgHeader,true));
 		// Try several headers to identify the sender
 		$try_addr = array(

@@ -158,6 +158,8 @@ class tracker_bo extends tracker_so
 	 *   auto_reply (0=Never/1=New/2=Always)
 	 *   reply_unknown (1=Yes/0=No)
 	 *   reply_text (text message)
+	 *   bounces (ignore/delete/forward)
+	 *   autoreplies (ignore/delete/forward/process)
 	 *
 	 * @var array
 	 */
