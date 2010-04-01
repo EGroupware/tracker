@@ -66,6 +66,8 @@ class tracker_so extends so_sql_cf
 	 */
 	function __construct()
 	{
+		// Set columns to search here so self::TRACKER_TABLE is available
+		$this->columns_to_search = array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','tr_budget','reply_message');
 		parent::__construct('tracker',self::TRACKER_TABLE,self::EXTRA_TABLE,'','tr_extra_name','tr_extra_value','tr_id');
 	}
 
@@ -242,12 +244,7 @@ class tracker_so extends so_sql_cf
 		}
 		if (is_string($criteria) && $criteria)
 		{
-			$pattern = $criteria;
-			$criteria = array();
-			foreach(array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','reply_message') as $col)
-			{
-				$criteria[$col] = $pattern;
-			}
+			$criteria = $this->search2criteria($criteria, $wildcard, $op);
 			$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 		}
 		elseif(isset($criteria['tr_id']))
