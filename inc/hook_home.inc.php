@@ -1,15 +1,15 @@
 <?php
-
-if ($GLOBALS['egw_info']['user']['apps']['tracker'] && $GLOBALS['egw_info']['user']['preferences']['tracker']['homepage_display'])
+$appname = $appname;
+if ($GLOBALS['egw_info']['user']['apps'][$appname] && $GLOBALS['egw_info']['user']['preferences'][$appname]['homepage_display'])
 {
 	$save_app = $GLOBALS['egw_info']['flags']['currentapp'];
-	$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
+	$GLOBALS['egw_info']['flags']['currentapp'] = $appname;
 
-	$GLOBALS['egw']->translation->add_app('tracker');
-
+	$GLOBALS['egw']->translation->add_app($appname);
+	$app_id = $GLOBALS['egw']->applications->name2id($appname);
 	$tracker = new tracker_ui();
-	$queue = $GLOBALS['egw_info']['user']['preferences']['tracker']['queue'];
-	$status = $GLOBALS['egw_info']['user']['preferences']['tracker']['status'];
+	$queue = $GLOBALS['egw_info']['user']['preferences'][$appname]['queue'];
+	$status = $GLOBALS['egw_info']['user']['preferences'][$appname]['status'];
 
 	//if (in_array($showevents,array('1','2'))) $showevents = 'own-open-today';
 	$html = $tracker->index(array('nm' => array('rows' => array('tr_status' => $status))),$queue,'',null,true);
