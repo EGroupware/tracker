@@ -169,7 +169,7 @@ class tracker_mailhandler extends tracker_bo
 			// Mailbox for all is pre-loaded, for others we have to change it
 			$this->mailBox = self::get_mailbox($queue);
 		}
-
+		if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$this->mailBox} for queue $queue\n");
 		if (!($this->mbox = @imap_open($this->mailBox,
 									$this->mailhandling[$queue]['username'],
 									$this->mailhandling[$queue]['password'])))
