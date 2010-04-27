@@ -403,6 +403,15 @@ class tracker_admin extends tracker_bo
 			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker),
 			// Mail handling
+			'interval' => array(
+				0 => 'Disabled',
+				5 => 5,
+				10 => 10,
+				15 => 15,
+				20 => 20,
+				30 => 30,
+				60 => 60
+			),
 			'servertype' => array(),
 			'default_tracker' => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
 			// TODO; enable the default_trackers onChange() to reload categories
