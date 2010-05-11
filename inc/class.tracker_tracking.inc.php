@@ -132,7 +132,7 @@ class tracker_tracking extends bo_tracking
 				$config = $config ? preg_split('/, ?/',$config) : array();
 				if ($data['tr_cc'])
 				{
-					$config = array_merge($config,split(', ?',$data['tr_cc']));
+					$config = array_merge($config,preg_split('/, ?/',$data['tr_cc']));
 				}
 				break;
 		}
