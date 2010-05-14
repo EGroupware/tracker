@@ -1140,6 +1140,7 @@ class tracker_bo extends tracker_so
 		unset($this->admins[$tracker]);
 		unset($this->technicians[$tracker]);
 		unset($this->users[$tracker]);
+		$this->mailhandling[$tracker]['interval'] = 0; // Cancel async job
 		$this->delete(array('tr_tracker' => $tracker));
 		$this->save_config();
 
