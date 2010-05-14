@@ -422,8 +422,11 @@ class tracker_ui extends tracker_bo
 			}
 		}
 		$tr_id = $this->data['tr_id'];
-		if (!($tracker = $this->data['tr_tracker'])) list($tracker) = @each($this->trackers);
-
+		if (!($tracker = $this->data['tr_tracker']))
+		{
+			reset($this->trackers);
+			list($tracker) = @each($this->trackers);
+		}
 		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
 
 		if ($this->data['tr_edit_mode'] == 'ascii' && $this->data['tr_description'] && $readonlys['tr_description'])
@@ -909,21 +912,32 @@ class tracker_ui extends tracker_bo
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 	 			'default_cols'   => '!esc_id',
 			);
-			// KL20070124 on first enter of the tracker system, show the first entry
-			if (!$tracker) list($tracker) = @each($this->trackers);
 			// use the state of the last session stored in the user prefs
 			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
 			{
 				$content['nm'] = array_merge($content['nm'],$state);
-				$tracker=$content['nm']['col_filter']['tr_tracker'];
+				$tracker = $content['nm']['col_filter']['tr_tracker'];
+			}
+			elseif (!$tracker)
+			{
+				reset($this->trackers);
+				list($tracker) = @each($this->trackers);
 			}
 		}
-		if($_GET['search']) {
+		if($_GET['search'])
+		{
 			$content['nm']['search'] = $_GET['search'];
+		}
+		// if there is only one tracker, use that one and do NOT show the selectbox
+		if (count($this->trackers) == 1)
+		{
+			reset($this->trackers);
+			list($tracker) = @each($this->trackers);
+			$readonlys['nm']['col_filter[tr_tracker]'] = true;
 		}
 		if (!$tracker)
 		{
-			$tracker = $content['nm']['col_filter']['tr_tracker']=$tracker='';
+			$tracker = $content['nm']['col_filter']['tr_tracker'] = '';
 		}
 		else
 		{
