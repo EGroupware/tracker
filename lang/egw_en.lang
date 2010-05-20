@@ -196,6 +196,7 @@ set bounty	tracker	en	Set bounty
 should the actions column in the tracker list-view be shown?	tracker	en	Should the actions column in the tracker list-view be shown?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+should there be a tracker-box on main screen?	tracker	en	Should there be a tracker-box on main screen?
 show a new column that calculated the acumulated times of timesheet entries.	tracker	en	Show a new column that calculated the acumulated times of timesheet entries.
 show actions in tracker listing	tracker	en	Show actions in tracker listing
 show the acumulated times of timesheet entries	tracker	en	Show the acumulated times of timesheet entries
@@ -223,6 +224,7 @@ tracker admins & technicians	tracker	en	Tracker admins & technicians
 tracker configuration	tracker	en	Tracker configuration
 tracker deleted	tracker	en	Tracker queue deleted
 tracker for new tickets	tracker	en	Tracker for new tickets
+tracker for the main screen	tracker	en	Tracker for the main screen
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found !!!
 tracker queue	tracker	en	Tracker Queue
@@ -240,8 +242,10 @@ votes	tracker	en	Votes
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	en	When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled.
 wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
+yes, always	tracker	en	Yes, always
 yes, display groups first	tracker	en	Yes, display groups first
 yes, display users first	tracker	en	Yes, display users first
+yes, new tickets only	tracker	en	Yes, new tickets only
 yes, with larger fontsize	tracker	en	Yes, with larger fontsize
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	en	You can enable/disable the queue access restrictions in the configuration tab (for all queues)
 you can respond by visiting:	tracker	en	You can respond by visiting:
