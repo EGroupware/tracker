@@ -97,6 +97,7 @@ email address to contact you	tracker	fi	Sähköpostiosoite, jolla sinut tavoitta
 email handling can be configured only for all trackers	tracker	fi	Sähköpostikäsittely voidaan konfiguroida vain kaikkiin HeplDeskeihin
 enter an email address here if unrecognized mails should be forwarded	tracker	fi	Mihin osoitteeseen tunnistamaton sähköposti pitäisi edelleenlähettää?
 enter an opening text for the reply message	tracker	fi	Syötä avausteksti vastaussähköpostiin.
+enter the imap server from which emails should be fetched	tracker	fi	IMAP palvelin josta sähköpostit noudetaan.
 entry saved	tracker	fi	Merkintä tallennettu
 error adding the new tracker!	tracker	fi	Virhe lisätessä uutta merkintää!
 error deleting escalation!	tracker	fi	Virhe poistettaessa eskalaatiota!
@@ -158,6 +159,7 @@ port number	tracker	fi	Portti
 postponed	tracker	fi	Lykätty
 print entry	tracker	fi	Tulosta merkintä
 priorities	tracker	fi	Tärkeysjärjestys
+priorities with empty label are not available to the user	tracker	fi	Tärkeysjärjestyksen tyhjät kentät eivät ole näkyvissä käyttäjille.
 project selection	tracker	fi	Projektinvalinta
 projects	tracker	fi	Projektit
 queue	tracker	fi	Queue
@@ -187,6 +189,7 @@ set bounty	tracker	fi	Aseta palkkio
 should the actions column in the tracker list-view be shown?	tracker	fi	Näytetäänkö 'Toiminnot' sarake HelpDeskin listanäkymässä?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähettääkö HelpDesk sinulle huomautusviestin, jos niitä merkintöjä joissa olet vastuuhenkilönä päivitetään?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähettääkö HelpDesk sinulle huomautusviestin, jos luomaasi merkintää päivitetään?
+should there be a tracker-box on main screen?	tracker	fi	Haluatko näyttää HelpDeskin etusivulla?
 show a new column that calculated the acumulated times of timesheet entries.	tracker	fi	Näytä uusi sarake ajanseurannan luomille merkinnöille (sarake johon yhteenlasketaan käytetty aika).
 show actions in tracker listing	tracker	fi	Näytä toimenpiteet listanäkymässä
 show the acumulated times of timesheet entries	tracker	fi	Näytä ajanhallinnan merkintöjen yhteenlaskettu aika
@@ -213,6 +216,7 @@ tracker admins & technicians	tracker	fi	Helpdeskin ylläpitäjät ja tekniset tu
 tracker configuration	tracker	fi	HelpDeskin konfigurointi
 tracker deleted	tracker	fi	HelpDesk Queue poistettu
 tracker for new tickets	tracker	fi	HelpDesk Queue uusille merkinnöille
+tracker for the main screen	tracker	fi	HelpDesk sovellus etusivulle
 tracker item modified by %1 at %2	tracker	fi	Merkintää muokannut: %1, %2
 tracker item not found !!!	tracker	fi	HelpDesk -merkintää ei löytynyt!!
 tracker queue	tracker	fi	HelpDesk Queue
@@ -228,9 +232,11 @@ vote for it!	tracker	fi	Äänestä sitä!
 votes	tracker	fi	Äänet
 wont fix	tracker	fi	Ei korjaannu
 works for me	tracker	fi	Toimii minulla
+yes, always	tracker	fi	Kyllä, aina
 yes, display groups first	tracker	fi	Kyllä, näytä ryhmät ensin
 yes, display users first	tracker	fi	Kyllä, näytä käyttäjät ensin
-yes, with larger fontsize	tracker	fi	Kyllä, Isompi fonttikoko
+yes, new tickets only	tracker	fi	Kyllä, vain uudet merkinnät
+yes, with larger fontsize	tracker	fi	Kyllä, isomalla fonttikoolla
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	fi	Voit sallia / ottaa pois käytöstä HelpDesk Queue rajoitukset konfiguroinnissa (kaikista HelpDesk Queuesta)
 you can respond by visiting:	tracker	fi	Voit vastata vierailemalla:
 you need to enter a name	tracker	fi	Anna nimi
