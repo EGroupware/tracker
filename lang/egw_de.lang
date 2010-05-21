@@ -196,6 +196,7 @@ set bounty	tracker	de	Prämie setzen
 should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der Trackerübersicht angezeigt werden?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
+should there be a tracker-box on main screen?	tracker	de	Soll in der Hauptansicht eine Tracker-Box erscheinen?
 show a new column that calculated the acumulated times of timesheet entries.	tracker	de	Zeige eine neue Spalte mit den zusammengefasten Zeiten der Stundenzettel
 show actions in tracker listing	tracker	de	Zeige Befehle in der Trackerübersicht
 show the acumulated times of timesheet entries	tracker	de	Zeige die zusammengefassten Zeiten der Stundenzettel
@@ -223,6 +224,7 @@ tracker admins & technicians	tracker	de	Administratoren & Techniker des Verfolgu
 tracker configuration	tracker	de	Konfiguration des Verfolgungssystems
 tracker deleted	tracker	de	Verfolgungssystem gelöscht
 tracker for new tickets	tracker	de	Tracker für neue Tickets
+tracker for the main screen	tracker	de	Tracker für die Hauptansicht
 tracker item modified by %1 at %2	tracker	de	Verfolgungssystem Eintrag geändert von %1 am %2
 tracker item not found !!!	tracker	de	Eintrag im Verfolgungssystem nicht gefunden !!!
 tracker queue	tracker	de	Verfolgungs Queue
@@ -240,8 +242,10 @@ votes	tracker	de	Stimmen
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn Emails von einer unbekannten Email Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld CC hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte Email Adressen nicht behandelt werden.
 wont fix	tracker	de	Ändere ich nicht
 works for me	tracker	de	Funktioniert bei mir
+yes, always	tracker	de	Ja, immer
 yes, display groups first	tracker	de	Ja, zeige Gruppen zuerst an
 yes, display users first	tracker	de	Ja, zeige Benutzer zuerst an
+yes, new tickets only	tracker	de	Ja, nur neue Tickets
 yes, with larger fontsize	tracker	de	Ja, mit einer größeren Schrift
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	de	Sie können die Zugriffskontrolle des Verfolgungssystem im Kartenreiter Konfiguration (für alle Systeme) ein- oder ausschalten
 you can respond by visiting:	tracker	de	Sie können unter dem folgenden Verweis antworten:
