@@ -127,6 +127,7 @@ import tts tickets	tracker	en	Import TTS tickets
 incoming mail folder	tracker	en	Incoming mail folder
 incoming mail rules	tracker	en	Incoming mail rules
 incoming mail server	tracker	en	Incoming mail server
+info only	tracker	en	Info only
 interval in minutes for checking the incoming mails	tracker	en	Interval in minutes for checking the incoming mails
 introduction message	tracker	en	Introduction message
 invalid	tracker	en	Invalid

@@ -92,6 +92,7 @@ class tracker_bo extends tracker_so
 		'd' => 'Duplicate',
 		'f' => 'Fixed',
 		'i' => 'Invalid',
+		'I' => 'Info only',
 		'l' => 'Later',
 		'o' => 'Out of date',
 		'p' => 'Postponed',
