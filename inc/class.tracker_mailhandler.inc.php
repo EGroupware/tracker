@@ -827,7 +827,8 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false;
 		}
-		preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
+		//preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
+		preg_match_all("/([a-z0-9][a-z0-9._-]*)?[a-z0-9]@([a-z0-9ÄÖÜäöüß](|[a-z0-9ÄÖÜäöüß_-]*[a-z0-9ÄÖÜäöüß])\.)+[a-z]{2,6}/", $addr, $address);
 		return ($address[0][0]);
 	}
 
