@@ -167,8 +167,18 @@ class tracker_mailhandler extends tracker_bo
 									$this->mailhandling[0]['username'],
 									$this->mailhandling[0]['password'])))
 		{
-			error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
-			return false; // Open mailbox failed, don't we wanna log this?
+			$show_failed = true;
+			// try novalidate cert, in case of ssl connection
+			if ($this->mailhandling[$queue]['servertype']==2)
+			{
+				$this->mailBox = str_replace('/ssl','/ssl/novalidate-cert',$this->mailBox);
+				if (($this->mbox = imap_open($this->mailBox,$this->mailhandling[$queue]['username'],$this->mailhandling[$queue]['password']))) $show_failed=false;
+			}
+			if ($show_failed)
+			{
+				error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
+				return false;
+			}
 		}
 
 		if (empty($this->mailhandling[0]['address']))
@@ -651,7 +661,8 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false;
 		}
-		preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
+		//preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
+		preg_match_all("/([a-z0-9][a-z0-9._-]*)?[a-z0-9]@([a-z0-9ÄÖÜäöüß](|[a-z0-9ÄÖÜäöüß_-]*[a-z0-9ÄÖÜäöüß])\.)+[a-z]{2,6}/", $addr, $address);
 		return ($address[0][0]);
 	}
 
