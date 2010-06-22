@@ -127,6 +127,7 @@ import tts tickets	tracker	de	TTS Tickets importieren
 incoming mail folder	tracker	de	Ordner für eingehende Mail
 incoming mail rules	tracker	de	Regeln für eingehende Mail
 incoming mail server	tracker	de	Server für eingehende Mail
+info only	tracker	en	zur Information
 interval in minutes for checking the incoming mails	tracker	de	Interval in Minute zur Überprüfung der eingehenden Mails
 introduction message	tracker	de	Willkomensnachricht
 invalid	tracker	de	Ungültig
