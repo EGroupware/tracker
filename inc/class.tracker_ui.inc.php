@@ -133,7 +133,7 @@ class tracker_ui extends tracker_bo
 			// edit or new?
 			if ((int)$_GET['tr_id'])
 			{
-				$own_referer = $GLOBALS['egw']->common->get_referer();
+				$own_referer = common::get_referer();
 				if (!$this->read($_GET['tr_id']))
 				{
 					$msg = lang('Tracker item not found !!!');
@@ -200,7 +200,7 @@ class tracker_ui extends tracker_bo
 				if ($popup)
 				{
 					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
-					$GLOBALS['egw']->common->egw_exit();
+					common::egw_exit();
 				}
 				else
 				{
@@ -238,7 +238,7 @@ class tracker_ui extends tracker_bo
 				if ($popup)
 				{
 					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
-					$GLOBALS['egw']->common->egw_exit();
+					common::egw_exit();
 				}
 				else
 				{
@@ -321,19 +321,15 @@ class tracker_ui extends tracker_bo
 					{
 						$js .= 'window.close();';
 						echo "<html>\n<body>\n<script>\n$js\n</script>\n</body>\n</html>\n";
-						$GLOBALS['egw']->common->egw_exit();
+						common::egw_exit();
 					}
-					else
+					unset($_GET['tr_id']);	// in case it's still set
+					if($own_referer && strpos($own_referer,'cd=yes') === false)
 					{
-						unset($_GET['tr_id']);	// in case it's still set
-						if($own_referer) {
-							// Go back to where you came from
-							egw::redirect_link($own_referer);
-						} else {
-							return $this->index(null,$this->data['tr_tracker'],$msg);
-						}
+						// Go back to where you came from
+						egw::redirect_link($own_referer);
 					}
-					break;
+					return $this->index(null,$this->data['tr_tracker'],$msg);
 
 				case 'vote':
 					if ($this->cast_vote())
