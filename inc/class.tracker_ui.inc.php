@@ -565,6 +565,12 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->set_cell_attribute('cat_id','onchange',true);
 		}
+		// No notifications needs label hidden too
+		if($readonlys['no_notifications'])
+		{
+			$tpl->set_cell_attribute('no_notifications', 'disabled', true);
+		}
+
 		if ($content['tr_assigned'] && !is_array($content['tr_assigned']))
 		{
 			$content['tr_assigned'] = explode(',',$content['tr_assigned']);

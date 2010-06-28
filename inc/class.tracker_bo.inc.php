@@ -204,6 +204,7 @@ class tracker_bo extends tracker_so
 		'reply_message'  => 'Add comment',
 		'add'            => 'Add',
 		'vote'           => 'Vote for it!',
+		'no_notifications'	=> 'No notifications',
 		'bounty'         => 'Set bounty',
 		'tr_cc'			 => 'CC',
 		'num_replies'    => 'Number of replies',
@@ -1224,6 +1225,7 @@ class tracker_bo extends tracker_so
 			'add'            => TRACKER_USER,
 			'vote'           => TRACKER_EVERYBODY,	// TRACKER_USER for NO anon user
 			'bounty'         => TRACKER_EVERYBODY,
+			'no_notifications'	=> TRACKER_ITEM_ASSIGNEE|TRACKER_TECHNICIAN|TRACKER_ADMIN,
 		) as $name => $value)
 		{
 			if (!isset($this->field_acl[$name])) $this->field_acl[$name] = $value;
