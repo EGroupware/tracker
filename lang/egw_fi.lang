@@ -125,6 +125,7 @@ import tts tickets	tracker	fi	Tuo TTS
 incoming mail folder	tracker	fi	Saapuvien sähköpostien kansio
 incoming mail rules	tracker	fi	Saapuvien sähköpostien säännöt
 incoming mail server	tracker	fi	Saapuvien sähköpostien palvelin
+info only	tracker	fi	Info
 interval in minutes for checking the incoming mails	tracker	fi	Kuinka usein tarkistetaan saapuvat sähköpostit?
 introduction message	tracker	fi	Tervehdysviesti
 invalid	tracker	fi	Kelpaamaton
@@ -207,6 +208,7 @@ the canned response will be prefix the text you type.	tracker	fi	Valmiiksi kirjo
 there already an escalation for that filter!	tracker	fi	Tällä suotimella on jo eskalaatio!
 this module displays information from the tracker.	tracker	fi	Tämä moduuli näyttää tietoa HelpDeskistä.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fi	Järjestelmä sulki tämän HelpDesk-merkinnän automaattisesti. Se oli viimeksi asetettu vireillä olevaan tilaan, eikä alkuperäinen lähettäjä vastannut siihen %1 päivän kuluessa.
+ticket count	tracker	fi	Merkintälaskuri
 ticket modified by %1 at %2	tracker	fi	Merkintää muokannut %1, %2
 times	tracker	fi	Ajat
 tracker	common	fi	HelpDesk

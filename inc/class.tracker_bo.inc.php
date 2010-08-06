@@ -283,7 +283,7 @@ class tracker_bo extends tracker_so
 	 */
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit', 'mailhandling',	// tracker unspecific
+		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users', 'mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access',
 	);
 	/**
@@ -577,7 +577,7 @@ class tracker_bo extends tracker_so
 	{
 		static $staff_cache;
 
-		//echo "botracker::get_staff($tracker,$return_groups,$technicians)";
+		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
 
 		// some caching
 		if (isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][(int)$return_groups]) &&
@@ -590,11 +590,12 @@ class tracker_bo extends tracker_so
 		switch($what)
 		{
 			case 'users':
+			case 'usersANDtechnicians':
 				foreach($tracker ? array(0,$tracker) : array_keys($this->users) as $t)
 				{
 					if (is_array($this->users[$t])) $staff = array_merge($staff,$this->users[$t]);
 				}
-				break;
+				if ($what == 'users') break;
 			case 'technicians':
 				foreach($tracker ? array(0,$tracker) : array_keys($this->technicians) as $t)
 				{
@@ -667,11 +668,13 @@ class tracker_bo extends tracker_so
 	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_technician($tracker,$user=null,$checkgroups=false)
+	function is_technician($tracker,$user=null,$checkgroups=false,$what=null)
 	{
 		if (is_null($user)) $user = $this->user;
 
-		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),'technicians');
+		if ($what === null) $what = ($this->allow_assign_users==1?'usersANDtechnicians':'technicians');
+
+		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),$what);//($this->allow_assign_users==1?'usersANDtechnicians':'technicians'));
 
 		return isset($technicians[$user]);
 	}
@@ -699,11 +702,11 @@ class tracker_bo extends tracker_so
 	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_staff($tracker,$user=null)
+	function is_staff($tracker,$user=null,$what=null)
 	{
 		if (is_null($user)) $user = $this->user;
 
-		return ($this->is_technician($tracker,$user) || $this->is_admin($tracker,$user));
+		return ($this->is_technician($tracker,$user,false,$what) || $this->is_admin($tracker,$user));
 	}
 
 	/**
