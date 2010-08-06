@@ -28,6 +28,7 @@ allow default projects for tracker	tracker	en	Allow default projects for tracker
 allow editing by	tracker	en	Allow editing by
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	en	Allow the predefinition of projects that will be assigned to new tracker-items.
 allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	en	allow to assign to a ticket not only "Tracker Admins" and "Technians", but also "Users" in the staff tab
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
 already escalated	tracker	en	already escalated
@@ -69,6 +70,7 @@ convert all open tickets	tracker	en	convert all open tickets
 converted count	tracker	en	converted count
 copy to	tracker	en	Copy to
 create new links	tracker	en	Create new links
+create new tracker entry's as default "private" for approval process	tracker	en	create new tracker entry's as default "private" for approval process
 created	tracker	en	Created
 creation date	tracker	en	creation date
 creator	tracker	en	Creator

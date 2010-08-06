@@ -28,6 +28,7 @@ allow default projects for tracker	tracker	de	Erlaube Zuordnung von Projekten in
 allow editing by	tracker	de	Bearbeiten erlauben von
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	de	Erlaube die Voreinstellung von Projektzuordnungen für Trackereinträge.
 allow to assign groups to tracker items	tracker	de	Erlaube Einträgen Gruppen zuzuweisen
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	de	Erlaube das Zuweisen von Tickets auch an Benutzer; nicht nur an Techniker und/oder Administratoren.
 allow voting	tracker	de	Erlaube Abstimmungen
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Einträge des Verfolgungssystem, zeige und sortiere nach den Stimmen
 already escalated	tracker	de	bereits eskaliert
@@ -69,6 +70,7 @@ convert all open tickets	tracker	de	konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
+create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Verfolgungssystemeinträge als Private Eintäge, zur Freigabe durch Verfolgungssystemadministratoren.
 created	tracker	de	Erstellt
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
@@ -127,7 +129,7 @@ import tts tickets	tracker	de	TTS Tickets importieren
 incoming mail folder	tracker	de	Ordner für eingehende Mail
 incoming mail rules	tracker	de	Regeln für eingehende Mail
 incoming mail server	tracker	de	Server für eingehende Mail
-info only	tracker	en	zur Information
+info only	tracker	de	zur Information
 interval in minutes for checking the incoming mails	tracker	de	Interval in Minute zur Überprüfung der eingehenden Mails
 introduction message	tracker	de	Willkomensnachricht
 invalid	tracker	de	Ungültig

@@ -239,8 +239,10 @@ class tracker_so extends so_sql_cf
 		}
 		if ($need_private_acl)
 		{
-			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
-				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
+			// user should always see the tickets he created; if not private allow to see created tickets and those that belong to a group the user is member of
+			$filter[] = '((tr_private=1 AND tr_creator='.$this->user.') OR (tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
+				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')))';
+			// this condition will be narrowed down by group/creator restrictions further below
 		}
 		if (is_string($criteria) && $criteria)
 		{
@@ -282,13 +284,17 @@ class tracker_so extends so_sql_cf
 			if ($filter['tr_tracker'])
 			{
 				// Single tracker
-				if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'])))
+				if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'],null,'technicians')))
 				{
-					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';
+					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . ')'.
+						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
+						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').')';
 				}
-				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'])))
+				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'],null,'technicians')))
 				{
-					$filter[] = '(tr_creator = ' . $this->user . ')';
+					$filter[] = '((tr_creator = ' . $this->user . ')'.
+						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
+						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').')';
 				}
 			}
 			else
@@ -306,7 +312,7 @@ class tracker_so extends so_sql_cf
 					{
 						continue; // Not implemented for 'all trackers'
 					}
-					if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker)))
+					if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker,null,'technicians')))
 					{
 						if ($restrictions['group'])
 						{
@@ -337,11 +343,15 @@ class tracker_so extends so_sql_cf
 				}
 				if (!empty($group_restrictions))
 				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . '))';
+					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND (tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . ')'.
+						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
+						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').'))';
 				}
 				if (!empty($creator_restrictions))
 				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND tr_creator = ' . $this->user . ')';
+					$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND (tr_creator = ' . $this->user.
+						($this->allow_assign_users==1?' OR tr_assigned IN ('.$this->user.','.
+						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')':'').'))';
 				}
 				if (!empty($all_restricions))
 				{
@@ -466,6 +476,7 @@ class tracker_so extends so_sql_cf
 				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'.	tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 			}
 		}
+		//_debug_array($filter);
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
 		if ($rows)

@@ -31,14 +31,14 @@ class tracker_hooks
 				'menuaction' => 'tracker.tracker_ui.edit',
 			),
 			'view_id' => 'tr_id',
-			'view_popup'  => '700x500',
+			'view_popup'  => '780x535',
 			'view_list' => 'tracker.tracker_ui.index',
 			'add' => array(
 				'menuaction' => 'tracker.tracker_ui.edit',
 			),
 			'add_app'    => 'link_app',
 			'add_id'     => 'link_id',
-			'add_popup'  => '700x480',
+			'add_popup'  => '750x500',
 		);
 	}
 

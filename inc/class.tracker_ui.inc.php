@@ -137,7 +137,7 @@ class tracker_ui extends tracker_bo
 				if (!$this->read($_GET['tr_id']))
 				{
 					$msg = lang('Tracker item not found !!!');
-					$this->init();
+					$this->init(($this->create_new_as_private==1?array('tr_private'=>1,'tr_group'=>$GLOBALS['egw']->accounts->data['account_primary_group']):array('tr_group'=>$GLOBALS['egw']->accounts->data['account_primary_group'])));
 				}
 				else
 				{
@@ -169,7 +169,7 @@ class tracker_ui extends tracker_bo
 			}
 			else	// new item
 			{
-				$this->init();
+				$this->init(($this->create_new_as_private==1?array('tr_private'=>1,'tr_group'=>$GLOBALS['egw']->accounts->data['account_primary_group']):array('tr_group'=>$GLOBALS['egw']->accounts->data['account_primary_group'])));
 			}
 			// for new items we use the session-state or $_GET['tracker']
 			if (!$this->data['tr_id'])
@@ -510,7 +510,7 @@ class tracker_ui extends tracker_bo
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
 			'tr_resolution' => self::$resolutions,
-			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,($this->allow_assign_users==1?'usersANDtechnicians':'technicians')),
 			// New items default to primary group is no right to change the group
 			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker) && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
@@ -727,7 +727,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
-		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker);
+		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,($this->allow_assign_users==1?'usersANDtechnicians':'technicians'));
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
