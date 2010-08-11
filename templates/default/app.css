@@ -31,3 +31,4 @@ table.fullWidth { width: 100%; }
 .status_filter select { width: 100px; }
 .indexPrio:first-letter { font-weight: bold; }
 .inputFullWidth input { width: 100%; }
+.image16 img { height: 16px; }
