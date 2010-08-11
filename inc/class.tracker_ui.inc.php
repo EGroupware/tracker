@@ -953,6 +953,8 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->read('tracker.index');
 		}
+		// disable filemanager icon, if user has no access to it
+		$readonlys['filemanager/navbar'] = true;//!isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
 	}

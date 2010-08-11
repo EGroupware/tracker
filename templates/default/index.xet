@@ -6,10 +6,10 @@
 			<menupopup rows="1" cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" options="All" label="Tracker Queue"/>
 		</menulist>
 	</template>
-	<template id="tracker.index.right" template="" lang="" group="0" version="1.5.001">
-		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
+	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
+		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.7.001">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.7.002">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -71,7 +71,7 @@
 					<menulist>
 						<menupopup type="select-cat" options="None" readonly="true" id="${row}[tr_version]"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,700x535" class="$row_cont[seen_class]"/>
+					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,tracker,780x535" class="$row_cont[seen_class]"/>
 					<vbox readonly="true">
 						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
@@ -110,6 +110,7 @@
 						<button image="timesheet" class="noPrint" label="Add timesheet entry" align="center" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]$row_cont[extra_links]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;"/>
 						<button image="print" class="noPrint" label="Print entry" align="center" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;"/>
 						<button image="edit" class="noPrint" label="Edit entry" align="center" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;"/>
+						<image src="filemanager/navbar" options="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16" label="Filemanager"/>
 					</hbox>
 					<checkbox options="$row_cont[tr_id]" id="checked[]" align="center"/>
 				</row>
