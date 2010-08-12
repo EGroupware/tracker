@@ -106,6 +106,11 @@ class tracker_admin extends tracker_bo
 					{
 						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','restrictions','notification','mailhandling','priorities')) as $name)
 						{
+							if (in_array($name,array('overdue_days','pending_close_days')) &&
+								$content[$name] === '')
+							{
+								$content[$name] = '0';	// otherwise it does NOT get stored
+							}
 							if ((string) $this->$name !== $content[$name])
 							{
 								$this->$name = $content[$name];
