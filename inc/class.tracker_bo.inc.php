@@ -365,11 +365,13 @@ class tracker_bo extends tracker_so
 			}
 		}
 		// check if item is overdue
-		$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
-		$limit = $this->now - $this->overdue_days * 24*60*60;
-		$data['overdue'] = $data['tr_status'] == 'o' && 	// only open items can be overdue
-			(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
-
+		if ($this->overdue_days > 0)
+		{
+			$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
+			$limit = $this->now - $this->overdue_days * 24*60*60;
+			$data['overdue'] = $data['tr_status'] == -100 && 	// only open items can be overdue
+				(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+		}
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
 
 		return $data;
