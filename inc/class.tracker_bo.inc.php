@@ -353,15 +353,18 @@ class tracker_bo extends tracker_so
 			}
 		}
 		// check if item is overdue
-		$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
-		$limit = $this->now - $this->overdue_days * 24*60*60;
-		$data['overdue'] = $data['tr_status'] == 'o' && 	// only open items can be overdue
-			(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
-
+		if ($this->overdue_days > 0)
+		{
+			$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
+			$limit = $this->now - $this->overdue_days * 24*60*60;
+			$data['overdue'] = $data['tr_status'] == -100 && 	// only open items can be overdue
+				(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+		}
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
 
 		// Keep a copy of the timestamps in server time, so notifications can change them for each user
-		foreach($this->timestamps as $field) {
+		foreach($this->timestamps as $field)
+		{
 			$data[$field . '_servertime'] = $data[$field];
 		}
 
