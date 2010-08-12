@@ -691,13 +691,13 @@ class tracker_bo extends tracker_so
 	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_technician($tracker,$user=null,$checkgroups=false,$what=null)
+	function is_technician($tracker,$user=null,$checkgroups=false)
 	{
 		if (is_null($user)) $user = $this->user;
 
 		if ($what === null) $what = ($this->allow_assign_users==1?'usersANDtechnicians':'technicians');
 
-		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),$what);//($this->allow_assign_users==1?'usersANDtechnicians':'technicians'));
+		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),'technicians');
 
 		return isset($technicians[$user]);
 	}
@@ -725,11 +725,11 @@ class tracker_bo extends tracker_so
 	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_staff($tracker,$user=null,$what=null)
+	function is_staff($tracker,$user=null)
 	{
 		if (is_null($user)) $user = $this->user;
 
-		return ($this->is_technician($tracker,$user,false,$what) || $this->is_admin($tracker,$user));
+		return ($this->is_technician($tracker,$user) || $this->is_admin($tracker,$user));
 	}
 
 	/**
