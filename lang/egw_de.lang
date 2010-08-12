@@ -70,7 +70,7 @@ convert all open tickets	tracker	de	konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 create new links	tracker	de	Neue Verknüpfung anlegen
-create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Verfolgungssystemeinträge als Private Eintäge, zur Freigabe durch Verfolgungssystemadministratoren.
+create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Einträge im Verfolgungssystem als Privat zur Freigabe durch Administratoren.
 created	tracker	de	Erstellt
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
@@ -89,6 +89,7 @@ delete this tracker including all it's items and categories	tracker	de	Dieses Ve
 delete this version	tracker	de	Diese Version löschen
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	de	Löscht nicht zuordenbar Mails vom Server, selbst wenn oben 'Mails löschen' nicht ausgewählt wurde.
 deleted	tracker	de	Gelöscht
+do not notify of these changes	tracker	de	Nicht über diese Änderungen benachrichtigen
 do you want to vote for this item	tracker	de	Wollen Sie für diesen Eintrag stimmen
 donator name to show	tracker	de	Name des Spenders zum anzeigen
 duplicate	tracker	de	Doppelt
@@ -143,11 +144,13 @@ links	tracker	de	Verknüpfungen
 list of coma separated email address	tracker	de	Liste von EMail Adressen mit Komma getrennt
 mail handling	tracker	de	Mail Behandlung
 matching filter	tracker	de	Filter zutreffend
+miscellaneous	tracker	de	Sonstiges
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
 new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
 new tracker item submitted by %1 at %2	tracker	de	Neuer Eintrag im Verfolgungsystem erstellt von %1 am %2
 no change	tracker	de	Keine Änderung
+no notifications	tracker	de	Keine Benachrichtigungen
 no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand

@@ -197,7 +197,7 @@ class tracker_bo extends tracker_so
 		'tr_priority'    => 'Priority',
 		'tr_closed'      => 'Closed',
 		'tr_creator'     => 'Created by',
-		'tr_group'		 => 'Owned by group',
+		'tr_group'		 => 'Group',
 		// pseudo fields used in edit
 		'link_to'        => 'Attachments & Links',
 		'canned_response' => 'Canned response',
@@ -330,6 +330,26 @@ class tracker_bo extends tracker_so
 
 		// read the tracker-configuration
 		$this->load_config();
+	}
+
+	/**
+	 * initializes data with the content of key
+	 * 
+	 * Reimplemented to set some defaults
+	 *
+	 * @param array $keys=array() array with keys in form internalName => value
+	 * @return array internal data after init
+	 */
+	function init($keys=array())
+	{
+		parent::init();
+
+		$this->data['tr_private'] = $this->create_new_as_private;
+		$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
+		
+		$this->data_merge($keys);
+
+		return $this->data;
 	}
 
 	/**

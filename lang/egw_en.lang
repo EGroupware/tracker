@@ -89,6 +89,7 @@ delete this tracker including all it's items and categories	tracker	en	Delete th
 delete this version	tracker	en	Delete this version
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	en	Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged.
 deleted	tracker	en	Deleted
+do not notify of these changes	tracker	en	Do not notify of these changes
 do you want to vote for this item	tracker	en	Do you want to vote for this item
 donator name to show	tracker	en	Donator name to show
 duplicate	tracker	en	Duplicate
@@ -143,11 +144,13 @@ links	tracker	en	Links
 list of coma separated email address	tracker	en	List of coma separated email address
 mail handling	tracker	en	Mail handling
 matching filter	tracker	en	matching filter
+miscellaneous	tracker	en	Miscellaneous
 new %1	tracker	en	New %1
 new items	tracker	en	New items
 new ticket submitted by %1 at %2	tracker	en	New ticket submitted by %1 at %2
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
 no change	tracker	en	No change
+no notifications	tracker	en	No notifications
 no trackers found, aborting	tracker	en	No Trackers found, aborting
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	Noone
