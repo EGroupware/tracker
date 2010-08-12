@@ -170,7 +170,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.config" template="" lang="" group="0" version="1.5.001">
+	<template id="tracker.admin.config" template="" lang="" group="0" version="1.5.002">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -203,7 +203,7 @@
 				<row class="row" disabled="@tracker">
 					<description options=",,,overdue_days" value="Overdue after"/>
 					<menulist>
-						<menupopup type="select-number" options="Never,1,30" id="overdue_days" statustext="After how many days a not replied item should be marked overdue?"/>
+						<menupopup type="select-number" id="overdue_days" statustext="After how many days a not replied item should be marked overdue?" options="Never,1,30"/>
 					</menulist>
 					<description options=",,,pending_close_days" value="Close pending"/>
 					<menulist>
@@ -219,17 +219,28 @@
 				<row class="th" disabled="!@tracker">
 					<description value="Restrict tracker items to staff and:" span="all"/>
 				</row>
-				<row disabled="!@tracker">
+				<row class="row" disabled="!@tracker">
 					<description options=",,,restricted" value="Group" statustext="Restict tracker items to the creators primary group and the staff only"/>
 					<checkbox statustext="Restict tracker items to the creators primary group and the staff only" id="restrictions[group]"/>
 					<description/>
 					<description/>
 				</row>
-				<row disabled="!@tracker">
+				<row class="row" disabled="!@tracker">
 					<description options=",,,restricted" value="Creator" statustext="Restict tracker items to the creators primary group and the staff only"/>
 					<checkbox statustext="Restict tracker items to the creator and the staff only" id="restrictions[creator]"/>
 					<description/>
 					<description/>
+				</row>
+				<row class="th" disabled="@tracker">
+					<description span="all" value="Miscellaneous"/>
+				</row>
+				<row class="row" disabled="@tracker">
+					<checkbox id="create_new_as_private" statustext="tracker entry can only seen by creator and admins"/>
+					<description value="create new tracker entry's as default &quot;private&quot; for approval process" span="3" options=",,,create_new_as_private"/>
+				</row>
+				<row class="row" disabled="@tracker">
+					<checkbox id="allow_assign_users" statustext="Staff  &quot;Users&quot; will be allowed for assignment to tracker tickets"/>
+					<description span="3" value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" options=",,,allow_assign_users"/>
 				</row>
 				<row class="th" disabled="@tracker">
 					<description span="all" value="ACL"/>
@@ -294,7 +305,157 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.5.001">
+	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.7.004">
+		<grid>
+			<columns>
+				<column width="200"/>
+				<column/>
+				<column width="200"/>
+				<column/>
+			</columns>
+			<rows>
+				<row class="row">
+					<description value="Check mail interval"/>
+					<menulist>
+						<menupopup id="mailhandling[interval]" statustext="Interval in minutes for checking the incoming mails"/>
+					</menulist>
+					<description value="Read mail address"/>
+					<textbox size="20" id="mailhandling[address]" statustext="Enter the mail address that will be read."/>
+				</row>
+				<row class="row">
+					<description value="Incoming mail server"/>
+					<textbox id="mailhandling[server]" size="40" statustext="Enter the IMAP server from which emails should be fetched"/>
+					<description value="Server type"/>
+					<menulist>
+						<menupopup id="mailhandling[servertype]"/>
+					</menulist>
+				</row>
+				<row class="row">
+					<description value="Port number"/>
+					<int id="mailhandling[serverport]"/>
+					<description value="Incoming mail folder"/>
+					<textbox id="mailhandling[folder]" size="20"/>
+				</row>
+				<row class="row">
+					<description value="Username"/>
+					<textbox size="20" id="mailhandling[username]"/>
+					<description value="Password"/>
+					<passwd options="20" id="mailhandling[password]"/>
+				</row>
+				<row class="th">
+					<description span="all" value="Incoming mail rules"/>
+					<description/>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description value="Delete mails from server"/>
+					<checkbox id="mailhandling[delete_from_server]"/>
+					<description value="Tracker for new tickets"/>
+					<menulist>
+						<menupopup id="mailhandling[default_tracker]" options="Reject" statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail."/>
+					</menulist>
+				</row>
+				<row class="row" disabled="!@mailhandling[default_tracker]">
+					<description/>
+					<description/>
+					<description value="Category for new tickets"/>
+					<menulist class="cat_select">
+						<menupopup options="select one" id="mailhandling[default_cat]"/>
+					</menulist>
+				</row>
+				<row class="row">
+					<description value="Unrecognized mails"/>
+					<radio options="ignore" label="Ignore" id="mailhandling[unrecognized_mails]" statustext="Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged."/>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description/>
+					<radio options="delete" label="Delete" id="mailhandling[unrecognized_mails]" statustext="Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged."/>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description/>
+					<hbox>
+						<radio options="forward" label="Forward to" id="mailhandling[unrecognized_mails]" statustext="Forward unrecognized mails to the email address that has to be specified here."/>
+						<textbox id="mailhandling[forward_to]" statustext="Enter an email address here if unrecognized mails should be forwarded"/>
+					</hbox>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description/>
+					<hbox>
+						<radio options="default" label="Store as" id="mailhandling[unrecognized_mails]" statustext="Use a default user for mails that where not recognized"/>
+						<menulist>
+							<menupopup id="mailhandling[unrec_reply]" statustext="Select which username should be used when unrecognized replies are handled"/>
+						</menulist>
+					</hbox>
+					<hbox span="all">
+						<description value="(New tickets as "/>
+						<menulist>
+							<menupopup type="select-account" id="mailhandling[unrec_mail]" statustext="Select which username should be used when unrecognized mails are handled." options="Reject"/>
+						</menulist>
+						<description value=")"/>
+					</hbox>
+				</row>
+				<row class="row">
+					<description/>
+					<checkbox id="mailhandling[auto_cc]" label="Add unrecognized mail address to the CC field" statustext="When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled."/>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description value="Handling autoreplies"/>
+					<radio id="mailhandling[autoreplies]" options="ignore" label="Ignore" statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked."/>
+					<description value="Handling bounced mails"/>
+					<radio options="ignore" label="Ignore" id="mailhandling[bounces]" statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked."/>
+				</row>
+				<row class="row">
+					<description/>
+					<radio options="delete" label="Delete" id="mailhandling[autoreplies]" statustext="Delete the mail from the server."/>
+					<description/>
+					<radio options="delete" label="Delete" id="mailhandling[bounces]" statustext="Delete the mail from the server"/>
+				</row>
+				<row class="row">
+					<description/>
+					<radio options="forward" label="Forward" id="mailhandling[autoreplies]" statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server."/>
+					<description/>
+					<radio options="forward" label="Forward" id="mailhandling[bounces]" statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server."/>
+				</row>
+				<row class="row">
+					<description/>
+					<hbox span="all">
+						<radio options="process" label="Process" id="mailhandling[autoreplies]" statustext="Process the message normally. *NOTE* This might cause mailloops when &quot;Sent autoreplies&quot; below is enabled!"/>
+						<description span="all" value=" (Beware of mailloops, check the help!) "/>
+					</hbox>
+					<description/>
+					<description/>
+				</row>
+				<row class="row">
+					<description value="Sent autoreplies"/>
+					<menulist>
+						<menupopup id="mailhandling[auto_reply]" statustext="Select how autoreplies should be sent when mails are received"/>
+					</menulist>
+					<description value="Reply also to unknown addresses"/>
+					<checkbox id="mailhandling[reply_unknown]"/>
+				</row>
+				<row class="row">
+					<description value="Introduction message"/>
+					<textbox span="3" id="mailhandling[reply_text]" statustext="Enter an opening text for the reply message" size="100"/>
+				</row>
+				<row>
+					<description/>
+					<description/>
+					<description/>
+					<description/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.admin" template="" lang="" group="0" version="1.5.002">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>
@@ -318,18 +479,20 @@
 					</hbox>
 				</row>
 				<row>
-					<tabbox span="all">
+					<tabbox span="all" id="cats|priorities|staff|config|mail">
 						<tabs>
 							<tab label="Categories" statustext="Categories, versions, canned responses"/>
 							<tab label="Priorities" statustext="Custom tracker priorities"/>
 							<tab label="Staff" statustext="Tracker admins &amp; technicians"/>
 							<tab label="Configuration" statustext="Configuration, ACL, Notifications"/>
+							<tab label="Mail handling" statustext="Automatic email handling"/>
 						</tabs>
 						<tabpanels>
 							<template id="tracker.admin.cats"/>
 							<template id="tracker.admin.priorities"/>
 							<template id="tracker.admin.staff"/>
 							<template id="tracker.admin.config"/>
+							<template id="tracker.admin.mail"/>
 						</tabpanels>
 					</tabbox>
 				</row>

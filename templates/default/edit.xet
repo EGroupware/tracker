@@ -147,11 +147,11 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.7.003">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.7.004">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
-				<column width="270"/>
+				<column width="400"/>
 				<column width="95"/>
 				<column width="230"/>
 			</columns>
@@ -266,14 +266,10 @@
 				</row>
 				<row>
 					<button label="Save" id="button[save]"/>
-					<hbox options="0,0" span="2">
+					<hbox options="0,0" span="3">
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify of these changes" id="no_notifications"/>
 					</hbox>
-					<vbox options="0,0" align="right">
-						<button label="Vote for it!" id="button[vote]" statustext="If this item is important for you, please vote for it." align="right" onclick="return confirm('Do you want to vote for this item');"/>
-						<description id="no_vote" class="redItalic" no_lang="1" align="right"/>
-					</vbox>
 				</row>
 			</rows>
 		</grid>
