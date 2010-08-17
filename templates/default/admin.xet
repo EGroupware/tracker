@@ -157,13 +157,13 @@
 			<rows>
 				<row class="row">
 					<description value="Staff"/>
-					<description options=",,,users" id="queue_access_enabled_label" statustext="@queue_access_enabled_label_help"/>
+					<description options=",,,users" value="Users"/>
 					<description options=",,,technicians" value="Technicians"/>
 					<description value="Tracker admins"/>
 				</row>
 				<row class="row" valign="top">
 					<description/>
-					<listbox type="select-account" id="users" rows="28" options="both"/>
+					<listbox type="select-account" id="users" rows="28" options="both" statustext="You can enable/disable the queue access restrictions in the configuration tab (for all queues)"/>
 					<listbox type="select-account" id="technicians" rows="28" options="both"/>
 					<listbox type="select-account" rows="28" options="both" id="admins"/>
 				</row>
@@ -214,7 +214,7 @@
 					<description value="Html editing" options=",,,htmledit"/>
 					<checkbox statustext="Permit html editing in overview and comments" id="htmledit"/>
 					<description value="Activate users queue access control" options=",,,enabled_queue_acl_access"/>
-					<checkbox id="enabled_queue_acl_access" statustext="Activate users queue access control"/>
+					<checkbox id="enabled_queue_acl_access" statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" onchange="getElementById('eT_accountsel_exec_users_').disabled = !this.checked;"/>
 				</row>
 				<row class="th" disabled="!@tracker">
 					<description value="Restrict tracker items to staff and:" span="all"/>
@@ -480,7 +480,7 @@
 					</hbox>
 				</row>
 				<row>
-					<tabbox span="all" id="cats|priorities|staff|config|mail">
+					<tabbox span="all" id="tabs">
 						<tabs>
 							<tab label="Categories" statustext="Categories, versions, canned responses"/>
 							<tab label="Priorities" statustext="Custom tracker priorities"/>

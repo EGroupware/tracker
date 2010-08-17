@@ -58,8 +58,6 @@ class tracker_admin extends tracker_bo
 	function admin($content=null,$msg='')
 	{
 		//_debug_array($content);
-		$tabs = 'cats|priorities|staff|config|mail';
-
 		$tracker = (int) $content['tracker'];
 
 		// apply preferences for assigning of defaultprojects, and provide the project list
@@ -333,10 +331,14 @@ class tracker_admin extends tracker_bo
 			'notification' => $this->notification[$tracker],
 			'restrictions' => $this->restrictions[$tracker],
 			'mailhandling' => $this->mailhandling[$tracker],
-			$tabs => $content[$tabs],
+			'tabs' => $content['tabs'],
 			// keep priority cat only if tracker is unchanged, otherwise reset it
 			'priorities' => $tracker == $content['tracker'] ? array('cat_id' => $content['priorities']['cat_id']) : array(),
 		);
+		if (!$this->enabled_queue_acl_access)
+		{
+			$GLOBALS['egw']->js->set_onload("document.getElementById('eT_accountsel_exec_users_').disabled = true;");
+		}
 
 		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
 		{
@@ -396,9 +398,6 @@ class tracker_admin extends tracker_bo
 				'TRACKER_ITEM_GROUP'    => !!($rights & TRACKER_ITEM_GROUP),
 			);
 		}
-		$this->enabled_queue_acl_access ? $queue_access_enabled_label = lang("Enabled") : $queue_access_enabled_label = lang("Disabled");
-		$content['queue_access_enabled_label'] = lang('Users').': '.lang('Restriction')." ".$queue_access_enabled_label;
-		$content['queue_access_enabled_label_help'] = lang('You can enable/disable the queue access restrictions in the configuration tab (for all queues)');
 
 		$n = 2;	// cat selection + table header
 		foreach($this->get_tracker_priorities($tracker,$content['priorities']['cat_id'],false) as $value => $label)

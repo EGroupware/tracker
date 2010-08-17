@@ -164,6 +164,7 @@ no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
 notification	tracker	de	Benachrichtigung
+only explicitly named users have read access (otherwise everyone)	tracker	de	nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
 open	tracker	de	Offen
 out of date	tracker	de	Nicht mehr aktuell
 overdue after	tracker	de	Überfällig nach

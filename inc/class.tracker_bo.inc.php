@@ -685,7 +685,7 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Check if a user (default current user) is an tecnichan for the given tracker
+	 * Check if a user (default current user) is an technichan for the given tracker
 	 *
 	 * @param int $tracker ID of tracker
 	 * @param int $user=null ID of user, default current user $this->user
@@ -695,9 +695,7 @@ class tracker_bo extends tracker_so
 	{
 		if (is_null($user)) $user = $this->user;
 
-		if ($what === null) $what = ($this->allow_assign_users==1?'usersANDtechnicians':'technicians');
-
-		$technicians =& $this->get_staff($tracker,($checkgroups ? 2 : 0),'technicians');
+		$technicians =& $this->get_staff($tracker,$checkgroups ? 2 : 0,'technicians');
 
 		return isset($technicians[$user]);
 	}

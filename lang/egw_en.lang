@@ -164,6 +164,7 @@ no trackers found, aborting	tracker	en	No Trackers found, aborting
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	Noone
 notification	tracker	en	Notification
+only explicitly named users have read access (otherwise everyone)	tracker	en	only explicitly named users have read access (otherwise everyone)
 open	tracker	en	Open
 out of date	tracker	en	Out of date
 overdue after	tracker	en	Overdue after
