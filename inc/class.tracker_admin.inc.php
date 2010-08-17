@@ -89,6 +89,21 @@ class tracker_admin extends tracker_bo
 						$msg = lang('Error adding the new tracker!');
 					}
 					break;
+					
+				case 'rename':
+					if (!$content['add_name'])
+					{
+						$msg = lang('You need to enter a name');		
+					}
+					elseif($tracker && $this->rename_tracker($tracker,$content['add_name']))
+					{
+						$msg = lang('Tracker queue renamed');
+					}
+					else
+					{
+						$msg = lang('Error renaming tracker queue!');
+					}
+					break;
 
 				case 'delete':
 					if ($tracker && isset($this->trackers[$tracker]))
@@ -442,6 +457,7 @@ class tracker_admin extends tracker_bo
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
+			'button[rename]' => !$tracker,
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl = new etemplate('tracker.admin');
