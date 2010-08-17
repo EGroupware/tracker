@@ -455,7 +455,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.5.002">
+	<template id="tracker.admin" template="" lang="" group="0" version="1.5.003">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>
@@ -475,6 +475,7 @@
 					</menulist>
 					<hbox align="right">
 						<textbox id="add_name" blur="--&gt; enter new name" size="32" maxlength="150"/>
+						<button label="Rename" id="button[rename]"/>
 						<button label="Add" id="button[add]"/>
 					</hbox>
 				</row>

@@ -5,6 +5,7 @@
 &#9830; own without reply not closed	tracker	en	? Own without reply not closed
 &#9830; without 30 days reply not closed	tracker	en	? Without 30 days reply not closed
 &#9830; without reply not closed	tracker	en	? Without reply not closed
+(beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
 (new tickets as	tracker	en	(New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
 --> enter new name	tracker	en	--> enter new name
@@ -79,6 +80,8 @@ custom tracker priorities	tracker	en	Custom tracker priorities
 date opened	tracker	en	Date opened
 define escalations	common	en	Define escalations
 delete mails from server	tracker	en	Delete mails from server
+delete the mail from the server	tracker	en	Delete the mail from the server
+delete the mail from the server.	tracker	en	Delete the mail from the server.
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
@@ -106,6 +109,7 @@ enter the mail address that will be read.	tracker	en	Enter the mail address that
 entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
 error deleting escalation!	tracker	en	Error deleting escalation!
+error renaming tracker queue!	tracker	en	Error renaming tracker queue!
 error saving the entry!!!	tracker	en	Error saving the entry!!!
 escalation	tracker	en	Escalation
 escalation added.	tracker	en	Escalation added.
@@ -116,15 +120,20 @@ everybody	tracker	en	Everybody
 existing links	tracker	en	Existing links
 field	tracker	en	Field
 fixed	tracker	en	Fixed
+forward	tracker	en	Forward
+forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	en	Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server.
 forward to	tracker	en	Forward to
 forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized mails to the email address that has to be specified here.
 from	tracker	en	From
+handling autoreplies	tracker	en	Handling autoreplies
+handling bounced mails	tracker	en	Handling bounced mails
 history	tracker	en	History
 html editing	tracker	en	Html editing
 id	tracker	en	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	en	If this item is important for you, please consider to set a bounty for it!
 if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
 ignore	tracker	en	Ignore
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	en	Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	en	Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged.
 import tts tickets	tracker	en	Import TTS tickets
 incoming mail folder	tracker	en	Incoming mail folder
@@ -169,6 +178,8 @@ postponed	tracker	en	Postponed
 print entry	tracker	en	Print entry
 priorities	tracker	en	Priorities
 priorities with empty label are not available to the user	tracker	en	Priorities with empty label are not available to the user
+process	tracker	en	Process
+process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	en	Process the message normally. *NOTE* This might cause mailloops when "Sent autoreplies" below is enabled!
 project selection	tracker	en	Project selection
 projects	tracker	en	Projects
 queue	tracker	en	Queue
@@ -208,6 +219,7 @@ show actions in tracker listing	tracker	en	Show actions in tracker listing
 show the acumulated times of timesheet entries	tracker	en	Show the acumulated times of timesheet entries
 show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?
 staff	tracker	en	Staff
+staff  "users" will be allowed for assignment to tracker tickets	tracker	en	Staff  "Users" will be allowed for assignment to tracker tickets
 state	tracker	en	State
 stati	tracker	en	Stati
 store as	tracker	en	Store as
@@ -229,11 +241,13 @@ tracker admins	tracker	en	Tracker admins
 tracker admins & technicians	tracker	en	Tracker admins & technicians
 tracker configuration	tracker	en	Tracker configuration
 tracker deleted	tracker	en	Tracker queue deleted
+tracker entry can only seen by creator and admins	tracker	en	tracker entry can only seen by creator and admins
 tracker for new tickets	tracker	en	Tracker for new tickets
 tracker for the main screen	tracker	en	Tracker for the main screen
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found !!!
 tracker queue	tracker	en	Tracker Queue
+tracker queue renamed	tracker	en	Tracker queue renamed
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
 tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
 tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.

@@ -1125,7 +1125,7 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Add a new tracker
+	 * Add a new tracker-queue
 	 *
 	 * @param string $name
 	 * @return int/boolean integer tracker-id on success or false otherwise
@@ -1142,6 +1142,28 @@ class tracker_bo extends tracker_so
 		{
 			$this->trackers[$id] = $name;
 			return $id;
+		}
+		return false;
+	}
+
+	/**
+	 * Rename a tracker-queue
+	 *
+	 * @param int $tracker
+	 * @param string $name
+	 * @return boolean true on success or false otherwise
+	 */
+	function rename_tracker($tracker,$name)
+	{
+		$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');
+		if ($tracker > 0 && !empty($name) && ($data = $cats->read($tracker)))
+		{
+			if ($data['name'] != $name)
+			{
+				$data['name'] = $this->trackers[$tracker] = $name;
+				$cats->edit($data);
+			}
+			return true;
 		}
 		return false;
 	}
