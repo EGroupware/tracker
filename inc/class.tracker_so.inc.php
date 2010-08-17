@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -239,10 +239,8 @@ class tracker_so extends so_sql_cf
 		}
 		if ($need_private_acl)
 		{
-			// user should always see the tickets he created; if not private allow to see created tickets and those that belong to a group the user is member of
-			$filter[] = '((tr_private=1 AND tr_creator='.$this->user.') OR (tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
-				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')))';
-			// this condition will be narrowed down by group/creator restrictions further below
+			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
+				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
 		}
 		if (is_string($criteria) && $criteria)
 		{
@@ -278,93 +276,74 @@ class tracker_so extends so_sql_cf
 			if (strpos($order_by,'votes') === false) $order_by .= ($order_by ? ',' : '').'votes DESC';
 		}
 
-		// Check for Tracker restrictions, OvE, 20071012
-		if ($this->user != 0) // Skip this in the cron- runs (close_pending(), OvE, 20071124)
+		// check for queue specific restrictions
+		if ($this->user) // Skip this in the cron-runs (close_pending(), OvE, 20071124)
 		{
-			if ($filter['tr_tracker'])
+			// we need to check all trackers for restrictions or (read) ACL (if enabled)
+			$need_restrictions = false;
+			$no_restrictions = $no_access = $creator_restrictions = $group_restrictions = array();
+			foreach($filter['tr_tracker'] ? array($filter['tr_tracker']) : array_keys($this->trackers) as $tracker)
 			{
-				// Single tracker
-				if ($this->restrictions[$filter['tr_tracker']]['group'] && !($this->is_staff($filter['tr_tracker'],null,'technicians')))
+				// technicians (and admins) allways have access to restricted queues
+				if ($this->is_technician($tracker))
 				{
-					$filter[] = '(tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . ')'.
-						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
-						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').')';
+					$no_restrictions[] = $tracker;
 				}
-				if ($this->restrictions[$filter['tr_tracker']]['creator'] && !($this->is_staff($filter['tr_tracker'],null,'technicians')))
+				// non users have no access if (read) ACL is turned on
+				elseif($this->enabled_queue_acl_access && !$this->is_user($tracker))
 				{
-					$filter[] = '((tr_creator = ' . $this->user . ')'.
-						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
-						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').')';
+					$no_access[] = $tracker;
+					$need_restrictions = true;
+				}
+				// check creator or group restrictions
+				// tickets only visible to creator or specified group (or technicians and admins)
+				elseif ($this->restrictions[$tracker]['group'] || $this->restrications[$tracker]['creator'])
+				{
+					if ($this->restrictions[$tracker]['creator']) $creator_restrictions[] = $tracker;
+					if ($this->restrictions[$tracker]['group']) $group_restrictions[] = $tracker;
+					$need_restrictions = true;
+				}
+				// neither restrictions nor read ACL
+				else
+				{
+					$no_restrictions[] = $tracker;
 				}
 			}
-			else
+			// do we need to restrict access to cretain queues
+			if ($need_restrictions)
 			{
-				// All trackers
-				$group_restrictions = array();
-				$creator_restrictions = array();
-				$all_restricions = array();
-				$access_restrictions = array();
-				$restrict = array();
-				if (!$this->restrictions) $this->restrictions = array();
-				foreach($this->restrictions as $tracker => $restrictions)
+				if ($no_access) 
 				{
-					if($tracker == 0)
-					{
-						continue; // Not implemented for 'all trackers'
-					}
-					if (($restrictions['group'] || $restrictions['creator']) AND !($this->is_staff($tracker,null,'technicians')))
-					{
-						if ($restrictions['group'])
-						{
-							array_push($group_restrictions, $tracker);
-							array_push($all_restricions, $tracker);
-						}
-						if ($restrictions['creator'])
-						{
-							array_push($creator_restrictions, $tracker);
-							array_push($all_restricions, $tracker);
-						}
-					}
+					$filter[] = $this->db->expression(self::TRACKER_TABLE,'NOT ',array(
+						'tr_tracker' => $no_access,
+					));
 				}
-				// Queue Access Control, has to be enabled in config
-				if ($this->enabled_queue_acl_access && !$this->is_user(0,$this->user))
+				$to_or = array();
+				if ($no_restrictions)
 				{
-					if (!empty($this->trackers))
-					{
-						foreach ($this->trackers as $tracker_id => $tracker_name)
-						{
-							array_push($access_restrictions, $tracker_id);
-						}
-					}
-					else
-					{
-						array_push($access_restrictions, -1);
-					}
+					$to_or[] = $this->db->expression(self::TRACKER_TABLE,array(
+						'tr_tracker' => $no_restrictions,
+					));
 				}
-				if (!empty($group_restrictions))
+				if ($creator_restrictions) 
 				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $group_restrictions) . ') AND (tr_group IN (' . implode(',', $GLOBALS['egw']->accounts->memberships($this->user,true)) . ')'.
-						($this->allow_assign_users==1?' OR (tr_assigned IN ('.$this->user.','.
-						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))':'').'))';
+					$to_or[] = $this->db->expression(self::TRACKER_TABLE,array(
+						'tr_tracker' => $creator_restrictions,
+						'tr_creator' => $this->user,
+					));
 				}
-				if (!empty($creator_restrictions))
+				if ($group_restrictions) 
 				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $creator_restrictions) . ') AND (tr_creator = ' . $this->user.
-						($this->allow_assign_users==1?' OR tr_assigned IN ('.$this->user.','.
-						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')':'').'))';
+					$to_or[] = $this->db->expression(self::TRACKER_TABLE,array(
+						'tr_tracker' => $group_restrictions,
+						'tr_group' => $GLOBALS['egw']->accounts->memberships($this->user,true),
+					));
 				}
-				if (!empty($all_restricions))
+				if ($to_or)
 				{
-					$restrict[] = '(tr_tracker NOT IN (' . implode(',', $all_restricions) . '))';
+					$filter[] = '('.implode(' OR ',$to_or).')';
 				}
-				if (!empty($access_restrictions))
-				{
-					$restrict[] = '(tr_tracker IN (' . implode(',', $access_restrictions) . '))';
-				}
-				if (!empty($restrict))
-				{
-					$filter[] = '(' . implode(' OR ', $restrict) . ')';
-				}
+				//_debug_array($filter);
 			}
 		}
 		//$this->debug = 4;
@@ -476,7 +455,6 @@ class tracker_so extends so_sql_cf
 				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'.	tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 			}
 		}
-		//_debug_array($filter);
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
 		if ($rows)
