@@ -297,7 +297,7 @@ class tracker_so extends so_sql_cf
 				}
 				// check creator or group restrictions
 				// tickets only visible to creator or specified group (or technicians and admins)
-				elseif ($this->restrictions[$tracker]['group'] || $this->restrications[$tracker]['creator'])
+				elseif ($this->restrictions[$tracker]['group'] || $this->restrictions[$tracker]['creator'])
 				{
 					if ($this->restrictions[$tracker]['creator']) $creator_restrictions[] = $tracker;
 					if ($this->restrictions[$tracker]['group']) $group_restrictions[] = $tracker;
@@ -309,6 +309,7 @@ class tracker_so extends so_sql_cf
 					$no_restrictions[] = $tracker;
 				}
 			}
+			//error_log('no_restrictions='.array2string($no_restrictions).', no_access='.array2string($no_access).', creator_restrictions='.$creator_restrictions.', group_restrictions='.array2string($group_restrictions).', need_restrictions='.array2string($need_restrictions));
 			// do we need to restrict access to cretain queues
 			if ($need_restrictions)
 			{
@@ -345,6 +346,7 @@ class tracker_so extends so_sql_cf
 				}
 				//_debug_array($filter);
 			}
+			//error_log('filter='.array2string($filter));
 		}
 		//$this->debug = 4;
 
