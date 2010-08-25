@@ -386,7 +386,7 @@ class tracker_mailhandler extends tracker_bo
 				for ($k=0; $k<sizeof($att);$k++)
 				{
 					//error_log(__METHOD__. " processing part->".$k." Message Part:".print_r($partNumber[$k],true));
-					if ($att[$k]->ifdisposition == 1 && $att[$k]->disposition == 'ATTACHMENT') 
+					if ($att[$k]->ifdisposition == 1 && strtoupper($att[$k]->disposition) == 'ATTACHMENT') 
 					{
 						//$num = count($attachments) - 1;
 						$num = $k;
@@ -543,6 +543,7 @@ class tracker_mailhandler extends tracker_bo
 	            "\n Deleted:".print_r($msgHeader->Deleted,true)."\n Stopped processing Mail. Not recent, new, or already answered, or deleted");
 			return false;
 		}
+
 		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Subject:'.print_r($msgHeader,true));
 		// Try several headers to identify the sender
 		$try_addr = array(
