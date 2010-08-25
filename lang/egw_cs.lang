@@ -127,6 +127,7 @@ import tts tickets	tracker	cs	Importovat TTS ohlášení
 incoming mail folder	tracker	cs	Složka příchozí pošty
 incoming mail rules	tracker	cs	Pravidla příchozí pošty
 incoming mail server	tracker	cs	Server příchozí pošty
+info only	tracker	cs	Jen informace
 interval in minutes for checking the incoming mails	tracker	cs	Interval kontroly příchozích e-mailů v minutách
 introduction message	tracker	cs	Úvodní zpráva
 invalid	tracker	cs	Neplatný
@@ -196,6 +197,7 @@ set bounty	tracker	cs	Vypsat odměnu
 should the actions column in the tracker list-view be shown?	tracker	cs	Má se sloupec akcí ukazovat v seznamovém zobrazení?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vám přidělených položek?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vámi vytvořených položek?
+should there be a tracker-box on main screen?	tracker	cs	Měl by být panel sledovacího systému na hlavní obrazovce?
 show a new column that calculated the acumulated times of timesheet entries.	tracker	cs	Zobrazovat nový sloupec, který ukazuje kumulované časy položek pracovního výkazu.
 show actions in tracker listing	tracker	cs	Zobrazovat akce ve výpisech sledovacího systému
 show the acumulated times of timesheet entries	tracker	cs	Zobrazovat kumulované časy položek pracovního výkazu.
@@ -214,7 +216,7 @@ there already an escalation for that filter!	tracker	cs	Pro tento filtr již exi
 this module displays information from the tracker.	tracker	cs	Tento modul zobrazuje informace ze Sledovacího systému.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	cs	Tato položka sledovacího systému byla automaticky uzavřena. Předtím byla ve stavu vyřizuje se, ale původní odesílatel nezareagoval ve stanovené lhůtě %1 dnů.
 ticket count	tracker	cs	počet ohlášení
-ticket modified by %1 at %2	tracker	cs	Ohlášní modifikoval(a) %1 v %2
+ticket modified by %1 at %2	tracker	cs	Ohlášení modifikoval(a) %1 v %2
 times	tracker	cs	Časy
 tracker	common	cs	Sledovací systém
 tracker added	tracker	cs	Přidána fronta sledovacího systému
@@ -223,6 +225,7 @@ tracker admins & technicians	tracker	cs	Administrátoři a technici sledovacího
 tracker configuration	tracker	cs	Konfigurace sledovacího systému
 tracker deleted	tracker	cs	Fronta sledovacího systému smazána
 tracker for new tickets	tracker	cs	Sledovací systém pro nová ohlášení
+tracker for the main screen	tracker	cs	Sledovací systém pro hlavní obrazovku
 tracker item modified by %1 at %2	tracker	cs	Položku sledovacího systému změnil(a) %1 v %2
 tracker item not found !!!	tracker	cs	Položka sledovacího systému nebyla nalezena !!!
 tracker queue	tracker	cs	Fronta sledovacího systému
@@ -240,8 +243,10 @@ votes	tracker	cs	Hlasů
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	cs	Když jsou přijaty e-maily z neznámé adresy, zaškrtněte tuto položku, aby byly automaticky přidány do CC pole sledovacího systému. Tato položka je ignorována, pokud nejsou zpracovávány neznámé e-mailové adresy.
 wont fix	tracker	cs	Nebude se opravovat
 works for me	tracker	cs	Mně funguje
+yes, always	tracker	cs	Ano vždy
 yes, display groups first	tracker	cs	Ano, zobrazovat nejprve skupiny
 yes, display users first	tracker	cs	Ano, zobrazovat nejprve uživatele
+yes, new tickets only	tracker	cs	Ano, jen nová ohlášení
 yes, with larger fontsize	tracker	cs	Ano, s větší velikostí písma
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	cs	Pro všechny fronty můžete na záložce konfigurace povolit/zakázat omezení přístupu.
 you can respond by visiting:	tracker	cs	Můžete odpovědět navštívením:
