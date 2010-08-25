@@ -70,9 +70,10 @@ create new links	tracker	sk	Vytvoriť nové odkazy
 created	tracker	sk	Vytvorené
 creation date	tracker	sk	Dátum vytvorenia
 creator	tracker	sk	Vytvoril
+custom fields	tracker	sk	Používateľské polia
 custom tracker priorities	tracker	sk	Používateľské priority Sledovača
 date opened	tracker	sk	Dátum otvorenia
-define escalations	tracker	sk	Definovať stupňovanie
+define escalations	admin	sk	Definovať stupňovanie
 delete mails from server	tracker	sk	Odstrániť E-maily zo servera
 delete this bounty	tracker	sk	Odstrániť túto odmenu
 delete this canned response	tracker	sk	Odstrániť túto šablónovú odpoveď
@@ -160,9 +161,11 @@ priorities with empty label are not available to the user	tracker	sk	Priority s 
 project selection	tracker	sk	Výber projektov
 projects	tracker	sk	Projekty
 queue	tracker	sk	Fronta
+read mail address	tracker	sk	Čítať poštovú adresu
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
 receive notifications about created tracker-items	tracker	sk	Dostávať pripomienky o vytvorených záležitostiach Sledovača
 receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
+recieve notifications about own changes in tracker-items	tracker	sk	Dostávať upozornenia ohľadom vlastných zmien v záležitostiach Sledovača
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenúť
 resolution	tracker	sk	Riešenie
@@ -183,9 +186,12 @@ set %1	tracker	sk	Zadať %1
 set an own bounty (in %s)	tracker	sk	Zadať vlastnú odmenu (v %s)
 set bounty	tracker	sk	Zadať odmenu
 should the actions column in the tracker list-view be shown?	tracker	sk	Má sa zobrazovať stĺpec akcií v pohľade na zoznam Sledovača?
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorá Vám bola priradená?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorú ste vytvorili?
-show actions in tracker listing	tracker	sk	obraziť akcie v zozname Sledovača
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorá Vám bola priradená?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby vám Sledovač posielal pripomienkové správy, keď sa zaktualizuje niektorá záležitosť ktorú ste vytvorili?
+show a new column that calculated the acumulated times of timesheet entries.	tracker	sk	Zobraziť nový stĺpec so spočítaným súčtom časov jednotlivých položiek Harmonogramu.
+show actions in tracker listing	tracker	sk	Zobraziť akcie v zozname Sledovača
+show the acumulated times of timesheet entries	tracker	sk	Zobraziť akumulované časy položiek Harmonogramu
+show the tracker send you notification mails, in tracker items that you updates?	tracker	sk	Chcete, aby vám Sledovač posielal upozorňujúce správy o položkách, ktoré ste aktualizovali?
 staff	tracker	sk	Personál
 state	tracker	sk	Stav
 store as	tracker	sk	Uložiť ako
