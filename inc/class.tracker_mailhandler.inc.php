@@ -206,6 +206,7 @@ class tracker_mailhandler extends tracker_bo
 			$_cnt = count ($this->msgList);
 			for ($_idx = 0; $_idx < $_cnt; $_idx++)
 			{
+				//error_log(__METHOD__.':About to process Message with ID:'.$_idx.' -> '.array2string($this->msgList[$_idx]));
 				if ($this->msgList[$_idx])
 				if (self::process_message($this->msgList[$_idx], $queue) && $this->mailhandling[$queue]['delete_from_server'])
 				{
@@ -329,9 +330,9 @@ class tracker_mailhandler extends tracker_bo
 			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,3));
 			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,"3.1"));
 			*/
-			if (self::LOG_LEVEL) error_log(__METHOD__.print_r($structure,true));
-			if (self::LOG_LEVEL>1) error_log(__METHOD__.print_r($struct,true));
-			if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($body,true));
+			if (self::LOG_LEVEL) error_log(__METHOD__.'Structure:'.print_r($structure,true));
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.'Struct:'.print_r($struct,true));
+			if (self::LOG_LEVEL>2) error_log(__METHOD__.'Body:'.print_r($body,true));
 			if (isset($struct->ifparameters) && $struct->ifparameters == 1)
 			{
 				//error_log(__METHOD__.__LINE__.print_r($param,true));
@@ -396,7 +397,7 @@ class tracker_mailhandler extends tracker_bo
 				for ($k=0; $k<sizeof($att);$k++)
 				{
 					//error_log(__METHOD__. " processing part->".$k." Message Part:".print_r($partNumber[$k],true));
-					if ($att[$k]->ifdisposition == 1 && $att[$k]->disposition == 'ATTACHMENT')
+					if ($att[$k]->ifdisposition == 1 && strtoupper($att[$k]->disposition) == 'ATTACHMENT')
 					{
 						//$num = count($attachments) - 1;
 						$num = $k;
@@ -589,7 +590,7 @@ class tracker_mailhandler extends tracker_bo
 		$senderIdentified = false;
 		$this->mailBody = null; // Clear previous message
 		$msgHeader = imap_headerinfo($this->mbox, $mid);
-
+		if (self::LOG_LEVEL>2)  error_log(__METHOD__.':Header retrieved:'.array2string($msgHeader));
 		// Workaround for PHP bug#48619
 		//
 		if (!empty($this->mailhandling[$queue]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
@@ -635,10 +636,11 @@ class tracker_mailhandler extends tracker_bo
 		}
 
 		if ($this->is_automail($mid, $msgHeader)) {
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.' Automails will not be processed.');
 			return false;
 		}
 
-		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Subject:'.print_r($msgHeader,true));
+		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Mailheader/Subject:'.print_r($msgHeader,true));
 		// Try several headers to identify the sender
 		$try_addr = array(
 			0 => $msgHeader->from[0],
@@ -724,7 +726,7 @@ class tracker_mailhandler extends tracker_bo
 
 		// By the time we get here, we know this ticket will be updated or created
 		$rv = $this->get_mailbody ($mid);
-		//error_log(__METHOD__.print_r($rv,true));
+		//error_log(__METHOD__.__LINE__.print_r($rv,true));
 		$this->mailBody = $rv['body'];
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
@@ -774,7 +776,7 @@ class tracker_mailhandler extends tracker_bo
 
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
-
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
 			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
