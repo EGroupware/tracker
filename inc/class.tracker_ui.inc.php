@@ -481,6 +481,7 @@ class tracker_ui extends tracker_bo
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
 					'Re' => self::$resolutions,
+					'Gr' => 'select-account',
 				),
 			),
 		);
