@@ -181,10 +181,14 @@ class tracker_so extends so_sql_cf
 	 * @param array $filter=null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
 	 * @param string $join_in='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
 	 *	"LEFT JOIN table2 ON (x=y AND z=o)", Note: there's no quoting done on $join, you are responsible for it!!!
-	 * @return array|NULL arra of matching rows (the row is an array of the cols) or NULL if nothing found
+	 * @return array|NULL array of matching rows (the row is an array of the cols) or NULL if nothing found
 	 */
 	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true)
 	{
+		if (!$this->trackers)
+		{
+			return array();	// no access to any tracker queue, but tracker app
+		}
 		$join = $join_in && $join_in != 1 ? $join_in : '';
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
