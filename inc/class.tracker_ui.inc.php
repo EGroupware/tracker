@@ -215,15 +215,18 @@ class tracker_ui extends tracker_bo
 			{
 				if(!$this->is_staff($this->data['tr_tracker']))
 				{
-					if($this->restrictions[($this->data['tr_tracker'])]['creator']
-						&& $this->data['tr_creator'] != $this->user)
+					// if we have group OR creator restrictions
+					if ($this->restrictions[$this->data['tr_tracker']]['creator'] ||
+						$this->restrictions[($this->data['tr_tracker'])]['group'])
 					{
-						$restrict = true;
-					}
-					if($this->restrictions[($this->data['tr_tracker'])]['group']
-						&& !(in_array($this->data['tr_group'], $GLOBALS['egw']->accounts->memberships($this->user,true))))
-					{
-						$restrict = true;
+						// we need to be creator OR group member
+						if (!($this->restrictions[$this->data['tr_tracker']]['creator'] &&
+								$this->data['tr_creator'] == $this->user ||
+							$this->restrictions[($this->data['tr_tracker'])]['group'] &&
+								in_array($this->data['tr_group'], $GLOBALS['egw']->accounts->memberships($this->user,true))))
+						{
+							$restrict = true;	// if not --> no access
+						}
 					}
 					// Check queue access if enabled and that no has access to queue 0 (All)
 					if ($this->enabled_queue_acl_access && !$this->trackers[$this->data['tr_tracker']] && !$this->is_user(0,$this->user))
@@ -237,7 +240,7 @@ class tracker_ui extends tracker_bo
 				$msg = lang('Permission denied !!!');
 				if ($popup)
 				{
-					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
+					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,false);
 					common::egw_exit();
 				}
 				else
@@ -480,6 +483,7 @@ class tracker_ui extends tracker_bo
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
 					'Re' => self::$resolutions,
+					'Gr' => 'select-account',
 				),
 			),
 		);
