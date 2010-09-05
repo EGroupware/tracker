@@ -1,18 +1,18 @@
 <?php
 /**
- * Tracker - Universal tracker (bugs, feature requests, ...) with voting and bounties
+ * EGroupware - Tracker - Universal tracker (bugs, feature requests, ...) with voting and bounties
  *
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '1.7.002';
+$setup_info['tracker']['version']   = '1.8';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee','egw_tracker_escalations','egw_tracker_escalated','egw_tracker_extra');
 $setup_info['tracker']['enable']    = 1;
@@ -39,15 +39,15 @@ $setup_info['tracker']['hooks'][] = 'home';
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'phpgwapi',
-	 'versions' => Array('1.4','1.5','1.6','1.7')
+	 'versions' => Array('1.7','1.8','1.9')
 );
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'etemplate',
-	 'versions' => Array('1.4','1.5','1.6','1.7')
+	 'versions' => Array('1.7','1.8','1.9')
 );
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'notifications',
-	 'versions' => Array('1.4','1.5','1.6','1.7')
+	 'versions' => Array('1.7','1.8','1.9')
 );
 // installation checks / requirements for tracker
 $setup_info['tracker']['check_install'] = array(
