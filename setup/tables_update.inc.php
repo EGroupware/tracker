@@ -1,9 +1,10 @@
 <?php
 /**
- * eGroupWare - Setup
- * http://www.egroupware.org
+ * EGroupware - Setup
+ *
  * Created by eTemplates DB-Tools written by ralfbecker@outdoor-training.de
  *
+ * @link http://www.egroupware.org
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
  * @subpackage setup
@@ -409,3 +410,8 @@ function tracker_upgrade1_7_001()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.7.002';
 }
 
+
+function tracker_upgrade1_7_002()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.8';
+}
