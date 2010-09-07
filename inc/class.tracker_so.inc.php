@@ -344,6 +344,12 @@ class tracker_so extends so_sql_cf
 						'tr_group' => $GLOBALS['egw']->accounts->memberships($this->user,true),
 					));
 				}
+				// allow assignee access if we are no admin ($need_private_acl) AND we have group/creator restrictions
+				if ($need_private_acl && ($creator_restrictions || $group_restrictions))
+				{
+					$to_or[] = 'tr_assigned IN ('.$this->user.','.
+						implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')';
+				}
 				if ($to_or)
 				{
 					$filter[] = '('.implode(' OR ',$to_or).')';

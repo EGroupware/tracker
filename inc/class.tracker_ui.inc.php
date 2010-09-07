@@ -213,7 +213,9 @@ class tracker_ui extends tracker_bo
 			$restrict = false;
 			if($this->data['tr_id'])
 			{
-				if(!$this->is_staff($this->data['tr_tracker']))
+				if (!$this->is_staff($this->data['tr_tracker']) &&	// user has to be staff or
+					!array_intersect($this->data['tr_assigned'],	// he or a group he is a member of is assigned
+						array_merge((array)$this->user,$GLOBALS['egw']->accounts->memberships($this->user))))
 				{
 					// if we have group OR creator restrictions
 					if ($this->restrictions[$this->data['tr_tracker']]['creator'] ||
