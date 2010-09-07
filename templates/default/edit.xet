@@ -147,7 +147,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.7.004">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.7.005">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -189,7 +189,7 @@
 						<menulist class="user_select">
 							<menupopup id="tr_assigned" options="Not assigned" no_lang="1"/>
 						</menulist>
-						<buttononly options="users" label="Select multiple" align="right" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;"/>
+						<buttononly options="users" label="Select multiple" align="right" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;"/>
 					</hbox>
 					<description options="tr_priority" value="Priority"/>
 					<menulist>
