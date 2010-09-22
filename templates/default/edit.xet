@@ -147,7 +147,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.7.005">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.7.006">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -216,7 +216,22 @@
 				</row>
 				<row class="row">
 					<description value="Cc" statustext="List of coma separated email address"/>
-					<textbox maxlength="254" id="tr_cc" class="inputFullWidth"/>
+					<grid width="100%" border="0">
+						<columns>
+							<column/>
+							<column width="16"/>
+						</columns>
+						<rows>
+							<row>
+								<textbox maxlength="254" id="tr_cc" class="inputFullWidth"/>
+								<buttononly options="users" label="Add from Addressbook" onclick="return add_email_from_ab(form::name('ab[id]'),form::name('tr_cc'));"/>
+							</row>
+							<row class="hiddenRow">
+								<link-entry options="addressbook-email" id="ab" blur="Search"/>
+								<description/>
+							</row>
+						</rows>
+					</grid>
 					<description value="Group"/>
 					<menulist>
 						<menupopup no_lang="1" id="tr_group" statustext="Ownership of the ticket"/>
@@ -273,5 +288,10 @@
 				</row>
 			</rows>
 		</grid>
+		<styles>
+			.hiddenRow {
+  display: none;
+}
+		</styles>
 	</template>
 </overlay>
