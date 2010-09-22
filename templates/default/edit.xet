@@ -227,8 +227,7 @@
 								<buttononly options="users" label="Add from Addressbook" onclick="return add_email_from_ab(form::name('ab[id]'),form::name('tr_cc'));"/>
 							</row>
 							<row class="hiddenRow">
-								<link-entry options="addressbook-email" id="ab" blur="Search"/>
-								<description/>
+								<link-entry options="addressbook-email" id="ab" blur="Search" span="all"/>
 							</row>
 						</rows>
 					</grid>

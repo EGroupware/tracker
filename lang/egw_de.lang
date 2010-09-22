@@ -18,6 +18,7 @@ activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgung
 add additionally	tracker	de	zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
+add from addressbook	tracker	de	Aus Adressbuch hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
 add unrecognized mail address to the cc field	tracker	de	Nicht erkannte Mail Adresse zu CC hinzufügen
 after	tracker	de	nach
