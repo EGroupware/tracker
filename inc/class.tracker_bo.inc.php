@@ -283,7 +283,7 @@ class tracker_bo extends tracker_so
 	 */
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users', 'mailhandling',	// tracker unspecific
+		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access',
 	);
 	/**

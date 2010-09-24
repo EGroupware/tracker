@@ -728,6 +728,7 @@ class tracker_ui extends tracker_bo
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
+			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
 			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
