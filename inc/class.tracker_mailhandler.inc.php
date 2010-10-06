@@ -706,7 +706,7 @@ class tracker_mailhandler extends tracker_bo
 
 		$this->mailSubject = $msgHeader->subject;
 		$this->decode_header ($this->mailSubject);
-		$this->ticketId = self::get_ticketId($this->mailSubject);
+		$this->ticketId = $this->get_ticketId($this->mailSubject);
 
 		if ($this->ticketId == 0) // Create new ticket?
 		{
@@ -860,41 +860,6 @@ class tracker_mailhandler extends tracker_bo
 		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work
 		$this->mailSender = $first_match['account_id'];
 		return true;
-	}
-
-	/**
-	 * Try to extract a ticket number from a subject line
-	 *
-	 * @param string the subjectline from the incoming message
-	 * @return int ticket ID, or 0 of no ticket ID was recognized
-	 */
-	function get_ticketId($subj='')
-	{
-		if (empty($subj))
-		{
-			return 0; // Don't bother...
-		}
-
-		// The subject line is expected to be in the format:
-		// [Re: |Fwd: |etc ]<Tracker name> #<id>: <Summary>
-		// allow colon or dash to separate Id from summary, as our notifications use a dash (' - ') and not a colon (': ')
-		preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data);
-		if (!$tr_data[2])
-		{
-			return 0; //
-		}
-
-		preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id);
-		$tracker_id = $tr_id[0][0];
-
-		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
-
-		// Use strncmp() here, since a Fwd might add a sqr bracket.
-		if (strncmp($trackerData[0]['tr_summary'], $tr_data[3][0], strlen($trackerData[0]['tr_summary'])))
-		{
-			return 0; // Summary doesn't match. Should this be ok?
-		}
-		return $tracker_id;
 	}
 
 	/**

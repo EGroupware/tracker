@@ -316,6 +316,14 @@ class tracker_bo extends tracker_so
 	);
 
 	/**
+	 * Maximum number of line characters (-_+=~) allowed in a mail, to not stall the layout.
+	 * Longer lines / biger number of these chars are truncated to that max. number or chars.
+	 *
+	 * @var int
+	 */
+	var $max_line_chars = 40;
+
+	/**
 	 * Constructor
 	 *
 	 * @return tracker_bo
@@ -1475,5 +1483,144 @@ class tracker_bo extends tracker_so
 		return !is_array($bounty) ? $bounty : '#'.$bounty['bounty_id'].', '.$bounty['bounty_name'].' <'.$bounty['bounty_email'].
 			'> ('.$GLOBALS['egw']->accounts->id2name($bounty['bounty_creator']).') '.
 			$bounty['bounty_amount'].' '.$this->currency.($bounty['bounty_confirmed'] ? ' Ok' : '');
+	}
+
+	/**
+	 * Try to extract a ticket number from a subject line
+	 *
+	 * @param string the subjectline from the incoming message
+	 * @return int ticket ID, or 0 of no ticket ID was recognized
+	 */
+	function get_ticketId($subj='')
+	{
+		if (empty($subj))
+		{
+			return 0; // Don't bother...
+		}
+
+		// The subject line is expected to be in the format:
+		// [Re: |Fwd: |etc ]<Tracker name> #<id>: <Summary>
+		// allow colon or dash to separate Id from summary, as our notifications use a dash (' - ') and not a colon (': ')
+		preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data);
+		if (!$tr_data[2])
+		{
+			return 0; //
+		}
+
+		preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id);
+		$tracker_id = $tr_id[0][0];
+		//error_log(__METHOD__.array2string(array(0=>$tracker_id,1=>$subj)));
+		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
+
+		// Use strncmp() here, since a Fwd might add a sqr bracket.
+		if (strncmp($trackerData[0]['tr_summary'], $tr_data[3][0], strlen($trackerData[0]['tr_summary'])))
+		{
+			return 0; // Summary doesn't match. Should this be ok?
+		}
+		return $tracker_id;
+	}
+
+	/**
+	 * prepares the content of an email to be imported as tracker
+	 *
+	 * @author Klaus Leithoff <kl@stylite.de>
+	 * @param string $_email_address rfc822 conform emailaddresses
+	 * @param string $_subject
+	 * @param string $_message
+	 * @param array $_attachments
+	 * @param string $_date
+	 * @return array $content array for tracker_ui
+	 */
+	function prepare_import_mail($_email_address,$_subject,$_message,$_attachments,$_date)
+	{
+		$address_array = imap_rfc822_parse_adrlist($_email_address,'');
+		foreach ((array)$address_array as $address)
+		{
+			$email[] = $emailadr = sprintf('%s@%s',
+				trim($address->mailbox),
+				trim($address->host));
+				$name[] = !empty($address->personal) ? $address->personal : $emailadr;
+		}
+		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
+		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
+			create_function('$matches',"return substr(\$matches[0],0,$this->max_line_chars);"),$_message);
+		$type = isset($this->enums['type']['email']) ? 'email' : 'note';
+		$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
+		$ticketId = $this->get_ticketId($_subject);
+		if ($ticketId == 0)
+		{
+			$trackerentry = array(
+				'tr_id' => 0,
+				'tr_cc' => implode(', ',$email),
+				'tr_summary' => $_subject,
+				'tr_description' => $_message,
+				'referer' => false,
+				'popup' => true,
+				'link_to' => array(
+					'to_app' => 'tracker',
+					'to_id' => 0,
+				),
+			);
+			// find the addressbookentry to link with
+			$addressbook = new addressbook_bo();
+			$contacts = array();
+			foreach ($email as $mailadr)
+			{
+				$contacts = array_merge($contacts,(array)$addressbook->search(
+					array(
+						'email' => $mailadr,
+						'email_home' => $mailadr
+					),True,'','','',false,'OR',false,null,'',false));
+			}
+			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
+			{
+				$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',$trackerentry['info_addr']);
+				$trackerentry['info_custom_from'] = true;	// show the info_from line and NOT only the link
+			}
+			else
+			{
+				// create the first address as info_contact
+				$contact = array_shift($contacts);
+				$trackerentry['info_contact'] = 'addressbook:'.$contact['id'];
+				// create the rest a "ordinary" links
+				foreach ($contacts as $contact)
+				{
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['id']);
+				}
+			}
+		}
+		else
+		{
+			$this->read($ticketId);
+			//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
+			// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
+			foreach ($this->data['replies'] as &$reply)
+			{
+				if (!$this->htmledit || stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false)
+				{
+					$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
+				}
+			}
+			$trackerentry = $this->data;
+			$trackerentry['reply_message'] = $_message;
+			$trackerentry['popup'] = true;
+
+		}
+		if (is_array($_attachments))
+		{
+			foreach ($_attachments as $attachment)
+			{
+				$is_vfs = false;
+				if (parse_url($attachment['tmp_name'],PHP_URL_SCHEME) == 'vfs' && egw_vfs::is_readable($attachment['tmp_name']))
+				{
+					$is_vfs = true;
+				}
+				if(is_readable($attachment['tmp_name']) || $is_vfs)
+				{
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
+				}
+			}
+		}
+		return $trackerentry;
 	}
 }
