@@ -24,6 +24,7 @@ class tracker_ui extends tracker_bo
 		'edit'  => true,
 		'index' => true,
 		'tprint'=> true,
+		'import_mail' => True,
 	);
 	/**
 	 * Displayed instead of the '@' in email-addresses
@@ -964,5 +965,111 @@ class tracker_ui extends tracker_bo
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
+	}
+
+	/**
+	 * imports a mail as tracker
+	 * two possible calls:
+	 * 1. with function args set. (we come from send mail)
+	 * 2. with $_GET['uid] = someuid (we come from display mail)
+	 *
+	 * @author klaus Leithoff <kl@stylite.de>
+	 * @param string $_to_emailAddress
+	 * @param string $_subject
+	 * @param string $_body
+	 * @param array $_attachments
+	 * @param string $_date
+	 */
+	function import_mail($_to_emailAddress=false,$_subject=false,$_body=false,$_attachments=false,$_date=false)
+	{
+		$uid = $_GET['uid'];
+		$partid = $_GET['part'];
+		$mailbox = base64_decode($_GET['mailbox']);
+		if ($_date == false || empty($_date)) $_date = $this->bo->user_time_now;
+		if (!empty($_to_emailAddress))
+		{
+			$GLOBALS['egw_info']['flags']['currentapp'] = 'infolog';
+			echo '<script>window.resizeTo(750,550);</script>';
+
+			if (is_array($_attachments))
+			{
+				//echo __METHOD__.'<br>';
+				//_debug_array($_attachments);
+				$bofelamimail = CreateObject('felamimail.bofelamimail',$GLOBALS['egw']->translation->charset());
+				//$bopreferences =& $bofelamimail->bopreferences; //= CreateObject('felamimail.bopreferences');
+				//$preferences  =& $bofelamimail->mailPreferences;
+				$bofelamimail->openConnection();
+				foreach ($_attachments as $attachment)
+				{
+					if ($attachment['type'] == 'MESSAGE/RFC822')
+					{
+						$bofelamimail->reopen($attachment['folder']);
+
+						$mailcontent = bofelamimail::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder']);
+						//_debug_array($mailcontent['attachments']);
+						foreach($mailcontent['attachments'] as $tmpattach => $tmpval)
+						{
+							$attachments[] = $tmpval;
+						}
+					}
+					else
+					{
+						if (!empty($attachment['folder']))
+						{
+							$is_winmail = $_GET['is_winmail'] ? $_GET['is_winmail'] : 0;
+							$bofelamimail->reopen($attachment['folder']);
+							$attachmentData = $bofelamimail->getAttachment($attachment['uid'],$attachment['partID'],$is_winmail);
+							$attachment['file'] =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+							$tmpfile = fopen($attachment['file'],'w');
+							fwrite($tmpfile,$attachmentData['attachment']);
+							fclose($tmpfile);
+						}
+
+						$attachments[] = array(
+							'name' => $attachment['name'],
+							'mimeType' => $attachment['type'],
+							'tmp_name' => $attachment['file'],
+							'size' => $attachment['size'],
+						);
+					}
+				}
+				$bofelamimail->closeConnection();
+			}
+			//_debug_array($_to_emailAddress);
+			$toaddr = array();
+			foreach(array('to','cc','bcc') as $x) if (is_array($_to_emailAddress[$x]) && !empty($_to_emailAddress[$x])) $toaddr = array_merge($toaddr,$_to_emailAddress[$x]);
+			//_debug_array($attachments);
+			$body = bofelamimail::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
+				'TO'=>(!empty($_to_emailAddress['to'])?implode(',',$_to_emailAddress['to']):null),
+				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
+				'BCC'=>(!empty($_to_emailAddress['bcc'])?implode(',',$_to_emailAddress['bcc']):null),
+				'SUBJECT'=>$_subject,
+				'DATE'=>bofelamimail::_strtotime($_date))).strip_tags($_body);
+			$this->edit($this->prepare_import_mail(
+				implode(',',$toaddr),$_subject,$body,$attachments,$_date
+			));
+			exit;
+		}
+		elseif ($uid && $mailbox)
+		{
+			$bofelamimail = CreateObject('felamimail.bofelamimail',$GLOBALS['egw']->translation->charset());
+			//$bopreferences =& $bofelamimail->bopreferences; //= CreateObject('felamimail.bopreferences');
+			$bofelamimail->openConnection();
+			$bofelamimail->reopen($mailbox);
+
+			$mailcontent = bofelamimail::get_mailcontent($bofelamimail,$uid,$partid,$mailbox);
+
+			return $this->edit($this->prepare_import_mail(
+				$mailcontent['mailaddress'],
+				$mailcontent['subject'],
+				$mailcontent['message'],
+				$mailcontent['attachments'],
+				strtotime($mailcontent['headers']['DATE'])
+			));
+		}
+		common::egw_header();
+		echo "<script> window.close(); alert('Error: no mail (Mailbox / UID) given!');</script>";
+		common::egw_exit();
+		exit;
 	}
 }
