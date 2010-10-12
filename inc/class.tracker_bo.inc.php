@@ -222,6 +222,7 @@ class tracker_bo extends tracker_so
 		'tr_version'     => 'Ve',
 		'tr_status'      => 'St',
 		'tr_description' => 'De',
+		'tr_creator'     => 'Cr',
 		'tr_assigned'    => 'As',
 		'tr_private'     => 'pr',
 //		'tr_budget'      => 'Bu',
@@ -352,9 +353,11 @@ class tracker_bo extends tracker_so
 	{
 		parent::init();
 
+		$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
+		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
 		$this->data['tr_private'] = $this->create_new_as_private;
 		$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
-		
+
 		$this->data_merge($keys);
 
 		return $this->data;
@@ -452,7 +455,7 @@ class tracker_bo extends tracker_so
 		if (!$this->data['tr_id'])	// new entry
 		{
 			$this->data['tr_created'] = $this->now;
-			$this->data['tr_creator'] = $this->user;
+			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_status'] = self::STATUS_OPEN;
 			$this->data['tr_seen'] = serialize(array($this->user));
 
@@ -1256,6 +1259,7 @@ class tracker_bo extends tracker_so
 			'tr_version'     => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_status'      => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_description' => TRACKER_ITEM_NEW,
+			'tr_creator'     => TRACKER_ADMIN,
 			'tr_assigned'    => TRACKER_ITEM_CREATOR|TRACKER_ADMIN,
 			'tr_private'     => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_budget'      => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
@@ -1267,7 +1271,6 @@ class tracker_bo extends tracker_so
 			'customfields'   => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			// set automatic by botracker::save()
 			'tr_id'          => 0,
-			'tr_creator'     => 0,
 			'tr_created'     => 0,
 			'tr_modifier'    => 0,
 			'tr_modified'    => 0,
