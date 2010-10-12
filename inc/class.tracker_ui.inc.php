@@ -178,7 +178,7 @@ class tracker_ui extends tracker_bo
 				if (($state = egw_session::appsession('index','tracker'.
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
-					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'];
+					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
 					$this->data['cat_id']     = $state['filter'];
 					$this->data['tr_version'] = $state['filter2'];
 				}
@@ -518,6 +518,7 @@ class tracker_ui extends tracker_bo
 			'tr_status'   => &$statis,
 			'tr_resolution' => self::$resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
+			'tr_creator'  => $this->get_staff($tracker,0,'usersANDtechnicians'),
 			// New items default to primary group is no right to change the group
 			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker) && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
