@@ -483,6 +483,7 @@ class tracker_ui extends tracker_bo
 					'Tr' => 'select-cat',
 					'Ve' => 'select-cat',
 					'As' => 'select-account',
+					'Cr' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
 					'Re' => self::$resolutions,
