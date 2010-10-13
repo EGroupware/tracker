@@ -353,7 +353,10 @@ class tracker_bo extends tracker_so
 	{
 		parent::init();
 
-		$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
+		if (is_array($this->trackers))	// init is called from so_sql::__construct(), where $this->trackers is NOT set
+		{
+			$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
+		}
 		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
 		$this->data['tr_private'] = $this->create_new_as_private;
 		$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
