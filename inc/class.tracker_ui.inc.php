@@ -511,6 +511,19 @@ class tracker_ui extends tracker_bo
 				}
 			}
 		}
+		// options for creator selectbox (allways add current selected user!)
+		if ($readonlys['tr_creator'])
+		{
+			$creators = array();
+		}
+		else
+		{
+			$creators = $this->get_staff($tracker,0,'usersANDtechnicians');
+		}
+		if ($content['tr_creator'] && !isset($creators[$content['tr_creator']]))
+		{
+			$creators[$content['tr_creator']] = common::grab_owner_name($content['tr_creator']);
+		}
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
@@ -519,7 +532,7 @@ class tracker_ui extends tracker_bo
 			'tr_status'   => &$statis,
 			'tr_resolution' => self::$resolutions,
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
-			'tr_creator'  => $this->get_staff($tracker,0,'usersANDtechnicians'),
+			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
 			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker) && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
