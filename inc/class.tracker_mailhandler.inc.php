@@ -842,7 +842,7 @@ class tracker_mailhandler extends tracker_bo
 	function search_user($mail_addr='')
 	{
 		$this->mailSender = null; // Make sure previous msg data is cleared
-
+/*
 		$acc_search = array(
 			'type' => 'accounts',
 //			'app' => 'tracker', // Make this a config item?
@@ -859,7 +859,10 @@ class tracker_mailhandler extends tracker_bo
 
 		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work
 		$this->mailSender = $first_match['account_id'];
-		return true;
+*/
+		$account_ID = $GLOBALS['egw']->accounts->name2id($mail_addr,'account_email');
+		if (!empty($account_ID)) $this->mailSender = $account_ID;
+		return (!empty($account_ID) ? true : false);
 	}
 
 	/**
