@@ -860,6 +860,7 @@ class tracker_mailhandler extends tracker_bo
 		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work
 		$this->mailSender = $first_match['account_id'];
 */
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.'Try to resolve Useraccount by mail:'.print_r($mail_addr,true));
 		$account_ID = $GLOBALS['egw']->accounts->name2id($mail_addr,'account_email');
 		if (!empty($account_ID)) $this->mailSender = $account_ID;
 		return (!empty($account_ID) ? true : false);
