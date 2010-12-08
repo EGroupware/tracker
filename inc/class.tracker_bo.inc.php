@@ -592,7 +592,7 @@ class tracker_bo extends tracker_so
 
 		$groups = array();
 		$primary_group = array();
-		$group_list = $GLOBALS['egw']->accounts->search(array('type' => 'groups'));
+		$group_list = $GLOBALS['egw']->accounts->search(array('type' => 'groups', 'order' => 'account_lid'));
 		foreach($group_list as $gid)
 		{
 			$groups[$gid['account_id']] = $gid['account_lid'];
