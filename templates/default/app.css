@@ -32,3 +32,6 @@ table.fullWidth { width: 100%; }
 .indexPrio:first-letter { font-weight: bold; }
 .inputFullWidth input { width: 100%; }
 .image16 img { height: 16px; }
+
+/* Restricted access replies */
+.reply_visible_1 { border: 1px dashed gray; }

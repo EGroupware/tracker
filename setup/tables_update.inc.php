@@ -415,3 +415,30 @@ function tracker_upgrade1_7_002()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.8';
 }
+
+function tracker_upgrade1_8()
+{
+	/* done by RefreshTable() anyway
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_replies','visible',array(
+		'type' => 'int',
+		'precision' => '1',
+		'nullable' => False
+	));*/
+	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker_replies',array(
+		'fd' => array(
+			'reply_id' => array('type' => 'auto','nullable' => False),
+			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
+			'reply_creator' => array('type' => 'int','precision' => '4','nullable' => False),
+			'reply_created' => array('type' => 'int','precision' => '8','nullable' => False),
+			'reply_message' => array('type' => 'text'),
+			'reply_visible' => array('type' => 'int','precision' => '1','nullable' => False, 'default' => 0)
+		),
+		'pk' => array('reply_id'),
+		'fk' => array(),
+		'ix' => array('reply_visible',array('tr_id','reply_created')),
+		'uc' => array()
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.001';
+}
+

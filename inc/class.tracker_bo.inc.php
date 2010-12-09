@@ -436,7 +436,9 @@ class tracker_bo extends tracker_so
 	*/
 	function read($keys,$extra_cols='',$join='')
 	{
-		if (($ret = parent::read($keys,$extra_cols,$join)))
+		// Read restricted doesn't include assigned, it's not known yet
+		$read_restricted = $this->is_admin(is_array($keys) ? $keys['tr_id'] : $keys) || $this->is_technician(is_array($keys) ? $keys['tr_id'] : $keys);
+		if (($ret = parent::read($keys,$extra_cols,$join, $read_restricted)))
 		{
 			$this->data['old_status'] = $this->data['tr_status'];
 		}
@@ -509,9 +511,16 @@ class tracker_bo extends tracker_so
 				// user if the ticket wasn't closed at the same time
 				if ($this->data['tr_status'] != self::STATUS_CLOSED)
 				{
-					$this->data['tr_seen'] = serialize(array($this->user));
+					$seen = array();
+					$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
+					if($this->data['reply_visible'])
+					{
+						// Keep those that can't see the comment
+						$seen = array_intersect($this->data['tr_seen'], array_keys($this->get_staff($this->data['tracker_id'], 2, 'users')));
+					}
+					$seen[] = $this->user;
+					$this->data['tr_seen'] = serialize($seen);
 				}
-
 				if ($this->data['canned_response'])
 				{
 					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).

@@ -524,6 +524,14 @@ class tracker_ui extends tracker_bo
 		{
 			$creators[$content['tr_creator']] = common::grab_owner_name($content['tr_creator']);
 		}
+
+		// Comment visibility
+		foreach($content['replies'] as $key => &$reply)
+		{
+			$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
+		}
+		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE);
+
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),

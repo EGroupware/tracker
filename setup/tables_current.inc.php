@@ -46,11 +46,12 @@ $phpgw_baseline = array(
 			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
 			'reply_creator' => array('type' => 'int','precision' => '4','nullable' => False),
 			'reply_created' => array('type' => 'int','precision' => '8','nullable' => False),
-			'reply_message' => array('type' => 'text')
+			'reply_message' => array('type' => 'text'),
+			'reply_visible' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0')
 		),
 		'pk' => array('reply_id'),
 		'fk' => array(),
-		'ix' => array(array('tr_id','reply_created')),
+		'ix' => array('reply_visible',array('tr_id','reply_created')),
 		'uc' => array()
 	),
 	'egw_tracker_votes' => array(

@@ -74,6 +74,51 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
+	 * Tracks the changes in one entry $data, by comparing it with the last version in $old
+         *
+	 * Overridden from parent to hide restricted comments
+	 *
+         * @param array $data current entry
+         * @param array $old=null old/last state of the entry or null for a new entry
+         * @param int $user=null user who made the changes, default to current user
+         * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undeleted
+         * @param array $changed_fields=null changed fields from ealier call to $this->changed_fields($data,$old), to not compute it again
+         * @param boolean $skip_notification=false do NOT send any notification
+         * @return int|boolean false on error, integer number of changes logged or true for new entries ($old == null)
+         */
+        public function track(array $data,array $old=null,$user=null,$deleted=null,array $changed_fields=null,$skip_notification=false)
+        {
+                $this->user = !is_null($user) ? $user : $GLOBALS['egw_info']['user']['account_id'];
+
+                $changes = true;
+
+		// Hide restricted comments from reply count
+		foreach((array)$data['replies'] as $key => $reply)
+		{
+			if($reply['reply_visible'] != 0)
+			{
+				$data['num_replies']--;
+			}
+		}
+		// If someone made a restricted comment, hide that from change tracking (notification & history)
+		if($data['reply_message'])
+		{
+			$old['num_replies'] = $data['num_replies'] - ($data['reply_visible'] != 0 ? 0 : 1);
+		}
+                if ($old && $this->field2history)
+                {
+                        $changes = $this->save_history($data,$old,$deleted,$changed_fields);
+                }
+
+                // do not run do_notifications if we have no changes, unless there was a restricted comment just made
+                if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications($data,$old,$deleted,$changes))
+                {
+                        $changes = false;
+                }
+                return $changes;
+        }
+
+	/**
 	 * Send an autoreply to the ticket creator or replier by the mailhandler
 	 *
 	 * @param array $data current entry
@@ -106,6 +151,55 @@ class tracker_tracking extends bo_tracking
 		}
 		// Send notification to the creator only; assignee, CC etc have been notified already
 		$this->send_notification($data,$old,$email,$data[$this->creator_field]);
+	}
+
+	/**
+	 * Send notifications for changed entry
+	 *
+	 * Overridden to hide restricted comments.  Sends restricted first to all but creator, then unrestricted to creator
+	 *
+	 * @internal use only track($data,$old,$user)
+	 * @param array $data current entry
+	 * @param array $old=null old/last state of the entry or null for a new entry
+	 * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undelted
+	 * @return boolean true on success, false on error (error messages are in $this->errors)
+	 */
+	public function do_notifications($data,$old,$deleted, $changes)
+	{
+		$success = True;
+
+		// Send all to others
+		$creator = $this->creator_field;
+		$this->creator_field = null;
+
+		// Don't send CC
+		$private = $data['tr_private'];
+		$data['tr_private'] = true;
+		$success = $success && parent::do_notifications($data, $old, $deleted);
+		if(!$changes)
+		{
+			// Only thing that really changed was a restricted comment
+			return $success;
+		}
+
+		// Edit messages
+		foreach((array)$data['replies'] as $key => $reply)
+		{
+			if($reply['reply_visible'] != 0)
+			{
+				unset($data['replies'][$key]);
+			}
+		}
+
+		// Send to creator && CC
+		$this->creator_field = $creator;
+		$data['tr_private'] = $private;
+		$assigned = $this->assigned_field;
+		$this->assigned_field = null;
+		$success = $success && parent::do_notifications($data, $old, $deleted);
+		$this->assigned_field = $assigned;
+
+		return $success;
 	}
 
 	/**

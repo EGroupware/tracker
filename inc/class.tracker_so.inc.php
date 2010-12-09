@@ -79,20 +79,14 @@ class tracker_so extends so_sql_cf
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
 	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
+	 * @param boolean $read_restricted Read restricted replies.  Does not include assigned, as they are read and added here.
 	 * @return array|boolean data if row could be retrived else False
 	*/
-	function read($keys,$extra_cols='',$join='')
+	function read($keys,$extra_cols='',$join='', $read_restricted = false)
 	{
 		if (($ret = parent::read($keys,$extra_cols,$join)))
 		{
 			$this->data2db();
-			$this->data['replies'] = array();
-			foreach($this->db->select(self::REPLIES_TABLE,'*',array('tr_id' => $this->data['tr_id']),
-				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
-			{
-				$this->data['replies'][] = $row;
-			}
-			$this->data['num_replies'] = count($this->data['replies']);
 
 			$bounty_where = array('tr_id' => $this->data['tr_id']);
 			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker']))
@@ -106,8 +100,22 @@ class tracker_so extends so_sql_cf
 				__LINE__,__FILE__,false,'','tracker') as $row)
 			{
 				$this->data['tr_assigned'][] = $row['tr_assigned'];
+				$read_restricted = $read_restricted || ($row['tr_assigned'] == $GLOBALS['egw_info']['user']['account_id']);
 			}
 			$this->db2data();
+
+			$this->data['replies'] = array();
+			$filter = array('tr_id' => $this->data['tr_id']);
+			if(!$read_restricted)
+			{
+				$filter['reply_visible'] = 0;
+			}
+			foreach($this->db->select(self::REPLIES_TABLE,'*',$filter,
+				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
+			{
+				$this->data['replies'][] = $row;
+			}
+			$this->data['num_replies'] = count($this->data['replies']);
 		}
 		return $ret;
 	}
@@ -131,6 +139,7 @@ class tracker_so extends so_sql_cf
 			$this->data2db();
 			if ($this->data['reply_message'])
 			{
+				$this->data['reply_visible'] = is_null($this->data['reply_visible']) ? 0 : $this->data['reply_visible'];
 				$this->db->insert(self::REPLIES_TABLE,$this->data,false,__LINE__,__FILE__,'tracker');
 				// add the new replies to this->data[replies]
 				if (!is_array($this->data['replies'])) $this->data['replies'] = array();
@@ -140,6 +149,7 @@ class tracker_so extends so_sql_cf
 					'reply_creator' => $this->data['reply_creator'],
 					'reply_created' => $this->data['reply_created'],
 					'reply_message' => $this->data['reply_message'],
+					'reply_visible' => $this->data['reply_visible'],
 				));
 				$this->data['num_replies'] = (int)$this->data['num_replies'] + 1;
 			}
