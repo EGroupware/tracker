@@ -8,7 +8,7 @@
  * @link http://www.egroupware.org
  * @author Nathan Gray
  * @copyright 2010 Nathan Gray
- * @version $Id$
+ * @version $Id
  */
 
 /**
