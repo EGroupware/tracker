@@ -8,12 +8,12 @@
  * @author Cornelius Weiss <nelius@cwtech.de>
  * @author Nathan Gray
  * @copyright 2010 Nathan Gray
- * @version $Id: $
+ * @version $Id$
  */
 
 
 /**
- * class import_csv for infolog
+ * class import_csv for tracker
  */
 class tracker_import_csv implements importexport_iface_import_plugin  {
 
