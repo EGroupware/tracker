@@ -7,7 +7,7 @@
  * @subpackage importexport
  * @link http://www.egroupware.org
  * @author Nathan Gray
- * @version $Id $
+ * @version $Id$
  */
 
 class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
@@ -28,6 +28,9 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		// Field mapping
 		$bo = new tracker_bo();
 		$this->mapping_fields = array('tr_id' => lang('ID')) + $bo->field2label;
+
+		// Change label from what's there
+		$this->mapping_fields['tr_tracker'] = lang('Queue');
 
 		// These aren't in the list
                 $this->mapping_fields += array(
