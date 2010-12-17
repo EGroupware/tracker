@@ -1120,7 +1120,7 @@ class tracker_bo extends tracker_so
 		if($options['start'] || $options['num_rows']) {
 			$limit = array($options['start'], $options['num_rows']);
 		}
-		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',$limit,array('tr_status' => self::STATUS_OPEN)) as $item )
+		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',$limit,array('tr_status != '. self::STATUS_DELETED)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
