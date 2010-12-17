@@ -140,6 +140,21 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		$_definition->plugin_options['creator'] = isset( $_definition->plugin_options['creator'] ) ?
 			$_definition->plugin_options['creator'] : $this->user;
 
+		// Used to try to automatically match names to account IDs
+		$addressbook = new addressbook_so();
+
+		$lookups = array(
+			'tr_tracker'    => $this->bo->trackers,
+			'tr_version'    => $this->bo->get_tracker_labels('version', null),
+			'tr_status'     => $this->bo->get_tracker_stati(null),
+			'tr_resolution' => tracker_ui::$resolutions,
+			'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
+		);
+		foreach($lookups['tr_tracker'] as $id => $name) {
+			$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $id);
+			$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
+		}
+
 		// Start counting successes
 		$count = 0;
 		$this->results = array();
@@ -170,10 +185,34 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// Check account IDs
 			foreach(array('tr_creator','tr_modifier','tr_group','tr_assigned') as $field) {
 				if($record[$field] && !is_numeric($record[$field])) {
-					$this->errors[$import_csv->get_current_position()] = lang(
-						'Invalid field: %1 = %2, it needs to be a number.', $field, $record[$field]
-					);
-					continue 2;
+					// Try an automatic conversion
+					$contact_id = self::addr_id($record[$field]);
+					if($contact_id) {
+						$contact = $addressbook->read($contact_id);
+						$account_id = $contact['account_id'];
+					} else {
+						$accounts = $GLOBALS['egw']->accounts->search(array('type' => 'both','query'=>$record[$field]));
+						if($accounts) $account_id = key($accounts);
+					}
+					if($account_id && common::grab_owner_name($account_id) == $record[$field]) {
+						$record[$field] = $account_id;
+					} else {
+						$this->errors[$import_csv->get_current_position()] = lang(
+							'Invalid field: %1 = %2, it needs to be a number.', $field, $record[$field]
+						);
+						continue 2;
+					}
+				}
+			}
+
+			// Lookups - from human friendly to integer
+			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
+				if(!is_numeric($record[$field]) && $key = array_search($record[$field], $lookups[$field])) {
+					$record[$field] = $key;
+				}
+				if($field == 'tr_tracker') {
+					$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
+					$lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
 				}
 			}
 
@@ -182,6 +221,32 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			{
 				list($lastname,$firstname,$org_name) = explode(',',$record['addressbook']);
 				$record['addressbook'] = self::addr_id($lastname,$firstname,$org_name);
+			}
+
+			// Comments
+			if($record['replies']) {
+				if(substr($record['replies'], 0, 2) == 'a:') {
+					// Tracker export with DB values, all comments serialized
+					$record['replies'] = unserialize($record['replies']);
+					$replies = array();
+					foreach($record['replies'] as $id => $reply) {
+						// User date format
+						$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
+							($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
+						$name = common::grab_owner_name($reply['reply_creator']);
+						$message = str_replace("\r\n", "\n", $reply['reply_message']);
+
+						$replies[$id] = "$date\t$name\t$message";
+					}
+					$record['replies'] = implode("\n",$replies);
+				}
+				// Import all comments as a single comment
+				$record += array(
+					'reply_creator' => $this->user,
+					'reply_created' => time(),
+					'reply_message' => $record['replies']
+				);
+				unset($record['replies']);
 			}
 
 			if ( $_definition->plugin_options['conditions'] ) {

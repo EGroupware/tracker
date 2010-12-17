@@ -38,7 +38,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
                         'tr_modified'   => lang('Modified'),
                         'tr_created'    => lang('Created'),
                         'tr_votes'      => lang('Votes'),
-			// Bounty and Comments don't import nicely.
+			'replies'	=> lang('Comments'),
                 );
 
 		// These aren't importable fields
