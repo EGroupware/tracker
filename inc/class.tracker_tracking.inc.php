@@ -101,10 +101,7 @@ class tracker_tracking extends bo_tracking
 			}
 		}
 		// If someone made a restricted comment, hide that from change tracking (notification & history)
-		if($data['reply_message'])
-		{
-			$old['num_replies'] = $data['num_replies'] - ($data['reply_visible'] != 0 ? 0 : 1);
-		}
+		$old['num_replies'] = $data['num_replies'] - (!$data['reply_message'] || $data['reply_visible'] != 0 ? 0 : 1);
                 if ($old && $this->field2history)
                 {
                         $changes = $this->save_history($data,$old,$deleted,$changed_fields);
@@ -170,7 +167,12 @@ class tracker_tracking extends bo_tracking
 
 		// Send all to others
 		$creator = $this->creator_field;
-		$this->creator_field = null;
+
+		if(!($this->tracker->is_admin($data['tr_tracker'], $creator) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
+		{
+			// Notify the creator with full info if they're an admin or technician
+			$this->creator_field = null;
+		}
 
 		// Don't send CC
 		$private = $data['tr_private'];
@@ -191,8 +193,11 @@ class tracker_tracking extends bo_tracking
 			}
 		}
 
-		// Send to creator && CC
-		$this->creator_field = $creator;
+		// Send to creator (if not already notified) && CC
+		if(!($this->tracker->is_admin($data['tr_tracker'], $creator) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
+		{
+			$this->creator_field = $creator;
+		}
 		$data['tr_private'] = $private;
 		$assigned = $this->assigned_field;
 		$this->assigned_field = null;
