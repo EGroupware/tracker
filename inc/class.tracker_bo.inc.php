@@ -1069,7 +1069,7 @@ class tracker_bo extends tracker_so
 	function link_query( $pattern )
 	{
 		$result = array();
-		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status' => self::STATUS_OPEN)) as $item )
+		foreach((array) $this->search($pattern,false,'tr_summary ASC','','%',false,'OR',false,array('tr_status != '. self::STATUS_DELETED)) as $item )
 		{
 			if ($item) $result[$item['tr_id']] = $this->link_title($item);
 		}
