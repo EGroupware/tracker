@@ -17,35 +17,33 @@ class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 
 		// Field mapping
 		$bo = new tracker_bo();
-		$this->export_fields = array('tr_id' => lang('Tracker ID')) + $bo->field2label;
-
-		// Change label from what's there
-		$this->export_fields['tr_tracker'] = lang('Queue');
-
-		// These aren't in the list
-		$this->export_fields += array(
-			'tr_modifier'	=> lang('Modified by'),
-			'tr_modified'	=> lang('Modified'),
-			'tr_created'	=> lang('Created'),
-			'tr_votes'	=> lang('Votes'),
-			'bounties'	=> lang('Bounty'),
-			
+		$this->export_fields = array(
+			'tr_id'          => 'Tracker ID',
+			'tr_summary'     => 'Summary',
+			'tr_tracker'     => 'Queue',
+			'cat_id'         => 'Category',
+			'tr_version'     => 'Version',
+			'tr_status'      => 'Status',
+			'tr_description' => 'Description',
+			'replies'        => 'Comments',
+			'tr_assigned'    => 'Assigned to',
+			'tr_private'     => 'Private',
+			'tr_resolution'  => 'Resolution',
+			'tr_completion'  => 'Completed',
+			'tr_priority'    => 'Priority',
+			'tr_closed'      => 'Closed',
+			'tr_creator'     => 'Created by',
+			'tr_modifier'    => 'Modified by',
+			'tr_modified'    => 'Modified',
+			'tr_created'     => 'Created',
+			'tr_votes'       => 'Votes',
+			'bounties'       => 'Bounty',
+			'tr_group'	 => 'Group',
+			'tr_cc'		 => 'CC',
+			'num_replies'    => 'Number of replies',
 		);
 
-		// These aren't exportable fields
-		unset($this->export_fields['link_to']);
-		unset($this->export_fields['canned_response']);
-		unset($this->export_fields['reply_message']);
-		unset($this->export_fields['add']);
-		unset($this->export_fields['vote']);
-		unset($this->export_fields['no_notifications']);
-		unset($this->export_fields['bounty']);
-
-		// Add in comments
-		$this->export_fields['replies'] = lang('Comments');
-
 		// Custom fields
-		unset($this->export_fields['customfields']); // Heading, not a real field
 		$custom = config::get_customfields('tracker', true);
 		foreach($custom as $name => $data) {
 			$this->export_fields['#'.$name] = $data['label'];
