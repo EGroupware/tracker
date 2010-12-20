@@ -17,7 +17,7 @@ class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 
 		// Field mapping
 		$bo = new tracker_bo();
-		$this->export_fields = array('tr_id' => lang('ID')) + $bo->field2label;
+		$this->export_fields = array('tr_id' => lang('Tracker ID')) + $bo->field2label;
 
 		// Change label from what's there
 		$this->export_fields['tr_tracker'] = lang('Queue');
