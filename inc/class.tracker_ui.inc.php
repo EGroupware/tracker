@@ -576,7 +576,7 @@ class tracker_ui extends tracker_bo
 			{
 				$content['no_vote'] = is_int($voted) ? lang('You voted %1.',
 					date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'].
-					($GLOBALS['egw_info']['user']['preferences']['common']['timeformat']==12?' h:i a':' H:i')),$voted) :
+					($GLOBALS['egw_info']['user']['preferences']['common']['timeformat']==12?' h:i a':' H:i'),$voted)) :
 					lang('You need to login to vote!');
 			}
 		}
