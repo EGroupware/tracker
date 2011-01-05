@@ -313,6 +313,7 @@ class tracker_tracking extends bo_tracking
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => common::grab_owner_name($data['tr_creator']),
+			'tr_created'     => $this->datetime($data['tr_created']),
 			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
 			'tr_cc'			 => $data['tr_cc'],
 			// The layout of tr_summary should NOT be changed in order for
