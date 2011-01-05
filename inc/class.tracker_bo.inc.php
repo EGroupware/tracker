@@ -195,6 +195,7 @@ class tracker_bo extends tracker_so
 		'tr_priority'    => 'Priority',
 		'tr_closed'      => 'Closed',
 		'tr_creator'     => 'Created by',
+		'tr_created'     => 'Created on',
 		'tr_group'		 => 'Owned by group',
 		// pseudo fields used in edit
 		'link_to'        => 'Attachments & Links',
