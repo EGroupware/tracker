@@ -96,6 +96,7 @@ class tracker_bo extends tracker_so
 		'l' => 'Later',
 		'o' => 'Out of date',
 		'p' => 'Postponed',
+		'O' => 'Outsourced',
 		'r' => 'Rejected',
 		'R' => 'Remind',
 		'w' => 'Wont fix',
