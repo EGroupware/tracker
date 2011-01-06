@@ -626,7 +626,7 @@ class tracker_bo extends tracker_so
 		static $staff_cache;
 
 		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
-		error_log(__METHOD__.__LINE__.array2string($tracker));
+		//error_log(__METHOD__.__LINE__.array2string($tracker));
 		// some caching
 		if (!empty($tracker) && isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][(int)$return_groups]) &&
 			isset($staff_cache[$tracker][(int)$return_groups][$what]))
