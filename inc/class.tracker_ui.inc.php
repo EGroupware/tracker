@@ -693,6 +693,12 @@ class tracker_ui extends tracker_bo
 			// save prefs, but do NOT invalid the cache (unnecessary)
 			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 		}
+		if (empty($query['col_filter']['tr_tracker']))
+		{
+			$trtofilter = array_keys($this->trackers);
+			//_debug_array($trtofilter);
+			$query['col_filter']['tr_tracker'] = $trtofilter;
+		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)

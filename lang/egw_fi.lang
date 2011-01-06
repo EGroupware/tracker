@@ -30,7 +30,7 @@ allow default projects for tracker	tracker	fi	Salli oletusprojektit
 allow editing by	tracker	fi	Salli muokkaaminen:
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	fi	Salli niiden projektien esimäärittelmät, jotka liitetään Reklamaationhallinnan merkintöihin.
 allow to assign groups to tracker items	tracker	fi	Salli merkintöjen vastuulliseksi määrittely ryhmille
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	fi	Salli merkinnän vastuulliseksi määrittely myös "Käyttäjille", ei ainoastaan "Teknikoille" ja "Ylläpitäjille".
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	fi	Salli myös "Käyttäjien" vastuulliseksi määrittely, ei ainoastaan "Teknikoiden" ja "Ylläpitäjien".
 allow voting	tracker	fi	Salli äänestäminen
 allow voting on tracker items, show and sort after the votes	tracker	fi	Salli äänestäminen merkinnöissä, näytä ja lajittele äänet.
 already escalated	tracker	fi	Eskalointi jo suoritettu
@@ -39,6 +39,7 @@ assign to project	tracker	fi	Liitä projektiin
 assigned to	tracker	fi	Vastuullinen
 assigning groups	tracker	fi	Vastuu ryhmälle
 attachments & links	tracker	fi	Liitteet ja linkit
+attention: no contact with address %1 found.	tracker	fi	Huomio: Kontaktia osoitteella %1 ei löytynyt.
 autoassign to	tracker	fi	Vastuu automaattisesti
 automatic email handling	tracker	fi	Automaattinen sähköpostikäsittely
 bounties	tracker	fi	Maksullinen kehitys

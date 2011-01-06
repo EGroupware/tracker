@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	en	%1 entries updated.
 %1 tickets have been converted	tracker	en	%1 tickets have been converted
-&#9830; not closed	tracker	en	? Not closed
-&#9830; own not closed	tracker	en	? Own not closed
-&#9830; own without reply not closed	tracker	en	? Own without reply not closed
-&#9830; without 30 days reply not closed	tracker	en	? Without 30 days reply not closed
-&#9830; without reply not closed	tracker	en	? Without reply not closed
+&#9830; not closed	tracker	en	♦ Not closed
+&#9830; own not closed	tracker	en	♦ Own not closed
+&#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
+&#9830; without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
+&#9830; without reply not closed	tracker	en	♦ Without reply not closed
 (beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
 (new tickets as	tracker	en	(New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop-down list
@@ -23,14 +23,14 @@ add timesheet entry	tracker	en	Add timesheet entry
 add unrecognized mail address to the cc field	tracker	en	Add unrecognized mail address to the CC field
 after	tracker	en	after
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
-after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatic
+after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatically
 all tickets are already converted to tracker	tracker	en	all tickets are already converted to Tracker
 allow bounties	tracker	en	Allow bounties
 allow default projects for tracker	tracker	en	Allow default projects for tracker
 allow editing by	tracker	en	Allow editing by
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	en	Allow the predefinition of projects that will be assigned to new tracker-items.
 allow to assign groups to tracker items	tracker	en	Allow to assign groups to tracker items
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	en	allow to assign to a ticket not only "Tracker Admins" and "Technians", but also "Users" in the staff tab
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	en	Allow "Users" (in Staff tab) to be assigned to a ticket additionally to "Technicians" and "Tracker Admins"
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
 already escalated	tracker	en	already escalated
@@ -122,7 +122,7 @@ existing links	tracker	en	Existing links
 field	tracker	en	Field
 fixed	tracker	en	Fixed
 forward	tracker	en	Forward
-forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	en	Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server.
+forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	en	Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterward, the mail will be deleted from the server.
 forward to	tracker	en	Forward to
 forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized mails to the email address that has to be specified here.
 from	tracker	en	From
@@ -189,13 +189,13 @@ read mail address	tracker	en	Read mail address
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker-items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker-items
 receive notifications in html	tracker	en	Receive notifications in html
-recieve notifications about own changes in tracker-items	tracker	en	Recieve notifications about own changes in tracker-items
+recieve notifications about own changes in tracker-items	tracker	en	Receive notifications about own changes in tracker-items
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 reply also to unknown addresses	tracker	en	Reply also to unknown addresses
 resolution	tracker	en	Resolution
-restict tracker items to the creator and the staff only	tracker	en	Restict tracker items to the creator and the staff only
-restict tracker items to the creators primary group and the staff only	tracker	en	Restict tracker items to the creators primary group and the staff only
+restict tracker items to the creator and the staff only	tracker	en	Restrict tracker items to the creator and the staff only
+restict tracker items to the creators primary group and the staff only	tracker	en	Restrict tracker items to the creators, primary group and the staff only
 restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
 restriction	tracker	en	Restriction
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
@@ -216,7 +216,7 @@ should the actions column in the tracker list-view be shown?	tracker	en	Should t
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
 should there be a tracker-box on main screen?	tracker	en	Should there be a tracker-box on main screen?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	en	Show a new column that calculated the acumulated times of timesheet entries.
+show a new column that calculated the acumulated times of timesheet entries.	tracker	en	Show a new column that calculated the accumulated times of TimeSheet entries.
 show actions in tracker listing	tracker	en	Show actions in tracker listing
 show the acumulated times of timesheet entries	tracker	en	Show the acumulated times of timesheet entries
 show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?

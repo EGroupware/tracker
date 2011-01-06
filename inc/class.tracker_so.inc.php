@@ -296,7 +296,7 @@ class tracker_so extends so_sql_cf
 			// we need to check all trackers for restrictions or (read) ACL (if enabled)
 			$need_restrictions = false;
 			$no_restrictions = $no_access = $creator_restrictions = $group_restrictions = array();
-			foreach($filter['tr_tracker'] ? array($filter['tr_tracker']) : array_keys($this->trackers) as $tracker)
+			foreach($filter['tr_tracker'] ? (array)$filter['tr_tracker'] : array_keys($this->trackers) as $tracker)
 			{
 				// technicians (and admins) allways have access to restricted queues
 				if ($this->is_technician($tracker))
