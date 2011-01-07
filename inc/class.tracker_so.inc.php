@@ -202,7 +202,10 @@ class tracker_so extends so_sql_cf
 		$join = $join_in && $join_in != 1 ? $join_in : '';
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
-		$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($filter['tr_tracker']);
+		foreach ((array)$filter['tr_tracker'] as $k => $tr)
+		{
+			$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($tr);
+		}
 
 		if (is_array($filter) && array_key_exists('tr_assigned',$filter))
 		{
