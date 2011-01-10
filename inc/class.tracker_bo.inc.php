@@ -507,22 +507,22 @@ class tracker_bo extends tracker_so
 			{
 				$this->data['tr_closed'] = null;
 			}
+			// Changes mark the ticket unseen for everbody but the current
+			// user if the ticket wasn't closed at the same time
+			if ($this->data['tr_status'] != self::STATUS_CLOSED)
+			{
+				$seen = array();
+				$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
+				if($this->data['reply_visible'])
+				{
+					// Keep those that can't see the comment
+					$seen = array_intersect($this->data['tr_seen'], array_keys($this->get_staff($this->data['tracker_id'], 2, 'users')));
+				}
+				$seen[] = $this->user;
+				$this->data['tr_seen'] = serialize($seen);
+			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
-				// Replies mark the ticket unseen for everbody but the current
-				// user if the ticket wasn't closed at the same time
-				if ($this->data['tr_status'] != self::STATUS_CLOSED)
-				{
-					$seen = array();
-					$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
-					if($this->data['reply_visible'])
-					{
-						// Keep those that can't see the comment
-						$seen = array_intersect($this->data['tr_seen'], array_keys($this->get_staff($this->data['tracker_id'], 2, 'users')));
-					}
-					$seen[] = $this->user;
-					$this->data['tr_seen'] = serialize($seen);
-				}
 				if ($this->data['canned_response'])
 				{
 					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).
