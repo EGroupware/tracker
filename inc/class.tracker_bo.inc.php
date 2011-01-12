@@ -505,15 +505,14 @@ class tracker_bo extends tracker_so
 			{
 				$this->data['tr_closed'] = null;
 			}
+			// Changes mark the ticket unseen for everbody but the current
+			// user if the ticket wasn't closed at the same time
+			if ($this->data['tr_status'] != self::STATUS_CLOSED)
+			{
+				$this->data['tr_seen'] = serialize(array($this->user));
+			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
-				// Replies mark the ticket unseen for everbody but the current
-				// user if the ticket wasn't closed at the same time
-				if ($this->data['tr_status'] != self::STATUS_CLOSED)
-				{
-					$this->data['tr_seen'] = serialize(array($this->user));
-				}
-
 				if ($this->data['canned_response'])
 				{
 					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).
