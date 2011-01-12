@@ -34,7 +34,7 @@ class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 			'tr_closed'      => 'Closed',
 			'tr_creator'     => 'Created by',
 			'tr_modifier'    => 'Modified by',
-			'tr_modified'    => 'Modified',
+			'tr_modified'    => 'Last Modified',
 			'tr_created'     => 'Created',
 			'tr_votes'       => 'Votes',
 			'bounties'       => 'Bounty',
