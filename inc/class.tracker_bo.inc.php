@@ -1164,6 +1164,12 @@ class tracker_bo extends tracker_so
 		))))
 		{
 			$this->trackers[$id] = $name;
+
+			// Update cf type list
+			$types = config::get_content_types('tracker');
+			$types[$id] = array('name' => $name, 'non_deletable' => true);
+			config::save_value('types',$types, 'tracker');
+
 			return $id;
 		}
 		return false;
@@ -1185,6 +1191,11 @@ class tracker_bo extends tracker_so
 			{
 				$data['name'] = $this->trackers[$tracker] = $name;
 				$cats->edit($data);
+
+				// Update cf type list
+				$types = config::get_content_types('tracker');
+				$types[$tracker]['name'] = $name;
+				config::save_value('types',$types, 'tracker');
 			}
 			return true;
 		}
@@ -1209,6 +1220,12 @@ class tracker_bo extends tracker_so
 		if ($ids) $this->historylog->delete($ids);
 
 		$GLOBALS['egw']->categories->delete($tracker,true);
+
+		// Update cf type list
+		$types = config::get_content_types('tracker');
+		unset($types[$tracker]);
+		config::save_value('types',$types, 'tracker');
+
 		$this->reload_labels();
 		unset($this->admins[$tracker]);
 		unset($this->technicians[$tracker]);

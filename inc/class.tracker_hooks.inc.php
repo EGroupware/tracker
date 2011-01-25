@@ -23,7 +23,7 @@ class tracker_hooks
 	 */
 	static function search_link($location)
 	{
-		return array(
+		$link = array(
 			'query' => 'tracker.tracker_bo.link_query',
 			'title' => 'tracker.tracker_bo.link_title',
 			'titles' => 'tracker.tracker_bo.link_titles',
@@ -39,7 +39,18 @@ class tracker_hooks
 			'add_app'    => 'link_app',
 			'add_id'     => 'link_id',
 			'add_popup'  => '750x500',
+			'default_types'	=> array('' => array('name' => 'all', 'non_deletable' => true, 'no_add' => true, 'options' => array())),
 		);
+
+		// Populate default types with queues
+		$tracker = new tracker_bo();
+		$queues = $tracker->get_tracker_labels();
+		foreach($queues as $id => $name)
+		{
+			$link['default_types'][$id] = array('name' => $name, 'non_deletable' => true);
+		}
+
+		return $link;
 	}
 
 	/**
