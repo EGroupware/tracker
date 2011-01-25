@@ -530,7 +530,8 @@ class tracker_ui extends tracker_bo
 		{
 			$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
 		}
-		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE);
+		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE) ||
+			!$this->allow_restricted_comments;
 
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
