@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry type="array" name="importExportDefinitions">
+  <entry type="array" name="metainfo">
+    <entry type="string" name="type">importexport definitions</entry>
+    <entry type="string" name="charset">utf-8</entry>
+    <entry type="integer" name="entries">2</entry>
+  </entry>
+  <entry type="array" name="definitions">
+    <entry type="array" name="export-tracker">
+      <entry type="string" name="name">export-tracker</entry>
+      <entry type="string" name="application">tracker</entry>
+      <entry type="string" name="plugin">tracker_export_csv</entry>
+      <entry type="string" name="type">export</entry>
+      <entry type="array" name="allowed_users">
+        <entry type="string" name="0">Default</entry>
+        <entry type="string" name="1">Admins</entry>
+      </entry>
+      <entry type="array" name="plugin_options">
+        <entry type="array" name="mapping">
+          <entry type="string" name="tr_id">tr_id</entry>
+          <entry type="string" name="tr_summary">tr_summary</entry>
+          <entry type="string" name="tr_tracker">tr_tracker</entry>
+          <entry type="string" name="cat_id">cat_id</entry>
+          <entry type="string" name="tr_version">tr_version</entry>
+          <entry type="string" name="tr_status">tr_status</entry>
+          <entry type="string" name="tr_description">tr_description</entry>
+          <entry type="string" name="replies">replies</entry>
+          <entry type="string" name="tr_assigned">tr_assigned</entry>
+          <entry type="string" name="tr_private">tr_private</entry>
+          <entry type="string" name="tr_resolution">tr_resolution</entry>
+          <entry type="string" name="tr_completion">tr_completion</entry>
+          <entry type="string" name="tr_priority">tr_priority</entry>
+          <entry type="string" name="tr_closed">tr_closed</entry>
+          <entry type="string" name="tr_creator">tr_creator</entry>
+          <entry type="string" name="tr_modifier">tr_modifier</entry>
+          <entry type="string" name="tr_modified">tr_modified</entry>
+          <entry type="string" name="tr_created">tr_created</entry>
+          <entry type="string" name="tr_votes">tr_votes</entry>
+          <entry type="string" name="bounties">bounties</entry>
+          <entry type="string" name="tr_group">tr_group</entry>
+          <entry type="string" name="tr_cc">tr_cc</entry>
+          <entry type="string" name="num_replies">num_replies</entry>
+        </entry>
+        <entry type="string" name="delimiter">;</entry>
+        <entry type="string" name="charset">utf-8</entry>
+        <entry type="string" name="begin_with_fieldnames">1</entry>
+        <entry type="string" name="convert">0</entry>
+      </entry>
+    </entry>
+    <entry type="array" name="import-tracker">
+      <entry type="string" name="name">import-tracker</entry>
+      <entry type="string" name="application">tracker</entry>
+      <entry type="string" name="plugin">tracker_import_csv</entry>
+      <entry type="string" name="type">import</entry>
+      <entry type="array" name="allowed_users">
+        <entry type="string" name="0">Default</entry>
+        <entry type="string" name="1">Admins</entry>
+      </entry>
+      <entry type="array" name="plugin_options">
+        <entry type="string" name="fieldsep">;</entry>
+        <entry type="string" name="charset">utf-8</entry>
+        <entry type="string" name="num_header_lines">1</entry>
+        <entry type="string" name="update_cats">add</entry>
+        <entry type="array" name="csv_fields">
+          <entry type="string" name="0">tr_id</entry>
+          <entry type="string" name="1">tr_summary</entry>
+          <entry type="string" name="2">tr_tracker</entry>
+          <entry type="string" name="3">cat_id</entry>
+          <entry type="string" name="4">tr_version</entry>
+          <entry type="string" name="5">tr_status</entry>
+          <entry type="string" name="6">tr_description</entry>
+          <entry type="string" name="7">replies</entry>
+          <entry type="string" name="8">tr_assigned</entry>
+          <entry type="string" name="9">tr_private</entry>
+          <entry type="string" name="10">tr_resolution</entry>
+          <entry type="string" name="11">tr_completion</entry>
+          <entry type="string" name="12">tr_priority</entry>
+          <entry type="string" name="13">tr_closed</entry>
+          <entry type="string" name="14">tr_creator</entry>
+          <entry type="string" name="15">tr_modifier</entry>
+          <entry type="string" name="16">tr_modified</entry>
+          <entry type="string" name="17">tr_created</entry>
+          <entry type="string" name="18">tr_votes</entry>
+          <entry type="string" name="19">bounties</entry>
+          <entry type="string" name="20">tr_group</entry>
+          <entry type="string" name="21">tr_cc</entry>
+          <entry type="string" name="22">num_replies</entry>
+          <entry type="string" name="23">no_csv_1</entry>
+          <entry type="string" name="24">no_csv_2</entry>
+          <entry type="string" name="25">no_csv_3</entry>
+        </entry>
+        <entry type="array" name="field_mapping">
+          <entry type="string" name="0">tr_id</entry>
+          <entry type="string" name="1">tr_summary</entry>
+          <entry type="string" name="2">tr_tracker</entry>
+          <entry type="string" name="3">cat_id</entry>
+          <entry type="string" name="4">tr_version</entry>
+          <entry type="string" name="5">tr_status</entry>
+          <entry type="string" name="6">tr_description</entry>
+          <entry type="string" name="7">replies</entry>
+          <entry type="string" name="8">tr_assigned</entry>
+          <entry type="string" name="9">tr_private</entry>
+          <entry type="string" name="10">tr_resolution</entry>
+          <entry type="string" name="11">tr_completion</entry>
+          <entry type="string" name="12">tr_priority</entry>
+          <entry type="string" name="13">tr_closed</entry>
+          <entry type="string" name="14">tr_creator</entry>
+          <entry type="string" name="15">tr_modifier</entry>
+          <entry type="string" name="16">tr_modified</entry>
+          <entry type="string" name="17">tr_created</entry>
+          <entry type="string" name="18">tr_votes</entry>
+          <entry type="string" name="20">tr_group</entry>
+          <entry type="string" name="21">tr_cc</entry>
+          <entry type="string" name="22">num_replies</entry>
+        </entry>
+        <entry type="string" name="field_conversion"/>
+        <entry type="array" name="conditions">
+          <entry type="array" name="0">
+            <entry type="string" name="string">tr_id</entry>
+            <entry type="string" name="type">exists</entry>
+            <entry type="array" name="true">
+              <entry type="string" name="action">update</entry>
+              <entry type="string" name="stop">1</entry>
+            </entry>
+            <entry type="array" name="false">
+              <entry type="string" name="action">insert</entry>
+              <entry type="string" name="stop">1</entry>
+            </entry>
+          </entry>
+        </entry>
+        <entry type="string" name="owner_from_csv">1</entry>
+        <entry type="string" name="change_owner">0</entry>
+      </entry>
+    </entry>
+  </entry>
+</entry>
