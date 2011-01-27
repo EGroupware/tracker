@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<overlay>
+	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row valign="top">
+					<customfields options="@tr_tracker"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>

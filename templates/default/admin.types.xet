@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<overlay>
+	<template id="tracker.admin.types" template="" lang="" group="0" version="1.9.001">
+		<grid>
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description/>
+				</row>
+			</rows>
+		</grid>
+		<styles>.header{
+font-weight: bold;
+}</styles>
+	</template>
+</overlay>
