@@ -172,7 +172,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				$name = common::grab_owner_name($reply['reply_creator']);
 				$message = str_replace("\r\n", "\n", $reply['reply_message']);
 
-				$replies[$id] = "$date\t$name\t$message";
+				$replies[$id] = "$date \t$name \t$message";
 			}
 			$record->replies = implode("\n",$replies);
 		}
