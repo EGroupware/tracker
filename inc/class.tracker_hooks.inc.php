@@ -39,7 +39,6 @@ class tracker_hooks
 			'add_app'    => 'link_app',
 			'add_id'     => 'link_id',
 			'add_popup'  => '750x500',
-			'default_types'	=> array('' => array('name' => 'all', 'non_deletable' => true, 'no_add' => true, 'options' => array())),
 		);
 
 		// Populate default types with queues
@@ -91,7 +90,7 @@ class tracker_hooks
 			$file = Array(
 				'Site configuration' => egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
 				'Define escalations' => egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
-				'Custom fields' => egw::link('/index.php','menuaction=admin.customfields.edit&appname='.$appname),
+				'Custom fields' => egw::link('/index.php','menuaction=tracker.tracker_customfields.edit'),
 			);
 			if ($location == 'admin')
 			{
