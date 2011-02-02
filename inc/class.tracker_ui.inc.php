@@ -526,9 +526,12 @@ class tracker_ui extends tracker_bo
 		}
 
 		// Comment visibility
-		foreach($content['replies'] as $key => &$reply)
+		if (is_array($content['replies']))
 		{
-			$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
+			foreach($content['replies'] as $key => &$reply)
+			{
+				$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
+			}
 		}
 		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE) ||
 			!$this->allow_restricted_comments;
