@@ -1498,7 +1498,7 @@ class tracker_bo extends tracker_so
 	 * @param string the subjectline from the incoming message
 	 * @return int ticket ID, or 0 of no ticket ID was recognized
 	 */
-	function get_ticketId($subj='')
+	function get_ticketId(&$subj='')
 	{
 		if (empty($subj))
 		{
@@ -1516,9 +1516,15 @@ class tracker_bo extends tracker_so
 
 		preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id);
 		$tracker_id = $tr_id[0][0];
+		if (!is_numeric($tracker_id)) return 0; // nothing found that looks like an ID
 		//error_log(__METHOD__.array2string(array(0=>$tracker_id,1=>$subj)));
 		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
-
+		if (is_numeric($tracker_id) && empty($trackerData)) // we have a numeric ID, but we could not find it in our database, is it external?
+		{
+			// we modify the subject as external tracker ids mess up our recognition of tracker ids
+			if ($tracker_id > 0) $subj = $tr_data[1][0].str_replace('#','ID:',$tr_data[2][0]).$tr_data[3][0];
+			return 0;
+		}
 		// Use strncmp() here, since a Fwd might add a sqr bracket.
 		if (strncmp($trackerData[0]['tr_summary'], $tr_data[3][0], strlen($trackerData[0]['tr_summary'])))
 		{
@@ -1551,8 +1557,8 @@ class tracker_bo extends tracker_so
 		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
 		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
 			create_function('$matches',"return substr(\$matches[0],0,$this->max_line_chars);"),$_message);
-		$type = isset($this->enums['type']['email']) ? 'email' : 'note';
-		$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
+		//$type = isset($this->enums['type']['email']) ? 'email' : 'note';
+		//$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
 		$ticketId = $this->get_ticketId($_subject);
 		if ($ticketId == 0)
 		{
@@ -1601,11 +1607,14 @@ class tracker_bo extends tracker_so
 			$this->read($ticketId);
 			//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 			// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
-			foreach ($this->data['replies'] as &$reply)
+			if (is_array($this->data['replies']))
 			{
-				if (!$this->htmledit || stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false)
+				foreach ($this->data['replies'] as &$reply)
 				{
-					$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
+					if (!$this->htmledit || stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false)
+					{
+						$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
+					}
 				}
 			}
 			$trackerentry = $this->data;
