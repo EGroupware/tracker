@@ -88,6 +88,7 @@ class tracker_customfields extends customfields
 		$GLOBALS['egw_info']['flags']['app_header'] = $GLOBALS['egw_info']['apps'][$this->appname]['title'].' - '.lang('Custom fields');
 		$readonlys = array();
 
+		unset($this->content_types['']); // Added by parent
 		foreach($this->content_types as $type => $entry)
 		{
 			$this->types2[$type] = $entry['name'];
@@ -102,6 +103,10 @@ class tracker_customfields extends customfields
 				$data = array();
 				$data['label'] = $name;
 				$data['order'] = ($n+1) * 10;
+			}
+			if($data['type2'] == '')
+			{
+				$data['type2'] = implode(',', array_keys($this->types2));
 			}
 			if (is_array($data['values']))
 			{
