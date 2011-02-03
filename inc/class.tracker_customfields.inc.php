@@ -41,6 +41,7 @@ class tracker_customfields extends customfields
 		$this->tmpl->read('tracker.customfields');
 
 		$this->content_types = config::get_content_types($this->appname);
+		unset($this->content_types['']); // Added by parent
 
 		// Make sure all queues are in there
                 $tracker = new tracker_bo();
