@@ -1578,8 +1578,8 @@ class tracker_bo extends tracker_so
 		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
 		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
 			create_function('$matches',"return substr(\$matches[0],0,$this->max_line_chars);"),$_message);
-		$type = isset($this->enums['type']['email']) ? 'email' : 'note';
-		$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
+		//$type = isset($this->enums['type']['email']) ? 'email' : 'note';
+		//$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
 		$ticketId = $this->get_ticketId($_subject);
 		if ($ticketId == 0)
 		{
@@ -1604,23 +1604,49 @@ class tracker_bo extends tracker_so
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					),True,'','','',false,'OR',false,null,'',false));
+					),'contact_id,contact_email,contact_email_home,egw_accounts.account_id as account_id','','','',false,'OR',false,null,'',false));
 			}
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
 			{
-				$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',$trackerentry['info_addr']);
-				$trackerentry['info_custom_from'] = true;	// show the info_from line and NOT only the link
+				$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
+				$trackerentry['tr_creator'] = $this->user;	// use current user as creator instead
 			}
 			else
 			{
-				// create the first address as info_contact
-				$contact = array_shift($contacts);
-				$trackerentry['info_contact'] = 'addressbook:'.$contact['id'];
-				// create the rest a "ordinary" links
+				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
 					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['id']);
+					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
+					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0) 
+					{
+						$buff = explode(',',strtolower($trackerentry['tr_cc'])) ;
+						unset($trackerentry['tr_cc']);
+						foreach (array('email','email_home') as $k => $n)
+						{
+							if (!empty($contact[$n]) && !empty($buff))
+							{
+								$break = false;
+								$cnt = count($buff);
+								$i = 0;
+								while ( $break == false )
+								{
+									$key = array_search(strtolower($contact[$n]),$buff);
+									//_debug_array('found:'.$n.'->'.$key);
+									if ($key !== false && isset($staff[$contact['account_id']]))
+									{
+										unset($buff[$key]);
+										if (empty($trackerentry['tr_creator'])) $trackerentry['tr_creator'] = $contact['account_id'];
+									}
+									$i++;
+									if ($key==false || $i>=$cnt) $break=true;
+								}
+							}
+						}
+						$trackerentry['tr_cc'] = implode(',',$buff);
+					}
 				}
+				if (empty($trackerentry['tr_creator'])) $trackerentry['tr_creator']=$this->user;
 			}
 		}
 		else
