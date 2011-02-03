@@ -21,9 +21,12 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		parent::__construct();
 
 		$this->steps += array(
+			'wizard_step45' => lang('Import options'),
 			'wizard_step50' => lang('Manage mapping'),
 			'wizard_step60' => lang('Choose \'creator\' of imported data'),
 		);
+
+		$this->step_templates['wizard_step45'] = 'tracker.wizard_import_options';
 
 		// Field mapping
 		$bo = new tracker_bo();
@@ -74,6 +77,55 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		$this->conditions = array(
 			'exists'	=>	lang('exists'),
 		);
+	}
+
+	function wizard_step45(&$content, &$sel_options, &$readonlys, &$preserv)
+	{
+		if($this->debug) error_log(__METHOD__.'->$content '.print_r($content,true));
+
+		// return from step45
+		if ($content['step'] == 'wizard_step45')
+		{
+			switch (array_search('pressed', $content['button']))
+			{
+				case 'next':
+					return $GLOBALS['egw']->importexport_definitions_ui->get_step($content['step'],1);
+				case 'previous' :
+					return $GLOBALS['egw']->importexport_definitions_ui->get_step($content['step'],-1);
+				case 'finish':
+					return 'wizard_finish';
+				default :
+					return $this->wizard_step45($content,$sel_options,$readonlys,$preserv);
+			}
+		}
+		// init step45
+		else
+		{
+			$content['message'] = $this->steps['wizard_step45'];
+			$content['step'] = 'wizard_step45';
+
+			$options = array(
+				'' => lang('Ignore'),
+				'~skip~' => lang('Skip record'),
+				'~add~' => lang('Add')
+			);
+			$ui = new tracker_ui();
+			$set_to = lang('Set to') . ':';
+			$sel_options = array(
+                                'translate_tracker'	=> $options + array($set_to => $ui->trackers),
+                                'translate_version'	=> $options + array($set_to => $ui->get_tracker_labels('version', null)),
+                                'translate_status'	=> $options + array($set_to => $ui->get_tracker_stati(null)),
+                                'translate_cat_id'	=> $options + array($set_to => $ui->get_tracker_labels('cat', null)),
+                        );
+                        foreach($sel_options['translate_tracker'][$set_to] as $id => $name) {
+                                $sel_options['translate_version'][$set_to] += $ui->get_tracker_labels('version', $id);
+                                $sel_options['translate_cat_id'][$set_to] += $ui->get_tracker_labels('cat', $id);
+                                $sel_options['translate_status'][$set_to] += $ui->get_tracker_stati($id);
+                        }
+			$preserv = $content;
+			unset ($preserv['button']);
+			return $this->step_templates['wizard_step45'];
+		}
 	}
 
 	function wizard_step50(&$content, &$sel_options, &$readonlys, &$preserv)

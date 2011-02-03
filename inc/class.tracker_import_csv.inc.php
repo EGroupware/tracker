@@ -207,8 +207,39 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 			// Lookups - from human friendly to integer
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
-				if(!is_numeric($record[$field]) && $key = array_search($record[$field], $lookups[$field])) {
-					$record[$field] = $key;
+				if(!is_numeric($record[$field])) {
+					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
+					if($key = array_search($record[$field], $lookups[$field])) {
+						$record[$field] = $key;
+					} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
+						$t_field = $_definition->plugin_options[$translate_key];
+						switch ($t_field) {
+							case '':
+								// Ignore and take your chances
+								break;
+							case '~skip~':
+								continue 2;
+							case '~add~':
+								// Add the thing in.  Takes some extra measures for tracker
+								$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
+								if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
+								$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
+								if($cat_id == 0 || $cat['data']['type'] != $type
+									|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
+								{
+									$cat_id = $GLOBALS['egw']->categories->add( array(
+										'name' => $record[$field],
+										'access' => 'public',
+										'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
+										'data' => serialize(array('type' => $type))
+									));
+								}
+								$record[$field] = $cat_id;
+								break;
+							default:
+								$record[$field] = $t_field;
+						}
+					}
 				}
 				if($field == 'tr_tracker') {
 					$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
