@@ -28,31 +28,33 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		// Field mapping
 		$bo = new tracker_bo();
 		$this->mapping_fields = array('tr_id' => lang('Tracker ID')) + $bo->field2label;
-
-		// Change label from what's there
-		$this->mapping_fields['tr_tracker'] = lang('Queue');
-
-		// These aren't in the list
-                $this->mapping_fields += array(
-                        'tr_modifier'   => lang('Modified by'),
-                        'tr_modified'   => lang('Modified'),
-                        'tr_created'    => lang('Created'),
-                        'tr_votes'      => lang('Votes'),
-			'replies'	=> lang('Comments'),
-                );
-
-		// These aren't importable fields
-                unset($this->mapping_fields['link_to']);
-                unset($this->mapping_fields['canned_response']);
-                unset($this->mapping_fields['reply_message']);
-                unset($this->mapping_fields['add']);
-                unset($this->mapping_fields['vote']);
-                unset($this->mapping_fields['no_notifications']);
-                unset($this->mapping_fields['bounty']);
-
+		$this->mapping_fields = array(
+			'tr_id'          => 'Tracker ID',
+			'tr_summary'     => 'Summary',
+			'tr_tracker'     => 'Queue',
+			'cat_id'         => 'Category',
+			'tr_version'     => 'Version',
+			'tr_status'      => 'Status',
+			'tr_description' => 'Description',
+			'replies'        => 'Comments',
+			'tr_assigned'    => 'Assigned to',
+			'tr_private'     => 'Private',
+			'tr_resolution'  => 'Resolution',
+			'tr_completion'  => 'Completed',
+			'tr_priority'    => 'Priority',
+			'tr_closed'      => 'Closed',
+			'tr_creator'     => 'Created by',
+			'tr_modifier'    => 'Modified by',
+			'tr_modified'    => 'Last Modified',
+			'tr_created'     => 'Created',
+			//'tr_votes'       => 'Votes', // Not importable
+			//'bounties'       => 'Bounty', // Not importable
+			'tr_group'	 => 'Group',
+			'tr_cc'		 => 'CC',
+			'num_replies'    => 'Number of replies',
+		);
 
 		// List each custom field
-		unset($this->mapping_fields['custom']);
 		$custom = config::get_customfields('tracker');
 		foreach($custom as $name => $data) {
 			$this->mapping_fields['#'.$name] = $data['label'];
