@@ -105,7 +105,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			$content['step'] = 'wizard_step45';
 
 			$options = array(
-				'' => lang('Ignore'),
+				false => lang('Ignore'),
 				'~skip~' => lang('Skip record'),
 				'~add~' => lang('Add')
 			);
@@ -122,7 +122,11 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
                                 $sel_options['translate_cat_id'][$set_to] += $ui->get_tracker_labels('cat', $id);
                                 $sel_options['translate_status'][$set_to] += $ui->get_tracker_stati($id);
                         }
+
 			$preserv = $content;
+			foreach($sel_options as $field => $options) {
+				if(!array_key_exists($field,$content)) $content[$field] = $content['plugin_options'][$field];
+			}
 			unset ($preserv['button']);
 			return $this->step_templates['wizard_step45'];
 		}
