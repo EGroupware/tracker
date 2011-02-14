@@ -108,7 +108,7 @@ class tracker_hooks
 	 */
 	static function settings()
 	{
-		return array(
+		$settings = array(
 			'notify_creator' => array(
 				'type'   => 'check',
 				'label'  => 'Receive notifications about created tracker-items',
@@ -177,5 +177,37 @@ class tracker_hooks
 				'default'=> false
 			),
 		);
+		// Merge print
+		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
+		{
+			$link = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
+
+			$settings['default_document'] = array(
+				'type'   => 'input',
+				'size'   => 60,
+				'label'  => 'Default document to insert entries',
+				'name'   => 'default_document',
+				'help'   => lang('If you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. That icon allows to download the specified document with the contact data inserted.','tracker').' '.
+					lang('The document can contain placeholder like $$tr_summary$$, to be replaced with the contact data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>').' '.
+					lang('At the moment the following document-types are supported:').'*.rtf, *.txt',
+				'run_lang' => false,
+				'xmlrpc' => True,
+				'admin'  => False,
+			);
+			$settings['document_dir'] = array(
+				'type'   => 'input',
+				'size'   => 60,
+				'label'  => 'Directory with documents to insert entries',
+				'name'   => 'document_dir',
+				'help'   => lang('If you specify a directory (full vfs path) here, eGroupWare displays an action for each document. That action allows to download the specified document with the %1 data inserted.', lang('tracker')).' '.
+					lang('The document can contain placeholder like $$tr_summary$$, to be replaced with the contact data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>').' '.
+					lang('At the moment the following document-types are supported:').'*.rtf, *.txt',
+				'run_lang' => false,
+				'xmlrpc' => True,
+				'admin'  => False,
+			);
+		}
+
+		return $settings;
 	}
 }

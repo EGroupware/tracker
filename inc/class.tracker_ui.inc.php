@@ -764,6 +764,7 @@ class tracker_ui extends tracker_bo
 			$id=$row['tr_id'];
 			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
+			$readonlys["document[$id]"] = !$GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
 			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
 
@@ -883,6 +884,32 @@ class tracker_ui extends tracker_bo
 			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
 			$tracker = $content['nm']['col_filter']['tr_tracker'];
 
+			if (is_array($content) && isset($content['nm']['rows']['document']))  // handle insert in default document button like an action
+			{
+				list($id) = @each($content['nm']['rows']['document']);
+				$content['action'] = 'document';
+				$content['nm']['rows']['checked'] = array($id);
+			}
+			if($content['action'] != '') {
+				if (!count($content['nm']['rows']['checked']) && !$content['use_all'])
+				{
+
+					$msg = lang('You need to select some entries first');
+				}
+				else
+				{
+					if ($this->action($content['action'],$content['nm']['rows']['checked'],$content['use_all'],
+					$success,$failed,$action_msg,'index',$msg))
+					{
+						$msg .= lang('%1 entries %2',$success,$action_msg);
+					}
+					elseif(is_null($msg))
+					{
+						$msg .= lang('%1 entries %2, %3 failed because of insufficent rights !!!',$success,$action_msg,$failed);
+					}
+				}
+			}
+			
 			if ($content['update'])
 			{
 				unset($content['update']);
@@ -925,6 +952,12 @@ class tracker_ui extends tracker_bo
 				$sel_options['esc_id']['matching filter']['-'.$esc_id] = $label;
 			}
 		}
+		// Merge print
+		if ($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])
+		{
+			$sel_options['action'][lang('Insert in document').':'] = tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir']);
+		}
+		
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
 			'nm' => egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
@@ -1106,5 +1139,75 @@ class tracker_ui extends tracker_bo
 		echo "<script> window.close(); alert('Error: no mail (Mailbox / UID) given!');</script>";
 		common::egw_exit();
 		exit;
+	}
+
+	/**
+	 * apply an action to multiple tracker entries
+	 *
+	 * @param string/int $action 'status_to',set status of entries
+	 * @param array $checked tracker id's to use if !$use_all
+	 * @param boolean $use_all if true use all entries of the current selection (in the session)
+	 * @param int &$success number of succeded actions
+	 * @param int &$failed number of failed actions (not enought permissions)
+	 * @param string &$action_msg translated verb for the actions, to be used in a message like %1 entries 'deleted'
+	 * @param string/array $session_name 'index' or 'email', or array with session-data depending if we are in the main list or the popup
+	 * @return boolean true if all actions succeded, false otherwise
+	 */
+	function action($action,$checked,$use_all,&$success,&$failed,&$action_msg,$session_name,&$msg)
+	{
+		//echo "<p>uicontacts::action('$action',".print_r($checked,true).','.(int)$use_all.",...)</p>\n";
+		$success = $failed = 0;
+		if ($use_all)
+		{
+			// get the whole selection
+			$query = is_array($session_name) ? $session_name : $GLOBALS['egw']->session->appsession($session_name,'tracker');
+
+			if ($use_all)
+			{
+				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
+				$query['num_rows'] = -1;	// all
+				$this->get_rows($query,$checked,$readonlys,true);	// true = only return the id's
+			}
+		}
+
+		// Dialogs to get options
+		list($action, $settings) = explode('_', $action, 2);
+
+		switch($action)
+		{
+			case 'document':
+				$msg = $this->download_document($checked,$settings);
+				$failed = count($checked);
+                                return false;
+		}
+
+		return !$failed;
+	}
+
+	/**
+	 * Download a document with inserted entries
+	 *
+	 * @param array $ids tracker-ids
+	 * @param string $document vfs-path of document
+	 * @return string error-message or error, otherwise the function does NOT return!
+	 */
+	function download_document($ids,$document='')
+	{
+		if (!$document)
+		{
+			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
+		}
+		else
+		{
+			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'].'/'.$document;
+		}
+		if (!@egw_vfs::stat($document))
+		{
+			return lang("Document '%1' does not exist or is not readable for you!",$document);
+		}
+		require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_merge.inc.php');
+		$document_merge = new tracker_merge();
+
+		return $document_merge->download($document,$ids);
 	}
 }
