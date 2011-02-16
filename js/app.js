@@ -9,6 +9,21 @@
  * @version $Id$
  */
 
+/**
+ * Javascript handling for multiple entry actions
+ */
+function do_action(selbox) {
+	if(selbox.value == "") return;
+	var prefix = selbox.id.substring(0,selbox.id.indexOf('['));
+	var popup = document.getElementById(prefix + '[' + selbox.value + '_popup]');
+	if(popup) {
+		popup.style.display = 'block';
+		return;
+	}
+	selbox.form.submit();
+	selbox.value = "";
+}
+
 function add_email_from_ab(ab_id,tr_cc)
 {
 	var ab = document.getElementById(ab_id); 

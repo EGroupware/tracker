@@ -1030,6 +1030,8 @@ class tracker_ui extends tracker_bo
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
 
+		egw_framework::validate_file('.','app','tracker');
+
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
 	}
 

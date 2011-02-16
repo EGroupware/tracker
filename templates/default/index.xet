@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.7.002">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -33,7 +33,10 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id"/>
+					<vbox>
+						<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id"/>
+						<nextmatch-sortheader id="tr_private" label="Private"/>
+					</vbox>
 					<nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
 					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
 					<nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
@@ -61,7 +64,12 @@
 					<button image="check" label="Check all" id="check_all" statustext="Check all" onclick="toggle_all(this.form,form::name('checked[]')); return false;" needed="1" class="tracker-checkall"/>
 				</row>
 				<row class="row">
-					<description id="${row}[tr_id]" no_lang="1"/>
+					<vbox no_lang="1">
+						<description id="${row}[tr_id]" no_lang="1"/>
+						<menulist>
+							<menupopup type="select-bool" readonly="true" id="${row}[tr_private]"/>
+						</menulist>
+					</vbox>
 					<menulist>
 						<menupopup no_lang="1" id="${row}[tr_tracker]" readonly="true"/>
 					</menulist>
@@ -107,9 +115,11 @@
 					<date-since id="${row}[esc_start]"/>
 					<customfields-list id="$row"/>
 					<hbox options="0" align="center" class="noPrint" orient="0">
+						<button image="infolog" class="noPrint" label="Add infolog" align="center" id="infolog[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=infolog.infolog_ui.edit&amp;action=tracker&amp;action_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;"/>
 						<button image="timesheet" class="noPrint" label="Add timesheet entry" align="center" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]$row_cont[extra_links]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;"/>
 						<button image="print" class="noPrint" label="Print entry" align="center" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;"/>
 						<button image="edit" class="noPrint" label="Edit entry" align="center" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;"/>
+						<button id="document[$row_cont[tr_id]]" image="etemplate/merge" label="Insert in document" class="image16"/>
 						<image src="filemanager/navbar" options="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16" label="Filemanager"/>
 					</hbox>
 					<checkbox options="$row_cont[tr_id]" id="checked[]" align="center"/>
@@ -117,7 +127,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="1.7.001">
+	<template id="tracker.index" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
@@ -158,8 +168,9 @@
 					</hbox>
 				</row>
 				<row disabled="!@is_admin">
-					<grid>
+					<grid width="100%">
 						<columns>
+							<column/>
 							<column/>
 							<column/>
 						</columns>
@@ -167,19 +178,31 @@
 							<row>
 								<description value="Canned response"/>
 								<description value="Comment"/>
+								<description/>
 							</row>
 							<row valign="top">
 								<menulist>
 									<menupopup id="canned_response" options="Select one" no_lang="1" statustext="The canned response will be prefix the text you type."/>
 								</menulist>
 								<textbox multiline="true" rows="3" cols="60" id="reply_message"/>
+								<hbox align="right">
+									<checkbox label="whole query" id="use_all"/>
+									<menulist>
+										<menupopup id="action" options="Select an action..." onchange="do_action(this);"/>
+									</menulist>
+								</hbox>
 							</row>
 						</rows>
 					</grid>
 				</row>
 				<row disabled="@is_admin">
 					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[nm][col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
-					<description/>
+					<hbox align="right">
+						<checkbox label="whole query" id="use_all"/>
+						<menulist>
+							<menupopup id="action" options="Select an action..." onchange="do_action(this);"/>
+						</menulist>
+					</hbox>
 				</row>
 			</rows>
 		</grid>
