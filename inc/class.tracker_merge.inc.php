@@ -56,6 +56,19 @@ class tracker_merge extends bo_merge
 		{
 			return false;
 		}
+		if(strpos($content,'all_comments') !== false) {
+			$this->bo->read($id);
+			$tracker = $this->bo->data;
+			$replies = array();
+			foreach($tracker['replies'] as $id => $reply) {
+				// User date format
+				$date = egw_time::to($reply['reply_created']);
+				$name = common::grab_owner_name($reply['reply_creator']);
+				$message = str_replace("\r\n", "\n", $reply['reply_message']);
+				$replies[$id] = "$date \t$name \t$message";
+			}
+			$replacements['$$all_comments$$'] = implode("\n",$replies);
+		}
 		return $replacements;
 	}
 
@@ -73,19 +86,20 @@ class tracker_merge extends bo_merge
 
 		// Convert to human friendly values
 		$types = tracker_export_csv::$types;
+		$types['select'][] = 'tr_private';
 		// Get lookups for human-friendly values
 		$lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
 			'tr_version'    => $this->bo->get_tracker_labels('version', null),
 			'tr_status'     => $this->bo->get_tracker_stati(null),
 			'tr_resolution' => tracker_bo::$resolutions,
+			'tr_private'	=> array('' => lang('no'),'1'=>lang('yes'))
 		);
 		foreach($lookups['tr_tracker'] as $t_id => $name) {
 			$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $t_id);
 			$lookups['tr_status'] += $this->bo->get_tracker_stati($t_id);
 		}
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
-
 		// Set any missing custom fields, or the marker will stay
 		$array = $record->get_record_array();
 		foreach($this->bo->customfields as $name => $field)
@@ -124,7 +138,7 @@ class tracker_merge extends bo_merge
 			$comments[$id][] = array(
 				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
-				'$$comment/restricted$$' => $reply['reply_visible'],
+				'$$comment/restricted$$' => $reply['reply_visible'] ? lang('yes') : lang('no'),
 			) + $this->contact_replacements($reply['reply_creator'], 'comment/user');
 		}
 		return $comments[$id][$n];
@@ -146,6 +160,7 @@ class tracker_merge extends bo_merge
 		$n = 0;
 		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label;
 		$fields['bounty'] = lang('bounty');
+		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
 		foreach($fields as $name => $label)
 		{
 			if (in_array($name,array('link_to','canned_response','reply_message','add','vote','no_notifications','num_replies','customfields'))) continue;	// dont show them
