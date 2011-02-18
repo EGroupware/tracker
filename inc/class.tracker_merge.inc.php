@@ -65,7 +65,8 @@ class tracker_merge extends bo_merge
 				$date = egw_time::to($reply['reply_created']);
 				$name = common::grab_owner_name($reply['reply_creator']);
 				$message = str_replace("\r\n", "\n", $reply['reply_message']);
-				$replies[$id] = "$date \t$name \t$message";
+				$restricted = $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '';
+				$replies[$id] = "$date \t$name \t$restricted\n$message";
 			}
 			$replacements['$$all_comments$$'] = implode("\n",$replies);
 		}
@@ -138,7 +139,7 @@ class tracker_merge extends bo_merge
 			$comments[$id][] = array(
 				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
-				'$$comment/restricted$$' => $reply['reply_visible'] ? lang('yes') : lang('no'),
+				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 			) + $this->contact_replacements($reply['reply_creator'], 'comment/user');
 		}
 		return $comments[$id][$n];
