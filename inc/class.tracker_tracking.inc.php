@@ -288,6 +288,7 @@ class tracker_tracking extends bo_tracking
 			$versions = $this->tracker->get_tracker_labels('version',$data['tr_tracker']);
 			$statis = $this->tracker->get_tracker_stati($data['tr_tracker']);
 			$priorities = $this->tracker->get_tracker_priorities($data['tr_tracker']);
+			$resolutions = $this->tracker->get_tracker_labels('resolution',$data['tr_tracker']);
 		}
 		if ($data['tr_assigned'])
 		{
@@ -309,7 +310,7 @@ class tracker_tracking extends bo_tracking
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
 			'tr_status'      => lang($statis[$data['tr_status']]),
-			'tr_resolution'  => lang(tracker_bo::$resolutions[$data['tr_resolution']]),
+			'tr_resolution'  => lang($resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => common::grab_owner_name($data['tr_creator']),

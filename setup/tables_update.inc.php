@@ -442,3 +442,87 @@ function tracker_upgrade1_8()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.001';
 }
 
+
+function tracker_upgrade1_9_001()
+{
+	// Rename actual tr_resolution column
+	$GLOBALS['egw_setup']->oProc->RenameColumn('egw_tracker','tr_resolution','char_tr_resolution');
+
+	// Create the new (int) tr_resolution column
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_resolution',array(
+            'type' => 'int',
+            'precision' => '4',
+            'nullable' => False
+	));
+	
+	// Create new resolutions
+        $resolutions = array(
+                'n' => 'None',
+                'a' => 'Accepted',
+                'd' => 'Duplicate',
+                'f' => 'Fixed',
+                'i' => 'Invalid',
+                'I' => 'Info only',
+                'l' => 'Later',
+                'o' => 'Out of date',
+                'p' => 'Postponed',
+                'O' => 'Outsourced',
+                'r' => 'Rejected',
+                'R' => 'Remind',
+                'w' => 'Wont fix',
+                'W' => 'Works for me',
+        );
+	
+	echo "Updating resolutions...<br />"; flush();
+	foreach($resolutions as $code => $name) {
+		$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
+			'cat_owner'  => -1,
+			'cat_access' => 'public',
+			'cat_appname'=> 'tracker',
+			'cat_name'   => $name,
+			'cat_description' => 'Resolution added by setup.',
+			'cat_data'   => serialize(array('type' => 'resolution')),
+			'last_mod'   => time(),
+		),false,__LINE__,__FILE__);
+		$cat_id = $GLOBALS['egw_setup']->db->get_last_insert_id($GLOBALS['egw_setup']->cats_table,'cat_id');
+		$GLOBALS['egw_setup']->db->update($GLOBALS['egw_setup']->cats_table,array(
+			'cat_main' => $cat_id,
+		),array(
+			'cat_id' => $cat_id,
+		),__LINE__,__FILE__);
+		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_resolution=$cat_id where char_tr_resolution='$code'",__LINE__,__FILE__);
+	}
+	
+	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker',array(
+		'fd' => array(
+			'tr_id' => array('type' => 'auto','nullable' => False),
+			'tr_summary' => array('type' => 'varchar','precision' => '80','nullable' => False),
+			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False),
+			'cat_id' => array('type' => 'int','precision' => '4'),
+			'tr_version' => array('type' => 'int','precision' => '4'),
+			'tr_status' => array('type' => 'int','precision' => '4','default' => '-100'),
+			'tr_description' => array('type' => 'text'),
+			'tr_private' => array('type' => 'int','precision' => '2','default' => '0'),
+			'tr_budget' => array('type' => 'decimal','precision' => '20','scale' => '2'),
+			'tr_completion' => array('type' => 'int','precision' => '2','default' => '0'),
+			'tr_creator' => array('type' => 'int','precision' => '4','nullable' => False),
+			'tr_created' => array('type' => 'int','precision' => '8','nullable' => False),
+			'tr_modifier' => array('type' => 'int','precision' => '4'),
+			'tr_modified' => array('type' => 'int','precision' => '8'),
+			'tr_closed' => array('type' => 'int','precision' => '8'),
+			'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
+			'tr_resolution' => array('type' => 'int','precision' => '4'),
+			'tr_cc' => array('type' => 'text'),
+			'tr_group' => array('type' => 'int','precision' => '11'),
+			'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii'),
+			'tr_seen' => array('type' => 'text')
+		),
+		'pk' => array('tr_id'),
+		'fk' => array(),
+		'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_resolution','tr_group',array('cat_id','tr_status')),
+		'uc' => array()
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.002';
+}
+

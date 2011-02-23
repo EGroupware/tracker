@@ -84,7 +84,7 @@
 						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>
 					<menulist>
-						<menupopup id="${row}[tr_resolution]" readonly="true"/>
+						<menupopup type="select-cat" id="${row}[tr_resolution]" readonly="true" options="None"/>
 					</menulist>
 					<image src="${row}[tr_completion]" label="$row_cont[tr_completion]" no_lang="1" align="center"/>
 					<vbox options="0,0">

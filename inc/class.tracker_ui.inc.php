@@ -486,7 +486,7 @@ class tracker_ui extends tracker_bo
 					'Cr' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
-					'Re' => self::$resolutions,
+					'Re' => self::$resolutions + $this->get_tracker_labels('resolution',$tracker),
 					'Gr' => 'select-account',
 				),
 			),
@@ -542,7 +542,7 @@ class tracker_ui extends tracker_bo
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
-			'tr_resolution' => self::$resolutions,
+                        'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
 			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
@@ -774,11 +774,13 @@ class tracker_ui extends tracker_bo
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
 		$statis = $this->get_tracker_stati($tracker);
+		$resolutions = $this->get_tracker_labels('resolution',$tracker);
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
+		$rows['sel_options']['tr_resolution'] =& $resolutions;
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
@@ -942,7 +944,7 @@ class tracker_ui extends tracker_bo
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
-			'tr_resolution' => self::$resolutions,
+			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{

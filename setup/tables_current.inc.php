@@ -29,7 +29,7 @@ $phpgw_baseline = array(
 			'tr_modified' => array('type' => 'int','precision' => '8'),
 			'tr_closed' => array('type' => 'int','precision' => '8'),
 			'tr_priority' => array('type' => 'int','precision' => '2','default' => '5'),
-			'tr_resolution' => array('type' => 'char','precision' => '1','default' => 'n'),
+			'tr_resolution' => array('type' => 'int','precision' => '4'),
 			'tr_cc' => array('type' => 'text'),
 			'tr_group' => array('type' => 'int','precision' => '11'),
 			'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii'),
@@ -37,7 +37,7 @@ $phpgw_baseline = array(
 		),
 		'pk' => array('tr_id'),
 		'fk' => array(),
-		'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_group',array('cat_id','tr_status')),
+		'ix' => array('tr_summary','tr_tracker','tr_version','tr_status','tr_resolution','tr_group',array('cat_id','tr_status')),
 		'uc' => array()
 	),
 	'egw_tracker_replies' => array(

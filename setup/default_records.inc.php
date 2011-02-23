@@ -20,6 +20,20 @@ foreach(array(
 	'Development Version' => 'version',
 	'Tracker' => 'cat',
 	'API' => 'cat',
+	'None' => 'resolution',
+	'Accepted' => 'resolution',
+	'Duplicate' => 'resolution',
+	'Fixed' => 'resolution',
+	'Invalid' => 'resolution',
+	'Info only' => 'resolution',
+	'Later' => 'resolution',
+	'Out of date' => 'resolution',
+	'Postponed' => 'resolution',
+	'Outsourced' => 'resolution',
+	'Rejected' => 'resolution',
+	'Remind' => 'resolution',
+	'Wont fix' => 'resolution',
+	'Works for me' => 'resolution',
 ) as $name => $type)
 {
 	$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(

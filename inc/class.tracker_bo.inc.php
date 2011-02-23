@@ -82,8 +82,9 @@ class tracker_bo extends tracker_so
 		self::STATUS_PENDING => 'Pending',
 	);
 	/**
-	 * Resolutions used by all trackers
+	 * Resolutions used by all trackers historically
 	 *
+	 * Kept around for history display, but no longer used
 	 * @var array
 	 */
 	static $resolutions = array(

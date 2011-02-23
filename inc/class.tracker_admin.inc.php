@@ -211,6 +211,7 @@ class tracker_admin extends tracker_bo
 						'versions'  => lang('Version'),
 						'projects'  => lang('Projects'),
 						'statis'    => lang('Stati'),
+						'resolutions'=> lang('Resolution'),
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
@@ -230,6 +231,9 @@ class tracker_admin extends tracker_bo
 									break;
 								case 'statis':
 									$new_cat_descr .= 'stati';
+									break;
+								case 'resolutions':
+									$new_cat_descr .= 'resolution';
 									break;
 								case 'projects':
 									$new_cat_descr .= 'project';
@@ -304,6 +308,7 @@ class tracker_admin extends tracker_bo
 						'versions'  => lang('Version'),
 						'projects'  => lang('Projects'),
 						'statis'    => lang('State'),
+						'resolutions'=> lang('Resolution'),
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
@@ -345,7 +350,7 @@ class tracker_admin extends tracker_bo
 			$content[$name] = $this->$name;
 		}
 		// cats & versions & responses & projects
-		$v = $c = $r = $s = $p = 1;
+		$v = $c = $r = $s = $p = $i = 1;
 		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 		foreach($this->all_cats as $cat)
 		{
@@ -369,6 +374,9 @@ class tracker_admin extends tracker_bo
 					case 'stati':
 						$content['statis'][$s++] = $cat + $data;
 						break;
+					case 'resolution':
+						$content['resolutions'][$i++] = $cat + $data;
+						break;
 					default:	// cat
 						$data['type'] = 'cat';
 						$content['cats'][$c++] = $cat + $data;
@@ -376,7 +384,7 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] =
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] = $content['resolutions'][$i++] = 
 			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;
