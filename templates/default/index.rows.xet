@@ -21,7 +21,7 @@
 				<column/>
 				<column/>
 				<column width="3%" disabled="!@allow_actions"/>
-				<column disabled="!@is_admin"/>
+				<column disabled="@no_check"/>
 			</columns>
 			<rows>
 				<row class="th">

@@ -765,7 +765,7 @@ class tracker_ui extends tracker_bo
 			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
 			$readonlys["document[$id]"] = !$GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
-			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
+			$readonlys['checked']=(!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']))) && (count(tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])) == 0);
 		}
 
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
@@ -808,6 +808,10 @@ class tracker_ui extends tracker_bo
 		$rows['allow_sum_timesheet'] =  isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'];
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
+
+		// Disable checkbox column
+		$rows['no_check'] = $readonlys['checked'];
+
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
 		return $total;
 	}
@@ -957,7 +961,11 @@ class tracker_ui extends tracker_bo
 		// Merge print
 		if ($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])
 		{
-			$sel_options['action'][lang('Insert in document').':'] = tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir']);
+			$documents = tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir']);
+			if($documents)
+			{
+				$sel_options['action'][lang('Insert in document').':'] = $documents;
+			}
 		}
 		
 		if (!is_array($content)) $content = array();
@@ -1031,6 +1039,13 @@ class tracker_ui extends tracker_bo
 		}
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
+
+		// Disable actions if there are none
+		if(count($sel_options['action']) == 0)
+		{
+			$tpl->disable_cells('action', true);
+			$tpl->disable_cells('use_all', true);
+		}
 
 		egw_framework::validate_file('.','app','tracker');
 
