@@ -64,12 +64,12 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				'tr_tracker'	=> $ui->trackers,
 				'tr_version'	=> $ui->get_tracker_labels('version', null),
 				'tr_status'	=> $ui->get_tracker_stati(null),
-				'tr_resolution'	=> $this->get_tracker_labels('resolution',null),
+				'tr_resolution'	=> $ui->get_tracker_labels('resolution',null),
 			);
 			foreach($lookups['tr_tracker'] as $id => $name) {
 				$lookups['tr_version'] += $ui->get_tracker_labels('version', $id);
 				$lookups['tr_status'] += $ui->get_tracker_stati($id);
-				$lookups['tr_resolution'] += $this->get_tracker_labels('resolution',$id);
+				$lookups['tr_resolution'] += $ui->get_tracker_labels('resolution',$id);
 			}
 		}
 
