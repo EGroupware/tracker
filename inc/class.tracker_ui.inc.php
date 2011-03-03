@@ -765,9 +765,10 @@ class tracker_ui extends tracker_bo
 			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
 			$readonlys["document[$id]"] = !$GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
-			$readonlys['checked']=(!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']))) && (count(tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])) == 0);
+			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
 		}
 
+		$readonlys['checked'] = $readonlys['checked'] && (count(tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])) == 0);
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
 
