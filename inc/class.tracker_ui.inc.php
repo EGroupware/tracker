@@ -904,6 +904,7 @@ class tracker_ui extends tracker_bo
 			'tr_tracker'  => &$this->trackers,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 			'tr_resolution' => self::$resolutions,
+			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
