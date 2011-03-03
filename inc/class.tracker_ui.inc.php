@@ -786,6 +786,7 @@ class tracker_ui extends tracker_bo
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
 			$rows['sel_options']['cat_id'] =& $cats;
 			$rows['sel_options']['tr_status_admin'] =& $statis;
+			$rows['sel_options']['tr_resolution_admin'] =& $resolutions;
 			$rows['is_admin'] = true;
 		}
 		if (!$this->allow_voting)
@@ -936,6 +937,7 @@ class tracker_ui extends tracker_bo
 						foreach($content as $name => $value)
 						{
 							if ($name == 'tr_status_admin') $name = 'tr_status';
+							if ($name == 'tr_resolution_admin') $name = 'tr_resolution';
 							if ($value !== '') $this->data[$name] = $name == 'tr_assigned' && $value === 'not' ? NULL : $value;
 						}
 						if (!$this->save()) $n++;

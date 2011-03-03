@@ -29,7 +29,7 @@
 				<column/>
 				<column/>
 				<column width="3%" disabled="!@allow_actions"/>
-				<column disabled="!@is_admin"/>
+				<column disabled="@no_check"/>
 			</columns>
 			<rows>
 				<row class="th">
@@ -92,7 +92,7 @@
 						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>
 					<menulist>
-						<menupopup id="${row}[tr_resolution]" readonly="true"/>
+						<menupopup type="select-cat" id="${row}[tr_resolution]" readonly="true" options="None"/>
 					</menulist>
 					<image src="${row}[tr_completion]" label="$row_cont[tr_completion]" no_lang="1" align="center"/>
 					<vbox options="0,0">
@@ -127,7 +127,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.index" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
@@ -158,6 +158,9 @@
 						</menulist>
 						<menulist>
 							<menupopup id="tr_status_admin" options="No change" label="Status" statustext="@status_help"/>
+						</menulist>
+						<menulist>
+							<menupopup id="tr_resolution_admin" options="No change" label="Resolution" statustext="@status_help"/>
 						</menulist>
 						<menulist>
 							<menupopup id="tr_assigned" options="No change" label="Assigned to" no_lang="1"/>
