@@ -917,7 +917,7 @@ class tracker_ui extends tracker_bo
 					}
 				}
 			}
-			
+
 			if ($content['update'])
 			{
 				unset($content['update']);
@@ -971,7 +971,7 @@ class tracker_ui extends tracker_bo
 				$sel_options['action'][lang('Insert in document').':'] = $documents;
 			}
 		}
-		
+
 		if (!is_array($content)) $content = array();
 		$content = array_merge($content,array(
 			'nm' => egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
@@ -1084,9 +1084,7 @@ class tracker_ui extends tracker_bo
 			{
 				//echo __METHOD__.'<br>';
 				//_debug_array($_attachments);
-				$bofelamimail = CreateObject('felamimail.bofelamimail',$GLOBALS['egw']->translation->charset());
-				//$bopreferences =& $bofelamimail->bopreferences; //= CreateObject('felamimail.bopreferences');
-				//$preferences  =& $bofelamimail->mailPreferences;
+				$bofelamimail = felamimail_bo::getInstance();
 				$bofelamimail->openConnection();
 				foreach ($_attachments as $attachment)
 				{
@@ -1094,7 +1092,7 @@ class tracker_ui extends tracker_bo
 					{
 						$bofelamimail->reopen($attachment['folder']);
 
-						$mailcontent = bofelamimail::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder']);
+						$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder']);
 						//_debug_array($mailcontent['attachments']);
 						foreach($mailcontent['attachments'] as $tmpattach => $tmpval)
 						{
@@ -1128,14 +1126,14 @@ class tracker_ui extends tracker_bo
 			$toaddr = array();
 			foreach(array('to','cc','bcc') as $x) if (is_array($_to_emailAddress[$x]) && !empty($_to_emailAddress[$x])) $toaddr = array_merge($toaddr,$_to_emailAddress[$x]);
 			//_debug_array($attachments);
-			$_body = strip_tags(bofelamimail::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" ) 
+			$_body = strip_tags(felamimail_bo::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" )
 			$_body = htmlspecialchars_decode($_body,ENT_QUOTES);
-			$body = bofelamimail::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
+			$body = felamimail_bo::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
 				'TO'=>(!empty($_to_emailAddress['to'])?implode(',',$_to_emailAddress['to']):null),
 				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
 				'BCC'=>(!empty($_to_emailAddress['bcc'])?implode(',',$_to_emailAddress['bcc']):null),
 				'SUBJECT'=>$_subject,
-				'DATE'=>bofelamimail::_strtotime($_date))).$_body;
+				'DATE'=>felamimail_bo::_strtotime($_date))).$_body;
 			$this->edit($this->prepare_import_mail(
 				implode(',',$toaddr),$_subject,$body,$attachments,$_date
 			));
@@ -1143,12 +1141,11 @@ class tracker_ui extends tracker_bo
 		}
 		elseif ($uid && $mailbox)
 		{
-			$bofelamimail = CreateObject('felamimail.bofelamimail',$GLOBALS['egw']->translation->charset());
-			//$bopreferences =& $bofelamimail->bopreferences; //= CreateObject('felamimail.bopreferences');
+			$bofelamimail = felamimail_bo::getInstance();
 			$bofelamimail->openConnection();
 			$bofelamimail->reopen($mailbox);
 
-			$mailcontent = bofelamimail::get_mailcontent($bofelamimail,$uid,$partid,$mailbox);
+			$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$uid,$partid,$mailbox);
 
 			return $this->edit($this->prepare_import_mail(
 				$mailcontent['mailaddress'],
