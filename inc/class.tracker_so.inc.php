@@ -237,7 +237,7 @@ class tracker_so extends so_sql_cf
 		{
 			$order_by = str_replace('tr_modified',$order_replace,$order_by);
 		}
-		
+
 		if (!is_array($extra_cols)) $extra_cols = $extra_cols ? explode(',',$extra_cols) : array();
 
 		if (is_array($filter) && array_key_exists('esc_id',$filter))
@@ -330,7 +330,7 @@ class tracker_so extends so_sql_cf
 			// do we need to restrict access to cretain queues
 			if ($need_restrictions)
 			{
-				if ($no_access) 
+				if ($no_access)
 				{
 					$filter[] = $this->db->expression(self::TRACKER_TABLE,'NOT ',array(
 						'tr_tracker' => $no_access,
@@ -343,14 +343,14 @@ class tracker_so extends so_sql_cf
 						'tr_tracker' => $no_restrictions,
 					));
 				}
-				if ($creator_restrictions) 
+				if ($creator_restrictions)
 				{
 					$to_or[] = $this->db->expression(self::TRACKER_TABLE,array(
 						'tr_tracker' => $creator_restrictions,
 						'tr_creator' => $this->user,
 					));
 				}
-				if ($group_restrictions) 
+				if ($group_restrictions)
 				{
 					$to_or[] = $this->db->expression(self::TRACKER_TABLE,array(
 						'tr_tracker' => $group_restrictions,
@@ -471,14 +471,7 @@ class tracker_so extends so_sql_cf
 		// if we have a join (searching by extra_value also adds a join), we have to group be tr_id, to avoid getting rows multiple times
 		if (($join || isset($criteria[$this->extra_value])) && stristr($order_by,'GROUP BY') === false)	// group by tr_id, as we get one row per assignee!
 		{
-			if ($this->db->Type == 'mysql')
-			{
-				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id ORDER BY '.($order_by ? $order_by : 'bounties DESC');
-			}
-			else
-			{
-				$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'.	tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
-			}
+			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'. tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 		}
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
