@@ -147,7 +147,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			'tr_tracker'    => $this->bo->trackers,
 			'tr_version'    => $this->bo->get_tracker_labels('version', null),
 			'tr_status'     => $this->bo->get_tracker_stati(null),
-			'tr_resolution' => $this->get_tracker_labels('resolution',null),
+			'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
 			'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
 		);
 		foreach($lookups['tr_tracker'] as $id => $name) {
