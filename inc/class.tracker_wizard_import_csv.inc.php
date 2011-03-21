@@ -79,6 +79,14 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		);
 	}
 
+	function wizard_step40(&$content, &$sel_options, &$readonlys, &$preserv)
+	{
+		$result = parent::wizard_step40($content, $sel_options, $readonlys, $preserv);
+		// Hide category choice, replace is the only one that makes sense
+		$content['no_cats'] = true;
+		return $result;
+	}
+
 	function wizard_step45(&$content, &$sel_options, &$readonlys, &$preserv)
 	{
 		if($this->debug) error_log(__METHOD__.'->$content '.print_r($content,true));
