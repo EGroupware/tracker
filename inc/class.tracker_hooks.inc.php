@@ -216,18 +216,24 @@ class tracker_hooks
 				'application' => 'tracker'
 			));
 			$options = array();
-			foreach ((array)$definitions->get_definitions() as $identifier) {
-				try {
+			foreach ((array)$definitions->get_definitions() as $identifier)
+			{
+				try
+				{
 					$definition = new importexport_definition($identifier);
-				} catch (Exception $e) {
+				}
+				catch (Exception $e)
+				{
 					// permission error
 					continue;
 				}
-				if ($title = $definition->get_title()) {
+				if ($title = $definition->get_title())
+				{
 					$options[$title] = $title;
 				}
 				unset($definition);
 			}
+			$default_def = 'export-tracker';
 			$settings['nextmatch-export-definition'] = array(
 				'type'   => 'select',
 				'values' => $options,
@@ -237,6 +243,7 @@ class tracker_hooks
 				'run_lang' => false,
 				'xmlrpc' => True,
 				'admin'  => False,
+				'default'=> isset($options[$default_def]) ? $default_def : false,
 			);
 		}
 		return $settings;
