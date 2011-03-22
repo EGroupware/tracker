@@ -143,18 +143,9 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		// Used to try to automatically match names to account IDs
 		$addressbook = new addressbook_so();
 
-		$lookups = array(
+		$_lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
-			'tr_version'    => $this->bo->get_tracker_labels('version', null),
-			'tr_status'     => $this->bo->get_tracker_stati(null),
-			'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
-			'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
 		);
-		foreach($lookups['tr_tracker'] as $id => $name) {
-			$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $id);
-			$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
-			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
-		}
 
 		// Start counting successes
 		$count = 0;
@@ -168,9 +159,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
-
-			// Automatically handle text categories without explicit translation
-			$record['cat_id'] = importexport_helper_functions::cat_name2id($record['cat_id']);
 
 			// Set creator, unless it's supposed to come from CSV file
 			if($_definition->plugin_options['creator_from_csv']) {
@@ -210,6 +198,17 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			}
 
 			// Lookups - from human friendly to integer
+			$lookups = $_lookups + array(
+				'tr_version'    => $this->bo->get_tracker_labels('version', null),
+				'tr_status'     => $this->bo->get_tracker_stati(null),
+				'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
+				'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
+			);
+			if(($id = $record['tr_tracker']) && $lookups['tr_tracker'][$id]) {
+				$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $id);
+				$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
+				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
+			}
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
 				if(!is_numeric($record[$field])) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
@@ -223,25 +222,35 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 								break;
 							case '~skip~':
 								continue 2;
-							case '~add~':
-								// Add the thing in.  Takes some extra measures for tracker
-								$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
-								if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
-								$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
-								if($cat_id == 0 || $cat['data']['type'] != $type
-									|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
-								{
-									$cat_id = $GLOBALS['egw']->categories->add( array(
-										'name' => $record[$field],
-										'access' => 'public',
-										'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
-										'data' => serialize(array('type' => $type))
-									));
-								}
-								$record[$field] = $cat_id;
-								break;
 							default:
-								$record[$field] = $t_field;
+								if(strpos($t_field, 'add') === 0) {
+									// Add the thing in.  Takes some extra measures for tracker
+									// Check for a parent
+									list($name, $parent) = explode('~',$t_field);
+
+									// Get type
+									$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
+									if($type == 'status') $type = 'stati';
+									$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
+									if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
+									if($cat_id == 0 || $cat['data']['type'] != $type
+										|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
+									{
+										$cat_id = $GLOBALS['egw']->categories->add( array(
+											'name' => $record[$field],
+											'access' => 'public',
+											'parent' => $parent,
+											'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
+											'data' => serialize(array('type' => $type))
+										));
+									}
+									$record[$field] = $cat_id;
+								} elseif($key = array_search($t_field, $lookups[$field])) {
+									$record[$field] = $key;
+								} else {
+									$record[$field] = $t_field;
+								}
+								break;
 						}
 					}
 				}

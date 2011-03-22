@@ -112,23 +112,29 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			$content['message'] = $this->steps['wizard_step45'];
 			$content['step'] = 'wizard_step45';
 
+			$ui = new tracker_ui();
 			$options = array(
 				false => lang('Ignore'),
 				'~skip~' => lang('Skip record'),
-				'~add~' => lang('Add')
 			);
-			$ui = new tracker_ui();
+			$add_to = lang('Add to') . ':';
+			$add_queue[$add_to] = array('add~' => lang('All'));
+			foreach($ui->trackers as $id => $label) {
+				$add_queue[$add_to]['add~'.$id] = $label;
+			}
 			$set_to = lang('Set to') . ':';
 			$sel_options = array(
-                                'translate_tracker'	=> $options + array($set_to => $ui->trackers),
-                                'translate_version'	=> $options + array($set_to => $ui->get_tracker_labels('version', null)),
-                                'translate_status'	=> $options + array($set_to => $ui->get_tracker_stati(null)),
-                                'translate_cat_id'	=> $options + array($set_to => $ui->get_tracker_labels('cat', null)),
+                                'translate_tracker'	=> $options + array('add' => lang('Add')) + array($set_to => $ui->trackers),
+                                'translate_version'	=> $options + $add_queue + array($set_to => $ui->get_tracker_labels('version', null)),
+                                'translate_status'	=> $options + $add_queue + array($set_to => $ui->get_tracker_stati(null)),
+                                'translate_resolution'	=> $options + $add_queue + array($set_to => $ui->get_tracker_labels('resolution', null)),
+                                'translate_cat_id'	=> $options + $add_queue + array($set_to => $ui->get_tracker_labels('cat', null)),
                         );
                         foreach($sel_options['translate_tracker'][$set_to] as $id => $name) {
                                 $sel_options['translate_version'][$set_to] += $ui->get_tracker_labels('version', $id);
                                 $sel_options['translate_cat_id'][$set_to] += $ui->get_tracker_labels('cat', $id);
                                 $sel_options['translate_status'][$set_to] += $ui->get_tracker_stati($id);
+                                $sel_options['translate_resolution'][$set_to] += $ui->get_tracker_labels('resolution', $id);
                         }
 
 			$preserv = $content;
