@@ -137,8 +137,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		}
 
 		// set Owner
-		$_definition->plugin_options['creator'] = isset( $_definition->plugin_options['creator'] ) ?
-			$_definition->plugin_options['creator'] : $this->user;
+		$_definition->plugin_options['record_owner'] = isset( $_definition->plugin_options['record_owner'] ) ?
+			$_definition->plugin_options['record_owner'] : $this->user;
 
 		// Used to try to automatically match names to account IDs
 		$addressbook = new addressbook_so();
@@ -161,24 +161,22 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			if( count( array_unique( $record ) ) < 2 ) continue;
 
 			// Set creator, unless it's supposed to come from CSV file
-			if($_definition->plugin_options['creator_from_csv']) {
-				if($record['tr_creator'] && !is_numeric($record['tr_creator'])) {
-					// Automatically handle text owner without explicit translation
-					$new_owner = importexport_helper_functions::account_name2id($record['tr_creator']);
-					if($new_owner == '') {
-						$this->errors[$import_csv->get_current_position()] = lang(
-							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
-							$record['tr_creator'],
-							common::grab_owner_name($_definition->plugin_options['creator']),
-							lang($this->bo->field2label['tr_creator'])
-						);
-						$record['tr_creator'] = $_definition->plugin_options['creator'];
-					} else {
-						$record['tr_creator'] = $new_owner;
-					}
+			if($_definition->plugin_options['owner_from_csv'] && $record['tr_creator'] && !is_numeric($record['tr_creator'])) {
+				// Automatically handle text owner without explicit translation
+				$new_owner = importexport_helper_functions::account_name2id($record['tr_creator']);
+				if($new_owner == '') {
+					$this->errors[$import_csv->get_current_position()] = lang(
+						'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
+						$record['tr_creator'],
+						common::grab_owner_name($_definition->plugin_options['record_owner']),
+						lang($this->bo->field2label['tr_creator'])
+					);
+					$record['tr_creator'] = $_definition->plugin_options['record_owner'];
+				} else {
+					$record['tr_creator'] = $new_owner;
 				}
-			} elseif ($_definition->plugin_options['creator']) {
-				$record['tr_creator'] = $_definition->plugin_options['creator'];
+			} elseif ($_definition->plugin_options['record_owner']) {
+				$record['tr_creator'] = $_definition->plugin_options['record_owner'];
 			}
 
 			// Check account IDs
@@ -192,7 +190,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 						$this->errors[$import_csv->get_current_position()] = lang(
 							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
 							$record[$field],
-							common::grab_owner_name($_definition->plugin_options['creator']),
+							common::grab_owner_name($_definition->plugin_options['record_owner']),
 							$this->bo->field2label[$field] ? lang($this->bo->field2label[$field]) : $field
 						);
 						continue 2;
