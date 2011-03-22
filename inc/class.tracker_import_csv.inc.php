@@ -162,35 +162,38 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 			// Set creator, unless it's supposed to come from CSV file
 			if($_definition->plugin_options['creator_from_csv']) {
-				if(!is_numeric($record['tr_creator'])) {
-					$this->errors[$import_csv->get_current_position()] = lang(
-						'Invalid creator ID: %1.  Might be a bad field translation.  Used %2 instead.', 
-						$record['tr_creator'], 
-						$_definition->plugin_options['creator']
-					);
-					$record['tr_creator'] = $_definition->plugin_options['creator'];
+				if($record['tr_creator'] && !is_numeric($record['tr_creator'])) {
+					// Automatically handle text owner without explicit translation
+					$new_owner = importexport_helper_functions::account_name2id($record['tr_creator']);
+					if($new_owner == '') {
+						$this->errors[$import_csv->get_current_position()] = lang(
+							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
+							$record['tr_creator'],
+							common::grab_owner_name($_definition->plugin_options['creator']),
+							lang($this->bo->field2label['tr_creator'])
+						);
+						$record['tr_creator'] = $_definition->plugin_options['creator'];
+					} else {
+						$record['tr_creator'] = $new_owner;
+					}
 				}
 			} elseif ($_definition->plugin_options['creator']) {
 				$record['tr_creator'] = $_definition->plugin_options['creator'];
 			}
 
 			// Check account IDs
-			foreach(array('tr_creator','tr_modifier','tr_group','tr_assigned') as $field) {
+			foreach(array('tr_modifier','tr_group','tr_assigned') as $field) {
 				if($record[$field] && !is_numeric($record[$field])) {
 					// Try an automatic conversion
-					$contact_id = self::addr_id($record[$field]);
-					if($contact_id) {
-						$contact = $addressbook->read($contact_id);
-						$account_id = $contact['account_id'];
-					} else {
-						$accounts = $GLOBALS['egw']->accounts->search(array('type' => 'both','query'=>$record[$field]));
-						if($accounts) $account_id = key($accounts);
-					}
-					if($account_id && common::grab_owner_name($account_id) == $record[$field]) {
+					$account_id = importexport_helper_functions::account_name2id($record[$field]);
+					if($account_id && strtoupper(common::grab_owner_name($account_id)) == strtoupper($record[$field])) {
 						$record[$field] = $account_id;
 					} else {
 						$this->errors[$import_csv->get_current_position()] = lang(
-							'Invalid field: %1 = %2, it needs to be a number.', $field, $record[$field]
+							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
+							$record[$field],
+							common::grab_owner_name($_definition->plugin_options['creator']),
+							$this->bo->field2label[$field] ? lang($this->bo->field2label[$field]) : $field
 						);
 						continue 2;
 					}
@@ -226,13 +229,20 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 								if(strpos($t_field, 'add') === 0) {
 									// Add the thing in.  Takes some extra measures for tracker
 									// Check for a parent
-									list($name, $parent) = explode('~',$t_field);
+									list($name, $parent_name) = explode('~',$t_field);
+									if($parent_name) {
+										$parent = importexport_helper_functions::cat_name2id($parent_name);
+									}
 
 									// Get type
 									$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
 									if($type == 'status') $type = 'stati';
+
+									// Get category
 									$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
 									if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
+
+									// Add in extra data
 									if($cat_id == 0 || $cat['data']['type'] != $type
 										|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
 									{

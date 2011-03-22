@@ -253,6 +253,7 @@ tracker queue renamed	tracker	en	Tracker queue renamed
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
 tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
 tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.
+unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	en	Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.
 unchanged	tracker	en	Unchanged
 unrecognized mails	tracker	en	Unrecognized mails
 url of the tracker	tracker	en	URL of the tracker
