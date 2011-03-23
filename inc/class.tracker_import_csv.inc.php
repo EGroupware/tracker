@@ -219,7 +219,9 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 						$t_field = $_definition->plugin_options[$translate_key];
 						switch ($t_field) {
 							case '':
-								// Ignore and take your chances
+							case '0':
+								// Skip that field
+								unset($record[$field]);
 								break;
 							case '~skip~':
 								continue 2;
