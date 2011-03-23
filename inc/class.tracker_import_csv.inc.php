@@ -193,7 +193,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 							common::grab_owner_name($_definition->plugin_options['record_owner']),
 							$this->bo->field2label[$field] ? lang($this->bo->field2label[$field]) : $field
 						);
-						continue 2;
 					}
 				}
 			}
