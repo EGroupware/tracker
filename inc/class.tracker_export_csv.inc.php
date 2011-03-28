@@ -152,7 +152,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 */
 	public function get_selectors_etpl() {
 		return array(
-			'name'	=> 'tracker.export_csv_selectors'
+			'name'	=> 'tracker.export_csv_selectors',
+			'content' => 'selected'
 		);
 	}
 
