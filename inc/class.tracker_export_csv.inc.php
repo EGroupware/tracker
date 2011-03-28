@@ -21,7 +21,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 		'select-account' => array('tr_creator','tr_modifier','tr_group','tr_assigned'),
 		'date-time' => array('tr_modified','tr_created','tr_closed'),
 		'select-cat' => array('cat_id'),
-		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution'),
+		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution', 'tr_private'),
 	);
 
 	/**
@@ -65,6 +65,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				'tr_version'	=> $ui->get_tracker_labels('version', null),
 				'tr_status'	=> $ui->get_tracker_stati(null),
 				'tr_resolution'	=> $ui->get_tracker_labels('resolution',null),
+				'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
 			);
 			foreach($lookups['tr_tracker'] as $id => $name) {
 				$lookups['tr_version'] += $ui->get_tracker_labels('version', $id);
