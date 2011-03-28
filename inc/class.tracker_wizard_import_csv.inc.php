@@ -157,22 +157,10 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 	{
 		if($this->debug) error_log(__METHOD__.'->$content '.print_r($content,true));
 		unset($content['no_owner_map']);
-		// Check that record owner has access
-		$access = true;
-		if($content['creator'])
-		{
-			$bo = new tracker_bo();
-			$access = $bo->check_access(0,EGW_ACL_EDIT, $content['creator']);
-		}
 
 		// return from step60
 		if ($content['step'] == 'wizard_step60')
 		{
-			if(!$access) {
-				$step = $content['step'];
-				unset($content['step']);
-				return $step;
-			}
 			switch (array_search('pressed', $content['button']))
 			{
 				case 'next':
@@ -189,9 +177,6 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		else
 		{
 			$content['msg'] = $this->steps['wizard_step60'];
-			if(!$access) {
-				$content['msg'] .= "\n* " . lang('Owner does not have edit rights');
-			}
 			$content['step'] = 'wizard_step60';
 			$preserv = $content;
 			if(!array_key_exists($content['record_owner']) && $content['plugin_options']) {

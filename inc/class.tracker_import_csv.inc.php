@@ -67,7 +67,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	/**
 	 * @var business object
 	 */
-	private $boinfolog;
+	private $bo;
 
 	/**
 	* For figuring out if a record has changed
@@ -269,6 +269,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				}
 			}
 
+			if(!array_key_exists('tr_private', $record)) $record['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
+
 			// Special values
 			if ($record['addressbook'] && !is_numeric($record['addressbook']))
 			{
@@ -375,6 +377,9 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				
 				// Fall through
 			case 'insert' :
+				// Defaults
+				if(!$_data['tr_priority']) $record['tr_priority'] = 5;
+
 				if ( $this->dry_run ) {
 					//print_r($_data);
 					$this->results[$_action]++;
