@@ -1230,4 +1230,23 @@ class tracker_ui extends tracker_bo
 
 		return $document_merge->download($document,$ids);
 	}
+
+	/**
+	 * Fill in canned comment
+	 *
+	 * @param id Canned comment ID
+	 */
+	public function ajax_canned_comment($id) {
+		$canned = $this->get_tracker_labels('response',$tracker);
+
+		/* Doesn't work
+		$response = egw_json_response::get();
+		//$response->assign('exec[reply_message]', 'value', $canned[$id]);
+		$response->jquery("textbox[name*='reply_message']", 'val', Array($canned[$id]));
+		*/
+
+		$response = new xajaxResponse();
+		$response->addScript('$("textarea[name*=\"reply_message\"]").val("' . $canned[$id] . '")');
+		return $response->getXML();
+	}
 }
