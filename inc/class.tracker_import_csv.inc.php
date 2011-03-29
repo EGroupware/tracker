@@ -273,6 +273,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			if(!$record['tr_priority']) $record['tr_priority'] = 5;
 			if(!$record['tr_completion']) $record['tr_completion'] = 0;
 			if(!array_key_exists('tr_private', $record)) $record['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
+			if(!$record['tr_private']) $record['tr_private'] = 0;
 
 			// Special values
 			if ($record['addressbook'] && !is_numeric($record['addressbook']))
