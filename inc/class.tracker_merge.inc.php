@@ -165,7 +165,10 @@ class tracker_merge extends bo_merge
 		echo '<tr><td colspan="4"><h3>'.lang('Tracker fields:')."</h3></td></tr>";
 
 		$n = 0;
-		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label;
+		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label + array(
+			'tr_modifier' => lang('Last modified by'), 
+			'tr_modified' => lang('last modified')
+		);
 		$fields['bounty'] = lang('bounty');
 		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
 		foreach($fields as $name => $label)
