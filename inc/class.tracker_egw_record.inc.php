@@ -35,7 +35,8 @@ class tracker_egw_record implements importexport_iface_egw_record
 		$this->identifier = $_identifier;
 		if($_identifier) {
 			$this->bo = new tracker_bo();
-			$this->record = $this->bo->read($this->identifier);
+			$this->bo->read($this->identifier);
+			$this->record = $this->bo->data;
 		}
 	}
 

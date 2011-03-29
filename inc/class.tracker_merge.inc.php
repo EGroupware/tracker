@@ -89,14 +89,13 @@ class tracker_merge extends bo_merge
 
 		// Convert to human friendly values
 		$types = tracker_export_csv::$types;
-		$types['select'][] = 'tr_private';
 		// Get lookups for human-friendly values
 		$lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
 			'tr_version'    => $this->bo->get_tracker_labels('version', null),
 			'tr_status'     => $this->bo->get_tracker_stati(null),
 			'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
-			'tr_private'	=> array('' => lang('no'),'1'=>lang('yes'))
+			'tr_private'	=> array(false => lang('no'),'1'=>lang('yes'))
 		);
 		foreach($lookups['tr_tracker'] as $t_id => $name) {
 			$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $t_id);
