@@ -1236,17 +1236,11 @@ class tracker_ui extends tracker_bo
 	 *
 	 * @param id Canned comment ID
 	 */
-	public function ajax_canned_comment($id) {
-		$canned = $this->get_canned_response($id);
-
-		/* Doesn't work
-		$response = egw_json_response::get();
-		//$response->assign('exec[reply_message]', 'value', $canned[$id]);
-		$response->jquery("textbox[name*='reply_message']", 'val', Array($canned[$id]));
-		*/
-
+	public function ajax_canned_comment($id)
+	{
 		$response = new xajaxResponse();
-		$response->addScript('$("textarea[name*=\"reply_message\"]").val("' . $canned . '")');
+		$response->assign('exec[reply_message]', 'value', $this->get_canned_response($id));
+
 		return $response->getXML();
 	}
 }
