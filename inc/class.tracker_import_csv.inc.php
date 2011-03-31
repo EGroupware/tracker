@@ -223,6 +223,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 								unset($record[$field]);
 								break;
 							case '~skip~':
+								$this->results['skipped']++;
 								continue 2;
 							default:
 								if(strpos($t_field, 'add') === 0) {
@@ -268,12 +269,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					$lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
 				}
 			}
-
-			// Defaults
-			if(!$record['tr_priority']) $record['tr_priority'] = 5;
-			if(!$record['tr_completion']) $record['tr_completion'] = 0;
-			if(!array_key_exists('tr_private', $record)) $record['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
-			if(!$record['tr_private']) $record['tr_private'] = 0;
 
 			// Special values
 			if ($record['addressbook'] && !is_numeric($record['addressbook']))
@@ -376,11 +371,18 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$_data = array_merge($old, $_data);
 				$changed = $this->tracking->changed_fields($_data, $old);
 				if(count($changed) == 0 && !$this->definition->plugin_options['update_timestamp']) {
+					$this->results['unchanged']++;
 					break;
 				}
 				
 				// Fall through
 			case 'insert' :
+				// Defaults
+				if(!$_data['tr_priority']) $_data['tr_priority'] = 5;
+				if(!$_data['tr_completion']) $_data['tr_completion'] = 0;
+				if(!array_key_exists('tr_private', $_data)) $_data['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
+				if($_data['tr_private'] == null) $_data['tr_private'] = 0;
+
 				if ( $this->dry_run ) {
 					//print_r($_data);
 					$this->results[$_action]++;
