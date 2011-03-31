@@ -1236,10 +1236,16 @@ class tracker_ui extends tracker_bo
 	 *
 	 * @param id Canned comment ID
 	 */
-	public function ajax_canned_comment($id)
+	public function ajax_canned_comment($id, $ckeditor=true)
 	{
 		$response = new xajaxResponse();
-		$response->assign('exec[reply_message]', 'value', $this->get_canned_response($id));
+		if($ckeditor) {
+			$response->script('if(CKEDITOR) { var ckeditor = CKEDITOR.instances["exec[reply_message]"];} if(ckeditor) ckeditor.setData("'.
+				str_replace(array("\r","\n"), array('',''), nl2br($this->get_canned_response($id))) .
+			 '");');
+		} else {
+			$response->assign('exec[reply_message]', 'value', $this->get_canned_response($id));
+		}
 
 		return $response->getXML();
 	}
