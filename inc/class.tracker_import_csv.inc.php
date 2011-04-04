@@ -162,23 +162,27 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			
 			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups);
 			
-			// Set creator, unless it's supposed to come from CSV file
-			if($_definition->plugin_options['owner_from_csv'] && $record['tr_creator'] && !is_numeric($record['tr_creator'])) {
-				// Automatically handle text owner without explicit translation
-				$new_owner = importexport_helper_functions::account_name2id($record['tr_creator']);
-				if($new_owner == '') {
-					$this->errors[$import_csv->get_current_position()] = lang(
-						'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
-						$record['tr_creator'],
-						common::grab_owner_name($_definition->plugin_options['record_owner']),
-						lang($this->bo->field2label['tr_creator'])
-					);
-					$record['tr_creator'] = $_definition->plugin_options['record_owner'];
-				} else {
-					$record['tr_creator'] = $new_owner;
+			// Set creator/group, unless it's supposed to come from CSV file
+			foreach(array('owner' => 'creator', 'group' => 'group') as $option => $field) {
+				if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
+					if(!is_numeric($record['tr_'.$field])) {
+						// Automatically handle text owner without explicit translation
+						$new_owner = importexport_helper_functions::account_name2id($record['tr_'.$field]);
+						if($new_owner == '') {
+							$this->errors[$import_csv->get_current_position()] = lang(
+								'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
+								$record['tr_'.$field],
+								common::grab_owner_name($_definition->plugin_options['record_'.$option]),
+								lang($this->bo->field2label['tr_'.$field])
+							);
+							$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
+						} else {
+							$record['tr_'.$field] = $new_owner;
+						}
+					}
+				} elseif ($_definition->plugin_options['record_'.$option]) {
+					$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
 				}
-			} elseif ($_definition->plugin_options['record_owner']) {
-				$record['tr_creator'] = $_definition->plugin_options['record_owner'];
 			}
 
 			// Check account IDs

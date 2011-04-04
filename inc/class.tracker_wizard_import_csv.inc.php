@@ -179,14 +179,16 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			$content['msg'] = $this->steps['wizard_step60'];
 			$content['step'] = 'wizard_step60';
 			$preserv = $content;
-			if(!array_key_exists($content['record_owner']) && $content['plugin_options']) {
-				$content['record_owner'] = $content['plugin_options']['record_owner'];
-			}
-			if(!array_key_exists($content['owner_from_csv']) && $content['plugin_options']) {
-				$content['owner_from_csv'] = $content['plugin_options']['owner_from_csv'];
-			}
-			if(!array_key_exists($content['change_owner']) && $content['plugin_options']) {
-				$content['change_owner'] = $content['plugin_options']['change_owner'];
+			foreach(array('owner', 'group') as $field) {
+				if(!array_key_exists('record_'.$field, $content) && $content['plugin_options']) {
+					$content['record_'.$field] = $content['plugin_options']['record_'.$field];
+				}
+				if(!array_key_exists($field.'_from_csv', $content) && $content['plugin_options']) {
+					$content[$field.'_from_csv'] = $content['plugin_options'][$field.'_from_csv'];
+				}
+				if(!array_key_exists('change_'.$field, $content) && $content['plugin_options']) {
+					$content['change_'.$field] = $content['plugin_options']['change_'.$field];
+				}
 			}
 
 			if(!in_array('tr_creator', $content['field_mapping'])) {
@@ -194,7 +196,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			}
 
 			unset ($preserv['button']);
-			return 'infolog.importexport_wizard_chooseowner';
+			return 'tracker.importexport_wizard_chooseowner';
 		}
 		
 	}
