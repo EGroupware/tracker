@@ -88,7 +88,7 @@ class tracker_merge extends bo_merge
 		$info = array();
 
 		// Convert to human friendly values
-		$types = tracker_export_csv::$types;
+		$types = tracker_egw_record::$types;
 		// Get lookups for human-friendly values
 		$lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
@@ -145,7 +145,8 @@ class tracker_merge extends bo_merge
 				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
-			) + $this->contact_replacements($reply['reply_creator'], 'comment/user');
+				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
+			);
 		}
 		return $comments[$id][$n];
 	}
@@ -189,7 +190,7 @@ class tracker_merge extends bo_merge
 		echo '<tr><td colspan="4">{{table/comment}}</td></tr>';
 		foreach(array(
 			'date' => 'date', 
-			'user/n_fn' => 'User - All contact fields are valid',
+			'user' => 'Username',
 			'message' => 'Message',
 			'restricted' => 'If the message was restricted'
 		) as $name => $label) {
