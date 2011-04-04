@@ -145,6 +145,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 		$_lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
+			'tr_private'	=> array(0 => lang('no'), 1 => lang('yes')),
 		);
 
 		// Start counting successes
@@ -209,10 +210,11 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
 				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
 			}
-			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
+			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id', 'tr_private') as $field) {
 				if(!is_numeric($record[$field])) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
-					if($key = array_search($record[$field], $lookups[$field])) {
+					$key = array_search($record[$field], $lookups[$field]);
+					if($key !== false) {
 						$record[$field] = $key;
 					} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
 						$t_field = $_definition->plugin_options[$translate_key];
@@ -380,7 +382,9 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				// Defaults
 				if(!$_data['tr_priority']) $_data['tr_priority'] = 5;
 				if(!$_data['tr_completion']) $_data['tr_completion'] = 0;
-				if(!array_key_exists('tr_private', $_data)) $_data['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
+				if(!array_key_exists('tr_private', $_data)) {
+					$_data['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
+				}
 				if($_data['tr_private'] == null) $_data['tr_private'] = 0;
 
 				if ( $this->dry_run ) {
