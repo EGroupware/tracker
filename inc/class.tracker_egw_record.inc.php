@@ -23,6 +23,15 @@ class tracker_egw_record implements importexport_iface_egw_record
 	private $record = array();
 	private $bo;
 
+	// Used in conversions
+	static $types = array(
+		'select-account' => array('tr_creator','tr_modifier','tr_group','tr_assigned'),
+		'date-time' => array('tr_modified','tr_created','tr_closed'),
+		'select-cat' => array('cat_id'),
+		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution'),
+		'select-bool' => array('tr_private'),
+	);
+
 
 
 	/**

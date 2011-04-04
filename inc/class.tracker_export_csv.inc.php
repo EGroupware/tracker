@@ -16,14 +16,6 @@
  */
 class tracker_export_csv implements importexport_iface_export_plugin {
 
-	// Used in conversions
-	static $types = array(
-		'select-account' => array('tr_creator','tr_modifier','tr_group','tr_assigned'),
-		'date-time' => array('tr_modified','tr_created','tr_closed'),
-		'select-cat' => array('cat_id'),
-		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution', 'tr_private'),
-	);
-
 	/**
 	 * Exports records as defined in $_definition
 	 *
@@ -90,7 +82,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				// Set per-category priorities
 				$lookups['tr_priority'] = $ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
 
-				importexport_export_csv::convert($_record, self::$types, 'tracker', $lookups);
+				importexport_export_csv::convert($_record, tracker_egw_record::$types, 'tracker', $lookups);
 				$this->convert($_record, $options);
 			} else {
 				// Implode arrays, so they don't say 'Array'

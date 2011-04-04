@@ -145,7 +145,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 		$_lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
-			'tr_private'	=> array(0 => lang('no'), 1 => lang('yes')),
 		);
 
 		// Start counting successes
@@ -160,7 +159,9 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
-
+			
+			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups);
+			
 			// Set creator, unless it's supposed to come from CSV file
 			if($_definition->plugin_options['owner_from_csv'] && $record['tr_creator'] && !is_numeric($record['tr_creator'])) {
 				// Automatically handle text owner without explicit translation
