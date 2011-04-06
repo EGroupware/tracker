@@ -215,7 +215,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
 				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
 			}
-			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id', 'tr_private') as $field) {
+			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
 				if(!is_numeric($record[$field])) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
 					$key = array_search($record[$field], $lookups[$field]);
