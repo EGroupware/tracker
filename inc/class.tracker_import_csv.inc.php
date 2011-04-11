@@ -199,6 +199,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 							common::grab_owner_name($_definition->plugin_options['record_owner']),
 							$this->bo->field2label[$field] ? lang($this->bo->field2label[$field]) : $field
 						);
+						$record[$field] = $_definition->plugin_options['record_owner'];
 					}
 				}
 			}
@@ -387,10 +388,10 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				// Defaults
 				if(!$_data['tr_priority']) $_data['tr_priority'] = 5;
 				if(!$_data['tr_completion']) $_data['tr_completion'] = 0;
-				if(!array_key_exists('tr_private', $_data) || $_data['tr_private'] == '') {
+				if(!array_key_exists('tr_private', $_data) || $_data['tr_private'] === '') {
 					$_data['tr_private'] = $this->bo->create_new_as_private ? 1 : 0;
 				}
-				if($_data['tr_private'] == null) $_data['tr_private'] = 0;
+				if($_data['tr_private'] === null) $_data['tr_private'] = 0;
 
 				if ( $this->dry_run ) {
 					//print_r($_data);
