@@ -69,29 +69,29 @@ function tracker_upgrade0_1_007()
 
 function tracker_upgrade0_1_008()
 {
-    // Add configurable statis (stored as egw_tracker global cats)
-    // Needs a int tr_status (migrate actual data to the new $stati array
+	// Add configurable statis (stored as egw_tracker global cats)
+	// Needs a int tr_status (migrate actual data to the new $stati array
 
 	// Rename actual tr_status column
-    $GLOBALS['egw_setup']->oProc->RenameColumn('egw_tracker','tr_status','char_tr_status');
+	$GLOBALS['egw_setup']->oProc->RenameColumn('egw_tracker','tr_status','char_tr_status');
 
-    // Create the new (int) tr_status column
-    $GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_status',array(
-            'type' => 'int',
-            'precision' => '4',
-            'nullable' => False,
-            'default'  => -100, // Open State
+	// Create the new (int) tr_status column
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_status',array(
+			'type' => 'int',
+			'precision' => '4',
+			'nullable' => False,
+			'default'  => -100, // Open State
 	));
 
-    // Update the data
+	// Update the data
 	//		'-100' => 'Open',
 	//		'-101' => 'Closed',
 	//		'-102' => 'Deleted',
 	//		'-103' => 'Pending',
 	$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-100 where char_tr_status='o'",__LINE__,__FILE__);
-    $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-101 where char_tr_status='c'",__LINE__,__FILE__);
-    $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-102 where char_tr_status='d'",__LINE__,__FILE__);
-    $GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-103 where char_tr_status='p'",__LINE__,__FILE__);
+	$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-101 where char_tr_status='c'",__LINE__,__FILE__);
+	$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-102 where char_tr_status='d'",__LINE__,__FILE__);
+	$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_status=-103 where char_tr_status='p'",__LINE__,__FILE__);
 
 	// Drop the old char tr_status column
 	$GLOBALS['egw_setup']->oProc->DropColumn('egw_tracker',array(
@@ -121,26 +121,26 @@ function tracker_upgrade0_1_008()
 		'uc' => array()
 	),'char_tr_status');
 
-    return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.009';
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.009';
 }
 
 
 function tracker_upgrade0_1_009()
 {
-    // Add CC to tracker table
+	// Add CC to tracker table
 
-    // Create the new (text) tr_cc column
-    $GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_cc',array(
-            'type' => 'text',
+	// Create the new (text) tr_cc column
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_cc',array(
+			'type' => 'text',
 	));
 
-    return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.010';
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '0.1.010';
 }
 
 
 function tracker_upgrade0_1_010()
 {
-     return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4';
+	 return $GLOBALS['setup_info']['tracker']['currentver'] = '1.4';
 }
 
 
@@ -187,7 +187,7 @@ function tracker_upgrade1_4()
 function tracker_upgrade1_4_001()
 {
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_edit_mode',array(
-		'type'      => 'varchar',
+		'type'	  => 'varchar',
 		'precision' => '5',
 		'default'   => 'ascii',
 	));
@@ -450,33 +450,33 @@ function tracker_upgrade1_9_001()
 
 	// Create the new (int) tr_resolution column
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_resolution',array(
-            'type' => 'int',
-            'precision' => '4',
-            'nullable' => False
+			'type' => 'int',
+			'precision' => '4',
+			'nullable' => False
 	));
-	
+
 	// Create new resolutions
-        $resolutions = array(
-                'n' => 'None',
-                'a' => 'Accepted',
-                'd' => 'Duplicate',
-                'f' => 'Fixed',
-                'i' => 'Invalid',
-                'I' => 'Info only',
-                'l' => 'Later',
-                'o' => 'Out of date',
-                'p' => 'Postponed',
-                'O' => 'Outsourced',
-                'r' => 'Rejected',
-                'R' => 'Remind',
-                'w' => 'Wont fix',
-                'W' => 'Works for me',
-        );
-	
-	echo "Updating resolutions...<br />"; flush();
+	$resolutions = array(
+		'n' => 'None',
+		'a' => 'Accepted',
+		'd' => 'Duplicate',
+		'f' => 'Fixed',
+		'i' => 'Invalid',
+		'I' => 'Info only',
+		'l' => 'Later',
+		'o' => 'Out of date',
+		'p' => 'Postponed',
+		'O' => 'Outsourced',
+		'r' => 'Rejected',
+		'R' => 'Remind',
+		'w' => 'Wont fix',
+		'W' => 'Works for me',
+	);
+
+	//echo "Updating resolutions...<br />"; flush();
 	foreach($resolutions as $code => $name) {
 		$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
-			'cat_owner'  => -1,
+			'cat_owner'  => categories::GLOBAL_ACCOUNT,
 			'cat_access' => 'public',
 			'cat_appname'=> 'tracker',
 			'cat_name'   => $name,
@@ -492,7 +492,7 @@ function tracker_upgrade1_9_001()
 		),__LINE__,__FILE__);
 		$GLOBALS['egw_setup']->oProc->query("update egw_tracker set tr_resolution=$cat_id where char_tr_resolution='$code'",__LINE__,__FILE__);
 	}
-	
+
 	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker',array(
 		'fd' => array(
 			'tr_id' => array('type' => 'auto','nullable' => False),
@@ -523,6 +523,21 @@ function tracker_upgrade1_9_001()
 		'uc' => array()
 	));
 
-	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.002';
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use categories::GLOBAL_ACCOUNT
 }
 
+
+/**
+ * Fix tracker global categories / resolutions created by 1.9.001 update, with wrong cat_onwer=-1
+ */
+function tracker_upgrade1_9_002()
+{
+	$GLOBALS['egw_setup']->db->update($GLOBALS['egw_setup']->cats_table,array(
+		'cat_owner'  => categories::GLOBAL_ACCOUNT,
+	),array(
+		'cat_owner'  => -1,
+		'cat_appname'=> 'tracker',
+	),__LINE__,__FILE__);
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use categories::GLOBAL_ACCOUNT
+}
