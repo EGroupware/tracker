@@ -8,7 +8,7 @@
  * @subpackage setup
  * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$ 
+ * @version $Id$
  */
 
 // create some example trackers and global versions and cats
@@ -37,7 +37,7 @@ foreach(array(
 ) as $name => $type)
 {
 	$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
-		'cat_owner'  => -1,
+		'cat_owner'  => categories::GLOBAL_ACCOUNT,
 		'cat_access' => 'public',
 		'cat_appname'=> 'tracker',
 		'cat_name'   => $name,
@@ -51,7 +51,7 @@ foreach(array(
 	),array(
 		'cat_id' => $cat_id,
 	),__LINE__,__FILE__);
-	
+
 	if ($name == 'Patches') $patches = $cat_id;
 }
 // create a tracker specific cat
@@ -117,5 +117,5 @@ foreach(array(
 		'config_name'  => $name,
 	),__LINE__,__FILE__);
 }
-	
+
 
