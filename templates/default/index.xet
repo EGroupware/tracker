@@ -154,9 +154,9 @@
 					</hbox>
 				</row>
 				<row>
-					<groupbox id="admin_popup">
-						<caption label="Multiple changes"/>
-						<grid id="admin">
+					<box id="admin_popup" class="action_popup prompt">
+						<description value="Multiple changes" span="all" class="promptheader"/>
+						<grid width="500px" id="admin">
 							<columns>
 								<column/>
 								<column/>
@@ -219,7 +219,7 @@
 								</row>
 							</rows>
 						</grid>
-					</groupbox>
+					</box>
 					<hbox align="right">
 						<box class="action_popup prompt" id="link_popup">
 							<vbox>
@@ -270,7 +270,7 @@
 	position: fixed;
 	top: 200px;
 	left: 450px;
-	width: 76ex;
+	width: 90ex;
 	z-index: 20000;
 	display: none;
 	border-collapse:collapse;
@@ -287,7 +287,7 @@
 }
 .action_popup .promptheader {
 	padding: 1ex;
-	width: 100%
+	/*width: 100%*/
 }
 
 .action_select {

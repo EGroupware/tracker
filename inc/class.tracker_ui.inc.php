@@ -893,7 +893,7 @@ class tracker_ui extends tracker_bo
 				$content['nm']['action'] = 'document';
 				$content['nm']['selected'] = array($id);
 			}
-			if ($content['admin'] && !$content['nm']['action'])
+			if ($content['admin'] && $content['nm']['action'] == 'admin')
 			{
 				$content['nm']['action'] = $content['admin'];
 			}
