@@ -80,7 +80,7 @@ no change	tracker	fr	Aucune modification
 non-anonymous users	tracker	fr	Utilisateur non-anonyme
 noone	tracker	fr	Personne
 notification	tracker	fr	Notification
-open	tracker	fr	Ouvert
+open(status)	tracker	fr	Ouvert
 out of date	tracker	fr	Expiré
 overdue after	tracker	fr	En retard après
 pending	tracker	fr	En attente

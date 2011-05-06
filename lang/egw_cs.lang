@@ -150,7 +150,7 @@ no trackers found, aborting	tracker	cs	Nebyly nalezeny sledovací systémy, kon�
 non-anonymous users	tracker	cs	Ne-anonymní uživatel
 noone	tracker	cs	Nikdo
 notification	tracker	cs	Upozornění
-open	tracker	cs	Otevřené
+open(status)	tracker	cs	Otevřené
 out of date	tracker	cs	Po termínu
 overdue after	tracker	cs	Po termínu k
 ownership of the ticket	tracker	cs	Vlastnictví ohlášení

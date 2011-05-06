@@ -166,7 +166,7 @@ non-anonymous users	tracker	sk	Ne-anonymný používateľ
 noone	tracker	sk	Nikto
 notification	tracker	sk	Pripomienka
 only explicitly named users have read access (otherwise everyone)	tracker	sk	Iba explicitne vymenovaní používatelia majú prístup na čítanie (ináč majú všetci)
-open	tracker	sk	Otvorené
+open(status)	tracker	sk	Otvorené
 out of date	tracker	sk	Zameškané
 overdue after	tracker	sk	Mešká po
 ownership of the ticket	tracker	sk	Vlastníctvo záležitosti

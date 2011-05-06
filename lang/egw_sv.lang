@@ -81,7 +81,7 @@ no change	tracker	sv	Ingen ändring
 non-anonymous users	tracker	sv	Inloggade användare
 noone	tracker	sv	Ingen
 notification	tracker	sv	Meddelande
-open	tracker	sv	Öppet
+open(status)	tracker	sv	Öppet
 out of date	tracker	sv	Förfallen
 overdue after	tracker	sv	Förfaller efter
 pending	tracker	sv	Vilande

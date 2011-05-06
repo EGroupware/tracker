@@ -136,7 +136,7 @@ no trackers found, aborting	tracker	it	Trackers non trovati , in chiusura
 non-anonymous users	tracker	it	Utenti non-anonimi
 noone	tracker	it	Nessuno
 notification	tracker	it	Notifica
-open	tracker	it	Aperto
+open(status)	tracker	it	Aperto
 out of date	tracker	it	Scaduto
 overdue after	tracker	it	Scaduto dopo
 ownership of the ticket	tracker	it	Proprietà del ticket

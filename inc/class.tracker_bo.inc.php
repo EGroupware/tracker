@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -76,7 +76,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	static $stati = array(
-		self::STATUS_OPEN    => 'Open',
+		self::STATUS_OPEN    => 'Open(status)',
 		self::STATUS_CLOSED  => 'Closed',
 		self::STATUS_DELETED => 'Deleted',
 		self::STATUS_PENDING => 'Pending',
@@ -346,7 +346,7 @@ class tracker_bo extends tracker_so
 
 	/**
 	 * initializes data with the content of key
-	 * 
+	 *
 	 * Reimplemented to set some defaults
 	 *
 	 * @param array $keys=array() array with keys in form internalName => value
@@ -552,17 +552,6 @@ class tracker_bo extends tracker_so
 					$this->tracking->notify_current_user = true;
 				}
 				$this->tracking->html_content_allow = true;
-			}
-			if ($this->customfields)
-			{
-				$data_custom = $old_custom = array();
-				foreach($this->customfields as $name => $custom)
-				{
-					if (isset($this->data['#'.$name]) && (string)$this->data['#'.$name]!=='') $data_custom[] = $custom['label'].': '.$this->data['#'.$name];
-					if (isset($old['#'.$name]) && (string)$old['#'.$name]!=='') $old_custom[] = $custom['label'].': '.$old['#'.$name];
-				}
-				$this->data['customfields'] = implode("\n",$data_custom);
-				$old['customfields'] = implode("\n",$old_custom);
 			}
 			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$this->data['no_notifications']))
 			{
@@ -881,7 +870,7 @@ class tracker_bo extends tracker_so
 	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty
 	 *
 	 * @param string $type='trackers' 'tracker', 'version', 'cat'
-	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
 	 */
 	function get_tracker_labels($type='tracker',$tracker=null)
 	{
@@ -1636,7 +1625,7 @@ class tracker_bo extends tracker_so
 				{
 					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['id']);
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
-					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0) 
+					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
 					{
 						$buff = explode(',',strtolower($trackerentry['tr_cc'])) ;
 						unset($trackerentry['tr_cc']);

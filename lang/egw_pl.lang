@@ -82,7 +82,7 @@ no change	tracker	pl	Brak zmian
 non-anonymous users	tracker	pl	Użytkownik nie anonimowy
 noone	tracker	pl	Nikt
 notification	tracker	pl	Powiadomienie
-open	tracker	pl	Otwarto
+open(status)	tracker	pl	Otwarto
 out of date	tracker	pl	Przeterminowany
 overdue after	tracker	pl	Zaznacz jako zaległe po
 pending	tracker	pl	W toku

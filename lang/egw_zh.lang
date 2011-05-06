@@ -107,7 +107,7 @@ non-anonymous users	tracker	zh	非匿名用户
 noone	tracker	zh	无
 notification	tracker	zh	提醒通知
 number of replies	tracker	zh	回复的数字
-open	tracker	zh	打开
+open(status)	tracker	zh	打开
 out of date	tracker	zh	超过日期
 overdue after	tracker	zh	到期天数
 owned by group	tracker	zh	由组拥有

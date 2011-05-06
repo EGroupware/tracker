@@ -9,21 +9,6 @@
  * @version $Id$
  */
 
-/**
- * Javascript handling for multiple entry actions
- */
-function do_action(selbox) {
-	if(selbox.value == "") return;
-	var prefix = selbox.id.substring(0,selbox.id.indexOf('['));
-	var popup = document.getElementById(prefix + '[' + selbox.value + '_popup]');
-	if(popup) {
-		popup.style.display = 'block';
-		return;
-	}
-	selbox.form.submit();
-	selbox.value = "";
-}
-
 function add_email_from_ab(ab_id,tr_cc)
 {
 	var ab = document.getElementById(ab_id); 
@@ -45,6 +30,52 @@ function add_email_from_ab(ab_id,tr_cc)
 			ab.onchange();
 			set_style_by_class('tr','hiddenRow','display','none');
 		}
+	}
+	return false;
+}
+
+var tracker_popup_action, tracker_popup_senders;
+
+/**
+ * Open popup for a certain action requiring further input
+ * 
+ * @param _action
+ * @param _senders
+ */
+function open_popup(_action, _senders)
+{
+	var prefix = 'exec';
+	var popup = document.getElementById(prefix + '[' + _action.id + '_popup]');
+
+	if (popup) {
+		tracker_popup_action = _action;
+		tracker_popup_senders = _senders;
+		popup.style.display = 'block';
+	}
+}
+
+/**
+ * Submit a popup action
+ */
+function submit_popup(button)
+{
+	button.form.submit_button.value = button.name;	// set name of button (sub-action)
+
+	// call regular nm_action to transmit action and senders correct
+	nm_action(tracker_popup_action, tracker_popup_senders);
+}
+
+/**
+ * Hide popup
+ */
+function hide_popup(element, div_id) 
+{
+	var prefix = element.id.substring(0,element.id.indexOf('['));
+	var popup = document.getElementById(prefix+'['+div_id+']');
+
+	// Hide popup
+	if(popup) {
+		popup.style.display = 'none';
 	}
 	return false;
 }

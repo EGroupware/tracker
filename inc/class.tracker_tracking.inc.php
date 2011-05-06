@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -65,12 +65,12 @@ class tracker_tracking extends bo_tracking
 	 * @param tracker_bo $botracker
 	 * @return tracker_tracking
 	 */
-	function __construct(&$botracker)
+	function __construct(tracker_bo $botracker)
 	{
-		parent::__construct();	// calling the constructor of the extended class
-
-		$this->tracker =& $botracker;
+		$this->tracker = $botracker;
 		$this->field2history =& $botracker->field2history;
+
+		parent::__construct('tracker');	// adding custom fields for tracker
 	}
 
 	/**

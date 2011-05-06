@@ -149,7 +149,7 @@ no trackers found, aborting	tracker	es-es	No se ha encontrado sistemas de seguim
 non-anonymous users	tracker	es-es	Usuarios no anónimos
 noone	tracker	es-es	Nadie
 notification	tracker	es-es	Notificación
-open	tracker	es-es	Abierto
+open(status)	tracker	es-es	Abierto
 out of date	tracker	es-es	Fuera de fecha
 overdue after	tracker	es-es	Vencimiento después de
 ownership of the ticket	tracker	es-es	Propietario del elemento de seguimiento

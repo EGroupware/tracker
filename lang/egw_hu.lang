@@ -59,7 +59,7 @@ later	tracker	hu	Később
 new %1	tracker	hu	Új %1
 new items	tracker	hu	Új tételek
 no change	tracker	hu	Nincs változás
-open	tracker	hu	Nyitott
+open(status)	tracker	hu	Nyitott
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
 rejected	tracker	hu	Elutasított

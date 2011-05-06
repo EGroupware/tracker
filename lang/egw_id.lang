@@ -71,7 +71,7 @@ no change	tracker	id	No change
 non-anonymous users	tracker	id	Non-anonymous users
 noone	tracker	id	Noone
 notification	tracker	id	Notification
-open	tracker	id	Open
+open(status)	tracker	id	Open
 overdue after	tracker	id	Overdue after
 pending	tracker	id	Pending
 port number	tracker	id	Port number

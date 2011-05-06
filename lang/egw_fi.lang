@@ -164,7 +164,7 @@ non-anonymous users	tracker	fi	Tunnistetut käyttäjät
 noone	tracker	fi	Ei kukaan
 notification	tracker	fi	Huomautusviesti
 only explicitly named users have read access (otherwise everyone)	tracker	fi	Vain erikseen merkityillä käyttäjillä on lukuoikeus (muutoin kaikilla)
-open	tracker	fi	Avoin
+open(status)	tracker	fi	Avoin
 out of date	tracker	fi	Myöhästynyt
 overdue after	tracker	fi	Eräpäivän jälkeen
 ownership of the ticket	tracker	fi	Merkinnän omistaja

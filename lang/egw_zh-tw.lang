@@ -91,7 +91,7 @@ no change	tracker	zh-tw	沒有異動
 non-anonymous users	tracker	zh-tw	非匿名使用者
 noone	tracker	zh-tw	無
 notification	tracker	zh-tw	提醒通知
-open	tracker	zh-tw	開啟
+open(status)	tracker	zh-tw	開啟
 out of date	tracker	zh-tw	超過日期
 overdue after	tracker	zh-tw	到期天數
 pending	tracker	zh-tw	等待中

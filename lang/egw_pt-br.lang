@@ -143,7 +143,7 @@ no trackers found, aborting	tracker	pt-br	Nenhum Elemento do Sistema de Tickets 
 non-anonymous users	tracker	pt-br	Usuários não anônimos
 noone	tracker	pt-br	Nenhum
 notification	tracker	pt-br	Notificação
-open	tracker	pt-br	Aberto
+open(status)	tracker	pt-br	Aberto
 out of date	tracker	pt-br	Desatualizado
 overdue after	tracker	pt-br	Arquivar após
 ownership of the ticket	tracker	pt-br	Propriedade do ticket

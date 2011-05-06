@@ -155,6 +155,7 @@ list of coma separated email address	tracker	de	Liste von EMail Adressen mit Kom
 mail handling	tracker	de	Mail Behandlung
 matching filter	tracker	de	Filter zutreffend
 miscellaneous	tracker	de	Sonstiges
+multiple changes	tracker	de	Mehrfache Änderungen
 new %1	tracker	de	%1 hinzfügen
 new items	tracker	de	Neue Einträge
 new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
@@ -166,7 +167,7 @@ non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
 notification	tracker	de	Benachrichtigung
 only explicitly named users have read access (otherwise everyone)	tracker	de	nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
-open	tracker	de	Offen
+open(status)	tracker	de	Offen
 out of date	tracker	de	Nicht mehr aktuell
 overdue after	tracker	de	Überfällig nach
 ownership of the ticket	tracker	de	Besitzer der Tickets

@@ -146,7 +146,7 @@ no trackers found, aborting	tracker	nl	Geen tracker reeks gevonden, afgebroken
 non-anonymous users	tracker	nl	Niet anonieme gebruikers
 noone	tracker	nl	Niemand
 notification	tracker	nl	Notificatie
-open	tracker	nl	Open
+open(status)	tracker	nl	Open
 out of date	tracker	nl	Verouderd
 overdue after	tracker	nl	Achterstallig ne
 ownership of the ticket	tracker	nl	Eigendom van de melding

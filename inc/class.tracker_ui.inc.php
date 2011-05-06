@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -179,7 +179,7 @@ class tracker_ui extends tracker_bo
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
 					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
-					$this->data['cat_id']     = $state['filter'];
+					$this->data['cat_id']     = $state['cat_id'];
 					$this->data['tr_version'] = $state['filter2'];
 				}
 				if (isset($this->trackers[(int)$_GET['tracker']]))
@@ -655,7 +655,7 @@ class tracker_ui extends tracker_bo
 
 		egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
 		$tracker = $query['col_filter']['tr_tracker'];
-		if (!($query['col_filter']['cat_id'] = $query['filter'])) unset($query['col_filter']['cat_id']);
+		if (!($query['col_filter']['cat_id'] = $query['cat_id'])) unset($query['col_filter']['cat_id']);
 		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
 
 		if (!($query['col_filter']['tr_creator'])) unset($query['col_filter']['tr_creator']);
@@ -667,8 +667,6 @@ class tracker_ui extends tracker_bo
 		}
 		elseif($query['col_filter']['tr_assigned'] === 'not')
 		{
-			//$query['col_filter'][] = 'tr_assigned IS NULL';
-			//unset($query['col_filter']['tr_assigned']);
 			$query['col_filter']['tr_assigned'] = null;
 		}
 		elseif(!$query['col_filter']['tr_assigned'])
@@ -677,7 +675,7 @@ class tracker_ui extends tracker_bo
 		}
 		// save the state of the index page (filters) in the user prefs
 		$state = serialize(array(
-			'filter'     => $query['filter'],	// cat
+			'cat_id'     => $query['cat_id'],	// cat
 			'filter2'    => $query['filter2'],	// version
 			'order'      => $query['order'],
 			'sort'       => $query['sort'],
@@ -765,10 +763,9 @@ class tracker_ui extends tracker_bo
 			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
 			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
 			$readonlys["document[$id]"] = !$GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
-			$readonlys['checked']=!($this->is_admin($row['tr_tracker'])) or ($this->is_technician($row['tr_tracker']));
+			$readonlys['checked'] = !($this->is_admin($row['tr_tracker']) || $this->is_technician($row['tr_tracker']));
 		}
 
-		$readonlys['checked'] = $readonlys['checked'] && (count(tracker_merge::get_documents($GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'])) == 0);
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
 
@@ -778,16 +775,14 @@ class tracker_ui extends tracker_bo
 		$resolutions = $this->get_tracker_labels('resolution',$tracker);
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
-		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
+		$rows['sel_options']['cat_id'] = $cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
 		$rows['sel_options']['tr_resolution'] =& $resolutions;
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
-			$rows['sel_options']['cat_id'] =& $cats;
 			$rows['sel_options']['tr_status_admin'] =& $statis;
-			$rows['sel_options']['tr_resolution_admin'] =& $resolutions;
 			$rows['is_admin'] = true;
 		}
 		if (!$this->allow_voting)
@@ -895,19 +890,23 @@ class tracker_ui extends tracker_bo
 			if (is_array($content) && isset($content['nm']['rows']['document']))  // handle insert in default document button like an action
 			{
 				list($id) = @each($content['nm']['rows']['document']);
-				$content['action'] = 'document';
-				$content['nm']['rows']['checked'] = array($id);
+				$content['nm']['action'] = 'document';
+				$content['nm']['selected'] = array($id);
 			}
-			if($content['action'] != '') {
-				if (!count($content['nm']['rows']['checked']) && !$content['use_all'])
+			if ($content['admin'])
+			{
+				$content['nm']['action'] = $content['admin'];
+			}
+			if($content['nm']['action'])
+			{
+				if (!count($content['nm']['selected']) && !$content['nm']['select_all'])
 				{
-
 					$msg = lang('You need to select some entries first');
 				}
 				else
 				{
-					if ($this->action($content['action'],$content['nm']['rows']['checked'],$content['use_all'],
-					$success,$failed,$action_msg,'index',$msg))
+					if ($this->action($content['nm']['action'],$content['nm']['selected'],$content['nm']['select_all'],
+						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notification']))
 					{
 						$msg .= lang('%1 entries %2',$success,$action_msg);
 					}
@@ -915,35 +914,6 @@ class tracker_ui extends tracker_bo
 					{
 						$msg .= lang('%1 entries %2, %3 failed because of insufficent rights !!!',$success,$action_msg,$failed);
 					}
-				}
-			}
-
-			if ($content['update'])
-			{
-				unset($content['update']);
-				$checked = $content['nm']['rows']['checked']; unset($content['nm']);
-				// remove all 'No change'
-				foreach($content as $name => $value) if ($value === '') unset($content[$name]);
-
-				if (!count($checked) || !count($content))
-				{
-					$msg = lang('You need to select something to change AND some tracker items!');
-				}
-				else
-				{
-					$n = 0;
-					foreach($checked as $tr_id)
-					{
-						if (!$this->read($tr_id)) continue;
-						foreach($content as $name => $value)
-						{
-							if ($name == 'tr_status_admin') $name = 'tr_status';
-							if ($name == 'tr_resolution_admin') $name = 'tr_resolution';
-							if ($value !== '') $this->data[$name] = $name == 'tr_assigned' && $value === 'not' ? NULL : $value;
-						}
-						if (!$this->save()) $n++;
-					}
-					$msg = lang('%1 entries updated.',$n);
 				}
 			}
 		}
@@ -984,13 +954,11 @@ class tracker_ui extends tracker_bo
 		{
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_ui.get_rows',
-				'no_cat'         => true,
+				'cat_is_select'  => 'no_lang',
 				'filter2'        => 0,	// all
 				'filter2_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
-				'filter'         => 0, // all
-				'filter_label'   => lang('Category'),
-				'filter_no_lang' => true,
+				'no_filter'      => true,
 				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),
@@ -1001,6 +969,7 @@ class tracker_ui extends tracker_bo
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 	 			'default_cols'   => '!esc_id',
+				'row_id'         => 'tr_id',
 			);
 			// use the state of the last session stored in the user prefs
 			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
@@ -1014,6 +983,8 @@ class tracker_ui extends tracker_bo
 				list($tracker) = @each($this->trackers);
 			}
 		}
+		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
+
 		if($_GET['search'])
 		{
 			$content['nm']['search'] = $_GET['search'];
@@ -1050,10 +1021,185 @@ class tracker_ui extends tracker_bo
 			$tpl->disable_cells('action', true);
 			$tpl->disable_cells('use_all', true);
 		}
-
 		egw_framework::validate_file('.','app','tracker');
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
+	}
+
+	/**
+	 * Get actions / context menu items
+	 *
+	 * @param int $tracker=null
+	 * @param int $cat_id=null
+	 * @return array see nextmatch_widget::get_actions()
+	 */
+	private function get_actions($tracker=null, $cat_id=null)
+	{
+		for($i = 0; $i <= 100; $i += 10) $percent[$i] = $i.'%';
+
+		$actions = array(
+			'open' => array(
+				'caption' => 'Open',
+				'default' => true,
+				'allowOnMultiple' => false,
+				'url' => 'menuaction=tracker.tracker_ui.edit&tr_id=$id',
+				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'group' => $group=1,
+			),
+			'print' => array(
+				'caption' => 'Print',
+				'allowOnMultiple' => false,
+				'url' => 'menuaction=tracker.tracker_ui.tprint&tr_id=$id',
+				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'group' => $group,
+			),
+			'add' => array(
+				'caption' => 'Add',
+				'group' => $group,
+				'url' => 'menuaction=tracker.tracker_ui.edit',
+				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+			),
+			'select_all' => array(
+				'caption' => 'Whole query',
+				'checkbox' => true,
+				'hint' => 'Apply the action on the whole query, NOT only the shown entries',
+				'group' => ++$group,
+			),
+			'no_notifications' => array(
+				'caption' => 'Do not notify',
+				'checkbox' => true,
+				'hint' => 'Do not notify of these changes',
+				'group' => $group,
+			),
+			// modifying content of one or multiple infolog(s)
+			'change' => array(
+				'caption' => 'Change',
+				'group' => ++$group,
+				'icon' => 'edit',
+				'disableClass' => 'rowNoEdit',
+				'children' => array(
+					'tracker' => array(
+						'caption' => 'Tracker Queue',
+						'prefix' => 'tr_tracker_',
+						'children' => $this->trackers,
+						'disabled' => count($this->trackers) <= 1,
+						'hideOnDisabled' => true,
+						'icon' => 'tracker/navbar',
+					),
+					'cat' => array(
+						'caption' => 'Category',
+						'prefix' => 'cat_',
+						'children' => $items=$this->get_tracker_labels('cat',$tracker),
+						'disabled' => count($items) <= 1,
+						'hideOnDisabled' => true,
+					),
+					'version' => array(
+						'caption' => 'Version',
+						'prefix' => 'version_',
+						'children' => $items=$this->get_tracker_labels('version',$tracker),
+						'disabled' => count($items) <= 1,
+						'hideOnDisabled' => true,
+					),
+					'assigned' => array(
+						'caption' => 'Assigned to',
+						'icon' => 'users',
+						'onExecute' => 'javaScript:open_popup',
+					),
+					'priority' => array(
+						'caption' => 'Priority',
+						'prefix' => 'priority_',
+						'children' => $items=$this->get_tracker_priorities($tracker,$cat_id),
+						'disabled' => count($items) <= 1,
+						'hideOnDisabled' => true,
+					),
+					'status' => array(
+						'caption' => 'Status',
+						'prefix' => 'status_',
+						'children' => $items=$this->get_tracker_stati($tracker),
+						'disabled' => count($items) <= 1,
+						'hideOnDisabled' => true,
+						'icon' => 'check',
+					),
+					'resolution' => array(
+						'caption' => 'Resolution',
+						'prefix' => 'resolution_',
+						'children' => $items=$this->get_tracker_labels('resolution',$tracker),
+						'disabled' => count($items) <= 1,
+						'hideOnDisabled' => true,
+					),
+					'completion' => array(
+						'caption' => 'Completed',
+						'prefix' => 'completion_',
+						'children' => $percent,
+						'icon' => 'completed',
+					),
+					'group' => array(
+						'caption' => 'Group',
+						'prefix' => 'group_',
+						'children' => array(),
+					),
+					'link' => array(
+						'caption' => 'Links',
+						'onExecute' => 'javaScript:open_popup',
+					),
+				),
+			),
+			'close' => array(
+				'caption' => 'Close',
+				'icon' => 'check',
+				'group' => $group,
+				'disableClass' => 'rowNoClose',
+			),
+			'admin' => array(
+				'caption' => 'Multiple changes',
+				'group' => $group,
+				'disabled' => !isset($GLOBALS['egw_info']['user']['apps']['admin']),
+				'hideOnDisabled' => true,
+				'onExecute' => 'javaScript:open_popup',
+				'icon' => 'user',
+			),
+		);
+		++$group;	// integration with other apps
+		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
+		{
+			$actions['filemanager'] = array(
+				'icon' => 'filemanager/navbar',
+				'caption' => 'Filemanager',
+				'url' => 'menuaction=filemanager.filemanager_ui.index&path=/apps/tracker/$id',
+				'allowOnMultiple' => false,
+				'group' => $group,
+			);
+		}
+		if ($GLOBALS['egw_info']['user']['apps']['timesheet'])
+		{
+			$actions['timesheet'] = array(	// interactive add for a single event
+				'icon' => 'timesheet/navbar',
+				'caption' => 'Timesheet',
+				'url' => 'menuaction=timesheet.timesheet_ui.edit&link_app[]=tracker&link_id[]=$id',
+				'group' => $group,
+				'allowOnMultiple' => false,
+				'popup' => egw_link::get_registry('timesheet', 'add_popup'),
+			);
+		}
+		if ($GLOBALS['egw_info']['user']['apps']['infolog'] && $this->allow_infolog)
+		{
+			$actions['infolog'] = array(
+				'icon' => 'infolog/navbar',
+				'caption' => 'InfoLog',
+				'url' => 'menuaction=infolog.infolog_ui.edit&action=tracker&action_id=$id',
+				'group' => $group,
+				'allowOnMultiple' => false,
+				'popup' => egw_link::get_registry('infolog', 'add_popup'),
+			);
+		}
+
+		$actions['documents'] = infolog_merge::document_action(
+			$this->prefs['document_dir'], ++$group, 'Insert in document', 'document_',
+			$this->prefs['default_document']
+		);
+
+		//echo "<p>".__METHOD__."($do_email, $tid_filter, $org_view)</p>\n"; _debug_array($actions);
+		return $actions;
 	}
 
 	/**
@@ -1164,18 +1310,20 @@ class tracker_ui extends tracker_bo
 	/**
 	 * apply an action to multiple tracker entries
 	 *
-	 * @param string/int $action 'status_to',set status of entries
+	 * @param string|int $action 'status_to',set status of entries
 	 * @param array $checked tracker id's to use if !$use_all
 	 * @param boolean $use_all if true use all entries of the current selection (in the session)
 	 * @param int &$success number of succeded actions
 	 * @param int &$failed number of failed actions (not enought permissions)
 	 * @param string &$action_msg translated verb for the actions, to be used in a message like %1 entries 'deleted'
-	 * @param string/array $session_name 'index' or 'email', or array with session-data depending if we are in the main list or the popup
+	 * @param string|array $session_name 'index' or 'email', or array with session-data depending if we are in the main list or the popup
+	 * @param string &$msg
+	 * @param boolean $no_notification
 	 * @return boolean true if all actions succeded, false otherwise
 	 */
-	function action($action,$checked,$use_all,&$success,&$failed,&$action_msg,$session_name,&$msg)
+	function action($action,$checked,$use_all,&$success,&$failed,&$action_msg,$session_name,&$msg,$no_notification)
 	{
-		//echo "<p>uicontacts::action('$action',".print_r($checked,true).','.(int)$use_all.",...)</p>\n";
+		//echo '<p>'.__METHOD__."('$action',".array2string($checked).','.(int)$use_all.",...)</p>\n";
 		$success = $failed = 0;
 		if ($use_all)
 		{
@@ -1190,17 +1338,66 @@ class tracker_ui extends tracker_bo
 			}
 		}
 
-		// Dialogs to get options
-		list($action, $settings) = explode('_', $action, 2);
-
-		switch($action)
+		if (is_array($action) && $action['update'])
 		{
-			case 'document':
-				$msg = $this->download_document($checked,$settings);
-				$failed = count($checked);
-                                return false;
-		}
+			unset($action['update']);
+			// remove all 'No change'
+			foreach($action as $name => $value) if ($value === '') unset($action[$name]);
 
+			if (!count($checked) || !count($action))
+			{
+				$msg = lang('You need to select something to change AND some tracker items!');
+				$failed = true;
+			}
+			else
+			{
+				$n = 0;
+				foreach($checked as $tr_id)
+				{
+					if (!$this->read($tr_id)) continue;
+					foreach($action as $name => $value)
+					{
+						if ($name == 'tr_status_admin') $name = 'tr_status';
+						$this->data[$name] = $name == 'tr_assigned' && $value === 'not' ? NULL : $value;
+					}
+					if (!$this->save())
+					{
+						$success++;
+					}
+					else
+					{
+						$failed++;
+					}
+				}
+				$action_msg = 'updated';
+			}
+		}
+		else
+		{
+			// Dialogs to get options
+			list($action, $settings) = explode('_', $action, 2);
+
+			switch($action)
+			{
+					case 'tracker':
+					case 'cat':
+					case 'version':
+					case 'assigned':
+					case 'priority':
+					case 'status':
+					case 'resolution':
+					case 'completion':
+					case 'group':
+					case 'link':
+die('To be implemented');
+						break;
+
+				case 'document':
+					$msg = $this->download_document($checked,$settings);
+					$failed = count($checked);
+					return false;
+			}
+		}
 		return !$failed;
 	}
 
@@ -1217,7 +1414,7 @@ class tracker_ui extends tracker_bo
 		{
 			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
 		}
-		elseif ($document[0] != '/')
+		else
 		{
 			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'].'/'.$document;
 		}
