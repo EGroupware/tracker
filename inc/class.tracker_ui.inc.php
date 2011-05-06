@@ -893,7 +893,7 @@ class tracker_ui extends tracker_bo
 				$content['nm']['action'] = 'document';
 				$content['nm']['selected'] = array($id);
 			}
-			if ($content['admin'])
+			if ($content['admin'] && !$content['nm']['action'])
 			{
 				$content['nm']['action'] = $content['admin'];
 			}
@@ -905,8 +905,21 @@ class tracker_ui extends tracker_bo
 				}
 				else
 				{
+					// Some processing to add values in for links and cats
+					$multi_action = $content['nm']['action'];
+					// Action has an additional action - add / delete, etc.  Buttons named <multi-action>_action[action_name]
+					if(in_array($multi_action, array('link', 'assigned','group')))
+					{
+						$content['nm']['action'] .= '_' . key($content[$multi_action . '_action']);
+
+						if(is_array($content[$multi_action]))
+						{
+							$content[$multi_action] = implode(',',$content[$multi_action]);
+						}
+						$content['nm']['action'] .= '_' . $content[$multi_action];
+					}
 					if ($this->action($content['nm']['action'],$content['nm']['selected'],$content['nm']['select_all'],
-						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notification']))
+						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notifications']))
 					{
 						$msg .= lang('%1 entries %2',$success,$action_msg);
 					}
@@ -1080,7 +1093,7 @@ class tracker_ui extends tracker_bo
 				'children' => array(
 					'tracker' => array(
 						'caption' => 'Tracker Queue',
-						'prefix' => 'tr_tracker_',
+						'prefix' => 'tracker_',
 						'children' => $this->trackers,
 						'disabled' => count($this->trackers) <= 1,
 						'hideOnDisabled' => true,
@@ -1135,8 +1148,7 @@ class tracker_ui extends tracker_bo
 					),
 					'group' => array(
 						'caption' => 'Group',
-						'prefix' => 'group_',
-						'children' => array(),
+						'onExecute' => 'javaScript:open_popup',
 					),
 					'link' => array(
 						'caption' => 'Links',
@@ -1360,6 +1372,7 @@ class tracker_ui extends tracker_bo
 						if ($name == 'tr_status_admin') $name = 'tr_status';
 						$this->data[$name] = $name == 'tr_assigned' && $value === 'not' ? NULL : $value;
 					}
+					if($no_notification) $this->data['no_notifications'] = true;
 					if (!$this->save())
 					{
 						$success++;
@@ -1379,18 +1392,92 @@ class tracker_ui extends tracker_bo
 
 			switch($action)
 			{
-					case 'tracker':
-					case 'cat':
-					case 'version':
-					case 'assigned':
-					case 'priority':
-					case 'status':
-					case 'resolution':
-					case 'completion':
-					case 'group':
-					case 'link':
-die('To be implemented');
+				case 'group':
+					// Popup adds an extra param (add/delete) that group doesn't need
+					list(,$settings) = explode('_',$settings);
+				case 'tracker':
+				case 'cat':
+				case 'version':
+				case 'priority':
+				case 'status':
+				case 'resolution':
+				case 'completion':
+					$action_msg = 'changed';
+					foreach($checked as $tr_id)
+					{
+						if (!$this->read($tr_id)) continue;
+						$this->data[($action == 'cat' ? 'cat_id' : 'tr_'.$action)] = $settings;
+						if($no_notification) $this->data['no_notifications'] = true;
+						if (!$this->save())
+						{
+							$success++;
+						}
+						else
+						{
+							$failed++;
+						}
+					}
+					break;
+				case 'assigned':
+					$action_msg = 'changed';
+					foreach($checked as $tr_id)
+					{
+						if (!$this->read($tr_id)) continue;
+						list($add_remove, $ids) = explode('_', $settings, 2);
+						$ids = explode(',',$ids);
+						$this->data['tr_assigned'] = $add_remove == 'add' ? 
+							array_merge($this->data['tr_assigned'],$ids) : 
+							array_diff($this->data['tr_assigned'],$ids);
+						if($no_notification) $this->data['no_notifications'] = true;
+						if (!$this->save())
+						{
+							$success++;
+						}
+						else
+						{
+							$failed++;
+						}
+					}
+					break;
+					
+				case 'link':
+					list($add_remove, $link) = explode('_', $settings, 2);
+					list($app, $link_id) = explode(':', $link);
+					if(!$link_id)
+					{
+						$action_msg = 'linked';
+						$msg = lang('You need to select an entry for linking.');
 						break;
+					}
+					$title = egw_link::title($app, $link_id);
+					foreach($checked as $id)
+					{
+						if (!$this->read($id))
+						{
+							$failed++;
+							continue;
+						}
+						if($add_remove == 'add')
+						{
+							$action_msg = lang('linked to %1', $title);
+							if(egw_link::link('tracker', $id, $app, $link_id))
+							{
+								$success++;
+							}
+							else
+							{
+								$failed++;
+							}
+						}
+						else
+						{
+							$action_msg = lang('unlinked from %1', $title);
+							$count = egw_link::unlink(0, 'tracker', $id, '', $app, $link_id);
+							$success += $count;
+						}
+					}
+					return $failed == 0;
+					break;
 
 				case 'document':
 					$msg = $this->download_document($checked,$settings);
