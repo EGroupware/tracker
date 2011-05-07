@@ -1116,7 +1116,7 @@ class tracker_ui extends tracker_bo
 					'assigned' => array(
 						'caption' => 'Assigned to',
 						'icon' => 'users',
-						'onExecute' => 'javaScript:open_popup',
+						'nm_action' => 'open_popup',
 					),
 					'priority' => array(
 						'caption' => 'Priority',
@@ -1148,11 +1148,11 @@ class tracker_ui extends tracker_bo
 					),
 					'group' => array(
 						'caption' => 'Group',
-						'onExecute' => 'javaScript:open_popup',
+						'nm_action' => 'open_popup',
 					),
 					'link' => array(
 						'caption' => 'Links',
-						'onExecute' => 'javaScript:open_popup',
+						'nm_action' => 'open_popup',
 					),
 				),
 			),
@@ -1167,7 +1167,7 @@ class tracker_ui extends tracker_bo
 				'group' => $group,
 				'disabled' => !isset($GLOBALS['egw_info']['user']['apps']['admin']),
 				'hideOnDisabled' => true,
-				'onExecute' => 'javaScript:open_popup',
+				'nm_action' => 'open_popup',
 				'icon' => 'user',
 			),
 		);
@@ -1425,8 +1425,8 @@ class tracker_ui extends tracker_bo
 						if (!$this->read($tr_id)) continue;
 						list($add_remove, $ids) = explode('_', $settings, 2);
 						$ids = explode(',',$ids);
-						$this->data['tr_assigned'] = $add_remove == 'add' ? 
-							array_merge($this->data['tr_assigned'],$ids) : 
+						$this->data['tr_assigned'] = $add_remove == 'add' ?
+							array_merge($this->data['tr_assigned'],$ids) :
 							array_diff($this->data['tr_assigned'],$ids);
 						if($no_notification) $this->data['no_notifications'] = true;
 						if (!$this->save())
@@ -1439,7 +1439,7 @@ class tracker_ui extends tracker_bo
 						}
 					}
 					break;
-					
+
 				case 'link':
 					list($add_remove, $link) = explode('_', $settings, 2);
 					list($app, $link_id) = explode(':', $link);

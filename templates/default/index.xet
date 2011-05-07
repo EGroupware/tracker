@@ -214,8 +214,8 @@
 									<textbox multiline="true" id="reply_message" rows="5" cols="60"/>
 								</row>
 								<row>
-									<button label="Update" id="update" onclick="submit_popup(this); return false;"/>
-									<buttononly label="Cancel" id="cancel" onclick="hide_popup(this,'admin_popup');"/>
+									<button label="Update" id="update" onclick="nm_submit_popup(this); return false;"/>
+									<buttononly label="Cancel" id="cancel" onclick="nm_hide_popup(this,'admin_popup');"/>
 								</row>
 							</rows>
 						</grid>
@@ -226,9 +226,9 @@
 								<description value="Add / Remove link" class="promptheader"/>
 								<link-entry id="link" class="action_popup-content"/>
 								<hbox>
-									<button label="Add" id="link_action[add]" onclick="submit_popup(this); return false;"/>
-									<button label="Delete" id="link_action[delete]" onclick="submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="hide_popup(this,'link_popup');"/>
+									<button label="Add" id="link_action[add]" onclick="nm_submit_popup(this); return false;"/>
+									<button label="Delete" id="link_action[delete]" onclick="nm_submit_popup(this); return false;"/>
+									<buttononly label="Cancel" onclick="nm_hide_popup(this,'link_popup');"/>
 								</hbox>
 							</vbox>
 						</box>
@@ -238,9 +238,9 @@
 								<description value="Select users or groups"/>
 								<listbox type="select-account" id="assigned" rows="5" options="both" class="action_popup-content"/>
 								<hbox>
-									<button label="Add" id="assigned_action[add]" onclick="submit_popup(this); return false;"/>
-									<button label="Delete" id="assigned_action[delete]" onclick="submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="hide_popup(this,'assigned_popup');"/>
+									<button label="Add" id="assigned_action[add]" onclick="nm_submit_popup(this); return false;"/>
+									<button label="Delete" id="assigned_action[delete]" onclick="nm_submit_popup(this); return false;"/>
+									<buttononly label="Cancel" onclick="nm_hide_popup(this,'assigned_popup');"/>
 								</hbox>
 							</vbox>
 						</box>
@@ -252,8 +252,8 @@
 									<menupopup type="select-account" id="group" options=",groups"/>
 								</menulist>
 								<hbox>
-									<button label="Ok" onclick="submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="hide_popup(this,'assigned_popup');"/>
+									<button label="Ok" onclick="nm_submit_popup(this); return false;"/>
+									<buttononly label="Cancel" onclick="nm_hide_popup(this,'assigned_popup');"/>
 								</hbox>
 							</vbox>
 						</box>
