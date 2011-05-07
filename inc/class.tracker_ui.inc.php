@@ -1382,7 +1382,7 @@ class tracker_ui extends tracker_bo
 						$failed++;
 					}
 				}
-				$action_msg = 'updated';
+				$action_msg = lang('updated');
 			}
 		}
 		else
@@ -1402,7 +1402,7 @@ class tracker_ui extends tracker_bo
 				case 'status':
 				case 'resolution':
 				case 'completion':
-					$action_msg = 'changed';
+					$action_msg = lang('updated');
 					foreach($checked as $tr_id)
 					{
 						if (!$this->read($tr_id)) continue;
@@ -1419,7 +1419,7 @@ class tracker_ui extends tracker_bo
 					}
 					break;
 				case 'assigned':
-					$action_msg = 'changed';
+					$action_msg = lang('updated');
 					foreach($checked as $tr_id)
 					{
 						if (!$this->read($tr_id)) continue;
@@ -1445,7 +1445,6 @@ class tracker_ui extends tracker_bo
 					list($app, $link_id) = explode(':', $link);
 					if(!$link_id)
 					{
-						$action_msg = 'linked';
 						$msg = lang('You need to select an entry for linking.');
 						break;
 					}
