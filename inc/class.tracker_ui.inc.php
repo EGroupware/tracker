@@ -1500,7 +1500,7 @@ class tracker_ui extends tracker_bo
 		{
 			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
 		}
-		else
+		elseif($document[0] !== '/')
 		{
 			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'].'/'.$document;
 		}
