@@ -163,7 +163,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups);
 			
 			// Set creator/group, unless it's supposed to come from CSV file
-			foreach(array('owner' => 'creator', 'group' => 'group') as $option => $field) {
+			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
 				if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
 					if(!is_numeric($record['tr_'.$field])) {
 						// Automatically handle text owner without explicit translation

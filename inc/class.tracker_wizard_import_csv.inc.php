@@ -179,7 +179,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			$content['msg'] = $this->steps['wizard_step60'];
 			$content['step'] = 'wizard_step60';
 			$preserv = $content;
-			foreach(array('owner', 'group') as $field) {
+			foreach(array('owner', 'group', 'assigned') as $field) {
 				if(!array_key_exists('record_'.$field, $content) && $content['plugin_options']) {
 					$content['record_'.$field] = $content['plugin_options']['record_'.$field];
 				}
