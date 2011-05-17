@@ -1346,7 +1346,15 @@ class tracker_ui extends tracker_bo
 			{
 				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
 				$query['num_rows'] = -1;	// all
-				$this->get_rows($query,$checked,$readonlys,true);	// true = only return the id's
+				$this->get_rows($query,$checked,$readonlys);
+				// $this->get_rows gives some extra data.  
+				foreach($checked as $row => $data)
+				{
+					if(!is_numeric($row))
+					{
+						unset($checked[$row]);
+					}
+				}
 			}
 		}
 
