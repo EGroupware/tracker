@@ -676,6 +676,7 @@ class tracker_ui extends tracker_bo
 		// save the state of the index page (filters) in the user prefs
 		$state = serialize(array(
 			'cat_id'     => $query['cat_id'],	// cat
+			'filter'     => $query['filter'],	// dates
 			'filter2'    => $query['filter2'],	// version
 			'order'      => $query['order'],
 			'sort'       => $query['sort'],
@@ -965,13 +966,20 @@ class tracker_ui extends tracker_bo
 
 		if (!is_array($content['nm']))
 		{
+			$date_filters = array('All');
+                        foreach($this->date_filters as $name => $date)
+                        {
+                                $date_filters[$name] = lang($name);
+                        }
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_ui.get_rows',
 				'cat_is_select'  => 'no_lang',
+				'filter'         => 0,  // all
+				'options-filter' => $date_filters, 
+				'filter_no_lang'=> true,
 				'filter2'        => 0,	// all
 				'filter2_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
-				'no_filter'      => true,
 				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
 				'options-tr_assigned' => array('not' => lang('Noone')),

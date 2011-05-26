@@ -319,6 +319,25 @@ class tracker_bo extends tracker_so
 		'without-30-days-reply-not-closed'	=> '&#9830; Without 30 days reply not closed',
 	);
 
+        /**
+         * Filter for search limiting the date-range
+         *
+         * @var array
+         */
+	var $date_filters = array(      // Start: year,month,day,week, End: year,month,day,week
+		'Today'       => array(0,0,0,0,  0,0,1,0),
+		'Yesterday'   => array(0,0,-1,0, 0,0,0,0),
+		'This week'   => array(0,0,0,0,  0,0,0,1),
+		'Last week'   => array(0,0,0,-1, 0,0,0,0),
+		'This month'  => array(0,0,0,0,  0,1,0,0),
+		'Last month'  => array(0,-1,0,0, 0,0,0,0),
+		'2 month ago' => array(0,-2,0,0, 0,-1,0,0),
+		'This year'   => array(0,0,0,0,  1,0,0,0),
+		'Last year'   => array(-1,0,0,0, 0,0,0,0),
+		'2 years ago' => array(-2,0,0,0, -1,0,0,0),
+		'3 years ago' => array(-3,0,0,0, -2,0,0,0),
+	);
+
 	/**
 	 * Maximum number of line characters (-_+=~) allowed in a mail, to not stall the layout.
 	 * Longer lines / biger number of these chars are truncated to that max. number or chars.
@@ -337,6 +356,7 @@ class tracker_bo extends tracker_so
 		parent::__construct();
 
 		$this->user = $GLOBALS['egw_info']['user']['account_id'];
+		$this->today = mktime(0,0,0,date('m',$this->now),date('d',$this->now),date('Y',$this->now));
 
 		$this->trackers = $this->get_tracker_labels();
 
@@ -1134,6 +1154,10 @@ class tracker_bo extends tracker_so
 	 */
 	function get_rows($query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
 	{
+		if($query['filter'])
+		{
+			$query['col_filter'][] = $this->date_filter($query['filter'],$query['startdate'],$query['enddate']);
+		}
 		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count);
 	}
 
@@ -1692,5 +1716,81 @@ class tracker_bo extends tracker_so
 			}
 		}
 		return $trackerentry;
+	}
+
+	/**
+	 * return SQL implementing filtering by date
+	 *
+	 * @param string $name
+	 * @param int &$start
+	 * @param int &$end_param
+	 * @return string
+	 */
+	function date_filter($name,&$start,&$end_param)
+	{
+		$end = $end_param;
+
+		if ($name == 'custom' && $start)
+		{
+			if ($end)
+			{
+				$end += 24*60*60;
+			}
+			else
+			{
+				$end = $start + 8*24*60*60;
+			}
+		}
+		else
+		{
+			if (!isset($this->date_filters[$name]))
+			{
+				return '1=1';
+			}
+			$year  = (int) date('Y',$this->today);
+			$month = (int) date('m',$this->today);
+			$day   = (int) date('d',$this->today);
+
+			list($syear,$smonth,$sday,$sweek,$eyear,$emonth,$eday,$eweek) = $this->date_filters[$name];
+
+			if ($syear || $eyear)
+			{
+				$start = mktime(0,0,0,1,1,$syear+$year);
+				$end   = mktime(0,0,0,1,1,$eyear+$year);
+			}
+			elseif ($smonth || $emonth)
+			{
+				$start = mktime(0,0,0,$smonth+$month,1,$year);
+				$end   = mktime(0,0,0,$emonth+$month,1,$year);
+			}
+			elseif ($sday || $eday)
+			{
+				$start = mktime(0,0,0,$month,$sday+$day,$year);
+				$end   = mktime(0,0,0,$month,$eday+$day,$year);
+			}
+			elseif ($sweek || $eweek)
+			{
+				$wday = (int) date('w',$this->today); // 0=sun, ..., 6=sat
+				switch($GLOBALS['egw_info']['user']['preferences']['calendar']['weekdaystarts'])
+				{
+					case 'Sunday':
+						$weekstart = $this->today - $wday * 24*60*60;
+						break;
+					case 'Saturday':
+						$weekstart = $this->today - (6-$wday) * 24*60*60;
+						break;
+					case 'Moday':
+					default:
+						$weekstart = $this->today - ($wday ? $wday-1 : 6) * 24*60*60;
+						break;
+				}
+				$start = $weekstart + $sweek*7*24*60*60;
+				$end   = $weekstart + $eweek*7*24*60*60;
+			}
+			$end_param = $end - 24*60*60;
+		}
+		//echo "<p align='right'>date_filter($name,$start,$end) today=".date('l, Y-m-d H:i',$this->today)." ==> ".date('l, Y-m-d H:i:s',$start)." <= date < ".date('l, Y-m-d H:i:s',$end)."</p>\n";
+		// convert start + end from user to servertime for the filter
+		return '('.($start-$this->tz_offset_s).' <= tr_created AND tr_created < '.($end-$this->tz_offset_s).')';
 	}
 }
