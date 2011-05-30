@@ -332,6 +332,9 @@ class tracker_bo extends tracker_so
 		'This month'  => array(0,0,0,0,  0,1,0,0),
 		'Last month'  => array(0,-1,0,0, 0,0,0,0),
 		'2 month ago' => array(0,-2,0,0, 0,-1,0,0),
+		'3 month ago' => array(0,-3,0,0, 0,-2,0,0),
+		'This quarter'=> array(0,0,0,0,  0,0,0,0),	// Just a marker, needs special handling
+		'Last quarter'=> array(0,-4,0,0, 0,-4,0,0),	// Just a marker
 		'This year'   => array(0,0,0,0,  1,0,0,0),
 		'Last year'   => array(-1,0,0,0, 0,0,0,0),
 		'2 years ago' => array(-2,0,0,0, -1,0,0,0),
@@ -1753,7 +1756,13 @@ class tracker_bo extends tracker_so
 
 			list($syear,$smonth,$sday,$sweek,$eyear,$emonth,$eday,$eweek) = $this->date_filters[$name];
 
-			if ($syear || $eyear)
+			if(stripos($name, 'quarter') !== false)
+			{
+				// Handle quarters
+				$start = mktime(0,0,0,((int)floor(($smonth+$month) / 3.1)) * 3 + 1, 1, $year);
+				$end = mktime(0,0,0,((int)floor(($emonth+$month) / 3.1)+1) * 3 + 1, 1, $year);
+			} 
+			elseif ($syear || $eyear)
 			{
 				$start = mktime(0,0,0,1,1,$syear+$year);
 				$end   = mktime(0,0,0,1,1,$eyear+$year);
