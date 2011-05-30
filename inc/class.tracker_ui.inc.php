@@ -746,10 +746,6 @@ class tracker_ui extends tracker_bo
 							//$info['pm_id'] = $link['id'];
 						}
 						if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
-						if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
-						{
-							$rows[$n]['extra_links'] .= '&link_app[]='.$link['app'].'&link_id[]='.$link['id'];
-						}
 					}
 					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $timesheets && $this->prefs['show_sum_timesheet'])
 					{
@@ -815,13 +811,39 @@ class tracker_ui extends tracker_bo
 	}
 
 	/**
+	 * Hook for timesheet to set some extra data and links
+	 *
+	 * @param array $data
+	 * @param int $data[id] info_id
+	 * @return array with key => value pairs to set in new timesheet and link_app/link_id arrays
+	 */
+	function timesheet_set($data)
+	{
+		$set = array();
+		if ((int)$data['id'] && ($ticket = $this->read($data['id'])))
+		{
+			if ($ticket['cat_id']) $set['cat_id'] = $ticket['cat_id'];
+
+			foreach(egw_link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
+			{
+				if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
+				{
+					$set['link_app'][] = $link['app'];
+					$set['link_id'][]  = $link['id'];
+				}
+			}
+		}
+		return $set;
+	}
+
+	/**
 	 * Check if a ticket has already been seen
 	 *
 	 * @param array $data=null Ticket data
 	 * @param boolean $update=false Set ticket as seen when true
 	 * @return boolean true=seen before false=new ticket
 	 */
-	function seen (&$data, $update=false)
+	function seen(&$data, $update=false)
 	{
 		$seen = array();
 		if ($data['tr_seen']) $seen = unserialize($data['tr_seen']);
@@ -975,7 +997,7 @@ class tracker_ui extends tracker_bo
 				'get_rows'       =>	'tracker.tracker_ui.get_rows',
 				'cat_is_select'  => 'no_lang',
 				'filter'         => 0,  // all
-				'options-filter' => $date_filters, 
+				'options-filter' => $date_filters,
 				'filter_no_lang'=> true,
 				'filter2'        => 0,	// all
 				'filter2_label'  => lang('Version'),
@@ -1355,7 +1377,7 @@ class tracker_ui extends tracker_bo
 				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
 				$query['num_rows'] = -1;	// all
 				$this->get_rows($query,$checked,$readonlys);
-				// $this->get_rows gives some extra data.  
+				// $this->get_rows gives some extra data.
 				foreach($checked as $row => $data)
 				{
 					if(!is_numeric($row))

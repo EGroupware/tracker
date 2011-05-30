@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -35,6 +35,7 @@ $setup_info['tracker']['hooks']['admin'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['search_link'] = 'tracker_hooks::search_link';
 $setup_info['tracker']['hooks'][] = 'home';
+$setup_info['tracker']['hooks']['timesheet_set'] = 'tracker.tracker_ui.timesheet_set';
 
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
