@@ -61,7 +61,7 @@
 					<nextmatch-customfields id="customfields"/>
 					<hbox class="noPrint">
 						<nextmatch-header align="center" label="Actions" id="legacy_actions"/>
-						<button align="right" statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_objectManager.toggleAllSelected(); return false;" image="check" class="tracker-checkall"/>
+						<button align="right" statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_globalObjectManager.getObjectById('tracker.index.rows').toggleAllSelected(); return false;" image="check" class="tracker-checkall"/>
 					</hbox>
 				</row>
 				<row class="$row_cont[cat_id] $row_cont[class]">
@@ -149,8 +149,8 @@
 				<row disabled="!@nm[selectcols]=/legacy_actions/">
 					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[nm][col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
 					<hbox align="right">
-						<button label="Select action" onclick="if (!egw_objectManager.executeActionImplementation(this, 'popup')) alert(egw::lang('You need to select some entries first!')); return false;;"/>
-						<button statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_objectManager.toggleAllSelected(); return false;" image="arrow_ltr" class="checkAllArrow"/>
+						<button label="Select action" onclick="if (!egw_globalObjectManager.getObjectById('tracker.index.rows').executeActionImplementation(this, 'popup')) alert(egw::lang('You need to select some entries first!')); return false;;"/>
+						<button statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_globalObjectManager.getObjectById('tracker.index.rows').toggleAllSelected(); return false;" image="arrow_ltr" class="checkAllArrow"/>
 					</hbox>
 				</row>
 				<row>
