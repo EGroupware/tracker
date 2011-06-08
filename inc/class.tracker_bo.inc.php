@@ -331,7 +331,6 @@ class tracker_bo extends tracker_so
 		'Last week'   => array(0,0,0,-1, 0,0,0,0),
 		'This month'  => array(0,0,0,0,  0,1,0,0),
 		'Last month'  => array(0,-1,0,0, 0,0,0,0),
-		'2 month ago' => array(0,-2,0,0, 0,-1,0,0),
 		'Last 3 months' => array(0,-3,0,0, 0,1,0,0),
 		'This quarter'=> array(0,0,0,0,  0,0,0,0),	// Just a marker, needs special handling
 		'Last quarter'=> array(0,-4,0,0, 0,-4,0,0),	// Just a marker
