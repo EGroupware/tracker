@@ -1011,7 +1011,7 @@ class tracker_ui extends tracker_bo
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
-	 			'default_cols'   => '!esc_id',
+	 			'default_cols'   => '!esc_id,legacy_actions',
 				'row_id'         => 'tr_id',
 			);
 			// use the state of the last session stored in the user prefs
