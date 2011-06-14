@@ -1517,39 +1517,14 @@ class tracker_ui extends tracker_bo
 					break;
 
 				case 'document':
-					$msg = $this->download_document($checked,$settings);
+					if (!$settings) $settings = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
+					$document_merge = new tracker_merge();
+					$msg = $document_merge->download($settings, $checked, '', $GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir']);
 					$failed = count($checked);
 					return false;
 			}
 		}
 		return !$failed;
-	}
-
-	/**
-	 * Download a document with inserted entries
-	 *
-	 * @param array $ids tracker-ids
-	 * @param string $document vfs-path of document
-	 * @return string error-message or error, otherwise the function does NOT return!
-	 */
-	function download_document($ids,$document='')
-	{
-		if (!$document)
-		{
-			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
-		}
-		elseif($document[0] !== '/')
-		{
-			$document = $GLOBALS['egw_info']['user']['preferences']['tracker']['document_dir'].'/'.$document;
-		}
-		if (!@egw_vfs::stat($document))
-		{
-			return lang("Document '%1' does not exist or is not readable for you!",$document);
-		}
-		require_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_merge.inc.php');
-		$document_merge = new tracker_merge();
-
-		return $document_merge->download($document,$ids);
 	}
 
 	/**
