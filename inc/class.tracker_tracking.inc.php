@@ -68,29 +68,29 @@ class tracker_tracking extends bo_tracking
 	function __construct(tracker_bo $botracker)
 	{
 		$this->tracker = $botracker;
-		$this->field2history =& $botracker->field2history;
+		$this->field2history = $botracker->field2history;
 
 		parent::__construct('tracker');	// adding custom fields for tracker
 	}
 
 	/**
 	 * Tracks the changes in one entry $data, by comparing it with the last version in $old
-         *
+	 *
 	 * Overridden from parent to hide restricted comments
 	 *
-         * @param array $data current entry
-         * @param array $old=null old/last state of the entry or null for a new entry
-         * @param int $user=null user who made the changes, default to current user
-         * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undeleted
-         * @param array $changed_fields=null changed fields from ealier call to $this->changed_fields($data,$old), to not compute it again
-         * @param boolean $skip_notification=false do NOT send any notification
-         * @return int|boolean false on error, integer number of changes logged or true for new entries ($old == null)
-         */
-        public function track(array $data,array $old=null,$user=null,$deleted=null,array $changed_fields=null,$skip_notification=false)
-        {
-                $this->user = !is_null($user) ? $user : $GLOBALS['egw_info']['user']['account_id'];
+	 * @param array $data current entry
+	 * @param array $old=null old/last state of the entry or null for a new entry
+	 * @param int $user=null user who made the changes, default to current user
+	 * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undeleted
+	 * @param array $changed_fields=null changed fields from ealier call to $this->changed_fields($data,$old), to not compute it again
+	 * @param boolean $skip_notification=false do NOT send any notification
+	 * @return int|boolean false on error, integer number of changes logged or true for new entries ($old == null)
+	 */
+	public function track(array $data,array $old=null,$user=null,$deleted=null,array $changed_fields=null,$skip_notification=false)
+	{
+		$this->user = !is_null($user) ? $user : $GLOBALS['egw_info']['user']['account_id'];
 
-                $changes = true;
+		$changes = true;
 
 		// Hide restricted comments from reply count
 		foreach((array)$data['replies'] as $key => $reply)
@@ -102,18 +102,18 @@ class tracker_tracking extends bo_tracking
 		}
 		// If someone made a restricted comment, hide that from change tracking (notification & history)
 		$old['num_replies'] = $data['num_replies'] - (!$data['reply_message'] || $data['reply_visible'] != 0 ? 0 : 1);
-                if ($old && $this->field2history)
-                {
-                        $changes = $this->save_history($data,$old,$deleted,$changed_fields);
-                }
+		if ($old && $this->field2history)
+		{
+			$changes = $this->save_history($data,$old,$deleted,$changed_fields);
+		}
 
-                // do not run do_notifications if we have no changes, unless there was a restricted comment just made
-                if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications($data,$old,$deleted,$changes))
-                {
-                        $changes = false;
-                }
-                return $changes;
-        }
+		// do not run do_notifications if we have no changes, unless there was a restricted comment just made
+		if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications($data,$old,$deleted,$changes))
+		{
+			$changes = false;
+		}
+		return $changes;
+	}
 
 	/**
 	 * Send an autoreply to the ticket creator or replier by the mailhandler
