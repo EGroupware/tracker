@@ -65,7 +65,7 @@
 					</hbox>
 				</row>
 				<row class="$row_cont[cat_id] $row_cont[class]">
-					<vbox no_lang="1">
+					<vbox no_lang="1" options="0,0">
 						<description id="${row}[tr_id]" no_lang="1"/>
 						<menulist>
 							<menupopup type="select-bool" id="${row}[tr_private]" readonly="true"/>
