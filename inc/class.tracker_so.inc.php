@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -80,16 +80,18 @@ class tracker_so extends so_sql_cf
 	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
 	 * @param boolean $read_restricted Read restricted replies.  Does not include assigned, as they are read and added here.
+	 * @param int $user=null for which user to check, default current user
 	 * @return array|boolean data if row could be retrived else False
-	*/
-	function read($keys,$extra_cols='',$join='', $read_restricted = false)
+	 */
+	function read($keys,$extra_cols='',$join='', $read_restricted = false, $user=null)
 	{
+		if (!$user) $user = $this->user;
 		if (($ret = parent::read($keys,$extra_cols,$join)))
 		{
 			$this->data2db();
 
 			$bounty_where = array('tr_id' => $this->data['tr_id']);
-			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker']))
+			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker'],$user))
 			{
 				$bounty_where[] = 'bounty_confirmed IS NOT NULL';
 			}
@@ -100,7 +102,7 @@ class tracker_so extends so_sql_cf
 				__LINE__,__FILE__,false,'','tracker') as $row)
 			{
 				$this->data['tr_assigned'][] = $row['tr_assigned'];
-				$read_restricted = $read_restricted || ($row['tr_assigned'] == $GLOBALS['egw_info']['user']['account_id']);
+				$read_restricted = $read_restricted || ($row['tr_assigned'] == $user);
 			}
 			$this->db2data();
 

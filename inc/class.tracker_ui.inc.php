@@ -195,7 +195,7 @@ class tracker_ui extends tracker_bo
 				$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\nwindow.focus();\n</script>\n";
 			}
 			// check if user has rights to create new entries and fail if not
-			if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add']))
+			if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 			{
 				$msg = lang('Permission denied !!!');
 				if ($popup)
@@ -267,7 +267,7 @@ class tracker_ui extends tracker_bo
 			switch($button)
 			{
 				case 'save':
-					if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add']))
+					if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 					{
 						$msg = lang('Permission denied !!!');
 						break;
@@ -533,7 +533,7 @@ class tracker_ui extends tracker_bo
 				$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
 			}
 		}
-		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE) ||
+		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
 			!$this->allow_restricted_comments;
 
 		$sel_options = array(
@@ -546,7 +546,7 @@ class tracker_ui extends tracker_bo
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
 			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
-			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker) && !$this->data['tr_id']),
+			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
 		);
 		foreach($this->field2history as $field => $status)
@@ -627,7 +627,7 @@ class tracker_ui extends tracker_bo
 		$readonlys = array();
 		foreach($this->field_acl as $name => $rigths)
 		{
-			$readonlys[$name] = !$this->check_rights($rigths);
+			$readonlys[$name] = !$rigths || !$this->check_rights($rigths, null, null, null, $name);
 		}
 		if ($this->customfields && $readonlys['customfields'])
 		{
@@ -1049,7 +1049,7 @@ class tracker_ui extends tracker_bo
 		}
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
-		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker);
+		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
 		$tpl = new etemplate();
 		if (!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
 		{

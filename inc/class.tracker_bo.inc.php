@@ -319,11 +319,11 @@ class tracker_bo extends tracker_so
 		'without-30-days-reply-not-closed'	=> '&#9830; Without 30 days reply not closed',
 	);
 
-        /**
-         * Filter for search limiting the date-range
-         *
-         * @var array
-         */
+	/**
+	 * Filter for search limiting the date-range
+	 *
+	 * @var array
+	 */
 	var $date_filters = array(      // Start: year,month,day,week, End: year,month,day,week
 		'Today'       => array(0,0,0,0,  0,0,1,0),
 		'Yesterday'   => array(0,0,-1,0, 0,0,0,0),
@@ -455,17 +455,22 @@ class tracker_bo extends tracker_so
 	 * Reimplemented to store the old status
 	 *
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
-	 * @param string/array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
+	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
-	 * @return array/boolean data if row could be retrived else False
+	 * @param int $user=null for which user to check, default current user
+	 * @return array|boolean data if row could be retrived else False
 	*/
-	function read($keys,$extra_cols='',$join='')
+	function read($keys,$extra_cols='',$join='',$user=null)
 	{
 		// Read restricted doesn't include assigned, it's not known yet
-		$read_restricted = $this->is_admin(is_array($keys) ? $keys['tr_id'] : $keys) || $this->is_technician(is_array($keys) ? $keys['tr_id'] : $keys);
-		if (($ret = parent::read($keys,$extra_cols,$join, $read_restricted)))
+		$read_restricted = $this->is_admin(is_array($keys) ? $keys['tr_id'] : $keys, $user) ||
+			$this->is_technician(is_array($keys) ? $keys['tr_id'] : $keys, $user);
+
+		if (($ret = parent::read($keys, $extra_cols, $join, $read_restricted, $user)))
 		{
 			$this->data['old_status'] = $this->data['tr_status'];
+
+			if ($this->deny_private()) $ret = $this->data = false;
 		}
 		return $ret;
 	}
@@ -738,7 +743,9 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Check if a user (default current user) is an tecnichan for the given tracker
+	 * Check if a user (default current user) is an user for the given tracker
+	 *
+	 * If queue ACL access is NOT enabled, we return is_tracker_user() (user is non-anonymous and has tracker run-rights)
 	 *
 	 * @param int $tracker ID of tracker
 	 * @param int $user=null ID of user, default current user $this->user
@@ -768,94 +775,253 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Check if current user is anonymous
+	 * Check if a user (default current user) is anonymous
 	 *
+	 * @param int $user=null ID of user, default current user $this->user
 	 * @return boolean
 	 */
-	function is_anonymous()
+	function is_anonymous($user=null)
 	{
-		static $anonymous;
+		static $cache = array();	// some caching to not read acl multiple times from the database ($user != $this->user)
 
-		if (!is_null($anonymous)) return $anonymous;
+		if (!$user) $user = $this->user;
 
-		//echo "<p align=right>is_anonymous=".(int)$GLOBALS['egw']->acl->check('anonymous',1,'phpgwapi')."</p>\n";
-		return $anonymous = $GLOBALS['egw']->acl->check('anonymous',1,'phpgwapi');
+		$anonymous =& $cache[$user];
+
+		if (!isset($anonymous))
+		{
+			if ($user == $this->user)
+			{
+				$anonymous = $GLOBALS['egw']->acl->check('anonymous',1,'phpgwapi');
+			}
+			else
+			{
+				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'phpgwapi',$use_memberships=false);
+				$anonymous = (boolean)$rights['anonymous'];
+			}
+		}
+		return $anonymous;
 	}
 
 	/**
-	 * Check what rights the current user has on the loaded tracker item ($this->data) or a given tracker
+	 * Check if a user (default current user) is a non-anoymous user with run-rights for tracker
+	 *
+	 * @param int $user=null ID of user, default current user $this->user
+	 * @return boolean
+	 */
+	function is_tracker_user($user=null)
+	{
+		static $cache = array();	// some caching to not read acl multiple times from the database ($user != $this->user)
+
+		if (is_null($user)) $user = $this->user;
+
+		$is_user =& $cache[$user];
+
+		if (!isset($is_user))
+		{
+			if ($this->is_anonymous($user))
+			{
+				$is_user = false;
+			}
+			elseif ($user == $this->user)
+			{
+				$is_user = isset($GLOBALS['egw_info']['user']['apps']['tracker']);
+			}
+			else
+			{
+				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'tracker',$use_memberships=true);
+				$is_user = (boolean)$rights['run'];
+			}
+		}
+		return $is_user;
+	}
+
+	/**
+	 * Check if given or current ticket is private and user is not creator, assignee or admin
+	 *
+	 * @param array $data=null array with ticket or null for $this->data
+	 * @param int $user=null account_id or null for current user
+	 * @return boolean true = deny access to private ticket, false grant access (ticket not private or access allowed)
+	 */
+	function deny_private(array $data=null,$user=null)
+	{
+		if (!$user) $user = $this->user;
+		if (!$data) $data = $this->data;
+
+		return $data['tr_private'] && !($user == $data['tr_creator'] || $this->is_admin($data['tr_tracker'],$user) ||
+			$data['tr_assigned'] && in_array($user,$data['tr_assigned']));
+	}
+
+	/**
+	 * Check what rights the current user has on a given or the current tracker item ($this->data) or a given tracker
 	 *
 	 * @param int $needed or'ed together: TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE
 	 * @param int $check_only_tracker=null should only the given tracker be checked and NO $this->data specific checks be performed, default no
+	 * @param int|array $data=null array with tracker item, integer tr_id or default null for loaded tracker item ($this->tracker)
+	 * @param int $user=null for which user to check, default current user
+	 * @param string $name=null something to put in error_log
+	 * @return boolean true if user has the $needed rights, false otherwise
 	 */
-	function check_rights($needed,$check_only_tracker=null)
+	function check_rights($needed,$check_only_tracker=null,$data=null,$user=null,$name=null)
 	{
-		$tracker = $check_only_tracker ? $check_only_tracker : $this->data['tr_tracker'];
-		//echo "<p align=right>botracker::check_rights($needed) tracker=$tracker='".$this->trackers[$tracker]."', is_tracker_user=".(int)isset($GLOBALS['egw_info']['user']['apps']['tracker']).", is_anonymous=".(int)$this->is_anonymous()."</p>\n";
-		if (!$needed) return false;
+		if (!$user) $user = $this->user;
 
-		if ($needed & TRACKER_EVERYBODY) return true;
-
-		// item creator
-		if (!$check_only_tracker && $needed & TRACKER_ITEM_CREATOR && $this->user == $this->data['tr_creator'])
+		if (!$data)
 		{
-			return true;
+			$data = $this->data;
+		}
+		elseif(!is_array($data))
+		{
+			$backup = $this->data;
+			if (!($data = $this->read(array('tr_id' => $data))))
+			{
+				$access = false;
+				$line = __LINE__;
+			}
+			$this->data = $backup;
+		}
+		$tracker = $check_only_tracker ? $check_only_tracker : $data['tr_tracker'];
+
+		if (isset($access))
+		{
+			// nothing to do, already set
+		}
+		elseif (!$needed)
+		{
+			$access = false;
+			$line = __LINE__;
+		}
+		// private tickets are only visible to creator, assignee and admins
+		elseif(!$check_only_tracker && $this->deny_private($data,$user))
+		{
+			$access = false;
+			$line = __LINE__.' (private)';
+		}
+		elseif ($needed & TRACKER_EVERYBODY)
+		{
+			$access = true;
+			$line = __LINE__;
+		}
+		// item creator
+		elseif (!$check_only_tracker && $needed & TRACKER_ITEM_CREATOR && $user == $data['tr_creator'])
+		{
+			$access = true;
+			$line = __LINE__;
 		}
 		// item group
-		if (!$check_only_tracker && $needed & TRACKER_ITEM_GROUP && in_array($this->data['tr_group'],$GLOBALS['egw']->accounts->memberships($this->user,true)))
+		elseif (!$check_only_tracker && $needed & TRACKER_ITEM_GROUP && in_array($data['tr_group'],$GLOBALS['egw']->accounts->memberships($user,true)))
 		{
-			return true;
+			$access = true;
+			$line = __LINE__;
 		}
-		// non-anonymous tracker user
-		if ($needed & TRACKER_USER && isset($GLOBALS['egw_info']['user']['apps']['tracker']) && !$this->is_anonymous())
+		// tracker user
+		elseif ($needed & TRACKER_USER && $this->is_tracker_user($user))
 		{
-			return true;
+			$access = true;
+			$line = __LINE__;
 		}
 		// tracker admins and technicians
-		if ($tracker)
+		elseif ($tracker)
 		{
-			if ($needed & TRACKER_ADMIN && $this->is_admin($tracker))
+			if ($needed & TRACKER_ADMIN && $this->is_admin($tracker,$user))
 			{
-				return true;
+				$access = true;
+				$line = __LINE__;
 			}
-			if ($needed & TRACKER_TECHNICIAN && $this->is_technician($tracker))
+			elseif ($needed & TRACKER_TECHNICIAN && $this->is_technician($tracker,$user))
 			{
-				return true;
+				$access = true;
+				$line = __LINE__;
 			}
+		}
+		if (isset($access))
+		{
+			// nothing to do, already set
 		}
 		// new items: everyone is the owner of new items
-		if (!$check_only_tracker && !$this->data['tr_id'])
+		elseif (!$check_only_tracker && !$data['tr_id'])
 		{
-			return !!($needed & (TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW));
+			$access = !!($needed & (TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW));
+			$line = __LINE__;
 		}
 		// assignee
-		if (!$check_only_tracker && ($needed & TRACKER_ITEM_ASSIGNEE) && $this->data['tr_assigned'])
+		elseif (!$check_only_tracker && ($needed & TRACKER_ITEM_ASSIGNEE) && $data['tr_assigned'])
 		{
-			foreach((array)$this->data['tr_assigned'] as $assignee)
+			foreach((array)$data['tr_assigned'] as $assignee)
 			{
-				if ($this->user == $assignee) return true;
+				if ($user == $assignee)
+				{
+					$access = true;
+					$line = __LINE__;
+					break;
+				}
 				// group assinged
 				if ($this->allow_assign_groups && $assignee < 0)
 				{
 					$members = $GLOBALS['egw']->accounts->members($assignee,true);
-					if (in_array($this->user,$members)) return true;
+					if (in_array($user,$members))
+					{
+						$access = true;
+						$line = __LINE__;
+						break;
+					}
 				}
 			}
 		}
-		return false;
+		if (!isset($access))
+		{
+			$access = false;
+			$line = __LINE__;
+		}
+		//error_log(__METHOD__."($needed, $check_only_tracker, tr_id=$data[tr_id], user=$user) '$name' returning in $line ".array2string($access).(!$needed ? ': '.function_backtrace() : ''));
+		return $access;
+	}
+
+	/**
+	 * Check access to the file store
+	 *
+	 * We need to map Tracker ACL to read or write access of the filestore:
+	 * - read access: a non-anonymous Tracker user, plus beeing able to read the tracker item
+	 * - write access: user is allowed to upload files or link with other entries
+	 *
+	 * @param int|array $id id of entry or entry array
+	 * @param int $check EGW_ACL_READ for read and EGW_ACL_EDIT for write or delete access
+	 * @param string $rel_path=null currently not used in Tracker
+	 * @param int $user=null for which user to check, default current user
+	 * @return boolean true if access is granted or false otherwise
+	 */
+	function file_access($id,$check,$rel_path=null,$user=null)
+	{
+		static $cache = array();	// as tracker does NOT cache read items, we run a cache here to not query items multiple times
+
+		if (!$user) $user = $this->user;
+
+		if (!is_array($id))
+		{
+			$access =& $cache[$user][(int)$id];
+		}
+		if (!isset($access))
+		{
+			$needed = $check == EGW_ACL_READ ? TRACKER_USER : $this->field_acl['link_to'];
+			$name = 'file_access '.($check == EGW_ACL_READ ? 'read' : 'write');
+
+			$access = $this->check_rights($needed,null,$id,$user,$name);
+		}
+		//error_log(__METHOD__."($id,$check,'$rel_path',$user) returning ".array2string($access));
+		return $access;
 	}
 
 	/**
 	 * Check if users is allowed to vote and has not already voted
 	 *
 	 * @param int $tr_id=null tracker-id, default current tracker-item ($this->data)
-	 * @return int/boolean true for no rights, timestamp voted or null
+	 * @return int|boolean true for no rights, timestamp voted or null
 	 */
 	function check_vote($tr_id=null)
 	{
 		if (is_null($tr_id)) $tr_id = $this->data['tr_id'];
 
-		if (!$tr_id || !$this->check_rights($this->field_acl['vote'])) return true;
+		if (!$tr_id || !$this->check_rights($this->field_acl['vote'],null,null,null,'vote')) return true;
 
 		if ($this->is_anonymous())
 		{
@@ -1034,7 +1200,7 @@ class tracker_bo extends tracker_so
 	 * Canned responses are now saved in the the data array, as the description is limited to 255 chars, which is to small.
 	 *
 	 * @param int $id
-	 * @return string/boolean string with the response or false if id not found
+	 * @return string|boolean string with the response or false if id not found
 	 */
 	function get_canned_response($id)
 	{
@@ -1051,7 +1217,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Try to autoassign to a new tracker item
 	 *
-	 * @return int/boolean account_id or false
+	 * @return int|boolean account_id or false
 	 */
 	function autoassign()
 	{
@@ -1076,8 +1242,8 @@ class tracker_bo extends tracker_so
 	 *
 	 * Is called as hook to participate in the linking
 	 *
-	 * @param int/array $entry int ts_id or array with tracker item
-	 * @return string/boolean string with title, null if tracker item not found, false if no perms to view it
+	 * @param int|array $entry int ts_id or array with tracker item
+	 * @return string|boolean string with title, null if tracker item not found, false if no perms to view it
 	 */
 	function link_title( $entry )
 	{
@@ -1167,7 +1333,7 @@ class tracker_bo extends tracker_so
 	 * Add a new tracker-queue
 	 *
 	 * @param string $name
-	 * @return int/boolean integer tracker-id on success or false otherwise
+	 * @return int|boolean integer tracker-id on success or false otherwise
 	 */
 	function add_tracker($name)
 	{
@@ -1403,7 +1569,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * Reimplement to convert to user-time
 	 *
-	 * @param array/int $keys array with key(s) or integer bounty-id
+	 * @param array|int $keys array with key(s) or integer bounty-id
 	 * @return array with bounties
 	 */
 	function read_bounties($keys)
@@ -1427,7 +1593,7 @@ class tracker_bo extends tracker_so
 	 * Save or update a bounty
 	 *
 	 * @param array &$data
-	 * @return int/boolean integer bounty_id or false on error
+	 * @return int|boolean integer bounty_id or false on error
 	 */
 	function save_bounty(&$data)
 	{
@@ -1760,7 +1926,7 @@ class tracker_bo extends tracker_so
 				// Handle quarters
 				$start = mktime(0,0,0,((int)floor(($smonth+$month) / 3.1)) * 3 + 1, 1, $year);
 				$end = mktime(0,0,0,((int)floor(($emonth+$month) / 3.1)+1) * 3 + 1, 1, $year);
-			} 
+			}
 			elseif ($syear || $eyear)
 			{
 				$start = mktime(0,0,0,1,1,$syear+$year);

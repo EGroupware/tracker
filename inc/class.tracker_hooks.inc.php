@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -39,6 +39,8 @@ class tracker_hooks
 			'add_app'    => 'link_app',
 			'add_id'     => 'link_id',
 			'add_popup'  => '750x500',
+			'file_access' => 'tracker.tracker_bo.file_access',
+			'file_access_user' => true,	// file_access supports 4th parameter $user
 		);
 
 		// Populate default types with queues
@@ -48,7 +50,6 @@ class tracker_hooks
 		{
 			$link['default_types'][$id] = array('name' => $name, 'non_deletable' => true);
 		}
-
 		return $link;
 	}
 
