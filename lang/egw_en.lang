@@ -41,12 +41,10 @@ amount	tracker	en	Amount
 assign to project	tracker	en	Assign to project
 assigned to	tracker	en	Assigned to
 assigning groups	tracker	en	Assigning groups
-at the moment the following document-types are supported:	tracker	en	At the moment the following document types are supported:
 attachments & links	tracker	en	Attachments & Links
 attention: no contact with address %1 found.	tracker	en	Attention: No contact with address %1 found
 autoassign to	tracker	en	Auto assign to
 automatic email handling	tracker	en	Automatic email handling
-automatically created by importexport	tracker	en	Automatically created by Import|Export
 bounties	tracker	en	Bounties
 bounty	tracker	en	Bounty
 bounty confirmed	tracker	en	Bounty confirmed.
@@ -105,7 +103,6 @@ deleted	tracker	en	Deleted
 directory with documents to insert entries	tracker	en	Directory with documents to insert entries
 do not notify of these changes	tracker	en	Do not notify of these changes
 do you want to vote for this item	tracker	en	Do you want to vote for this item
-document '%1' does not exist or is not readable for you!	tracker	en	Document '%1' does not exist or is not readable for you!
 donator name to show	tracker	en	Donator name to show
 duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	Email address to which a copy of all tracker notifications should be send
@@ -129,10 +126,6 @@ escalation deleted.	tracker	en	Escalation deleted.
 escalation not found!	tracker	en	Escalation not found!
 escalation saved.	tracker	en	Escalation saved.
 everybody	tracker	en	Everybody
-example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	en	Example {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - search the field "n_prefix", for "Mr", if found, write Hello Mr., else write Hello Ms.
-example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	en	Example {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Example: Mr Dr. James Miller
-example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	en	Example {{NELF role}} - if field role is not empty, you will get a new line with the value of field role
-example {{nelfnv role}} - if field role is not empty, set a lf without any value of the field	tracker	en	Example {{NELFNV role}} - if field role is not empty, set a LF without any value of the field
 existing links	tracker	en	Existing links
 exists	tracker	en	Exists
 export definitition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
@@ -145,7 +138,6 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	en	Forward to
 forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized mails to the email address that has to be specified here.
 from	tracker	en	From
-general fields:	tracker	en	General fields:
 handling autoreplies	tracker	en	Handling auto replies
 handling bounced mails	tracker	en	Handling bounced mails
 history	tracker	en	History
@@ -153,9 +145,6 @@ html editing	tracker	en	HTML editing
 id	tracker	en	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	en	If this item is important for you, please consider to set a bounty for it!
 if this item is important for you, please vote for it.	tracker	en	If this item is important for you, please vote for it.
-if you specify a directory (full vfs path) here, egroupware displays an action for each document. that action allows to download the specified document with the %1 data inserted.	tracker	en	If you specify a directory, full vfs path, EGroupware displays an action for each document. That action allows to download the specified document with the %1 data inserted.
-if you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. that icon allows to download the specified document with the %1 data inserted.	tracker	en	If you specify a document, full vfs path, %1 displays an extra document icon for each entry. That icon allows to download the specified document with the %1 data inserted.
-if you specify an export definition, it will be used when you export	tracker	en	If you specify an export definition, it will be used when you export.
 ignore	tracker	en	Ignore
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	en	Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	en	Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged.
@@ -182,7 +171,6 @@ linked to %1	tracker	en	Linked to %1
 links	tracker	en	Links
 list of coma separated email address	tracker	en	List of comma separated email address
 mail handling	tracker	en	Mail handling
-manage mapping	tracker	en	Manage mapping
 matching filter	tracker	en	Matching filter
 miscellaneous	tracker	en	Miscellaneous
 multiple changes	tracker	en	Multiple changes

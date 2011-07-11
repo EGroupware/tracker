@@ -188,9 +188,9 @@ class tracker_hooks
 				'size'   => 60,
 				'label'  => 'Default document to insert entries',
 				'name'   => 'default_document',
-				'help'   => lang('If you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. That icon allows to download the specified document with the %1 data inserted.',lang('tracker')).' '.
-					lang('The document can contain placeholder like {{tr_summary}}, to be replaced with the contact data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>').' '.
-					lang('At the moment the following document-types are supported:'). implode(',',bo_merge::get_file_extensions()),
+				'help'   => lang('If you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. That icon allows to download the specified document with the data inserted.',lang('tracker')).' '.
+					lang('The document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>','tr_summary').' '.
+					lang('The following document-types are supported:'). implode(',',bo_merge::get_file_extensions()),
 				'run_lang' => false,
 				'xmlrpc' => True,
 				'admin'  => False,
@@ -200,9 +200,9 @@ class tracker_hooks
 				'size'   => 60,
 				'label'  => 'Directory with documents to insert entries',
 				'name'   => 'document_dir',
-				'help'   => lang('If you specify a directory (full vfs path) here, eGroupWare displays an action for each document. That action allows to download the specified document with the %1 data inserted.', lang('tracker')).' '.
-					lang('The document can contain placeholder like {{tr_summary}}, to be replaced with the contact data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>').' '.
-					lang('At the moment the following document-types are supported:') . implode(',',bo_merge::get_file_extensions()),
+				'help'   => lang('If you specify a directory (full vfs path) here, %1 displays an action for each document. That action allows to download the specified document with the data inserted.', lang('tracker')).' '.
+					lang('The document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).','<a href="'.$link.'" target="_blank">','</a>','tr_summary').' '.
+					lang('The following document-types are supported:') . implode(',',bo_merge::get_file_extensions()),
 				'run_lang' => false,
 				'xmlrpc' => True,
 				'admin'  => False,
@@ -239,7 +239,7 @@ class tracker_hooks
 			$settings['nextmatch-export-definition'] = array(
 				'type'   => 'select',
 				'values' => $options,
-				'label'  => 'Export definitition to use for nextmatch export',
+				'label'  => 'Export definition to use for nextmatch export',
 				'name'   => 'nextmatch-export-definition',
 				'help'   => lang('If you specify an export definition, it will be used when you export'),
 				'run_lang' => false,
