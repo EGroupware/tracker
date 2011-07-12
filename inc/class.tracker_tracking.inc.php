@@ -282,7 +282,7 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_details($data)
 	{
-		static $cats,$versions,$statis,$priorities;
+		static $cats,$versions,$statis,$priorities,$resolutions;
 		if (!$cats)
 		{
 			$cats = $this->tracker->get_tracker_labels('cat',$data['tr_tracker']);
