@@ -167,6 +167,7 @@ class tracker_tracking extends bo_tracking
 
 		// Send all to others
 		$creator = $data[$this->creator_field];
+		$creator_field = $this->creator_field;
 		if(!($this->tracker->is_admin($data['tr_tracker'], $creator) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
 		{
 			// Notify the creator with full info if they're an admin or technician
@@ -195,7 +196,7 @@ class tracker_tracking extends bo_tracking
 		// Send to creator (if not already notified) && CC
 		if(!($this->tracker->is_admin($data['tr_tracker'], $creator) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
 		{
-			$this->creator_field = $creator;
+			$this->creator_field = $creator_field;
 		}
 		$data['tr_private'] = $private;
 		$assigned = $this->assigned_field;
