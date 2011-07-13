@@ -173,11 +173,13 @@ class tracker_tracking extends bo_tracking
 			// Notify the creator with full info if they're an admin or technician
 			$this->creator_field = null;
 		}
-
+		$email_notified = array();
 		// Don't send CC
 		$private = $data['tr_private'];
 		$data['tr_private'] = true;
-		$success = $success && parent::do_notifications($data, $old, $deleted);
+		
+		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
+		//error_log(__METHOD__.__LINE__." email notified:".array2string($email_notified));
 		if(!$changes)
 		{
 			// Only thing that really changed was a restricted comment
@@ -201,7 +203,8 @@ class tracker_tracking extends bo_tracking
 		$data['tr_private'] = $private;
 		$assigned = $this->assigned_field;
 		$this->assigned_field = null;
-		$success = $success && parent::do_notifications($data, $old, $deleted);
+		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
+		//error_log(__METHOD__.__LINE__." email notified:".array2string($email_notified));
 		$this->assigned_field = $assigned;
 
 		return $success;
@@ -235,6 +238,7 @@ class tracker_tracking extends bo_tracking
 				}
 				break;
 		}
+		//error_log(__METHOD__.__LINE__.' Name:'.$name.' -> '.array2string($config).' Data:'.array2string($data));
 		return $config;
 	}
 
