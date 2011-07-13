@@ -492,6 +492,7 @@ class tracker_bo extends tracker_so
 			$this->data['tr_created'] = $this->now;
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_status'] = self::STATUS_OPEN;
+			$this->data['tr_resolution'] = $this->new_resolution;
 			$this->data['tr_seen'] = serialize(array($this->user));
 
 			if (!$this->data['tr_group'])
@@ -1462,6 +1463,13 @@ class tracker_bo extends tracker_so
 			{
 				config::save_value($name,$value,'tracker');
 			}
+		}
+
+		if(!$this->new_resolution)
+		{
+			$categories = new categories(null, 'tracker');
+			$this->new_resolution = $categories->name2id('None');
+			config::save_value('new_resolution',$this->new_resolution,'tracker');
 		}
 		if (!$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
 
