@@ -767,6 +767,7 @@ class tracker_ui extends tracker_bo
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
+		unset($rows['sel_options']['assigned']['not']);
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
