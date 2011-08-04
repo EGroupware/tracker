@@ -618,29 +618,6 @@ class tracker_ui extends tracker_bo
 	}
 
 	/**
-	 * set fields readonly, depending on the rights the current user has on the actual tracker item
-	 *
-	 * @return array
-	 */
-	function readonlys_from_acl()
-	{
-		//echo "<p>uitracker::get_readonlys() is_admin(tracker={$this->data['tr_tracker']})=".$this->is_admin($this->data['tr_tracker']).", id={$this->data['tr_id']}, creator={$this->data['tr_creator']}, assigned={$this->data['tr_assigned']}, user=$this->user</p>\n";
-		$readonlys = array();
-		foreach($this->field_acl as $name => $rigths)
-		{
-			$readonlys[$name] = !$rigths || !$this->check_rights($rigths, null, null, null, $name);
-		}
-		if ($this->customfields && $readonlys['customfields'])
-		{
-			foreach($this->customfields as $name => $data)
-			{
-				$readonlys['#'.$name] = $readonlys['customfields'];
-			}
-		}
-		return $readonlys;
-	}
-
-	/**
 	 * query rows for the nextmatch widget
 	 *
 	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
@@ -947,13 +924,17 @@ class tracker_ui extends tracker_bo
 					{
 						$msg .= lang('%1 entries %2',$success,$action_msg);
 					}
-					elseif(is_null($msg))
+					else
 					{
-						$msg .= lang('%1 entries %2, %3 failed because of insufficent rights !!!',$success,$action_msg,$failed);
+						if(is_null($msg) || $msg == '')
+						{
+							$msg = lang('%1 entries %2, %3 failed because of insufficent rights !!!',$success,$action_msg,$failed);
+						}
 					}
 				}
 			}
 		}
+
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
