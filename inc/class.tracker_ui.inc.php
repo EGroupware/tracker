@@ -822,8 +822,6 @@ class tracker_ui extends tracker_bo
 		$set = array();
 		if ((int)$data['id'] && ($ticket = $this->read($data['id'])))
 		{
-			if ($ticket['cat_id']) $set['cat_id'] = $ticket['cat_id'];
-
 			foreach(egw_link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
 			{
 				if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
