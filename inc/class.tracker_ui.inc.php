@@ -549,6 +549,7 @@ class tracker_ui extends tracker_bo
 			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
 		);
+
 		foreach($this->field2history as $field => $status)
 		{
 			$sel_options['status'][$status] = $this->field2label[$field];
@@ -765,6 +766,7 @@ class tracker_ui extends tracker_bo
 
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'))+$this->get_staff($tracker,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
+		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
@@ -1466,6 +1468,8 @@ class tracker_ui extends tracker_bo
 						$this->data['tr_assigned'] = $add_remove == 'add' ?
 							array_merge($this->data['tr_assigned'],$ids) :
 							array_diff($this->data['tr_assigned'],$ids);
+						// No 0 allowed
+						$this->data['tr_assigned'] = array_unique(array_diff($this->data['tr_assigned'], array(0)));
 						if($no_notification) $this->data['no_notifications'] = true;
 						if (!$this->save())
 						{
