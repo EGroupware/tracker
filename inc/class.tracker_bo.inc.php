@@ -524,6 +524,14 @@ class tracker_bo extends tracker_so
 				//echo "<p>botracker::save() no change --> no save needed</p>\n";
 				return false;
 			}
+
+			// Check for modifying field without access
+			$readonlys = $this->readonlys_from_acl();
+			foreach($changed as $field)
+			{
+				if($readonlys[$field]) return $field;
+			}
+
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			// set close-date if status is closed and not yet set
@@ -1974,5 +1982,28 @@ class tracker_bo extends tracker_so
 		//echo "<p align='right'>date_filter($name,$start,$end) today=".date('l, Y-m-d H:i',$this->today)." ==> ".date('l, Y-m-d H:i:s',$start)." <= date < ".date('l, Y-m-d H:i:s',$end)."</p>\n";
 		// convert start + end from user to servertime for the filter
 		return '('.($start-$this->tz_offset_s).' <= tr_created AND tr_created < '.($end-$this->tz_offset_s).')';
+	}
+
+	/**
+	 * set fields readonly, depending on the rights the current user has on the actual tracker item
+	 *
+	 * @return array
+	 */
+	function readonlys_from_acl()
+	{
+		//echo "<p>uitracker::get_readonlys() is_admin(tracker={$this->data['tr_tracker']})=".$this->is_admin($this->data['tr_tracker']).", id={$this->data['tr_id']}, creator={$this->data['tr_creator']}, assigned={$this->data['tr_assigned']}, user=$this->user</p>\n";
+		$readonlys = array();
+		foreach($this->field_acl as $name => $rigths)
+		{
+			$readonlys[$name] = !$rigths || !$this->check_rights($rigths, null, null, null, $name);
+		}
+		if ($this->customfields && $readonlys['customfields'])
+		{
+			foreach($this->customfields as $name => $data)
+			{
+				$readonlys['#'.$name] = $readonlys['customfields'];
+			}
+		}
+		return $readonlys;
 	}
 }

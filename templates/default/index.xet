@@ -236,7 +236,12 @@
 							<vbox>
 								<description value="Change assigned" class="promptheader"/>
 								<description value="Select users or groups"/>
-								<listbox type="select-account" id="assigned" rows="5" options="both" class="action_popup-content"/>
+								<hbox options="0,0">
+									<menulist class="user_select">
+										<menupopup id="assigned" no_lang="1" options="Select one..."/>
+									</menulist>
+									<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('assigned'))) { selectbox.size=5; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
+								</hbox>
 								<hbox>
 									<button label="Add" id="assigned_action[add]" onclick="nm_submit_popup(this); return false;"/>
 									<button label="Delete" id="assigned_action[delete]" onclick="nm_submit_popup(this); return false;"/>
@@ -253,7 +258,7 @@
 								</menulist>
 								<hbox>
 									<button label="Ok" onclick="nm_submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="nm_hide_popup(this,'assigned_popup');"/>
+									<buttononly label="Cancel" onclick="nm_hide_popup(this,'group_popup');"/>
 								</hbox>
 							</vbox>
 						</box>
