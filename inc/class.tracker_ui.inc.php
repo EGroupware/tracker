@@ -1046,6 +1046,14 @@ class tracker_ui extends tracker_bo
 			$tpl->disable_cells('action', true);
 			$tpl->disable_cells('use_all', true);
 		}
+		
+		// Show only own groups in group popup if queue acl
+		if($this->enabled_queue_acl_access)
+		{
+			$group = explode(',',$tpl->get_cell_attribute('group', 'size'));
+			$group[1] = 'owngroups';
+			$tpl->set_cell_attribute('group', 'size', implode(',',$group));
+		}
 		egw_framework::validate_file('.','app','tracker');
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
