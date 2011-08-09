@@ -514,7 +514,7 @@ class tracker_bo extends tracker_so
 			$this->read($new['tr_id']);
 			$old =& $this->data;
 			$this->data =& $new;
-			$changed[] = array();
+			$changed = array();
 			foreach($old as $name => $value)
 			{
 				if (isset($new[$name]) && $new[$name] != $value) $changed[] = $name;
@@ -918,7 +918,8 @@ class tracker_bo extends tracker_so
 			$line = __LINE__;
 		}
 		// item group
-		elseif (!$check_only_tracker && $needed & TRACKER_ITEM_GROUP && in_array($data['tr_group'],$GLOBALS['egw']->accounts->memberships($user,true)))
+		elseif (!$check_only_tracker && $needed & TRACKER_ITEM_GROUP &&
+			($memberships = $GLOBALS['egw']->accounts->memberships($user,true)) && in_array($data['tr_group'],$memberships))
 		{
 			$access = true;
 			$line = __LINE__;
