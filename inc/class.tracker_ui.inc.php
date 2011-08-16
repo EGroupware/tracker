@@ -691,6 +691,17 @@ class tracker_ui extends tracker_bo
 			//_debug_array($trtofilter);
 			$query['col_filter']['tr_tracker'] = $trtofilter;
 		}
+
+		// Get list of currently displayed trackers, so we can get all valid statuses
+		if($query['col_filter']['tr_tracker']) {
+			$trackers = is_array($query['col_filter']['tr_tracker']) ? $query['col_filter']['tr_tracker'] : array($query['col_filter']['tr_tracker']);
+		}
+		else
+		{
+			$trackers = array();
+		}
+
+	
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
@@ -704,6 +715,8 @@ class tracker_ui extends tracker_bo
 			{
 				$rows[$n]['seen_class'] = 'unseen';
 			}
+
+			$trackers[] = $row['tr_tracker'];
 
 			// show the right tracker and/or cat specific priority label
 			if ($row['tr_priority'])
@@ -760,7 +773,17 @@ class tracker_ui extends tracker_bo
 
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
+		$resolutions = $this->get_tracker_labels('resolution',$tracker);
+		
 		$statis = $this->get_tracker_stati($tracker);
+		$trackers = array_unique($trackers);
+		if($trackers)
+		{
+			foreach($trackers as $tracker_id)
+			{
+				$statis += $this->get_tracker_stati($tracker_id);
+			}
+		}
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['filter'] = array(lang('All'))+$cats;
