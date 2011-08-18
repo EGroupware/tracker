@@ -139,7 +139,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		// Add the Servertype
 		$mBox .= ('/'.$this->serverTypes[($this->mailhandling[$queue]['servertype'])]);
-
+		$mBox .= '/norsh'; // do not use rsh or ssh to establish connection
 		// Close the server ID
 		$mBox .= '}';
 
