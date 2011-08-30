@@ -109,7 +109,7 @@ class tracker_so extends so_sql_cf
 			}
 			$this->db2data();
 		}
-		return $ret;
+		return $ret ? $this->data : $ret;
 	}
 
 	/**
