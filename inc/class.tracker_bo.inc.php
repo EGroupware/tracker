@@ -830,18 +830,22 @@ class tracker_bo extends tracker_so
 		{
 			if ($this->is_anonymous($user))
 			{
+				$reason = 'anonymous';
 				$is_user = false;
 			}
 			elseif ($user == $this->user)
 			{
 				$is_user = isset($GLOBALS['egw_info']['user']['apps']['tracker']);
+				$reason = 'egw_info[user][apps][tracker] is '.(!$is_user ? 'NOT ' : '').'set';
 			}
 			else
 			{
 				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'tracker',$use_memberships=true);
 				$is_user = (boolean)$rights['run'];
+				$reason = 'has '.(!$is_user ? 'NO' : '').'run rights';
 			}
 		}
+		//error_log(__METHOD__."($user) this->user=$this->user returning ($reason) ".array2string($is_user));
 		return $is_user;
 	}
 
@@ -1008,7 +1012,7 @@ class tracker_bo extends tracker_so
 
 		if (!is_array($id))
 		{
-			$access =& $cache[$user][(int)$id];
+			$access =& $cache[$user][(int)$id][$check];
 		}
 		if (!isset($access))
 		{
