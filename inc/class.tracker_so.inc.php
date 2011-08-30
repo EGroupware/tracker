@@ -119,7 +119,7 @@ class tracker_so extends so_sql_cf
 			}
 			$this->data['num_replies'] = count($this->data['replies']);
 		}
-		return $ret;
+		return $ret ? $this->data : $ret;
 	}
 
 	/**
