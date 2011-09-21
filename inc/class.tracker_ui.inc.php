@@ -542,7 +542,7 @@ class tracker_ui extends tracker_bo
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
-                        'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
+			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
 			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
