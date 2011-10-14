@@ -563,7 +563,7 @@ class tracker_ui extends tracker_bo
 			'add_comment' => !$tr_id || $readonlys['reply_message'],
 			'history'  => !$tr_id,
 			'bounties' => !$this->allow_bounties,
-			'custom'   => !$this->customfields,
+			'custom'   => !config::get_customfields('tracker', false, $content['tr_tracker']),
 		);
 		if ($tr_id && $readonlys['reply_message'])
 		{
@@ -690,7 +690,7 @@ class tracker_ui extends tracker_bo
 			$trackers = array();
 		}
 
-	
+
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
@@ -762,7 +762,7 @@ class tracker_ui extends tracker_bo
 		$versions = $this->get_tracker_labels('version',$tracker);
 		$cats = $this->get_tracker_labels('cat',$tracker);
 		$resolutions = $this->get_tracker_labels('resolution',$tracker);
-		
+
 		$statis = $this->get_tracker_stati($tracker);
 		$trackers = array_unique($trackers);
 		if($trackers)
@@ -1068,7 +1068,7 @@ class tracker_ui extends tracker_bo
 			$tpl->disable_cells('action', true);
 			$tpl->disable_cells('use_all', true);
 		}
-		
+
 		// Show only own groups in group popup if queue acl
 		if($this->enabled_queue_acl_access)
 		{
