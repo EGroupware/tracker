@@ -153,7 +153,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -163,7 +163,7 @@
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
+					<html align="center" id="msg" no_lang="1" readonly="true" span="all" class="redItalic"/>
 					<description/>
 					<description/>
 					<description/>
