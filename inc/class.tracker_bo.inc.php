@@ -523,6 +523,7 @@ class tracker_bo extends tracker_so
 				{
 					if ($name === 'tr_completion' && str_replace('%','',$new[$name]) == str_replace('%','',$value)) continue;
 					if ($name === 'tr_assigned' && (array)$new[$name] == (array)$value) continue;
+					if ($name === 'tr_seen') continue;
 					if ($name === 'replies' && is_array($new[$name]))
 					{
 						// reindex
@@ -541,7 +542,8 @@ class tracker_bo extends tracker_so
 									//error_log(__METHOD__.__LINE__.' '.$rv .'<==>'. $value[$k][$srk]);
 									// reply_vivible_class may be added by UI, so old will not have that
 									// reply_created may be a timestamp UNIX or YYYY-MM-DD HH:MM (but Seconds missing) so we cannot transform and compare relyably
-									if ($srk==='reply_visible_class' || $srk ==='reply_created') continue; 
+									// reply_message may be html encoded or not, we skip this, as it should not be changed anyhow
+									if ($srk==='reply_visible_class' || $srk ==='reply_created' || $srk ==='reply_message') continue; 
 									if ($rv !== $value[$k][$srk]) $ridentical = false;
 								}
 								if ($ridentical===false) break; // first one not identical adds replies to changed
