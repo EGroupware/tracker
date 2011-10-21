@@ -288,10 +288,29 @@ class tracker_ui extends tracker_bo
 					{
 						$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 					}
-					if ($this->save() == 0)
+					$ret = $this->save();
+					if ($ret === false)
+					{
+						$msg = lang('Save aborted; No change detected.');
+						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
+							// only change to current tracker, if not all trackers displayed
+							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
+					}
+					elseif ($ret === 'tr_modifier' || $ret === 'tr_modified')
+					{
+						$msg .= ($msg ? ', ' : '') .lang('Error: the entry has been updated since you opened it for editing!').'<br />'.
+							lang('Copy your changes to the clipboard, %1reload the entry%2 and merge them.','<a href="'.
+								htmlspecialchars(egw::link('/index.php',array(
+									'menuaction' => 'tracker.tracker_ui.edit',
+									'tr_id'    => $this->data['tr_id'],
+									//'referer'    => $referer,
+								))).'">','</a>');
+						break;
+					}
+					elseif ($ret == 0)
 					{
 						$msg = lang('Entry saved');
-
 						//apply defaultlinks
 						usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 						foreach($this->all_cats as $cat)
@@ -524,6 +543,7 @@ class tracker_ui extends tracker_bo
 		{
 			$creators[$content['tr_creator']] = common::grab_owner_name($content['tr_creator']);
 		}
+
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),

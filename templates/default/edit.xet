@@ -147,7 +147,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.7.006">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -157,7 +157,7 @@
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<description span="all" class="redItalic" align="center" id="msg" no_lang="1"/>
+					<html span="all" class="redItalic" align="center" id="msg" no_lang="1" readonly="true"/>
 					<description/>
 					<description/>
 					<description/>
@@ -262,11 +262,11 @@
 						</tabpanels>
 					</tabbox>
 				</row>
-				<row disabled="!@tr_id">
+				<row>
 					<description value="Created by"/>
 					<hbox options="0,0">
 						<menulist>
-							<menupopup type="select-account" id="tr_creator" readonly="true"/>
+							<menupopup id="tr_creator" no_lang="1"/>
 						</menulist>
 						<date-time id="tr_created" label="," readonly="true"/>
 					</hbox>
@@ -280,10 +280,14 @@
 				</row>
 				<row>
 					<button label="Save" id="button[save]"/>
-					<hbox options="0,0" span="3">
+					<hbox options="0,0" span="2">
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify of these changes" id="no_notifications"/>
 					</hbox>
+					<vbox options="0,0" align="right">
+						<button label="Vote for it!" id="button[vote]" statustext="If this item is important for you, please vote for it." align="right" onclick="return confirm('Do you want to vote for this item');"/>
+						<description id="no_vote" class="redItalic" no_lang="1" align="right"/>
+					</vbox>
 				</row>
 			</rows>
 		</grid>
