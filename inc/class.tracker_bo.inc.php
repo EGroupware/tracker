@@ -510,18 +510,57 @@ class tracker_bo extends tracker_so
 			// check if we have a real modification
 			// read the old record
 			$new =& $this->data;
+			//error_log(__METHOD__.__LINE__.array2string($new));
 			unset($this->data);
 			$this->read($new['tr_id']);
 			$old =& $this->data;
+			unset($this->data);
 			$this->data =& $new;
 			$changed = array();
 			foreach($old as $name => $value)
 			{
-				if (isset($new[$name]) && $new[$name] != $value) $changed[] = $name;
+				if (isset($new[$name]) && $new[$name] != $value)
+				{
+					if ($name === 'tr_completion' && str_replace('%','',$new[$name]) == str_replace('%','',$value)) continue;
+					if ($name === 'tr_assigned' && (array)$new[$name] == (array)$value) continue;
+					if ($name === 'tr_seen') continue;
+					if ($name === 'replies' && is_array($new[$name]))
+					{
+						// reindex
+						$test = array_slice($new[$name],0);
+						$value = array_slice($value,0);
+						//error_log(__METHOD__.__LINE__.array2string($test));
+						//error_log(__METHOD__.__LINE__.array2string($value));
+						// compare the replies to be on the save side,(even there should not be any changes with the replies, unless you add one)
+						if (count($test) == count($value))
+						{
+							$ridentical=true;
+							foreach($test as $k => $reply)
+							{
+								foreach($reply as $srk => $rv)
+								{
+									//error_log(__METHOD__.__LINE__.' '.$rv .'<==>'. $value[$k][$srk]);
+									// reply_vivible_class may be added by UI, so old will not have that
+									// reply_created may be a timestamp UNIX or YYYY-MM-DD HH:MM (but Seconds missing) so we cannot transform and compare relyably
+									// reply_message may be html encoded or not, we skip this, as it should not be changed anyhow
+									if ($srk==='reply_visible_class' || $srk ==='reply_created' || $srk ==='reply_message') continue; 
+									if ($rv !== $value[$k][$srk]) $ridentical = false;
+								}
+								if ($ridentical===false) break; // first one not identical adds replies to changed
+							}
+						}
+						if ($ridentical) continue;
+					} 
+					$changed[] = $name;
+					//error_log(__METHOD__.__LINE__.' changes in '.$name.': new->'.array2string($new[$name]));
+					//error_log(__METHOD__.__LINE__.' old->'.array2string($value));
+				}
 			}
-			if (!$changed)
+			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) || 
+				(isset($this->data['canned_response']) && !empty($this->data['canned_response']))))
 			{
 				//echo "<p>botracker::save() no change --> no save needed</p>\n";
+				//error_log(__METHOD__.__LINE__."  no change --> no save needed");
 				return false;
 			}
 
@@ -529,7 +568,10 @@ class tracker_bo extends tracker_so
 			$readonlys = $this->readonlys_from_acl();
 			foreach($changed as $field)
 			{
-				if($readonlys[$field]) return $field;
+				if($readonlys[$field]){
+					//error_log(__METHOD__.__LINE__.' Field:'.$field.'->'.array2string($readonlys).function_backtrace());
+					return $field;
+				}
 			}
 
 			$this->data['tr_modified'] = $this->now;
@@ -661,22 +703,26 @@ class tracker_bo extends tracker_so
 			return $staff_cache[$tracker][(int)$return_groups][$what];
 		}
 		$staff = array();
+
 		switch($what)
 		{
 			case 'users':
 			case 'usersANDtechnicians':
+				if (is_null($this->users) || $this->users==='NULL') $this->users = array();
 				foreach($tracker ? array(0,$tracker) : array_keys($this->users) as $t)
 				{
 					if (is_array($this->users[$t])) $staff = array_merge($staff,$this->users[$t]);
 				}
 				if ($what == 'users') break;
 			case 'technicians':
+				if (is_null($this->technicians) || $this->technicians==='NULL') $this->technicians = array();
 				foreach($tracker ? array(0,$tracker) : array_keys($this->technicians) as $t)
 				{
 					if (is_array($this->technicians[$t])) $staff = array_merge($staff,$this->technicians[$t]);
 				}
 				// fall through, as technicians include admins
 			case 'admins':
+				if (is_null($this->admins) || $this->admins==='NULL') $this->admins = array();
 				foreach($tracker ? array(0,$tracker) : array_keys($this->admins) as $t)
 				{
 					if (is_array($this->admins[$t])) $staff = array_merge($staff,$this->admins[$t]);
@@ -1441,13 +1487,12 @@ class tracker_bo extends tracker_so
 		foreach($this->config_names as $name)
 		{
 			#echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
-
 			config::save_value($name,$this->$name,'tracker');
 		}
 		self::set_async_job($this->pending_close_days > 0);
 
 		$mailhandler = new tracker_mailhandler();
-		foreach($this->mailhandling as $queue_id => $handling) {
+		foreach((array)$this->mailhandling as $queue_id => $handling) {
 			$mailhandler->set_async_job($queue_id, $handling['interval']);
 		}
 	}
@@ -1484,7 +1529,7 @@ class tracker_bo extends tracker_so
 			$this->new_resolution = $categories->name2id('None');
 			config::save_value('new_resolution',$this->new_resolution,'tracker');
 		}
-		if (!$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
+		if (is_array($this->notification) && !$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
 
 		foreach(array(
 			'tr_summary'     => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
@@ -1998,7 +2043,7 @@ class tracker_bo extends tracker_so
 	{
 		//echo "<p>uitracker::get_readonlys() is_admin(tracker={$this->data['tr_tracker']})=".$this->is_admin($this->data['tr_tracker']).", id={$this->data['tr_id']}, creator={$this->data['tr_creator']}, assigned={$this->data['tr_assigned']}, user=$this->user</p>\n";
 		$readonlys = array();
-		foreach($this->field_acl as $name => $rigths)
+		foreach((array)$this->field_acl as $name => $rigths)
 		{
 			$readonlys[$name] = !$rigths || !$this->check_rights($rigths, null, null, null, $name);
 		}
