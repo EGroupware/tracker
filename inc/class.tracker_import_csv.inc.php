@@ -160,7 +160,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
 			
-			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups);
+			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
 			
 			// Set creator/group, unless it's supposed to come from CSV file
 			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
