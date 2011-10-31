@@ -143,6 +143,11 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		// Used to try to automatically match names to account IDs
 		$addressbook = new addressbook_so();
 
+		// Process cat_id as a normal select
+		$types = tracker_egw_record::$types;
+		unset($types['select-cat']);
+		$types['select'][] = 'cat_id';
+
 		$_lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
 		);
@@ -160,7 +165,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
 			
-			importexport_import_csv::convert($record, tracker_egw_record::$types, 'tracker', $_lookups);
+			importexport_import_csv::convert($record, $types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
 			
 			// Set creator/group, unless it's supposed to come from CSV file
 			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
@@ -217,9 +222,18 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
 			}
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
-				if(!is_numeric($record[$field])) {
+				if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
-					$key = array_search($record[$field], $lookups[$field]);
+					$key = false;
+
+					// Check for key as value - importing DB values, or from conversion
+					if(is_numeric($record[$field]) && $lookups[$field][$record[$field]]) $key = $record[$field];
+
+					// Look for human values - existing ones should already be IDs
+					if(!$key) 
+					{
+						$key = array_search($record[$field], $lookups[$field]);
+					}
 					if($key !== false) {
 						$record[$field] = $key;
 					} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
