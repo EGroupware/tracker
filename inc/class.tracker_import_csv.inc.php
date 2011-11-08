@@ -407,6 +407,10 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				}
 				if($_data['tr_private'] === null) $_data['tr_private'] = 0;
 
+				// Can't change modifier - bo prevents it
+				unset($_data['tr_modifier']);
+				unset($_data['tr_modified']);
+
 				if ( $this->dry_run ) {
 					//print_r($_data);
 					$this->results[$_action]++;
@@ -416,7 +420,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					if($result) {
 						$this->errors[$record_num] = lang('Permissions error - %1 could not %2',
 							$GLOBALS['egw']->accounts->id2name($_data['owner']),
-							lang($_action)
+							lang($_action) . (is_numeric($result) ? '' : ' ' . $result)
 						);
 					} else {
 						$this->results[$_action]++;
