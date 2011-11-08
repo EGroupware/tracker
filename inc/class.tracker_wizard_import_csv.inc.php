@@ -47,8 +47,8 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			'tr_priority'    => 'Priority',
 			'tr_closed'      => 'Closed',
 			'tr_creator'     => 'Created by',
-			'tr_modifier'    => 'Modified by',
-			'tr_modified'    => 'Last Modified',
+			//'tr_modifier'    => 'Modified by', // Not importable
+			//'tr_modified'    => 'Last Modified', // Not importable
 			'tr_created'     => 'Created',
 			//'tr_votes'       => 'Votes', // Not importable
 			//'bounties'       => 'Bounty', // Not importable
