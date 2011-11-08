@@ -165,7 +165,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 					($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
 				$name = common::grab_owner_name($reply['reply_creator']);
-				$message = str_replace("\r\n", "\n", $reply['reply_message']);
+				$message = str_replace("\r\n", "\n", htmlspecialchars_decode(strip_tags($reply['reply_message'])));
 
 				$replies[$id] = "$date \t$name \t$message";
 			}
