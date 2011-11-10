@@ -140,7 +140,8 @@
         <entry type="string" name="creator_from_csv">1</entry>
         <entry type="string" name="group_from_csv">1</entry>
         <entry type="string" name="assigned_from_csv">1</entry>
-        <entry type="string" name="change_creator"/>
+	<entry type="string" name="change_creator"/>
+	<entry type="string" name="convert">1</entry>
       </entry>
       <entry type="string" name="modified">2011-11-10 10:00:00</entry>
     </entry>
