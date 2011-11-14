@@ -105,15 +105,14 @@
           <entry type="string" name="12">tr_priority</entry>
           <entry type="string" name="13">tr_closed</entry>
           <entry type="string" name="14">tr_creator</entry>
+<!-- These are no longer allowed to be changed by tracker
           <entry type="string" name="15">tr_modifier</entry>
           <entry type="string" name="16">tr_modified</entry>
+-->
           <entry type="string" name="17">tr_created</entry>
           <entry type="string" name="20">tr_group</entry>
           <entry type="string" name="21">tr_cc</entry>
           <entry type="string" name="22">num_replies</entry>
-        </entry>
-        <entry type="array" name="field_conversion">
-          <entry type="string" name="3">Transl</entry>
         </entry>
         <entry type="array" name="conditions">
           <entry type="array" name="0">
@@ -132,15 +131,19 @@
         <entry type="string" name="owner_from_csv">1</entry>
         <entry type="string" name="change_owner">0</entry>
         <entry type="string" name="message">Import options</entry>
-        <entry type="string" name="translate_tracker">7</entry>
-        <entry type="string" name="translate_version">~add~</entry>
-        <entry type="string" name="translate_cat_id">12</entry>
+        <entry type="string" name="translate_tracker">add</entry>
+        <entry type="string" name="translate_version">add~</entry>
+        <entry type="string" name="translate_status">add~</entry>
+        <entry type="string" name="translate_resolution">add~</entry>
+        <entry type="string" name="translate_cat_id">add~</entry>
         <entry type="string" name="creator"/>
-        <entry type="string" name="creator_from_csv"/>
-        <entry type="string" name="change_creator"/>
-        <entry type="string" name="translate_status">0</entry>
+        <entry type="string" name="creator_from_csv">1</entry>
+        <entry type="string" name="group_from_csv">1</entry>
+        <entry type="string" name="assigned_from_csv">1</entry>
+	<entry type="string" name="change_creator"/>
+	<entry type="string" name="convert">1</entry>
       </entry>
-      <entry type="string" name="modified">2011-05-24 10:00:00</entry>
+      <entry type="string" name="modified">2011-11-10 10:00:00</entry>
     </entry>
   </entry>
 </entry>
