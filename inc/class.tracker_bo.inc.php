@@ -510,7 +510,7 @@ class tracker_bo extends tracker_so
 			// check if we have a real modification
 			// read the old record
 			$new =& $this->data;
-			//serror_log(__METHOD__.__LINE__.array2string($new));
+			//error_log(__METHOD__.__LINE__.array2string($new));
 			$cfs = array_keys((array)config::get_customfields('tracker', false, $new['tr_tracker']));
 			foreach($cfs as $k => &$cf) $cf='#'.$cf;
 			//error_log(__METHOD__.__LINE__.array2string($cfs));
