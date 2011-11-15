@@ -510,7 +510,10 @@ class tracker_bo extends tracker_so
 			// check if we have a real modification
 			// read the old record
 			$new =& $this->data;
-			//error_log(__METHOD__.__LINE__.array2string($new));
+			//serror_log(__METHOD__.__LINE__.array2string($new));
+			$cfs = array_keys((array)config::get_customfields('tracker', false, $new['tr_tracker']));
+			foreach($cfs as $k => &$cf) $cf='#'.$cf;
+			//error_log(__METHOD__.__LINE__.array2string($cfs));
 			unset($this->data);
 			$this->read($new['tr_id']);
 			$old =& $this->data;
@@ -519,6 +522,8 @@ class tracker_bo extends tracker_so
 			$changed = array();
 			foreach($old as $name => $value)
 			{
+				//error_log(__METHOD__.__LINE__.' '.$name.'->'.array2string($value));
+				if (in_array($name, $cfs)) continue; // we check customfields later
 				if (isset($new[$name]) && $new[$name] != $value)
 				{
 					if ($name === 'tr_completion' && str_replace('%','',$new[$name]) == str_replace('%','',$value)) continue;
@@ -550,11 +555,19 @@ class tracker_bo extends tracker_so
 							}
 						}
 						if ($ridentical) continue;
-					} 
+					}
+					if (isset($new[$name]) && empty($new[$name]) && empty($value)) continue; // if both representations are empty we continue, no matter what type
 					$changed[] = $name;
 					//error_log(__METHOD__.__LINE__.' changes in '.$name.': new->'.array2string($new[$name]));
 					//error_log(__METHOD__.__LINE__.' old->'.array2string($value));
 				}
+			}
+			foreach($cfs as $k => $cf)
+			{
+				if ((isset($new[$cf]) && isset($old[$cf])  && $new[$cf] != $old[$cf]) ||
+					(isset($new[$cf]) && !isset($old[$cf]) ) ||
+					(!isset($new[$cf]) && isset($old[$cf]) ) ) $changed[] = $cf;
+
 			}
 			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) || 
 				(isset($this->data['canned_response']) && !empty($this->data['canned_response']))))
