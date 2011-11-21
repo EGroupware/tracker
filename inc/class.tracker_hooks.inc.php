@@ -218,7 +218,7 @@ class tracker_hooks
 				'application' => 'tracker'
 			));
 			$options = array(
-				'~nextmatch~'	=>	lang('No definition')
+				'~nextmatch~'	=>	lang('Old fixed definition')
 			);
 			foreach ((array)$definitions->get_definitions() as $identifier)
 			{
