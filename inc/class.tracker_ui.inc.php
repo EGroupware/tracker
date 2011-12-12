@@ -526,6 +526,36 @@ class tracker_ui extends tracker_bo
 				$link_id = $link_ids[$n];
 				if (preg_match('/^[a-z_0-9-]+:[:a-z_0-9-]+$/i',$link_app.':'.$link_id))	// gard against XSS
 				{
+					switch($link_app)
+					{
+						case 'infolog':
+							static $infolog_bo;
+                                                        if(!$infolog_bo) $infolog_bo = new infolog_bo();
+                                                        $infolog = $app_entry = $infolog_bo->read($link_id);
+							$content = array_merge($content, array(
+								'tr_owner'	=> $infolog['info_owner'],
+								'cat_id'	=> $GLOBALS['egw']->categories->check_list(EGW_ACL_READ, $infolog['info_cat']),
+								'tr_private'	=> $infolog['info_access'] == 'private',
+								'tr_summary'	=> $infolog['info_subject'],
+								'tr_description'	=> $infolog['info_des'],
+								'tr_cc'		=> $infolog['info_cc'],
+								'tr_created'	=> $infolog['info_startdate']
+							));
+                                                        // Add responsible as participant - filtered later
+                                                        foreach($infolog['info_responsible'] as $responsible) {
+								$content['tr_assigned'][] = $responsible;
+                                                        }
+
+                                                        break;
+						
+					}
+					// Copy same custom fields
+                                        $_cfs = config::get_customfields('tracker');
+                                        $link_app_cfs = config::get_customfields($link_app);
+                                        foreach($cal_cfs as $name => $settings)
+                                        {
+                                                if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
+                                        }
 					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
 			}
