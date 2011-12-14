@@ -180,7 +180,7 @@ class tracker_ui extends tracker_bo
 				{
 					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
 					$this->data['cat_id']     = $state['cat_id'];
-					$this->data['tr_version'] = $state['filter2'];
+					$this->data['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
 				if (isset($this->trackers[(int)$_GET['tracker']]))
 				{
@@ -534,13 +534,39 @@ class tracker_ui extends tracker_bo
                                                         $infolog = $app_entry = $infolog_bo->read($link_id);
 							$content = array_merge($content, array(
 								'tr_owner'	=> $infolog['info_owner'],
-								'cat_id'	=> $GLOBALS['egw']->categories->check_list(EGW_ACL_READ, $infolog['info_cat']),
 								'tr_private'	=> $infolog['info_access'] == 'private',
 								'tr_summary'	=> $infolog['info_subject'],
 								'tr_description'	=> $infolog['info_des'],
 								'tr_cc'		=> $infolog['info_cc'],
 								'tr_created'	=> $infolog['info_startdate']
 							));
+							
+							// Categories are different, no globals.  Match by name.
+							$match = array(
+								$infolog_bo->enums['type'][$infolog['info_type']] => array(
+									'field'	=> 'tr_tracker',
+									'source'=> $this->trackers
+								),
+								categories::id2name($infolog['info_cat']) => array(
+									'field'	=> 'cat_id',
+									'source'=> $this->get_tracker_labels('cat',$tracker)
+								)
+							);
+							foreach($match as $info_field => $info)
+							{
+								$content[$info['field']] = array_search($info_field,$info['source']);
+							}
+
+							// Try to match priorities
+							foreach($this->get_tracker_priorities($content['tr_tracker'], $content['cat_id']) as $p => $label)
+							{
+								if(stripos($label, $infolog_bo->enums['priority'][$infolog['info_priority']]) !== false)
+								{
+									$content['tr_priority'] = $p;
+									break;
+								}
+							}
+	
                                                         // Add responsible as participant - filtered later
                                                         foreach($infolog['info_responsible'] as $responsible) {
 								$content['tr_assigned'][] = $responsible;
@@ -552,7 +578,7 @@ class tracker_ui extends tracker_bo
 					// Copy same custom fields
                                         $_cfs = config::get_customfields('tracker');
                                         $link_app_cfs = config::get_customfields($link_app);
-                                        foreach($cal_cfs as $name => $settings)
+                                        foreach($_cfs as $name => $settings)
                                         {
                                                 if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
                                         }

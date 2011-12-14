@@ -109,6 +109,11 @@ class tracker_hooks
 	 */
 	static function settings()
 	{
+		// Versions for default version
+		$versions = array('~no-default~'=>lang('None'));
+		$bo = new tracker_bo();
+		$versions += $bo->get_tracker_labels('version');
+
 		$settings = array(
 			'notify_creator' => array(
 				'type'   => 'check',
@@ -163,6 +168,17 @@ class tracker_hooks
 				'xmlrpc' => True,
 				'admin'  => False,
 				'forced' => true,
+			),
+			'default_version' => array(
+				'type'   => 'select',
+				'values' => $versions,
+				'label'  => 'Default version for new tracker entries',
+				'name'   => 'default_version',
+				'help'   => lang('Pre-selected version when creating a new tracker'),
+				'run_lang' => false,
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> false,
 			),
 			'homepage_display' => array(
 				'type'   => 'check',
