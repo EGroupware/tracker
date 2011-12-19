@@ -572,6 +572,11 @@ class tracker_ui extends tracker_bo
 								$content['tr_assigned'][] = $responsible;
                                                         }
 
+							// Copy infolog's links
+                                                        foreach(egw_link::get_links('infolog',$link_id) as $copy_link)
+                                                        {
+                                                                egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
+                                                        }
                                                         break;
 						
 					}
