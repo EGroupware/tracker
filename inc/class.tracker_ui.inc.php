@@ -180,7 +180,7 @@ class tracker_ui extends tracker_bo
 				{
 					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
 					$this->data['cat_id']     = $state['cat_id'];
-					$this->data['tr_version'] = $state['filter2'];
+					$this->data['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
 				if (isset($this->trackers[(int)$_GET['tracker']]))
 				{
@@ -526,6 +526,67 @@ class tracker_ui extends tracker_bo
 				$link_id = $link_ids[$n];
 				if (preg_match('/^[a-z_0-9-]+:[:a-z_0-9-]+$/i',$link_app.':'.$link_id))	// gard against XSS
 				{
+					switch($link_app)
+					{
+						case 'infolog':
+							static $infolog_bo;
+                                                        if(!$infolog_bo) $infolog_bo = new infolog_bo();
+                                                        $infolog = $app_entry = $infolog_bo->read($link_id);
+							$content = array_merge($content, array(
+								'tr_owner'	=> $infolog['info_owner'],
+								'tr_private'	=> $infolog['info_access'] == 'private',
+								'tr_summary'	=> $infolog['info_subject'],
+								'tr_description'	=> $infolog['info_des'],
+								'tr_cc'		=> $infolog['info_cc'],
+								'tr_created'	=> $infolog['info_startdate']
+							));
+							
+							// Categories are different, no globals.  Match by name.
+							$match = array(
+								$infolog_bo->enums['type'][$infolog['info_type']] => array(
+									'field'	=> 'tr_tracker',
+									'source'=> $this->trackers
+								),
+								categories::id2name($infolog['info_cat']) => array(
+									'field'	=> 'cat_id',
+									'source'=> $this->get_tracker_labels('cat',$tracker)
+								)
+							);
+							foreach($match as $info_field => $info)
+							{
+								$content[$info['field']] = array_search($info_field,$info['source']);
+							}
+
+							// Try to match priorities
+							foreach($this->get_tracker_priorities($content['tr_tracker'], $content['cat_id']) as $p => $label)
+							{
+								if(stripos($label, $infolog_bo->enums['priority'][$infolog['info_priority']]) !== false)
+								{
+									$content['tr_priority'] = $p;
+									break;
+								}
+							}
+	
+                                                        // Add responsible as participant - filtered later
+                                                        foreach($infolog['info_responsible'] as $responsible) {
+								$content['tr_assigned'][] = $responsible;
+                                                        }
+
+							// Copy infolog's links
+                                                        foreach(egw_link::get_links('infolog',$link_id) as $copy_link)
+                                                        {
+                                                                egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
+                                                        }
+                                                        break;
+						
+					}
+					// Copy same custom fields
+                                        $_cfs = config::get_customfields('tracker');
+                                        $link_app_cfs = config::get_customfields($link_app);
+                                        foreach($_cfs as $name => $settings)
+                                        {
+                                                if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
+                                        }
 					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
 			}
