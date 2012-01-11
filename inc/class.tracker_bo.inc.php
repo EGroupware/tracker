@@ -791,7 +791,7 @@ class tracker_bo extends tracker_so
 
 		$admins =& $this->get_staff($tracker,0,'admins');
 
-		return isset($admins[$user]);
+		return $this->user===0 || isset($admins[$user]); // this->user is set to 0 by close_pending
 	}
 
 	/**
