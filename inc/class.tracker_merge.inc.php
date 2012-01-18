@@ -116,7 +116,7 @@ class tracker_merge extends bo_merge
 		$array['links_attachments'] = $this->get_links('tracker', $id);
 		foreach(array_keys($GLOBALS['egw_info']['user']['apps']) as $app)
 		{
-			$array["$$".($prefix?$prefix.'/':'')."links/{$app}$$"] = $this->get_links('tracker',$id, $app);
+			$array["links/{$app}"] = $this->get_links('tracker',$id, $app);
 		}
 
 		// Add markers
