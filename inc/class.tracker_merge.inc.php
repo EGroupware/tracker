@@ -40,6 +40,7 @@ class tracker_merge extends bo_merge
 	{
 		parent::__construct();
 		$this->table_plugins['comment'] = 'comment';
+		$this->table_plugins['comment/-1'] = 'comment';
 		$this->bo = new tracker_bo();
 	}
 
@@ -103,13 +104,25 @@ class tracker_merge extends bo_merge
 			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $t_id);
 		}
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
-		// Set any missing custom fields, or the marker will stay
 		$array = $record->get_record_array();
+
+		// Signature
+		if($this->bo->notification[$record->tr_tracker]['signature'])
+		{
+			$array['signature'] = $this->bo->notification[$record->tr_tracker]['signature'];
+		}
+		else
+		{
+			$array['signature'] = $this->bo->notification[0]['signature'];
+		}
+
+		// Set any missing custom fields, or the marker will stay
 		foreach($this->bo->customfields as $name => $field)
 		{
 			if(!$array['#'.$name]) $array['#'.$name] = '';
 		}
 
+		
 		// Links
 		$array['links'] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME);
  		$array['attachments'] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME);
@@ -125,6 +138,12 @@ class tracker_merge extends bo_merge
 			if(!$value) $value = '';
 			$info['$$'.($prefix ? $prefix.'/':'').$key.'$$'] = $value;
 		}
+		// Special comments - already have $$
+		$comments = $this->get_comments($id);
+		foreach($comments[-1] as $key => $comment)
+		{
+			$info += $comment;
+		}
 		return $info;
 	}
 
@@ -138,26 +157,51 @@ class tracker_merge extends bo_merge
         */
         public function comment($plugin,$id,$n)
         {
+		$comments = $this->get_comments($id);
+
+		return $comments[$n];
+	}
+
+	/**
+	 * Get the comments for this tracker entry
+	 */
+	protected function get_comments($tr_id)
+	{
 		static $comments;
+		if($comments[$tr_id]) return $comments[$tr_id];
 
-		if($comments[$id][$n]) return $comments[$id][$n];
-
-		$this->bo->read($id);
+		$this->bo->read($tr_id);
 		$tracker = $this->bo->data;
 
-		$comments = array(); // Clear it to keep memory down
+		// Clear it to keep memory down - just this ticket
+		$comments = array();
+		$last_creator_comment = array();
+		$last_assigned_comment = array();
 		foreach($tracker['replies'] as $i => $reply) {
 			if($reply['reply_visible'] > 0) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
-			$comments[$id][] = array(
+			$comments[$tr_id][] = array(
 				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
 			);
+			if($reply['reply_creator'] == $tracker['tr_creator']) $last_creator_comment = $reply;
+			if(in_array($reply['reply_creator'], $tracker['tr_assigned'])) $last_assigned_comment = $reply;
 		}
-		return $comments[$id][$n];
+
+		// Special comments
+		foreach(array('' => $reply, '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
+			$comments[$tr_id][-1][$key] = array(
+				'$$comment/-1'.$key.'/date$$' => $comment ? $this->format_datetime($comment['reply_created']) : '',
+				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
+				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
+				'$$comment/-1'.$key.'/user$$' => $comment ? common::grab_owner_name($comment['reply_creator']) : ''
+			);
+		}
+
+		return $comments[$tr_id];
 	}
 
 	/**
@@ -176,10 +220,14 @@ class tracker_merge extends bo_merge
 		$n = 0;
 		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label + array(
 			'tr_modifier' => lang('Last modified by'), 
-			'tr_modified' => lang('last modified')
+			'tr_modified' => lang('last modified'),
 		);
 		$fields['bounty'] = lang('bounty');
 		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
+		$fields['signature'] = lang('Notification signature');
+		$fields['comment/-1/...'] = 'Only the last comment';
+		$fields['comment/-1/creator/...'] = 'Only the last comment by the creator';
+		$fields['comment/-1/assigned_to/...'] = 'Only the last comment by one of the assigned users';
 		foreach($fields as $name => $label)
 		{
 			if (in_array($name,array('link_to','canned_response','reply_message','add','vote','no_notifications','num_replies','customfields'))) continue;	// dont show them
@@ -201,7 +249,7 @@ class tracker_merge extends bo_merge
 			'date' => 'date', 
 			'user' => 'Username',
 			'message' => 'Message',
-			'restricted' => 'If the message was restricted'
+			'restricted' => 'If the message was restricted',
 		) as $name => $label) {
 			echo '<tr><td /><td>{{comment/'.$name.'}}</td><td>'.lang($label).'</td></tr>';
 		}

@@ -257,6 +257,38 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
+	 * Get the body of the notification message
+	 * If there is a custom notification message configured, that will be used.  Otherwise, the 
+	 * default message will be used.
+	 *
+	 * @param boolean $html_email
+	 * @param array $data
+	 * @param array $old
+	 * @param boolean $integrate_link to have links embedded inside the body
+	 * @param int|string $receiver numeric account_id or email address
+	 * @return string
+	 */
+	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
+	{
+		if(!($notification = $this->tracker->notification[$data['tr_tracker']]) && !$notification['message'])
+		{
+			$notification = $this->tracker->notification[0];
+		}
+
+		if(!$notification['message']) return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+
+		$merge = new tracker_merge();
+		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/plain');
+		if(strpos('{{signature}}', $notification['message']) !== 0) $message.="\n".$notification['signature'];
+		if($error)
+		{
+			error_log($error);
+			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+		}
+		return $message;
+	}
+
+	/**
 	 * Get the modified / new message (1. line of mail body) for a given entry, can be reimplemented
 	 *
 	 * @param array $data

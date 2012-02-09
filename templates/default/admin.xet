@@ -25,11 +25,11 @@
 								<description value="Actions"/>
 							</row>
 							<row>
-								<textbox id="${row}[name]" size="60" maxlength="150" blur="--&gt; enter new name"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="60" maxlength="150"/>
 								<menulist>
-									<menupopup options="Noone" id="${row}[autoassign]" no_lang="1"/>
+									<menupopup id="${row}[autoassign]" no_lang="1" options="Noone"/>
 								</menulist>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this category');" statustext="Delete this category"/>
+								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this category');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -47,8 +47,8 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row">
-								<textbox id="${row}[name]" size="80" maxlength="150" blur="--&gt; enter new name"/>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this version');" statustext="Delete this version"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this version');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -66,8 +66,8 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row">
-								<textbox size="80" maxlength="150" blur="--&gt; enter new name" id="${row}[name]"/>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" statustext="Delete this status" onclick="return confirm('Delete this status');"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -85,8 +85,8 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row">
-								<textbox size="80" maxlength="150" blur="--&gt; enter new name" id="${row}[name]"/>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" statustext="Delete this status" onclick="return confirm('Delete this status');"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -106,9 +106,9 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row" valign="top">
-								<textbox size="30" id="${row}[name]" blur="--&gt; enter new name"/>
-								<textbox multiline="true" rows="3" cols="50" id="${row}[description]"/>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this canned response');" statustext="Delete this canned response"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="30"/>
+								<textbox multiline="true" id="${row}[description]" rows="3" cols="50"/>
+								<button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this canned response');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -128,9 +128,9 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row" valign="top">
-								<textbox size="40" maxlength="40" id="${row}[name]" blur="--&gt; enter new name"/>
-								<projectmanager-select options="--&gt; choose a project from the drop-down list" no_lang="1" id="${row}[projectlist]"/>
-								<button image="delete" label="Delete" align="center" id="delete[$row_cont[id]]" onclick="return confirm('Delete this entry');" statustext="Delete this entry"/>
+								<textbox blur="--&gt; enter new name" id="${row}[name]" size="40" maxlength="40"/>
+								<projectmanager-select id="${row}[projectlist]" no_lang="1" options="--&gt; choose a project from the drop-down list"/>
+								<button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this entry');" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -147,19 +147,19 @@
 			</columns>
 			<rows>
 				<row height="20">
-					<description options=",,,cat_id" value="Category"/>
+					<description value="Category" for="cat_id"/>
 					<menulist span="all">
-						<menupopup options="All" id="cat_id" onchange="1" statustext="Changes made below will be lost, if not applied before!"/>
+						<menupopup statustext="Changes made below will be lost, if not applied before!" id="cat_id" onchange="1" options="All"/>
 					</menulist>
 				</row>
 				<row class="th" height="20">
 					<description value="Value" class="leftPad5"/>
 					<description value="Label"/>
-					<description value="Priorities with empty label are not available to the user" align="right"/>
+					<description align="right" value="Priorities with empty label are not available to the user"/>
 				</row>
 				<row class="row">
 					<description id="${row}[value]" readonly="true" class="leftPad5"/>
-					<textbox size="80" id="${row}[label]"/>
+					<textbox id="${row}[label]" size="80"/>
 					<description id="${row}[label]"/>
 				</row>
 			</rows>
@@ -176,15 +176,15 @@
 			<rows>
 				<row class="row">
 					<description value="Staff"/>
-					<description options=",,,users" value="Users"/>
-					<description options=",,,technicians" value="Technicians"/>
+					<description value="Users" for="users"/>
+					<description value="Technicians" for="technicians"/>
 					<description value="Tracker admins"/>
 				</row>
 				<row class="row" valign="top">
 					<description/>
-					<listbox type="select-account" id="users" rows="28" options="both" statustext="You can enable/disable the queue access restrictions in the configuration tab (for all queues)"/>
+					<listbox type="select-account" statustext="You can enable/disable the queue access restrictions in the configuration tab (for all queues)" id="users" rows="28" options="both"/>
 					<listbox type="select-account" id="technicians" rows="28" options="both"/>
-					<listbox type="select-account" rows="28" options="both" id="admins"/>
+					<listbox type="select-account" id="admins" rows="28" options="both"/>
 				</row>
 			</rows>
 		</grid>
@@ -199,78 +199,78 @@
 			</columns>
 			<rows>
 				<row class="th" disabled="@tracker">
-					<description span="all" value="Configuration for all trackers"/>
+					<description value="Configuration for all trackers" span="all"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description options=",,,allow_assing_groups" value="Assigning groups"/>
+					<description value="Assigning groups" for="allow_assing_groups"/>
 					<menulist>
-						<menupopup id="allow_assign_groups" statustext="Allow to assign groups to tracker items" no_lang="1"/>
+						<menupopup statustext="Allow to assign groups to tracker items" id="allow_assign_groups" no_lang="1"/>
 					</menulist>
-					<description options=",,,allow_voting" value="Allow voting"/>
+					<description value="Allow voting" for="allow_voting"/>
 					<menulist>
-						<menupopup id="allow_voting" statustext="Allow voting on tracker items, show and sort after the votes"/>
+						<menupopup statustext="Allow voting on tracker items, show and sort after the votes" id="allow_voting"/>
 					</menulist>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description options=",,,allow_bounties" value="Allow bounties"/>
+					<description value="Allow bounties" for="allow_bounties"/>
 					<menulist>
 						<menupopup id="allow_bounties"/>
 					</menulist>
-					<description options=",,,currency" value="Currency"/>
+					<description value="Currency" for="currency"/>
 					<textbox id="currency"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description options=",,,overdue_days" value="Overdue after"/>
+					<description value="Overdue after" for="overdue_days"/>
 					<menulist>
-						<menupopup type="select-number" id="overdue_days" statustext="After how many days a not replied item should be marked overdue?" options="Never,1,30"/>
+						<menupopup type="select-number" statustext="After how many days a not replied item should be marked overdue?" id="overdue_days" options="Never,1,30"/>
 					</menulist>
-					<description options=",,,pending_close_days" value="Close pending"/>
+					<description value="Close pending" for="pending_close_days"/>
 					<menulist>
-						<menupopup type="select-number" options="Never,1,30" id="pending_close_days" statustext="After how many days pending items should be closed automatic"/>
+						<menupopup type="select-number" statustext="After how many days pending items should be closed automatic" id="pending_close_days" options="Never,1,30"/>
 					</menulist>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description value="Html editing" options=",,,htmledit"/>
+					<description value="Html editing" for="htmledit"/>
 					<checkbox statustext="Permit html editing in overview and comments" id="htmledit"/>
-					<description value="Activate users queue access control" options=",,,enabled_queue_acl_access"/>
-					<checkbox id="enabled_queue_acl_access" statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" onchange="getElementById('eT_accountsel_exec_users_').disabled = !this.checked;"/>
+					<description value="Activate users queue access control" for="enabled_queue_acl_access"/>
+					<checkbox statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="getElementById('eT_accountsel_exec_users_').disabled = !this.checked;"/>
 				</row>
 				<row class="th" disabled="!@tracker">
 					<description value="Restrict tracker items to staff and:" span="all"/>
 				</row>
 				<row class="row" disabled="!@tracker">
-					<description options=",,,restricted" value="Group" statustext="Restict tracker items to the creators primary group and the staff only"/>
+					<description statustext="Restict tracker items to the creators primary group and the staff only" value="Group" for="restricted"/>
 					<checkbox statustext="Restict tracker items to the creators primary group and the staff only" id="restrictions[group]"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="row" disabled="!@tracker">
-					<description options=",,,restricted" value="Creator" statustext="Restict tracker items to the creators primary group and the staff only"/>
+					<description statustext="Restict tracker items to the creators primary group and the staff only" value="Creator" for="restricted"/>
 					<checkbox statustext="Restict tracker items to the creator and the staff only" id="restrictions[creator]"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="th" disabled="@tracker">
-					<description span="all" value="Miscellaneous"/>
+					<description value="Miscellaneous" span="all"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<checkbox id="create_new_as_private" statustext="tracker entry can only seen by creator and admins"/>
-					<description value="create new tracker entry's as default &quot;private&quot; for approval process" span="3" options=",,,create_new_as_private"/>
+					<checkbox statustext="tracker entry can only seen by creator and admins" id="create_new_as_private"/>
+					<description value="create new tracker entry's as default &quot;private&quot; for approval process" for="create_new_as_private" span="3"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<checkbox id="allow_assign_users" statustext="Staff  &quot;Users&quot; will be allowed for assignment to tracker tickets"/>
-					<description span="3" value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" options=",,,allow_assign_users"/>
+					<checkbox statustext="Staff  &quot;Users&quot; will be allowed for assignment to tracker tickets" id="allow_assign_users"/>
+					<description value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" for="allow_assign_users" span="3"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<checkbox id="allow_infolog" statustext="Allow creation of infolog entries from tracker tickets"/>
+					<checkbox statustext="Allow creation of infolog entries from tracker tickets" id="allow_infolog"/>
 					<description value="Allow creation of infolog entries from tracker tickets" span="3"/>
 				</row>
 				<row>
 					<checkbox id="allow_restricted_comments"/>
-					<description span="all" value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users"/>
+					<description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"/>
 				</row>
 				<row class="th" disabled="@tracker">
-					<description span="all" value="ACL"/>
+					<description value="ACL" span="all"/>
 				</row>
 				<row class="row" valign="top" disabled="@tracker">
 					<description value="Allow editing by"/>
@@ -289,14 +289,14 @@
 						<rows>
 							<row class="th">
 								<description value="Field"/>
-								<description value="Tracker admins" align="center"/>
-								<description value="Technicians" align="center"/>
-								<description value="Non-anonymous users" align="center"/>
-								<description value="Everybody" align="center"/>
-								<description value="Item creator" align="center"/>
+								<description align="center" value="Tracker admins"/>
+								<description align="center" value="Technicians"/>
+								<description align="center" value="Non-anonymous users"/>
+								<description align="center" value="Everybody"/>
+								<description align="center" value="Item creator"/>
 								<description value="Group"/>
-								<description value="Item assignee" align="center"/>
-								<description value="New items" align="center"/>
+								<description align="center" value="Item assignee"/>
+								<description align="center" value="New items"/>
 							</row>
 							<row class="row">
 								<description id="${row}[label]" readonly="true"/>
@@ -313,20 +313,20 @@
 					</grid>
 				</row>
 				<row class="th">
-					<description span="all" value="E-Mail notifications"/>
+					<description value="E-Mail notifications" span="all"/>
 				</row>
 				<row class="row">
-					<description options=",,,notification_sender" value="Sender address"/>
-					<textbox size="30" id="notification[sender]" statustext="Sender address for all notifications, eg. noreply@egroupware.org"/>
-					<description options=",,,notification_link" value="URL of the tracker"/>
-					<textbox size="30" id="notification[link]" statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW"/>
+					<description value="Sender address" for="notification_sender"/>
+					<textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]" size="30"/>
+					<description value="URL of the tracker" for="notification_link"/>
+					<textbox statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]" size="30"/>
 				</row>
 				<row class="row">
 					<description value="Copy to"/>
-					<textbox size="30" statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]"/>
-					<description value="Language" no_lang="1" options=",,,notification_lang"/>
+					<textbox statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]" size="30"/>
+					<description value="Language" no_lang="1" for="notification_lang"/>
 					<menulist>
-						<menupopup id="notification[lang]" statustext="Language for the copy" no_lang="1"/>
+						<menupopup statustext="Language for the copy" id="notification[lang]" no_lang="1"/>
 					</menulist>
 				</row>
 			</rows>
@@ -344,14 +344,14 @@
 				<row class="row">
 					<description value="Check mail interval"/>
 					<menulist>
-						<menupopup id="mailhandling[interval]" statustext="Interval in minutes for checking the incoming mails"/>
+						<menupopup statustext="Interval in minutes for checking the incoming mails" id="mailhandling[interval]"/>
 					</menulist>
 					<description value="Read mail address"/>
-					<textbox size="20" id="mailhandling[address]" statustext="Enter the mail address that will be read."/>
+					<textbox statustext="Enter the mail address that will be read." id="mailhandling[address]" size="20"/>
 				</row>
 				<row class="row">
 					<description value="Incoming mail server"/>
-					<textbox id="mailhandling[server]" size="40" statustext="Enter the IMAP server from which emails should be fetched"/>
+					<textbox statustext="Enter the IMAP server from which emails should be fetched" id="mailhandling[server]" size="40"/>
 					<description value="Server type"/>
 					<menulist>
 						<menupopup id="mailhandling[servertype]"/>
@@ -359,18 +359,18 @@
 				</row>
 				<row class="row">
 					<description value="Port number"/>
-					<int id="mailhandling[serverport]"/>
+					<textbox type="integer" id="mailhandling[serverport]"/>
 					<description value="Incoming mail folder"/>
 					<textbox id="mailhandling[folder]" size="20"/>
 				</row>
 				<row class="row">
 					<description value="Username"/>
-					<textbox size="20" id="mailhandling[username]"/>
+					<textbox id="mailhandling[username]" size="20"/>
 					<description value="Password"/>
-					<passwd options="20" id="mailhandling[password]"/>
+					<passwd id="mailhandling[password]" options="20"/>
 				</row>
 				<row class="th">
-					<description span="all" value="Incoming mail rules"/>
+					<description value="Incoming mail rules" span="all"/>
 					<description/>
 					<description/>
 					<description/>
@@ -380,7 +380,7 @@
 					<checkbox id="mailhandling[delete_from_server]"/>
 					<description value="Tracker for new tickets"/>
 					<menulist>
-						<menupopup id="mailhandling[default_tracker]" options="Reject" statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail."/>
+						<menupopup statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail." id="mailhandling[default_tracker]" options="Reject"/>
 					</menulist>
 				</row>
 				<row class="row" disabled="!@mailhandling[default_tracker]">
@@ -388,26 +388,26 @@
 					<description/>
 					<description value="Category for new tickets"/>
 					<menulist class="cat_select">
-						<menupopup options="select one" id="mailhandling[default_cat]"/>
+						<menupopup id="mailhandling[default_cat]" options="select one"/>
 					</menulist>
 				</row>
 				<row class="row">
 					<description value="Unrecognized mails"/>
-					<radio options="ignore" label="Ignore" id="mailhandling[unrecognized_mails]" statustext="Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged."/>
+					<radio statustext="Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged." label="Ignore" id="mailhandling[unrecognized_mails]" options="ignore"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="row">
 					<description/>
-					<radio options="delete" label="Delete" id="mailhandling[unrecognized_mails]" statustext="Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged."/>
+					<radio statustext="Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged." label="Delete" id="mailhandling[unrecognized_mails]" options="delete"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="row">
 					<description/>
 					<hbox>
-						<radio options="forward" label="Forward to" id="mailhandling[unrecognized_mails]" statustext="Forward unrecognized mails to the email address that has to be specified here."/>
-						<textbox id="mailhandling[forward_to]" statustext="Enter an email address here if unrecognized mails should be forwarded"/>
+						<radio statustext="Forward unrecognized mails to the email address that has to be specified here." label="Forward to" id="mailhandling[unrecognized_mails]" options="forward"/>
+						<textbox statustext="Enter an email address here if unrecognized mails should be forwarded" id="mailhandling[forward_to]"/>
 					</hbox>
 					<description/>
 					<description/>
@@ -415,48 +415,48 @@
 				<row class="row">
 					<description/>
 					<hbox>
-						<radio options="default" label="Store as" id="mailhandling[unrecognized_mails]" statustext="Use a default user for mails that where not recognized"/>
+						<radio statustext="Use a default user for mails that where not recognized" label="Store as" id="mailhandling[unrecognized_mails]" options="default"/>
 						<menulist>
-							<menupopup id="mailhandling[unrec_reply]" statustext="Select which username should be used when unrecognized replies are handled"/>
+							<menupopup statustext="Select which username should be used when unrecognized replies are handled" id="mailhandling[unrec_reply]"/>
 						</menulist>
 					</hbox>
 					<hbox span="all">
 						<description value="(New tickets as "/>
 						<menulist>
-							<menupopup type="select-account" id="mailhandling[unrec_mail]" statustext="Select which username should be used when unrecognized mails are handled." options="Reject"/>
+							<menupopup type="select-account" statustext="Select which username should be used when unrecognized mails are handled." id="mailhandling[unrec_mail]" options="Reject"/>
 						</menulist>
 						<description value=")"/>
 					</hbox>
 				</row>
 				<row class="row">
 					<description/>
-					<checkbox id="mailhandling[auto_cc]" label="Add unrecognized mail address to the CC field" statustext="When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled."/>
+					<checkbox statustext="When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled." label="Add unrecognized mail address to the CC field" id="mailhandling[auto_cc]"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="row">
 					<description value="Handling autoreplies"/>
-					<radio id="mailhandling[autoreplies]" options="ignore" label="Ignore" statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked."/>
+					<radio statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked." label="Ignore" id="mailhandling[autoreplies]" options="ignore"/>
 					<description value="Handling bounced mails"/>
-					<radio options="ignore" label="Ignore" id="mailhandling[bounces]" statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked."/>
+					<radio statustext="Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked." label="Ignore" id="mailhandling[bounces]" options="ignore"/>
 				</row>
 				<row class="row">
 					<description/>
-					<radio options="delete" label="Delete" id="mailhandling[autoreplies]" statustext="Delete the mail from the server."/>
+					<radio statustext="Delete the mail from the server." label="Delete" id="mailhandling[autoreplies]" options="delete"/>
 					<description/>
-					<radio options="delete" label="Delete" id="mailhandling[bounces]" statustext="Delete the mail from the server"/>
+					<radio statustext="Delete the mail from the server" label="Delete" id="mailhandling[bounces]" options="delete"/>
 				</row>
 				<row class="row">
 					<description/>
-					<radio options="forward" label="Forward" id="mailhandling[autoreplies]" statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server."/>
+					<radio statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server." label="Forward" id="mailhandling[autoreplies]" options="forward"/>
 					<description/>
-					<radio options="forward" label="Forward" id="mailhandling[bounces]" statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server."/>
+					<radio statustext="Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterwards, the mail will be deleted from the server." label="Forward" id="mailhandling[bounces]" options="forward"/>
 				</row>
 				<row class="row">
 					<description/>
 					<hbox span="all">
-						<radio options="process" label="Process" id="mailhandling[autoreplies]" statustext="Process the message normally. *NOTE* This might cause mailloops when &quot;Sent autoreplies&quot; below is enabled!"/>
-						<description span="all" value=" (Beware of mailloops, check the help!) "/>
+						<radio statustext="Process the message normally. *NOTE* This might cause mailloops when &quot;Sent autoreplies&quot; below is enabled!" label="Process" id="mailhandling[autoreplies]" options="process"/>
+						<description value=" (Beware of mailloops, check the help!) " span="all"/>
 					</hbox>
 					<description/>
 					<description/>
@@ -464,14 +464,14 @@
 				<row class="row">
 					<description value="Sent autoreplies"/>
 					<menulist>
-						<menupopup id="mailhandling[auto_reply]" statustext="Select how autoreplies should be sent when mails are received"/>
+						<menupopup statustext="Select how autoreplies should be sent when mails are received" id="mailhandling[auto_reply]"/>
 					</menulist>
 					<description value="Reply also to unknown addresses"/>
 					<checkbox id="mailhandling[reply_unknown]"/>
 				</row>
 				<row class="row">
 					<description value="Introduction message"/>
-					<textbox span="3" id="mailhandling[reply_text]" statustext="Enter an opening text for the reply message" size="100"/>
+					<textbox statustext="Enter an opening text for the reply message" id="mailhandling[reply_text]" size="100" span="3"/>
 				</row>
 				<row>
 					<description/>
@@ -482,38 +482,76 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.5.003">
+	<template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.001">
+		<grid width="100%" id="notification">
+			<columns>
+				<column/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description value="Notification message"/>
+					<checkbox label="Use custom notification message" id="use_custom"/>
+				</row>
+				<row>
+					<textbox multiline="true" id="message" span="all"/>
+				</row>
+				<row>
+					<description value="Full list of placeholder names" href="tracker.tracker_merge.show_replacements" span="all"/>
+				</row>
+				<row>
+					<description value="Signature" span="all"/>
+				</row>
+				<row>
+					<textbox multiline="true" id="signature" span="all"/>
+				</row>
+			</rows>
+		</grid>
+		<styles>
+			textarea {
+ padding-right: 2ex;
+ width:99%;
+ height: 20ex;
+}
+		</styles>
+	</template>
+	<template id="tracker.admin" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>
 				<column/>
 				<column/>
+				<column/>
+				<column/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<description span="all" class="redItalic" align="center" id="msg" no_lang="1"/>
+					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
+					<description/>
+					<description/>
 					<description/>
 					<description/>
 				</row>
 				<row>
-					<description options=",,,tracker" value="tracker" class="bold" disabled="true"/>
-					<menulist class="bold">
-						<menupopup options="All" id="tracker" no_lang="1" onchange="1" label="Tracker Queue"/>
+					<description disabled="true" value="tracker" for="tracker" class="bold"/>
+					<menulist>
+						<menupopup class="bold" label="Tracker Queue" id="tracker" no_lang="1" onchange="1" options="All"/>
 					</menulist>
 					<hbox align="right">
-						<textbox id="add_name" blur="--&gt; enter new name" size="32" maxlength="150"/>
+						<textbox blur="--&gt; enter new name" id="add_name" size="32" maxlength="150"/>
 						<button label="Rename" id="button[rename]"/>
 						<button label="Add" id="button[add]"/>
 					</hbox>
 				</row>
 				<row>
-					<tabbox span="all" id="tabs">
+					<tabbox id="tracker.admin.cats|tracker.admin.priorities|tracker.admin.staff|tracker.admin.config|tracker.admin.mail|tracker.admin.notifications" span="all">
 						<tabs>
-							<tab label="Categories" statustext="Categories, versions, canned responses"/>
-							<tab label="Priorities" statustext="Custom tracker priorities"/>
-							<tab label="Staff" statustext="Tracker admins &amp; technicians"/>
-							<tab label="Configuration" statustext="Configuration, ACL, Notifications"/>
-							<tab label="Mail handling" statustext="Automatic email handling"/>
+							<tab id="tracker.admin.cats" label="Categories" statustext="Categories, versions, canned responses"/>
+							<tab id="tracker.admin.priorities" label="Priorities" statustext="Custom tracker priorities"/>
+							<tab id="tracker.admin.staff" label="Staff" statustext="Tracker admins &amp; technicians"/>
+							<tab id="tracker.admin.config" label="Configuration" statustext="Configuration, ACL, Notifications"/>
+							<tab id="tracker.admin.mail" label="Mail handling" statustext="Automatic email handling"/>
+							<tab id="tracker.admin.notifications" label="Notifications" statustext="Custom notifications"/>
 						</tabs>
 						<tabpanels>
 							<template id="tracker.admin.cats"/>
@@ -521,16 +559,17 @@
 							<template id="tracker.admin.staff"/>
 							<template id="tracker.admin.config"/>
 							<template id="tracker.admin.mail"/>
+							<template id="tracker.admin.notifications"/>
 						</tabpanels>
 					</tabbox>
 				</row>
 				<row>
 					<hbox span="2">
 						<button label="Save" id="button[save]"/>
-						<button id="button[apply]" label="Apply"/>
+						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]"/>
 					</hbox>
-					<button label="Delete" align="right" id="button[delete]" onclick="return confirm('Delete this tracker including all it's items and categories');"/>
+					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all it's items and categories');"/>
 				</row>
 			</rows>
 		</grid>
