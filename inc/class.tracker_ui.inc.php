@@ -1374,7 +1374,7 @@ class tracker_ui extends tracker_bo
 					{
 						$bofelamimail->reopen($attachment['folder']);
 
-						$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder']);
+						$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder'],$this->htmledit);
 						//_debug_array($mailcontent['attachments']);
 						foreach($mailcontent['attachments'] as $tmpattach => $tmpval)
 						{
@@ -1415,7 +1415,7 @@ class tracker_ui extends tracker_bo
 				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
 				'BCC'=>(!empty($_to_emailAddress['bcc'])?implode(',',$_to_emailAddress['bcc']):null),
 				'SUBJECT'=>$_subject,
-				'DATE'=>felamimail_bo::_strtotime($_date))).$_body;
+				'DATE'=>felamimail_bo::_strtotime($_date)),'',$this->htmledit).$_body;
 			$this->edit($this->prepare_import_mail(
 				implode(',',$toaddr),$_subject,$body,$attachments,$_date
 			));
@@ -1427,7 +1427,7 @@ class tracker_ui extends tracker_bo
 			$bofelamimail->openConnection();
 			$bofelamimail->reopen($mailbox);
 
-			$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$uid,$partid,$mailbox);
+			$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$uid,$partid,$mailbox,$this->htmledit);
 
 			return $this->edit($this->prepare_import_mail(
 				$mailcontent['mailaddress'],
