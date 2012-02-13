@@ -494,7 +494,7 @@
 					<description/>
 				</row>
 				<row>
-					<textbox multiline="true" id="message" span="all"/>
+					<htmlarea id="message" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
 				</row>
 				<row>
 					<description value="Full list of placeholder names" href="tracker.tracker_merge.show_replacements" span="all"/>
@@ -503,17 +503,10 @@
 					<description value="Signature" span="all"/>
 				</row>
 				<row>
-					<textbox multiline="true" id="signature" span="all"/>
+					<htmlarea id="signature" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
 				</row>
 			</rows>
 		</grid>
-		<styles>
-			textarea {
- padding-right: 2ex;
- width:99%;
- height: 20ex;
-}
-		</styles>
 	</template>
 	<template id="tracker.admin" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
