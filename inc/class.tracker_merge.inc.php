@@ -103,8 +103,7 @@ class tracker_merge extends bo_merge
 			$lookups['tr_status'] += $this->bo->get_tracker_stati($t_id);
 			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $t_id);
 		}
-		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
-		$array = $record->get_record_array();
+		$array = array();
 
 		// Signature
 		if($this->bo->notification[$record->tr_tracker]['signature'])
@@ -115,6 +114,9 @@ class tracker_merge extends bo_merge
 		{
 			$array['signature'] = $this->bo->notification[0]['signature'];
 		}
+
+		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
+		$array += $record->get_record_array();
 
 		// Set any missing custom fields, or the marker will stay
 		foreach($this->bo->customfields as $name => $field)

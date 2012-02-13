@@ -491,7 +491,7 @@
 			<rows>
 				<row>
 					<description value="Notification message"/>
-					<checkbox label="Use custom notification message" id="use_custom"/>
+					<description/>
 				</row>
 				<row>
 					<textbox multiline="true" id="message" span="all"/>
@@ -537,7 +537,7 @@
 					<menulist>
 						<menupopup class="bold" label="Tracker Queue" id="tracker" no_lang="1" onchange="1" options="All"/>
 					</menulist>
-					<hbox align="right">
+					<hbox align="right" span="all">
 						<textbox blur="--&gt; enter new name" id="add_name" size="32" maxlength="150"/>
 						<button label="Rename" id="button[rename]"/>
 						<button label="Add" id="button[add]"/>
@@ -569,7 +569,7 @@
 						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]"/>
 					</hbox>
-					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all it's items and categories');"/>
+					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all it's items and categories');" span="all"/>
 				</row>
 			</rows>
 		</grid>
