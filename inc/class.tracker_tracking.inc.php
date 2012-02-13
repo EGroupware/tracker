@@ -270,7 +270,8 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
 	{
-		if(!($notification = $this->tracker->notification[$data['tr_tracker']]) && !$notification['message'])
+		$notification = $this->tracker->notification[$data['tr_tracker']];
+		if($notification['message'] == '')
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
 		}
