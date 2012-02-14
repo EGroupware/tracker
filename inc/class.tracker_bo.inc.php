@@ -548,7 +548,7 @@ class tracker_bo extends tracker_so
 									// reply_vivible_class may be added by UI, so old will not have that
 									// reply_created may be a timestamp UNIX or YYYY-MM-DD HH:MM (but Seconds missing) so we cannot transform and compare relyably
 									// reply_message may be html encoded or not, we skip this, as it should not be changed anyhow
-									if ($srk==='reply_visible_class' || $srk ==='reply_created' || $srk ==='reply_message') continue; 
+									if ($srk==='reply_visible_class' || $srk ==='reply_created' || $srk ==='reply_message') continue;
 									if ($rv !== $value[$k][$srk]) $ridentical = false;
 								}
 								if ($ridentical===false) break; // first one not identical adds replies to changed
@@ -569,7 +569,7 @@ class tracker_bo extends tracker_so
 					(!isset($new[$cf]) && isset($old[$cf]) ) ) $changed[] = $cf;
 
 			}
-			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) || 
+			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) ||
 				(isset($this->data['canned_response']) && !empty($this->data['canned_response']))))
 			{
 				//echo "<p>botracker::save() no change --> no save needed</p>\n";
@@ -1517,7 +1517,7 @@ class tracker_bo extends tracker_so
 	function load_config()
 	{
 		$migrate_config = false;	// update old config-values, can be removed soon
-		foreach(config::read('tracker') as $name => $value)
+		foreach((array)config::read('tracker') as $name => $value)
 		{
 			if (substr($name,0,13) == 'notification_')	// update old config-values, can be removed soon
 			{
