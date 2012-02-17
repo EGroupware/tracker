@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.004">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.005">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -80,12 +80,12 @@
 					<menulist>
 						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_target="tracker" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
 					<vbox readonly="true">
 						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
-						<menulist>
-							<menupopup type="select-account" class="noWrap" id="${row}[tr_modifier]" readonly="true"/>
+						<menulist class="noWrap">
+							<menupopup type="select-account" id="${row}[tr_modifier]" readonly="true"/>
 						</menulist>
 					</vbox>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
@@ -93,29 +93,29 @@
 						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>
 					<menulist>
-						<menupopup type="select-cat" id="${row}[tr_resolution]" readonly="true" options="None"/>
+						<menupopup id="${row}[tr_resolution]" readonly="true" options="None"/>
 					</menulist>
-					<progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
+					<image align="center" label="$row_cont[tr_completion]" src="${row}[tr_completion]" no_lang="1"/>
 					<vbox options="0,0">
 						<hbox readonly="true" options="0,0">
 							<image label="Created by" src="move2" readonly="true"/>
-							<menulist>
-								<menupopup type="select-account" class="leftPad5" id="${row}[tr_creator]" readonly="true"/>
+							<menulist class="leftPad5">
+								<menupopup type="select-account" id="${row}[tr_creator]" readonly="true"/>
 							</menulist>
 						</hbox>
 						<hbox readonly="true" options="0,0">
 							<image label="Assigned to" src="groupevent" readonly="true"/>
-							<menulist>
-								<menupopup type="select-account" class="leftPad5" id="${row}[tr_assigned]" readonly="true"/>
+							<menulist class="leftPad5">
+								<menupopup type="select-account" id="${row}[tr_assigned]" readonly="true"/>
 							</menulist>
 						</hbox>
 					</vbox>
 					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@duration_format"/>
-					<textbox type="integer" align="center" id="${row}[votes]" readonly="true"/>
+					<int align="center" id="${row}[votes]" readonly="true"/>
 					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
 					<date-since id="${row}[esc_start]"/>
 					<customfields-list id="$row"/>
-					<hbox align="center" class="noPrint">
+					<hbox align="center" options="0" class="noPrint" orient="0">
 						<button align="center" label="Add infolog" id="infolog[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=infolog.infolog_ui.edit&amp;action=tracker&amp;action_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="infolog" class="noPrint"/>
 						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
@@ -163,31 +163,31 @@
 							</columns>
 							<rows>
 								<row>
-									<description value="Category" for="cat_id"/>
+									<description value="Category" options=",,,cat_id"/>
 									<menulist>
 										<menupopup id="cat_id" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Version" for="tr_version"/>
+									<description value="Version" options=",,,tr_version"/>
 									<menulist>
 										<menupopup id="tr_version" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Priority" for="tr_priority"/>
+									<description value="Priority" options=",,,tr_priority"/>
 									<menulist>
 										<menupopup id="tr_priority" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Status" font_style="tr_status"/>
+									<description value="Status" options="tr_status"/>
 									<menulist>
 										<menupopup statustext="@status_help" id="tr_status_admin" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Resolution" for="tr_resolution"/>
+									<description value="Resolution" options=",,,tr_resolution"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup statustext="@status_help" id="tr_resolution" options="No change"/>
@@ -198,19 +198,19 @@
 									</hbox>
 								</row>
 								<row>
-									<description value="Assigned to" for="tr_assigned"/>
+									<description value="Assigned to" options=",,,tr_assigned"/>
 									<menulist>
 										<menupopup id="tr_assigned" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Canned response" for="canned_response"/>
+									<description value="Canned response" options=",,,canned_response"/>
 									<menulist>
 										<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" options="Select one"/>
 									</menulist>
 								</row>
 								<row valign="top">
-									<description value="Comment" for="reply_message"/>
+									<description value="Comment" options=",,,reply_message"/>
 									<textbox multiline="true" id="reply_message" rows="5" cols="60"/>
 								</row>
 								<row>
