@@ -508,7 +508,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.admin" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>
