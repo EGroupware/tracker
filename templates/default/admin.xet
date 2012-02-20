@@ -482,8 +482,8 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%" id="notification">
+	<template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.002">
+		<grid width="100%">
 			<columns>
 				<column/>
 				<column/>
@@ -497,7 +497,7 @@
 					<htmlarea id="message" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
 				</row>
 				<row>
-					<description value="Full list of placeholder names" href="tracker.tracker_merge.show_replacements" span="all"/>
+					<description href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" span="all"/>
 				</row>
 				<row>
 					<description value="Signature" span="all"/>
@@ -507,6 +507,13 @@
 				</row>
 			</rows>
 		</grid>
+		<styles>
+			textarea {
+ padding-right: 2ex;
+ width:99%;
+ height: 20ex;
+}
+		</styles>
 	</template>
 	<template id="tracker.admin" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
