@@ -829,11 +829,18 @@ class tracker_ui extends tracker_bo
 		if (!$this->prefs['show_sum_timesheet'] || !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 		{
 			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
+			$rows['allow_sum_timesheet'] = false;
 		}
+		else
+		{
+			// Disable column if turned off in the column list
+			$rows['allow_sum_timesheet'] = (strpos($query_in['selectcols'], 'tr_sum_timesheets') !== false);
+		}
+
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 		// enable the Actions column
 		$this->prefs['show_actions'] ? $rows['allow_actions'] = $this->prefs['show_actions'] : $rows['allow_actions'] = null;
-		$rows['allow_sum_timesheet'] =  isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'];
+
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
