@@ -461,6 +461,7 @@ class tracker_admin extends tracker_bo
 		{
 			$sel_options['servertype'][] = $typ[1];
 		}
+		$content['notification']['no_checkboxes'] = !($tracker);
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,

@@ -106,13 +106,16 @@ class tracker_merge extends bo_merge
 		$array = array();
 
 		// Signature
-		if($this->bo->notification[$record->tr_tracker]['signature'])
+		if($this->bo->notification[$record->tr_tracker]['use_signature'])
 		{
-			$array['signature'] = $this->bo->notification[$record->tr_tracker]['signature'];
-		}
-		else
-		{
-			$array['signature'] = $this->bo->notification[0]['signature'];
+			if(trim(strip_tags($this->bo->notification[$record->tr_tracker]['signature'])))
+			{
+				$array['signature'] = $this->bo->notification[$record->tr_tracker]['signature'];
+			}
+			else
+			{
+				$array['signature'] = $this->bo->notification[0]['signature'];
+			}
 		}
 
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);

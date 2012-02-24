@@ -271,13 +271,20 @@ class tracker_tracking extends bo_tracking
 	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
-		if($notification['message'] == '')
+		if(trim(strip_tags($notification['message'])) == '')
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
 		}
-		if(!$notification['signature']) $notification['signature'] = $this->tracker->notification[0]['signature'];
+		if(trim(strip_tags($notification['signature'])) == '')
+		{
+			$notification['signature'] = $this->tracker->notification[0]['signature'];
+		}
+		if(!$notification['use_signature']) $notification['signature'] = '';
 
-		if(!$notification['message']) return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+		if(!$notification['use_custom'] || !$notification['message']) 
+		{
+			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+		}
 
 		$merge = new tracker_merge();
 		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/plain');

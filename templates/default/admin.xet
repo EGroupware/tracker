@@ -483,24 +483,25 @@
 		</grid>
 	</template>
 	<template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.002">
-		<grid width="100%">
+		<grid width="100%" id="notification">
 			<columns>
 				<column/>
-				<column/>
+				<column disabled="@no_checkboxes"/>
 			</columns>
 			<rows>
 				<row>
 					<description value="Notification message"/>
-					<description/>
+					<checkbox label="Use custom notification message" id="use_custom"/>
 				</row>
 				<row>
 					<htmlarea id="message" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
 				</row>
 				<row>
-					<description href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" span="all"/>
+					<description href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" extra_link_target="_blank" span="all"/>
 				</row>
 				<row>
-					<description value="Signature" span="all"/>
+					<description value="Signature"/>
+					<checkbox label="Use custom signature" id="use_signature"/>
 				</row>
 				<row>
 					<htmlarea id="signature" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
