@@ -271,33 +271,35 @@ class tracker_tracking extends bo_tracking
 	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
-		if(trim(strip_tags($notification['message'])) == '')
+		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
 		}
-		if(trim(strip_tags($notification['signature'])) == '')
+		if(trim(strip_tags($notification['signature'])) == '' || !$notification['use_signature'])
 		{
 			$notification['signature'] = $this->tracker->notification[0]['signature'];
 		}
-		if(!$notification['use_signature']) $notification['signature'] = '';
+		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
 
-		if(!$notification['use_custom'] || !$notification['message']) 
+		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message']) 
 		{
-			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
+				$notification['signature'];
 		}
 
 		$merge = new tracker_merge();
-		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/plain');
+		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
 		if(strpos($notification['message'], '{{signature}}') === False) 
 		{
-			$message.="\n".$notification['signature'];
+			$message.=($html_email?"<br />\n":"\n").
+				$notification['signature'];
 		}
 		if($error)
 		{
 			error_log($error);
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
 		}
-		return $message;
+		return $html_email ? $message : strip_tags($message);
 	}
 
 	/**
@@ -398,4 +400,5 @@ class tracker_tracking extends bo_tracking
 		}
 		return $details;
 	}
+
 }

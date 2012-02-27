@@ -192,12 +192,12 @@ class tracker_merge extends bo_merge
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
 			);
-			if($reply['reply_creator'] == $tracker['tr_creator']) $last_creator_comment = $reply;
-			if(in_array($reply['reply_creator'], $tracker['tr_assigned'])) $last_assigned_comment = $reply;
+			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
+			if(in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
 		}
 
 		// Special comments
-		foreach(array('' => $reply, '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
+		foreach(array('' => $tracker['replies'][0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
 			$comments[$tr_id][-1][$key] = array(
 				'$$comment/-1'.$key.'/date$$' => $comment ? $this->format_datetime($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
