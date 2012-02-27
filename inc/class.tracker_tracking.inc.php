@@ -401,4 +401,12 @@ class tracker_tracking extends bo_tracking
 		return $details;
 	}
 
+	/**
+	 * Override to extend permission so tracker_merge can use it
+	 */
+	public function get_link($data,$old,$allow_popup=false,$receiver=null)
+	{
+		return parent::get_link($data,$old,$allow_popup,$receiver);
+	}
+
 }

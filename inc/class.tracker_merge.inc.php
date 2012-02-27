@@ -121,6 +121,10 @@ class tracker_merge extends bo_merge
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
 		$array += $record->get_record_array();
 
+		// HTML link to ticket
+		$tracker = new tracker_tracking($this->bo);
+		$array['tr_link'] = $tracker->get_link($array, array());
+
 		// Set any missing custom fields, or the marker will stay
 		foreach($this->bo->customfields as $name => $field)
 		{
@@ -228,6 +232,7 @@ class tracker_merge extends bo_merge
 			'tr_modified' => lang('last modified'),
 		);
 		$fields['bounty'] = lang('bounty');
+		$fields['tr_link'] = lang('Link to ticket');
 		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
 		$fields['signature'] = lang('Notification signature');
 		$fields['comment/-1/...'] = 'Only the last comment';
