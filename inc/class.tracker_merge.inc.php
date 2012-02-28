@@ -53,7 +53,7 @@ class tracker_merge extends bo_merge
 	 */
 	protected function get_replacements($id,&$content=null)
 	{
-		if (!($replacements = $this->tracker_replacements($id)))
+		if (!($replacements = $this->tracker_replacements($id,'', $content)))
 		{
 			return false;
 		}
@@ -83,7 +83,7 @@ class tracker_merge extends bo_merge
 	 * @param string $prefix='' prefix like eg. 'erole'
 	 * @return array|boolean
 	 */
-	public function tracker_replacements($id,$prefix='') 
+	public function tracker_replacements($id,$prefix='', &$content='') 
 	{
 		$record = new tracker_egw_record($id);
 		$info = array();
@@ -133,12 +133,32 @@ class tracker_merge extends bo_merge
 
 		
 		// Links
-		$array['links'] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME);
- 		$array['attachments'] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME);
-		$array['links_attachments'] = $this->get_links('tracker', $id);
-		foreach(array_keys($GLOBALS['egw_info']['user']['apps']) as $app)
+		$pattern = '@\$(links|attachments|links_attachments)\/?(title|href|link)?\/?([a-z]*)\$@';
+		static $link_cache;
+		if(preg_match_all($pattern, $content, $matches))
 		{
-			$array["links/{$app}"] = $this->get_links('tracker',$id, $app);
+			foreach($matches[0] as $i => $placeholder)
+			{
+				$placeholder = substr($placeholder, 1, -1);
+				if($link_cache[$id][$placeholder]) 
+				{
+					$array[$placeholder] = $link_cache[$id][$placeholder];
+					continue;
+				}
+				switch($matches[1][$i])
+				{
+					case 'links':
+						$array[$placeholder] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME, array(),$matches[2][$i]);
+						break;
+					case 'attachments':
+						$array[$placeholder] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME,array(),$matches[2][$i]);
+						break;
+					default:
+						$array[$placeholder] = $this->get_links('tracker', $id, $matches[3][$i], array(), $matches[2][$i]);
+						break;
+				}
+				$link_cache[$id][$placeholder] = $array[$placeholder];
+			}
 		}
 
 		// Add markers
@@ -277,6 +297,8 @@ class tracker_merge extends bo_merge
  			'attachments' => lang('List of files linked to the current record'),
 			'links_attachments' => lang('Links and attached files'),
 			'links/[appname]' => lang('Links to specified application.  Example: {{links/infolog}}'),
+			'links/href' => lang('Links wrapped in an HREF tag with download link'),
+			'links/link' => lang('Download url for links'),
 			'date' => lang('Date'),
 			'user/n_fn' => lang('Name of current user, all other contact fields are valid too'),
 			'user/account_lid' => lang('Username'),
