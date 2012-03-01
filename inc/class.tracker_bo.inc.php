@@ -1542,8 +1542,10 @@ class tracker_bo extends tracker_so
 			$this->new_resolution = $categories->name2id('None');
 			config::save_value('new_resolution',$this->new_resolution,'tracker');
 		}
-		if (is_array($this->notification) && !$this->notification[0]['lang']) $this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
-
+		if (is_array($this->notification) && !$this->notification[0]['lang'])
+		{
+			$this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default_prefs('common', 'lang');
+		}
 		foreach(array(
 			'tr_summary'     => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_tracker'     => TRACKER_ITEM_NEW|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
@@ -1617,14 +1619,14 @@ class tracker_bo extends tracker_so
 			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
 		))))
 		{
-			if ($GLOBALS['egw']->preferences->default['common']['lang'] &&	// load the system default language
-				$GLOBALS['egw']->translation->user_lang != $GLOBALS['egw']->preferences->default['common']['lang'])
+			if (($default_lang = $GLOBALS['egw']->preferences->default_prefs('common','lang')) &&	// load the system default language
+				translation::$userlang != $default_lang)
 			{
 				$save_lang = $GLOBALS['egw_info']['user']['preferences']['common']['lang'];
-				$GLOBALS['egw_info']['user']['preferences']['common']['lang'] = $GLOBALS['egw']->preferences->default['common']['lang'];
-				$GLOBALS['egw']->translation->init();
+				$GLOBALS['egw_info']['user']['preferences']['common']['lang'] = $default_lang;
+				translation::init();
 			}
-			$GLOBALS['egw']->translation->add_app('tracker');
+			translation::add_app('tracker');
 
 			foreach($ids as $tr_id)
 			{
@@ -1638,7 +1640,7 @@ class tracker_bo extends tracker_so
 			if ($save_lang)
 			{
 				$GLOBALS['egw_info']['user']['preferences']['common']['lang'] = $save_lang;
-				$GLOBALS['egw']->translation->init();
+				translation::init();
 			}
 		}
 	}
