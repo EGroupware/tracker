@@ -727,6 +727,21 @@ class tracker_mailhandler extends tracker_bo
 		// By the time we get here, we know this ticket will be updated or created
 		$rv = $this->get_mailbody ($mid);
 		//error_log(__METHOD__.__LINE__.print_r($rv,true));
+		$parsed_header=imap_rfc822_parse_headers(imap_fetchheader($this->mbox, $mid));
+		$buff=array();
+		foreach(array('from','to','cc','bcc') as $k)
+		{
+			if (isset($parsed_header->{$k}))
+			{
+				foreach($parsed_header->{$k} as $i)
+				{ 
+					if ($i->mailbox)
+					{
+						$buff[$k][] = imap_rfc822_write_address($i->mailbox,$i->host,$i->personal);
+					}
+				}
+			}
+		}
 		$this->mailBody = $rv['body'];
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
@@ -734,17 +749,40 @@ class tracker_mailhandler extends tracker_bo
 		if ($this->ticketId == 0)
 		{
 			$this->init();
-			$this->user = $this->mailSender;
+			// this should take care, that new tickets are created by either the identified sender or the configured user
+			// as by default the creator was the user running the async job, thus not recognizing the configuration, we assume the
+			// running user having sufficient rights (see else)
+			if (self::LOG_LEVEL>1)
+			{
+				error_log(__METHOD__.__LINE__.'->'.$this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'));
+				error_log(__METHOD__.__LINE__.'->'.$this->mailSender);
+				error_log(__METHOD__.__LINE__.'->'.$this->mailhandling[$queue]['default_tracker']);
+			}
+			if ($this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'))
+			{
+				$this->data['tr_creator'] = $this->user = $this->mailSender;
+			}
+			else
+			{
+				$this->user = $this->mailSender;
+			}
+			$this->data['tr_created'] = felamimail_bo::_strtotime($msgHeader->Date,'ts',true);
 			$this->data['tr_summary'] = $this->mailSubject;
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
-			$this->data['tr_description'] = $this->mailBody;
+			$this->data['tr_description'] = felamimail_bo::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
+				'TO'=>(isset($buff['to']) && !empty($buff['to'])?implode(',',$buff['to']):null),
+				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
+				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
+				'SUBJECT'=>$this->mailSubject,
+				'DATE'=>felamimail_bo::_strtotime($msgHeader->Date)),'',$this->htmledit).$this->mailBody;
 			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
 			{
 				$this->data['tr_cc'] = $replytoAddress;
 			}
+			//error_log(__METHOD__.__LINE__.array2string($this->data));
 		}
 		else
 		{
@@ -773,7 +811,7 @@ class tracker_mailhandler extends tracker_bo
 				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
 			$this->data['reply_message'] = $this->mailBody;
-
+			$this->data['reply_created'] = felamimail_bo::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));

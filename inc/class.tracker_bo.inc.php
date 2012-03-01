@@ -489,7 +489,7 @@ class tracker_bo extends tracker_so
 
 		if (!$this->data['tr_id'])	// new entry
 		{
-			$this->data['tr_created'] = $this->now;
+			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_status'] = self::STATUS_OPEN;
 			$this->data['tr_resolution'] = $this->new_resolution;
@@ -620,7 +620,7 @@ class tracker_bo extends tracker_so
 					$this->data['reply_message'] = $this->get_canned_response($this->data['canned_response']).
 						($this->data['reply_message'] ? "\n\n".$this->data['reply_message'] : '');
 				}
-				$this->data['reply_created'] = $this->now;
+				$this->data['reply_created'] = (isset($this->data['reply_created'])&&!empty($this->data['reply_created'])?$this->data['reply_created']:$this->now);
 				$this->data['reply_creator'] = $this->user;
 
 				// replies set status pending back to open
