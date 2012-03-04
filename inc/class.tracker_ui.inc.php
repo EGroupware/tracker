@@ -331,11 +331,9 @@ class tracker_ui extends tracker_bo
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
-						$js = "opener.egw_refresh('".addslashes($msg)."','tracker',{$this->data['tr_id']},'".
-							($content['tr_id']?'edit':'add')."',null,/&tr_id=[0-9]+/,'');";
-						/*$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
+						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
 							// only change to current tracker, if not all trackers displayed
-							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";*/
+							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
 					}
 					else
 					{
