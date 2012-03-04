@@ -128,9 +128,10 @@ class tracker_so extends so_sql_cf
 	 * Reimplemented to save the reply too
 	 *
 	 * @param array $keys if given $keys are copied to data before saveing => allows a save as
-	 * @return int 0 on success and errno != 0 else
+	 * @param string|array $extra_where=null extra where clause, eg. to check an etag, returns true if no affected rows!
+	 * @return int|boolean 0 on success, or errno != 0 on error, or true if $extra_where is given and no rows affected
 	 */
-	function save($keys=null)
+	function save($keys=null,$extra_where=null)
 	{
 		if ($keys)
 		{
@@ -193,9 +194,10 @@ class tracker_so extends so_sql_cf
 	 * @param array $filter=null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
 	 * @param string $join_in='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
 	 *	"LEFT JOIN table2 ON (x=y AND z=o)", Note: there's no quoting done on $join, you are responsible for it!!!
-	 * @return array|NULL array of matching rows (the row is an array of the cols) or NULL if nothing found
+	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
+	 * @return array|NULL array of matching rows (the row is an array of the cols) or NULL
 	 */
-	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true)
+	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true,$need_full_no_count=false)
 	{
 		if (!$this->trackers)
 		{
@@ -514,10 +516,11 @@ class tracker_so extends so_sql_cf
 	/**
 	 * Delete tracker items with the given keys
 	 *
-	 * @param array $keys tr_id or array with tr_id or tr_tracker
-	 * @return int affected rows / tracker-items, should be > 0 if ok, 0 if an error
+	 * @param array|int $keys=null if given array with col => value pairs to characterise the rows to delete, or integer autoinc id
+	 * @param boolean $only_return_ids=false return $ids of delete call to db object, but not run it (can be used by extending classes!)
+	 * @return int|array affected rows, should be 1 if ok, 0 if an error or array with id's if $only_return_ids
 	 */
-	function delete($keys)
+	function delete($keys=null,$only_return_ids=false)
 	{
 		if (!$keys)
 		{
@@ -527,26 +530,19 @@ class tracker_so extends so_sql_cf
 		{
 			$keys = array('tr_id' => $keys);
 		}
-		$ids = 'SELECT tr_id FROM '.self::TRACKER_TABLE.' WHERE '.$this->db->expression(self::TRACKER_TABLE,$keys);
-		$where = "tr_id IN ($ids)";
-		if (!$this->db->capabilities['sub_queries'])
+		if (!$only_return_ids)
 		{
-			$ids = array();
-			foreach($this->db->query($ids,__LINE__,__FILE__) as $row)
+			$where = array();
+			if (($where['tr_id'] = parent::delete($keys,true)))
 			{
-				$ids[] = $row['tr_id'];
+				$this->db->delete(self::REPLIES_TABLE,$where,__LINE__,__FILE__,'tracker');
+				$this->db->delete(self::VOTES_TABLE,$where,__LINE__,__FILE__,'tracker');
+				$this->db->delete(self::BOUNTIES_TABLE,$where,__LINE__,__FILE__,'tracker');
+				$this->db->delete(self::ASSIGNEE_TABLE,$where,__LINE__,__FILE__,'tracker');
+				$this->db->delete(self::ESCALATED_TABLE,$where,__LINE__,__FILE__,'tracker');
 			}
-			$where = 'tr_id IN ('.implode(',',$ids).')';
 		}
-		if ($ids)
-		{
-			$this->db->delete(self::REPLIES_TABLE,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete(self::VOTES_TABLE,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete(self::BOUNTIES_TABLE,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete(self::ASSIGNEE_TABLE,$where,__LINE__,__FILE__,'tracker');
-			$this->db->delete(self::ESCALATED_TABLE,$where,__LINE__,__FILE__,'tracker');
-		}
-		return parent::delete($keys);
+		return parent::delete($keys,$only_return_ids);
 	}
 
 	/**
