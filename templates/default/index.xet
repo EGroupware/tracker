@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.005">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.006">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -17,6 +17,7 @@
 				<column disabled="@no_cat_id"/>
 				<column/>
 				<column width="30%"/>
+				<column/>
 				<column/>
 				<column/>
 				<column width="10%"/>
@@ -39,7 +40,11 @@
 					<nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
 					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
 					<nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
-					<nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
+					<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+					<vbox>
+						<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+						<nextmatch-header label="Description" id="tr_description" options="1" class="tracker-summary"/>
+					</vbox>
 					<vbox>
 						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
 						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
@@ -64,7 +69,7 @@
 						<button align="right" statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_globalObjectManager.getObjectById('tracker.index.rows').toggleAllSelected(); return false;" image="check" class="tracker-checkall"/>
 					</hbox>
 				</row>
-				<row class="$row_cont[cat_id] $row_cont[class]">
+				<row class="$row_cont[cat_id] $row_cont[class]" valign="top">
 					<vbox no_lang="1" options="0,0">
 						<description id="${row}[tr_id]" no_lang="1"/>
 						<menulist>
@@ -81,6 +86,11 @@
 						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+					<vbox no_lang="1">
+						<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+						<hrule/>
+						<description id="${row}[tr_description]" no_lang="1" class="trackerDes"/>
+					</vbox>
 					<vbox readonly="true">
 						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
@@ -128,13 +138,16 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.index" template="" lang="" group="0" version="1.9.003">
 		<grid width="100%" class="tracker-index">
 			<columns>
 				<column/>
 				<column/>
 			</columns>
 			<rows>
+				<row disabled="!@css">
+					<html id="css" span="all"/>
+				</row>
 				<row disabled="!@msg">
 					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
 					<description/>

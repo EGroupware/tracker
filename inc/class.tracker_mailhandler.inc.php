@@ -729,6 +729,8 @@ class tracker_mailhandler extends tracker_bo
 		//error_log(__METHOD__.__LINE__.print_r($rv,true));
 		$parsed_header=imap_rfc822_parse_headers(imap_fetchheader($this->mbox, $mid));
 		$buff=array();
+		$mailHeaderInfo = '';
+		$header2desc=$header2comment=false;
 		foreach(array('from','to','cc','bcc') as $k)
 		{
 			if (isset($parsed_header->{$k}))
@@ -743,6 +745,18 @@ class tracker_mailhandler extends tracker_bo
 			}
 		}
 		$this->mailBody = $rv['body'];
+		if (isset($this->mailhandling[$queue]['mailheaderhandling']) && $this->mailhandling[$queue]['mailheaderhandling']>0)
+		{
+			if ($this->mailhandling[$queue]['mailheaderhandling']==1) $header2desc=true;
+			if ($this->mailhandling[$queue]['mailheaderhandling']==2) $header2comment=true;
+			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $header2desc=$header2comment=true;
+			$mailHeaderInfo = felamimail_bo::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
+				'TO'=>(isset($buff['to']) && !empty($buff['to'])?implode(',',$buff['to']):null),
+				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
+				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
+				'SUBJECT'=>$this->mailSubject,
+				'DATE'=>felamimail_bo::_strtotime($msgHeader->Date)),'',$this->htmledit);
+		}
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
 
@@ -772,12 +786,7 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
-			$this->data['tr_description'] = felamimail_bo::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
-				'TO'=>(isset($buff['to']) && !empty($buff['to'])?implode(',',$buff['to']):null),
-				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
-				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
-				'SUBJECT'=>$this->mailSubject,
-				'DATE'=>felamimail_bo::_strtotime($msgHeader->Date)),'',$this->htmledit).$this->mailBody;
+			$this->data['tr_description'] = ($mailHeaderInfo&&$header2desc?$mailHeaderInfo:'').$this->mailBody;
 			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
 			{
 				$this->data['tr_cc'] = $replytoAddress;
@@ -810,7 +819,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
-			$this->data['reply_message'] = $this->mailBody;
+			$this->data['reply_message'] = ($mailHeaderInfo&&$header2comment?$mailHeaderInfo:'').$this->mailBody;
 			$this->data['reply_created'] = felamimail_bo::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
