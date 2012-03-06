@@ -180,6 +180,18 @@ class tracker_bo extends tracker_so
 	);
 
 	/**
+	 * how to handle mailheaderinfo, provided as an array of arrays with spec => descr
+	 *
+	 * @var array
+	 */
+	var $mailheaderhandling = array(
+		0 => array('noinfo', 'no, no additional Mailheader to description and comments'),
+		1 => array('infotodesc', 'yes, add Mailheader to description'),
+		2 => array('infotocomment', 'yes, add Mailheader to comments'),
+		3 => array('infotoboth', 'yes, add Mailheader to both (description and comments)'),
+	);
+
+	/**
 	 * Translates field / acl-names to labels
 	 *
 	 * @var array

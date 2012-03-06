@@ -802,6 +802,7 @@ class tracker_ui extends tracker_bo
 				}
 				$rows[$n]['prio_label'] = $prio_labels[$row['tr_priority']];
 			}
+			if (isset($rows[$n]['tr_description'])) $rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
@@ -1166,6 +1167,19 @@ class tracker_ui extends tracker_bo
 			$tpl->set_cell_attribute('group', 'size', implode(',',$group));
 		}
 		egw_framework::validate_file('.','app','tracker');
+		// add scrollbar to long description, if user choose so in his prefs
+		if ($this->prefs['limit_des_lines'] > 0 || (string)$this->prefs['limit_des_lines'] == '');
+		{
+			//$content['css'] = '<style type="text/css">@import url('.$GLOBALS['egw_info']['server']['webserver_url'].'/tracker/templates/default/app.css);'."</style>";
+
+			$content['css'] .= '<style type="text/css">@media screen { .trackerDes {  '.
+				($this->prefs['limit_des_width']?'max-width:'.$this->prefs['limit_des_width'].'em;':'').' max-height: '.
+				(($this->prefs['limit_des_lines'] ? $this->prefs['limit_des_lines'] : 5) * 1.35).	// dono why em is not real lines
+				'em; overflow: auto; }}
+@media screen { .colfullWidth {
+width:100%;
+}</style>';
+		}
 
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
 	}
