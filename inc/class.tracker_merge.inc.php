@@ -123,15 +123,14 @@ class tracker_merge extends bo_merge
 
 		// HTML link to ticket
 		$tracker = new tracker_tracking($this->bo);
-		$array['tr_link'] = $tracker->get_link($array, array());
-
+		$array['tr_link'] = html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
+		
 		// Set any missing custom fields, or the marker will stay
 		foreach($this->bo->customfields as $name => $field)
 		{
 			if(!$array['#'.$name]) $array['#'.$name] = '';
 		}
 
-		
 		// Links
 		$pattern = '@\$(links|attachments|links_attachments)\/?(title|href|link)?\/?([a-z]*)\$@';
 		static $link_cache;
