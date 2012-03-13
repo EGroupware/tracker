@@ -4,7 +4,6 @@
 5 - medium	tracker	fr	5 - moyenne
 9 - highest	tracker	fr	9 - haute
 accepted	tracker	fr	Accepté
-actions	tracker	fr	Actions
 add comment	tracker	fr	Ajouter un commentaire
 after how many days a not replied item should be marked overdue?	tracker	fr	Après combien de jours un élément non répondu sera marqué en retard?
 after how many days pending items should be closed automatic	tracker	fr	Après combien de jours les éléments en attente seront automatiquement fermés

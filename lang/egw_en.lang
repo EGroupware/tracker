@@ -15,7 +15,6 @@
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
 accepted	tracker	en	Accepted
-actions	tracker	en	Actions
 activate users queue access control	tracker	en	Activate users queue access control
 add additionally	tracker	en	Add additionally
 add assigned	tracker	en	Add assigned
@@ -86,6 +85,7 @@ custom fields	tracker	en	Custom fields
 custom tracker priorities	tracker	en	Custom tracker priorities
 date opened	tracker	en	Date opened
 default document to insert entries	tracker	en	Default document to insert entries
+default version for new tracker entries	tracker	en	Default version for new tracker entries
 define escalations	common	en	Define escalations
 delete mails from server	tracker	en	Delete mails from server
 delete the mail from the server	tracker	en	Delete the mail from the server
@@ -203,6 +203,7 @@ permissions error - %1 could not %2	tracker	en	Permissions error - %1 could not 
 permit html editing in overview and comments	tracker	en	Permit HTML editing in overview and comments
 port number	tracker	en	Port number
 postponed	tracker	en	Postponed
+pre-selected version when creating a new tracker	tracker	en	Pre-selected version when creating a new tracker
 print entry	tracker	en	Print entry
 priorities	tracker	en	Priorities
 priorities with empty label are not available to the user	tracker	en	Priorities with empty label are not available to the user.
@@ -240,13 +241,9 @@ set %1	tracker	en	Set %1
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
 set bounty	tracker	en	Set bounty
 set to	tracker	en	Set to
-should the actions column in the tracker list-view be shown?	tracker	en	Should the actions column in the tracker list view be shown
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
 should there be a tracker-box on main screen?	tracker	en	Show Tracker on Home page
-show a new column that calculated the acumulated times of timesheet entries.	tracker	en	Show a new column that calculated the accumulated times of TimeSheet entries.
-show actions in tracker listing	tracker	en	Show actions in tracker listing
-show the acumulated times of timesheet entries	tracker	en	Show the accumulated times of TimeSheet entries
 show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?
 skip record	tracker	en	Skip record
 staff	tracker	en	Staff

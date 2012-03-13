@@ -15,7 +15,6 @@
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
-actions	tracker	de	Befehle
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem aktivieren
 add additionally	tracker	de	zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
@@ -86,6 +85,7 @@ custom fields	tracker	de	Benutzerdefinierte Felder
 custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 date opened	tracker	de	Datum angelegt
 default document to insert entries	tracker	de	Standarddokument zum Einfügen von Daten
+default version for new tracker entries	tracker	de	Vorgabe für die Version neuer Tickets
 define escalations	common	de	Eskalation definieren
 delete mails from server	tracker	de	Mails auf dem Server löschen
 delete the mail from the server	tracker	de	Mails auf dem Server löschen
@@ -199,6 +199,7 @@ permissions error - %1 could not %2	tracker	de	Zugriff verweigert - %1 konnte ni
 permit html editing in overview and comments	tracker	de	Formatierte Textbearbeitung im Überblick und den Antworten
 port number	tracker	de	Portnummer
 postponed	tracker	de	Vertagt
+pre-selected version when creating a new tracker	tracker	de	Vorausgewählte Version für neue Tickets
 print entry	tracker	de	Ticket drucken
 priorities	tracker	de	Prioritäten
 priorities with empty label are not available to the user	tracker	de	Prioritäten mit leerer Beschriftung sind für den Benutzer nicht verfügbar
@@ -234,13 +235,9 @@ server type	tracker	de	Server Type
 set %1	tracker	de	%1 setzen
 set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
 set bounty	tracker	de	Prämie setzen
-should the actions column in the tracker list-view be shown?	tracker	de	Soll die Befehle-Spalte in der Trackerübersicht angezeigt werden?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
 should there be a tracker-box on main screen?	tracker	de	Soll in der Hauptansicht eine Tracker-Box erscheinen?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	de	Zeige eine neue Spalte mit den zusammengefasten Zeiten der Stundenzettel
-show actions in tracker listing	tracker	de	Zeige Befehle in der Trackerübersicht
-show the acumulated times of timesheet entries	tracker	de	Zeige die zusammengefassten Zeiten der Stundenzettel
 show the tracker send you notification mails, in tracker items that you updates?	tracker	de	Empfange Sie Benachrichtigungen über Einträge die Sie selbst geändert haben
 staff	tracker	de	Mitarbeiter
 staff  "users" will be allowed for assignment to tracker tickets	tracker	de	Mitarbeiter "Benutzer" können Tickets zugewiesen bekommen

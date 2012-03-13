@@ -4,7 +4,6 @@
 5 - medium	tracker	sl	5 - srednja
 9 - highest	tracker	sl	9 - najvišja
 accepted	tracker	sl	Sprejeto
-actions	tracker	sl	Dejanja
 add comment	tracker	sl	Dodaj komentar
 after how many days a not replied item should be marked overdue?	tracker	sl	Po koliko dneh naj bo opravilo brez odgovora označeno kot zapadlo?
 after how many days pending items should be closed automatic	tracker	sl	Po koliko dneh naj se nerešeni elementi samodejno zaprejo

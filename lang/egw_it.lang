@@ -12,7 +12,6 @@
 5 - medium	tracker	it	5 - media
 9 - highest	tracker	it	9 - più alta
 accepted	tracker	it	Accettato
-actions	tracker	it	Azioni
 activate users queue access control	tracker	it	Attivazione controllo accessi utenti
 add additionally	tracker	it	Aggiungi inoltre
 add assigned	tracker	it	Aggiungi assegnatario
@@ -177,7 +176,6 @@ set an own bounty (in %s)	tracker	it	Imposta un bounty (in %s)
 set bounty	tracker	it	Imposta bounty
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
-show actions in tracker listing	tracker	it	Visualizza le azioni nella lista del tracker
 staff	tracker	it	Staff
 state	tracker	it	Stato
 stati	tracker	it	Stati

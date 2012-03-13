@@ -12,7 +12,6 @@
 5 - medium	tracker	es-es	5 - media
 9 - highest	tracker	es-es	9 - la más alta
 accepted	tracker	es-es	Aceptada
-actions	tracker	es-es	Acciones
 activate users queue access control	tracker	es-es	Activar control de acceso para la cola de usuarios
 add additionally	tracker	es-es	añadir adicionalmente
 add assigned	tracker	es-es	Añadir asignados
@@ -193,12 +192,8 @@ server type	tracker	es-es	Tipo de servidor
 set %1	tracker	es-es	Establecer %1
 set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
 set bounty	tracker	es-es	Fijar recompensa
-should the actions column in the tracker list-view be shown?	tracker	es-es	¿Debe verse la columna de acciones en la vista de lista de seguimiento?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	es-es	Mostrar una columna nueva con el cálculo de los tiempos acumulados de las entradas de la hoja de tiempos.
-show actions in tracker listing	tracker	es-es	Mostrar acciones en el listado de seguimiento
-show the acumulated times of timesheet entries	tracker	es-es	Mostrar los tiempos acumulados de las entradas de la hoja de tiempos
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 staff	tracker	es-es	Equipo
 state	tracker	es-es	Estado

@@ -4,7 +4,6 @@
 5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
 9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
 accepted	tracker	pl	Zaakceptowany
-actions	tracker	pl	Akcje
 add comment	tracker	pl	Dodaj komentarz
 after how many days a not replied item should be marked overdue?	tracker	pl	Po ilu dniach zgłoszenie bez odpowiedzi powinno być oznaczone jako zaległe?
 after how many days pending items should be closed automatic	tracker	pl	Po ilu dniach zgłoszenia będące w toku powinny być automatycznie zamknięte?

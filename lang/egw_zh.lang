@@ -11,7 +11,6 @@
 5 - medium	tracker	zh	5 - 中等
 9 - highest	tracker	zh	9 - 最高
 accepted	tracker	zh	接受
-actions	tracker	zh	操作
 activate users queue access control	tracker	zh	激活用户队列访问控制
 add comment	tracker	zh	添加注释
 add timesheet entry	tracker	zh	添加时间表条目
@@ -132,13 +131,9 @@ sender address	tracker	zh	发件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
 set an own bounty (in %s)	tracker	zh	设定一个自己的奖金(在 %s)
 set bounty	tracker	zh	设定奖金
-should the actions column in the tracker list-view be shown?	tracker	zh	在任务跟踪列表中是否要显示操作栏？
 should the tracker send you notification mails in html?	tracker	zh	跟踪系统是否要发送 html 通知邮件给您？
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh	如果指派给您的任务跟踪项目更新了，是否要发送通知给您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh	如果您建立的任务跟踪项目更新了，是否要发送通知给您？
-show a new column that calculated the acumulated times of timesheet entries.	tracker	zh	显示一个计算时间表条目累积时间的新栏。
-show actions in tracker listing	tracker	zh	在任务跟踪列表中显示操作
-show the acumulated times of timesheet entries	tracker	zh	显示时间表条目的累积时间
 show the tracker send you notification mails, in tracker items that you updates?	tracker	zh	显示跟踪系统发送给您的通知邮件，您在跟踪项目中进行了更新？
 staff	tracker	zh	职员
 state	tracker	zh	状态
