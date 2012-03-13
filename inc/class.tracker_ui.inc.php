@@ -880,12 +880,7 @@ class tracker_ui extends tracker_bo
 		if (!$this->prefs['show_sum_timesheet'] || !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 		{
 			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
-			$rows['no_tr_sum_timesheets'] = false;
-		}
-		else
-		{
-			// Disable column if turned off in the column list
-			$rows['no_tr_sum_timesheets'] = (strpos($query_in['selectcols'], 'tr_sum_timesheets') !== false);
+			$rows['no_tr_sum_timesheets'] = true;
 		}
 
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
