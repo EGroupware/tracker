@@ -12,7 +12,6 @@
 5 - medium	tracker	nl	5 - gemiddeld
 9 - highest	tracker	nl	9 - hoogste
 accepted	tracker	nl	Geaccepteerd
-actions	tracker	nl	Acties
 activate users queue access control	tracker	nl	Activeer gebruikers toegang reeksen
 add additionally	tracker	nl	extra toevoegen
 add assigned	tracker	nl	Toegewezen toevoegen
@@ -187,12 +186,8 @@ server type	tracker	nl	Server type
 set %1	tracker	nl	Zet %1
 set an own bounty (in %s)	tracker	nl	Ken een eigen gift toe (in %s)
 set bounty	tracker	nl	Gift toekennen
-should the actions column in the tracker list-view be shown?	tracker	nl	Moet de Acties kolom in het lijst overzicht worden getoond?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, aan u toegewezen, worden aangepast?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, door u gecreëerd, worden aangepast?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	nl	Toon een nieuwe kolom met berekende samengevoegde tijden uit timesheet
-show actions in tracker listing	tracker	nl	Toon acties in het overzicht
-show the acumulated times of timesheet entries	tracker	nl	Toon de samengevoegde tijden uit timesheet
 show the tracker send you notification mails, in tracker items that you updates?	tracker	nl	Moet Tracker notificatie mails verzenden van meldingen die u zelf heeft aangepast?
 staff	tracker	nl	Medewerkers
 state	tracker	nl	Status

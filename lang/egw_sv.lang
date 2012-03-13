@@ -4,7 +4,6 @@
 5 - medium	tracker	sv	5 - Medium
 9 - highest	tracker	sv	9 - Högst
 accepted	tracker	sv	Accepterad
-actions	tracker	sv	Åtgärder
 add comment	tracker	sv	Lägg till kommentar
 after how many days a not replied item should be marked overdue?	tracker	sv	Efter hur många dagar ska obesvarade ärenden markeras som förfallen?
 after how many days pending items should be closed automatic	tracker	sv	Efter hur många dagar som vilande ska ärenden automatiskt stängas?

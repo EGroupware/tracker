@@ -877,15 +877,8 @@ class tracker_ui extends tracker_bo
 			$rows['no_bounties'] = true;
 			$query_in['options-selectcols']['bounties'] = false;
 		}
-		if (!$this->prefs['show_sum_timesheet'] || !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
-		{
-			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
-			$rows['no_tr_sum_timesheets'] = true;
-		}
 
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
-		// enable the Actions column
-		$this->prefs['show_actions'] ? $rows['allow_actions'] = $this->prefs['show_actions'] : $rows['allow_actions'] = null;
 
 		// enable tracker column if all trackers are shown
 		if ($tracker) $rows['no_tr_tracker'] = true;
@@ -1078,10 +1071,10 @@ class tracker_ui extends tracker_bo
 		if (!is_array($content['nm']))
 		{
 			$date_filters = array('All');
-                        foreach($this->date_filters as $name => $date)
-                        {
-                                $date_filters[$name] = lang($name);
-                        }
+			foreach($this->date_filters as $name => $date)
+			{
+				$date_filters[$name] = lang($name);
+			}
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_ui.get_rows',
 				'cat_is_select'  => 'no_lang',
@@ -1113,6 +1106,11 @@ class tracker_ui extends tracker_bo
 			{
 				reset($this->trackers);
 				list($tracker) = @each($this->trackers);
+			}
+			// disable times column, if no timesheet rights
+			if (!isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+			{
+				$content['nm']['options-selectcols']['tr_sum_timesheets'] = false;
 			}
 		}
 		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);

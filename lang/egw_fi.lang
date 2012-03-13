@@ -15,7 +15,6 @@
 5 - medium	tracker	fi	5 - normaali
 9 - highest	tracker	fi	9 - korkea
 accepted	tracker	fi	Hyväksytty
-actions	tracker	fi	Toiminnot
 activate users queue access control	tracker	fi	Aktivoi ketjukohtaiset käyttöoikeudet
 add additionally	tracker	fi	Lisää mukana olevaksi
 add assigned	tracker	fi	Lisää vastuulliseksi
@@ -241,13 +240,9 @@ set %1	tracker	fi	Aseta %1
 set an own bounty (in %s)	tracker	fi	Aseta oma maksullinen lisätyö (%s)
 set bounty	tracker	fi	Aseta palkkio
 set to	tracker	fi	Aseta
-should the actions column in the tracker list-view be shown?	tracker	fi	Näytetäänkö 'Toiminnot' sarake Reklamaationhallinnan listanäkymässä?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos niitä merkintöjä joissa olet vastuuhenkilönä, päivitetään?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos luomaasi merkintää päivitetään?
 should there be a tracker-box on main screen?	tracker	fi	Haluatko näyttää Reklamaationhallinnan merkinnät etusivulla?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	fi	Näytä uusi sarake ajanseurannan luomille merkinnöille (sarake johon yhteenlasketaan käytetty aika).
-show actions in tracker listing	tracker	fi	Näytä toimenpiteet listanäkymässä
-show the acumulated times of timesheet entries	tracker	fi	Näytä ajanhallinnan merkintöjen yhteenlaskettu aika
 show the tracker send you notification mails, in tracker items that you updates?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä joita itse päivitit?
 staff	tracker	fi	Henkilökunta
 staff  "users" will be allowed for assignment to tracker tickets	tracker	fi	Salli "Käyttäjien" vastuulliseksi määrittely merkintöihin.

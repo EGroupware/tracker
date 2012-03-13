@@ -13,7 +13,6 @@
 5 - medium	tracker	sk	5 - priemerná
 9 - highest	tracker	sk	9 - najvyššia
 accepted	tracker	sk	Prijaté
-actions	tracker	sk	Akcie
 activate users queue access control	tracker	sk	Zapnúť používateľskú kontrolu prístupu k frontám
 add additionally	tracker	sk	pridať dodatočne
 add assigned	tracker	sk	Pridať priradené
@@ -212,13 +211,9 @@ server type	tracker	sk	Typ servera
 set %1	tracker	sk	Zadať %1
 set an own bounty (in %s)	tracker	sk	Zadať vlastnú odmenu (v %s)
 set bounty	tracker	sk	Zadať odmenu
-should the actions column in the tracker list-view be shown?	tracker	sk	Má sa zobrazovať stĺpec akcií v pohľade na zoznam Sledovača?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v niektorej záležitosti Sledovača, ktorá Vám bola priradená?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v záležitosti Sledovača, ktorú ste vytvorili?
 should there be a tracker-box on main screen?	tracker	sk	Chcete, aby sa na hlavnej obrazovke zobrazovalo okno sledovača?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	sk	Zobrazí nový stĺpec, ktorý spočíta kumulované časy položiek Sledovača.
-show actions in tracker listing	tracker	sk	Zobraziť akcie v zozname Sledovača
-show the acumulated times of timesheet entries	tracker	sk	Zobraziť kumulované časy položiek Sledovača
 show the tracker send you notification mails, in tracker items that you updates?	tracker	sk	Chcete, aby vám Sledovač posielal oznámenia o položkách Sledovača, ktoré ste sami zmenili?
 staff	tracker	sk	Personál
 staff  "users" will be allowed for assignment to tracker tickets	tracker	sk	Personál "Používatelia" bude môcť byť priradený k položkám Sledovača

@@ -12,7 +12,6 @@
 5 - medium	tracker	ru	5 - средний
 9 - highest	tracker	ru	9 - высший
 accepted	tracker	ru	Принято
-actions	tracker	ru	Действия
 activate users queue access control	tracker	ru	Включить контроль доступа пользователей к очереди
 add additionally	tracker	ru	добавить к имеющимся
 add assigned	tracker	ru	Назначение добавлено
@@ -183,10 +182,8 @@ server type	tracker	ru	Тип сервера
 set %1	tracker	ru	Установить %1
 set an own bounty (in %s)	tracker	ru	Установить свою премию (%s)
 set bounty	tracker	ru	Установить премию
-should the actions column in the tracker list-view be shown?	tracker	ru	Следует ли показывать колонку действий в списке просмотра трекера?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
-show actions in tracker listing	tracker	ru	Показавать действия в списке трекера
 staff	tracker	ru	Кадровый резерв
 state	tracker	ru	Состояние
 stati	tracker	ru	Статистика

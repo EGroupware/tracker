@@ -5,7 +5,6 @@
 5 - medium	tracker	zh-tw	5 - 中等
 9 - highest	tracker	zh-tw	9 - 最高
 accepted	tracker	zh-tw	接受
-actions	tracker	zh-tw	操作
 add comment	tracker	zh-tw	新增意見
 add timesheet entry	tracker	zh-tw	新增時間表資料
 after how many days a not replied item should be marked overdue?	tracker	zh-tw	在多少天後沒有回應的項目要視為過期？
@@ -112,10 +111,8 @@ sender address	tracker	zh-tw	寄件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh-tw	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
 set an own bounty (in %s)	tracker	zh-tw	設定一個自己的獎金（在 %s）
 set bounty	tracker	zh-tw	設定獎金
-should the actions column in the tracker list-view be shown?	tracker	zh-tw	在服務台列表中是否要顯示操作欄位？
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh-tw	如果指派給您的服務台項目更新了，是否要寄送通知給您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh-tw	如果您建立的服務台項目更新了，是否要寄送通知給您？
-show actions in tracker listing	tracker	zh-tw	在服務台列表中顯示操作
 staff	tracker	zh-tw	工作團隊
 state	tracker	zh-tw	狀態
 stati	tracker	zh-tw	狀態

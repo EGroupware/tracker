@@ -4,7 +4,6 @@
 5 - medium	tracker	et	5 - keskmine
 9 - highest	tracker	et	9 - kõrgeim
 accepted	tracker	et	Kinnitatud
-actions	tracker	et	Tegevused
 add comment	tracker	et	Lisa kommentaar
 add timesheet entry	tracker	et	Lisa Timesheet kirje
 after how many days a not replied item should be marked overdue?	tracker	et	Mitme päevapärast vastamatta asjad määratakse kui hilinenud?
@@ -85,7 +84,6 @@ resolution	tracker	et	Lahendus
 sender address	tracker	et	Saatja aadress
 set an own bounty (in %s)	tracker	et	Sea oma vaevatasu (%s)
 set bounty	tracker	et	Sea vaevatasu
-show actions in tracker listing	tracker	et	Näita tegevusi jälgija listis
 staff	tracker	et	Töötajad
 summary	tracker	et	Summaarselt
 technicians	tracker	et	Tehnikud

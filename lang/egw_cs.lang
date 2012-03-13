@@ -12,7 +12,6 @@
 5 - medium	tracker	cs	5 - střední
 9 - highest	tracker	cs	9 - nejvyšší
 accepted	tracker	cs	Přijato
-actions	tracker	cs	Akce
 activate users queue access control	tracker	cs	Aktivovat přístupovou kontrolu uživatelských front
 add additionally	tracker	cs	přidat dodatečně
 add assigned	tracker	cs	Přidat přidělené
@@ -194,12 +193,8 @@ server type	tracker	cs	Typ serveru
 set %1	tracker	cs	Nastavit %1
 set an own bounty (in %s)	tracker	cs	Vypsat vlastní odměnu (v %s)
 set bounty	tracker	cs	Vypsat odměnu
-should the actions column in the tracker list-view be shown?	tracker	cs	Má se sloupec akcí ukazovat v seznamovém zobrazení?
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vám přidělených položek?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vámi vytvořených položek?
-show a new column that calculated the acumulated times of timesheet entries.	tracker	cs	Zobrazovat nový sloupec, který ukazuje kumulované časy položek pracovního výkazu.
-show actions in tracker listing	tracker	cs	Zobrazovat akce ve výpisech sledovacího systému
-show the acumulated times of timesheet entries	tracker	cs	Zobrazovat kumulované časy položek pracovního výkazu.
 show the tracker send you notification mails, in tracker items that you updates?	tracker	cs	Měl by Vám sledovací systém zasílat upozornění na položky, které jste aktualizoval(a)?
 staff	tracker	cs	Personál
 state	tracker	cs	Stav
