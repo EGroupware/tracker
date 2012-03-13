@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.006">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.007">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -24,7 +24,7 @@
 				<column/>
 				<column/>
 				<column width="18%"/>
-				<column disabled="!@allow_sum_timesheet"/>
+				<column disabled="@no_tr_sum_timesheets"/>
 				<column disabled="@no_votes"/>
 				<column disabled="@no_bounties"/>
 				<column/>
@@ -86,10 +86,12 @@
 						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
-					<vbox no_lang="1">
+					<vbox no_lang="1" class="colfullWidth">
 						<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
 						<hrule/>
-						<description id="${row}[tr_description]" no_lang="1" class="trackerDes"/>
+						<box no_lang="1" class="trackerDes">
+							<html id="${row}[tr_description]" no_lang="1"/>
+						</box>
 					</vbox>
 					<vbox readonly="true">
 						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
