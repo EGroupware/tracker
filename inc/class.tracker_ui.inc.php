@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -540,7 +540,7 @@ class tracker_ui extends tracker_bo
 								'tr_cc'		=> $infolog['info_cc'],
 								'tr_created'	=> $infolog['info_startdate']
 							));
-							
+
 							// Categories are different, no globals.  Match by name.
 							$match = array(
 								$infolog_bo->enums['type'][$infolog['info_type']] => array(
@@ -566,7 +566,7 @@ class tracker_ui extends tracker_bo
 									break;
 								}
 							}
-	
+
                                                         // Add responsible as participant - filtered later
                                                         foreach($infolog['info_responsible'] as $responsible) {
 								$content['tr_assigned'][] = $responsible;
@@ -578,7 +578,7 @@ class tracker_ui extends tracker_bo
                                                                 egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
                                                         }
                                                         break;
-						
+
 					}
 					// Copy same custom fields
                                         $_cfs = config::get_customfields('tracker');
@@ -880,12 +880,12 @@ class tracker_ui extends tracker_bo
 		if (!$this->prefs['show_sum_timesheet'] || !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 		{
 			$query_in['options-selectcols']['tr_sum_timesheets'] = false;
-			$rows['allow_sum_timesheet'] = false;
+			$rows['no_tr_sum_timesheets'] = false;
 		}
 		else
 		{
 			// Disable column if turned off in the column list
-			$rows['allow_sum_timesheet'] = (strpos($query_in['selectcols'], 'tr_sum_timesheets') !== false);
+			$rows['no_tr_sum_timesheets'] = (strpos($query_in['selectcols'], 'tr_sum_timesheets') !== false);
 		}
 
 		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
@@ -1105,7 +1105,7 @@ class tracker_ui extends tracker_bo
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
-	 			'default_cols'   => '!esc_id,legacy_actions',
+	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description',
 				'row_id'         => 'tr_id',
 			);
 			// use the state of the last session stored in the user prefs
