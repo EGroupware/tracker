@@ -25,20 +25,24 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 		$options = $_definition->plugin_options;
 
 		$ui = new tracker_ui();
-		
+
 		$selection = array();
 		$query_key = 'tracker'.($options['tracker'] ? '-'.$options['tracker'] : '');
 		$query = $old_query = egw_session::appsession('index',$query_key);
 		if ($options['selection'] == 'selected') {
 			// ui selection with checkbox 'use_all'
 			$query['num_rows'] = -1;	// all
+			$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
 			$ui->get_rows($query,$selection,$readonlys);
-			
+
 			// Reset nm params
 			egw_session::appsession('index',$query_key, $old_query);
 		}
 		elseif ( $options['selection'] == 'all' ) {
-			$query = array('num_rows' => -1);	// all
+			$query = array(
+				'num_rows' => -1,		// all
+				'csv_export' => true,	// so get_rows method _can_ produce different content or not store state in the session
+			);
 			$ui->get_rows($query,$selection,$readonlys);
 
 			// Reset nm params
