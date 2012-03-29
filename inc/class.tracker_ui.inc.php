@@ -713,7 +713,11 @@ class tracker_ui extends tracker_bo
 		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
-		egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
+		$query = $query_in;
+		if (!$query['csv_export'])	// do not store query for csv-export in session
+		{
+			egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
+		}
 		$tracker = $query['col_filter']['tr_tracker'];
 		if (!($query['col_filter']['cat_id'] = $query['cat_id'])) unset($query['col_filter']['cat_id']);
 		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
@@ -748,7 +752,7 @@ class tracker_ui extends tracker_bo
 				'tr_status'   => $query['col_filter']['tr_status'],
 			),
 		));
-		if ($GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
+		if (!$query['csv_export'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
 			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
 		{
 			//$msg .= "save the index state <br>";
