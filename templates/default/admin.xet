@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.admin.cats" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.admin.cats" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -85,7 +85,10 @@
 								<description value="Actions"/>
 							</row>
 							<row class="row">
-								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<hbox>
+									<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+									<description id="${row}[name]" readonly="true"/>
+								</hbox>
 								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
 							</row>
 						</rows>
@@ -332,7 +335,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.7.004">
+	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.001">
 		<grid>
 			<columns>
 				<column width="200"/>
@@ -433,6 +436,13 @@
 					<checkbox statustext="When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled." label="Add unrecognized mail address to the CC field" id="mailhandling[auto_cc]"/>
 					<description/>
 					<description/>
+				</row>
+				<row class="row" valign="top">
+					<description value="Handling Mailheader Information"/>
+					<description value="Do you want to add Mailheader Information to Description and/or Comments?"/>
+					<menulist span="2">
+						<menupopup id="mailhandling[mailheaderhandling]"/>
+					</menulist>
 				</row>
 				<row class="row">
 					<description value="Handling autoreplies"/>
