@@ -106,7 +106,7 @@ class tracker_merge extends bo_merge
 		$array = array();
 
 		// Signature
-		if($this->bo->notification[$record->tr_tracker]['use_signature'])
+		if($this->bo->notification[$record->tr_tracker]['use_signature'] || $this->bo->notification[0]['use_signature'])
 		{
 			if(trim(strip_tags($this->bo->notification[$record->tr_tracker]['signature'])))
 			{
