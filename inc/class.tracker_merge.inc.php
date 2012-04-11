@@ -83,7 +83,7 @@ class tracker_merge extends bo_merge
 	 * @param string $prefix='' prefix like eg. 'erole'
 	 * @return array|boolean
 	 */
-	public function tracker_replacements($id,$prefix='', &$content='') 
+	public function tracker_replacements($id,$prefix='', &$content='')
 	{
 		$record = new tracker_egw_record($id);
 		$info = array();
@@ -118,6 +118,12 @@ class tracker_merge extends bo_merge
 			}
 		}
 
+		// Expand custom field links
+		if($content && strpos($content, '#') !== 0)
+		{
+			$this->cf_link_to_expand($record->get_record_array(), $content, $info);
+		}
+
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
 		$array += $record->get_record_array();
 
@@ -139,7 +145,7 @@ class tracker_merge extends bo_merge
 			foreach($matches[0] as $i => $placeholder)
 			{
 				$placeholder = substr($placeholder, 1, -1);
-				if($link_cache[$id][$placeholder]) 
+				if($link_cache[$id][$placeholder])
 				{
 					$array[$placeholder] = $link_cache[$id][$placeholder];
 					continue;
@@ -247,7 +253,7 @@ class tracker_merge extends bo_merge
 
 		$n = 0;
 		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label + array(
-			'tr_modifier' => lang('Last modified by'), 
+			'tr_modifier' => lang('Last modified by'),
 			'tr_modified' => lang('last modified'),
 		);
 		$fields['bounty'] = lang('bounty');
@@ -275,7 +281,7 @@ class tracker_merge extends bo_merge
 		echo '<tr><td colspan="4"><h3>'.lang('Comments').":</h3></td></tr>";
 		echo '<tr><td colspan="4">{{table/comment}}</td></tr>';
 		foreach(array(
-			'date' => 'date', 
+			'date' => 'date',
 			'user' => 'Username',
 			'message' => 'Message',
 			'restricted' => 'If the message was restricted',
