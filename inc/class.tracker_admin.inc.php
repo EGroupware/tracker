@@ -69,7 +69,13 @@ class tracker_admin extends tracker_bo
 		if (is_array($content))
 		{
 			list($button) = @each($content['button']);
-
+			$defaultresolution = false;
+			if (isset($content['resolutions']['isdefaultresolution']))
+			{
+				$name = 'resolutions';
+				$defaultresolution = $content[$name]['isdefaultresolution'];
+				unset($content[$name]['isdefaultresolution']);
+			}
 			switch($button)
 			{
 				case 'add':
@@ -87,11 +93,11 @@ class tracker_admin extends tracker_bo
 						$msg = lang('Error adding the new tracker!');
 					}
 					break;
-					
+
 				case 'rename':
 					if (!$content['add_name'])
 					{
-						$msg = lang('You need to enter a name');		
+						$msg = lang('You need to enter a name');
 					}
 					elseif($tracker && $this->rename_tracker($tracker,$content['add_name']))
 					{
@@ -258,9 +264,10 @@ class tracker_admin extends tracker_bo
 							}
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
-								$name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
-								$name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist'] ||
-								$name == 'responses' && $cat['description'] != $old_cat['data']['response'])
+								($name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign']) ||
+								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
+								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
+								($name == 'resolutions' && (($defaultresolution && ($cat['id']==$defaultresolution || $cat['isdefault'] && $cat['id']!=$defaultresolution))||!$defaultresolution && $cat['isdefault']) ))
 							{
 								$old_cat['name'] = $cat['name'];
 								switch($name)
@@ -273,6 +280,14 @@ class tracker_admin extends tracker_bo
 										break;
 									case 'responses':
 										$old_cat['data']['response'] = $cat['description'];
+										break;
+									case 'resolutions':
+										if ($cat['id']==$defaultresolution) $old_cat['data']['isdefault'] = $cat['isdefault'] = true;
+										else
+										{
+											if (isset($old_cat['data']['isdefault'])) unset($old_cat['data']['isdefault']);
+											if (isset($cat['isdefault'])) unset($cat['isdefault']);
+										}
 										break;
 								}
 								//echo "update to"; _debug_array($old_cat);
@@ -376,6 +391,7 @@ class tracker_admin extends tracker_bo
 						break;
 					case 'resolution':
 						$content['resolutions'][$i++] = $cat + $data;
+						if ($data['isdefault']) $content['resolutions']['isdefaultresolution'] = $cat['id'];
 						break;
 					default:	// cat
 						$data['type'] = 'cat';
@@ -384,7 +400,7 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] = $content['resolutions'][$i++] = 
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] = $content['resolutions'][$i++] =
 			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;

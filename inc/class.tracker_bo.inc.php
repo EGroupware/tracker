@@ -103,6 +103,7 @@ class tracker_bo extends tracker_so
 		'w' => 'Wont fix',
 		'W' => 'Works for me',
 	);
+	var $new_resolution;
 	/**
 	 * Technicians by tracker or key=0 for all trackers
 	 *
@@ -501,10 +502,15 @@ class tracker_bo extends tracker_so
 
 		if (!$this->data['tr_id'])	// new entry
 		{
+			// next 2 lines are to set / initialize new_resolution
+			//$resolutions = $this->get_tracker_labels('resolution'); // all
+			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
+			$resolutions = $this->get_tracker_labels('resolution',$this->data['tr_tracker']); // possible specific
+			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
 			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_status'] = self::STATUS_OPEN;
-			$this->data['tr_resolution'] = $this->new_resolution;
+			$this->data['tr_resolution'] = ($this->new_resolution[$this->data['tr_tracker']]?$this->new_resolution[$this->data['tr_tracker']]:$this->new_resolution['all']);
 			$this->data['tr_seen'] = serialize(array($this->user));
 
 			if (!$this->data['tr_group'])
@@ -1142,7 +1148,7 @@ class tracker_bo extends tracker_so
 	 * The labels are saved as categories and can be tracker specific (sub-cat of the tracker) or for all trackers.
 	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty
 	 *
-	 * @param string $type='trackers' 'tracker', 'version', 'cat'
+	 * @param string $type='trackers' 'tracker', 'version', 'cat', 'resolution'
 	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
 	 */
 	function get_tracker_labels($type='tracker',$tracker=null)
@@ -1168,6 +1174,7 @@ class tracker_bo extends tracker_so
 		if (!$tracker) $tracker = $this->data['tr_tracker'];
 
 		$labels = array();
+		$new_resolution = false;
 		foreach($this->all_cats as $cat)
 		{
 			$cat_data = unserialize($cat['data']);
@@ -1175,9 +1182,12 @@ class tracker_bo extends tracker_so
 			if ($cat_type == $type && ($cat['parent'] == 0 || $cat['main'] == $tracker && $cat['id'] != $tracker))
 			{
 				$labels[$cat['id']] = $cat['name'];
+				if ($cat_type=='resolution' && $cat_data['isdefault']) $new_resolution[(!empty($tracker) && $cat['main'] == $tracker?$tracker:'all')] = $cat['id'];
 			}
 		}
+		if ($new_resolution) config::save_value('new_resolution',$new_resolution,'tracker');
 		$this->load_config();
+
 		if ($type == 'tracker' && !$GLOBALS['egw_info']['user']['apps']['admin'] && $this->enabled_queue_acl_access)
 		{
 			foreach ($labels as $tracker_id => $tracker_name)
@@ -1551,9 +1561,14 @@ class tracker_bo extends tracker_so
 		if(!$this->new_resolution)
 		{
 			$categories = new categories(null, 'tracker');
-			$this->new_resolution = $categories->name2id('None');
-			config::save_value('new_resolution',$this->new_resolution,'tracker');
+			$new_resolution = $categories->name2id('None');
+			if ($new_resolution)
+			{
+				$this->new_resolution['all'] = $new_resolution;
+				config::save_value('new_resolution',$this->new_resolution,'tracker');
+			}
 		}
+
 		if (is_array($this->notification) && !$this->notification[0]['lang'])
 		{
 			$this->notification[0]['lang'] = $GLOBALS['egw']->preferences->default_prefs('common', 'lang');
