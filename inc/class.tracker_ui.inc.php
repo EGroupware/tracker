@@ -857,6 +857,7 @@ class tracker_ui extends tracker_bo
 			foreach($trackers as $tracker_id)
 			{
 				$statis += $this->get_tracker_stati($tracker_id);
+				$resolutions += $this->get_tracker_labels('resolution',$tracker_id);
 			}
 		}
 
@@ -1278,7 +1279,7 @@ width:100%;
 					'resolution' => array(
 						'caption' => 'Resolution',
 						'prefix' => 'resolution_',
-						'children' => $items=$this->get_tracker_labels('resolution',$tracker),
+						'children' => $items=$this->get_tracker_labels('resolution',$tracker), // ToDo: get tracker specific solutions as well, have them available only when applicable
 						'disabled' => count($items) <= 1,
 						'hideOnDisabled' => true,
 					),
