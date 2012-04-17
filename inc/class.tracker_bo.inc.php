@@ -509,6 +509,7 @@ class tracker_bo extends tracker_so
 			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
 			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
+			$this->data['tr_version'] = $this->data['tr_version'] ? $this->data['tr_version'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 			$this->data['tr_status'] = self::STATUS_OPEN;
 			$this->data['tr_resolution'] = ($this->new_resolution[$this->data['tr_tracker']]?$this->new_resolution[$this->data['tr_tracker']]:$this->new_resolution['all']);
 			$this->data['tr_seen'] = serialize(array($this->user));
