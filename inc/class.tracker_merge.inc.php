@@ -52,7 +52,7 @@ class tracker_merge extends bo_merge
 	 */
 	protected function get_replacements($id,&$content=null)
 	{
-		if (!($replacements = $this->tracker_replacements($id)))
+		if (!($replacements = $this->tracker_replacements($id,'',$content)))
 		{
 			return false;
 		}
@@ -82,7 +82,7 @@ class tracker_merge extends bo_merge
 	 * @param string $prefix='' prefix like eg. 'erole'
 	 * @return array|boolean
 	 */
-	public function tracker_replacements($id,$prefix='') 
+	public function tracker_replacements($id,$prefix='', &$content='')
 	{
 		$record = new tracker_egw_record($id);
 		$info = array();
@@ -102,6 +102,13 @@ class tracker_merge extends bo_merge
 			$lookups['tr_status'] += $this->bo->get_tracker_stati($t_id);
 			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $t_id);
 		}
+
+		// Expand custom field links
+		if($content && strpos($content, '#') !== 0)
+		{
+			$this->cf_link_to_expand($record->get_record_array(), $content, $info);
+		}
+
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
 		// Set any missing custom fields, or the marker will stay
 		$array = $record->get_record_array();
@@ -111,12 +118,32 @@ class tracker_merge extends bo_merge
 		}
 
 		// Links
-		$array['links'] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME);
- 		$array['attachments'] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME);
-		$array['links_attachments'] = $this->get_links('tracker', $id);
-		foreach(array_keys($GLOBALS['egw_info']['user']['apps']) as $app)
+		$pattern = '@\$(links|attachments|links_attachments)\/?(title|href|link)?\/?([a-z]*)\$@';
+                static $link_cache;
+		if(preg_match_all($pattern, $content, $matches))
 		{
-			$array["links/{$app}"] = $this->get_links('tracker',$id, $app);
+			foreach($matches[0] as $i => $placeholder)
+			{
+				$placeholder = substr($placeholder, 1, -1);
+				if($link_cache[$id][$placeholder])
+				{
+					$array[$placeholder] = $link_cache[$id][$placeholder];
+					continue;
+				}
+				switch($matches[1][$i])
+				{
+					case 'links':
+						$array[$placeholder] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME, array(),$matches[2][$i]);
+						break;
+					case 'attachments':
+						$array[$placeholder] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME,array(),$matches[2][$i]);
+						break;
+					default:
+						$array[$placeholder] = $this->get_links('tracker', $id, $matches[3][$i], array(), $matches[2][$i]);
+						break;
+				}
+				$link_cache[$id][$placeholder] = $array[$placeholder];
+			}
 		}
 
 		// Add markers
@@ -175,8 +202,8 @@ class tracker_merge extends bo_merge
 
 		$n = 0;
 		$fields = array('tr_id' => lang('Tracker ID')) + $this->bo->field2label + array(
-			'tr_modifier' => lang('Last modified by'), 
-			'tr_modified' => lang('last modified')
+			'tr_modifier' => lang('Last modified by'),
+			'tr_modified' => lang('last modified'),
 		);
 		$fields['bounty'] = lang('bounty');
 		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
@@ -198,7 +225,7 @@ class tracker_merge extends bo_merge
 		echo '<tr><td colspan="4"><h3>'.lang('Comments').":</h3></td></tr>";
 		echo '<tr><td colspan="4">{{table/comment}}</td></tr>';
 		foreach(array(
-			'date' => 'date', 
+			'date' => 'date',
 			'user' => 'Username',
 			'message' => 'Message',
 			'restricted' => 'If the message was restricted'
