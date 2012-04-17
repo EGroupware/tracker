@@ -558,7 +558,7 @@
 					</hbox>
 				</row>
 				<row>
-					<tabbox id="tracker.admin.cats|tracker.admin.priorities|tracker.admin.staff|tracker.admin.config|tracker.admin.mail|tracker.admin.notifications" span="all">
+					<tabbox id="tabs" span="all">
 						<tabs>
 							<tab id="tracker.admin.cats" label="Categories" statustext="Categories, versions, canned responses"/>
 							<tab id="tracker.admin.priorities" label="Priorities" statustext="Custom tracker priorities"/>
