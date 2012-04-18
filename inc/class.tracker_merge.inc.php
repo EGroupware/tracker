@@ -103,6 +103,8 @@ class tracker_merge extends bo_merge
 			$lookups['tr_status'] += $this->bo->get_tracker_stati($t_id);
 			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $t_id);
 		}
+		$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record->tr_tracker, $record->cat_id);
+
 		$array = array();
 
 		// Signature
