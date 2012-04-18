@@ -101,6 +101,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			$export_object->export_record($_record);
 			unset($_record);
 		}
+		return $export_object;
 	}
 
 	/**
