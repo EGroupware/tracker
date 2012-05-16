@@ -1543,6 +1543,23 @@ width:100%;
 
 			switch($action)
 			{
+				case 'close':
+					$action_msg = lang('closed');
+					foreach($checked as $tr_id)
+					{
+						if (!$this->read($tr_id)) continue;
+						$this->data['tr_status'] = tracker_bo::STATUS_CLOSED;
+						if($no_notification) $this->data['no_notifications'] = true;
+						if (!$this->save())
+						{
+							$success++;
+						}
+						else
+						{
+							$failed++;
+						}
+					}
+					break;
 				case 'group':
 					// Popup adds an extra param (add/delete) that group doesn't need
 					list(,$settings) = explode('_',$settings);
