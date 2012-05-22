@@ -15,6 +15,7 @@
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
 accepted	tracker	en	Accepted
+acl	tracker	en	Access Control List
 activate users queue access control	tracker	en	Activate users queue access control
 add additionally	tracker	en	Add additionally
 add assigned	tracker	en	Add assigned
@@ -68,7 +69,7 @@ completed	tracker	en	Completed
 configuration	tracker	en	Configuration
 configuration for all trackers	tracker	en	Configuration for all tracker queues
 configuration updated.	tracker	en	Configuration updated
-configuration, acl, notifications	tracker	en	Configuration, ACL, Notifications
+configuration, notifications	tracker	en	Configuration, Notifications
 confirm that you pay the specified bounty to implement or fix the issue	tracker	en	Confirm that you pay the specified bounty to implement or fix the issue
 confirm the receipt of money for this bounty	tracker	en	Confirm the receipt of money for this bounty
 confirmed	tracker	en	Confirmed

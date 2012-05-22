@@ -15,6 +15,7 @@
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
+acl	tracker	de	Zugriffskontrolle
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem aktivieren
 add additionally	tracker	de	zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
@@ -68,7 +69,7 @@ completed	tracker	de	Prozent erledigt
 configuration	tracker	de	Konfiguration
 configuration for all trackers	tracker	de	Konfiguration für alle Verfolgungssysteme
 configuration updated.	tracker	de	Konfiguration aktualisiert.
-configuration, acl, notifications	tracker	de	Konfiguration, Zugriffskontrolle, Benachrichtigungen
+configuration, notifications	tracker	de	Konfiguration, Benachrichtigungen
 confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie zahlen, für die Implementation oder Behebung dieses Themas
 confirm the receipt of money for this bounty	tracker	de	Bestätigen Sie den Zahlungseingang dieser Prämie
 confirmed	tracker	de	Bestätigt
