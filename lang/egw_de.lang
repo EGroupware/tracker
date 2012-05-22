@@ -15,7 +15,7 @@
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
-acl	tracker	de	Zugriffskontrolle
+acl	tracker	de	Bearbeitungsrechte
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem aktivieren
 add additionally	tracker	de	zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
