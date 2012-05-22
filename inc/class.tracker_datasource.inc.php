@@ -7,7 +7,7 @@
  * @package tracker
  * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$ 
+ * @version $Id$
  */
 
 include_once(EGW_INCLUDE_ROOT.'/projectmanager/inc/class.datasource.inc.php');
@@ -25,13 +25,13 @@ class tracker_datasource extends datasource
 	function datasource_tracker()
 	{
 		$this->datasource('tracker');
-		
+
 		$this->valid = PM_COMPLETION|PM_READ_START|PM_READ_END|PM_PLANNED_BUDGET|PM_RESOURCES;
 	}
-	
+
 	/**
 	 * get an entry from the underlaying app (if not given) and convert it into a datasource array
-	 * 
+	 *
 	 * @param mixed $data_id id as used in the link-class for that app, or complete entry as array
 	 * @return array/boolean array with the data supported by that source or false on error (eg. not found, not availible)
 	 */
@@ -46,7 +46,7 @@ class tracker_datasource extends datasource
 		if (!is_array($data_id))
 		{
 			$data =& $GLOBALS['botracker']->read((int) $data_id);
-			
+
 			if (!is_array($data)) return false;
 		}
 		else
@@ -58,7 +58,7 @@ class tracker_datasource extends datasource
 			'pe_completion'   => $data['tr_completion'],
 			'pe_real_start'   => $data['tr_created'],
 			'pe_real_end'     => $data['tr_closed'],
-			'pe_resources'    => $data['tr_assigned'] ? array($data['tr_assigned']) : null,
+			'pe_resources'    => $data['tr_assigned'] ? (array)$data['tr_assigned'] : null,
 			'pe_details'      => $data['tr_description'] ? nl2br($data['tr_description']) : '',
 			'pe_planned_budget'   => $data['tr_budget'],
 		);
