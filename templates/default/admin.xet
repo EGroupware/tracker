@@ -195,7 +195,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -275,12 +275,41 @@
 					<checkbox id="allow_restricted_comments"/>
 					<description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"/>
 				</row>
+				<row class="th">
+					<description value="E-Mail notifications" span="all"/>
+				</row>
+				<row class="row">
+					<description value="Sender address" for="notification_sender"/>
+					<textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]" size="30"/>
+					<description value="URL of the tracker" for="notification_link"/>
+					<textbox statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]" size="30"/>
+				</row>
+				<row class="row">
+					<description value="Copy to"/>
+					<textbox statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]" size="30"/>
+					<description value="Language" no_lang="1" for="notification_lang"/>
+					<menulist>
+						<menupopup statustext="Language for the copy" id="notification[lang]" no_lang="1"/>
+					</menulist>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.admin.acl" template="" lang="" group="0" version="1.9.002">
+		<grid width="100%" height="450" overflow="auto">
+			<columns>
+				<column width="100"/>
+				<column/>
+				<column/>
+				<column width="40%"/>
+			</columns>
+			<rows>
 				<row class="th" disabled="@tracker">
 					<description value="ACL" span="all"/>
 				</row>
 				<row class="row" valign="top" disabled="@tracker">
 					<description value="Allow editing by"/>
-					<grid width="100%" height="200" overflow="auto" id="field_acl">
+					<grid width="100%" height="425" overflow="auto" id="field_acl">
 						<columns>
 							<column/>
 							<column/>
@@ -317,23 +346,6 @@
 							</row>
 						</rows>
 					</grid>
-				</row>
-				<row class="th">
-					<description value="E-Mail notifications" span="all"/>
-				</row>
-				<row class="row">
-					<description value="Sender address" for="notification_sender"/>
-					<textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]" size="30"/>
-					<description value="URL of the tracker" for="notification_link"/>
-					<textbox statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]" size="30"/>
-				</row>
-				<row class="row">
-					<description value="Copy to"/>
-					<textbox statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]" size="30"/>
-					<description value="Language" no_lang="1" for="notification_lang"/>
-					<menulist>
-						<menupopup statustext="Language for the copy" id="notification[lang]" no_lang="1"/>
-					</menulist>
 				</row>
 			</rows>
 		</grid>
@@ -529,7 +541,7 @@
 }
 		</styles>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.admin" template="" lang="" group="0" version="1.9.003">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>
@@ -563,7 +575,8 @@
 							<tab id="tracker.admin.cats" label="Categories" statustext="Categories, versions, canned responses"/>
 							<tab id="tracker.admin.priorities" label="Priorities" statustext="Custom tracker priorities"/>
 							<tab id="tracker.admin.staff" label="Staff" statustext="Tracker admins &amp; technicians"/>
-							<tab id="tracker.admin.config" label="Configuration" statustext="Configuration, ACL, Notifications"/>
+							<tab id="tracker.admin.config" label="Configuration" statustext="Configuration, Notifications"/>
+							<tab id="tracker.admin.acl" label="ACL" statustext="ACL"/>
 							<tab id="tracker.admin.mail" label="Mail handling" statustext="Automatic email handling"/>
 							<tab id="tracker.admin.notifications" label="Notifications" statustext="Custom notifications"/>
 						</tabs>
@@ -572,6 +585,7 @@
 							<template id="tracker.admin.priorities"/>
 							<template id="tracker.admin.staff"/>
 							<template id="tracker.admin.config"/>
+							<template id="tracker.admin.acl"/>
 							<template id="tracker.admin.mail"/>
 							<template id="tracker.admin.notifications"/>
 						</tabpanels>

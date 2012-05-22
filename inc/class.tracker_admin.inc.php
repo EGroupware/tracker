@@ -485,6 +485,7 @@ class tracker_admin extends tracker_bo
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
 			'button[rename]' => !$tracker,
+			'tabs' => array('tracker.admin.acl'=>$tracker),
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl = new etemplate('tracker.admin');
