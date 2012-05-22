@@ -192,7 +192,7 @@ class tracker_hooks
 			$link = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
 
 			$settings['default_document'] = array(
-				'type'   => 'input',
+				'type'   => 'vfs_file',
 				'size'   => 60,
 				'label'  => 'Default document to insert entries',
 				'name'   => 'default_document',
@@ -204,7 +204,7 @@ class tracker_hooks
 				'admin'  => False,
 			);
 			$settings['document_dir'] = array(
-				'type'   => 'input',
+				'type'   => 'vfs_dirs',
 				'size'   => 60,
 				'label'  => 'Directory with documents to insert entries',
 				'name'   => 'document_dir',
