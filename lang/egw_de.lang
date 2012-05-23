@@ -128,6 +128,7 @@ escalation deleted.	tracker	de	Eskalation gelöscht.
 escalation not found!	tracker	de	Eskalation nicht gefunden!
 escalation saved.	tracker	de	Eskalation gespeichert.
 everybody	tracker	de	Jeder
+exclude links of the following apps on timesheet creation	tracker	de	Ignoriere Verknüpfungen der im folgenden ausgewählten Anwendungen bei der Erzeugung von Stundenzetteln zu Tickets
 existing links	tracker	de	Bestehende Verknüpfungen
 exists	tracker	de	existiert
 export definitition to use for nextmatch export	tracker	de	Export Profil der Listenansicht (Disketten Symbol)
@@ -186,6 +187,7 @@ no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 no, no additional mailheader to description and comments	tracker	de	nein, keine Mailheaderinformationen
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
+note: timesheet itself is always excluded	tracker	de	Beachte: Links zur Anwendung Stundenzettel werden IMMER ignoriert. 
 notification	tracker	de	Benachrichtigung
 only explicitly named users have read access (otherwise everyone)	tracker	de	nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
 open(status)	tracker	de	Offen
