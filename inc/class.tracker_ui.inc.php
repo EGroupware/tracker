@@ -907,9 +907,11 @@ class tracker_ui extends tracker_bo
 		$set = array();
 		if ((int)$data['id'] && ($ticket = $this->read($data['id'])))
 		{
+			//error_log(__METHOD__.__LINE__.$this->exclude_app_on_timesheetcreation);
 			foreach(egw_link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
 			{
-				if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
+				//if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
+				if (stripos($this->exclude_app_on_timesheetcreation.','.'timesheet'.','.egw_link::VFS_APPNAME,$link['app'])===false)
 				{
 					$set['link_app'][] = $link['app'];
 					$set['link_id'][]  = $link['id'];

@@ -9,7 +9,7 @@
 	<template id="tracker.index.right" template="" lang="" group="0" version="1.7.001">
 		<buttononly label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[col_filter][tr_tracker]}'),'_blank','dependent=yes,width=750,height=500,scrollbars=yes,status=yes'); return false;"/>
 	</template>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.007">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -87,7 +87,7 @@
 					</menulist>
 					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
 					<vbox no_lang="1" class="colfullWidth">
-						<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+						<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
 						<hrule/>
 						<box no_lang="1" class="trackerDes">
 							<html id="${row}[tr_description]" no_lang="1"/>
@@ -96,8 +96,8 @@
 					<vbox readonly="true">
 						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
-						<menulist class="noWrap">
-							<menupopup type="select-account" id="${row}[tr_modifier]" readonly="true"/>
+						<menulist>
+							<menupopup type="select-account" class="noWrap" id="${row}[tr_modifier]" readonly="true"/>
 						</menulist>
 					</vbox>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
@@ -107,18 +107,18 @@
 					<menulist>
 						<menupopup id="${row}[tr_resolution]" readonly="true" options="None"/>
 					</menulist>
-					<image align="center" label="$row_cont[tr_completion]" src="${row}[tr_completion]" no_lang="1"/>
+					<progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
 					<vbox options="0,0">
 						<hbox readonly="true" options="0,0">
 							<image label="Created by" src="move2" readonly="true"/>
-							<menulist class="leftPad5">
-								<menupopup type="select-account" id="${row}[tr_creator]" readonly="true"/>
+							<menulist>
+								<menupopup type="select-account" class="leftPad5" id="${row}[tr_creator]" readonly="true"/>
 							</menulist>
 						</hbox>
 						<hbox readonly="true" options="0,0">
 							<image label="Assigned to" src="groupevent" readonly="true"/>
-							<menulist class="leftPad5">
-								<menupopup type="select-account" id="${row}[tr_assigned]" readonly="true"/>
+							<menulist>
+								<menupopup type="select-account" class="leftPad5" id="${row}[tr_assigned]" readonly="true"/>
 							</menulist>
 						</hbox>
 					</vbox>
@@ -127,9 +127,9 @@
 					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
 					<date-since id="${row}[esc_start]"/>
 					<customfields-list id="$row"/>
-					<hbox align="center" options="0" class="noPrint" orient="0">
+					<hbox align="center" class="noPrint">
 						<button align="center" label="Add infolog" id="infolog[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=infolog.infolog_ui.edit&amp;action=tracker&amp;action_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="infolog" class="noPrint"/>
-						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
+						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.timesheet_ui.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
 						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>
