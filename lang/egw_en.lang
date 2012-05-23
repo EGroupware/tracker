@@ -128,6 +128,7 @@ escalation deleted.	tracker	en	Escalation deleted.
 escalation not found!	tracker	en	Escalation not found!
 escalation saved.	tracker	en	Escalation saved.
 everybody	tracker	en	Everybody
+exclude links of the following apps on timesheet creation	tracker	en	Exclude links of the following apps on timesheet creation
 existing links	tracker	en	Existing links
 exists	tracker	en	Exists
 export definitition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
@@ -190,6 +191,7 @@ no trackers found, aborting	tracker	en	No Trackers found, aborting.
 no, no additional mailheader to description and comments	tracker	en	no, no additional Mailheader to description and comments
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	No one
+note: timesheet itself is always excluded	tracker	en	Note: timesheet itself is always excluded
 notification	tracker	en	Notification
 only explicitly named users have read access (otherwise everyone)	tracker	en	Only explicitly named users have read access, otherwise everyone
 open(status)	tracker	en	Open
