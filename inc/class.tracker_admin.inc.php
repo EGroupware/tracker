@@ -432,6 +432,9 @@ class tracker_admin extends tracker_bo
 			);
 		}
 		//_debug_array($content);
+		if (is_array($content['exclude_app_on_timesheetcreation']) && !in_array('timesheet',$content['exclude_app_on_timesheetcreation'])) $content['exclude_app_on_timesheetcreation'][]='timesheet';
+		if (isset($content['exclude_app_on_timesheetcreation']) && !is_array($content['exclude_app_on_timesheetcreation']) && stripos($content['exclude_app_on_timesheetcreation'],'timesheet')===false) $content['exclude_app_on_timesheetcreation']=(strlen(trim($content['exclude_app_on_timesheetcreation']))>0?$content['exclude_app_on_timesheetcreation'].',':'').'timesheet';
+		if (!isset($content['exclude_app_on_timesheetcreation'])) $content['exclude_app_on_timesheetcreation']='timesheet';
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		$sel_options = array(
 			'tracker' => &$this->trackers,
@@ -472,6 +475,7 @@ class tracker_admin extends tracker_bo
 				0 => 'Creator',
 				1 => 'Nobody',
 			),
+			'exclude_app_on_timesheetcreation' => egw_link::app_list('add'),
 		);
 		foreach($this->mailservertypes as $ind => $typ)
 		{
