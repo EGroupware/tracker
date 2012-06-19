@@ -26,7 +26,7 @@ class tracker_datasource extends datasource
 	{
 		$this->datasource('tracker');
 
-		$this->valid = PM_COMPLETION|PM_READ_START|PM_READ_END|PM_PLANNED_BUDGET|PM_RESOURCES;
+		$this->valid = PM_COMPLETION|PM_READ_START|PM_READ_END|PM_PLANNED_BUDGET|PM_RESOURCES|PM_CAT_ID;
 	}
 
 	/**
@@ -61,6 +61,7 @@ class tracker_datasource extends datasource
 			'pe_resources'    => $data['tr_assigned'] ? (array)$data['tr_assigned'] : null,
 			'pe_details'      => $data['tr_description'] ? nl2br($data['tr_description']) : '',
 			'pe_planned_budget'   => $data['tr_budget'],
+			'cat_id'          => $data['cat_id'],
 		);
 	}
 }
