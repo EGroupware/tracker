@@ -164,6 +164,7 @@ class tracker_tracking extends bo_tracking
 	public function do_notifications($data,$old,$deleted, $changes)
 	{
 		$success = True;
+		$email_notified = array();
 
 		// Send all to others
 		$creator = $data[$this->creator_field];
@@ -173,16 +174,20 @@ class tracker_tracking extends bo_tracking
 			// Notify the creator with full info if they're an admin or technician
 			$this->creator_field = null;
 		}
-		$email_notified = array();
+
 		// Don't send CC
 		$private = $data['tr_private'];
 		$data['tr_private'] = true;
 		
+		// Send notification - $email_notified will be skipped
 		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
-		//error_log(__METHOD__.__LINE__." email notified:".array2string($email_notified));
+
+		error_log(__METHOD__.__LINE__." email notified with restricted comments:".array2string($email_notified));
+
 		if(!$changes)
 		{
 			// Only thing that really changed was a restricted comment
+			error_log(__METHOD__.':'.__LINE__.' Stopping, no other changes');
 			return $success;
 		}
 
@@ -201,11 +206,9 @@ class tracker_tracking extends bo_tracking
 			$this->creator_field = $creator_field;
 		}
 		$data['tr_private'] = $private;
-		$assigned = $this->assigned_field;
-		$this->assigned_field = null;
+		$already_notified = $email_notified;
 		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
-		//error_log(__METHOD__.__LINE__." email notified:".array2string($email_notified));
-		$this->assigned_field = $assigned;
+		error_log(__METHOD__.__LINE__." email notified, restricted comments removed:".array2string(array_diff($email_notified,$already_notified)));
 
 		return $success;
 	}
@@ -258,7 +261,7 @@ class tracker_tracking extends bo_tracking
 
 	/**
 	 * Get the body of the notification message
-	 * If there is a custom notification message configured, that will be used.  Otherwise, the 
+	 * If there is a custom notification message configured, that will be used.  Otherwise, the
 	 * default message will be used.
 	 *
 	 * @param boolean $html_email
@@ -281,7 +284,7 @@ class tracker_tracking extends bo_tracking
 		}
 		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
 
-		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message']) 
+		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
 		{
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
 				$notification['signature'];
@@ -289,7 +292,7 @@ class tracker_tracking extends bo_tracking
 
 		$merge = new tracker_merge();
 		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
-		if(strpos($notification['message'], '{{signature}}') === False) 
+		if(strpos($notification['message'], '{{signature}}') === False)
 		{
 			$message.=($html_email?"<br />\n":"\n").
 				$notification['signature'];
