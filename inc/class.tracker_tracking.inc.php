@@ -182,12 +182,12 @@ class tracker_tracking extends bo_tracking
 		// Send notification - $email_notified will be skipped
 		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
 
-		error_log(__METHOD__.__LINE__." email notified with restricted comments:".array2string($email_notified));
+		//error_log(__METHOD__.__LINE__." email notified with restricted comments:".array2string($email_notified));
 
 		if(!$changes)
 		{
 			// Only thing that really changed was a restricted comment
-			error_log(__METHOD__.':'.__LINE__.' Stopping, no other changes');
+			//error_log(__METHOD__.':'.__LINE__.' Stopping, no other changes');
 			return $success;
 		}
 
@@ -208,7 +208,7 @@ class tracker_tracking extends bo_tracking
 		$data['tr_private'] = $private;
 		$already_notified = $email_notified;
 		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
-		error_log(__METHOD__.__LINE__." email notified, restricted comments removed:".array2string(array_diff($email_notified,$already_notified)));
+		//error_log(__METHOD__.__LINE__." email notified, restricted comments removed:".array2string(array_diff($email_notified,$already_notified)));
 
 		return $success;
 	}
