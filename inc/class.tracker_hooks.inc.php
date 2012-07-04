@@ -41,6 +41,7 @@ class tracker_hooks
 			'add_popup'  => '750x500',
 			'file_access' => 'tracker.tracker_bo.file_access',
 			'file_access_user' => true,	// file_access supports 4th parameter $user
+			'merge' => true,
 		);
 
 		// Populate default types with queues
