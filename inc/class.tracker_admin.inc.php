@@ -282,7 +282,16 @@ class tracker_admin extends tracker_bo
 										$old_cat['data']['response'] = $cat['description'];
 										break;
 									case 'resolutions':
-										if ($cat['id']==$defaultresolution) $old_cat['data']['isdefault'] = $cat['isdefault'] = true;
+										if ($cat['id']==$defaultresolution)
+										{
+											$no_change = $cat['isdefault'];
+											$old_cat['data']['isdefault'] = $cat['isdefault'] = true;
+											if($no_change)
+											{
+												// No real change - use 2 because switch is a loop in PHP
+												continue 2;
+											}
+										}
 										else
 										{
 											if (isset($old_cat['data']['isdefault'])) unset($old_cat['data']['isdefault']);
