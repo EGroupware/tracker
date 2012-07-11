@@ -291,7 +291,7 @@ class tracker_ui extends tracker_bo
 					$ret = $this->save();
 					if ($ret === false)
 					{
-						$msg = lang('Save aborted; No change detected.');
+						$msg = lang('Nothing to save.');
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
 						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
 							// only change to current tracker, if not all trackers displayed

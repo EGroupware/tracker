@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -177,7 +177,7 @@ class tracker_tracking extends bo_tracking
 		// Don't send CC
 		$private = $data['tr_private'];
 		$data['tr_private'] = true;
-		
+
 		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
 		//error_log(__METHOD__.__LINE__." email notified:".array2string($email_notified));
 		if(!$changes)
@@ -353,5 +353,27 @@ class tracker_tracking extends bo_tracking
 			}
 		}
 		return $details;
+	}
+	/**
+	 * Compute changes between new and old data
+	 *
+	 * Reimplemented to cope with some tracker specialties:
+	 * - tr_completion is postfixed with a percent
+	 *
+	 * @param array $data
+	 * @param array $old=null
+	 * @return array of keys with different values in $data and $old
+	 */
+	public function changed_fields(array $data,array $old=null)
+	{
+		$changed = parent::changed_fields($data, $old);
+
+		// for tr_completion ignore percent postfix
+		if (($k = array_search('tr_completion', $changed)) !== false &&
+			(int)$data['tr_completion'] === (int)$old['tr_completion'])
+		{
+			unset($changed[$k]);
+		}
+		return $changed;
 	}
 }
