@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -248,7 +248,8 @@ class tracker_bo extends tracker_so
 		'tr_resolution'  => 'Re',
 		'tr_cc'			 => 'Cc',
 		'tr_group'		 => 'Gr',
-		'num_replies'    => 'Nr',
+		// no need to track number of replies, as replies are versioned
+		//'num_replies'    => 'Nr',
 /* the following bounty-stati are only for reference
 		'bounty-set'     => 'bo',
 		'bounty-deleted' => 'xb',
@@ -503,8 +504,6 @@ class tracker_bo extends tracker_so
 		if (!$this->data['tr_id'])	// new entry
 		{
 			// next 2 lines are to set / initialize new_resolution
-			//$resolutions = $this->get_tracker_labels('resolution'); // all
-			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
 			$resolutions = $this->get_tracker_labels('resolution',$this->data['tr_tracker']); // possible specific
 			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
 			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
@@ -529,78 +528,27 @@ class tracker_bo extends tracker_so
 			// check if we have a real modification
 			// read the old record
 			$new =& $this->data;
-			//error_log(__METHOD__.__LINE__.array2string($new));
-			$cfs = array_keys((array)config::get_customfields('tracker', false, $new['tr_tracker']));
-			foreach($cfs as $k => &$cf) $cf='#'.$cf;
-			//error_log(__METHOD__.__LINE__.array2string($cfs));
 			unset($this->data);
 			$this->read($new['tr_id']);
 			$old =& $this->data;
 			unset($this->data);
 			$this->data =& $new;
-			$changed = array();
-			foreach($old as $name => $value)
-			{
-				//error_log(__METHOD__.__LINE__.' '.$name.'->'.array2string($value));
-				if (in_array($name, $cfs)) continue; // we check customfields later
-				if (isset($new[$name]) && $new[$name] != $value)
-				{
-					if ($name === 'tr_completion' && str_replace('%','',$new[$name]) == str_replace('%','',$value)) continue;
-					if ($name === 'tr_assigned' && (array)$new[$name] == (array)$value) continue;
-					if ($name === 'tr_seen') continue;
-					if ($name === 'replies' && is_array($new[$name]))
-					{
-						// reindex
-						$test = array_slice($new[$name],0);
-						$value = array_slice($value,0);
-						//error_log(__METHOD__.__LINE__.array2string($test));
-						//error_log(__METHOD__.__LINE__.array2string($value));
-						// compare the replies to be on the save side,(even there should not be any changes with the replies, unless you add one)
-						if (count($test) == count($value))
-						{
-							$ridentical=true;
-							foreach($test as $k => $reply)
-							{
-								foreach($reply as $srk => $rv)
-								{
-									//error_log(__METHOD__.__LINE__.' '.$rv .'<==>'. $value[$k][$srk]);
-									// reply_vivible_class may be added by UI, so old will not have that
-									// reply_created may be a timestamp UNIX or YYYY-MM-DD HH:MM (but Seconds missing) so we cannot transform and compare relyably
-									// reply_message may be html encoded or not, we skip this, as it should not be changed anyhow
-									if ($srk==='reply_visible_class' || $srk ==='reply_created' || $srk ==='reply_message') continue;
-									if ($rv !== $value[$k][$srk]) $ridentical = false;
-								}
-								if ($ridentical===false) break; // first one not identical adds replies to changed
-							}
-						}
-						if ($ridentical) continue;
-					}
-					if (isset($new[$name]) && empty($new[$name]) && empty($value)) continue; // if both representations are empty we continue, no matter what type
-					$changed[] = $name;
-					//error_log(__METHOD__.__LINE__.' changes in '.$name.': new->'.array2string($new[$name]));
-					//error_log(__METHOD__.__LINE__.' old->'.array2string($value));
-				}
-			}
-			foreach($cfs as $k => $cf)
-			{
-				if ((isset($new[$cf]) && isset($old[$cf])  && $new[$cf] != $old[$cf]) ||
-					(isset($new[$cf]) && !isset($old[$cf]) ) ||
-					(!isset($new[$cf]) && isset($old[$cf]) ) ) $changed[] = $cf;
 
-			}
+			if (!is_object($this->tracking)) $this->tracking = new tracker_tracking($this);
+			$changed = $this->tracking->changed_fields($new, $old);
+
 			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) ||
 				(isset($this->data['canned_response']) && !empty($this->data['canned_response']))))
 			{
-				//echo "<p>botracker::save() no change --> no save needed</p>\n";
 				//error_log(__METHOD__.__LINE__."  no change --> no save needed");
 				return false;
 			}
-
 			// Check for modifying field without access
 			$readonlys = $this->readonlys_from_acl();
 			foreach($changed as $field)
 			{
-				if($readonlys[$field]){
+				if ($readonlys[$field])
+				{
 					//error_log(__METHOD__.__LINE__.' Field:'.$field.'->'.array2string($readonlys).function_backtrace());
 					return $field;
 				}
