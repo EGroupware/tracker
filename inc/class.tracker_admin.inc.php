@@ -223,8 +223,8 @@ class tracker_admin extends tracker_bo
 					{
 						foreach($content[$name] as $cat)
 						{
-							//_debug_array($cat);
-							if (!$cat['name']) continue;	// ignore empty (new) cats
+							//_debug_array(array($name=>$cat));
+							if (!is_array($cat) || !$cat['name']) continue;	// ignore empty (new) cats
 
 							$new_cat_descr = 'tracker-';
 							switch($name)
