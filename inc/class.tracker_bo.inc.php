@@ -717,7 +717,7 @@ class tracker_bo extends tracker_so
 			if ($GLOBALS['egw']->accounts->get_type($uid) == 'g')
 			{
 				if ($return_groups) $groups[(string)$uid] = $GLOBALS['egw']->common->grab_owner_name($uid);
-				foreach($GLOBALS['egw']->accounts->members($uid,true) as $u)
+				foreach((array)$GLOBALS['egw']->accounts->members($uid,true) as $u)
 				{
 					if (!isset($users[$u])) $users[$u] = $GLOBALS['egw']->common->grab_owner_name($u);
 				}
@@ -998,8 +998,7 @@ class tracker_bo extends tracker_so
 				// group assinged
 				if ($this->allow_assign_groups && $assignee < 0)
 				{
-					$members = $GLOBALS['egw']->accounts->members($assignee,true);
-					if (in_array($user,$members))
+					if (($members = $GLOBALS['egw']->accounts->members($assignee,true)) && in_array($user,$members))
 					{
 						$access = true;
 						$line = __LINE__;
