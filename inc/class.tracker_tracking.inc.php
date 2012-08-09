@@ -229,6 +229,9 @@ class tracker_tracking extends bo_tracking
 			);
 			if ($name == 'tr_summary') $details[$name]['type'] = 'summary';
 		}
+		// add custom fields for given type
+		$details += $this->get_customfields($data, $data['tr_tracker']);
+
 		$details['tr_description'] = array(
 			'value' => $data['tr_description'],
 			'type'  => 'multiline',
