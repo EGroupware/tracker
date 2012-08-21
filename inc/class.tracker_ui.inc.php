@@ -1380,7 +1380,7 @@ width:100%;
 		if ($_date == false || empty($_date)) $_date = $this->bo->user_time_now;
 		if (!empty($_to_emailAddress))
 		{
-			$GLOBALS['egw_info']['flags']['currentapp'] = 'infolog';
+			$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
 			echo '<script>window.resizeTo(750,550);</script>';
 
 			if (is_array($_attachments))
@@ -1437,6 +1437,7 @@ width:100%;
 				'BCC'=>(!empty($_to_emailAddress['bcc'])?implode(',',$_to_emailAddress['bcc']):null),
 				'SUBJECT'=>$_subject,
 				'DATE'=>felamimail_bo::_strtotime($_date)),'',$this->htmledit).$_body;
+			if ($this->htmledit) $body = '<pre>'.$body.'</pre>';
 			$this->edit($this->prepare_import_mail(
 				implode(',',$toaddr),$_subject,$body,$attachments,$_date
 			));
