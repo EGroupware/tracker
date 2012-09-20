@@ -170,7 +170,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
 			
-			importexport_import_csv::convert($record, $types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
+			$result = importexport_import_csv::convert($record, $types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
+			if($result) $this->warnings[$import_csv->get_current_position()] = $result;
 			
 			// Set creator/group, unless it's supposed to come from CSV file
 			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
@@ -235,7 +236,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					if(is_numeric($record[$field]) && $lookups[$field][$record[$field]]) $key = $record[$field];
 
 					// Look for human values - existing ones should already be IDs
-					if(!$key) 
+					if(!$key)
 					{
 						$key = array_search($record[$field], $lookups[$field]);
 					}
