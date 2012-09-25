@@ -106,7 +106,12 @@ class tracker_tracking extends bo_tracking
 		{
 			$changes = $this->save_history($data,$old,$deleted,$changed_fields);
 		}
-
+		// check if the not tracked field num_replies changed and count that as change to
+		// so new comments without other changes give a notification
+		if (!$changes && $old && $old['num_replies'] != $data['num_replies'])
+		{
+			$changes = true;
+		}
 		// do not run do_notifications if we have no changes, unless there was a restricted comment just made
 		if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications($data,$old,$deleted,$changes))
 		{
