@@ -467,6 +467,7 @@ class tracker_mailhandler extends tracker_bo
 						}
 						$this->decode_header($attachments[$num]['filename']);
 						$this->decode_header($attachments[$num]['name']);
+						if (empty($attachments[$num]['name'])) $attachments[$num]['name'] = $attachments[$num]['filename'];
 						$attachments[$num]['tmp_name'] = tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 						$tmpfile = fopen($attachments[$num]['tmp_name'],'w');
 						fwrite($tmpfile,((substr(strtolower($attachments[$num]['type']),0,4) == "text") ? $attachments[$num]['attachment']: imap_base64($attachments[$num]['attachment'])));
@@ -736,7 +737,7 @@ class tracker_mailhandler extends tracker_bo
 			if (isset($parsed_header->{$k}))
 			{
 				foreach($parsed_header->{$k} as $i)
-				{ 
+				{
 					if ($i->mailbox)
 					{
 						$buff[$k][] = imap_rfc822_write_address($i->mailbox,$i->host,$i->personal);
