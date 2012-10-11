@@ -129,7 +129,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false; // Or should we default to 'localhost'?
 		}
-		
+
 		$mBox = '{'.$this->mailhandling[0]['server'];	// Set the servername
 
 		if(!empty($this->mailhandling[0]['serverport']))
@@ -168,7 +168,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			$show_failed = true;
 			// try novalidate cert, in case of ssl connection
-			if ($this->mailhandling[0]['servertype']==2) 
+			if ($this->mailhandling[0]['servertype']==2)
 			{
 				$this->mailBox = str_replace('/ssl','/ssl/novalidate-cert',$this->mailBox);
 				if (($this->mbox = @imap_open($this->mailBox,$this->mailhandling[0]['username'],$this->mailhandling[0]['password']))) $show_failed=false;
@@ -216,11 +216,11 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
-	 * determines the mime type of a eMail in accordance to the imap_fetchstructure 
+	 * determines the mime type of a eMail in accordance to the imap_fetchstructure
 	 * found at http://www.linuxscope.net/articles/mailAttachmentsPHP.html
 	 * by Kevin Steffer
 	 */
-	function get_mime_type(&$structure) 
+	function get_mime_type(&$structure)
 	{
 		$primary_mime_type = array("TEXT", "MULTIPART","MESSAGE", "APPLICATION", "AUDIO","IMAGE", "VIDEO", "OTHER");
 		if($structure->subtype) {
@@ -229,39 +229,39 @@ class tracker_mailhandler extends tracker_bo
 		return "TEXT/PLAIN";
 	}
 
-	function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) 
+	function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false)
 	{
 		//error_log(__METHOD__." getting body for ID: $msg_number, $mime_type, $part_number");
 		if(!$structure) {
 			//error_log(__METHOD__." fetching structure, as no structure passed.");
 			$structure = imap_fetchstructure($stream, $msg_number);
 		}
-		if($structure) 
+		if($structure)
 		{
-			if($mime_type == $this->get_mime_type($structure)) 
+			if($mime_type == $this->get_mime_type($structure))
 			{
-				if(!$part_number) 
+				if(!$part_number)
 				{
 					$part_number = "1";
 				}
 				//error_log(__METHOD__." mime type matched. Part $part_number.");
 				$struct = imap_bodystruct ($stream, $msg_number, "$part_number");
 				$body = imap_fetchbody($stream, $msg_number, $part_number);
-				return array('struct'=> $struct, 
+				return array('struct'=> $struct,
 							 'body'=>$body,
 							);
 			}
 
-			if($structure->type == 1) /* multipart */ 
+			if($structure->type == 1) /* multipart */
 			{
-				while(list($index, $sub_structure) = each($structure->parts)) 
+				while(list($index, $sub_structure) = each($structure->parts))
 				{
-					if($part_number) 
+					if($part_number)
 					{
 						$prefix = $part_number . '.';
 					}
 					$data = $this->get_part($stream, $msg_number, $mime_type, $sub_structure,$prefix.($index + 1));
-					if($data && !empty($data['body'])) 
+					if($data && !empty($data['body']))
 					{
 						return $data;
 					}
@@ -290,7 +290,7 @@ class tracker_mailhandler extends tracker_bo
 		if(function_exists(mb_decode_mimeheader)) {
 			mb_internal_encoding($charset);
 		}
-		if ($section === false) 
+		if ($section === false)
 		{
 			$part_number = 1;
 		}
@@ -321,11 +321,11 @@ class tracker_mailhandler extends tracker_bo
 			*/
 			if (self::LOG_LEVEL) error_log(__METHOD__.print_r($structure,true));
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.print_r($struct,true));
-			if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($body,true)); 
+			if (self::LOG_LEVEL>2) error_log(__METHOD__.print_r($body,true));
 			if (isset($struct->ifparameters) && $struct->ifparameters == 1)
 			{
 				//error_log(__METHOD__.__LINE__.print_r($param,true));
-				while(list($index, $param) = each($struct->parameters)) 
+				while(list($index, $param) = each($struct->parameters))
 				{
 					if (strtoupper($param->attribute) == 'CHARSET') $charset = $param->value;
 				}
@@ -371,7 +371,7 @@ class tracker_mailhandler extends tracker_bo
 			$contentParts = count($structure->parts);
 			$additionalAttachments = array();
 			$attachments = array();
-			if($structure->type == 1 && $contentParts >=2) /* multipart */ 
+			if($structure->type == 1 && $contentParts >=2) /* multipart */
 			{
 				$att = array();
 				$partNumber = array();
@@ -386,7 +386,7 @@ class tracker_mailhandler extends tracker_bo
 				for ($k=0; $k<sizeof($att);$k++)
 				{
 					//error_log(__METHOD__. " processing part->".$k." Message Part:".print_r($partNumber[$k],true));
-					if ($att[$k]->ifdisposition == 1 && strtoupper($att[$k]->disposition) == 'ATTACHMENT') 
+					if ($att[$k]->ifdisposition == 1 && strtoupper($att[$k]->disposition) == 'ATTACHMENT')
 					{
 						//$num = count($attachments) - 1;
 						$num = $k;
@@ -395,7 +395,7 @@ class tracker_mailhandler extends tracker_bo
 						//error_log(__METHOD__. " part:".print_r($att[$k],true));
 						// type2 = Message; get mail as attachment, with its attachments too
 						if ($att[$k]->type == 2)
-						{ 
+						{
 							//error_log(__METHOD__. " part $k ->".($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number'])." is MESSAGE:".print_r($partNumber[$k]['substruct']->parts[0],true));
 							$rv = $this->get_mailbody($mid,($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number']) , $partNumber[$k]['substruct']->parts[0]);
 							$attachments[$num]['attachment'] = $rv['body'];
@@ -403,33 +403,33 @@ class tracker_mailhandler extends tracker_bo
 							if ($att[$k]->ifparameters)
 							{
 								//error_log(__METHOD__. " parameters exist:");
-								while(list($index, $param) = each($att[$k]->parameters)) 
+								while(list($index, $param) = each($att[$k]->parameters))
 								{
 									//error_log(__METHOD__.__LINE__.print_r($param,true));
 									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
-								}							
+								}
 							}
 							if ($att[$k]->ifdparameters)
 							{
 								//error_log(__METHOD__. " dparameters exist:");
-								while(list($index, $param) = each($att[$k]->dparameters)) 
+								while(list($index, $param) = each($att[$k]->dparameters))
 								{
 									//error_log(__METHOD__.__LINE__.print_r($param,true));
 									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
-								}							
+								}
 							}
 							$att[$k] = $rv['struct'];
 							if (!empty($rv['attachments'])) for ($a=0; $a<sizeof($rv['attachments']);$a++) $additionalAttachments[] = $rv['attachments'][$a];
-							if (empty($attachments[$num]['attachment']) && empty($rv['attachments'])) 
+							if (empty($attachments[$num]['attachment']) && empty($rv['attachments']))
 							{
 								unset($attachments[$num]);
 								continue;  // no content -> skip
 							}
-						} 
+						}
 						else
 						{
 							$attachments[$num]['attachment'] = imap_fetchbody($this->mbox,$mid,$k+2);
-							if (empty($attachments[$num]['attachment'])) 
+							if (empty($attachments[$num]['attachment']))
 							{
 								unset($attachments[$num]);
 								continue; // no content -> skip
@@ -437,25 +437,33 @@ class tracker_mailhandler extends tracker_bo
 							if ($att[$k]->ifparameters)
 							{
 								//error_log(__METHOD__. " parameters exist:");
-								while(list($index, $param) = each($att[$k]->parameters)) 
+								while(list($index, $param) = each($att[$k]->parameters))
 								{
 									//error_log(__METHOD__.__LINE__.print_r($param,true));
 									if (strtoupper($param->attribute) == 'CHARSET') $attachments[$num]['charset'] = $param->value;
 									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
-								}							
+								}
 							}
 							if ($att[$k]->ifdparameters)
 							{
 								//error_log(__METHOD__. " dparameters exist:");
-								while(list($index, $param) = each($att[$k]->dparameters)) 
+								while(list($index, $param) = each($att[$k]->dparameters))
 								{
 									//error_log(__METHOD__.__LINE__.print_r($param,true));
 									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
-								}							
+								}
 							}
 						}
 						$this->decode_header($attachments[$num]['filename']);
 						$this->decode_header($attachments[$num]['name']);
+						if (empty($attachments[$num]['name'])) $attachments[$num]['name'] = $attachments[$num]['filename'];
+						if (empty($attachments[$num]['name']))
+						{
+							$attachments[$num]['name'] = 'noname_'.$num;
+							$st = '';
+							if (strpos($attachments[$num]['type'],'/')!==false) list($t,$st) = explode('/',$attachments[$num]['type'],2);
+							if (!empty($st)) $attachments[$num]['name'] = $attachments[$num]['name'].'.'.$st;
+						}
 						$attachments[$num]['tmp_name'] = tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 						$tmpfile = fopen($attachments[$num]['tmp_name'],'w');
 						fwrite($tmpfile,((substr(strtolower($attachments[$num]['type']),0,4) == "text") ? $attachments[$num]['attachment']: imap_base64($attachments[$num]['attachment'])));
@@ -467,7 +475,7 @@ class tracker_mailhandler extends tracker_bo
 			}
 		}
 		//if (!empty($attachments)) error_log(__METHOD__." Attachments with this mail:".print_r($attachments,true));
-		if (!empty($additionalAttachments)) 
+		if (!empty($additionalAttachments))
 		{
 			//error_log(__METHOD__." Attachments retrieved with attachments:".print_r($additionalAttachments,true));
 			for ($a=0; $a<sizeof($additionalAttachments);$a++) $attachments[] = $additionalAttachments[$a];
@@ -515,7 +523,7 @@ class tracker_mailhandler extends tracker_bo
 		 # Flagged - F if marked as important/urgent, else ' '
 		 # Answered - A if Answered, else ' '
 		 # Deleted - D if marked for deletion, else ' '
-		 # Draft - X if marked as draft, else ' ' 
+		 # Draft - X if marked as draft, else ' '
 		 */
 
 		if ($msgHeader->Deleted == 'D')
@@ -528,9 +536,9 @@ class tracker_mailhandler extends tracker_bo
 				$msgHeader->Unseen == ' '))		// seen
 		*/
 		// should do the same, but is more robust as recent is a flag with some sideeffects
-		// message should be marked/flagged as seen after processing 
+		// message should be marked/flagged as seen after processing
 		// (don't forget to flag the message if forwarded; as forwarded is not supported with all IMAP use Seen instead)
-		if ((($msgHeader->Recent == 'R' || $msgHeader->Recent == ' ') && $msgHeader->Unseen == ' ') || 
+		if ((($msgHeader->Recent == 'R' || $msgHeader->Recent == ' ') && $msgHeader->Unseen == ' ') ||
 			($msgHeader->Answered == 'A' && $msgHeader->Unseen == ' ') || // is answered and seen
 			$msgHeader->Draft == 'X') // is Draft
 		{
