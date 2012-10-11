@@ -468,6 +468,13 @@ class tracker_mailhandler extends tracker_bo
 						$this->decode_header($attachments[$num]['filename']);
 						$this->decode_header($attachments[$num]['name']);
 						if (empty($attachments[$num]['name'])) $attachments[$num]['name'] = $attachments[$num]['filename'];
+						if (empty($attachments[$num]['name']))
+						{
+							$attachments[$num]['name'] = 'noname_'.$num;
+							$st = '';
+							if (strpos($attachments[$num]['type'],'/')!==false) list($t,$st) = explode('/',$attachments[$num]['type'],2);
+							if (!empty($st)) $attachments[$num]['name'] = $attachments[$num]['name'].'.'.$st;
+						}
 						$attachments[$num]['tmp_name'] = tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 						$tmpfile = fopen($attachments[$num]['tmp_name'],'w');
 						fwrite($tmpfile,((substr(strtolower($attachments[$num]['type']),0,4) == "text") ? $attachments[$num]['attachment']: imap_base64($attachments[$num]['attachment'])));
