@@ -227,6 +227,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
 				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
 			}
+
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
 				if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
@@ -434,9 +435,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		}
 
 		// Process some additional fields
-		if(!is_numeric($result)) {
-			return $result;
-		}
 		$_link_id = false;
 		foreach(self::$special_fields as $field => $desc) {
 			if(!$_data[$field]) continue;
@@ -452,7 +450,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$link_id = egw_link::link('tracker',$id,$app,$app_id);
 			}
 		}
-		return $result;
+		return true;
 	}
 
 	/**
