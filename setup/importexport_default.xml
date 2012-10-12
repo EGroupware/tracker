@@ -2,7 +2,7 @@
 <entry type="array" name="importExportDefinitions">
   <entry type="array" name="metainfo">
     <entry type="string" name="type">importexport definitions</entry>
-    <entry type="string" name="charset">user</entry>
+    <entry type="string" name="charset">utf-8</entry>
     <entry type="integer" name="entries">2</entry>
   </entry>
   <entry type="array" name="definitions">
@@ -46,7 +46,7 @@
         <entry type="string" name="begin_with_fieldnames">label</entry>
         <entry type="string" name="convert">1</entry>
       </entry>
-      <entry type="string" name="modified">2011-05-24 10:00:00</entry>
+      <entry type="string" name="modified">2012-05-29 08:25:22</entry>
     </entry>
     <entry type="array" name="import-tracker">
       <entry type="string" name="name">import-tracker</entry>
@@ -62,32 +62,29 @@
         <entry type="string" name="num_header_lines">1</entry>
         <entry type="string" name="update_cats">replace</entry>
         <entry type="array" name="csv_fields">
-          <entry type="string" name="0">tr_id</entry>
-          <entry type="string" name="1">tr_summary</entry>
-          <entry type="string" name="2">tr_tracker</entry>
-          <entry type="string" name="3">cat_id</entry>
-          <entry type="string" name="4">tr_version</entry>
-          <entry type="string" name="5">tr_status</entry>
-          <entry type="string" name="6">tr_description</entry>
-          <entry type="string" name="7">replies</entry>
-          <entry type="string" name="8">tr_assigned</entry>
-          <entry type="string" name="9">tr_private</entry>
-          <entry type="string" name="10">tr_resolution</entry>
-          <entry type="string" name="11">tr_completion</entry>
-          <entry type="string" name="12">tr_priority</entry>
-          <entry type="string" name="13">tr_closed</entry>
-          <entry type="string" name="14">tr_creator</entry>
-          <entry type="string" name="15">tr_modifier</entry>
-          <entry type="string" name="16">tr_modified</entry>
-          <entry type="string" name="17">tr_created</entry>
-          <entry type="string" name="18">tr_votes</entry>
-          <entry type="string" name="19">bounties</entry>
-          <entry type="string" name="20">tr_group</entry>
-          <entry type="string" name="21">tr_cc</entry>
-          <entry type="string" name="22">num_replies</entry>
-          <entry type="string" name="23">no_csv_1</entry>
-          <entry type="string" name="24">no_csv_2</entry>
-          <entry type="string" name="25">no_csv_3</entry>
+          <entry type="string" name="0">Tracker ID</entry>
+          <entry type="string" name="1">Summary</entry>
+          <entry type="string" name="2">Queue</entry>
+          <entry type="string" name="3">Category</entry>
+          <entry type="string" name="4">Version</entry>
+          <entry type="string" name="5">Status</entry>
+          <entry type="string" name="6">Description</entry>
+          <entry type="string" name="7">Comments</entry>
+          <entry type="string" name="8">Assigned to</entry>
+          <entry type="string" name="9">Private</entry>
+          <entry type="string" name="10">Resolution</entry>
+          <entry type="string" name="11">Completed</entry>
+          <entry type="string" name="12">Priority</entry>
+          <entry type="string" name="13">Closed</entry>
+          <entry type="string" name="14">Created by</entry>
+          <entry type="string" name="15">Modified by</entry>
+          <entry type="string" name="16">Last Modified</entry>
+          <entry type="string" name="17">Created</entry>
+          <entry type="string" name="18">Votes</entry>
+          <entry type="string" name="19">Bounty</entry>
+          <entry type="string" name="20">Group</entry>
+          <entry type="string" name="21">CC</entry>
+          <entry type="string" name="22">Number of replies</entry>
         </entry>
         <entry type="array" name="field_mapping">
           <entry type="string" name="0">tr_id</entry>
@@ -105,10 +102,6 @@
           <entry type="string" name="12">tr_priority</entry>
           <entry type="string" name="13">tr_closed</entry>
           <entry type="string" name="14">tr_creator</entry>
-<!-- These are no longer allowed to be changed by tracker
-          <entry type="string" name="15">tr_modifier</entry>
-          <entry type="string" name="16">tr_modified</entry>
--->
           <entry type="string" name="17">tr_created</entry>
           <entry type="string" name="20">tr_group</entry>
           <entry type="string" name="21">tr_cc</entry>
@@ -140,10 +133,17 @@
         <entry type="string" name="creator_from_csv">1</entry>
         <entry type="string" name="group_from_csv">1</entry>
         <entry type="string" name="assigned_from_csv">1</entry>
-	<entry type="string" name="change_creator"/>
-	<entry type="string" name="convert">1</entry>
+        <entry type="string" name="change_creator"/>
+        <entry type="string" name="convert">1</entry>
+        <entry type="boolean" name="no_cats">TRUE</entry>
+        <entry type="string" name="field_conversion"/>
+        <entry type="string" name="record_owner">7</entry>
+        <entry type="string" name="record_group">-1</entry>
+        <entry type="string" name="change_group">0</entry>
+        <entry type="string" name="record_assigned">7</entry>
+        <entry type="string" name="change_assigned">0</entry>
       </entry>
-      <entry type="string" name="modified">2011-11-10 10:00:00</entry>
+      <entry type="string" name="modified">2012-10-11 12:52:37</entry>
     </entry>
   </entry>
 </entry>
