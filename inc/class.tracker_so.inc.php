@@ -104,7 +104,6 @@ class tracker_so extends so_sql_cf
 				$this->data['tr_assigned'][] = $row['tr_assigned'];
 				$read_restricted = $read_restricted || ($row['tr_assigned'] == $user);
 			}
-			$this->db2data();
 
 			$this->data['replies'] = array();
 			$filter = array('tr_id' => $this->data['tr_id']);
@@ -118,6 +117,7 @@ class tracker_so extends so_sql_cf
 				$this->data['replies'][] = $row;
 			}
 			$this->data['num_replies'] = count($this->data['replies']);
+			$this->db2data();
 		}
 		return $ret ? $this->data : $ret;
 	}
