@@ -137,13 +137,13 @@
         <entry type="string" name="convert">1</entry>
         <entry type="boolean" name="no_cats">TRUE</entry>
         <entry type="string" name="field_conversion"/>
-        <entry type="string" name="record_owner">7</entry>
+        <entry type="string" name="record_owner"></entry>
         <entry type="string" name="record_group">-1</entry>
         <entry type="string" name="change_group">0</entry>
-        <entry type="string" name="record_assigned">7</entry>
         <entry type="string" name="change_assigned">0</entry>
+        <entry type="string" name="record_assigned"></entry>
       </entry>
-      <entry type="string" name="modified">2012-10-11 12:52:37</entry>
+      <entry type="string" name="modified">2012-10-22 10:00:00</entry>
     </entry>
   </entry>
 </entry>
