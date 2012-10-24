@@ -486,6 +486,7 @@ class tracker_ui extends tracker_bo
 			'tr_reply_options' => $tr_reply_options,
 			'on_cancel' => $popup ? 'window.close();' : '',
 			'no_vote' => '',
+			'show_dates' => $this->show_dates,
 			'link_to' => array(
 				'to_id' => $tr_id,
 				'to_app' => 'tracker',
@@ -505,6 +506,8 @@ class tracker_ui extends tracker_bo
 					'Cr' => 'select-account',
 					'pr' => array('Public','Private'),
 					'Cl' => 'date-time',
+					'tr_startdate' => 'date-time',
+					'tr_duedate' => 'date-time',
 					'Re' => self::$resolutions + $this->get_tracker_labels('resolution',$tracker),
 					'Gr' => 'select-account',
 				),
@@ -782,6 +785,7 @@ class tracker_ui extends tracker_bo
 		}
 
 
+
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
@@ -850,7 +854,7 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
 
 		// Add allowed staff
-		foreach($tracker as $tr_id)
+		foreach((array)$tracker as $tr_id)
 		{
 			$rows['sel_options']['tr_assigned'] += $this->get_staff($tr_id,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
 		}
@@ -859,7 +863,7 @@ class tracker_ui extends tracker_bo
 
 		
 		$versions = $cats = $resolutions = $statis = array();
-		foreach($tracker as $tr_id)
+		foreach((array)$tracker as $tr_id)
 		{
 			$versions += $this->get_tracker_labels('version',$tr_id);
 			$cats += $this->get_tracker_labels('cat',$tr_id);
@@ -903,6 +907,12 @@ class tracker_ui extends tracker_bo
 
 		// enable tracker column if all trackers are shown
 		if ($tracker && !$query['multi_queue']) $rows['no_tr_tracker'] = true;
+
+		// disable start date / due date column, if disabled in config
+		if(!$this->show_dates)
+		{
+			$rows['no_tr_startdate_tr_duedate'] = true;
+		}
 
 		// Disable checkbox column
 		$rows['no_check'] = $readonlys['checked'];
@@ -1152,6 +1162,13 @@ class tracker_ui extends tracker_bo
 			if (!isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				$content['nm']['options-selectcols']['tr_sum_timesheets'] = false;
+			}
+			// disable start date / due date column, if disabled in config
+			if(!$this->show_dates)
+			{
+				// Need to set each field so parser takes the whole column
+				$content['nm']['options-selectcols']['tr_startdate'] = false;
+				$content['nm']['options-selectcols']['tr_duedate'] = false;
 			}
 		}
 		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);

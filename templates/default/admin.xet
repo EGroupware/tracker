@@ -195,7 +195,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.003">
+	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.004">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -271,6 +271,12 @@
 				<row class="row" disabled="@tracker">
 					<checkbox statustext="Staff  &quot;Users&quot; will be allowed for assignment to tracker tickets" id="allow_assign_users"/>
 					<description value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" for="allow_assign_users" span="3"/>
+				</row>
+				<row class="row">
+					<checkbox id="show_dates"/>
+					<description value="Show start date and due date"/>
+					<description/>
+					<description/>
 				</row>
 				<row class="row" disabled="@tracker">
 					<checkbox statustext="Allow creation of infolog entries from tracker tickets" id="allow_infolog"/>
@@ -546,7 +552,7 @@
 }
 		</styles>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.9.003">
+	<template id="tracker.admin" template="" lang="" group="0" version="1.9.004">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>

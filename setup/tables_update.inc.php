@@ -541,3 +541,20 @@ function tracker_upgrade1_9_002()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use categories::GLOBAL_ACCOUNT
 }
+
+function tracker_upgrade1_9_003()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_startdate',array(
+		'type' => 'int',
+		'precision' => '8',
+		'comment' => 'Date ticket is scheduled to begin'
+	));
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_duedate',array(
+		'type' => 'int',
+		'precision' => '8',
+		'comment' => 'Date ticket is required to be resolved by'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.004';
+}
+

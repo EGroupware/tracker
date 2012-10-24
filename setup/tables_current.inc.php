@@ -33,7 +33,9 @@ $phpgw_baseline = array(
 			'tr_cc' => array('type' => 'text','comment' => 'cc-field for notification'),
 			'tr_group' => array('type' => 'int','precision' => '11','comment' => 'group-id to which the ticket belongs'),
 			'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii','comment' => 'ascii or html'),
-			'tr_seen' => array('type' => 'text','comment' => 'flag if the ticket has been already viewed')
+			'tr_seen' => array('type' => 'text','comment' => 'flag if the ticket has been already viewed'),
+			'tr_startdate' => array('type' => 'int','precision' => '8','comment' => 'Date ticket is scheduled to begin'),
+			'tr_duedate' => array('type' => 'int','precision' => '8','comment' => 'Date ticket is required to be resolved by')
 		),
 		'pk' => array('tr_id'),
 		'fk' => array(),

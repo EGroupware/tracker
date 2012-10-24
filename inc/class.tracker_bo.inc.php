@@ -210,6 +210,8 @@ class tracker_bo extends tracker_so
 		'tr_resolution'  => 'Resolution',
 		'tr_completion'  => 'Completed',
 		'tr_priority'    => 'Priority',
+		'tr_startdate'   => 'Start date',
+		'tr_duedate'     => 'Due date',
 		'tr_closed'      => 'Closed',
 		'tr_creator'     => 'Created by',
 		'tr_created'     => 'Created on',
@@ -244,6 +246,8 @@ class tracker_bo extends tracker_so
 //		'tr_budget'      => 'Bu',
 		'tr_completion'  => 'Co',
 		'tr_priority'    => 'Pr',
+		'tr_startdate'   => 'tr_startdate',
+		'tr_duedate'     => 'tr_duedate',
 		'tr_closed'      => 'Cl',
 		'tr_resolution'  => 'Re',
 		'tr_cc'			 => 'Cc',
@@ -302,7 +306,7 @@ class tracker_bo extends tracker_so
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling',	// tracker unspecific
-		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation',
+		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates'
 	);
 	/**
 	 * Notification settings (tracker specific, keys: sender, link, copy, lang)
