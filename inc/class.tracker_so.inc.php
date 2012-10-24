@@ -377,17 +377,32 @@ class tracker_so extends so_sql_cf
 		}
 		//$this->debug = 4;
 
+		
+		// Add in custom filters that = closed
+		$custom_closed = array();
+		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker);
+		foreach($stati as $stati_id => $stati_label)
+		{
+			$data = categories::id2name($stati_id, 'data');
+			if($data['closed']) $custom_closed[] = $stati_id;
+		}
+		$not_closed = substr(self::SQL_NOT_CLOSED,0,-1) . ' AND tr_status != \'' . implode('\' AND tr_status != \'', $custom_closed) . '\')';
+
 		// Handle the special filters
 		switch ($filter['tr_status'])
 		{
+			case 'closed':
+				unset($filter['tr_status']);
+				$filter[] = str_replace(array('!=', 'AND'), array('=','OR'),$not_closed);
+				break;
 			case 'not-closed':
 				unset($filter['tr_status']);
-				$filter[] = self::SQL_NOT_CLOSED;
+				$filter[] = $not_closed;
 				break;
 			case 'own-not-closed':
 				unset($filter['tr_status']);
 				$filter['tr_creator'] = $this->user;
-				$filter[] = self::SQL_NOT_CLOSED;
+				$filter[] = $not_closed;
 				break;
 			case 'without-reply-not-closed':
 				unset($filter['tr_status']);
@@ -405,7 +420,7 @@ class tracker_so extends so_sql_cf
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
 					$filter[] = 'replies=0';
 				}
-				$filter[] = self::SQL_NOT_CLOSED;
+				$filter[] = $not_closed;
 				break;
 			case 'own-without-reply-not-closed':
 				unset($filter['tr_status']);
@@ -424,7 +439,7 @@ class tracker_so extends so_sql_cf
 					$filter[] = 'replies=0';
 				}
 				$filter['tr_creator'] = $this->user;
-				$filter[] = self::SQL_NOT_CLOSED;
+				$filter[] = $not_closed;
 				break;
 			case 'without-30-days-reply-not-closed':
 				unset($filter['tr_status']);
@@ -442,7 +457,7 @@ class tracker_so extends so_sql_cf
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
 					$filter[] = 'replies=0';
 				}
-				$filter[] = self::SQL_NOT_CLOSED;
+				$filter[] = $not_closed;
 				break;
 			case 'open':
 				$filter['tr_status'] = self::STATUS_OPEN;

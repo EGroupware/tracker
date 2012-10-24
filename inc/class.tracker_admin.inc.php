@@ -265,6 +265,7 @@ class tracker_admin extends tracker_bo
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
 								($name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign']) ||
+								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
 								($name == 'resolutions' && (($defaultresolution && ($cat['id']==$defaultresolution || $cat['isdefault'] && $cat['id']!=$defaultresolution))||!$defaultresolution && $cat['isdefault']) ))
@@ -274,6 +275,9 @@ class tracker_admin extends tracker_bo
 								{
 									case 'cats':
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										break;
+									case 'statis':
+										$old_cat['data']['closed'] = $cat['closed'];
 										break;
 									case 'projects':
 										$old_cat['data']['projectlist'] = $cat['projectlist'];
