@@ -539,7 +539,6 @@ class tracker_admin extends tracker_bo
 					}
 					$row['prio_label'] = $prio_labels[$row['tr_priority']];
 				}
-_debug_array($row);
 			}
 		}
 		return $Ok;
