@@ -881,24 +881,6 @@ class tracker_ui extends tracker_bo
 			}
 		}
 
-		// Add in 'Closed' logical filter if there are any config stati marked as closed
-		$closed_stati = array();
-                foreach($statis as $stati_id => $stati_label)
-                {
-                        $data = categories::id2name($stati_id, 'data');
-                        if($data['closed']) $closed_stati[] = $stati_id;
-                }
-		if($closed_stati)
-		{
-			$statis['closed']= '&#9830; Closed';
-			array_unshift($closed_stati, self::STATUS_CLOSED);
-			foreach($closed_stati as $status_id)
-			{
-				$closed_label = $statis[$status_id];
-				unset($statis[$status_id]);
-				$statis[$status_id] = '&nbsp;&nbsp;'.$closed_label;
-			}
-		}
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['cat_id'] = $cats;
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
