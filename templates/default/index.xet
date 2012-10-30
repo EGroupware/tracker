@@ -3,8 +3,8 @@
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.9.001">
 		<hbox>
-			<menulist class="bold">
-				<menupopup cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="1" options="All"/>
+			<menulist>
+				<menupopup class="bold" cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="1" options="All"/>
 			</menulist>
 			<button id="col_filter[multi_queue][true]" image="foldertree_nolines_plus"/>
 		</hbox>
@@ -53,7 +53,10 @@
 						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
 						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
 					</vbox>
-					<unknown options="2"/>
+					<vbox options="0,0">
+						<nextmatch-sortheader label="Start date" id="tr_startdate" options="2"/>
+						<nextmatch-sortheader label="Due date" id="tr_duedate"/>
+					</vbox>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"/>
 					<vbox options="0,0">
 						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="status_filter"/>
@@ -90,9 +93,9 @@
 					<menulist>
 						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+					<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 					<vbox no_lang="1" class="colfullWidth">
-						<description id="${row}[tr_summary]" no_lang="1" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extra_link_popup="780x535" class="$row_cont[seen_class]"/>
+						<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 						<hrule/>
 						<box no_lang="1" class="trackerDes">
 							<html id="${row}[tr_description]" no_lang="1"/>
@@ -142,7 +145,7 @@
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
 						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>
-						<image label="Filemanager" src="filemanager/navbar" href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16"/>
+						<image href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" label="Filemanager" src="filemanager/navbar" class="image16"/>
 						<checkbox align="right" id="checked[]" options="$row_cont[tr_id]"/>
 					</hbox>
 				</row>
@@ -161,7 +164,6 @@
 				</row>
 				<row disabled="!@msg">
 					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
-					<description/>
 					<description/>
 				</row>
 				<row disabled="1">
