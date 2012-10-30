@@ -250,11 +250,17 @@ class tracker_so extends so_sql_cf
 			{
 				// we left join with the escalated timestamp table, to check if the escalation is not alread done
 				$filter[] = self::escalated_filter(abs($filter['esc_id']),$join,$filter['esc_id'] > 0);
-
-				$escalation = new tracker_escalations(abs($filter['esc_id']));
-				$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE,$f = $escalation->get_filter());
-				//echo "filter($filter[esc_id])='$fs'="; _debug_array($f);
-				$extra_cols[] = $escalation->get_time_col().' AS esc_start';
+				if($filter['esc_id'] > 0)
+				{
+					$extra_cols[] = self::ESCALATED_TABLE . '.esc_created AS esc_start';
+				}
+				else
+				{
+					$escalation = new tracker_escalations(abs($filter['esc_id']));
+					$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE,$f = $escalation->get_filter());
+					//echo "filter($filter[esc_id])='$fs'="; _debug_array($f);
+					$extra_cols[] = $escalation->get_time_col().' AS esc_start';
+				}
 			}
 			unset($filter['esc_id']);
 		}
@@ -518,13 +524,18 @@ class tracker_so extends so_sql_cf
 	 *
 	 * @param int $esc_id
 	 * @param string &$join join with escalation table is added there
-	 * @param boolean $escalated=true default true=return only escalated tickets, false = return not escalated ticktes
+	 * @param boolean/timetamp $escalated=true default true=return only escalated tickets, false = return not escalated ticktes,
+	 * 	timestamp = return tickets escalated before the time
 	 * @return string filter
 	 */
 	function escalated_filter($esc_id,&$join,$escalated=true)
 	{
 		$join .= ' LEFT JOIN '.self::ESCALATED_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ESCALATED_TABLE.'.tr_id AND esc_id='.(int)$esc_id;
 
+		if($escalated && $escalated !== true)
+		{
+			return '(esc_created IS NULL or esc_created < ' . $this->db->quote($this->db->to_timestamp($escalated)).')';
+		}
 		return $escalated ? 'esc_created IS NOT NULL' : 'esc_created IS NULL';
 	}
 

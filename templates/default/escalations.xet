@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.escalations.rows" template="" lang="" group="0" version="1.5.001">
+	<template id="tracker.escalations.rows" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
 				<column width="20%"/>
+				<column/>
 				<column/>
 				<column/>
 				<column/>
@@ -17,46 +18,53 @@
 			<rows>
 				<row class="th">
 					<nextmatch-sortheader label="Title" id="esc_title"/>
-					<nextmatch-filterheader options="Queue" id="tr_tracker"/>
-					<nextmatch-header id="cat_id" label="Category"/>
-					<nextmatch-header id="tr_version" label="Version"/>
+					<nextmatch-filterheader id="tr_tracker" options="Queue"/>
+					<nextmatch-header label="Category" id="cat_id"/>
+					<nextmatch-header label="Version" id="tr_version"/>
 					<nextmatch-header label="Status" id="tr_status"/>
 					<nextmatch-sortheader label="Priority" id="tr_priority"/>
-					<nextmatch-header id="esc_action_label" label="Action"/>
+					<nextmatch-header label="Action" id="esc_action_label"/>
 					<nextmatch-sortheader label="Time" id="esc_time"/>
+					<nextmatch-sortheader label="Match again after" id="esc_match_repeat"/>
 					<description/>
 				</row>
 				<row class="row">
-					<description no_lang="1" id="${row}[esc_title]"/>
+					<description id="${row}[esc_title]" no_lang="1"/>
 					<menulist>
-						<menupopup type="select-cat" options="All" id="${row}[tr_tracker]" readonly="true"/>
+						<menupopup type="select-cat" id="${row}[tr_tracker]" readonly="true" options="All"/>
 					</menulist>
 					<menulist>
-						<menupopup type="select-cat" options="All" id="${row}[cat_id]" readonly="true"/>
+						<menupopup type="select-cat" id="${row}[cat_id]" readonly="true" options="All"/>
 					</menulist>
 					<menulist>
-						<menupopup type="select-cat" options="All" id="${row}[tr_version]" readonly="true"/>
+						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="All"/>
 					</menulist>
 					<menulist>
-						<menupopup options="All" id="${row}[tr_status]" readonly="true"/>
+						<menupopup id="${row}[tr_status]" readonly="true" options="All"/>
 					</menulist>
 					<description id="${row}[prio_label]"/>
 					<textbox multiline="true" id="${row}[esc_action_label]" readonly="true"/>
 					<vbox options="0,0">
 						<date-duration id="${row}[esc_time]" readonly="true" options=",dhm,24"/>
-						<menulist>
-							<menupopup id="${row}[esc_type]" readonly="true" label="after"/>
-						</menulist>
+						<hbox readonly="true">
+							<menulist>
+								<menupopup id="${row}[esc_before_after]" no_lang="1" readonly="true"/>
+							</menulist>
+							<menulist>
+								<menupopup id="${row}[esc_type]" no_lang="1" readonly="true"/>
+							</menulist>
+						</hbox>
 					</vbox>
+					<date-duration id="${row}[esc_match_repeat]" readonly="true"/>
 					<hbox options="0,0">
-						<button image="edit" label="Edit" id="edit[$row_cont[esc_id]]"/>
-						<button image="delete" label="Delete" id="delete[$row_cont[esc_id]]" statustext="Delete this escalation" onclick="return confirm('Delete this escalation');"/>
+						<button label="Edit" id="edit[$row_cont[esc_id]]" image="edit"/>
+						<button statustext="Delete this escalation" label="Delete" id="delete[$row_cont[esc_id]]" onclick="return confirm('Delete this escalation');" image="delete"/>
 					</hbox>
 				</row>
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.escalations" template="" lang="" group="0" version="1.5.001">
+	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
 				<column width="100"/>
@@ -65,27 +73,37 @@
 			</columns>
 			<rows>
 				<row>
-					<nextmatch span="all" id="nm" options="tracker.escalations.rows"/>
+					<nextmatch id="nm" options="tracker.escalations.rows" span="all"/>
 				</row>
 				<row>
 					<hrule span="all"/>
 				</row>
 				<row>
-					<description span="all" class="redItalic" id="msg"/>
+					<description id="msg" span="all" class="redItalic"/>
 					<description/>
 					<description/>
 				</row>
 				<row>
 					<description value="Title"/>
-					<textbox size="80" maxlength="128" id="esc_title" span="all"/>
+					<textbox id="esc_title" size="80" maxlength="128" span="all"/>
 				</row>
 				<row>
 					<description value="Time"/>
 					<hbox options="0,0">
 						<date-duration id="esc_time" options=",dhm,24"/>
-						<menulist class="leftPad5">
-							<menupopup label="after" id="esc_type"/>
+						<menulist>
+							<menupopup id="esc_before_after"/>
 						</menulist>
+						<menulist class="leftPad5">
+							<menupopup id="esc_type"/>
+						</menulist>
+					</hbox>
+					<description/>
+				</row>
+				<row>
+					<description value="Match again after"/>
+					<hbox options="0,0">
+						<date-duration statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat" options=",dhm,24"/>
 					</hbox>
 					<description/>
 				</row>
@@ -103,30 +121,30 @@
 								<row>
 									<description value="Queue"/>
 									<menulist span="all">
-										<menupopup options="All" id="tr_tracker" onchange="1"/>
+										<menupopup id="tr_tracker" onchange="1" options="All"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Category"/>
 									<menulist>
-										<menupopup options="All" id="cat_id"/>
+										<menupopup id="cat_id" options="All"/>
 									</menulist>
 									<description value="Version"/>
 									<menulist>
-										<menupopup options="All" id="tr_version"/>
+										<menupopup id="tr_version" options="All"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Status"/>
 									<hbox options="0,0">
 										<menulist>
-											<menupopup options="All" id="tr_status"/>
+											<menupopup id="tr_status" options="All"/>
 										</menulist>
-										<buttononly options="navbar" label="Select multiple" class="mStatus" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
 									<menulist>
-										<menupopup options="All" id="tr_priority"/>
+										<menupopup id="tr_priority" options="All"/>
 									</menulist>
 								</row>
 							</rows>
@@ -148,42 +166,45 @@
 								<row>
 									<description value="Queue"/>
 									<menulist span="all">
-										<menupopup options="Unchanged" id="tr_tracker" onchange="1"/>
+										<menupopup id="tr_tracker" onchange="1" options="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Category"/>
 									<menulist>
-										<menupopup options="Unchanged" id="cat_id"/>
+										<menupopup id="cat_id" options="Unchanged"/>
 									</menulist>
 									<description value="Version"/>
 									<menulist>
-										<menupopup options="Unchanged" id="tr_version"/>
+										<menupopup id="tr_version" options="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Status"/>
 									<menulist>
-										<menupopup options="Unchanged" id="tr_status"/>
+										<menupopup id="tr_status" options="Unchanged"/>
 									</menulist>
 									<description value="Priority"/>
 									<menulist>
-										<menupopup options="Unchanged" id="tr_priority"/>
+										<menupopup id="tr_priority" options="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Assigned to"/>
 									<hbox options="0,0" span="all">
 										<menulist>
-											<menupopup options="Unchanged" id="tr_assigned"/>
+											<menupopup id="tr_assigned" options="Unchanged"/>
 										</menulist>
-										<buttononly options="users" label="Select multiple" class="leftPad5" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;"/>
-										<checkbox id="add_assigned" label="add additionally" class="leftPad5"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;" options="users" class="leftPad5"/>
+										<checkbox label="add additionally" id="add_assigned" class="leftPad5"/>
 									</hbox>
 								</row>
 								<row valign="top">
 									<description value="Comment"/>
-									<textbox multiline="true" rows="3" id="reply_message" span="all" class="reply"/>
+									<vbox span="all" class="reply">
+										<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
+										<textbox multiline="true" id="reply_message" rows="3" span="all" class="reply"/>
+									</vbox>
 									<description/>
 									<description/>
 								</row>
@@ -196,13 +217,13 @@
 					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
-						<button id="button[cancel]" label="Cancel"/>
+						<button align="right" label="Cancel" id="button[cancel]"/>
 					</hbox>
 				</row>
 			</rows>
 		</grid>
 		<styles>
-			.reply textarea { width: 100%; }
+			.reply .reply&gt;textarea  { width: 100%; }
 .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
 		</styles>
 	</template>

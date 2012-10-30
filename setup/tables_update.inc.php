@@ -558,3 +558,20 @@ function tracker_upgrade1_9_003()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.004';
 }
 
+
+function tracker_upgrade1_9_004()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_reply_visible',array(
+		'type' => 'int',
+		'precision' => '1'
+	));
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_match_repeat',array(
+		'type' => 'int',
+		'precision' => '4',
+		'default' => '0'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.005';
+}
+
+

@@ -526,6 +526,10 @@ class tracker_admin extends tracker_bo
 		{
 			foreach($rows as &$row)
 			{
+				// Show before / after
+				$row['esc_before_after'] = ($row['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+				$row['esc_time'] = abs($row['esc_time']);
+				
 				// show the right tracker and/or cat specific priority label
 				if ($row['tr_priority'])
 				{
@@ -535,6 +539,7 @@ class tracker_admin extends tracker_bo
 					}
 					$row['prio_label'] = $prio_labels[$row['tr_priority']];
 				}
+_debug_array($row);
 			}
 		}
 		return $Ok;
@@ -572,6 +577,17 @@ class tracker_admin extends tracker_bo
 			{
 				case 'save':
 				case 'apply':
+					// 'Before' only valid for start & due dates
+					if($content['esc_before_after'] == tracker_escalations::BEFORE &&
+						!in_array($content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
+					{	
+						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
+						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
+						break;
+					}
+					// Handle before time
+					$escalations->data['esc_time'] *= ($content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
+
 					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
@@ -615,6 +631,11 @@ class tracker_admin extends tracker_bo
 			'nm' => $content['nm'],
 			'msg' => $msg,
 		);
+
+		// Handle before time
+		$content['esc_before_after'] = ($content['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+		$content['esc_time'] = abs($content['esc_time']);
+
 		$preserv['esc_id'] = $content['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
@@ -626,10 +647,18 @@ class tracker_admin extends tracker_bo
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => $this->get_tracker_stati($tracker),
 			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'esc_before_after' => array(
+				tracker_escalations::AFTER => lang('after'),
+				tracker_escalations::BEFORE => lang('before'),
+			),
 			'esc_type'    => array(
 				tracker_escalations::CREATION => lang('creation date'),
 				tracker_escalations::MODIFICATION => lang('last modified'),
+				tracker_escalations::START => lang('start date'),
+				tracker_escalations::DUE => lang('due date'),
 				tracker_escalations::REPLIED => lang('last reply'),
+				tracker_escalations::REPLIED_CREATOR => lang('last reply by creator'),
+				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
 			),
 		);
 		$tpl = new etemplate('tracker.escalations');

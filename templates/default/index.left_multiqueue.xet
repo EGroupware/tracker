@@ -2,12 +2,21 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.index.left_multiqueue" template="" lang="" group="0" version="1.9.001">
-		<vbox>
-			<hbox class="bold">
-				<description value="Tracker Queue" class="bold"/>
-				<button id="col_filter[multi_queue][false]" image="foldertree_nolines_minus"/>
-			</hbox>
-			<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="3"/>
-		</vbox>
+		<grid width="100%">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<hbox class="bold">
+						<description value="Tracker Queue" class="bold"/>
+						<button id="col_filter[multi_queue][false]" image="foldertree_nolines_minus"/>
+					</hbox>
+				</row>
+				<row>
+					<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="3" options="width=100%"/>
+				</row>
+			</rows>
+		</grid>
 	</template>
 </overlay>

@@ -364,10 +364,12 @@ class tracker_tracking extends bo_tracking
 				'type' => 'message',
 			);
 		}
-		foreach(array(
+		$detail_fields = array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
+			'tr_startdate'   => $this->datetime($data['tr_startdate']),
+			'tr_duedate'     => $this->datetime($data['tr_duedate']),
 			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
@@ -379,7 +381,16 @@ class tracker_tracking extends bo_tracking
 			// The layout of tr_summary should NOT be changed in order for
 			// tracker.tracker_mailhandler.get_ticketId() to work!
 			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
-		) as $name => $value)
+		);
+
+		// Don't show start date / due date if disabled
+		$config = config::read('tracker');
+		if(!$config['show_dates'])
+		{
+			unset($detail_fields['tr_startdate']);
+			unset($detail_fields['tr_duedate']);
+		}
+		foreach($detail_fields as $name => $value)
 		{
 			$details[$name] = array(
 				'label' => lang($this->tracker->field2label[$name]),

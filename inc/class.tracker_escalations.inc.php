@@ -27,6 +27,18 @@ class tracker_escalations extends so_sql2
 	const CREATION = 0;
 	const MODIFICATION = 1;
 	const REPLIED = 2;
+	const REPLIED_CREATOR = 3;
+	const REPLIED_ASSIGNED = 4;
+	const START = 5;
+	const DUE = 6;
+
+	/**
+	 * Values for checking before or after an event
+	 * 'Before' is only valid for start & due dates
+	 */
+	const BEFORE = 1;
+	const AFTER = 2;
+
 	/**
 	 * Fields not in the main table, which need to be merged or set
 	 *
@@ -90,7 +102,7 @@ class tracker_escalations extends so_sql2
 		}
 		foreach($data as $key => &$value)
 		{
-			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type')))
+			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat')))
 			{
 				if ($key == 'esc_tr_assigned')
 				{
@@ -123,6 +135,7 @@ class tracker_escalations extends so_sql2
 							}
 							$action .= implode(', ',$users);
 							break;
+						case 'esc_reply_visible':
 						case 'esc_add_assigned':
 							continue 2;
 						case 'esc_tr_priority':
@@ -142,7 +155,7 @@ class tracker_escalations extends so_sql2
 							$action .= $GLOBALS['egw']->categories->id2name($cat_id);
 							break;
 						case 'esc_reply_message':
-							$action = lang('Add comment').":\n".$value;
+							$action = ($data['esc_reply_visible'] ? lang('Add restricted comment') : lang('Add comment')).":\n".$value;
 							break;
 					}
 					$actions[] = $action;
@@ -226,8 +239,19 @@ class tracker_escalations extends so_sql2
 				return 'tr_created';
 			case self::MODIFICATION:
 				return 'tr_modified';
+			case self::START:
+				return 'tr_startdate';
+			case self::DUE:
+				return 'tr_duedate';
 			case self::REPLIED:
 				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r WHERE r.tr_id = egw_tracker.tr_id)";
+			case self::REPLIED_CREATOR:
+				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r WHERE r.tr_id = egw_tracker.tr_id
+					AND r.reply_creator = egw_tracker.tr_creator)";
+			case self::REPLIED_ASSIGNED:
+				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r
+					JOIN egw_tracker_assignee ON r.tr_id = egw_tracker_assignee.tr_id
+					WHERE r.tr_id = egw_tracker.tr_id)";
 		}
 	}
 
@@ -254,6 +278,7 @@ class tracker_escalations extends so_sql2
 		{
 			return false;
 		}
+
 		foreach($this->set as $name => $value)
 		{
 			if (!is_null($value) && $value)
@@ -277,15 +302,14 @@ class tracker_escalations extends so_sql2
 		}
 		self::$tracker->init($ticket);
 
-		if (self::$tracker->save() != 0)
+		if ($result = self::$tracker->save() != 0)
 		{
 			return false;	// error saving the ticket
 		}
-		$this->db->insert(tracker_so::ESCALATED_TABLE,array(),array(
+		$this->db->insert(tracker_so::ESCALATED_TABLE,array(), array(
 			'tr_id' =>  $ticket['tr_id'],
-			'esc_id' => $this->id,
+			'esc_id' => $this->id
 		),__LINE__,__FILE__,'tracker');
-
 		return true;
 	}
 
@@ -303,7 +327,9 @@ class tracker_escalations extends so_sql2
 		// filter only due tickets
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
-		$filter[] = tracker_bo::escalated_filter($this->id,$join,false);
+		$filter[] = tracker_bo::escalated_filter($this->id,$join,
+			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
+		);
 
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
@@ -323,11 +349,13 @@ class tracker_escalations extends so_sql2
 	{
 		if (($escalations = $this->search(array(),false)))
 		{
+//			$this->db->transaction_begin();
 			foreach($escalations as $escalation)
 			{
 				$this->init($escalation);
 				$this->do_escalation();
 			}
+//			$this->db->transaction_commit();
 		}
 		else	// no escalations (any more) --> delete async job
 		{
