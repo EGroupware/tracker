@@ -745,6 +745,7 @@ class tracker_ui extends tracker_bo
 		{
 			unset($query['col_filter']['tr_assigned']);
 		}
+
 		// save the state of the index page (filters) in the user prefs
 		$state = serialize(array(
 			'cat_id'     => $query['cat_id'],	// cat
@@ -1131,6 +1132,7 @@ class tracker_ui extends tracker_bo
 				'cat_is_select'  => 'no_lang',
 				'filter'         => 0,  // all
 				'options-filter' => $date_filters,
+				'filter_label'   => lang('Date filter'),
 				'filter_no_lang'=> true,
 				'filter2'        => 0,	// all
 				'filter2_label'  => lang('Version'),

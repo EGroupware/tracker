@@ -357,6 +357,7 @@ class tracker_bo extends tracker_so
 		'Last year'   => array(-1,0,0,0, 0,0,0,0),
 		'2 years ago' => array(-2,0,0,0, -1,0,0,0),
 		'3 years ago' => array(-3,0,0,0, -2,0,0,0),
+		'Overdue'     => false,
 	);
 
 	/**
@@ -435,9 +436,14 @@ class tracker_bo extends tracker_so
 		{
 			$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
 			$limit = $this->now - $this->overdue_days * 24*60*60;
-			$data['overdue'] = $data['tr_status'] == -100 && 	// only open items can be overdue
+			$data['overdue'] = !in_array($data['tr_status'],$this->get_tracker_stati(null,true)) && 	// only open items can be overdue
 				(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+
 		}
+
+		// Consider due date independent of overdue days
+		$data['overdue'] |= ($data['tr_duedate'] && $this->now > $data['tr_duedate'] && !in_array($data['tr_status'], $this->get_tracker_stati(null,true)));
+
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
 
 		// Keep a copy of the timestamps in server time, so notifications can change them for each user
@@ -562,18 +568,18 @@ class tracker_bo extends tracker_so
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			// set close-date if status is closed and not yet set
-			if ($this->data['tr_status'] == self::STATUS_CLOSED && is_null($this->data['tr_closed']))
+			if (in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
 			}
 			// unset closed date, if item is re-opend
-			if ($this->data['tr_status'] != self::STATUS_CLOSED && !is_null($this->data['tr_closed']))
+			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
 			}
 			// Changes mark the ticket unseen for everbody but the current
 			// user if the ticket wasn't closed at the same time
-			if ($this->data['tr_status'] != self::STATUS_CLOSED)
+			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
 			{
 				$seen = array();
 				$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
@@ -1164,10 +1170,23 @@ class tracker_bo extends tracker_so
 	 * There's a bunch of pre-defined stati, plus statis stored as labels, which can be per tracker
 	 *
 	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param boolean $closed True to get 'closed' stati, false to get open stati, null for all
 	 */
-	function get_tracker_stati($tracker=null)
+	function get_tracker_stati($tracker=null, $closed = null)
 	{
-		return self::$stati + $this->get_tracker_labels('stati',$tracker);
+		$stati = self::$stati + $this->get_tracker_labels('stati',$tracker);
+		if($closed === null) return $stati;
+
+		$filtered = (!$closed ? array(self::STATUS_OPEN    => 'Open(status)') : array(self::STATUS_CLOSED  => 'Closed'));
+
+		foreach($stati as $id => $name)
+		{
+			if($id > 0 && $data = $GLOBALS['egw']->categories->id2name($id,'data'))
+			{
+				if($closed == $data['closed']) $filtered[$id] = $name;
+			}
+		}
+		return $filtered;
 	}
 
 	/**
@@ -1368,7 +1387,7 @@ class tracker_bo extends tracker_so
 	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
-	function get_rows($query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
+	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
 	{
 		if($query['filter'])
 		{
@@ -1562,6 +1581,15 @@ class tracker_bo extends tracker_so
 		) as $name => $value)
 		{
 			if (!isset($this->field_acl[$name])) $this->field_acl[$name] = $value;
+		}
+
+		// Add date filters if using start/due dates
+		if($this->show_dates)
+		{
+			$this->date_filters += array(
+				'started'  => false,
+				'upcoming' => false
+			);
 		}
 	}
 
@@ -1965,6 +1993,11 @@ class tracker_bo extends tracker_so
 	{
 		$end = $end_param;
 
+		// Get all closed stati for filtering
+		// may conflict with status column filter, but that's OK - overdue + closed should give no results
+		$closed_stati = $this->get_tracker_stati($this->tracker, true);
+		$closed_stati = implode(',',array_keys($closed_stati));
+
 		if ($name == 'custom' && $start)
 		{
 			if ($end)
@@ -1975,6 +2008,30 @@ class tracker_bo extends tracker_so
 			{
 				$end = $start + 8*24*60*60;
 			}
+		}
+		else if (strtolower($name) == 'overdue')
+		{
+                        $limit = $this->now - $this->overdue_days * 24*60*60;
+
+			return "((tr_duedate IS NOT NULL and tr_duedate < {$this->now}
+OR tr_duedate IS NULL AND
+    CASE
+        WHEN tr_modified IS NULL
+        THEN
+            tr_created < $limit
+        ELSE
+            tr_modified < $limit
+    END
+) AND tr_status NOT IN ($closed_stati)
+			) ";
+		}
+		else if (strtolower($name) == 'started')
+		{
+			return "(tr_startdate IS NOT NULL and tr_startdate < {$this->now} AND tr_status NOT IN ($closed_stati))";
+		}
+		else if (strtolower($name) == 'upcoming')
+		{
+			return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} AND tr_status NOT IN ($closed_stati))";
 		}
 		else
 		{

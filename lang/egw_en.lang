@@ -214,6 +214,7 @@ notification signature	tracker	en	Notification signature
 only explicitly named users have read access (otherwise everyone)	tracker	en	Only explicitly named users have read access, otherwise everyone
 open(status)	tracker	en	Open
 out of date	tracker	en	Out of date
+overdue	tracker	en	Overdue
 overdue after	tracker	en	Overdue after
 ownership of the ticket	tracker	en	Owner of the ticket
 pending	tracker	en	Pending
@@ -269,6 +270,7 @@ show the tracker send you notification mails, in tracker items that you updates?
 skip record	tracker	en	Skip record
 staff	tracker	en	Staff
 staff  "users" will be allowed for assignment to tracker tickets	tracker	en	Staff 'Users' will be allowed for assignment to tracker tickets
+started	tracker	en	Started
 state	tracker	en	State
 stati	tracker	en	State
 store as	tracker	en	Store as
@@ -313,6 +315,7 @@ unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker
 unchanged	tracker	en	Unchanged
 unlinked from %1	tracker	en	Unlinked from %1
 unrecognized mails	tracker	en	Unrecognized mails
+upcoming	tracker	en	Upcoming
 updated	tracker	en	Updated
 url of the tracker	tracker	en	URL of the tracker
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	en	URL to be included in the notification, e.g. to the page with the Site Manager module, default tracker inside eGW
