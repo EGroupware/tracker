@@ -575,3 +575,14 @@ function tracker_upgrade1_9_004()
 }
 
 
+
+function tracker_upgrade1_9_005()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_notify',array(
+		'type' => 'varchar',
+		'precision' => '15'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.006';
+}
+

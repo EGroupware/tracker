@@ -47,6 +47,15 @@ class tracker_escalations extends so_sql2
 	var $non_db_cols = array('set');
 
 	/**
+	 * Notification options
+	 */
+	public static $notification = array(
+		'all'		=> 'all',
+		'responsible'	=> 'responsible',
+		'none'		=> 'none'
+	);
+
+	/**
 	 * Constructor
 	 *
 	 * @return tracker_ui
@@ -135,6 +144,7 @@ class tracker_escalations extends so_sql2
 							}
 							$action .= implode(', ',$users);
 							break;
+						case 'esc_notify':
 						case 'esc_reply_visible':
 						case 'esc_add_assigned':
 							continue 2;
@@ -274,6 +284,14 @@ class tracker_escalations extends so_sql2
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
+		if(!is_object(self::$tracker->tracking))
+		{
+			self::$tracker->tracking = new tracker_tracking(self::$tracker);
+		}
+		else
+		{
+			unset(self::$tracker->tracking->skip_notify);
+		}
 		if (!is_array($ticket) && !($ticket = self::$tracker->read($ticket)))
 		{
 			return false;
@@ -286,6 +304,21 @@ class tracker_escalations extends so_sql2
 				switch($name)
 				{
 					case 'add_assigned':
+						break;
+					case 'notify':
+						// Change notifications
+						if($value == 'none')
+						{
+							$ticket['no_notifications'] = true;
+						}
+						else if ($value == 'responsible')
+						{
+							// Skip owner & cc
+							$ticket['skip_notify'] = array(
+								$GLOBALS['egw']->accounts->id2name($ticket['tr_creator'],'account_email'),
+							);
+							self::$tracker->tracking->skip_notify = array_merge($ticket['skip_notify'], self::$tracker->tracking->get_config('copy',$ticket));
+						}
 						break;
 					case 'tr_assigned':
 						if ($this->set['add_assigned'])

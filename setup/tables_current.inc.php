@@ -117,7 +117,8 @@ $phpgw_baseline = array(
 			'esc_tr_priority' => array('type' => 'int','precision' => '4'),
 			'esc_reply_message' => array('type' => 'text'),
 			'esc_reply_visible' => array('type' => 'int','precision' => '1'),
-			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0')
+			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
+			'esc_notify' => array('type' => 'varchar','precision' => '15')
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),

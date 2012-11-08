@@ -64,7 +64,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.002">
 		<grid width="100%">
 			<columns>
 				<column width="100"/>
@@ -82,6 +82,8 @@
 					<description id="msg" span="all" class="redItalic"/>
 					<description/>
 					<description/>
+					<description/>
+					<description/>
 				</row>
 				<row>
 					<description value="Title"/>
@@ -94,8 +96,8 @@
 						<menulist>
 							<menupopup id="esc_before_after"/>
 						</menulist>
-						<menulist class="leftPad5">
-							<menupopup id="esc_type"/>
+						<menulist>
+							<menupopup class="leftPad5" id="esc_type"/>
 						</menulist>
 					</hbox>
 					<description/>
@@ -205,6 +207,14 @@
 										<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 										<textbox multiline="true" id="reply_message" rows="3" span="all" class="reply"/>
 									</vbox>
+									<description/>
+									<description/>
+								</row>
+								<row>
+									<description value="Notification"/>
+									<menulist>
+										<menupopup id="notify"/>
+									</menulist>
 									<description/>
 									<description/>
 								</row>

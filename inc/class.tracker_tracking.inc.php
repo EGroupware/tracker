@@ -169,7 +169,8 @@ class tracker_tracking extends bo_tracking
 	public function do_notifications($data,$old,$deleted, $changes)
 	{
 		$success = True;
-		$email_notified = array();
+		$skip = $this->get_config('skip_notify',$data,$old);
+		$email_notified = $skip ? $skip : array();
 
 		// Send all to others
 		$creator = $data[$this->creator_field];
@@ -244,6 +245,9 @@ class tracker_tracking extends bo_tracking
 				{
 					$config = array_merge($config,preg_split('/, ?/',$data['tr_cc']));
 				}
+				break;
+			case 'skip_notify':
+				$config = array_merge((array)$config,$data['skip_notify'] ? $data['skip_notify'] : (array)$this->skip_notify);
 				break;
 		}
 		//error_log(__METHOD__.__LINE__.' Name:'.$name.' -> '.array2string($config).' Data:'.array2string($data));

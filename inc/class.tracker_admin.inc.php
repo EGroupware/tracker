@@ -659,6 +659,7 @@ class tracker_admin extends tracker_bo
 				tracker_escalations::REPLIED_CREATOR => lang('last reply by creator'),
 				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
 			),
+			'notify' => tracker_escalations::$notification
 		);
 		$tpl = new etemplate('tracker.escalations');
 		if ($content['set']['tr_assigned'] && !is_array($content['set']['tr_assigned']))
