@@ -323,7 +323,7 @@ vote for it!	tracker	de	Dafür abstimmen!
 votes	tracker	de	Stimmen
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn E-Mails von einer unbekannten E-Mail Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld CC hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte E-Mail Adressen nicht behandelt werden.
 wont fix	tracker	de	Vorerst keine Anpassung
-works for me	tracker	de	Nicht replizierbar
+works for me	tracker	de	Nicht reproduzierbar
 yes, add mailheader to both (description and comments)	tracker	de	Ja, Mailheaderinformationen für Beschreibung und Kommentare hinzufügen
 yes, add mailheader to comments	tracker	de	Ja, Mailheaderinformationen für Kommentare hinzufügen
 yes, add mailheader to description	tracker	de	Ja, Mailheaderinformationen zur Beschreibung hinzufügen
