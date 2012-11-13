@@ -625,28 +625,9 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query=$query_in);
-		$tracker = $query['col_filter']['tr_tracker'];
-		if (!($query['col_filter']['cat_id'] = $query['filter'])) unset($query['col_filter']['cat_id']);
-		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
 
-		if (!($query['col_filter']['tr_creator'])) unset($query['col_filter']['tr_creator']);
-
-		if ($query['col_filter']['tr_assigned'] < 0)	// resolve groups with it's members
-		{
-			$query['col_filter']['tr_assigned'] = $GLOBALS['egw']->accounts->members($query['col_filter']['tr_assigned'],true);
-			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
-		}
-		elseif($query['col_filter']['tr_assigned'] === 'not')
-		{
-			//$query['col_filter'][] = 'tr_assigned IS NULL';
-			//unset($query['col_filter']['tr_assigned']);
-			$query['col_filter']['tr_assigned'] = null;
-		}
-		elseif(!$query['col_filter']['tr_assigned'])
-		{
-			unset($query['col_filter']['tr_assigned']);
-		}
 		// save the state of the index page (filters) in the user prefs
+		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
 		$state = serialize(array(
 			'filter'     => $query['filter'],	// cat
 			'filter2'    => $query['filter2'],	// version
@@ -667,6 +648,27 @@ class tracker_ui extends tracker_bo
 			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
 			// save prefs, but do NOT invalid the cache (unnecessary)
 			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
+		}
+		$tracker = $query['col_filter']['tr_tracker'];
+		if (!($query['col_filter']['cat_id'] = $query['filter'])) unset($query['col_filter']['cat_id']);
+		if (!($query['col_filter']['tr_version'] = $query['filter2'])) unset($query['col_filter']['tr_version']);
+
+		if (!($query['col_filter']['tr_creator'])) unset($query['col_filter']['tr_creator']);
+
+		if ($query['col_filter']['tr_assigned'] < 0)	// resolve groups with it's members
+		{
+			$query['col_filter']['tr_assigned'] = $GLOBALS['egw']->accounts->members($query['col_filter']['tr_assigned'],true);
+			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
+		}
+		elseif($query['col_filter']['tr_assigned'] === 'not')
+		{
+			//$query['col_filter'][] = 'tr_assigned IS NULL';
+			//unset($query['col_filter']['tr_assigned']);
+			$query['col_filter']['tr_assigned'] = null;
+		}
+		elseif(!$query['col_filter']['tr_assigned'])
+		{
+			unset($query['col_filter']['tr_assigned']);
 		}
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
