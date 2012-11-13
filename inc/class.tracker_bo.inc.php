@@ -1993,11 +1993,6 @@ class tracker_bo extends tracker_so
 	{
 		$end = $end_param;
 
-		// Get all closed stati for filtering
-		// may conflict with status column filter, but that's OK - overdue + closed should give no results
-		$closed_stati = $this->get_tracker_stati($this->tracker, true);
-		$closed_stati = implode(',',array_keys($closed_stati));
-
 		if ($name == 'custom' && $start)
 		{
 			if ($end)
@@ -2013,7 +2008,7 @@ class tracker_bo extends tracker_so
 		{
                         $limit = $this->now - $this->overdue_days * 24*60*60;
 
-			return "((tr_duedate IS NOT NULL and tr_duedate < {$this->now}
+			return "(tr_duedate IS NOT NULL and tr_duedate < {$this->now}
 OR tr_duedate IS NULL AND
     CASE
         WHEN tr_modified IS NULL
@@ -2022,16 +2017,15 @@ OR tr_duedate IS NULL AND
         ELSE
             tr_modified < $limit
     END
-) AND tr_status NOT IN ($closed_stati)
 			) ";
 		}
 		else if (strtolower($name) == 'started')
 		{
-			return "(tr_startdate IS NOT NULL and tr_startdate < {$this->now} AND tr_status NOT IN ($closed_stati))";
+			return "(tr_startdate IS NOT NULL and tr_startdate < {$this->now} )" ;
 		}
 		else if (strtolower($name) == 'upcoming')
 		{
-			return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} AND tr_status NOT IN ($closed_stati))";
+			return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
 		}
 		else
 		{
