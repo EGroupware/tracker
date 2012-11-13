@@ -721,6 +721,31 @@ class tracker_ui extends tracker_bo
 		{
 			egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
 		}
+		// save the state of the index page (filters) in the user prefs
+		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
+		$state = serialize(array(
+			'cat_id'     => $query['cat_id'],	// cat
+			'filter'     => $query['filter'],	// dates
+			'filter2'    => $query['filter2'],	// version
+			'order'      => $query['order'],
+			'sort'       => $query['sort'],
+			'num_rows'   => $query['num_rows'],
+			'col_filter' => array(
+				'tr_tracker'  => $query['col_filter']['tr_tracker'],
+				'tr_creator'  => $query['col_filter']['tr_creator'],
+				'tr_assigned' => $query['col_filter']['tr_assigned'],
+				'tr_status'   => $query['col_filter']['tr_status'],
+			),
+		));
+		if (!$query['csv_export'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
+			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
+		{
+			//$msg .= "save the index state <br>";
+			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
+			// save prefs, but do NOT invalid the cache (unnecessary)
+			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
+		}
+
 		$tracker = $query['col_filter']['tr_tracker'];
 		// Explode multiples into array
 		if(strpos($tracker,',') !== false)
@@ -746,29 +771,6 @@ class tracker_ui extends tracker_bo
 			unset($query['col_filter']['tr_assigned']);
 		}
 
-		// save the state of the index page (filters) in the user prefs
-		$state = serialize(array(
-			'cat_id'     => $query['cat_id'],	// cat
-			'filter'     => $query['filter'],	// dates
-			'filter2'    => $query['filter2'],	// version
-			'order'      => $query['order'],
-			'sort'       => $query['sort'],
-			'num_rows'   => $query['num_rows'],
-			'col_filter' => array(
-				'tr_tracker'  => $query['col_filter']['tr_tracker'],
-				'tr_creator'  => $query['col_filter']['tr_creator'],
-				'tr_assigned' => $query['col_filter']['tr_assigned'],
-				'tr_status'   => $query['col_filter']['tr_status'],
-			),
-		));
-		if (!$query['csv_export'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
-			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
-		{
-			//$msg .= "save the index state <br>";
-			$GLOBALS['egw']->preferences->add('tracker','index_state',$state);
-			// save prefs, but do NOT invalid the cache (unnecessary)
-			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
-		}
 		if (empty($query['col_filter']['tr_tracker']))
 		{
 			$trtofilter = array_keys($this->trackers);
@@ -784,8 +786,6 @@ class tracker_ui extends tracker_bo
 		{
 			$trackers = array();
 		}
-
-
 
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
@@ -862,7 +862,7 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 		unset($rows['sel_options']['assigned']['not']);
 
-		
+
 		$versions = $cats = $resolutions = $statis = array();
 		foreach((array)$tracker as $tr_id)
 		{
