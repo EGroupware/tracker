@@ -14,9 +14,14 @@
 					</hbox>
 				</row>
 				<row>
-					<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="3" options="width=100%"/>
+					<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="3" options=",,,,,,true" class="tracker_queue"/>
 				</row>
 			</rows>
 		</grid>
+		<styles>
+			.tracker_queue select {
+  width: 100%;
+}
+		</styles>
 	</template>
 </overlay>

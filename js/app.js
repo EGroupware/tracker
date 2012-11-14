@@ -15,7 +15,7 @@ function add_email_from_ab(ab_id,tr_cc)
 	
 	if (!ab || !ab.value)
 	{
-		set_style_by_class('tr','hiddenRow','display','block');
+		set_style_by_class('tr','hiddenRow','display','table-row');
 	}
 	else
 	{
