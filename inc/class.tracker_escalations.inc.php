@@ -231,6 +231,11 @@ class tracker_escalations extends so_sql2
 			//echo "<p>time=".time()."=".date('Y-m-d H:i:s').", esc_time=$this->esc_time, time()-esc_time*60=".(time()-$this->esc_time*60).'='.date('Y-m-d H:i:s',time()-$this->esc_time*60)."</p>\n";
 			$filter[] = $this->get_time_col().' < '.(time()-$this->esc_time*60);
 		}
+		if ($due && $this->esc_time < 0)
+		{
+			// Don't let 'before' matches go on too long - limit the range to 1 day
+			$filter[] = $this->get_time_col() . ' > ' . (time() - $this->esc_time*60 - 86400);
+		}
 
 		return $filter;
 	}
