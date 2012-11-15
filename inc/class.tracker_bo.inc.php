@@ -2021,7 +2021,7 @@ OR tr_duedate IS NULL AND
 		}
 		else if (strtolower($name) == 'started')
 		{
-			return "(tr_startdate IS NOT NULL and tr_startdate < {$this->now} )" ;
+			return "(tr_startdate IS NULL OR tr_startdate < {$this->now} )" ;
 		}
 		else if (strtolower($name) == 'upcoming')
 		{
