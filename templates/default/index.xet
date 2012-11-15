@@ -3,8 +3,8 @@
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.9.001">
 		<hbox>
-			<menulist>
-				<menupopup class="bold" cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="1" options="All"/>
+			<menulist class="bold">
+				<menupopup cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="1" options="All"/>
 			</menulist>
 			<button id="col_filter[multi_queue][true]" image="foldertree_nolines_plus"/>
 		</hbox>
@@ -110,7 +110,7 @@
 					</vbox>
 					<vbox>
 						<date-time id="${row}[tr_startdate]" readonly="true" class="noWrap"/>
-						<date-time id="${row}[tr_duedate]" readonly="true" class="noWrap"/>
+						<date-time id="${row}[tr_duedate]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					</vbox>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
