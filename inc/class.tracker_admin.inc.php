@@ -658,6 +658,7 @@ class tracker_admin extends tracker_bo
 				tracker_escalations::REPLIED => lang('last reply'),
 				tracker_escalations::REPLIED_CREATOR => lang('last reply by creator'),
 				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
+				tracker_escalations::REPLIED_NOT_CREATOR => lang('last reply by anyone but creator'),
 			),
 			'notify' => tracker_escalations::$notification
 		);

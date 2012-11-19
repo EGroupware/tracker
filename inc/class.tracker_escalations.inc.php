@@ -29,6 +29,7 @@ class tracker_escalations extends so_sql2
 	const REPLIED = 2;
 	const REPLIED_CREATOR = 3;
 	const REPLIED_ASSIGNED = 4;
+	const REPLIED_NOT_CREATOR = 7;
 	const START = 5;
 	const DUE = 6;
 
@@ -233,8 +234,16 @@ class tracker_escalations extends so_sql2
 		}
 		if ($due && $this->esc_time < 0)
 		{
-			// Don't let 'before' matches go on too long - limit the range to 1 day
-			$filter[] = $this->get_time_col() . ' > ' . (time() - $this->esc_time*60 - 86400);
+			if($this->esc_type == self::START)
+			{
+				// 'Before start date' only matches start dates in the future
+				$filter[] = $this->get_time_col() . ' > ' . time();
+			}
+			else
+			{
+				// Don't let other 'before' matches go on too long - limit the range to 1 day
+				$filter[] = $this->get_time_col() . ' > ' . (time() - $this->esc_time*60 - 86400);
+			}
 		}
 
 		return $filter;
@@ -267,6 +276,9 @@ class tracker_escalations extends so_sql2
 				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r
 					JOIN egw_tracker_assignee ON r.tr_id = egw_tracker_assignee.tr_id
 					WHERE r.tr_id = egw_tracker.tr_id)";
+			case self::REPLIED_NOT_CREATOR:
+				return "(SELECT MAX(reply_created) FROM egw_tracker_replies r WHERE r.tr_id = egw_tracker.tr_id
+					AND r.reply_creator != egw_tracker.tr_creator)";
 		}
 	}
 
