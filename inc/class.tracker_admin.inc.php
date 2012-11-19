@@ -539,6 +539,9 @@ class tracker_admin extends tracker_bo
 					}
 					$row['prio_label'] = $prio_labels[$row['tr_priority']];
 				}
+
+				// Show repeat limit, if set
+				if($row['esc_limit']) $row['esc_limit_label'] = lang('maximum %1 times', $row['esc_limit']);
 			}
 		}
 		return $Ok;

@@ -586,3 +586,28 @@ function tracker_upgrade1_9_005()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.006';
 }
 
+
+function tracker_upgrade1_9_006()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_limit',array(
+		'type' => 'int',
+		'precision' => '1',
+		'comment' => 'Limit on how many times one ticket will match'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.007';
+}
+
+
+function tracker_upgrade1_9_007()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalated','match_count',array(
+		'type' => 'int',
+		'precision' => '1',
+		'nullable' => False,
+		'default' => '1'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.007';
+}
+

@@ -112,7 +112,7 @@ class tracker_escalations extends so_sql2
 		}
 		foreach($data as $key => &$value)
 		{
-			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat')))
+			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat','esc_limit')))
 			{
 				if ($key == 'esc_tr_assigned')
 				{
@@ -226,6 +226,7 @@ class tracker_escalations extends so_sql2
 		if ($this->tr_priority) $filter['tr_priority'] = $this->tr_priority;
 		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
 		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
+		if ($this->esc_limit)	$filter[] = 'match_count < ' . $this->esc_limit;
 
 		if ($due)
 		{
@@ -356,10 +357,19 @@ class tracker_escalations extends so_sql2
 		{
 			return false;	// error saving the ticket
 		}
-		$this->db->insert(tracker_so::ESCALATED_TABLE,array(), array(
+		$count = $this->db->select(tracker_so::ESCALATED_TABLE,
+			array('match_count'),array(
+				'tr_id' =>  $ticket['tr_id'],
+				'esc_id' => $this->id
+			),__LINE__,__FILE__,'tracker'
+		)->fetchColumn(0);
+		
+		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => max($count + 1,255)),
+		array(
 			'tr_id' =>  $ticket['tr_id'],
 			'esc_id' => $this->id
 		),__LINE__,__FILE__,'tracker');
+
 		return true;
 	}
 

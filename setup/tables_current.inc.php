@@ -118,7 +118,8 @@ $phpgw_baseline = array(
 			'esc_reply_message' => array('type' => 'text'),
 			'esc_reply_visible' => array('type' => 'int','precision' => '1'),
 			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
-			'esc_notify' => array('type' => 'varchar','precision' => '15')
+			'esc_notify' => array('type' => 'varchar','precision' => '15'),
+			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match')
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),
@@ -129,7 +130,8 @@ $phpgw_baseline = array(
 		'fd' => array(
 			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
 			'esc_id' => array('type' => 'int','precision' => '4','nullable' => False),
-			'esc_created' => array('type' => 'timestamp','nullable' => False,'default' => 'current_timestamp')
+			'esc_created' => array('type' => 'timestamp','nullable' => False,'default' => 'current_timestamp'),
+			'match_count' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1')
 		),
 		'pk' => array('tr_id','esc_id'),
 		'fk' => array(),
