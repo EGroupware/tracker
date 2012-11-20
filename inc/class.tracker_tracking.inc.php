@@ -387,13 +387,16 @@ class tracker_tracking extends bo_tracking
 			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
 		);
 
-		// Don't show start date / due date if disabled
+		// Don't show start date / due date if disabled or not set
 		$config = config::read('tracker');
 		if(!$config['show_dates'])
 		{
 			unset($detail_fields['tr_startdate']);
 			unset($detail_fields['tr_duedate']);
 		}
+		if(!$data['tr_startdate']) unset($detail_fields['tr_startdate']);
+		if(!$data['tr_duedate']) unset($detail_fields['tr_duedate']);
+
 		foreach($detail_fields as $name => $value)
 		{
 			$details[$name] = array(
