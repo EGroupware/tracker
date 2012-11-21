@@ -535,9 +535,16 @@ class tracker_admin extends tracker_bo
 				{
 					if (is_null($prio_labels) || $row['tr_tracker'] != $prio_tracker || $row['cat_id'] != $prio_cat)
 					{
-						$prio_labels = $this->get_tracker_priorities($prio_tracker=$row['tr_tracker'],$prio_cat = $row['cat_id']);
+						$prio_labels = $this->get_tracker_priorities(
+							$prio_tracker=is_array($row['tr_tracker']) ? $row['tr_tracker'][0] : $row['tr_tracker'],
+							$prio_cat = is_array($row['cat_id']) ? $row['cat_id'][0] : $row['cat_id']
+						);
 					}
-					$row['prio_label'] = $prio_labels[$row['tr_priority']];
+					foreach($row['tr_priority'] as $priority)
+					{
+						$row['prio_label'][]= $prio_labels[$priority];
+					}
+					$row['prio_label'] = implode(',',$row['prio_label']);
 				}
 
 				// Show repeat limit, if set
@@ -595,7 +602,7 @@ class tracker_admin extends tracker_bo
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save()) == 0)
+					elseif (($err = $escalations->save(null,null,!$content['run_on_existing'])) == 0)
 					{
 						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
@@ -641,14 +648,10 @@ class tracker_admin extends tracker_bo
 		$preserv['esc_id'] = $content['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
+
 		$tracker = $content['tr_tracker'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
-			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
-			'tr_status'   => $this->get_tracker_stati($tracker),
-			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
 			'esc_before_after' => array(
 				tracker_escalations::AFTER => lang('after'),
 				tracker_escalations::BEFORE => lang('before'),
@@ -663,13 +666,29 @@ class tracker_admin extends tracker_bo
 				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
 				tracker_escalations::REPLIED_NOT_CREATOR => lang('last reply by anyone but creator'),
 			),
-			'notify' => tracker_escalations::$notification
+			'notify' => tracker_escalations::$notification,
+			'cat_id' => array(),
+			'tr_version' => array(),
+			'tr_resolution' => array(),
+			'tr_priority' => array(),
+			'tr_status' => array(),
+			'tr_assigned' => array()
 		);
-		$tpl = new etemplate('tracker.escalations');
+
+		foreach(($content['tr_tracker'] ? (array)$content['tr_tracker'] : array_keys($this->trackers)) as $tracker)
+		{
+			$sel_options['cat_id'] 		+= $this->get_tracker_labels('cat',$tracker);
+			$sel_options['tr_version']	+= $this->get_tracker_labels('version',$tracker);
+			$sel_options['tr_resolution']	+= $this->get_tracker_labels('resolution',$tracker);
+			$sel_options['tr_priority']	+= $this->get_tracker_priorities($tracker,$content['cat_id']);
+			$sel_options['tr_status']	+= $this->get_tracker_stati($tracker);
+			$sel_options['tr_assigned']	+= $this->get_staff($tracker,$this->allow_assign_groups);
+		}
 		if ($content['set']['tr_assigned'] && !is_array($content['set']['tr_assigned']))
 		{
 			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
 		}
+		$tpl = new etemplate('tracker.escalations');
 		if (count($content['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
@@ -679,15 +698,13 @@ class tracker_admin extends tracker_bo
 		{
 			$content['tr_status'] = explode(',',$content['tr_status']);
 		}
-		if (count($content['tr_status']) > 1)
-		{
-			$widget =& $tpl->get_widget_by_name('tr_status');
-			$widget['size'] = '3+';
-		}
-		if ($this->tracker_has_cat_specific_priorities($tracker))
-		{
-			$widget =& $tpl->get_widget_by_name('cat_id');
-			$widget['onchange'] = true;
+		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
+                {
+			if (count($content[$array]) > 1)
+			{
+				$widget =& $tpl->get_widget_by_name($array);
+				$widget['size'] = '3+';
+			}
 		}
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);

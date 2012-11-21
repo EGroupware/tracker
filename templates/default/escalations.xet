@@ -14,11 +14,13 @@
 				<column/>
 				<column/>
 				<column/>
+				<column/>
 			</columns>
 			<rows>
 				<row class="th">
 					<nextmatch-sortheader label="Title" id="esc_title"/>
 					<nextmatch-filterheader id="tr_tracker" options="Queue"/>
+					<nextmatch-header label="Resolution" id="tr_resolution"/>
 					<nextmatch-header label="Category" id="cat_id"/>
 					<nextmatch-header label="Version" id="tr_version"/>
 					<nextmatch-header label="Status" id="tr_status"/>
@@ -32,6 +34,9 @@
 					<description id="${row}[esc_title]" no_lang="1"/>
 					<menulist>
 						<menupopup type="select-cat" id="${row}[tr_tracker]" readonly="true" options="All"/>
+					</menulist>
+					<menulist>
+						<menupopup type="select-cat" id="${row}[tr_resolution]" readonly="true" options="All"/>
 					</menulist>
 					<menulist>
 						<menupopup type="select-cat" id="${row}[cat_id]" readonly="true" options="All"/>
@@ -50,13 +55,13 @@
 							<menulist>
 								<menupopup id="${row}[esc_before_after]" no_lang="1" readonly="true"/>
 							</menulist>
-							<menulist>
+							<menulist class="noWrap">
 								<menupopup id="${row}[esc_type]" no_lang="1" readonly="true"/>
 							</menulist>
 						</hbox>
 					</vbox>
 					<vbox readonly="true">
-						<date-duration id="${row}[esc_match_repeat]" readonly="true"/>
+						<date-duration id="${row}[esc_match_repeat]" readonly="true" class="noWrap"/>
 						<description id="${row}[esc_limit_label]"/>
 					</vbox>
 					<hbox options="0,0">
@@ -124,34 +129,53 @@
 								<column/>
 							</columns>
 							<rows>
-								<row>
+								<row valign="top">
 									<description value="Queue"/>
-									<menulist span="all">
-										<menupopup id="tr_tracker" onchange="1" options="All"/>
-									</menulist>
+									<hbox onchange="1" options="0,0">
+										<menulist span="all">
+											<menupopup id="tr_tracker" options="All"/>
+										</menulist>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_tracker'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+									</hbox>
+									<description value="Resolution"/>
+									<hbox options="0,0">
+										<menulist>
+											<menupopup id="tr_resolution" options="All"/>
+										</menulist>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_resolution'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+									</hbox>
 								</row>
-								<row>
+								<row valign="top">
 									<description value="Category"/>
-									<menulist>
-										<menupopup id="cat_id" options="All"/>
-									</menulist>
+									<hbox options="0,0">
+										<menulist>
+											<menupopup id="cat_id" options="All"/>
+										</menulist>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('cat_id'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+									</hbox>
 									<description value="Version"/>
-									<menulist>
-										<menupopup id="tr_version" options="All"/>
-									</menulist>
+									<hbox options="0,0">
+										<menulist>
+											<menupopup id="tr_version" options="All"/>
+										</menulist>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_version'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+									</hbox>
 								</row>
-								<row>
+								<row valign="top">
 									<description value="Status"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_status" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
-									<menulist>
-										<menupopup id="tr_priority" options="All"/>
-									</menulist>
+									<hbox options="0,0">
+										<menulist>
+											<menupopup id="tr_priority" options="All"/>
+										</menulist>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_priority'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+									</hbox>
 								</row>
 							</rows>
 						</grid>
@@ -231,6 +255,7 @@
 					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
+						<checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="run_on_existing"/>
 						<button align="right" label="Cancel" id="button[cancel]"/>
 					</hbox>
 				</row>

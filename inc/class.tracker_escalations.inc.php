@@ -21,6 +21,13 @@ class tracker_escalations extends so_sql2
 	 * Name of escalations table
 	 */
 	const ESCALATIONS_TABLE = 'egw_tracker_escalations';
+
+	/**
+	 * Async jobs
+	 */
+	const ASYNC_JOB_NAME = 'tracker-escalations';
+	const ASYNC_NOTIFICATION = 'tracker-pref-notification';
+
 	/**
 	 * Values for esc_type column
 	 */
@@ -106,9 +113,12 @@ class tracker_escalations extends so_sql2
 		{
 			$data = &$this->data;
 		}
-		if (isset($data['tr_status']) && strpos($data['tr_status'],',') !== false)
+		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
 		{
-			$data['tr_status'] = explode(',',$data['tr_status']);
+			if (isset($data[$array]) && strpos($data[$array],',') !== false)
+			{
+				$data[$array] = explode(',',$data[$array]);
+			}
 		}
 		foreach($data as $key => &$value)
 		{
@@ -150,7 +160,9 @@ class tracker_escalations extends so_sql2
 						case 'esc_add_assigned':
 							continue 2;
 						case 'esc_tr_priority':
-							$priorities = ExecMethod('tracker.tracker_bo.get_tracker_priorities',$data['tr_tracker']);
+							$priorities = ExecMethod('tracker.tracker_bo.get_tracker_priorities',
+								is_array($data['tr_tracker']) ? $data['tr_tracker'][0] : $data['tr_tracker']
+							);
 							$action .= $priorities[$value];
 							break;
 						case 'esc_tr_status':
@@ -204,9 +216,12 @@ class tracker_escalations extends so_sql2
 			}
 			unset($data['set']);
 		}
-		if (is_array($data['tr_status']))
+		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
 		{
-			$data['tr_status'] = implode(',',$data['tr_status']);
+			if (is_array($data[$array]))
+			{
+				$data[$array] = implode(',',$data[$array]);
+			}
 		}
 		return parent::db2data($data);
 	}
@@ -226,27 +241,25 @@ class tracker_escalations extends so_sql2
 		if ($this->tr_priority) $filter['tr_priority'] = $this->tr_priority;
 		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
 		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
-		if ($this->esc_limit)	$filter[] = 'match_count < ' . $this->esc_limit;
+		if ($this->esc_limit)	$filter[] = '(match_count < ' . $this->esc_limit .' OR match_count IS NULL)';
 
 		if ($due)
 		{
 			//echo "<p>time=".time()."=".date('Y-m-d H:i:s').", esc_time=$this->esc_time, time()-esc_time*60=".(time()-$this->esc_time*60).'='.date('Y-m-d H:i:s',time()-$this->esc_time*60)."</p>\n";
 			$filter[] = $this->get_time_col().' < '.(time()-$this->esc_time*60);
 		}
-		if ($due && $this->esc_time < 0)
+		else if ($this->esc_time < 0)
 		{
-			if($this->esc_type == self::START)
-			{
-				// 'Before start date' only matches start dates in the future
-				$filter[] = $this->get_time_col() . ' > ' . time();
-			}
-			else
-			{
-				// Don't let other 'before' matches go on too long - limit the range to 1 day
-				$filter[] = $this->get_time_col() . ' > ' . (time() - $this->esc_time*60 - 86400);
-			}
+			// Not actually running, limit to a week to prevent everything showing
+			$filter[] = $this->get_time_col() . ' < ' . strtotime("+1 week", time());
 		}
-
+		//echo $this->get_time_col() . ' < ' . date('Y-m-d H:i',time() - $this->esc_time*60  ) . "\n";
+		if($this->esc_type == self::START && $this->esc_time < 0)
+		{
+			// 'Before start date' only matches start dates in the future
+			$filter[] = $this->get_time_col() . ' > ' . time();
+			//echo $this->get_time_col() . ' > ' . date('Y-m-d H:i',time()) . "\n";
+		}
 		return $filter;
 	}
 
@@ -315,6 +328,7 @@ class tracker_escalations extends so_sql2
 			return false;
 		}
 
+		//echo self::$tracker->link_title($ticket['tr_id']) . "\n";
 		foreach($this->set as $name => $value)
 		{
 			if (!is_null($value) && $value)
@@ -363,8 +377,9 @@ class tracker_escalations extends so_sql2
 				'esc_id' => $this->id
 			),__LINE__,__FILE__,'tracker'
 		)->fetchColumn(0);
+
 		
-		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => max($count + 1,255)),
+		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => min($count + 1,255)),
 		array(
 			'tr_id' =>  $ticket['tr_id'],
 			'esc_id' => $this->id
@@ -384,6 +399,9 @@ class tracker_escalations extends so_sql2
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
+
+		//echo "\n".$this->esc_title . "\n----------------------\n";
+
 		// filter only due tickets
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
@@ -394,11 +412,13 @@ class tracker_escalations extends so_sql2
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
 		{
+			//echo count($due_tickets) ." matching tickets:\n";
 			foreach($due_tickets as $ticket)
 			{
 				$this->escalate_ticket($ticket);
 			}
 		}
+		//else echo "\nNo tickets\n--------\n\n";
 	}
 
 	/**
@@ -423,7 +443,6 @@ class tracker_escalations extends so_sql2
 		}
 	}
 
-	const ASYNC_JOB_NAME = 'tracker-escalations';
 
 	/**
 	 * Check if exist and if not start or stop an async job to close pending items
@@ -454,12 +473,174 @@ class tracker_escalations extends so_sql2
 	 *
 	 * @param array $keys
 	 * @param array $extra_where
+	 * @param boolean $escalate_existing Mark existing (matching) tickets as escalated without taking the action.
 	 * @return int
 	 */
-	function save($keys=null,$extra_where=null)
+	function save($keys=null,$extra_where=null, $escalate_existing = true)
 	{
 		self::set_async_job(true);
 
-		return parent::save($keys,$extra_where);
+		$result = parent::save($keys,$extra_where);
+		
+		if($result != 0 || !$escalate_existing) return $result;
+
+		
+		if (is_null(self::$tracker))
+		{
+			self::$tracker = new tracker_bo();
+			self::$tracker->user = 0;
+		}
+
+		// filter only due tickets
+		$filter = $this->get_filter(true);
+		// not having this escalation already done
+		$filter[] = tracker_bo::escalated_filter($this->id,$join,
+			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
+		);
+
+		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
+			'',false,'AND',false,$filter,$join)))
+		{
+			// error_log(count($due_tickets) . ' escalated with no action');
+			foreach($due_tickets as $ticket)
+			{
+				$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => $this->match_count),
+				array(
+					'tr_id' =>  $ticket['tr_id'],
+					'esc_id' => $this->id
+				),__LINE__,__FILE__,'tracker');
+
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * Give simple notifications per user preferences
+	 *
+	 * These notifications are done in addition to escalations.
+	 */
+	public static function preference_notifications()
+	{
+
+		// Remember so we can restore after
+		$save_account_id = $GLOBALS['egw_info']['user']['account_id'];
+                $save_prefs      = $GLOBALS['egw_info']['user']['preferences'];
+
+		// Map of preference -> filter
+		static $preferences = array(
+			'notify_start'	=> 'tr_startdate IS NOT NULL AND tr_startdate ',
+			'notify_due'	=> 'tr_duedate IS NOT NULL AND tr_duedate  '
+		);
+
+
+		if (is_null(self::$tracker))
+                {
+                        self::$tracker = new tracker_bo();
+                        self::$tracker->user = 0;
+                }
+                if(!is_object(self::$tracker->tracking))
+                {
+                        self::$tracker->tracking = new tracker_tracking(self::$tracker);
+                }
+                else
+                {
+                        unset(self::$tracker->tracking->skip_notify);
+                }
+
+		// Open tickets
+		$open_stati = array_keys(self::$tracker->get_tracker_stati(null,false));
+
+		// Get a list of users
+		$users = self::$tracker->users_with_open_entries();
+
+		foreach($users as $user)
+		{
+			// Create environment for user
+			if (!($email = $GLOBALS['egw']->accounts->id2name($user,'account_email'))) continue;
+                        self::$tracker->user = $GLOBALS['egw_info']['user']['account_id'] = $user;
+                        $GLOBALS['egw']->preferences->preferences($user);
+                        $GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
+                        $GLOBALS['egw']->acl->acl($user);
+                        $GLOBALS['egw']->acl->read_repository();
+			
+			// Keep a list of tickets so we only send the user one notification / ticket
+			$notified = array();
+
+			// Step through preferences
+			foreach($preferences as $pref => $filter)
+			{
+				if (!($pref_value = $GLOBALS['egw_info']['user']['preferences']['tracker'][$pref])) continue;
+
+				$pref_time= time()+24*60*60*(int)$pref_value;
+				$filter = "($filter > $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')';
+//echo "\nUser: $user Preference: $pref=$pref_value Filter: $filter\n";
+//echo date('Y-m-d H:i', $pref_time) . ' < ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
+
+				if (self::$tracker->user != $user)
+				{
+					self::$tracker->user = $user;
+				}
+
+				// Get matching tickets
+				$tickets = self::$tracker->search(array($filter, 'tr_status' => $open_stati));
+				if(!$tickets) continue;
+				
+				foreach($tickets as $ticket)
+				{
+//echo self::$tracker->link_title($ticket['tr_id']) . "\n";
+					// Stop if already notified because of this ticket
+					if(!$ticket['tr_id'] || in_array($ticket['tr_id'], $notified)) continue;
+
+					// Remember to prevent more notifications
+					$notified[] = $ticket['tr_id'];
+
+					switch($pref)
+					{
+						case 'notify_start':
+							$subject = lang('Starting %1', self::$tracker->link_title($ticket['tr_id']));
+							$message = lang('%1 is starting %2',
+								self::$tracker->link_title($ticket['tr_id']),
+								$ticket['tr_startdate'] ? egw_time::to($ticket['tr_startdate']) : ''
+							);
+							break;
+						case 'notify_due':
+							$subject = lang('Due %1', self::$tracker->link_title($ticket['tr_id']));
+							$message = lang('%1 is due %2',
+								self::$tracker->link_title($ticket['tr_id']),
+								$ticket['tr_duedate'] ? egw_time::to($ticket['tr_duedate']) : ''
+							);
+							break;
+					}
+
+					// Send notification
+					try {
+//echo "\nSending $subject \n$message\n";
+						$notification = new notifications();
+						$notification->set_sender('eGroupWare '.lang('tracker').' <noreply@'.$GLOBALS['egw_info']['server']['mail_suffix'].'>');
+						$notification->set_receivers(array($email));
+						$notification->set_subject($subject);
+						$notification->set_message($message);
+						$notification->add_link(
+							self::$tracker->link_title($ticket['tr_id']),
+							egw_link::view('tracker',$ticket['tr_id']),
+							egw_link::is_popup('tracker','view')
+						);
+						$notification->send();
+					}
+					catch (Exception $exception) {
+						error_log($exception->get_message .
+							"\nUser: $user Preference: $pref=$pref_value Filter: $filter\n "
+						);
+					}
+				}
+				unset($tickets);
+			}
+			
+		}
+
+		// Restore
+		$GLOBALS['egw_info']['user']['account_id']  = $save_account_id;
+		$GLOBALS['egw_info']['user']['preferences'] = $save_prefs;
 	}
 }

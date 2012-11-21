@@ -100,11 +100,11 @@ $phpgw_baseline = array(
 	'egw_tracker_escalations' => array(
 		'fd' => array(
 			'esc_id' => array('type' => 'auto','nullable' => False),
-			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
-			'cat_id' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
-			'tr_version' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_tracker' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'cat_id' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'tr_version' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
 			'tr_status' => array('type' => 'varchar','precision' => '255','nullable' => False,'default' => '0'),
-			'tr_priority' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_priority' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
 			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
 			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),
 			'esc_type' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0'),
@@ -119,7 +119,8 @@ $phpgw_baseline = array(
 			'esc_reply_visible' => array('type' => 'int','precision' => '1'),
 			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
 			'esc_notify' => array('type' => 'varchar','precision' => '15'),
-			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match')
+			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match'),
+			'tr_resolution' => array('type' => 'varchar','precision' => '55','nullable' => False)
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),

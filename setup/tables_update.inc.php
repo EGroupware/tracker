@@ -608,6 +608,36 @@ function tracker_upgrade1_9_007()
 		'default' => '1'
 	));
 
-	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.007';
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_tracker',array(
+		'type' => 'varchar',
+		'precision' => '55',
+		'nullable' => False,
+		'default' => '0'
+	));
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','cat_id',array(
+		'type' => 'varchar',
+		'precision' => '55',
+		'nullable' => False,
+		'default' => '0'
+	));
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_version',array(
+		'type' => 'varchar',
+		'precision' => '55',
+		'nullable' => False,
+		'default' => '0'
+	));
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_priority',array(
+		'type' => 'varchar',
+		'precision' => '55',
+		'nullable' => False,
+		'default' => '0'
+	));
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','tr_resolution',array(
+		'type' => 'varchar',
+		'precision' => '55',
+		'nullable' => False
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.008';
 }
 

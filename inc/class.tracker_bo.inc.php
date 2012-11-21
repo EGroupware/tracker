@@ -2108,4 +2108,58 @@ OR tr_duedate IS NULL AND
 		}
 		return $readonlys;
 	}
+
+	/**
+	 * Get a list of users with open tickets, either created or assigned.
+	 *
+	 * Limits the amount of checking to do for notifications by only getting users with
+	 * tickets where the start date, due date or created + limit is within 4 days
+	 *
+	 * @return array of user IDs
+	 */
+	public function users_with_open_entries()
+	{
+
+		$users = array();
+	
+		$config_limit = $this->now - $this->overdue_days * 24*60*60;
+		$four_days = 4 * 24*60*60;
+		
+		$where = array(
+			'tr_status' => array_keys($this->get_tracker_stati(null, false)),
+			"(tr_duedate IS NOT NULL and ABS(tr_duedate - {$this->now}) < {$four_days}
+OR tr_startdate IS NOT NULL AND ABS(tr_startdate - {$this->now}) < $four_days
+OR tr_duedate IS NULL AND
+    CASE
+        WHEN tr_modified IS NULL
+        THEN
+            ABS(tr_created - $config_limit) < $four_days
+        ELSE
+            ABS(tr_modified - $config_limit) < $four_days
+    END
+                        ) "
+		);
+
+		// Creator
+		$result = $this->db->select(self::TRACKER_TABLE, array('DISTINCT tr_creator'),$where,__LINE__,__FILE__);
+		foreach($result as $user)
+		{
+			$users[] = $user['tr_creator'];
+		}
+
+		// Assigned
+		$result = $this->db->select(
+			self::ASSIGNEE_TABLE, array('DISTINCT tr_assigned'),$where,__LINE__,__FILE__,
+			false, '',false,-1,
+			'JOIN '.self::TRACKER_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id = '.self::ASSIGNEE_TABLE.'.tr_id'
+		);
+		foreach($result as $user)
+		{
+			$user = $user['tr_assigned'];
+			if($user < 0) $user = $GLOBALS['egw']->accounts->members($user,true);
+			$users[] = $user;
+		}
+
+		return array_unique($users);
+	}
 }

@@ -12,7 +12,7 @@
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '1.9.007';
+$setup_info['tracker']['version']   = '1.9.008';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee','egw_tracker_escalations','egw_tracker_escalated','egw_tracker_extra');
 $setup_info['tracker']['enable']    = 1;
@@ -36,6 +36,7 @@ $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['search_link'] = 'tracker_hooks::search_link';
 $setup_info['tracker']['hooks'][] = 'home';
 $setup_info['tracker']['hooks']['timesheet_set'] = 'tracker.tracker_ui.timesheet_set';
+$setup_info['tracker']['hooks']['verify_settings'] = 'tracker_hooks::verify_settings';
 
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
