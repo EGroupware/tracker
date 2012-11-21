@@ -1445,7 +1445,8 @@ width:100%;
 			{
 				//echo __METHOD__.'<br>';
 				//_debug_array($_attachments);
-				$bofelamimail = felamimail_bo::getInstance();
+				$icServerID =& egw_cache::getSession('felamimail','activeProfileID');
+				$bofelamimail	= felamimail_bo::getInstance(true,$icServerID);
 				$bofelamimail->openConnection();
 				foreach ($_attachments as $attachment)
 				{
@@ -1503,7 +1504,8 @@ width:100%;
 		}
 		elseif ($uid && $mailbox)
 		{
-			$bofelamimail = felamimail_bo::getInstance();
+			$icServerID =& egw_cache::getSession('felamimail','activeProfileID');
+			$bofelamimail	= felamimail_bo::getInstance(true,$icServerID);
 			$bofelamimail->openConnection();
 			$bofelamimail->reopen($mailbox);
 
