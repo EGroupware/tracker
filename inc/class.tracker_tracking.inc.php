@@ -265,7 +265,7 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_subject($data,$old)
 	{
-		return $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
+		return $data['prefix'] . $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
 	}
 
 	/**
@@ -323,6 +323,8 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_message($data,$old)
 	{
+		if($data['message']) return $data['message'];
+
 		if (!$data['tr_modified'] || !$old)
 		{
 			return lang('New ticket submitted by %1 at %2',

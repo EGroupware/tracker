@@ -598,41 +598,24 @@ class tracker_escalations extends so_sql2
 					switch($pref)
 					{
 						case 'notify_start':
-							$subject = lang('Starting %1', self::$tracker->link_title($ticket['tr_id']));
-							$message = lang('%1 is starting %2',
+							$ticket['prefix'] = lang('Starting').' ';
+							$ticket['message'] = lang('%1 is starting %2',
 								self::$tracker->link_title($ticket['tr_id']),
 								$ticket['tr_startdate'] ? egw_time::to($ticket['tr_startdate']) : ''
 							);
 							break;
 						case 'notify_due':
-							$subject = lang('Due %1', self::$tracker->link_title($ticket['tr_id']));
-							$message = lang('%1 is due %2',
+							$ticket['prefix'] = lang('Due') . ' ' .
+							$ticket['message'] = lang('%1 is due %2',
 								self::$tracker->link_title($ticket['tr_id']),
 								$ticket['tr_duedate'] ? egw_time::to($ticket['tr_duedate']) : ''
 							);
 							break;
 					}
+print_r($ticket);
 
 					// Send notification
-					try {
-//echo "\nSending $subject \n$message\n";
-						$notification = new notifications();
-						$notification->set_sender('eGroupWare '.lang('tracker').' <noreply@'.$GLOBALS['egw_info']['server']['mail_suffix'].'>');
-						$notification->set_receivers(array($email));
-						$notification->set_subject($subject);
-						$notification->set_message($message);
-						$notification->add_link(
-							self::$tracker->link_title($ticket['tr_id']),
-							egw_link::view('tracker',$ticket['tr_id']),
-							egw_link::is_popup('tracker','view')
-						);
-						$notification->send();
-					}
-					catch (Exception $exception) {
-						error_log($exception->get_message .
-							"\nUser: $user Preference: $pref=$pref_value Filter: $filter\n "
-						);
-					}
+					self::$tracker->tracking->send_notification($ticket, null, $email, $user, $pref);
 				}
 				unset($tickets);
 			}
