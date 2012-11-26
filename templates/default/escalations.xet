@@ -121,18 +121,18 @@
 				<row>
 					<groupbox span="2">
 						<caption label="Filter"/>
-						<grid>
+						<grid width="100%">
 							<columns>
 								<column width="87"/>
-								<column width="150"/>
+								<column width="200"/>
 								<column width="60"/>
-								<column/>
+								<column width="200"/>
 							</columns>
 							<rows>
 								<row valign="top">
 									<description value="Queue"/>
 									<hbox onchange="1" options="0,0">
-										<menulist span="all">
+										<menulist>
 											<menupopup id="tr_tracker" options="All"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_tracker'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
@@ -264,6 +264,7 @@
 		<styles>
 			.reply .reply&gt;textarea  { width: 100%; }
 .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
+fieldset&gt;table&gt;tbody&gt;tr&gt;td&gt;table, td&gt;table&gt;tbody&gt;tr&gt;td&gt;select {width: 100%;}
 		</styles>
 	</template>
 </overlay>
