@@ -344,6 +344,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $date_filters = array(      // Start: year,month,day,week, End: year,month,day,week
+		'Overdue'     => false,
 		'Today'       => array(0,0,0,0,  0,0,1,0),
 		'Yesterday'   => array(0,0,-1,0, 0,0,0,0),
 		'This week'   => array(0,0,0,0,  0,0,0,1),
@@ -357,7 +358,6 @@ class tracker_bo extends tracker_so
 		'Last year'   => array(-1,0,0,0, 0,0,0,0),
 		'2 years ago' => array(-2,0,0,0, -1,0,0,0),
 		'3 years ago' => array(-3,0,0,0, -2,0,0,0),
-		'Overdue'     => false,
 	);
 
 	/**
@@ -1586,10 +1586,10 @@ class tracker_bo extends tracker_so
 		// Add date filters if using start/due dates
 		if($this->show_dates)
 		{
-			$this->date_filters += array(
+			$this->date_filters = array(
 				'started'  => false,
 				'upcoming' => false
-			);
+			) + $this->date_filters;
 		}
 	}
 
