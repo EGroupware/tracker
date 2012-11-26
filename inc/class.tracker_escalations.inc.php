@@ -594,6 +594,7 @@ class tracker_escalations extends so_sql2
 
 					// Remember to prevent more notifications
 					$notified[] = $ticket['tr_id'];
+					$ticket = self::$tracker->read($ticket['tr_id']);
 
 					switch($pref)
 					{
@@ -605,14 +606,13 @@ class tracker_escalations extends so_sql2
 							);
 							break;
 						case 'notify_due':
-							$ticket['prefix'] = lang('Due') . ' ' .
+							$ticket['prefix'] = lang('Due') . ' ';
 							$ticket['message'] = lang('%1 is due %2',
 								self::$tracker->link_title($ticket['tr_id']),
 								$ticket['tr_duedate'] ? egw_time::to($ticket['tr_duedate']) : ''
 							);
 							break;
 					}
-print_r($ticket);
 
 					// Send notification
 					self::$tracker->tracking->send_notification($ticket, null, $email, $user, $pref);
