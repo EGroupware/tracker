@@ -601,6 +601,8 @@ function tracker_upgrade1_9_006()
 
 function tracker_upgrade1_9_007()
 {
+	$GLOBALS['egw_setup']->oProc->DropIndex('egw_tracker_escalations',array('tr_tracker','cat_id','tr_version','tr_status','tr_priority','esc_time','esc_type'));
+
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalated','match_count',array(
 		'type' => 'int',
 		'precision' => '1',
@@ -637,6 +639,7 @@ function tracker_upgrade1_9_007()
 		'precision' => '55',
 		'nullable' => False
 	));
+	$GLOBALS['egw_setup']->oProc->CreateIndex('egw_tracker_escalations',array('tr_tracker(32)','cat_id(32)','tr_version(32)','tr_status(32)','tr_priority(32)','esc_time','esc_type'),true);
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.008';
 }
