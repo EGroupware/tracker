@@ -616,12 +616,12 @@ class tracker_bo extends tracker_so
 			if (!is_object($this->tracking))
 			{
 				$this->tracking = new tracker_tracking($this);
-				if($this->prefs['notify_own_modification'])
-				{
-					$this->tracking->notify_current_user = true;
-				}
-				$this->tracking->html_content_allow = true;
 			}
+			if($this->prefs['notify_own_modification'])
+			{
+				$this->tracking->notify_current_user = true;
+			}
+			$this->tracking->html_content_allow = true;
 			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$this->data['no_notifications']))
 			{
 				return implode(', ',$this->tracking->errors);
