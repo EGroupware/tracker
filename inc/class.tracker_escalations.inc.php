@@ -175,7 +175,7 @@ class tracker_escalations extends so_sql2
 						case 'esc_cat_id':
 						case 'esc_tr_version':
 						case 'esc_tr_tracker':
-							$action .= $GLOBALS['egw']->categories->id2name($cat_id);
+							$action .= $GLOBALS['egw']->categories->id2name($value);
 							break;
 						case 'esc_reply_message':
 							$action = ($data['esc_reply_visible'] ? lang('Add restricted comment') : lang('Add comment')).":\n".$value;
