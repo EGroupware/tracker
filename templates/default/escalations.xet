@@ -231,12 +231,13 @@
 								</row>
 								<row valign="top">
 									<description value="Comment"/>
-									<vbox span="all" class="reply">
-										<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
-										<textbox multiline="true" id="reply_message" rows="3" span="all" class="reply"/>
-									</vbox>
+									<textbox multiline="true" id="reply_message" rows="3" span="all" class="reply"/>
 									<description/>
 									<description/>
+								</row>
+								<row disabled="@no_comment_visibility">
+									<description/>
+									<checkbox label="Only for admins, technicians or assigned" id="reply_visible" span="all"/>
 								</row>
 								<row>
 									<description value="Notification"/>

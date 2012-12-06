@@ -706,6 +706,7 @@ class tracker_admin extends tracker_bo
 				$widget['size'] = '3+';
 			}
 		}
+		$content['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
 		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);

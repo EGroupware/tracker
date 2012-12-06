@@ -57,7 +57,7 @@ class tracker_so extends so_sql_cf
 	 *
 	 * @var array
 	 */
-	var $non_db_cols = array('tr_assigned','reply_message');
+	var $non_db_cols = array('tr_assigned','reply_message','reply_visible');
 
 	/**
 	 * Constructor
