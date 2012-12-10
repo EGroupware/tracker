@@ -567,15 +567,19 @@ class tracker_bo extends tracker_so
 
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
+			$changed[] = 'tr_modified';
+
 			// set close-date if status is closed and not yet set
 			if (in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
+				$changed[] = 'tr_closed';
 			}
 			// unset closed date, if item is re-opend
 			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
+				$changed[] = 'tr_closed';
 			}
 			// Changes mark the ticket unseen for everbody but the current
 			// user if the ticket wasn't closed at the same time
@@ -607,6 +611,10 @@ class tracker_bo extends tracker_so
 					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
 			}
+
+			// Reset escalation flags on variable fields (comment, modified, etc.)
+			$esc = new tracker_escalations();
+			$esc->reset($this->data, $changed);
 		}
 		if (!($err = parent::save()))
 		{

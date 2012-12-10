@@ -239,6 +239,7 @@ class tracker_escalations extends so_sql2
 		if ($this->tr_tracker)  $filter['tr_tracker'] = $this->tr_tracker;
 		if ($this->tr_status)   $filter['tr_status'] = $this->tr_status;
 		if ($this->tr_priority) $filter['tr_priority'] = $this->tr_priority;
+		if ($this->tr_resolution) $filter['tr_resolution'] = $this->tr_resolution;
 		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
 		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
 		if ($this->esc_limit)	$filter[] = '(match_count < ' . $this->esc_limit .' OR match_count IS NULL)';
@@ -386,6 +387,74 @@ class tracker_escalations extends so_sql2
 		),__LINE__,__FILE__,'tracker');
 
 		return true;
+	}
+
+	/**
+	 * Reset the escalations on a ticket appropriately when the ticket is modified
+	 *
+	 * @param $ticket Array of ticket data
+	 * @param $changed array of fields that have changed
+	 */
+	public function reset($ticket, $changed = array())
+	{
+		$change_fields = array('tr_tracker', 'tr_resolution', 'cat_id', 'tr_version', 'tr_status', 'tr_priority');
+
+		// Find escalations that have already affected this ticket
+		$filter = array('tr_id' => $ticket['tr_id']);
+		$join = 'JOIN egw_tracker_escalated ON egw_tracker_escalated.esc_id = egw_tracker_escalations.esc_id';
+		$escalations = $this->search('',false,'','',false,'AND',false,$filter,$join);
+
+		foreach($escalations as $esc)
+		{
+			// Check primary date column
+			$delete = false;
+			switch($esc['esc_type'])
+			{
+				// Creation date doesn't change
+				// case self::CREATION
+				case self::MODIFICATION:
+					if(in_array('tr_modified', $changed)) $delete = true;
+					break;
+				case self::REPLIED:
+					if($ticket['reply_created']) $delete = true;
+					break;
+				case self::REPLIED_CREATOR:
+					if($ticket['reply_creator'] == $ticket['tr_creator']) $delete = true;
+					break;
+				case self::REPLIED_ASSIGNED:
+					$assigned = $this->tracker->check_rights(TRACKER_ITEM_ASSIGNEE, false, $ticket, $ticket['reply_creator']);
+					if($ticket['reply_creator'] && $assigned) $delete = true;
+					break;
+				case self::REPLIED_NOT_CREATOR:
+					if($ticket['reply_creator'] != $ticket['tr_creator']) $delete = true;
+					break;
+				case self::START:
+					if(in_array('tr_startdate', $changed)) $delete = true;
+					break;
+				case self::DUE:
+					if(in_array('tr_duedate', $changed)) $delete = true;
+					break;
+			}
+			if(!$delete)
+			{
+				// Check for escalation filter fields against changed fields
+				foreach($change_fields as $field)
+				{
+					if($esc[$field] && in_array($field,$changed))
+					{
+						$delete = true;
+						break;
+					}
+				}
+			}
+			if($delete) {
+				$this->db->delete(
+					tracker_so::ESCALATED_TABLE,
+					array('tr_id' => $ticket['tr_id'], 'esc_id'=>$esc['esc_id']),
+					__LINE__,__FILE__
+				);
+			}
+		}
 	}
 
 	/**
