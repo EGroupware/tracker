@@ -256,14 +256,14 @@
 					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
-						<checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="run_on_existing"/>
+						<checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"/>
 						<button align="right" label="Cancel" id="button[cancel]"/>
 					</hbox>
 				</row>
 			</rows>
 		</grid>
 		<styles>
-			.reply .reply&gt;textarea  { width: 100%; }
+			.reply, .reply&gt;textarea  { width: 100%; }
 .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
 fieldset&gt;table&gt;tbody&gt;tr&gt;td&gt;table, td&gt;table&gt;tbody&gt;tr&gt;td&gt;select {width: 100%;}
 		</styles>

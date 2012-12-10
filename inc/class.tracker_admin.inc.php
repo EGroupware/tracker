@@ -597,12 +597,13 @@ class tracker_admin extends tracker_bo
 					// Handle before time
 					$escalations->data['esc_time'] *= ($content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
 
+_debug_array($content);
 					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save(null,null,!$content['run_on_existing'])) == 0)
+					elseif (($err = $escalations->save(null,null,!$content['esc_run_on_existing'])) == 0)
 					{
 						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}

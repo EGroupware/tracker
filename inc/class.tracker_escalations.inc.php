@@ -122,7 +122,7 @@ class tracker_escalations extends so_sql2
 		}
 		foreach($data as $key => &$value)
 		{
-			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat','esc_limit')))
+			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat','esc_limit','esc_run_on_existing')))
 			{
 				if ($key == 'esc_tr_assigned')
 				{

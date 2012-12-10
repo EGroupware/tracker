@@ -120,12 +120,13 @@ $phpgw_baseline = array(
 			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
 			'esc_notify' => array('type' => 'varchar','precision' => '15'),
 			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match'),
-			'tr_resolution' => array('type' => 'varchar','precision' => '55','nullable' => False)
+			'tr_resolution' => array('type' => 'varchar','precision' => '55','nullable' => False),
+			'esc_run_on_existing' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1','comment' => 'When saving the escalation, marks existing tickets as matched without taking action, or leave them to run next time async job runs')
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),
 		'ix' => array(),
-		'uc' => array(array('tr_tracker(32)','cat_id(32)','tr_version(32)','tr_status(32)','tr_priority(32)','esc_time','esc_type'))
+		'uc' => array(array('esc_time','esc_type'))
 	),
 	'egw_tracker_escalated' => array(
 		'fd' => array(
