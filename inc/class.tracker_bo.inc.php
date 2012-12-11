@@ -565,6 +565,25 @@ class tracker_bo extends tracker_so
 				}
 			}
 
+			// Changes mark the ticket unseen for everbody but the current
+			// user if the ticket wasn't closed at the same time
+			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
+			{
+				$seen = array();
+				$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
+
+				// This only matters if no other changes have been made
+				if($this->data['reply_visible'] && empty($changed))
+				{
+					// Keep those that can't see the comment
+					$seen = array_intersect($this->data['tr_seen'], array_keys(array_diff(
+						$this->get_staff($this->data['tracker_id'], 2, 'users'),
+						$this->get_staff($this->data['tracker_id'], 2, 'technicians')
+					)));
+				}
+				$seen[] = $this->user;
+				$this->data['tr_seen'] = serialize($seen);
+			}
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
 			$changed[] = 'tr_modified';
@@ -580,20 +599,6 @@ class tracker_bo extends tracker_so
 			{
 				$this->data['tr_closed'] = null;
 				$changed[] = 'tr_closed';
-			}
-			// Changes mark the ticket unseen for everbody but the current
-			// user if the ticket wasn't closed at the same time
-			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
-			{
-				$seen = array();
-				$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
-				if($this->data['reply_visible'])
-				{
-					// Keep those that can't see the comment
-					$seen = array_intersect($this->data['tr_seen'], array_keys($this->get_staff($this->data['tracker_id'], 2, 'users')));
-				}
-				$seen[] = $this->user;
-				$this->data['tr_seen'] = serialize($seen);
 			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
