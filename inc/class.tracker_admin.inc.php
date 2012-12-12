@@ -540,7 +540,7 @@ class tracker_admin extends tracker_bo
 							$prio_cat = is_array($row['cat_id']) ? $row['cat_id'][0] : $row['cat_id']
 						);
 					}
-					foreach($row['tr_priority'] as $priority)
+					foreach((array)$row['tr_priority'] as $priority)
 					{
 						$row['prio_label'][]= $prio_labels[$priority];
 					}
