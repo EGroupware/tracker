@@ -256,8 +256,8 @@
 					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
+						<button label="Cancel" id="button[cancel]"/>
 						<checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"/>
-						<button align="right" label="Cancel" id="button[cancel]"/>
 					</hbox>
 				</row>
 			</rows>
