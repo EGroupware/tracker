@@ -293,6 +293,9 @@ class tracker_tracking extends bo_tracking
 		}
 		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
 
+		// If no signature set, use the global one
+		if(!$notification['signature']) $notification['signature'] = parent::get_signature($data,$old,$receiver);
+
 		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
 		{
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
@@ -312,6 +315,14 @@ class tracker_tracking extends bo_tracking
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
 		}
 		return $html_email ? $message : strip_tags($message);
+	}
+
+	/**
+	 * Override parent to return nothing, it's taken care of in get_body()
+	 * @see get_body()
+	 */
+	protected function get_signature($data,$old,$receiver) {
+		return false;
 	}
 
 	/**
