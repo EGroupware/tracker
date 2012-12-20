@@ -117,8 +117,9 @@ class tracker_ui extends tracker_bo
 	{
 		if ($this->htmledit)
 		{
-			$tr_description_options = 'simple,240px,100%,false';
-			$tr_reply_options = 'simple,215px,100%,false';
+			$rte_features = $GLOBALS['egw_info']['user']['preferences']['common']['rte_features'];
+			$tr_description_options = $rte_features.',240px,100%,false';
+			$tr_reply_options = $rte_features.',215px,100%,false';
 		}
 		else
 		{

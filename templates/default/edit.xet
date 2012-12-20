@@ -46,7 +46,7 @@
 			</columns>
 			<rows>
 				<row class="th" disabled="@no_canned">
-					<description value="Canned response" options=",,,canned_response" class="3"/>
+					<description value="Canned response" for="canned_response" class="3"/>
 					<menulist>
 						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="var request = new egw_json_request('tracker.tracker_ui.ajax_canned_comment',[this.value,document.getElementById('exec[reply_message]').style.display == 'none']); request.sendRequest(true); this.value = ''; return false;" options="Select one"/>
 					</menulist>
@@ -57,7 +57,7 @@
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<vbox>
-						<description value="Comment" options=",,,reply_message"/>
+						<description value="Comment" for="reply_message"/>
 					</vbox>
 					<htmlarea id="reply_message" mode="@tr_reply_options" span="3"/>
 				</row>
@@ -153,7 +153,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.9.006">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -195,7 +195,7 @@
 						<menulist class="user_select">
 							<menupopup id="tr_assigned" no_lang="1" options="Not assigned"/>
 						</menulist>
-						<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
+						<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { \$j(selectbox).unchosen().css('width','100%'); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; \$j(selectbox).chosen();}  this.style.display='none'; return false;" options="users"/>
 					</hbox>
 					<description value="Priority" options="tr_priority"/>
 					<menulist>
