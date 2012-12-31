@@ -603,6 +603,9 @@ class tracker_bo extends tracker_so
 		}
 		if (!($err = parent::save()))
 		{
+			// create (and remove) links in custom fields
+                        customfields_widget::update_customfield_links('tracker',$this->data,$old,'tr_id');
+
 			// so other apps can update eg. their titles and the cached title gets unset
 			egw_link::notify_update('tracker',$this->data['tr_id'],$this->data);
 
