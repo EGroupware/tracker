@@ -33,7 +33,9 @@ $phpgw_baseline = array(
 			'tr_cc' => array('type' => 'text','comment' => 'cc-field for notification'),
 			'tr_group' => array('type' => 'int','precision' => '11','comment' => 'group-id to which the ticket belongs'),
 			'tr_edit_mode' => array('type' => 'varchar','precision' => '5','default' => 'ascii','comment' => 'ascii or html'),
-			'tr_seen' => array('type' => 'text','comment' => 'flag if the ticket has been already viewed')
+			'tr_seen' => array('type' => 'text','comment' => 'flag if the ticket has been already viewed'),
+			'tr_startdate' => array('type' => 'int','precision' => '8','comment' => 'Date ticket is scheduled to begin'),
+			'tr_duedate' => array('type' => 'int','precision' => '8','comment' => 'Date ticket is required to be resolved by')
 		),
 		'pk' => array('tr_id'),
 		'fk' => array(),
@@ -98,11 +100,11 @@ $phpgw_baseline = array(
 	'egw_tracker_escalations' => array(
 		'fd' => array(
 			'esc_id' => array('type' => 'auto','nullable' => False),
-			'tr_tracker' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
-			'cat_id' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
-			'tr_version' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_tracker' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'cat_id' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'tr_version' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
 			'tr_status' => array('type' => 'varchar','precision' => '255','nullable' => False,'default' => '0'),
-			'tr_priority' => array('type' => 'int','precision' => '4','nullable' => False,'default' => '0'),
+			'tr_priority' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
 			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
 			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),
 			'esc_type' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0'),
@@ -113,18 +115,25 @@ $phpgw_baseline = array(
 			'esc_tr_version' => array('type' => 'int','precision' => '4'),
 			'esc_tr_status' => array('type' => 'int','precision' => '4'),
 			'esc_tr_priority' => array('type' => 'int','precision' => '4'),
-			'esc_reply_message' => array('type' => 'text')
+			'esc_reply_message' => array('type' => 'text'),
+			'esc_reply_visible' => array('type' => 'int','precision' => '1'),
+			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
+			'esc_notify' => array('type' => 'varchar','precision' => '15'),
+			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match'),
+			'tr_resolution' => array('type' => 'varchar','precision' => '55','nullable' => False),
+			'esc_run_on_existing' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1','comment' => 'When saving the escalation, marks existing tickets as matched without taking action, or leave them to run next time async job runs')
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),
 		'ix' => array(),
-		'uc' => array(array('tr_tracker','cat_id','tr_version','tr_status','tr_priority','esc_time','esc_type'))
+		'uc' => array(array('esc_time','esc_type'))
 	),
 	'egw_tracker_escalated' => array(
 		'fd' => array(
 			'tr_id' => array('type' => 'int','precision' => '4','nullable' => False),
 			'esc_id' => array('type' => 'int','precision' => '4','nullable' => False),
-			'esc_created' => array('type' => 'timestamp','nullable' => False,'default' => 'current_timestamp')
+			'esc_created' => array('type' => 'timestamp','nullable' => False,'default' => 'current_timestamp'),
+			'match_count' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1')
 		),
 		'pk' => array('tr_id','esc_id'),
 		'fk' => array(),

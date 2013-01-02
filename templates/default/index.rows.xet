@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.007">
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -12,11 +12,12 @@
 				<column/>
 				<column/>
 				<column/>
+				<column/>
 				<column width="10%"/>
 				<column/>
 				<column/>
 				<column width="18%"/>
-				<column disabled="!@allow_sum_timesheet"/>
+				<column disabled="@no_tr_sum_timesheets"/>
 				<column disabled="@no_votes"/>
 				<column disabled="@no_bounties"/>
 				<column/>
@@ -40,6 +41,10 @@
 					<vbox>
 						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
 						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
+					</vbox>
+					<vbox>
+						<nextmatch-sortheader label="Start date" id="tr_startdate"/>
+						<nextmatch-sortheader label="Due date" id="tr_duedate"/>
 					</vbox>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"/>
 					<vbox options="0,0">
@@ -92,6 +97,7 @@
 							<menupopup type="select-account" class="noWrap" id="${row}[tr_modifier]" readonly="true"/>
 						</menulist>
 					</vbox>
+					<description/>
 					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
@@ -121,7 +127,7 @@
 					<customfields-list id="$row"/>
 					<hbox align="center" class="noPrint">
 						<button align="center" label="Add infolog" id="infolog[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=infolog.infolog_ui.edit&amp;action=tracker&amp;action_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="infolog" class="noPrint"/>
-						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.uitimesheet.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
+						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.timesheet_ui.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
 						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>

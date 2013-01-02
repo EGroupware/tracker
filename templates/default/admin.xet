@@ -58,15 +58,18 @@
 					<grid width="100%" height="100" overflow="auto" id="statis">
 						<columns>
 							<column/>
+							<column/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
+								<description align="center" value="Closed"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<checkbox align="center" id="${row}[closed]"/>
 								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
 							</row>
 						</rows>
@@ -195,7 +198,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.003">
+	<template id="tracker.admin.config" template="" lang="" group="0" version="1.9.004">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -273,10 +276,16 @@
 					<description value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" options=",,,allow_assign_users" span="3"/>
 				</row>
 				<row class="row" disabled="@tracker">
+					<checkbox id="show_dates"/>
+					<description value="Show start date and due date"/>
+					<description/>
+					<description/>
+				</row>
+				<row class="row" disabled="@tracker">
 					<checkbox statustext="Allow creation of infolog entries from tracker tickets" id="allow_infolog"/>
 					<description value="Allow creation of infolog entries from tracker tickets" span="3"/>
 				</row>
-				<row>
+				<row disabled="@tracker">
 					<checkbox id="allow_restricted_comments"/>
 					<description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"/>
 				</row>
@@ -512,7 +521,41 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin" template="" lang="" group="0" version="1.5.004">
+	<template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.002">
+		<grid width="100%" id="notification">
+			<columns>
+				<column/>
+				<column disabled="@no_checkboxes"/>
+			</columns>
+			<rows>
+				<row>
+					<description value="Notification message"/>
+					<checkbox label="Use custom notification message" id="use_custom"/>
+				</row>
+				<row>
+					<htmlarea id="message" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
+				</row>
+				<row>
+					<description href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" extra_link_target="_blank" span="all"/>
+				</row>
+				<row>
+					<description value="Signature"/>
+					<checkbox label="Use custom signature" id="use_signature"/>
+				</row>
+				<row>
+					<htmlarea id="signature" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
+				</row>
+			</rows>
+		</grid>
+		<styles>
+			textarea {
+ padding-right: 2ex;
+ width:99%;
+ height: 20ex;
+}
+		</styles>
+	</template>
+	<template id="tracker.admin" template="" lang="" group="0" version="1.9.004">
 		<grid width="100%">
 			<columns>
 				<column width="1"/>

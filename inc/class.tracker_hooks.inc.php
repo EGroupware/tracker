@@ -113,6 +113,14 @@ class tracker_hooks
 		$versions = array('~no-default~'=>lang('None'));
 		$bo = new tracker_bo();
 		$versions += $bo->get_tracker_labels('version');
+		$notify_options = array(
+                        '0'   => lang('No'),
+                        '-1d' => lang('one day after'),
+                        '0d'  => lang('same day'),
+                        '1d'  => lang('one day in advance'),
+                        '2d'  => lang('%1 days in advance',2),
+                        '3d'  => lang('%1 days in advance',3),
+                );
 
 		$settings = array(
 			'notify_creator' => array(
@@ -141,6 +149,26 @@ class tracker_hooks
 				'xmlrpc' => True,
 				'admin'  => False,
 				'default'=> false,
+			),
+			'notify_start' => array(
+				'type'   => 'select',
+				'label'  => 'Receive notifications about starting entries you created or are assigned to',
+				'name'   => 'notify_start',
+				'help'   => 'Do you want a notification, if items you are responsible for are about to start?',
+				'values' => $notify_options,
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> '0d',       // Same day
+			),
+			'notify_due' => array(
+				'type'   => 'select',
+				'label'  => 'Receive notifications about due entries you created or are assigned to',
+				'name'   => 'notify_due',
+				'help'   => 'Do you want a notification, if items you are responsible for are due?',
+				'values' => $notify_options,
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> '0d',       // Same day
 			),
 			'allow_defaultproject' => array(
 				'type'   => 'check',
@@ -259,5 +287,26 @@ class tracker_hooks
 			);
 		}
 		return $settings;
+	}
+
+	/**
+	 * Verification hook called if settings / preferences get stored
+	 *
+	 * Installs a task to send async notifications at 2h everyday
+	 *
+	 * @param array $data
+	 */
+	static function verify_settings($data)
+	{
+		if ($data['prefs']['notify_due'] || $data['prefs']['notify_start'])
+		{
+			$async = new asyncservice();
+
+			if (!$async->read(tracker_escalations::ASYNC_NOTIFICATION))
+			{
+				$async->set_timer(array('hour' => 2),tracker_escalations::ASYNC_NOTIFICATION,
+					'tracker_escalations::preference_notifications',null);
+			}
+		}
 	}
 }

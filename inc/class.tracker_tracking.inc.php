@@ -169,6 +169,8 @@ class tracker_tracking extends bo_tracking
 	public function do_notifications($data,$old,$deleted, $changes)
 	{
 		$success = True;
+		$skip = $this->get_config('skip_notify',$data,$old);
+		$email_notified = $skip ? $skip : array();
 
 		// Send all to others
 		$creator = $data[$this->creator_field];
@@ -242,6 +244,9 @@ class tracker_tracking extends bo_tracking
 					$config = array_merge($config,preg_split('/, ?/',$data['tr_cc']));
 				}
 				break;
+			case 'skip_notify':
+				$config = array_merge((array)$config,$data['skip_notify'] ? $data['skip_notify'] : (array)$this->skip_notify);
+				break;
 		}
 		//error_log(__METHOD__.__LINE__.' Name:'.$name.' -> '.array2string($config).' Data:'.array2string($data));
 		return $config;
@@ -258,7 +263,7 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_subject($data,$old)
 	{
-		return $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
+		return $data['prefix'] . $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
 	}
 
 	/**
@@ -270,6 +275,8 @@ class tracker_tracking extends bo_tracking
 	 */
 	function get_message($data,$old)
 	{
+		if($data['message']) return $data['message'];
+
 		if (!$data['tr_modified'] || !$old)
 		{
 			return lang('New ticket submitted by %1 at %2',
@@ -315,10 +322,12 @@ class tracker_tracking extends bo_tracking
 				'type' => 'message',
 			);
 		}
-		foreach(array(
+		$detail_fields = array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
+			'tr_startdate'   => $this->datetime($data['tr_startdate']),
+			'tr_duedate'     => $this->datetime($data['tr_duedate']),
 			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
@@ -330,7 +339,19 @@ class tracker_tracking extends bo_tracking
 			// The layout of tr_summary should NOT be changed in order for
 			// tracker.tracker_mailhandler.get_ticketId() to work!
 			'tr_summary'     => '#'.$data['tr_id'].' - '.$data['tr_summary'],
-		) as $name => $value)
+		);
+
+		// Don't show start date / due date if disabled or not set
+		$config = config::read('tracker');
+		if(!$config['show_dates'])
+		{
+			unset($detail_fields['tr_startdate']);
+			unset($detail_fields['tr_duedate']);
+		}
+		if(!$data['tr_startdate']) unset($detail_fields['tr_startdate']);
+		if(!$data['tr_duedate']) unset($detail_fields['tr_duedate']);
+
+		foreach($detail_fields as $name => $value)
 		{
 			$details[$name] = array(
 				'label' => lang($this->tracker->field2label[$name]),

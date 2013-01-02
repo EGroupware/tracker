@@ -265,6 +265,7 @@ class tracker_admin extends tracker_bo
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
 								($name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign']) ||
+								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
 								($name == 'resolutions' && (($defaultresolution && ($cat['id']==$defaultresolution || $cat['isdefault'] && $cat['id']!=$defaultresolution))||!$defaultresolution && $cat['isdefault']) ))
@@ -274,6 +275,9 @@ class tracker_admin extends tracker_bo
 								{
 									case 'cats':
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										break;
+									case 'statis':
+										$old_cat['data']['closed'] = $cat['closed'];
 										break;
 									case 'projects':
 										$old_cat['data']['projectlist'] = $cat['projectlist'];
@@ -522,15 +526,29 @@ class tracker_admin extends tracker_bo
 		{
 			foreach($rows as &$row)
 			{
+				// Show before / after
+				$row['esc_before_after'] = ($row['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+				$row['esc_time'] = abs($row['esc_time']);
+				
 				// show the right tracker and/or cat specific priority label
 				if ($row['tr_priority'])
 				{
 					if (is_null($prio_labels) || $row['tr_tracker'] != $prio_tracker || $row['cat_id'] != $prio_cat)
 					{
-						$prio_labels = $this->get_tracker_priorities($prio_tracker=$row['tr_tracker'],$prio_cat = $row['cat_id']);
+						$prio_labels = $this->get_tracker_priorities(
+							$prio_tracker=is_array($row['tr_tracker']) ? $row['tr_tracker'][0] : $row['tr_tracker'],
+							$prio_cat = is_array($row['cat_id']) ? $row['cat_id'][0] : $row['cat_id']
+						);
 					}
-					$row['prio_label'] = $prio_labels[$row['tr_priority']];
+					foreach((array)$row['tr_priority'] as $priority)
+					{
+						$row['prio_label'][]= $prio_labels[$priority];
+					}
+					$row['prio_label'] = implode(',',$row['prio_label']);
 				}
+
+				// Show repeat limit, if set
+				if($row['esc_limit']) $row['esc_limit_label'] = lang('maximum %1 times', $row['esc_limit']);
 			}
 		}
 		return $Ok;
@@ -568,12 +586,23 @@ class tracker_admin extends tracker_bo
 			{
 				case 'save':
 				case 'apply':
+					// 'Before' only valid for start & due dates
+					if($content['esc_before_after'] == tracker_escalations::BEFORE &&
+						!in_array($content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
+					{	
+						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
+						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
+						break;
+					}
+					// Handle before time
+					$escalations->data['esc_time'] *= ($content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
+
 					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save()) == 0)
+					elseif (($err = $escalations->save(null,null,!$content['esc_run_on_existing'])) == 0)
 					{
 						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
@@ -611,28 +640,55 @@ class tracker_admin extends tracker_bo
 			'nm' => $content['nm'],
 			'msg' => $msg,
 		);
+
+		// Handle before time
+		$content['esc_before_after'] = ($content['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+		$content['esc_time'] = abs($content['esc_time']);
+
 		$preserv['esc_id'] = $content['esc_id'];
 		$preserv['nm'] = $content['nm'];
+
 
 		$tracker = $content['tr_tracker'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
-			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
-			'tr_status'   => $this->get_tracker_stati($tracker),
-			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups),
+			'esc_before_after' => array(
+				tracker_escalations::AFTER => lang('after'),
+				tracker_escalations::BEFORE => lang('before'),
+			),
 			'esc_type'    => array(
 				tracker_escalations::CREATION => lang('creation date'),
 				tracker_escalations::MODIFICATION => lang('last modified'),
+				tracker_escalations::START => lang('start date'),
+				tracker_escalations::DUE => lang('due date'),
 				tracker_escalations::REPLIED => lang('last reply'),
+				tracker_escalations::REPLIED_CREATOR => lang('last reply by creator'),
+				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
+				tracker_escalations::REPLIED_NOT_CREATOR => lang('last reply by anyone but creator'),
 			),
+			'notify' => tracker_escalations::$notification,
+			'cat_id' => array(),
+			'tr_version' => array(),
+			'tr_resolution' => array(),
+			'tr_priority' => array(),
+			'tr_status' => array(),
+			'tr_assigned' => array()
 		);
-		$tpl = new etemplate('tracker.escalations');
+
+		foreach(($content['tr_tracker'] ? (array)$content['tr_tracker'] : array_keys($this->trackers)) as $tracker)
+		{
+			$sel_options['cat_id'] 		+= $this->get_tracker_labels('cat',$tracker);
+			$sel_options['tr_version']	+= $this->get_tracker_labels('version',$tracker);
+			$sel_options['tr_resolution']	+= $this->get_tracker_labels('resolution',$tracker);
+			$sel_options['tr_priority']	+= $this->get_tracker_priorities($tracker,$content['cat_id']);
+			$sel_options['tr_status']	+= $this->get_tracker_stati($tracker);
+			$sel_options['tr_assigned']	+= $this->get_staff($tracker,$this->allow_assign_groups);
+		}
 		if ($content['set']['tr_assigned'] && !is_array($content['set']['tr_assigned']))
 		{
 			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
 		}
+		$tpl = new etemplate('tracker.escalations');
 		if (count($content['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
@@ -642,16 +698,15 @@ class tracker_admin extends tracker_bo
 		{
 			$content['tr_status'] = explode(',',$content['tr_status']);
 		}
-		if (count($content['tr_status']) > 1)
-		{
-			$widget =& $tpl->get_widget_by_name('tr_status');
-			$widget['size'] = '3+';
+		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
+                {
+			if (count($content[$array]) > 1)
+			{
+				$widget =& $tpl->get_widget_by_name($array);
+				$widget['size'] = '3+';
+			}
 		}
-		if ($this->tracker_has_cat_specific_priorities($tracker))
-		{
-			$widget =& $tpl->get_widget_by_name('cat_id');
-			$widget['onchange'] = true;
-		}
+		$content['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
 		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);

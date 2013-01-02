@@ -210,6 +210,8 @@ class tracker_bo extends tracker_so
 		'tr_resolution'  => 'Resolution',
 		'tr_completion'  => 'Completed',
 		'tr_priority'    => 'Priority',
+		'tr_startdate'   => 'Start date',
+		'tr_duedate'     => 'Due date',
 		'tr_closed'      => 'Closed',
 		'tr_creator'     => 'Created by',
 		'tr_created'     => 'Created on',
@@ -244,6 +246,8 @@ class tracker_bo extends tracker_so
 //		'tr_budget'      => 'Bu',
 		'tr_completion'  => 'Co',
 		'tr_priority'    => 'Pr',
+		'tr_startdate'   => 'tr_startdate',
+		'tr_duedate'     => 'tr_duedate',
 		'tr_closed'      => 'Cl',
 		'tr_resolution'  => 'Re',
 		'tr_cc'			 => 'Cc',
@@ -302,7 +306,7 @@ class tracker_bo extends tracker_so
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling',	// tracker unspecific
-		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation',
+		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates'
 	);
 	/**
 	 * Notification settings (tracker specific, keys: sender, link, copy, lang)
@@ -326,9 +330,10 @@ class tracker_bo extends tracker_so
 	 * Filters to manage advanced logical statis
 	 */
 	var $filters = array(
-		'not-closed'						=> '&#9830; Not closed',
-		'own-not-closed'					=> '&#9830; Own not closed',
-		'without-reply-not-closed' 			=> '&#9830; Without reply not closed',
+		'closed'				=> '&#9830; Closed',
+		'not-closed'				=> '&#9830; Not closed',
+		'own-not-closed'			=> '&#9830; Own not closed',
+		'without-reply-not-closed' 		=> '&#9830; Without reply not closed',
 		'own-without-reply-not-closed' 		=> '&#9830; Own without reply not closed',
 		'without-30-days-reply-not-closed'	=> '&#9830; Without 30 days reply not closed',
 	);
@@ -339,6 +344,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $date_filters = array(      // Start: year,month,day,week, End: year,month,day,week
+		'Overdue'     => false,
 		'Today'       => array(0,0,0,0,  0,0,1,0),
 		'Yesterday'   => array(0,0,-1,0, 0,0,0,0),
 		'This week'   => array(0,0,0,0,  0,0,0,1),
@@ -430,9 +436,14 @@ class tracker_bo extends tracker_so
 		{
 			$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
 			$limit = $this->now - $this->overdue_days * 24*60*60;
-			$data['overdue'] = $data['tr_status'] == -100 && 	// only open items can be overdue
+			$data['overdue'] = !in_array($data['tr_status'],$this->get_tracker_stati(null,true)) && 	// only open items can be overdue
 				(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+
 		}
+
+		// Consider due date independent of overdue days
+		$data['overdue'] |= ($data['tr_duedate'] && $this->now > $data['tr_duedate'] && !in_array($data['tr_status'], $this->get_tracker_stati(null,true)));
+
 		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
 
 		// Keep a copy of the timestamps in server time, so notifications can change them for each user
@@ -574,15 +585,33 @@ class tracker_bo extends tracker_so
 			}
 			$this->data['tr_modified'] = $this->now;
 			$this->data['tr_modifier'] = $this->user;
+			$changed[] = 'tr_modified';
+
 			// set close-date if status is closed and not yet set
-			if ($this->data['tr_status'] == self::STATUS_CLOSED && is_null($this->data['tr_closed']))
+			if (in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
+				$changed[] = 'tr_closed';
 			}
 			// unset closed date, if item is re-opend
-			if ($this->data['tr_status'] != self::STATUS_CLOSED && !is_null($this->data['tr_closed']))
+			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && !is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
+				$changed[] = 'tr_closed';
+			}
+			// Changes mark the ticket unseen for everbody but the current
+			// user if the ticket wasn't closed at the same time
+			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
+			{
+				$seen = array();
+				$this->data['tr_seen'] = unserialize($this->data['tr_seen']);
+				if($this->data['reply_visible'])
+				{
+					// Keep those that can't see the comment
+					$seen = array_intersect($this->data['tr_seen'], array_keys($this->get_staff($this->data['tracker_id'], 2, 'users')));
+				}
+				$seen[] = $this->user;
+				$this->data['tr_seen'] = serialize($seen);
 			}
 			if ($this->data['reply_message'] || $this->data['canned_response'])
 			{
@@ -600,6 +629,10 @@ class tracker_bo extends tracker_so
 					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
 			}
+
+			// Reset escalation flags on variable fields (comment, modified, etc.)
+			$esc = new tracker_escalations();
+			$esc->reset($this->data, $changed);
 		}
 		if (!($err = parent::save()))
 		{
@@ -612,12 +645,12 @@ class tracker_bo extends tracker_so
 			if (!is_object($this->tracking))
 			{
 				$this->tracking = new tracker_tracking($this);
-				if($this->prefs['notify_own_modification'])
-				{
-					$this->tracking->notify_current_user = true;
-				}
-				$this->tracking->html_content_allow = true;
 			}
+			if($this->prefs['notify_own_modification'])
+			{
+				$this->tracking->notify_current_user = true;
+			}
+			$this->tracking->html_content_allow = true;
 			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$this->data['no_notifications']))
 			{
 				return implode(', ',$this->tracking->errors);
@@ -1166,10 +1199,23 @@ class tracker_bo extends tracker_so
 	 * There's a bunch of pre-defined stati, plus statis stored as labels, which can be per tracker
 	 *
 	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param boolean $closed True to get 'closed' stati, false to get open stati, null for all
 	 */
-	function get_tracker_stati($tracker=null)
+	function get_tracker_stati($tracker=null, $closed = null)
 	{
-		return self::$stati + $this->get_tracker_labels('stati',$tracker);
+		$stati = self::$stati + $this->get_tracker_labels('stati',$tracker);
+		if($closed === null) return $stati;
+
+		$filtered = (!$closed ? array(self::STATUS_OPEN    => 'Open(status)') : array(self::STATUS_CLOSED  => 'Closed'));
+
+		foreach($stati as $id => $name)
+		{
+			if($id > 0 && $data = $GLOBALS['egw']->categories->id2name($id,'data'))
+			{
+				if($closed == $data['closed']) $filtered[$id] = $name;
+			}
+		}
+		return $filtered;
 	}
 
 	/**
@@ -1370,7 +1416,7 @@ class tracker_bo extends tracker_so
 	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
-	function get_rows($query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
+	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
 	{
 		if($query['filter'])
 		{
@@ -1542,6 +1588,8 @@ class tracker_bo extends tracker_so
 			'tr_resolution'  => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_completion'  => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_priority'    => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
+			'tr_startdate'   => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
+			'tr_duedate'     => TRACKER_ITEM_CREATOR|TRACKER_ADMIN,
 			'tr_cc'			 => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'tr_group'		 => TRACKER_TECHNICIAN|TRACKER_ADMIN,
 			'customfields'   => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
@@ -1562,6 +1610,15 @@ class tracker_bo extends tracker_so
 		) as $name => $value)
 		{
 			if (!isset($this->field_acl[$name])) $this->field_acl[$name] = $value;
+		}
+
+		// Add date filters if using start/due dates
+		if($this->show_dates)
+		{
+			$this->date_filters = array(
+				'started'  => false,
+				'upcoming' => false
+			) + $this->date_filters;
 		}
 	}
 
@@ -1976,6 +2033,29 @@ class tracker_bo extends tracker_so
 				$end = $start + 8*24*60*60;
 			}
 		}
+		else if (strtolower($name) == 'overdue')
+		{
+                        $limit = $this->now - $this->overdue_days * 24*60*60;
+
+			return "(tr_duedate IS NOT NULL and tr_duedate < {$this->now}
+OR tr_duedate IS NULL AND
+    CASE
+        WHEN tr_modified IS NULL
+        THEN
+            tr_created < $limit
+        ELSE
+            tr_modified < $limit
+    END
+			) ";
+		}
+		else if (strtolower($name) == 'started')
+		{
+			return "(tr_startdate IS NULL OR tr_startdate < {$this->now} )" ;
+		}
+		else if (strtolower($name) == 'upcoming')
+		{
+			return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
+		}
 		else
 		{
 			if (!isset($this->date_filters[$name]))
@@ -2056,5 +2136,59 @@ class tracker_bo extends tracker_so
 			}
 		}
 		return $readonlys;
+	}
+
+	/**
+	 * Get a list of users with open tickets, either created or assigned.
+	 *
+	 * Limits the amount of checking to do for notifications by only getting users with
+	 * tickets where the start date, due date or created + limit is within 4 days
+	 *
+	 * @return array of user IDs
+	 */
+	public function users_with_open_entries()
+	{
+
+		$users = array();
+	
+		$config_limit = $this->now - $this->overdue_days * 24*60*60;
+		$four_days = 4 * 24*60*60;
+		
+		$where = array(
+			'tr_status' => array_keys($this->get_tracker_stati(null, false)),
+			"(tr_duedate IS NOT NULL and ABS(tr_duedate - {$this->now}) < {$four_days}
+OR tr_startdate IS NOT NULL AND ABS(tr_startdate - {$this->now}) < $four_days
+OR tr_duedate IS NULL AND
+    CASE
+        WHEN tr_modified IS NULL
+        THEN
+            ABS(tr_created - $config_limit) < $four_days
+        ELSE
+            ABS(tr_modified - $config_limit) < $four_days
+    END
+                        ) "
+		);
+
+		// Creator
+		$result = $this->db->select(self::TRACKER_TABLE, array('DISTINCT tr_creator'),$where,__LINE__,__FILE__);
+		foreach($result as $user)
+		{
+			$users[] = $user['tr_creator'];
+		}
+
+		// Assigned
+		$result = $this->db->select(
+			self::ASSIGNEE_TABLE, array('DISTINCT tr_assigned'),$where,__LINE__,__FILE__,
+			false, '',false,-1,
+			'JOIN '.self::TRACKER_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id = '.self::ASSIGNEE_TABLE.'.tr_id'
+		);
+		foreach($result as $user)
+		{
+			$user = $user['tr_assigned'];
+			if($user < 0) $user = $GLOBALS['egw']->accounts->members($user,true);
+			$users[] = $user;
+		}
+
+		return array_unique($users);
 	}
 }
