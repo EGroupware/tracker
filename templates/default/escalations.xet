@@ -135,14 +135,14 @@
 										<menulist>
 											<menupopup id="tr_tracker" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_tracker'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_tracker'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Resolution"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_resolution" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_resolution'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_resolution'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -151,14 +151,14 @@
 										<menulist>
 											<menupopup id="cat_id" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('cat_id'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('cat_id'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Version"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_version" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_version'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_version'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -167,14 +167,14 @@
 										<menulist>
 											<menupopup id="tr_status" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_priority" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_priority'))) { \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';\$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_priority'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 							</rows>
