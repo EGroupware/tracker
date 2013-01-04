@@ -23,6 +23,7 @@ class tracker_merge extends bo_merge
 	 * @var array
 	 */
 	var $public_functions = array(
+		'download_by_request'	=> true,
 		'show_replacements'		=> true,
 		'tracker_replacements'	=> true,
 	);
