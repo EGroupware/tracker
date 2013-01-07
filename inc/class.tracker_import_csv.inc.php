@@ -176,7 +176,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// Set creator/group, unless it's supposed to come from CSV file
 			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
 				if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
-					if(!is_numeric($record['tr_'.$field])) {
+					if(!is_numeric($record['tr_'.$field]))
+					{
 						// Automatically handle text owner without explicit translation
 						$new_owner = importexport_helper_functions::account_name2id($record['tr_'.$field]);
 						if($new_owner == '') {
@@ -196,27 +197,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				}
 			}
 
-			// Check account IDs
-			foreach(array('tr_modifier','tr_group','tr_assigned') as $field) {
-				if($record[$field] && !is_numeric($record[$field])) {
-					// Try an automatic conversion
-					$account_id = importexport_helper_functions::account_name2id($record[$field]);
-					if($account_id && strtoupper(common::grab_owner_name($account_id)) == strtoupper($record[$field])) {
-						$record[$field] = $account_id;
-					} else {
-						$this->errors[$import_csv->get_current_position()] = lang(
-							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
-							$record[$field],
-							common::grab_owner_name($_definition->plugin_options['record_owner']),
-							$this->bo->field2label[$field] ? lang($this->bo->field2label[$field]) : $field
-						);
-						$record[$field] = $_definition->plugin_options['record_owner'];
-					}
-				}
-			}
-
 			// Lookups - from human friendly to integer
-			$lookups = $_lookups + array(
+			$lookups = array(
 				'tr_version'    => $this->bo->get_tracker_labels('version', null),
 				'tr_status'     => $this->bo->get_tracker_stati(null),
 				'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
@@ -228,10 +210,22 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
 			}
 
+			// Translate lookups
+			foreach($lookups as $field => &$l_values)
+			{
+				foreach($l_values as $l_key => &$l_label)
+				{
+					$l_label = lang($l_label);
+				}
+			}
+			$lookups = $_lookups + $lookups;
+
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
 				if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
 					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
 					$key = false;
+
+					//echo "Checking $field. Currently {$record[$field]}.<br />";
 
 					// Check for key as value - importing DB values, or from conversion
 					if(is_numeric($record[$field]) && $lookups[$field][$record[$field]]) $key = $record[$field];
@@ -245,6 +239,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 						$record[$field] = $key;
 					} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
 						$t_field = $_definition->plugin_options[$translate_key];
+						//echo "Got some options here :$t_field<br />";
 						switch ($t_field) {
 							case '':
 							case '0':
@@ -297,6 +292,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
 					$lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
 				}
+				//echo "Final: {$record[$field]}<br />";
 			}
 
 			// Special values
