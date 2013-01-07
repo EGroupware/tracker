@@ -273,6 +273,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 										$cat_id = $GLOBALS['egw']->categories->add( array(
 											'name' => $record[$field],
 											'access' => 'public',
+											'owner' => 0,
 											'parent' => $parent,
 											'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
 											'data' => serialize(array('type' => $type))
