@@ -36,13 +36,18 @@ foreach(array(
 	'Works for me' => 'resolution',
 ) as $name => $type)
 {
+	$data = serialize(array('type' => $type));
+	if($name == 'None' && $type = 'resolution')
+	{
+		$data = serialize(array('type' => $type,'isdefault'=>true));
+	}
 	$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
 		'cat_owner'  => categories::GLOBAL_ACCOUNT,
 		'cat_access' => 'public',
 		'cat_appname'=> 'tracker',
 		'cat_name'   => $name,
 		'cat_description' => ucfirst($type).' added by setup.',
-		'cat_data'   => serialize(array('type' => $type)),
+		'cat_data'   => $data,
 		'last_mod'   => time(),
 	),false,__LINE__,__FILE__);
 	$cat_id = $GLOBALS['egw_setup']->db->get_last_insert_id($GLOBALS['egw_setup']->cats_table,'cat_id');
