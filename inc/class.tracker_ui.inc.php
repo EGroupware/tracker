@@ -162,7 +162,7 @@ class tracker_ui extends tracker_bo
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
 					foreach ($this->data['replies'] as &$reply)
 					{
-						if (!$this->htmledit || stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false)
+						if (!$this->htmledit || (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
 							$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
 						}
@@ -534,8 +534,8 @@ class tracker_ui extends tracker_bo
 					{
 						case 'infolog':
 							static $infolog_bo;
-                                                        if(!$infolog_bo) $infolog_bo = new infolog_bo();
-                                                        $infolog = $app_entry = $infolog_bo->read($link_id);
+							if(!$infolog_bo) $infolog_bo = new infolog_bo();
+							$infolog = $app_entry = $infolog_bo->read($link_id);
 							$content = array_merge($content, array(
 								'tr_owner'	=> $infolog['info_owner'],
 								'tr_private'	=> $infolog['info_access'] == 'private',
@@ -571,26 +571,26 @@ class tracker_ui extends tracker_bo
 								}
 							}
 
-                                                        // Add responsible as participant - filtered later
-                                                        foreach($infolog['info_responsible'] as $responsible) {
+							// Add responsible as participant - filtered later
+							foreach($infolog['info_responsible'] as $responsible) {
 								$content['tr_assigned'][] = $responsible;
-                                                        }
+							}
 
 							// Copy infolog's links
-                                                        foreach(egw_link::get_links('infolog',$link_id) as $copy_link)
-                                                        {
-                                                                egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
-                                                        }
-                                                        break;
+							foreach(egw_link::get_links('infolog',$link_id) as $copy_link)
+							{
+								egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
+							}
+							break;
 
 					}
 					// Copy same custom fields
-                                        $_cfs = config::get_customfields('tracker');
-                                        $link_app_cfs = config::get_customfields($link_app);
-                                        foreach($_cfs as $name => $settings)
-                                        {
-                                                if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
-                                        }
+					$_cfs = config::get_customfields('tracker');
+					$link_app_cfs = config::get_customfields($link_app);
+					foreach($_cfs as $name => $settings)
+					{
+						if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
+					}
 					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
 			}
