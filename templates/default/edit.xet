@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.edit.description" template="" lang="" group="0" version="0.1.002">
+	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
 		<grid width="100%" height="250" overflow="auto">
 			<columns>
-				<column width="100"/>
+				<column/>
+				<column/>
 				<column/>
 			</columns>
 			<rows>
 				<row class="row_off" valign="top">
-					<description value="Description"/>
-					<htmlarea id="tr_description" needed="1" mode="@tr_description_options" span="3"/>
+					<htmlarea mode="@tr_description_options" id="tr_description" needed="1" span="3"/>
 				</row>
 			</rows>
 		</grid>
@@ -46,7 +46,7 @@
 			</columns>
 			<rows>
 				<row class="th" disabled="@no_canned">
-					<description value="Canned response" for="canned_response" class="3"/>
+					<description value="Canned response" options=",,,canned_response" class="3"/>
 					<menulist>
 						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="var request = new egw_json_request('tracker.tracker_ui.ajax_canned_comment',[this.value,document.getElementById('exec[reply_message]').style.display == 'none']); request.sendRequest(true); this.value = ''; return false;" options="Select one"/>
 					</menulist>
@@ -57,7 +57,7 @@
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<vbox>
-						<description value="Comment" for="reply_message"/>
+						<description value="Comment" options=",,,reply_message"/>
 					</vbox>
 					<htmlarea id="reply_message" mode="@tr_reply_options" span="3"/>
 				</row>
@@ -163,62 +163,44 @@
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<html align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
+					<html align="center" id="msg" no_lang="1" readonly="true" span="all" class="redItalic"/>
 					<description/>
 					<description/>
 					<description/>
 				</row>
 				<row class="th" height="28">
-					<description value="Tracker Queue" options=",,,tr_tracker"/>
+					<description for="tr_tracker" value="Tracker Queue"/>
 					<hbox onchange="1" options="0,0" class="user_filter">
-						<menulist class="width100">
-							<menupopup id="tr_tracker" no_lang="1" onchange="1"/>
+						<menulist>
+							<menupopup class="width100" id="tr_tracker" no_lang="1" onchange="1"/>
 						</menulist>
-						<int id="tr_id" readonly="true" class="trIdEdit"/>
+						<int id="tr_id" readonly="true" options="," class="trIdEdit"/>
 					</hbox>
-					<description value="Private" options=",,,tr_private"/>
+					<description for="tr_private" value="Private"/>
 					<checkbox id="tr_private"/>
 				</row>
 				<row class="row">
-					<description value="Category" options=",,,cat_id"/>
-					<menulist class="cat_select">
-						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"/>
+					<description for="cat_id" value="Category"/>
+					<menulist>
+						<menupopup class="cat_select" id="cat_id" needed="1" no_lang="1" options="Select one"/>
 					</menulist>
-					<description value="Version" options=",,,tr_version"/>
-					<menulist class="user_select">
-						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one"/>
+					<description for="tr_version" value="Version"/>
+					<menulist>
+						<menupopup class="user_select" id="tr_version" needed="1" no_lang="1" options="Select one"/>
 					</menulist>
 				</row>
 				<row class="row">
-					<description value="Assigned to" options=",,,tr_assigned"/>
+					<description for="tr_assigned" value="Assigned to"/>
 					<hbox options="0,0">
-						<menulist class="user_select">
-							<menupopup id="tr_assigned" no_lang="1" options="Not assigned"/>
+						<menulist>
+							<menupopup class="user_select" id="tr_assigned" no_lang="1" options="Not assigned"/>
 						</menulist>
-						<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { \$j(selectbox).unchosen().css('width','100%'); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; \$j(selectbox).chosen();}  this.style.display='none'; return false;" options="users"/>
+						<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
 					</hbox>
-					<description value="Priority" options="tr_priority"/>
+					<description font_style="tr_priority" value="Priority"/>
 					<menulist>
 						<menupopup id="tr_priority"/>
 					</menulist>
-				</row>
-				<row class="row" disabled="!@tr_id">
-					<description value="Status" options=",,,tr_status"/>
-					<hbox options="0,0">
-						<menulist>
-							<menupopup statustext="@status_help" id="tr_status"/>
-						</menulist>
-						<date-time label=" " id="tr_closed"/>
-					</hbox>
-					<description value="Resolution" options=",,,tr_resolution"/>
-					<hbox options="0,0">
-						<menulist>
-							<menupopup id="tr_resolution"/>
-						</menulist>
-						<menulist class="leftPad5">
-							<menupopup type="select-percent" id="tr_completion"/>
-						</menulist>
-					</hbox>
 				</row>
 				<row class="row">
 					<description statustext="List of coma separated email address" value="Cc"/>
@@ -243,7 +225,7 @@
 					</menulist>
 				</row>
 				<row class="row">
-					<description value="Summary" options=",,,tr_summary"/>
+					<description for="tr_summary" value="Summary"/>
 					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="inputFullWidth"/>
 				</row>
 				<row valign="top">
@@ -268,7 +250,31 @@
 						</tabpanels>
 					</tabbox>
 				</row>
-				<row>
+				<row class="x row_off" disabled="!@show_dates">
+					<description value="Start date"/>
+					<date-time id="tr_startdate"/>
+					<description value="Due date"/>
+					<date-time id="tr_duedate"/>
+				</row>
+				<row class="x row_on" disabled="!@tr_id">
+					<description for="tr_status" value="Status"/>
+					<hbox options="0,0">
+						<menulist>
+							<menupopup statustext="@status_help" id="tr_status"/>
+						</menulist>
+						<date-time label=" " id="tr_closed"/>
+					</hbox>
+					<description for="tr_resolution" value="Resolution"/>
+					<hbox options="0,0">
+						<menulist>
+							<menupopup id="tr_resolution"/>
+						</menulist>
+						<menulist>
+							<menupopup type="select-percent" class="leftPad5" id="tr_completion"/>
+						</menulist>
+					</hbox>
+				</row>
+				<row class="x row_off">
 					<description value="Created by"/>
 					<hbox options="0,0">
 						<menulist>
@@ -286,14 +292,14 @@
 				</row>
 				<row>
 					<button label="Save" id="button[save]"/>
-					<hbox options="0,0" span="2">
+					<hbox options="0,0" span="all">
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify of these changes" id="no_notifications"/>
+						<vbox align="right" options="0,0">
+							<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="return confirm('Do you want to vote for this item');"/>
+							<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
+						</vbox>
 					</hbox>
-					<vbox align="right" options="0,0">
-						<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="return confirm('Do you want to vote for this item');"/>
-						<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
-					</vbox>
 				</row>
 			</rows>
 		</grid>
