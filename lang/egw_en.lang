@@ -12,6 +12,8 @@
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
+2 days in advance	tracker	en	2 days in advance
+3 days in advance	tracker	en	3 days in advance
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
 accepted	tracker	en	Accepted
@@ -46,6 +48,7 @@ attention: no contact with address %1 found.	tracker	en	Attention: No contact wi
 autoassign to	tracker	en	Auto assign to
 automatic email handling	tracker	en	Automatic email handling
 automatically created by importexport	tracker	en	Automatically created by importexport
+before	tracker	en	Before
 bounties	tracker	en	Bounties
 bounty	tracker	en	Bounty
 bounty confirmed	tracker	en	Bounty confirmed.
@@ -110,6 +113,7 @@ do you want to vote for this item	tracker	en	Do you want to vote for this item
 donator name to show	tracker	en	Donator name to show
 download url for links	tracker	en	Download url for links
 duplicate	tracker	en	Duplicate
+due date	tracker	en	Due date
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	Email address to which a copy of all tracker notifications should be send
 e-mail notifications	tracker	en	Email notifications
 edit %1	tracker	en	Edit %1
@@ -181,6 +185,9 @@ language for the copy	tracker	en	Language for the copy
 last modified	tracker	en	Last modified
 last modified by	tracker	en	Last modified by
 last reply	tracker	en	Last reply
+last reply by anyone but creator	tracker	en	Last reply by anyone but creator
+last reply by assigned	tracker	en	Last reply by assigned
+last reply by creator	tracker	en	Last reply by creator
 later	tracker	en	Later
 limit number of description lines (default 5, 0 for no limit)	tracker	en	Limit number of description lines. Default = 5, 0 = no limit.
 link to ticket	tracker	en	Link to ticket
@@ -211,6 +218,8 @@ note: timesheet itself is always excluded	tracker	en	Note: timesheet itself is a
 nothing to save.	tracker	en	Nothing to save.
 notification	tracker	en	Notification
 notification signature	tracker	en	Notification signature
+one day after	tracker	en	One day after
+one day in advance	tracker	en	One day in advance
 only explicitly named users have read access (otherwise everyone)	tracker	en	Only explicitly named users have read access, otherwise everyone
 open(status)	tracker	en	Open
 out of date	tracker	en	Out of date
@@ -244,11 +253,13 @@ remind	tracker	en	Remind
 replacements for inserting entries into documents	tracker	en	Replacements for inserting entries into documents
 reply also to unknown addresses	tracker	en	Reply also to unknown addresses
 resolution	tracker	en	Resolution
+responsible	tracker	en	Responsible
 restict tracker items to the creator and the staff only	tracker	en	Restrict tracker items to the creator and the staff only
 restict tracker items to the creators primary group and the staff only	tracker	en	Restrict tracker items to the creators, primary group and the staff only
 restrict tracker items to staff and:	tracker	en	Restrict tracker items to staff and:
 restricted comment	tracker	en	Restricted comment
 restriction	tracker	en	Restriction
+same day	tracker	en	Same day
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
 select how autoreplies should be sent when mails are received	tracker	en	Select how auto replies should be sent when mails are received
 select multiple	tracker	en	Select multiple
