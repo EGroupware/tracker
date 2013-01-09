@@ -153,7 +153,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.9.006">
+	<template id="tracker.edit" template="" lang="" group="0" version="1.9.007">
 		<grid width="100%">
 			<columns>
 				<column width="95"/>
@@ -229,15 +229,15 @@
 					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="inputFullWidth"/>
 				</row>
 				<row valign="top">
-					<tabbox id="tracker.edit.description|tracker.edit.comments|tracker.edit.add_comment|tracker.edit.links|tracker.edit.custom|tracker.edit.history|tracker.edit.bounties" span="all">
+					<tabbox id="tabs" span="all">
 						<tabs>
-							<tab id="tracker.edit.description" label="Description" statustext="Description"/>
-							<tab id="tracker.edit.comments" label="Comments" statustext="Comments"/>
-							<tab id="tracker.edit.add_comment" label="Add comment" statustext="Add comment"/>
-							<tab id="tracker.edit.links" label="Links" statustext="Attachments &amp; Links"/>
-							<tab id="tracker.edit.custom" label="Custom" statustext="Custom fields"/>
-							<tab id="tracker.edit.history" label="History" statustext="History"/>
-							<tab id="tracker.edit.bounties" label="Bounties" statustext="If this item is important for you, please consider to set a bounty for it!"/>
+							<tab id="description" label="Description" statustext="Description"/>
+							<tab id="comments" label="Comments" statustext="Comments"/>
+							<tab id="add_comment" label="Add comment" statustext="Add comment"/>
+							<tab id="links" label="Links" statustext="Attachments &amp; Links"/>
+							<tab id="custom" label="Custom" statustext="Custom fields"/>
+							<tab id="history" label="History" statustext="History"/>
+							<tab id="bounties" label="Bounties" statustext="If this item is important for you, please consider to set a bounty for it!"/>
 						</tabs>
 						<tabpanels>
 							<template id="tracker.edit.description"/>
