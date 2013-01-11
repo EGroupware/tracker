@@ -644,13 +644,13 @@ function tracker_upgrade1_9_007()
 
 function tracker_upgrade1_9_008()
 {
-	/* done by RefreshTable() anyway
+	// done by RefreshTable() anyway, but needed for postgres
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_run_on_existing',array(
 		'type' => 'int',
 		'precision' => '1',
 		'nullable' => False,
 		'default' => '1'
-	));*/
+	));
 	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker_escalations',array(
 		'fd' => array(
 			'esc_id' => array('type' => 'auto','nullable' => False),
