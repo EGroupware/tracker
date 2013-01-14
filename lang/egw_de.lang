@@ -6,6 +6,7 @@
 %1 is due %2	tracker	de	%1 sind fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
+&#9830; closed	tracker	de	♦ Geschlossen
 &#9830; not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
 &#9830; own not closed	tracker	de	♦ Eigene nicht geschlossen
 &#9830; own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen

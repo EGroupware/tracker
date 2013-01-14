@@ -6,6 +6,7 @@
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
+&#9830; closed	tracker	en	♦ Closed
 &#9830; not closed	tracker	en	♦ Not closed
 &#9830; own not closed	tracker	en	♦ Own not closed
 &#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
