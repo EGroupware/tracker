@@ -415,6 +415,10 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				unset($_data['tr_modifier']);
 				unset($_data['tr_modified']);
 
+				if($this->definition->plugin_options['no_notification'])
+				{
+					$_data['no_notifications'] = true;
+				}
 				if ( $this->dry_run ) {
 					//print_r($_data);
 					$this->results[$_action]++;
