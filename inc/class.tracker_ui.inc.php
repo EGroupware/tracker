@@ -979,7 +979,7 @@ class tracker_ui extends tracker_bo
 				unset($seen[$key]);
 			}
 		}
-		$this->db->update('egw_tracker', array('tr_seen' => serialize($seen)),
+		$this->db->update('egw_tracker', array('tr_seen' => serialize(array_unique($seen))),
 			array('tr_id' => $data['tr_id']),__LINE__,__FILE__,'tracker');
 		return false; // This time still false...
 	}
