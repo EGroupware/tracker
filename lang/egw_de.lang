@@ -6,19 +6,20 @@
 %1 is due %2	tracker	de	%1 sind fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-&#9830; closed	tracker	de	♦ Geschlossen
 &#9830; not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
 &#9830; own not closed	tracker	de	♦ Eigene nicht geschlossen
 &#9830; own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
 &#9830; without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
 &#9830; without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
-(beware of mailloops, check the help!)	tracker	de	Passen Sie auf Mailschleifen auf, siehe Hilfe!
+(beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
 --> enter new name	tracker	de	--> neuen Namen eingeben
 1 - lowest	tracker	de	1 - niedrigste
 2 days in advance	tracker	de	2 Tage im Voraus
+2 years ago	tracker	de	2 Jahre zurück
 3 days in advance	tracker	de	3 Tage im Voraus
+3 years ago	tracker	de	3 Jahre zurück
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
@@ -71,6 +72,7 @@ bounty set	tracker	de	Prämie gesetzt
 canned response	tracker	de	Standardantwort
 canned responses	tracker	de	Standardantworten
 categories, versions, canned responses	tracker	de	Kategorien, Versionen, Standardantworten
+category	tracker	de	Kategorie
 category for new tickets	tracker	de	Kategorie für neue Tickets
 change assigned	tracker	de	Zugewiesener Benutzer ändern
 change assigned when updating	tracker	de	Zugewiesener Benutzer ändern bei der der Aktualisierung
@@ -102,6 +104,8 @@ copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker
 create new links	tracker	de	Neue Verknüpfung anlegen
 create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Einträge im Verfolgungssystem als Privat zur Freigabe durch Administratoren.
 created	tracker	de	Erstellt
+created by	tracker	de	Erstellt von
+created on	tracker	de	Erstellungsdatum
 creates a new field	tracker	de	Neues Feld erstellen
 creation date	tracker	de	Erstellungsdatum
 creator	tracker	de	Ersteller
@@ -155,7 +159,7 @@ enter the mail address that will be read.	tracker	de	E-Mail Adresse die gelesen 
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
-error renaming tracker queue!	tracker	de	Fehler beim Umbennenen der Verfolgungssystem-Queue!
+error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
 error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 ünd fügen diese wieder ein.
 escalation	tracker	de	Eskalation
@@ -171,7 +175,8 @@ example {{nelfnv role}} - if field role is not empty, set a lf without any value
 exclude links of the following apps on timesheet creation	tracker	de	Ignoriere die Verknüpfungen der folgenden Anwendungen bei der Erzeugung von Stundenzetteln
 existing links	tracker	de	Bestehende Verknüpfungen
 exists	tracker	de	existiert
-export as csv	tracker	de	als CSV Datei erxportieren
+export as csv	tracker	de	als CSV Datei exportieren
+export csv	tracker	de	Export als CSV Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
@@ -186,7 +191,7 @@ from	tracker	de	Von
 full list of placeholder names	tracker	de	komplette Liste der Platzhalter
 general fields:	tracker	de	Allgemeine Felder
 handling autoreplies	tracker	de	Behandlung von automatischen Antworten
-handling bounced mails	tracker	de	Behandlung von nicht zustellbaren E-Mails
+handling bounced mails	tracker	de	Behandlung von unzustellbaren E-Mails
 handling mailheader information	tracker	de	Handhabung von Mailheader Informationen
 history	tracker	de	Historie
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	de	Wie viele Zeilen der Beschreibung sollen direkt sichtbar sein. Zusätzliche Zeilen können über einen Rollbalken (scrollbar) erreicht werden.
@@ -201,6 +206,8 @@ if you specify an export definition, it will be used when you export*	tracker	de
 ignore	tracker	de	Ignorieren
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	de	E-Mail ignorieren. Die E-Mail bleibt in der Mailbox, auch wenn 'E-Mails auf dem Server löschen' darüber abgehakt ist.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	de	Nicht zuordenbare E-Mail ignorieren. Sie werden nicht vom Server gelöscht, selbst wenn oben 'E-Mails löschen' ausgewählt wurde.
+imap, ssl secured	tracker	de	IMAP, SSL verschlüsselt
+imap, tls secured	tracker	de	IMAP, TLS verschlüsselt
 import options	tracker	de	Import Optionen
 import tts tickets	tracker	de	TTS Tickets importieren
 imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	de	Importiert Datensätze in das Verfolgungssystem aus einer CSV Datei. CSV bedeutet: 'Komma getrennte Werte'. Unter dem Seitenreiter Optionen können Sie den Feldtrenner auswählen.
@@ -216,18 +223,22 @@ invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
 language for the copy	tracker	de	Sprache für die Kopie
+last 3 months	tracker	de	Letzten 3 Monate
 last modified	tracker	de	Zuletzt geändert
 last modified by	tracker	de	Geändert von
+last month	tracker	de	Letzten Monat
+last quarter	tracker	de	Letztes Quartal
 last reply	tracker	de	letzte Antwort
 last reply by anyone but creator	tracker	de	Letzter Kommentar von jedem, ausser dem Ersteller
 last reply by assigned	tracker	de	Letzter Kommentar von dem Zuständigen
 last reply by creator	tracker	de	Letzter Kommentar von dem Ersteller
 last week	tracker	de	Letzte Woche
+last year	tracker	de	Letztes Jahr
 later	tracker	de	Später
 leaves without saveing	tracker	de	ohne Speichern verlassen
 length<br>rows	tracker	de	Länge<br>Zeilen
 limit number of description lines (default 5, 0 for no limit)	tracker	de	Begrenze Anzahl Beschreibungszeilen (Vorgabe 5, 0 für keine Grenze)
-link to ticket	tracker	de	Verknüfungen zu einem Ticket
+link to ticket	tracker	de	Verknüpfungen zu einem Ticket
 linked to %1	tracker	de	Verknüpft mit %1
 links	tracker	de	Verknüpfungen
 links and attached files	tracker	de	Verknüpfungen und verknüpfte Dateien
@@ -239,7 +250,7 @@ mail handling	tracker	de	E-Mailumwandlung
 manage mapping	tracker	de	Feldzuordnungen bearbeiten
 match again after	tracker	de	zutreffend nach
 matching filter	tracker	de	Filter zutreffend
-max length of the input [, length of the inputfield (optional)]	tracker	de	max Länge des Textfeldes [, Länge des Textfeldes (optional)]
+max length of the input [, length of the inputfield (optional)]	tracker	de	max. Länge des Textfeldes [, Länge des Textfeldes (optional)]
 maximum %1 times	tracker	de	Maximum %1 Zeiten
 maximum %s times	tracker	de	Maximum %s Zeiten
 miscellaneous	tracker	de	Sonstiges
@@ -248,6 +259,7 @@ name of current user, all other contact fields are valid too	tracker	de	Name des
 new %1	tracker	de	%1 hinzufügen
 new items	tracker	de	Neue Einträge
 new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
+new tickets as	tracker	de	Neue Tickets erstellen als
 new tracker item submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
 no change	tracker	de	Keine Änderung
 no notifications	tracker	de	Keine Benachrichtigungen
@@ -265,11 +277,11 @@ old fixed definition	tracker	de	Feste Definitionsdateien, die nicht angepasst we
 one day after	tracker	de	Einen Tag danach
 one day in advance	tracker	de	Einen Tag im Voraus
 only explicitly named users have read access (otherwise everyone)	tracker	de	nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
-only for admins, technicians or assigned	tracker	de	Nur sichtbar für Administratoren, Technicker bzw. zugewiesenen Benutzern
+only for admins, technicians or assigned	tracker	de	Nur sichtbar für Administratoren, Techniker bzw. zugewiesenen Benutzern
 open(status)	tracker	de	Offen
 order	tracker	de	Reihenfolge
 out of date	tracker	de	Nicht mehr aktuell
-overdue	tracker	de	Überfällig
+overdue	tracker	de	überfällig
 overdue after	tracker	de	Überfällig nach
 ownership of the ticket	tracker	de	Besitzer der Tickets
 pending	tracker	de	Schwebend
@@ -278,9 +290,10 @@ pending items will be closed automatic after %1 days without response.	tracker	d
 permission denied !!!	tracker	de	Zugriff verweigert !!!
 permissions error - %1 could not %2	tracker	de	Zugriff verweigert - %1 konnte nicht %2
 permit html editing in overview and comments	tracker	de	Formatierte Textbearbeitung im Überblick und in den Antworten
+pop3	tracker	de	POP3
 port number	tracker	de	Portnummer
 postponed	tracker	de	Vertagt
-pre-selected version when creating a new tracker	tracker	de	Vorausgewählte Version für neue Tickets
+pre-selected version when creating a new tracker	tracker	de	Vorbelegung der Version für neue Tickets
 print entry	tracker	de	Ticket drucken
 priorities	tracker	de	Prioritäten
 priorities with empty label are not available to the user	tracker	de	Prioritäten mit leerer Beschriftung sind für den Benutzer nicht verfügbar
@@ -292,7 +305,7 @@ queue	tracker	de	Queue
 read mail address	tracker	de	E-Mail Adresse zum lesen
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
-receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder Vercantwortlich sind
+receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder Verantwortlich sind
 receive notifications about starting entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für zu startende Einträge, die Sie erstellt haben oder Verantwortlich sind
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
 recieve notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Einträge
@@ -303,22 +316,25 @@ reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten
 report as bar chart by the selected criterias	tracker	de	Bericht als Balkendiagramm für die ausgewählten Kriterien
 report as pie chart for the main criterias	tracker	de	Bericht als Tortendiagramm für die Hauptkriterien
 report parameter	tracker	de	Parameter der Berichte
+report parameters	tracker	de	Parameter für Ihren Bericht
 reporting timeframe	tracker	de	Zeitfenster der Berichte
 reports	tracker	de	Berichte
 resolution	tracker	de	Lösung
 responsible	tracker	de	Verantwortlich
 restict tracker items to the creator and the staff only	tracker	de	Tickets auf Ersteller und Mitarbeiter einschränken
-restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Grupper des Ersteller und Mitarbeiter einschränken
+restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Gruppe des Ersteller und Mitarbeiter einschränken
 restrict tracker items to staff and:	tracker	de	Tickets einschränken auf Mitarbeiter und:
 restricted comment	tracker	de	Eingeschränkt lesbare Antworten
 restriction	tracker	de	Einschränkungen
 run on existing tickets	tracker	de	Auf  bestehende Tickets anwenden
 same day	tracker	de	am gleichen Tag
 save new report	tracker	de	Bericht speichern
+save new report...	tracker	de	Neuen Bericht speichern...
 saves the changes made and leaves	tracker	de	Änderungen speichern und diesen Menüpunkt verlassen
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	de	Einen Tracker für neue Tickets auswählen oder 'Zurückweisen' um das Erzeugen von Tickets per Mail zu verbieten.
 select accounts for which the custom field should be visible	tracker	de	Wählen Sie die Benutzer aus, für die das Benutzerdefinierte Feld sichtbar sein darf
-select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworden gesendet werden, wenn Mails empfangen werden
+select existing report	tracker	de	Wählen Sie einen bestehenden Bericht aus
+select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn Mails empfangen werden
 select multiple	tracker	de	Mehrere Auswählen
 select one...	tracker	de	Eintrag auswählen
 select tracker queue	tracker	de	Verfolgungssystem-Queue auswählen
@@ -343,13 +359,15 @@ signature	tracker	de	Signatur
 skip record	tracker	de	Eintrag überspringen
 staff	tracker	de	Mitarbeiter
 staff  "users" will be allowed for assignment to tracker tickets	tracker	de	Mitarbeiter "Benutzer" können Tickets zugewiesen bekommen
+standard imap	tracker	de	Standard IMAP
 started	tracker	de	gestartet
 starting	tracker	de	wird gestartet
 state	tracker	de	Status
 stati	tracker	de	Status
+status	tracker	de	Status
 store as	tracker	de	Speichern als
 summary	tracker	de	Zusammenfassung
-tag to mark positions for address labels	tracker	de	Markiert die Position für den Adress Eintrag.
+tag to mark positions for address labels	tracker	de	Markiert die Position für den Adressen Eintrag.
 technicians	tracker	de	Techniker
 thank you for setting this bounty.	tracker	de	Danke dass Sie diese Prämie gesetzt haben.
 thank you for voting.	tracker	de	Danke dass Sie abgestimmt haben.
@@ -361,8 +379,11 @@ the name used internaly (<= 20 chars), changeing it makes existing data unavaili
 the text displayed to the user	tracker	de	Der angezeigte Text. der  für den Benutzer sichtbar ist
 there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalation für diesen Filter!
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
+this month	tracker	de	Diesen Monat
+this quarter	tracker	de	Dieses Quartal
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieses Ticket wurde automatisch geschlossen. Es wurde zuvor auf den Status Schwebend gesetzt, und derjenige der das Ticket angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 this week	tracker	de	Diese Woche
+this year	tracker	de	Dieses Jahr
 ticket count	tracker	de	Anzahl Tickets
 ticket modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
 times	tracker	de	Zeiten
@@ -378,7 +399,7 @@ tracker csv import	tracker	de	CSV Import in das Verfolgungssystem
 tracker deleted	tracker	de	Verfolgungssystem-Queue gelöscht
 tracker entry can only seen by creator and admins	tracker	de	Tickets können nur vom Ersteller oder einem Administrator gesehen werden
 tracker fields:	tracker	de	Felder des Verfolgungssystems:
-tracker for new tickets	tracker	de	Tracker für neue Tickets
+tracker for new tickets	tracker	de	Queue für neue Tickets
 tracker for the main screen	tracker	de	Tracker für die Hauptansicht
 tracker id	tracker	de	Ticketnummer (ID)
 tracker item modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
