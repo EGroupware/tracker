@@ -6,19 +6,20 @@
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
-&#9830; closed	tracker	en	♦ Closed
 &#9830; not closed	tracker	en	♦ Not closed
 &#9830; own not closed	tracker	en	♦ Own not closed
 &#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
 &#9830; without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
 &#9830; without reply not closed	tracker	en	♦ Without reply not closed
-(beware of mailloops, check the help!)	tracker	en	Beware of mail loops, check the help!
+(beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
 (new tickets as	tracker	en	New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
 2 days in advance	tracker	en	2 days in advance
+2 years ago	tracker	en	2 years ago
 3 days in advance	tracker	en	3 days in advance
+3 years ago	tracker	en	3 years ago
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
 accepted	tracker	en	Accepted
@@ -71,6 +72,7 @@ bounty set	tracker	en	Bounty set
 canned response	tracker	en	Canned response
 canned responses	tracker	en	Canned responses
 categories, versions, canned responses	tracker	en	Categories, versions, canned responses
+category	tracker	en	Category
 category for new tickets	tracker	en	Category for new tickets
 change assigned	tracker	en	Change assigned
 change assigned when updating	tracker	en	Change assigned when updating
@@ -102,6 +104,8 @@ copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker
 create new links	tracker	en	Create new links
 create new tracker entry's as default "private" for approval process	tracker	en	Create new tracker entry as default 'private' for approval process
 created	tracker	en	Created
+created by	tracker	en	Created by
+created on	tracker	en	Created on
 creates a new field	tracker	en	creates a new field
 creation date	tracker	en	Creation date
 creator	tracker	en	Creator
@@ -172,6 +176,7 @@ exclude links of the following apps on timesheet creation	tracker	en	Exclude lin
 existing links	tracker	en	Existing links
 exists	tracker	en	Exists
 export as csv	tracker	en	Export as CSV
+export csv	tracker	en	Export CSV
 export definition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
 export definitition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
 exports a list of tracker tickets to a csv file.	tracker	en	Exports a list of tracker tickets to a CSV file.
@@ -201,6 +206,8 @@ if you specify an export definition, it will be used when you export*	tracker	en
 ignore	tracker	en	Ignore
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	en	Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	en	Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged.
+imap, ssl secured	tracker	en	IMAP, SSL secured
+imap, tls secured	tracker	en	IMAP, TLS secured
 import options	tracker	en	Import options
 import tts tickets	tracker	en	Import TTS tickets
 imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	en	Imports entries into the tracker from CSV File. CSV means 'Comma Separated Values'. In the options Tab you can also choose other separators.
@@ -216,13 +223,17 @@ invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
 item creator	tracker	en	Item creator
 language for the copy	tracker	en	Language for the copy
+last 3 months	tracker	en	Last 3 months
 last modified	tracker	en	Last modified
 last modified by	tracker	en	Last modified by
+last month	tracker	en	Last month
+last quarter	tracker	en	Last quarter
 last reply	tracker	en	Last reply
 last reply by anyone but creator	tracker	en	Last reply by anyone but creator
 last reply by assigned	tracker	en	Last reply by assigned
 last reply by creator	tracker	en	Last reply by creator
 last week	tracker	en	Last week
+last year	tracker	en	Last year
 later	tracker	en	Later
 leaves without saveing	tracker	en	leaves without saveing
 length<br>rows	tracker	en	Length<br>Rows
@@ -248,6 +259,7 @@ name of current user, all other contact fields are valid too	tracker	en	Name of 
 new %1	tracker	en	New %1
 new items	tracker	en	New items
 new ticket submitted by %1 at %2	tracker	en	New ticket submitted by %1 at %2
+new tickets as	tracker	en	New tickets as
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
 no change	tracker	en	No change
 no notifications	tracker	en	No notifications
@@ -278,6 +290,7 @@ pending items will be closed automatic after %1 days without response.	tracker	e
 permission denied !!!	tracker	en	Permission denied !!!
 permissions error - %1 could not %2	tracker	en	Permissions error - %1 could not %2
 permit html editing in overview and comments	tracker	en	Permit HTML editing in overview and comments
+pop3	tracker	en	POP3
 port number	tracker	en	Port number
 postponed	tracker	en	Postponed
 pre-selected version when creating a new tracker	tracker	en	Pre-selected version when creating a new tracker
@@ -303,6 +316,7 @@ reply also to unknown addresses	tracker	en	Reply also to unknown addresses
 report as bar chart by the selected criterias	tracker	en	Report as bar chart by the selected criterias
 report as pie chart for the main criterias	tracker	en	Report as pie chart for the main criterias
 report parameter	tracker	en	Report parameter
+report parameters	tracker	en	Report parameters
 reporting timeframe	tracker	en	Reporting Timeframe
 reports	tracker	en	Reports
 resolution	tracker	en	Resolution
@@ -315,9 +329,11 @@ restriction	tracker	en	Restriction
 run on existing tickets	tracker	en	Run on existing tickets
 same day	tracker	en	Same day
 save new report	tracker	en	Save new report
+save new report...	tracker	en	Save new report...
 saves the changes made and leaves	tracker	en	saves the changes made and leaves
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
 select accounts for which the custom field should be visible	tracker	en	Select accounts for which the custom field should be visible
+select existing report	tracker	en	Select existing report
 select how autoreplies should be sent when mails are received	tracker	en	Select how auto replies should be sent when mails are received
 select multiple	tracker	en	Select multiple
 select one...	tracker	en	Select one...
@@ -343,10 +359,12 @@ signature	tracker	en	Signature
 skip record	tracker	en	Skip record
 staff	tracker	en	Staff
 staff  "users" will be allowed for assignment to tracker tickets	tracker	en	Staff 'Users' will be allowed for assignment to tracker tickets
+standard imap	tracker	en	Standard IMAP
 started	tracker	en	Started
 starting	tracker	en	Starting
 state	tracker	en	State
 stati	tracker	en	State
+status	tracker	en	Status
 store as	tracker	en	Store as
 summary	tracker	en	Summary
 tag to mark positions for address labels	tracker	en	Tag to mark positions for address labels
@@ -361,8 +379,11 @@ the name used internaly (<= 20 chars), changeing it makes existing data unavaili
 the text displayed to the user	tracker	en	the text displayed to the user
 there already an escalation for that filter!	tracker	en	There already an escalation for that filter!
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker
+this month	tracker	en	This month
+this quarter	tracker	en	This quarter
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a pending status and was not responded within %1 days.
 this week	tracker	en	This week
+this year	tracker	en	This year
 ticket count	tracker	en	Ticket count
 ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
 times	tracker	en	Times
