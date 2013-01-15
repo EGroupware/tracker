@@ -417,7 +417,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 				if($this->definition->plugin_options['no_notification'])
 				{
-					$_data['no_notifications'] = true;
+					$this->bo->data['no_notifications'] = true;
 				}
 				if ( $this->dry_run ) {
 					//print_r($_data);
