@@ -419,7 +419,7 @@ class tracker_admin extends tracker_bo
 		$f = 1;
 		foreach($this->field2label as $name => $label)
 		{
-			if (in_array($name,array('num_replies'))) continue;
+			if (in_array($name,array('num_replies', 'tr_created'))) continue;
 
 			$rights = $this->field_acl[$name];
 			$content['field_acl'][$f++] = array(
