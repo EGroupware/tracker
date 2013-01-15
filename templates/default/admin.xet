@@ -364,7 +364,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.001">
+	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.002">
 		<grid>
 			<columns>
 				<column width="200"/>
@@ -453,7 +453,7 @@
 						</menulist>
 					</hbox>
 					<hbox span="all">
-						<description value="(New tickets as "/>
+						<description value="(New tickets as"/>
 						<menulist>
 							<menupopup type="select-account" statustext="Select which username should be used when unrecognized mails are handled." id="mailhandling[unrec_mail]" options="Reject"/>
 						</menulist>
@@ -495,7 +495,7 @@
 					<description/>
 					<hbox span="all">
 						<radio statustext="Process the message normally. *NOTE* This might cause mailloops when &quot;Sent autoreplies&quot; below is enabled!" label="Process" id="mailhandling[autoreplies]" options="process"/>
-						<description value=" (Beware of mailloops, check the help!) " span="all"/>
+						<description value="(Beware of mailloops, check the help!)" span="all"/>
 					</hbox>
 					<description/>
 					<description/>
