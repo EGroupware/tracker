@@ -393,6 +393,7 @@ class tracker_so extends so_sql_cf
 			if($data['closed']) $custom_closed[] = $stati_id;
 		}
 		$not_closed = substr(self::SQL_NOT_CLOSED,0,-1) . ' AND tr_status != \'' . implode('\' AND tr_status != \'', $custom_closed) . '\')';
+		if (empty($custom_closed)) $not_closed = self::SQL_NOT_CLOSED;
 
 		// Handle the special filters
 		switch ($filter['tr_status'])
