@@ -40,6 +40,7 @@ class tracker_merge extends bo_merge
 	{
 		parent::__construct();
 		$this->table_plugins['comment'] = 'comment';
+		$this->table_plugins['comment/-1'] = 'comment';
 		$this->bo = new tracker_bo();
 	}
 
@@ -52,7 +53,7 @@ class tracker_merge extends bo_merge
 	 */
 	protected function get_replacements($id,&$content=null)
 	{
-		if (!($replacements = $this->tracker_replacements($id,'',$content)))
+		if (!($replacements = $this->tracker_replacements($id,'', $content)))
 		{
 			return false;
 		}
@@ -102,16 +103,32 @@ class tracker_merge extends bo_merge
 			$lookups['tr_status'] += $this->bo->get_tracker_stati($t_id);
 			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $t_id);
 		}
+		$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record->tr_tracker, $record->cat_id);
 
-		// Expand custom field links
-		if($content && strpos($content, '#') !== 0)
+		$array = array();
+
+		// Signature
+		if($this->bo->notification[$record->tr_tracker]['use_signature'] || $this->bo->notification[0]['use_signature'])
 		{
-			$this->cf_link_to_expand($record->get_record_array(), $content, $info);
+			if(trim(strip_tags($this->bo->notification[$record->tr_tracker]['signature'])) &&
+				$this->bo->notification[$record->tr_tracker]['use_signature'])
+			{
+				$array['signature'] = $this->bo->notification[$record->tr_tracker]['signature'];
+			}
+			else
+			{
+				$array['signature'] = $this->bo->notification[0]['signature'];
+			}
 		}
 
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
+		$array += $record->get_record_array();
+
+		// HTML link to ticket
+		$tracker = new tracker_tracking($this->bo);
+		$array['tr_link'] = html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
+		
 		// Set any missing custom fields, or the marker will stay
-		$array = $record->get_record_array();
 		foreach($this->bo->customfields as $name => $field)
 		{
 			if(!$array['#'.$name]) $array['#'.$name] = '';
@@ -119,7 +136,7 @@ class tracker_merge extends bo_merge
 
 		// Links
 		$pattern = '@\$(links|attachments|links_attachments)\/?(title|href|link)?\/?([a-z]*)\$@';
-                static $link_cache;
+		static $link_cache;
 		if(preg_match_all($pattern, $content, $matches))
 		{
 			foreach($matches[0] as $i => $placeholder)
@@ -152,6 +169,12 @@ class tracker_merge extends bo_merge
 			if(!$value) $value = '';
 			$info['$$'.($prefix ? $prefix.'/':'').$key.'$$'] = $value;
 		}
+		// Special comments - already have $$
+		$comments = $this->get_comments($id);
+		foreach($comments[-1] as $key => $comment)
+		{
+			$info += $comment;
+		}
 		return $info;
 	}
 
@@ -165,26 +188,51 @@ class tracker_merge extends bo_merge
         */
         public function comment($plugin,$id,$n)
         {
+		$comments = $this->get_comments($id);
+
+		return $comments[$n];
+	}
+
+	/**
+	 * Get the comments for this tracker entry
+	 */
+	protected function get_comments($tr_id)
+	{
 		static $comments;
+		if($comments[$tr_id]) return $comments[$tr_id];
 
-		if($comments[$id][$n]) return $comments[$id][$n];
-
-		$this->bo->read($id);
+		$this->bo->read($tr_id);
 		$tracker = $this->bo->data;
 
-		$comments = array(); // Clear it to keep memory down
+		// Clear it to keep memory down - just this ticket
+		$comments = array();
+		$last_creator_comment = array();
+		$last_assigned_comment = array();
 		foreach($tracker['replies'] as $i => $reply) {
 			if($reply['reply_visible'] > 0) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
-			$comments[$id][] = array(
+			$comments[$tr_id][] = array(
 				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
 			);
+			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
+			if(in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
 		}
-		return $comments[$id][$n];
+
+		// Special comments
+		foreach(array('' => $tracker['replies'][0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
+			$comments[$tr_id][-1][$key] = array(
+				'$$comment/-1'.$key.'/date$$' => $comment ? $this->format_datetime($comment['reply_created']) : '',
+				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
+				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
+				'$$comment/-1'.$key.'/user$$' => $comment ? common::grab_owner_name($comment['reply_creator']) : ''
+			);
+		}
+
+		return $comments[$tr_id];
 	}
 
 	/**
@@ -206,7 +254,12 @@ class tracker_merge extends bo_merge
 			'tr_modified' => lang('last modified'),
 		);
 		$fields['bounty'] = lang('bounty');
+		$fields['tr_link'] = lang('Link to ticket');
 		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
+		$fields['signature'] = lang('Notification signature');
+		$fields['comment/-1/...'] = 'Only the last comment';
+		$fields['comment/-1/creator/...'] = 'Only the last comment by the creator';
+		$fields['comment/-1/assigned_to/...'] = 'Only the last comment by one of the assigned users';
 		foreach($fields as $name => $label)
 		{
 			if (in_array($name,array('link_to','canned_response','reply_message','add','vote','no_notifications','num_replies','customfields'))) continue;	// dont show them
@@ -228,7 +281,7 @@ class tracker_merge extends bo_merge
 			'date' => 'date',
 			'user' => 'Username',
 			'message' => 'Message',
-			'restricted' => 'If the message was restricted'
+			'restricted' => 'If the message was restricted',
 		) as $name => $label) {
 			echo '<tr><td /><td>{{comment/'.$name.'}}</td><td>'.lang($label).'</td></tr>';
 		}
@@ -246,6 +299,8 @@ class tracker_merge extends bo_merge
  			'attachments' => lang('List of files linked to the current record'),
 			'links_attachments' => lang('Links and attached files'),
 			'links/[appname]' => lang('Links to specified application.  Example: {{links/infolog}}'),
+			'links/href' => lang('Links wrapped in an HREF tag with download link'),
+			'links/link' => lang('Download url for links'),
 			'date' => lang('Date'),
 			'user/n_fn' => lang('Name of current user, all other contact fields are valid too'),
 			'user/account_lid' => lang('Username'),

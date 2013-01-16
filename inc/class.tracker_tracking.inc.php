@@ -267,6 +267,52 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
+	 * Get the body of the notification message
+	 * If there is a custom notification message configured, that will be used.  Otherwise, the
+	 * default message will be used.
+	 *
+	 * @param boolean $html_email
+	 * @param array $data
+	 * @param array $old
+	 * @param boolean $integrate_link to have links embedded inside the body
+	 * @param int|string $receiver numeric account_id or email address
+	 * @return string
+	 */
+	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
+	{
+		$notification = $this->tracker->notification[$data['tr_tracker']];
+		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
+		{
+			$notification['message'] = $this->tracker->notification[0]['message'];
+		}
+		if(trim(strip_tags($notification['signature'])) == '' || !$notification['use_signature'])
+		{
+			$notification['signature'] = $this->tracker->notification[0]['signature'];
+		}
+		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
+
+		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
+		{
+			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
+				$notification['signature'];
+		}
+
+		$merge = new tracker_merge();
+		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
+		if(strpos($notification['message'], '{{signature}}') === False)
+		{
+			$message.=($html_email?"<br />\n":"\n").
+				$notification['signature'];
+		}
+		if($error)
+		{
+			error_log($error);
+			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
+		}
+		return $html_email ? $message : strip_tags($message);
+	}
+
+	/**
 	 * Get the modified / new message (1. line of mail body) for a given entry, can be reimplemented
 	 *
 	 * @param array $data
@@ -383,6 +429,7 @@ class tracker_tracking extends bo_tracking
 		}
 		return $details;
 	}
+
 	/**
 	 * Compute changes between new and old data
 	 *
@@ -404,5 +451,13 @@ class tracker_tracking extends bo_tracking
 			unset($changed[$k]);
 		}
 		return $changed;
+	}
+
+	/**
+	 * Override to extend permission so tracker_merge can use it
+	 */
+	public function get_link($data,$old,$allow_popup=false,$receiver=null)
+	{
+		return parent::get_link($data,$old,$allow_popup,$receiver);
 	}
 }
