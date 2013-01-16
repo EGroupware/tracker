@@ -976,22 +976,30 @@ class tracker_ui extends tracker_bo
 	 *
 	 * @param array $data=null Ticket data
 	 * @param boolean $update=false Set ticket as seen when true
+	 * @param boolean $been_seen=true Mark the ticket as seen/unseen by current user
 	 * @return boolean true=seen before false=new ticket
 	 */
-	function seen(&$data, $update=false)
+	function seen(&$data, $update=false, $been_seen = true)
 	{
 		$seen = array();
 		if ($data['tr_seen']) $seen = unserialize($data['tr_seen']);
-		if (in_array($this->user, $seen))
-		{
-			return true;
-		}
 		if ($update === false)
 		{
-			return false;
+			return in_array($this->user, $seen);
 		}
-		$seen[] = $this->user;
-		$this->db->update('egw_tracker', array('tr_seen' => serialize($seen)),
+		if($been_seen)
+		{
+			$seen[] = $this->user;
+		}
+		else
+		{
+			$key = array_search($this->user,$seen);
+			if($key !== false)
+			{
+				unset($seen[$key]);
+			}
+		}
+		$this->db->update('egw_tracker', array('tr_seen' => serialize(array_unique($seen))),
 			array('tr_id' => $data['tr_id']),__LINE__,__FILE__,'tracker');
 		return false; // This time still false...
 	}
@@ -1317,6 +1325,14 @@ width:100%;
 				'icon' => 'edit',
 				'disableClass' => 'rowNoEdit',
 				'children' => array(
+					'seen' => array(
+						'caption' => 'Mark as read',
+						'group' => 1,
+					),
+					'unseen' => array(
+						'caption' => 'Mark as unread',
+						'group' => 1,
+					),
 					'tracker' => array(
 						'caption' => 'Tracker Queue',
 						'prefix' => 'tracker_',
@@ -1388,6 +1404,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 			),
+			
 			'admin' => array(
 				'caption' => 'Multiple changes',
 				'group' => $group,
@@ -1629,6 +1646,16 @@ width:100%;
 
 			switch($action)
 			{
+				case 'seen':
+				case 'unseen':
+					$action_msg = lang($action);
+					foreach($checked as $tr_id)
+					{
+						if (!$this->read($tr_id)) continue;
+						self::seen($this->data, true, $action == 'seen');
+						$success++;
+					}
+					break;
 				case 'group':
 					// Popup adds an extra param (add/delete) that group doesn't need
 					list(,$settings) = explode('_',$settings);
