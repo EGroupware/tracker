@@ -1153,7 +1153,7 @@ class tracker_ui extends tracker_bo
 
 		if (!is_array($content['nm']))
 		{
-			$date_filters = array('All');
+			$date_filters = array(lang('All'));
 			foreach($this->date_filters as $name => $date)
 			{
 				$date_filters[$name] = lang($name);

@@ -404,7 +404,7 @@ class tracker_escalations extends so_sql2
 		$join = 'JOIN egw_tracker_escalated ON egw_tracker_escalated.esc_id = egw_tracker_escalations.esc_id';
 		$escalations = $this->search('',false,'','',false,'AND',false,$filter,$join);
 
-		foreach($escalations as $esc)
+		foreach((array)$escalations as $esc)
 		{
 			// Check primary date column
 			$delete = false;
