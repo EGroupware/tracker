@@ -281,6 +281,7 @@ class tracker_tracking extends bo_tracking
 	function get_body($html_email,$data,$old,$integrate_link = true,$receiver=null)
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
+		$merge = new tracker_merge();
 		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
@@ -292,7 +293,14 @@ class tracker_tracking extends bo_tracking
 		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
 
 		// If no signature set, use the global one
-		if(!$notification['signature']) $notification['signature'] = parent::get_signature($data,$old,$receiver);
+		if(!$notification['signature'])
+		{
+			$notification['signature'] = parent::get_signature($data,$old,$receiver);
+		}
+		else
+		{
+			$notification['signature'] = $merge->merge_string($notification['signature'], array($data['tr_id']), $error, 'text/html');
+		}
 
 		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
 		{
@@ -300,7 +308,6 @@ class tracker_tracking extends bo_tracking
 				$notification['signature'];
 		}
 
-		$merge = new tracker_merge();
 		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
 		if(strpos($notification['message'], '{{signature}}') === False)
 		{
