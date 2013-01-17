@@ -213,7 +213,7 @@ class tracker_merge extends bo_merge
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
 			$comments[$tr_id][] = array(
-				'$$comment/date$$' => $this->format_datetime($reply['reply_created']),
+				'$$comment/date$$' => egw_time::to($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
@@ -225,7 +225,7 @@ class tracker_merge extends bo_merge
 		// Special comments
 		foreach(array('' => $tracker['replies'][0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
 			$comments[$tr_id][-1][$key] = array(
-				'$$comment/-1'.$key.'/date$$' => $comment ? $this->format_datetime($comment['reply_created']) : '',
+				'$$comment/-1'.$key.'/date$$' => $comment ? egw_time::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
 				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/-1'.$key.'/user$$' => $comment ? common::grab_owner_name($comment['reply_creator']) : ''
