@@ -12,7 +12,7 @@
 5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
 9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
 accepted	tracker	pl	Zaakceptowany
-actions	tracker	pl	Akcje
+actions	tracker	pl	Polecenia
 activate users queue access control	tracker	pl	Aktywuj kontrolę dostępu kolejki użytkowników
 add additionally	tracker	pl	dodaj dodatkowo
 add assigned	tracker	pl	Dodaj przypisane
@@ -70,9 +70,9 @@ converted count	tracker	pl	ilość skonwertowanych
 copy to	tracker	pl	Skopiuj do
 create new links	tracker	pl	Utwórz nowe odnośniki
 created	tracker	pl	Utworzono
-creation date	tracker	pl	data stworzenia
+creation date	tracker	pl	Data stworzenia
 creator	tracker	pl	Twórca
-custom fields	tracker	pl	Pola własne
+custom fields	tracker	pl	Pola użytkownika
 custom tracker priorities	tracker	pl	Własne priorytety dla systemu śledzenia
 date opened	tracker	pl	Data utworzenia
 define escalations	common	pl	Zdefiniuj eskalacje
@@ -80,7 +80,7 @@ delete mails from server	tracker	pl	Usuń maile z serwera
 delete this bounty	tracker	pl	Usuń wskazaną premię
 delete this canned response	tracker	pl	Usuń wskazaną odpowiedź predefiniowaną
 delete this category	tracker	pl	Usuń wskazaną kategorię
-delete this entry	tracker	pl	Usuń ten wpis
+delete this entry	tracker	pl	skasuj ten wpis
 delete this escalation	tracker	pl	Usuń tą eskalacje
 delete this status	tracker	pl	Usuń wskazany status
 delete this tracker including all it's items and categories	tracker	pl	Usuń kolejkę śledzenia wraz ze wszystkimi zgłoszeniami i kategoriami
@@ -137,7 +137,7 @@ language for the copy	tracker	pl	Język dla kopii
 last modified	tracker	pl	Ostatnio zmodyfikowano
 last reply	tracker	pl	ostatnia odpowiedź
 later	tracker	pl	Później
-links	tracker	pl	Odnośniki
+links	tracker	pl	Linki
 list of coma separated email address	tracker	pl	Lista adresów e-mail, rozdzielona przecinkami
 mail handling	tracker	pl	Obsługa wiadomości email
 matching filter	tracker	pl	filtr dopasowania
@@ -216,7 +216,7 @@ this module displays information from the tracker.	tracker	pl	Ten moduł wyświe
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pl	To zgłoszenie zostało automatycznie zamknięte przez system. Wcześniej było w toku ale osoba zgłaszająca nie odpowiedziała w czasie %1 dni.
 ticket count	tracker	pl	liczba ticketów
 ticket modified by %1 at %2	tracker	pl	Ticket zmodyfikowany przez %1, %2
-times	tracker	pl	Czasy
+times	tracker	pl	razy
 tracker	common	pl	System śledzenia
 tracker added	tracker	pl	Kolejka śledzenia została dodana
 tracker admins	tracker	pl	Administratorzy systemu śledzenia
@@ -241,10 +241,8 @@ votes	tracker	pl	Głosy
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	pl	Gdy e-maile są odbierane od nieznanych adresatów, oznacz to pole by automatycznie dodawać te adresy w pole CC. Ta opcja jest ignorowana jeśli obsługa nieznanych adresatów nie jest aktywna.
 wont fix	tracker	pl	Nie będzie poprawione
 works for me	tracker	pl	Dla mnie działa
-yes, always	tracker	pl	Tak, zawsze
 yes, display groups first	tracker	pl	Tak, pokazuj wpierw grupy
 yes, display users first	tracker	pl	Tak, pokazuj wpierw użytkowników
-yes, new tickets only	tracker	pl	Tak, tylko nowe tikety
 yes, with larger fontsize	tracker	pl	Tak, z większą czcionką
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	pl	Możesz włączyć/wyłączyć ograniczenia dostępu do kolejki w zakładce konfiguracji (dla wszystkich kolejek)
 you can respond by visiting:	tracker	pl	Możesz odpowiedzieć odwiedzając stronę:
