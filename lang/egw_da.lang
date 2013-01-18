@@ -1,0 +1,44 @@
+accepted	tracker	da	Accepteret
+applies the changes	tracker	da	udfør ændringerne
+comments	tracker	da	Kommentarer
+configuration	tracker	da	Konfiguration
+copy to	tracker	da	Kopier til
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	da	Kopier dine ændringer til 'Udklipsholderen', %1reload indtastning%2 og bland dem
+create new links	tracker	da	Lav nyt link
+created	tracker	da	Oprettet
+creates a new field	tracker	da	opretter et nyt felt
+creation date	tracker	da	Lavet (dato:)
+custom fields	tracker	da	Valgfri Felter
+delete this category	tracker	da	Slet denne kategori
+delete this entry	tracker	da	Slet denne indtastning
+deleted	tracker	da	slettet
+deletes this field	tracker	da	sletter dette felt
+determines the order the fields are displayed	tracker	da	bestemmer rækkefølgen felterne bliver vist
+each value is a line like <id>[=<label>]	tracker	da	hver værdi er en linie som <id>[=<label>]
+error: the entry has been updated since you opened it for editing!	tracker	da	Fejl: Dette emne er opdateret siden du åbnede det for redigering
+everybody	tracker	da	alle
+existing links	tracker	da	eksisterende links
+forward	tracker	da	Vidersend
+from	tracker	da	Fra
+history	tracker	da	Historisk
+id	tracker	da	ID
+last modified	tracker	da	Sidst opdateret
+leaves without saveing	tracker	da	forlad uden at gemme
+length<br>rows	tracker	da	Længde<br>række
+links	tracker	da	Links
+max length of the input [, length of the inputfield (optional)]	tracker	da	maks længde af inputtet [længde af input feltet (valg frit)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	da	Antal af rækker for et multi-linie felt eller linier i en multi-select box
+open(status)	tracker	da	åben
+order	tracker	da	Rækkefølge
+overdue	tracker	da	forfalden
+rejected	tracker	da	Forkastet
+responsible	tracker	da	Ansvarlig
+saves the changes made and leaves	tracker	da	gem ændringerne og afslut
+signature	tracker	da	Signatur
+state	tracker	da	Land
+summary	tracker	da	Opsummering
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	da	Navn brugt internt (<= 20 tegn), ændring gør eksisterende data utilgængelige
+the text displayed to the user	tracker	da	teksten som vises til brugeren
+times	tracker	da	Gange
+upcoming	tracker	da	kommende
+updated	tracker	da	Opdateret

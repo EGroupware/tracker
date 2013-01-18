@@ -1,0 +1,46 @@
+accepted	tracker	hr	Prihvaćeno
+applies the changes	tracker	hr	Prihvaćanje promjena
+completed	tracker	hr	Completed
+configuration	tracker	hr	Konfiguracija
+copy to	tracker	hr	Kopiraj u
+create new links	tracker	hr	Create new links
+created	tracker	hr	Napravljeno
+creates a new field	tracker	hr	stvara novo polje
+custom fields	tracker	hr	Proizvoljno Polje
+delete this category	tracker	hr	obriši ovu kategoriju
+delete this entry	tracker	hr	Obriši ovaj zapis
+deleted	tracker	hr	Obrisano
+deletes this field	tracker	hr	obriši ova polja
+determines the order the fields are displayed	tracker	hr	Određuje redosljed prikazivanja polja
+each value is a line like <id>[=<label>]	tracker	hr	each value is a line like <id>[=<label>]
+entry saved	tracker	hr	Entry saved
+existing links	tracker	hr	Existing links
+forward	tracker	hr	Proslijedi
+from	tracker	hr	From
+history	tracker	hr	povijest
+id	tracker	hr	identitet
+last modified	tracker	hr	Zadnja izmjena
+leaves without saveing	tracker	hr	napusti bez spremanja
+length<br>rows	tracker	hr	Duljina<br>Retci
+links	tracker	hr	Links
+max length of the input [, length of the inputfield (optional)]	tracker	hr	max length of the input [, length of the inputfield (optional)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	hr	number of row for a multiline inputfield or line of a multi-select-box
+open(status)	tracker	hr	otvori
+order	tracker	hr	Naredba
+overdue	tracker	hr	prošao rok
+process	tracker	hr	Process
+rejected	tracker	hr	Odbijeno
+responsible	tracker	hr	Odgovoran
+saves the changes made and leaves	tracker	hr	sprema promjene i izlazi
+select one...	tracker	hr	select one...
+signature	tracker	hr	Potpis
+state	tracker	hr	Županija
+summary	tracker	hr	Suma
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	hr	ime upotrebljavano interno (<= 20 znakova), mijenjanjem postoječe podatke činite nedostupnima
+the text displayed to the user	tracker	hr	Tekst prikazan korisniku
+this month	tracker	hr	Ovog mjeseca
+this week	tracker	hr	Ovog tjedna
+this year	tracker	hr	Ove godine
+times	tracker	hr	Times
+upcoming	tracker	hr	nadolazeći
+updated	tracker	hr	Updated

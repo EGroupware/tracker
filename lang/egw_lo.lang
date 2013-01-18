@@ -1,0 +1,35 @@
+accepted	tracker	lo	ໄດ້ຍອມຮັບ
+applies the changes	tracker	lo	ໃຊ້ການປ່ຽນແປງ
+check all	tracker	lo	ກວດສອບທັງໝົດ
+copy to	tracker	lo	ສໍາເນົາໄປທີ່
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	lo	ຄັດລອກການປ່ຽນແປງຂອງທ່ານໄປຄຼິບບອດ,%1ໂຫຼດຄືນການບັນທຶກ/ຂໍ້ມູນ %2 ແລະ ລວມມັນເຂົ້າກັນ
+create new links	tracker	lo	ສ້າງການເຊື່ອມຕໍ່ໃໝ່
+created	tracker	lo	ຖືກສ້າງແລ້ວ
+creates a new field	tracker	lo	ສ້າງfieldໄໝ
+custom fields	tracker	lo	ກໍານົດ fields
+delete this category	tracker	lo	ລຶບໝວດໝູ່ນີ້
+delete this entry	tracker	lo	ລຶບຂໍ້ມູນເຂົ້າມານີ້
+deletes this field	tracker	lo	ລຶບ field ນີ້
+determines the order the fields are displayed	tracker	lo	ສະແດງລໍາດັບຂອງ fields ທີ່ສະແດງ
+each value is a line like <id>[=<label>]	tracker	lo	ແຕ່ລະລາຄ່າເປັນໜຶ່ງແຖວ <id>[=<label>]
+each value is a line like id[=label]	tracker	lo	ແຕ່ລະລາຄ່າເປັນໜຶ່ງແຖວ id[=label]
+error: the entry has been updated since you opened it for editing!	tracker	lo	ຂໍ້ຜິດພາດ: ຂໍ້ມູນ/ລາຍການ ໄດ້ຮັບການປັບປຸງຕັ້ງແຕ່ຕອນທ່ານເປີດສໍາລັບການແກ້ໄຂ!!!
+existing links	tracker	lo	ການເຊື່ອມຕໍ່ທີ່ມີຢູ່ແລ້ວ
+exists	tracker	lo	ມີຢູ່ແລ້ວ
+history	tracker	lo	ປະຫວັດສາດ
+id	tracker	lo	ລະຫັດ
+leaves without saveing	tracker	lo	ອອກໂດຍບໍ່ໄກ້ບັນທຶກ
+length<br>rows	tracker	lo	ຄວາມຍາວ <br> ແຖວ
+links	tracker	lo	ເຊື່ອມຕໍ່
+max length of the input [, length of the inputfield (optional)]	tracker	lo	ຄວາມຍາວສູງສຸດຂອງການປ້ອນຂໍ້ຄວາມ[, ຄວາມຍາວຂອງພື້ນທີ່ຂໍ້ຄວາມ(ຖ້າມີ)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	lo	ຈໍານວນແຖວສໍາລັບຂອບເຂດຂອງການປ້ອນຂໍ້ມູນຫຼາຍໆແຖວ ຫຼື ຕົວເລືອກຫຼາຍໆຕົວ
+order	tracker	lo	Order
+permission denied !!!	tracker	lo	ບໍ່ໄດ້ຮັບອະນຸຍາດ !!!
+rejected	tracker	lo	ຖືກປະຕິເສດ
+saves the changes made and leaves	tracker	lo	ບັນທຶກການປ່ຽນແປງ made ແລະ leaves
+select accounts for which the custom field should be visible	tracker	lo	ເລືອກບັນຊີສໍາລັບຟີລທີ່ກໍານົດເອງ ຄວນຈະສະແດງ
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	lo	ຊື່ທີ່ໃຊ້(<=20ຕົວອັກສອນ), ຖ້າມີການປ່ຽນແປງຂໍ້ມູນທີ່ມີຢູ່ຈະເຮັດໃຫ້ໃຊ້ບໍ່ໄດ້
+the text displayed to the user	tracker	lo	ຂໍ້ຄວາມທີ່ສະແດງໄປຫາຜູ້ໃຊ້
+times	tracker	lo	ຄັ້ງ
+type of customfield	tracker	lo	ຊະນິດຂອງ ຟິລທີ່ກໍານົດເອງ
+updated	tracker	lo	ປັບປຸງແລ້ວ

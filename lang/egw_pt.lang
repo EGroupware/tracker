@@ -1,0 +1,63 @@
+2 years ago	tracker	pt	Há 2 anos atrás
+3 years ago	tracker	pt	Há 3 anos atrás
+accepted	tracker	pt	Aceite
+add timesheet entry	tracker	pt	Adicionar registo da folha de tempo
+applies the changes	tracker	pt	Aplicar as alterações
+check all	tracker	pt	Marcar todas
+comments	tracker	pt	Comentários
+completed	tracker	pt	Concluído
+configuration	tracker	pt	Configuração
+copy to	tracker	pt	Copiar para
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	pt	Copia as suas alterações para a área de transferência, %recarrega o registo% e funde-os
+create new links	tracker	pt	Criar novas ligações
+created	tracker	pt	Criado
+creates a new field	tracker	pt	cria um novo campo
+creation date	tracker	pt	Data de criação
+custom fields	tracker	pt	Personalizar campos
+delete this category	tracker	pt	eliminar esta categoria
+delete this entry	tracker	pt	eliminar este registo
+deleted	tracker	pt	eliminado/a
+deletes this field	tracker	pt	eliminar este campo
+determines the order the fields are displayed	tracker	pt	determina a ordem de apresentação dos campos
+each value is a line like <id>[=<label>]	tracker	pt	cada valor é uma linha como <id>[=<etiqueta>]
+each value is a line like id[=label]	tracker	pt	cada valor é uma linha como <id>[=etiqueta]
+entry saved	tracker	pt	Registo guardado
+error saving the entry!!!	tracker	pt	Erro ao guardar o registo!!!
+error: the entry has been updated since you opened it for editing!	tracker	pt	Erro: o registo foi actualizado desde que começou a editar!
+everybody	tracker	pt	Todos
+existing links	tracker	pt	Ligações existentes
+forward	tracker	pt	Encaminhar
+from	tracker	pt	De
+history	tracker	pt	Histórico
+id	tracker	pt	ID
+last modified	tracker	pt	última modificação
+last month	tracker	pt	Último mês
+last week	tracker	pt	Última semana
+last year	tracker	pt	Último ano
+leaves without saveing	tracker	pt	Continua sem guardar
+length<br>rows	tracker	pt	Altura<br>Linhas
+links	tracker	pt	Ligações
+max length of the input [, length of the inputfield (optional)]	tracker	pt	comprimento máximo [, comprimento do campo (opcional)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	pt	Número de linhas para um campo multi-linha ou linhas de uma caixa de selecção múltipla.
+open(status)	tracker	pt	Abrir
+order	tracker	pt	Ordenar
+overdue	tracker	pt	Em atraso
+permission denied !!!	tracker	pt	Permissão negada !!!
+process	tracker	pt	Processar
+rejected	tracker	pt	Rejeitado
+responsible	tracker	pt	Responsável
+saves the changes made and leaves	tracker	pt	guarda as alterações e deixa
+select one...	tracker	pt	seleccione um(a)...
+signature	tracker	pt	Assinatura
+state	tracker	pt	Bairro
+summary	tracker	pt	Assunto
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	pt	o nome utilizado internamente (<= 20 caracteres), alterá-lo torna os dados existentes indisponíveis
+the text displayed to the user	tracker	pt	o texto apresentado ao utilizador
+this month	tracker	pt	Este mês
+this week	tracker	pt	Esta semana
+this year	tracker	pt	Este ano
+times	tracker	pt	Tempo
+type of customfield	tracker	pt	Tipo de campo personalizado
+upcoming	tracker	pt	A chegar
+updated	tracker	pt	Actualizado
+yesterday	tracker	pt	Ontem

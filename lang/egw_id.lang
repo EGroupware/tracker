@@ -1,15 +1,21 @@
-id	tracker	id	ID
+%1 days in advance	tracker	id	%1 hari dimuka
+--> enter new name	tracker	id	--> masukan nama baru
+2 years ago	tracker	id	2 tahun yang lalu
+3 years ago	tracker	id	3 tahun yang lalu
 accepted	tracker	id	Accepted
 add additionally	tracker	id	add additionally
 add assigned	tracker	id	Add assigned
 add comment	tracker	id	Add comment
+add timesheet entry	tracker	id	Tamba entri lembarwaktu
 after	tracker	id	after
 allow bounties	tracker	id	Allow bounties
 allow voting	tracker	id	Allow voting
 already escalated	tracker	id	already escalated
 amount	tracker	id	Amount
+applies the changes	tracker	id	terapkan perubahan
 assigned to	tracker	id	Assigned to
 assigning groups	tracker	id	Assigning groups
+attention: no contact with address %1 found.	tracker	id	Perhatian: Tidak ditemukan Kontak dengan alamat %1.
 autoassign to	tracker	id	Autoassign to
 bounties	tracker	id	Bounties
 bounty confirmed	tracker	id	Bounty confirmed
@@ -22,6 +28,7 @@ canned responses	tracker	id	Canned responses
 check all	tracker	id	Check all
 close pending	tracker	id	Close pending
 closed	tracker	id	Closed
+comment by %1 at %2:	tracker	id	Komentar oleh %1 pada %2:
 comments	tracker	id	Comments
 completed	tracker	id	Completed
 configuration	tracker	id	Configuration
@@ -29,74 +36,112 @@ configuration updated.	tracker	id	Configuration updated.
 confirmed	tracker	id	Confirmed
 converted count	tracker	id	converted count
 copy to	tracker	id	Copy to
+create new links	tracker	id	Bikin tautan baru
 created	tracker	id	Created
+creates a new field	tracker	id	bikin field baru
 creation date	tracker	id	creation date
 creator	tracker	id	Creator
 custom fields	tracker	id	Custom fields
 date opened	tracker	id	Date opened
 define escalations	common	id	Define escalations
+delete this category	tracker	id	hapus kategori ini
+delete this entry	tracker	id	Hapus entri ini
+delete this status	tracker	id	Hapus status ini
 deleted	tracker	id	Deleted
+deletes this field	tracker	id	hapus field ini
+determines the order the fields are displayed	tracker	id	menentukan urutan field ditampilkan
 duplicate	tracker	id	Duplicate
 e-mail notifications	tracker	id	E-Mail notifications
+each value is a line like <id>[=<label>]	tracker	id	setiap nilai adalah sebuah baris seperti <id>[=<label>]
 edit %1	tracker	id	Edit %1
 edit entry	tracker	id	Edit entry
 entry saved	tracker	id	Entry saved
+error saving the entry!!!	tracker	id	Error saving the entry!!!
 escalation	tracker	id	Escalation
 escalation added.	tracker	id	Escalation added.
 escalation deleted.	tracker	id	Escalation deleted.
 escalation saved.	tracker	id	Escalation saved.
 everybody	tracker	id	Everybody
 existing links	tracker	id	Existing links
+export as csv	tracker	id	Ekspor sebagai CSV
 field	tracker	id	Field
 fixed	tracker	id	Fixed
+forward	tracker	id	Forward
 forward to	tracker	id	Forward to
 from	tracker	id	From
+general fields:	tracker	id	Field Umum:
 history	tracker	id	History
 html editing	tracker	id	Html editing
+id	tracker	id	ID
 ignore	tracker	id	Ignore
+insert in document	tracker	id	Sisipkan dalam dokumen
 introduction message	tracker	id	Introduction message
 invalid	tracker	id	Invalid
 item assignee	tracker	id	Item assignee
 item creator	tracker	id	Item creator
 last modified	tracker	id	Last modified
+last modified by	tracker	id	Diubah terakhir oleh
+last month	tracker	id	Bulan lalu
 last reply	tracker	id	last reply
+last week	tracker	id	Minggu lalu
+last year	tracker	id	Tahun lalu
 later	tracker	id	Later
+leaves without saveing	tracker	id	tinggalkan tanpa menyimpan
+length<br>rows	tracker	id	Length<br>Rows
 links	tracker	id	Links
 mail handling	tracker	id	Mail handling
+manage mapping	tracker	id	Mengelola pemetaan
 matching filter	tracker	id	matching filter
 new %1	tracker	id	New %1
 new items	tracker	id	New items
+new ticket submitted by %1 at %2	tracker	id	Tiket baru dikirimkan oleh %1 pada %2
 no change	tracker	id	No change
 non-anonymous users	tracker	id	Non-anonymous users
 noone	tracker	id	Noone
 notification	tracker	id	Notification
+number of row for a multiline inputfield or line of a multi-select-box	tracker	id	number of row for a multiline inputfield or line of a multi-select-box
+one day after	tracker	id	sehari setelah
+one day in advance	tracker	id	sehari dimuka
 open(status)	tracker	id	Open
+order	tracker	id	Urutan
+overdue	tracker	id	lewat waktu
 overdue after	tracker	id	Overdue after
 pending	tracker	id	Pending
+permission denied !!!	tracker	id	Ijin ditolak !!!
 port number	tracker	id	Port number
 postponed	tracker	id	Postponed
 print entry	tracker	id	Print entry
 priorities	tracker	id	Priorities
+process	tracker	id	Proses
 project selection	tracker	id	Project selection
 projects	tracker	id	Projects
 queue	tracker	id	Queue
 rejected	tracker	id	Rejected
 remind	tracker	id	Remind
 resolution	tracker	id	Resolution
+responsible	tracker	id	penanggungjawab
 restriction	tracker	id	Restriction
+same day	tracker	id	hari yang sama
+saves the changes made and leaves	tracker	id	simpan perubahan dan tinggalkan
 select multiple	tracker	id	Select multiple
+select one...	tracker	id	select satu...
 sender address	tracker	id	Sender address
 sent autoreplies	tracker	id	Sent autoreplies
 server type	tracker	id	Server type
 set %1	tracker	id	Set %1
 set bounty	tracker	id	Set bounty
+signature	tracker	id	Tandatangan
 staff	tracker	id	Staff
 state	tracker	id	State
 stati	tracker	id	Stati
 store as	tracker	id	Store as
 summary	tracker	id	Summary
 technicians	tracker	id	Technicians
+this month	tracker	id	Bulan ini
+this week	tracker	id	Minggu ini
+this year	tracker	id	Tahun ini
 ticket count	tracker	id	ticket count
+ticket modified by %1 at %2	tracker	id	Tiket diubah oleh %1 pada %2
 times	tracker	id	Times
 tracker	common	id	Tracking System
 tracker added	tracker	id	Tracker queue added
@@ -105,8 +150,13 @@ tracker configuration	tracker	id	Tracker configuration
 tracker deleted	tracker	id	Tracker queue deleted
 tracker queue	tracker	id	Tracker Queue
 tracker-%1 deleted.	tracker	id	Tracker-%1 deleted.
+type of customfield	tracker	id	Type of customfield
 unchanged	tracker	id	Unchanged
 unrecognized mails	tracker	id	Unrecognized mails
+upcoming	tracker	id	mendatang
+updated	tracker	id	Dikinikan
 versions	tracker	id	Versions
 votes	tracker	id	Votes
 wont fix	tracker	id	Wont fix
+yesterday	tracker	id	Kemarin
+you can respond by visiting:	tracker	id	Untuk melihatnya, kunjungi:

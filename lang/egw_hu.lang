@@ -1,10 +1,14 @@
+%1 days in advance	tracker	hu	%1 napot előre
 %1 entries updated.	tracker	hu	%1 bejegyzés frissítve.
 --> enter new name	tracker	hu	-> Adjon meg új nevet
 1 - lowest	tracker	hu	1 - legalacsonyabb
+2 years ago	tracker	hu	2 évvel korábban
+3 years ago	tracker	hu	3 évvel korábban
 5 - medium	tracker	hu	5 - közepes
 9 - highest	tracker	hu	9 - legmagasabb
 accepted	tracker	hu	Elfogadva
 add comment	tracker	hu	Megjegyzés hozzáadása
+add timesheet entry	tracker	hu	Regiszter bejegyzés hozzáadása
 after how many days a not replied item should be marked overdue?	tracker	hu	A nem megválaszolt bejegyzést hány nap után jelöljük Lejártnak?
 after how many days pending items should be closed automatic	tracker	hu	A függőben lévő bejegyzést hány nap után zárjuk le automatikusan?
 allow bounties	tracker	hu	Pénzjutalom engedélyezve
@@ -13,9 +17,11 @@ allow to assign groups to tracker items	tracker	hu	Tracker bejegyzések csoporto
 allow voting	tracker	hu	Szavazás engedélyezve
 allow voting on tracker items, show and sort after the votes	tracker	hu	Engedélyezi a Tracker bejegyzésekre szavazást, megjelenítést és rendezést a szavazás szerint
 amount	tracker	hu	Mennyiség
+applies the changes	tracker	hu	változások végrehajtása
 assigned to	tracker	hu	Megbízva
 assigning groups	tracker	hu	Csoportokhoz rendelés
 attachments & links	tracker	hu	Mellékletek és hivatkozások
+attention: no contact with address %1 found.	tracker	hu	Figyelem: %1 címmel Kapcsolat nem található.
 autoassign to	tracker	hu	Auto hozzárendelés
 bounties	tracker	hu	Pénzjutalmak
 bounty confirmed	tracker	hu	Pénzjutalom megerősítve
@@ -33,36 +39,83 @@ completed	tracker	hu	Teljesítve
 configuration	tracker	hu	Konfiguráció
 configuration for all trackers	tracker	hu	Összes Tracker sor konfigurálása
 configuration updated.	tracker	hu	Konfiguráció frissítve.
-configuration, acl, notifications	tracker	hu	Konfiguráció, ACL, Értesítések
 confirm that you pay the specified bounty to implement or fix the issue	tracker	hu	Erősítse meg, hogy hajlandó kifizetni a jutalmat a megvalósításért vagy a hiba kijavításáért
 confirm the receipt of money for this bounty	tracker	hu	Erősítse meg a pénz átvételét ehhez a pénzjutalomhoz
 copy to	tracker	hu	Másold ide:
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	hu	Másold a módosításokat a vágólapra, %1frissítsd az oldalat%2 és fűzd hozzá.
 create new links	tracker	hu	Új hivatkozások létrehozása
 created	tracker	hu	Létrehozva
+creates a new field	tracker	hu	Új mező létrehozása
+creation date	tracker	hu	Létrehozás dátuma
+custom fields	tracker	hu	Egyedi mezők
 date opened	tracker	hu	Megnyitás dátuma
 delete this category	tracker	hu	Kategória törlése
+delete this entry	tracker	hu	Aktuális bejegyzés törlése
 deleted	tracker	hu	Törölt
+deletes this field	tracker	hu	Aktuális mező törlése
+determines the order the fields are displayed	tracker	hu	megjelenített mezők rendezésének meghatározása
+do you want a notification, if items you are responsible for are about to start?	tracker	hu	Kér értesítést, ha egy saját feladatát rövidesen el kell kezdenie?
+do you want a notification, if items you are responsible for are due?	tracker	hu	Kér értesítést, ha egy saját feladatának a határideje rövidesen lejár?
 duplicate	tracker	hu	Duplikál
 e-mail notifications	tracker	hu	Email értesítés
+each value is a line like <id>[=<label>]	tracker	hu	minden érték egy sor, ehhez hasonlóan: <id>[=<címke>]
+each value is a line like id[=label]	tracker	hu	minden érték egy sor, ehhez hasonlóan: id[=címke]
 edit %1	tracker	hu	%1 szerkesztése
 entry saved	tracker	hu	Bejegyzés elmentve
 error saving the entry!!!	tracker	hu	Hiba történt a bejegyzés mentése közben !!!
+error: the entry has been updated since you opened it for editing!	tracker	hu	Hiba: a bejegyzés módosult mióta megnyitottad!
 everybody	tracker	hu	Mindenki
 existing links	tracker	hu	Létezõ hivatkozások
+export as csv	tracker	hu	Export CSV formában
 field	tracker	hu	Mező
+forward	tracker	hu	Továbbít
+forward to	tracker	hu	Továbbítás ide
+from	tracker	hu	Tól:
+general fields:	tracker	hu	Általános mezők:
 history	tracker	hu	Történet
 id	tracker	hu	Azonosító
 invalid	tracker	hu	Érvénytelen
 last modified	tracker	hu	Utolsó módosítás
+last modified by	tracker	hu	utoljára módosította
+last month	tracker	hu	Korábbi hónap
+last week	tracker	hu	Korábbi hét
+last year	tracker	hu	Korábbi év
 later	tracker	hu	Később
+leaves without saveing	tracker	hu	kilépés mentés nélkül
+length<br>rows	tracker	hu	Sorok<br>Hossza
+limit number of description lines (default 5, 0 for no limit)	tracker	hu	A leírás sorainak felső határa (5 alapértelmezésben, 0 korlátlan számú sorhoz)
+links	tracker	hu	Hivatkozások
+max length of the input [, length of the inputfield (optional)]	tracker	hu	a beviteli mező maximális hossza (opcionális)
 new %1	tracker	hu	Új %1
 new items	tracker	hu	Új tételek
 no change	tracker	hu	Nincs változás
+noone	tracker	hu	Senki
+number of row for a multiline inputfield or line of a multi-select-box	tracker	hu	sorok száma a többsoros beviteli mező, vagy egy kiválasztó lista esetén (ilyen 'magas' lesz a doboz/szerkesztő mező)
+one day after	tracker	hu	egy nappal ezután
+one day in advance	tracker	hu	egy nappal előre
 open(status)	tracker	hu	Nyitott
+order	tracker	hu	Rendezés
+overdue	tracker	hu	lejárt
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
 rejected	tracker	hu	Elutasított
 remind	tracker	hu	Emlékeztető
 resolution	tracker	hu	Határozat
+responsible	tracker	hu	Felelős
+same day	tracker	hu	azonos napon
+saves the changes made and leaves	tracker	hu	Változások mentése és kilépés
+signature	tracker	hu	Aláírás
 state	tracker	hu	Állapot
 summary	tracker	hu	Összefoglaló
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	hu	a nevet a rendszer használja (<=20 karakter), megváltozása esetén a létező adatok elérhetetlenekké válnak
+the text displayed to the user	tracker	hu	a szöveg megjelenítve a felhasználónak
+this month	tracker	hu	Folyó hónap
+this week	tracker	hu	Folyó hét
+this year	tracker	hu	Folyó év
+times	tracker	hu	Időigény
+type of customfield	tracker	hu	Egyedi mező típusa
+upcoming	tracker	hu	közelgő
+updated	tracker	hu	frissítve
+yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
+yesterday	tracker	hu	Tegnap
+you can respond by visiting:	tracker	hu	Megtekintéshez látogasson el ide:

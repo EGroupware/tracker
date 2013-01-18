@@ -1,0 +1,60 @@
+2 years ago	tracker	no	2 år siden
+3 years ago	tracker	no	3 år siden
+accepted	tracker	no	Godtatt
+add timesheet entry	tracker	no	Legg til forekomst i timeregistrering
+check all	tracker	no	Kontroller alle
+comments	tracker	no	Kommentarer
+completed	tracker	no	Utført
+configuration	tracker	no	Konfigurasjon
+copy to	tracker	no	Kopier til
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	no	Kopier endringene dine til utklippstavlen, %1oppfrisk forekomsten%2 og sammenstill de
+create new links	tracker	no	Opprette nye lenker
+created	tracker	no	Opprettet
+creates a new field	tracker	no	lager nytt felt
+creation date	tracker	no	Først opprettet
+custom fields	tracker	no	Egendefinerte Felter
+delete this category	tracker	no	slett denne kategorien
+delete this entry	tracker	no	slett dette forekomsten
+deleted	tracker	no	slettet
+deletes this field	tracker	no	sletter dette feltet
+determines the order the fields are displayed	tracker	no	avgjør rekkefølge feltene vises i
+each value is a line like <id>[=<label>]	tracker	no	hver verdi er en linje som <id>[=<label>]
+entry saved	tracker	no	Registrering lagret
+error saving the entry!!!	tracker	no	Feil ved lagring av forekomst!
+error: the entry has been updated since you opened it for editing!	tracker	no	Feil: Denne forekomsten er endret siden du åpnet den for redigering!
+everybody	tracker	no	alle
+existing links	tracker	no	Eksisterende lenker
+forward	tracker	no	Videresend
+from	tracker	no	Fra
+history	tracker	no	Historikk
+id	tracker	no	Id
+last modified	tracker	no	Sist endret
+last month	tracker	no	Siste måned
+last week	tracker	no	Siste uke
+last year	tracker	no	Siste år
+leaves without saveing	tracker	no	avslutt uten å lagre
+length<br>rows	tracker	no	Lengde<br>Kolonner
+links	tracker	no	Lenker
+max length of the input [, length of the inputfield (optional)]	tracker	no	maks. lengde på innslag [,feltlengde (valgfri)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	no	antall rekker i multi-linje felter eller linjer i multi-valg bokser
+open(status)	tracker	no	åpen
+order	tracker	no	Ordre
+overdue	tracker	no	forfalt
+permission denied !!!	tracker	no	Adgang nektet !
+process	tracker	no	Prosess
+rejected	tracker	no	Avslått
+responsible	tracker	no	Ansvarlig
+saves the changes made and leaves	tracker	no	lagrer endringene og lukker
+select one...	tracker	no	Velg en...
+signature	tracker	no	Signatur
+state	tracker	no	Fylke
+summary	tracker	no	Sammendrag
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	no	navnet benyttet intertnt(<= 20 kar.), endring gjør eksisterende data utilgjengelige.
+the text displayed to the user	tracker	no	teksten som vises til bruker
+this month	tracker	no	Denne måneden
+this week	tracker	no	Denne uken
+this year	tracker	no	Dette året
+times	tracker	no	Ant. ganger
+upcoming	tracker	no	nært forestående
+updated	tracker	no	Oppdatert
+yesterday	tracker	no	I går

@@ -1,0 +1,75 @@
+%1 days in advance	tracker	bg	%1 дена предварително
+2 years ago	tracker	bg	преди 2 години
+3 years ago	tracker	bg	преди 3 години
+accepted	tracker	bg	Прието
+add timesheet entry	tracker	bg	Добави запис в Графика
+attention: no contact with address %1 found.	tracker	bg	Внимание! Не е намерен контакт с адрес %1.
+check all	tracker	bg	Маркира всички
+comments	tracker	bg	Коментари
+completed	tracker	bg	Приключен
+configuration	tracker	bg	Конфигуриране
+copy to	tracker	bg	Копиране в
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	bg	Копирайте измеменията в клипборда, %1презаредете записа%2 и ги обединете.
+create new links	tracker	bg	Създаване на нови връзки
+created	tracker	bg	Създаден
+creates a new field	tracker	bg	създава ново поле
+creation date	tracker	bg	Дата на създаване
+custom fields	tracker	bg	Полета по избор
+delete this entry	tracker	bg	изтриване на този запис
+deleted	tracker	bg	изтрит
+deletes this field	tracker	bg	изтрива това поле
+determines the order the fields are displayed	tracker	bg	определя реда за показване на полетата
+do you want a notification, if items you are responsible for are about to start?	tracker	bg	Желаете ли известие преди началото на задачи, за които отговаряте?
+do you want a notification, if items you are responsible for are due?	tracker	bg	Желаете ли известие при достигане на крайния срок за задачи, за които отговаряте?
+each value is a line like <id>[=<label>]	tracker	bg	всяка стойност е ред във формат <id>[=<label>]
+entry saved	tracker	bg	Записът е запазен
+error saving the entry!!!	tracker	bg	Грешка при запис!!!
+error: the entry has been updated since you opened it for editing!	tracker	bg	Грешка: записът е бил актуализиран, след като сте го отворили за редакция!
+existing links	tracker	bg	Съществуващи връзки
+export as csv	tracker	bg	Експорт в CSV
+forward	tracker	bg	Препращане
+forward to	tracker	bg	препрати до
+from	tracker	bg	От
+general fields:	tracker	bg	Общи полета:
+history	tracker	bg	История
+id	tracker	bg	ИД
+insert in document	tracker	bg	Вмъкване в документа
+last modified	tracker	bg	Последно модифициран
+last modified by	tracker	bg	Последно модифициран от
+last month	tracker	bg	Миналия месец
+last week	tracker	bg	Миналата седмица
+last year	tracker	bg	Миналата година
+leaves without saveing	tracker	bg	изход без запис
+length<br>rows	tracker	bg	Дължина<br>Редове
+links	tracker	bg	Връзки
+manage mapping	tracker	bg	Управление на съответствията
+max length of the input [, length of the inputfield (optional)]	tracker	bg	макс. дължина на входа[, дължнина на вх.поле (опция)]
+name of current user, all other contact fields are valid too	tracker	bg	Име на текущия потребител, останалите полета на контакта също са валидни
+new %1	tracker	bg	Нов %1
+number of row for a multiline inputfield or line of a multi-select-box	tracker	bg	Брой редове за многоредово текстово поле или множествен избор
+one day after	tracker	bg	един ден по-късно
+one day in advance	tracker	bg	един ден предварително
+open(status)	tracker	bg	отвори
+order	tracker	bg	Ред
+overdue	tracker	bg	просрочен
+permission denied !!!	tracker	bg	Достъпът отказан !!!
+rejected	tracker	bg	Отказано
+responsible	tracker	bg	отговорен
+same day	tracker	bg	същия ден
+saves the changes made and leaves	tracker	bg	запазва направените промени и излиза
+select one...	tracker	bg	изберете едно...
+signature	tracker	bg	Подпис
+state	tracker	bg	Област / Щат
+summary	tracker	bg	Обобщение
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	bg	името, използвано в системата (до 20 символа) Промяната му прави съществуващите данни недостъпни
+the text displayed to the user	tracker	bg	текстът, показван на потребителя
+this month	tracker	bg	Този месец
+this week	tracker	bg	Тази седмица
+this year	tracker	bg	Тази година
+times	tracker	bg	Времена
+type of customfield	tracker	bg	Тип на полето по избор
+upcoming	tracker	bg	предстоящ
+updated	tracker	bg	Актуализиран
+yes, with larger fontsize	tracker	bg	Да, с по-голям размер на шрифта
+yesterday	tracker	bg	Вчера
+you can respond by visiting:	tracker	bg	За преглед посетете:

@@ -1,0 +1,48 @@
+accepted	tracker	iw	התקבל
+applies the changes	tracker	iw	מבצע את השינוים
+comments	tracker	iw	הערות
+completed	tracker	iw	הושלם
+configuration	tracker	iw	תצורה
+copy to	tracker	iw	העתק אל
+create new links	tracker	iw	יצור קישורים חדשים
+created	tracker	iw	נוצר
+creates a new field	tracker	iw	יוצר שדה חדש
+creation date	tracker	iw	תאריך יצירה
+custom fields	tracker	iw	שדות מותאמים אישית
+delete this category	tracker	iw	מחק קטגוריה זו
+delete this entry	tracker	iw	מחק רשומה זו
+deleted	tracker	iw	נמחקו
+deletes this field	tracker	iw	מוחק את השדה הזה
+determines the order the fields are displayed	tracker	iw	קובע את סדר תצוגת השדות
+entry saved	tracker	iw	הרשומה נשמרה
+everybody	tracker	iw	כולם
+existing links	tracker	iw	קישורים קיימים
+forward	tracker	iw	העבר
+from	tracker	iw	מאת
+history	tracker	iw	היסטוריה
+id	tracker	iw	זיהוי
+last modified	tracker	iw	שונה לאחרונה
+leaves without saveing	tracker	iw	יוצא בלי לשמור
+length<br>rows	tracker	iw	אורך<br>שורות
+links	tracker	iw	קישורים
+max length of the input [, length of the inputfield (optional)]	tracker	iw	([אורך הקלט המירבי [, אורך שדה הקלט (אופציונאלי
+number of row for a multiline inputfield or line of a multi-select-box	tracker	iw	מספר השורה של שדה קלט רב-שורות או של תיבת רבי-בחירה
+open(status)	tracker	iw	פתח
+order	tracker	iw	סדר
+overdue	tracker	iw	עבר זמנו
+process	tracker	iw	תהליך
+rejected	tracker	iw	נדחה
+responsible	tracker	iw	אחראי
+saves the changes made and leaves	tracker	iw	יוצא ושומר את השינוים
+select one...	tracker	iw	...בחר אחד
+signature	tracker	iw	חתימה
+state	tracker	iw	מדינה
+summary	tracker	iw	סיכום
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	iw	השם לשימוש פנימי (>=20 תווים), אם משנים אותו אין יותר גישה לנתונים הקיימים
+the text displayed to the user	tracker	iw	הטקסט להציג למשתמש
+this month	tracker	iw	החודש
+this week	tracker	iw	השבוע
+this year	tracker	iw	השנה
+times	tracker	iw	פעמים
+upcoming	tracker	iw	מתקרב
+updated	tracker	iw	מעודכן
