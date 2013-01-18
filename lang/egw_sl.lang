@@ -1,3 +1,4 @@
+%1 days in advance	tracker	sl	%1 dni vnaprej
 %1 entries updated.	tracker	sl	%1 vnosov posodobljenih.
 --> enter new name	tracker	sl	--> vnesite novo ime
 1 - lowest	tracker	sl	1 - najnižja
@@ -5,6 +6,8 @@
 9 - highest	tracker	sl	9 - najvišja
 accepted	tracker	sl	Sprejeto
 add comment	tracker	sl	Dodaj komentar
+add timesheet entry	tracker	sl	Dodaj vnos timeheet
+after	tracker	sl	Po
 after how many days a not replied item should be marked overdue?	tracker	sl	Po koliko dneh naj bo opravilo brez odgovora označeno kot zapadlo?
 after how many days pending items should be closed automatic	tracker	sl	Po koliko dneh naj se nerešeni elementi samodejno zaprejo
 allow bounties	tracker	sl	Dovoli nagrade
@@ -13,10 +16,14 @@ allow to assign groups to tracker items	tracker	sl	Dovoli dodelitev skupin eleme
 allow voting	tracker	sl	Dovoli glasovanje
 allow voting on tracker items, show and sort after the votes	tracker	sl	Dovoli glasovanje za elemente Trackerja, po glasovanju prikaži glasove in uredi
 amount	tracker	sl	Količina
+applies the changes	tracker	sl	Uveljavi spremembe
 assigned to	tracker	sl	Komu dodeliti
 assigning groups	tracker	sl	Dodeljevanje skupin
 attachments & links	tracker	sl	Priloge in povezave
+attention: no contact with address %1 found.	tracker	sl	Pozor: Stik z naslovom %1 ni bil najden.
 autoassign to	tracker	sl	Samodejno dodeli
+automatically created by importexport	tracker	sl	Samodejno ustvarjeno z Importexport
+before	tracker	sl	Pred
 bounties	tracker	sl	Nagrade
 bounty confirmed	tracker	sl	Nagrada potrjena
 bounty deleted	tracker	sl	Nagrada izbrisana
@@ -33,47 +40,75 @@ completed	tracker	sl	Zaključeno
 configuration	tracker	sl	Konfiguracija
 configuration for all trackers	tracker	sl	Konfiguracija za vse čakalne vrste
 configuration updated.	tracker	sl	Konfiguracija posodobljena.
-configuration, acl, notifications	tracker	sl	Konfiguracija, ACL, Obveščanje
 confirm that you pay the specified bounty to implement or fix the issue	tracker	sl	Potrdite, da boste plačali navedeno nagrado za implementacijo ali reševanje napake
 confirm the receipt of money for this bounty	tracker	sl	Potrdi prejem denarja za to nagrado
 confirmed	tracker	sl	Potrjeno
 copy to	tracker	sl	Kopiraj v
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	sl	Kopira spremembe v odložišče, %1 ponovno naloži vnos %2 in ju spoji.
 create new links	tracker	sl	Ustvari nove povezave
 created	tracker	sl	Ustvarjeno
+creates a new field	tracker	sl	Ustvari novo polje
+creation date	tracker	sl	Datum ustvarjanja
+custom fields	tracker	sl	Lastna polja
 date opened	tracker	sl	Datum odprtja
+default document to insert entries	tracker	sl	Privzeti dokument za vstavljanje
 delete this bounty	tracker	sl	Izbriši to nagrado
 delete this canned response	tracker	sl	Izriši ta samodejni odgovor
 delete this category	tracker	sl	Izbriši to kategorijo
+delete this entry	tracker	sl	Izbriši ta vnos
 delete this status	tracker	sl	Izbriši ta status
 delete this tracker including all it's items and categories	tracker	sl	Izbriš ta tracker vključno z vsemi elementi in lategorijami
 delete this version	tracker	sl	Zbriši to različico
 deleted	tracker	sl	Zbrisano
+deletes this field	tracker	sl	Ibriše to polje
+determines the order the fields are displayed	tracker	sl	Določa vrstni red prikaza polj
+directory with documents to insert entries	tracker	sl	Mapa z dokumenti za vstavljanje
+do you want a notification, if items you are responsible for are about to start?	tracker	sl	Želite prejeti obvestilo, če se bodo elementi, za katere ste odgovorni kmalu začnejo?
+do you want a notification, if items you are responsible for are due?	tracker	sl	Želite prejeti obvestilo, če so elementi, za keter ste odgovorni pretečeni?
 do you want to vote for this item	tracker	sl	Ali želite glasovati za ta element?
 donator name to show	tracker	sl	Ime donatorja za prikaz
 duplicate	tracker	sl	Podvoji
 e-mail address to which a copy of all tracker-notifications should be send	tracker	sl	E-naslov, na katerega se pošljejo kopije vseh obvestil o trackerjih
 e-mail notifications	tracker	sl	E-poštni opomnik
+each value is a line like <id>[=<label>]	tracker	sl	vsaka vrednost je vrstica oblike <id>[=<oznaka>]
+each value is a line like id[=label]	tracker	sl	Vsaka vrednost je vrstica oblike id[=oznaka]
 edit %1	tracker	sl	Uredi %1
 email address to contact you	tracker	sl	Vaš kontaktni elektronski naslov
 entry saved	tracker	sl	Vnos shranjen
 error adding the new tracker!	tracker	sl	Napaka pri dodajanju novega trackerja!
 error saving the entry!!!	tracker	sl	Napaka pri shranjevanju vnosa!
+error: the entry has been updated since you opened it for editing!	tracker	sl	Napaka: vnos je bil spremenjen medtem, ko ste imeli odprtega za urejanje!
 everybody	tracker	sl	Vsi
 existing links	tracker	sl	Obstoječe povezave
+exists	tracker	sl	Obstaja
+export as csv	tracker	sl	Izvozi v CSV
 field	tracker	sl	Polje
 fixed	tracker	sl	Popravljeno
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	sl	Za tipska pisma uporabite značko. Vsebino, ki jo želite imeti v vseh dokumentih, vnesite med značke.
+forward	tracker	sl	Posreduj
+forward to	tracker	sl	Posreduj
 from	tracker	sl	Od
+general fields:	tracker	sl	Splošna polja:
 history	tracker	sl	Zgodovina
 id	tracker	sl	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sl	Če je zadeva za vas pomembna, premislite o nagradi za jneno izvedbo!
 if this item is important for you, please vote for it.	tracker	sl	Če je ta element za vas pomemben, lahko glasujete zanj.
+insert	tracker	sl	Vstavi
+insert in document	tracker	sl	Vstavi v dokument
 invalid	tracker	sl	Napačno
 item assignee	tracker	sl	Kdo je dodelil element
 item creator	tracker	sl	Lastnik elementa
 language for the copy	tracker	sl	Jezik kopije
 last modified	tracker	sl	Zadnjič spremenjeno
+last modified by	tracker	sl	Nazadnje spremenil
 later	tracker	sl	Pozneje
+leaves without saveing	tracker	sl	Zapre brez shranjevanja
+length<br>rows	tracker	sl	Dolžina<br>Vrstic
+links	tracker	sl	Povezave
 list of coma separated email address	tracker	sl	Seznam e-naslovov, ločenih z vejico
+manage mapping	tracker	sl	Upravljaj mapiranje
+max length of the input [, length of the inputfield (optional)]	tracker	sl	Največja dolžina vnosa [, dolžina vnosnega polja (opcijsko)]
+name of current user, all other contact fields are valid too	tracker	sl	Ime trenutnega uporabnika, veljavna so tudi vsa druga polja stika
 new %1	tracker	sl	Nov %1
 new items	tracker	sl	Novi elementi
 new tracker item submitted by %1 at %2	tracker	sl	Nov element trackerja je ustvaril %1 ob %2
@@ -81,37 +116,52 @@ no change	tracker	sl	Brez sprememb
 non-anonymous users	tracker	sl	Ne-anonimni uporabnik
 noone	tracker	sl	Nihče
 notification	tracker	sl	Obvestilo
+number of row for a multiline inputfield or line of a multi-select-box	tracker	sl	Število vrstic za večvrstično vnosno polje ali vrstica v polju z več izbirami
+one day after	tracker	sl	En dan po
+one day in advance	tracker	sl	En dan vnaprej
 open(status)	tracker	sl	Odprto
+order	tracker	sl	Vrstni red
 out of date	tracker	sl	Izven roka
+overdue	tracker	sl	Zapadel
 overdue after	tracker	sl	Zapade po
 pending	tracker	sl	V teku
 pending items never get close automatic.	tracker	sl	Elementi v teku naj se nikoli ne zaprejo samodejno.
 pending items will be closed automatic after %1 days without response.	tracker	sl	Naloge v teku bodo samodejno zaprte po %1 dnevih brez odgovora.
 permission denied !!!	tracker	sl	Dostop zavrnjen!
 postponed	tracker	sl	Prestavljeno
+process	tracker	sl	Proces
 receive notifications about assigned tracker-items	tracker	sl	Prejmi obvestila o dodeljenih nalogah
 receive notifications about created tracker-items	tracker	sl	Prejmi obvestila o ustvarjenih nalogah
 receive notifications in html	tracker	sl	Prejem obvestila v obliki HTML
 rejected	tracker	sl	Zavrnjeno
 remind	tracker	sl	Opomni
 resolution	tracker	sl	Ločljivost
+responsible	tracker	sl	Odgovoren
+same day	tracker	sl	Isti dan
+saves the changes made and leaves	tracker	sl	Shrani narejene spremembe in zapusti program
+select one...	tracker	sl	izberite enega...
 sender address	tracker	sl	Naslov pošiljatelja
 sender address for all notifications, eg. noreply@egroupware.org	tracker	sl	Naslov pošiljatelja za vsa obvestila, npr. brez-odgovora@egroupware.org
 set an own bounty (in %s)	tracker	sl	Nastavite lastno nagrado (v %s)
 set bounty	tracker	sl	Nastavite nagrado
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sl	Naj vam Tracker pošlje elektronsko sporočilo z obvestilom, če kdo posodobi nalogo, ki je dodeljena vam?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sl	Naj vam Tracker pošlje elektronsko sporočilo z obvestilom, če kdo posodobi nalogo, ki ste jo ustvarili vi?
+signature	tracker	sl	Podpis
 staff	tracker	sl	Osebje
 state	tracker	sl	Stanje
 stati	tracker	sl	Statistika
 summary	tracker	sl	Povzetek
+tag to mark positions for address labels	tracker	sl	Oznaka za označitev položajev oznak adresarja
 technicians	tracker	sl	Tehniki
 thank you for setting this bounty.	tracker	sl	Hvala, ker ste ponudili nagrado.
 thank you for voting.	tracker	sl	Hvala za glas.
 the bounty will not be shown, until the money is received.	tracker	sl	Nagrada ne bo prikazana, dokler denar ne bo prejet.
 the canned response will be prefix the text you type.	tracker	sl	Samodejni odgovor bo dodan pred besedilo, ki ga boste natipkali.
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	sl	Ime, uporabljeno interno (<= 20 znakov). Če ga spremenite, obstoječi podatki ne bodo več na voljo.
+the text displayed to the user	tracker	sl	Besedilo, ki se prikaže uporabniku
 this module displays information from the tracker.	tracker	sl	Ta modul prikaže informacije iz Tracker-ja.
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sl	Ta naloga je bil samodejno končana. Predhodno je bilo njeno stanje popravljeno na V teku ampak oseba, ki je nalogo odprla, ni odgovorila v %1 dnevih.
+times	tracker	sl	Časi
 tracker	common	sl	Tracker
 tracker added	tracker	sl	Dodana je bila čakalna vrsta
 tracker admins	tracker	sl	Nadzorniki Trackerja
@@ -123,8 +173,12 @@ tracker item not found !!!	tracker	sl	Element Trackerja ni bil najden!
 tracker-%1 '%2' added.	tracker	sl	Tracker-%1 '%2' dodan.
 tracker-%1 '%2' updated.	tracker	sl	Tracker-%1 '%2' posodobljen.
 tracker-%1 deleted.	tracker	sl	Tracker-%1 '%2' izbrisan.
+type of customfield	tracker	sl	Vrsta polja po meri
+upcoming	tracker	sl	Prihajajoč
+updated	tracker	sl	Podosodobljeno
 url of the tracker	tracker	sl	Naslov URL trackerja
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sl	URL, ki naj bo vključen v obvestilo, npr. do strani z modulom SiteMgr, privzetim trackerjem znotraj eGW
+use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	sl	Uporabi to značko za naslov nalepk. Stik, ki ga želite ponoviti, dajte med dve znački.
 versions	tracker	sl	Različice
 vote for it!	tracker	sl	Glasuj!
 votes	tracker	sl	Glasovi
@@ -132,6 +186,7 @@ wont fix	tracker	sl	Ne bo popravljeno
 works for me	tracker	sl	Meni dela
 yes, display groups first	tracker	sl	Da, najprej prikaži skupine
 yes, display users first	tracker	sl	Da, najprej prikaži uporabnike
+yes, with larger fontsize	tracker	sl	Da, z večjo pisavo
 you can respond by visiting:	tracker	sl	Odgovorite lahko z obiskom strani:
 you need to enter a name	tracker	sl	Vnesti morate ime
 you need to login to vote!	tracker	sl	Za glasovanje se morate pirjaviti

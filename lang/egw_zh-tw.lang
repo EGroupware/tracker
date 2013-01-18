@@ -1,7 +1,10 @@
+%1 days in advance	tracker	zh-tw	%1 天提出
 %1 entries updated.	tracker	zh-tw	%1 筆資料更新了。
 --> choose a project from the drop-down list	tracker	zh-tw	--> 選擇一個專案
 --> enter new name	tracker	zh-tw	--> 輸入新名稱
 1 - lowest	tracker	zh-tw	1 - 最低
+2 years ago	tracker	zh-tw	兩年前
+3 years ago	tracker	zh-tw	三年前
 5 - medium	tracker	zh-tw	5 - 中等
 9 - highest	tracker	zh-tw	9 - 最高
 accepted	tracker	zh-tw	接受
@@ -17,10 +20,12 @@ allow to assign groups to tracker items	tracker	zh-tw	允許指派群組到服�
 allow voting	tracker	zh-tw	允許評價
 allow voting on tracker items, show and sort after the votes	tracker	zh-tw	允許為服務中心項目投票，在投票後顯示與排序
 amount	tracker	zh-tw	金額
+applies the changes	tracker	zh-tw	套用變更
 assign to project	tracker	zh-tw	指派到專案
 assigned to	tracker	zh-tw	負責人
 assigning groups	tracker	zh-tw	指派給群組
 attachments & links	tracker	zh-tw	附加檔案與連結
+attention: no contact with address %1 found.	tracker	zh-tw	注意：找不到住址為 %1 的聯絡人。
 autoassign to	tracker	zh-tw	自動指派給
 bounties	tracker	zh-tw	獎金
 bounty confirmed	tracker	zh-tw	獎金確認了
@@ -41,13 +46,16 @@ completed	tracker	zh-tw	完成
 configuration	tracker	zh-tw	設定
 configuration for all trackers	tracker	zh-tw	所有服務台設定
 configuration updated.	tracker	zh-tw	設定更新了。
-configuration, acl, notifications	tracker	zh-tw	設定、權限、提醒通知
 confirm that you pay the specified bounty to implement or fix the issue	tracker	zh-tw	確認您為這個問題的實做或修正支付了指定的獎金
 confirm the receipt of money for this bounty	tracker	zh-tw	確認這個獎金是否收款
 confirmed	tracker	zh-tw	確認
 copy to	tracker	zh-tw	複製到
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	zh-tw	複製異動資料到剪貼簿， %1重新讀取資料%2並且將他們合併。
 create new links	tracker	zh-tw	建立新連結
 created	tracker	zh-tw	建立時間
+creates a new field	tracker	zh-tw	建立新欄位
+creation date	tracker	zh-tw	提供給
+custom fields	tracker	zh-tw	自訂欄位
 date opened	tracker	zh-tw	開啟日期
 delete this bounty	tracker	zh-tw	刪除這個獎金
 delete this canned response	tracker	zh-tw	刪除這個制式回應
@@ -57,32 +65,54 @@ delete this status	tracker	zh-tw	刪除這個狀態
 delete this tracker including all it's items and categories	tracker	zh-tw	刪除這個服務台，包含其中的所有項目與類別
 delete this version	tracker	zh-tw	刪除這個版本
 deleted	tracker	zh-tw	已刪除
+deletes this field	tracker	zh-tw	刪除這個欄位
+determines the order the fields are displayed	tracker	zh-tw	偵測顯示欄位的順序
+do you want a notification, if items you are responsible for are about to start?	tracker	zh-tw	您負責的項目快要開始時，您是否想要收到提醒？
+do you want a notification, if items you are responsible for are due?	tracker	zh-tw	您負責的項目過期時，您是否想要收到提醒？
 do you want to vote for this item	tracker	zh-tw	您是否要為這個項目投票
 donator name to show	tracker	zh-tw	要顯示的贊助者名稱
 duplicate	tracker	zh-tw	複製
 e-mail address to which a copy of all tracker-notifications should be send	tracker	zh-tw	所有服務台提醒通知的副本要寄送的信箱
 e-mail notifications	tracker	zh-tw	郵寄提醒通知
+each value is a line like <id>[=<label>]	tracker	zh-tw	每個數值是一行像是 <id>[=<label>] 這樣的文字
+each value is a line like id[=label]	tracker	zh-tw	每個數值是一行像是 id[=label] 這樣的文字
 edit %1	tracker	zh-tw	編輯 %1
 email address to contact you	tracker	zh-tw	聯絡信箱
 entry saved	tracker	zh-tw	資料儲存了
 error adding the new tracker!	tracker	zh-tw	新增服務台時發生錯誤！
 error saving the entry!!!	tracker	zh-tw	儲存資料時發生錯誤！
+error: the entry has been updated since you opened it for editing!	tracker	zh-tw	錯誤： 在您開始編輯後這個資料已經被其他人更新了！
 everybody	tracker	zh-tw	所有人
 existing links	tracker	zh-tw	現有連結
+export as csv	tracker	zh-tw	匯出成 CSV
 field	tracker	zh-tw	欄位
 fixed	tracker	zh-tw	固定
+forward	tracker	zh-tw	轉寄
+forward to	tracker	zh-tw	轉寄給
 from	tracker	zh-tw	寄件人
+general fields:	tracker	zh-tw	一般欄位：
 history	tracker	zh-tw	記錄
 id	tracker	zh-tw	編號
 if this item is important for you, please consider to set a bounty for it!	tracker	zh-tw	如果這個項目對您而言相當緊急，不妨考慮為它設定一個獎金！
 if this item is important for you, please vote for it.	tracker	zh-tw	如果這個項目對您而言很重要，請加入投票。
+insert in document	tracker	zh-tw	插入文件
 invalid	tracker	zh-tw	錯誤
 item assignee	tracker	zh-tw	項目負責人
 item creator	tracker	zh-tw	項目建立者
 language for the copy	tracker	zh-tw	副本的語言
 last modified	tracker	zh-tw	最後更新日期
+last modified by	tracker	zh-tw	更新者
+last month	tracker	zh-tw	上個月
+last week	tracker	zh-tw	上星期
+last year	tracker	zh-tw	去年
 later	tracker	zh-tw	晚一點
+leaves without saveing	tracker	zh-tw	不儲存離開
+length<br>rows	tracker	zh-tw	長度<br>列數
+links	tracker	zh-tw	連結
 list of coma separated email address	tracker	zh-tw	逗點分隔信箱列表
+manage mapping	tracker	zh-tw	管理對應
+max length of the input [, length of the inputfield (optional)]	tracker	zh-tw	輸入資料長度上限[, 輸入欄位長度（選填）]
+name of current user, all other contact fields are valid too	tracker	zh-tw	目前使用者的名稱，所有其他聯絡人欄位也是正確的
 new %1	tracker	zh-tw	新 %1
 new items	tracker	zh-tw	新項目
 new tracker item submitted by %1 at %2	tracker	zh-tw	%1 在 %2 建立新的服務台項目
@@ -90,14 +120,20 @@ no change	tracker	zh-tw	沒有異動
 non-anonymous users	tracker	zh-tw	非匿名使用者
 noone	tracker	zh-tw	無
 notification	tracker	zh-tw	提醒通知
+number of row for a multiline inputfield or line of a multi-select-box	tracker	zh-tw	多行輸入的行數或是多重選擇區塊的行數
+one day after	tracker	zh-tw	一天後
+one day in advance	tracker	zh-tw	一天前
 open(status)	tracker	zh-tw	開啟
+order	tracker	zh-tw	順序
 out of date	tracker	zh-tw	超過日期
+overdue	tracker	zh-tw	過期的
 overdue after	tracker	zh-tw	到期天數
 pending	tracker	zh-tw	等待中
 pending items never get close automatic.	tracker	zh-tw	等待中的項目永遠不會自動關閉。
 pending items will be closed automatic after %1 days without response.	tracker	zh-tw	等待中的項目在 %1 天後如果沒有回應就會自動關閉。
 permission denied !!!	tracker	zh-tw	沒有權限！
 postponed	tracker	zh-tw	延期
+process	tracker	zh-tw	處理程序
 project selection	tracker	zh-tw	選擇專案
 projects	tracker	zh-tw	專案
 receive notifications about assigned tracker-items	tracker	zh-tw	在被指派服務台項目時發出通知
@@ -106,6 +142,10 @@ receive notifications in html	tracker	zh-tw	接收 html 格式通知
 rejected	tracker	zh-tw	拒絕
 remind	tracker	zh-tw	提醒
 resolution	tracker	zh-tw	決議
+responsible	tracker	zh-tw	責任
+same day	tracker	zh-tw	同一天
+saves the changes made and leaves	tracker	zh-tw	儲存異動後離開
+select one...	tracker	zh-tw	選擇一個...
 select tracker queue	tracker	zh-tw	選擇服務需求佇列
 sender address	tracker	zh-tw	寄件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh-tw	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
@@ -113,6 +153,7 @@ set an own bounty (in %s)	tracker	zh-tw	設定一個自己的獎金（在 %s）
 set bounty	tracker	zh-tw	設定獎金
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh-tw	如果指派給您的服務台項目更新了，是否要寄送通知給您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh-tw	如果您建立的服務台項目更新了，是否要寄送通知給您？
+signature	tracker	zh-tw	簽名檔
 staff	tracker	zh-tw	工作團隊
 state	tracker	zh-tw	狀態
 stati	tracker	zh-tw	狀態
@@ -122,8 +163,14 @@ thank you for setting this bounty.	tracker	zh-tw	感謝您設定這個獎金。
 thank you for voting.	tracker	zh-tw	感謝您的投票。
 the bounty will not be shown, until the money is received.	tracker	zh-tw	這個獎金會在款項收取後顯示。
 the canned response will be prefix the text you type.	tracker	zh-tw	制式回應會在您輸入的文字前面加上。
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	zh-tw	內部名稱（小於 20 個字元），修改這個項目將可能造成現有資料無法讀取
+the text displayed to the user	tracker	zh-tw	顯示的文字
 this module displays information from the tracker.	tracker	zh-tw	這個模組顯示來自服務抬的資訊。
+this month	tracker	zh-tw	這個月
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	zh-tw	這個服務台項目被系統自動關閉了，它之前狀態設定為等待中，但是原本的建立者在 %1 天內沒有回應。
+this week	tracker	zh-tw	這星期
+this year	tracker	zh-tw	今年
+times	tracker	zh-tw	次數
 tracker	common	zh-tw	服務台
 tracker added	tracker	zh-tw	服務台新增了
 tracker admins	tracker	zh-tw	服務台管理員
@@ -136,6 +183,9 @@ tracker queue	tracker	zh-tw	等候服務項目
 tracker-%1 '%2' added.	tracker	zh-tw	服務台 -%1 '%2' 新增了。
 tracker-%1 '%2' updated.	tracker	zh-tw	服務台 -%1 '%2' 更新了。
 tracker-%1 deleted.	tracker	zh-tw	服務台 -%1 刪除了。
+type of customfield	tracker	zh-tw	自訂欄位類型
+upcoming	tracker	zh-tw	即將到來
+updated	tracker	zh-tw	更新日期
 url of the tracker	tracker	zh-tw	服務台網址
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	zh-tw	要加入到提醒通知的網址，例如 SiteMgr 模組的網址，預設會包含在 eGW 中
 versions	tracker	zh-tw	版本
@@ -145,6 +195,8 @@ wont fix	tracker	zh-tw	不會修正
 works for me	tracker	zh-tw	適用於我
 yes, display groups first	tracker	zh-tw	是的，先顯示群組
 yes, display users first	tracker	zh-tw	是的，先顯示使用者
+yes, with larger fontsize	tracker	zh-tw	是，使用較大的字體
+yesterday	tracker	zh-tw	昨天
 you can respond by visiting:	tracker	zh-tw	您可以透過網址回應：
 you need to enter a name	tracker	zh-tw	您必須輸入名稱
 you need to login to vote!	tracker	zh-tw	您必須登入才能投票！

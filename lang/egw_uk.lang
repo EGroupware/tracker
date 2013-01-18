@@ -1,0 +1,35 @@
+accepted	tracker	uk	Прийнято
+applies the changes	tracker	uk	Застосувати зміни
+configuration	tracker	uk	Конфігурація
+create new links	tracker	uk	Створити нові посилання
+creates a new field	tracker	uk	створює нові поля
+custom fields	tracker	uk	Власні поля
+delete this category	tracker	uk	Видалити цю категорію
+delete this entry	tracker	uk	видалити цей запис
+deleted	tracker	uk	Видалено
+deletes this field	tracker	uk	видаляє це поле
+determines the order the fields are displayed	tracker	uk	визначає послідовність показу полів
+each value is a line like <id>[=<label>]	tracker	uk	Кожне значення є рядком у вигляді <id>[=<label>]
+existing links	tracker	uk	Існуючі посилання
+from	tracker	uk	Від
+id	tracker	uk	Id
+last modified	tracker	uk	Востаннє змінено
+leaves without saveing	tracker	uk	вийти без збереження
+length<br>rows	tracker	uk	Довжина<br>Рядки
+links	tracker	uk	Посилання
+max length of the input [, length of the inputfield (optional)]	tracker	uk	максимальна довжина вводу[, видима довжина поля вводу (необов'язково)]
+number of row for a multiline inputfield or line of a multi-select-box	tracker	uk	кількість рядків для багаторядкового поля вводу або рядків віконця вибору множини
+open(status)	tracker	uk	відкрито
+order	tracker	uk	Послідовність
+overdue	tracker	uk	прострочено
+rejected	tracker	uk	Відхилено
+responsible	tracker	uk	Відповідальний
+saves the changes made and leaves	tracker	uk	зберігає зроблені зміни та виходить
+state	tracker	uk	Область
+the text displayed to the user	tracker	uk	текст, що показуються користувачу
+this month	tracker	uk	Поточний місяць
+this week	tracker	uk	Поточний тиждень
+this year	tracker	uk	Поточний рік
+times	tracker	uk	Раз
+upcoming	tracker	uk	майбутні
+updated	tracker	uk	Змінено

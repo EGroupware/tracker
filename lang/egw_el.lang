@@ -1,0 +1,61 @@
+%1 days in advance	tracker	el	%1 ημέρες πριν
+accepted	tracker	el	Αποδέχτηκε
+applies the changes	tracker	el	εφαρμόζει τις αλλαγές
+attention: no contact with address %1 found.	tracker	el	Προσοχή: Καμία Επαφή με τη διεύθυνση %1 δεν βρέθηκε.
+check all	tracker	el	Έλεγχος όλων
+comments	tracker	el	Σχόλια
+completed	tracker	el	Ολοκληρώθηκε
+configuration	tracker	el	Διαμόρφωση
+copy to	tracker	el	Αντιγραφή στο
+create new links	tracker	el	Δημιουργία νέων συνδέσμων
+created	tracker	el	Δημιουργήθηκε
+creates a new field	tracker	el	δημιουργεί νέο πεδίο
+creation date	tracker	el	Ημερομηνία δημιουργίας
+custom fields	tracker	el	Προσαρμοσμένα πεδία
+delete this category	tracker	el	διέγραψε αυτή την κατηγορία
+delete this entry	tracker	el	δαγραφή αυτής της καταχώρησης
+deleted	tracker	el	διεγράφη
+deletes this field	tracker	el	διαγράφει αυτό το πεδίο
+determines the order the fields are displayed	tracker	el	καθορίζει τη σειρά εμφάνισης των πεδίων
+do you want a notification, if items you are responsible for are about to start?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος πρόκειται να ξεκινήσουν;
+do you want a notification, if items you are responsible for are due?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος έχουν καθυστερήσει;
+each value is a line like <id>[=<label>]	tracker	el	κάθε τιμή είναι μία γραμμή σαν <id>[=<label>]
+each value is a line like id[=label]	tracker	el	κάθε τιμή είναι μία γραμμή σαν id[=label]
+error: the entry has been updated since you opened it for editing!	tracker	el	Σφάλμα:η καταχώρηση έχει ενημερωθεί από όταν την ανοίξατε για προσαρμογή!
+existing links	tracker	el	Υπάρχοντες σύνδεσμοι
+export as csv	tracker	el	Εξαγωγή ως CSV
+forward	tracker	el	Προώθηση
+forward to	tracker	el	προώθηση σε
+from	tracker	el	Από
+general fields:	tracker	el	Γενικά πεδία:
+history	tracker	el	Ιστορικό
+id	tracker	el	Id
+last modified	tracker	el	Τελευταία τροποποίηση
+last modified by	tracker	el	Τελευταία τροποποίηση από
+leaves without saveing	tracker	el	αποχώρηση χωρίς αποθήκευση
+length<br>rows	tracker	el	Μήκος<br>Γραμμές
+links	tracker	el	Σύνδεσμοι
+max length of the input [, length of the inputfield (optional)]	tracker	el	μέγιστο μήκος για την εισαγωγή, [μήκος του πεδίου εισαγωγής (κατ'επιλογήν)]
+new %1	tracker	el	Νέο %1
+number of row for a multiline inputfield or line of a multi-select-box	tracker	el	αριθμός σειρών για ένα πολυγραμμικό πεδίο εισαγωγής ή γραμμών για ένα πολυ-επιλογών-κουτί
+one day after	tracker	el	μία μέρα μετά
+one day in advance	tracker	el	Μία μέρα νωρίτερα
+open(status)	tracker	el	ανοικτά
+order	tracker	el	Ταξινόμηση
+overdue	tracker	el	καθυστερημένα
+permission denied !!!	tracker	el	Άδεια απορρίπτεται !!!
+rejected	tracker	el	Απορρίφθηκε
+responsible	tracker	el	υπεύθυνος
+same day	tracker	el	ίδια ημέρα
+saves the changes made and leaves	tracker	el	αποθηκέυει όλες τις αλλαγές που έγιναν και αποχωρεί
+signature	tracker	el	Υπογραφή
+state	tracker	el	Νομός
+summary	tracker	el	Περίληψη
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	el	το όνομα χρησιμοποιείται εσωτερικά (<=20 χαρακτ), ενδεχόμενη αλλαγή του προκαλεί μη διαθεσιμότητα των δεδομένων
+the text displayed to the user	tracker	el	το κείμενο που προβάλεται στον χρήστη
+times	tracker	el	Φορες
+type of customfield	tracker	el	Τύπος συνήθους πεδίου
+upcoming	tracker	el	επερχόμενο
+updated	tracker	el	Ενημερώθηκε
+yes, with larger fontsize	tracker	el	Ναι,  με μεγαλύτερο μέγεθος φόντου
+you can respond by visiting:	tracker	el	Για να το δείτε επισκεφθείτε:

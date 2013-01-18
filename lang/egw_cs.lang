@@ -1,3 +1,4 @@
+%1 days in advance	tracker	cs	%1 dní dopředu
 %1 entries updated.	tracker	cs	%1 položek zaktualizováno.
 %1 tickets have been converted	tracker	cs	%1 ohlášení bylo zkonvertováno
 &#9830; not closed	tracker	cs	Neuzavřené
@@ -9,6 +10,8 @@
 --> choose a project from the drop-down list	tracker	cs	--> vyberte projekt z rozevíracího seznamu
 --> enter new name	tracker	cs	--> zadejte nové jméno
 1 - lowest	tracker	cs	1 - nejnižší
+2 years ago	tracker	cs	Před 2 roky
+3 years ago	tracker	cs	Před 3 roky
 5 - medium	tracker	cs	5 - střední
 9 - highest	tracker	cs	9 - nejvyšší
 accepted	tracker	cs	Přijato
@@ -31,12 +34,15 @@ allow voting	tracker	cs	Povolit hlasování
 allow voting on tracker items, show and sort after the votes	tracker	cs	Povolit hlasování o položkách ve sledovacím systému, zobrazit je a setřídit podle hlasů
 already escalated	tracker	cs	již eskalované
 amount	tracker	cs	Množství
+applies the changes	tracker	cs	použije změny
 assign to project	tracker	cs	Přidělit projektu
 assigned to	tracker	cs	Přiděleno (komu)
 assigning groups	tracker	cs	Přidělování skupin
 attachments & links	tracker	cs	Přílohy a odkazy
+attention: no contact with address %1 found.	tracker	cs	Upozornění: Žádný kontakt s adresou %1 nebyl nalezen.
 autoassign to	tracker	cs	Automaticky přidělit (komu)
 automatic email handling	tracker	cs	Automatické zpracování e-mailů
+automatically created by importexport	tracker	cs	Automaticky vytvořeno aplikací ImportExport
 bounties	tracker	cs	Odměny
 bounty confirmed	tracker	cs	Odměna potvrzena
 bounty confirmed.	tracker	cs	Odměna potvrzena.
@@ -59,7 +65,6 @@ completed	tracker	cs	Hotovo
 configuration	tracker	cs	Konfigurace
 configuration for all trackers	tracker	cs	Konfigurace pro všechny fronty Sledovacího systému
 configuration updated.	tracker	cs	Konfigurace zaktualizována.
-configuration, acl, notifications	tracker	cs	Konfigurace, ACL, Upozornění
 confirm that you pay the specified bounty to implement or fix the issue	tracker	cs	Potvrďte zaplacení uvedené odměny za implementaci nebo opravu této položky
 confirm the receipt of money for this bounty	tracker	cs	Potvrďte přijetí peněz z této odměny
 confirmed	tracker	cs	Potvrzeno
@@ -67,8 +72,10 @@ convert all closed tickets	tracker	cs	konvertovat všechna uzavřená ohlášen�
 convert all open tickets	tracker	cs	konvertovat všechna otevřená ohlášení
 converted count	tracker	cs	počet zkonvertovaných
 copy to	tracker	cs	Kopírovat do
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	cs	Zkopírujte Vaše změny do schránky (clipboardu), %1znovu načtěte záznam%2 a změny slučte.
 create new links	tracker	cs	Vytvořit nové odkazy
 created	tracker	cs	Vytvořeno
+creates a new field	tracker	cs	vytvoří novou položku
 creation date	tracker	cs	datum vytvoření
 creator	tracker	cs	Tvůrce
 custom fields	tracker	cs	Uživatelsky definované položky
@@ -86,11 +93,17 @@ delete this tracker including all it's items and categories	tracker	cs	Smazat te
 delete this version	tracker	cs	Smazat tuto verzi
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	cs	Smazat ze serveru nerozpoznané e-maily i v případě, že není aktivní výše uvedená volba 'Smazat e-maily'.
 deleted	tracker	cs	Smazáno
+deletes this field	tracker	cs	smaže tuto položku
+determines the order the fields are displayed	tracker	cs	určuje pořadí zobrazování položek
+do you want a notification, if items you are responsible for are about to start?	tracker	cs	Chcete dostávat upozornění na počáteční termín položek, za které jste odpovědný/á?
+do you want a notification, if items you are responsible for are due?	tracker	cs	Chcete dostávat upozornění na konečný termín položek, za které jste odpovědný/á?
 do you want to vote for this item	tracker	cs	Chcete hlasovat pro tuto položku?
 donator name to show	tracker	cs	Jaké jméno dárce se má zobrazit
 duplicate	tracker	cs	Duplikát
 e-mail address to which a copy of all tracker-notifications should be send	tracker	cs	E-mailová adresa, na kterou mají být zasílány kopie všech upozornění sledovacího systému
 e-mail notifications	tracker	cs	E-mailová upozornění
+each value is a line like <id>[=<label>]	tracker	cs	každá hodnota je řádek ve tvaru <id>[=<label>]
+each value is a line like id[=label]	tracker	cs	každá hodnota je řádek ve tvaru id[=label]
 edit %1	tracker	cs	Editovat %1
 edit entry	tracker	cs	Editovat záznam
 email address to contact you	tracker	cs	Vaše kontaktní e-mailová adresa
@@ -103,6 +116,7 @@ entry saved	tracker	cs	Záznam uložen
 error adding the new tracker!	tracker	cs	Chyba při přidávání nového sledovacího systému!
 error deleting escalation!	tracker	cs	Chyba při mazání eskalace!
 error saving the entry!!!	tracker	cs	Chyba při ukládání záznamu!!!
+error: the entry has been updated since you opened it for editing!	tracker	cs	Chyba: záznam byl zaktualizován v době, kdy jste ho měl(a) otevřený k editaci!
 escalation	tracker	cs	Eskalace
 escalation added.	tracker	cs	Eskalace byla přidána.
 escalation deleted.	tracker	cs	Eskalace byla smazána.
@@ -110,11 +124,15 @@ escalation not found!	tracker	cs	Eskalace nebyla nalezena!
 escalation saved.	tracker	cs	Eskalace byla uložena.
 everybody	tracker	cs	Všichni
 existing links	tracker	cs	Stávající odkazy
+export as csv	tracker	cs	Exportovat jako CSV
 field	tracker	cs	Položka
 fixed	tracker	cs	Opraveno
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	cs	Pro hromadný dopis použijte tento štítek. Obsah, který chcete opakovat vložte mezi dva štítky.
+forward	tracker	cs	Přeposlat
 forward to	tracker	cs	Přeposlat na:
 forward unrecognized mails to the email address that has to be specified here.	tracker	cs	Přeposlat nerozpoznané e-maily na adresu, která zde musí být uvedena.
 from	tracker	cs	Od
+general fields:	tracker	cs	Obecné položky:
 history	tracker	cs	Historie
 html editing	tracker	cs	HTML editace
 id	tracker	cs	ID
@@ -127,6 +145,7 @@ incoming mail folder	tracker	cs	Složka příchozí pošty
 incoming mail rules	tracker	cs	Pravidla příchozí pošty
 incoming mail server	tracker	cs	Server příchozí pošty
 info only	tracker	cs	Jen informace
+insert in document	tracker	cs	Vložit do dokumentu
 interval in minutes for checking the incoming mails	tracker	cs	Interval kontroly příchozích e-mailů v minutách
 introduction message	tracker	cs	Úvodní zpráva
 invalid	tracker	cs	Neplatné
@@ -134,12 +153,22 @@ item assignee	tracker	cs	Osoba zodpovědná za položku
 item creator	tracker	cs	Tvůrce položky
 language for the copy	tracker	cs	Jazyk kopie
 last modified	tracker	cs	Naposledy změněno
+last modified by	tracker	cs	naposledy změnil(a)
+last month	tracker	cs	Minulý měsíc
 last reply	tracker	cs	poslední odpověď
+last week	tracker	cs	Minulý týden
+last year	tracker	cs	Minulý rok
 later	tracker	cs	Později
+leaves without saveing	tracker	cs	ukončí bez ukládání
+length<br>rows	tracker	cs	Délka<br>Řádky
+limit number of description lines (default 5, 0 for no limit)	tracker	cs	Omezit počet řádek popisu (výchozí 5, pro zrušení limitu 0)
 links	tracker	cs	Odkazy
 list of coma separated email address	tracker	cs	Seznam e-mailových adres oddělených čárkami
 mail handling	tracker	cs	Zpracování pošty
+manage mapping	tracker	cs	Spravovat mapování
 matching filter	tracker	cs	filtr shody
+max length of the input [, length of the inputfield (optional)]	tracker	cs	maximální délka vstupu (volitelné)
+name of current user, all other contact fields are valid too	tracker	cs	Jméno aktuálního uživatele, všechny ostatní položky kontaktu jsou také platné
 new %1	tracker	cs	Nové %1
 new items	tracker	cs	Nové položky
 new ticket submitted by %1 at %2	tracker	cs	Nové ohlášení odeslal %1 v %2
@@ -149,8 +178,13 @@ no trackers found, aborting	tracker	cs	Nebyly nalezeny sledovací systémy, kon�
 non-anonymous users	tracker	cs	Ne-anonymní uživatel
 noone	tracker	cs	Nikdo
 notification	tracker	cs	Upozornění
+number of row for a multiline inputfield or line of a multi-select-box	tracker	cs	počet řádků ve víceřádkovém vstupním poli nebo ve výběrovém okně
+one day after	tracker	cs	jeden den po
+one day in advance	tracker	cs	jeden den dopředu
 open(status)	tracker	cs	Otevřené
+order	tracker	cs	Pořadí
 out of date	tracker	cs	Po termínu
+overdue	tracker	cs	po termínu
 overdue after	tracker	cs	Po termínu k
 ownership of the ticket	tracker	cs	Vlastnictví ohlášení
 pending	tracker	cs	Vyřizuje se
@@ -163,6 +197,7 @@ postponed	tracker	cs	Odložené
 print entry	tracker	cs	Tisknout záznam
 priorities	tracker	cs	Priority
 priorities with empty label are not available to the user	tracker	cs	Priority s prázdným textovým popiskem nebudou dostupné uživateli
+process	tracker	cs	Proces
 project selection	tracker	cs	Výběr projektu
 projects	tracker	cs	Projekty
 queue	tracker	cs	Fronta
@@ -175,13 +210,18 @@ rejected	tracker	cs	Odmítnuté
 remind	tracker	cs	Připomenout
 reply also to unknown addresses	tracker	cs	Odpovídat také na neznámé adresy
 resolution	tracker	cs	Řešení
+responsible	tracker	cs	odpovědný
 restict tracker items to the creator and the staff only	tracker	cs	Omezit položky sledovacího systému jen na tvůrce a personál
 restict tracker items to the creators primary group and the staff only	tracker	cs	Omezit položky sledovacího systému jen na primární skupinu tvůrce a personál
 restrict tracker items to staff and:	tracker	cs	Omezit položky sledovacího systému na personál a:
 restriction	tracker	cs	Omezení
+same day	tracker	cs	stejný den
+saves the changes made and leaves	tracker	cs	uloží provedené změny a ukončí
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	cs	Vyberte výchozí sledovací systém pro nová ohlášení nebo zadejte 'Odmítnout' pokud nechcete povolit vytváření ohlášení prostřednictvím e-mailu.
+select accounts for which the custom field should be visible	tracker	cs	Vybrat účty, pro které má být uživatelsky definované pole viditelné
 select how autoreplies should be sent when mails are received	tracker	cs	Vyberte jak mají být odesílány automatické odpovědi při příjetí zpráv
 select multiple	tracker	cs	Vybrat více
+select one...	tracker	cs	vybrat jeden...
 select tracker queue	tracker	cs	vybrat frontu sledovacího systému
 select which categories should be used in tracker for the tts categories	tracker	cs	Vyberte, které kategorie mají být ve sledovacím systému použity pro kategorie z TTS
 select which username should be used when unrecognized mails are handled.	tracker	cs	Vyberte které uživatelské jméno by mělo být použito pro zpracování nerozpoznaných e-mailů.
@@ -196,19 +236,26 @@ set bounty	tracker	cs	Vypsat odměnu
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vám přidělených položek?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	cs	Má Vám sledovací systém zaslat e-mail s upozorněním, pokud dojde k aktualizaci Vámi vytvořených položek?
 show the tracker send you notification mails, in tracker items that you updates?	tracker	cs	Měl by Vám sledovací systém zasílat upozornění na položky, které jste aktualizoval(a)?
+signature	tracker	cs	Podpis
 staff	tracker	cs	Personál
 state	tracker	cs	Stav
 stati	tracker	cs	Stavy
 store as	tracker	cs	Uložit jako
 summary	tracker	cs	Shrnutí
+tag to mark positions for address labels	tracker	cs	Značka pro vyznačení pozic v adresních štítcích
 technicians	tracker	cs	Technici
 thank you for setting this bounty.	tracker	cs	Děkujeme Vám za vypsání odměny.
 thank you for voting.	tracker	cs	Děkujeme Vám za hlasování.
 the bounty will not be shown, until the money is received.	tracker	cs	Odměna NEBUDE zobrazena, dokud nedojde k přijetí peněz.
 the canned response will be prefix the text you type.	tracker	cs	Předpřipravená odpověď bude vložena na začátek textu, který napíšete.
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	cs	název používaný interně (<= 20 znaků), je změna způsobí nedostupnost stávajících dat
+the text displayed to the user	tracker	cs	text zobrazený uživateli
 there already an escalation for that filter!	tracker	cs	Pro tento filtr již existuje eskalace!
 this module displays information from the tracker.	tracker	cs	Tento modul zobrazuje informace ze Sledovacího systému.
+this month	tracker	cs	Tento měsíc
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	cs	Tato položka sledovacího systému byla automaticky uzavřena. Předtím byla ve stavu vyřizuje se, ale původní odesílatel nezareagoval ve stanovené lhůtě %1 dnů.
+this week	tracker	cs	Tento týden
+this year	tracker	cs	Tento rok
 ticket count	tracker	cs	počet ohlášení
 ticket modified by %1 at %2	tracker	cs	Ohlášní modifikoval(a) %1 v %2
 times	tracker	cs	Časy
@@ -225,11 +272,15 @@ tracker queue	tracker	cs	Fronta sledovacího systému
 tracker-%1 '%2' added.	tracker	cs	Sledovací systém-%1 '%2' přidán.
 tracker-%1 '%2' updated.	tracker	cs	Sledovací systém-%1 '%2' aktualizován.
 tracker-%1 deleted.	tracker	cs	Sledovací systém-%1 smazán.
+type of customfield	tracker	cs	Typ uživatelsky definované položky
 unchanged	tracker	cs	Nezměněno
 unrecognized mails	tracker	cs	Nerozpoznané e-maily
+upcoming	tracker	cs	nadcházející
+updated	tracker	cs	Aktualizováno
 url of the tracker	tracker	cs	URL sledovacího systému
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	cs	URL, které má být obsaženo v upozornění, např. URL modulu Správce webu, výchozí URL je Sledovací systém v rámci eGroupWaru
 use a default user for mails that where not recognized	tracker	cs	Použít výchozího uživatele pro nerozpoznané e-maily
+use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	cs	Použijte tuto značku pro adresní štítky. Obsah, který chcete opakovat, vložte mezi dvě značky.
 versions	tracker	cs	Verze
 vote for it!	tracker	cs	Hlasovat pro ni!
 votes	tracker	cs	Hlasů
@@ -239,6 +290,7 @@ works for me	tracker	cs	Mně funguje
 yes, display groups first	tracker	cs	Ano, zobrazovat nejprve skupiny
 yes, display users first	tracker	cs	Ano, zobrazovat nejprve uživatele
 yes, with larger fontsize	tracker	cs	Ano, s větší velikostí písma
+yesterday	tracker	cs	Včera
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	cs	Pro všechny fronty můžete na záložce konfigurace povolit/zakázat omezení přístupu.
 you can respond by visiting:	tracker	cs	Můžete odpovědět navštívením:
 you need to enter a name	tracker	cs	Musíte zadat jméno

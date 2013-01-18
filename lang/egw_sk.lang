@@ -1,3 +1,4 @@
+%1 days in advance	tracker	sk	%1 dní v predstihu
 %1 entries %2	tracker	sk	%1 položiek %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	sk	%1 položiek %2, %3 kvôli nedostatočným oprávneniam!
 %1 entries updated.	tracker	sk	%1 položiek bolo aktualizovaných
@@ -12,10 +13,13 @@
 --> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu
 --> enter new name	tracker	sk	--> zadajte nový názov
 1 - lowest	tracker	sk	1 - najnižšia
+2 years ago	tracker	sk	2 roky späť
+3 years ago	tracker	sk	3 roky späť
 5 - medium	tracker	sk	5 - priemerná
 9 - highest	tracker	sk	9 - najvyššia
 accepted	tracker	sk	Prijaté
 activate users queue access control	tracker	sk	Zapnúť používateľskú kontrolu prístupu k frontám
+add / remove link	tracker	sk	Pridať / odstrániť odkaz
 add additionally	tracker	sk	pridať dodatočne
 add assigned	tracker	sk	Pridať priradené
 add comment	tracker	sk	Pridať poznámku
@@ -37,6 +41,7 @@ allow voting	tracker	sk	Povoliť hlasovanie
 allow voting on tracker items, show and sort after the votes	tracker	sk	Povoliť hlasovanie o záležitostiach sledovača, zobraziť a zoradiť podľa hlasovania
 already escalated	tracker	sk	už vystupňované
 amount	tracker	sk	Množstvo
+applies the changes	tracker	sk	vykoná zmeny
 assign to project	tracker	sk	Priradiť k projektu
 assigned to	tracker	sk	Priradené (komu)
 assigning groups	tracker	sk	Priraďovanie skupín
@@ -44,6 +49,8 @@ attachments & links	tracker	sk	Prílohy a Odkazy
 attention: no contact with address %1 found.	tracker	sk	Pozor: nenašiel sa kontakt s adresou %1
 autoassign to	tracker	sk	Automaticky priradiť (komu)
 automatic email handling	tracker	sk	Automatické spracovanie E-mailu
+automatically created by importexport	tracker	sk	Automaticky vytvorené aplikáciou importexport
+before	tracker	sk	Pred
 bounties	tracker	sk	Odmeny
 bounty	tracker	sk	Odmena
 bounty confirmed	tracker	sk	Odmena bola potvrdená
@@ -55,6 +62,7 @@ canned response	tracker	sk	Šablónová odpoveď
 canned responses	tracker	sk	Šablónové odpovede
 categories, versions, canned responses	tracker	sk	Kategórie, verzie, šablónové odpovede
 category for new tickets	tracker	sk	Kategória pre nové záležitosti
+change owner when updating	tracker	sk	Zmeniť vlastníka pri aktualizovaní
 changes made below will be lost, if not applied before!	tracker	sk	Nižžieurobené zmeny sa stratia, ak sa najprv neaplikujú!
 check all	tracker	sk	Označiť všetko
 check mail interval	tracker	sk	Označiť interval E-mailu
@@ -76,9 +84,11 @@ convert all closed tickets	tracker	sk	skonvertovať všetky uzavreté záznamy
 convert all open tickets	tracker	sk	skonvertovať všetky otvorené záznamy
 converted count	tracker	sk	počet skonvertovaných záznamov
 copy to	tracker	sk	Kopírovať (kam)
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	sk	Kopírovať vaše zmeny do schránky, %1znovunačítať položku%2 a zlúčiť ich.
 create new links	tracker	sk	Vytvoriť nové odkazy
 create new tracker entry's as default "private" for approval process	tracker	sk	Vytvoriť nové položky Sledovača predvolene ako "súkromné" pre proces potvrdenia
 created	tracker	sk	Vytvorené
+creates a new field	tracker	sk	vytvorí nové pole
 creation date	tracker	sk	Dátum vytvorenia
 creator	tracker	sk	Vytvoril
 custom fields	tracker	sk	Používateľské polia
@@ -100,14 +110,20 @@ delete this tracker including all it's items and categories	tracker	sk	Odstráni
 delete this version	tracker	sk	Odstrániť túto verziu
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	sk	Odstrániť nerozpoznané E-maily zo servera, aj v prípade, že nie je aktivovaná vyššieuvedená značka 'Odstrániť E-maily'.
 deleted	tracker	sk	Odstránené
+deletes this field	tracker	sk	odstráni túto položku
+determines the order the fields are displayed	tracker	sk	určuje poradie, v akom sa položky zobrazujú
 directory with documents to insert entries	tracker	sk	Priečinok s dokumentami pre vloženie položiek
 do not notify of these changes	tracker	sk	Neposielať upozornenia k týmto zmenám
+do you want a notification, if items you are responsible for are about to start?	tracker	sk	Chcete dostať pripomienku, keď sa majú začať položky, za ktoré ste zodpovední?
+do you want a notification, if items you are responsible for are due?	tracker	sk	Chcete dostať pripomienku, keď nastane termín splnenia tých položiek, za ktoré ste zodpovední?
 do you want to add mailheader information to description and/or comments?	tracker	sk	Chcete pridať informácie z hlavičky správy do opisu a/alebo poznámky?
 do you want to vote for this item	tracker	sk	Chcete hlasovať za túto záležitosť
 donator name to show	tracker	sk	Aké meno darcu sa má zobraziť
 duplicate	tracker	sk	Duplikát
 e-mail address to which a copy of all tracker-notifications should be send	tracker	sk	E-mailová adresa, na ktorú sa má posielať kópia všetkých pripomienok Sledovača
 e-mail notifications	tracker	sk	E-mailové pripomienky
+each value is a line like <id>[=<label>]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
+each value is a line like id[=label]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
 edit %1	tracker	sk	Upraviť %1
 edit entry	tracker	sk	Upraviť položku
 email address to contact you	tracker	sk	Vaša E-mailová adresa
@@ -121,15 +137,22 @@ error adding the new tracker!	tracker	sk	Chyba pri pridávaní nového sledovač
 error deleting escalation!	tracker	sk	Chyba pri odstraňovaní stupňovania!
 error renaming tracker queue!	tracker	sk	Chyba pri premenovaní fronty Sledovača!
 error saving the entry!!!	tracker	sk	Chyba pri ukladaní položky!
+error: the entry has been updated since you opened it for editing!	tracker	sk	Chyba: táto položka bola aktualizovaná v čase, kým ste ju mali otvorenú pre úpravy!
 escalation	tracker	sk	Stupňovanie
 escalation added.	tracker	sk	Stupňovanie bolo pridané.
 escalation deleted.	tracker	sk	Stupňovanie bolo odstránené.
 escalation not found!	tracker	sk	Stupňovanie sa nenašlo!
 escalation saved.	tracker	sk	Stupňovanie bolo uložené.
 everybody	tracker	sk	Všetci
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	sk	Príklad {{IF n_prefix~pán~Dobrý deň pán~Dobrý deň pani}} - hľadá v poli "n_prefix" text "pán", ak nájde, napíše Dobrý deň pán, v opačnom prípade napíše Dobrý deň pani
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	sk	Príklad {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Príklad: pán Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	sk	Príklad {{NELF role}} - ak pole pozícia nie je prázdne, dostanete nový riadok s hodnotou poľa pozícia
+example {{nelfnv role}} - if field role is not empty, set a lf without any value of the field	tracker	sk	Príklad {{NELFNV role}}  - ak pole pozícia nie je prázdne nastaví LF bez akejkoľvek hodnoty poľa
 exclude links of the following apps on timesheet creation	tracker	sk	Vynechať odkazy nasledovných aplikácií pri vytváraní harmonogramu
 existing links	tracker	sk	Existujúce odkazy
 exists	tracker	sk	Existuje
+export as csv	tracker	sk	Exportovať ako CSV
+export definition to use for nextmatch export	tracker	sk	Exportná definícia pre použitie v exporte
 export definitition to use for nextmatch export	tracker	sk	Exportná definícia pre použitie v exporte
 exports a list of tracker tickets to a csv file.	tracker	sk	Exportovať zoznam položiek Sledovača do súboru CSV.
 field	tracker	sk	Pole
@@ -140,6 +163,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	sk	Odoslať ďalej
 forward unrecognized mails to the email address that has to be specified here.	tracker	sk	Odoslať nerozpoznané E-maily na E-mailovú adresu, ktorá je tu uvedená.
 from	tracker	sk	Od
+general fields:	tracker	sk	Všeobecné polia:
 handling autoreplies	tracker	sk	Obsluha automatických odpovedí
 handling bounced mails	tracker	sk	Obsluha odmietnutých správ
 handling mailheader information	tracker	sk	Obsluha informácií hlavičiek správ
@@ -149,6 +173,8 @@ html editing	tracker	sk	Úprava HTML
 id	tracker	sk	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sk	Ak je pre vás táto záležitosť dôležitá, prosím zvážte vypísanie odmeny za jej vyriešenie!
 if this item is important for you, please vote for it.	tracker	sk	Ak je pre vás táto záležitosť dôležitá, prosím hlasujte za ňu.
+if you specify an export definition, it will be used when you export	tracker	sk	Ak zadáte exportnú definíciu, bude sa používať pri exportoch.
+if you specify an export definition, it will be used when you export*	tracker	sk	Ak zadáte exportnú definíciu, bude sa používať pri exportoch
 ignore	tracker	sk	Ignorovať
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	sk	Ignorovať správu. Zostane v poštovom priečinku, aj v prípade, že je začiarknutá možnosť 'Odstrániť správy zo servera'.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	sk	Ignorovať nerozpoznané E-maily. Nebudú odstránené zo servera, dokonca ani keď je aktivovaná vyššieuvedená značka 'Odstrániť E-maily'.
@@ -169,14 +195,24 @@ item creator	tracker	sk	Ohlasovateľ záležitosti
 language for the copy	tracker	sk	Jazyk kópie
 last modified	tracker	sk	Naposledy zmenené
 last modified by	tracker	sk	Naposledy zmenil/a
+last month	tracker	sk	Posledný mesiac
 last reply	tracker	sk	Posledná odpoveď
+last week	tracker	sk	Posledný týždeň
+last year	tracker	sk	Posledný rok
 later	tracker	sk	Neskôr
+leaves without saveing	tracker	sk	odísť bez uloženia
+length<br>rows	tracker	sk	Dĺžka/<br>Riadkov
 limit number of description lines (default 5, 0 for no limit)	tracker	sk	Obmedziť počet riadkov opisu. 0 = bez obmedzenia, predvolené = 5.
 linked to %1	tracker	sk	Pripojené na %1
 links	tracker	sk	Odkazy
+links and attached files	tracker	sk	Odkazy a priložené súbory
+links to specified application.  example: {{links/infolog}}	tracker	sk	Odkazy na vybranú aplikáciu. Príklad: {{links/infolog}}
 list of coma separated email address	tracker	sk	Zoznam E-mailových adries oddelených čiarkami
+list of files linked to the current record	tracker	sk	Zoznam súborov priložených k súčasnému záznamu
 mail handling	tracker	sk	Spracovanie pošty
+manage mapping	tracker	sk	Správa mapovania
 matching filter	tracker	sk	zodpovedajúci filter
+max length of the input [, length of the inputfield (optional)]	tracker	sk	Maximálna dĺžka vstupu [, dĺžka vstupného poľa (nepovinné)]
 miscellaneous	tracker	sk	Rôzne
 multiple changes	tracker	sk	Viacero zmien
 name of current user, all other contact fields are valid too	tracker	sk	Meno súčasného používateľa, všetky ostatné polia kontaktu sú tiež platné
@@ -193,9 +229,15 @@ noone	tracker	sk	Nikto
 note: timesheet itself is always excluded	tracker	sk	Poznámka: samotný harmonogram sa vynecháva vždy
 nothing to save.	tracker	sk	Niet čo uložiť.
 notification	tracker	sk	Pripomienka
+number of row for a multiline inputfield or line of a multi-select-box	tracker	sk	počet riadkov vo viacriadkovom vstupnom poli alebo v ponuke pre výber
+old fixed definition	tracker	sk	Stará pevná definícia
+one day after	tracker	sk	Deň po
+one day in advance	tracker	sk	1 deň v predstihu
 only explicitly named users have read access (otherwise everyone)	tracker	sk	Iba explicitne vymenovaní používatelia majú prístup na čítanie (ináč majú všetci)
 open(status)	tracker	sk	Otvorené
+order	tracker	sk	Poradie
 out of date	tracker	sk	Zameškané
+overdue	tracker	sk	Meškajúce
 overdue after	tracker	sk	Mešká po
 ownership of the ticket	tracker	sk	Vlastníctvo záležitosti
 pending	tracker	sk	Vybavuje sa
@@ -225,17 +267,24 @@ remind	tracker	sk	Pripomenúť
 replacements for inserting entries into documents	tracker	sk	Náhrady pre vkladanie polí do dokumentov
 reply also to unknown addresses	tracker	sk	Odpovedať aj na neznáme adresy
 resolution	tracker	sk	Riešenie
+responsible	tracker	sk	Zodpovednosť
 restict tracker items to the creator and the staff only	tracker	sk	Obmedziť záležitosti na ich tvorcu a personál
 restict tracker items to the creators primary group and the staff only	tracker	sk	Obmedziť záležitosti na primárnu skupinu ich tvorcu a personál
 restrict tracker items to staff and:	tracker	sk	Obmedziť záležitosti na personál a:
 restricted comment	tracker	sk	Obmedzená poznámka
 restriction	tracker	sk	Obmedzenie
+same day	tracker	sk	V ten deň
+saves the changes made and leaves	tracker	sk	Uloží vykonané zmeny a odíde.
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	sk	Zadajte predvolený sledovač pre nové položky, alebo 'Odmietnuť', ak sa má zamedziť vytváraniu položky cez E-mail.
+select accounts for which the custom field should be visible	tracker	sk	Vyberte účty, pre ktoré bude vlastné pole viditeľné
 select how autoreplies should be sent when mails are received	tracker	sk	Vybrať, ako sa majú posielať automatické odpovede, keď je prijatá správa
 select multiple	tracker	sk	Vybrať viacero
+select one...	tracker	sk	vyberte jednu...
 select tracker queue	tracker	sk	vyberte frontu sledovača
+select users or groups	tracker	sk	Vyberte používateľov alebo skupiny
 select which categories should be used in tracker for the tts categories	tracker	sk	Vyberte, ktoré kategórie sa majú v Sledovači použiť pre kategórie TTS
 select which username should be used when unrecognized mails are handled.	tracker	sk	Vyberte, ktoré používateľské meno sa má použiť pri spracovaní nerozpoznaných E-mailov.
+select which username should be used when unrecognized replies are handled	tracker	sk	Vyberte, ktoré používateľské meno sa má použiť pri spracovaní nerozpoznaných odpovedí
 sender address	tracker	sk	Adresa odosielateľa
 sender address for all notifications, eg. noreply@egroupware.org	tracker	sk	Adresa odosielateľa pre všetky pripomienky, napr. bezodpovede@egroupware.org
 sent autoreplies	tracker	sk	Poslať automatické odpovede
@@ -248,6 +297,7 @@ should the tracker send you notification mails, if tracker items assigned to you
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v záležitosti Sledovača, ktorú ste vytvorili?
 should there be a tracker-box on main screen?	tracker	sk	Chcete, aby sa na hlavnej obrazovke zobrazovalo okno sledovača?
 show the tracker send you notification mails, in tracker items that you updates?	tracker	sk	Chcete, aby vám Sledovač posielal oznámenia o položkách Sledovača, ktoré ste sami zmenili?
+signature	tracker	sk	Podpis
 skip record	tracker	sk	Preskočiť záznam
 staff	tracker	sk	Personál
 staff  "users" will be allowed for assignment to tracker tickets	tracker	sk	Personál "Používatelia" bude môcť byť priradený k položkám Sledovača
@@ -261,12 +311,20 @@ thank you for setting this bounty.	tracker	sk	Ďakujeme za vypísanie tejto odme
 thank you for voting.	tracker	sk	Ďakujeme za Váš hlas.
 the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa NEBUDE zobrazovať, až kým nebudú prijaté peniaze.
 the canned response will be prefix the text you type.	tracker	sk	Šablónová odpoveď sa zobrazí pred textom, ktorý napíšete.
+the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	sk	Dokument môže obsahovať premennú, napr. {{%3}} ktorá sa nahradí údajmi (%1úplný zoznam názvov premenných%2).
+the following document-types are supported:	tracker	sk	Podporované sú nasledovné typy dokumentov:
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	sk	Vnútorne používané meno (nanajvýš 20 znakov), jeho zmena zneprístupní existujúce údaje
+the text displayed to the user	tracker	sk	text zobrazený používateľovi
 there already an escalation for that filter!	tracker	sk	Stupňovanie pre tento filter už existuje!
 this module displays information from the tracker.	tracker	sk	Tento modul zobrazuje informácie zo Stopovača.
+this month	tracker	sk	Tento mesiac
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sk	Táto záležitosť Sledovača bola automaticky uzavretá systémom. Pôvodne bola v stave 'Vybavuje sa', avšak pôvodný ohlasovateľ neodpovedal do %1 dní.
+this week	tracker	sk	Tento týždeň
+this year	tracker	sk	Tento rok
 ticket count	tracker	sk	počet záznamov
 ticket modified by %1 at %2	tracker	sk	Záznam zmenil %1 k %2
 times	tracker	sk	Časy
+titles of any entries linked to the current record, excluding attached files	tracker	sk	Názvy akýchkoľvek položiek pripojených na súčasný záznam, okrem priložených súborov
 total:	tracker	sk	Celkovo:
 tracker	common	sk	Sledovač
 tracker added	tracker	sk	Fronta Sledovača pridaná.
@@ -288,14 +346,19 @@ tracker queue renamed	tracker	sk	Fronta Sledovača premenovaná
 tracker-%1 '%2' added.	tracker	sk	Sledovač-%1 '%2' pridané.
 tracker-%1 '%2' updated.	tracker	sk	Sledovač-%1 '%2' aktualizované.
 tracker-%1 deleted.	tracker	sk	Sledovač-%1 '%2' odstránené.
+type of customfield	tracker	sk	Typ vlastného poľa
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	sk	Nepodarilo sa previesť "%1" na ID účtu. Používam nastavenie zásuvného modulu (%2) pre %3.
 unchanged	tracker	sk	Nezmenené
 unlinked from %1	tracker	sk	Odpojené z %1
 unrecognized mails	tracker	sk	Nerozpoznané E-maily
+upcoming	tracker	sk	Blížiace sa
 updated	tracker	sk	Aktualizované
 url of the tracker	tracker	sk	URL adresa Sledovača
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sk	URL adresa, ktorá má byť uvedená v pripomienke, napr. na stránku s modulom SiteMgr, predvolené: Sledovač v rámci EGroupware
 use a default user for mails that where not recognized	tracker	sk	Použiť predvoleného používateľa pre E-maily, ktoré neboli rozpoznané
+use all	tracker	sk	Použiť všetko
+use field from csv if possible	tracker	sk	Použiť pole z CSV ak je možné
+use search results	tracker	sk	Použiť výsledok vyhľadávania
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	sk	Túto značku použite pre štítky s adresou. Obsah, ktorý chcete opakovať, vložte medzi dve takéto značky.
 versions	tracker	sk	Verzie
 vote for it!	tracker	sk	Hlasovať za vyriešenie
@@ -311,6 +374,7 @@ yes, display groups first	tracker	sk	Áno, najprv zobraziť skupiny
 yes, display users first	tracker	sk	Áno, najprv zobraziť používateľov
 yes, new tickets only	tracker	sk	Áno, len nové záležitosti
 yes, with larger fontsize	tracker	sk	Áno, s väčším písmom
+yesterday	tracker	sk	Včera
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	sk	Obmedzenia prístupu ku fronte môžete povoliť/zakázať v konfiguračnej tabuľke (pre všetky fronty)
 you can respond by visiting:	tracker	sk	Môžete odpovedať kliknutím na:
 you need to enter a name	tracker	sk	Musíte zadať názov

@@ -1,3 +1,4 @@
+%1 days in advance	tracker	ru	%1 дней(я) до
 %1 entries updated.	tracker	ru	%1 записей обновлено.
 %1 tickets have been converted	tracker	ru	%1 запросов было преобразовано
 &#9830; not closed	tracker	ru	♦ Незакрытые
@@ -9,6 +10,8 @@
 --> choose a project from the drop-down list	tracker	ru	--> выберите проект из ниспадающего списка
 --> enter new name	tracker	ru	--> введите новое имя
 1 - lowest	tracker	ru	1 - низший
+2 years ago	tracker	ru	2 года назад
+3 years ago	tracker	ru	3 года назад
 5 - medium	tracker	ru	5 - средний
 9 - highest	tracker	ru	9 - высший
 accepted	tracker	ru	Принято
@@ -30,12 +33,15 @@ allow voting	tracker	ru	Разрешить голосование
 allow voting on tracker items, show and sort after the votes	tracker	ru	Разрешить голосование за запросыы трекера, показывать и сортировать после голосований
 already escalated	tracker	ru	уже подвергнут эскалации
 amount	tracker	ru	Количество
+applies the changes	tracker	ru	применить изменения
 assign to project	tracker	ru	Присоединить к проекту
 assigned to	tracker	ru	Назначено
 assigning groups	tracker	ru	Назначенная группа
 attachments & links	tracker	ru	Вложения и ссылки
+attention: no contact with address %1 found.	tracker	ru	Внимание: Контакт с адресом %1 не найден
 autoassign to	tracker	ru	Автоназначение
 automatic email handling	tracker	ru	Автоматическое управление почтой
+automatically created by importexport	tracker	ru	Автоматически создано ИмпортЭкспорт'ом
 bounties	tracker	ru	Премии
 bounty confirmed	tracker	ru	Премия подтверждена
 bounty confirmed.	tracker	ru	Премия подтверждена.
@@ -57,7 +63,6 @@ completed	tracker	ru	Завершено
 configuration	tracker	ru	Конфигурация
 configuration for all trackers	tracker	ru	Конфигурация для всех очередей трекера
 configuration updated.	tracker	ru	Конфигурация обновлена.
-configuration, acl, notifications	tracker	ru	Конфигурация, Список прав доступа(ACL), Уведомления
 confirm that you pay the specified bounty to implement or fix the issue	tracker	ru	Подтвердите, что вы платите указанную премию за выполнение или решения проблемы.
 confirm the receipt of money for this bounty	tracker	ru	Подтвердите расписку в получении этой премии
 confirmed	tracker	ru	Подтверждено
@@ -65,10 +70,13 @@ convert all closed tickets	tracker	ru	преобразовать все закр
 convert all open tickets	tracker	ru	преобразовать все открытые запросы
 converted count	tracker	ru	счетчик преобразованых
 copy to	tracker	ru	Копия
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	ru	Скопируйте Ваши изменения в буфер обмена, %1перезагрузите запись%2 а объедините их.
 create new links	tracker	ru	Создать новую ссылку
 created	tracker	ru	Создано
+creates a new field	tracker	ru	создать новое поле
 creation date	tracker	ru	даты создания
 creator	tracker	ru	Создатель
+custom fields	tracker	ru	Пользовательские Поля
 custom tracker priorities	tracker	ru	Пользовательские приоритеты трекера
 date opened	tracker	ru	Дата открытия
 define escalations	common	ru	Назначение эскалаций
@@ -83,11 +91,17 @@ delete this tracker including all it's items and categories	tracker	ru	Удал�
 delete this version	tracker	ru	Удалить эту версию
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	ru	Удаление нераспознанных писем с сервера в случае если "Удаление писем" выше отмечено.
 deleted	tracker	ru	Удалено
+deletes this field	tracker	ru	Удалить это поле
+determines the order the fields are displayed	tracker	ru	оперделяет порядок,в котором отображаются поля
+do you want a notification, if items you are responsible for are about to start?	tracker	ru	Вы желаете получать напоминания при запуске задач(записей) за которые вы отвечаете?
+do you want a notification, if items you are responsible for are due?	tracker	ru	Вы желаете получать напоминания, если задачи за которые вы отвечаете должны быть уже завершены?
 do you want to vote for this item	tracker	ru	Хотите проголосовать за этот пункт?
 donator name to show	tracker	ru	Показать имя жертвователя
 duplicate	tracker	ru	Дублировано
 e-mail address to which a copy of all tracker-notifications should be send	tracker	ru	Адрес e-mail, по которому должна быть выслана копия всех уведомлений трекера
 e-mail notifications	tracker	ru	уведомление по e-mail
+each value is a line like <id>[=<label>]	tracker	ru	каждое значение - это строка типа <идентификатор>[=<метка>]
+each value is a line like id[=label]	tracker	ru	каждое значение - это строка типа <идентификатор>[=<метка>]
 edit %1	tracker	ru	Редактировать %1
 edit entry	tracker	ru	редактировать запись
 email address to contact you	tracker	ru	Адрес e-mail для контакта с Вами
@@ -99,6 +113,7 @@ entry saved	tracker	ru	Запись сохранена
 error adding the new tracker!	tracker	ru	Ошибка при добавлении нового трекера!
 error deleting escalation!	tracker	ru	Ошибка при удаленииэскалации!
 error saving the entry!!!	tracker	ru	Ошибка сохранения записи!!!
+error: the entry has been updated since you opened it for editing!	tracker	ru	Ошибка: запись была изменена после того, как вы открыли ее для редактирования!
 escalation	tracker	ru	Эскалация
 escalation added.	tracker	ru	Добавлена эскалация
 escalation deleted.	tracker	ru	Эскалация удалена.
@@ -106,11 +121,15 @@ escalation not found!	tracker	ru	Эскалация не найдена!
 escalation saved.	tracker	ru	Эскалация сохранена.
 everybody	tracker	ru	Каждому
 existing links	tracker	ru	Существующие ссылки
+export as csv	tracker	ru	Экспортировать как CSV
 field	tracker	ru	Поле
 fixed	tracker	ru	Исправлено
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	ru	Для последовательности писем используйте эту метку. Поместите текст, который вы желаете повторять между двух меток.
+forward	tracker	ru	Переслать
 forward to	tracker	ru	Переслать на
 forward unrecognized mails to the email address that has to be specified here.	tracker	ru	Пересылать нераспознанные письма на адрес эл. почты указанный здесь.
 from	tracker	ru	От
+general fields:	tracker	ru	Основные поля:
 history	tracker	ru	История
 html editing	tracker	ru	Редактирование Html
 id	tracker	ru	Идентификатор
@@ -122,17 +141,28 @@ import tts tickets	tracker	ru	Импортировать запросы TTS
 incoming mail folder	tracker	ru	Папка входящих писем
 incoming mail rules	tracker	ru	Правила для входящих писем
 incoming mail server	tracker	ru	Сервер входящей почты
+insert in document	tracker	ru	Вставить в документ
 interval in minutes for checking the incoming mails	tracker	ru	Интервал в минутах для проверки входящих писем
 invalid	tracker	ru	Неверно
 item assignee	tracker	ru	Уполномоченный запроса
 item creator	tracker	ru	Создатель запроса
 language for the copy	tracker	ru	Язык для копии
 last modified	tracker	ru	последнего изменения
+last modified by	tracker	ru	последний раз изменено
+last month	tracker	ru	Прошлый месяц
 last reply	tracker	ru	последнего ответа
+last week	tracker	ru	Прошлая неделя
+last year	tracker	ru	Прошлый год
 later	tracker	ru	Позже
+leaves without saveing	tracker	ru	выйти без сохранения
+length<br>rows	tracker	ru	Длина<br>Строк
+links	tracker	ru	Ссылки
 list of coma separated email address	tracker	ru	Список почтовых адресов разделенных запятыми
 mail handling	tracker	ru	Управление почтой
+manage mapping	tracker	ru	Управление отобажением
 matching filter	tracker	ru	соответствие фильтру
+max length of the input [, length of the inputfield (optional)]	tracker	ru	макс. длина строки ввода [, длина поля ввода (необязательно)]
+name of current user, all other contact fields are valid too	tracker	ru	Имя текущего пользователя, все остальные поля контакта также действительны.
 new %1	tracker	ru	Новый %1
 new items	tracker	ru	Новый пункт
 new ticket submitted by %1 at %2	tracker	ru	Новый запрос отправлен %1 в %2
@@ -142,8 +172,13 @@ no trackers found, aborting	tracker	ru	Трекеры не найдены, пр�
 non-anonymous users	tracker	ru	Неанонимный пользователь
 noone	tracker	ru	Никто
 notification	tracker	ru	Уведомление
+number of row for a multiline inputfield or line of a multi-select-box	tracker	ru	количество строк с многострочном поле вводща или в списке с множественным выбором
+one day after	tracker	ru	через один день
+one day in advance	tracker	ru	за один день до
 open(status)	tracker	ru	Открыто
+order	tracker	ru	Порядок
 out of date	tracker	ru	Устарело
+overdue	tracker	ru	просроченные
 overdue after	tracker	ru	Просрочено после
 ownership of the ticket	tracker	ru	Владение запросом
 pending	tracker	ru	Незавершено
@@ -156,6 +191,7 @@ postponed	tracker	ru	Отсрочено
 print entry	tracker	ru	Распечатать запись
 priorities	tracker	ru	Приоритеты
 priorities with empty label are not available to the user	tracker	ru	Приоритеты с незаполненным названием не доступны пользователю
+process	tracker	ru	Процесс(?)
 project selection	tracker	ru	Выбор проекта
 projects	tracker	ru	Проекты
 queue	tracker	ru	Очередь
@@ -166,12 +202,16 @@ receive notifications in html	tracker	ru	Принимать сообщения �
 rejected	tracker	ru	Отклонено
 remind	tracker	ru	Напомнить
 resolution	tracker	ru	Решение
+responsible	tracker	ru	Ответственный
 restict tracker items to the creator and the staff only	tracker	ru	Разрешить доступ к записям трекера только персоналу и создавшему
 restict tracker items to the creators primary group and the staff only	tracker	ru	Разрешить доступ к записям трекера только персоналу и первичной группе создавших
 restrict tracker items to staff and:	tracker	ru	Разрешить доступ к записям трекера только персоналу и:
 restriction	tracker	ru	Ограничения
+same day	tracker	ru	этот же день
+saves the changes made and leaves	tracker	ru	записать сделанные изменения и выйти
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	ru	Выберите очередь трекера по умолчанию для новых записей либо "Отклонить" для отключения возможности создания запросов по почте.
 select multiple	tracker	ru	Выбрать несколько
+select one...	tracker	ru	выберите один...
 select tracker queue	tracker	ru	выберите очередь трекера
 select which categories should be used in tracker for the tts categories	tracker	ru	выберите какие категории необходимо использовать в трекере для категорий TTS
 select which username should be used when unrecognized mails are handled.	tracker	ru	Выберите какое имя пользователя должно использоваться при управлении нераспознанными письмами.
@@ -184,6 +224,7 @@ set an own bounty (in %s)	tracker	ru	Установить свою премию 
 set bounty	tracker	ru	Установить премию
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
+signature	tracker	ru	Подпись
 staff	tracker	ru	Кадровый резерв
 state	tracker	ru	Состояние
 stati	tracker	ru	Статистика
@@ -194,9 +235,14 @@ thank you for setting this bounty.	tracker	ru	Спасибо за установ
 thank you for voting.	tracker	ru	Спасибо за голосование.
 the bounty will not be shown, until the money is received.	tracker	ru	Премия НЕ будет показана, пока не будут получены деньги.
 the canned response will be prefix the text you type.	tracker	ru	Готовый ответ будет префиксом текста, который Вы набираете.
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	ru	Внутреннее имя (<= 20 символов), изменение сделает существующие данные недоступными
+the text displayed to the user	tracker	ru	текст, показываемый пользователю
 there already an escalation for that filter!	tracker	ru	Для этого фильтра уже имеется эскалация!
 this module displays information from the tracker.	tracker	ru	Этот модуль показывает информацию из Трекера
+this month	tracker	ru	Этот месяц
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	ru	Этот запрос в Трекере был закрыт автоматически системой. Его статус перед этим был назначен как, Незавершенный, и первоначальный представитель не откликнулся в течении %1 дней.
+this week	tracker	ru	Эта неделя
+this year	tracker	ru	Этот год
 ticket count	tracker	ru	счетчик запросов
 ticket modified by %1 at %2	tracker	ru	Запарос модивицирован %1 в %2
 times	tracker	ru	Раз
@@ -213,8 +259,11 @@ tracker queue	tracker	ru	Очередь Трекера
 tracker-%1 '%2' added.	tracker	ru	Трекер-%1 '%2' добавлен.
 tracker-%1 '%2' updated.	tracker	ru	Трекер-%1 '%2' изменен.
 tracker-%1 deleted.	tracker	ru	Трекер-%1 удален
+type of customfield	tracker	ru	Тип пользовательского поля
 unchanged	tracker	ru	Без изменений
 unrecognized mails	tracker	ru	Нераспознанные письма
+upcoming	tracker	ru	приход
+updated	tracker	ru	Обновлено
 url of the tracker	tracker	ru	URL трекера
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	ru	URL, который должен быть включен в уведомление, напр. на страницу модуля УправлениеСайтом, трекер по умолчанию внутри eGW
 use a default user for mails that where not recognized	tracker	ru	Использовать пользователя по умолчанию для нераспознанных писем
@@ -226,6 +275,7 @@ works for me	tracker	ru	У меня работает
 yes, display groups first	tracker	ru	Да, показывать группы первыми
 yes, display users first	tracker	ru	Да, показывать пользователей первыми
 yes, with larger fontsize	tracker	ru	Да, с большим размером шрифта
+yesterday	tracker	ru	Вчера
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	ru	Вы можете включить/выключить ограничения на доступ к очереди в закладке конфигурирования (для всех очередей)
 you can respond by visiting:	tracker	ru	Вы можете откликнуться, посетив:
 you need to enter a name	tracker	ru	Вы должны ввести имя

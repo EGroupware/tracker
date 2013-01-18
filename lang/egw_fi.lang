@@ -1,6 +1,10 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	fi	"%2" on käytössä ainoastaan aloitus ja eräpäiville. Käytä "%1".
+%1 days in advance	tracker	fi	%1 päivää etukäteen
 %1 entries %2	tracker	fi	%1 merkintä(ä) %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	fi	%1 merkintä(ä) %2, %3 epäonnistui riittämättömien käyttöoikeuksien vuoksi!
 %1 entries updated.	tracker	fi	%1 merkintää päivitetty.
+%1 is due %2	tracker	fi	%1 erääntyy %2
+%1 is starting %2	tracker	fi	%1 alkaa %2
 %1 tickets have been converted	tracker	fi	%1 merkintää muutettu.
 &#9830; not closed	tracker	fi	♦ Ei suljetut
 &#9830; own not closed	tracker	fi	♦ Omat, ei suljetut
@@ -12,22 +16,33 @@
 --> choose a project from the drop-down list	tracker	fi	--> valitse projekti pudotusvalikosta
 --> enter new name	tracker	fi	--> anna uusi nimi
 1 - lowest	tracker	fi	1 - alhainen
+2 days in advance	tracker	fi	2 päivää etukäteen
+2 years ago	tracker	fi	2 vuotta sitten
+3 days in advance	tracker	fi	3 päivää etukäteen
+3 years ago	tracker	fi	3 vuotta sitten
 5 - medium	tracker	fi	5 - normaali
 9 - highest	tracker	fi	9 - korkea
 accepted	tracker	fi	Hyväksytty
+acl	tracker	fi	Käyttäjäoikeudet
 activate users queue access control	tracker	fi	Aktivoi ketjukohtaiset käyttöoikeudet
+add / remove link	tracker	fi	Lisää / Poista linkki
 add additionally	tracker	fi	Lisää mukana olevaksi
 add assigned	tracker	fi	Lisää vastuulliseksi
 add comment	tracker	fi	Lisää kommentti
 add from addressbook	tracker	fi	Lisää osoitekirjasta
+add infolog	tracker	fi	Lisää Tehtävä
+add restricted comment	tracker	fi	Lisää suojattu kommentti
 add timesheet entry	tracker	fi	Lisää ajanseurantamerkintä
 add to	tracker	fi	Lisää
 add unrecognized mail address to the cc field	tracker	fi	Lisää tunnistamaton sähköpostiosoite piilokopio (CC) kenttään
 after	tracker	fi	jälkeen
 after how many days a not replied item should be marked overdue?	tracker	fi	Montako päivää merkintä voi olla vastaamatta, ennen kuin se merkitään erääntyneeksi?
 after how many days pending items should be closed automatic	tracker	fi	Monenko päivän vireillä olon jälkeen merkintä suljetaan automaattisesti?
+all	tracker	fi	Kaikki
 all tickets are already converted to tracker	tracker	fi	Kaikki merkinnät ovat jo Reklamaationhallinnassa
 allow bounties	tracker	fi	Salli maksullinen kehitys
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	fi	Salli suojattujen kommenttien käyttö. (Ylläpitäjät, Teknikot ja vastuulliset)
+allow creation of infolog entries from tracker tickets	tracker	fi	Salli Tehtävien luonti Resurssienhallinnan merkinnästä
 allow default projects for tracker	tracker	fi	Salli oletusprojektit
 allow editing by	tracker	fi	Salli muokkaaminen:
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	fi	Salli niiden projektien esimäärittelmät, jotka liitetään Reklamaationhallinnan merkintöihin.
@@ -37,16 +52,18 @@ allow voting	tracker	fi	Salli äänestäminen
 allow voting on tracker items, show and sort after the votes	tracker	fi	Salli äänestäminen merkinnöissä, näytä ja lajittele äänet.
 already escalated	tracker	fi	Eskalointi jo suoritettu
 amount	tracker	fi	Summa
+applies the changes	tracker	fi	Lisää muutokset
 assign to project	tracker	fi	Liitä projektiin
 assigned to	tracker	fi	Vastuullinen
 assigning groups	tracker	fi	Vastuu ryhmälle
-at the moment the following document-types are supported:	tracker	fi	Seuraavat tiedostomuodot ovat tuettuja:
 attachments & links	tracker	fi	Liitteet ja linkit
 attention: no contact with address %1 found.	tracker	fi	Huomio: Kontaktia osoitteella %1 ei löytynyt.
 autoassign to	tracker	fi	Vastuu automaattisesti
 automatic email handling	tracker	fi	Automaattinen sähköpostikäsittely
 automatically created by importexport	tracker	fi	Automaattisesti luotu tuonnista | viennistä
+before	tracker	fi	Ennen
 bounties	tracker	fi	Maksullinen kehitys
+bounty	tracker	fi	Maksullinen kehitys
 bounty confirmed	tracker	fi	Maksullinen kehitys vahvistettu
 bounty confirmed.	tracker	fi	Maksullinen kehitys vahvistettu
 bounty deleted	tracker	fi	Maksullinen kehitys poistettu
@@ -55,7 +72,13 @@ bounty set	tracker	fi	Maksullisen kehityksen summa asetettu
 canned response	tracker	fi	Valmiiksi tallennettu vastaus
 canned responses	tracker	fi	Valmiiksi tallennettu vastaus
 categories, versions, canned responses	tracker	fi	Kategoriat, versiot, tallennetut vastaukset
+category	tracker	fi	Kategoria
 category for new tickets	tracker	fi	Kategoria uusille merkinnöille
+change assigned	tracker	fi	Muuta vastuulliset
+change assigned when updating	tracker	fi	Muuta vastuulliset päivitettäessä
+change group	tracker	fi	Muuta ryhmä
+change group when updating	tracker	fi	Muuta ryhmä päivitettäessä
+change owner when updating	tracker	fi	Muuta omistaja päivitettäessä
 changes made below will be lost, if not applied before!	tracker	fi	Tehdyt muutokset menetetään, ellei niitä ole ensin lisätty/tallennettu.
 check all	tracker	fi	Merkitse kaikki
 check mail interval	tracker	fi	Valitse postitusväli
@@ -69,22 +92,30 @@ completed	tracker	fi	Valmis
 configuration	tracker	fi	Konfiguraatio
 configuration for all trackers	tracker	fi	Kaikkien Reklamaationhallintaketjujen konfigurointi kerralla
 configuration updated.	tracker	fi	Konfiguraatio päivitetty
-configuration, acl, notifications	tracker	fi	Konfigurointi, ACL, huomautukset
+configuration, notifications	tracker	fi	Konfigurointi, Huomautukset
 confirm that you pay the specified bounty to implement or fix the issue	tracker	fi	Vahvista, että maksat määrittelemäsi summan, jotta kyseinen ominaisuus kehitetään tai ongelma ratkaistaan.
 confirm the receipt of money for this bounty	tracker	fi	Vahvista vastaanottavasi rahat kyseisestä tehtävästä
 confirmed	tracker	fi	Vahvistettu
 convert all closed tickets	tracker	fi	Lisää kaikkiin suljettuihin merkintöihin
 convert all open tickets	tracker	fi	Lisää kaikkiin avoimiin merkintöihin
 copy to	tracker	fi	Lähetä kopio
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	fi	Kopioi muutokset työpöydälle, %1päivitä merkintä%2 ja sulauta
 create new links	tracker	fi	Luo uusi linkki
 create new tracker entry's as default "private" for approval process	tracker	fi	Aseta uusiin merkintöihin "Yksityinen" oletusarvona, esimerkiksi merkinnän hyväksymisprosessia varten.
 created	tracker	fi	Luotu
+created by	tracker	fi	Luoja
+created on	tracker	fi	Luotu
+creates a new field	tracker	fi	Luo uusi kenttä
 creation date	tracker	fi	Aloitusaika
 creator	tracker	fi	Luonut
 custom fields	tracker	fi	Lisäkentät
+custom notifications	tracker	fi	Muokattavat huomautusviestit
 custom tracker priorities	tracker	fi	Muokattavat prioriteetit
+customfield	tracker	fi	Muokattavat kentät
+date filter	tracker	fi	Suodatin
 date opened	tracker	fi	Avauspäivä
 default document to insert entries	tracker	fi	Merkintöjen oletusasiakirja
+default version for new tracker entries	tracker	fi	Oletusversio uusille merkinnöille
 define escalations	common	fi	Määrittele eskalaatiot
 delete mails from server	tracker	fi	Poista sähköpostit palvelimelta
 delete the mail from the server	tracker	fi	Poista sähköposti palvelimelta
@@ -99,14 +130,23 @@ delete this tracker including all it's items and categories	tracker	fi	Poista t�
 delete this version	tracker	fi	Poista tämä versio
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	fi	Poista tunnistamattomat sähköpostit palvelimelta, vaikka 'Poista sähköpostit' merkintä ei ole valittuna.
 deleted	tracker	fi	Poistettu
+deletes this field	tracker	fi	Poistaa kentän
+determines the order the fields are displayed	tracker	fi	Määrittelee kenttien näytön järjestyksen
 directory with documents to insert entries	tracker	fi	Merkintöjen oletuskansio
 do not notify of these changes	tracker	fi	Älä lähetä huomautusviestejä muutoksista
+do you want a notification, if items you are responsible for are about to start?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä jotka ovat alkamassa?
+do you want a notification, if items you are responsible for are due?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä jotka ovat erääntymässä?
+do you want to add mailheader information to description and/or comments?	tracker	fi	Lisätäänkö "Mail header" tieto Kuvaukseen ja/tai kommenttiin?
 do you want to vote for this item	tracker	fi	Haluatko äänestää tätä merkintää?
-document '%1' does not exist or is not readable for you!	tracker	fi	Asiakirjaa '%1' ei ole olemassa tai sinulla ei ole oikeutta lukea sitä!
 donator name to show	tracker	fi	Näytä lahjoittajan nimi
+download url for links	tracker	fi	Linkkien URL
+due	tracker	fi	Eräpäivä
+due date	tracker	fi	Eräpäivä
 duplicate	tracker	fi	Tuplaa
 e-mail address to which a copy of all tracker-notifications should be send	tracker	fi	Sähköpostiosoite, johon kaikki Reklamaationhallinnan huomautusviestit tulisi lähettää.
-e-mail notifications	tracker	fi	Huomautussähköpostiviestit
+e-mail notifications	tracker	fi	Huomautusviestit
+each value is a line like <id>[=<label>]	tracker	fi	Jokainen arvo on rivillä kuten <id>[=<label>]
+each value is a line like id[=label]	tracker	fi	Jokainen arvo on rivillä kuten id[=label]
 edit %1	tracker	fi	Muokkaa %1
 edit entry	tracker	fi	Muokkaa merkintää
 email address to contact you	tracker	fi	Sähköpostiosoite, jolla sinut tavoittaa
@@ -120,6 +160,7 @@ error adding the new tracker!	tracker	fi	Virhe lisätessä uutta merkintää!
 error deleting escalation!	tracker	fi	Virhe poistettaessa eskalaatiota!
 error renaming tracker queue!	tracker	fi	Virhe ketjun uudelleennimeämisessä!
 error saving the entry!!!	tracker	fi	Virhe tallentaessa merkintää !!!
+error: the entry has been updated since you opened it for editing!	tracker	fi	Virhe: Merkintä on jo päivitetty avaamisen jälkeen
 escalation	tracker	fi	Eskalaatio
 escalation added.	tracker	fi	Eskalaatio lisätty
 escalation deleted.	tracker	fi	Eskalaatio poistettu
@@ -130,8 +171,12 @@ example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", fo
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	fi	Esimerkki {{LETTERPREFIXCUSTOM n_prefix title n_family}} ---> Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	fi	Esimerkki {{NELF role}} ---> jos kenttä 'role' = 'rooli/asema' ei ole tyhjä, se kirjoitetaan seuraavalle riville
 example {{nelfnv role}} - if field role is not empty, set a lf without any value of the field	tracker	fi	Esimerkki {{NELFNV role}} ---> jos kenttä 'role' = 'rooli/asema' ei ole tyhjä, aseta LF ilman arvoa
+exclude links of the following apps on timesheet creation	tracker	fi	Poissulje sovellusten linkit Ajanhallinnan merkintää luotaessa
 existing links	tracker	fi	Olemassa olevat linkit
 exists	tracker	fi	Olemassaoleva
+export as csv	tracker	fi	CSV Vienti
+export csv	tracker	fi	CSV vienti
+export definition to use for nextmatch export	tracker	fi	Vienti asetukset 'nextmatch' vientiin
 export definitition to use for nextmatch export	tracker	fi	Vienti asetukset 'nextmatch' vientiin
 exports a list of tracker tickets to a csv file.	tracker	fi	Vie merkintöjä Reklamaationhallinnasta CSV tiedostoon
 field	tracker	fi	Kenttä
@@ -145,17 +190,18 @@ from	tracker	fi	Keneltä
 general fields:	tracker	fi	Yleiset kentät:
 handling autoreplies	tracker	fi	Automaattistan vastausten hallinta
 history	tracker	fi	Historia
+how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	fi	Kuinka monta kuvauskentän riviä tulisi olla näkyvissä?
 html editing	tracker	fi	HTML editointi
 id	tracker	fi	Tunniste
 if this item is important for you, please consider to set a bounty for it!	tracker	fi	Jos tämä kohde on sinulle tärkeä, harkitse sen tekemistä maksullisena lisätyönä!
 if this item is important for you, please vote for it.	tracker	fi	Jos tämä kohde on sinulle tärkeä, äänestä sen puolesta.
-if you specify a directory (full vfs path) here, egroupware displays an action for each document. that action allows to download the specified document with the %1 data inserted.	tracker	fi	Oletuskansio näyttää valikossa kaikki kansiossa olevat asiakirjat. Merkitse kenttään täydellinen kansion VFS polku!
-if you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. that icon allows to download the specified document with the %1 data inserted.	tracker	fi	Oletusasiakirja, %1 näyttää ylimääräisen asiakirjakuvakkeen jokaiselle merkinnälle. Merkitse kenttään täydellinen asiakirjan VFS polku!
 if you specify an export definition, it will be used when you export	tracker	fi	Valitse viennin oletusasetus
 if you specify an export definition, it will be used when you export*	tracker	fi	Valitse viennin oletusasetus
 ignore	tracker	fi	Jätä huomiotta
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	fi	Jätä sähköposti huomiotta. Se säilytetään sähköpostitilillä vaikka "Poista sähköpostiviestit palvelimelta"-valinta olisikin merkitty.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	fi	Jätä tunnistamattomat sähköpostit huomiotta. Niitä ei poisteta palvelimelta, vaikka 'Poista Sähköpostit' olisi valittuna.
+imap, ssl secured	tracker	fi	IMAP, SSL suojattu
+imap, tls secured	tracker	fi	IMAP, TSL suojattu
 import options	tracker	fi	Tuontiasetukset
 import tts tickets	tracker	fi	Tuo TTS
 imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	fi	Tuo merkintöjä CSV tiedostosta Reklamaationhallintaan. CSV 'Comma Separated Values' tarkoittaa pilkulla eroitettuja arvoja. Voit valita myös muita erotustapoja.
@@ -171,30 +217,61 @@ invalid	tracker	fi	Kelpaamaton
 item assignee	tracker	fi	Vastuuhenkilöt
 item creator	tracker	fi	Merkinnän luoja
 language for the copy	tracker	fi	Kopioitava kieli
+last 3 months	tracker	fi	Viimeiset 3 kuukautta
 last modified	tracker	fi	Viimeksi muokattu
 last modified by	tracker	fi	Viimeksi muokannut
-last reply	tracker	fi	Viimeksi vastattu
-later	tracker	fi	Viimeisin
+last month	tracker	fi	Viimeisin koko kuukausi
+last quarter	tracker	fi	Viimeisin vuosineljännes
+last reply	tracker	fi	Viimeksi muokattu
+last reply by anyone but creator	tracker	fi	Viimeksi muokattu -kuka tahansa paitsi omistaja
+last reply by assigned	tracker	fi	Viimeksi muokattu - vastuullinen
+last reply by creator	tracker	fi	Viimeksi muokattu - omistaja
+last week	tracker	fi	Viime viikko
+last year	tracker	fi	Viime vuosi
+later	tracker	fi	Jälkeen
+leaves without saveing	tracker	fi	Poistuu tallentamatta
+length<br>rows	tracker	fi	Pituus<br>Rivit
+limit number of description lines (default 5, 0 for no limit)	tracker	fi	Kuvausrivien maksimimäärä listanäkymässä. Oletus=5, 0=Ei rajoitusta
+link to ticket	tracker	fi	Linkki merkintään
 linked to %1	tracker	fi	Linkki: %1
 links	tracker	fi	Linkit
+links and attached files	tracker	fi	Linkit ja liitetyt tiedostot
+links to specified application.  example: {{links/infolog}}	tracker	fi	Linkki määriteltyyn sovellukseen. Esim. {{links/infolog}}
 list of coma separated email address	tracker	fi	Lista pilkulla erotetuista sähköpostiosoitteista
+list of files linked to the current record	tracker	fi	Lista liitetyistä tiedostoista
 mail handling	tracker	fi	Postinkäsittely
 manage mapping	tracker	fi	Valitse kentät
+max length of the input [, length of the inputfield (optional)]	tracker	fi	Max. sisällön pituus [,sisältökenttä pituus (valinnainen)]
+maximum %1 times	tracker	fi	maksimisaan %1 kertaa
+maximum %s times	tracker	fi	maksimisaan %s kertaa
 miscellaneous	tracker	fi	Sekalaiset
+multiple changes	tracker	fi	Useat muutokset
 name of current user, all other contact fields are valid too	tracker	fi	Käyttäjän nimi, muut kentät ovat myös voimassa.
 new %1	tracker	fi	Uusi %1
 new items	tracker	fi	Uusi kohde
 new ticket submitted by %1 at %2	tracker	fi	Uusi merkintä henkilöltä %1, %2
+new tickets as	tracker	fi	Uudet merkinnät
 new tracker item submitted by %1 at %2	tracker	fi	Uusi merkintä henkilöltä %1, %2
 no change	tracker	fi	Ei muutosta
 no notifications	tracker	fi	Ei huomautusviestejä
 no trackers found, aborting	tracker	fi	Merkintöjä ei löydetty, keskeytetään.
 non-anonymous users	tracker	fi	Tunnistetut käyttäjät
 noone	tracker	fi	Ei kukaan
+note: timesheet itself is always excluded	tracker	fi	Huom: Ajanhallinta on aina poissuljettu
+nothing to save.	tracker	fi	Ei tallennettavaa
 notification	tracker	fi	Huomautusviesti
+notification message	tracker	fi	Huomautusviesti
+notification signature	tracker	fi	Huomautusviestin allekirjoitus
+number of row for a multiline inputfield or line of a multi-select-box	tracker	fi	Rivien määrä (useariviseen syöttökenttään tai multi-valintalaatikkoon)
+old fixed definition	tracker	fi	Vanha, korjattu määritelmä
+one day after	tracker	fi	Päivää myöhemmin
+one day in advance	tracker	fi	Yksi päivä etukäteen
 only explicitly named users have read access (otherwise everyone)	tracker	fi	Vain erikseen merkityillä käyttäjillä on lukuoikeus (muutoin kaikilla)
+only for admins, technicians or assigned	tracker	fi	Ainoastaan Ylläpitäjät, teknikot ja vastuulliset henkilöt
 open(status)	tracker	fi	Avoin
+order	tracker	fi	Järjestys
 out of date	tracker	fi	Myöhästynyt
+overdue	tracker	fi	Erääntynyt
 overdue after	tracker	fi	Eräpäivän jälkeen
 ownership of the ticket	tracker	fi	Merkinnän omistaja
 pending	tracker	fi	Vireillä
@@ -203,33 +280,53 @@ pending items will be closed automatic after %1 days without response.	tracker	f
 permission denied !!!	tracker	fi	Pääsy estetty !!!
 permissions error - %1 could not %2	tracker	fi	Virhe oikeuksissa - %1 ei voinut: %2
 permit html editing in overview and comments	tracker	fi	Salli HTML-editointi yleiskuvauksessa ja kommenteissa
+pop3	tracker	fi	POP3
 port number	tracker	fi	Portti
 postponed	tracker	fi	Lykätty
+pre-selected version when creating a new tracker	tracker	fi	Oletusversio uutta merkintää luotaessa
 print entry	tracker	fi	Tulosta merkintä
 priorities	tracker	fi	Tärkeysjärjestys
 priorities with empty label are not available to the user	tracker	fi	Tärkeysjärjestyksen tyhjät kentät eivät ole näkyvissä käyttäjille.
+process	tracker	fi	Prosessi
 project selection	tracker	fi	Projektinvalinta
 projects	tracker	fi	Projektit
 queue	tracker	fi	Queue
 read mail address	tracker	fi	Luettava sähköpostiosoite
 receive notifications about assigned tracker-items	tracker	fi	Vastaanota huomautuksia delegoiduista merkinnöistä
 receive notifications about created tracker-items	tracker	fi	Vastaanota huomautuksia uusista merkinnöistä
+receive notifications about due entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti erääntyvistä merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
+receive notifications about starting entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti alkavista merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
 receive notifications in html	tracker	fi	Vastaanota huomautukset html -muodossa
 recieve notifications about own changes in tracker-items	tracker	fi	Vastaanota huomautuksia tekemistäsi muutoksista merkinnöissä.
 rejected	tracker	fi	Kielletty
 remind	tracker	fi	Muistuta
 replacements for inserting entries into documents	tracker	fi	Asiakirjoihin syötettävät sijaismerkinnät
 reply also to unknown addresses	tracker	fi	Vastaa myös tuntemattomiin osoitteisiin
+report as bar chart by the selected criterias	tracker	fi	Raportti palkki-mallisena
+report as pie chart for the main criterias	tracker	fi	Raportti keikko-mallisena
+report parameter	tracker	fi	Raportoitavat parametrit
+report parameters	tracker	fi	Raportoitavat parametrit
+reporting timeframe	tracker	fi	Raportoitava aikaväli
+reports	tracker	fi	Raportit
 resolution	tracker	fi	Resoluutio
+responsible	tracker	fi	Vastuuliset
 restict tracker items to the creator and the staff only	tracker	fi	Rajoita merkintöjen lukuoikeus ainoastaan merkinnän omistajalle ja henkilökunnalle.
 restict tracker items to the creators primary group and the staff only	tracker	fi	Rajoita merkintöjen lukuoikeus ainoastaan omistajan ensisijaiselle ryhmälle ja henkilökunnalle.
 restrict tracker items to staff and:	tracker	fi	Rajoita merkinnät henkilökunnalle ja:
 restricted comment	tracker	fi	Rajoitettu kommentti
 restriction	tracker	fi	Rajoitukset
+same day	tracker	fi	Samana päivänä
+save new report	tracker	fi	Tallenna uusi raportti
+save new report...	tracker	fi	Tallenna uusi raportti...
+saves the changes made and leaves	tracker	fi	Tallentaa tehdyt muutokset
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	fi	Valitse Reklamaationhallintaketju uusille merkinnöille tai valitse "Hylkää" (Reject) estääksesi uusien merkintöjen luomisen sähköpostilla.
+select accounts for which the custom field should be visible	tracker	fi	Valitse käyttäjätilit, joille kenttä on näkyvissä
+select existing report	tracker	fi	Valitse olemassaoleva raportti
 select how autoreplies should be sent when mails are received	tracker	fi	Valitse kuinka automaattinen vastaus tulisi lähettää, kun viesti on vastaanotettu.
 select multiple	tracker	fi	Valitse useampi käyttäjä
+select one...	tracker	fi	Valitse...
 select tracker queue	tracker	fi	Valitse Reklamaationhallintaketju
+select users or groups	tracker	fi	Valitse käyttäjät tai ryhmät
 select which categories should be used in tracker for the tts categories	tracker	fi	Valitse käytettävät kategoriat TTS kategorioille.
 select which username should be used when unrecognized mails are handled.	tracker	fi	Valitse käyttäjänimi, mitä käytetään tunnistamattomille sähköposteille.
 sender address	tracker	fi	Lähettäjän osoite
@@ -243,24 +340,40 @@ set to	tracker	fi	Aseta
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos niitä merkintöjä joissa olet vastuuhenkilönä, päivitetään?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos luomaasi merkintää päivitetään?
 should there be a tracker-box on main screen?	tracker	fi	Haluatko näyttää Reklamaationhallinnan merkinnät etusivulla?
+show start date and due date	tracker	fi	Näytä aloitus- ja eräpäivät
 show the tracker send you notification mails, in tracker items that you updates?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä joita itse päivitit?
+signature	tracker	fi	Allekirjoitus
+skip record	tracker	fi	Ohita
 staff	tracker	fi	Henkilökunta
 staff  "users" will be allowed for assignment to tracker tickets	tracker	fi	Salli "Käyttäjien" vastuulliseksi määrittely merkintöihin.
+started	tracker	fi	Aloitettu
+starting	tracker	fi	Alkamassa
 state	tracker	fi	Tila
 stati	tracker	fi	Tila
+status	tracker	fi	Tila
 store as	tracker	fi	Varastoi
 summary	tracker	fi	Tiivistelmä
+tag to mark positions for address labels	tracker	fi	Tägi osoitetarrojen sijainnille
 technicians	tracker	fi	Tekninkot
 thank you for setting this bounty.	tracker	fi	Kiitos kun asetit palkkion
 thank you for voting.	tracker	fi	Kiitos kun äänestit
 the bounty will not be shown, until the money is received.	tracker	fi	Maksullista kehitystä EI näytetä ennen kuin summa on maksettu.
 the canned response will be prefix the text you type.	tracker	fi	Valmiiksi kirjoitettu vastaus on aloitustekstinä kirjoittamallesi viestille.
+the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	fi	Tiedosto voi sisältää merkintöjä kuten {{%3}}, mihin syötetään haluttu tieto. %1Lista mahdollisista merkinnöistä%2
+the following document-types are supported:	tracker	fi	Seuraavat tiedostotyypit ovat tuettuja:
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	fi	Nimeä käytetään sisäisesti (tietokannassa) (<= 20 merkkiä), muuttaminen voi hävittää olemassa olevia tietoja.
+the text displayed to the user	tracker	fi	Teksti näytetään käyttäjälle
 there already an escalation for that filter!	tracker	fi	Tällä suotimella on jo eskalaatio!
 this module displays information from the tracker.	tracker	fi	Tämä moduuli näyttää tietoa Reklamaationhallinnasta.
+this month	tracker	fi	Tämä kuukausi
+this quarter	tracker	fi	Tämä vuosineljännes
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fi	Järjestelmä sulki tämän merkinnän automaattisesti. Se oli viimeksi asetettu vireillä olevaan tilaan, eikä alkuperäinen lähettäjä vastannut siihen %1 päivän kuluessa.
+this week	tracker	fi	Tämä viikko
+this year	tracker	fi	Tämä vuosi
 ticket count	tracker	fi	Merkintälaskuri
 ticket modified by %1 at %2	tracker	fi	Merkintää muokannut %1, %2
 times	tracker	fi	Ajat
+titles of any entries linked to the current record, excluding attached files	tracker	fi	Linkitettyjen tietueiden otsikot/aiheet, poissulkien liitetyt tiedostot.
 total:	tracker	fi	Yhteensä:
 tracker	common	fi	Reklamaationhallinta
 tracker added	tracker	fi	Reklamaationhallintaketju lisätty
@@ -282,13 +395,21 @@ tracker queue renamed	tracker	fi	Reklamaationhallintaketju nimetty uudelleen
 tracker-%1 '%2' added.	tracker	fi	Merkintä-%1 '%2' lisätty.
 tracker-%1 '%2' updated.	tracker	fi	Merkintä-%1 '%2' päivitetty.
 tracker-%1 deleted.	tracker	fi	Merkintä-%1 poistettu
+type of customfield	tracker	fi	Lisäkentän tyyppi
+unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	fi	'%1' ei voitu muuttaa tili IDksi. Käytetty sen sijaan (%2) %3
 unchanged	tracker	fi	Ei muutetut
 unlinked from %1	tracker	fi	Linkki poistettu: %1
 unrecognized mails	tracker	fi	Tunnistamattomat sähköpostit
+upcoming	tracker	fi	Tulevat
 updated	tracker	fi	Päivitetty
 url of the tracker	tracker	fi	Reklamaationhallinnan URL
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	fi	Sisällytetäänkö Reklamaationhallinnan URL huomautusviesteihin, esim. nettisivulle (Sivustonhallinta-sovelluksessa). Oletus on EGroupwaren Reklamaationhallinta.
 use a default user for mails that where not recognized	tracker	fi	Valitse käyttäjänimi, mitä käytetään tunnistamattomille sähköposteille.
+use all	tracker	fi	Kaikki
+use custom notification message	tracker	fi	Ota huomautusviesti käyttöön
+use custom signature	tracker	fi	Ota allekirjoitus käyttöön
+use field from csv if possible	tracker	fi	Käytä CSV kentässä olevaa tietoa
+use search results	tracker	fi	Hakutulokset
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	fi	Käytä tägiä toistettaviin dokumentteihin. Lisää sisältö kahden tägin väliin.
 versions	tracker	fi	Versiot
 vote for it!	tracker	fi	Äänestä sitä!
@@ -301,6 +422,7 @@ yes, display groups first	tracker	fi	Kyllä, näytä ryhmät ensin
 yes, display users first	tracker	fi	Kyllä, näytä käyttäjät ensin
 yes, new tickets only	tracker	fi	Kyllä, vain uudet merkinnät
 yes, with larger fontsize	tracker	fi	Kyllä, isomalla fonttikoolla
+yesterday	tracker	fi	Eilen
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	fi	Voit sallia / ottaa pois käytöstä Reklamaationhallintaketjujen rajoitukset konfiguroinnissa (kaikista ketjuista)
 you can respond by visiting:	tracker	fi	Voit vastata vierailemalla:
 you need to enter a name	tracker	fi	Anna nimi

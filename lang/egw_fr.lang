@@ -1,10 +1,17 @@
+%1 days in advance	tracker	fr	%1 jours en avance
+%1 entries %2	tracker	fr	%1 entrées %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	fr	%1 entrées %2, %3 ont échoués par manque de droits suffisants !!!
 %1 entries updated.	tracker	fr	%1 entrées mises à jour.
 --> enter new name	tracker	fr	--> entrez un nouveau nom
 1 - lowest	tracker	fr	1- basse
+2 years ago	tracker	fr	Il y a 2 ans
+3 years ago	tracker	fr	Il y a 3 ans
 5 - medium	tracker	fr	5 - moyenne
 9 - highest	tracker	fr	9 - haute
 accepted	tracker	fr	Accepté
+add / remove link	tracker	fr	Ajouter / Enlever le lien
 add comment	tracker	fr	Ajouter un commentaire
+add timesheet entry	tracker	fr	Ajouter une entrée feuille de temps
 after how many days a not replied item should be marked overdue?	tracker	fr	Après combien de jours un élément non répondu sera marqué en retard?
 after how many days pending items should be closed automatic	tracker	fr	Après combien de jours les éléments en attente seront automatiquement fermés
 allow bounties	tracker	fr	Permettre les primes
@@ -13,9 +20,11 @@ allow to assign groups to tracker items	tracker	fr	Permettre d'assigner des grou
 allow voting	tracker	fr	Permettre les votes
 allow voting on tracker items, show and sort after the votes	tracker	fr	Permettre de voter, afficher et trier des éléments du traqueur
 amount	tracker	fr	Montant
+applies the changes	tracker	fr	appliquer les changements
 assigned to	tracker	fr	Assigné à
 assigning groups	tracker	fr	Groupes d'assignation
 attachments & links	tracker	fr	Attachements & Liens
+attention: no contact with address %1 found.	tracker	fr	Attention: Aucun contact trouvé avec l'adresse %1
 autoassign to	tracker	fr	Assigner automatiquement à
 bounties	tracker	fr	Primes
 bounty confirmed	tracker	fr	Prime confirmée
@@ -24,6 +33,7 @@ bounty set	tracker	fr	Prime fixée
 canned response	tracker	fr	Réponse standard
 canned responses	tracker	fr	Réponses standard
 categories, versions, canned responses	tracker	fr	Catégories, versions, réponses standard
+change owner when updating	tracker	fr	Changer le propriètaire lors de la mise à jour
 check all	tracker	fr	Tout sélectionner
 close pending	tracker	fr	Fermer en attente
 closed	tracker	fr	Fermé
@@ -33,45 +43,78 @@ completed	tracker	fr	Complété
 configuration	tracker	fr	Configuration
 configuration for all trackers	tracker	fr	Configuration pour toutes les queues du traqueur
 configuration updated.	tracker	fr	Configuration mise à jour.
-configuration, acl, notifications	tracker	fr	Configuration, contrôle d'accès (ACL), Notifications
 confirm that you pay the specified bounty to implement or fix the issue	tracker	fr	Confirmer que vous avez payé la prime spécifiée pour implémenter ou corriger le cas
 confirm the receipt of money for this bounty	tracker	fr	Confirmez la réception de l'argent pour cette prime
 confirmed	tracker	fr	Confirmé
 copy to	tracker	fr	Copier vers
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	fr	Copie vos changements vers le presse-papiers, %1recharger l'entrée%2 et les fusionne.
 create new links	tracker	fr	Créer de nouveaux liens
 created	tracker	fr	Créé
+creates a new field	tracker	fr	Créer un nouveau champ
+creation date	tracker	fr	Date de création
+custom fields	tracker	fr	Champs personnalisés
 date opened	tracker	fr	Date d'ouverture
+default document to insert entries	tracker	fr	Document par défaut pour insérer les entrées.
 delete this bounty	tracker	fr	Supprimer cette prime
 delete this canned response	tracker	fr	Supprimer cette réponse standard
 delete this category	tracker	fr	Supprimer cette catégorie
+delete this entry	tracker	fr	Supprimer cette entrée
 delete this status	tracker	fr	Supprimer ce status
 delete this tracker including all it's items and categories	tracker	fr	Supprimer ce traqueur y-compris tous ses éléments et catégories
 delete this version	tracker	fr	Supprimer cette version
 deleted	tracker	fr	Supprimé
+deletes this field	tracker	fr	Supprimer ce champ
+determines the order the fields are displayed	tracker	fr	Détermine l'ordre d'afficahge des champs
+directory with documents to insert entries	tracker	fr	Répertoire avec les documents pour insérer les entrées
+do not notify of these changes	tracker	fr	Ne pas notifier de ces changements
+do you want a notification, if items you are responsible for are about to start?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont sur le point de commencer.
+do you want a notification, if items you are responsible for are due?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont dues.
 donator name to show	tracker	fr	Nom du donateur à afficher
 duplicate	tracker	fr	Duplicata
 e-mail address to which a copy of all tracker-notifications should be send	tracker	fr	Adresse email où toutes les notifications du traqueur seront envoyées
 e-mail notifications	tracker	fr	Notifications email
+each value is a line like <id>[=<label>]	tracker	fr	Chaque valeur est une ligne comme <id>[=<label>]
+each value is a line like id[=label]	tracker	fr	Chaque valeur est une ligne comme id[=<label>]
 edit %1	tracker	fr	Modifier %1
 email address to contact you	tracker	fr	Adresse email pour vous contacter
 entry saved	tracker	fr	Entrée enregistrée
 error adding the new tracker!	tracker	fr	Erreur lors de l'ajout du nouveau traqueur!
 error saving the entry!!!	tracker	fr	Erreur lors de l'enregistrement de l'entrée!!!
+error: the entry has been updated since you opened it for editing!	tracker	fr	Erreur: cette entrée a été mise à jour pendant que vous l'aviez ouverte pour la modifier!
 everybody	tracker	fr	Tout le monde
 existing links	tracker	fr	Liens existants
+exists	tracker	fr	Existe
+export as csv	tracker	fr	Exporter au format CSV
 field	tracker	fr	Champ
 fixed	tracker	fr	Corrigé
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	fr	Pour les lettres en série utiliser cette balise. Placer le contenu que vous voulez répéter entre deux balises.
+forward	tracker	fr	Transférer
+forward to	tracker	fr	transférer à
 from	tracker	fr	De
 history	tracker	fr	Historique
 id	tracker	fr	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	fr	Si cet élément est important pour vous, veuillez considérer d'y fixer une prime!
 if this item is important for you, please vote for it.	tracker	fr	Si cet élément est important pour vous, veuillez le voter.
+insert	tracker	fr	Insérer
+insert in document	tracker	fr	Insérer dans un document
 invalid	tracker	fr	Invalide
 item assignee	tracker	fr	Acquéreur de l'élément
 item creator	tracker	fr	Créateur de l'élément
 language for the copy	tracker	fr	Langage pour la copie
 last modified	tracker	fr	Dernière modification
+last modified by	tracker	fr	Dernière modification par
+last month	tracker	fr	Le mois dernier
+last week	tracker	fr	La semaine dernière
+last year	tracker	fr	L'année dernière
 later	tracker	fr	Plus tard
+leaves without saveing	tracker	fr	Quitter sans enregistrer
+length<br>rows	tracker	fr	Longueur<br>lignes
+limit number of description lines (default 5, 0 for no limit)	tracker	fr	Limiter le nombre de lignes de description. Défaut = 5, 0 = pas de limite.
+linked to %1	tracker	fr	Lié à %1
+links	tracker	fr	Liens
+manage mapping	tracker	fr	Gestion des correspondances
+max length of the input [, length of the inputfield (optional)]	tracker	fr	Longueur maximum de l'entrée [, longueur du champ de saisi (optionnel)]
+name of current user, all other contact fields are valid too	tracker	fr	Nom de l'utilisateur courant, tous les autres champs de contacts sont valides aussi
 new %1	tracker	fr	Nouveau %1
 new items	tracker	fr	Nouvel élément
 new tracker item submitted by %1 at %2	tracker	fr	Nouvel élément de traqueur soumis par %1 à %2
@@ -79,34 +122,57 @@ no change	tracker	fr	Aucune modification
 non-anonymous users	tracker	fr	Utilisateur non-anonyme
 noone	tracker	fr	Personne
 notification	tracker	fr	Notification
+number of row for a multiline inputfield or line of a multi-select-box	tracker	fr	Nombre de lignes pour un champ multiligne ou pour une boîte de sélection multiple.
+one day after	tracker	fr	Un jour plus tard
+one day in advance	tracker	fr	Un jour plus tôt
 open(status)	tracker	fr	Ouvert
+order	tracker	fr	Ordre
 out of date	tracker	fr	Expiré
+overdue	tracker	fr	Tardif
 overdue after	tracker	fr	En retard après
 pending	tracker	fr	En attente
 pending items never get close automatic.	tracker	fr	Les éléments en attente ne sont jamais fermés automatiquement.
 pending items will be closed automatic after %1 days without response.	tracker	fr	Les éléments en attente seront fermés automatiquement après %1 jours sans réponse.
 permission denied !!!	tracker	fr	Accès interdit !!!
+permissions error - %1 could not %2	tracker	fr	Error de permission - %1 ne peut %2
 postponed	tracker	fr	Remis à plus tard
+process	tracker	fr	Procéder
 receive notifications about assigned tracker-items	tracker	fr	Recevoir les notifications des éléments de traqueur assignés
 receive notifications about created tracker-items	tracker	fr	Recevoir les notifications des éléments de traqueur créés
 rejected	tracker	fr	Rejeté
 remind	tracker	fr	Rappeler
+replacements for inserting entries into documents	tracker	fr	Remplacements pour insertion d'entrées dans des documents
 resolution	tracker	fr	Résolution
+responsible	tracker	fr	Responsable
+same day	tracker	fr	Même jour
+saves the changes made and leaves	tracker	fr	Enregistrer les modifications et quitter
+select accounts for which the custom field should be visible	tracker	fr	Sélectionner les comptes pour lesquels le champ personnalisé devrait être visible.
+select one...	tracker	fr	sélectionnez un...
+select users or groups	tracker	fr	Sélectionner des utilisateurs et groupes
 sender address	tracker	fr	Adresse de l'expéditeur
 sender address for all notifications, eg. noreply@egroupware.org	tracker	fr	Adresse de l'expéditeur pour toutes les notifications, p.ex. noreply@egroupware.org
 set an own bounty (in %s)	tracker	fr	Fixer sa propre prime (en %s)
 set bounty	tracker	fr	Fixer une prime
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments dont vous êtes assignés sont modifiés?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments que vous avez créé sont modifiés?
+signature	tracker	fr	Signature
 staff	tracker	fr	Equipe
+state	tracker	fr	Région
 summary	tracker	fr	Description
+tag to mark positions for address labels	tracker	fr	Balise pour marquer les positions des étiquettes d'adresses
 technicians	tracker	fr	Techniciens
 thank you for setting this bounty.	tracker	fr	Merci d'avoir fixé cette prime.
 thank you for voting.	tracker	fr	Merci d'avoir voté.
 the bounty will not be shown, until the money is received.	tracker	fr	La prime ne sera PAS affichée jusqu'à ce que l'argent sera reçu.
 the canned response will be prefix the text you type.	tracker	fr	La réponse standard précédera le texte que vous entrez.
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	fr	Nom utilisé en interne (<= 20 caractères), le changer rendra certaines données inaccessibles.
+the text displayed to the user	tracker	fr	le texte montré à l'utilisateur
 this module displays information from the tracker.	tracker	fr	Ce module affiche les informations du Traqueur
+this month	tracker	fr	Ce mois
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fr	Cet élément du Traqueur a été automatiquement fermé par le système. Il avait été mis en status 'En attente', et le créateur original n'a pas répondu dans les %1 jours.
+this week	tracker	fr	Cette semaine
+this year	tracker	fr	Cette année
+times	tracker	fr	Heures
 tracker	common	fr	Traqueur
 tracker added	tracker	fr	Queue de Traqueur ajoutée
 tracker admins	tracker	fr	Administrateurs du Traqueur
@@ -118,8 +184,16 @@ tracker item not found !!!	tracker	fr	Elément de Traqueur introuvable !!!
 tracker-%1 '%2' added.	tracker	fr	Traqueur-%1 '%2' ajouté.
 tracker-%1 '%2' updated.	tracker	fr	Traqueur-%1 '%2' mis à jour.
 tracker-%1 deleted.	tracker	fr	Traqueur-%1 '%2' supprimé
+type of customfield	tracker	fr	Type de champ personnalisé
+unlinked from %1	tracker	fr	Délier de %1
+upcoming	tracker	fr	Arrivant
+updated	tracker	fr	Mis à jour
 url of the tracker	tracker	fr	URL du traqueur
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	fr	URL devant être inclue dans la notification, p.ex. vers la page du module SiteMgr, Traqueur par défaut dans eGW
+use all	tracker	fr	Utiliser tout
+use field from csv if possible	tracker	fr	Utiliser le champ du CSV si possible
+use search results	tracker	fr	Utiliser les résultats de la recherche
+use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	fr	Utiliser cette balise pour les étiquettes d'adresse. Placer le contenu que vous voulez répéter entre deux balises.
 versions	tracker	fr	Versions
 vote for it!	tracker	fr	Voter!
 votes	tracker	fr	Votes
@@ -127,9 +201,13 @@ wont fix	tracker	fr	Ne corrigerai pas
 works for me	tracker	fr	Fonctionne pour moi
 yes, display groups first	tracker	fr	Oui, afficher les groupes en premier
 yes, display users first	tracker	fr	Oui, afficher les utilisateurs en premier
+yes, with larger fontsize	tracker	fr	Oui, avec une taille de caractères plus grande
+yesterday	tracker	fr	Hier
 you can respond by visiting:	tracker	fr	Vous pouvez répondre en visitant:
 you need to enter a name	tracker	fr	Vous devez entrer un nom
 you need to login to vote!	tracker	fr	Vous devez vous connecter pour voter!
+you need to select an entry for linking.	tracker	fr	Vous devez sélectionner une entrée pour la lier
+you need to select some entries first	tracker	fr	Vous devez sélectionner des entrées d'abord.
 you need to select something to change and some tracker items!	tracker	fr	Vous devez sélectionner quelque chose à modifier et un élément de traqueur!
 you need to specify amount, donators name and email address!	tracker	fr	Vous devez spécifier le montant, le nom du donateur ET son adresse email!
 you voted %1.	tracker	fr	Vous avez voté %1.

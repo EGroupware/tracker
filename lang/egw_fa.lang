@@ -1,0 +1,63 @@
+2 years ago	tracker	fa	دو سال پیش
+3 years ago	tracker	fa	سه سال پیش
+accepted	tracker	fa	تأیید شد
+add timesheet entry	tracker	fa	افزودن برگه ساعت کار
+applies the changes	tracker	fa	تغییرات را اعمال می کند
+check all	tracker	fa	چک کردن همه
+comments	tracker	fa	توضیحات
+completed	tracker	fa	پایان یافته است.
+configuration	tracker	fa	پیکربندی
+copy to	tracker	fa	نسخه برداری به
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	fa	تغییرات شما را در تخته یادداشت نگه میدارد، %1ورودی را مجددا بازیابی نمائید%2 و ادغامشان کنید
+create new links	tracker	fa	ایجاد پیوندهای جدید
+created	tracker	fa	ایجاد شد
+creates a new field	tracker	fa	ایجاد فیلد جدید
+creation date	tracker	fa	تاریخ ایجاد
+custom fields	tracker	fa	فیلدهای سفارشی
+delete this category	tracker	fa	حذف این دسته
+delete this entry	tracker	fa	حذف این ورودی
+deleted	tracker	fa	حذف شد
+deletes this field	tracker	fa	حذف این فیلد
+determines the order the fields are displayed	tracker	fa	تشخیص ترتیب نمایش فیلدها
+each value is a line like <id>[=<label>]	tracker	fa	هر مقدار در یک خط مثل [<id>[=<label>
+each value is a line like id[=label]	tracker	fa	هر مقدار در یک خط مثل [id[=label
+entry saved	tracker	fa	ورودی ذخیره شد
+error saving the entry!!!	tracker	fa	خطای ذخیره ورودی!!!
+error: the entry has been updated since you opened it for editing!	tracker	fa	خطا: ورودی درحال بهنگام سازی است در زمانی که شما دارید ویرایش یا بازش می کنید
+everybody	tracker	fa	همه
+existing links	tracker	fa	پیوندهای موجود
+forward	tracker	fa	پیش سو
+from	tracker	fa	از
+history	tracker	fa	تاریخچه
+id	tracker	fa	کد
+last modified	tracker	fa	آخرین تغییرات
+last month	tracker	fa	ماه گذشته
+last week	tracker	fa	هفته گذشته
+last year	tracker	fa	سال گذشته
+leaves without saveing	tracker	fa	ترک بدون ذخیره
+length<br>rows	tracker	fa	طول <br> سطور
+links	tracker	fa	پیوندها
+max length of the input [, length of the inputfield (optional)]	tracker	fa	حداکثر اندازه ورودی [طول فیلد ورودی] (دلخواه)
+number of row for a multiline inputfield or line of a multi-select-box	tracker	fa	تعداد سطور یک فیلد چند خطی یا خط چند انتخابی
+open(status)	tracker	fa	کارهای باز
+order	tracker	fa	ترتیب
+overdue	tracker	fa	کارهای سررسیده
+permission denied !!!	tracker	fa	دسترسی غیر ممکن!!!
+process	tracker	fa	پروسه
+rejected	tracker	fa	پذیرفته نشد
+responsible	tracker	fa	مسئول اجرا
+saves the changes made and leaves	tracker	fa	تغییرات را ذخیره کرده و خارج می شود
+select one...	tracker	fa	انتخاب یکی...
+signature	tracker	fa	امضاء
+state	tracker	fa	استان
+summary	tracker	fa	خلاصه
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	fa	نامی که داخلی استفاده می شود(کمتر از ۲۰ کاراکتر)، تغییر آن ممکن است باعث شود که اطلاعات غیر قابل دسترس شون
+the text displayed to the user	tracker	fa	متنی که به کاربر نمایش داده می شود
+this month	tracker	fa	این ماه
+this week	tracker	fa	این هفته
+this year	tracker	fa	امسال
+times	tracker	fa	زمانها
+type of customfield	tracker	fa	نوع فیلد سفارشی
+upcoming	tracker	fa	کارهای آینده
+updated	tracker	fa	بهنگام شد
+yesterday	tracker	fa	دیروز

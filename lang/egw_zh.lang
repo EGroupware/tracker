@@ -8,6 +8,8 @@
 --> choose a project from the drop-down list	tracker	zh	--> 从下拉列表选择一个项目
 --> enter new name	tracker	zh	--> 输入新名称
 1 - lowest	tracker	zh	1 - 最低
+2 years ago	tracker	zh	两年前
+3 years ago	tracker	zh	三年前
 5 - medium	tracker	zh	5 - 中等
 9 - highest	tracker	zh	9 - 最高
 accepted	tracker	zh	接受
@@ -25,11 +27,13 @@ allow to assign groups to tracker items	tracker	zh	允许指派群组到任务�
 allow voting	tracker	zh	允许投票
 allow voting on tracker items, show and sort after the votes	tracker	zh	允许对跟踪项目进行投票，在投票以后显示并且排序
 amount	tracker	zh	总计
+applies the changes	tracker	zh	应用更改
 assign to project	tracker	zh	指派到项目
 assigned to	tracker	zh	指派
 assigning groups	tracker	zh	指派给群组
 attachments & links	tracker	zh	附件与链接
 autoassign to	tracker	zh	自动指派给
+automatically created by importexport	tracker	zh	导入导出自动地创建
 bounties	tracker	zh	奖金
 bounty confirmed	tracker	zh	奖金已确认
 bounty confirmed.	tracker	zh	奖金已确认。
@@ -49,7 +53,6 @@ completed	tracker	zh	完成
 configuration	tracker	zh	配置
 configuration for all trackers	tracker	zh	所有任务跟踪配置
 configuration updated.	tracker	zh	配置已更新。
-configuration, acl, notifications	tracker	zh	配置、ACL、提醒通知
 confirm that you pay the specified bounty to implement or fix the issue	tracker	zh	确认您为这个问题的实施或修复支付了指定的奖金
 confirm the receipt of money for this bounty	tracker	zh	确认这个奖金的收据
 confirmed	tracker	zh	确认
@@ -57,8 +60,13 @@ convert all closed tickets	tracker	zh	转换所有关闭的传票
 convert all open tickets	tracker	zh	转换所有打开的传票
 converted count	tracker	zh	已转换的计数
 copy to	tracker	zh	复制到
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	zh	复制您的改变到剪贴板，%1重新载入条目%2并合并它们。
 create new links	tracker	zh	建立新链接
 created	tracker	zh	建立时间
+creates a new field	tracker	zh	创建一新字段
+creation date	tracker	zh	创建日期
+creator	tracker	zh	创建者
+custom fields	tracker	zh	自定义字段
 date opened	tracker	zh	被打开的日期
 delete this bounty	tracker	zh	删除这个奖金
 delete this canned response	tracker	zh	删除这个制式回应
@@ -68,34 +76,54 @@ delete this status	tracker	zh	删除这个状态
 delete this tracker including all it's items and categories	tracker	zh	删除这个任务跟踪，包含其中的所有项目与类别
 delete this version	tracker	zh	删除这个版本
 deleted	tracker	zh	已删除
+deletes this field	tracker	zh	删除此字段域
+determines the order the fields are displayed	tracker	zh	确定显示字段域顺序
 do you want to vote for this item	tracker	zh	您是否要为这个项目投票
 donator name to show	tracker	zh	要显示的赞助者名称
 duplicate	tracker	zh	副本
 e-mail address to which a copy of all tracker-notifications should be send	tracker	zh	所有任务跟踪提醒通知的副本要发送的信箱
 e-mail notifications	tracker	zh	发送通知邮件
+each value is a line like <id>[=<label>]	tracker	zh	每个数值是一行像是<id>[=<label>]这样的文字
+each value is a line like id[=label]	tracker	zh	每个数值是一行像是 id[=label] 这样的文字
 edit %1	tracker	zh	编辑%1
 email address to contact you	tracker	zh	联系信箱
 entry saved	tracker	zh	条目被保存
 error adding the new tracker!	tracker	zh	添加任务跟踪时发生错误！
 error saving the entry!!!	tracker	zh	保存条目时发生错误！
+error: the entry has been updated since you opened it for editing!	tracker	zh	错误：条目自从您打开编辑以来已经更新！
 everybody	tracker	zh	所有人
 existing links	tracker	zh	现有链接
+export as csv	tracker	zh	导出成 CSV
 field	tracker	zh	字段
 fixed	tracker	zh	固定的
+forward	tracker	zh	转发
+forward to	tracker	zh	转发到
 from	tracker	zh	来自
+general fields:	tracker	zh	通用字段：
 history	tracker	zh	历史
 html editing	tracker	zh	HTML 编辑
 id	tracker	zh	编号
 if this item is important for you, please consider to set a bounty for it!	tracker	zh	如果这个项目对您而言相当紧急，不妨考虑为它设定一个奖金！
 if this item is important for you, please vote for it.	tracker	zh	如果这个项目对您而言很重要，请加入投票。
 import tts tickets	tracker	zh	导入TTS传票
+insert in document	tracker	zh	插入文件
 invalid	tracker	zh	错误
 item assignee	tracker	zh	项目负责人
 item creator	tracker	zh	项目建立者
 language for the copy	tracker	zh	副本的语言
 last modified	tracker	zh	最后更新日期
+last modified by	tracker	zh	最近修改
+last month	tracker	zh	上个月
+last week	tracker	zh	上星期
+last year	tracker	zh	去年
 later	tracker	zh	晚一点
+leaves without saveing	tracker	zh	不保存
+length<br>rows	tracker	zh	长度<br>列数
+links	tracker	zh	链接
 list of coma separated email address	tracker	zh	逗号分隔电子邮件列表
+manage mapping	tracker	zh	管理匹配
+max length of the input [, length of the inputfield (optional)]	tracker	zh	输入的最大长度 [, 输入字段的长度 (可选)]
+name of current user, all other contact fields are valid too	tracker	zh	目前用户的名称，所有其他联系人字段也是正确的
 new %1	tracker	zh	新建%1
 new items	tracker	zh	新建项目
 new ticket submitted by %1 at %2	tracker	zh	新传票由%1在%2提交
@@ -105,16 +133,18 @@ no trackers found, aborting	tracker	zh	未找到任务跟踪，异常退出
 non-anonymous users	tracker	zh	非匿名用户
 noone	tracker	zh	无
 notification	tracker	zh	提醒通知
-number of replies	tracker	zh	回复的数字
+number of row for a multiline inputfield or line of a multi-select-box	tracker	zh	多行输入字段的列数或多选框的行数
 open(status)	tracker	zh	打开
+order	tracker	zh	排序
 out of date	tracker	zh	超过日期
+overdue	tracker	zh	延误事项
 overdue after	tracker	zh	到期天数
-owned by group	tracker	zh	由组拥有
 pending	tracker	zh	未决的
 pending items never get close automatic.	tracker	zh	未决的项目永远不会自动关闭。
 pending items will be closed automatic after %1 days without response.	tracker	zh	未决的项目在%1天后如果没有答复将自动关闭。
 permission denied !!!	tracker	zh	没有权限！
 postponed	tracker	zh	延期
+process	tracker	zh	进程
 project selection	tracker	zh	项目选择
 projects	tracker	zh	项目
 receive notifications about assigned tracker-items	tracker	zh	在被指派任务跟踪项目时发出通知
@@ -124,17 +154,20 @@ recieve notifications about own changes in tracker-items	tracker	zh	收到有关
 rejected	tracker	zh	拒绝
 remind	tracker	zh	提醒
 resolution	tracker	zh	决议
+responsible	tracker	zh	委派给
 restriction	tracker	zh	限制
+saves the changes made and leaves	tracker	zh	保存修改并离开
+select one...	tracker	zh	选择一个...
 select tracker queue	tracker	zh	选择跟踪队列
 select which categories should be used in tracker for the tts categories	tracker	zh	应该为TTS分类选择哪些类别来应用于任务跟踪
 sender address	tracker	zh	发件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
 set an own bounty (in %s)	tracker	zh	设定一个自己的奖金(在 %s)
 set bounty	tracker	zh	设定奖金
-should the tracker send you notification mails in html?	tracker	zh	跟踪系统是否要发送 html 通知邮件给您？
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh	如果指派给您的任务跟踪项目更新了，是否要发送通知给您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh	如果您建立的任务跟踪项目更新了，是否要发送通知给您？
 show the tracker send you notification mails, in tracker items that you updates?	tracker	zh	显示跟踪系统发送给您的通知邮件，您在跟踪项目中进行了更新？
+signature	tracker	zh	签名
 staff	tracker	zh	职员
 state	tracker	zh	状态
 stati	tracker	zh	状态
@@ -144,10 +177,16 @@ thank you for setting this bounty.	tracker	zh	感谢您设定这个奖金。
 thank you for voting.	tracker	zh	感谢您的投票。
 the bounty will not be shown, until the money is received.	tracker	zh	这个奖金会在款项收取后显示。
 the canned response will be prefix the text you type.	tracker	zh	固定格式的答复将在您输入的文字前加上前缀。
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	zh	使用的名称在内 (<= 20 个字符)，修改现有的无效数据
+the text displayed to the user	tracker	zh	向用户显示的文本
 this module displays information from the tracker.	tracker	zh	这个模块用来显示来自跟踪的信息。
+this month	tracker	zh	这个月
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	zh	这个跟踪项目已被系统自动关闭，在这之前它的状态被设置为未决状态，但是原提交者在%1天内没有答复。
+this week	tracker	zh	这星期
+this year	tracker	zh	今年
 ticket count	tracker	zh	传票计数
 ticket modified by %1 at %2	tracker	zh	传票由%1在%2修改
+times	tracker	zh	次数
 tracker	common	zh	跟踪系统
 tracker added	tracker	zh	跟踪队列已添加
 tracker admins	tracker	zh	跟踪管理
@@ -160,6 +199,9 @@ tracker queue	tracker	zh	任务跟踪队列
 tracker-%1 '%2' added.	tracker	zh	任务跟踪 -%1 '%2' 被添加。
 tracker-%1 '%2' updated.	tracker	zh	任务跟踪 -%1 '%2' 已更新。
 tracker-%1 deleted.	tracker	zh	任务跟踪 -%1 已删除。
+type of customfield	tracker	zh	自定义字段类型
+upcoming	tracker	zh	临近事项
+updated	tracker	zh	更新
 url of the tracker	tracker	zh	任务跟踪的网址
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	zh	要加入到提醒通知的网址，例如 SiteMgr 模块的网址，缺省会包含在 eGW 中
 versions	tracker	zh	版本
@@ -170,6 +212,7 @@ works for me	tracker	zh	适用于我
 yes, display groups first	tracker	zh	是，首先显示组
 yes, display users first	tracker	zh	是，首先显示用户
 yes, with larger fontsize	tracker	zh	是，使用较大的字体
+yesterday	tracker	zh	昨天
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	zh	你可以在配置标签中启用/禁用队列访问限制(所有队列)
 you can respond by visiting:	tracker	zh	您可以通过访问答复：
 you need to enter a name	tracker	zh	您必须输入名称
