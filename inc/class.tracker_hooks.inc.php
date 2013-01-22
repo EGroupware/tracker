@@ -123,6 +123,63 @@ class tracker_hooks
                 );
 
 		$settings = array(
+			array(
+				'type'  => 'section',
+				'title' => lang('General settings'),
+				'no_lang'=> true,
+				'xmlrpc' => False,
+				'admin'  => False
+			),
+			'homepage_display' => array(
+				'type'   => 'check',
+				'label'  => 'Tracker for the main screen',
+				'name'   => 'homepage_display',
+				'values' => array(
+					'no'  => 'No',
+					'yes' => 'Yes'
+				),
+				'help'   => 'Should there be a tracker-box on main screen?',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> false
+			),
+			'allow_defaultproject' => array(
+				'type'   => 'check',
+				'label'  => 'Allow default projects for tracker',
+				'name'   => 'allow_defaultproject',
+				'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'forced' => true,
+			),
+			'default_version' => array(
+				'type'   => 'select',
+				'values' => $versions,
+				'label'  => 'Default version for new tracker entries',
+				'name'   => 'default_version',
+				'help'   => 'Pre-selected version when creating a new tracker',
+				'run_lang' => false,
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> false,
+			),
+			'limit_des_lines' => array(
+				'type'   => 'input',
+				'size'   => 5,
+				'label'  => 'Limit number of description lines (default 5, 0 for no limit)',
+				'name'   => 'limit_des_lines',
+				'help'   => 'How many description lines should be directly visible. Further lines are available via a scrollbar.',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> 5,
+			),
+			array(
+				'type'  => 'section',
+				'title' => lang('Notification settings'),
+				'no_lang'=> true,
+				'xmlrpc' => False,
+				'admin'  => False
+			),
 			'notify_creator' => array(
 				'type'   => 'check',
 				'label'  => 'Receive notifications about created tracker-items',
@@ -170,48 +227,12 @@ class tracker_hooks
 				'admin'  => False,
 				'default'=> '0d',       // Same day
 			),
-			'allow_defaultproject' => array(
-				'type'   => 'check',
-				'label'  => 'Allow default projects for tracker',
-				'name'   => 'allow_defaultproject',
-				'help'   => 'Allow the predefinition of projects that will be assigned to new tracker-items.',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'forced' => true,
-			),
-			'limit_des_lines' => array(
-				'type'   => 'input',
-				'size'   => 5,
-				'label'  => 'Limit number of description lines (default 5, 0 for no limit)',
-				'name'   => 'limit_des_lines',
-				'help'   => 'How many description lines should be directly visible. Further lines are available via a scrollbar.',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> 5,
-			),
-			'default_version' => array(
-				'type'   => 'select',
-				'values' => $versions,
-				'label'  => 'Default version for new tracker entries',
-				'name'   => 'default_version',
-				'help'   => 'Pre-selected version when creating a new tracker',
-				'run_lang' => false,
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> false,
-			),
-			'homepage_display' => array(
-				'type'   => 'check',
-				'label'  => 'Tracker for the main screen',
-				'name'   => 'homepage_display',
-				'values' => array(
-					'no'  => 'No',
-					'yes' => 'Yes'
-				),
-				'help'   => 'Should there be a tracker-box on main screen?',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> false
+			'data_settings' => array(
+				'type'  => 'section',
+				'title' => lang('Data exchange settings'),
+				'no_lang'=> true,
+				'xmlrpc' => False,
+				'admin'  => False
 			),
 		);
 		// Merge print
