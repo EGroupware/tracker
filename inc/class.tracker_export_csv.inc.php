@@ -16,6 +16,12 @@
  */
 class tracker_export_csv implements importexport_iface_export_plugin {
 
+	public function __construct()
+	{
+		translation::add_app('tracker');
+		$this->ui = new tracker_ui();
+		$this->get_selects();
+	}
 	/**
 	 * Exports records as defined in $_definition
 	 *
@@ -24,59 +30,73 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	public function export( $_stream, importexport_definition $_definition) {
 		$options = $_definition->plugin_options;
 
-		$ui = new tracker_ui();
 
 		$selection = array();
 		$query_key = 'tracker'.($options['tracker'] ? '-'.$options['tracker'] : '');
 		$query = $old_query = egw_session::appsession('index',$query_key);
-		if ($options['selection'] == 'selected') {
-			// ui selection with checkbox 'use_all'
-			$query['num_rows'] = -1;	// all
-			$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
-			$ui->get_rows($query,$selection,$readonlys);
+		switch($options['selection'])
+		{
+			case 'selected':
+				// ui selection with checkbox 'use_all'
+				$query['num_rows'] = -1;	// all
+				$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
+				$this->ui->get_rows($query,$selection,$readonlys);
 
-			// Reset nm params
-			egw_session::appsession('index',$query_key, $old_query);
-		}
-		elseif ( $options['selection'] == 'all' ) {
-			$query = array(
-				'num_rows' => -1,		// all
-				'csv_export' => true,	// so get_rows method _can_ produce different content or not store state in the session
-			);
-			$ui->get_rows($query,$selection,$readonlys);
+				// Reset nm params
+				egw_session::appsession('index',$query_key, $old_query);
+				break;
+			case 'filter':
+			case 'all':
+				$query = array(
+					'num_rows' => -1,		// all
+					'csv_export' => true,	// so get_rows method _can_ produce different content or not store state in the session
+				);
+				if($options['selection'] == 'filter')
+				{
+					$fields = importexport_helper_functions::get_filter_fields($_definition->application, $this);
+					$query['col_filter'] = $_definition->filter;
 
-			// Reset nm params
-			egw_session::appsession('index',$query_key, $old_query);
-		} else {
-			$selection = explode(',',$options['selection']);
+					// Backend expects a string
+					if($query['col_filter']['info_responsible'])
+					{
+						$query['col_filter']['info_responsible'] = implode(',',$query['col_filter']['info_responsible']);
+					}
+
+					// Handle ranges
+					foreach($query['col_filter'] as $field => $value)
+					{
+						if(!is_array($value) || (!$value['from'] && !$value['to'])) continue;
+
+						// Ranges are inclusive, so should be provided that way (from 2 to 10 includes 2 and 10)
+						if($value['from']) $query['col_filter'][] = "$field >= " . (int)$value['from'];
+						if($value['to']) $query['col_filter'][] = "$field <= " . (int)$value['to'];
+						unset($query['col_filter'][$field]);
+					}
+				}
+error_log(array2string($query['col_filter']));
+
+				$this->ui->get_rows($query,$selection,$readonlys);
+
+				// Reset nm params
+				egw_session::appsession('index',$query_key, $old_query);
+			break;
+			default:
+				$selection = explode(',',$options['selection']);
+			break;
 		}
 
 		$export_object = new importexport_export_csv($_stream, (array)$options);
 		$export_object->set_mapping($options['mapping']);
 
-		// Get lookups for human-friendly values
-		if($options['convert']) {
-			$lookups = array(
-				'tr_tracker'	=> $ui->trackers,
-				'tr_version'	=> $ui->get_tracker_labels('version', null),
-				'tr_status'	=> $ui->get_tracker_stati(null),
-				'tr_resolution'	=> $ui->get_tracker_labels('resolution',null),
-				'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
-			);
-			foreach($lookups['tr_tracker'] as $id => $name) {
-				$lookups['tr_version'] += $ui->get_tracker_labels('version', $id);
-				$lookups['tr_status'] += $ui->get_tracker_stati($id);
-				$lookups['tr_resolution'] += $ui->get_tracker_labels('resolution',$id);
-			}
-		}
+		if($options['convert'])
 
 		foreach ($selection as $record) {
 			if(!is_array($record) || !$record['tr_id']) continue;
 
 			// Add in comments & bounties
 			if($options['mapping']['replies'] || $options['mapping']['bounties']) {
-				$ui->read($record['tr_id']);
-				$record = $ui->data;
+				$this->ui->read($record['tr_id']);
+				$record = $this->ui->data;
 			}
 
 			$_record = new tracker_egw_record();
@@ -84,7 +104,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 
 			if($options['convert']) {
 				// Set per-category priorities
-				$lookups['tr_priority'] = $ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
+				$lookups['tr_priority'] = $this->ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
 
 				importexport_export_csv::convert($_record, tracker_egw_record::$types, 'tracker', $lookups);
 				$this->convert($_record, $options);
@@ -149,7 +169,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 */
 	public function get_selectors_etpl() {
 		return array(
-			'name'	=> 'tracker.export_csv_selectors',
+			'name'	=> 'importexport.export_csv_selectors',
 			'content' => 'selected'
 		);
 	}
@@ -195,4 +215,36 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			}
 		}
 	}
+
+	/**
+	 * Get lookups for human-friendly values
+	 */
+	public function get_selects()
+	{
+		$this->selects = array(
+			'tr_tracker'	=> $this->ui->trackers,
+			'tr_version'	=> $this->ui->get_tracker_labels('version', null),
+			'tr_status'	=> $this->ui->get_tracker_stati(null),
+			'tr_resolution'	=> $this->ui->get_tracker_labels('resolution',null),
+			'tr_priority'	=> $this->ui->get_tracker_priorities(),
+			'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
+		);
+		foreach($this->selects['tr_tracker'] as $id => $name) {
+			$this->selects['tr_version'] += $this->ui->get_tracker_labels('version', $id);
+			$this->selects['tr_status'] += $this->ui->get_tracker_stati($id);
+			$this->selects['tr_resolution'] += $this->ui->get_tracker_labels('resolution',$id);
+			$this->selects['tr_priority'] += $this->ui->get_tracker_priorities($id);
+		}
+	}
+
+	/**
+	 * Adjust automatically generated filter fields
+	 */
+	public function get_filter_fields(Array &$filters)
+        {
+                foreach($filters as $field_name => &$settings)
+                {
+                        if($this->selects[$field_name]) $settings['values'] = $this->selects[$field_name];
+                }
+        }
 }
