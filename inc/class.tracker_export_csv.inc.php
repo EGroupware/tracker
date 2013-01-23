@@ -36,7 +36,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 		$query = $old_query = egw_session::appsession('index',$query_key);
 		switch($options['selection'])
 		{
-			case 'selected':
+			case 'search':
 				// ui selection with checkbox 'use_all'
 				$query['num_rows'] = -1;	// all
 				$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
@@ -104,9 +104,9 @@ error_log(array2string($query['col_filter']));
 
 			if($options['convert']) {
 				// Set per-category priorities
-				$lookups['tr_priority'] = $this->ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
+				$this->selects['tr_priority'] = $this->ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
 
-				importexport_export_csv::convert($_record, tracker_egw_record::$types, 'tracker', $lookups);
+				importexport_export_csv::convert($_record, tracker_egw_record::$types, 'tracker', $this->selects);
 				$this->convert($_record, $options);
 			} else {
 				// Implode arrays, so they don't say 'Array'
@@ -242,6 +242,10 @@ error_log(array2string($query['col_filter']));
 	 */
 	public function get_filter_fields(Array &$filters)
         {
+		// When filtering, use only categories flagged as category
+		$filters['cat_id']['type'] = 'select';
+		$filters['cat_id']['values'] = $this->ui->get_tracker_labels('cat',null);
+
                 foreach($filters as $field_name => &$settings)
                 {
                         if($this->selects[$field_name]) $settings['values'] = $this->selects[$field_name];
