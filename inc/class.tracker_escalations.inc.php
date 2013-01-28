@@ -617,9 +617,6 @@ class tracker_escalations extends so_sql2
                         unset(self::$tracker->tracking->skip_notify);
                 }
 
-		// Open tickets
-		$open_stati = array_keys(self::$tracker->get_tracker_stati(null,false));
-
 		// Get a list of users
 		$users = self::$tracker->users_with_open_entries();
 
@@ -641,10 +638,14 @@ class tracker_escalations extends so_sql2
 			{
 				if (!($pref_value = $GLOBALS['egw_info']['user']['preferences']['tracker'][$pref])) continue;
 
-				$pref_time= time()+24*60*60*(int)$pref_value;
-				$filter = "($filter > $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')';
+				$pref_time= mktime(0,0,0,date('m'),date('d'), date('Y')) + 24*60*60*(int)$pref_value;
+				$_filter = array(
+					"($filter >= $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')',
+					'tr_tracker'	=> array_keys(self::$tracker->trackers),
+					'tr_status'	=> 'own-not-closed'
+				);
 //echo "\nUser: $user Preference: $pref=$pref_value Filter: $filter\n";
-//echo date('Y-m-d H:i', $pref_time) . ' < ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
+//echo date('Y-m-d H:i', $pref_time) . ' <= ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
 
 				if (self::$tracker->user != $user)
 				{
@@ -652,7 +653,7 @@ class tracker_escalations extends so_sql2
 				}
 
 				// Get matching tickets
-				$tickets = self::$tracker->search(array($filter, 'tr_status' => $open_stati));
+				$tickets = self::$tracker->search(array(),True,'','','',False,'AND',false,$_filter);
 				if(!$tickets) continue;
 				
 				foreach($tickets as $ticket)
