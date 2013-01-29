@@ -414,7 +414,7 @@ class tracker_so extends so_sql_cf
 			case 'ownorassigned-not-closed':
 				unset($filter['tr_status']);
 				$filter[] = '('.$this->db->expression(self::TRACKER_TABLE,array('tr_creator' => $this->user)).' OR '.
-					self::TRACKER_TABLE.'.tr_id in (SELECT tr_id from '.self::ASSIGNEE_TABLE.' WHERE '. $this->db->expression(self::ASSIGNEE_TABLE,array('tr_assigned' => $this->user)).'))';
+					self::TRACKER_TABLE.'.tr_id in (SELECT tr_id from '.self::ASSIGNEE_TABLE.' WHERE '. $this->db->expression(self::ASSIGNEE_TABLE,'tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')').'))';
 				$filter[] = $not_closed;
 				break;
 			case 'without-reply-not-closed':
