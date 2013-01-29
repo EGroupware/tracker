@@ -379,7 +379,7 @@ class tracker_escalations extends so_sql2
 			),__LINE__,__FILE__,'tracker'
 		)->fetchColumn(0);
 
-		
+
 		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => min($count + 1,255)),
 		array(
 			'tr_id' =>  $ticket['tr_id'],
@@ -550,10 +550,10 @@ class tracker_escalations extends so_sql2
 		self::set_async_job(true);
 
 		$result = parent::save($keys,$extra_where);
-		
+
 		if($result != 0 || !$escalate_existing) return $result;
 
-		
+
 		if (is_null(self::$tracker))
 		{
 			self::$tracker = new tracker_bo();
@@ -617,9 +617,6 @@ class tracker_escalations extends so_sql2
                         unset(self::$tracker->tracking->skip_notify);
                 }
 
-		// Open tickets
-		$open_stati = array_keys(self::$tracker->get_tracker_stati(null,false));
-
 		// Get a list of users
 		$users = self::$tracker->users_with_open_entries();
 
@@ -632,7 +629,7 @@ class tracker_escalations extends so_sql2
                         $GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
                         $GLOBALS['egw']->acl->acl($user);
                         $GLOBALS['egw']->acl->read_repository();
-			
+
 			// Keep a list of tickets so we only send the user one notification / ticket
 			$notified = array();
 
@@ -641,10 +638,14 @@ class tracker_escalations extends so_sql2
 			{
 				if (!($pref_value = $GLOBALS['egw_info']['user']['preferences']['tracker'][$pref])) continue;
 
-				$pref_time= time()+24*60*60*(int)$pref_value;
-				$filter = "($filter > $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')';
+				$pref_time= mktime(0,0,0,date('m'),date('d'), date('Y')) + 24*60*60*(int)$pref_value;
+				$_filter = array(
+					"($filter >= $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')',
+					'tr_tracker'	=> array_keys(self::$tracker->trackers),
+					'tr_status'	=> 'own-not-closed'
+				);
 //echo "\nUser: $user Preference: $pref=$pref_value Filter: $filter\n";
-//echo date('Y-m-d H:i', $pref_time) . ' < ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
+//echo date('Y-m-d H:i', $pref_time) . ' <= ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
 
 				if (self::$tracker->user != $user)
 				{
@@ -652,9 +653,9 @@ class tracker_escalations extends so_sql2
 				}
 
 				// Get matching tickets
-				$tickets = self::$tracker->search(array($filter, 'tr_status' => $open_stati));
+				$tickets = self::$tracker->search(array(),'tr_id','','','',False,'AND',false,$_filter);
 				if(!$tickets) continue;
-				
+
 				foreach($tickets as $ticket)
 				{
 //echo self::$tracker->link_title($ticket['tr_id']) . "\n";
@@ -688,7 +689,7 @@ class tracker_escalations extends so_sql2
 				}
 				unset($tickets);
 			}
-			
+
 		}
 
 		// Restore
