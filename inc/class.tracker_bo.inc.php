@@ -333,6 +333,7 @@ class tracker_bo extends tracker_so
 		'closed'				=> '&#9830; Closed',
 		'not-closed'				=> '&#9830; Not closed',
 		'own-not-closed'			=> '&#9830; Own not closed',
+		'ownorassigned-not-closed'		=> '&#9830; Own or assigned not closed',
 		'without-reply-not-closed' 		=> '&#9830; Without reply not closed',
 		'own-without-reply-not-closed' 		=> '&#9830; Own without reply not closed',
 		'without-30-days-reply-not-closed'	=> '&#9830; Without 30 days reply not closed',

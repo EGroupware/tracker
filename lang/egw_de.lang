@@ -8,6 +8,7 @@
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
 &#9830; not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
 &#9830; own not closed	tracker	de	♦ Eigene nicht geschlossen
+&#9830; own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene, nicht geschlossen
 &#9830; own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
 &#9830; without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
 &#9830; without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
