@@ -590,13 +590,15 @@ class tracker_bo extends tracker_so
 			$changed[] = 'tr_modified';
 
 			// set close-date if status is closed and not yet set
-			if (in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && is_null($this->data['tr_closed']))
+			if (in_array($this->data['tr_status'],array_keys($this->get_tracker_stati(null, true))) &&
+				is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = $this->now;
 				$changed[] = 'tr_closed';
 			}
 			// unset closed date, if item is re-opend
-			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)) && !is_null($this->data['tr_closed']))
+			if (!in_array($this->data['tr_status'],array_keys($this->get_tracker_stati(null, true))) &&
+				!is_null($this->data['tr_closed']))
 			{
 				$this->data['tr_closed'] = null;
 				$changed[] = 'tr_closed';

@@ -73,7 +73,6 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 						unset($query['col_filter'][$field]);
 					}
 				}
-error_log(array2string($query['col_filter']));
 
 				$this->ui->get_rows($query,$selection,$readonlys);
 
@@ -170,7 +169,6 @@ error_log(array2string($query['col_filter']));
 	public function get_selectors_etpl() {
 		return array(
 			'name'	=> 'importexport.export_csv_selectors',
-			'content' => 'selected'
 		);
 	}
 
