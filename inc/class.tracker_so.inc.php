@@ -411,6 +411,12 @@ class tracker_so extends so_sql_cf
 				$filter['tr_creator'] = $this->user;
 				$filter[] = $not_closed;
 				break;
+			case 'ownorassigned-not-closed':
+				unset($filter['tr_status']);
+				$filter[] = '('.$this->db->expression(self::TRACKER_TABLE,array('tr_creator' => $this->user)).' OR '.
+					self::TRACKER_TABLE.'.tr_id in (SELECT tr_id from '.self::ASSIGNEE_TABLE.' WHERE '. $this->db->expression(self::ASSIGNEE_TABLE,'tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')').'))';
+				$filter[] = $not_closed;
+				break;
 			case 'without-reply-not-closed':
 				unset($filter['tr_status']);
 				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
@@ -499,6 +505,7 @@ class tracker_so extends so_sql_cf
 		{
 			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'. tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.	tr_status , '.self::TRACKER_TABLE.'. tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'. tr_priority, '.self::TRACKER_TABLE.'. tr_resolution, '.self::TRACKER_TABLE.'. tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'. tr_edit_mode, '.self::TRACKER_TABLE.'. tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
 		}
+
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
 
 		if ($rows)

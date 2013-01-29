@@ -379,7 +379,7 @@ class tracker_escalations extends so_sql2
 			),__LINE__,__FILE__,'tracker'
 		)->fetchColumn(0);
 
-		
+
 		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => min($count + 1,255)),
 		array(
 			'tr_id' =>  $ticket['tr_id'],
@@ -550,10 +550,10 @@ class tracker_escalations extends so_sql2
 		self::set_async_job(true);
 
 		$result = parent::save($keys,$extra_where);
-		
+
 		if($result != 0 || !$escalate_existing) return $result;
 
-		
+
 		if (is_null(self::$tracker))
 		{
 			self::$tracker = new tracker_bo();
@@ -622,6 +622,7 @@ class tracker_escalations extends so_sql2
 
 		foreach($users as $user)
 		{
+			if (isset($notified)) $notified=array();
 			// Create environment for user
 			if (!($email = $GLOBALS['egw']->accounts->id2name($user,'account_email'))) continue;
                         self::$tracker->user = $GLOBALS['egw_info']['user']['account_id'] = $user;
@@ -629,7 +630,7 @@ class tracker_escalations extends so_sql2
                         $GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
                         $GLOBALS['egw']->acl->acl($user);
                         $GLOBALS['egw']->acl->read_repository();
-			
+
 			// Keep a list of tickets so we only send the user one notification / ticket
 			$notified = array();
 
@@ -642,7 +643,7 @@ class tracker_escalations extends so_sql2
 				$_filter = array(
 					"($filter >= $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')',
 					'tr_tracker'	=> array_keys(self::$tracker->trackers),
-					'tr_status'	=> 'own-not-closed'
+					'tr_status'	=> 'ownorassigned-not-closed'
 				);
 //echo "\nUser: $user Preference: $pref=$pref_value Filter: $filter\n";
 //echo date('Y-m-d H:i', $pref_time) . ' <= ' . $pref . ' < ' . date('Y-m-d H:i', $pref_time+24*60*60) . "\n";
@@ -653,9 +654,10 @@ class tracker_escalations extends so_sql2
 				}
 
 				// Get matching tickets
-				$tickets = self::$tracker->search(array(),True,'','','',False,'AND',false,$_filter);
+				$tickets = self::$tracker->search(array(),'tr_id','','','',False,'AND',false,$_filter);
+//error_log(__METHOD__.__LINE__.' Tickets for User:'.$user.'->'.array2string($tickets));
 				if(!$tickets) continue;
-				
+
 				foreach($tickets as $ticket)
 				{
 //echo self::$tracker->link_title($ticket['tr_id']) . "\n";
@@ -689,7 +691,7 @@ class tracker_escalations extends so_sql2
 				}
 				unset($tickets);
 			}
-			
+
 		}
 
 		// Restore
