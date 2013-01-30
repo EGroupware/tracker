@@ -71,6 +71,8 @@ class tracker_escalations extends so_sql2
 	function __construct($id = null)
 	{
 		parent::__construct('tracker',self::ESCALATIONS_TABLE,null,'',true);
+		$uni_cols = array('esc_time','esc_type','tr_tracker','cat_id','tr_status','tr_resolution','tr_version');
+		$this->db_uni_cols = array(array_combine($uni_cols,$uni_cols));
 
 		if (!is_null($id) && !$this->read($id))
 		{

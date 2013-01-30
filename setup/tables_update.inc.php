@@ -687,3 +687,41 @@ function tracker_upgrade1_9_008()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.009';
 }
 
+
+function tracker_upgrade1_9_009()
+{
+	$GLOBALS['egw_setup']->oProc->RefreshTable('egw_tracker_escalations',array(
+		'fd' => array(
+			'esc_id' => array('type' => 'auto','nullable' => False),
+			'tr_tracker' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'cat_id' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'tr_version' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'tr_status' => array('type' => 'varchar','precision' => '255','nullable' => False,'default' => '0'),
+			'tr_priority' => array('type' => 'varchar','precision' => '55','nullable' => False,'default' => '0'),
+			'esc_title' => array('type' => 'varchar','precision' => '128','nullable' => False),
+			'esc_time' => array('type' => 'int','precision' => '4','nullable' => False),
+			'esc_type' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '0'),
+			'esc_tr_assigned' => array('type' => 'varchar','precision' => '255'),
+			'esc_add_assigned' => array('type' => 'bool'),
+			'esc_tr_tracker' => array('type' => 'int','precision' => '4'),
+			'esc_cat_id' => array('type' => 'int','precision' => '4'),
+			'esc_tr_version' => array('type' => 'int','precision' => '4'),
+			'esc_tr_status' => array('type' => 'int','precision' => '4'),
+			'esc_tr_priority' => array('type' => 'int','precision' => '4'),
+			'esc_reply_message' => array('type' => 'text'),
+			'esc_reply_visible' => array('type' => 'int','precision' => '1'),
+			'esc_match_repeat' => array('type' => 'int','precision' => '4','default' => '0'),
+			'esc_notify' => array('type' => 'varchar','precision' => '15'),
+			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match'),
+			'tr_resolution' => array('type' => 'varchar','precision' => '55','nullable' => False),
+			'esc_run_on_existing' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1','comment' => 'When saving the escalation, marks existing tickets as matched without taking action, or leave them to run next time async job runs')
+		),
+		'pk' => array('esc_id'),
+		'fk' => array(),
+		'ix' => array(),
+		'uc' => array(array('esc_time','esc_type','tr_tracker(32)','cat_id(32)','tr_status(32)','tr_resolution(32)','tr_version(32)'))
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.010';
+}
+
