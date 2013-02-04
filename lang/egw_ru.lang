@@ -201,6 +201,7 @@ receive notifications about created tracker-items	tracker	ru	Получать у
 receive notifications in html	tracker	ru	Принимать сообщения в формате html
 rejected	tracker	ru	Отклонено
 remind	tracker	ru	Напомнить
+reports	tracker	ru	Отчёты
 resolution	tracker	ru	Решение
 responsible	tracker	ru	Ответственный
 restict tracker items to the creator and the staff only	tracker	ru	Разрешить доступ к записям трекера только персоналу и создавшему
@@ -244,7 +245,7 @@ this tracker item was closed automatically by the system. it was previously set 
 this week	tracker	ru	Эта неделя
 this year	tracker	ru	Этот год
 ticket count	tracker	ru	счетчик запросов
-ticket modified by %1 at %2	tracker	ru	Запарос модивицирован %1 в %2
+ticket modified by %1 at %2	tracker	ru	Запрос модифицирован %1 в %2
 times	tracker	ru	Раз
 tracker	common	ru	Система Трекера
 tracker added	tracker	ru	Добавлена очередь Трекера
