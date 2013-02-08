@@ -1,6 +1,8 @@
 configuration	tracker	ja	環境設定
 created	tracker	ja	作成
 custom fields	tracker	ja	カスタム項目
+forward	tracker	ja	転送
+from	tracker	ja	差出人
 id	tracker	ja	ID
 order	tracker	ja	順序
 rejected	tracker	ja	拒否済み

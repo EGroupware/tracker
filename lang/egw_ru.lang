@@ -79,6 +79,7 @@ creator	tracker	ru	Создатель
 custom fields	tracker	ru	Пользовательские Поля
 custom tracker priorities	tracker	ru	Пользовательские приоритеты трекера
 date opened	tracker	ru	Дата открытия
+default document to insert entries	tracker	ru	Документ по умолчанию для вставки записей
 define escalations	common	ru	Назначение эскалаций
 delete mails from server	tracker	ru	Удаление писем с сервера
 delete this bounty	tracker	ru	Удалить эту премию
@@ -93,6 +94,7 @@ delete unrecognized mails from the server, even if 'delete mails' above is not t
 deleted	tracker	ru	Удалено
 deletes this field	tracker	ru	Удалить это поле
 determines the order the fields are displayed	tracker	ru	оперделяет порядок,в котором отображаются поля
+directory with documents to insert entries	tracker	ru	Каталог с документами для вставки
 do you want a notification, if items you are responsible for are about to start?	tracker	ru	Вы желаете получать напоминания при запуске задач(записей) за которые вы отвечаете?
 do you want a notification, if items you are responsible for are due?	tracker	ru	Вы желаете получать напоминания, если задачи за которые вы отвечаете должны быть уже завершены?
 do you want to vote for this item	tracker	ru	Хотите проголосовать за этот пункт?
@@ -122,6 +124,7 @@ escalation saved.	tracker	ru	Эскалация сохранена.
 everybody	tracker	ru	Каждому
 existing links	tracker	ru	Существующие ссылки
 export as csv	tracker	ru	Экспортировать как CSV
+export definition to use for nextmatch export	tracker	ru	Экспорт определения для использования при следующем экспорте
 field	tracker	ru	Поле
 fixed	tracker	ru	Исправлено
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	ru	Для последовательности писем используйте эту метку. Поместите текст, который вы желаете повторять между двух меток.
@@ -135,6 +138,7 @@ html editing	tracker	ru	Редактирование Html
 id	tracker	ru	Идентификатор
 if this item is important for you, please consider to set a bounty for it!	tracker	ru	Если запрос для Вас важен, пожалуйста назначте премию за его исполнение!
 if this item is important for you, please vote for it.	tracker	ru	Если запрос для Вас важен, пожалуйста проголосуйте за него.
+if you specify an export definition, it will be used when you export	tracker	ru	если вы укажете оперделения для экспорта, оно будет использоваться при экспорте
 ignore	tracker	ru	Игнорировать
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	ru	Игнорировать нераспознанные письма. Они не будут удалены с сервера, если "Удалять письма" выше не отмечено.
 import tts tickets	tracker	ru	Импортировать запросы TTS
@@ -173,6 +177,7 @@ non-anonymous users	tracker	ru	Неанонимный пользователь
 noone	tracker	ru	Никто
 notification	tracker	ru	Уведомление
 number of row for a multiline inputfield or line of a multi-select-box	tracker	ru	количество строк с многострочном поле вводща или в списке с множественным выбором
+old fixed definition	tracker	ru	Прежние изменения определены(Old fixed definition)
 one day after	tracker	ru	через один день
 one day in advance	tracker	ru	за один день до
 open(status)	tracker	ru	Открыто
