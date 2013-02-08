@@ -1,5 +1,4 @@
 accepted	tracker	da	Accepteret
-actions	tracker	da	Handling
 comments	tracker	da	Kommentarer
 configuration	tracker	da	Konfiguration
 copy to	tracker	da	Kopier til
@@ -17,7 +16,6 @@ history	tracker	da	Historisk
 id	tracker	da	ID
 last modified	tracker	da	Sidst opdateret
 links	tracker	da	Links
-open	tracker	da	åben
 rejected	tracker	da	Forkastet
 state	tracker	da	Land
 summary	tracker	da	Opsummering

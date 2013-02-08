@@ -1,5 +1,4 @@
 accepted	tracker	ko	승락됨
-actions	tracker	ko	액션
 add timesheet entry	tracker	ko	타임시트 엔트리에 추가
 comments	tracker	ko	커멘트들
 completed	tracker	ko	완료됨
@@ -16,7 +15,6 @@ from	tracker	ko	부터
 history	tracker	ko	내역
 last modified	tracker	ko	마지막 수정
 links	tracker	ko	링크
-open	tracker	ko	개설
 rejected	tracker	ko	거부됨
 state	tracker	ko	주
 summary	tracker	ko	요약

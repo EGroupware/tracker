@@ -1,5 +1,4 @@
 accepted	tracker	no	Godtatt
-actions	tracker	no	Funksjoner
 add timesheet entry	tracker	no	Legg til forekomst i timeregistrering
 check all	tracker	no	Kontroller alle
 comments	tracker	no	Kommentarer
@@ -22,7 +21,6 @@ history	tracker	no	Historikk
 id	tracker	no	Id
 last modified	tracker	no	Sist endret
 links	tracker	no	Lenker
-open	tracker	no	åpen
 permission denied !!!	tracker	no	Adgang nektet !
 rejected	tracker	no	Avslått
 state	tracker	no	Fylke

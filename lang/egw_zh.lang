@@ -11,7 +11,6 @@
 5 - medium	tracker	zh	5 - 中等
 9 - highest	tracker	zh	9 - 最高
 accepted	tracker	zh	接受
-actions	tracker	zh	操作
 activate users queue access control	tracker	zh	激活用户队列访问控制
 add comment	tracker	zh	添加注释
 add timesheet entry	tracker	zh	添加时间表条目
@@ -111,7 +110,6 @@ no trackers found, aborting	tracker	zh	未找到任务跟踪，异常退出
 non-anonymous users	tracker	zh	非匿名用户
 noone	tracker	zh	无
 notification	tracker	zh	提醒通知
-open	tracker	zh	打开
 out of date	tracker	zh	超过日期
 overdue after	tracker	zh	到期天数
 pending	tracker	zh	未决的

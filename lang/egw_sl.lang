@@ -4,7 +4,6 @@
 5 - medium	tracker	sl	5 - srednja
 9 - highest	tracker	sl	9 - najvišja
 accepted	tracker	sl	Sprejeto
-actions	tracker	sl	Dejanja
 add comment	tracker	sl	Dodaj komentar
 add timesheet entry	tracker	sl	Dodaj vnos timeheet
 after	tracker	sl	Po
@@ -89,7 +88,6 @@ no change	tracker	sl	Brez sprememb
 non-anonymous users	tracker	sl	Ne-anonimni uporabnik
 noone	tracker	sl	Nihče
 notification	tracker	sl	Obvestilo
-open	tracker	sl	Odpri
 out of date	tracker	sl	Izven roka
 overdue after	tracker	sl	Zapade po
 pending	tracker	sl	V teku

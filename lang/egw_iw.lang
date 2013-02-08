@@ -1,5 +1,4 @@
 accepted	tracker	iw	התקבל
-actions	tracker	iw	פעולות
 comments	tracker	iw	הערות
 completed	tracker	iw	הושלם
 configuration	tracker	iw	תצורה
@@ -19,7 +18,6 @@ history	tracker	iw	היסטוריה
 id	tracker	iw	זיהוי
 last modified	tracker	iw	שונה לאחרונה
 links	tracker	iw	קישורים
-open	tracker	iw	פתח
 rejected	tracker	iw	נדחה
 state	tracker	iw	מדינה
 summary	tracker	iw	סיכום

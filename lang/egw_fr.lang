@@ -4,7 +4,6 @@
 5 - medium	tracker	fr	5 - moyenne
 9 - highest	tracker	fr	9 - haute
 accepted	tracker	fr	Accepté
-actions	tracker	fr	Actions
 add comment	tracker	fr	Ajouter un commentaire
 add timesheet entry	tracker	fr	Ajouter une entrée feuille de temps
 after how many days a not replied item should be marked overdue?	tracker	fr	Après combien de jours un élément non répondu sera marqué en retard?
@@ -86,7 +85,6 @@ no change	tracker	fr	Aucune modification
 non-anonymous users	tracker	fr	Utilisateur non-anonyme
 noone	tracker	fr	Personne
 notification	tracker	fr	Notification
-open	tracker	fr	Ouvert
 out of date	tracker	fr	Expiré
 overdue after	tracker	fr	En retard après
 pending	tracker	fr	En attente

@@ -4,7 +4,6 @@
 5 - medium	tracker	hu	5 - közepes
 9 - highest	tracker	hu	9 - legmagasabb
 accepted	tracker	hu	Elfogadva
-actions	tracker	hu	Műveletek
 add comment	tracker	hu	Megjegyzés hozzáadása
 add timesheet entry	tracker	hu	Regiszter bejegyzés hozzáadása
 after how many days a not replied item should be marked overdue?	tracker	hu	A nem megválaszolt bejegyzést hány nap után jelöljük Lejártnak?
@@ -67,7 +66,6 @@ new %1	tracker	hu	Új %1
 new items	tracker	hu	Új tételek
 no change	tracker	hu	Nincs változás
 noone	tracker	hu	Senki
-open	tracker	hu	Megnyit
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
 rejected	tracker	hu	Elutasított

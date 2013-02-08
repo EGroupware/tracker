@@ -1,5 +1,4 @@
 accepted	tracker	lv	Akceptēts
-actions	tracker	lv	Darbības
 check all	tracker	lv	Parbaudīt visu
 comments	tracker	lv	Komentāri
 completed	tracker	lv	Pabeigts
@@ -20,7 +19,6 @@ history	tracker	lv	Vēsture
 id	tracker	lv	ID
 last modified	tracker	lv	Pēdējo reizi pārveidots
 links	tracker	lv	Saites
-open	tracker	lv	atvērt
 permission denied !!!	tracker	lv	Atļauja liegta!!!
 rejected	tracker	lv	Noraidīts
 state	tracker	lv	Štats

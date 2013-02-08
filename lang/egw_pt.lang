@@ -1,5 +1,4 @@
 accepted	tracker	pt	Aceite
-actions	tracker	pt	Acções
 add timesheet entry	tracker	pt	Adicionar registo da folha de tempo
 check all	tracker	pt	Marcar todas
 comments	tracker	pt	Comentários
@@ -22,7 +21,6 @@ history	tracker	pt	Histórico
 id	tracker	pt	ID
 last modified	tracker	pt	última modificação
 links	tracker	pt	Ligações
-open	tracker	pt	Abrir
 permission denied !!!	tracker	pt	Permissão negada !!!
 rejected	tracker	pt	Rejeitado
 state	tracker	pt	Bairro

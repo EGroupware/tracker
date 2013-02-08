@@ -12,7 +12,6 @@
 5 - medium	tracker	cs	5 - střední
 9 - highest	tracker	cs	9 - nejvyšší
 accepted	tracker	cs	Přijato
-actions	tracker	cs	Akce
 activate users queue access control	tracker	cs	Aktivovat přístupovou kontrolu uživatelských front
 add additionally	tracker	cs	přidat dodatečně
 add assigned	tracker	cs	Přidat přidělené
@@ -150,7 +149,6 @@ no trackers found, aborting	tracker	cs	Nebyly nalezeny sledovací systémy, kon�
 non-anonymous users	tracker	cs	Ne-anonymní uživatel
 noone	tracker	cs	Nikdo
 notification	tracker	cs	Upozornění
-open	tracker	cs	Otevřít
 out of date	tracker	cs	Po termínu
 overdue after	tracker	cs	Po termínu k
 ownership of the ticket	tracker	cs	Vlastnictví ohlášení

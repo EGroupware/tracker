@@ -1,5 +1,4 @@
 accepted	tracker	eu	Onartuta
-actions	tracker	eu	Ekintzak
 check all	tracker	eu	Guztia hautatu
 comments	tracker	eu	Komentarioak
 completed	tracker	eu	Osatua
@@ -21,7 +20,6 @@ history	tracker	eu	Historia
 id	tracker	eu	Id
 last modified	tracker	eu	azken aldaketa
 links	tracker	eu	Loturak
-open	tracker	eu	ireki
 permission denied !!!	tracker	eu	Baimena ukatua!
 rejected	tracker	eu	Ukatu
 state	tracker	eu	Estatua

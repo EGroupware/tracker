@@ -1,5 +1,4 @@
 accepted	tracker	hr	Prihvaćeno
-actions	tracker	hr	Akcije
 completed	tracker	hr	Completed
 configuration	tracker	hr	Konfiguracija
 copy to	tracker	hr	Kopiraj u
@@ -16,7 +15,6 @@ history	tracker	hr	povijest
 id	tracker	hr	identitet
 last modified	tracker	hr	Zadnja izmjena
 links	tracker	hr	Links
-open	tracker	hr	otvori
 rejected	tracker	hr	Odbijeno
 state	tracker	hr	Županija
 summary	tracker	hr	Suma

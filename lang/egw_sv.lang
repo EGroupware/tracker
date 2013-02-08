@@ -4,7 +4,6 @@
 5 - medium	tracker	sv	5 - Medium
 9 - highest	tracker	sv	9 - Högst
 accepted	tracker	sv	Accepterad
-actions	tracker	sv	Åtgärder
 add comment	tracker	sv	Lägg till kommentar
 add timesheet entry	tracker	sv	Lägg till tidredovisnings post
 after how many days a not replied item should be marked overdue?	tracker	sv	Efter hur många dagar ska obesvarade ärenden markeras som förfallen?
@@ -87,7 +86,6 @@ no change	tracker	sv	Ingen ändring
 non-anonymous users	tracker	sv	Inloggade användare
 noone	tracker	sv	Ingen
 notification	tracker	sv	Meddelande
-open	tracker	sv	Öppet
 out of date	tracker	sv	Förfallen
 overdue after	tracker	sv	Förfaller efter
 pending	tracker	sv	Vilande

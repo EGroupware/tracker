@@ -1,6 +1,5 @@
 --> enter new name	tracker	id	--> masukan nama baru
 accepted	tracker	id	Accepted
-actions	tracker	id	Tindakan
 add additionally	tracker	id	add additionally
 add assigned	tracker	id	Add assigned
 add comment	tracker	id	Add comment
@@ -80,7 +79,6 @@ no change	tracker	id	No change
 non-anonymous users	tracker	id	Non-anonymous users
 noone	tracker	id	Noone
 notification	tracker	id	Notification
-open	tracker	id	Open
 overdue after	tracker	id	Overdue after
 pending	tracker	id	Pending
 permission denied !!!	tracker	id	Ijin ditolak !!!

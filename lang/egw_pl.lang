@@ -12,7 +12,6 @@
 5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
 9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
 accepted	tracker	pl	Zaakceptowany
-actions	tracker	pl	Polecenia
 activate users queue access control	tracker	pl	Aktywuj kontrolę dostępu kolejki użytkowników
 add additionally	tracker	pl	dodaj dodatkowo
 add assigned	tracker	pl	Dodaj przypisane
@@ -150,7 +149,6 @@ no trackers found, aborting	tracker	pl	Nie znaleziono Systemów Śledzenia, anul
 non-anonymous users	tracker	pl	Użytkownik nie anonimowy
 noone	tracker	pl	Nikt
 notification	tracker	pl	Powiadomienie
-open	tracker	pl	Otwarto
 out of date	tracker	pl	Przeterminowany
 overdue after	tracker	pl	Zaznacz jako zaległe po
 ownership of the ticket	tracker	pl	Własność ticketu

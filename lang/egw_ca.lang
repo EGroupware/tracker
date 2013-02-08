@@ -1,5 +1,4 @@
 accepted	tracker	ca	Acceptat
-actions	tracker	ca	Accions
 add timesheet entry	tracker	ca	Afegeix entrada d'horari
 check all	tracker	ca	Comprova-ho tot
 comments	tracker	ca	Comentaris
@@ -22,7 +21,6 @@ id	tracker	ca	id
 last modified	tracker	ca	Darrera modificació
 links	tracker	ca	Enllaços
 noone	tracker	ca	Ningú
-open	tracker	ca	obert
 permission denied !!!	tracker	ca	Permís denegat !!!
 rejected	tracker	ca	Rebutjat
 state	tracker	ca	Província

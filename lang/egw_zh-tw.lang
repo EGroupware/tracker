@@ -5,7 +5,6 @@
 5 - medium	tracker	zh-tw	5 - 中等
 9 - highest	tracker	zh-tw	9 - 最高
 accepted	tracker	zh-tw	接受
-actions	tracker	zh-tw	動作
 add comment	tracker	zh-tw	新增意見
 add timesheet entry	tracker	zh-tw	新增時間表資料
 after how many days a not replied item should be marked overdue?	tracker	zh-tw	在多少天後沒有回應的項目要視為過期？
@@ -95,7 +94,6 @@ no change	tracker	zh-tw	沒有異動
 non-anonymous users	tracker	zh-tw	非匿名使用者
 noone	tracker	zh-tw	無
 notification	tracker	zh-tw	提醒通知
-open	tracker	zh-tw	開啟
 out of date	tracker	zh-tw	超過日期
 overdue after	tracker	zh-tw	到期天數
 pending	tracker	zh-tw	等待中

@@ -4,7 +4,6 @@
 5 - medium	tracker	et	5 - keskmine
 9 - highest	tracker	et	9 - kõrgeim
 accepted	tracker	et	Kinnitatud
-actions	tracker	et	Tegevused
 add comment	tracker	et	Lisa kommentaar
 add timesheet entry	tracker	et	Lisa Timesheet kirje
 after how many days a not replied item should be marked overdue?	tracker	et	Mitme päevapärast vastamatta asjad määratakse kui hilinenud?
@@ -73,7 +72,6 @@ no change	tracker	et	Ära muuda
 non-anonymous users	tracker	et	Mitte-anonüümsed kasutajad
 noone	tracker	et	Mittekeegi
 notification	tracker	et	Meeldetuletus
-open	tracker	et	Avatud
 out of date	tracker	et	Aegunud
 pending	tracker	et	Otsustamatta
 pending items never get close automatic.	tracker	et	Otsustamatta ei suleta kunagi automaatselt.

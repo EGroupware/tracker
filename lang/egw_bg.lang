@@ -1,5 +1,4 @@
 accepted	tracker	bg	Прието
-actions	tracker	bg	Действия
 add timesheet entry	tracker	bg	Добави запис в Графика
 check all	tracker	bg	Маркира всички
 comments	tracker	bg	Коментари
@@ -22,7 +21,6 @@ id	tracker	bg	ИД
 last modified	tracker	bg	Последно модифициран
 links	tracker	bg	Връзки
 new %1	tracker	bg	Нов %1
-open	tracker	bg	отвори
 permission denied !!!	tracker	bg	Достъпът отказан !!!
 rejected	tracker	bg	Отказано
 state	tracker	bg	Област / Щат

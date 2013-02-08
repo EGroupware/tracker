@@ -1,5 +1,4 @@
 accepted	tracker	fa	تأیید شد
-actions	tracker	fa	اعمال
 add timesheet entry	tracker	fa	افزودن برگه ساعت کار
 check all	tracker	fa	چک کردن همه
 comments	tracker	fa	توضیحات
@@ -22,7 +21,6 @@ history	tracker	fa	تاریخچه
 id	tracker	fa	کد
 last modified	tracker	fa	آخرین تغییرات
 links	tracker	fa	پیوندها
-open	tracker	fa	کارهای باز
 permission denied !!!	tracker	fa	دسترسی غیر ممکن!!!
 rejected	tracker	fa	پذیرفته نشد
 state	tracker	fa	استان

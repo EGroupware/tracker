@@ -12,7 +12,6 @@
 5 - medium	tracker	pt-br	5 - média
 9 - highest	tracker	pt-br	9 - maior
 accepted	tracker	pt-br	Aceito
-actions	tracker	pt-br	Ações
 activate users queue access control	tracker	pt-br	Ativar acesso de controle aos elementos dos usuários
 add additionally	tracker	pt-br	adicionar incrementando
 add assigned	tracker	pt-br	Adicionar designado
@@ -145,7 +144,6 @@ no trackers found, aborting	tracker	pt-br	Nenhum Elemento do Sistema de Tickets 
 non-anonymous users	tracker	pt-br	Usuários não anônimos
 noone	tracker	pt-br	Nenhum
 notification	tracker	pt-br	Notificação
-open	tracker	pt-br	Aberto
 out of date	tracker	pt-br	Desatualizado
 overdue after	tracker	pt-br	Arquivar após
 ownership of the ticket	tracker	pt-br	Propriedade do ticket
