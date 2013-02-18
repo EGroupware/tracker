@@ -114,6 +114,7 @@ custom fields	tracker	en	Custom fields
 custom notifications	tracker	en	Custom notifications
 custom tracker priorities	tracker	en	Custom tracker priorities
 customfield	tracker	en	Customfield
+data exchange settings	tracker	en	Data exchange settings
 date filter	tracker	en	Date filter
 date opened	tracker	en	Date opened
 default document to insert entries	tracker	en	Default document to insert entries
@@ -191,6 +192,7 @@ forward unrecognized mails to the email address that has to be specified here.	t
 from	tracker	en	From
 full list of placeholder names	tracker	en	Full list of placeholder names
 general fields:	tracker	en	General fields:
+general settings	tracker	en	General settings
 handling autoreplies	tracker	en	Handling auto replies
 handling bounced mails	tracker	en	Handling bounced mails
 handling mailheader information	tracker	en	Handling Mailheader Information
@@ -272,6 +274,7 @@ note: timesheet itself is always excluded	tracker	en	Note: timesheet itself is a
 nothing to save.	tracker	en	Nothing to save.
 notification	tracker	en	Notification
 notification message	tracker	en	Notification message
+notification settings	tracker	en	Notification settings
 notification signature	tracker	en	Notification signature
 number of row for a multiline inputfield or line of a multi-select-box	tracker	en	number of row for a multiline inputfield or line of a multi-select-box
 old fixed definition	tracker	en	Old fixed definition
