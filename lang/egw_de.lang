@@ -12,7 +12,7 @@
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
-activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem-Queues aktivieren
+activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungssystem-Queues aktivieren
 add additionally	tracker	de	Zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
@@ -127,8 +127,8 @@ incoming mail folder	tracker	de	Ordner für eingehende E-Mails
 incoming mail rules	tracker	de	Regeln für eingehende E-Mails
 incoming mail server	tracker	de	Server für eingehende E-Mails
 info only	tracker	de	Nur zur Information
-interval in minutes for checking the incoming mails	tracker	de	Interval in Minuten zur Überprüfung der eingehenden E-Mails
-introduction message	tracker	de	Willkomensnachricht
+interval in minutes for checking the incoming mails	tracker	de	Intervall in Minuten zur Überprüfung der eingehenden E-Mails
+introduction message	tracker	de	Willkommensnachricht
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
@@ -179,7 +179,7 @@ restict tracker items to the creators primary group and the staff only	tracker	d
 restrict tracker items to staff and:	tracker	de	Tickets einschränken auf Mitarbeiter und:
 restriction	tracker	de	Einschränkungen
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	de	Einen Tracker für neue Tickets auswählen oder 'Zurückweisen' um das Erzeugen von Tickets per Mail zu verbieten.
-select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn E-mails empfangen werden
+select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn E-Mails empfangen werden
 select multiple	tracker	de	Mehrere Auswählen
 select tracker queue	tracker	de	Verfolgungssystem-Queue auswählen
 select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Verfolgungssystem für die TTS Kategorien verwendet werden
