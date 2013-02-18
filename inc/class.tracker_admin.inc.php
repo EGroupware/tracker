@@ -494,6 +494,10 @@ class tracker_admin extends tracker_bo
 		{
 			$sel_options['servertype'][] = $typ[1];
 		}
+		foreach($this->mailheaderhandling as $ind => $typ)
+		{
+			$sel_options['mailheaderhandling'][] = $typ[1];
+		}
 		$readonlys = array(
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
