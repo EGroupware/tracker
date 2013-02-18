@@ -25,7 +25,7 @@
 9 - highest	tracker	de	9 - höchste
 accepted	tracker	de	Akzeptiert
 acl	tracker	de	Bearbeitungsrechte
-activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungsystem-Queues aktivieren
+activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungssystem-Queues aktivieren
 add / remove link	tracker	de	Link hinzufügen oder entfernen
 add additionally	tracker	de	Zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
@@ -101,7 +101,7 @@ convert all closed tickets	tracker	de	konvertiere geschlossene Tickets
 convert all open tickets	tracker	de	konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
-copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 ünd fügen diese wieder ein.
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
 create new links	tracker	de	Neue Verknüpfung anlegen
 create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Einträge im Verfolgungssystem als Privat zur Freigabe durch Administratoren.
 created	tracker	de	Erstellt
@@ -114,6 +114,7 @@ custom fields	tracker	de	Benutzerdefinierte Felder
 custom notifications	tracker	de	Benutzerdefinierte Benachrichtigungen
 custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 customfield	tracker	de	Benutzerdefiniertes Feld
+data exchange settings	tracker	de	Einstellungen für den Datenaustausch
 date filter	tracker	de	Filter nach Datum
 date opened	tracker	de	Datum angelegt
 default document to insert entries	tracker	de	Standarddokument zum Einfügen von Daten
@@ -162,7 +163,7 @@ error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgun
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
-error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 ünd fügen diese wieder ein.
+error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
 escalation	tracker	de	Eskalation
 escalation added.	tracker	de	Eskalation hinzugefügt.
 escalation deleted.	tracker	de	Eskalation gelöscht.
@@ -191,11 +192,12 @@ forward unrecognized mails to the email address that has to be specified here.	t
 from	tracker	de	Von
 full list of placeholder names	tracker	de	komplette Liste der Platzhalter
 general fields:	tracker	de	Allgemeine Felder
+general settings	tracker	de	Allgemeine Einstellungen
 handling autoreplies	tracker	de	Handhabung von automatischen Antworten
 handling bounced mails	tracker	de	Handhabung von unzustellbaren E-Mails
 handling mailheader information	tracker	de	Handhabung von Mailheader Informationen
 history	tracker	de	Historie
-how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	de	Wie viele Zeilen der Beschreibung sollen direkt sichtbar sein. Zusätzliche Zeilen können über einen Rollbalken (scrollbar) erreicht werden.
+how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	de	Wie viele Zeilen der Beschreibung sollen direkt sichtbar sein. Zusätzliche Zeilen können über einen Scrollbalken erreicht werden.
 html editing	tracker	de	Formatierte Textbearbeitung
 id	tracker	de	ID
 if a ticket has matched before, should the actions be taken again?	tracker	de	Soll diese Aktion nochmal angewendet werden, obwohl dieses Ticket schon mal für eine Abfrage angewendet wurde.
@@ -218,8 +220,8 @@ incoming mail server	tracker	de	Server für eingehende E-Mails
 info only	tracker	de	Nur zur Information
 insert	tracker	de	einfügen
 insert in document	tracker	de	Einfügen in Dokument
-interval in minutes for checking the incoming mails	tracker	de	Interval in Minuten zur Überprüfung der eingehenden E-Mails
-introduction message	tracker	de	Willkomensnachricht
+interval in minutes for checking the incoming mails	tracker	de	Intervall in Minuten zur Überprüfung der eingehenden E-Mails
+introduction message	tracker	de	Willkommensnachricht
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
@@ -272,6 +274,7 @@ note: timesheet itself is always excluded	tracker	de	Beachte: Links zur Anwendun
 nothing to save.	tracker	de	Nichts zu speichern.
 notification	tracker	de	Benachrichtigung
 notification message	tracker	de	Benachrichtigungsmeldung
+notification settings	tracker	de	Einstellungen zur Benachrichtigung
 notification signature	tracker	de	Signatur der Benachrichtigungen
 number of row for a multiline inputfield or line of a multi-select-box	tracker	de	Anzahl der Zeile eines Mehrfachzeilenfeldes (multi-select-box)
 old fixed definition	tracker	de	Feste Definitionsdateien, die nicht angepasst werden können
@@ -299,7 +302,7 @@ print entry	tracker	de	Ticket drucken
 priorities	tracker	de	Prioritäten
 priorities with empty label are not available to the user	tracker	de	Prioritäten mit leerer Beschriftung sind für den Benutzer nicht verfügbar
 process	tracker	de	Verarbeiten
-process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	de	Nachricht normal verarbeiten. *Achtung* Das kann Mailschleifen bewirken, falls "Automatische Antworten" darunter eingeschlatet ist!
+process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	de	Nachricht normal verarbeiten. *Achtung* Das kann Mailschleifen bewirken, falls "Automatische Antworten" darunter eingeschaltet ist!
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 queue	tracker	de	Queue
@@ -335,7 +338,7 @@ saves the changes made and leaves	tracker	de	Änderungen speichern und diesen Me
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	de	Einen Tracker für neue Tickets auswählen oder 'Zurückweisen' um das Erzeugen von Tickets per Mail zu verbieten.
 select accounts for which the custom field should be visible	tracker	de	Wählen Sie die Benutzer aus, für die das Benutzerdefinierte Feld sichtbar sein darf
 select existing report	tracker	de	Wählen Sie einen bestehenden Bericht aus
-select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn E-mails empfangen werden
+select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn E-Mails empfangen werden
 select multiple	tracker	de	Mehrere Auswählen
 select one...	tracker	de	Eintrag auswählen
 select tracker queue	tracker	de	Verfolgungssystem-Queue auswählen
