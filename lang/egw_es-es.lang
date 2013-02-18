@@ -106,6 +106,7 @@ do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	es-es	¿Desea una notificación, si los elementos de los que es responsable han vencido?
 do you want to vote for this item	tracker	es-es	¿Desea votar por este elemento?
 donator name to show	tracker	es-es	Nombre del donante a mostrar
+due date	tracker	es-es	Vencimiento
 duplicate	tracker	es-es	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
 e-mail notifications	tracker	es-es	Notificaciones por correo
