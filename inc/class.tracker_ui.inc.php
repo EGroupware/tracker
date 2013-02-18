@@ -885,7 +885,7 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 		unset($rows['sel_options']['assigned']['not']);
 
-		
+
 		$versions = $cats = $resolutions = $statis = array();
 		foreach((array)$tracker as $tr_id)
 		{
