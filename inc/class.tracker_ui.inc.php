@@ -1405,7 +1405,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 			),
-			
+
 			'admin' => array(
 				'caption' => 'Multiple changes',
 				'group' => $group,
@@ -1476,6 +1476,21 @@ width:100%;
 		$uid = $_GET['uid'];
 		$partid = $_GET['part'];
 		$mailbox = base64_decode($_GET['mailbox']);
+		$mailClass = 'felamimail_bo';
+		$sessionLocation = 'felamimail';
+		// if rowid is set, we are called from new mail module.
+		if (method_exists('mail_ui','splitRowID') && isset($_GET['rowid']) && !empty($_GET['rowid']))
+		{
+			// rowid holds all needed information: server, folder, uid, etc.
+			$rowID = $_GET['rowid'];
+			$hA = mail_ui::splitRowID($rowID);
+			$sessionLocation = $hA['app']; // THIS is part of the row ID, we may use this for validation
+			if ($sessionLocation != 'mail') throw new egw_exception_assertion_failed(lang('Application mail expected but got: %1',$sessionLocation));
+			$uid = $hA['msgUID'];
+			$mailbox = $hA['folder'];
+			$icServerID = $hA['profileID'];
+			$mailClass = 'mail_bo';
+		}
 		if ($_date == false || empty($_date)) $_date = $this->bo->user_time_now;
 		if (!empty($_to_emailAddress))
 		{
@@ -1486,16 +1501,16 @@ width:100%;
 			{
 				//echo __METHOD__.'<br>';
 				//_debug_array($_attachments);
-				$icServerID =& egw_cache::getSession('felamimail','activeProfileID');
-				$bofelamimail	= felamimail_bo::getInstance(true,$icServerID);
-				$bofelamimail->openConnection();
+				$icServerID =& egw_cache::getSession($sessionLocation,'activeProfileID');
+				$mailobject	= $mailClass::getInstance(true,$icServerID);
+				$mailobject->openConnection();
 				foreach ($_attachments as $attachment)
 				{
 					if ($attachment['type'] == 'MESSAGE/RFC822')
 					{
-						$bofelamimail->reopen($attachment['folder']);
+						$mailobject->reopen($attachment['folder']);
 
-						$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$attachment['uid'],$attachment['partID'],$attachment['folder'],$this->htmledit);
+						$mailcontent = $mailClass::get_mailcontent($mailobject,$attachment['uid'],$attachment['partID'],$attachment['folder'],$this->htmledit);
 						//_debug_array($mailcontent['attachments']);
 						foreach($mailcontent['attachments'] as $tmpattach => $tmpval)
 						{
@@ -1507,8 +1522,8 @@ width:100%;
 						if (!empty($attachment['folder']))
 						{
 							$is_winmail = $_GET['is_winmail'] ? $_GET['is_winmail'] : 0;
-							$bofelamimail->reopen($attachment['folder']);
-							$attachmentData = $bofelamimail->getAttachment($attachment['uid'],$attachment['partID'],$is_winmail);
+							$mailobject->reopen($attachment['folder']);
+							$attachmentData = $mailobject->getAttachment($attachment['uid'],$attachment['partID'],$is_winmail);
 							$attachment['file'] =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 							$tmpfile = fopen($attachment['file'],'w');
 							fwrite($tmpfile,$attachmentData['attachment']);
@@ -1523,20 +1538,40 @@ width:100%;
 						);
 					}
 				}
-				$bofelamimail->closeConnection();
+				$mailobject->closeConnection();
 			}
+
+			// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
+			// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
+			if ($_rawMailHeader && $_rawMailBody && $GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='add_raw')
+			{
+				$message = ltrim(str_replace("\n","\r\n",$_rawMailHeader)).str_replace("\n","\r\n",$_rawMailBody);
+				$subject = str_replace('$$','__',($_subject?$_subject:lang('(no subject)')));
+				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+				$tmpfile = fopen($attachment_file,'w');
+				fwrite($tmpfile,$message);
+				fclose($tmpfile);
+				$size = filesize($attachment_file);
+				$attachments[] = array(
+						'name' => trim($subject).'.eml',
+						'mimeType' => 'message/rfc822',
+						'tmp_name' => $attachment_file,
+						'size' => $size,
+					);
+			}
+
 			//_debug_array($_to_emailAddress);
 			$toaddr = array();
 			foreach(array('to','cc','bcc') as $x) if (is_array($_to_emailAddress[$x]) && !empty($_to_emailAddress[$x])) $toaddr = array_merge($toaddr,$_to_emailAddress[$x]);
 			//_debug_array($attachments);
-			$_body = strip_tags(felamimail_bo::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" )
+			$_body = strip_tags($mailClass::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" )
 			$_body = htmlspecialchars_decode($_body,ENT_QUOTES);
-			$body = felamimail_bo::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
+			$body = $mailClass::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
 				'TO'=>(!empty($_to_emailAddress['to'])?implode(',',$_to_emailAddress['to']):null),
 				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
 				'BCC'=>(!empty($_to_emailAddress['bcc'])?implode(',',$_to_emailAddress['bcc']):null),
 				'SUBJECT'=>$_subject,
-				'DATE'=>felamimail_bo::_strtotime($_date)),'',$this->htmledit).$_body;
+				'DATE'=>$mailClass::_strtotime($_date)),'',$this->htmledit).$_body;
 			if ($this->htmledit) $body = '<pre>'.$body.'</pre>';
 			$this->edit($this->prepare_import_mail(
 				implode(',',$toaddr),$_subject,$body,$attachments,$_date
@@ -1545,12 +1580,32 @@ width:100%;
 		}
 		elseif ($uid && $mailbox)
 		{
-			$icServerID =& egw_cache::getSession('felamimail','activeProfileID');
-			$bofelamimail	= felamimail_bo::getInstance(true,$icServerID);
-			$bofelamimail->openConnection();
-			$bofelamimail->reopen($mailbox);
+			$icServerID =& egw_cache::getSession($sessionLocation,'activeProfileID');
+			$mailobject	= $mailClass::getInstance(true,$icServerID);
+			$mailobject->openConnection();
+			$mailobject->reopen($mailbox);
 
-			$mailcontent = felamimail_bo::get_mailcontent($bofelamimail,$uid,$partid,$mailbox,$this->htmledit);
+			$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$mailbox,$this->htmledit);
+
+			// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
+			// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
+			if ($GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='add_raw')
+			{
+				$message = $mailobject->getMessageRawBody($uid, $partid);
+				$headers = $mailobject->getMessageHeader($uid, $partid,true);
+				$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
+				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+				$tmpfile = fopen($attachment_file,'w');
+				fwrite($tmpfile,$message);
+				fclose($tmpfile);
+				$size = filesize($attachment_file);
+				$mailcontent['attachments'][] = array(
+						'name' => trim($subject).'.eml',
+						'mimeType' => 'message/rfc822',
+						'tmp_name' => $attachment_file,
+						'size' => $size,
+					);
+			}
 
 			return $this->edit($this->prepare_import_mail(
 				$mailcontent['mailaddress'],
