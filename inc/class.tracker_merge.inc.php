@@ -135,33 +135,7 @@ class tracker_merge extends bo_merge
 		}
 
 		// Links
-		$pattern = '@\$(links|attachments|links_attachments)\/?(title|href|link)?\/?([a-z]*)\$@';
-		static $link_cache;
-		if(preg_match_all($pattern, $content, $matches))
-		{
-			foreach($matches[0] as $i => $placeholder)
-			{
-				$placeholder = substr($placeholder, 1, -1);
-				if($link_cache[$id][$placeholder])
-				{
-					$array[$placeholder] = $link_cache[$id][$placeholder];
-					continue;
-				}
-				switch($matches[1][$i])
-				{
-					case 'links':
-						$array[$placeholder] = $this->get_links('tracker', $id, '!'.egw_link::VFS_APPNAME, array(),$matches[2][$i]);
-						break;
-					case 'attachments':
-						$array[$placeholder] = $this->get_links('tracker', $id, egw_link::VFS_APPNAME,array(),$matches[2][$i]);
-						break;
-					default:
-						$array[$placeholder] = $this->get_links('tracker', $id, $matches[3][$i], array(), $matches[2][$i]);
-						break;
-				}
-				$link_cache[$id][$placeholder] = $array[$placeholder];
-			}
-		}
+		$array += $this->get_all_links('tracker', $id, $prefix, $content);
 
 		// Add markers
 		foreach($array as $key => &$value)
