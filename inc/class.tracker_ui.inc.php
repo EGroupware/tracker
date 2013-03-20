@@ -295,6 +295,7 @@ class tracker_ui extends tracker_bo
 						$msg = lang('Nothing to save.');
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
 						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
+						$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
 							// only change to current tracker, if not all trackers displayed
 							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
 					}
@@ -332,9 +333,7 @@ class tracker_ui extends tracker_bo
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
-						$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+(opener.location.href.indexOf('?')<0?'?':'&')+'msg=".addslashes(urlencode($msg)).
-							// only change to current tracker, if not all trackers displayed
-							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
+						$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
 					}
 					else
 					{
@@ -363,7 +362,7 @@ class tracker_ui extends tracker_bo
 						$msg = lang('Thank you for voting.');
 						if ($popup)
 						{
-							$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
+							$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
 							$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
 						}
 					}
