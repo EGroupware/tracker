@@ -65,6 +65,11 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 
 		$this->mapping_fields += tracker_import_csv::$special_fields;
 
+		foreach($this->mapping_fields as $name => &$label)
+		{
+			$label = lang($label);
+		}
+
 		// Actions
 		$this->actions = array(
 			'none'		=>	lang('none'),
