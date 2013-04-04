@@ -1081,6 +1081,9 @@ class tracker_ui extends tracker_bo
 			{
 				$content['nm']['action'] = $content['admin'];
 			}
+			// Clear multiple action popup
+			unset($content['admin']);
+
 			if($content['nm']['action'])
 			{
 				if (!count($content['nm']['selected']) && !$content['nm']['select_all'])
@@ -1228,7 +1231,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		// Turn on multi-queue widget
-		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';;
+		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
