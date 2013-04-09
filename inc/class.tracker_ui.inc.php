@@ -193,7 +193,7 @@ class tracker_ui extends tracker_bo
 
 			if ($popup)
 			{
-				$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\nwindow.focus();\n</script>\n";
+				$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\nwindow.focus();\n</script>\n";
 			}
 			// check if user has rights to create new entries and fail if not
 			if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
@@ -344,7 +344,7 @@ class tracker_ui extends tracker_bo
 					if ($popup)
 					{
 						$js .= 'window.close();';
-						echo "<html>\n<body>\n<script>\n$js\n</script>\n</body>\n</html>\n";
+						echo "<html>\n<body>\n<script type='text/javascript'>\n$js\n</script>\n</body>\n</html>\n";
 						common::egw_exit();
 					}
 					unset($_GET['tr_id']);	// in case it's still set
@@ -362,7 +362,7 @@ class tracker_ui extends tracker_bo
 						if ($popup)
 						{
 							$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
-							$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
+							$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\n$js\n</script>\n";
 						}
 					}
 					break;
@@ -427,7 +427,7 @@ class tracker_ui extends tracker_bo
 									{
 										$msg = lang('Bounty confirmed');
 										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
-										$GLOBALS['egw_info']['flags']['java_script'] .= "<script>\n$js\n</script>\n";
+										$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\n$js\n</script>\n";
 									}
 									else
 									{
@@ -1479,7 +1479,7 @@ width:100%;
 		if (!empty($_to_emailAddress))
 		{
 			$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
-			echo '<script>window.resizeTo(750,550);</script>';
+			echo '<script type="text/javascript">window.resizeTo(750,550);</script>';
 
 			if (is_array($_attachments))
 			{
@@ -1600,7 +1600,7 @@ width:100%;
 			));
 		}
 		common::egw_header();
-		echo "<script> window.close(); alert('Error: no mail (Mailbox / UID) given!');</script>";
+		echo "<script type='text/javascript'> window.close(); alert('Error: no mail (Mailbox / UID) given!');</script>";
 		common::egw_exit();
 		exit;
 	}
