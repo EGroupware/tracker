@@ -548,8 +548,14 @@ class tracker_bo extends tracker_so
 
 			if (!is_object($this->tracking)) $this->tracking = new tracker_tracking($this);
 			$changed = $this->tracking->changed_fields($new, $old);
-
-			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message'])) ||
+			//error_log(__METHOD__.__LINE__.' ReplyMessage:'.$this->data['reply_message'].' Mode:'.$this->data['tr_edit_mode'].' Config:'.$this->htmledit);
+			$testReply = $this->data['reply_message'];
+			if ($this->htmledit && isset($this->data['reply_message']) && !empty($this->data['reply_message']))
+			{
+				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']),false,$stripcrl=true,$stripalltags=true));				
+			}
+			//error_log(__METHOD__.__LINE__.' TestReplyMessage:'.$testReply);
+			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message']) && !empty($testReply)) ||
 				(isset($this->data['canned_response']) && !empty($this->data['canned_response']))))
 			{
 				//error_log(__METHOD__.__LINE__."  no change --> no save needed");
