@@ -36,6 +36,7 @@ $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['search_link'] = 'tracker_hooks::search_link';
 $setup_info['tracker']['hooks'][] = 'home';
 $setup_info['tracker']['hooks']['timesheet_set'] = 'tracker.tracker_ui.timesheet_set';
+$setup_info['tracker']['hooks']['infolog_set'] = 'tracker.tracker_ui.infolog_set';
 $setup_info['tracker']['hooks']['verify_settings'] = 'tracker_hooks::verify_settings';
 
 /* Dependencies for this app to work */

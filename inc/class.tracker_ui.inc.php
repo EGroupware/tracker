@@ -951,7 +951,7 @@ class tracker_ui extends tracker_bo
 	 * Hook for timesheet to set some extra data and links
 	 *
 	 * @param array $data
-	 * @param int $data[id] info_id
+	 * @param int $data[id] tracker_id
 	 * @return array with key => value pairs to set in new timesheet and link_app/link_id arrays
 	 */
 	function timesheet_set($data)
@@ -973,6 +973,47 @@ class tracker_ui extends tracker_bo
 		return $set;
 	}
 
+	/**
+	 * Hook for InfoLog to set some extra data and links
+	 *
+	 * @param array $data
+	 * @param int $data[id] tracker_id
+	 * @return array with key => value pairs to set in new infolog and link_app/link_id arrays
+	 */
+	function infolog_set($data)
+	{
+		if (!($tracker = $this->read($data['id'])))
+		{
+			return array();
+		}
+		$set = array(
+			'info_subject' => $tracker['tr_summary'],
+			'info_des'     => $tracker['tr_description'],
+			'info_contact' => 'tracker:'.$tracker['tr_id'],
+		);
+		// copy links
+		foreach(egw_link::get_links('tracker',$tracker['tr_id'],'','link_lastmod DESC',true) as $link)
+		{
+			$set['link_app'][] = $link['app'];
+			$set['link_id'][]  = $link['id'];
+
+			// prefer addressbook or projectmanager link as primary contact over default of this ticket
+			if (in_array($link['app'], array('addressbook','projectmanager')) &&
+				strpos($set['info_contact'], 'addressbook:') !== 0)
+			{
+				$set['info_contact'] = $link['app'].':'.$link['id'];
+			}
+		}
+		// copy same named customfields
+		foreach(config::get_customfields('infolog') as $name => $nul)
+		{
+			if(array_key_exists('#'.$name, $tracker))
+			{
+				$set['#'.$name] = $tracker['#'.$name];
+			}
+		}
+		return $set;
+	}
 	/**
 	 * Check if a ticket has already been seen
 	 *
