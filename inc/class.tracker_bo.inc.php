@@ -216,6 +216,7 @@ class tracker_bo extends tracker_so
 		'tr_creator'     => 'Created by',
 		'tr_created'     => 'Created on',
 		'tr_group'		 => 'Group',
+		'tr_cc'			 => 'CC',
 		// pseudo fields used in edit
 		'link_to'        => 'Attachments & Links',
 		'canned_response' => 'Canned response',
@@ -224,7 +225,6 @@ class tracker_bo extends tracker_so
 		'vote'           => 'Vote for it!',
 		'no_notifications'	=> 'No notifications',
 		'bounty'         => 'Set bounty',
-		'tr_cc'			 => 'CC',
 		'num_replies'    => 'Number of replies',
 		'customfields'   => 'Custom fields',
 	);
@@ -551,7 +551,7 @@ class tracker_bo extends tracker_so
 			$testReply = $this->data['reply_message'];
 			if ($this->htmledit && isset($this->data['reply_message']) && !empty($this->data['reply_message']))
 			{
-				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']),false,$stripcrl=true,$stripalltags=true));				
+				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']),false,$stripcrl=true,$stripalltags=true));
 			}
 			//error_log(__METHOD__.__LINE__.' TestReplyMessage:'.$testReply);
 			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message']) && !empty($testReply)) ||
@@ -2159,10 +2159,10 @@ OR tr_duedate IS NULL AND
 	{
 
 		$users = array();
-	
+
 		$config_limit = $this->now - $this->overdue_days * 24*60*60;
 		$four_days = 4 * 24*60*60;
-		
+
 		$where = array(
 			'tr_status' => array_keys($this->get_tracker_stati(null, false)),
 			"(tr_duedate IS NOT NULL and ABS(tr_duedate - {$this->now}) < {$four_days}
