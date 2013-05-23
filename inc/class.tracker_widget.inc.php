@@ -91,7 +91,7 @@ class tracker_widget
 			case 'tracker-value':
 			default:
 				if (substr($value,0,8) == 'tracker:') $value = substr($value,8);	// link-entry syntax
-				if (!$value || !$cell['size'] || (!is_array($this->data) || $this->data['info_id'] != $value) &&
+				if (!$value || !$cell['size'] || (!is_array($this->data) || $this->data['tr_id'] != $value) &&
 					!($this->data = $this->tracker->read($value)))
 				{
 					$cell = $tmpl->empty_cell();
