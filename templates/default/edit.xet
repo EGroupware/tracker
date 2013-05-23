@@ -226,7 +226,7 @@
 				</row>
 				<row class="row">
 					<description for="tr_summary" value="Summary"/>
-					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="inputFullWidth"/>
+					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="inputFullWidth" tabindex="1"/>
 				</row>
 				<row valign="top">
 					<tabbox id="tabs" span="all">
