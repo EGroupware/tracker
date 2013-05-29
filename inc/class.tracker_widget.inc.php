@@ -215,6 +215,7 @@ class tracker_widget
 			'no_notifications','bounty','num_replies','customfields',
 		);
 		$fields += array_diff_key($this->tracker->field2label, array_flip($remove));
+		$fileds['tr_id'] = 'ID';
 		$fileds['tr_modified'] = 'Modified';
 		$fileds['tr_modifier'] = 'Modifier';
 
