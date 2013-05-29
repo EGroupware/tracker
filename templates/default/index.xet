@@ -3,8 +3,8 @@
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.9.001">
 		<hbox>
-			<menulist class="bold">
-				<menupopup cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="1" options="All"/>
+			<menulist>
+				<menupopup class="bold" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" onchange="1" options="All"/>
 			</menulist>
 			<button id="col_filter[multi_queue][true]" image="foldertree_nolines_plus"/>
 		</hbox>
@@ -145,7 +145,7 @@
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
 						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>
-						<image href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" label="Filemanager" src="filemanager/navbar" class="image16"/>
+						<image label="Filemanager" src="filemanager/navbar" href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16"/>
 						<checkbox align="right" id="checked[]" options="$row_cont[tr_id]"/>
 					</hbox>
 				</row>
@@ -171,7 +171,7 @@
 					<template align="right" id="right"/>
 				</row>
 				<row>
-					<nextmatch id="nm" options="tracker.index.rows" span="all"/>
+					<nextmatch id="nm" template="tracker.index.rows" span="all"/>
 				</row>
 				<row disabled="!@nm[selectcols]=/legacy_actions/">
 					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[nm][col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>
