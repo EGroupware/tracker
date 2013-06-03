@@ -1125,6 +1125,7 @@ class tracker_ui extends tracker_bo
 							$content[$multi_action] = implode(',',$content[$multi_action]);
 						}
 						$content['nm']['action'] .= '_' . $content[$multi_action];
+						unset($content[$multi_action]);
 					}
 					if ($this->action($content['nm']['action'],$content['nm']['selected'],$content['nm']['select_all'],
 						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notifications']))
