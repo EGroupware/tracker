@@ -53,7 +53,10 @@
 						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
 						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
 					</vbox>
-					<unknown options="2"/>
+					<vbox options="0,0">
+						<nextmatch-sortheader label="Start date" id="tr_startdate" options="2"/>
+						<nextmatch-sortheader label="Due date" id="tr_duedate"/>
+					</vbox>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"/>
 					<vbox options="0,0">
 						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="status_filter"/>
@@ -90,9 +93,9 @@
 					<menulist>
 						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
-					<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
+					<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 					<vbox no_lang="1" class="colfullWidth">
-						<description id="${row}[tr_summary]" no_lang="1" options=",tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id],,,,780x535" class="$row_cont[seen_class]"/>
+						<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 						<hrule/>
 						<box no_lang="1" class="trackerDes">
 							<html id="${row}[tr_description]" no_lang="1"/>
@@ -132,7 +135,7 @@
 						</hbox>
 					</vbox>
 					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@duration_format"/>
-					<int align="center" id="${row}[votes]" readonly="true"/>
+					<int align="center" id="${row}[votes]" readonly="true" options=","/>
 					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
 					<date-since id="${row}[esc_start]"/>
 					<customfields-list id="$row"/>
@@ -142,7 +145,7 @@
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
 						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>
-						<image label="Filemanager" src="filemanager/navbar" options="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16"/>
+						<image href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" label="Filemanager" src="filemanager/navbar" class="image16"/>
 						<checkbox align="right" id="checked[]" options="$row_cont[tr_id]"/>
 					</hbox>
 				</row>
@@ -161,6 +164,7 @@
 				</row>
 				<row disabled="!@msg">
 					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
+					<description/>
 					<description/>
 				</row>
 				<row disabled="1">
@@ -187,54 +191,54 @@
 							</columns>
 							<rows>
 								<row>
-									<description value="Category" options=",,,cat_id"/>
+									<description for="cat_id" value="Category"/>
 									<menulist>
 										<menupopup id="cat_id" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Version" options=",,,tr_version"/>
+									<description for="tr_version" value="Version"/>
 									<menulist>
 										<menupopup id="tr_version" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Priority" options=",,,tr_priority"/>
+									<description for="tr_priority" value="Priority"/>
 									<menulist>
 										<menupopup id="tr_priority" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Status" options="tr_status"/>
+									<description font_style="tr_status" value="Status"/>
 									<menulist>
 										<menupopup statustext="@status_help" id="tr_status_admin" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Resolution" options=",,,tr_resolution"/>
+									<description for="tr_resolution" value="Resolution"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup statustext="@status_help" id="tr_resolution" options="No change"/>
 										</menulist>
-										<menulist class="leftPad5">
-											<menupopup type="select-percent" id="tr_completion" options="No change"/>
+										<menulist>
+											<menupopup type="select-percent" class="leftPad5" id="tr_completion" options="No change"/>
 										</menulist>
 									</hbox>
 								</row>
 								<row>
-									<description value="Assigned to" options=",,,tr_assigned"/>
+									<description for="tr_assigned" value="Assigned to"/>
 									<menulist>
 										<menupopup id="tr_assigned" no_lang="1" options="No change"/>
 									</menulist>
 								</row>
 								<row>
-									<description value="Canned response" options=",,,canned_response"/>
+									<description for="canned_response" value="Canned response"/>
 									<menulist>
 										<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" options="Select one"/>
 									</menulist>
 								</row>
 								<row valign="top">
-									<description value="Comment" options=",,,reply_message"/>
+									<description for="reply_message" value="Comment"/>
 									<textbox multiline="true" id="reply_message" rows="5" cols="60"/>
 								</row>
 								<row>
@@ -244,7 +248,7 @@
 							</rows>
 						</grid>
 					</box>
-					<hbox align="right">
+					<hbox align="right" span="all">
 						<box id="link_popup" class="action_popup prompt">
 							<vbox>
 								<description value="Add / Remove link" class="promptheader"/>
@@ -261,8 +265,8 @@
 								<description value="Change assigned" class="promptheader"/>
 								<description value="Select users or groups"/>
 								<hbox options="0,0">
-									<menulist class="user_select">
-										<menupopup id="assigned" no_lang="1" options="Select one..."/>
+									<menulist>
+										<menupopup class="user_select" id="assigned" no_lang="1" options="Select one..."/>
 									</menulist>
 									<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('assigned'))) { selectbox.size=5; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
 								</hbox>
@@ -277,8 +281,8 @@
 							<vbox>
 								<description value="Change group" class="promptheader"/>
 								<description value="Select group"/>
-								<menulist class="action_popup-content">
-									<menupopup type="select-account" id="group" options=",groups"/>
+								<menulist>
+									<menupopup type="select-account" class="action_popup-content" id="group" options=",groups"/>
 								</menulist>
 								<hbox>
 									<button label="Ok" onclick="nm_submit_popup(this); return false;"/>
