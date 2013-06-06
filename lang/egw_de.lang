@@ -270,6 +270,7 @@ no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 no, no additional mailheader to description and comments	tracker	de	nein, keine Mailheaderinformationen
 non-anonymous users	tracker	de	Nicht anonyme Benutzer
 noone	tracker	de	Niemand
+not-closed	tracker	de	Nicht geschlossen
 note: timesheet itself is always excluded	tracker	de	Beachte: Links zur Anwendung Stundenzettel werden IMMER ignoriert.
 nothing to save.	tracker	de	Nichts zu speichern.
 notification	tracker	de	Benachrichtigung
