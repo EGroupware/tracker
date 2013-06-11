@@ -627,7 +627,8 @@ class tracker_bo extends tracker_so
 			}
 			else
 			{
-				unset($this->data['reply_message']);
+				if (isset($this->data['reply_message'])) unset($this->data['reply_message']);
+				if (isset($this->data['canned_response'])) unset($this->data['canned_response']);
 			}
 
 			// Reset escalation flags on variable fields (comment, modified, etc.)
