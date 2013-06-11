@@ -622,7 +622,7 @@ class tracker_bo extends tracker_so
 				$seen[] = $this->user;
 				$this->data['tr_seen'] = serialize($seen);
 			}
-			if ($this->data['reply_message'] || $this->data['canned_response'])
+			if (($this->data['reply_message'] && !empty($testReply)) || $this->data['canned_response'])
 			{
 				if ($this->data['canned_response'])
 				{
@@ -637,6 +637,11 @@ class tracker_bo extends tracker_so
 				{
 					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
+			}
+			else
+			{
+				if (isset($this->data['reply_message'])) unset($this->data['reply_message']);
+				if (isset($this->data['canned_response'])) unset($this->data['canned_response']);
 			}
 
 			// Reset escalation flags on variable fields (comment, modified, etc.)
