@@ -491,7 +491,7 @@ class tracker_mailhandler extends tracker_bo
 			//error_log(__METHOD__." Attachments retrieved with attachments:".print_r($additionalAttachments,true));
 			for ($a=0; $a<sizeof($additionalAttachments);$a++) $attachments[] = $additionalAttachments[$a];
 		}
-		return array('body' => $GLOBALS['egw']->translation->convertHTMLToText(html::purify($body)),
+		return array('body' => $GLOBALS['egw']->translation->convertHTMLToText(nl2br(html::purify($body))),
 					 'struct' => $struct,
 					 'attachments' =>  $attachments
 					);
@@ -763,7 +763,7 @@ class tracker_mailhandler extends tracker_bo
 				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
 				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
 				'SUBJECT'=>$this->mailSubject,
-				'DATE'=>felamimail_bo::_strtotime($msgHeader->Date)),'',$this->htmledit);
+				'DATE'=>felamimail_bo::_strtotime($msgHeader->Date)),'',false/*$this->htmledit*/);
 		}
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
@@ -795,6 +795,7 @@ class tracker_mailhandler extends tracker_bo
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
 			$this->data['tr_description'] = ($mailHeaderInfo&&$header2desc?$mailHeaderInfo:'').$this->mailBody;
+			if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
 			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
 			{
 				$this->data['tr_cc'] = $replytoAddress;
