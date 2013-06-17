@@ -17,7 +17,8 @@ add additionally	tracker	ru	добавить к имеющимся
 add assigned	tracker	ru	Назначение добавлено
 add comment	tracker	ru	Добавить коментарий
 add timesheet entry	tracker	ru	Добавить запись распределения времени
-after	tracker	ru	после
+add unrecognized mail address to the cc field	tracker	ru	Добавить нераспознанные адреса почты в поле CC
+after	tracker	ru	После
 after how many days a not replied item should be marked overdue?	tracker	ru	Через сколько дней запрос, не получивший ответа, должен быть отмечен как просроченный?
 after how many days pending items should be closed automatic	tracker	ru	Через сколько дней ожидающие запросы должны быть автоматически закрыты?
 all tickets are already converted to tracker	tracker	ru	все запросы уже преобразованы в Трекер
@@ -45,10 +46,11 @@ bounty set	tracker	ru	Набор премий
 canned response	tracker	ru	Готовый ответ
 canned responses	tracker	ru	Готовые ответы
 categories, versions, canned responses	tracker	ru	Категории, версии, готовые ответы
+category for new tickets	tracker	ru	Категория для новых записей Трекера
 changes made below will be lost, if not applied before!	tracker	ru	Изменения сделанные ниже будут утеряны если не применены !
 check all	tracker	ru	Отметить все
 check mail interval	tracker	ru	Интервал проверки почты
-choose a project from the drop-down list	tracker	ru	выберите проект из ниспадающего меню
+choose a project from the drop-down list	tracker	ru	Выберите проект из ниспадающего меню
 close pending	tracker	ru	Закрыть незавершенные
 closed	tracker	ru	Закрыто
 comment by %1 at %2:	tracker	ru	Откоментировано %1 %2:
@@ -69,7 +71,7 @@ create new links	tracker	ru	Создать новую ссылку
 created	tracker	ru	Создано
 creation date	tracker	ru	даты создания
 creator	tracker	ru	Создатель
-custom fields	tracker	ru	Пользовательские Поля
+custom fields	tracker	ru	Пользовательские поля
 custom tracker priorities	tracker	ru	Пользовательские приоритеты трекера
 date opened	tracker	ru	Дата открытия
 define escalations	common	ru	Назначение эскалаций
@@ -86,7 +88,7 @@ delete unrecognized mails from the server, even if 'delete mails' above is not t
 deleted	tracker	ru	Удалено
 do you want to vote for this item	tracker	ru	Хотите проголосовать за этот пункт?
 donator name to show	tracker	ru	Показать имя жертвователя
-duplicate	tracker	ru	Дублировано
+duplicate	tracker	ru	Дублирует
 e-mail address to which a copy of all tracker-notifications should be send	tracker	ru	Адрес e-mail, по которому должна быть выслана копия всех уведомлений трекера
 e-mail notifications	tracker	ru	уведомление по e-mail
 edit %1	tracker	ru	Редактировать %1
@@ -94,6 +96,7 @@ edit entry	tracker	ru	редактировать запись
 email address to contact you	tracker	ru	Адрес e-mail для контакта с Вами
 email handling can be configured only for all trackers	tracker	ru	Управление эл. письмами может быть сконфигурировано только для всех очередей трекера
 enter an email address here if unrecognized mails should be forwarded	tracker	ru	Введите здесь адрес эл. почты если нераспознанные письма должны быть перенаправлены
+enter an opening text for the reply message	tracker	ru	Введите текст, открывающий ответное сообщение
 enter the imap server from which emails should be fetched	tracker	ru	Введите название сервера IMAP с которого будет приниматься почта
 enter the mail address that will be read.	tracker	ru	Введите адрес эл. почты для чтения.
 entry saved	tracker	ru	Запись сохранена
@@ -123,12 +126,14 @@ import tts tickets	tracker	ru	Импортировать запросы TTS
 incoming mail folder	tracker	ru	Папка входящих писем
 incoming mail rules	tracker	ru	Правила для входящих писем
 incoming mail server	tracker	ru	Сервер входящей почты
+info only	tracker	ru	К сведению
 interval in minutes for checking the incoming mails	tracker	ru	Интервал в минутах для проверки входящих писем
+introduction message	tracker	ru	Вступительное сообщение
 invalid	tracker	ru	Неверно
 item assignee	tracker	ru	Уполномоченный запроса
 item creator	tracker	ru	Создатель запроса
 language for the copy	tracker	ru	Язык для копии
-last modified	tracker	ru	последнего изменения
+last modified	tracker	ru	Последнего изменения
 last reply	tracker	ru	последнего ответа
 later	tracker	ru	Позже
 links	tracker	ru	Ссылки
@@ -164,14 +169,17 @@ read mail address	tracker	ru	Адрес почты для чтения
 receive notifications about assigned tracker-items	tracker	ru	Получать уведомление о назначенных пунктах трекера
 receive notifications about created tracker-items	tracker	ru	Получать уведомление о созданных пунктах трекера
 receive notifications in html	tracker	ru	Принимать сообщения в формате html
+recieve notifications about own changes in tracker-items	tracker	ru	Получать уведомления о собственных изменениях записей Трекера
 rejected	tracker	ru	Отклонено
 remind	tracker	ru	Напомнить
+reply also to unknown addresses	tracker	ru	Отвечать также по неизвестным адресам
 resolution	tracker	ru	Решение
 restict tracker items to the creator and the staff only	tracker	ru	Разрешить доступ к записям трекера только персоналу и создавшему
 restict tracker items to the creators primary group and the staff only	tracker	ru	Разрешить доступ к записям трекера только персоналу и первичной группе создавших
 restrict tracker items to staff and:	tracker	ru	Разрешить доступ к записям трекера только персоналу и:
 restriction	tracker	ru	Ограничения
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	ru	Выберите очередь трекера по умолчанию для новых записей либо "Отклонить" для отключения возможности создания запросов по почте.
+select how autoreplies should be sent when mails are received	tracker	ru	Выбрать как должен посылаться автоматически ответ на полученные письма
 select multiple	tracker	ru	Выбрать несколько
 select tracker queue	tracker	ru	выберите очередь трекера
 select which categories should be used in tracker for the tts categories	tracker	ru	выберите какие категории необходимо использовать в трекере для категорий TTS
@@ -179,6 +187,7 @@ select which username should be used when unrecognized mails are handled.	tracke
 select which username should be used when unrecognized replies are handled	tracker	ru	Выберите какое имя пользователя должно использоваться при управлении нераспознанными ответами.
 sender address	tracker	ru	Адрес отправителя
 sender address for all notifications, eg. noreply@egroupware.org	tracker	ru	Адрес отправителя для всех уведомлений, напр. noreply@egroupware.org
+sent autoreplies	tracker	ru	Послать автоматический ответ
 server type	tracker	ru	Тип сервера
 set %1	tracker	ru	Установить %1
 set an own bounty (in %s)	tracker	ru	Установить свою премию (%s)
@@ -187,7 +196,8 @@ should the actions column in the tracker list-view be shown?	tracker	ru	След
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
 show actions in tracker listing	tracker	ru	Показавать действия в списке трекера
-staff	tracker	ru	Кадровый резерв
+show the tracker send you notification mails, in tracker items that you updates?	tracker	ru	Должен ли Трекер посылать письменные уведомления о записях, Вами обновленных?
+staff	tracker	ru	Персонал
 state	tracker	ru	Состояние
 stati	tracker	ru	Статистика
 store as	tracker	ru	Сохранить как
@@ -200,10 +210,10 @@ the canned response will be prefix the text you type.	tracker	ru	Готовый 
 there already an escalation for that filter!	tracker	ru	Для этого фильтра уже имеется эскалация!
 this module displays information from the tracker.	tracker	ru	Этот модуль показывает информацию из Трекера
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	ru	Этот запрос в Трекере был закрыт автоматически системой. Его статус перед этим был назначен как, Незавершенный, и первоначальный представитель не откликнулся в течении %1 дней.
-ticket count	tracker	ru	счетчик запросов
+ticket count	tracker	ru	Счетчик запросов
 ticket modified by %1 at %2	tracker	ru	Запрос модифицирован %1 в %2
 times	tracker	ru	Раз
-tracker	common	ru	Система Трекера
+tracker	common	ru	Трекер
 tracker added	tracker	ru	Добавлена очередь Трекера
 tracker admins	tracker	ru	Администраторы Трекера
 tracker admins & technicians	tracker	ru	Администраторы и специалисты Трекера
@@ -224,7 +234,8 @@ use a default user for mails that where not recognized	tracker	ru	Использ
 versions	tracker	ru	Версии
 vote for it!	tracker	ru	Проголосуйте за это!
 votes	tracker	ru	Голоса
-wont fix	tracker	ru	Не будет исправлено
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	ru	Отметьте это поле для автоматического добавления неизвестных адресов, с которых получена почта, в поле CC Трекера. Это поле игнорируется, когда неопознанная почта не управляется.
+wont fix	tracker	ru	Неисправимо
 works for me	tracker	ru	У меня работает
 yes, display groups first	tracker	ru	Да, показывать группы первыми
 yes, display users first	tracker	ru	Да, показывать пользователей первыми
