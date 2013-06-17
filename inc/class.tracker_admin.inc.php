@@ -573,11 +573,22 @@ class tracker_admin extends tracker_bo
 				'no_filter' => true,
 				'order'          =>	'esc_time',
 				'sort'           =>	'ASC',// IO direction of the sort: 'ASC' or 'DESC'
+				'row_id'	=>	'esc_id',
+				'actions'	=>	array(
+					'edit' => array(
+						'caption' => 'edit',
+						'default' => true,
+						'allowOnMultiple' => false,
+					),
+					'delete' => array(
+						'caption' => 'delete',
+						'allowOnMultiple' => false,
+					)
+				)
 			);
 		}
 		else
 		{
-			//_debug_array($content);
 			list($button) = @each($content['button']);
 			unset($content['button']);
 			$escalations->init($content);
@@ -612,27 +623,37 @@ class tracker_admin extends tracker_bo
 					$escalations->init();
 					break;
 			}
-			if ($content['nm']['rows']['edit'])
+			if($content['nm']['rows']['edit'] || $content['nm']['rows']['delete'])
 			{
-				list($id) = each($content['nm']['rows']['edit']);
-				unset($content['nm']['rows']);
-				if (!$escalations->read($id))
-				{
-					$msg = lang('Escalation not found!');
-					$escalations->init();
-				}
+				$content['nm']['action'] = key($content['nm']['rows']);
+				$content['nm']['selected'] = array(key($content['nm']['rows'][$content['nm']['action']]));
 			}
-			elseif($content['nm']['rows']['delete'])
+			if($content['nm']['action'])
 			{
-				list($id) = each($content['nm']['rows']['delete']);
-				unset($content['nm']['rows']);
-				if (!$escalations->delete(array('esc_id' => $id)))
+				$action = $content['nm']['action'];
+				list($id) = $content['nm']['selected'];
+				$id = (int)$id;
+				unset($content['nm']['action']);
+				unset($content['nm']['selected']);
+				switch($action)
 				{
-					$msg = lang('Error deleting escalation!');
-				}
-				else
-				{
-					$msg = lang('Escalation deleted.');
+					case 'edit':
+						if (!$escalations->read($id))
+						{
+							$msg = lang('Escalation not found!');
+							$escalations->init();
+						}
+						break;
+					case 'delete':
+						if (!$escalations->delete(array('esc_id' => $id)))
+						{
+							$msg = lang('Error deleting escalation!');
+						}
+						else
+						{
+							$msg = lang('Escalation deleted.');
+						}
+						break;
 				}
 			}
 		}
@@ -702,8 +723,16 @@ class tracker_admin extends tracker_bo
                 {
 			if (count($content[$array]) > 1)
 			{
-				$widget =& $tpl->get_widget_by_name($array);
-				$widget['size'] = '3+';
+				// Old etemplate support
+				if(method_exists($tpl, 'get_widget_by_name'))
+				{
+					$widget =& $tpl->get_widget_by_name($array);
+					$widget['size'] = '3+';
+				} else {
+					$tpl->setElementAttribute($array, 'empty_label', 'all');
+					$tpl->setElementAttribute($array, 'rows', '3');
+					$tpl->setElementAttribute($array, 'tags', true);
+				}
 			}
 		}
 		$content['set']['no_comment_visibility'] = !$this->allow_restricted_comments;

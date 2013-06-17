@@ -28,7 +28,7 @@
 					<nextmatch-header label="Action" id="esc_action_label"/>
 					<nextmatch-sortheader label="Time" id="esc_time"/>
 					<nextmatch-sortheader label="Match again after" id="esc_match_repeat"/>
-					<description/>
+					<nextmatch-header label="Actions" id="actions"/>
 				</row>
 				<row class="row">
 					<description id="${row}[esc_title]" no_lang="1"/>
@@ -72,7 +72,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.003">
+	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.004">
 		<grid width="100%">
 			<columns>
 				<column width="100"/>
@@ -81,7 +81,7 @@
 			</columns>
 			<rows>
 				<row>
-					<nextmatch id="nm" options="tracker.escalations.rows" span="all"/>
+					<nextmatch id="nm" template="tracker.escalations.rows" span="all"/>
 				</row>
 				<row>
 					<hrule span="all"/>
@@ -121,7 +121,7 @@
 				<row>
 					<groupbox span="2">
 						<caption label="Filter"/>
-						<grid width="100%">
+						<grid width="100%" class="big_boxes">
 							<columns>
 								<column width="87"/>
 								<column width="200"/>
@@ -135,14 +135,14 @@
 										<menulist>
 											<menupopup id="tr_tracker" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_tracker'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_tracker'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Resolution"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_resolution" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_resolution'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_resolution'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -151,14 +151,14 @@
 										<menulist>
 											<menupopup id="cat_id" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('cat_id'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('cat_id'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Version"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_version" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_version'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_version'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -167,14 +167,14 @@
 										<menulist>
 											<menupopup id="tr_status" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_status'))) { if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_status'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_priority" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_priority'))) {  if(\$j().chosen) \$j(selectbox).unchosen(); selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]'; if(\$j().chosen) \$j(selectbox).chosen();\$j(this).hide();}  return false;" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_priority'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 							</rows>
@@ -225,7 +225,7 @@
 										<menulist>
 											<menupopup id="tr_assigned" options="Unchanged"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('tr_assigned'))) { selectbox.size=3; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  return false;" options="users" class="leftPad5"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.apply(this,typeof widget == 'undefined' ? [form::name('tr_assigned')]: ['tr_assigned',widget]);" options="users" class="leftPad5"/>
 										<checkbox label="add additionally" id="add_assigned" class="leftPad5"/>
 									</hbox>
 								</row>
@@ -264,7 +264,7 @@
 		</grid>
 		<styles>
 			.reply, .reply&gt;textarea  { width: 100%; }
-.mStatus img { width: 16px; height: 16px; padding-left: 5px; }
+.mStatus, .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
 fieldset&gt;table&gt;tbody&gt;tr&gt;td&gt;table, td&gt;table&gt;tbody&gt;tr&gt;td&gt;select {width: 100%;}
 		</styles>
 	</template>
