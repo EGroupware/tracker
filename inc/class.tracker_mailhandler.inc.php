@@ -129,7 +129,20 @@ class tracker_mailhandler extends tracker_bo
 		{
 			return false; // Or should we default to 'localhost'?
 		}
-
+		if ($this->mailhandling[$queue]['servertype']<=2)
+		{
+			$icServer = CreateObject('emailadmin.defaultimap');
+			$icServer->ImapServerId	= 'tracker_'.trim($queue);
+			$icServer->encryption	= ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
+			$icServer->host		= $this->mailhandling[$queue]['server'];
+			$icServer->port 	= $this->mailhandling[$queue]['serverport'];
+			$icServer->validatecert	= $this->mailhandling[$queue]['servertype']==2?true:false;
+			$icServer->username 	= $this->mailhandling[$queue]['username'];
+			$icServer->loginName 	= $this->mailhandling[$queue]['username'];
+			$icServer->password	= $this->mailhandling[$queue]['password'];
+			$icServer->enableSieve	= false;
+			return $icServer;
+		}
 		$mBox = '{'.$this->mailhandling[$queue]['server'];	// Set the servername
 
 		if(!empty($this->mailhandling[$queue]['serverport']))
@@ -168,6 +181,90 @@ class tracker_mailhandler extends tracker_bo
 		} else {
 			// Mailbox for all is pre-loaded, for others we have to change it
 			$this->mailBox = self::get_mailbox($queue);
+		}
+		if ($this->mailBox instanceof defaultimap)
+		{
+			$mailClass = 'felamimail_bo';
+			$mailobject	= $mailClass::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
+			//error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
+			// connect
+			$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
+			// may fail for validatecert=true
+			if ( PEAR::isError($tretval) && $mailobject->icServer->validatecert)
+			{
+				$mailobject->icServer->validatecert=false;
+				$mailobject->icServer->_connectionErrorObject->message = ',';
+				// try again
+				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
+			}
+			// retrieve list
+			//error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
+			$_folderName = $this->mailhandling[$queue]['folder'];
+			$mailobject->reopen($_folderName);
+			if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
+			$_filter=array('status'=>array('UNSEEN','UNDELETED'));
+			if (!empty($this->mailhandling[$queue]['address']))
+			{
+				$_filter['type']='TO';
+				$_filter['string']=trim($this->mailhandling[$queue]['address']);
+			}
+			$sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse=1, $_filter,$byUid=true,false);
+			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
+			$deletedCounter = 0;
+			foreach ((array)$sortResult as $i => $uid)
+			{
+				if (empty($uid)) continue;
+				error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']);
+				$s = $mailobject->icServer->getSummary($uid, true);
+				$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit);
+
+				// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
+				// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
+				if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
+				{
+					$message = $mailobject->getMessageRawBody($uid, $partid);
+					$headers = $mailobject->getMessageHeader($uid, $partid,true);
+					$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
+					$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+					$tmpfile = fopen($attachment_file,'w');
+					fwrite($tmpfile,$message);
+					fclose($tmpfile);
+					$size = filesize($attachment_file);
+					$mailcontent['attachments'][] = array(
+							'name' => trim($subject).'.eml',
+							'mimeType' => 'message/rfc822',
+							'tmp_name' => $attachment_file,
+							'size' => $size,
+						);
+				}
+				if ($mailcontent)
+				{
+					error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
+					if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
+					$mailobject->icServer->selectMailbox($_folderName);
+					$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+					//$rv = $mailobject->icServer->setFlags($uid, '\\Answered', 'add', true);
+					if ( PEAR::isError($rv)) error_log(__METHOD__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
+					if (self::process_message2($mailobject, $uid, $mailcontent, $queue) && $this->mailhandling[$queue]['delete_from_server'])
+					{
+						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+						$deletedCounter++;
+					}
+				}
+			}
+			// Expunge delete mails, if any
+			if ($deletedCounter)
+			{
+				$mailobject->icServer->selectMailbox($_folderName);
+				$rv = $mailobject->icServer->expunge();
+				if (self::LOG_LEVEL && PEAR::isError($rv)) error_log(__METHOD__." failed to expunge Message(s) from Folder: ".$_folderName.' due to:'.$rv->message);
+			}
+
+			// Close the connection
+			$mailobject->closeConnection();
+
+			$this->user = $this->originalUser;
+			return false;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$this->mailBox} for queue $queue\n");
 		if (!($this->mbox = @imap_open($this->mailBox,
@@ -591,6 +688,7 @@ class tracker_mailhandler extends tracker_bo
 	 * Process a messages from the mailbox
 	 *
 	 * @param int Message ID from the server
+	 * @param int queue tracking queue_id
 	 * @return boolean true=message successfully processed, false=message couldn't or shouldn't be processed
 	 */
 	function process_message ($mid, $queue)
@@ -795,7 +893,7 @@ class tracker_mailhandler extends tracker_bo
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
 			$this->data['tr_description'] = ($mailHeaderInfo&&$header2desc?$mailHeaderInfo:'').$this->mailBody;
-			if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
+			//if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
 			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
 			{
 				$this->data['tr_cc'] = $replytoAddress;
@@ -832,6 +930,19 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['reply_created'] = felamimail_bo::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
+		// Save Current edition mode preventing mixed types
+		if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'html';
+		}
+		elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'ascii';
+		}
+		else
+		{
+			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
+		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
@@ -857,6 +968,147 @@ class tracker_mailhandler extends tracker_bo
 			{
 				if(is_readable($attachment['tmp_name']))
 				{
+					egw_link::attach_file('tracker',$this->data['tr_id'],$attachment);
+				}
+			}
+		}
+
+		return !$saverv;
+	}
+
+	/**
+	 * Process a messages from the mailbox (felamimail/NET_IMAP Object)
+	 *
+	 * @param int mailobject that holds connection to the server
+	 * @param int Message ID from the server
+	 * @param array mailcontent the retrieved messages content
+	 * @param int queue tracking queue_id
+	 * @return boolean true=message successfully processed, false=message couldn't or shouldn't be processed
+	 */
+	function process_message2 ($mailobject, $mid, $mailcontent, $queue)
+	{
+		$this->ticketId = $this->get_ticketId($mailcontent['subject']);
+
+		if ($this->ticketId == 0) // Create new ticket?
+		{
+			if (empty($this->mailhandling[$queue]['default_tracker']))
+			{
+				return false; // Not allowed
+			}
+			if (!$senderIdentified) // Unknown user
+			{
+				if (empty($this->mailhandling[$queue]['unrec_mail']))
+				{
+					return false; // Not allowed for unknown users
+				}
+				$this->mailSender = $this->mailhandling[$queue]['unrec_mail']; // Ok, set default user
+			}
+		}
+
+		if ($this->ticketId == 0)
+		{
+			$this->init();
+			// this should take care, that new tickets are created by either the identified sender or the configured user
+			// as by default the creator was the user running the async job, thus not recognizing the configuration, we assume the
+			// running user having sufficient rights (see else)
+			if (self::LOG_LEVEL>1)
+			{
+				error_log(__METHOD__.__LINE__.'->'.$this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'));
+				error_log(__METHOD__.__LINE__.'->'.$this->mailSender);
+				error_log(__METHOD__.__LINE__.'->'.$this->mailhandling[$queue]['default_tracker']);
+			}
+			if ($this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'))
+			{
+				$this->data['tr_creator'] = $this->user = $this->mailSender;
+			}
+			else
+			{
+				$this->user = $this->mailSender;
+			}
+			$this->data['tr_created'] = felamimail_bo::_strtotime($mailcontent['headers']['DATE'],'ts',true);
+			$this->data['tr_summary'] = $mailcontent['subject'];
+			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
+			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
+//			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
+			$this->data['tr_priority'] = 5;
+			$this->data['tr_description'] = $mailcontent['message'];
+			//if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
+			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
+			{
+				$this->data['tr_cc'] = $replytoAddress;
+			}
+			//error_log(__METHOD__.__LINE__.array2string($this->data));
+		}
+		else
+		{
+			$this->read($this->ticketId);
+			if (!$senderIdentified)
+			{
+				switch ($this->mailhandling[$queue]['unrec_reply'])
+				{
+					case 0 :
+						$this->user = $this->data['tr_creator'];
+						break;
+					case 1 :
+						$this->user = 0;
+						break;
+					default :
+						$this->user = 0;
+						break;
+				}
+			}
+			else
+			{
+				$this->user = $this->mailSender;
+			}
+			if ($this->mailhandling[$queue]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
+			{
+				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
+			}
+			$this->data['reply_message'] = $mailcontent['message'];
+			$this->data['reply_created'] = felamimail_bo::_strtotime($mailcontent['headers']['DATE'],'ts',true);
+		}
+		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
+		// Save Current edition mode preventing mixed types
+		if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'html';
+		}
+		elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'ascii';
+		}
+		else
+		{
+			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
+		}
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
+		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
+		$saverv = $this->save(null,
+			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
+			|| ($this->mailhandling[$queue]['auto_reply'] == 1	// only new tickets
+				&& $this->ticketId == 0)					// and this is a new one
+				) && (										// AND
+					$senderIdentified		 				// we know this user
+				|| (!$senderIdentified						// or we don't and
+				&& $this->mailhandling[$queue]['reply_unknown'] == 1 // don't care
+			))) == true
+				? array(
+					'reply_text' => $this->mailhandling[$queue]['reply_text'],
+					// UserID or mail address
+					'reply_to' => ($this->user ? $this->user : $replytoAddress),
+				)
+				: null
+		);
+
+		if (($saverv==0) && is_array($mailcontent['attachments']))
+		{
+			foreach ($mailcontent['attachments'] as $attachment)
+			{
+				//error_log(__METHOD__.__LINE__.'#'.$attachment['tmp_name'].'#'.$this->data['tr_id']);
+				if(is_readable($attachment['tmp_name']))
+				{
+					//error_log(__METHOD__.__LINE__.'# trying to link '.$attachment['tmp_name'].'# to:'.$this->data['tr_id']);
 					egw_link::attach_file('tracker',$this->data['tr_id'],$attachment);
 				}
 			}
