@@ -831,6 +831,19 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['reply_created'] = felamimail_bo::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
+		// Save Current edition mode preventing mixed types
+		if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'html';
+		}
+		elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
+		{
+			$this->data['tr_edit_mode'] = 'ascii';
+		}
+		else
+		{
+			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
+		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
