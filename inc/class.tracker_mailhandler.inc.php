@@ -211,49 +211,22 @@ class tracker_mailhandler extends tracker_bo
 			$sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse=1, $_filter,$byUid=true,false);
 			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
 			$deletedCounter = 0;
+			$mailobject->icServer->selectMailbox($_folderName);
 			foreach ((array)$sortResult as $i => $uid)
 			{
 				if (empty($uid)) continue;
-				error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']);
-				$s = $mailobject->icServer->getSummary($uid, true);
-				$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit);
-
-				// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
-				// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
-				if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
+				if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']);
+				if ($uid)
 				{
-					$message = $mailobject->getMessageRawBody($uid, $partid);
-					$headers = $mailobject->getMessageHeader($uid, $partid,true);
-					$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
-					$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
-					$tmpfile = fopen($attachment_file,'w');
-					fwrite($tmpfile,$message);
-					fclose($tmpfile);
-					$size = filesize($attachment_file);
-					$mailcontent['attachments'][] = array(
-							'name' => trim($subject).'.eml',
-							'mimeType' => 'message/rfc822',
-							'tmp_name' => $attachment_file,
-							'size' => $size,
-						);
-				}
-				if ($mailcontent)
-				{
-					error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
-					if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
-					$mailobject->icServer->selectMailbox($_folderName);
-					$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
-					//$rv = $mailobject->icServer->setFlags($uid, '\\Answered', 'add', true);
-					if ( PEAR::isError($rv)) error_log(__METHOD__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
-					if (self::process_message2($mailobject, $uid, $mailcontent, $queue) && $this->mailhandling[$queue]['delete_from_server'])
+					if (self::process_message2($mailobject, $uid, $_folderName, $queue) && $this->mailhandling[$queue]['delete_from_server'])
 					{
 						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
 						$deletedCounter++;
 					}
 				}
 			}
-			// Expunge delete mails, if any
-			if ($deletedCounter)
+			// Expunge deleted mails, if any
+			if ($deletedCounter) // NOTE THERE MAY BE DELETED MESSAGES AFTER THE PROCESSING
 			{
 				$mailobject->icServer->selectMailbox($_folderName);
 				$rv = $mailobject->icServer->expunge();
@@ -261,10 +234,10 @@ class tracker_mailhandler extends tracker_bo
 			}
 
 			// Close the connection
-			$mailobject->closeConnection();
+			$mailobject->closeConnection(); // not sure we should do that, as this seems to kill more then our connection
 
 			$this->user = $this->originalUser;
-			return false;
+			return true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$this->mailBox} for queue $queue\n");
 		if (!($this->mbox = @imap_open($this->mailBox,
@@ -981,13 +954,81 @@ class tracker_mailhandler extends tracker_bo
 	 *
 	 * @param int mailobject that holds connection to the server
 	 * @param int Message ID from the server
-	 * @param array mailcontent the retrieved messages content
+	 * @param string _folderName the folder where the messages should reside in
 	 * @param int queue tracking queue_id
 	 * @return boolean true=message successfully processed, false=message couldn't or shouldn't be processed
 	 */
-	function process_message2 ($mailobject, $mid, $mailcontent, $queue)
+	function process_message2 ($mailobject, $uid, $_folderName, $queue)
 	{
-		$this->ticketId = $this->get_ticketId($mailcontent['subject']);
+		$s = $mailobject->icServer->getSummary($uid, true);// we need that, to be able to manipulate message flags as Seen, etc.
+		$subject = $mailobject->decode_subject($s[0]['SUBJECT']);// we use the needed headers for determining beforehand, if we have a new ticket, or a comment
+		// FLAGS - control in case filter wont work
+		$flags = felamimail_bo::prepareFlagsArray($s[0]);
+		if ($flags['deleted'] || $flags['seen'])
+		{
+			return false; // Already seen or deleted (in case our filter did not work as intended)
+		}
+		// should do the same as checking only recent, but is more robust as recent is a flag with some sideeffects
+		// message should be marked/flagged as seen after processing
+		// (don't forget to flag the message if forwarded; as forwarded is not supported with all IMAP use Seen instead)
+		if (($flags['recent'] && $flags['seen']) ||
+			($flags['answered'] && $flags['seen']) || // is answered and seen
+			$flags['draft']) // is Draft
+		{
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'."UID:$uid in Folder $_folderName with".' Subject:'.$subject.
+				"\n Date:".$s[0]['DATE'].
+	            "\n Flags:".print_r($flags,true).
+				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
+			return false;
+		}
+
+		$tId = $this->get_ticketId($subject);
+		$addHeaderInfoSection = false;
+		if (isset($this->mailhandling[$queue]['mailheaderhandling']) && $this->mailhandling[$queue]['mailheaderhandling']>0)
+		{
+			//$tId == 0 will be new ticket, else will indicate comment
+			if ($this->mailhandling[$queue]['mailheaderhandling']==1) $addHeaderInfoSection=($tId == 0 ? true : false);
+			if ($this->mailhandling[$queue]['mailheaderhandling']==2) $addHeaderInfoSection=($tId == 0 ? false: true);
+			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
+		}
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
+		$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit,$addHeaderInfoSection);
+
+		// on we go, as everything seems to be in order. flagging the message
+		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+		if ( PEAR::isError($rv)) error_log(__METHOD__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
+
+		// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
+		// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
+		if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
+		{
+			$message = $mailobject->getMessageRawBody($uid, $partid);
+			$headers = $mailobject->getMessageHeader($uid, $partid,true);
+			$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
+			$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
+			$tmpfile = fopen($attachment_file,'w');
+			fwrite($tmpfile,$message);
+			fclose($tmpfile);
+			$size = filesize($attachment_file);
+			$mailcontent['attachments'][] = array(
+					'name' => trim($subject).'.eml',
+					'mimeType' => 'message/rfc822',
+					'tmp_name' => $attachment_file,
+					'size' => $size,
+				);
+		}
+		else
+		{
+			error_log(__METHOD__.__LINE__." Could not retrieve Content for message $uid in $_folderName for Server with ID:".$mailobject->icServer->ImapServerId." for Queue: $queue");
+			return false;
+		}
+		if (self::LOG_LEVEL>1 && $mailcontent)
+		{
+			error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
+			if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
+		}
+		// do not fetch the possible ticketID (again), reuse $tId
+		$this->ticketId = $tId; //$this->get_ticketId($mailcontent['subject']);
 
 		if ($this->ticketId == 0) // Create new ticket?
 		{
