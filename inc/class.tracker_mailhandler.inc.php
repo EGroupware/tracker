@@ -999,7 +999,7 @@ class tracker_mailhandler extends tracker_bo
 		if ( PEAR::isError($rv)) error_log(__METHOD__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
 
 		// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
-		// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
+		// this is done to have a simple archive functionality
 		if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
 		{
 			$message = $mailobject->getMessageRawBody($uid, $partid);
@@ -1027,6 +1027,8 @@ class tracker_mailhandler extends tracker_bo
 			error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
 			if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
 		}
+		// prepare the data to be saved
+		// (use bo function connected to the ui interface mail import, so after preparing we need to adjust stuff)
 		$this->data = $this->prepare_import_mail(
 			$mailcontent['mailaddress'],
 			$mailcontent['subject'],
@@ -1034,8 +1036,8 @@ class tracker_mailhandler extends tracker_bo
 			$mailcontent['attachments'],
 			strtotime($mailcontent['headers']['DATE'])
 		);
-		// do not fetch the possible ticketID (again), reuse $tId
-		$this->ticketId = $tId; //$this->get_ticketId($mailcontent['subject']);
+		// do not fetch the possible ticketID (again), use what is returned by prepare_import_mail
+		$this->ticketId = $this->data['tr_id'];
 
 		if ($this->ticketId == 0) // Create new ticket?
 		{
