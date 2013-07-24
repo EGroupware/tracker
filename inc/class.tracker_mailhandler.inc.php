@@ -992,7 +992,7 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
-		$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit,$addHeaderInfoSection);
+		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit,$addHeaderInfoSection);
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
@@ -1027,6 +1027,13 @@ class tracker_mailhandler extends tracker_bo
 			error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
 			if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
 		}
+		$this->data = $this->prepare_import_mail(
+			$mailcontent['mailaddress'],
+			$mailcontent['subject'],
+			$mailcontent['message'],
+			$mailcontent['attachments'],
+			strtotime($mailcontent['headers']['DATE'])
+		);
 		// do not fetch the possible ticketID (again), reuse $tId
 		$this->ticketId = $tId; //$this->get_ticketId($mailcontent['subject']);
 
@@ -1048,41 +1055,15 @@ class tracker_mailhandler extends tracker_bo
 
 		if ($this->ticketId == 0)
 		{
-			$this->init();
-			// this should take care, that new tickets are created by either the identified sender or the configured user
-			// as by default the creator was the user running the async job, thus not recognizing the configuration, we assume the
-			// running user having sufficient rights (see else)
-			if (self::LOG_LEVEL>1)
-			{
-				error_log(__METHOD__.__LINE__.'->'.$this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'));
-				error_log(__METHOD__.__LINE__.'->'.$this->mailSender);
-				error_log(__METHOD__.__LINE__.'->'.$this->mailhandling[$queue]['default_tracker']);
-			}
-			if ($this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'))
-			{
-				$this->data['tr_creator'] = $this->user = $this->mailSender;
-			}
-			else
-			{
-				$this->user = $this->mailSender;
-			}
-			$this->data['tr_created'] = felamimail_bo::_strtotime($mailcontent['headers']['DATE'],'ts',true);
-			$this->data['tr_summary'] = $mailcontent['subject'];
+
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
-			$this->data['tr_description'] = $mailcontent['message'];
-			//if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
-			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
-			{
-				$this->data['tr_cc'] = $replytoAddress;
-			}
 			//error_log(__METHOD__.__LINE__.array2string($this->data));
 		}
 		else
 		{
-			$this->read($this->ticketId);
 			if (!$senderIdentified)
 			{
 				switch ($this->mailhandling[$queue]['unrec_reply'])
@@ -1102,14 +1083,14 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$this->user = $this->mailSender;
 			}
-			if ($this->mailhandling[$queue]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
-			{
-				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
-			}
-			$this->data['reply_message'] = $mailcontent['message'];
-			$this->data['reply_created'] = felamimail_bo::_strtotime($mailcontent['headers']['DATE'],'ts',true);
+		}
+		if (!isset($this->mailhandling[$queue]['auto_cc']) || $this->mailhandling[$queue]['auto_cc']==false)
+		{
+			unset($this->data['tr_cc']);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
+
+		if ($this->data['popup']) unset($this->data['popup']);
 		// Save Current edition mode preventing mixed types
 		if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
 		{
@@ -1141,7 +1122,7 @@ class tracker_mailhandler extends tracker_bo
 				)
 				: null
 		);
-
+		// attachments must be saved/linked after saving the ticket
 		if (($saverv==0) && is_array($mailcontent['attachments']))
 		{
 			foreach ($mailcontent['attachments'] as $attachment)
