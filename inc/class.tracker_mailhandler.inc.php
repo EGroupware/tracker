@@ -217,7 +217,7 @@ class tracker_mailhandler extends tracker_bo
 			if (self::LOG_LEVEL>0 && PEAR::isError($tretval)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
 			$_folderName = $this->mailhandling[$queue]['folder'];
 			$mailobject->reopen($_folderName);
-			if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
 			$_filter=array('status'=>array('UNSEEN','UNDELETED'));
 			if (!empty($this->mailhandling[$queue]['address']))
 			{
@@ -1008,7 +1008,7 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
-		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid,$_folderName,$this->htmledit,$addHeaderInfoSection);
+		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection);
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
@@ -1033,15 +1033,15 @@ class tracker_mailhandler extends tracker_bo
 					'size' => $size,
 				);
 		}
-		else
-		{
-			error_log(__METHOD__.__LINE__." Could not retrieve Content for message $uid in $_folderName for Server with ID:".$mailobject->icServer->ImapServerId." for Queue: $queue");
-			return false;
-		}
 		if (self::LOG_LEVEL>1 && $mailcontent)
 		{
 			error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
 			if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
+		}
+		else
+		{
+			error_log(__METHOD__.__LINE__." Could not retrieve Content for message $uid in $_folderName for Server with ID:".$mailobject->icServer->ImapServerId." for Queue: $queue");
+			return false;
 		}
 		// prepare the data to be saved
 		// (use bo function connected to the ui interface mail import, so after preparing we need to adjust stuff)
