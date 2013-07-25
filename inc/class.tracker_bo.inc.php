@@ -730,34 +730,49 @@ class tracker_bo extends tracker_so
 		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
 		//error_log(__METHOD__.__LINE__.array2string($tracker));
 		// some caching
-		if (!empty($tracker) && isset($staff_cache[$tracker]) && isset($staff_cache[$tracker][(int)$return_groups]) &&
-			isset($staff_cache[$tracker][(int)$return_groups][$what]))
+		$r = 0;
+		$rv = array();
+		foreach ((array)$tracker as $track)
 		{
-			//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
-			return $staff_cache[$tracker][(int)$return_groups][$what];
+			if (!empty($tracker) && isset($staff_cache[$track]) && isset($staff_cache[$track][(int)$return_groups]) &&
+				isset($staff_cache[$track][(int)$return_groups][$what]))
+			{
+				$r++;
+				//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
+				$rv = array_merge($rv,$staff_cache[$track][(int)$return_groups][$what]);
+			}
+			if ($r==count((array)$tracker)) return $rv;
 		}
 		$staff = array();
-
+		if (is_array($tracker))
+		{
+			$_tracker = $tracker;
+			array_unshift($_tracker,0);
+		}
+		else
+		{
+			$_tracker = array(0,$tracker);
+		}
 		switch($what)
 		{
 			case 'users':
 			case 'usersANDtechnicians':
 				if (is_null($this->users) || $this->users==='NULL') $this->users = array();
-				foreach($tracker ? array(0,$tracker) : array_keys($this->users) as $t)
+				foreach($tracker ? $_tracker : array_keys($this->users) as $t)
 				{
 					if (is_array($this->users[$t])) $staff = array_merge($staff,$this->users[$t]);
 				}
 				if ($what == 'users') break;
 			case 'technicians':
 				if (is_null($this->technicians) || $this->technicians==='NULL') $this->technicians = array();
-				foreach($tracker ? array(0,$tracker) : array_keys($this->technicians) as $t)
+				foreach($tracker ? $_tracker : array_keys($this->technicians) as $t)
 				{
 					if (is_array($this->technicians[$t])) $staff = array_merge($staff,$this->technicians[$t]);
 				}
 				// fall through, as technicians include admins
 			case 'admins':
 				if (is_null($this->admins) || $this->admins==='NULL') $this->admins = array();
-				foreach($tracker ? array(0,$tracker) : array_keys($this->admins) as $t)
+				foreach($tracker ? $_tracker : array_keys($this->admins) as $t)
 				{
 					if (is_array($this->admins[$t])) $staff = array_merge($staff,$this->admins[$t]);
 				}
@@ -796,7 +811,8 @@ class tracker_bo extends tracker_so
 			}
 		}
 		//_debug_array($staff);
-		return $staff_cache[$tracker][(int)$return_groups][$what] = $staff;
+		if (!is_array($tracker)) $staff_cache[$tracker][(int)$return_groups][$what]=$staff;
+		return $staff;
 	}
 
 	/**
