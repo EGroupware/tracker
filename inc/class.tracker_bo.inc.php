@@ -103,7 +103,6 @@ class tracker_bo extends tracker_so
 		'w' => 'Wont fix',
 		'W' => 'Works for me',
 	);
-	var $new_resolution;
 	/**
 	 * Technicians by tracker or key=0 for all trackers
 	 *
@@ -406,6 +405,8 @@ class tracker_bo extends tracker_so
 		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
 		$this->data['tr_private'] = $this->create_new_as_private;
 		$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
+		// set default resolution
+		$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
 
 		$this->data_merge($keys);
 
@@ -515,14 +516,15 @@ class tracker_bo extends tracker_so
 
 		if (!$this->data['tr_id'])	// new entry
 		{
-			// next 2 lines are to set / initialize new_resolution
-			$resolutions = $this->get_tracker_labels('resolution',$this->data['tr_tracker']); // possible specific
-			//error_log(__METHOD__.__LINE__.'->'.array2string($this->new_resolution));
 			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_version'] = $this->data['tr_version'] ? $this->data['tr_version'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 			$this->data['tr_status'] = $this->data['tr_status'] ? $this->data['tr_status'] : self::STATUS_OPEN;
-			$this->data['tr_resolution'] = $this->data['tr_resolution'] ? $this->data['tr_resolution'] : ($this->new_resolution[$this->data['tr_tracker']]?$this->new_resolution[$this->data['tr_tracker']]:$this->new_resolution['all']);
+
+			if (!$this->data['tr_resolution'])	// if no resolution set, ask labels for resolution default
+			{
+				$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
+			}
 			$this->data['tr_seen'] = serialize(array($this->user));
 
 			if (!$this->data['tr_group'])
@@ -1157,8 +1159,9 @@ class tracker_bo extends tracker_so
 	 *
 	 * @param string $type='trackers' 'tracker', 'version', 'cat', 'resolution'
 	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
+	 * @param int &$default=null on return default, if it is set
 	 */
-	function get_tracker_labels($type='tracker',$tracker=null)
+	function get_tracker_labels($type='tracker', $tracker=null, &$default=null)
 	{
 		if (is_null($this->all_cats))
 		{
@@ -1181,7 +1184,7 @@ class tracker_bo extends tracker_so
 		if (!$tracker) $tracker = $this->data['tr_tracker'];
 
 		$labels = array();
-		$new_resolution = false;
+		$default = null;
 		foreach($this->all_cats as $cat)
 		{
 			$cat_data = unserialize($cat['data']);
@@ -1189,11 +1192,22 @@ class tracker_bo extends tracker_so
 			if ($cat_type == $type && ($cat['parent'] == 0 || $cat['main'] == $tracker && $cat['id'] != $tracker))
 			{
 				$labels[$cat['id']] = $cat['name'];
-				if ($cat_type=='resolution' && $cat_data['isdefault']) $new_resolution[(!empty($tracker) && $cat['main'] == $tracker?$tracker:'all')] = $cat['id'];
+				// set default with precedence to tracker specific one
+				if ($cat_data['isdefault'] && (!isset($default) || $cat['main'] == $tracker))
+				{
+					$default = $cat['id'];
+				}
+				if ($cat['name'] == 'None' && (!isset($none_id) || $cat['main'] == $tracker))
+				{
+					$none_id = $cat['id'];
+				}
 			}
 		}
-		if ($new_resolution) config::save_value('new_resolution',$new_resolution,'tracker');
-		$this->load_config();
+		// if no default specified, fall back to id of cat with name "None"
+		if (!isset($default) && isset($none_id))
+		{
+			$default = $none_id;
+		}
 
 		if ($type == 'tracker' && !$GLOBALS['egw_info']['user']['apps']['admin'] && $this->enabled_queue_acl_access)
 		{
@@ -1575,17 +1589,6 @@ class tracker_bo extends tracker_so
 			foreach($this->notification as $name => $value)
 			{
 				config::save_value($name,$value,'tracker');
-			}
-		}
-
-		if(!$this->new_resolution)
-		{
-			$categories = new categories(null, 'tracker');
-			$new_resolution = $categories->name2id('None');
-			if ($new_resolution)
-			{
-				$this->new_resolution['all'] = $new_resolution;
-				config::save_value('new_resolution',$this->new_resolution,'tracker');
 			}
 		}
 
