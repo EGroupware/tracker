@@ -726,10 +726,10 @@ class tracker_bo extends tracker_so
 			{
 				$r++;
 				//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
-				$rv = array_merge($rv,$staff_cache[$track][(int)$return_groups][$what]);
+				$rv = $rv+$staff_cache[$track][(int)$return_groups][$what];
 			}
-			if ($r==count((array)$tracker)) return $rv;
 		}
+		if (!empty($rv) && $r==count((array)$tracker)) return $rv;
 
 		$staff = array();
 		if (is_array($tracker))
