@@ -214,7 +214,7 @@ class tracker_mailhandler extends tracker_bo
 				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
 			}
 			// retrieve list
-			//error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
+			if (self::LOG_LEVEL>0 && PEAR::isError($tretval)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
 			$_folderName = $this->mailhandling[$queue]['folder'];
 			$mailobject->reopen($_folderName);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
