@@ -93,7 +93,7 @@ class tracker_mailhandler extends tracker_bo
 	 * 2 = more debug info
 	 * 3 = complete debug info
 	 */
-	const LOG_LEVEL = 3;
+	const LOG_LEVEL = 0;
 
 	/**
 	 * Constructor
