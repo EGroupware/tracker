@@ -58,6 +58,13 @@ class tracker_mailhandler extends tracker_bo
 	var $mbox;
 
 	/**
+	 * smtpObject for autoreplies and worwarding
+	 *
+	 * @var send object
+	 */
+	var $smtpMail;
+
+	/**
 	 * Ticket ID or 0 if not recognize
 	 *
 	 * @var int
@@ -86,7 +93,7 @@ class tracker_mailhandler extends tracker_bo
 	 * 2 = more debug info
 	 * 3 = complete debug info
 	 */
-	const LOG_LEVEL = 0;
+	const LOG_LEVEL = 3;
 
 	/**
 	 * Constructor
@@ -182,11 +189,20 @@ class tracker_mailhandler extends tracker_bo
 			// Mailbox for all is pre-loaded, for others we have to change it
 			$this->mailBox = self::get_mailbox($queue);
 		}
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." for $queue");
 		if ($this->mailBox instanceof defaultimap)
 		{
+			if ($this->mailhandling[$queue]['autoreplies'] || $this->mailhandling[$queue]['unrecognized_mails'])
+			{
+				if(is_object($this->smtpMail))
+				{
+					unset($this->smtpMail);
+				}
+				$this->smtpMail = new send('notification');
+			}
 			$mailClass = 'felamimail_bo';
 			$mailobject	= $mailClass::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
-			//error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
+			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
 			// connect
 			$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
 			// may fail for validatecert=true
@@ -1036,8 +1052,35 @@ class tracker_mailhandler extends tracker_bo
 			$mailcontent['attachments'],
 			strtotime($mailcontent['headers']['DATE'])
 		);
+
+		// Handle unrecognized mails: we get a warning from prepare_import_mail, when mail is not recognized
+		// ToDo: Introduce a key, to be able to tell the error-condition
+		if (!empty($this->data['msg']) && $this->data['tr_creator'] == $this->user)
+		{
+			switch ($this->mailhandling[$queue]['unrecognized_mails'])
+			{
+				case 'ignore' :		// Do nothing
+					return false;
+					break;
+				case 'delete' :		// Delete, whatever the overall delete setting is
+					$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+					return false;	// Prevent from a second delete attempt
+					break;
+				case 'forward' :	// Return the status of the forward attempt
+					$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], $this->data['msg'], $queue);
+					$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+					if ($returnVal) $rv = $mailobject->icServer->setFlags($uid, '$Forwarded', 'add', true);
+					return $returnVal;
+					break;
+				case 'default' :	// Save as default user; handled below
+				default :			// Duh ??
+					break;
+			}
+		}
+
 		// do not fetch the possible ticketID (again), use what is returned by prepare_import_mail
 		$this->ticketId = $this->data['tr_id'];
+
 
 		if ($this->ticketId == 0) // Create new ticket?
 		{
@@ -1174,24 +1217,6 @@ class tracker_mailhandler extends tracker_bo
 	function search_user($mail_addr='')
 	{
 		$this->mailSender = null; // Make sure previous msg data is cleared
-/*
-		$acc_search = array(
-			'type' => 'accounts',
-//			'app' => 'tracker', // Make this a config item?
-			'query' => $mail_addr,
-			'query_type' => 'email',
-		);
-		$account_info = $GLOBALS['egw']->accounts->search($acc_search);
-		$match_cnt = $GLOBALS['egw']->accounts->total;
-
-		if ($match_cnt != 1) {
-			// No matches (0) or ambigious (>1)
-			return false;
-		}
-
-		$first_match = array_shift($account_info); // shift, since the key is numeric, so [0] won't work
-		$this->mailSender = $first_match['account_id'];
-*/
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.'Try to resolve Useraccount by mail:'.print_r($mail_addr,true));
 		$account_ID = $GLOBALS['egw']->accounts->name2id($mail_addr,'account_email');
 		if (!empty($account_ID)) $this->mailSender = $account_ID;
@@ -1207,6 +1232,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function forward_message($mid=0, &$headers=null, $queue=0)
 	{
+
 		if ($mid == 0 || $headers == null) // no data
 		{
 			return false;
@@ -1220,6 +1246,38 @@ class tracker_mailhandler extends tracker_bo
 				'Reply-To: ' . $headers->reply_toaddress . "\r\n";
 
 		return (mail($to, $subj, $body, $hdrs));
+
+	}
+
+	/**
+	 * Forward a mail that was not recognized
+	 *
+	 * @param int message ID from the server
+	 * @return boolean status
+	 */
+	function forward_message2($mailobject, $uid, $subject, $_message, $queue=0)
+	{
+return false;
+		$this->smtpMail->ClearAddresses();
+		$this->smtpMail->ClearAttachments();
+		$this->smtpMail->AddAddress($this->mailhandling[$queue]['forward_to'], $this->mailhandling[$queue]['forward_to']);
+		$this->smtpMail->AddCustomHeader('X-EGroupware-type: tracker-forward');
+		$this->smtpMail->AddCustomHeader('X-EGroupware-Tracker: '.$queue);
+		$this->smtpMail->AddCustomHeader('X-EGroupware-Install: '.$GLOBALS['egw_info']['server']['install_id'].'@'.$GLOBALS['egw_info']['server']['default_domain']);
+		//$this->mail->AddCustomHeader('X-EGroupware-URL: notification-mail');
+		//$this->mail->AddCustomHeader('X-EGroupware-Tracker: notification-mail');
+		$this->smtpMail->From = $this->sender->account_email;
+		$this->smtpMail->FromName = $this->sender->account_fullname;
+		$this->smtpMail->Subject = $_subject;
+		$this->smtpMail->IsHTML(false);
+		$this->smtpMail->Body = lang("This message was forwarded to you from EGroupware-Tracker Mailhandling: %1. \r\nSee attachment (original mail) for further details\r\n %2",$queue,$_message);
+
+		$rawBody        = $mail_bo->getMessageRawBody($mailobject);
+		$_mailObject->AddStringAttachment($rawBody, $mailObject->EncodeHeader($subject), '7bit', 'message/rfc822');
+		if(!$error=$this->smtpMail->Send())
+		{
+			error_log(__METHOD__.__LINE__." Failed forwarding message via email.$error".print_r($this->smtpMail->ErrorInfo,true));
+		}
 	}
 
 	/**
