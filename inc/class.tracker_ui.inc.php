@@ -747,7 +747,7 @@ class tracker_ui extends tracker_bo
 
 		$tracker = $query['col_filter']['tr_tracker'];
 		// Explode multiples into array
-		if(strpos($tracker,',') !== false)
+		if(!is_array($tracker) && strpos($tracker,',') !== false)
 		{
 			$tracker = $query['col_filter']['tr_tracker'] = explode(',',$query['col_filter']['tr_tracker']);
 		}
@@ -921,7 +921,9 @@ class tracker_ui extends tracker_bo
 		// Disable checkbox column
 		$rows['no_check'] = $readonlys['checked'];
 
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? $this->trackers[$tracker] : lang('All'));
+		$trackerlabel = array();
+		foreach((array)$tracker as $t){$trackerlabel[]=$this->trackers[$t];}
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? join(',',$trackerlabel) : lang('All'));
 		return $total;
 	}
 
