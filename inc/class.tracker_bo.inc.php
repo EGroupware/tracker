@@ -380,10 +380,10 @@ class tracker_bo extends tracker_so
 		$this->user = $GLOBALS['egw_info']['user']['account_id'];
 		$this->today = mktime(0,0,0,date('m',$this->now),date('d',$this->now),date('Y',$this->now));
 
-		$this->trackers = $this->get_tracker_labels();
-
 		// read the tracker-configuration
 		$this->load_config();
+
+		$this->trackers = $this->get_tracker_labels();
 	}
 
 	/**
