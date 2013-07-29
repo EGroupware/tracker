@@ -670,6 +670,99 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * Check if this is an automated message (bounce, autoreply...)
+	 * @TODO This is currently a very basic implementation, the intention is to implement more checks,
+	 * eg, filter failing addresses and remove them from CC.
+	 *
+	 * @param object mailobject holding the server, and its connection
+	 * @param int message ID from the server
+	 * @param string subject the messages subject
+	 * @param array msgHeaders full headers retrieved for message
+	 * @param int queue the queue we are in
+	 * @return boolean status
+	 */
+	function is_automail2($mailobject, $uid, $subject, $msgHeaders, $queue=0)
+	{
+		// This array can be filled with checks that should be made.
+		// 'bounces' and 'autoreplies' (level 1) are the keys coded below, the level 2 arrays
+		// must match $msgHeader properties.
+		//
+		$autoMails = array(
+			 'bounces' => array(
+				 'subject' => array(
+				)
+				,'from' => array(
+					 'mailer-daemon'
+				)
+			)
+			,'autoreplies' => array(
+				 'subject' => array(
+					 'out of the office',
+					 'out of office',
+					 'autoreply'
+					)
+				,'auto-submitted' => array(
+					'auto-replied'
+				)
+			)
+		);
+
+		// Check for bounced messages
+		foreach ($autoMails['bounces'] as $_k => $_v) {
+			if (count($_v) == 0) {
+				continue;
+			}
+			$_re = '/(' . implode('|', $_v) . ')/i';
+			if (preg_match($_re, $msgHeader[strtoupper($_k)])) {
+				switch ($this->mailhandling[0]['bounces']) {
+					case 'delete' :		// Delete, whatever the overall delete setting is
+						$returnVal = $mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+						break;
+					case 'forward' :	// Return the status of the forward attempt
+						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (bounces) are configured to be forwarded"), $queue);
+						if ($returnVal)
+						{
+							$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+							$rv = $mailobject->icServer->setFlags($uid, '$Forwarded', 'add', true);
+						}
+					default :			// default: 'ignore'
+						break;
+				}
+				return true;
+			}
+		}
+
+		// Check for autoreplies
+		foreach ($autoMails['autoreplies'] as $_k => $_v) {
+			if (count($_v) == 0) {
+				continue;
+			}
+			$_re = '/(' . implode('|', $_v) . ')/i';
+			if (preg_match($_re, $msgHeader[strtoupper($_k)])) {
+				switch ($this->mailhandling[0]['autoreplies']) {
+					case 'delete' :		// Delete, whatever the overall delete setting is
+						$returnVal = $mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+						break;
+					case 'forward' :	// Return the status of the forward attempt
+						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (replies) are configured to be forwarded"), $queue);
+						if ($returnVal)
+						{
+							$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+							$rv = $mailobject->icServer->setFlags($uid, '$Forwarded', 'add', true);
+						}
+						break;
+					case 'process' :	// Process normally...
+						return false;	// ...so act as if it's no automail
+						break;
+					default :			// default: 'ignore'
+						break;
+				}
+				return true;
+			}
+		}
+	}
+
+	/**
 	 * Decode a mail header
 	 *
 	 * @param string Pointer to the (possibly) encoded header that will be changes
@@ -1060,6 +1153,13 @@ class tracker_mailhandler extends tracker_bo
 		);
 		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data));
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'.$this->mailhandling[$queue]['unrecognized_mails'].':'.$this->data['tr_creator'].' vs. '.array2string($this->user));
+
+		// handle auto - mails
+		if ($this->is_automail2($mailobject, $uid, $mailcontent['subject'], $mailcontent['headers'], $queue)) {
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.' Automails will not be processed.');
+			return false;
+		}
+
 		// Handle unrecognized mails: we get a warning from prepare_import_mail, when mail is not recognized
 		// ToDo: Introduce a key, to be able to tell the error-condition
 		if (!empty($this->data['msg']) && $this->data['tr_creator'] == $this->user)
@@ -1075,8 +1175,11 @@ class tracker_mailhandler extends tracker_bo
 					break;
 				case 'forward' :	// Return the status of the forward attempt
 					$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], $this->data['msg'], $queue);
-					$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
-					if ($returnVal) $rv = $mailobject->icServer->setFlags($uid, '$Forwarded', 'add', true);
+					if ($returnVal)
+					{
+						$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
+						$rv = $mailobject->icServer->setFlags($uid, '$Forwarded', 'add', true);
+					}
 					return $returnVal;
 					break;
 				case 'default' :	// Save as default user; handled below
@@ -1259,7 +1362,11 @@ class tracker_mailhandler extends tracker_bo
 	/**
 	 * Forward a mail that was not recognized
 	 *
+	 * @param object mailobject holding the server, and its connection
 	 * @param int message ID from the server
+	 * @param string subject the messages subject
+	 * @param array _message full retrieved message
+	 * @param int queue the queue we are in
 	 * @return boolean status
 	 */
 	function forward_message2($mailobject, $uid, $subject, $_message, $queue=0)
