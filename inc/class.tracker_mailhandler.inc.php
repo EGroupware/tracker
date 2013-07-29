@@ -144,6 +144,11 @@ class tracker_mailhandler extends tracker_bo
 			$icServer->host		= $this->mailhandling[$queue]['server'];
 			$icServer->port 	= $this->mailhandling[$queue]['serverport'];
 			$icServer->validatecert	= $this->mailhandling[$queue]['servertype']==2?true:false;
+			if ($icServer->validatecert)
+			{
+				$vCO=egw_cache::getCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($icServer->ImapServerId));
+				if ($vCO) $icServer->validatecert=false;
+			}
 			$icServer->username 	= $this->mailhandling[$queue]['username'];
 			$icServer->loginName 	= $this->mailhandling[$queue]['username'];
 			$icServer->password	= $this->mailhandling[$queue]['password'];
@@ -212,6 +217,7 @@ class tracker_mailhandler extends tracker_bo
 				$mailobject->icServer->_connectionErrorObject->message = ',';
 				// try again
 				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
+				if (!PEAR::isError($tretval)) egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
 			}
 			// retrieve list
 			if (self::LOG_LEVEL>0 && PEAR::isError($tretval)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
@@ -250,7 +256,7 @@ class tracker_mailhandler extends tracker_bo
 			}
 
 			// Close the connection
-			$mailobject->closeConnection(); // not sure we should do that, as this seems to kill more then our connection
+			//$mailobject->closeConnection(); // not sure we should do that, as this seems to kill more then our connection
 
 			$this->user = $this->originalUser;
 			return true;
@@ -1052,7 +1058,8 @@ class tracker_mailhandler extends tracker_bo
 			$mailcontent['attachments'],
 			strtotime($mailcontent['headers']['DATE'])
 		);
-
+		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data));
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'.$this->mailhandling[$queue]['unrecognized_mails'].':'.$this->data['tr_creator'].' vs. '.array2string($this->user));
 		// Handle unrecognized mails: we get a warning from prepare_import_mail, when mail is not recognized
 		// ToDo: Introduce a key, to be able to tell the error-condition
 		if (!empty($this->data['msg']) && $this->data['tr_creator'] == $this->user)
@@ -1257,7 +1264,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function forward_message2($mailobject, $uid, $subject, $_message, $queue=0)
 	{
-return false;
 		$this->smtpMail->ClearAddresses();
 		$this->smtpMail->ClearAttachments();
 		$this->smtpMail->AddAddress($this->mailhandling[$queue]['forward_to'], $this->mailhandling[$queue]['forward_to']);
@@ -1266,18 +1272,24 @@ return false;
 		$this->smtpMail->AddCustomHeader('X-EGroupware-Install: '.$GLOBALS['egw_info']['server']['install_id'].'@'.$GLOBALS['egw_info']['server']['default_domain']);
 		//$this->mail->AddCustomHeader('X-EGroupware-URL: notification-mail');
 		//$this->mail->AddCustomHeader('X-EGroupware-Tracker: notification-mail');
-		$this->smtpMail->From = $this->sender->account_email;
-		$this->smtpMail->FromName = $this->sender->account_fullname;
-		$this->smtpMail->Subject = $_subject;
+		$account_email = $GLOBALS['egw']->accounts->id2name($this->sender,'account_email');
+		$account_lid = $GLOBALS['egw']->accounts->id2name($this->sender,'account_lid');
+		$notificationSender = (!empty($this->notification[$queue]['sender'])?$this->notification[$queue]['sender']:$this->notification[0]['sender']);
+		$this->smtpMail->From = (!empty($notificationSender)?$notificationSender:$account_email);
+		$this->smtpMail->FromName = (!empty($notificationSender)?$notificationSender:$account_lid);
+		$this->smtpMail->Subject = lang('[FWD]').' '.$subject;
 		$this->smtpMail->IsHTML(false);
 		$this->smtpMail->Body = lang("This message was forwarded to you from EGroupware-Tracker Mailhandling: %1. \r\nSee attachment (original mail) for further details\r\n %2",$queue,$_message);
 
-		$rawBody        = $mail_bo->getMessageRawBody($mailobject);
-		$_mailObject->AddStringAttachment($rawBody, $mailObject->EncodeHeader($subject), '7bit', 'message/rfc822');
+		$rawBody        = $mailobject->getMessageRawBody($uid);
+		$this->smtpMail->AddStringAttachment($rawBody, $this->smtpMail->EncodeHeader($subject), '7bit', 'message/rfc822');
 		if(!$error=$this->smtpMail->Send())
 		{
 			error_log(__METHOD__.__LINE__." Failed forwarding message via email.$error".print_r($this->smtpMail->ErrorInfo,true));
+			return false;
 		}
+		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
+		return true;
 	}
 
 	/**
