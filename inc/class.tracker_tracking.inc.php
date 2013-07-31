@@ -196,6 +196,8 @@ class tracker_tracking extends bo_tracking
 			//error_log(__METHOD__.':'.__LINE__.' Stopping, no other changes');
 			return $success;
 		}
+		// clears the cached notifications body
+		$this->ClearBodyCache();
 
 		// Edit messages
 		foreach((array)$data['replies'] as $key => $reply)
