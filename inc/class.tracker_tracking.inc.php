@@ -192,6 +192,8 @@ class tracker_tracking extends bo_tracking
 			// Only thing that really changed was a restricted comment
 			return $success;
 		}
+		// clears the cached notifications body
+		$this->ClearBodyCache();
 
 		// Edit messages
 		foreach((array)$data['replies'] as $key => $reply)
