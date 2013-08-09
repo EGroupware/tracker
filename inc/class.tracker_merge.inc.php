@@ -34,6 +34,11 @@ class tracker_merge extends bo_merge
 	protected $bo = null;
 
 	/**
+	 * Cache comments per ticket to reduce database hits
+	 */
+	protected $comment_cache = array();
+	
+	/**
 	 * Constructor
 	 *
 	 */
@@ -166,9 +171,9 @@ class tracker_merge extends bo_merge
 	 * @param int $id
 	 * @param int $n
 	 * @return array
-        */
-        public function comment($plugin,$id,$n)
-        {
+	*/
+	public function comment($plugin,$id,$n)
+	{
 		$comments = $this->get_comments($id);
 
 		return $comments[$n];
@@ -179,21 +184,20 @@ class tracker_merge extends bo_merge
 	 */
 	protected function get_comments($tr_id)
 	{
-		static $comments;
-		if($comments[$tr_id]) return $comments[$tr_id];
+		if($this->comment_cache[$tr_id]) return $this->comment_cache[$tr_id];
 
 		$this->bo->read($tr_id);
 		$tracker = $this->bo->data;
 
 		// Clear it to keep memory down - just this ticket
-		$comments = array();
+		$this->comment_cache = array();
 		$last_creator_comment = array();
 		$last_assigned_comment = array();
 		foreach($tracker['replies'] as $i => $reply) {
 			if($reply['reply_visible'] > 0) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
-			$comments[$tr_id][] = array(
+			$this->comment_cache[$tr_id][] = array(
 				'$$comment/date$$' => egw_time::to($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
@@ -205,7 +209,7 @@ class tracker_merge extends bo_merge
 
 		// Special comments
 		foreach(array('' => $tracker['replies'][0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
-			$comments[$tr_id][-1][$key] = array(
+			$this->comment_cache[$tr_id][-1][$key] = array(
 				'$$comment/-1'.$key.'/date$$' => $comment ? egw_time::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
 				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
@@ -213,7 +217,7 @@ class tracker_merge extends bo_merge
 			);
 		}
 
-		return $comments[$tr_id];
+		return $this->comment_cache[$tr_id];
 	}
 
 	/**
