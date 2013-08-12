@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-13 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -236,7 +236,7 @@ class tracker_so extends so_sql_cf
 		}
 
 		// Check if we order by tr_modified, and use tr_created for null rows
-		$order_replace = 'IF(tr_modified IS NULL, tr_created, tr_modified)';
+		static $order_replace = 'CASE tr_modified WHEN NULL THEN tr_created ELSE tr_modified END';
 		if (strpos($order_by,'tr_modified') !== false && strpos($order_by,$order_replace) === false)
 		{
 			$order_by = str_replace('tr_modified',$order_replace,$order_by);
@@ -383,7 +383,7 @@ class tracker_so extends so_sql_cf
 		}
 		//$this->debug = 4;
 
-		
+
 		// Add in custom filters that = closed
 		$custom_closed = array();
 		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker);
