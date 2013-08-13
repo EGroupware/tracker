@@ -236,7 +236,7 @@ class tracker_so extends so_sql_cf
 		}
 
 		// Check if we order by tr_modified, and use tr_created for null rows
-		static $order_replace = 'CASE tr_modified WHEN NULL THEN tr_created ELSE tr_modified END';
+		static $order_replace = 'CASE WHEN tr_modified IS NULL THEN tr_created ELSE tr_modified END';
 		if (strpos($order_by,'tr_modified') !== false && strpos($order_by,$order_replace) === false)
 		{
 			$order_by = str_replace('tr_modified',$order_replace,$order_by);
