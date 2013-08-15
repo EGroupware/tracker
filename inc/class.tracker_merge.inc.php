@@ -39,6 +39,11 @@ class tracker_merge extends bo_merge
 	protected $comment_cache = array();
 	
 	/**
+	 * Allow to set comments to avoid re-reading from DB
+	 */
+	protected $preset_comments = array();
+	
+	/**
 	 * Constructor
 	 *
 	 */
@@ -186,14 +191,22 @@ class tracker_merge extends bo_merge
 	{
 		if($this->comment_cache[$tr_id]) return $this->comment_cache[$tr_id];
 
-		$this->bo->read($tr_id);
-		$tracker = $this->bo->data;
-
 		// Clear it to keep memory down - just this ticket
-		$this->comment_cache = array();
+		$this->comment_cache[$tr_id] = array();
 		$last_creator_comment = array();
 		$last_assigned_comment = array();
-		foreach($tracker['replies'] as $i => $reply) {
+		
+		if(array_key_exists($tr_id, $this->preset_comments))
+		{
+			$replies = $this->preset_comments[$tr_id];
+		}
+		else
+		{
+			$this->bo->read($tr_id);
+			$tracker = $this->bo->data;
+			$replies = $tracker['replies'];
+		}
+		foreach($replies as $i => $reply) {
 			if($reply['reply_visible'] > 0) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
@@ -208,7 +221,7 @@ class tracker_merge extends bo_merge
 		}
 
 		// Special comments
-		foreach(array('' => $tracker['replies'][0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
+		foreach(array('' => $replies[0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
 			$this->comment_cache[$tr_id][-1][$key] = array(
 				'$$comment/-1'.$key.'/date$$' => $comment ? egw_time::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
@@ -218,6 +231,20 @@ class tracker_merge extends bo_merge
 		}
 
 		return $this->comment_cache[$tr_id];
+	}
+	
+	/**
+	 * Limit to only certain comments by pre-setting the cache
+	 *
+	 * This avoids reading comments from database.  Used by notifications
+	 * to forceably remove restricted comments without considering ACL (eg CC)
+	 *
+	 * @param int $tr_id Tracker ticket ID
+	 * @param Array $comments List of comment info
+	 */
+	public function set_comments($tr_id, Array $comments)
+	{
+		$this->preset_comments[$tr_id] = $comments;
 	}
 
 	/**
