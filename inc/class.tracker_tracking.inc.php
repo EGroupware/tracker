@@ -284,6 +284,10 @@ class tracker_tracking extends bo_tracking
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
 		$merge = new tracker_merge();
+		
+		// Set comments according to data, avoids re-reading from DB
+		$merge->set_comments($data['tr_id'], $data['replies']);
+		
 		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
