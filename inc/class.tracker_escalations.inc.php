@@ -606,19 +606,19 @@ class tracker_escalations extends so_sql2
 
 
 		if (is_null(self::$tracker))
-                {
-                        self::$tracker = new tracker_bo();
-                        self::$tracker->user = 0;
-                }
-                if(!is_object(self::$tracker->tracking))
-                {
-                        self::$tracker->tracking = new tracker_tracking(self::$tracker);
-                }
-                else
-                {
-                        unset(self::$tracker->tracking->skip_notify);
-                }
-
+		{
+				self::$tracker = new tracker_bo();
+				self::$tracker->user = 0;
+		}
+		if(!is_object(self::$tracker->tracking))
+		{
+				self::$tracker->tracking = new tracker_tracking(self::$tracker);
+		}
+		else
+		{
+				unset(self::$tracker->tracking->skip_notify);
+		}
+		
 		// Get a list of users
 		$users = self::$tracker->users_with_open_entries();
 
@@ -627,12 +627,24 @@ class tracker_escalations extends so_sql2
 			if (isset($notified)) $notified=array();
 			// Create environment for user
 			if (!($email = $GLOBALS['egw']->accounts->id2name($user,'account_email'))) continue;
-                        self::$tracker->user = $GLOBALS['egw_info']['user']['account_id'] = $user;
-                        $GLOBALS['egw']->preferences->preferences($user);
-                        $GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
-                        $GLOBALS['egw']->acl->acl($user);
-                        $GLOBALS['egw']->acl->read_repository();
+			
+			self::$tracker->user = $GLOBALS['egw_info']['user']['account_id'] = $user;
+			$GLOBALS['egw']->preferences->preferences($user);
+			$GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
+			$GLOBALS['egw']->acl->acl($user);
+			$GLOBALS['egw']->acl->read_repository();
+			
+			// load the right language if needed
+			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != translation::$userlang)	
+			{
+				translation::init();
+				// Make sure translations are loaded
+				translation::add_app('tracker');
+			}
 
+			// Load date/time preferences into egw_time
+			egw_time::init();
+			
 			// Keep a list of tickets so we only send the user one notification / ticket
 			$notified = array();
 
