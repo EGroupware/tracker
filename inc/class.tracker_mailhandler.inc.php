@@ -1075,6 +1075,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function process_message2 ($mailobject, $uid, $_folderName, $queue)
 	{
+		$senderIdentified = true;
 		$s = $mailobject->icServer->getSummary($uid, true);// we need that, to be able to manipulate message flags as Seen, etc.
 		$subject = $mailobject->decode_subject($s[0]['SUBJECT']);// we use the needed headers for determining beforehand, if we have a new ticket, or a comment
 		// FLAGS - control in case filter wont work
@@ -1164,6 +1165,7 @@ class tracker_mailhandler extends tracker_bo
 		// ToDo: Introduce a key, to be able to tell the error-condition
 		if (!empty($this->data['msg']) && $this->data['tr_creator'] == $this->user)
 		{
+			$senderIdentified = false;
 			switch ($this->mailhandling[$queue]['unrecognized_mails'])
 			{
 				case 'ignore' :		// Do nothing
