@@ -1999,7 +1999,11 @@ class tracker_bo extends tracker_so
 						$trackerentry['tr_cc'] = implode(',',$buff);
 					}
 				}
-				if (empty($trackerentry['tr_creator'])) $trackerentry['tr_creator']=$this->user;
+				if (empty($trackerentry['tr_creator']))
+				{
+					$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
+					$trackerentry['tr_creator']=$this->user;
+				}
 			}
 		}
 		else
