@@ -150,6 +150,7 @@ class tracker_tracking extends bo_tracking
 		if ($autoreply['reply_text'])
 		{
 			$data['reply_text'] = $autoreply['reply_text'];
+			$this->ClearBodyCache();
 		}
 		// Send notification to the creator only; assignee, CC etc have been notified already
 		$this->send_notification($data,$old,$email,$data[$this->creator_field]);
@@ -343,21 +344,29 @@ class tracker_tracking extends bo_tracking
 	 *
 	 * @param array $data
 	 * @param array $old
-	 * @return string
+	 * @return array (of strings) for multiline messages
 	 */
 	function get_message($data,$old)
 	{
 		if($data['message']) return $data['message'];
 
+		if ($data['reply_text'])
+		{
+			$r[] = $data['reply_text'];
+			$r[] = '---';// this is wanted for separation of reply_text to status/creation text
+		}
+
 		if (!$data['tr_modified'] || !$old)
 		{
-			return lang('New ticket submitted by %1 at %2',
+			$r[] = lang('New ticket submitted by %1 at %2',
 				common::grab_owner_name($data['tr_creator']),
 				$this->datetime($data['tr_created_servertime']));
+			return $r;
 		}
-		return lang('Ticket modified by %1 at %2',
+		$r[] = lang('Ticket modified by %1 at %2',
 			$data['tr_modifier'] ? common::grab_owner_name($data['tr_modifier']) : lang('Tracker'),
 			$this->datetime($data['tr_modified_servertime']));
+		return $r;
 	}
 
 	/**
@@ -387,6 +396,7 @@ class tracker_tracking extends bo_tracking
 			}
 			$assigned = implode(', ',$assigned);
 		}
+/*
 		if ($data['reply_text'])
 		{
 			$details['reply_text'] = array(
@@ -394,6 +404,7 @@ class tracker_tracking extends bo_tracking
 				'type' => 'message',
 			);
 		}
+*/
 		$detail_fields = array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
