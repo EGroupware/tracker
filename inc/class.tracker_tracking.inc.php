@@ -286,7 +286,7 @@ class tracker_tracking extends bo_tracking
 		$merge = new tracker_merge();
 		
 		// Set comments according to data, avoids re-reading from DB
-		$merge->set_comments($data['tr_id'], $data['replies']);
+		if (isset($data['replies'])) $merge->set_comments($data['tr_id'], $data['replies']);
 		
 		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
 		{
