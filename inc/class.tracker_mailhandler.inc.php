@@ -1112,7 +1112,7 @@ class tracker_mailhandler extends tracker_bo
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
-		if ( PEAR::isError($rv)) error_log(__METHOD__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
+		if ( PEAR::isError($rv)) error_log(__METHOD__.__LINE__." failed to flag Message $uid as Seen in Folder: ".$_folderName.' due to:'.$rv->message);
 
 		// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
 		// this is done to have a simple archive functionality
@@ -1138,7 +1138,7 @@ class tracker_mailhandler extends tracker_bo
 			error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent));
 			if (!empty($mailcontent['attachments'])) error_log(__METHOD__.__LINE__.'#'.array2string($mailcontent['attachments']));
 		}
-		else
+		if (!$mailcontent)
 		{
 			error_log(__METHOD__.__LINE__." Could not retrieve Content for message $uid in $_folderName for Server with ID:".$mailobject->icServer->ImapServerId." for Queue: $queue");
 			return false;
@@ -1261,7 +1261,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 		}
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
+		if (self::LOG_LEVEL>1 && $replytoAddress) error_log(__METHOD__.__LINE__.' Replytoaddress:'.array2string($replytoAddress));
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
 			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
