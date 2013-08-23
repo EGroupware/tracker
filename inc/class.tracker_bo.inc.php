@@ -2008,6 +2008,50 @@ class tracker_bo extends tracker_so
 		}
 		else
 		{
+			// find the addressbookentry to idetify the reply creator
+                        $addressbook = new addressbook_bo();
+                        $contacts = array();
+                        foreach ($email as $mailadr)
+                        {
+                                $contacts = array_merge($contacts,(array)$addressbook->search(
+                                        array(
+                                                'email' => $mailadr,
+                                                'email_home' => $mailadr
+                                        ),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
+                        }
+			$found= false;
+                        if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
+                        {
+                                $msg['reply_creator'] = $this->user;      // use current user as creator instead
+                        }
+                        else
+                        {
+				$msg['reply_creator'] = $this->user;
+				// try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
+				//error_log(__METHOD__.__LINE__.' Number of Contacts Found:'.count($contacts));
+				foreach ($contacts as $contact)
+				{
+					if (empty($contact['account_id'])) continue;
+					//error_log(__METHOD__.__LINE__.' Contact Found:'.array2string($contact));
+					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
+					if (empty($msg['reply_creator'])&& $contact['account_id']>0)
+					{
+						foreach (array('email','email_home') as $k => $n)
+						{
+							if (!empty($contact[$n]))
+							{
+								// we found someone as staff, so we set it as current user
+								if (isset($staff[$contact['account_id']]))
+								{
+									$this->user = $msg['reply_creator'] = $contact['account_id'];
+									$found = true;
+								}
+							}
+						}
+					}
+				}
+			}
+			if($found===false) $msg['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
 			$this->read($ticketId);
 			//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 			// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
@@ -2024,7 +2068,8 @@ class tracker_bo extends tracker_so
 			$trackerentry = $this->data;
 			$trackerentry['reply_message'] = $_message;
 			$trackerentry['popup'] = true;
-
+			if (isset($msg['msg'])) $trackerentry['msg'] = $msg['msg'];
+			if (isset($msg['reply_creator'])) $trackerentry['reply_creator'] = $msg['reply_creator'];
 		}
 		$queue = 0; // all; we use this, as we do not have a queue, when preparing a new ticket
 		if (isset($trackerentry['tr_tracker']) && !empty($trackerentry['tr_tracker'])) $queue = $trackerentry['tr_tracker'];
