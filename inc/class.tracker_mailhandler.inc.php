@@ -221,7 +221,7 @@ class tracker_mailhandler extends tracker_bo
 				if (!PEAR::isError($tretval)) egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
 			}
 			// retrieve list
-			if (self::LOG_LEVEL>0 && PEAR::isError($tretval)); error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
+			if (self::LOG_LEVEL>0 && (PEAR::isError($tretval) || $tretval===false)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
 			$_folderName = $this->mailhandling[$queue]['folder'];
 			$mailobject->reopen($_folderName);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
