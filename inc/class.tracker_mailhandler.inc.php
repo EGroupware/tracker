@@ -93,7 +93,7 @@ class tracker_mailhandler extends tracker_bo
 	 * 2 = more debug info
 	 * 3 = complete debug info
 	 */
-	const LOG_LEVEL = 0;
+	const LOG_LEVEL = 3;
 
 	/**
 	 * Constructor
@@ -211,16 +211,17 @@ class tracker_mailhandler extends tracker_bo
 			// connect
 			$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
 			// may fail for validatecert=true
-			if ( PEAR::isError($tretval) && $mailobject->icServer->validatecert)
+			if ( (PEAR::isError($tretval) || $tretval===false) && $mailobject->icServer->validatecert)
 			{
 				$mailobject->icServer->validatecert=false;
 				$mailobject->icServer->_connectionErrorObject->message = ',';
+				$mailobject->icServer->_connected = false;
 				// try again
 				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
 				if (!PEAR::isError($tretval)) egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
 			}
 			// retrieve list
-			if (self::LOG_LEVEL>0 && PEAR::isError($tretval)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
+			if (self::LOG_LEVEL>0 && (PEAR::isError($tretval) || $tretval===false)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
 			$_folderName = $this->mailhandling[$queue]['folder'];
 			$mailobject->reopen($_folderName);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
@@ -240,6 +241,7 @@ class tracker_mailhandler extends tracker_bo
 				if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']);
 				if ($uid)
 				{
+					$this->user = $this->originalUser;
 					if (self::process_message2($mailobject, $uid, $_folderName, $queue) && $this->mailhandling[$queue]['delete_from_server'])
 					{
 						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
@@ -1153,7 +1155,8 @@ class tracker_mailhandler extends tracker_bo
 			strtotime($mailcontent['headers']['DATE'])
 		);
 		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data));
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'.$this->mailhandling[$queue]['unrecognized_mails'].':'.$this->data['tr_creator'].' vs. '.array2string($this->user));
+		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.' Mailaddress:'.array2string($mailcontent['mailaddress']));
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'.$this->mailhandling[$queue]['unrecognized_mails'].':'.($this->data['tr_id']?$this->data['reply_creator']:$this->data['tr_creator']).' vs. '.array2string($this->user).' Ticket:'.$this->data['tr_id'].' Message:'.$this->data['msg']);
 
 		// handle auto - mails
 		if ($this->is_automail2($mailobject, $uid, $mailcontent['subject'], $mailcontent['headers'], $queue)) {
@@ -1163,8 +1166,10 @@ class tracker_mailhandler extends tracker_bo
 
 		// Handle unrecognized mails: we get a warning from prepare_import_mail, when mail is not recognized
 		// ToDo: Introduce a key, to be able to tell the error-condition
-		if (!empty($this->data['msg']) && $this->data['tr_creator'] == $this->user)
+		if (!empty($this->data['msg']) && (($this->data['tr_creator'] == $this->user) || ($this->data['tr_id'] && $this->data['reply_creator'] == $this->user)))
 		{
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.array2string($this->data['msg']).':'.$this->data['tr_creator'].'=='. $this->user);
+			if ($this->data['tr_id'] && $this->data['reply_creator'] == $this->user) unset($this->data['reply_creator']);
 			$senderIdentified = false;
 			switch ($this->mailhandling[$queue]['unrecognized_mails'])
 			{
@@ -1217,22 +1222,25 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
 //			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
+			if (!$senderIdentified && isset($this->mailSender))  $this->data['tr_creator'] = $this->user = $this->mailSender;
 			//error_log(__METHOD__.__LINE__.array2string($this->data));
 		}
 		else
 		{
+			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data['reply_message']));
 			if (!$senderIdentified)
 			{
+				if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.':'.$this->data['tr_creator'].':'.$this->mailhandling[$queue]['unrec_mail'].':'.$this->user.':'.$this->mailSender.'#');
 				switch ($this->mailhandling[$queue]['unrec_reply'])
 				{
 					case 0 :
-						$this->user = $this->data['tr_creator'];
+						$this->user = (!empty($this->data['tr_creator'])?$this->data['tr_creator']:(!empty($this->mailhandling[$queue]['unrec_mail'])?$this->mailhandling[$queue]['unrec_mail']:$this->user));
 						break;
 					case 1 :
 						$this->user = 0;
 						break;
 					default :
-						$this->user = 0;
+						$this->user = (!empty($this->mailhandling[$queue]['unrec_mail'])?$this->mailhandling[$queue]['unrec_mail']:0);
 						break;
 				}
 			}
@@ -1241,7 +1249,7 @@ class tracker_mailhandler extends tracker_bo
 				$this->user = $this->mailSender;
 			}
 		}
-		if (!isset($this->mailhandling[$queue]['auto_cc']) || $this->mailhandling[$queue]['auto_cc']==false)
+		if ($this->ticketId == 0 && (!isset($this->mailhandling[$queue]['auto_cc']) || $this->mailhandling[$queue]['auto_cc']==false))
 		{
 			unset($this->data['tr_cc']);
 		}
