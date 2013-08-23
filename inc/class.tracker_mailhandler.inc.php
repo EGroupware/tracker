@@ -197,13 +197,14 @@ class tracker_mailhandler extends tracker_bo
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." for $queue");
 		if ($this->mailBox instanceof defaultimap)
 		{
-			if ($this->mailhandling[$queue]['autoreplies'] || $this->mailhandling[$queue]['unrecognized_mails'])
+			if (/*$this->mailhandling[$queue]['auto_reply'] ||*/ $this->mailhandling[$queue]['autoreplies'] || $this->mailhandling[$queue]['unrecognized_mails'])
 			{
 				if(is_object($this->smtpMail))
 				{
 					unset($this->smtpMail);
 				}
 				$this->smtpMail = new send('notification');
+				if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
 			}
 			$mailClass = 'felamimail_bo';
 			$mailobject	= $mailClass::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
@@ -1171,6 +1172,8 @@ class tracker_mailhandler extends tracker_bo
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.array2string($this->data['msg']).':'.$this->data['tr_creator'].'=='. $this->user);
 			if ($this->data['tr_id'] && $this->data['reply_creator'] == $this->user) unset($this->data['reply_creator']);
 			$senderIdentified = false;
+			$replytoAddress = $mailcontent['mailaddress'];
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.' ReplyToAddress:'.$replytoAddress);
 			switch ($this->mailhandling[$queue]['unrecognized_mails'])
 			{
 				case 'ignore' :		// Do nothing
@@ -1269,7 +1272,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 		}
-		if (self::LOG_LEVEL>1 && $replytoAddress) error_log(__METHOD__.__LINE__.' Replytoaddress:'.array2string($replytoAddress));
+		if (self::LOG_LEVEL>1 && $replytoAddress) error_log(__METHOD__.__LINE__.' Replytoaddress:'.array2string($replytoAddress).' Text:'.$this->mailhandling[$queue]['reply_text']);
 		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
 		$saverv = $this->save(null,
 			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
@@ -1283,7 +1286,7 @@ class tracker_mailhandler extends tracker_bo
 				? array(
 					'reply_text' => $this->mailhandling[$queue]['reply_text'],
 					// UserID or mail address
-					'reply_to' => ($this->user ? $this->user : $replytoAddress),
+					'reply_to' => ($replytoAddress ? $replytoAddress : $this->user),
 				)
 				: null
 		);

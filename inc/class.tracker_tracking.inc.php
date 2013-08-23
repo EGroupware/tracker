@@ -145,15 +145,17 @@ class tracker_tracking extends bo_tracking
 		}
 		else
 		{
+			$this->notify_current_user = true; // Ensure send_notification() doesn't fail this check
 			$email = $autoreply['reply_to']; // mail from an unknown user (set here, so we need to send a notification)
 		}
+		//error_log(__METHOD__.__LINE__.array2string($autoreply));
 		if ($autoreply['reply_text'])
 		{
 			$data['reply_text'] = $autoreply['reply_text'];
 			$this->ClearBodyCache();
 		}
 		// Send notification to the creator only; assignee, CC etc have been notified already
-		$this->send_notification($data,$old,$email,$data[$this->creator_field]);
+		$this->send_notification($data,$old,$email,(is_integer($autoreply['reply_to'])?$data[$this->creator_field]:$this->get_config('lang',$data)));
 	}
 
 	/**
