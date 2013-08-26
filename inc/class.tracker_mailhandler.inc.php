@@ -1144,7 +1144,7 @@ class tracker_mailhandler extends tracker_bo
 				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
 			return false;
 		}
-
+		$subject = str_replace(array('[',']','{','}','<','>'),' ',trim($subject));	
 		$tId = $this->get_ticketId($subject);
 		$addHeaderInfoSection = false;
 		if (isset($this->mailhandling[$queue]['mailheaderhandling']) && $this->mailhandling[$queue]['mailheaderhandling']>0)

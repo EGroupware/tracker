@@ -2022,7 +2022,7 @@ class tracker_bo extends tracker_so
 					if (empty($contact['account_id'])) continue;
 					//error_log(__METHOD__.__LINE__.' Contact Found:'.array2string($contact));
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
-					if (empty($msg['reply_creator'])&& $contact['account_id']>0)
+					if ($found==false && $contact['account_id']>0)
 					{
 						foreach (array('email','email_home') as $k => $n)
 						{
