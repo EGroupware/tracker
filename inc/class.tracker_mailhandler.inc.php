@@ -184,9 +184,10 @@ class tracker_mailhandler extends tracker_bo
 	 * Get all mails from the server. Invoked by the async timer
 	 *
 	 * @param int Which tracker queue to check mail for
+	 * @param boolean TestConnection=false
 	 * @return boolean true=run finished, false=an error occured
 	 */
-	function check_mail($queue = 0) {
+	function check_mail($queue = 0, $TestConnection=false) {
 		// Config for all passes null
 		if(!$queue) {
 			$queue = 0;
@@ -206,9 +207,23 @@ class tracker_mailhandler extends tracker_bo
 				$this->smtpMail = new send('notification');
 				if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
 			}
+			$rFP=egw_cache::getCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId));
+			if ($rFP && !empty($rFP) && $rFP == $this->mailBox)
+			{
+				if ($TestConnection==false)
+				{
+					error_log(__METHOD__.','.__LINE__." could not connect previously, and profile did not change");
+					error_log(__METHOD__.','.__LINE__." refused to open mailbox:".array2string($this->mailBox));
+					$this->mailhandling[$queue]['interval']=0;
+					$this->save_config();
+					return false;
+				}
+			}
 			$mailClass = 'felamimail_bo';
 			$mailobject	= $mailClass::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
+			
+			$connectionFailed = false;
 			// connect
 			$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
 			// may fail for validatecert=true
@@ -219,7 +234,36 @@ class tracker_mailhandler extends tracker_bo
 				$mailobject->icServer->_connected = false;
 				// try again
 				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
-				if (!PEAR::isError($tretval)) egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
+				if (!(PEAR::isError($tretval) || $tretval===false))
+				{
+					egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
+				}
+				else
+				{
+					// connection failed - remember that
+					$connectionFailed = true;
+				}
+			}
+			else
+			{
+				// connection failed - remember that
+				if (PEAR::isError($tretval) || $tretval===false) $connectionFailed = true;
+			}
+			if ($TestConnection===true)
+			{
+				if (self::LOG_LEVEL>0) error_log(__METHOD__.','.__LINE__." failed to open mailbox:".array2string($mailobject->icServer));
+				if ($connectionFailed) throw new egw_exception_wrong_userinput(lang("failed to open mailbox: %1 -> disabled for automatic mailprocessing!",(PEAR::isError($tretval)?$tretval->message:lang('could not connect'))));
+				return true;//everythig all right
+			}
+			if ($connectionFailed)
+			{
+				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),$this->mailBox,$expiration=60*60*5);
+				if (self::LOG_LEVEL>0) error_log(__METHOD__.','.__LINE__." failed to open mailbox:".array2string($this->mailBox));
+				return false;
+			}
+			else
+			{
+				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
 			}
 			// retrieve list
 			if (self::LOG_LEVEL>0 && (PEAR::isError($tretval) || $tretval===false)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);

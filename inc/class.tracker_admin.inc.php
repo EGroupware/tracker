@@ -209,7 +209,27 @@ class tracker_admin extends tracker_bo
 					if ($need_update)
 					{
 						$this->save_config();
-						$msg = lang('Configuration updated.').' ';
+						$validationError=false;
+						$this->load_config();
+						$mailhandler = new tracker_mailhandler();
+						foreach((array)$this->mailhandling as $queue_id => $handling) {
+							if ($handling['interval'])
+							{
+								try
+								{
+									$mailhandler->check_mail($queue_id,true);
+								}
+								catch (egw_exception_assertion_failed $e)
+								{	// not sure that this is needed to pass on exeptions
+									$msg .= ($msg?' ':'').$e->getMessage();
+									$this->mailhandling[$queue_id]['interval']=0;
+									$validationError=true;
+								}
+							}
+						}
+						
+						if ($validationError) $this->save_config();
+						$msg .= ($msg?' ':'').lang('Configuration updated.').' ';
 					}
 					$need_update = false;
 					foreach(array(
