@@ -1575,6 +1575,7 @@ width:100%;
 			{
 				$message = ltrim(str_replace("\n","\r\n",$_rawMailHeader)).str_replace("\n","\r\n",$_rawMailBody);
 				$subject = str_replace('$$','__',($_subject?$_subject:lang('(no subject)')));
+				$subject = str_replace(array('[',']','{','}','<','>'),' ',trim($subject));
 				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 				$tmpfile = fopen($attachment_file,'w');
 				fwrite($tmpfile,$message);
@@ -1594,6 +1595,7 @@ width:100%;
 			//_debug_array($attachments);
 			$_body = strip_tags($mailClass::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" )
 			$_body = htmlspecialchars_decode($_body,ENT_QUOTES);
+			$_subject = str_replace(array('[',']','{','}','<','>'),' ',trim($_subject));
 			$body = $mailClass::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
 				'TO'=>(!empty($_to_emailAddress['to'])?implode(',',$_to_emailAddress['to']):null),
 				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
@@ -1622,6 +1624,7 @@ width:100%;
 				$message = $mailobject->getMessageRawBody($uid, $partid);
 				$headers = $mailobject->getMessageHeader($uid, $partid,true);
 				$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
+				$subject = str_replace(array('[',']','{','}','<','>'),' ',trim($subject));
 				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 				$tmpfile = fopen($attachment_file,'w');
 				fwrite($tmpfile,$message);
@@ -1634,7 +1637,7 @@ width:100%;
 						'size' => $size,
 					);
 			}
-
+			$mailcontent['subject'] = str_replace(array('[',']','{','}','<','>'),' ',trim($mailcontent['subject']));
 			return $this->edit($this->prepare_import_mail(
 				$mailcontent['mailaddress'],
 				$mailcontent['subject'],
