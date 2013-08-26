@@ -93,7 +93,7 @@ class tracker_mailhandler extends tracker_bo
 	 * 2 = more debug info
 	 * 3 = complete debug info
 	 */
-	const LOG_LEVEL = 3;
+	const LOG_LEVEL = 0;
 
 	/**
 	 * Constructor
@@ -1124,6 +1124,7 @@ class tracker_mailhandler extends tracker_bo
 			$message = $mailobject->getMessageRawBody($uid, $partid);
 			$headers = $mailobject->getMessageHeader($uid, $partid,true);
 			$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
+			$subject = str_replace(array('[',']','{','}','<','>'),' ',trim($subject));
 			$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 			$tmpfile = fopen($attachment_file,'w');
 			fwrite($tmpfile,$message);
@@ -1148,6 +1149,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		// prepare the data to be saved
 		// (use bo function connected to the ui interface mail import, so after preparing we need to adjust stuff)
+		$mailcontent['subject'] = str_replace(array('[',']','{','}','<','>'),' ',trim($mailcontent['subject']));
 		$this->data = $this->prepare_import_mail(
 			$mailcontent['mailaddress'],
 			$mailcontent['subject'],
