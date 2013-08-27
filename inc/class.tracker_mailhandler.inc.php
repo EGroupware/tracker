@@ -266,6 +266,8 @@ class tracker_mailhandler extends tracker_bo
 			{
 				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
 			}
+			// load lang stuff for mailheaderInfoSection creation
+			translation::add_app('felamimail');
 			// retrieve list
 			if (self::LOG_LEVEL>0 && (PEAR::isError($tretval) || $tretval===false)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
 			$_folderName = $this->mailhandling[$queue]['folder'];

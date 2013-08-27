@@ -1519,6 +1519,8 @@ width:100%;
 			$icServerID = $hA['profileID'];
 			$mailClass = 'mail_bo';
 		}
+		// load lang stuff for mailheaderInfoSection creation
+		translation::add_app($sessionLocation);
 		if ($_date == false || empty($_date)) $_date = $this->bo->user_time_now;
 		if (!empty($_to_emailAddress))
 		{
