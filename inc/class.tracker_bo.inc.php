@@ -1997,23 +1997,23 @@ class tracker_bo extends tracker_so
 		else
 		{
 			// find the addressbookentry to idetify the reply creator
-                        $addressbook = new addressbook_bo();
-                        $contacts = array();
-                        foreach ($email as $mailadr)
-                        {
-                                $contacts = array_merge($contacts,(array)$addressbook->search(
-                                        array(
-                                                'email' => $mailadr,
-                                                'email_home' => $mailadr
-                                        ),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
-                        }
+            $addressbook = new addressbook_bo();
+            $contacts = array();
+            foreach ($email as $mailadr)
+            {
+                    $contacts = array_merge($contacts,(array)$addressbook->search(
+                            array(
+                                    'email' => $mailadr,
+                                    'email_home' => $mailadr
+                            ),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
+            }
 			$found= false;
-                        if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
-                        {
-                                $msg['reply_creator'] = $this->user;      // use current user as creator instead
-                        }
-                        else
-                        {
+            if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
+            {
+                    $msg['reply_creator'] = $this->user;      // use current user as creator instead
+            }
+            else
+            {
 				$msg['reply_creator'] = $this->user;
 				// try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				//error_log(__METHOD__.__LINE__.' Number of Contacts Found:'.count($contacts));

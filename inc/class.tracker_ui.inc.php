@@ -1597,6 +1597,12 @@ width:100%;
 			$_body = strip_tags($mailClass::htmlspecialchars($_body)); //we need to fix broken tags (or just stuff like "<800 USD/p" )
 			$_body = htmlspecialchars_decode($_body,ENT_QUOTES);
 			$_subject = $mailClass::adaptSubjectForImport($_subject);
+			$tId = $this->get_ticketId($_subject);
+			if ($tId)
+			{
+				$t = $this->read($tId);
+				$this->htmledit = $t['tr_edit_mode']=='html';
+			}
 			$body = $mailClass::createHeaderInfoSection(array('FROM'=>$_to_emailAddress['from'],
 				'TO'=>(!empty($_to_emailAddress['to'])?implode(',',$_to_emailAddress['to']):null),
 				'CC'=>(!empty($_to_emailAddress['cc'])?implode(',',$_to_emailAddress['cc']):null),
@@ -1615,6 +1621,14 @@ width:100%;
 			$mailobject	= $mailClass::getInstance(true,$icServerID);
 			$mailobject->openConnection();
 			$mailobject->reopen($mailbox);
+			$headers = $mailobject->getMessageHeader($uid, $partid,true);
+			$subject = $mailClass::adaptSubjectForImport($headers['SUBJECT']);
+			$tId = $this->get_ticketId($subject);
+			if ($tId)
+			{
+				$t = $this->read($tId);
+				$this->htmledit = $t['tr_edit_mode']=='html';
+			}
 
 			$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$mailbox,$this->htmledit);
 
