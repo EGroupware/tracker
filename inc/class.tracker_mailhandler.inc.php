@@ -1149,6 +1149,11 @@ class tracker_mailhandler extends tracker_bo
 		}
 		$subject = felamimail_bo::adaptSubjectForImport($subject);	
 		$tId = $this->get_ticketId($subject);
+		if ($tId)
+		{
+			$t = $this->read($tId);
+			$this->htmledit = $t['tr_edit_mode']=='html';
+		}
 		$addHeaderInfoSection = false;
 		if (isset($this->mailhandling[$queue]['mailheaderhandling']) && $this->mailhandling[$queue]['mailheaderhandling']>0)
 		{
