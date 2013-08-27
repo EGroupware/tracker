@@ -97,11 +97,12 @@ class tracker_mailhandler extends tracker_bo
 
 	/**
 	 * Constructor
+	 * @param array mailhandlingConfig - optional mailhandling config, to overrule the config loaded by parent
 	 */
-	function __construct()
+	function __construct($mailhandlingConfig=null)
 	{
 		parent::__construct();
-
+		if (!is_null($mailhandlingConfig)) $this->mailhandling = $mailhandlingConfig;
 		// In case we run in fallback, make sure the original user gets restored
 		$this->originalUser = $this->user;
 		foreach($this->mailservertypes as $ind => $typ)

@@ -210,8 +210,8 @@ class tracker_admin extends tracker_bo
 					{
 						$this->save_config();
 						$validationError=false;
-						$this->load_config();
-						$mailhandler = new tracker_mailhandler();
+						//$this->load_config();
+						$mailhandler = new tracker_mailhandler($this->mailhandling);
 						foreach((array)$this->mailhandling as $queue_id => $handling) {
 							if ($handling['interval'])
 							{
