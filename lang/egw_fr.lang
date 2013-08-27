@@ -6,6 +6,7 @@
 accepted	tracker	fr	Accepté
 add comment	tracker	fr	Ajouter un commentaire
 add timesheet entry	tracker	fr	Ajouter une entrée feuille de temps
+after	tracker	fr	Après
 after how many days a not replied item should be marked overdue?	tracker	fr	Après combien de jours un élément non répondu sera marqué en retard?
 after how many days pending items should be closed automatic	tracker	fr	Après combien de jours les éléments en attente seront automatiquement fermés
 allow bounties	tracker	fr	Permettre les primes
@@ -42,6 +43,7 @@ copy to	tracker	fr	Copier vers
 create new links	tracker	fr	Créer de nouveaux liens
 created	tracker	fr	Créé
 creation date	tracker	fr	Date de création
+creator	tracker	fr	Créateur
 custom fields	tracker	fr	Champs personnalisés
 date opened	tracker	fr	Date d'ouverture
 delete this bounty	tracker	fr	Supprimer cette prime
@@ -71,6 +73,7 @@ history	tracker	fr	Historique
 id	tracker	fr	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	fr	Si cet élément est important pour vous, veuillez considérer d'y fixer une prime!
 if this item is important for you, please vote for it.	tracker	fr	Si cet élément est important pour vous, veuillez le voter.
+ignore	tracker	fr	Ignorer
 invalid	tracker	fr	Invalide
 item assignee	tracker	fr	Acquéreur de l'élément
 item creator	tracker	fr	Créateur de l'élément
@@ -80,6 +83,7 @@ later	tracker	fr	Plus tard
 links	tracker	fr	Liens
 new %1	tracker	fr	Nouveau %1
 new items	tracker	fr	Nouvel élément
+new ticket submitted by %1 at %2	tracker	fr	Nouveau ticket soumis par %1 à %2
 new tracker item submitted by %1 at %2	tracker	fr	Nouvel élément de traqueur soumis par %1 à %2
 no change	tracker	fr	Aucune modification
 non-anonymous users	tracker	fr	Utilisateur non-anonyme
@@ -113,6 +117,7 @@ the bounty will not be shown, until the money is received.	tracker	fr	La prime n
 the canned response will be prefix the text you type.	tracker	fr	La réponse standard précédera le texte que vous entrez.
 this module displays information from the tracker.	tracker	fr	Ce module affiche les informations du Traqueur
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	fr	Cet élément du Traqueur a été automatiquement fermé par le système. Il avait été mis en status 'En attente', et le créateur original n'a pas répondu dans les %1 jours.
+ticket modified by %1 at %2	tracker	fr	Ticket modifié par %1 à %2
 times	tracker	fr	Heures
 tracker	common	fr	Traqueur
 tracker added	tracker	fr	Queue de Traqueur ajoutée
