@@ -157,7 +157,7 @@ email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umw
 enter an email address here if unrecognized mails should be forwarded	tracker	de	E-Mail Adresse zu der nicht zuordenbare E-Mails weitergeleitet werden
 enter an opening text for the reply message	tracker	de	Geben Sie einen Anfangstext für die Antwortnachricht ein
 enter the imap server from which emails should be fetched	tracker	de	IMAP Server von dem E-Mail gelesen werden sollen
-enter the mail address that will be read.	tracker	de	E-Mail Adresse die gelesen wird.
+enter the mail address that will be read.	tracker	de	Tragen sie hier eine E-Mail Adresse ein, die als zusätzlicher Filter für ungelesene E-Mails angewendet werden soll. Lassen Sie das Feld leer, wenn Sie alle ungelesenen E-Mails verarbeiten möchten.
 entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
@@ -307,7 +307,7 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 queue	tracker	de	Queue
-read mail address	tracker	de	E-Mail Adresse zum lesen
+read mail address	tracker	de	Verarbeitung nur dieser Mailadresse
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
 receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
