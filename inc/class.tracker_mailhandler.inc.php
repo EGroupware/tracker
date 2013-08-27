@@ -1252,6 +1252,10 @@ class tracker_mailhandler extends tracker_bo
 					break;
 			}
 		}
+		else
+		{
+			$replytoAddress = ($this->data['tr_id']?$this->data['reply_creator']:$this->data['tr_creator']);
+		}
 
 		// do not fetch the possible ticketID (again), use what is returned by prepare_import_mail
 		$this->ticketId = $this->data['tr_id'];
