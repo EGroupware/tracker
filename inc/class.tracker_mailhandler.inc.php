@@ -290,11 +290,13 @@ class tracker_mailhandler extends tracker_bo
 				if ($uid)
 				{
 					$this->user = $this->originalUser;
+					$htmlEditOrg = $this->htmledit; // preserve that, as an existing ticket may be of a different mode
 					if (self::process_message2($mailobject, $uid, $_folderName, $queue) && $this->mailhandling[$queue]['delete_from_server'])
 					{
 						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
 						$deletedCounter++;
 					}
+					$this->htmledit = $htmlEditOrg;
 				}
 			}
 			// Expunge deleted mails, if any
