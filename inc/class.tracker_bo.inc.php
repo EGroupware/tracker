@@ -2022,6 +2022,7 @@ class tracker_bo extends tracker_so
 					if (empty($contact['account_id'])) continue;
 					//error_log(__METHOD__.__LINE__.' Contact Found:'.array2string($contact));
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
+					//error_log(__METHOD__.__LINE__.array2string($staff));
 					if ($found==false && $contact['account_id']>0)
 					{
 						foreach (array('email','email_home') as $k => $n)
@@ -2031,7 +2032,8 @@ class tracker_bo extends tracker_so
 								// we found someone as staff, so we set it as current user
 								if (isset($staff[$contact['account_id']]))
 								{
-									$this->user = $msg['reply_creator'] = $contact['account_id'];
+									//error_log(__METHOD__.__LINE__.' ->'.$n.':'.array2string($contact));
+									$msg['reply_creator'] = $contact['account_id'];
 									$found = true;
 								}
 							}

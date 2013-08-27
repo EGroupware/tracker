@@ -1212,7 +1212,7 @@ class tracker_mailhandler extends tracker_bo
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.' Automails will not be processed.');
 			return false;
 		}
-
+		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data['msg']).':'.$this->data['tr_creator'].'=='.$this->data['reply_creator'].'=='. $this->user);
 		// Handle unrecognized mails: we get a warning from prepare_import_mail, when mail is not recognized
 		// ToDo: Introduce a key, to be able to tell the error-condition
 		if (!empty($this->data['msg']) && (($this->data['tr_creator'] == $this->user) || ($this->data['tr_id'] && $this->data['reply_creator'] == $this->user)))
@@ -1264,6 +1264,10 @@ class tracker_mailhandler extends tracker_bo
 				}
 				$this->mailSender = $this->mailhandling[$queue]['unrec_mail']; // Ok, set default user
 			}
+		}
+		else
+		{
+			$this->mailSender = (!$senderIdentified?$this->mailhandling[$queue]['unrec_mail']:$this->data['reply_creator']);
 		}
 
 		if ($this->ticketId == 0)
