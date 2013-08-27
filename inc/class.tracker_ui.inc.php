@@ -115,7 +115,7 @@ class tracker_ui extends tracker_bo
 	 */
 	function edit($content=null,$msg='',$popup=true)
 	{
-		if ($this->htmledit)
+		if ($this->htmledit || (isset($content['tr_edit_mode']) && $content['tr_edit_mode']=='html'))
 		{
 			$rte_features = $GLOBALS['egw_info']['user']['preferences']['common']['rte_features'];
 			$tr_description_options = $rte_features.',240px,100%,false';
