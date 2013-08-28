@@ -265,7 +265,7 @@ class tracker_mailhandler extends tracker_bo
 			if ( (PEAR::isError($tretval) || $tretval===false) && $mailobject->icServer->validatecert)
 			{
 				$mailobject->icServer->validatecert=false;
-				if (gettype($mailobject->icServer->_connectionErrorObject)=='object') $mailobject->icServer->_connectionErrorObject->message = ',';
+				if (is_object($mailobject->icServer->_connectionErrorObject)) $mailobject->icServer->_connectionErrorObject->message = ',';
 				$mailobject->icServer->_connected = false;
 				// try again
 				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
