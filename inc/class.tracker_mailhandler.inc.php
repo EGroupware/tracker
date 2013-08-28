@@ -137,6 +137,7 @@ class tracker_mailhandler extends tracker_bo
 		$diff = array();
 		if (!($reference instanceof defaultimap)) return false;
 		if (!($profile instanceof defaultimap)) return false;
+		if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
 		if ($reference->encryption != $profile->encryption) $diff['encryption']=array('reference'=>$reference->encryption,'profile'=>$profile->encryption);
 		if ($reference->host != $profile->host) $diff['host']=array('reference'=>$reference->host,'profile'=>$profile->host);
 		if ($reference->port != $profile->port) $diff['port']=array('reference'=>$reference->port,'profile'=>$profile->port);
