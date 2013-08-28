@@ -197,6 +197,14 @@ class tracker_mailhandler extends tracker_bo
 			$this->mailBox = self::get_mailbox($queue);
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." for $queue");
+		if ($this->mailBox === false)
+		{
+			if ($TestConnection) throw new egw_exception_wrong_userinput(lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
+			error_log(__METHOD__.','.__LINE__.lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
+			$this->mailhandling[$queue]['interval']=0;
+			$this->save_config();
+			return false;
+		}
 		if ($this->mailBox instanceof defaultimap)
 		{
 			if (/*$this->mailhandling[$queue]['auto_reply'] ||*/ $this->mailhandling[$queue]['autoreplies'] || $this->mailhandling[$queue]['unrecognized_mails'])
@@ -327,7 +335,7 @@ class tracker_mailhandler extends tracker_bo
 			}
 			if ($show_failed)
 			{
-				error_log(__FILE__.','.__METHOD__." failed to open mailbox:".print_r($this->mailBox,true));
+				error_log(__METHOD__.__LINE__." failed to open mailbox:".print_r($this->mailBox,true));
 				return false;
 			}
 		}
