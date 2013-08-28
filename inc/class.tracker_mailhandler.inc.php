@@ -270,7 +270,7 @@ class tracker_mailhandler extends tracker_bo
 			translation::add_app('felamimail');
 			// retrieve list
 			if (self::LOG_LEVEL>0 && (PEAR::isError($tretval) || $tretval===false)) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobject->errorMessage);
-			$_folderName = ($this->mailhandling[$queue]['folder']?$this->mailhandling[$queue]['folder']:'INBOX');
+			$_folderName = (!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX');
 			$mailobject->reopen($_folderName);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
 			$_filter=array('status'=>array('UNSEEN','UNDELETED'));
