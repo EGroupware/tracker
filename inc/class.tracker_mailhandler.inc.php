@@ -127,6 +127,27 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
+	 * Compare 2 given mailbox settings (for a given set of properties)
+	 * @param defaultImap Object $reference reference
+	 * @param defaultImap Object $profile compare to reference
+	 * @return mixed false/array with the differences found; empty array when no differences for the predefined set of keys are found; false if either one is not of type defaultImap
+	 */
+	static function compareMailboxSettings($reference, $profile)
+	{
+		$diff = array();
+		if (!($reference instanceof defaultimap)) return false;
+		if (!($profile instanceof defaultimap)) return false;
+		if ($reference->encryption != $profile->encryption) $diff['encryption']=array('reference'=>$reference->encryption,'profile'=>$profile->encryption);
+		if ($reference->host != $profile->host) $diff['host']=array('reference'=>$reference->host,'profile'=>$profile->host);
+		if ($reference->port != $profile->port) $diff['port']=array('reference'=>$reference->port,'profile'=>$profile->port);
+		if ($reference->validatecert != $profile->validatecert) $diff['validatecert']=array('reference'=>$reference->validatecert,'profile'=>$profile->validatecert);
+		if ($reference->username != $profile->username) $diff['username']=array('reference'=>$reference->username,'profile'=>$profile->username);
+		if ($reference->loginName != $profile->loginName) $diff['loginName']=array('reference'=>$reference->loginName,'profile'=>$profile->loginName);
+		if ($reference->password != $profile->password) $diff['password']=array('reference'=>$reference->password,'profile'=>$profile->password);
+		return $diff;
+	}
+
+	/**
 	 * Compose the mailbox identification
 	 *
 	 * @return string mailbox identification as '{server[:port]/type}folder'
@@ -217,15 +238,19 @@ class tracker_mailhandler extends tracker_bo
 				if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
 			}
 			$rFP=egw_cache::getCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId));
-			if ($rFP && !empty($rFP) && $rFP == $this->mailBox)
+			if ($rFP && !empty($rFP))
 			{
-				if ($TestConnection==false)
+				$d = self::compareMailboxSettings($this->mailBox,$rFP);
+				if ($d===false || empty($d))
 				{
-					error_log(__METHOD__.','.__LINE__." could not connect previously, and profile did not change");
-					error_log(__METHOD__.','.__LINE__." refused to open mailbox:".array2string($this->mailBox));
-					$this->mailhandling[$queue]['interval']=0;
-					$this->save_config();
-					return false;
+					if ($TestConnection==false)
+					{
+						error_log(__METHOD__.','.__LINE__." could not connect previously, and profile did not change");
+						error_log(__METHOD__.','.__LINE__." refused to open mailbox:".array2string($this->mailBox));
+						$this->mailhandling[$queue]['interval']=0;
+						$this->save_config();
+						return false;
+					}
 				}
 			}
 			$mailClass = 'felamimail_bo';
