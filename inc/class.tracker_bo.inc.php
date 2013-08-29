@@ -1902,9 +1902,10 @@ class tracker_bo extends tracker_so
 	 * @param string $_message
 	 * @param array $_attachments
 	 * @param string $_date
+	 * @param int $_queue optional param to pass queue
 	 * @return array $content array for tracker_ui
 	 */
-	function prepare_import_mail($_email_address,$_subject,$_message,$_attachments,$_date)
+	function prepare_import_mail($_email_address,$_subject,$_message,$_attachments,$_date,$_queue=0)
 	{
 		$address_array = imap_rfc822_parse_adrlist($_email_address,'');
 		foreach ((array)$address_array as $address)
@@ -2061,10 +2062,10 @@ class tracker_bo extends tracker_so
 			if (isset($msg['msg'])) $trackerentry['msg'] = $msg['msg'];
 			if (isset($msg['reply_creator'])) $trackerentry['reply_creator'] = $msg['reply_creator'];
 		}
-		$queue = 0; // all; we use this, as we do not have a queue, when preparing a new ticket
+		$queue = $_queue; // all; we use this, as we do not have a queue, when preparing a new ticket
 		if (isset($trackerentry['tr_tracker']) && !empty($trackerentry['tr_tracker'])) $queue = $trackerentry['tr_tracker'];
 		// since we only add replies for existing tickets, we do not mess with tr_cc in that case
-		if ($ticketId==0 && $queue==0 && (!isset($this->mailhandling[$queue]['auto_cc']) || empty($this->mailhandling[$queue]['auto_cc']))) unset($trackerentry['tr_cc']);
+		if ($ticketId==0 && (!isset($this->mailhandling[$queue]['auto_cc']) || empty($this->mailhandling[$queue]['auto_cc']))) unset($trackerentry['tr_cc']);
 		if (is_array($_attachments))
 		{
 			foreach ($_attachments as $attachment)
