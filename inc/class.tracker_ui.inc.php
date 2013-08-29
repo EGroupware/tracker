@@ -100,8 +100,6 @@ class tracker_ui extends tracker_bo
 		{
 			return implode(', ',$this->tracking->errors);
 		}
-		// Adding Automatic print func
-		$GLOBALS['egw']->js->set_onload('window.print();');
 		$GLOBALS['egw']->framework->render($details,'',false);
 	}
 
@@ -191,10 +189,6 @@ class tracker_ui extends tracker_bo
 			}
 			if ($_GET['no_popup'] || $_GET['nopopup']) $popup = false;
 
-			if ($popup)
-			{
-				$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\nwindow.focus();\n</script>\n";
-			}
 			// check if user has rights to create new entries and fail if not
 			if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 			{
@@ -294,9 +288,10 @@ class tracker_ui extends tracker_bo
 					{
 						$msg = lang('Nothing to save.');
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
-						$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
-							// only change to current tracker, if not all trackers displayed
-							($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
+						egw_framework::refresh_opener($msg,'tracker',$this->data['tr_id'],'edit');
+
+						// only change to current tracker, if not all trackers displayed
+						($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
 					}
 					elseif ($ret === 'tr_modifier' || $ret === 'tr_modified')
 					{
@@ -332,7 +327,7 @@ class tracker_ui extends tracker_bo
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
 						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
-						$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
+						egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'],'edit');
 					}
 					else
 					{
@@ -343,8 +338,7 @@ class tracker_ui extends tracker_bo
 				case 'cancel':
 					if ($popup)
 					{
-						$js .= 'window.close();';
-						echo "<html>\n<body>\n<script type='text/javascript'>\n$js\n</script>\n</body>\n</html>\n";
+						egw_framework::window_close();
 						common::egw_exit();
 					}
 					unset($_GET['tr_id']);	// in case it's still set
@@ -361,8 +355,7 @@ class tracker_ui extends tracker_bo
 						$msg = lang('Thank you for voting.');
 						if ($popup)
 						{
-							$js = "opener.egw_refresh('".str_replace("'","\\'",$msg)."','tracker',{$this->data['tr_id']},'edit');";
-							$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\n$js\n</script>\n";
+							egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
 						}
 					}
 					break;
@@ -426,8 +419,7 @@ class tracker_ui extends tracker_bo
 									if ($this->save_bounty($this->data['bounties'][$n]))
 									{
 										$msg = lang('Bounty confirmed');
-										$js = "opener.location.href=opener.location.href.replace(/&tr_id=[0-9]+/,'')+'&msg=".addslashes(urlencode($msg))."';";
-										$GLOBALS['egw_info']['flags']['java_script'] .= "<script type='text/javascript'>\n$js\n</script>\n";
+										egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
 									}
 									else
 									{
@@ -679,7 +671,7 @@ class tracker_ui extends tracker_bo
 		$what = $tracker ? $this->trackers[$tracker] : lang('Tracker');
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
-		$tpl = new etemplate('tracker.edit');
+		$tpl = new etemplate_new('tracker.edit');
 		if ($this->tracker_has_cat_specific_priorities($tracker))
 		{
 			$tpl->set_cell_attribute('cat_id','onchange',true);
@@ -1260,7 +1252,7 @@ class tracker_ui extends tracker_bo
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
-		$tpl = new etemplate();
+		$tpl = new etemplate_new();
 		if (!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
 		{
 			$tpl->read('tracker.index');
@@ -1323,8 +1315,7 @@ width:100%;
 			'print' => array(
 				'caption' => 'Print',
 				'allowOnMultiple' => false,
-				'url' => 'menuaction=tracker.tracker_ui.tprint&tr_id=$id',
-				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'onExecute' => 'javaScript:app.tracker.tprint',
 				'group' => $group,
 			),
 			'add' => array(
@@ -1525,7 +1516,6 @@ width:100%;
 		if (!empty($_to_emailAddress))
 		{
 			$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
-			echo '<script type="text/javascript">window.resizeTo(750,550);</script>';
 
 			if (is_array($_attachments))
 			{
@@ -1661,7 +1651,7 @@ width:100%;
 			));
 		}
 		common::egw_header();
-		echo "<script type='text/javascript'> window.close(); alert('Error: no mail (Mailbox / UID) given!');</script>";
+		egw_framework::window_close(lang('Error: no mail (Mailbox / UID) given!'));
 		common::egw_exit();
 		exit;
 	}
@@ -1880,15 +1870,15 @@ width:100%;
 	 */
 	public function ajax_canned_comment($id, $ckeditor=true)
 	{
-		$response = new xajaxResponse();
-		if($ckeditor) {
-			$response->script('if(CKEDITOR) { var ckeditor = CKEDITOR.instances["exec[reply_message]"];} if(ckeditor) ckeditor.setData("'.
-				str_replace(array("\r","\n"), array('',''), nl2br($this->get_canned_response($id))) .
-			 '");');
-		} else {
-			$response->assign('exec[reply_message]', 'value', $this->get_canned_response($id));
-		}
+		$response = egw_json_response::get();
 
-		return $response->getXML();
+		if($ckeditor)
+		{
+			$response->call('app.tracker.canned_comment_response',nl2br($this->get_canned_response($id)));
+		}
+		else
+		{
+			$response->call('app.tracker.canned_comment_response', $this->get_canned_response($id));
+		}
 	}
 }

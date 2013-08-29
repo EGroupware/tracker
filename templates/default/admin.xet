@@ -242,7 +242,7 @@
 					<description value="Html editing" for="htmledit"/>
 					<checkbox statustext="Permit html editing in overview and comments" id="htmledit"/>
 					<description value="Activate users queue access control" for="enabled_queue_acl_access"/>
-					<checkbox statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="getElementById('eT_accountsel_exec_users_').disabled = !this.checked;"/>
+					<checkbox statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="app.tracker.acl_queue_access()"/>
 				</row>
 				<row class="row" disabled="@tracker">
 					<description value="Exclude links of the following apps on timesheet creation" span="2"/>

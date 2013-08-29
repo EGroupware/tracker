@@ -162,7 +162,7 @@
 				<row disabled="!@css">
 					<html id="css" span="all"/>
 				</row>
-				<row disabled="!@msg">
+				<row >
 					<description align="center" id="msg" no_lang="1" span="all" class="redItalic"/>
 					<description/>
 				</row>

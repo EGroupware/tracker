@@ -227,7 +227,7 @@ class tracker_admin extends tracker_bo
 								}
 							}
 						}
-						
+
 						if ($validationError) $this->save_config();
 						$msg .= ($msg?' ':'').lang('Configuration updated.').' ';
 					}
@@ -388,11 +388,7 @@ class tracker_admin extends tracker_bo
 			// keep priority cat only if tracker is unchanged, otherwise reset it
 			'priorities' => $tracker == $content['tracker'] ? array('cat_id' => $content['priorities']['cat_id']) : array(),
 		);
-		if (!$this->enabled_queue_acl_access)
-		{
-			$GLOBALS['egw']->js->set_onload("document.getElementById('eT_accountsel_exec_users_').disabled = true;");
-		}
-
+		
 		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
 		{
 			$content[$name] = $this->$name;
@@ -525,7 +521,7 @@ class tracker_admin extends tracker_bo
 			'tabs' => array('tracker.admin.acl'=>$tracker),
 		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
-		$tpl = new etemplate('tracker.admin');
+		$tpl = new etemplate_new('tracker.admin');
 		return $tpl->exec('tracker.tracker_admin.admin',$content,$sel_options,$readonlys,$content);
 	}
 
@@ -549,7 +545,7 @@ class tracker_admin extends tracker_bo
 				// Show before / after
 				$row['esc_before_after'] = ($row['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
 				$row['esc_time'] = abs($row['esc_time']);
-				
+
 				// show the right tracker and/or cat specific priority label
 				if ($row['tr_priority'])
 				{
@@ -620,7 +616,7 @@ class tracker_admin extends tracker_bo
 					// 'Before' only valid for start & due dates
 					if($content['esc_before_after'] == tracker_escalations::BEFORE &&
 						!in_array($content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
-					{	
+					{
 						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
 						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
 						break;
@@ -729,7 +725,7 @@ class tracker_admin extends tracker_bo
 		{
 			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
 		}
-		$tpl = new etemplate('tracker.escalations');
+		$tpl = new etemplate_new('tracker.escalations');
 		if (count($content['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
