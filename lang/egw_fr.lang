@@ -254,6 +254,7 @@ notification message	tracker	fr	Message de notification
 notification settings	tracker	fr	Paramètres de notification
 notification signature	tracker	fr	Signature de notification
 number of row for a multiline inputfield or line of a multi-select-box	tracker	fr	Nombre de lignes pour un champ multiligne ou pour une boîte de sélection multiple.
+old fixed definition	tracker	fr	L'ancienne définition fixe
 one day after	tracker	fr	Un jour plus tard
 one day in advance	tracker	fr	Un jour plus tôt
 only for admins, technicians or assigned	tracker	fr	Seulement por les administrateurs, techniciens et assignés.
