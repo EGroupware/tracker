@@ -168,7 +168,7 @@ app.tracker = AppJS.extend(
 	},
 
 	/**
-	 * canned_comment_requst
+	 * canned_comment_request
 	 *
 	 */
 	canned_comment_requst: function()
@@ -177,8 +177,8 @@ app.tracker = AppJS.extend(
 		var id = this.et2.getWidgetById('canned_response').get_value();
 		if (id && editor)
 		{
-			var request = new egw_json_request('tracker.tracker_ui.ajax_canned_comment',[id,document.getElementById('tracker-edit_reply_message').style.display == 'none']);
-			request.sendRequest(true);
+			// Need to specify the popup's egw
+			this.et2.egw().json('tracker.tracker_ui.ajax_canned_comment',[id,document.getElementById('tracker-edit_reply_message').style.display == 'none']).sendRequest(true);
 		}
 	},
 	/**
