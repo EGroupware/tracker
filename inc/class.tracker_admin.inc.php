@@ -495,6 +495,7 @@ class tracker_admin extends tracker_bo
 			'default_tracker' => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
 			// TODO; enable the default_trackers onChange() to reload categories
 			'default_cat' => $this->get_tracker_labels('cat',$content['mailhandling']['default_tracker']),
+			'default_version' => $this->get_tracker_labels('version',$content['mailhandling']['default_tracker']),
 			'unrec_reply' => array(
 				0 => 'Creator',
 				1 => 'Nobody',

@@ -364,7 +364,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.003">
 		<grid>
 			<columns>
 				<column width="200"/>
@@ -410,18 +410,36 @@
 				<row class="row">
 					<description value="Delete mails from server"/>
 					<checkbox id="mailhandling[delete_from_server]"/>
-					<description value="Tracker for new tickets"/>
+					<description value="Tracker for new tickets" options="Reject"/>
 					<menulist>
 						<menupopup statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail." id="mailhandling[default_tracker]" options="Reject"/>
 					</menulist>
 				</row>
-				<row class="row" disabled="!@mailhandling[default_tracker]">
+				<row class="row">
 					<description/>
 					<description/>
-					<description value="Category for new tickets"/>
-					<menulist class="cat_select">
-						<menupopup id="mailhandling[default_cat]" options="select one"/>
-					</menulist>
+					<box cols="1" rows="1" span="2">
+						<grid>
+							<columns>
+								<column width="199"/>
+								<column/>
+							</columns>
+							<rows>
+								<row>
+									<description value="Category for new tickets"/>
+									<menulist class="cat_select">
+										<menupopup id="mailhandling[default_cat]" options="select one"/>
+									</menulist>
+								</row>
+								<row>
+									<description value="Version for new tickets"/>
+									<menulist class="cat_select">
+										<menupopup id="mailhandling[default_version]" options="select one"/>
+									</menulist>
+								</row>
+							</rows>
+						</grid>
+					</box>
 				</row>
 				<row class="row">
 					<description value="Unrecognized mails"/>

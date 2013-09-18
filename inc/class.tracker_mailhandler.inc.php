@@ -1064,7 +1064,7 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['tr_summary'] = $this->mailSubject;
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
-//			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
+			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
 			$this->data['tr_description'] = ($mailHeaderInfo&&$header2desc?$mailHeaderInfo:'').$this->mailBody;
 			//if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
@@ -1321,7 +1321,7 @@ class tracker_mailhandler extends tracker_bo
 
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
-//			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
+			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
 			$this->data['tr_priority'] = 5;
 			if (!$senderIdentified && isset($this->mailSender))  $this->data['tr_creator'] = $this->user = $this->mailSender;
 			//error_log(__METHOD__.__LINE__.array2string($this->data));
