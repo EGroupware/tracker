@@ -6,8 +6,6 @@
 			<columns>
 				<column width="100"/>
 				<column/>
-				<column/>
-				<column width="30%"/>
 			</columns>
 			<rows>
 				<row class="row" valign="top">
@@ -156,7 +154,7 @@
 			</columns>
 			<rows>
 				<row height="20">
-					<description value="Category" for="cat_id"/>
+					<description for="cat_id" value="Category"/>
 					<menulist span="all">
 						<menupopup statustext="Changes made below will be lost, if not applied before!" id="cat_id" onchange="1" options="All"/>
 					</menulist>
@@ -185,8 +183,8 @@
 			<rows>
 				<row class="row">
 					<description value="Staff"/>
-					<description value="Users" for="users"/>
-					<description value="Technicians" for="technicians"/>
+					<description for="users" value="Users"/>
+					<description for="technicians" value="Technicians"/>
 					<description value="Tracker admins"/>
 				</row>
 				<row class="row" valign="top">
@@ -211,37 +209,37 @@
 					<description value="Configuration for all trackers" span="all"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description value="Assigning groups" for="allow_assing_groups"/>
+					<description for="allow_assing_groups" value="Assigning groups"/>
 					<menulist>
 						<menupopup statustext="Allow to assign groups to tracker items" id="allow_assign_groups" no_lang="1"/>
 					</menulist>
-					<description value="Allow voting" for="allow_voting"/>
+					<description for="allow_voting" value="Allow voting"/>
 					<menulist>
 						<menupopup statustext="Allow voting on tracker items, show and sort after the votes" id="allow_voting"/>
 					</menulist>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description value="Allow bounties" for="allow_bounties"/>
+					<description for="allow_bounties" value="Allow bounties"/>
 					<menulist>
 						<menupopup id="allow_bounties"/>
 					</menulist>
-					<description value="Currency" for="currency"/>
+					<description for="currency" value="Currency"/>
 					<textbox id="currency"/>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description value="Overdue after" for="overdue_days"/>
+					<description for="overdue_days" value="Overdue after"/>
 					<menulist>
 						<menupopup type="select-number" statustext="After how many days a not replied item should be marked overdue?" id="overdue_days" options="Never,1,30"/>
 					</menulist>
-					<description value="Close pending" for="pending_close_days"/>
+					<description for="pending_close_days" value="Close pending"/>
 					<menulist>
 						<menupopup type="select-number" statustext="After how many days pending items should be closed automatic" id="pending_close_days" options="Never,1,30"/>
 					</menulist>
 				</row>
 				<row class="row" disabled="@tracker">
-					<description value="Html editing" for="htmledit"/>
+					<description for="htmledit" value="Html editing"/>
 					<checkbox statustext="Permit html editing in overview and comments" id="htmledit"/>
-					<description value="Activate users queue access control" for="enabled_queue_acl_access"/>
+					<description for="enabled_queue_acl_access" value="Activate users queue access control"/>
 					<checkbox statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="app.tracker.acl_queue_access()"/>
 				</row>
 				<row class="row" disabled="@tracker">
@@ -253,13 +251,13 @@
 					<description value="Restrict tracker items to staff and:" span="all"/>
 				</row>
 				<row class="row" disabled="!@tracker">
-					<description statustext="Restict tracker items to the creators primary group and the staff only" value="Group" for="restricted"/>
+					<description for="restricted" statustext="Restict tracker items to the creators primary group and the staff only" value="Group"/>
 					<checkbox statustext="Restict tracker items to the creators primary group and the staff only" id="restrictions[group]"/>
 					<description/>
 					<description/>
 				</row>
 				<row class="row" disabled="!@tracker">
-					<description statustext="Restict tracker items to the creators primary group and the staff only" value="Creator" for="restricted"/>
+					<description for="restricted" statustext="Restict tracker items to the creators primary group and the staff only" value="Creator"/>
 					<checkbox statustext="Restict tracker items to the creator and the staff only" id="restrictions[creator]"/>
 					<description/>
 					<description/>
@@ -269,11 +267,11 @@
 				</row>
 				<row class="row" disabled="@tracker">
 					<checkbox statustext="tracker entry can only seen by creator and admins" id="create_new_as_private"/>
-					<description value="create new tracker entry's as default &quot;private&quot; for approval process" for="create_new_as_private" span="3"/>
+					<description for="create_new_as_private" value="create new tracker entry's as default &quot;private&quot; for approval process" span="3"/>
 				</row>
 				<row class="row" disabled="@tracker">
 					<checkbox statustext="Staff  &quot;Users&quot; will be allowed for assignment to tracker tickets" id="allow_assign_users"/>
-					<description value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" for="allow_assign_users" span="3"/>
+					<description for="allow_assign_users" value="allow to assign to a ticket not only &quot;Tracker Admins&quot; and &quot;Technians&quot;, but also &quot;Users&quot; in the staff tab" span="3"/>
 				</row>
 				<row class="row" disabled="@tracker">
 					<checkbox id="show_dates"/>
@@ -293,15 +291,15 @@
 					<description value="E-Mail notifications" span="all"/>
 				</row>
 				<row class="row">
-					<description value="Sender address" for="notification_sender"/>
+					<description for="notification_sender" value="Sender address"/>
 					<textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]" size="30"/>
-					<description value="URL of the tracker" for="notification_link"/>
+					<description for="notification_link" value="URL of the tracker"/>
 					<textbox statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]" size="30"/>
 				</row>
 				<row class="row">
 					<description value="Copy to"/>
 					<textbox statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]" size="30"/>
-					<description value="Language" no_lang="1" for="notification_lang"/>
+					<description for="notification_lang" value="Language" no_lang="1"/>
 					<menulist>
 						<menupopup statustext="Language for the copy" id="notification[lang]" no_lang="1"/>
 					</menulist>
@@ -364,7 +362,7 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.003">
 		<grid>
 			<columns>
 				<column width="200"/>
@@ -403,9 +401,6 @@
 				</row>
 				<row class="th">
 					<description value="Incoming mail rules" span="all"/>
-					<description/>
-					<description/>
-					<description/>
 				</row>
 				<row class="row">
 					<description value="Delete mails from server"/>
@@ -415,13 +410,31 @@
 						<menupopup statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail." id="mailhandling[default_tracker]" options="Reject"/>
 					</menulist>
 				</row>
-				<row class="row" disabled="!@mailhandling[default_tracker]">
+				<row class="row">
 					<description/>
 					<description/>
-					<description value="Category for new tickets"/>
-					<menulist class="cat_select">
-						<menupopup id="mailhandling[default_cat]" options="select one"/>
-					</menulist>
+					<box span="2">
+						<grid>
+							<columns>
+								<column width="199"/>
+								<column/>
+							</columns>
+							<rows>
+								<row>
+									<description value="Category for new tickets"/>
+									<menulist>
+										<menupopup class="cat_select" id="mailhandling[default_cat]" options="select one"/>
+									</menulist>
+								</row>
+								<row>
+									<description value="Version for new tickets"/>
+									<menulist>
+										<menupopup class="cat_select" id="mailhandling[default_version]" options="select one"/>
+									</menulist>
+								</row>
+							</rows>
+						</grid>
+					</box>
 				</row>
 				<row class="row">
 					<description value="Unrecognized mails"/>
@@ -497,8 +510,6 @@
 						<radio statustext="Process the message normally. *NOTE* This might cause mailloops when &quot;Sent autoreplies&quot; below is enabled!" label="Process" id="mailhandling[autoreplies]" options="process"/>
 						<description value="(Beware of mailloops, check the help!)" span="all"/>
 					</hbox>
-					<description/>
-					<description/>
 				</row>
 				<row class="row">
 					<description value="Sent autoreplies"/>
@@ -533,17 +544,17 @@
 					<checkbox label="Use custom notification message" id="use_custom"/>
 				</row>
 				<row>
-					<htmlarea id="message" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
+					<htmlarea height="200" mode="advanced" id="message" span="all" toolbar="false" width="100%"/>
 				</row>
 				<row>
-					<description href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" extra_link_target="_blank" span="all"/>
+					<description extra_link_target="_blank" href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" span="all"/>
 				</row>
 				<row>
 					<description value="Signature"/>
 					<checkbox label="Use custom signature" id="use_signature"/>
 				</row>
 				<row>
-					<htmlarea id="signature" mode="advanced" height="200" width="100%" toolbar="false" span="all"/>
+					<htmlarea height="200" mode="advanced" id="signature" span="all" toolbar="false" width="100%"/>
 				</row>
 			</rows>
 		</grid>
@@ -563,6 +574,10 @@
 				<column/>
 				<column/>
 				<column/>
+				<column/>
+				<column/>
+				<column/>
+				<column/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
@@ -571,9 +586,13 @@
 					<description/>
 					<description/>
 					<description/>
+					<description/>
+					<description/>
+					<description/>
+					<description/>
 				</row>
 				<row>
-					<description disabled="true" value="tracker" for="tracker" class="bold"/>
+					<description disabled="true" for="tracker" value="tracker" class="bold"/>
 					<menulist>
 						<menupopup class="bold" label="Tracker Queue" id="tracker" no_lang="1" onchange="1" options="All"/>
 					</menulist>
@@ -584,7 +603,7 @@
 					</hbox>
 				</row>
 				<row>
-					<tabbox id="tabs" span="all">
+					<tabbox id="tracker.admin.cats|tracker.admin.priorities|tracker.admin.staff|tracker.admin.config|tracker.admin.acl|tracker.admin.mail|tracker.admin.notifications" span="all">
 						<tabs>
 							<tab id="tracker.admin.cats" label="Categories" statustext="Categories, versions, canned responses"/>
 							<tab id="tracker.admin.priorities" label="Priorities" statustext="Custom tracker priorities"/>
