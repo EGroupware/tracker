@@ -668,7 +668,7 @@ class tracker_ui extends tracker_bo
 		$content['no_links'] = $readonlys['link_to'];
 		$content['bounties']['no_set_bounties'] = $readonlys['bounty'];
 
-		$what = $tracker ? $this->trackers[$tracker] : lang('Tracker');
+		$what = ($tracker && isset($this->trackers[$tracker]) ? $this->trackers[$tracker] : lang('Tracker'));
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
 		$tpl = new etemplate_new('tracker.edit');

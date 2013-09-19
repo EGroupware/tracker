@@ -1958,7 +1958,8 @@ class tracker_bo extends tracker_so
 				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['id']);
+					$gg = egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['contact_id']);
+					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.$contact['contact_id']);
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
 					{
