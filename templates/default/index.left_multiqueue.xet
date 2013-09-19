@@ -14,7 +14,7 @@
 					</hbox>
 				</row>
 				<row>
-					<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" onchange="1" rows="3" options=",,,,,,true" class="tracker_queue"/>
+					<listbox cols="1" id="col_filter[tr_tracker]" no_lang="1" rows="3" options=",,,,,,true" class="tracker_queue"/>
 				</row>
 			</rows>
 		</grid>
