@@ -1255,6 +1255,8 @@ class tracker_ui extends tracker_bo
 		// Turn on multi-queue widget
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
+		$content['nm']['favorites'] = true; // Enable favorites
+		
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
