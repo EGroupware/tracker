@@ -683,6 +683,12 @@ class tracker_ui extends tracker_bo
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
 		$tpl = new etemplate('tracker.edit');
+		// use a type-specific template (tracker.edit.xyz), if one exists, otherwise fall back to the generic one
+		if (!$tpl->read('tracker.edit.'.trim($this->trackers[$tracker])))
+		{
+			$tpl->read('tracker.edit');
+		}
+
 		if ($this->tracker_has_cat_specific_priorities($tracker))
 		{
 			$tpl->set_cell_attribute('cat_id','onchange',true);
