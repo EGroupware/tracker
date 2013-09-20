@@ -34,6 +34,7 @@ $setup_info['tracker']['hooks']['settings'] = 'tracker_hooks::settings';
 $setup_info['tracker']['hooks']['admin'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['search_link'] = 'tracker_hooks::search_link';
+$setup_info['infolog']['hooks']['deleteaccount'] = 'tracker.tracker_so.change_delete_owner';
 $setup_info['tracker']['hooks'][] = 'home';
 $setup_info['tracker']['hooks']['timesheet_set'] = 'tracker.tracker_ui.timesheet_set';
 $setup_info['tracker']['hooks']['infolog_set'] = 'tracker.tracker_ui.infolog_set';

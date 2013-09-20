@@ -580,6 +580,47 @@ class tracker_so extends so_sql_cf
 	}
 
 	/**
+	 * changes or deletes entries with a spezified owner (for hook_delete_account)
+	 *
+	 * @param array $args hook arguments
+	 * @param int $args['account_id'] account to delete
+	 * @param int $args['new_owner']=0 new owner
+	 */
+	function change_delete_owner(array $args)  // new_owner=0 means delete
+	{
+		if (!(int) $args['new_owner'])
+		{
+			foreach($this->db->select(self::TRACKER_TABLE,'tr_id',array('tr_creator'=>$args['account_id']),__LINE__,__FILE__,false,'','tracker') as $row)
+			{
+				$this->delete($row['tr_id'],False);
+			}
+		}
+		else
+		{
+			$this->db->update(self::TRACKER_TABLE,array('tr_creator'=>$args['new_owner']),array('tr_creator'=>$args['account_id']),__LINE__,__FILE__,'tracker');
+			$this->db->update(self::TRACKER_TABLE,array('tr_modifier'=>$args['new_owner']),array('tr_modifier'=>$args['account_id']),__LINE__,__FILE__,'tracker');
+			$toDelete = array();
+			$toUpdate = array();
+			foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_id,tr_assigned',array('tr_assigned'=>$args['account_id']),__LINE__,__FILE__,false,'','tracker') as $row)
+			{
+				//error_log(__METHOD__.__LINE__.array2string($row));
+				$toUpdate[$row['tr_id']] = $row['tr_assigned'];
+			}
+			foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_id,tr_assigned',array('tr_assigned'=>$args['new_owner']),__LINE__,__FILE__,false,'','tracker') as $row)
+			{
+				//error_log(__METHOD__.__LINE__.array2string($row));
+				if (isset($toUpdate[$row['tr_id']]))
+				{
+					$toDelete[$row['tr_id']] = $toUpdate[$row['tr_id']];
+					unset($toUpdate[$row['tr_id']]);
+				}
+			}
+			foreach ($toDelete as $trid => $who) $this->db->delete(self::ASSIGNEE_TABLE,array('tr_id'=>$trid,'tr_assigned'=>$who),__LINE__,__FILE__,'tracker');
+			foreach ($toUpdate as $trid => $who) $this->db->update(self::ASSIGNEE_TABLE,array('tr_assigned'=>$args['new_owner']),array('tr_id'=>$trid,'tr_assigned'=>$args['account_id']),__LINE__,__FILE__,'tracker');
+		}
+	}
+
+	/**
 	 * Check if users is allowed to vote - has not already voted
 	 *
 	 * @param int $tr_id tracker-id
