@@ -163,7 +163,7 @@
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<html align="center" id="msg" no_lang="1" readonly="true" span="all" class="redItalic"/>
+					<html align="center" id="msg" no_lang="1" readonly="true" span="all" class="message"/>
 					<description/>
 					<description/>
 					<description/>

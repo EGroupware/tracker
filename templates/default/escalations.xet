@@ -87,7 +87,7 @@
 					<hrule span="all"/>
 				</row>
 				<row>
-					<description id="msg" span="all" class="redItalic"/>
+					<description id="msg" span="all" class="message"/>
 					<description/>
 					<description/>
 					<description/>
