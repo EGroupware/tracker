@@ -59,13 +59,13 @@
 					</vbox>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"/>
 					<vbox options="0,0">
-						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="status_filter"/>
+						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="tracker_status_filter"/>
 					</vbox>
-					<nextmatch-filterheader label="Resolution" id="tr_resolution" options="All" class="status_filter"/>
+					<nextmatch-filterheader label="Resolution" id="tr_resolution" options="All" class="tracker_status_filter"/>
 					<nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
 					<vbox options="0,0">
-						<nextmatch-accountfilter id="tr_creator" options="Created by" class="user_filter"/>
-						<nextmatch-filterheader id="tr_assigned" no_lang="1" options="Assigned to" class="user_filter"/>
+						<nextmatch-accountfilter id="tr_creator" options="Created by" class="tracker_user_filter"/>
+						<nextmatch-filterheader id="tr_assigned" no_lang="1" options="Assigned to" class="tracker_user_filter"/>
 					</vbox>
 					<nextmatch-header align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"/>
 					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes"/>
@@ -112,7 +112,7 @@
 						<date-time id="${row}[tr_startdate]" readonly="true" class="noWrap"/>
 						<date-time id="${row}[tr_duedate]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					</vbox>
-					<description align="center" id="${row}[prio_label]" class="indexPrio"/>
+					<description align="center" id="${row}[prio_label]" class="tracker_indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
 					</menulist>
@@ -124,13 +124,13 @@
 						<hbox readonly="true" options="0,0">
 							<image label="Created by" src="move2" readonly="true"/>
 							<menulist>
-								<menupopup type="select-account" class="leftPad5" id="${row}[tr_creator]" readonly="true"/>
+								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"/>
 							</menulist>
 						</hbox>
 						<hbox readonly="true" options="0,0">
 							<image label="Assigned to" src="groupevent" readonly="true"/>
 							<menulist>
-								<menupopup type="select-account" class="leftPad5" id="${row}[tr_assigned]" readonly="true"/>
+								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"/>
 							</menulist>
 						</hbox>
 					</vbox>
@@ -144,8 +144,8 @@
 						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.timesheet_ui.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
 						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
 						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
-						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="image16"/>
-						<image label="Filemanager" src="filemanager/navbar" href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="image16"/>
+						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="tracker_image16"/>
+						<image label="Filemanager" src="filemanager/navbar" href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="tracker_image16"/>
 						<checkbox align="right" id="checked[]" options="$row_cont[tr_id]"/>
 					</hbox>
 				</row>
@@ -220,7 +220,7 @@
 											<menupopup statustext="@status_help" id="tr_resolution" options="No change"/>
 										</menulist>
 										<menulist>
-											<menupopup type="select-percent" class="leftPad5" id="tr_completion" options="No change"/>
+											<menupopup type="select-percent" class="tracker_leftPad5" id="tr_completion" options="No change"/>
 										</menulist>
 									</hbox>
 								</row>
@@ -265,7 +265,7 @@
 								<description value="Select users or groups"/>
 								<hbox options="0,0">
 									<menulist>
-										<menupopup class="user_select" id="assigned" no_lang="1" options="Select one..."/>
+										<menupopup class="tracker_user_select" id="assigned" no_lang="1" options="Select one..."/>
 									</menulist>
 									<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('assigned'))) { selectbox.size=5; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
 								</hbox>

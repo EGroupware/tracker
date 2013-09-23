@@ -105,7 +105,7 @@
 							<menupopup id="esc_before_after"/>
 						</menulist>
 						<menulist>
-							<menupopup class="leftPad5" id="esc_type"/>
+							<menupopup class="tracker_leftPad5" id="esc_type"/>
 						</menulist>
 					</hbox>
 					<description/>
@@ -225,8 +225,8 @@
 										<menulist>
 											<menupopup id="tr_assigned" options="Unchanged"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.apply(this,typeof widget == 'undefined' ? [form::name('tr_assigned')]: ['tr_assigned',widget]);" options="users" class="leftPad5"/>
-										<checkbox label="add additionally" id="add_assigned" class="leftPad5"/>
+										<buttononly label="Select multiple" onclick="return expand_filter.apply(this,typeof widget == 'undefined' ? [form::name('tr_assigned')]: ['tr_assigned',widget]);" options="users" class="tracker_leftPad5"/>
+										<checkbox label="add additionally" id="add_assigned" class="tracker_leftPad5"/>
 									</hbox>
 								</row>
 								<row valign="top">

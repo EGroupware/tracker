@@ -160,12 +160,12 @@
 					</menulist>
 				</row>
 				<row class="th" height="20">
-					<description value="Value" class="leftPad5"/>
+					<description value="Value" class="tracker_leftPad5"/>
 					<description value="Label"/>
 					<description align="right" value="Priorities with empty label are not available to the user"/>
 				</row>
 				<row class="row">
-					<description id="${row}[value]" readonly="true" class="leftPad5"/>
+					<description id="${row}[value]" readonly="true" class="tracker_leftPad5"/>
 					<textbox id="${row}[label]" size="80"/>
 					<description id="${row}[label]"/>
 				</row>
@@ -423,13 +423,13 @@
 								<row>
 									<description value="Category for new tickets"/>
 									<menulist>
-										<menupopup class="cat_select" id="mailhandling[default_cat]" options="select one"/>
+										<menupopup class="tracker_cat_select" id="mailhandling[default_cat]" options="select one"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Version for new tickets"/>
 									<menulist>
-										<menupopup class="cat_select" id="mailhandling[default_version]" options="select one"/>
+										<menupopup class="tracker_cat_select" id="mailhandling[default_version]" options="select one"/>
 									</menulist>
 								</row>
 							</rows>

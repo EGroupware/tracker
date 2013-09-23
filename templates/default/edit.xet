@@ -170,11 +170,11 @@
 				</row>
 				<row class="th" height="28">
 					<description for="tr_tracker" value="Tracker Queue"/>
-					<hbox onchange="1" options="0,0" class="user_filter">
+					<hbox onchange="1" options="0,0" class="tracker_user_filter">
 						<menulist>
 							<menupopup class="width100" id="tr_tracker" no_lang="1" onchange="1"/>
 						</menulist>
-						<textbox type="integer" id="tr_id" readonly="true" class="trIdEdit"/>
+						<textbox type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
 					</hbox>
 					<description for="tr_private" value="Private"/>
 					<checkbox id="tr_private"/>
@@ -182,18 +182,18 @@
 				<row class="row">
 					<description for="cat_id" value="Category"/>
 					<menulist>
-						<menupopup class="cat_select" id="cat_id" needed="1" no_lang="1" options="Select one"/>
+						<menupopup class="tracker_cat_select" id="cat_id" needed="1" no_lang="1" options="Select one"/>
 					</menulist>
 					<description for="tr_version" value="Version"/>
 					<menulist>
-						<menupopup class="user_select" id="tr_version" needed="1" no_lang="1" options="Select one"/>
+						<menupopup class="tracker_user_select" id="tr_version" needed="1" no_lang="1" options="Select one"/>
 					</menulist>
 				</row>
 				<row class="row">
 					<description for="tr_assigned" value="Assigned to"/>
 					<hbox options="0,0">
 						<menulist>
-							<menupopup class="user_select" id="tr_assigned" no_lang="1" options="Not assigned"/>
+							<menupopup class="tracker_user_select" id="tr_assigned" no_lang="1" options="Not assigned"/>
 						</menulist>
 						<buttononly align="right" label="Select multiple" onclick="return app.tracker.expand_filter.call(this, form::name('tr_assigned'),typeof widget == 'undefined' ? null:widget);" options="users"/>
 					</hbox>
@@ -211,7 +211,7 @@
 						</columns>
 						<rows>
 							<row>
-								<textbox id="tr_cc" maxlength="254" class="inputFullWidth"/>
+								<textbox id="tr_cc" maxlength="254" class="tracker_inputFullWidth"/>
 								<buttononly label="Add from Addressbook" onclick="return app.tracker.add_email_from_ab(form::name('ab[id]'),form::name('tr_cc'));" options="users"/>
 							</row>
 							<row class="hiddenRow">
@@ -226,7 +226,7 @@
 				</row>
 				<row class="row">
 					<description for="tr_summary" value="Summary"/>
-					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="inputFullWidth" tabindex="1"/>
+					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="tracker_inputFullWidth" tabindex="1"/>
 				</row>
 				<row valign="top">
 					<tabbox id="tabs" span="all">
@@ -270,7 +270,7 @@
 							<menupopup id="tr_resolution"/>
 						</menulist>
 						<menulist>
-							<menupopup type="select-percent" class="leftPad5" id="tr_completion"/>
+							<menupopup type="select-percent" class="tracker_leftPad5" id="tr_completion"/>
 						</menulist>
 					</hbox>
 				</row>

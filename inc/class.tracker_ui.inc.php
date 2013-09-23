@@ -793,11 +793,11 @@ class tracker_ui extends tracker_bo
 			// Check if this is a new (unseen) ticket for the current user
 			if (self::seen($row, false))
 			{
-				$rows[$n]['seen_class'] = 'seen';
+				$rows[$n]['seen_class'] = 'tracker_seen';
 			}
 			else
 			{
-				$rows[$n]['seen_class'] = 'unseen';
+				$rows[$n]['seen_class'] = 'tracker_unseen';
 			}
 
 			$trackers[] = $row['tr_tracker'];
