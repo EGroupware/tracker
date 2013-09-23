@@ -816,7 +816,7 @@ class tracker_ui extends tracker_bo
 				$rows[$n]['prio_label'] = $prio_labels[$row['tr_priority']];
 			}
 			if (isset($rows[$n]['tr_description'])) $rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
-			if ($row['overdue']) $rows[$n]['overdue_class'] = 'overdue';
+			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 			// in case there is no pref setting for show_sum_timesheet anymore, check for selected column tr_sum_timesheets
 			if ((!$this->prefs['show_sum_timesheet'] || !isset($this->prefs['show_sum_timesheet'])) && (stripos($query_in['selectcols'],'tr_sum_timesheets')!==false) ) $this->prefs['show_sum_timesheet']=1;
@@ -1256,7 +1256,7 @@ class tracker_ui extends tracker_bo
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		$content['nm']['favorites'] = true; // Enable favorites
-		
+
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
@@ -1331,12 +1331,6 @@ width:100%;
 				'group' => $group,
 				'url' => 'menuaction=tracker.tracker_ui.edit',
 				'popup' => egw_link::get_registry('tracker', 'add_popup'),
-			),
-			'select_all' => array(
-				'caption' => 'Whole query',
-				'checkbox' => true,
-				'hint' => 'Apply the action on the whole query, NOT only the shown entries',
-				'group' => ++$group,
 			),
 			'no_notifications' => array(
 				'caption' => 'Do not notify',
