@@ -813,7 +813,7 @@ class tracker_ui extends tracker_bo
 		if ($query['col_filter']['multi_queue']) unset($query['col_filter']['multi_queue']);
 
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
-	_debug_array($query['col_filter']);
+
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		foreach($rows as $n => $row)
 		{
