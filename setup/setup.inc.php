@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-13 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -29,7 +29,6 @@ $setup_info['tracker']['description'] =
 $setup_info['tracker']['note'] = '';
 
 /* The hooks this app includes, needed for hooks registration */
-$setup_info['tracker']['hooks']['preferences'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['settings'] = 'tracker_hooks::settings';
 $setup_info['tracker']['hooks']['admin'] = 'tracker_hooks::all_hooks';
 $setup_info['tracker']['hooks']['sidebox_menu'] = 'tracker_hooks::all_hooks';

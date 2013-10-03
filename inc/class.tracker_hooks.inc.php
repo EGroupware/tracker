@@ -81,22 +81,7 @@ class tracker_hooks
 			display_sidebox($appname,$GLOBALS['egw_info']['apps'][$appname]['title'].' '.lang('Menu'),$file);
 		}
 
-		if ($GLOBALS['egw_info']['user']['apps']['preferences'] && $location != 'admin')
-		{
-			$file = array(
-				'Preferences'     => egw::link('/index.php','menuaction=preferences.uisettings.index&appname='.$appname,'preferences'),
-			);
-			if ($location == 'preferences')
-			{
-				display_section($appname,$file);
-			}
-			else
-			{
-				display_sidebox($appname,lang('Preferences'),$file);
-			}
-		}
-
-		if ($GLOBALS['egw_info']['user']['apps']['admin'] && $location != 'preferences')
+		if ($GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$file = Array(
 				'Site configuration' => egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
