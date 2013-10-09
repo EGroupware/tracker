@@ -95,7 +95,7 @@
 				</row>
 				<row>
 					<description value="Title"/>
-					<textbox id="esc_title" size="80" maxlength="128" span="all"/>
+					<textbox id="esc_title" size="80" maxlength="128" span="all" />
 				</row>
 				<row>
 					<description value="Time"/>
@@ -135,14 +135,14 @@
 										<menulist>
 											<menupopup id="tr_tracker" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_tracker'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Resolution"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_resolution" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_resolution'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -151,14 +151,14 @@
 										<menulist>
 											<menupopup id="cat_id" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('cat_id'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Version"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_version" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_version'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
@@ -167,14 +167,14 @@
 										<menulist>
 											<menupopup id="tr_status" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_status'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
 									<hbox options="0,0">
 										<menulist>
 											<menupopup id="tr_priority" options="All"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.call(this, form::name('tr_priority'),typeof widget == 'undefined' ? null:widget);" options="navbar" class="mStatus"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 							</rows>
@@ -225,7 +225,7 @@
 										<menulist>
 											<menupopup id="tr_assigned" options="Unchanged"/>
 										</menulist>
-										<buttononly label="Select multiple" onclick="return expand_filter.apply(this,typeof widget == 'undefined' ? [form::name('tr_assigned')]: ['tr_assigned',widget]);" options="users" class="tracker_leftPad5"/>
+										<buttononly label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null)" options="users" class="tracker_leftPad5"/>
 										<checkbox label="add additionally" id="add_assigned" class="tracker_leftPad5"/>
 									</hbox>
 								</row>

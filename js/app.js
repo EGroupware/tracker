@@ -106,14 +106,15 @@ app.tracker = AppJS.extend(
 	 * @param  filter
 	 * @param  widget
 	 */
-	expand_filter: function(filter,widget)
+	expand_filter: function(widget)
 	{
-		$j(this).hide();
-		var selectbox=document.getElementById(filter)
-		if ($j('[id="'+filter+'"]').length != 1 && typeof widget != "undefined" && widget != null)
+		$j(widget.node).hide();
+		var filterId = widget._parent._children[0]._children[0].dom_id;
+		var selectbox = document.getElementById(filterId);
+		if ($j('[id="'+filterId+'"]').length != 1 && typeof widget != "undefined" && widget != null)
 		{
-			selectbox = widget.getParent().getWidgetById(filter).getInputNode();
-			widget.getParent().getWidgetById(filter).set_tags(true);
+			selectbox = widget.getParent().getWidgetById(filterId.split(filterId.match("tracker-(?:escalations|edit)_"))[1]).getInputNode();
+			widget.getParent().getWidgetById(filterId.split(filterId.match("tracker-(?:escalations|edit)_"))[1]).set_tags(true);
 		}
 		else if (selectbox)
 		{
