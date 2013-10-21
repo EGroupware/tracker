@@ -772,7 +772,7 @@ class tracker_ui extends tracker_bo
 		{
 			$trtofilter = array_keys($this->trackers);
 			//_debug_array($trtofilter);
-			$query['col_filter']['tr_tracker'] = $trtofilter;
+			$query['col_filter']['tr_tracker'] = $tracker = $trtofilter;
 		}
 
 		// Get list of currently displayed trackers, so we can get all valid statuses
