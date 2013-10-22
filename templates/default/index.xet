@@ -183,7 +183,7 @@
 				<row>
 					<box id="admin_popup" class="action_popup prompt">
 						<description value="Multiple changes" span="all" class="promptheader"/>
-						<grid width="500px" id="admin">
+						<grid width="500px" class="action_popup-content">
 							<columns>
 								<column/>
 								<column/>

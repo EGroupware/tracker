@@ -1098,9 +1098,9 @@ class tracker_ui extends tracker_bo
 				$content['nm']['action'] = 'document';
 				$content['nm']['selected'] = array($id);
 			}
-			if ($content['admin'] && $content['nm']['action'] == 'admin')
+			if ($content['admin_popup'] && $content['nm']['action'] == 'admin')
 			{
-				$content['nm']['action'] = $content['admin'];
+				$content['nm']['action'] = $content['admin_popup'];
 			}
 			// Clear multiple action popup
 			unset($content['admin']);
