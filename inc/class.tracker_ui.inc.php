@@ -209,7 +209,6 @@ class tracker_ui extends tracker_bo
 					unset($_GET['tr_id']);	// in case it's still set
 					return $this->index(null,$this->data['tr_tracker'],$msg);
 				}
-				break;
 			}
 			// on resticted trackers, check if the user has read access, OvE, 20071012
 			$restrict = false;
@@ -252,7 +251,6 @@ class tracker_ui extends tracker_bo
 					unset($_GET['tr_id']);	// in case it's still set
 					return $this->index(null,$this->data['tr_tracker'],$msg);
 				}
-				break;
 			}
 		}
 		else	// submitted form
