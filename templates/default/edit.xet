@@ -48,7 +48,7 @@
 				<row class="th" disabled="@no_canned">
 					<description value="Canned response" for="canned_response" class="3"/>
 					<menulist>
-						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst()" options="Select one"/>
+						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one"/>
 					</menulist>
 				</row>
 				<row disabled="@no_comment_visibility">
@@ -195,7 +195,7 @@
 						<menulist>
 							<menupopup class="tracker_user_select" id="tr_assigned" no_lang="1" options="Not assigned"/>
 						</menulist>
-						<buttononly align="right" label="Select multiple" onclick="return app.tracker.expand_filter.call(this, form::name('tr_assigned'),typeof widget == 'undefined' ? null:widget);" options="users"/>
+						<buttononly align="right" label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null);" options="users"/>
 					</hbox>
 					<description font_style="tr_priority" value="Priority"/>
 					<menulist>
@@ -211,11 +211,7 @@
 						</columns>
 						<rows>
 							<row>
-								<textbox id="tr_cc" maxlength="254" class="tracker_inputFullWidth"/>
-								<buttononly label="Add from Addressbook" onclick="return app.tracker.add_email_from_ab(form::name('ab[id]'),form::name('tr_cc'));" options="users"/>
-							</row>
-							<row class="hiddenRow">
-								<link-entry blur="Search" id="ab" options="addressbook-email" span="all"/>
+								<taglist-email id="tr_cc" width="100%" allowFreeEntries="true" />
 							</row>
 						</rows>
 					</grid>

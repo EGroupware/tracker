@@ -67,39 +67,6 @@ app.tracker = AppJS.extend(
 		}
 	},
 
-
-	/**
-	 * add_email_from_ab
-	 * egw:uses
-	 * /phpgwapi/js/jsapi/app_base;
-	 * @param ab_id
-	 * @param tr_cc
-	 */
-	add_email_from_ab: function(ab_id,tr_cc)
-	{
-		var ab = document.getElementById(ab_id);
-
-		if (!ab || !ab.value)
-		{
-			$j('tr.hiddenRow').css('display','table-row');
-		}
-		else
-		{
-			var cc = document.getElementById(tr_cc);
-
-			for(var i=0; i < ab.options.length && ab.options[i].value != ab.value; ++i) ;
-
-			if (i < ab.options.length)
-			{
-				cc.value += (cc.value?', ':'')+ab.options[i].text.replace(/^.* <(.*)>$/,'$1');
-				ab.value = '';
-				ab.onchange();
-				$j('tr.hiddenRow').css('display','none');
-			}
-		}
-		return false;
-	},
-
 	/**
 	 * expand_filter
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
