@@ -211,7 +211,7 @@
 						</columns>
 						<rows>
 							<row>
-								<taglist-email id="tr_cc" width="100%" allowFreeEntries="true" />
+								<taglist-email id="tr_cc" width="100%" allowFreeEntries="true" empty_label="Add email-address"/>
 							</row>
 						</rows>
 					</grid>
