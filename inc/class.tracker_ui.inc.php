@@ -121,8 +121,8 @@ class tracker_ui extends tracker_bo
 		}
 		else
 		{
-			$tr_description_options = 'ascii,230px,540px';
-			$tr_reply_options = 'ascii,205px,540px';
+			$tr_description_options = 'ascii,230px,99%';
+			$tr_reply_options = 'ascii,205px,99%';
 		}
 
 		//_debug_array($content);
