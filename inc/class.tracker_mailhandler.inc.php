@@ -161,7 +161,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		if ($this->mailhandling[$queue]['servertype']<=2)
 		{
-			$icServer = CreateObject('emailadmin.defaultimap');
+			$icServer = new emailadmin_oldimap();
 			$icServer->ImapServerId	= 'tracker_'.trim($queue);
 			$icServer->encryption	= ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
 			$icServer->host		= $this->mailhandling[$queue]['server'];
@@ -246,10 +246,33 @@ class tracker_mailhandler extends tracker_bo
 				{
 					if ($TestConnection==false)
 					{
-						error_log(__METHOD__.','.__LINE__." could not connect previously, and profile did not change");
-						error_log(__METHOD__.','.__LINE__." refused to open mailbox:".array2string($this->mailBox));
-						$this->mailhandling[$queue]['interval']=0;
+						error_log(__METHOD__.','.__LINE__." ".lang("eGroupWare Tracker Mailhandling: could not connect previously, and profile did not change"));
+						error_log(__METHOD__.','.__LINE__." ".lang("refused to open mailbox: %1",array2string($this->mailBox)));
+						$previousInterval = $this->mailhandling[$queue]['interval'];
+						$this->mailhandling[$queue]['interval']=$this->mailhandling[$queue]['interval']*2;
 						$this->save_config();
+						egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
+						if ($GLOBALS['egw_info']['server']['admin_mails'])
+						{
+							// notify admin(s) via email
+							$from    = 'eGroupWareTrackerMailHandling@'.$GLOBALS['egw_info']['server']['mail_suffix'];
+							$subject = lang("eGroupWare Tracker Mailhandling: could not connect previously, and profile did not change");
+							$body    = lang("refused to open mailbox therefore changed Interval from %1 to %2",$previousInterval,$this->mailhandling[$queue]['interval']);
+							$body    .= "\n";
+							$body    .= lang("Mailbox settings used: %1",array2string($this->mailBox));
+
+							$admin_mails = explode(',',$GLOBALS['egw_info']['server']['admin_mails']);
+							foreach($admin_mails as $to)
+							{
+								try {
+										$GLOBALS['egw']->send->msg('email',$to,$subject,$body,'','','',$from,$from);
+								}
+								catch(Exception $e) {
+									// ignore exception, but log it, to block the account and give a correct error-message to user
+									error_log(__METHOD__."('$to') ".$e->getMessage());
+								}
+							}
+						}
 						return false;
 					}
 				}
