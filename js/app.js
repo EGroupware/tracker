@@ -70,35 +70,17 @@ app.classes.tracker = AppJS.extend(
 	/**
 	 * expand_filter
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
-	 * @param  filter
-	 * @param  widget
+	 *
+	 * @param {object} _event
+	 * @param {et2_baseWidget} _widget
 	 */
-	expand_filter: function(widget)
+	multiple_assigned: function(_event, _widget)
 	{
-		$j(widget.node).hide();
-		var filterId = widget._parent._children[0]._children[0].dom_id;
-		var selectbox = document.getElementById(filterId);
-		if ($j('[id="'+filterId+'"]').length != 1 && typeof widget != "undefined" && widget != null)
-		{
-			selectbox = widget.getParent().getWidgetById(filterId.split(filterId.match("tracker-(?:escalations|edit)_"))[1]).getInputNode();
-			widget.getParent().getWidgetById(filterId.split(filterId.match("tracker-(?:escalations|edit)_"))[1]).set_tags(true);
-		}
-		else if (selectbox)
-		{
-			selectbox.name+='[]';
-		}
+		_widget.set_disabled(true);
 
-		if($j().chosen)
-		{
-			$j(selectbox).unchosen();
-		}
-		selectbox.size=3;
-		selectbox.multiple=true;
-		if(selectbox.options[0].value=='')
-		{
-			selectbox.options[0]=null;
-		}
-		if($j().chosen) $j(selectbox).chosen();
+		var selectbox = this.et2.getWidgetById('tr_assigned');
+		selectbox.set_multiple(true)
+		selectbox.set_tags(true, '98%');
 
 		return false;
 	},

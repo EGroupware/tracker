@@ -195,9 +195,9 @@
 						<menulist>
 							<menupopup class="tracker_user_select" id="tr_assigned" no_lang="1" options="Not assigned"/>
 						</menulist>
-						<buttononly align="right" label="Select multiple" onclick="app.tracker.expand_filter(widget? widget:null);" options="users"/>
+						<buttononly align="right" label="Select multiple" onclick="app.tracker.multiple_assigned" options="users"/>
 					</hbox>
-					<description font_style="tr_priority" value="Priority"/>
+					<description for="tr_priority" value="Priority"/>
 					<menulist>
 						<menupopup id="tr_priority"/>
 					</menulist>
