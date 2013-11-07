@@ -73,12 +73,15 @@ app.classes.tracker = AppJS.extend(
 	 *
 	 * @param {object} _event
 	 * @param {et2_baseWidget} _widget
+	 *
+	 * Note: It's important to consider the menupop widget needs to be always first child of
+	 * buttononly's parent, since we are getting the right selectbox by orders
 	 */
 	multiple_assigned: function(_event, _widget)
 	{
 		_widget.set_disabled(true);
 
-		var selectbox = this.et2.getWidgetById('tr_assigned');
+		var selectbox = _widget.getParent()._children[0]._children[0];
 		selectbox.set_multiple(true)
 		selectbox.set_tags(true, '98%');
 
