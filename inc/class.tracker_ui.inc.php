@@ -1116,14 +1116,24 @@ class tracker_ui extends tracker_bo
 					// Action has an additional action - add / delete, etc.  Buttons named <multi-action>_action[action_name]
 					if(in_array($multi_action, array('link', 'assigned','group')))
 					{
-						$content['nm']['action'] .= '_' . key($content[$multi_action . '_action']);
+						$action = $content[$multi_action.'_popup'];
+						$content['nm']['action'] .= '_' . key($action[$multi_action . '_action']);
 
-						if(is_array($content[$multi_action]))
+						// Action handling function wants a single string value, so mush it together
+						if(is_array($action[$multi_action]))
 						{
-							$content[$multi_action] = implode(',',$content[$multi_action]);
+							if($multi_action == 'link')
+							{
+								$action[$multi_action] = $action[$multi_action]['app'] . ':' . $action[$multi_action]['id'];
+							}
+							else
+							{
+								$action[$multi_action] = implode(',',$action[$multi_action]);
+							}
 						}
-						$content['nm']['action'] .= '_' . $content[$multi_action];
+						$content['nm']['action'] .= '_' . $action[$multi_action];
 						unset($content[$multi_action]);
+						unset($content[$multi_action.'_popup']);
 					}
 					if ($this->action($content['nm']['action'],$content['nm']['selected'],$content['nm']['select_all'],
 						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notifications']))
@@ -1832,6 +1842,7 @@ width:100%;
 						$msg = lang('You need to select an entry for linking.');
 						break;
 					}
+					error_log("APp: $app ID: $link_id");
 					$title = egw_link::title($app, $link_id);
 					foreach($checked as $id)
 					{
