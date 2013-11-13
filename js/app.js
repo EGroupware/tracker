@@ -152,7 +152,8 @@ app.classes.tracker = AppJS.extend(
 	acl_queue_access: function()
 	{
 
-		if(this.et2.getWidgetById('enabled_queue_acl_access').get_value() === 'false')
+		var queue_acl = this.et2.getWidgetById('enabled_queue_acl_access');
+		if(!queue_acl || queue_acl.get_value() === 'false')
 		{
 
 			this.et2.getWidgetById('users').disabled = true;
