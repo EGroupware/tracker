@@ -87,7 +87,7 @@ delete this category	tracker	pl	Usuń wskazaną kategorię
 delete this entry	tracker	pl	skasuj ten wpis
 delete this escalation	tracker	pl	Usuń tą eskalacje
 delete this status	tracker	pl	Usuń wskazany status
-delete this tracker including all it's items and categories	tracker	pl	Usuń kolejkę śledzenia wraz ze wszystkimi zgłoszeniami i kategoriami
+delete this tracker including all its items and categories	tracker	pl	Usuń kolejkę śledzenia wraz ze wszystkimi zgłoszeniami i kategoriami
 delete this version	tracker	pl	Usuń wskazaną wersję
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	pl	Usuń nierozpoznane maile z serwera, nawet jeśli ''
 deleted	tracker	pl	Usunięto

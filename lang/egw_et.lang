@@ -45,7 +45,7 @@ delete this canned response	tracker	et	Kustuta see eelsalvestatud vastus
 delete this category	tracker	et	Kustuta see kategooria
 delete this entry	tracker	et	Kustuta see kirje
 delete this status	tracker	et	Kustuta see staatus
-delete this tracker including all it's items and categories	tracker	et	Kustuta see jälgija koos tema asjade ja kategoorjatega
+delete this tracker including all its items and categories	tracker	et	Kustuta see jälgija koos tema asjade ja kategoorjatega
 delete this version	tracker	et	Kustuta see versioon
 deleted	tracker	et	Kustutatud
 deletes this field	tracker	et	kustutab selle välja

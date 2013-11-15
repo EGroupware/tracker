@@ -129,7 +129,7 @@ delete this category	tracker	de	Diese Kategorie löschen
 delete this entry	tracker	de	Diesen Eintrag löschen
 delete this escalation	tracker	de	Diese Eskalation löschen
 delete this status	tracker	de	Diesen Status löschen
-delete this tracker including all it's items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
+delete this tracker including all its items and categories	tracker	de	Dieses Verfolgungssystem einschließlich aller Einträge und Kategorien löschen
 delete this version	tracker	de	Diese Version löschen
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	de	Löscht nicht zuordenbare E-Mails vom Server, selbst wenn oben 'E-Mails löschen' nicht ausgewählt wurde.
 deleted	tracker	de	Gelöscht

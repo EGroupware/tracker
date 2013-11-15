@@ -106,7 +106,7 @@ delete this category	tracker	sk	Odstrániť túto kategóriu
 delete this entry	tracker	sk	Odstrániť túto položku
 delete this escalation	tracker	sk	Odstrániť toto stupňovanie
 delete this status	tracker	sk	Odstrániť tento stav
-delete this tracker including all it's items and categories	tracker	sk	Odstrániť tento sledovač vrátane všetkých záležitostí a kategórií
+delete this tracker including all its items and categories	tracker	sk	Odstrániť tento sledovač vrátane všetkých záležitostí a kategórií
 delete this version	tracker	sk	Odstrániť túto verziu
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	sk	Odstrániť nerozpoznané E-maily zo servera, aj v prípade, že nie je aktivovaná vyššieuvedená značka 'Odstrániť E-maily'.
 deleted	tracker	sk	Odstránené

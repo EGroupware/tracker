@@ -57,7 +57,7 @@ delete this canned response	tracker	sl	Izriši ta samodejni odgovor
 delete this category	tracker	sl	Izbriši to kategorijo
 delete this entry	tracker	sl	Izbriši ta vnos
 delete this status	tracker	sl	Izbriši ta status
-delete this tracker including all it's items and categories	tracker	sl	Izbriš ta tracker vključno z vsemi elementi in lategorijami
+delete this tracker including all its items and categories	tracker	sl	Izbriš ta tracker vključno z vsemi elementi in lategorijami
 delete this version	tracker	sl	Zbriši to različico
 deleted	tracker	sl	Zbrisano
 deletes this field	tracker	sl	Ibriše to polje

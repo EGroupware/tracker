@@ -126,7 +126,7 @@ delete this category	tracker	ru	Удалить эту категорию
 delete this entry	tracker	ru	Удалить эту запись
 delete this escalation	tracker	ru	Удалить эту эскалацию
 delete this status	tracker	ru	Удалить это состояние
-delete this tracker including all it's items and categories	tracker	ru	Удалить этот трекер включая все его записи и категории
+delete this tracker including all its items and categories	tracker	ru	Удалить этот трекер включая все его записи и категории
 delete this version	tracker	ru	Удалить эту версию
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	ru	Удаление нераспознанных писем с сервера в случае если "Удаление писем" выше отмечено.
 deleted	tracker	ru	Удалено

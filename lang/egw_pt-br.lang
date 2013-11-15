@@ -87,7 +87,7 @@ delete this category	tracker	pt-br	Remover esta categoria
 delete this entry	tracker	pt-br	Remover este registro
 delete this escalation	tracker	pt-br	Remover esta escala
 delete this status	tracker	pt-br	Remover este status
-delete this tracker including all it's items and categories	tracker	pt-br	Remover este tipo de ticket, incluindo todas suas categorias e tickets
+delete this tracker including all its items and categories	tracker	pt-br	Remover este tipo de ticket, incluindo todas suas categorias e tickets
 delete this version	tracker	pt-br	Remover esta versão
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	pt-br	Remover emails não reconhecidos do servidor, mesmo se 'Remover emails' acima não estiver definido.
 deleted	tracker	pt-br	Removido

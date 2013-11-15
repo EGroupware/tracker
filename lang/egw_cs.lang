@@ -89,7 +89,7 @@ delete this category	tracker	cs	Smazat tuto kategorii
 delete this entry	tracker	cs	Smazat tento záznam
 delete this escalation	tracker	cs	Smazat tuto eskalaci
 delete this status	tracker	cs	Smazat tento stav
-delete this tracker including all it's items and categories	tracker	cs	Smazat tento sledovací systém včetně všech položek a kategorií
+delete this tracker including all its items and categories	tracker	cs	Smazat tento sledovací systém včetně všech položek a kategorií
 delete this version	tracker	cs	Smazat tuto verzi
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	cs	Smazat ze serveru nerozpoznané e-maily i v případě, že není aktivní výše uvedená volba 'Smazat e-maily'.
 deleted	tracker	cs	Smazáno

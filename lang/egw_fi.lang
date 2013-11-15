@@ -126,7 +126,7 @@ delete this category	tracker	fi	Poista tämä kategoria
 delete this entry	tracker	fi	Poista tämä merkintä
 delete this escalation	tracker	fi	Poista tämä eskalaatio
 delete this status	tracker	fi	Poista tämä tila
-delete this tracker including all it's items and categories	tracker	fi	Poista tämä ketju kaikkine merkintöineen ja kategorioineen.
+delete this tracker including all its items and categories	tracker	fi	Poista tämä ketju kaikkine merkintöineen ja kategorioineen.
 delete this version	tracker	fi	Poista tämä versio
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	fi	Poista tunnistamattomat sähköpostit palvelimelta, vaikka 'Poista sähköpostit' merkintä ei ole valittuna.
 deleted	tracker	fi	Poistettu

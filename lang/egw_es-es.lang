@@ -94,7 +94,7 @@ delete this category	tracker	es-es	Borrar esta categoría
 delete this entry	tracker	es-es	Borrar esta entrada
 delete this escalation	tracker	es-es	Borrar este escalado
 delete this status	tracker	es-es	Borrar este estado
-delete this tracker including all it's items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
+delete this tracker including all its items and categories	tracker	es-es	Borrar este informe incluyendo todos sus elementos y categorías
 delete this version	tracker	es-es	Borrar esta versión
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	es-es	Borrar correos no reconocidos del servidor, incluso si 'Borrar correos' no está señalado.
 deleted	tracker	es-es	Borrado

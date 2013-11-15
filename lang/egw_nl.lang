@@ -89,7 +89,7 @@ delete this category	tracker	nl	Verwijder deze categorie
 delete this entry	tracker	nl	Verwijder deze invoer
 delete this escalation	tracker	nl	Verwijder deze escalatie
 delete this status	tracker	nl	Verwijder deze status
-delete this tracker including all it's items and categories	tracker	nl	Verwijder deze tracker inclusief alle meldingen en categorieën
+delete this tracker including all its items and categories	tracker	nl	Verwijder deze tracker inclusief alle meldingen en categorieën
 delete this version	tracker	nl	Verwijder deze versie
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	nl	Verwijder niet herkende mail van de server, zelfs als 'Verwijder mails' hierboven niet is aangevinkt
 deleted	tracker	nl	Verwijderd

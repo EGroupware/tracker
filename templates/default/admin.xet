@@ -630,7 +630,7 @@
 						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]"/>
 					</hbox>
-					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all it's items and categories');" span="all"/>
+					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all its items and categories');" span="all"/>
 				</row>
 			</rows>
 		</grid>

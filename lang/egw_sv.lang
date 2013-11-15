@@ -54,7 +54,7 @@ delete this bounty	tracker	sv	Radera belöningen
 delete this canned response	tracker	sv	Radera det sparade svaret
 delete this category	tracker	sv	Radera kategorin
 delete this entry	tracker	sv	Radera posten
-delete this tracker including all it's items and categories	tracker	sv	Radera Trackern inklusive alla ärenden och kategorier
+delete this tracker including all its items and categories	tracker	sv	Radera Trackern inklusive alla ärenden och kategorier
 delete this version	tracker	sv	Radera versionen
 deleted	tracker	sv	Raderat
 deletes this field	tracker	sv	Raderar detta fält

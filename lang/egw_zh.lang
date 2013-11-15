@@ -73,7 +73,7 @@ delete this canned response	tracker	zh	删除这个制式回应
 delete this category	tracker	zh	删除这个类别
 delete this entry	tracker	zh	删除这条条目
 delete this status	tracker	zh	删除这个状态
-delete this tracker including all it's items and categories	tracker	zh	删除这个任务跟踪，包含其中的所有项目与类别
+delete this tracker including all its items and categories	tracker	zh	删除这个任务跟踪，包含其中的所有项目与类别
 delete this version	tracker	zh	删除这个版本
 deleted	tracker	zh	已删除
 deletes this field	tracker	zh	删除此字段域

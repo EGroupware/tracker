@@ -128,7 +128,7 @@ delete this category	tracker	fr	Supprimer cette catégorie
 delete this entry	tracker	fr	Supprimer cette entrée
 delete this escalation	tracker	fr	Supprimer cette escalade
 delete this status	tracker	fr	Supprimer ce status
-delete this tracker including all it's items and categories	tracker	fr	Supprimer ce traqueur y-compris tous ses éléments et catégories
+delete this tracker including all its items and categories	tracker	fr	Supprimer ce traqueur y-compris tous ses éléments et catégories
 delete this version	tracker	fr	Supprimer cette version
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	fr	Supprimer les emails non reconnus du serveur, même si "Supprimer les emails" ci-dessus n'est pas coché.
 deleted	tracker	fr	Supprimé
