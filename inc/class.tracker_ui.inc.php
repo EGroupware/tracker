@@ -260,6 +260,7 @@ class tracker_ui extends tracker_bo
 			switch($button)
 			{
 				case 'save':
+					$this->data['tr_cc'] = implode(',',$this->data['tr_cc']);
 					if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 					{
 						$msg = lang('Permission denied !!!');
