@@ -140,6 +140,7 @@ app.classes.tracker = AppJS.extend(
 	 */
 	canned_comment_response: function(_replyMsg)
 	{
+		this.et2.getWidgetById('canned_response').set_value('');
 		var editor = this.et2.getWidgetById('reply_message');
 		if(editor)
 		{
