@@ -284,7 +284,7 @@
 									<menupopup type="select-account" class="action_popup-content" id="group" options=",groups"/>
 								</menulist>
 								<hbox>
-									<button label="Ok" onclick="nm_submit_popup(this); return false;"/>
+									<button label="Ok" id="group_set" onclick="nm_submit_popup(this); return false;"/>
 									<buttononly label="Cancel" onclick="nm_hide_popup(this,'group_popup');"/>
 								</hbox>
 							</vbox>
