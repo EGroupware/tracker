@@ -27,7 +27,7 @@
 								<menulist>
 									<menupopup id="${row}[autoassign]" no_lang="1" options="Noone"/>
 								</menulist>
-								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this category');" image="delete"/>
+								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this category','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -46,7 +46,7 @@
 							</row>
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
-								<button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this version');" image="delete"/>
+								<button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this version','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -68,7 +68,7 @@
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
 								<checkbox align="center" id="${row}[closed]"/>
-								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
+								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -93,7 +93,7 @@
 									<description id="${row}[name]" readonly="true"/>
 								</hbox>
 								<radio align="center" id="isdefaultresolution" options="$row_cont[id]"/>
-								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this status');" image="delete"/>
+								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -115,7 +115,7 @@
 							<row class="row" valign="top">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="30"/>
 								<textbox multiline="true" id="${row}[description]" rows="3" cols="50"/>
-								<button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this canned response');" image="delete"/>
+								<button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -137,7 +137,7 @@
 							<row class="row" valign="top">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="40" maxlength="40"/>
 								<projectmanager-select id="${row}[projectlist]" no_lang="1" options="--&gt; choose a project from the drop-down list"/>
-								<button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="return confirm('Delete this entry');" image="delete"/>
+								<button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this entry','Delete')" image="delete"/>
 							</row>
 						</rows>
 					</grid>
@@ -630,7 +630,7 @@
 						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]"/>
 					</hbox>
-					<button align="right" label="Delete" id="button[delete]" onclick="return confirm('Delete this tracker including all its items and categories');" span="all"/>
+					<button align="right" label="Delete" id="button[delete]" onclick="et2_dialog.confirm(widget,'Delete this tracker including all its items and categories','Delete')" span="all"/>
 				</row>
 			</rows>
 		</grid>

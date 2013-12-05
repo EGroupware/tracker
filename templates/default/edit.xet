@@ -126,7 +126,7 @@
 					<textbox type="float" id="new[bounty_amount]"/>
 					<textbox blur="@user_name" statustext="Donator name to show" id="new[bounty_name]" size="16" maxlength="64"/>
 					<textbox blur="@user_email" statustext="Email address to contact you" id="new[bounty_email]" size="24" maxlength="64"/>
-					<button statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="return confirm('Confirm that you pay the specified bounty to implement or fix the issue');" span="all"/>
+					<button statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="et2_dialog.confirm(widget,'Confirm that you pay the specified bounty to implement or fix the issue','Confirmation')" span="all"/>
 				</row>
 				<row class="th">
 					<description value="Datum"/>
@@ -146,8 +146,8 @@
 					<description id="${row}[bounty_email]" no_lang="1"/>
 					<hbox align="center" options="0,0">
 						<date-time id="${row}[bounty_confirmed]" readonly="true"/>
-						<button align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="return confirm('Confirm the receipt of money for this bounty');" image="edit"/>
-						<button align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="return confirm('Delete this bounty');" image="delete"/>
+						<button align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"/>
+						<button align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"/>
 					</hbox>
 				</row>
 			</rows>
@@ -279,7 +279,7 @@
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify of these changes" id="no_notifications"/>
 						<vbox align="right" options="0,0">
-							<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="return confirm('Do you want to vote for this item');"/>
+							<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');"/>
 							<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
 						</vbox>
 					</hbox>
