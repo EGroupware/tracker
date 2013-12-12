@@ -71,7 +71,7 @@ class tracker_hooks
 			display_sidebox($appname,lang('Favorites'),array(
 				array(
 					'no_lang' => true,
-					'text'=> etemplate_widget_nextmatch::favorite_list($appname,'tracker.tracker_ui.get_rows'),
+					'text'=> egw_framework::favorite_list($appname,'tracker.tracker_ui.get_rows'),
 					'link'=>false,
 					'icon' => false
 				)
