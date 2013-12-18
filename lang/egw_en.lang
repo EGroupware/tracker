@@ -23,10 +23,12 @@
 3 years ago	tracker	en	3 years ago
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
+[fwd]	tracker	en	[FWD]
 accepted	tracker	en	Accepted
 acl	tracker	en	Access Control List
 activate users queue access control	tracker	en	Activate users queue access control
 add / remove link	tracker	en	Add / Remove link
+add a ticket	tracker	en	Add a ticket
 add additionally	tracker	en	Add additionally
 add assigned	tracker	en	Add assigned
 add comment	tracker	en	Add comment
@@ -53,6 +55,7 @@ allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
 already escalated	tracker	en	Already escalated
 amount	tracker	en	Amount
+application mail expected but got: %1	tracker	en	Application mail expected but got: %1
 applies the changes	tracker	en	applies the changes
 assign to project	tracker	en	Assign to project
 assigned to	tracker	en	Assigned to
@@ -61,6 +64,8 @@ attachments & links	tracker	en	Attachments & Links
 attention: no contact with address %1 found.	tracker	en	Attention: No contact with address %1 found
 autoassign to	tracker	en	Auto assign to
 automatic email handling	tracker	en	Automatic email handling
+automatic mails (bounces) are configured to be forwarded	tracker	en	automatic mails (bounces) are configured to be forwarded
+automatic mails (replies) are configured to be forwarded	tracker	en	automatic mails (replies) are configured to be forwarded
 automatically created by importexport	tracker	en	Automatically created by importexport
 before	tracker	en	Before
 bounties	tracker	en	Bounties
@@ -102,6 +107,7 @@ convert all open tickets	tracker	en	Convert all open tickets
 converted count	tracker	en	Converted count
 copy to	tracker	en	Copy to
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	en	Copy your changes to the clipboard, %1reload the entry%2 and merge them.
+could not connect	tracker	en	could not connect
 create new links	tracker	en	Create new links
 create new tracker entry's as default "private" for approval process	tracker	en	Create new tracker entry as default 'private' for approval process
 created	tracker	en	Created
@@ -152,6 +158,7 @@ each value is a line like <id>[=<label>]	tracker	en	each value is a line like <i
 each value is a line like id[=label]	tracker	en	each value is a line like id[=label]
 edit %1	tracker	en	Edit %1
 edit entry	tracker	en	Edit entry
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	eGroupWare Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
 enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized mails should be forwarded
@@ -163,6 +170,7 @@ error adding the new tracker!	tracker	en	Error adding the new tracker!
 error deleting escalation!	tracker	en	Error deleting escalation!
 error renaming tracker queue!	tracker	en	Error re-naming tracker queue!
 error saving the entry!!!	tracker	en	Error saving the entry!!!
+error: no mail (mailbox / uid) given!	tracker	en	Error: no mail (Mailbox / UID) given!
 error: the entry has been updated since you opened it for editing!	tracker	en	Error: the entry has been updated since you opened it for editing!
 escalation	tracker	en	Escalation
 escalation added.	tracker	en	Escalation added.
@@ -182,6 +190,8 @@ export csv	tracker	en	Export CSV
 export definition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
 export definitition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
 exports a list of tracker tickets to a csv file.	tracker	en	Exports a list of tracker tickets to a CSV file.
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	en	failed to open mailbox: %1 -> disabled for automatic mailprocessing!
+favorites	tracker	en	Favorites
 field	tracker	en	Field
 fixed	tracker	en	Fixed
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	en	For serial letter use this tag. Place the content you want to repeat between two tags.
@@ -199,6 +209,7 @@ handling mailheader information	tracker	en	Handling Mailheader Information
 history	tracker	en	History
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	en	How many description lines should be directly visible. Further lines are available via a scroll bar.
 html editing	tracker	en	HTML editing
+html link to the current record	tracker	en	HTML link to the current record
 id	tracker	en	ID
 if a ticket has matched before, should the actions be taken again?	tracker	en	If a ticket has matched before, should the actions be taken again?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	en	If left unchecked, marks every existing, matching ticket as already escalated, without taking the action.
@@ -217,6 +228,7 @@ imports entries into the tracker from a csv file. csv means 'comma seperated val
 incoming mail folder	tracker	en	Incoming mail folder
 incoming mail rules	tracker	en	Incoming mail rules
 incoming mail server	tracker	en	Incoming mail server
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	en	incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1
 info only	tracker	en	Info only
 insert	tracker	en	Insert
 insert in document	tracker	en	Insert in document
@@ -250,6 +262,7 @@ links wrapped in an href tag with download link	tracker	en	Links wrapped in an H
 list of coma separated email address	tracker	en	List of comma separated email address
 list of files linked to the current record	tracker	en	List of files linked to the current record
 mail handling	tracker	en	Mail handling
+mailbox settings used: %1	tracker	en	Mailbox settings used: %1
 manage mapping	tracker	en	Manage mapping
 match again after	tracker	en	Match again after
 matching filter	tracker	en	Matching filter
@@ -314,6 +327,8 @@ receive notifications about due entries you created or are assigned to	tracker	e
 receive notifications about starting entries you created or are assigned to	tracker	en	Receive notifications about starting entries you created or are assigned to
 receive notifications in html	tracker	en	Receive notifications in HTML
 recieve notifications about own changes in tracker-items	tracker	en	Receive notifications about own changes in tracker-items
+refused to open mailbox therefore changed interval from %1 to %2	tracker	en	refused to open mailbox therefore changed Interval from %1 to %2
+refused to open mailbox: %1	tracker	en	refused to open mailbox: %1
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 replacements for inserting entries into documents	tracker	en	Replacements for inserting entries into documents
@@ -371,6 +386,8 @@ state	tracker	en	State
 stati	tracker	en	State
 status	tracker	en	Status
 store as	tracker	en	Store as
+success message	tracker	en	Success message
+sum	tracker	en	Sum
 summary	tracker	en	Summary
 tag to mark positions for address labels	tracker	en	Tag to mark positions for address labels
 technicians	tracker	en	Technicians
@@ -383,6 +400,7 @@ the following document-types are supported:	tracker	en	The following document-ty
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	en	the name used internaly (<= 20 chars), changeing it makes existing data unavailible
 the text displayed to the user	tracker	en	the text displayed to the user
 there already an escalation for that filter!	tracker	en	There already an escalation for that filter!
+this module allows to add a ticket.	tracker	en	This module allows to add a ticket.
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker
 this month	tracker	en	This month
 this quarter	tracker	en	This quarter

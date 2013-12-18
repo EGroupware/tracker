@@ -27,6 +27,7 @@ accepted	tracker	de	Akzeptiert
 acl	tracker	de	Bearbeitungsrechte
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungssystem-Queues aktivieren
 add / remove link	tracker	de	Link hinzufügen oder entfernen
+add a ticket	tracker	de	Ticket hinzufügen
 add additionally	tracker	de	Zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
@@ -102,6 +103,7 @@ convert all open tickets	tracker	de	konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
+could not connect	tracker	de	Konnte nicht verbinden
 create new links	tracker	de	Neue Verknüpfung anlegen
 create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Einträge im Verfolgungssystem als Privat zur Freigabe durch Administratoren.
 created	tracker	de	Erstellt
@@ -182,6 +184,7 @@ export csv	tracker	de	Export als CSV Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
+favorites	tracker	de	Favoriten
 field	tracker	de	Feld
 fixed	tracker	de	Gelöst
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	de	Wenn Sie Serienbriefe erzeugen möchten, dann benutzen Sie dieses 'Markierungszeichen'. Setzen Sie den Inhalt, der wiederholt werden soll (Anschriftstags und Briefinhalt) zwischen zwei 'Seiten-Wiederholungs-Zeichen'.
@@ -199,6 +202,7 @@ handling mailheader information	tracker	de	Handhabung von Mailheader Information
 history	tracker	de	Historie
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	de	Wie viele Zeilen der Beschreibung sollen direkt sichtbar sein. Zusätzliche Zeilen können über einen Scrollbalken erreicht werden.
 html editing	tracker	de	Formatierte Textbearbeitung
+html link to the current record	tracker	de	HTML-Link zum aktuellen Eintrag
 id	tracker	de	ID
 if a ticket has matched before, should the actions be taken again?	tracker	de	Soll diese Aktion nochmal angewendet werden, obwohl dieses Ticket schon mal für eine Abfrage angewendet wurde.
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	de	Wenn es nicht angewendet wurde, werden jetzt alle diese Tickets als eskaliert gekennzeichnet, ohne eine Aktion durchzuführen.
@@ -371,6 +375,8 @@ state	tracker	de	Status
 stati	tracker	de	Status
 status	tracker	de	Status
 store as	tracker	de	Speichern als
+success message	tracker	de	Erfolgsmeldung
+sum	tracker	de	Summe
 summary	tracker	de	Zusammenfassung
 tag to mark positions for address labels	tracker	de	Markiert die Position für den Adressen Eintrag.
 technicians	tracker	de	Techniker
@@ -383,6 +389,7 @@ the following document-types are supported:	tracker	de	folgende Dokument-Typen w
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	de	Interne Bezeichnung (<= 20 Zeichen), Achtung, eine Änderung führt zum Verlust bestehender Daten
 the text displayed to the user	tracker	de	Der angezeigte Text. der  für den Benutzer sichtbar ist
 there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalation für diesen Filter!
+this module allows to add a ticket.	tracker	de	Dieses Modul erlaubt ein Ticket hinzuzufügen.
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this month	tracker	de	Diesen Monat
 this quarter	tracker	de	Dieses Quartal
