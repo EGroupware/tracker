@@ -279,7 +279,7 @@ class tracker_mailhandler extends tracker_bo
 			$mailClass = 'felamimail_bo';
 			$mailobject	= $mailClass::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
-			
+
 			$connectionFailed = false;
 			// connect
 			$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
@@ -1205,7 +1205,7 @@ class tracker_mailhandler extends tracker_bo
 				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
 			return false;
 		}
-		$subject = felamimail_bo::adaptSubjectForImport($subject);	
+		$subject = felamimail_bo::adaptSubjectForImport($subject);
 		$tId = $this->get_ticketId($subject);
 		if ($tId)
 		{
@@ -1221,7 +1221,7 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
-		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection);
+		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection,(!($GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='text_only')));
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);

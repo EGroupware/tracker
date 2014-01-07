@@ -1547,7 +1547,7 @@ width:100%;
 			$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
 			echo '<script>window.resizeTo(750,550);</script>';
 
-			if (is_array($_attachments))
+			if (!($GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='text_only')&&is_array($_attachments))
 			{
 				//echo __METHOD__.'<br>';
 				//_debug_array($_attachments);
@@ -1660,7 +1660,7 @@ width:100%;
 				$this->htmledit = $t['tr_edit_mode']=='html';
 			}
 
-			$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$mailbox,$this->htmledit);
+			$mailcontent = $mailClass::get_mailcontent($mailobject,$uid,$partid,$mailbox,$this->htmledit,true,(!($GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='text_only')));
 
 			// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
 			// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
