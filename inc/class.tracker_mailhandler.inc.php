@@ -1222,7 +1222,7 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
-		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection);
+		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection,(!($GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='text_only')));
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->icServer->setFlags($uid, '\\Seen', 'add', true);
