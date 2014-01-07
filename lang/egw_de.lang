@@ -23,6 +23,7 @@
 3 years ago	tracker	de	3 Jahre zurück
 5 - medium	tracker	de	5 - mittlere
 9 - highest	tracker	de	9 - höchste
+[fwd]	tracker	de	[FWD]
 accepted	tracker	de	Akzeptiert
 acl	tracker	de	Bearbeitungsrechte
 activate users queue access control	tracker	de	Zugriffskontrolle für Verfolgungssystem-Queues aktivieren
@@ -54,6 +55,7 @@ allow voting	tracker	de	Abstimmungen erlauben
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Tickets, zeige und sortiere nach den Stimmen
 already escalated	tracker	de	bereits eskaliert
 amount	tracker	de	Betrag
+application mail expected but got: %1	tracker	de	falsche Werte für die Anwendung Mail: %1
 applies the changes	tracker	de	Diese Änderungen übernehmen
 assign to project	tracker	de	Projektzuweisung
 assigned to	tracker	de	Zugewiesen an
@@ -62,6 +64,8 @@ attachments & links	tracker	de	Anhänge & Verknüpfungen
 attention: no contact with address %1 found.	tracker	de	Achtung: Kein Kontakt mit der Adresse %1 gefunden!
 autoassign to	tracker	de	Automatisch zuweisen an
 automatic email handling	tracker	de	Automatische E-Mail-Umwandlung
+automatic mails (bounces) are configured to be forwarded	tracker	de	Automatische Antwortmails (zurückgewiesene), sind so konfiguriert, das Sie weitergeleitet werden
+automatic mails (replies) are configured to be forwarded	tracker	de	Automatische Antwortmails (Rückantwort) , sind so konfiguriert, das Sie weitergeleitet werden
 automatically created by importexport	tracker	de	Dieser Eintrag wurde automatisch durch das Modul Import/Export erstellt
 before	tracker	de	vor
 bounties	tracker	de	Prämien
@@ -154,6 +158,7 @@ each value is a line like <id>[=<label>]	tracker	de	Jeder Wert entspricht einer 
 each value is a line like id[=label]	tracker	de	Jeder Wert entspricht einer Zeile in dem Format  id[=label]
 edit %1	tracker	de	%1 bearbeiten
 edit entry	tracker	de	Ticket bearbeiten
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zur Mailbox Möglich, bitte passen die Sie Einstellungen an.
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umwandlung kann nur für alle Verfolgungssysteme konfiguriert werden.
 enter an email address here if unrecognized mails should be forwarded	tracker	de	E-Mail Adresse zu der nicht zuordenbare E-Mails weitergeleitet werden
@@ -165,6 +170,7 @@ error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgun
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
+error: no mail (mailbox / uid) given!	tracker	de	Fehler: keinen Mailbix/UID vorhanden!
 error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
 escalation	tracker	de	Eskalation
 escalation added.	tracker	de	Eskalation hinzugefügt.
@@ -184,6 +190,7 @@ export csv	tracker	de	Export als CSV Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	de	Keiner Verbindung zur Mailbox möglich: %1 -> Automatische E-Mailanahme wurde deaktiviert.
 favorites	tracker	de	Favoriten
 field	tracker	de	Feld
 fixed	tracker	de	Gelöst
@@ -221,6 +228,7 @@ imports entries into the tracker from a csv file. csv means 'comma seperated val
 incoming mail folder	tracker	de	Ordner für eingehende E-Mails
 incoming mail rules	tracker	de	Regeln für eingehende E-Mails
 incoming mail server	tracker	de	Server für eingehende E-Mails
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	de	Das E-Mail Profil für die automatische E-Mail-Annahme ist nicht vollständig; Automatische E-Mailanahme wurde für Queue %1 deaktiviert.
 info only	tracker	de	Nur zur Information
 insert	tracker	de	einfügen
 insert in document	tracker	de	Einfügen in Dokument
@@ -254,6 +262,7 @@ links wrapped in an href tag with download link	tracker	de	Verknüpfungen in ein
 list of coma separated email address	tracker	de	Liste von E-Mail Adressen, durch Komma getrennt
 list of files linked to the current record	tracker	de	Liste der Dateien, die mit diesem Datensatz verbunden sind.
 mail handling	tracker	de	E-Mailumwandlung
+mailbox settings used: %1	tracker	de	Die Einstellungen der  Mailbox %1 wurden verwendet.
 manage mapping	tracker	de	Feldzuordnungen bearbeiten
 match again after	tracker	de	zutreffend nach
 matching filter	tracker	de	Filter zutreffend
@@ -318,6 +327,8 @@ receive notifications about due entries you created or are assigned to	tracker	d
 receive notifications about starting entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für zu startende Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
 recieve notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Einträge
+refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu der Mailbox war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
+refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
@@ -368,7 +379,7 @@ signature	tracker	de	Signatur
 skip record	tracker	de	Eintrag überspringen
 staff	tracker	de	Mitarbeiter
 staff  "users" will be allowed for assignment to tracker tickets	tracker	de	Mitarbeiter "Benutzer" können Tickets zugewiesen bekommen
-standard imap	tracker	de	Standard IMAP
+standard imap	tracker	de	IMAP, unverschlüsselt
 started	tracker	de	gestartet
 starting	tracker	de	wird gestartet
 state	tracker	de	Status
