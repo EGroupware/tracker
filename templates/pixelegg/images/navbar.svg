@@ -4,10 +4,9 @@
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="28.347px" height="28.347px" viewBox="0 0 28.347 28.347" enable-background="new 0 0 28.347 28.347" xml:space="preserve">
 <g>
-	<path fill-rule="evenodd" clip-rule="evenodd" fill="#ECEDED" d="M24.805,0H3.543C1.586,0,0,1.586,0,3.544v21.26
-		c0,1.957,1.586,3.543,3.543,3.543h21.262c1.957,0,3.543-1.586,3.543-3.543V3.544C28.348,1.586,26.762,0,24.805,0z M14.759,26.294
-		v-7.271H13.88l-6.925,7.271v-7.271H2.05V9.325h4.905V2.053l6.925,7.272h0.879V2.053l11.535,12.121L14.759,26.294z"/>
-	<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#ECEDED" points="8.246,11.265 3.599,11.265 3.599,17.083 8.246,17.083 
-		8.246,21.446 15.309,14.174 8.246,6.901 	"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#ECEDED" d="M0,0v28.347h28.348V0H0z M14.755,26.291v-7.272h-0.879
+		l-6.925,7.272v-7.272H2.046V9.323h4.905V2.05l6.925,7.273h0.879V2.05L26.29,14.171L14.755,26.291z"/>
+	<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#ECEDED" points="8.242,11.263 3.595,11.263 3.595,17.079 8.242,17.079 
+		8.242,21.442 15.305,14.171 8.242,6.898 	"/>
 </g>
 </svg>
