@@ -1,6 +1,8 @@
 /**
  * EGroupware: CSS with less preprocessor
  *
+ * TRACKER
+ *
  * Please do NOT change app.css directly, instead change app.less and compile it!
  *
  * @link http://www.egroupware.org
@@ -25,7 +27,15 @@
 //**********************************
 // main
 
+// hinzufügen
+        button#tracker-index_add{
+            .Complete_Button_add_only_plus;
+            background-color: @egw_color_2_a;
+            
+            &:hover {.Complete_Button_add_only_plus_hover;}
+            &:active {background-color: @color_positive_action_active !important;}
 
+        }
 // main
 
 
@@ -37,5 +47,3 @@
 
 // Dialog Tracker bearbeiten und alle weiteren
 // #####################################################
-
-
