@@ -1542,8 +1542,8 @@ width:100%;
 
 						// get the message itself, and attach it, as we are able to display it in egw
 						// instead of fetching only the attachments attached files (as we did previously)
-						$message = $mailobject->getMessageRawBody($attachment['uid'],$attachment['partID']);
-						$headers = $mailobject->getMessageHeader($attachment['uid'],$attachment['partID'],true);
+						$message = $mailobject->getMessageRawBody($attachment['uid'],$attachment['partID'],($attachment['folder']?$attachment['folder']:$mailbox));
+						$headers = $mailobject->getMessageHeader($attachment['uid'],$attachment['partID'],true,false,($attachment['folder']?$attachment['folder']:$mailbox));
 						$subject = str_replace('$$','__',($headers['SUBJECT']?$headers['SUBJECT']:lang('(no subject)')));
 						$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 						$tmpfile = fopen($attachment_file,'w');
@@ -1631,7 +1631,7 @@ width:100%;
 			$mailobject	= $mailClass::getInstance(true,$icServerID);
 			$mailobject->openConnection();
 			$mailobject->reopen($mailbox);
-			$headers = $mailobject->getMessageHeader($uid, $partid,true);
+			$headers = $mailobject->getMessageHeader($uid, $partid,true,false,$mailbox);
 			$subject = $mailClass::adaptSubjectForImport($headers['SUBJECT']);
 			$tId = $this->get_ticketId($subject);
 			if ($tId)
@@ -1646,8 +1646,8 @@ width:100%;
 			// this is done to have a simple archive functionality (ToDo: opening .eml in email module)
 			if ($GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='add_raw')
 			{
-				$message = $mailobject->getMessageRawBody($uid, $partid);
-				$headers = $mailobject->getMessageHeader($uid, $partid,true);
+				$message = $mailobject->getMessageRawBody($uid, $partid,$mailbox);
+				$headers = $mailobject->getMessageHeader($uid, $partid,true,false,$mailbox);
 				$subject = $mailClass::adaptSubjectForImport($headers['SUBJECT']);
 				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 				$tmpfile = fopen($attachment_file,'w');
