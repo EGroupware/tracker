@@ -170,7 +170,7 @@ error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgun
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
-error: no mail (mailbox / uid) given!	tracker	de	Fehler: keinen Mailbix/UID vorhanden!
+error: no mail (mailbox / uid) given!	tracker	de	Fehler: keinen Mailbox/UID vorhanden!
 error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
 escalation	tracker	de	Eskalation
 escalation added.	tracker	de	Eskalation hinzugefügt.
