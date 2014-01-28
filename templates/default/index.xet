@@ -39,7 +39,7 @@
 				<row class="th">
 					<vbox>
 						<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id"/>
-						<nextmatch-sortheader label="Private" id="tr_private"/>
+						<nextmatch-filterheader id="tr_private" options="Private"/>
 					</vbox>
 					<nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
 					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
