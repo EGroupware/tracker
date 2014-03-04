@@ -144,14 +144,28 @@ class tracker_mailhandler extends tracker_bo
 		$diff = array();
 		if (!($reference instanceof defaultimap)) return false;
 		if (!($profile instanceof defaultimap)) return false;
-		if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
-		if ($reference->encryption != $profile->encryption) $diff['encryption']=array('reference'=>$reference->encryption,'profile'=>$profile->encryption);
-		if ($reference->host != $profile->host) $diff['host']=array('reference'=>$reference->host,'profile'=>$profile->host);
-		if ($reference->port != $profile->port) $diff['port']=array('reference'=>$reference->port,'profile'=>$profile->port);
-		if ($reference->validatecert != $profile->validatecert) $diff['validatecert']=array('reference'=>$reference->validatecert,'profile'=>$profile->validatecert);
-		if ($reference->username != $profile->username) $diff['username']=array('reference'=>$reference->username,'profile'=>$profile->username);
-		if ($reference->loginName != $profile->loginName) $diff['loginName']=array('reference'=>$reference->loginName,'profile'=>$profile->loginName);
-		if ($reference->password != $profile->password) $diff['password']=array('reference'=>$reference->password,'profile'=>$profile->password);
+		//error_log(__METHOD__.__LINE__.' Reference:'.get_class($reference));
+		//error_log(__METHOD__.__LINE__.' Profile:'.get_class($profile));
+		if (get_class($reference) != get_class($profile)) return false;
+		if ($profile instanceof emailadmin_imap)
+		{
+			if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
+			if ($reference->acc_imap_host != $profile->acc_imap_host) $diff['acc_imap_host']=array('reference'=>$reference->acc_imap_host,'profile'=>$profile->acc_imap_host);
+			if ($reference->acc_imap_port != $profile->acc_imap_port) $diff['acc_imap_port']=array('reference'=>$reference->acc_imap_port,'profile'=>$profile->acc_imap_port);
+			if ($reference->acc_imap_username != $profile->acc_imap_username) $diff['acc_imap_username']=array('reference'=>$reference->acc_imap_username,'profile'=>$profile->acc_imap_username);
+			if ($reference->acc_imap_password != $profile->acc_imap_password) $diff['acc_imap_password']=array('reference'=>$reference->acc_imap_password,'profile'=>$profile->acc_imap_password);
+		}
+		else
+		{
+			if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
+			if ($reference->encryption != $profile->encryption) $diff['encryption']=array('reference'=>$reference->encryption,'profile'=>$profile->encryption);
+			if ($reference->host != $profile->host) $diff['host']=array('reference'=>$reference->host,'profile'=>$profile->host);
+			if ($reference->port != $profile->port) $diff['port']=array('reference'=>$reference->port,'profile'=>$profile->port);
+			if ($reference->validatecert != $profile->validatecert) $diff['validatecert']=array('reference'=>$reference->validatecert,'profile'=>$profile->validatecert);
+			if ($reference->username != $profile->username) $diff['username']=array('reference'=>$reference->username,'profile'=>$profile->username);
+			if ($reference->loginName != $profile->loginName) $diff['loginName']=array('reference'=>$reference->loginName,'profile'=>$profile->loginName);
+			if ($reference->password != $profile->password) $diff['password']=array('reference'=>$reference->password,'profile'=>$profile->password);
+		}
 		return $diff;
 	}
 
@@ -1298,8 +1312,8 @@ class tracker_mailhandler extends tracker_bo
 		// this is done to have a simple archive functionality
 		if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
 		{
-			$message = $mailobject->getMessageRawBody($uid, $partid);
-			$headers = $mailobject->getMessageHeader($uid, $partid,true);
+			$message = $mailobject->getMessageRawBody($uid, $partid, $_folderName);
+			$headers = $mailobject->getMessageHeader($uid, $partid,true,false,$_folderName);
 			$subject = $mc::adaptSubjectForImport($headers['SUBJECT']);
 			$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 			$tmpfile = fopen($attachment_file,'w');
@@ -1588,7 +1602,7 @@ class tracker_mailhandler extends tracker_bo
 		$this->smtpMail->IsHTML(false);
 		$this->smtpMail->Body = lang("This message was forwarded to you from EGroupware-Tracker Mailhandling: %1. \r\nSee attachment (original mail) for further details\r\n %2",$queue,$_message);
 
-		$rawBody        = $mailobject->getMessageRawBody($uid);
+		$rawBody        = $mailobject->getMessageRawBody($uid,'',(!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX'));
 		$this->smtpMail->AddStringAttachment($rawBody, $this->smtpMail->EncodeHeader($subject), '7bit', 'message/rfc822');
 		if(!$error=$this->smtpMail->Send())
 		{
