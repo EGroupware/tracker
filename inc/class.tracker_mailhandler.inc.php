@@ -145,15 +145,27 @@ class tracker_mailhandler extends tracker_bo
 		if (!($reference instanceof defaultimap)) return false;
 		if (!($profile instanceof defaultimap)) return false;
 		//error_log(__METHOD__.__LINE__.' Reference:'.get_class($reference));
+		//error_log(__METHOD__.__LINE__.' Reference:'.array2string($reference));
 		//error_log(__METHOD__.__LINE__.' Profile:'.get_class($profile));
+		//error_log(__METHOD__.__LINE__.' Profile:'.array2string($profile));
 		if (get_class($reference) != get_class($profile)) return false;
 		if ($profile instanceof emailadmin_imap)
 		{
 			if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
-			if ($reference->acc_imap_host != $profile->acc_imap_host) $diff['acc_imap_host']=array('reference'=>$reference->acc_imap_host,'profile'=>$profile->acc_imap_host);
-			if ($reference->acc_imap_port != $profile->acc_imap_port) $diff['acc_imap_port']=array('reference'=>$reference->acc_imap_port,'profile'=>$profile->acc_imap_port);
-			if ($reference->acc_imap_username != $profile->acc_imap_username) $diff['acc_imap_username']=array('reference'=>$reference->acc_imap_username,'profile'=>$profile->acc_imap_username);
-			if ($reference->acc_imap_password != $profile->acc_imap_password) $diff['acc_imap_password']=array('reference'=>$reference->acc_imap_password,'profile'=>$profile->acc_imap_password);
+			try
+			{
+				if ($reference->acc_imap_host != $profile->acc_imap_host) $diff['acc_imap_host']=array('reference'=>$reference->acc_imap_host,'profile'=>$profile->acc_imap_host);
+				if ($reference->acc_imap_port != $profile->acc_imap_port) $diff['acc_imap_port']=array('reference'=>$reference->acc_imap_port,'profile'=>$profile->acc_imap_port);
+				if ($reference->acc_imap_username != $profile->acc_imap_username) $diff['acc_imap_username']=array('reference'=>$reference->acc_imap_username,'profile'=>$profile->acc_imap_username);
+				if ($reference->acc_imap_password != $profile->acc_imap_password) $diff['acc_imap_password']=array('reference'=>$reference->acc_imap_password,'profile'=>$profile->acc_imap_password);
+			}
+			catch(Exception $e)
+			{
+				if ($reference->hostspec != $profile->hostspec) $diff['acc_imap_host']=array('reference'=>$reference->hostspec,'profile'=>$profile->hostspec);
+				if ($reference->port != $profile->port) $diff['acc_imap_port']=array('reference'=>$reference->port,'profile'=>$profile->port);
+				if ($reference->username != $profile->username) $diff['acc_imap_username']=array('reference'=>$reference->username,'profile'=>$profile->username);
+				if ($reference->password != $profile->password) $diff['acc_imap_password']=array('reference'=>$reference->password,'profile'=>$profile->password);
+			}
 		}
 		else
 		{
