@@ -1431,7 +1431,7 @@ width:100%;
 			'admin' => array(
 				'caption' => 'Multiple changes',
 				'group' => $group,
-				'disabled' => !isset($GLOBALS['egw_info']['user']['apps']['admin']),
+				'enabled' => isset($GLOBALS['egw_info']['user']['apps']['admin']),
 				'hideOnDisabled' => true,
 				'nm_action' => 'open_popup',
 				'icon' => 'user',
