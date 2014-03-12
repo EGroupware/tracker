@@ -1258,6 +1258,8 @@ class tracker_ui extends tracker_bo
 		// Turn on multi-queue widget
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
+		// Apply link?
+
 		$content['nm']['favorites'] = true; // Enable favorites
 
 		$content['is_admin'] = $this->is_admin($tracker);
@@ -1895,5 +1897,48 @@ width:100%;
 		{
 			$response->call('app.tracker.canned_comment_response', $this->get_canned_response($id));
 		}
+	}
+
+	/**
+	 * shows tracker in other applications
+	 *
+	 * @param $args['location'] location of hooks: {addressbook|projects|calendar}_view
+	 * @param $args['view']     menuaction to view, if location == 'infolog'
+	 * @param $args['app']      app-name, if location == 'infolog'
+	 * @param $args['view_id']  name of the id-var for location == 'infolog'
+	 * @param $args[$args['view_id']] id of the entry
+	 * this function can be called for any app, which should include infolog: \
+	 * 	$GLOBALS['egw']->hooks->process(array( \
+	 * 		 * 'location' => 'infolog', \
+	 * 		 * 'app'      => <your app>, \
+	 * 		 * 'view_id'  => <id name>, \
+	 * 		 * <id name>  => <id value>, \
+	 * 		 * 'view'     => <menuaction to view an entry in your app> \
+	 * 	));
+	 */
+	public function hook_view($args)
+	{
+		// Load JS for tracker actions
+		egw_framework::validate_file('.','app','tracker');
+
+		switch ($args['location'])
+		{
+			case 'addressbook_view':
+				$app     = 'addressbook';
+				$view_id = 'ab_id';
+				$view_id2 = 'contact_id';
+				$view    = 'addressbook.addressbook_ui.view';
+				break;
+		}
+		if (!isset($app) || !isset($args[$view_id]))
+		{
+			return False;
+		}
+		$this->called_by = $app;	// for read/save_sessiondata, to have different sessions for the hooks
+		$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
+		translation::add_app('tracker');
+
+		// ?
+		$this->index(null);
 	}
 }
