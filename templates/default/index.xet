@@ -33,7 +33,6 @@
 				<column disabled="@no_bounties"/>
 				<column/>
 				<column/>
-				<column width="3%" disabled="@no_legacy_actions"/>
 			</columns>
 			<rows>
 				<row class="th">
@@ -72,10 +71,6 @@
 					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties"/>
 					<nextmatch-filterheader id="esc_id" options="Escalation"/>
 					<nextmatch-customfields id="customfields"/>
-					<hbox class="noPrint">
-						<nextmatch-header align="center" label="Actions" id="legacy_actions"/>
-						<button align="right" statustext="Check all" label="Check all" id="check_all" needed="1" onclick="egw_globalObjectManager.getObjectById('tracker.index.rows').toggleAllSelected(); return false;" image="check" class="tracker-checkall"/>
-					</hbox>
 				</row>
 				<row class="$row_cont[cat_id] $row_cont[class]" valign="top">
 					<vbox no_lang="1" options="0,0">
@@ -139,15 +134,6 @@
 					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
 					<date-since id="${row}[esc_start]"/>
 					<customfields-list id="$row"/>
-					<hbox align="center" class="noPrint">
-						<button align="center" label="Add infolog" id="infolog[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=infolog.infolog_ui.edit&amp;action=tracker&amp;action_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="infolog" class="noPrint"/>
-						<button align="center" label="Add timesheet entry" id="timesheet[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=timesheet.timesheet_ui.edit&amp;link_app[]=tracker&amp;link_id[]=$row_cont[tr_id]'),'_blank','dependent=yes,width=600,height=400,scrollbars=yes,status=yes'); return false;" image="timesheet" class="noPrint"/>
-						<button align="center" label="Print entry" id="tprint[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.tprint&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="print" class="noPrint"/>
-						<button align="center" label="Edit entry" id="edit[$row_cont[tr_id]]" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]'),'_blank','dependent=yes,width=700,height=535,scrollbars=yes,status=yes'); return false;" image="edit" class="noPrint"/>
-						<button label="Insert in document" id="document[$row_cont[tr_id]]" image="etemplate/merge" class="tracker_image16"/>
-						<image label="Filemanager" src="filemanager/navbar" href="/index.php?menuaction=filemanager.filemanager_ui.index&amp;path=/apps/tracker/$row_cont[tr_id]" class="tracker_image16"/>
-						<checkbox align="right" id="checked[]" options="$row_cont[tr_id]"/>
-					</hbox>
 				</row>
 			</rows>
 		</grid>

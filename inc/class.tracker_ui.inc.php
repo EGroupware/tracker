@@ -845,10 +845,6 @@ class tracker_ui extends tracker_bo
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
-			$readonlys["infolog[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog);
-			$readonlys["timesheet[$id]"]= !(isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && ($this->is_admin($row['tr_tracker']) or ($this->is_technician($row['tr_tracker']))));
-			$readonlys["document[$id]"] = !$GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
-			$readonlys['checked'] = !($this->is_admin($row['tr_tracker']) || $this->is_technician($row['tr_tracker']));
 		}
 
 		$rows['duration_format'] = ','.$this->duration_format.',,1';
@@ -914,9 +910,6 @@ class tracker_ui extends tracker_bo
 		{
 			$rows['no_tr_startdate_tr_duedate'] = true;
 		}
-
-		// Disable checkbox column
-		$rows['no_check'] = $readonlys['checked'];
 
 		$trackerlabel = array();
 		foreach((array)$tracker as $t){$trackerlabel[]=$this->trackers[$t];}
