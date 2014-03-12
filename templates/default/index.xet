@@ -83,10 +83,10 @@
 						<menupopup id="${row}[tr_tracker]" no_lang="1" readonly="true"/>
 					</menulist>
 					<menulist>
-						<menupopup type="select-cat" id="${row}[cat_id]" readonly="true" options="None"/>
+						<menupopup id="${row}[cat_id]" readonly="true" options="None"/>
 					</menulist>
 					<menulist>
-						<menupopup type="select-cat" id="${row}[tr_version]" readonly="true" options="None"/>
+						<menupopup id="${row}[tr_version]" readonly="true" options="None"/>
 					</menulist>
 					<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 					<vbox no_lang="1" class="colfullWidth">
