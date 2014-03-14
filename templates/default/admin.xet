@@ -14,8 +14,8 @@
 						<columns>
 							<column/>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column width="5%"/>
+							<column width="110" disabled="!@@tracker"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
@@ -40,8 +40,8 @@
 					<grid width="100%" height="100" overflow="auto" id="versions">
 						<columns>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column width="5%"/>
+							<column width="110" disabled="!@@tracker"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
@@ -63,8 +63,8 @@
 						<columns>
 							<column/>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column width="5%"/>
+							<column width="110" disabled="!@@tracker"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
@@ -88,8 +88,8 @@
 						<columns>
 							<column/>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column width="5%"/>
+							<column width="110" disabled="!@@tracker"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
@@ -116,8 +116,8 @@
 						<columns>
 							<column/>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column width="5%"/>
+							<column width="110" disabled="!@@tracker"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
@@ -128,7 +128,7 @@
 							</row>
 							<row class="row" valign="top">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="30"/>
-								<textbox multiline="true" id="${row}[description]" rows="3" cols="50"/>
+								<textbox multiline="true" id="${row}[description]"/>
 								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"/>
 							</row>
@@ -141,8 +141,8 @@
 						<columns>
 							<column/>
 							<column/>
-							<column disabled="!@@tracker"/>
-							<column/>
+							<column width="110" disabled="1"/>
+							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">

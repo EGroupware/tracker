@@ -433,20 +433,25 @@ class tracker_admin extends tracker_bo
 					case 'response':
 						if ($data['response']) $cat['description'] = $data['response'];
 						$content['responses'][$n=$r++] = $cat;
+						if ($tracker != $cat['parent']) $readonlys['responses'][$n.'[description]'] = true;
 						break;
 					case 'project':
 						$content['projects'][$n=$p++] = $cat + $data;
+						if ($tracker != $cat['parent']) $readonlys['responses'][$n.'[projectlist]'] = true;
 						break;
 					case 'stati':
 						$content['statis'][$n=$s++] = $cat + $data;
+						if ($tracker != $cat['parent']) $readonlys['statis'][$n.'[closed]'] = true;
 						break;
 					case 'resolution':
 						$content['resolutions'][$n=$i++] = $cat + $data;
 						if ($data['isdefault']) $content['resolutions']['isdefaultresolution'] = $cat['id'];
+						if ($tracker != $cat['parent']) $readonlys['resolutions']['isdefaulresolution['.$cat['id'].']'] = true;
 						break;
 					default:	// cat
 						$data['type'] = 'cat';
 						$content['cats'][$n=$c++] = $cat + $data;
+						if ($tracker != $cat['parent']) $readonlys['cats'][$n.'[autoassign]'] = true;
 						break;
 				}
 				$namespace = $data['type'].'s';
@@ -458,8 +463,7 @@ class tracker_admin extends tracker_bo
 				// global cat, but not all tracker --> disable name, autoassign and delete
 				elseif ($tracker && !$cat['parent'])
 				{
-					$readonlys[$namespace][$n.'[autoassign]'] = $readonlys[$namespace][$n.'[name]'] =
-						$readonlys[$namespace]['delete['.$cat['id'].']'] = true;
+					$readonlys[$namespace][$n.'[name]'] = $readonlys[$namespace]['delete['.$cat['id'].']'] = true;
 				}
 				if ($tracker && isset($data['denyglobal']) && in_array($tracker, $data['denyglobal']))
 				{
