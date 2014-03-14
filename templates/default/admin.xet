@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <overlay>
-	<template id="tracker.admin.cats" template="" lang="" group="0" version="1.9.002">
+	<template id="tracker.admin.cats" template="" lang="" group="0" version="1.9.003">
 		<grid width="100%" height="450" overflow="auto">
 			<columns>
 				<column width="100"/>
@@ -14,12 +14,14 @@
 						<columns>
 							<column/>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description value="Autoassign to"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row>
@@ -27,6 +29,7 @@
 								<menulist>
 									<menupopup id="${row}[autoassign]" no_lang="1" options="Noone"/>
 								</menulist>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this category','Delete')" image="delete"/>
 							</row>
 						</rows>
@@ -37,15 +40,18 @@
 					<grid width="100%" height="100" overflow="auto" id="versions">
 						<columns>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this version','Delete')" image="delete"/>
 							</row>
 						</rows>
@@ -57,17 +63,20 @@
 						<columns>
 							<column/>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description align="center" value="Closed"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
 								<checkbox align="center" id="${row}[closed]"/>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"/>
 							</row>
 						</rows>
@@ -79,12 +88,14 @@
 						<columns>
 							<column/>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description align="center" value="Default"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row">
@@ -93,6 +104,7 @@
 									<description id="${row}[name]" readonly="true"/>
 								</hbox>
 								<radio align="center" id="isdefaultresolution" options="$row_cont[id]"/>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"/>
 							</row>
 						</rows>
@@ -104,17 +116,20 @@
 						<columns>
 							<column/>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column width="5%"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description value="Canned response"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row" valign="top">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="30"/>
 								<textbox multiline="true" id="${row}[description]" rows="3" cols="50"/>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"/>
 							</row>
 						</rows>
@@ -126,17 +141,20 @@
 						<columns>
 							<column/>
 							<column/>
+							<column disabled="!@@tracker"/>
 							<column/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description value="Project selection"/>
+								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row" valign="top">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="40" maxlength="40"/>
 								<projectmanager-select id="${row}[projectlist]" no_lang="1" options="--&gt; choose a project from the drop-down list"/>
+								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this entry','Delete')" image="delete"/>
 							</row>
 						</rows>
