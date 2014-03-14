@@ -553,7 +553,7 @@ class tracker_bo extends tracker_so
 			$testReply = $this->data['reply_message'];
 			if ($this->htmledit && isset($this->data['reply_message']) && !empty($this->data['reply_message']))
 			{
-				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']),false,$stripcrl=true,$stripalltags=true));
+				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']), false, true, true));
 			}
 			//error_log(__METHOD__.__LINE__.' TestReplyMessage:'.$testReply);
 			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message']) && !empty($testReply)) ||
@@ -687,8 +687,8 @@ class tracker_bo extends tracker_so
 	 */
 	function &get_groups($primary=false)
 	{
-		static $groups;
-		static $primary_group;
+		static $groups = null;
+		static $primary_group = null;
 
 		if($primary)
 		{
@@ -705,8 +705,6 @@ class tracker_bo extends tracker_so
 			}
 		}
 
-		$groups = array();
-		$primary_group = array();
 		$group_list = $GLOBALS['egw']->accounts->search(array('type' => 'groups', 'order' => 'account_lid', 'sort' => 'ASC'));
 		foreach($group_list as $gid)
 		{
@@ -727,7 +725,7 @@ class tracker_bo extends tracker_so
 	 */
 	function &get_staff($tracker,$return_groups=2,$what='technicians')
 	{
-		static $staff_cache;
+		static $staff_cache = null;
 
 		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
 		//error_log(__METHOD__.__LINE__.array2string($tracker));
@@ -804,18 +802,19 @@ class tracker_bo extends tracker_so
 		natcasesort($groups);
 
 		// groups or users first
-		$staff = $this->allow_assign_groups == 1 ? $groups : $users;
+		$staff_sorted = $this->allow_assign_groups == 1 ? $groups : $users;
 
 		if ($this->allow_assign_groups)	// do we need a second one
 		{
 			foreach($this->allow_assign_groups == 1 ? $users : $groups as $uid => $label)
 			{
-				$staff[$uid] = $label;
+				$staff_sorted[$uid] = $label;
 			}
 		}
 		//_debug_array($staff);
-		if (!is_array($tracker)) $staff_cache[$tracker][(int)$return_groups][$what]=$staff;
-		return $staff;
+		if (!is_array($tracker)) $staff_cache[$tracker][(int)$return_groups][$what] = $staff_sorted;
+
+		return $staff_sorted;
 	}
 
 	/**
@@ -1086,6 +1085,7 @@ class tracker_bo extends tracker_so
 			$line = __LINE__;
 		}
 		//error_log(__METHOD__."($needed, $check_only_tracker, tr_id=$data[tr_id], user=$user) '$name' returning in $line ".array2string($access).(!$needed ? ': '.function_backtrace() : ''));
+		unset($name);
 		return $access;
 	}
 
@@ -1104,6 +1104,7 @@ class tracker_bo extends tracker_so
 	 */
 	function file_access($id,$check,$rel_path=null,$user=null)
 	{
+		unset($rel_path);	// unused, but required by function signature
 		static $cache = array();	// as tracker does NOT cache read items, we run a cache here to not query items multiple times
 
 		if (!$user) $user = $this->user;
@@ -1167,7 +1168,8 @@ class tracker_bo extends tracker_so
 	 * Get tracker specific labels: tracker, version, categorie
 	 *
 	 * The labels are saved as categories and can be tracker specific (sub-cat of the tracker) or for all trackers.
-	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty
+	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty.
+	 * Labels need to be either tracker specific or global and NOT in denyglobal.
 	 *
 	 * @param string $type='trackers' 'tracker', 'version', 'cat', 'resolution'
 	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
@@ -1196,12 +1198,14 @@ class tracker_bo extends tracker_so
 		if (!$tracker) $tracker = $this->data['tr_tracker'];
 
 		$labels = array();
-		$default = null;
+		$default = $none_id = null;
 		foreach($this->all_cats as $cat)
 		{
 			$cat_data = unserialize($cat['data']);
 			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
-			if ($cat_type == $type && ($cat['parent'] == 0 || $cat['main'] == $tracker && $cat['id'] != $tracker))
+			if ($cat_type == $type &&	// cats need to be either tracker specific or global and tracker NOT in denyglobal
+				(!$cat['parent'] && !($tracker && in_array($tracker, (array)$cat_data['denyglobal'])) ||
+				$cat['main'] == $tracker && $cat['id'] != $tracker))
 			{
 				$labels[$cat['id']] = $cat['name'];
 				// set default with precedence to tracker specific one
@@ -1223,7 +1227,7 @@ class tracker_bo extends tracker_so
 
 		if ($type == 'tracker' && !$GLOBALS['egw_info']['user']['apps']['admin'] && $this->enabled_queue_acl_access)
 		{
-			foreach ($labels as $tracker_id => $tracker_name)
+			foreach (array_keys($labels) as $tracker_id)
 			{
 				if (!$this->is_user($tracker_id,$this->user) && !$this->is_technician($tracker_id,$this->user) && !$this->is_admin($tracker_id,$this->user))
 				{
@@ -1871,8 +1875,8 @@ class tracker_bo extends tracker_so
 		// The subject line is expected to be in the format:
 		// [Re: |Fwd: |etc ]<Tracker name> #<id>: <Summary>
 		// allow colon or dash to separate Id from summary, as our notifications use a dash (' - ') and not a colon (': ')
-		preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data);
-		if (!$tr_data[2])
+		$tr_data = null;
+		if (!preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data) && !$tr_data[2])
 		{
 			return 0; //
 		}
@@ -1885,8 +1889,8 @@ class tracker_bo extends tracker_so
 			$tr_data[0][0] = $buff[0][0];
 			$tr_data[3][0] = $tr_data[3][0].$buff[2][0].$buff[3][0];
 		}
-		preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id);
-		$tracker_id = $tr_id[0][0];
+		$tr_id = null;
+		$tracker_id = preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id) ? $tr_id[0][0] : null;
 		if (!is_numeric($tracker_id)) return 0; // nothing found that looks like an ID
 		//error_log(__METHOD__.array2string(array(0=>$tracker_id,1=>$subj)));
 		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
@@ -1919,13 +1923,15 @@ class tracker_bo extends tracker_so
 	 */
 	function prepare_import_mail($_email_address,$_subject,$_message,$_attachments,$_date,$_queue=0)
 	{
+		unset($_date);	// unused, but required by function signature
 		$address_array = imap_rfc822_parse_adrlist($_email_address,'');
+		$email = $name = array();
 		foreach ((array)$address_array as $address)
 		{
 			$email[] = $emailadr = sprintf('%s@%s',
 				trim($address->mailbox),
 				trim($address->host));
-				$name[] = !empty($address->personal) ? $address->personal : $emailadr;
+			$name[] = !empty($address->personal) ? $address->personal : $emailadr;
 		}
 		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
 		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
@@ -1970,7 +1976,7 @@ class tracker_bo extends tracker_so
 				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
-					$gg = egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['contact_id']);
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['contact_id']);
 					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.$contact['contact_id']);
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
@@ -2217,7 +2223,7 @@ OR tr_duedate IS NULL AND
 		}
 		if ($this->customfields && $readonlys['customfields'])
 		{
-			foreach($this->customfields as $name => $data)
+			foreach(array_keys($this->customfields) as $name)
 			{
 				$readonlys['#'.$name] = $readonlys['customfields'];
 			}
@@ -2257,19 +2263,17 @@ OR tr_duedate IS NULL AND
 		);
 
 		// Creator
-		$result = $this->db->select(self::TRACKER_TABLE, array('DISTINCT tr_creator'),$where,__LINE__,__FILE__);
-		foreach($result as $user)
+		foreach($this->db->select(self::TRACKER_TABLE, array('DISTINCT tr_creator'),$where,__LINE__,__FILE__) as $user)
 		{
 			$users[] = $user['tr_creator'];
 		}
 
 		// Assigned
-		$result = $this->db->select(
+		foreach($this->db->select(
 			self::ASSIGNEE_TABLE, array('DISTINCT tr_assigned'),$where,__LINE__,__FILE__,
 			false, '',false,-1,
 			'JOIN '.self::TRACKER_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id = '.self::ASSIGNEE_TABLE.'.tr_id'
-		);
-		foreach($result as $user)
+		) as $user)
 		{
 			$user = $user['tr_assigned'];
 			if($user < 0) $user = $GLOBALS['egw']->accounts->members($user,true);

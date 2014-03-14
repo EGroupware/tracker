@@ -134,6 +134,7 @@ delete this version	tracker	en	Delete this version
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	en	Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged.
 deleted	tracker	en	Deleted
 deletes this field	tracker	en	deletes this field
+deny global	tracker	en	Deny global
 determines the order the fields are displayed	tracker	en	determines the order the fields are displayed
 directory with documents to insert entries	tracker	en	Directory with documents to insert entries
 do not notify of these changes	tracker	en	Do not notify of these changes

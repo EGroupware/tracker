@@ -227,11 +227,12 @@ class tracker_admin extends tracker_bo
 								}
 							}
 						}
-						
+
 						if ($validationError) $this->save_config();
 						$msg .= ($msg?' ':'').lang('Configuration updated.').' ';
 					}
-					$need_update = false;
+					$reload_labels = false;
+					$cats = null;
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
@@ -284,12 +285,27 @@ class tracker_admin extends tracker_bo
 							}
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
+								($tracker && in_array($tracker, (array)$old_cat['data']['denyglobal']) != !empty($cat['denyglobal'])) ||
 								($name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign']) ||
 								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
 								($name == 'resolutions' && (($defaultresolution && ($cat['id']==$defaultresolution || $cat['isdefault'] && $cat['id']!=$defaultresolution))||!$defaultresolution && $cat['isdefault']) ))
 							{
+								if ($tracker && !$cat['parent'])
+								{
+									if ($old_cat['data']['denyglobal'] && !$cat['denyglobal'] &&
+										($k = array_search($tracker, $old_cat['data']['denyglobal'])) !== false)
+									{
+										unset($old_cat['data']['denyglobal'][$k]);
+										//error_log(__METHOD__."() unsetting old_cat[data][denyglobal][$k]");
+									}
+									elseif ($cat['denyglobal'])
+									{
+										$old_cat['data']['denyglobal'][] = $cat['denyglobal'];
+										//error_log(__METHOD__."() adding $tracker to old_cat[data][denyglobal]");
+									}
+								}
 								$old_cat['name'] = $cat['name'];
 								switch($name)
 								{
@@ -331,12 +347,12 @@ class tracker_admin extends tracker_bo
 								if (($id = $cats->add($old_cat)))
 								{
 									$msg .= $old_cat['id'] ? lang("Tracker-%1 '%2' updated.",$what,$cat['name']) : lang("Tracker-%1 '%2' added.",$what,$cat['name']);
-									$need_update = true;
+									$reload_labels = true;
 								}
 							}
 						}
 					}
-					if ($need_update)
+					if ($reload_labels)
 					{
 						$this->reload_labels();
 					}
@@ -397,6 +413,12 @@ class tracker_admin extends tracker_bo
 		{
 			$content[$name] = $this->$name;
 		}
+		$readonlys = array(
+			'button[delete]' => !$tracker,
+			'delete[0]' => true,
+			'button[rename]' => !$tracker,
+			'tabs' => array('acl'=>$tracker),
+		);
 		// cats & versions & responses & projects
 		$v = $c = $r = $s = $p = $i = 1;
 		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
@@ -405,35 +427,55 @@ class tracker_admin extends tracker_bo
 			if (!is_array($data = unserialize($cat['data']))) $data = array('type' => $data);
 			//echo "<p>$cat[name] ($cat[id]/$cat[parent]/$cat[main]): ".print_r($data,true)."</p>\n";
 
-			if ($cat['parent'] == $tracker && $data['type'] != 'tracker')
+			if ($data['type'] != 'tracker' && ($cat['parent'] == $tracker || !$cat['parent']))
 			{
 				switch ($data['type'])
 				{
 					case 'version':
-						$content['versions'][$v++] = $cat + $data;
+						$content['versions'][$n=$v++] = $cat + $data;
 						break;
 					case 'response':
 						if ($data['response']) $cat['description'] = $data['response'];
-						$content['responses'][$r++] = $cat;
+						$content['responses'][$n=$r++] = $cat;
 						break;
 					case 'project':
-						$content['projects'][$p++] = $cat + $data;
+						$content['projects'][$n=$p++] = $cat + $data;
 						break;
 					case 'stati':
-						$content['statis'][$s++] = $cat + $data;
+						$content['statis'][$n=$s++] = $cat + $data;
 						break;
 					case 'resolution':
-						$content['resolutions'][$i++] = $cat + $data;
+						$content['resolutions'][$n=$i++] = $cat + $data;
 						if ($data['isdefault']) $content['resolutions']['isdefaultresolution'] = $cat['id'];
 						break;
 					default:	// cat
 						$data['type'] = 'cat';
-						$content['cats'][$c++] = $cat + $data;
+						$content['cats'][$n=$c++] = $cat + $data;
 						break;
+				}
+				$namespace = $data['type'].'s';
+				// non-global --> disable deny global checkbox
+				if ($tracker && $cat['parent'] == $tracker)
+				{
+					$readonlys[$namespace][$n.'[denyglobal]'] = true;
+				}
+				// global cat, but not all tracker --> disable name, autoassign and delete
+				elseif ($tracker && !$cat['parent'])
+				{
+					$readonlys[$namespace][$n.'[autoassign]'] = $readonlys[$namespace][$n.'[name]'] =
+						$readonlys[$namespace]['delete['.$cat['id'].']'] = true;
+				}
+				if ($tracker && isset($data['denyglobal']) && in_array($tracker, $data['denyglobal']))
+				{
+					$content[$namespace][$n]['denyglobal'] = $tracker;
 				}
 			}
 		}
-		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] = $content['projects'][$p++] = $content['statis'][$s++] = $content['resolutions'][$i++] =
+		$readonlys['versions'][$v.'[denyglobal]'] = $readonlys['cats'][$c.'[denyglobal]'] =
+			$readonlys['responses'][$r.'[denyglobal]'] = $readonlys['projects'][$p.'[denyglobal]'] =
+			$readonlys['statis'][$s.'[denyglobal]'] = $readonlys['resolutions'][$i.'[denyglobal]'] = true;
+		$content['versions'][$v++] = $content['cats'][$c++] = $content['responses'][$r++] =
+			$content['projects'][$p++] = $content['statis'][$s++] = $content['resolutions'][$i++] =
 			array('id' => 0,'name' => '');	// one empty line for adding
 		// field_acl
 		$f = 1;
@@ -519,12 +561,6 @@ class tracker_admin extends tracker_bo
 		{
 			$sel_options['mailheaderhandling'][] = $typ[1];
 		}
-		$readonlys = array(
-			'button[delete]' => !$tracker,
-			'delete[0]' => true,
-			'button[rename]' => !$tracker,
-			'tabs' => array('acl'=>$tracker),
-		);
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
 		$tpl = new etemplate('tracker.admin');
 		return $tpl->exec('tracker.tracker_admin.admin',$content,$sel_options,$readonlys,$content);
@@ -545,12 +581,13 @@ class tracker_admin extends tracker_bo
 
 		if ($rows)
 		{
+			$prio_labels = $prio_tracker = $prio_cat = null;
 			foreach($rows as &$row)
 			{
 				// Show before / after
 				$row['esc_before_after'] = ($row['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
 				$row['esc_time'] = abs($row['esc_time']);
-				
+
 				// show the right tracker and/or cat specific priority label
 				if ($row['tr_priority'])
 				{
@@ -610,7 +647,7 @@ class tracker_admin extends tracker_bo
 					// 'Before' only valid for start & due dates
 					if($content['esc_before_after'] == tracker_escalations::BEFORE &&
 						!in_array($content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
-					{	
+					{
 						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
 						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
 						break;
@@ -666,6 +703,7 @@ class tracker_admin extends tracker_bo
 		$content['esc_before_after'] = ($content['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
 		$content['esc_time'] = abs($content['esc_time']);
 
+		$readonlys = $preserv = array();
 		$preserv['esc_id'] = $content['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
