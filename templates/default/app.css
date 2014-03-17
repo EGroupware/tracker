@@ -13,7 +13,7 @@ div#tracker-edit.et2_container
 .tracker_unseen { font-weight: bold; }
 .tracker_seen { font-weight: normal; }
 .tracker_leftPad5 { padding-left: 5px; }
-.tracker_trIdEdit:before { content: "#"; }
+label.tracker_trIdEdit:before { content: "#"; }
 .headertext { color: black; font-size: 120%; }
 .lpadding5 { padding-left: 5px; }
 .tracker_assign { width:100% !important;}
