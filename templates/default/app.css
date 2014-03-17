@@ -1,14 +1,22 @@
 /* $Id$ */
-
-.noWrap { white-space: nowrap; }
+/* Header classes*/
+tr.dialogHeader td, tr.dialogHeader2 td, tr.dialogHeader3 td, tr.dialogHeader4 td,
+tr.dialogOperators td,.dialogFooterToolbar {
+	padding: 5px 0 5px 0;
+	vertical-align: middle;
+}
+div#tracker-edit.et2_container
+{
+	width:848px;
+}
 .tracker_overdue,.bold { font-weight: bold; }
 .tracker_unseen { font-weight: bold; }
 .tracker_seen { font-weight: normal; }
 .tracker_leftPad5 { padding-left: 5px; }
-.tracker_trIdEdit { padding-left: 10px; }
 .tracker_trIdEdit:before { content: "#"; }
 .headertext { color: black; font-size: 120%; }
 .lpadding5 { padding-left: 5px; }
+.tracker_assign { width:100% !important;}
 .redItalic { color: red; font-style: italic; }
 .low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
 .low,.low_done { color:#606060; }
@@ -20,16 +28,8 @@
 .tracker_overdue { color:#cc0000; font-weight:bold; }
 .private { font-style:italic; }
 .planned { font-style:italic; }
-table.fullWidth { width: 100%; }
-.infoId:before { content:"#" }
 .fixedHeight { line-height: 12px; }
-.noWrap { white-space: nowrap; }
-.tracker_user_filter select { width: 150px; }
-.tracker_user_select select { width: 230px; }
-.tracker_cat_select select  { width: 100%; }
-.tracker_status_filter select { width: 100px; }
 .tracker_indexPrio:first-letter { font-weight: bold; }
-.tracker_inputFullWidth input { width: 100%; }
 .tracker_image16 img { height: 16px; }
 
 /* Restricted access replies */

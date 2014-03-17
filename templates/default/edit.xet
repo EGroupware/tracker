@@ -153,68 +153,98 @@
 			</rows>
 		</grid>
 	</template>
+	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
+		<grid width="100%" height="250" overflow="auto">
+			<columns>
+				<column width="100"/>
+				<column width="200"/>
+				<column width="78"/>
+				<column width="90"/>
+				<column width="200"/>
+			</columns>
+			<rows>
+				<row>
+					<description statustext="List of coma separated email address" value="Cc"/>
+					<taglist-email id="tr_cc"  allowFreeEntries="true" empty_label="Add email-address"  class="et2_fullWidth"/>
+					<description/>
+					<description for="tr_priority" value="Priority"/>
+					<menulist span="all" >
+						<menupopup id="tr_priority" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_assigned" value="Assigned to"/>
+					<menulist>
+						<menupopup  class="tracker_assign" empty_label="Not assigned" id="tr_assigned" multiple="true" no_lang="1" tags="true"/>
+					</menulist>
+					<description/>
+					<description value="Group"/>
+					<menulist span="all" >
+						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description value="Close date" />
+					<date-time label=" " id="tr_closed" class="et2_fullWidth"/>
+					<description/>
+					<description for="tr_private" value="Private"/>
+					<checkbox id="tr_private" span="all" class="et2_fullWidth"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
 	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
-				<column width="95"/>
-				<column width="400"/>
-				<column width="95"/>
-				<column width="230"/>
+				<column width="100"/>
+				<column width="200"/>
+				<column width="80"/>
+				<column width="90"/>
+				<column width="120"/>
+				<column width="30"/>
+				<column width="50"/>
+				<column width="4"/>
 			</columns>
 			<rows>
-				<row disabled="!@msg">
-					<html align="center" id="msg" no_lang="1" readonly="true" span="all" class="message"/>
-					<description/>
-					<description/>
+				<row class="dialogHeader">
+					<description for="tr_summary" value="Summary"/>
+					<textbox id="tr_summary" needed="1" maxlength="80" span="4" class="et2_fullWidth" tabindex="1"/>
+					<textbox type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
+					<appicon/>
 					<description/>
 				</row>
-				<row class="th" height="28">
+				<row class="dialogHeader2">
 					<description for="tr_tracker" value="Tracker Queue"/>
-					<hbox onchange="1" options="0,0" class="tracker_user_filter">
-						<menulist>
-							<menupopup class="width100" id="tr_tracker" no_lang="1" onchange="1"/>
-						</menulist>
-						<textbox type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
-					</hbox>
-					<description for="tr_private" value="Private"/>
-					<checkbox id="tr_private"/>
-				</row>
-				<row class="row">
-					<description for="cat_id" value="Category"/>
 					<menulist>
-						<menupopup class="tracker_cat_select" id="cat_id" needed="1" no_lang="1" options="Select one"/>
+						<menupopup id="tr_tracker" no_lang="1" onchange="1" class="et2_fullWidth"/>
 					</menulist>
+					<description/>
+					<description for="cat_id" value="Category"/>
+					<menulist span="3">
+						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"  class="et2_fullWidth"/>
+					</menulist>
+					<description/>
+				</row>
+				<row class="dialogHeader3">
 					<description for="tr_version" value="Version"/>
 					<menulist>
-						<menupopup class="tracker_user_select" id="tr_version" needed="1" no_lang="1" options="Select one"/>
+						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one" class="et2_fullWidth"/>
 					</menulist>
+					<description/>
 				</row>
-				<row class="row">
-					<description for="tr_assigned" value="Assigned to"/>
-					<menulist>
-						<menupopup class="tracker_user_select" empty_label="Not assigned" id="tr_assigned" multiple="true" no_lang="1" tags="true" width="380px"/>
-					</menulist>
-					<description for="tr_priority" value="Priority"/>
-					<menulist>
-						<menupopup id="tr_priority"/>
-					</menulist>
-				</row>
-				<row class="row">
-					<description statustext="List of coma separated email address" value="Cc"/>
-					<taglist-email id="tr_cc" width="378px" allowFreeEntries="true" empty_label="Add email-address"/>
-					<description value="Group"/>
-					<menulist>
-						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1"/>
-					</menulist>
-				</row>
-				<row class="row">
-					<description for="tr_summary" value="Summary"/>
-					<textbox id="tr_summary" needed="1" maxlength="80" span="3" class="tracker_inputFullWidth" tabindex="1"/>
+				<row class="dialogHeader4" disabled="!@show_dates">
+					<description value="Start date"/>
+					<date-time id="tr_startdate" class="et2_fullWidth"/>
+					<description/>
+					<description value="Due date"/>
+					<date-time id="tr_duedate" class="et2_fullWidth" span="3"/>
+					<description/>
 				</row>
 				<row valign="top">
-					<tabbox id="tabs" span="all">
+					<tabbox id="tabs" span="all" class="et2_noWrap">
 						<tabs>
 							<tab id="description" label="Description" statustext="Description"/>
+							<tab id="details" label="Details" statustext="Details"/>
 							<tab id="comments" label="Comments" statustext="Comments"/>
 							<tab id="add_comment" label="Add comment" statustext="Add comment"/>
 							<tab id="links" label="Links" statustext="Attachments &amp; Links"/>
@@ -224,6 +254,7 @@
 						</tabs>
 						<tabpanels>
 							<template id="tracker.edit.description"/>
+							<template id="tracker.edit.details"/>
 							<template id="tracker.edit.comments"/>
 							<template id="tracker.edit.add_comment"/>
 							<template id="tracker.edit.links"/>
@@ -233,47 +264,40 @@
 						</tabpanels>
 					</tabbox>
 				</row>
-				<row class="x row_off" disabled="!@show_dates">
-					<description value="Start date"/>
-					<date-time id="tr_startdate"/>
-					<description value="Due date"/>
-					<date-time id="tr_duedate"/>
-				</row>
-				<row class="x row_on" disabled="!@tr_id">
+				<row class="dialogOperators" disabled="!@tr_id">
 					<description for="tr_status" value="Status"/>
-					<hbox options="0,0">
-						<menulist>
-							<menupopup statustext="@status_help" id="tr_status"/>
-						</menulist>
-						<date-time label=" " id="tr_closed"/>
-					</hbox>
+					<menulist>
+						<menupopup statustext="@status_help" id="tr_status" class="et2_fullWidth"/>
+					</menulist>
+					<description/>
 					<description for="tr_resolution" value="Resolution"/>
-					<hbox options="0,0">
-						<menulist>
-							<menupopup id="tr_resolution"/>
-						</menulist>
-						<menulist>
-							<menupopup type="select-percent" class="tracker_leftPad5" id="tr_completion"/>
-						</menulist>
-					</hbox>
+					<menulist>
+						<menupopup id="tr_resolution" class="et2_fullWidth"/>
+					</menulist>
+					<menulist span="2">
+						<menupopup type="select-percent" id="tr_completion" class="et2_fullWidth"/>
+					</menulist>
+					<description/>
 				</row>
-				<row class="x row_off">
+				<row class="dialogOperators">
 					<description value="Created by"/>
 					<hbox options="0,0">
 						<menulist>
 							<menupopup id="tr_creator" no_lang="1"/>
 						</menulist>
-						<date-time label="," id="tr_created" readonly="true"/>
+						<date-time label="," id="tr_created" readonly="true" align="right"/>
 					</hbox>
+					<description/>
 					<description value="Last modified"/>
-					<hbox options="0,0">
+					<hbox options="0,0" span="3">
 						<menulist>
 							<menupopup type="select-account" id="tr_modifier" readonly="true"/>
 						</menulist>
-						<date-time label="," id="tr_modified" readonly="true"/>
+						<date-time label="," id="tr_modified" readonly="true" align="right"/>
 					</hbox>
+					<description/>
 				</row>
-				<row>
+				<row class="dialogOperators">
 					<button label="Save" id="button[save]"/>
 					<hbox options="0,0" span="all">
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
@@ -283,13 +307,8 @@
 							<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
 						</vbox>
 					</hbox>
-				</row>
+				</row> 
 			</rows>
 		</grid>
-		<styles>
-			.hiddenRow {
-  display: none;
-}
-		</styles>
 	</template>
 </overlay>
