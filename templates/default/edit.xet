@@ -285,7 +285,7 @@
 						<menulist>
 							<menupopup id="tr_creator" no_lang="1"/>
 						</menulist>
-						<date-time label="," id="tr_created" readonly="true" align="right"/>
+						<date-time id="tr_created" readonly="true" align="right"/>
 					</hbox>
 					<description/>
 					<description value="Last modified"/>
@@ -293,7 +293,7 @@
 						<menulist>
 							<menupopup type="select-account" id="tr_modifier" readonly="true"/>
 						</menulist>
-						<date-time label="," id="tr_modified" readonly="true" align="right"/>
+						<date-time id="tr_modified" readonly="true" align="right"/>
 					</hbox>
 					<description/>
 				</row>
