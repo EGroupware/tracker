@@ -1976,8 +1976,8 @@ class tracker_bo extends tracker_so
 				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',$contact['contact_id']);
-					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.$contact['contact_id']);
+					$gg = egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
+					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
 					{
@@ -2017,23 +2017,24 @@ class tracker_bo extends tracker_so
 		else
 		{
 			// find the addressbookentry to idetify the reply creator
-            $addressbook = new addressbook_bo();
-            $contacts = array();
-            foreach ($email as $mailadr)
-            {
-                    $contacts = array_merge($contacts,(array)$addressbook->search(
-                            array(
-                                    'email' => $mailadr,
-                                    'email_home' => $mailadr
-                            ),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
-            }
+			// find the addressbookentry to idetify the reply creator
+			$addressbook = new addressbook_bo();
+			$contacts = array();
+			foreach ($email as $mailadr)
+			{
+				$contacts = array_merge($contacts,(array)$addressbook->search(
+					array(
+						'email' => $mailadr,
+						'email_home' => $mailadr
+					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
+			}
 			$found= false;
-            if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
-            {
-                    $msg['reply_creator'] = $this->user;      // use current user as creator instead
-            }
-            else
-            {
+			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
+			{
+				$msg['reply_creator'] = $this->user;      // use current user as creator instead
+			}
+			else
+			{
 				$msg['reply_creator'] = $this->user;
 				// try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				//error_log(__METHOD__.__LINE__.' Number of Contacts Found:'.count($contacts));
