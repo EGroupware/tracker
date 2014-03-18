@@ -289,13 +289,10 @@
 					</hbox>
 					<description/>
 					<description value="Last modified"/>
-					<hbox options="0,0" span="3">
-						<menulist>
-							<menupopup type="select-account" id="tr_modifier" readonly="true"/>
-						</menulist>
-						<date-time id="tr_modified" readonly="true" align="right"/>
-					</hbox>
-					<description/>
+					<menulist>
+						<menupopup type="select-account" id="tr_modifier" readonly="true"/>
+					</menulist>
+					<date-time id="tr_modified" readonly="true" align="right"/>
 				</row>
 				<row class="dialogFooterToolbar">
 					<button label="Save" id="button[save]"/>
