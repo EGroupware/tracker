@@ -241,7 +241,7 @@
 					<description/>
 				</row>
 				<row valign="top">
-					<tabbox id="tabs" span="all" class="et2_noWrap">
+					<tabbox id="tabs" span="all">
 						<tabs>
 							<tab id="description" label="Description" statustext="Description"/>
 							<tab id="details" label="Details" statustext="Details"/>
@@ -292,7 +292,7 @@
 					<menulist>
 						<menupopup type="select-account" id="tr_modifier" readonly="true"/>
 					</menulist>
-					<date-time id="tr_modified" readonly="true" align="right"/>
+					<date-time id="tr_modified" readonly="true" class="et2_nowrap" align="right"/>
 				</row>
 				<row class="dialogFooterToolbar">
 					<button label="Save" id="button[save]"/>
