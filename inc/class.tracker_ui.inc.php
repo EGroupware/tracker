@@ -1207,6 +1207,7 @@ class tracker_ui extends tracker_bo
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description',
 				'row_id'         => 'tr_id',
+				'row_modified'   => 'tr_modified'
 			);
 			// use the state of the last session stored in the user prefs
 			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
