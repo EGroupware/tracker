@@ -715,7 +715,10 @@ class tracker_ui extends tracker_bo
 		$query = $query_in;
 		if (!$query['csv_export'])	// do not store query for csv-export in session
 		{
+			$linked = $query['col_filter']['linked'];
+			unset($query['col_filter']['linked']);
 			egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
+			$query['col_filter']['linked'] = $linked;
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
@@ -743,6 +746,37 @@ class tracker_ui extends tracker_bo
 		}
 
 		$tracker = $query['col_filter']['tr_tracker'];
+
+		// Handle linked filter (show only entries linked to a certain other entry)
+		if ($query['col_filter']['linked'])
+		{
+			if(!is_array($query['col_filter']['linked']))
+			{
+				// Legacy string style
+				list($app,$id) = explode(':',$query['col_filter']['linked']);
+			}
+			else
+			{
+				// Full info
+				$app = $query['col_filter']['linked']['app'];
+				$id = $query['col_filter']['linked']['id'];
+			}
+			if(!is_array($id)) $id = explode(',',$id);
+			if (!($links = egw_link::get_links_multiple($app,$id,true,'tracker')))
+			{
+				$rows = array();	// no infologs linked to selected --> no rows to return
+				return 0;
+			}
+			$query['col_filter']['tr_id'] = array();
+			foreach($links as $entries)
+			{
+				$query['col_filter']['tr_id'] = array_merge($query['col_filter']['tr_id'],$entries);
+			}
+			$query['col_filter']['tr_id'] = array_unique($query['col_filter']['tr_id']);
+			$linked = array('app' => $app, 'id' => $id, 'title' => (count($id) == 1 ? egw_link::title($app, $id) : lang('multiple')));
+		}
+		unset($query['col_filter']['linked']);
+
 		// Explode multiples into array
 		if(!is_array($tracker) && strpos($tracker,',') !== false)
 		{
@@ -913,6 +947,7 @@ class tracker_ui extends tracker_bo
 
 		$trackerlabel = array();
 		foreach((array)$tracker as $t){$trackerlabel[]=$this->trackers[$t];}
+		if (isset($linked)) $query['col_filter']['linked'] = $linked;  // add linked back to the colfilter
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? join(',',$trackerlabel) : lang('All'));
 		return $total;
 	}
@@ -1259,8 +1294,6 @@ class tracker_ui extends tracker_bo
 		// Turn on multi-queue widget
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
-		// Apply link?
-
 		$content['nm']['favorites'] = true; // Enable favorites
 
 		$content['is_admin'] = $this->is_admin($tracker);
@@ -1271,6 +1304,14 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->read('tracker.index');
 		}
+
+		// Apply link / avoid DOM conflicts
+		if($this->called_by)
+		{
+			$content['nm'] = array_merge($content['nm'], egw_session::appsession($this->called_by,'tracker'));
+			$tpl->set_dom_id("{$tpl->name}-{$this->called_by}");
+		}
+
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
 
@@ -1922,6 +1963,8 @@ width:100%;
 		// Load JS for tracker actions
 		egw_framework::validate_file('.','app','tracker');
 
+		$state=egw_session::appsession('index','tracker');
+
 		switch ($args['location'])
 		{
 			case 'addressbook_view':
@@ -1929,6 +1972,12 @@ width:100%;
 				$view_id = 'ab_id';
 				$view_id2 = 'contact_id';
 				$view    = 'addressbook.addressbook_ui.view';
+				// Just set the filter
+				$state['col_filter']['linked'] = array(
+					'app' => $app,
+					'id' => $args[$view_id]
+				);
+				egw_session::appsession($app,'tracker',$state);
 				break;
 		}
 		if (!isset($app) || !isset($args[$view_id]))
@@ -1939,7 +1988,6 @@ width:100%;
 		$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
 		translation::add_app('tracker');
 
-		// ?
 		$this->index(null);
 	}
 }
