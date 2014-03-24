@@ -49,14 +49,14 @@
 						<nextmatch-header label="Description" id="tr_description" options="1" class="tracker-summary"/>
 					</vbox>
 					<vbox>
-						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"/>
-						<nextmatch-sortheader label="Last modified" id="tr_modified"/>
+						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
+						<nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
 					</vbox>
 					<vbox options="0,0">
-						<nextmatch-sortheader label="Start date" id="tr_startdate" options="2"/>
-						<nextmatch-sortheader label="Due date" id="tr_duedate"/>
+						<nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
+						<nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
 					</vbox>
-					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"/>
+					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
 					<vbox options="0,0">
 						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="tracker_status_filter"/>
 					</vbox>
@@ -67,8 +67,8 @@
 						<nextmatch-filterheader id="tr_assigned" no_lang="1" options="Assigned to" class="tracker_user_filter"/>
 					</vbox>
 					<nextmatch-header align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"/>
-					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes"/>
-					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties"/>
+					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes" sortmode="DESC"/>
+					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties" sortmode="DESC"/>
 					<nextmatch-filterheader id="esc_id" options="Escalation"/>
 					<nextmatch-customfields id="customfields"/>
 				</row>
