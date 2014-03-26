@@ -713,12 +713,9 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		$query = $query_in;
-		if (!$query['csv_export'])	// do not store query for csv-export in session
+		if (!$query['csv_export'] && !$query['action'])	// do not store query for csv-export in session
 		{
-			$linked = $query['col_filter']['linked'];
-			unset($query['col_filter']['linked']);
 			egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
-			$query['col_filter']['linked'] = $linked;
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
@@ -736,7 +733,7 @@ class tracker_ui extends tracker_bo
 				'tr_status'   => $query['col_filter']['tr_status'],
 			),
 		));
-		if (!$query['csv_export'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
+		if (!$query['csv_export'] && !$query['action'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
 			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
 		{
 			//$msg .= "save the index state <br>";
@@ -747,35 +744,55 @@ class tracker_ui extends tracker_bo
 
 		$tracker = $query['col_filter']['tr_tracker'];
 
-		// Handle linked filter (show only entries linked to a certain other entry)
+		// handle action and linked filter (show only entries linked to a certain other entry)
+		$link_filters = array();
+		$links = array();
 		if ($query['col_filter']['linked'])
 		{
-			if(!is_array($query['col_filter']['linked']))
+			$link_filters['linked'] = $query['col_filter']['linked'];
+			$links['linked'] = array();
+			unset($query['col_filter']['linked']);
+		}
+		if($query['action'] && in_array($query['action'], array_keys($GLOBALS['egw_info']['apps'])) && $query['action_id'])
+		{
+			$link_filters['action'] = array('app'=>$query['action'], 'id' => $query['action_id']);
+			$links['action'] = array();
+		}
+		foreach($link_filters as $key => $link)
+		{
+			if(!is_array($link))
 			{
 				// Legacy string style
-				list($app,$id) = explode(':',$query['col_filter']['linked']);
+				list($app,$id) = explode(':',$link);
 			}
 			else
 			{
 				// Full info
-				$app = $query['col_filter']['linked']['app'];
-				$id = $query['col_filter']['linked']['id'];
+				$app = $link['app'];
+				$id = $link['id'];
 			}
 			if(!is_array($id)) $id = explode(',',$id);
-			if (!($links = egw_link::get_links_multiple($app,$id,true,'tracker')))
+			if (!($linked = egw_link::get_links_multiple($app,$id,true,'tracker')))
 			{
-				$rows = array();	// no infologs linked to selected --> no rows to return
+				$rows = array();	// no entries linked to selected link --> no rows to return
 				return 0;
 			}
-			$query['col_filter']['tr_id'] = array();
-			foreach($links as $entries)
+
+
+			foreach($linked as $infos)
 			{
-				$query['col_filter']['tr_id'] = array_merge($query['col_filter']['tr_id'],$entries);
+				$links[$key] = array_merge($links[$key],$infos);
 			}
-			$query['col_filter']['tr_id'] = array_unique($query['col_filter']['tr_id']);
-			$linked = array('app' => $app, 'id' => $id, 'title' => (count($id) == 1 ? egw_link::title($app, $id) : lang('multiple')));
+			$links[$key] = array_unique($links[$key]);
+			if($key == 'linked')
+			{
+				$linked = array('app' => $app, 'id' => $id, 'title' => (count($id) == 1 ? egw_link::title($app, $id) : lang('multiple')));
+			}
 		}
-		unset($query['col_filter']['linked']);
+		if(count($links))
+		{
+			$query['col_filter']['tr_id'] = count($links) > 1 ? call_user_func_array('array_intersect', $links) : $links[$key];
+		}
 
 		// Explode multiples into array
 		if(!is_array($tracker) && strpos($tracker,',') !== false)
@@ -1970,13 +1987,9 @@ width:100%;
 			case 'addressbook_view':
 				$app     = 'addressbook';
 				$view_id = 'ab_id';
-				$view_id2 = 'contact_id';
-				$view    = 'addressbook.addressbook_ui.view';
 				// Just set the filter
-				$state['col_filter']['linked'] = array(
-					'app' => $app,
-					'id' => $args[$view_id]
-				);
+				$state['action'] = $app;
+				$state['action_id'] = $args[$view_id];
 				egw_session::appsession($app,'tracker',$state);
 				break;
 		}
