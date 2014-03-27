@@ -260,6 +260,16 @@ class tracker_ui extends tracker_bo
 			switch($button)
 			{
 				case 'save':
+					if (is_array($this->data['tr_cc']))
+					{
+						foreach($this->data['tr_cc'] as $i => $value)
+						{
+							//imap_rfc822 should not be used, but it works reliable here, until we have some regex solution or use horde stuff
+							$addresses = imap_rfc822_parse_adrlist($value, '');
+							//error_log(__METHOD__.__LINE__.$value.'->'.array2string($addresses[0]));
+							$this->data['tr_cc'][$i]=$addresses[0]->host ? $addresses[0]->mailbox.'@'.$addresses[0]->host : $addresses[0]->mailbox;
+						}
+					}
 					$this->data['tr_cc'] = implode(',',$this->data['tr_cc']);
 					if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 					{
@@ -695,6 +705,7 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->set_cell_attribute('tr_assigned','size','3+');
 		}
+		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
 	}
 
