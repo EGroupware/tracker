@@ -258,7 +258,6 @@ no trackers found, aborting	tracker	fi	Merkintöjä ei löydetty, keskeytetään
 non-anonymous users	tracker	fi	Tunnistetut käyttäjät
 noone	tracker	fi	Ei kukaan
 note: timesheet itself is always excluded	tracker	fi	Huom: Ajanhallinta on aina poissuljettu
-nothing to save.	tracker	fi	Ei tallennettavaa
 notification	tracker	fi	Huomautusviesti
 notification message	tracker	fi	Huomautusviesti
 notification signature	tracker	fi	Huomautusviestin allekirjoitus
