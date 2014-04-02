@@ -56,12 +56,12 @@ app.classes.tracker = AppJS.extend(
 	{
 		// call parent
 		this._super.apply(this, arguments);
-		if (typeof et2.templates['tracker.admin'] != "undefined")
+		if (et2.name === 'tracker.admin')
 		{
 			this.acl_queue_access();
 		}
 
-		if (typeof et2.templates['tracker.edit'] != "undefined")
+		if (et2.name === 'tracker.edit')
 		{
 			this.edit_popup();
 		}
@@ -157,11 +157,11 @@ app.classes.tracker = AppJS.extend(
 		if(!queue_acl || queue_acl.get_value() === 'false')
 		{
 
-			this.et2.getWidgetById('users').disabled = true;
+			this.et2.getWidgetById('users').set_disabled(true);
 		}
 		else
 		{
-			this.et2.getWidgetById('users').disabled = false;
+			this.et2.getWidgetById('users').set_disabled(false);
 		}
 	},
 });
