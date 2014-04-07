@@ -160,7 +160,7 @@ class tracker_ui extends tracker_bo
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
 					foreach ($this->data['replies'] as &$reply)
 					{
-						if (!$this->htmledit || (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
+						if (!($this->htmledit || $this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
 							$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
 						}
