@@ -48,7 +48,7 @@ class tracker_mailhandler extends tracker_bo
 	 *
 	 * @var string
 	 */
-	var $mailClass = 'mail_bo';
+	var $mailClass = 'emailadmin_imapbase';
 
 	/**
 	 * List with all messages retrieved from the server
@@ -194,53 +194,28 @@ class tracker_mailhandler extends tracker_bo
 		}
 		if ($this->mailhandling[$queue]['servertype']<=2)
 		{
-			if ((isset($GLOBALS['egw_info']['apps']['mail'])&&isset($GLOBALS['egw_info']['apps']['felamimail'])) ||
-				(isset($GLOBALS['egw_info']['apps']['mail'])&&!isset($GLOBALS['egw_info']['apps']['felamimail'])))
+			try
 			{
-				try
-				{
-					$this->mailClass = 'mail_bo';
-					$params['acc_imap_type'] = 'emailadmin_imap';
-					$params['acc_id'] = 'tracker_'.trim($queue);
-					$params['acc_imap_host'] = $this->mailhandling[$queue]['server'];
-					$params['acc_imap_ssl'] = ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
-					$params['acc_imap_port'] = $this->mailhandling[$queue]['serverport'];
-					$params['acc_imap_username'] = $this->mailhandling[$queue]['username'];
-					$params['acc_imap_password'] = $this->mailhandling[$queue]['password'];
-					$params['acc_sieve_enabled'] = false;
-					$params['acc_smtp_type'] = 'defaultsmtp'; // needed, else the constructor fails
-					$eaaccount = new emailadmin_account($params);
-					$icServer = $eaaccount->imapServer();
-//error_log(__METHOD__.__LINE__.array2string($icServer));
-					return $icServer;
-				}
-				catch (Exception $e)
-				{
-					error_log(__METHOD__.__LINE__.' Failed loading mail profile:'.$e->getMessage());
-					//throw new egw_exception(__METHOD__.' Failed loading mail profile:'.$e->getMessage());
-					return false;
-				}
-			}
-			else
-			{
-				$this->mailClass = 'felamimail_bo';
-				$icServer = new emailadmin_oldimap();
-				$icServer->ImapServerId	= 'tracker_'.trim($queue);
-				$icServer->encryption	= ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
-				$icServer->host		= $this->mailhandling[$queue]['server'];
-				$icServer->port 	= $this->mailhandling[$queue]['serverport'];
-				$icServer->validatecert	= $this->mailhandling[$queue]['servertype']==2?true:false;
-				if ($icServer->validatecert)
-				{
-					$vCO=egw_cache::getCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($icServer->ImapServerId));
-					if ($vCO) $icServer->validatecert=false;
-				}
-				$icServer->username 	= $this->mailhandling[$queue]['username'];
-				$icServer->loginName 	= $this->mailhandling[$queue]['username'];
-				$icServer->password	= $this->mailhandling[$queue]['password'];
-				$icServer->enableSieve	= false;
+				$this->mailClass = 'emailadmin_imapbase';
+				$params['acc_imap_type'] = 'emailadmin_imap';
+				$params['acc_id'] = 'tracker_'.trim($queue);
+				$params['acc_imap_host'] = $this->mailhandling[$queue]['server'];
+				$params['acc_imap_ssl'] = ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
+				$params['acc_imap_port'] = $this->mailhandling[$queue]['serverport'];
+				$params['acc_imap_username'] = $this->mailhandling[$queue]['username'];
+				$params['acc_imap_password'] = $this->mailhandling[$queue]['password'];
+				$params['acc_sieve_enabled'] = false;
+				$params['acc_smtp_type'] = 'defaultsmtp'; // needed, else the constructor fails
+				$eaaccount = new emailadmin_account($params);
+				$icServer = $eaaccount->imapServer();
 //error_log(__METHOD__.__LINE__.array2string($icServer));
 				return $icServer;
+			}
+			catch (Exception $e)
+			{
+				error_log(__METHOD__.__LINE__.' Failed loading mail profile:'.$e->getMessage());
+				//throw new egw_exception(__METHOD__.' Failed loading mail profile:'.$e->getMessage());
+				return false;
 			}
 		}
 		$mBox = '{'.$this->mailhandling[$queue]['server'];	// Set the servername
@@ -348,42 +323,7 @@ class tracker_mailhandler extends tracker_bo
 			
 			$connectionFailed = false;
 			// connect
-			if ($mc=='felamimail_bo')
-			{
-				$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
-				if (PEAR::isError($tretval))
-				{
-					$tretval = false;
-					$mailobjecterrorMessage = ($tretval->message?$tretval->message:$mailobject->errorMessage);
-				}
-				// may fail for validatecert=true
-				if ( $tretval===false && $mailobject->icServer->validatecert)
-				{
-					$mailobject->icServer->validatecert=false;
-					if (is_object($mailobject->icServer->_connectionErrorObject)) $mailobject->icServer->_connectionErrorObject->message = ',';
-					$mailobject->icServer->_connected = false;
-					// try again
-					$tretval = $mailobject->openConnection($this->mailBox->ImapServerId);
-					if (!(PEAR::isError($tretval) || $tretval===false))
-					{
-						egw_cache::setCache(egw_cache::INSTANCE,'email','emailValidateCertOverrule_'.trim($this->mailBox->ImapServerId),true,$expiration=60*60*10);
-					}
-					else
-					{
-						// connection failed - remember that
-						$connectionFailed = true;
-						$mailobjecterrorMessage = ($tretval->message?$tretval->message:$mailobject->errorMessage);
-					}
-				}
-				else
-				{
-					// connection failed - remember that
-					if ($tretval===false) $connectionFailed = true;
-				}
-				$_folderName = (!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX');
-				$mailobject->reopen($_folderName);
-			}
-			elseif ($mc=='mail_bo')
+			if ($mc=='emailadmin_imapbase')
 			{
 				try
 				{
@@ -414,7 +354,7 @@ class tracker_mailhandler extends tracker_bo
 				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
 			}
 			// load lang stuff for mailheaderInfoSection creation
-			translation::add_app(($mc=='mail_bo'?'mail':'felamimail'));
+			translation::add_app('mail');
 			// retrieve list
 			if (self::LOG_LEVEL>0 &&  $tretval===false) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobjecterrorMessage);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
@@ -425,14 +365,14 @@ class tracker_mailhandler extends tracker_bo
 				$_filter['string']=trim($this->mailhandling[$queue]['address']);
 			}
 			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse=1, $_filter,$byUid=true,false);
-			$sortResult = ($mc=='mail_bo'?$_sortResult['match']->ids:$_sortResult);
+			$sortResult = $_sortResult['match']->ids;
 			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
 			$deletedCounter = 0;
 			$mailobject->reopen($_folderName);
 			foreach ((array)$sortResult as $i => $uid)
 			{
 				if (empty($uid)) continue;
-				if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']);
+				if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['mail']['saveAsOptions']);
 				if ($uid)
 				{
 					$this->user = $this->originalUser;
@@ -1264,7 +1204,7 @@ class tracker_mailhandler extends tracker_bo
 	}
 
 	/**
-	 * Process a messages from the mailbox (felamimail/NET_IMAP Object)
+	 * Process a messages from the mailbox
 	 *
 	 * @param int mailobject that holds connection to the server
 	 * @param int Message ID from the server
@@ -1314,7 +1254,7 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $addHeaderInfoSection=true;
 		}
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__."# $uid with title:".$subject.($tId==0?' for new ticket':' for ticket:'.$tId).'. FetchMailHeader:'.$addHeaderInfoSectiont.' mailheaderhandling:'.$this->mailhandling[$queue]['mailheaderhandling']);
-		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection,(!($GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='text_only')));
+		$mailcontent = $mailobject::get_mailcontent($mailobject,$uid,$partid='',$_folderName,$this->htmledit,$addHeaderInfoSection,(!($GLOBALS['egw_info']['user']['preferences']['mail']['saveAsOptions']==='text_only')));
 
 		// on we go, as everything seems to be in order. flagging the message
 		$rv = $mailobject->flagMessages('seen', $uid, $_folderName);
@@ -1322,7 +1262,7 @@ class tracker_mailhandler extends tracker_bo
 
 		// this one adds the mail itself (as message/rfc822 (.eml) file) to the infolog as additional attachment
 		// this is done to have a simple archive functionality
-		if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['felamimail']['saveAsOptions']==='add_raw')
+		if ($mailcontent && $GLOBALS['egw_info']['user']['preferences']['mail']['saveAsOptions']==='add_raw')
 		{
 			$message = $mailobject->getMessageRawBody($uid, $partid, $_folderName);
 			$headers = $mailobject->getMessageHeader($uid, $partid,true,false,$_folderName);
