@@ -204,6 +204,11 @@ class tracker_mailhandler extends tracker_bo
 				$params['acc_imap_port'] = $this->mailhandling[$queue]['serverport'];
 				$params['acc_imap_username'] = $this->mailhandling[$queue]['username'];
 				$params['acc_imap_password'] = $this->mailhandling[$queue]['password'];
+				$params['acc_folder_sent'] = 'none';
+				$params['acc_folder_trash'] = 'none';
+				$params['acc_folder_draft'] = 'none';
+				$params['acc_folder_template'] = 'none';
+				$params['acc_folder_junk'] = 'none';
 				$params['acc_sieve_enabled'] = false;
 				$params['acc_smtp_type'] = 'defaultsmtp'; // needed, else the constructor fails
 				$eaaccount = new emailadmin_account($params);
