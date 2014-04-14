@@ -72,6 +72,8 @@ class tracker_hooks
 
 			$file = array(
 			);
+
+			$file['Placeholders'] = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
 			display_sidebox($appname,$GLOBALS['egw_info']['apps'][$appname]['title'].' '.lang('Menu'),$file);
 		}
 
