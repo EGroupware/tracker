@@ -162,13 +162,14 @@ class tracker_ui extends tracker_bo
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
 					foreach ($this->data['replies'] as &$reply)
 					{
+						//error_log(__METHOD__.__LINE__.' Ticket:#'.$this->data['tr_id'].':'.strlen( $reply['reply_message']));
 						if (!($this->htmledit || $this->data['tr_edit_mode'] == 'html') || (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
 							$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
 						}
-						if (($this->htmledit || $this->data['tr_edit_mode'] == 'html') && strlen( $reply['reply_message'] ) > 65300)
+						if (($this->htmledit || $this->data['tr_edit_mode'] == 'html') && strlen( $reply['reply_message'] ) > 64000)
 						{
-							//error_log(__METHOD__.__LINE__.' '.strlen( $reply['reply_message']));
+							//error_log(__METHOD__.__LINE__.' Ticket:#'.$this->data['tr_id'].':'.strlen( $reply['reply_message']));
 							$htmLawed_config = array(
 								'keep_bad'=>2, //remove tags but keep element content (4 and 6 keep element content only if text (pcdata) is valid in parent element as per specs, this may lead to textloss if balance is switched on)
 								'balance'=>1,//turn off tag-balancing (config['balance']=>0). That will not introduce any security risk; only standards-compliant tag nesting check/filtering will be turned off (basic tag-balance will remain; i.e., there won't be any unclosed tag, etc., after filtering)
