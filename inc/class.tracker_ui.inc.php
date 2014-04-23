@@ -1142,7 +1142,7 @@ class tracker_ui extends tracker_bo
 				if(!$multi_queue)
 				{
 					// Only select 1 queue when going from multi to single
-					$tracker = explode(',',$tracker);
+					$tracker = is_array($tracker) ? $tracker : explode(',',$tracker);
 					$tracker = $content['nm']['col_filter']['tr_tracker'] = $tracker[0];
 				}
 			}
