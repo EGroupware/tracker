@@ -608,6 +608,13 @@ function tracker_upgrade1_9_007()
 		'default' => '1'
 	));
 
+	// drop all unique indexes limiting escalations still created on new instances
+	$def = $GLOBALS['egw_setup']->oProc->GetIndexes('egw_tracker_escalations');
+	foreach((array)$def['uc'] as $columns)
+	{
+		$GLOBALS['egw_setup']->oProc->DropIndex('egw_tracker_escalations', $columns);
+	}
+
 	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_escalations','tr_tracker',array(
 		'type' => 'varchar',
 		'precision' => '55',
