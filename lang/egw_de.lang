@@ -15,7 +15,7 @@
 (beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
---> enter new name	tracker	de	--> neuen Namen eingeben
+--> enter new name	tracker	de	-> Neuer Name für eine Queue
 1 - lowest	tracker	de	1 - niedrigste
 2 days in advance	tracker	de	2 Tage im Voraus
 2 years ago	tracker	de	2 Jahre zurück
@@ -265,13 +265,15 @@ list of files linked to the current record	tracker	de	Liste der Dateien, die mit
 mail handling	tracker	de	E-Mailumwandlung
 mailbox settings used: %1	tracker	de	Die Einstellungen der  Mailbox %1 wurden verwendet.
 manage mapping	tracker	de	Feldzuordnungen bearbeiten
+mark as read	tracker	de	Als gelesen markieren
+mark as unread	tracker	de	Als ungelesen markieren
 match again after	tracker	de	zutreffend nach
 matching filter	tracker	de	Filter zutreffend
 max length of the input [, length of the inputfield (optional)]	tracker	de	max. Länge des Textfeldes [, Länge des Textfeldes (optional)]
 maximum %1 times	tracker	de	Maximum %1 Zeiten
 maximum %s times	tracker	de	Maximum %s Zeiten
 miscellaneous	tracker	de	Sonstiges
-multiple changes	tracker	de	Mehrfache Änderungen
+multiple changes	tracker	de	Mehrfach-Änderungen
 name of current user, all other contact fields are valid too	tracker	de	Name des aktuellen Benutzers, alle anderen Kontaktfelder können Sie ebenso verwenden
 new %1	tracker	de	%1 hinzufügen
 new items	tracker	de	Neue Einträge

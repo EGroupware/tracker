@@ -265,6 +265,8 @@ list of files linked to the current record	tracker	en	List of files linked to th
 mail handling	tracker	en	Mail handling
 mailbox settings used: %1	tracker	en	Mailbox settings used: %1
 manage mapping	tracker	en	Manage mapping
+mark as read	tracker	en	Mark as read
+mark as unread	tracker	en	Mark as unread
 match again after	tracker	en	Match again after
 matching filter	tracker	en	Matching filter
 max length of the input [, length of the inputfield (optional)]	tracker	en	max length of the input [, length of the inputfield (optional)]
