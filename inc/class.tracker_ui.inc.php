@@ -689,7 +689,7 @@ class tracker_ui extends tracker_bo
 
 		if ($this->tracker_has_cat_specific_priorities($tracker))
 		{
-			$tpl->set_cell_attribute('cat_id','onchange',true);
+			$tpl->set_cell_attribute('cat_id','onchange','1');
 		}
 		// No notifications needs label hidden too
 		if($readonlys['no_notifications'])
