@@ -156,10 +156,10 @@
 	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%" height="250" overflow="auto">
 			<columns>
-				<column width="100"/>
-				<column width="200"/>
-				<column width="78"/>
-				<column width="90"/>
+				<column width="85"/>
+				<column width="165"/>
+				<column width="40"/>
+				<column width="70"/>
 				<column width="200"/>
 			</columns>
 			<rows>
@@ -175,7 +175,7 @@
 				<row>
 					<description for="tr_assigned" value="Assigned to"/>
 					<menulist>
-						<menupopup  class="tracker_assign" empty_label="Not assigned" id="tr_assigned" multiple="true" no_lang="1" tags="true"/>
+						<menupopup  class="tracker_assign" id="tr_assigned" multiple="true" no_lang="1" tags="true" empty_label="User or group"/>
 					</menulist>
 					<description/>
 					<description value="Group"/>
@@ -194,13 +194,13 @@
 		</grid>
 	</template>
 	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
-		<grid width="100%">
+		<grid width="99%">
 			<columns>
 				<column width="100"/>
 				<column width="200"/>
-				<column width="80"/>
+				<column width="30"/>
 				<column width="90"/>
-				<column width="120"/>
+				<column width="100"/>
 				<column width="30"/>
 				<column width="50"/>
 				<column width="4"/>
@@ -292,7 +292,8 @@
 					<menulist>
 						<menupopup type="select-account" id="tr_modifier" readonly="true"/>
 					</menulist>
-					<date-time id="tr_modified" readonly="true" class="et2_nowrap" align="right"/>
+					<date-time id="tr_modified" readonly="true" class="et2_nowrap" span="2" align="right"/>
+					<description/>
 				</row>
 				<row class="dialogFooterToolbar">
 					<button label="Save" id="button[save]"/>
