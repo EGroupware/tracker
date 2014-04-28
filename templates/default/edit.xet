@@ -22,7 +22,7 @@
 				<column/>
 			</columns>
 			<rows>
-				<row class="th">
+				<row class="th" height="29px">
 					<description value="Comments"/>
 					<textbox type="integer" id="num_replies" readonly="true"/>
 				</row>
