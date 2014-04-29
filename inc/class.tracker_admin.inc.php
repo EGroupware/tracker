@@ -247,6 +247,7 @@ class tracker_admin extends tracker_bo
 							//_debug_array(array($name=>$cat));
 							if (!is_array($cat) || !$cat['name']) continue;	// ignore empty (new) cats
 
+								if($name == 'resolutions') error_log(array2string($cat));
 							$new_cat_descr = 'tracker-';
 							switch($name)
 							{
@@ -433,15 +434,15 @@ class tracker_admin extends tracker_bo
 					case 'response':
 						if ($data['response']) $cat['description'] = $data['response'];
 						$content['responses'][$n=$r++] = $cat;
-						if ($tracker != $cat['parent']) $readonlys['responses'][$n.'[description]'] = true;
+						if ($tracker != $cat['parent']) $readonlys['responses'][$n]['description'] = true;
 						break;
 					case 'project':
 						$content['projects'][$n=$p++] = $cat + $data;
-						if ($tracker != $cat['parent']) $readonlys['responses'][$n.'[projectlist]'] = true;
+						if ($tracker != $cat['parent']) $readonlys['responses'][$n]['projectlist'] = true;
 						break;
 					case 'stati':
 						$content['statis'][$n=$s++] = $cat + $data;
-						if ($tracker != $cat['parent']) $readonlys['statis'][$n.'[closed]'] = true;
+						if ($tracker != $cat['parent']) $readonlys['statis'][$n]['closed'] = true;
 						break;
 					case 'resolution':
 						$content['resolutions'][$n=$i++] = $cat + $data;
@@ -451,7 +452,7 @@ class tracker_admin extends tracker_bo
 					default:	// cat
 						$data['type'] = 'cat';
 						$content['cats'][$n=$c++] = $cat + $data;
-						if ($tracker != $cat['parent']) $readonlys['cats'][$n.'[autoassign]'] = true;
+						if ($tracker != $cat['parent']) $readonlys['cats'][$n]['autoassign'] = true;
 						break;
 				}
 				$namespace = $data['type'].'s';
@@ -463,7 +464,7 @@ class tracker_admin extends tracker_bo
 				// global cat, but not all tracker --> disable name, autoassign and delete
 				elseif ($tracker && !$cat['parent'])
 				{
-					$readonlys[$namespace][$n.'[name]'] = $readonlys[$namespace]['delete['.$cat['id'].']'] = true;
+					$readonlys[$namespace][$n]['name'] = $readonlys[$namespace]['delete'][$cat['id']] = true;
 				}
 				if ($tracker && isset($data['denyglobal']) && in_array($tracker, $data['denyglobal']))
 				{
