@@ -34,4 +34,4 @@ label.tracker_trIdEdit:before { content: "#"; }
 
 /* Restricted access replies */
 .reply_visible_1 { border: 1px dashed gray; }
-.reply_visible_* { white-space: normal; }
+span.reply_visible_0 { white-space: normal !important; }
