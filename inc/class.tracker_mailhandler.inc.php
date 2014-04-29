@@ -516,7 +516,56 @@ class tracker_mailhandler extends tracker_bo
 		} // END OF STRUTURE
 		return false;
 	} // END OF FUNCTION
-
+	
+	/**
+	 * Extract the lastest reply from mail body message
+	 *
+	 *
+	 * @param {string} $mailBody string of mail body message
+	 *
+	 * @return {string} latest reply of mail body message
+	 *
+	 * @todo Find an optimize and accurate pattern/method to recognise content of mail message (eg. Recognition/Classification algurithm like Perceptron or similar)
+	 */
+	function extract_latestReply ($mailBody)
+	{
+		$mailCntArray = preg_split("/(\r\n|\n|\r)/",$mailBody);
+		$fRline = true;
+		$oMInx = 0;
+		$alienSender = false;
+		
+		foreach ($mailCntArray as $key => $val)
+		{
+			if (preg_match ("/^From:.*@gmail.*/", $mailCntArray[$key]))
+			{
+				$alienSender = true;
+			}
+			if (preg_match("/^-----.*Original message---.*/", $mailCntArray[$key]))
+			{
+				$oMInx = $key;
+			}
+			if (preg_match("/^>.*/",$mailCntArray[$key]))
+			{
+				if ($fRline && $alienSender)
+				{
+					$fRline = false;
+					unset($mailCntArray[$key-2]);
+					unset($mailCntArray[$key-1]);
+				}
+				elseif ($fRline && $oMInx > 0)
+				{
+					$fRline = false;
+					for ($i =  $oMInx; $i<$key; $i++)
+					{
+						unset ($mailCntArray[$i]);
+					}
+				}
+				unset($mailCntArray[$key]);
+			}
+		}
+		return join("\n", $mailCntArray);
+	}
+	
 	/**
 	 * Retrieve and decode a bodypart
 	 *
@@ -1388,6 +1437,9 @@ class tracker_mailhandler extends tracker_bo
 		}
 		else
 		{
+			// Extract latest reply from the mail message content and replace it for last comment
+			$this->data['tr_description'] = $this->extract_latestReply($this->data['tr_description']);
+			
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data['reply_message']));
 			if (!$senderIdentified)
 			{
