@@ -107,6 +107,13 @@ label.tracker_trIdEdit:before {
 /* Restricted access replies */
 .reply_visible_1 {
   border: 1px dashed gray;
+  background: beige;
+  width: 100%;
+  display: inline-block;
+  white-space: normal !important;
+}
+span.reply_visible_0 {
+  white-space: normal !important;
 }
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
