@@ -1207,7 +1207,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
-			$this->data['reply_message'] = ($mailHeaderInfo&&$header2comment?$mailHeaderInfo:'').$this->mailBody;
+			$this->data['reply_message'] = ($mailHeaderInfo&&$header2comment?$mailHeaderInfo:'').$this->extract_latestReply($this->mailBody);
 			$this->data['reply_created'] = $mc::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
@@ -1438,7 +1438,7 @@ class tracker_mailhandler extends tracker_bo
 		else
 		{
 			// Extract latest reply from the mail message content and replace it for last comment
-			$this->data['tr_description'] = $this->extract_latestReply($this->data['tr_description']);
+			$this->data['reply_message'] = $this->extract_latestReply($this->data['reply_message']);
 			
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data['reply_message']));
 			if (!$senderIdentified)
