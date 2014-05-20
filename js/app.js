@@ -100,7 +100,7 @@ app.classes.tracker = AppJS.extend(
 		if (_action.id === 'print')
 		{
 			var popup  = egw().open_link('/index.php?menuaction=tracker.tracker_ui.tprint&tr_id='+id[1],'',egw().link_get_registry('tracker','add_popup'),'tracker');
-			popup.print();
+			popup.onload = function (){this.print();};
 		}
 	},
 
