@@ -6,12 +6,12 @@
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-&#9830; not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
-&#9830; own not closed	tracker	de	♦ Eigene nicht geschlossen
-&#9830; own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene, nicht geschlossen
-&#9830; own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
-&#9830; without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
-&#9830; without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
+♦ not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
+♦ own not closed	tracker	de	♦ Eigene nicht geschlossen
+♦ own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene, nicht geschlossen
+♦ own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
+♦ without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
+♦ without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
 (beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
