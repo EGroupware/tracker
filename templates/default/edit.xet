@@ -10,7 +10,7 @@
 			</columns>
 			<rows>
 				<row class="row_off" valign="top">
-					<htmlarea mode="@tr_description_options" id="tr_description" needed="1" span="3"/>
+					<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3"/>
 				</row>
 			</rows>
 		</grid>
@@ -59,7 +59,7 @@
 					<vbox>
 						<description value="Comment" for="reply_message"/>
 					</vbox>
-					<htmlarea id="reply_message" mode="@tr_reply_options" span="3"/>
+					<htmlarea id="reply_message" options="@tr_reply_options" span="3"/>
 				</row>
 			</rows>
 		</grid>
