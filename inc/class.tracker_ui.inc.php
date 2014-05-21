@@ -269,8 +269,8 @@ class tracker_ui extends tracker_bo
 							//error_log(__METHOD__.__LINE__.$value.'->'.array2string($addresses[0]));
 							$this->data['tr_cc'][$i]=$addresses[0]->host ? $addresses[0]->mailbox.'@'.$addresses[0]->host : $addresses[0]->mailbox;
 						}
+						$this->data['tr_cc'] = implode(',',$this->data['tr_cc']);
 					}
-					$this->data['tr_cc'] = implode(',',$this->data['tr_cc']);
 					if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
 					{
 						$msg = lang('Permission denied !!!');
