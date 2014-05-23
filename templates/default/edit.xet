@@ -167,9 +167,9 @@
 					<description statustext="List of coma separated email address" value="Cc"/>
 					<taglist-email id="tr_cc"  allowFreeEntries="true" empty_label="Add email-address"  class="et2_fullWidth"/>
 					<description/>
-					<description for="tr_priority" value="Priority"/>
+					<description value="Group"/>
 					<menulist span="all" >
-						<menupopup id="tr_priority" class="et2_fullWidth"/>
+						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1" class="et2_fullWidth"/>
 					</menulist>
 				</row>
 				<row>
@@ -178,17 +178,13 @@
 						<menupopup  class="tracker_assign" id="tr_assigned" multiple="true" no_lang="1" tags="true" empty_label="User or group"/>
 					</menulist>
 					<description/>
-					<description value="Group"/>
-					<menulist span="all" >
-						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1" class="et2_fullWidth"/>
-					</menulist>
+					<description for="tr_private" value="Private"/>
+					<checkbox id="tr_private" span="all" class="et2_fullWidth"/>
 				</row>
 				<row>
 					<description value="Close date" />
 					<date-time label=" " id="tr_closed" class="et2_fullWidth"/>
 					<description/>
-					<description for="tr_private" value="Private"/>
-					<checkbox id="tr_private" span="all" class="et2_fullWidth"/>
 				</row>
 			</rows>
 		</grid>
@@ -231,6 +227,10 @@
 						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one" class="et2_fullWidth"/>
 					</menulist>
 					<description/>
+					<description for="tr_priority" value="Priority"/>
+					<menulist span="all" >
+						<menupopup id="tr_priority" class="et2_fullWidth"/>
+					</menulist>
 				</row>
 				<row class="dialogHeader4" disabled="!@show_dates">
 					<description value="Start date"/>
