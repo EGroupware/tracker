@@ -16,7 +16,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%" height="250" overflow="auto">
+		<grid width="100%" height="250" class="egwGridView_grid">
 			<columns>
 				<column width="100"/>
 				<column/>
