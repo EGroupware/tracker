@@ -66,7 +66,33 @@ app.classes.tracker = AppJS.extend(
 			this.edit_popup();
 		}
 	},
-
+	
+	/**
+	 * Observer method receives update notifications from all applications
+	 * 
+	 * @param {string} _msg message (already translated) to show, eg. 'Entry deleted'
+	 * @param {string} _app application name
+	 * @param {(string|number)} _id id of entry to refresh or null
+	 * @param {string} _type either 'update', 'edit', 'delete', 'add' or null
+	 * - update: request just modified data from given rows.  Sorting is not considered,
+	 *		so if the sort field is changed, the row will not be moved.
+	 * - edit: rows changed, but sorting may be affected.  Requires full reload.
+	 * - delete: just delete the given rows clientside (no server interaction neccessary)
+	 * - add: requires full reload for proper sorting
+	 * @param {string} _msg_type 'error', 'warning' or 'success' (default)
+	 * @param {string} _targetapp which app's window should be refreshed, default current
+	 */
+	observer: function(_msg, _app, _id, _type, _msg_type, _targetapp)
+	{
+		switch (_app)
+		{
+			case 'timesheet':
+				var nm = this.et2 ? this.et2.getWidgetById('nm') : null;
+				if (nm) nm.applyFilters();
+				break;
+		}
+	},
+	
 	/**
 	 * expand_filter
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
@@ -82,7 +108,7 @@ app.classes.tracker = AppJS.extend(
 		_widget.set_disabled(true);
 
 		var selectbox = _widget.getParent()._children[0]._children[0];
-		selectbox.set_multiple(true)
+		selectbox.set_multiple(true);
 		selectbox.set_tags(true, '98%');
 
 		return false;
@@ -163,5 +189,5 @@ app.classes.tracker = AppJS.extend(
 		{
 			this.et2.getWidgetById('users').set_disabled(false);
 		}
-	},
+	}
 });
