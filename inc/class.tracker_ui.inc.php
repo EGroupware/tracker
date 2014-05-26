@@ -880,7 +880,7 @@ class tracker_ui extends tracker_bo
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 			// in case there is no pref setting for show_sum_timesheet anymore, check for selected column tr_sum_timesheets
-			if ((!$this->prefs['show_sum_timesheet'] || !isset($this->prefs['show_sum_timesheet'])) && (stripos($query_in['selectcols'],'tr_sum_timesheets')!==false) ) $this->prefs['show_sum_timesheet']=1;
+			if ((!$this->prefs['show_sum_timesheet'] || !isset($this->prefs['show_sum_timesheet'])) && (stripos(implode(',',$query_in['selectcols']),'tr_sum_timesheets')!==false)) $this->prefs['show_sum_timesheet']=1;
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
 			{
 				unset($links);
