@@ -85,16 +85,19 @@ app.classes.tracker = AppJS.extend(
 	 */
 	observer: function(_msg, _app, _id, _type, _msg_type, _links)
 	{
-		if (typeof _links['tracker'] != 'undefined')
+		if (typeof _links != 'underfined')
 		{	
-			switch (_app)
-			{
-				case 'timesheet':
-					var nm = this.et2 ? this.et2.getWidgetById('nm') : null;
-					if (nm) nm.applyFilters();
-					break;
+			if (typeof _links.tracker != 'undefined')
+			{	
+				switch (_app)
+				{
+					case 'timesheet':
+						var nm = this.et2 ? this.et2.getWidgetById('nm') : null;
+						if (nm) nm.applyFilters();
+						break;
+				}
 			}
-		}
+		}	
 	},
 	
 	/**
