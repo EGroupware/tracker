@@ -296,9 +296,9 @@
 					<description/>
 				</row>
 				<row class="dialogFooterToolbar">
-					<button label="Save" id="button[save]"/>
-					<button label="Apply" id="button[apply]"/>
 					<hbox options="0,0" span="all">
+						<button label="Save" id="button[save]"/>
+						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify" id="no_notifications"/>
 						<vbox align="right" options="0,0">
