@@ -260,6 +260,7 @@ class tracker_ui extends tracker_bo
 			switch($button)
 			{
 				case 'save':
+				case 'apply':
 					if (is_array($this->data['tr_cc']))
 					{
 						foreach($this->data['tr_cc'] as $i => $value)
@@ -343,6 +344,11 @@ class tracker_ui extends tracker_bo
 						$msg = lang('Error saving the entry!!!');
 						break;
 					}
+					if ($button == 'apply')
+					{
+						$_GET['tr_id'] = $this->data['tr_id'];
+						return $this->edit($_GET['tr_id'], $msg);
+					}	
 					// fall-through for save
 				case 'cancel':
 					if ($popup)
