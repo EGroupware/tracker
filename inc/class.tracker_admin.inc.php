@@ -211,9 +211,14 @@ class tracker_admin extends tracker_bo
 						$this->save_config();
 						$validationError=false;
 						//$this->load_config();
+						if (!is_array($this->mailhandling) && !empty($this->mailhandling))
+						{
+							$this->mailhandling=array(0=>array('interval'=>0));
+							$validationError=true;
+						}
 						$mailhandler = new tracker_mailhandler($this->mailhandling);
 						foreach((array)$this->mailhandling as $queue_id => $handling) {
-							if ($handling['interval'])
+							if (is_array($this->mailhandling[$queue_id]) && $this->mailhandling[$queue_id]['interval'])
 							{
 								try
 								{
@@ -222,7 +227,7 @@ class tracker_admin extends tracker_bo
 								catch (egw_exception_assertion_failed $e)
 								{	// not sure that this is needed to pass on exeptions
 									$msg .= ($msg?' ':'').$e->getMessage();
-									$this->mailhandling[$queue_id]['interval']=0;
+									if (is_array($this->mailhandling[$queue_id])) $this->mailhandling[$queue_id]['interval']=0;
 									$validationError=true;
 								}
 							}
