@@ -13,6 +13,10 @@
  */
 /* $Id$ */
 /* Header classes*/
+#tracker-index_tracker-index-left_multiqueue {
+  /* This prevents the multi-select from pushing down the add button */
+  max-width: 95%;
+}
 tr.dialogHeader td,
 tr.dialogHeader2 td,
 tr.dialogHeader3 td,
