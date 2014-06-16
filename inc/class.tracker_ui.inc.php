@@ -885,9 +885,8 @@ class tracker_ui extends tracker_bo
 			if (isset($rows[$n]['tr_description'])) $rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
-			// in case there is no pref setting for show_sum_timesheet anymore, check for selected column tr_sum_timesheets
-			if ((!$this->prefs['show_sum_timesheet'] || !isset($this->prefs['show_sum_timesheet'])) && (stripos(implode(',',$query_in['selectcols']),'tr_sum_timesheets')!==false)) $this->prefs['show_sum_timesheet']=1;
-			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $this->prefs['show_sum_timesheet'])
+			
+			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				unset($links);
 				if (($links = egw_link::get_links('tracker',$row['tr_id'])) &&
@@ -903,7 +902,7 @@ class tracker_ui extends tracker_bo
 						}
 						if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
 					}
-					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']) && $timesheets && $this->prefs['show_sum_timesheet'])
+					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 					{
 						$sum = ExecMethod('timesheet.timesheet_bo.sum',$timesheets);
 						$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
