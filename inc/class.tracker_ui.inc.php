@@ -348,7 +348,7 @@ class tracker_ui extends tracker_bo
 					{
 						$_GET['tr_id'] = $this->data['tr_id'];
 						return $this->edit($_GET['tr_id'], $msg);
-					}	
+					}
 					// fall-through for save
 				case 'cancel':
 					if ($popup)
@@ -885,7 +885,7 @@ class tracker_ui extends tracker_bo
 			if (isset($rows[$n]['tr_description'])) $rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
-			
+
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				unset($links);
@@ -978,10 +978,6 @@ class tracker_ui extends tracker_bo
 			$rows['no_tr_startdate_tr_duedate'] = true;
 		}
 
-		$trackerlabel = array();
-		foreach((array)$tracker as $t){$trackerlabel[]=$this->trackers[$t];}
-		if (isset($linked)) $query['col_filter']['linked'] = $linked;  // add linked back to the colfilter
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').': '.($tracker ? join(',',$trackerlabel) : lang('All'));
 		return $total;
 	}
 
