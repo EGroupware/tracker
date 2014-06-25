@@ -452,7 +452,6 @@ function tracker_upgrade1_9_001()
 	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker','tr_resolution',array(
 			'type' => 'int',
 			'precision' => '4',
-			'nullable' => False
 	));
 
 	// Create new resolutions
