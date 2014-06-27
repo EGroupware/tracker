@@ -321,7 +321,7 @@ class tracker_ui extends tracker_bo
 						usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
 						foreach($this->all_cats as $cat)
 						{
-							if (!is_array($data = unserialize($cat['data']))) $data = array('type' => $data);
+							if (!is_array($data = $cat['data'])) $data = array('type' => $data);
 							//echo "<p>".$this->data['tr_tracker'].": $cat[name] ($cat[id]/$cat[parent]/$cat[main]): ".print_r($data,true)."</p>\n";
 
 							if ($cat['parent'] == $this->data['tr_tracker'] && $data['type'] != 'tracker' && $data['type']=='project')

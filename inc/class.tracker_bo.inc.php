@@ -1189,7 +1189,7 @@ class tracker_bo extends tracker_so
 		$default = $none_id = null;
 		foreach($this->all_cats as $cat)
 		{
-			$cat_data = unserialize($cat['data']);
+			$cat_data =& $cat['data'];
 			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
 			if ($cat_type == $type &&	// cats need to be either tracker specific or global and tracker NOT in denyglobal
 				(!$cat['parent'] && !($tracker && in_array($tracker, (array)$cat_data['denyglobal'])) ||
@@ -1339,7 +1339,7 @@ class tracker_bo extends tracker_so
 	{
 		foreach($this->all_cats as $cat)
 		{
-			if (($data = unserialize($cat['data'])) && $data['type'] == 'response' && $cat['id'] == $id)
+			if ($cat['data']['type'] == 'response' && $cat['id'] == $id)
 			{
 				return $data['response'] ? $data['response'] : $cat['description'];
 			}
@@ -1358,8 +1358,7 @@ class tracker_bo extends tracker_so
 		{
 			if ($cat['id'] == $this->data['cat_id'])
 			{
-				$data = unserialize($cat['data']);
-				$user = $data['autoassign'];
+				$user = $cat['data']['autoassign'];
 
 				if ($user && $this->is_technician($this->data['tr_tracker'],$user,true))
 				{
@@ -1964,7 +1963,7 @@ class tracker_bo extends tracker_so
 				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
-					$gg = egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
