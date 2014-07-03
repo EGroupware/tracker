@@ -1620,6 +1620,7 @@ width:100%;
 						$attachments[] = array(
 								'name' => trim($subject).'.eml',
 								'mimeType' => 'message/rfc822',
+								'type' => 'message/rfc822',
 								'tmp_name' => $attachment_file,
 								'size' => $size,
 							);
@@ -1640,6 +1641,7 @@ width:100%;
 						$attachments[] = array(
 							'name' => $attachment['name'],
 							'mimeType' => $attachment['type'],
+							'type' => $attachment['type'],
 							'tmp_name' => $attachment['file'],
 							'size' => $attachment['size'],
 						);
@@ -1662,6 +1664,7 @@ width:100%;
 				$attachments[] = array(
 						'name' => trim($subject).'.eml',
 						'mimeType' => 'message/rfc822',
+						'type' => 'message/rfc822',
 						'tmp_name' => $attachment_file,
 						'size' => $size,
 					);
@@ -1724,6 +1727,7 @@ width:100%;
 				$mailcontent['attachments'][] = array(
 						'name' => trim($subject).'.eml',
 						'mimeType' => 'message/rfc822',
+						'type' => 'message/rfc822',
 						'tmp_name' => $attachment_file,
 						'size' => $size,
 					);

@@ -1329,6 +1329,7 @@ class tracker_mailhandler extends tracker_bo
 			$mailcontent['attachments'][] = array(
 					'name' => trim($subject).'.eml',
 					'mimeType' => 'message/rfc822',
+					'type' => 'message/rfc822',
 					'tmp_name' => $attachment_file,
 					'size' => $size,
 				);
