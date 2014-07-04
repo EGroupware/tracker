@@ -2,7 +2,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%"/>
+		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="250"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" height="250" class="egwGridView_grid">
