@@ -2,18 +2,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<grid width="100%" height="250" overflow="auto">
-			<columns>
-				<column/>
-				<column/>
-				<column/>
-			</columns>
-			<rows>
-				<row class="row_off" valign="top">
-					<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3"/>
-				</row>
-			</rows>
-		</grid>
+		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" height="250" class="egwGridView_grid">
@@ -67,7 +56,7 @@
 	<template id="tracker.edit.links" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%" height="250" overflow="auto">
 			<columns>
-				<column width="100"/>
+				<column width="99%"/>
 				<column/>
 			</columns>
 			<rows>
@@ -190,7 +179,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
-		<grid width="99%">
+		<grid width="100%">
 			<columns>
 				<column width="100"/>
 				<column width="200"/>
