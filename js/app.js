@@ -143,13 +143,17 @@ app.classes.tracker = AppJS.extend(
 	 */
 	edit_popup: function()
 	{
-		if (!this.et2.node.baseURI.match('[no][no_]popup'))
+		if (typeof this.et2.node !='undefined' && typeof this.et2.node.baseURI != 'undefined')
 		{
-			window.focus();
-			if (this.et2.node.baseURI.match('composeid')) //tracker created by mail application
+			if (!this.et2.node.baseURI.match('[no][no_]popup'))
 			{
-				window.resizeTo(750,550);
-			}
+				window.focus();
+			
+				if (this.et2.node.baseURI.match('composeid')) //tracker created by mail application
+				{
+					window.resizeTo(750,550);
+				}
+			}	
 		}
 	},
 
