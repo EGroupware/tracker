@@ -31,7 +31,7 @@ class tracker_customfields extends customfields
 	/**
 	 * Edit/Create Custom fields with type
 	 *
-	 * @param $content Content from eTemplate 
+	 * @param $content Content from eTemplate
 	 */
 	function edit($content = array())
 	{
@@ -72,9 +72,9 @@ class tracker_customfields extends customfields
 						{
 							break;
 						}
+					//fall through	
 					case 'cancel':
-						$GLOBALS['egw']->redirect_link($content['referer'] ? $content['referer'] : '/admin/index.php');
-						exit;
+						egw::redirect_link('/admin/index.php', null, 'admin');
 				}
 			}
 			$referer = $content['referer'];

@@ -364,10 +364,7 @@ class tracker_admin extends tracker_bo
 					if ($button == 'apply') break;
 					// fall-through for save
 				case 'cancel':
-					$GLOBALS['egw']->redirect_link('/index.php',array(
-						'menuaction' => 'tracker.tracker_ui.index',
-						'msg' => $msg,
-					));
+					egw::redirect_link('/admin/index.php', null, 'admin');
 					break;
 
 				default:
