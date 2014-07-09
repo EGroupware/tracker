@@ -121,7 +121,7 @@
 				<row>
 					<groupbox span="2">
 						<caption label="Filter"/>
-						<grid width="100%" class="big_boxes">
+						<grid class="big_boxes">
 							<columns>
 								<column width="87"/>
 								<column width="200"/>
@@ -180,10 +180,7 @@
 							</rows>
 						</grid>
 					</groupbox>
-					<description/>
-				</row>
-				<row>
-					<groupbox span="2">
+					<groupbox class="tracker_escalation_action">
 						<caption label="Action"/>
 						<grid width="100%" id="set">
 							<columns>
@@ -250,9 +247,8 @@
 							</rows>
 						</grid>
 					</groupbox>
-					<description/>
 				</row>
-				<row>
+				<row class="dialogFooterToolbar">
 					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
@@ -263,6 +259,7 @@
 			</rows>
 		</grid>
 		<styles>
+			.tracker_escalation_action {position: relative;top: -28px;}
 			.reply, .reply&gt;textarea  { width: 100%; }
 .mStatus, .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
 fieldset&gt;table&gt;tbody&gt;tr&gt;td&gt;table, td&gt;table&gt;tbody&gt;tr&gt;td&gt;select {width: 100%;}
