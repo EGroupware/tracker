@@ -634,6 +634,7 @@ class tracker_admin extends tracker_bo
 				'order'          =>	'esc_time',
 				'sort'           =>	'ASC',// IO direction of the sort: 'ASC' or 'DESC'
 				'row_id'	=>	'esc_id',
+				'placeholder_actions' => array(),
 				'actions'	=>	array(
 					'edit' => array(
 						'caption' => 'edit',
