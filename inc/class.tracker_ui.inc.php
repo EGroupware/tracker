@@ -1269,7 +1269,7 @@ class tracker_ui extends tracker_bo
 	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
 	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
-	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description',
+	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description,tr_resolution,tr_completion,tr_sum_timesheets,votes,bounties',
 				'row_id'         => 'tr_id',
 				'row_modified'   => 'tr_modified'
 			);

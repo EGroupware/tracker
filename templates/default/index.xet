@@ -15,24 +15,24 @@
 	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
 		<grid width="100%">
 			<columns>
-				<column/>
-				<column disabled="@no_tr_tracker"/>
-				<column disabled="@no_cat_id"/>
-				<column/>
-				<column width="30%"/>
-				<column/>
-				<column/>
-				<column disabled="@no_tr_startdate_tr_duedate"/>
-				<column/>
+				<column width="65"/>
+				<column width="10%" disabled="@no_tr_tracker"/>
+				<column width="10%" disabled="@no_cat_id"/>
 				<column width="10%"/>
-				<column/>
-				<column/>
+				<column width="auto"/>
+				<column width="auto"/>
+				<column width="120"/>
+				<column width="120" disabled="@no_tr_startdate_tr_duedate"/>
+				<column width="45"/>
+				<column width="10%"/>
+				<column width="10%"/>
+				<column width="65"/>
 				<column width="18%"/>
 				<column disabled="@no_tr_sum_timesheets"/>
 				<column disabled="@no_votes"/>
 				<column disabled="@no_bounties"/>
 				<column/>
-				<column/>
+				<column width="10%"/>
 			</columns>
 			<rows>
 				<row class="th">
@@ -46,23 +46,23 @@
 					<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
 					<vbox>
 						<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
-						<nextmatch-header label="Description" id="tr_description" options="1" class="tracker-summary"/>
+						<nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
 					</vbox>
 					<vbox>
 						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
 						<nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
 					</vbox>
-					<vbox options="0,0">
+					<vbox>
 						<nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
 						<nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
 					</vbox>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
-					<vbox options="0,0">
+					<vbox>
 						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="tracker_status_filter"/>
 					</vbox>
 					<nextmatch-filterheader label="Resolution" id="tr_resolution" options="All" class="tracker_status_filter"/>
 					<nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
-					<vbox options="0,0">
+					<vbox>
 						<nextmatch-accountfilter id="tr_creator" options="Created by" class="tracker_user_filter"/>
 						<nextmatch-filterheader id="tr_assigned" no_lang="1" options="Assigned to" class="tracker_user_filter"/>
 					</vbox>
@@ -73,7 +73,7 @@
 					<nextmatch-customfields id="customfields"/>
 				</row>
 				<row class="$row_cont[cat_id] $row_cont[class]" valign="top">
-					<vbox no_lang="1" options="0,0">
+					<vbox no_lang="1">
 						<description id="${row}[tr_id]" no_lang="1"/>
 						<menulist>
 							<menupopup type="select-bool" id="${row}[tr_private]" readonly="true"/>
@@ -115,14 +115,14 @@
 						<menupopup id="${row}[tr_resolution]" readonly="true" options="None"/>
 					</menulist>
 					<progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
-					<vbox options="0,0">
-						<hbox readonly="true" options="0,0">
+					<vbox>
+						<hbox readonly="true">
 							<image label="Created by" src="move2" readonly="true"/>
 							<menulist>
 								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"/>
 							</menulist>
 						</hbox>
-						<hbox readonly="true" options="0,0">
+						<hbox readonly="true">
 							<image label="Assigned to" src="groupevent" readonly="true"/>
 							<menulist>
 								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"/>
