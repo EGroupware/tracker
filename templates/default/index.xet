@@ -19,15 +19,15 @@
 				<column disabled="@no_tr_tracker"/>
 				<column disabled="@no_cat_id"/>
 				<column/>
-				<column width="30%"/>
-				<column/>
-				<column/>
-				<column disabled="@no_tr_startdate_tr_duedate"/>
-				<column/>
+				<column width="40%"/>
+				<column width="40%"/>
+				<column width="135"/>
+				<column width="135" disabled="@no_tr_startdate_tr_duedate"/>
+				<column width="45"/>
 				<column width="10%"/>
-				<column/>
-				<column/>
-				<column width="18%"/>
+				<column width="10%"/>
+				<column width="65"/>
+				<column width="135"/>
 				<column disabled="@no_tr_sum_timesheets"/>
 				<column disabled="@no_votes"/>
 				<column disabled="@no_bounties"/>
