@@ -168,7 +168,7 @@
 					</menulist>
 					<description/>
 					<description for="tr_private" value="Private"/>
-					<checkbox id="tr_private" span="all" class="et2_fullWidth"/>
+					<checkbox id="tr_private" span="all" class="et2_fullWidth" unselected_value="0"/>
 				</row>
 				<row>
 					<description value="Close date" />
