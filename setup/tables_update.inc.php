@@ -710,3 +710,16 @@ function tracker_upgrade1_9_012()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '14.1';
 }
+
+
+/**
+ * Setting all tr_private=NULL to "0"
+ *
+ * @return string
+ */
+function tracker_upgrade14_1()
+{
+	$GLOBALS['egw_setup']->db->update('egw_tracker', array('tr_private'=>0), array('tr_private IS NULL'), __LINE__, __FILE__, 'tracker');
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '14.1.001';
+}

@@ -909,6 +909,9 @@ class tracker_ui extends tracker_bo
 					}
 				}
 			}
+			// do NOT display public tickets with "No", just display "Yes" for private ticktes
+			if ((string)$row['tr_private'] === '0') $rows[$n]['tr_private'] = '';
+
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
 			$id=$row['tr_id'];
