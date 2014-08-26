@@ -35,18 +35,20 @@ class tracker_customfields extends customfields
 	 */
 	function edit($content = array())
 	{
-		$this->tmpl = new etemplate();
+		translation::add_app('infolog');	// some translations are still in infolog
 
-		$this->fields = config::get_customfields($this->appname,true);
+		$this->tmpl = new etemplate_new();
+
+		$this->fields = egw_customfields::get($this->appname,true);
 		$this->tmpl->read('tracker.customfields');
 
 		$this->content_types = config::get_content_types($this->appname);
 		unset($this->content_types['']); // Added by parent
 
 		// Make sure all queues are in there
-                $tracker = new tracker_bo();
-                $queues = $tracker->get_tracker_labels();
-                foreach($queues as $id => $name)
+		$tracker = new tracker_bo();
+		$queues = $tracker->get_tracker_labels();
+		foreach($queues as $id => $name)
 		{
 			if(!$this->content_types[$id]) $this->content_types[$id] = array('name' => $name);
 		}
@@ -72,7 +74,7 @@ class tracker_customfields extends customfields
 						{
 							break;
 						}
-					//fall through	
+					//fall through
 					case 'cancel':
 						egw::redirect_link('/admin/index.php', null, 'admin');
 				}
