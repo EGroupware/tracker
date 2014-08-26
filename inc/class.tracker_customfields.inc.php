@@ -42,15 +42,13 @@ class tracker_customfields extends customfields
 		$this->fields = egw_customfields::get($this->appname,true);
 		$this->tmpl->read('tracker.customfields');
 
-		$this->content_types = config::get_content_types($this->appname);
-		unset($this->content_types['']); // Added by parent
-
-		// Make sure all queues are in there
+		// tracker uses (only) queues as content-types
+		$this->content_types = array();
 		$tracker = new tracker_bo();
 		$queues = $tracker->get_tracker_labels();
 		foreach($queues as $id => $name)
 		{
-			if(!$this->content_types[$id]) $this->content_types[$id] = array('name' => $name);
+			$this->content_types[$id] = array('name' => $name);
 		}
 
 		if ($content)
