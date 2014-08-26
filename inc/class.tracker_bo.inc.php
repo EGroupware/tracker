@@ -1159,7 +1159,7 @@ class tracker_bo extends tracker_so
 	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty.
 	 * Labels need to be either tracker specific or global and NOT in denyglobal.
 	 *
-	 * @param string $type='trackers' 'tracker', 'version', 'cat', 'resolution'
+	 * @param string $type='tracker' 'tracker', 'version', 'cat', 'resolution'
 	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
 	 * @param int &$default=null on return default, if it is set
 	 */
