@@ -16,29 +16,32 @@
 			</columns>
 			<rows>
 				<row class="th">
+					<description value="Queue"/>
 					<description statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" value="Name"/>
 					<description value="Label"/>
-					<description value="Queue"/>
-					<description value="Type"/>
+					<description value="Type of field"/>
 					<description value="Private"/>
 					<description statustext="each value is a line like &lt;id&gt;[=&lt;label&gt;]" value="Options"/>
-					<description value="Length&lt;br&gt;Rows"/>
+					<vbox>
+						<description value="Length"/>
+						<description value="Rows"/>
+					</vbox>
 					<description value="Order"/>
 					<description align="center" statustext="deletes this field" value="Action"/>
 				</row>
 				<row class="row" valign="top">
+					<listbox id="${row}[type2]" no_lang="1" rows="3"/>
 					<textbox statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" id="${row}[name]" size="20" maxlength="32"/>
 					<vbox>
 						<textbox statustext="the text displayed to the user" id="${row}[label]" maxlength="255"/>
 						<description id="${row}[label]"/>
 					</vbox>
-					<listbox id="${row}[type2]" no_lang="1" rows="3"/>
 					<vbox options="0,0">
 						<customfields-types statustext="Type of customfield" id="{$row}[type]"/>
 						<checkbox label="required" id="${row}[needed]"/>
 					</vbox>
-					<listbox type="select-account" align="center" statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" options="both"/>
-					<textbox multiline="true" statustext="each value is a line like id[=label]" id="${row}[values]" rows="2" cols="30"/>
+					<select-account statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" account_type="both"/>
+					<textbox multiline="true" statustext="each value is a line like id[=label]" id="${row}[values]" rows="4" cols="30"/>
 					<vbox>
 						<textbox statustext="max length of the input [, length of the inputfield (optional)]" id="${row}[len]" size="5"/>
 						<textbox type="integer" blur="1" statustext="number of row for a multiline inputfield or line of a multi-select-box" id="${row}[rows]" min="0" max="10" size="2"/>
@@ -88,8 +91,5 @@
 				</row>
 			</rows>
 		</grid>
-		<styles>
-			.redItalic { color: red; font-style: italics; }
-		</styles>
 	</template>
 </overlay>
