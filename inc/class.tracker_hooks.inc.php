@@ -121,6 +121,7 @@ class tracker_hooks
 				'xmlrpc' => False,
 				'admin'  => False
 			),
+			/* disabled until we have a home app again
 			'homepage_display' => array(
 				'type'   => 'check',
 				'label'  => 'Tracker for the main screen',
@@ -133,7 +134,7 @@ class tracker_hooks
 				'xmlrpc' => True,
 				'admin'  => False,
 				'default'=> false
-			),
+			),*/
 			'allow_defaultproject' => array(
 				'type'   => 'check',
 				'label'  => 'Allow default projects for tracker',
