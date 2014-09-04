@@ -6,12 +6,6 @@
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-♦ not closed	tracker	de	♦ Nicht geschlossen (oder gelöscht)
-♦ own not closed	tracker	de	♦ Eigene nicht geschlossen
-♦ own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene, nicht geschlossen
-♦ own without reply not closed	tracker	de	♦ Eigene ohne Antwort nicht geschlossen
-♦ without 30 days reply not closed	tracker	de	♦ Ohne Antwort für 30 Tage nicht geschlossen
-♦ without reply not closed	tracker	de	♦ Ohne Antwort nicht geschlossen
 (beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
@@ -429,7 +423,7 @@ tracker for the main screen	tracker	de	Verfolgungssystem für die Hauptansicht
 tracker id	tracker	de	Ticketnummer (ID)
 tracker item modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
 tracker item not found !!!	tracker	de	Ticket nicht gefunden !!!
-tracker queue	tracker	de	Verfolgungssystem-Queue
+tracker queue	tracker	de	Fachgebiet-Queue
 tracker queue renamed	tracker	de	Verfolgungssystem-Queue umbenannt
 tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.
 tracker-%1 '%2' updated.	tracker	de	Verfolgungssystem-%1 '%2' aktualisiert.
