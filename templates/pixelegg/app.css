@@ -119,6 +119,12 @@ label.tracker_trIdEdit:before {
 span.reply_visible_0 {
   white-space: normal !important;
 }
+#tracker-edit_tr_creator {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 50%;
+  overflow: hidden;
+}
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
 }
