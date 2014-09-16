@@ -180,26 +180,34 @@ class tracker_ui extends tracker_bo
 						}
 					}
 				}
+				$needInit = false;
 			}
 			else	// new item
 			{
-				$this->init();
+				$needInit = true;
+				$regardInInit = array();
 			}
 			// for new items we use the session-state or $_GET['tracker']
 			if (!$this->data['tr_id'])
 			{
+				$regardInInit = array();
 				if (($state = egw_session::appsession('index','tracker'.
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
-					$this->data['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
-					$this->data['cat_id']     = $state['cat_id'];
-					$this->data['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
+					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
+					$this->data['cat_id']     = $regardInInit['cat_id'] = $state['cat_id'];
+					$this->data['tr_version'] = $regardInInit['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
 				if (isset($this->trackers[(int)$_GET['tracker']]))
 				{
-					$this->data['tr_tracker'] = (int)$_GET['tracker'];
+					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
-				$this->data['tr_priority'] = 5;
+				$this->data['tr_priority'] = $regardInInit['tr_priority'] = 5;
+			}
+			// initialize and try to merge what we already have
+			if ($needInit)
+			{
+				$this->init($regardInInit);
 			}
 			if ($_GET['no_popup'] || $_GET['nopopup']) $popup = false;
 
