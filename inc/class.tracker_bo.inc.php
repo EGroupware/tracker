@@ -397,8 +397,8 @@ class tracker_bo extends tracker_so
 	function init($keys=array())
 	{
 		parent::init();
-
-		if (is_array($this->trackers))	// init is called from so_sql::__construct(), where $this->trackers is NOT set
+		if (isset($keys['tr_tracker'])&&!empty($keys['tr_tracker'])) $this->data['tr_tracker']=$keys['tr_tracker'];
+		if (is_array($this->trackers)&&(!isset($this->data['tr_tracker'])||empty($this->data['tr_tracker'])))	// init is called from so_sql::__construct(), where $this->trackers is NOT set
 		{
 			$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
 		}
@@ -1197,7 +1197,7 @@ class tracker_bo extends tracker_so
 			{
 				$labels[$cat['id']] = $cat['name'];
 				// set default with precedence to tracker specific one
-				if ($cat_data['isdefault'] && (!isset($default) || $cat['main'] == $tracker))
+				if (is_array($cat_data) && isset($cat_data['isdefault']) && $cat_data['isdefault'] && (!isset($default) || $cat['main'] == $tracker))
 				{
 					$default = $cat['id'];
 				}
