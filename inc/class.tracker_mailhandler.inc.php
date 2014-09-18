@@ -280,8 +280,16 @@ class tracker_mailhandler extends tracker_bo
 				{
 					unset($this->smtpMail);
 				}
-				$this->smtpMail = new send('notification');
-				if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
+				try
+				{
+					$this->smtpMail = new send('notification');
+					if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
+				} catch(Exception $e) {
+					// ignore exception, but log it, to block the account and give a correct error-message to user
+					error_log(__METHOD__."(".__LINE__.") "." Could not initiate smtpMail for notification purpose:".$e->getMessage());
+					unset($this->smtpMail);
+				}
+
 			}
 			$rFP=egw_cache::getCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId));
 			if ($rFP && !empty($rFP))
@@ -297,7 +305,7 @@ class tracker_mailhandler extends tracker_bo
 						$this->mailhandling[$queue]['interval']=$this->mailhandling[$queue]['interval']*2;
 						$this->save_config();
 						egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
-						if ($GLOBALS['egw_info']['server']['admin_mails'])
+						if ($GLOBALS['egw_info']['server']['admin_mails'] && $this->smtpMail)
 						{
 							// notify admin(s) via email
 							$from    = 'eGroupWareTrackerMailHandling@'.$GLOBALS['egw_info']['server']['mail_suffix'];
