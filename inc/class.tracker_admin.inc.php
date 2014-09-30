@@ -361,6 +361,18 @@ class tracker_admin extends tracker_bo
 					{
 						$this->reload_labels();
 					}
+					// Reload tracker app
+					if(egw_json_response::isJSONResponse())
+					{
+						// egw_framework::redirect_link() will exit, we need to keep going
+						egw_json_response::get()->redirect(egw_framework::link('/index.php', array(
+							'menuaction' => 'tracker.tracker_ui.index',
+							// reload is not a special flag, it just makes a different
+							// url to avoid smart refresh of just nextmatch
+							'reload',
+							'ajax' => 'true'
+						)), false, 'tracker');
+					}
 					if ($button == 'apply') break;
 					// fall-through for save
 				case 'cancel':
