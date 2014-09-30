@@ -21,8 +21,33 @@
  * 3) colon (:) separted list of alternative fields: the first non-empty one is used if the selected value is empty
  * There's a special field "sum" in 1), which sums up all fields given in alternatives.
  */
-class tracker_widget
+class tracker_widget extends etemplate_widget_entry
 {
+
+	/**
+	 * Array with a transformation description, based on attributes to modify.
+	 * @see etemplate_widget_transformer
+	 *
+	 * @var array
+	 */
+	protected static $transformation = array(
+		'type' => array(
+			'tracker-fields' => array(
+				'sel_options' => array('__callback__' => '_get_fields'),
+				'type' => 'select',
+				'no_lang' => true,
+				'options' => 'None',
+			),
+			'__default__' => array(
+				'options' => array(
+					'' => array('id' => '@value[@id]'),
+					// Others added automatically in constructor
+					'__default__' => array('type' => 'label', 'options' => ''),
+				),
+				'no_lang' => 1,
+			),
+		),
+	);
 	/**
 	 * exported methods of this class
 	 *
@@ -56,12 +81,58 @@ class tracker_widget
 	/**
 	 * Constructor of the extension
 	 *
-	 * @param string $ui '' for html
 	 */
-	function __construct($ui)
+	function __construct($xml)
 	{
-		$this->ui = $ui;
+		parent::__construct($xml);
 		$this->tracker = new tracker_bo();
+
+		// Automatically add all known types from egw_record
+		if(count(self::$transformation['type']['__default__']['options']) == 2)
+		{
+			foreach(tracker_egw_record::$types as $type => $fields)
+			{
+				foreach($fields as $field)
+				{
+					if(self::$transformation['type']['__default__']['options'][$field]) continue;
+					self::$transformation['type']['__default__']['options'][$field] = array(
+						'type' => $type
+					);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get tracker data, if $value not already contains them
+	 *
+	 * @param int|string|array $value
+	 * @param array $attrs
+	 * @return array
+	 */
+	public function get_entry($value, array $attrs)
+	{
+		// Already done
+		if (is_array($value) && !(array_key_exists('app',$value) && array_key_exists('id', $value))) return $value;
+
+		// Link entry, already in array format
+		if(is_array($value) && array_key_exists('app', $value) && array_key_exists('id', $value)) $value = $value['id'];
+
+		// Link entry, in string format
+		if (substr($value,0,8) == 'tracker:') $value = substr($value,8);
+
+		switch($attrs['type'])
+		{
+			case 'tracker-value':
+			default:
+				if (!($entry = $this->tracker->read($value)))
+				{
+					$entry = array();
+				}
+				break;
+		}
+		error_log(__METHOD__."('$value') returning ".array2string($entry));
+		return $entry;
 	}
 
 	/**
