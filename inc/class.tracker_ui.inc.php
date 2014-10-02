@@ -1222,7 +1222,7 @@ class tracker_ui extends tracker_bo
 
 		if (!$tracker) $tracker = $content['nm']['col_filter']['tr_tracker'];
 		$sel_options = array(
-			'tr_tracker'  => &$this->trackers,
+			'tr_tracker'  => $this->trackers,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
