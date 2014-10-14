@@ -318,7 +318,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @var string
 	 */
-	var $allow_bounties = true;
+	var $allow_bounties = false;
 	/**
 	 * Currency used by the bounties
 	 *
