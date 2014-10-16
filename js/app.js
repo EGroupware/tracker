@@ -186,14 +186,19 @@ app.classes.tracker = AppJS.extend(
 	},
 	/**
 	 * acl_queue_access
+	 *
+	 * Enables or disables the Site configuration 'Staff'tab 'Users' widget
+	 * based on the 'enabled_queue_acl_access' config setting
 	 */
 	acl_queue_access: function()
 	{
-
 		var queue_acl = this.et2.getWidgetById('enabled_queue_acl_access');
-		if(!queue_acl || queue_acl.get_value() === 'false')
-		{
 
+		// Check content too, in case we're viewing a specific queue and that widget
+		// isn't there
+		var content = this.et2.getArrayMgr('content').getEntry('enabled_queue_acl_access');
+		if(queue_acl && queue_acl.get_value() === 'false' || content !== null && !content)
+		{
 			this.et2.getWidgetById('users').set_disabled(true);
 		}
 		else
