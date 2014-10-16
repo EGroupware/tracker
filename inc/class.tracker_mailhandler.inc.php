@@ -255,7 +255,19 @@ class tracker_mailhandler extends tracker_bo
 	 * @param boolean TestConnection=false
 	 * @return boolean true=run finished, false=an error occured
 	 */
-	function check_mail($queue = 0, $TestConnection=false) {
+	function check_mail($queue = 0, $TestConnection=false)
+	{
+		$matches = null;
+		// new format with array('tr_tracker' => $queue)
+		if (is_array($queue))
+		{
+			$queue = $queue['tr_tracker'];
+		}
+		// remove quotes added by async-service
+		elseif(!is_numeric($queue) && preg_match('/([0-9]+)/', $queue, $matches))
+		{
+			$queue = $matches[1];
+		}
 		// Config for all passes null
 		if(!$queue) {
 			$queue = 0;
@@ -333,7 +345,7 @@ class tracker_mailhandler extends tracker_bo
 			$mc =$this->mailClass;
 			$mailobject	= $mc::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
-			
+
 			$connectionFailed = false;
 			// connect
 			if ($mc=='emailadmin_imapbase')
@@ -392,8 +404,15 @@ class tracker_mailhandler extends tracker_bo
 					$htmlEditOrg = $this->htmledit; // preserve that, as an existing ticket may be of a different mode
 					if (self::process_message2($mailobject, $uid, $_folderName, $queue) && $this->mailhandling[$queue]['delete_from_server'])
 					{
-						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
-						$deletedCounter++;
+						try
+						{
+							$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+							$deletedCounter++;
+						}
+						catch (Exception $e)
+						{
+							error_log(__METHOD__.__LINE__." Failed to move Message (".array2string($uid).") from Folder $_folderName to configured TrashFolder Error:".$e->getMessage());
+						}
 					}
 					$this->htmledit = $htmlEditOrg;
 				}
@@ -524,7 +543,7 @@ class tracker_mailhandler extends tracker_bo
 		} // END OF STRUTURE
 		return false;
 	} // END OF FUNCTION
-	
+
 	/**
 	 * Extract the lastest reply from mail body message
 	 *
@@ -541,7 +560,7 @@ class tracker_mailhandler extends tracker_bo
 		$fRline = true;
 		$oMInx = 0;
 		$alienSender = false;
-		
+
 		foreach ($mailCntArray as $key => $val)
 		{
 			if (preg_match ("/^From:.*@gmail.*/", $mailCntArray[$key]))
@@ -573,7 +592,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		return join("\n", $mailCntArray);
 	}
-	
+
 	/**
 	 * Retrieve and decode a bodypart
 	 *
@@ -1300,7 +1319,7 @@ class tracker_mailhandler extends tracker_bo
 				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
 			return false;
 		}
-		$subject = $mc::adaptSubjectForImport($subject);	
+		$subject = $mc::adaptSubjectForImport($subject);
 		$tId = $this->get_ticketId($subject);
 		if ($tId)
 		{
@@ -1448,7 +1467,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			// Extract latest reply from the mail message content and replace it for last comment
 			$this->data['reply_message'] = $this->extract_latestReply($this->data['reply_message']);
-			
+
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data['reply_message']));
 			if (!$senderIdentified)
 			{
