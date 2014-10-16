@@ -264,7 +264,7 @@ class tracker_mailhandler extends tracker_bo
 			$queue = $queue['tr_tracker'];
 		}
 		// remove quotes added by async-service
-		elseif(!is_nummeric($queue) && preg_match('/([0-9]+)/', $queue, $matches))
+		elseif(!is_numeric($queue) && preg_match('/([0-9]+)/', $queue, $matches))
 		{
 			$queue = $matches[1];
 		}
@@ -404,8 +404,15 @@ class tracker_mailhandler extends tracker_bo
 					$htmlEditOrg = $this->htmledit; // preserve that, as an existing ticket may be of a different mode
 					if (self::process_message2($mailobject, $uid, $_folderName, $queue) && $this->mailhandling[$queue]['delete_from_server'])
 					{
-						$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
-						$deletedCounter++;
+						try
+						{
+							$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+							$deletedCounter++;
+						}
+						catch (Exception $e)
+						{
+							error_log(__METHOD__.__LINE__." Failed to move Message (".array2string($uid).") from Folder $_folderName to configured TrashFolder Error:".$e->getMessage());
+						}
 					}
 					$this->htmledit = $htmlEditOrg;
 				}
