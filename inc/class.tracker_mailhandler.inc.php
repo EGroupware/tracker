@@ -275,11 +275,14 @@ class tracker_mailhandler extends tracker_bo
 			// Mailbox for all is pre-loaded, for others we have to change it
 			$this->mailBox = self::get_mailbox($queue);
 		}
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." for $queue");
+		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." for $queue on".' # Instance='.$GLOBALS['egw_info']['user']['domain']);
+
 		if ($this->mailBox === false)
 		{
 			if ($TestConnection) throw new egw_exception_wrong_userinput(lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
-			error_log(__METHOD__.','.__LINE__.lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
+			// this line should prevent adding garbage to mailhandlerconfig
+			if (!isset($this->mailhandling[$queue]) || empty($this->mailhandling[$queue]) || $this->mailhandling[$queue]['interval']==0) return false;
+			error_log(__METHOD__.','.__LINE__.lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue.' # Instance='.$GLOBALS['egw_info']['user']['domain']));
 			$this->mailhandling[$queue]['interval']=0;
 			$this->save_config();
 			return false;
