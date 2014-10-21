@@ -403,8 +403,10 @@ this quarter	tracker	de	Dieses Quartal
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	de	Dieses Ticket wurde automatisch geschlossen. Es wurde zuvor auf den Status schwebend gesetzt, und derjenige der das Ticket angelegt hat, hat nicht binnen %1 Tagen geantwortet.
 this week	tracker	de	Diese Woche
 this year	tracker	de	Dieses Jahr
+ticket	common	de	Ticket
 ticket count	tracker	de	Anzahl Tickets
 ticket modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
+tickets	common	de	Tickets
 times	tracker	de	Zeiten
 titles of any entries linked to the current record, excluding attached files	tracker	de	Titel der Einträge, die zu diesem aktuellen Datensatz verknüpft sind, ausser angefügte Dateien.
 total:	tracker	de	Insgesamt:

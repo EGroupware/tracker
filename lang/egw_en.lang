@@ -409,8 +409,10 @@ this quarter	tracker	en	This quarter
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	en	This Tracker item was closed automatically by the system. It was previously set to a pending status and was not responded within %1 days.
 this week	tracker	en	This week
 this year	tracker	en	This year
+ticket	common	en	Ticket
 ticket count	tracker	en	Ticket count
 ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
+tickets	common	en	Tickets
 times	tracker	en	Times
 titles of any entries linked to the current record, excluding attached files	tracker	en	Titles of any entries linked to the current record, excluding attached files
 total:	tracker	en	Total:
