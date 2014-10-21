@@ -42,6 +42,8 @@ class tracker_hooks
 			'file_access' => 'tracker.tracker_bo.file_access',
 			'file_access_user' => true,	// file_access supports 4th parameter $user
 			'merge' => true,
+			'entry' => 'Ticket',
+			'entries' => 'Tickets',
 		);
 
 		// Populate default types with queues
