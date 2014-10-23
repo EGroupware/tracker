@@ -15,10 +15,8 @@ require_once(EGW_INCLUDE_ROOT . '/admin/inc/class.customfields.inc.php');
 */
 class tracker_customfields extends customfields
 {
-	var $public_functions = array(
-		'edit' => True
-	);
-
+	public $appname = 'tracker';
+	
 	/**
 	 * Constructor
 	 *
@@ -26,118 +24,5 @@ class tracker_customfields extends customfields
 	function __construct()
 	{
 		parent::__construct('tracker');
-	}
-
-	/**
-	 * Edit/Create Custom fields with type
-	 *
-	 * @param $content Content from eTemplate
-	 */
-	function edit($content = array())
-	{
-		translation::add_app('infolog');	// some translations are still in infolog
-
-		$this->tmpl = new etemplate_new();
-
-		$this->fields = egw_customfields::get($this->appname,true);
-		$this->tmpl->read('tracker.customfields');
-
-		// tracker uses (only) queues as content-types
-		$this->content_types = array();
-		$tracker = new tracker_bo();
-		$queues = $tracker->get_tracker_labels();
-		foreach($queues as $id => $name)
-		{
-			$this->content_types[$id] = array('name' => $name);
-		}
-
-		if ($content)
-		{
-			if($content['fields']['delete']) $this->delete_field($content);
-			elseif($content['fields']['create']) $this->create_field($content);
-			else
-			{
-				list($action) = @each($content['button']);
-				switch($action)
-				{
-					default:
-						if (!$content['fields']['create'] && !$content['fields']['delete'])
-						{
-							break;	// type change
-						}
-					case 'save':
-					case 'apply':
-						$this->update($content);
-						if ($action != 'save')
-						{
-							break;
-						}
-					//fall through
-					case 'cancel':
-						egw::redirect_link('/index.php', array(
-							'menuaction' => 'admin.admin_ui.index',
-							'ajax' => 'true'
-						), 'admin');
-				}
-			}
-			$referer = $content['referer'];
-		}
-		else
-		{
-			$content['use_private'] = (boolean)$_GET['use_private'];
-
-			$referer = $GLOBALS['egw']->common->get_referer();
-		}
-		$GLOBALS['egw_info']['flags']['app_header'] = $GLOBALS['egw_info']['apps'][$this->appname]['title'].' - '.lang('Custom fields');
-		$readonlys = array();
-
-		unset($this->content_types['']); // Added by parent
-		foreach($this->content_types as $type => $entry)
-		{
-			$this->types2[$type] = $entry['name'];
-		}
-
-		$content['fields'] = array('use_private' => $content['use_private']);
-		$n = 0;
-		foreach($this->fields as $name => $data)
-		{
-			if(!is_array($data))
-			{
-				$data = array();
-				$data['label'] = $name;
-				$data['order'] = ($n+1) * 10;
-			}
-			if($data['type2'] == '')
-			{
-				$data['type2'] = implode(',', array_keys($this->types2));
-			}
-			if (is_array($data['values']))
-			{
-				$values = '';
-				foreach($data['values'] as $var => $value)
-				{
-					$values .= (!empty($values) ? "\n" : '').$var.'='.$value;
-				}
-				$data['values'] = $values;
-			}
-			$content['fields'][++$n] = (array)$data + array(
-				'name'   => $name
-			);
-			$preserv_fields[$n]['old_name'] = $name;
-			$readonlys['fields']["create$name"] = True;
-		}
-		$content['fields'][++$n] = array('name'=>'','order' => 10 * $n);	// new line for create
-		$content['fields']['type2'] = 'enable';
-
-		$readonlys['fields']["delete[]"] = True;
-		$sel_options = array(
-			'type2' => $this->types2
-		);
-		$this->tmpl->exec('tracker.tracker_customfields.edit',$content,$sel_options,$readonlys,array(
-			'fields' => $preserv_fields,
-			'appname' => $this->appname,
-			'referer' => $referer,
-			'use_private' => $content['use_private'],
-		));
 	}
 }

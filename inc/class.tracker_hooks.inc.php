@@ -84,7 +84,7 @@ class tracker_hooks
 			$file = Array(
 				'Site configuration' => egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
 				'Define escalations' => egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
-				'Custom fields' => egw::link('/index.php','menuaction=tracker.tracker_customfields.edit&use_private=1'),
+				'Custom fields' => egw::link('/index.php','menuaction=tracker.tracker_customfields.index&use_private=1&ajax=true'),
 			);
 			if ($location == 'admin')
 			{
