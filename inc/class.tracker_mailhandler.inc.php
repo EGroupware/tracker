@@ -570,7 +570,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$alienSender = true;
 			}
-			if (preg_match("/^-----.*Original message---.*/", $mailCntArray[$key]))
+			if (preg_match("/^-----.*original message---.*/i", $mailCntArray[$key]))
 			{
 				$oMInx = $key;
 			}
