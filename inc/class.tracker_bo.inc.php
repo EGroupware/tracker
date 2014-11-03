@@ -1341,7 +1341,7 @@ class tracker_bo extends tracker_so
 		{
 			if ($cat['data']['type'] == 'response' && $cat['id'] == $id)
 			{
-				return $data['response'] ? $data['response'] : $cat['description'];
+				return $cat['data']['response'] ? $cat['data']['response'] : $cat['description'];
 			}
 		}
 		return false;
