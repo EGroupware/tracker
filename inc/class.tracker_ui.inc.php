@@ -68,10 +68,9 @@ class tracker_ui extends tracker_bo
 	/**
 	 * Print a tracker item
 	 *
-	 * @param array $content=null eTemplate content
 	 * @return string html-content, if sitemgr otherwise null
 	 */
-	function tprint($content=null)
+	function tprint()
 	{
 		// Check if exists
 		if ((int)$_GET['tr_id'])
@@ -106,9 +105,9 @@ class tracker_ui extends tracker_bo
 	/**
 	 * Edit a tracker item in a popup
 	 *
-	 * @param array $content=null eTemplate content
-	 * @param string $msg=''
-	 * @param boolean $popup=true use or not use a popup
+	 * @param array $content =null eTemplate content
+	 * @param string $msg =''
+	 * @param boolean $popup =true use or not use a popup
 	 * @return string html-content, if sitemgr otherwise null
 	 */
 	function edit($content=null,$msg='',$popup=true)
@@ -142,7 +141,7 @@ class tracker_ui extends tracker_bo
 				else
 				{
 					// Set the ticket as seen by this user
-					$seen = self::seen($this->data, true);
+					self::seen($this->data, true);
 
 					// editing, preventing/fixing mixed ascii-html
 					if ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
@@ -305,7 +304,7 @@ class tracker_ui extends tracker_bo
 					if ($ret === false)
 					{
 						$msg = lang('Nothing to save.');
-						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+						$state = egw_session::appsession('index','tracker');
 						egw_framework::refresh_opener($msg,'tracker',$this->data['tr_id'],'edit');
 
 						// only change to current tracker, if not all trackers displayed
@@ -344,7 +343,7 @@ class tracker_ui extends tracker_bo
 						{
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 						}
-						$state = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+						$state = egw_session::appsession('index','tracker');
 						egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'],'edit');
 					}
 					else
@@ -546,7 +545,7 @@ class tracker_ui extends tracker_bo
 					switch($link_app)
 					{
 						case 'infolog':
-							static $infolog_bo;
+							static $infolog_bo=null;
 							if(!$infolog_bo) $infolog_bo = new infolog_bo();
 							$infolog = $app_entry = $infolog_bo->read($link_id);
 							$content = array_merge($content, array(
@@ -602,7 +601,8 @@ class tracker_ui extends tracker_bo
 					$link_app_cfs = config::get_customfields($link_app);
 					foreach($_cfs as $name => $settings)
 					{
-						if($link_app_cfs[$name]) $event['#'.$name] = $app_entry['#'.$name];
+						unset($settings);
+						if($link_app_cfs[$name]) $content['#'.$name] = $app_entry['#'.$name];
 					}
 					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
@@ -863,6 +863,7 @@ class tracker_ui extends tracker_bo
 
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
+		$prio_labels = $prio_tracker = $prio_cat = null;
 		foreach($rows as $n => $row)
 		{
 			// Check if this is a new (unseen) ticket for the current user
@@ -1052,6 +1053,7 @@ class tracker_ui extends tracker_bo
 		// copy same named customfields
 		foreach(config::get_customfields('infolog') as $name => $nul)
 		{
+			unset($nul);
 			if(array_key_exists('#'.$name, $tracker))
 			{
 				$set['#'.$name] = $tracker['#'.$name];
@@ -1062,9 +1064,9 @@ class tracker_ui extends tracker_bo
 	/**
 	 * Check if a ticket has already been seen
 	 *
-	 * @param array $data=null Ticket data
-	 * @param boolean $update=false Set ticket as seen when true
-	 * @param boolean $been_seen=true Mark the ticket as seen/unseen by current user
+	 * @param array $data =null Ticket data
+	 * @param boolean $update =false Set ticket as seen when true
+	 * @param boolean $been_seen =true Mark the ticket as seen/unseen by current user
 	 * @return boolean true=seen before false=new ticket
 	 */
 	function seen(&$data, $update=false, $been_seen = true)
@@ -1095,11 +1097,11 @@ class tracker_ui extends tracker_bo
 	/**
 	 * Show a tracker
 	 *
-	 * @param array $content=null eTemplate content
-	 * @param int $tracker=null id of tracker
-	 * @param string $msg=''
-	 * @param int $only_tracker=null show only the given tracker and not tracker-selection
-	 * @param boolean $return_html=false if set to true, html content returned
+	 * @param array $content =null eTemplate content
+	 * @param int $tracker =null id of tracker
+	 * @param string $msg =''
+	 * @param int $only_tracker =null show only the given tracker and not tracker-selection
+	 * @param boolean $return_html =false if set to true, html content returned
 	 * @return string html-content, if sitemgr otherwise null
 	 */
 	function index($content=null,$tracker=null,$msg='',$only_tracker=null, $return_html=false)
@@ -1142,8 +1144,8 @@ class tracker_ui extends tracker_bo
 			$tracker = $content['nm']['col_filter']['tr_tracker'];
 
 			// Multiple queues at once
-			list($multi_queue) = @each($content['nm']['col_filter']['multi_queue']);
-			$multi_queue = $multi_queue == 'true' ? true : ($multi_queue == 'false' ? false : $this->prefs['multi_queue']);
+			list($multi_queue_filter) = @each($content['nm']['col_filter']['multi_queue']);
+			$multi_queue = $multi_queue_filter == 'true' ? true : ($multi_queue_filter == 'false' ? false : $this->prefs['multi_queue']);
 			if($multi_queue != $this->prefs['multi_queue'])
 			{
 				// Store in preferences
@@ -1154,7 +1156,7 @@ class tracker_ui extends tracker_bo
 				if(!$multi_queue)
 				{
 					// Only select 1 queue when going from multi to single
-					$tracker = is_array($tracker) ? $tracker : explode(',',$tracker);
+					if (!is_array($tracker)) $tracker = explode(',', $tracker);
 					$tracker = $content['nm']['col_filter']['tr_tracker'] = $tracker[0];
 				}
 			}
@@ -1204,6 +1206,7 @@ class tracker_ui extends tracker_bo
 						unset($content[$multi_action]);
 						unset($content[$multi_action.'_popup']);
 					}
+					$success = $failed = $action_msg = null;
 					if ($this->action($content['nm']['action'],$content['nm']['selected'],$content['nm']['select_all'],
 						$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notifications']))
 					{
@@ -1247,17 +1250,15 @@ class tracker_ui extends tracker_bo
 		}
 
 		if (!is_array($content)) $content = array();
-		$content = array_merge($content,array(
-			'nm' => egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : '')),
-			'msg' => $msg,
-			'status_help' => !$this->pending_close_days ? lang('Pending items never get close automatic.') :
-				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days),
-		));
+		$content['nm'] = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+		$content['msg'] = $msg;
+		$content['status_help'] = !$this->pending_close_days ? lang('Pending items never get close automatic.') :
+				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days);
 
 		if (!is_array($content['nm']))
 		{
 			$date_filters = array(lang('All'));
-			foreach($this->date_filters as $name => $date)
+			foreach(array_keys($this->date_filters) as $name)
 			{
 				$date_filters[$name] = lang($name);
 			}
@@ -1371,10 +1372,10 @@ class tracker_ui extends tracker_bo
 		}
 		egw_framework::validate_file('.','app','tracker');
 		// add scrollbar to long description, if user choose so in his prefs
+		/* @kl: why is an if used, if it is effectily commented by a semicolon?
 		if ($this->prefs['limit_des_lines'] > 0 || (string)$this->prefs['limit_des_lines'] == '');
+		*/
 		{
-			//$content['css'] = '<style type="text/css">@import url('.$GLOBALS['egw_info']['server']['webserver_url'].'/tracker/templates/default/app.css);'."</style>";
-
 			$content['css'] .= '<style type="text/css">@media screen { .trackerDes {  '.
 				($this->prefs['limit_des_width']?'max-width:'.$this->prefs['limit_des_width'].'em;':'').' max-height: '.
 				(($this->prefs['limit_des_lines'] ? $this->prefs['limit_des_lines'] : 5) * 1.35).	// dono why em is not real lines
@@ -1390,14 +1391,16 @@ width:100%;
 	/**
 	 * Get actions / context menu items
 	 *
-	 * @param int $tracker=null
-	 * @param int $cat_id=null
+	 * @param int $tracker =null
+	 * @param int $cat_id =null
 	 * @return array see nextmatch_widget::get_actions()
 	 */
 	private function get_actions($tracker=null, $cat_id=null)
 	{
-		for($i = 0; $i <= 100; $i += 10) $percent[$i] = $i.'%';
-
+		for($i = 0; $i <= 100; $i += 10)
+		{
+			$percent[$i] = $i.'%';
+		}
 		$actions = array(
 			'open' => array(
 				'caption' => 'Open',
@@ -1689,10 +1692,13 @@ width:100%;
 
 			//_debug_array($_to_emailAddress);
 			$toaddr = array();
-			foreach(array('to','cc','bcc') as $x) if (is_array($_to_emailAddress[$x]) && !empty($_to_emailAddress[$x])) $toaddr = array_merge($toaddr,$_to_emailAddress[$x]);
+			foreach(array('to','cc','bcc') as $x)
+			{
+				if (is_array($_to_emailAddress[$x]) && !empty($_to_emailAddress[$x])) $toaddr = array_merge($toaddr,$_to_emailAddress[$x]);
+			}
 			//_debug_array($attachments);
-			$_body = strip_tags($_body); //we need to fix broken tags (or just stuff like "<800 USD/p" )
-			$_body = htmlspecialchars_decode($_body,ENT_QUOTES);
+			//we need to fix broken tags (or just stuff like "<800 USD/p" )
+			$_body = htmlspecialchars_decode(strip_tags($_body), ENT_QUOTES);
 			$_subject = $mailClass::adaptSubjectForImport($_subject);
 			$tId = $this->get_ticketId($_subject);
 			if ($tId)
@@ -1791,10 +1797,12 @@ width:100%;
 			{
 				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
 				$query['num_rows'] = -1;	// all
+				$readonlys = null;
 				$this->get_rows($query,$checked,$readonlys);
 				// $this->get_rows gives some extra data.
 				foreach($checked as $row => $data)
 				{
+					unset($data);
 					if(!is_numeric($row))
 					{
 						unset($checked[$row]);
@@ -1807,8 +1815,10 @@ width:100%;
 		{
 			unset($action['update']);
 			// remove all 'No change'
-			foreach($action as $name => $value) if ($value === '') unset($action[$name]);
-
+			foreach($action as $name => $value)
+			{
+				if ($value === '') unset($action[$name]);
+			}
 			if (!count($checked) || !count($action))
 			{
 				$msg = lang('You need to select something to change AND some tracker items!');
@@ -1816,7 +1826,6 @@ width:100%;
 			}
 			else
 			{
-				$n = 0;
 				foreach($checked as $tr_id)
 				{
 					if (!$this->read($tr_id)) continue;
@@ -1903,8 +1912,8 @@ width:100%;
 					foreach($checked as $tr_id)
 					{
 						if (!$this->read($tr_id)) continue;
-						list($add_remove, $ids) = explode('_', $settings, 2);
-						$ids = explode(',',$ids);
+						list($add_remove, $idstr) = explode('_', $settings, 2);
+						$ids = explode(',',$idstr);
 						$this->data['tr_assigned'] = $add_remove == 'add' ?
 							array_merge($this->data['tr_assigned'],$ids) :
 							array_diff($this->data['tr_assigned'],$ids);
@@ -1959,7 +1968,6 @@ width:100%;
 						}
 					}
 					return $failed == 0;
-					break;
 
 				case 'document':
 					if (!$settings) $settings = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];
