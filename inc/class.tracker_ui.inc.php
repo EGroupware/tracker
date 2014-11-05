@@ -1648,6 +1648,12 @@ width:100%;
 							fwrite($tmpfile,$attachmentData['attachment']);
 							fclose($tmpfile);
 						}
+						//make sure we search for our attached file in our configured temp_dir
+						if (isset($attachment['file']) && parse_url($attachment['file'],PHP_URL_SCHEME) != 'vfs' &&
+							file_exists($GLOBALS['egw_info']['server']['temp_dir'].SEP.basename($attachment['file'])))
+						{
+							$attachment['file'] = $GLOBALS['egw_info']['server']['temp_dir'].SEP.basename($attachment['file']);
+						}
 
 						$attachments[] = array(
 							'name' => $attachment['name'],
@@ -1666,7 +1672,7 @@ width:100%;
 			if ($_rawMailHeader && $_rawMailBody && $GLOBALS['egw_info']['user']['preferences'][$sessionLocation]['saveAsOptions']==='add_raw')
 			{
 				$message = ltrim(str_replace("\n","\r\n",$_rawMailHeader)).str_replace("\n","\r\n",$_rawMailBody);
-				$subject = $mailClass::adaptSubjectForImport($subject);
+				$subject = $mailClass::adaptSubjectForImport($_subject);
 				$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 				$tmpfile = fopen($attachment_file,'w');
 				fwrite($tmpfile,$message);
