@@ -217,7 +217,7 @@ class tracker_merge extends bo_merge
 				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
 			);
 			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
-			if(in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
+			if(is_array($tracker['tr_assigned']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
 		}
 
 		// Special comments
