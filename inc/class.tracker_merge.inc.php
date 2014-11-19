@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @author Nathan Gray
  * @package tracker
- * @copyright (c) 2007-9 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2007-14 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @copyright 2011 Nathan Gray
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
@@ -37,12 +37,12 @@ class tracker_merge extends bo_merge
 	 * Cache comments per ticket to reduce database hits
 	 */
 	protected $comment_cache = array();
-	
+
 	/**
 	 * Allow to set comments to avoid re-reading from DB
 	 */
 	protected $preset_comments = array();
-	
+
 	/**
 	 * Constructor
 	 *
@@ -53,6 +53,10 @@ class tracker_merge extends bo_merge
 		$this->table_plugins['comment'] = 'comment';
 		$this->table_plugins['comment/-1'] = 'comment';
 		$this->bo = new tracker_bo();
+
+		// switch of handling of html formated content, if html is not used
+		$this->parse_html_styles = $this->bo->htmledit || egw_customfields::use_html('tracker');
+
 	}
 
 	/**
@@ -80,6 +84,7 @@ class tracker_merge extends bo_merge
 				if($reply['reply_visible'] > 0) {
 					$message = '['.$message.']';
 				}
+				$restricted = $reply['reply_visible'] ? '' : lang('restricted');
 				$replies[$id] = "$date \t$name \t$restricted\n$message";
 			}
 			$replacements['$$all_comments$$'] = implode("\n",$replies);
@@ -144,9 +149,9 @@ class tracker_merge extends bo_merge
 		// HTML link to ticket
 		$tracker = new tracker_tracking($this->bo);
 		$array['tr_link'] = html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
-		
+
 		// Set any missing custom fields, or the marker will stay
-		foreach($this->bo->customfields as $name => $field)
+		foreach(array_keys($this->bo->customfields) as $name)
 		{
 			if(!$array['#'.$name]) $array['#'.$name] = '';
 		}
@@ -179,6 +184,8 @@ class tracker_merge extends bo_merge
 	*/
 	public function comment($plugin,$id,$n)
 	{
+		unset($plugin);	// not used, but required by function signature
+
 		$comments = $this->get_comments($id);
 
 		return $comments[$n];
@@ -195,7 +202,7 @@ class tracker_merge extends bo_merge
 		$this->comment_cache[$tr_id] = array();
 		$last_creator_comment = array();
 		$last_assigned_comment = array();
-		
+
 		if(array_key_exists($tr_id, $this->preset_comments))
 		{
 			$replies = $this->preset_comments[$tr_id];
@@ -206,7 +213,7 @@ class tracker_merge extends bo_merge
 			$tracker = $this->bo->data;
 			$replies = $tracker['replies'];
 		}
-		foreach($replies as $i => $reply) {
+		foreach($replies as $reply) {
 			if($reply['reply_visible'] > 0) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
@@ -232,7 +239,7 @@ class tracker_merge extends bo_merge
 
 		return $this->comment_cache[$tr_id];
 	}
-	
+
 	/**
 	 * Limit to only certain comments by pre-setting the cache
 	 *
@@ -298,7 +305,7 @@ class tracker_merge extends bo_merge
 			echo '<tr><td /><td>{{comment/'.$name.'}}</td><td>'.lang($label).'</td></tr>';
 		}
  		echo '<tr><td>{{endtable}}</td></tr>';
-		
+
 		echo '<tr><td colspan="4"><h3>'.lang('Custom fields').":</h3></td></tr>";
 		foreach($this->bo->customfields as $name => $field)
 		{
