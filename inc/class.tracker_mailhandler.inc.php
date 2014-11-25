@@ -297,7 +297,7 @@ class tracker_mailhandler extends tracker_bo
 				}
 				try
 				{
-					$this->smtpMail = new send();
+					$this->smtpMail = new egw_mailer();
 					if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
 				} catch(Exception $e) {
 					// ignore exception, but log it, to block the account and give a correct error-message to user
