@@ -1395,7 +1395,7 @@ width:100%;
 	 * @param int $cat_id =null
 	 * @return array see nextmatch_widget::get_actions()
 	 */
-	private function get_actions($tracker=null, $cat_id=null)
+	public function get_actions($tracker=null, $cat_id=null)
 	{
 		for($i = 0; $i <= 100; $i += 10)
 		{
