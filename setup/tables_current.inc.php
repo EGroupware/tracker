@@ -20,7 +20,7 @@ $phpgw_baseline = array(
 			'tr_version' => array('type' => 'int','precision' => '4','comment' => 'version of the ticket','meta' => 'category'),
 			'tr_status' => array('type' => 'int','precision' => '4','default' => '-100','comment' => 'status of the ticket'),
 			'tr_description' => array('type' => 'text','comment' => 'long description'),
-			'tr_private' => array('type' => 'int','precision' => '2','default' => '0','comment' => '1=private'),
+			'tr_private' => array('type' => 'int','precision' => '2','nullable' => False,'default' => '0','comment' => '1=private'),
 			'tr_budget' => array('type' => 'decimal','precision' => '20','scale' => '2','comment' => 'budget for bounties'),
 			'tr_completion' => array('type' => 'int','precision' => '2','default' => '0','comment' => 'completion of the ticket','meta' => 'percent'),
 			'tr_creator' => array('type' => 'int','precision' => '4','nullable' => False,'comment' => 'account id of the creator','meta' => 'user'),

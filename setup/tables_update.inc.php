@@ -723,3 +723,24 @@ function tracker_upgrade14_1()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '14.1.001';
 }
+
+/**
+ * Setting all tr_private=NULL to "0" AND forbid in db schema to allow NULL for tr_private
+ *
+ * @return string
+ */
+function tracker_upgrade14_1_001()
+{
+	$GLOBALS['egw_setup']->db->update('egw_tracker', array('tr_private'=>0), array('tr_private IS NULL'), __LINE__, __FILE__, 'tracker');
+
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker','tr_private',array(
+		'type' => 'int',
+		'precision' => '2',
+		'nullable' => False,
+		'default' => '0',
+		'comment' => '1=private'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '14.1.002';
+}
+
