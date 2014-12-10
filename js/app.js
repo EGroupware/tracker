@@ -101,6 +101,37 @@ app.classes.tracker = AppJS.extend(
 	},
 	
 	/**
+	 * Set the state / apply a favorite
+	 * Overridden from the parent to set the queue to multiple if there are
+	 * more than one in the state
+	 */
+	setState: function(state)
+	{
+		// State should be an object, not a string, but we'll parse
+		if(typeof state == "string")
+		{
+			if(state.indexOf('{') != -1 || state =='null')
+			{
+				state = JSON.parse(state);
+			}
+		}
+		if(typeof state == "object" && state != null && state.state && state.state.col_filter)
+		{
+			if(typeof state.state.col_filter.tr_tracker == 'object' && Object.keys(state.state.col_filter.tr_tracker).length > 1)
+			{
+				var template = etemplate2.getById('tracker-index') || null;
+				if(template)
+				{
+					var nm = template.widgetContainer.getWidgetById('nm');
+					nm.set_header_left('tracker.index.left_multiqueue');
+				}
+			}
+		}
+		// call parent
+		this._super.apply(this, arguments);
+	},
+
+	/**
 	 * expand_filter
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
 	 *
