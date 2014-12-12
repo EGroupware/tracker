@@ -497,7 +497,7 @@ class tracker_ui extends tracker_bo
 			'tr_description_options' => $tr_description_options,
 			'tr_description_mode'    => $readonlys['tr_description'],
 			'tr_reply_options' => $tr_reply_options,
-			'on_cancel' => $popup ? 'window.close();' : '',
+			'on_cancel' => $popup ? 'egw(window).close();' : '',
 			'no_vote' => '',
 			'show_dates' => $this->show_dates,
 			'link_to' => array(
