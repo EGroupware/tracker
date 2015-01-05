@@ -113,9 +113,6 @@ label.tracker_trIdEdit:before {
   display: inline-block;
   white-space: normal !important;
 }
-span.reply_visible_0 {
-  white-space: normal !important;
-}
 #tracker-edit_tr_creator {
   white-space: nowrap;
   text-overflow: ellipsis;
