@@ -236,5 +236,15 @@ app.classes.tracker = AppJS.extend(
 		{
 			this.et2.getWidgetById('users').set_disabled(false);
 		}
+	},
+	
+	/**
+	 * Get title in order to set it as document title
+	 * @returns {string}
+	 */
+	getWindowTitle: function()
+	{
+		var widget = this.et2.getWidgetById('tr_summary');
+		if(widget) return widget.options.value;
 	}
 });
