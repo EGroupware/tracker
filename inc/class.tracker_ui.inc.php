@@ -161,7 +161,7 @@ class tracker_ui extends tracker_bo
 					{
 						if (!($this->htmledit || $this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
-							$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
+							$reply['reply_message'] = html::htmlspecialchars($reply['reply_message']);
 						}
 					}
 				}
