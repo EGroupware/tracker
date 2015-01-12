@@ -36,7 +36,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 			// Use a different template so it can be accessed from client side
 			'template'	=> 'tracker.index.rows',
 			// Use a reduced column set for home, user can change if needed
-			'default_cols'   => 'tr_id_tr_private,tr_tracker,tr_summary_tr_description,tr_startdate_tr_duedate,tr_status',
+			'default_cols'   => 'tr_summary,tr_created_tr_modified,tr_status',
 			'row_id'         => 'tr_id',
 			'row_modified'   => 'tr_modified',
 
