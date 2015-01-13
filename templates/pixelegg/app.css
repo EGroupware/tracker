@@ -114,7 +114,6 @@ label.tracker_trIdEdit:before {
   background: beige;
   width: 100%;
   display: inline-block;
-  white-space: normal !important;
 }
 #tracker-edit_tr_creator {
   white-space: nowrap;
