@@ -42,6 +42,7 @@ attention: no contact with address %1 found.	tracker	pt-br	Atenção: nenhum con
 autoassign to	tracker	pt-br	Auto designar para
 automatic email handling	tracker	pt-br	Tratamento automático de email
 automatically created by importexport	tracker	pt-br	Automaticamente criado por importar/exportar
+before	tracker	pt-br	Antes
 bounties	tracker	pt-br	Pagamentos
 bounty confirmed	tracker	pt-br	Pagamento confirmado
 bounty confirmed.	tracker	pt-br	Pagamento confirmado
@@ -78,7 +79,9 @@ creation date	tracker	pt-br	data de criação
 creator	tracker	pt-br	Criador
 custom fields	tracker	pt-br	Campos personalizados
 custom tracker priorities	tracker	pt-br	Prioridades personalizadas para tipos de ticket
+data exchange settings	tracker	pt-br	Configurações de troca de dados
 date opened	tracker	pt-br	Data de abertura
+default document to insert entries	tracker	pt-br	Documento padrão para inserir entradas
 define escalations	common	pt-br	Definir escalas
 delete mails from server	tracker	pt-br	Remover emails do servidor
 delete this bounty	tracker	pt-br	Remover este pagamento
@@ -93,6 +96,7 @@ delete unrecognized mails from the server, even if 'delete mails' above is not t
 deleted	tracker	pt-br	Removido
 deletes this field	tracker	pt-br	Remover este campo
 determines the order the fields are displayed	tracker	pt-br	determinar a ordem de exibição dos campos
+directory with documents to insert entries	tracker	pt-br	Diretório com documentos para inserir entradas
 do you want a notification, if items you are responsible for are about to start?	tracker	pt-br	Você quer receber uma notificação, caso algum item esteja prestes a iniciar e você seja o responsável?
 do you want a notification, if items you are responsible for are due?	tracker	pt-br	Você quer receber uma notificação, caso itens excedam o prazo e você seja o responsável?
 do you want to vote for this item	tracker	pt-br	Você deseja votar neste ticket ?
@@ -121,7 +125,9 @@ escalation not found!	tracker	pt-br	Escala não encontrada!
 escalation saved.	tracker	pt-br	Escala salva.
 everybody	tracker	pt-br	Todos
 existing links	tracker	pt-br	Links existentes
+exists	tracker	pt-br	Existe
 export as csv	tracker	pt-br	Exportar como CSV
+export definition to use for nextmatch export	tracker	pt-br	Definição Exportar para usar para exportação NextMatch
 field	tracker	pt-br	Campo
 fixed	tracker	pt-br	Resolvido
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	pt-br	Para cartas em série use esta tag. Coloque o conteúdo, que você quer que repita, entre duas Tags.
@@ -130,8 +136,10 @@ forward to	tracker	pt-br	Encaminhar para
 forward unrecognized mails to the email address that has to be specified here.	tracker	pt-br	Encaminhar emails não reconhecidos para o endereço de email que deve ser informado aqui.
 from	tracker	pt-br	De
 general fields:	tracker	pt-br	Campos gerais:
+general settings	tracker	pt-br	Definições gerais
 history	tracker	pt-br	Histórico
 html editing	tracker	pt-br	Editar em HTML
+html link to the current record	tracker	pt-br	Link HTML para o registro atual
 id	tracker	pt-br	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	pt-br	Se esta entrada é importante para você, considere definir um pagamento por ela!
 if this item is important for you, please vote for it.	tracker	pt-br	Se esta entrada é importante para você, por favor vote por ela.
@@ -141,6 +149,7 @@ import tts tickets	tracker	pt-br	Importar Tickets
 incoming mail folder	tracker	pt-br	Pasta de entrada para emails
 incoming mail rules	tracker	pt-br	Regras para recebimento de emails
 incoming mail server	tracker	pt-br	Servidor para recebimento de emails
+insert	tracker	pt-br	Inserir
 insert in document	tracker	pt-br	Inserir em documento
 interval in minutes for checking the incoming mails	tracker	pt-br	Intervalo, em minutos, para checagem de novos emails
 invalid	tracker	pt-br	Inválido
@@ -157,7 +166,9 @@ later	tracker	pt-br	Depois
 leaves without saveing	tracker	pt-br	sair sem salvar
 length<br>rows	tracker	pt-br	Tamanho<br>Linhas
 links	tracker	pt-br	Links
+links and attached files	tracker	pt-br	Links e arquivos anexados
 list of coma separated email address	tracker	pt-br	Lista de e-mails separados por vírgulas
+list of files linked to the current record	tracker	pt-br	Lista de arquivos vinculados ao registro atual
 mail handling	tracker	pt-br	Tratamento de email
 manage mapping	tracker	pt-br	Gerenciar mapeamento
 matching filter	tracker	pt-br	filtro usado
@@ -168,11 +179,14 @@ new items	tracker	pt-br	Novos tickets
 new ticket submitted by %1 at %2	tracker	pt-br	Novo ticket adicionado por %1 em %2
 new tracker item submitted by %1 at %2	tracker	pt-br	Novo ticket adicionado por %1 em %2
 no change	tracker	pt-br	Sem alteração
+no notifications	tracker	pt-br	Nenhuma notificação
 no trackers found, aborting	tracker	pt-br	Nenhum Elemento do Sistema de Tickets encontrato, abortando
 non-anonymous users	tracker	pt-br	Usuários não anônimos
 noone	tracker	pt-br	Nenhum
 notification	tracker	pt-br	Notificação
+notification settings	tracker	pt-br	Configurações de notificação
 number of row for a multiline inputfield or line of a multi-select-box	tracker	pt-br	número de linhas para um campo de entrada ou linhas para uma caixa de seleção
+old fixed definition	tracker	pt-br	Definição fixa Velho
 one day after	tracker	pt-br	um dia depois
 one day in advance	tracker	pt-br	um dia adiantado
 open(status)	tracker	pt-br	Aberto
@@ -201,6 +215,7 @@ receive notifications about created tracker-items	tracker	pt-br	Receber notifica
 receive notifications in html	tracker	pt-br	Receber notificações em HTML
 rejected	tracker	pt-br	Rejeitado
 remind	tracker	pt-br	Lembrar
+replacements for inserting entries into documents	tracker	pt-br	Substitutos para a inserção de entradas em documentos
 resolution	tracker	pt-br	Resolução
 responsible	tracker	pt-br	Responsável
 restict tracker items to the creator and the staff only	tracker	pt-br	Restringir tickets somente ao criador e à equipe
@@ -229,12 +244,15 @@ staff	tracker	pt-br	Equipe
 state	tracker	pt-br	Estado
 stati	tracker	pt-br	Estado
 store as	tracker	pt-br	Guardar como
+sum	tracker	pt-br	Soma
 summary	tracker	pt-br	Resumo
+tag to mark positions for address labels	tracker	pt-br	Tag para marcar posições para etiquetas de endereço
 technicians	tracker	pt-br	Técnicos
 thank you for setting this bounty.	tracker	pt-br	Obrigado por definir este pagamento
 thank you for voting.	tracker	pt-br	Obrigado por votar
 the bounty will not be shown, until the money is received.	tracker	pt-br	O pagamento NÃO será exibido, até o dinheiro ser recebido.
 the canned response will be prefix the text you type.	tracker	pt-br	A resposta automática precederá o texto que você digitar.
+the following document-types are supported:	tracker	pt-br	Os seguintes tipos de documentos são suportados:
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	pt-br	o nome usado internamente (<= 20 caracteres), alterando-o fará dados existentes ficarem inacessíveis
 the text displayed to the user	tracker	pt-br	o texto exibido para o usuário
 there already an escalation for that filter!	tracker	pt-br	Já existe uma escala para este filtro!
@@ -267,6 +285,7 @@ updated	tracker	pt-br	Atualizado
 url of the tracker	tracker	pt-br	URL do Sistema de Tickets
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	pt-br	URL para ser inclusa nas notificações
 use a default user for mails that where not recognized	tracker	pt-br	Usar um usuário padrão para emails que não forem reconhecidos
+use field from csv if possible	tracker	pt-br	Use o campo de CSV, se possível
 versions	tracker	pt-br	Versões
 vote for it!	tracker	pt-br	Vote !
 votes	tracker	pt-br	Votos

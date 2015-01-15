@@ -125,6 +125,7 @@ escalation saved.	tracker	cs	Eskalace byla uložena.
 everybody	tracker	cs	Všichni
 existing links	tracker	cs	Stávající odkazy
 export as csv	tracker	cs	Exportovat jako CSV
+favorites	tracker	cs	Oblíbené
 field	tracker	cs	Položka
 fixed	tracker	cs	Opraveno
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	cs	Pro hromadný dopis použijte tento štítek. Obsah, který chcete opakovat vložte mezi dva štítky.
@@ -241,6 +242,7 @@ staff	tracker	cs	Personál
 state	tracker	cs	Stav
 stati	tracker	cs	Stavy
 store as	tracker	cs	Uložit jako
+sum	tracker	cs	Celkem
 summary	tracker	cs	Shrnutí
 tag to mark positions for address labels	tracker	cs	Značka pro vyznačení pozic v adresních štítcích
 technicians	tracker	cs	Technici

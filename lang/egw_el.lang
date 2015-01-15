@@ -50,6 +50,7 @@ same day	tracker	el	ίδια ημέρα
 saves the changes made and leaves	tracker	el	αποθηκέυει όλες τις αλλαγές που έγιναν και αποχωρεί
 signature	tracker	el	Υπογραφή
 state	tracker	el	Νομός
+sum	tracker	el	Σύνολο
 summary	tracker	el	Περίληψη
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	el	το όνομα χρησιμοποιείται εσωτερικά (<=20 χαρακτ), ενδεχόμενη αλλαγή του προκαλεί μη διαθεσιμότητα των δεδομένων
 the text displayed to the user	tracker	el	το κείμενο που προβάλεται στον χρήστη

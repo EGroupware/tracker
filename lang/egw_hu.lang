@@ -67,6 +67,7 @@ error: the entry has been updated since you opened it for editing!	tracker	hu	Hi
 everybody	tracker	hu	Mindenki
 existing links	tracker	hu	Létezõ hivatkozások
 export as csv	tracker	hu	Export CSV formában
+favorites	tracker	hu	Kedvencek
 field	tracker	hu	Mező
 forward	tracker	hu	Továbbít
 forward to	tracker	hu	Továbbítás ide
@@ -106,6 +107,7 @@ same day	tracker	hu	azonos napon
 saves the changes made and leaves	tracker	hu	Változások mentése és kilépés
 signature	tracker	hu	Aláírás
 state	tracker	hu	Állapot
+sum	tracker	hu	Összesen
 summary	tracker	hu	Összefoglaló
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	hu	a nevet a rendszer használja (<=20 karakter), megváltozása esetén a létező adatok elérhetetlenekké válnak
 the text displayed to the user	tracker	hu	a szöveg megjelenítve a felhasználónak

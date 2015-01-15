@@ -179,6 +179,7 @@ export csv	tracker	fi	CSV vienti
 export definition to use for nextmatch export	tracker	fi	Vienti asetukset 'nextmatch' vientiin
 export definitition to use for nextmatch export	tracker	fi	Vienti asetukset 'nextmatch' vientiin
 exports a list of tracker tickets to a csv file.	tracker	fi	Vie merkintöjä Reklamaationhallinnasta CSV tiedostoon
+favorites	tracker	fi	Suosikit
 field	tracker	fi	Kenttä
 fixed	tracker	fi	Korjattu
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	fi	Käytä tägiä toistettaviin dokumentteihin. Lisää sisältö kahden tägin väliin.
@@ -351,6 +352,7 @@ state	tracker	fi	Tila
 stati	tracker	fi	Tila
 status	tracker	fi	Tila
 store as	tracker	fi	Varastoi
+sum	tracker	fi	Summa
 summary	tracker	fi	Tiivistelmä
 tag to mark positions for address labels	tracker	fi	Tägi osoitetarrojen sijainnille
 technicians	tracker	fi	Tekninkot

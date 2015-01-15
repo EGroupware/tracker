@@ -64,6 +64,7 @@ escalation saved.	tracker	id	Escalation saved.
 everybody	tracker	id	Everybody
 existing links	tracker	id	Existing links
 export as csv	tracker	id	Ekspor sebagai CSV
+favorites	tracker	id	Favorit
 field	tracker	id	Field
 fixed	tracker	id	Fixed
 forward	tracker	id	Forward
@@ -135,6 +136,7 @@ staff	tracker	id	Staff
 state	tracker	id	State
 stati	tracker	id	Stati
 store as	tracker	id	Store as
+sum	tracker	id	Jml
 summary	tracker	id	Summary
 technicians	tracker	id	Technicians
 this month	tracker	id	Bulan ini

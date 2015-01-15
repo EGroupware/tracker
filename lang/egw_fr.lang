@@ -140,6 +140,7 @@ do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont dues.
 do you want to vote for this item	tracker	fr	Voulez-vous voter pour cet élément ?
 donator name to show	tracker	fr	Nom du donateur à afficher
+download url for links	tracker	fr	URL de téléchargement pour les liens
 due	tracker	fr	Echéance
 due date	tracker	fr	Date d'échéance
 duplicate	tracker	fr	Duplicata
@@ -172,6 +173,7 @@ exists	tracker	fr	Existe
 export as csv	tracker	fr	Exporter au format CSV
 export csv	tracker	fr	Export CSV
 export definition to use for nextmatch export	tracker	fr	Définition de l'export à utiliser pour l'export "nextmatch"
+export definitition to use for nextmatch export	tracker	fr	Définition de l'export à utiliser pour l'export "nextmatch"
 field	tracker	fr	Champ
 fixed	tracker	fr	Corrigé
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	fr	Pour les lettres en série utiliser cette balise. Placer le contenu que vous voulez répéter entre deux balises.
@@ -184,10 +186,12 @@ handling autoreplies	tracker	fr	Traitement des réponses automatiques
 handling bounced mails	tracker	fr	Traitement des messages retournés en erreur
 history	tracker	fr	Historique
 html editing	tracker	fr	Modification en HTML
+html link to the current record	tracker	fr	Lien HTML vers l'enregistrement courant
 id	tracker	fr	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	fr	Si cet élément est important pour vous, veuillez considérer d'y fixer une prime!
 if this item is important for you, please vote for it.	tracker	fr	Si cet élément est important pour vous, veuillez le voter.
 if you specify an export definition, it will be used when you export	tracker	fr	Si vous spécifier un format d'export, il sera utilisé à l'export.
+if you specify an export definition, it will be used when you export*	tracker	fr	Si vous spécifier un format d'export, il sera utilisé à l'export*
 ignore	tracker	fr	Ignorer
 imap, ssl secured	tracker	fr	IMAP, sécurisé par SSL
 imap, tls secured	tracker	fr	IMAP, sécurisé par TLS
@@ -330,6 +334,7 @@ state	tracker	fr	Région
 stati	tracker	fr	Statut
 status	tracker	fr	Statut
 store as	tracker	fr	Enregistrer comme
+sum	tracker	fr	Somme
 summary	tracker	fr	Description
 tag to mark positions for address labels	tracker	fr	Balise pour marquer les positions des étiquettes d'adresses
 technicians	tracker	fr	Techniciens
@@ -350,6 +355,7 @@ this year	tracker	fr	Cette année
 ticket count	tracker	fr	Compteur de tickets
 ticket modified by %1 at %2	tracker	fr	Ticket modifié par %1 à %2
 times	tracker	fr	Heures
+titles of any entries linked to the current record, excluding attached files	tracker	fr	Titres de toutes les entrées liées à l'enregistrement courant, à l'exception des fichiers
 total:	tracker	fr	Tota l:
 tracker	common	fr	Traqueur
 tracker added	tracker	fr	Queue de Traqueur ajoutée

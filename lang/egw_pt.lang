@@ -1,9 +1,16 @@
+%1 days in advance	tracker	pt	% 1 dias de antecedência
+%1 entries %2	tracker	pt	% 1% 2 entradas
 2 years ago	tracker	pt	Há 2 anos atrás
 3 years ago	tracker	pt	Há 3 anos atrás
 accepted	tracker	pt	Aceite
+add / remove link	tracker	pt	Adicionar / remover ligação
 add timesheet entry	tracker	pt	Adicionar registo da folha de tempo
+application mail expected but got: %1	tracker	pt	Correio Aplicação esperava, mas tenho: 1%
 applies the changes	tracker	pt	Aplicar as alterações
+attention: no contact with address %1 found.	tracker	pt	Atenção: Nenhum contato com o endereço% 1 encontrado.
+change owner when updating	tracker	pt	Alterar proprietário ao atualizar
 check all	tracker	pt	Marcar todas
+closed	tracker	pt	Fechado.
 comments	tracker	pt	Comentários
 completed	tracker	pt	Concluído
 configuration	tracker	pt	Configuração
@@ -13,44 +20,81 @@ create new links	tracker	pt	Criar novas ligações
 created	tracker	pt	Criado
 creates a new field	tracker	pt	cria um novo campo
 creation date	tracker	pt	Data de criação
+creator	tracker	pt	Criador
 custom fields	tracker	pt	Personalizar campos
+data exchange settings	tracker	pt	Configurações de troca de dados
+default document to insert entries	tracker	pt	Documento padrão para inserir entradas
 delete this category	tracker	pt	eliminar esta categoria
 delete this entry	tracker	pt	eliminar este registo
 deleted	tracker	pt	eliminado/a
 deletes this field	tracker	pt	eliminar este campo
 determines the order the fields are displayed	tracker	pt	determina a ordem de apresentação dos campos
+directory with documents to insert entries	tracker	pt	Diretório com documentos para inserir entradas
+do not notify of these changes	tracker	pt	Não notificar dessas mudanças
+download url for links	tracker	pt	Baixe url para links
 each value is a line like <id>[=<label>]	tracker	pt	cada valor é uma linha como <id>[=<etiqueta>]
 each value is a line like id[=label]	tracker	pt	cada valor é uma linha como <id>[=etiqueta]
 entry saved	tracker	pt	Registo guardado
 error saving the entry!!!	tracker	pt	Erro ao guardar o registo!!!
+error: no mail (mailbox / uid) given!	tracker	pt	Erro: nenhum e-mail (caixa de correio / UID) dado!
 error: the entry has been updated since you opened it for editing!	tracker	pt	Erro: o registo foi actualizado desde que começou a editar!
 everybody	tracker	pt	Todos
 existing links	tracker	pt	Ligações existentes
+exists	tracker	pt	Existe
+export definition to use for nextmatch export	tracker	pt	Definição Exportar para usar para exportação NextMatch
+export definitition to use for nextmatch export	tracker	pt	Definição Exportar para usar para exportação NextMatch
+favorites	tracker	pt	Favoritos
+field	tracker	pt	Campo
 forward	tracker	pt	Encaminhar
+forward to	tracker	pt	encaminhar à
 from	tracker	pt	De
+full list of placeholder names	tracker	pt	Lista completa de nomes de espaço reservado
+general fields:	tracker	pt	Campos gerais:
+general settings	tracker	pt	Definições gerais
 history	tracker	pt	Histórico
+html link to the current record	tracker	pt	Link HTML para o registro atual
 id	tracker	pt	ID
+insert	tracker	pt	Inserir
+insert in document	tracker	pt	Insira no documento
 last modified	tracker	pt	última modificação
 last month	tracker	pt	Último mês
 last week	tracker	pt	Última semana
 last year	tracker	pt	Último ano
+later	tracker	pt	mais tarde
 leaves without saveing	tracker	pt	Continua sem guardar
 length<br>rows	tracker	pt	Altura<br>Linhas
+linked to %1	tracker	pt	Ligado a 1%
 links	tracker	pt	Ligações
+links and attached files	tracker	pt	Links e arquivos anexados
+links wrapped in an href tag with download link	tracker	pt	Ligações envolto em uma tag HREF com link para download
+list of files linked to the current record	tracker	pt	Lista de arquivos vinculados ao registro atual
+manage mapping	tracker	pt	Gerenciar mapeamento
 max length of the input [, length of the inputfield (optional)]	tracker	pt	comprimento máximo [, comprimento do campo (opcional)]
+new %1	tracker	pt	Nova% 1
+notification settings	tracker	pt	Configurações de notificação
 number of row for a multiline inputfield or line of a multi-select-box	tracker	pt	Número de linhas para um campo multi-linha ou linhas de uma caixa de selecção múltipla.
+old fixed definition	tracker	pt	Definição fixa Velho
+one day after	tracker	pt	Um dia depois
+one day in advance	tracker	pt	Um dia de antecedência
 open(status)	tracker	pt	Abrir
 order	tracker	pt	Ordenar
 overdue	tracker	pt	Em atraso
 permission denied !!!	tracker	pt	Permissão negada !!!
+permissions error - %1 could not %2	tracker	pt	Erro de permissões -% 1 não pôde% 2
 process	tracker	pt	Processar
 rejected	tracker	pt	Rejeitado
+replacements for inserting entries into documents	tracker	pt	Substitutos para a inserção de entradas em documentos
 responsible	tracker	pt	Responsável
+same day	tracker	pt	Mesmo dia
 saves the changes made and leaves	tracker	pt	guarda as alterações e deixa
 select one...	tracker	pt	seleccione um(a)...
+select users or groups	tracker	pt	Selecione os usuários ou grupos
 signature	tracker	pt	Assinatura
 state	tracker	pt	Bairro
+sum	tracker	pt	Soma
 summary	tracker	pt	Assunto
+tag to mark positions for address labels	tracker	pt	Tag para marcar posições para etiquetas de endereço
+the following document-types are supported:	tracker	pt	Os seguintes tipos de documentos são suportados:
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	pt	o nome utilizado internamente (<= 20 caracteres), alterá-lo torna os dados existentes indisponíveis
 the text displayed to the user	tracker	pt	o texto apresentado ao utilizador
 this month	tracker	pt	Este mês
@@ -58,6 +102,15 @@ this week	tracker	pt	Esta semana
 this year	tracker	pt	Este ano
 times	tracker	pt	Tempo
 type of customfield	tracker	pt	Tipo de campo personalizado
+unlinked from %1	tracker	pt	Desvinculada de 1%
 upcoming	tracker	pt	A chegar
 updated	tracker	pt	Actualizado
+use all	tracker	pt	Use todos
+use custom notification message	tracker	pt	Utilize mensagem de notificação personalizada
+use field from csv if possible	tracker	pt	Use o campo de CSV, se possível
+use search results	tracker	pt	Utilizar os resultados da pesquisa
+yes, with larger fontsize	tracker	pt	Sim, com maior tamanho da fonte
 yesterday	tracker	pt	Ontem
+you can respond by visiting:	tracker	pt	Você pode responder, visitando
+you need to select an entry for linking.	tracker	pt	Você precisa selecionar uma entrada para a ligação.
+you need to select some entries first	tracker	pt	Você precisa selecionar algumas entradas em primeiro lugar.
