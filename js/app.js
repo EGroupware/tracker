@@ -66,10 +66,10 @@ app.classes.tracker = AppJS.extend(
 			this.edit_popup();
 		}
 	},
-	
+
 	/**
 	 * Observer method receives update notifications from all applications
-	 * 
+	 *
 	 * @param {string} _msg message (already translated) to show, eg. 'Entry deleted'
 	 * @param {string} _app application name
 	 * @param {(string|number)} _id id of entry to refresh or null
@@ -86,9 +86,9 @@ app.classes.tracker = AppJS.extend(
 	observer: function(_msg, _app, _id, _type, _msg_type, _links)
 	{
 		if (typeof _links != 'underfined')
-		{	
+		{
 			if (typeof _links.tracker != 'undefined')
-			{	
+			{
 				switch (_app)
 				{
 					case 'timesheet':
@@ -97,9 +97,9 @@ app.classes.tracker = AppJS.extend(
 						break;
 				}
 			}
-		}	
+		}
 	},
-	
+
 	/**
 	 * Set the state / apply a favorite
 	 * Overridden from the parent to set the queue to multiple if there are
@@ -117,7 +117,9 @@ app.classes.tracker = AppJS.extend(
 		}
 		if(typeof state == "object" && state != null && state.state && state.state.col_filter)
 		{
-			if(typeof state.state.col_filter.tr_tracker == 'object' && Object.keys(state.state.col_filter.tr_tracker).length > 1)
+			if(typeof state.state.col_filter.tr_tracker == 'object'
+					&& state.state.col_filter.tr_tracker &&
+					Object.keys(state.state.col_filter.tr_tracker).length > 1)
 			{
 				var template = etemplate2.getById('tracker-index') || null;
 				if(template)
@@ -179,12 +181,12 @@ app.classes.tracker = AppJS.extend(
 			if (!this.et2.node.baseURI.match('[no][no_]popup'))
 			{
 				window.focus();
-			
+
 				if (this.et2.node.baseURI.match('composeid')) //tracker created by mail application
 				{
 					window.resizeTo(750,550);
 				}
-			}	
+			}
 		}
 	},
 
@@ -237,7 +239,7 @@ app.classes.tracker = AppJS.extend(
 			this.et2.getWidgetById('users').set_disabled(false);
 		}
 	},
-	
+
 	/**
 	 * Get title in order to set it as document title
 	 * @returns {string}
