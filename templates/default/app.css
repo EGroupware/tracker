@@ -9,7 +9,7 @@ tr.dialogOperators td,.dialogFooterToolbar {
 	padding: 5px 0 5px 0;
 	vertical-align: middle;
 }
-div#tracker-edit.et2_container
+#tracker-edit.et2_container
 {
 }
 .tracker_overdue,.bold { font-weight: bold; }
