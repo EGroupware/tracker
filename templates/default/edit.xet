@@ -143,7 +143,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
-		<grid width="100%" overflow="auto">
+		<grid width="100%">
 			<columns>
 				<column width="85"/>
 				<column width="165"/>
