@@ -48,3 +48,6 @@ label.tracker_trIdEdit:before { content: "#"; }
 	width: 50%;
 	overflow: hidden;
 }
+.trackerDes {
+	white-space: pre-wrap;
+}
