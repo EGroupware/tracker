@@ -118,6 +118,9 @@ label.tracker_trIdEdit:before {
   width: 50%;
   overflow: hidden;
 }
+.trackerDes {
+  white-space: pre-wrap;
+}
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
 }
