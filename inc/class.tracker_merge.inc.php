@@ -159,6 +159,14 @@ class tracker_merge extends bo_merge
 		// Links
 		$array += $this->get_all_links('tracker', $id, $prefix, $content);
 
+		// Timesheet time
+		if(strpos($content, 'tr_sum_timesheets'))
+		{
+			$links = egw_link::get_links('tracker',$id,'timesheet');
+			$sum = ExecMethod('timesheet.timesheet_bo.sum',$links);
+			$info['$$tr_sum_timesheets$$'] = $sum['duration'];
+		}
+		
 		// Add markers
 		foreach($array as $key => &$value)
 		{
@@ -279,6 +287,7 @@ class tracker_merge extends bo_merge
 		$fields['comment/-1/...'] = 'Only the last comment';
 		$fields['comment/-1/creator/...'] = 'Only the last comment by the creator';
 		$fields['comment/-1/assigned_to/...'] = 'Only the last comment by one of the assigned users';
+		$fields['tr_sum_timesheets'] = lang('Used time');
 		foreach($fields as $name => $label)
 		{
 			if (in_array($name,array('link_to','canned_response','reply_message','add','vote','no_notifications','num_replies','customfields'))) continue;	// dont show them
