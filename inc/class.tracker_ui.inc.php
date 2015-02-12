@@ -135,8 +135,7 @@ class tracker_ui extends tracker_bo
 				$own_referer = common::get_referer();
 				if (!$this->read($_GET['tr_id']))
 				{
-					$msg = lang('Tracker item not found !!!');
-					$this->init();
+					egw_framework::window_close(lang('Tracker item not found !!!'));
 				}
 				else
 				{
