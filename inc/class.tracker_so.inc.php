@@ -72,54 +72,53 @@ class tracker_so extends so_sql_cf
 	}
 
 	/**
-	 * Read a tracker item
+	 * Read replies and bounties (non-admin only confirmed ones) of current entry ($this->data)
 	 *
-	 * Reimplemented to read the replies and bounties (non-admin only confirmed ones) too
-	 *
-	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
-	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
-	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
-	 * @param boolean $read_restricted Read restricted replies.  Does not include assigned, as they are read and added here.
-	 * @param int $user=null for which user to check, default current user
-	 * @return array|boolean data if row could be retrived else False
+	 * @param boolean $is_admin =false
+	 * @param boolean $is_technician =false
+	 * @param int $user =null
+	 * @return array $this->data incl. replies, bounties, etc.
 	 */
-	function read($keys,$extra_cols='',$join='', $read_restricted = false, $user=null)
+	function read_extra($is_admin=false, $is_technician=false, $user=null)
 	{
+		$read_restricted = $is_admin || $is_technician;
 		if (!$user) $user = $this->user;
-		if (($ret = parent::read($keys,$extra_cols,$join)))
+
+		$this->data2db();
+
+		$bounty_where = array('tr_id' => $this->data['tr_id']);
+		if (!$is_admin)
 		{
-			$this->data2db();
-
-			$bounty_where = array('tr_id' => $this->data['tr_id']);
-			if (method_exists($this,'is_admin') && !$this->is_admin($this->data['tr_tracker'],$user))
-			{
-				$bounty_where[] = 'bounty_confirmed IS NOT NULL';
-			}
-			$this->data['bounties'] = $this->read_bounties($bounty_where);
-
-			$this->data['tr_assigned'] = array();
-			foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_assigned',array('tr_id' => $this->data['tr_id']),
-				__LINE__,__FILE__,false,'','tracker') as $row)
-			{
-				$this->data['tr_assigned'][] = $row['tr_assigned'];
-				$read_restricted = $read_restricted || ($row['tr_assigned'] == $user);
-			}
-
-			$this->data['replies'] = array();
-			$filter = array('tr_id' => $this->data['tr_id']);
-			if(!$read_restricted)
-			{
-				$filter['reply_visible'] = 0;
-			}
-			foreach($this->db->select(self::REPLIES_TABLE,'*',$filter,
-				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
-			{
-				$this->data['replies'][] = $row;
-			}
-			$this->data['num_replies'] = count($this->data['replies']);
-			$this->db2data();
+			$bounty_where[] = 'bounty_confirmed IS NOT NULL';
 		}
-		return $ret ? $this->data : $ret;
+		$this->data['bounties'] = $this->read_bounties($bounty_where);
+
+		$this->data['tr_assigned'] = array();
+		foreach($this->db->select(self::ASSIGNEE_TABLE,'tr_assigned',array('tr_id' => $this->data['tr_id']),
+			__LINE__,__FILE__,false,'','tracker') as $row)
+		{
+			$this->data['tr_assigned'][] = $row['tr_assigned'];
+			$read_restricted = $read_restricted || $row['tr_assigned'] == $user ||
+				// if assigned to a group, we need to check memberships of $user
+				$GLOBALS['egw']->accounts->get_type($row['tr_assigned']) == 'g' &&
+					in_array($row['tr_assigned'], $GLOBALS['egw']->accounts->memberships($user, true));
+		}
+
+		$this->data['replies'] = array();
+		$filter = array('tr_id' => $this->data['tr_id']);
+		if(!$read_restricted)
+		{
+			$filter['reply_visible'] = 0;
+		}
+		foreach($this->db->select(self::REPLIES_TABLE,'*',$filter,
+			__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
+		{
+			$this->data['replies'][] = $row;
+		}
+		$this->data['num_replies'] = count($this->data['replies']);
+		$this->db2data();
+
+		return $this->data;
 	}
 
 	/**

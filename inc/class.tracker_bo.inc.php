@@ -489,12 +489,12 @@ class tracker_bo extends tracker_so
 	*/
 	function read($keys,$extra_cols='',$join='',$user=null)
 	{
-		// Read restricted doesn't include assigned, it's not known yet
-		$read_restricted = $this->is_admin(is_array($keys) ? $keys['tr_id'] : $keys, $user) ||
-			$this->is_technician(is_array($keys) ? $keys['tr_id'] : $keys, $user);
-
-		if (($ret = parent::read($keys, $extra_cols, $join, $read_restricted, $user)))
+		if (($ret = parent::read($keys, $extra_cols, $join)))
 		{
+			// read_extras need to know if $user is admin and/or technician of queue of ticket
+			$ret = $this->read_extra($this->is_admin($this->data['tr_tracker'], $user),
+				$this->is_technician($this->data['tr_tracker'], $user), $user);
+
 			$this->data['old_status'] = $this->data['tr_status'];
 
 			if ($this->deny_private()) $ret = $this->data = false;
@@ -946,9 +946,11 @@ class tracker_bo extends tracker_so
 	{
 		if (!$user) $user = $this->user;
 		if (!$data) $data = $this->data;
+		$memberships = $GLOBALS['egw']->accounts->memberships($user, true);
+		$memberships[] = $user;
 
 		return $data['tr_private'] && !($user == $data['tr_creator'] || $this->is_admin($data['tr_tracker'],$user) ||
-			$data['tr_assigned'] && in_array($user,$data['tr_assigned']));
+			$data['tr_assigned'] && array_intersect($memberships, $data['tr_assigned']));
 	}
 
 	/**
