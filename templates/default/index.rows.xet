@@ -119,7 +119,7 @@
 							</menulist>
 						</hbox>
 					</vbox>
-					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@duration_format"/>
+					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@@duration_format"/>
 					<textbox type="integer" align="center" id="${row}[votes]" readonly="true"/>
 					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
 					<date-since id="${row}[esc_start]"/>
