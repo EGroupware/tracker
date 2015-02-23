@@ -60,7 +60,7 @@ class tracker_ui extends tracker_bo
 		if ($GLOBALS['egw_info']['apps']['projectmanager'])
 		{
 			$pm_config = config::read('projectmanager');
-			$this->duration_format = str_replace(',','',$pm_config['duration_units']).','.$pm_config['hours_per_workday'];
+			$this->duration_format = str_replace(',','',implode('', (array)$pm_config['duration_units'])).','.$pm_config['hours_per_workday'];
 			unset($pm_config);
 		}
 	}
@@ -925,7 +925,6 @@ class tracker_ui extends tracker_bo
 			$id=$row['tr_id'];
 		}
 
-		$rows['duration_format'] = ','.$this->duration_format.',,1';
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
 
 		// Add allowed staff
@@ -1335,6 +1334,8 @@ class tracker_ui extends tracker_bo
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		$content['nm']['favorites'] = true; // Enable favorites
+		
+		$content['duration_format'] = ','.$this->duration_format.',,1';
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
