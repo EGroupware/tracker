@@ -89,16 +89,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.history" template="" lang="" group="0" version="0.1.002">
-		<grid width="100%">
-			<columns>
-				<column/>
-			</columns>
-			<rows>
-				<row valign="top">
-					<historylog id="history"/>
-				</row>
-			</rows>
-		</grid>
+		<historylog id="history"/>
 	</template>
 	<template id="tracker.edit.bounties" template="" lang="" group="0" version="0.1.003">
 		<grid width="100%" overflow="auto" id="bounties">
