@@ -634,6 +634,7 @@ class tracker_ui extends tracker_bo
 		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
 			!$this->allow_restricted_comments;
 
+		$account_select_pref = $GLOBALS['egw_info']['user']['preferences']['common']['account_selection'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
@@ -641,10 +642,10 @@ class tracker_ui extends tracker_bo
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
-			'tr_assigned' => $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
+			'tr_assigned' => $account_select_pref == 'none' ? array() : $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
 			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
-			'tr_group' => $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
+			'tr_group' => $account_select_pref == 'none' ? array() : $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
 		);
 
@@ -671,6 +672,13 @@ class tracker_ui extends tracker_bo
 		{
 			$msg = lang('Permission denied !!!');
 			$readonlys['button[save]'] = true;
+		}
+		// Assigned & group are not select-account widgets, so we need to apply
+		// none preference (no value, no options) here.
+		if($account_select_pref == 'none')
+		{
+			$readonlys['tr_assigned'] = true;
+			$readonlys['tr_group'] = true;
 		}
 		if (!$this->allow_voting || !$tr_id || $readonlys['vote'] || ($voted = $this->check_vote()))
 		{
