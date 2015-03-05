@@ -1947,13 +1947,14 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to link with
 			$addressbook = new addressbook_bo();
 			$contacts = array();
+			$filter['owner'] = 0;
 			foreach ($email as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
+					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,$filte,'',false));
 			}
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
 			{
@@ -2008,13 +2009,14 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to idetify the reply creator
 			$addressbook = new addressbook_bo();
 			$contacts = array();
+			$filter['owner'] = 0;
 			foreach ($email as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,null,'',false));
+					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,$filter,'',false));
 			}
 			$found= false;
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
