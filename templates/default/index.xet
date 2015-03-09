@@ -168,7 +168,8 @@
 					</hbox>
 				</row>
 				<row>
-					<box id="admin_popup" class="action_popup prompt">
+					<box>
+						<box id="admin_popup" class="action_popup prompt">
 						<description value="Multiple changes" span="all" class="promptheader"/>
 						<grid width="500px" class="action_popup-content">
 							<columns>
@@ -233,6 +234,7 @@
 								</row>
 							</rows>
 						</grid>
+					</box>
 					</box>
 					<hbox align="right">
 						<box id="link_popup" class="action_popup prompt">
