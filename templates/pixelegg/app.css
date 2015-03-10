@@ -121,6 +121,9 @@ label.tracker_trIdEdit:before {
 .trackerDes {
   white-space: pre-wrap;
 }
+#tracker-admin_tracker-admin-acl tr.row {
+  border-bottom: 1px solid silver;
+}
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
 }

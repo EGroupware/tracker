@@ -51,3 +51,7 @@ label.tracker_trIdEdit:before { content: "#"; }
 .trackerDes {
 	white-space: pre-wrap;
 }
+/* Add border to ACL's table for more reading convenient*/
+#tracker-admin_tracker-admin-acl tr.row {
+	border-bottom: 1px solid silver;
+}
