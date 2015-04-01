@@ -192,6 +192,7 @@ forward	tracker	fr	Transférer
 forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	fr	Transférer le mail à la même adresse où les emails non reconnus peuvent être transférés (cette adresse doit être entrée).  Après cela, l' email a supprimé du serveur.
 forward to	tracker	fr	transférer à
 from	tracker	fr	De
+full list of placeholder names	tracker	fr	Liste complète de mots clé
 general fields:	tracker	fr	Champs généraux :
 general settings	tracker	fr	Paramètres principaux
 handling autoreplies	tracker	fr	Traitement des réponses automatiques

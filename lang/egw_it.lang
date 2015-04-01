@@ -59,6 +59,7 @@ change owner when updating	tracker	it	Modifica il proprietario quando aggiorni
 changes made below will be lost, if not applied before!	tracker	it	le modifiche apportate fino ad ora andranno perdute , se non applicate prima !
 check all	tracker	it	Seleziona tutto
 check mail interval	tracker	it	Controllo della mail ogni
+choose 'creator' of imported data	tracker	it	Seleziona "creatore" dei dati importati
 choose a project from the drop-down list	tracker	it	scegli il progetto dal menù a tendina
 close pending	tracker	it	Chiudi in sospeso
 closed	tracker	it	Chiuso
@@ -156,6 +157,7 @@ if this item is important for you, please vote for it.	tracker	it	Se questo ogge
 if you specify an export definition, it will be used when you export	tracker	it	Se specifichi una definizione di esportazione, allora verrà usata durante la relativa operazione
 if you specify an export definition, it will be used when you export*	tracker	it	Verrà usata quando esporti, se specifichi qui una definizione di esportazione
 ignore	tracker	it	Ignora
+import options	tracker	it	Importa opzioni
 import tts tickets	tracker	it	Importa TTS tickets
 incoming mail folder	tracker	it	Cartella della posta in arrivo
 incoming mail rules	tracker	it	Regole della posta in arrivo
@@ -196,6 +198,7 @@ no notifications	tracker	it	Nessuna notifica
 no trackers found, aborting	tracker	it	Trackers non trovati , in chiusura
 non-anonymous users	tracker	it	Utenti non-anonimi
 noone	tracker	it	Nessuno
+not-closed	tracker	it	non-chiusi
 notification	tracker	it	Notifica
 notification settings	tracker	it	Impostazioni di notifica
 number of row for a multiline inputfield or line of a multi-select-box	tracker	it	Numero di righe per un campo di testo oppure un campo di selezione multipla
@@ -229,6 +232,7 @@ receive notifications in html	tracker	it	Ricezione notifiche in html
 rejected	tracker	it	Rifiutato
 remind	tracker	it	Ricorda
 replacements for inserting entries into documents	tracker	it	Sostituzioni per inserimento voci in documenti
+reports	tracker	it	Rapporti
 resolution	tracker	it	Soluzione
 responsible	tracker	it	responsabile
 restict tracker items to the creator and the staff only	tracker	it	Restringi l'accesso agli oggetti-tracker solo al creatore e allo Staff
@@ -252,9 +256,11 @@ server type	tracker	it	Tipo del server
 set %1	tracker	it	Imposta %1
 set an own bounty (in %s)	tracker	it	Imposta un bounty (in %s)
 set bounty	tracker	it	Imposta bounty
+set to	tracker	it	Imposta a
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
 signature	tracker	it	Firma
+skip record	tracker	it	Salta voce
 staff	tracker	it	Staff
 state	tracker	it	Stato
 stati	tracker	it	Stati
@@ -295,6 +301,7 @@ tracker-%1 '%2' added.	tracker	it	Tracker-%1 '%2' aggiunto.
 tracker-%1 '%2' updated.	tracker	it	Tracker-%1 '%2' aggiornato.
 tracker-%1 deleted.	tracker	it	Tracker-%1 eliminato.
 type of customfield	tracker	it	Tipo di campo personalizzato
+unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	it	Impossibile convertire "%1" a ID account. Impostazione plugin (%2) per %3 in uso.
 unchanged	tracker	it	Non cambiare
 unlinked from %1	tracker	it	Link annullato da %1
 unrecognized mails	tracker	it	Email non ricosciute
