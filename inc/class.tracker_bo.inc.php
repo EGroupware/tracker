@@ -1902,25 +1902,19 @@ class tracker_bo extends tracker_so
 	 * prepares the content of an email to be imported as tracker
 	 *
 	 * @author Klaus Leithoff <kl@stylite.de>
-	 * @param string $_email_address rfc822 conform emailaddresses
+	 * @param array $_addresses array of addresses
+	 *	- array (email,name)
 	 * @param string $_subject
 	 * @param string $_message
 	 * @param array $_attachments
-	 * @param string $_date
 	 * @param int $_queue optional param to pass queue
 	 * @return array $content array for tracker_ui
 	 */
-	function prepare_import_mail($_email_address,$_subject,$_message,$_attachments,$_date,$_queue=0)
+	function prepare_import_mail($_addresses,$_subject,$_message,$_attachments,$_queue=0)
 	{
-		unset($_date);	// unused, but required by function signature
-		$address_array = imap_rfc822_parse_adrlist($_email_address,'');
-		$email = $name = array();
-		foreach ((array)$address_array as $address)
+		foreach($_addresses as $address)
 		{
-			$email[] = $emailadr = sprintf('%s@%s',
-				trim($address->mailbox),
-				trim($address->host));
-			$name[] = !empty($address->personal) ? $address->personal : $emailadr;
+			$emails[] =$address['email'];
 		}
 		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
 		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
@@ -1934,7 +1928,7 @@ class tracker_bo extends tracker_so
 		{
 			$trackerentry = array(
 				'tr_id' => 0,
-				'tr_cc' => implode(', ',$email),
+				'tr_cc' => implode(', ',$emails),
 				'tr_summary' => $_subject,
 				'tr_description' => $_message,
 				'referer' => false,
@@ -1948,7 +1942,7 @@ class tracker_bo extends tracker_so
 			$addressbook = new addressbook_bo();
 			$contacts = array();
 			$filter['owner'] = 0;
-			foreach ($email as $mailadr)
+			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
 					array(
@@ -1958,7 +1952,7 @@ class tracker_bo extends tracker_so
 			}
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
 			{
-				$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
+				$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$emails));
 				$trackerentry['tr_creator'] = $this->user;	// use current user as creator instead
 			}
 			else
@@ -1999,7 +1993,7 @@ class tracker_bo extends tracker_so
 				}
 				if (empty($trackerentry['tr_creator']))
 				{
-					$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
+					$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$emails));
 					$trackerentry['tr_creator']=$this->user;
 				}
 			}
@@ -2010,7 +2004,7 @@ class tracker_bo extends tracker_so
 			$addressbook = new addressbook_bo();
 			$contacts = array();
 			$filter['owner'] = 0;
-			foreach ($email as $mailadr)
+			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
 					array(
@@ -2052,7 +2046,7 @@ class tracker_bo extends tracker_so
 					}
 				}
 			}
-			if($found===false) $msg['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$email));
+			if($found===false) $msg['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$emails));
 			$this->read($ticketId);
 			//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 			// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
@@ -2080,14 +2074,9 @@ class tracker_bo extends tracker_so
 		{
 			foreach ($_attachments as $attachment)
 			{
-				$is_vfs = false;
-				if (parse_url($attachment['tmp_name'],PHP_URL_SCHEME) == 'vfs' && egw_vfs::is_readable($attachment['tmp_name']))
+				if($attachment['egw_data'])
 				{
-					$is_vfs = true;
-				}
-				if(is_readable($attachment['tmp_name']) || $is_vfs)
-				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],egw_link::DATA_APPNAME,$attachment);
 				}
 			}
 		}
