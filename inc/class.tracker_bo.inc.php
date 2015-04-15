@@ -360,13 +360,7 @@ class tracker_bo extends tracker_so
 		'3 years ago' => array(-3,0,0,0, -2,0,0,0),
 	);
 
-	/**
-	 * Maximum number of line characters (-_+=~) allowed in a mail, to not stall the layout.
-	 * Longer lines / biger number of these chars are truncated to that max. number or chars.
-	 *
-	 * @var int
-	 */
-	var $max_line_chars = 40;
+	
 
 	/**
 	 * Constructor

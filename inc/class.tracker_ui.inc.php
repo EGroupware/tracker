@@ -24,7 +24,7 @@ class tracker_ui extends tracker_bo
 		'edit'  => true,
 		'index' => true,
 		'tprint'=> true,
-		'import_mail' => True,
+		'mail_import' => True,
 	);
 	/**
 	 * Displayed instead of the '@' in email-addresses
@@ -1579,12 +1579,20 @@ width:100%;
 	/**
 	 * imports a mail as Tracker
 	 *
-	 * @param array $mailContent mail content
+	 * @param array $mailContent = null mail content
 	 * @return  array
 	 */
-	function mail_import($mailContent)
+	function mail_import(array $mailContent=null)
 	{
-		return $this->edit($this->prepare_import_mail($mailContent['addresses'],
+		// It would get called from compose as a popup with egw_data
+		if (!is_array($mailContent) && ($_GET['egw_data']))
+		{
+			// get the mail raw data
+			egw_link::get_data ($_GET['egw_data']);
+			return false;
+		}
+		
+		$this->edit($this->prepare_import_mail($mailContent['addresses'],
 				$mailContent['subject'],
 				$mailContent['message'],
 				$mailContent['attachments']));

@@ -332,6 +332,9 @@ class tracker_hooks
 	 */
 	public static function mail_import($args)
 	{
-		return 'tracker.tracker_ui.mail_import';
+		return array(
+			'menuaction' => 'tracker.tracker_ui.mail_import',
+			'popup' => egw_link::get_registry('tracker', 'add_popup')
+		);
 	}
 }
