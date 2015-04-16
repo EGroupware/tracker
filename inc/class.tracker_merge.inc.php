@@ -146,6 +146,8 @@ class tracker_merge extends bo_merge
 		importexport_export_csv::convert($record, $types, 'tracker', $lookups);
 		$array += $record->get_record_array();
 
+		$array['tr_completion'] = (int)$array['tr_completion'] . '%';
+
 		// HTML link to ticket
 		$tracker = new tracker_tracking($this->bo);
 		$array['tr_link'] = html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
