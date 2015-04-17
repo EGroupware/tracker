@@ -385,7 +385,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * Reimplemented to set some defaults
 	 *
-	 * @param array $keys=array() array with keys in form internalName => value
+	 * @param array $keys = array() array with keys in form internalName => value
 	 * @return array internal data after init
 	 */
 	function init($keys=array())
@@ -476,7 +476,7 @@ class tracker_bo extends tracker_so
 	 * @param array $keys array with keys in form internalName => value, may be a scalar value if only one key
 	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
-	 * @param int $user=null for which user to check, default current user
+	 * @param int $user = null for which user to check, default current user
 	 * @return array|boolean data if row could be retrived else False
 	*/
 	function read($keys,$extra_cols='',$join='',$user=null)
@@ -661,7 +661,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Get a list of all groups
 	 *
-	 * @param boolean $primary=false, when not ACL to change the group, return primary group only on new tickets
+	 * @param boolean $primary = false, when not ACL to change the group, return primary group only on new tickets
 	 * @return array with gid => group-name pairs
 	 */
 	function &get_groups($primary=false)
@@ -698,8 +698,8 @@ class tracker_bo extends tracker_so
 	 * Get the staff (technicians or admins) of a tracker
 	 *
 	 * @param int $tracker tracker-id or 0, 0 = staff of all trackers!
-	 * @param int $return_groups=2 0=users, 1=groups+users, 2=users+groups
-	 * @param string $what='technicians' technicians=technicians (incl. admins), admins=only admins, users=only users
+	 * @param int $return_groups = 2 0=users, 1=groups+users, 2=users+groups
+	 * @param string $what = 'technicians' technicians=technicians (incl. admins), admins=only admins, users=only users
 	 * @return array with uid => user-name pairs
 	 */
 	function &get_staff($tracker,$return_groups=2,$what='technicians')
@@ -801,7 +801,7 @@ class tracker_bo extends tracker_so
 	 * Check if a user (default current user) is an admin for the given tracker
 	 *
 	 * @param int $tracker ID of tracker
-	 * @param int $user=null ID of user, default current user $this->user
+	 * @param int $user = null ID of user, default current user $this->user
 	 * @return boolean
 	 */
 	function is_admin($tracker,$user=null)
@@ -835,7 +835,7 @@ class tracker_bo extends tracker_so
 	 * If queue ACL access is NOT enabled, we return is_tracker_user() (user is non-anonymous and has tracker run-rights)
 	 *
 	 * @param int $tracker ID of tracker
-	 * @param int $user=null ID of user, default current user $this->user
+	 * @param int $user = null ID of user, default current user $this->user
 	 * @return boolean
 	 */
 	function is_user($tracker,$user=null)
@@ -851,7 +851,7 @@ class tracker_bo extends tracker_so
 	 * Check if a user (default current user) is staff member for the given tracker
 	 *
 	 * @param int $tracker ID of tracker
-	 * @param int $user=null ID of user, default current user $this->user
+	 * @param int $user = null ID of user, default current user $this->user
 	 * @return boolean
 	 */
 	function is_staff($tracker,$user=null)
@@ -864,7 +864,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if a user (default current user) is anonymous
 	 *
-	 * @param int $user=null ID of user, default current user $this->user
+	 * @param int $user = null ID of user, default current user $this->user
 	 * @return boolean
 	 */
 	function is_anonymous($user=null)
@@ -893,7 +893,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if a user (default current user) is a non-anoymous user with run-rights for tracker
 	 *
-	 * @param int $user=null ID of user, default current user $this->user
+	 * @param int $user = null ID of user, default current user $this->user
 	 * @return boolean
 	 */
 	function is_tracker_user($user=null)
@@ -930,8 +930,8 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if given or current ticket is private and user is not creator, assignee or admin
 	 *
-	 * @param array $data=null array with ticket or null for $this->data
-	 * @param int $user=null account_id or null for current user
+	 * @param array $data = null array with ticket or null for $this->data
+	 * @param int $user = null account_id or null for current user
 	 * @return boolean true = deny access to private ticket, false grant access (ticket not private or access allowed)
 	 */
 	function deny_private(array $data=null,$user=null)
@@ -949,10 +949,10 @@ class tracker_bo extends tracker_so
 	 * Check what rights the current user has on a given or the current tracker item ($this->data) or a given tracker
 	 *
 	 * @param int $needed or'ed together: TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE
-	 * @param int $check_only_tracker=null should only the given tracker be checked and NO $this->data specific checks be performed, default no
-	 * @param int|array $data=null array with tracker item, integer tr_id or default null for loaded tracker item ($this->tracker)
-	 * @param int $user=null for which user to check, default current user
-	 * @param string $name=null something to put in error_log
+	 * @param int $check_only_tracker = null should only the given tracker be checked and NO $this->data specific checks be performed, default no
+	 * @param int|array $data = null array with tracker item, integer tr_id or default null for loaded tracker item ($this->tracker)
+	 * @param int $user = null for which user to check, default current user
+	 * @param string $name = null something to put in error_log
 	 * @return boolean true if user has the $needed rights, false otherwise
 	 */
 	function check_rights($needed,$check_only_tracker=null,$data=null,$user=null,$name=null)
@@ -1080,8 +1080,8 @@ class tracker_bo extends tracker_so
 	 *
 	 * @param int|array $id id of entry or entry array
 	 * @param int $check EGW_ACL_READ for read and EGW_ACL_EDIT for write or delete access
-	 * @param string $rel_path=null currently not used in Tracker
-	 * @param int $user=null for which user to check, default current user
+	 * @param string $rel_path = null currently not used in Tracker
+	 * @param int $user = null for which user to check, default current user
 	 * @return boolean true if access is granted or false otherwise
 	 */
 	function file_access($id,$check,$rel_path=null,$user=null)
@@ -1109,7 +1109,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if users is allowed to vote and has not already voted
 	 *
-	 * @param int $tr_id=null tracker-id, default current tracker-item ($this->data)
+	 * @param int $tr_id = null tracker-id, default current tracker-item ($this->data)
 	 * @return int|boolean true for no rights, timestamp voted or null
 	 */
 	function check_vote($tr_id=null)
@@ -1132,8 +1132,8 @@ class tracker_bo extends tracker_so
 	/**
 	 * Cast vote for given tracker-item
 	 *
-	 * @param int $tr_id=null tracker-id, default current tracker-item ($this->data)
-	 * @return boolean true=vote casted, false=already voted before
+	 * @param int $tr_id = null tracker-id, default current tracker-item ($this->data)
+	 * @return boolean true = vote casted, false=already voted before
 	 */
 	function cast_vote($tr_id=null)
 	{
@@ -1153,9 +1153,9 @@ class tracker_bo extends tracker_so
 	 * The "cat_data" column stores if a tracker-cat is a "tracker", "version", "cat" or empty.
 	 * Labels need to be either tracker specific or global and NOT in denyglobal.
 	 *
-	 * @param string $type='tracker' 'tracker', 'version', 'cat', 'resolution'
-	 * @param int $tracker=null tracker to use or null to use $this->data['tr_tracker']
-	 * @param int &$default=null on return default, if it is set
+	 * @param string $type = 'tracker' 'tracker', 'version', 'cat', 'resolution'
+	 * @param int $tracker = null tracker to use or null to use $this->data['tr_tracker']
+	 * @param int &$default = null on return default, if it is set
 	 */
 	function get_tracker_labels($type='tracker', $tracker=null, &$default=null)
 	{
@@ -1229,7 +1229,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * There's a bunch of pre-defined stati, plus statis stored as labels, which can be per tracker
 	 *
-	 * @param int $tracker=null tracker to use of null to use $this->data['tr_tracker']
+	 * @param int $tracker = null tracker to use of null to use $this->data['tr_tracker']
 	 * @param boolean $closed True to get 'closed' stati, false to get open stati, null for all
 	 */
 	function get_tracker_stati($tracker=null, $closed = null)
@@ -1254,9 +1254,9 @@ class tracker_bo extends tracker_so
 	 *
 	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys and customizable labels
 	 *
-	 * @param int $tracker=null tracker to use or null to use tracker unspecific priorities
-	 * @param int $cat_id=null category to use or null to use categorie unspecific priorities
-	 * @param boolean $remove_empty=true should empty labels be displayed, default no
+	 * @param int $tracker = null tracker to use or null to use tracker unspecific priorities
+	 * @param int $cat_id = null category to use or null to use categorie unspecific priorities
+	 * @param boolean $remove_empty = true should empty labels be displayed, default no
 	 * @return array
 	 */
 	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true)
@@ -1441,9 +1441,9 @@ class tracker_bo extends tracker_so
 	 *	For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
 	 * @param array &$rows returned rows/competitions
 	 * @param array &$readonlys eg. to disable buttons based on acl, not use here, maybe in a derived class
-	 * @param string $join='' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
+	 * @param string $join = '' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
 	 *	"LEFT JOIN table2 ON (x=y)", Note: there's no quoting done on $join!
-	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
+	 * @param boolean $need_full_no_count = false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
 	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
@@ -1644,7 +1644,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if exist and if not start or stop an async job to close pending items
 	 *
-	 * @param boolean $start=true true=start, false=stop
+	 * @param boolean $start = true true=start, false=stop
 	 */
 	static function set_async_job($start=true)
 	{
@@ -1778,7 +1778,7 @@ class tracker_bo extends tracker_so
 	/**
 	 * Delete a bounty, the bounty must not be confirmed and you must be an tracker-admin!
 	 *
-	 * @param int $bounty_id
+	 * @param int $id
 	 * @return boolean true on success or false otherwise
 	 */
 	function delete_bounty($id)
@@ -1803,7 +1803,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @internal
 	 * @param array $new new value
-	 * @param array $old=null old value
+	 * @param array $old = null old value
 	 */
 	function _bounty2history($new,$old=null)
 	{
@@ -1908,11 +1908,7 @@ class tracker_bo extends tracker_so
 		{
 			$emails[] =$address['email'];
 		}
-		// shorten long (> $this->max_line_chars) lines of "line" chars (-_+=~) in mails
-		$_message = preg_replace_callback('/[-_+=~\.]{'.$this->max_line_chars.',}/m',
-			create_function('$matches',"return substr(\$matches[0],0,$this->max_line_chars);"),$_message);
-		//$type = isset($this->enums['type']['email']) ? 'email' : 'note';
-		//$status = isset($this->status['defaults'][$type]) ? $this->status['defaults'][$type] : 'done';
+		
 		$ticketId = $this->get_ticketId($_subject);
 		//_debug_array('TickedId found:'.$ticketId);
 		// we have to check if we know this ticket before proceeding
@@ -2069,6 +2065,10 @@ class tracker_bo extends tracker_so
 				if($attachment['egw_data'])
 				{
 					egw_link::link('tracker',$trackerentry['link_to']['to_id'],egw_link::DATA_APPNAME,$attachment);
+				}
+				else if(is_readable($attachment['tmp_name']))
+				{
+					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
 				}
 			}
 		}
