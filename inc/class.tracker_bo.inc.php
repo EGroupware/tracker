@@ -446,8 +446,6 @@ class tracker_bo extends tracker_so
 		// Consider due date independent of overdue days
 		$data['overdue'] |= ($data['tr_duedate'] && $this->now > $data['tr_duedate'] && !in_array($data['tr_status'], $this->get_tracker_stati(null,true)));
 
-		if (is_numeric($data['tr_completion'])) $data['tr_completion'] .= '%';
-
 		// Keep a copy of the timestamps in server time, so notifications can change them for each user
 		foreach($this->timestamps as $field)
 		{
