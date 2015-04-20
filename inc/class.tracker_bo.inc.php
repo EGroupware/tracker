@@ -1839,7 +1839,20 @@ class tracker_bo extends tracker_so
 			'> ('.$GLOBALS['egw']->accounts->id2name($bounty['bounty_creator']).') '.
 			$bounty['bounty_amount'].' '.$this->currency.($bounty['bounty_confirmed'] ? ' Ok' : '');
 	}
-
+	
+	/**
+	 * Provide response data of get_ticketId to client-side
+	 * JSON response to client with data = (int)ticket_id
+	 * or 0 if there was no ticket registered for the given subject
+	 *
+	 * @param type $_subject
+	 */
+	function ajax_getTicketId($_subject)
+	{
+		$response  = egw_json_response::get();
+		$response->data($this->get_ticketId($_subject));
+	}
+	
 	/**
 	 * Try to extract a ticket number from a subject line
 	 *
@@ -1899,17 +1912,18 @@ class tracker_bo extends tracker_so
 	 * @param string $_subject
 	 * @param string $_message
 	 * @param array $_attachments
+	 * @param string $_ticket_id ticket id
 	 * @param int $_queue optional param to pass queue
 	 * @return array $content array for tracker_ui
 	 */
-	function prepare_import_mail($_addresses,$_subject,$_message,$_attachments,$_queue=0)
+	function prepare_import_mail($_addresses, $_subject, $_message, $_attachments, $_ticket_id, $_queue = 0)
 	{
 		foreach($_addresses as $address)
 		{
 			$emails[] =$address['email'];
 		}
 		
-		$ticketId = $this->get_ticketId($_subject);
+		$ticketId = $_ticket_id? $_ticket_id: $this->get_ticketId($_subject);
 		//_debug_array('TickedId found:'.$ticketId);
 		// we have to check if we know this ticket before proceeding
 		if ($ticketId == 0)

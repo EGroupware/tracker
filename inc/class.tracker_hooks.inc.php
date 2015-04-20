@@ -334,7 +334,8 @@ class tracker_hooks
 	{
 		return array(
 			'menuaction' => 'tracker.tracker_ui.mail_import',
-			'popup' => egw_link::get_registry('tracker', 'add_popup')
+			'popup' => egw_link::get_registry('tracker', 'add_popup'),
+			'app_entry_method' => 'tracker.tracker_bo.ajax_getTicketId'
 		);
 	}
 }

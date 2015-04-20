@@ -1595,7 +1595,8 @@ width:100%;
 		$this->edit($this->prepare_import_mail($mailContent['addresses'],
 				$mailContent['subject'],
 				$mailContent['message'],
-				$mailContent['attachments']));
+				$mailContent['attachments'],
+				$mailContent['entry_id']));
 	}
 
 	/**
