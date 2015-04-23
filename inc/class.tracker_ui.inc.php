@@ -1591,10 +1591,12 @@ width:100%;
 			egw_link::get_data ($_GET['egw_data']);
 			return false;
 		}
+		// Wrap a pre tag if we are using html editor
+		$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
 		
 		$this->edit($this->prepare_import_mail($mailContent['addresses'],
 				$mailContent['subject'],
-				$mailContent['message'],
+				$message,
 				$mailContent['attachments'],
 				$mailContent['entry_id']));
 	}
