@@ -231,7 +231,7 @@
 					<description/>
 				</row>
 				<row valign="top">
-					<tabbox id="tabs" span="all" tab_height="250">
+					<tabbox id="tabs" span="all" tab_height="280">
 						<tabs>
 							<tab id="description" label="Description" statustext="Description"/>
 							<tab id="details" label="Details" statustext="Details"/>
