@@ -324,4 +324,18 @@ class tracker_hooks
 			}
 		}
 	}
+	
+	/**
+	 * Mail integration hook to import mail message contents into a tracker entry
+	 *
+	 * @return string method to be executed for tracker mail integration
+	 */
+	public static function mail_import($args)
+	{
+		return array(
+			'menuaction' => 'tracker.tracker_ui.mail_import',
+			'popup' => egw_link::get_registry('tracker', 'add_popup'),
+			'app_entry_method' => 'tracker.tracker_bo.ajax_getTicketId'
+		);
+	}
 }
