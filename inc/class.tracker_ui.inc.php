@@ -664,6 +664,9 @@ class tracker_ui extends tracker_bo
 			'bounties' => !$this->allow_bounties,
 			'custom'   => !config::get_customfields('tracker', false, $content['tr_tracker']),
 		);
+		// Make link_to readonly if the user has no EDIT access
+		$readonlys['link_to'] = !$this->file_access($tr_id, EGW_ACL_EDIT);
+		
 		if ($tr_id && $readonlys['reply_message'])
 		{
 			$readonlys['button[save]'] = true;
