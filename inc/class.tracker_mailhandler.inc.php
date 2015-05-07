@@ -1382,7 +1382,7 @@ class tracker_mailhandler extends tracker_bo
 			$mailcontent['subject'],
 			$mailcontent['message'],
 			$mailcontent['attachments'],
-			strtotime($mailcontent['headers']['DATE']),
+			($tId?$tId:0),
 			$queue
 		);
 		if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->data));
