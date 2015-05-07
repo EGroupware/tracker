@@ -1918,11 +1918,18 @@ class tracker_bo extends tracker_so
 	 */
 	function prepare_import_mail($_addresses, $_subject, $_message, $_attachments, $_ticket_id, $_queue = 0)
 	{
-		foreach($_addresses as $address)
+		foreach((array)$_addresses as $address)
 		{
-			$emails[] =$address['email'];
+			if (is_array($address) && isset($address['email']))
+			{
+				$emails[] =$address['email'];
+			}
+			else
+			{
+				$parsedAddresses = emailadmin_imapbase::parseAddressList($address);
+				foreach($parsedAddresses as $i => $adr)	$emails[] = $adr->mailbox.'@'.$adr->host;
+			}
 		}
-		
 		$ticketId = $_ticket_id? $_ticket_id: $this->get_ticketId($_subject);
 		//_debug_array('TickedId found:'.$ticketId);
 		// we have to check if we know this ticket before proceeding
