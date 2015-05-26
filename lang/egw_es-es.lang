@@ -3,12 +3,15 @@
 %1 entries %2	tracker	es-es	%1 entradas %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	es-es	%1 entradas %2, %3 fallaron por permisos insuficientes
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
+%1 is starting %2	tracker	es-es	%1 está empezando %2
 %1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
 &#9830; not closed	tracker	es-es	♦ No cerrado
 &#9830; own not closed	tracker	es-es	♦ Propio no cerrado
+&#9830; own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
 &#9830; own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado
 &#9830; without 30 days reply not closed	tracker	es-es	♦ Sin contestación en 30 días no cerrado
 &#9830; without reply not closed	tracker	es-es	♦ Sin contestación no cerrado
+(beware of mailloops, check the help!)	tracker	es-es	(Tenga cuidado con los bucles de correo, ¡revise la ayuda!)
 (new tickets as	tracker	es-es	Nueva entrada como
 --> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable
 --> enter new name	tracker	es-es	--> introduzca un nombre nuevo
@@ -20,6 +23,7 @@
 5 - medium	tracker	es-es	5 - media
 9 - highest	tracker	es-es	9 - la más alta
 accepted	tracker	es-es	Aceptada
+acl	tracker	es-es	Lista de control de acceso
 activate users queue access control	tracker	es-es	Activar control de acceso para la cola de usuarios
 add / remove link	tracker	es-es	Añadir / eliminar enlace
 add a ticket	tracker	es-es	Añadir una entrada
@@ -27,14 +31,17 @@ add additionally	tracker	es-es	Añadir adicionalmente
 add assigned	tracker	es-es	Añadir asignados
 add comment	tracker	es-es	Añadir comentario
 add from addressbook	tracker	es-es	Añadir desde la libreta de direcciones
+add restricted comment	tracker	es-es	Añadir comentario restringido
 add timesheet entry	tracker	es-es	Añadir entrada de la hoja de tiempos
+add to	tracker	es-es	Añadir a
 add unrecognized mail address to the cc field	tracker	es-es	Añadir la dirección de correo no reconocida al campo CC
-after	tracker	es-es	después
+after	tracker	es-es	Después
 after how many days a not replied item should be marked overdue?	tracker	es-es	¿Después de cuántos días un elemento sin respuesta debe quedar marcado como obsoleto?
 after how many days pending items should be closed automatic	tracker	es-es	Después de cuantos días los elementos pendientes deben cerrarse automáticamente
 all	tracker	es-es	Todos
 all tickets are already converted to tracker	tracker	es-es	Todos los tickets se han convertido al sistema de seguimiento
 allow bounties	tracker	es-es	Permitir recompensas
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	es-es	Permitir la creación de comentarios restringidos que sólo sean visibles a los administradores, técnicos y usuarios asignados
 allow default projects for tracker	tracker	es-es	Permitir proyectos predeterminados para el seguimiento
 allow editing by	tracker	es-es	Permitir edición por
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	es-es	Permitir predefinir proyectos que se asignarán a elementos nuevos de seguimiento.
@@ -51,9 +58,12 @@ attachments & links	tracker	es-es	Adjuntos y enlaces
 attention: no contact with address %1 found.	tracker	es-es	Atención: no se encontraron contactos con la dirección %1
 autoassign to	tracker	es-es	Asignar automáticamente a
 automatic email handling	tracker	es-es	Gestión automática del correo
+automatic mails (bounces) are configured to be forwarded	tracker	es-es	correos automáticos (rebotes) están configurados para ser reenviados
+automatic mails (replies) are configured to be forwarded	tracker	es-es	correos automáticos (respuestas) están configurados para ser reenviados
 automatically created by importexport	tracker	es-es	Creados automáticamente por importexport
 before	tracker	es-es	Antes
 bounties	tracker	es-es	Recompensas
+bounty	tracker	es-es	Recompensa
 bounty confirmed	tracker	es-es	Recompensa confirmada
 bounty confirmed.	tracker	es-es	Recompensa confirmada
 bounty deleted	tracker	es-es	Recompensa borrada
@@ -322,15 +332,22 @@ times	tracker	es-es	Tiempos
 titles of any entries linked to the current record, excluding attached files	tracker	es-es	Títulos de las entradas enlazadas con el registro actual, excluyendo los archivos adjuntos
 total:	tracker	es-es	Total:
 tracker	common	es-es	Sistema de seguimiento
-tracker added	tracker	es-es	Se ha añadido una nueva cola de seguimiento
-tracker admins	tracker	es-es	Administradores de la cola
-tracker admins & technicians	tracker	es-es	Administradores y técnicos de la cola
-tracker configuration	tracker	es-es	Configuración de la cola
-tracker deleted	tracker	es-es	Se ha borrado la cola de seguimiento
+tracker added	tracker	es-es	Cola de seguimiento añadida.
+tracker admins	tracker	es-es	Administradores de seguimiento
+tracker admins & technicians	tracker	es-es	Administradores y técnicos de seguimiento
+tracker configuration	tracker	es-es	Configuración de seguimiento
+tracker csv export	tracker	es-es	Exportar seguimiento a CSV
+tracker csv import	tracker	es-es	Importar seguimiento de CSV
+tracker deleted	tracker	es-es	Cola de seguimiento suprimida.
+tracker entry can only seen by creator and admins	tracker	es-es	Entrada de seguimiento puede ser vista solamente por creador y administradores
+tracker fields:	tracker	es-es	Campos de seguimiento:
 tracker for new tickets	tracker	es-es	Elemento para incidencias nuevas
+tracker for the main screen	tracker	es-es	Seguimiento para la pantalla principal
+tracker id	tracker	es-es	Id. de seguimiento
 tracker item modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
-tracker item not found !!!	tracker	es-es	¡No se encontró el elemento a seguir!
+tracker item not found !!!	tracker	es-es	¡No se encontró el elemento de seguimiento!
 tracker queue	tracker	es-es	Cola de seguimiento
+tracker queue renamed	tracker	es-es	Cola de seguimiento renombrada.
 tracker-%1 '%2' added.	tracker	es-es	Seguimiento - %1 '%2' añadido
 tracker-%1 '%2' updated.	tracker	es-es	Seguimiento - %1 '%2' actualizado
 tracker-%1 deleted.	tracker	es-es	Seguimiento - %1 borrado
@@ -344,6 +361,8 @@ url of the tracker	tracker	es-es	URL del seguimiento
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	es-es	URL a incluir en la notificación. Por ejemplo, a la págigna con el módulo del Administrador de sitios web, el seguimiento predeterminado dentro de eGroupWare.
 use a default user for mails that where not recognized	tracker	es-es	Usar un usuario predeterminado para los correos no reconocidos
 use all	tracker	es-es	Usar todos
+use custom notification message	tracker	es-es	Usar mensaje de notificación personalizado
+use custom signature	tracker	es-es	Usar firma personalizada
 use field from csv if possible	tracker	es-es	Usar el campo de CSV si es posible
 use search results	tracker	es-es	Usar los resultados de la búsqueda
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	es-es	Usar esta etiqueta para las etiquetas de direcciones. Ponga el contenido que quiera repetir entre dos etiquetas.
@@ -351,9 +370,13 @@ version for new tickets	tracker	es-es	Versión para nuevas entradas
 versions	tracker	es-es	Versiones
 vote for it!	tracker	es-es	¡Vote por él!
 votes	tracker	es-es	Votos
+what should be done with unknown values?	tracker	es-es	¿Qué se debe hacer con valores desconocidos?
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	es-es	Cuando se reciben correos de una dirección desconocida, poner una etiqueta a este campo para añadirlo automáticamente al campo CC. Este campo se ignora si no se usan las direcciones de correo desconocidas.
 wont fix	tracker	es-es	No se va a solucionar
 works for me	tracker	es-es	A mí me funciona
+yes, add mailheader to both (description and comments)	tracker	es-es	sí, añadir encabezado de correo a ambos (descripción y comentarios)
+yes, add mailheader to comments	tracker	es-es	sí, añadir encabezado de correo a comentarios
+yes, add mailheader to description	tracker	es-es	sí, añadir encabezado de correo a descripción
 yes, always	tracker	es-es	Si, siempre
 yes, display groups first	tracker	es-es	Sí, mostrar los grupos primero
 yes, display users first	tracker	es-es	Sí, mostrar los usuarios primero
