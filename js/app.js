@@ -214,7 +214,7 @@ app.classes.tracker = AppJS.extend(
 		var editor = this.et2.getWidgetById('reply_message');
 		if(editor)
 		{
-			editor.set_value(_replyMsg.replace(/(\r\n|\n|\r)/gm,""));
+			editor.set_value(_replyMsg);
 		}
 	},
 	/**
