@@ -416,7 +416,7 @@
 					<description value="Username"/>
 					<textbox id="mailhandling[username]" size="20"/>
 					<description value="Password"/>
-					<passwd id="mailhandling[password]" options="20"/>
+					<passwd id="mailhandling[password]" options="20" autocomplete="on"/>
 				</row>
 				<row class="th">
 					<description value="Incoming mail rules" span="all"/>
