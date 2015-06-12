@@ -84,7 +84,7 @@ class tracker_merge extends bo_merge
 				if($reply['reply_visible'] > 0) {
 					$message = '['.$message.']';
 				}
-				$restricted = $reply['reply_visible'] ? '' : lang('restricted');
+				$restricted = $reply['reply_visible']=='0' ? '' : lang('restricted');
 				$replies[$id] = "$date \t$name \t$restricted\n$message";
 			}
 			$replacements['$$all_comments$$'] = implode("\n",$replies);
@@ -213,14 +213,15 @@ class tracker_merge extends bo_merge
 		$last_creator_comment = array();
 		$last_assigned_comment = array();
 
+		$this->bo->read($tr_id);
+		$tracker = $this->bo->data;
+		
 		if(array_key_exists($tr_id, $this->preset_comments))
 		{
 			$replies = $this->preset_comments[$tr_id];
 		}
 		else
 		{
-			$this->bo->read($tr_id);
-			$tracker = $this->bo->data;
 			$replies = $tracker['replies'];
 		}
 		foreach($replies as $reply) {
