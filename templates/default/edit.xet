@@ -3,7 +3,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240"/>
+		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240" imageUpload="link_to"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="egwGridView_grid">
@@ -23,7 +23,7 @@
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
 						</menulist>
 					</vbox>
-					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]"/>
+					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
@@ -49,7 +49,7 @@
 					<vbox>
 						<description value="Comment" for="reply_message"/>
 					</vbox>
-					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="200"/>
+					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="200" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
