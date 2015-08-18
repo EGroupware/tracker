@@ -330,7 +330,7 @@ class tracker_tracking extends bo_tracking
 			error_log($error);
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
 		}
-		return $html_email ? $message : strip_tags($message);
+		return $html_email ? $message : translation::convertHTMLToText(html::purify($message), false, true, true);
 	}
 
 	/**
