@@ -31,6 +31,7 @@ add additionally	tracker	es-es	Añadir adicionalmente
 add assigned	tracker	es-es	Añadir asignados
 add comment	tracker	es-es	Añadir comentario
 add from addressbook	tracker	es-es	Añadir desde la libreta de direcciones
+add infolog	tracker	es-es	Añadir InfoLog
 add restricted comment	tracker	es-es	Añadir comentario restringido
 add timesheet entry	tracker	es-es	Añadir entrada de la hoja de tiempos
 add to	tracker	es-es	Añadir a
@@ -42,6 +43,7 @@ all	tracker	es-es	Todos
 all tickets are already converted to tracker	tracker	es-es	Todos los tickets se han convertido al sistema de seguimiento
 allow bounties	tracker	es-es	Permitir recompensas
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	es-es	Permitir la creación de comentarios restringidos que sólo sean visibles a los administradores, técnicos y usuarios asignados
+allow creation of infolog entries from tracker tickets	tracker	es-es	Permitir la creación de entradas InfoLog desde entradas de seguimiento
 allow default projects for tracker	tracker	es-es	Permitir proyectos predeterminados para el seguimiento
 allow editing by	tracker	es-es	Permitir edición por
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	es-es	Permitir predefinir proyectos que se asignarán a elementos nuevos de seguimiento.
@@ -158,6 +160,7 @@ example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", fo
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	es-es	Ejemplo {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Ejemplo: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	es-es	Ejemplo {{NELF role}} - si el rol del campo no está vacío, obtendrá una línea nueva con el valor del rol del campo
 example {{nelfnv role}} - if field role is not empty, set a lf without any value of the field	tracker	es-es	Ejemplo {{NELFNV role}} - si el rol del campo no está vacío, establece un salto de línea (LF) sin ningún valor del campo
+exclude links of the following apps on timesheet creation	tracker	es-es	Excluir enlaces de las siguientes aplicaciones en la creación de la hoja te tiempos
 existing links	tracker	es-es	Enlaces existentes
 exists	tracker	es-es	Existe
 export as csv	tracker	es-es	Exportar como CSV
@@ -202,7 +205,7 @@ last modified	tracker	es-es	Última modificación
 last modified by	tracker	es-es	Última modificación por
 last month	tracker	es-es	Último mes
 last quarter	tracker	es-es	Último trimestre
-last reply	tracker	es-es	última respuesta
+last reply	tracker	es-es	Última respuesta
 last reply by assigned	tracker	es-es	Última respuesta del asignado
 last reply by creator	tracker	es-es	Última respuesta del creador
 last week	tracker	es-es	Última semana
@@ -224,24 +227,33 @@ mark as read	tracker	es-es	Marcar como leído
 mark as unread	tracker	es-es	Marcar como sin leer
 matching filter	tracker	es-es	filtro que coincide
 max length of the input [, length of the inputfield (optional)]	tracker	es-es	longitud máxima de la entrada [, longitud del campo de entrada (opcional)]
+miscellaneous	tracker	es-es	Misceláneo
+multiple changes	tracker	es-es	Múltiples cambios
 name of current user, all other contact fields are valid too	tracker	es-es	Nombre del usuario actual. Todos los demás campos del contacto también son válidos.
 new %1	tracker	es-es	Nuevo %1
 new items	tracker	es-es	Nuevos elementos
 new ticket submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
 new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
 no change	tracker	es-es	Sin cambios
+no notifications	tracker	es-es	Sin notificaciones
 no trackers found, aborting	tracker	es-es	No se ha encontrado sistemas de seguimiento, abortando
 non-anonymous users	tracker	es-es	Usuarios no anónimos
 noone	tracker	es-es	Nadie
 not-closed	tracker	es-es	sin cerrar
+note: timesheet itself is always excluded	tracker	es-es	Nota: la hoja de tiempos en sí siempre se excluye
 notification	tracker	es-es	Notificación
+notification message	tracker	es-es	Mensaje de notificación
+notification settings	tracker	es-es	Configuración de notificaciones
+notification signature	tracker	es-es	Firma de notificación
 number of row for a multiline inputfield or line of a multi-select-box	tracker	es-es	número de filas para un campo multilínea or línea de una lista multiselección
-one day after	tracker	es-es	un día después
-one day in advance	tracker	es-es	una día por adelantado
+one day after	tracker	es-es	Un día después
+one day in advance	tracker	es-es	Un día por adelantado
+only explicitly named users have read access (otherwise everyone)	tracker	es-es	Sólo los usuarios con nombre explícitamente tienen acceso de lectura, de lo contrario todo el mundo
+only for admins, technicians or assigned	tracker	es-es	Sólo para administradores, técnicos o asignado
 open(status)	tracker	es-es	Abierto
 order	tracker	es-es	Orden
 out of date	tracker	es-es	Fuera de fecha
-overdue	tracker	es-es	vencido
+overdue	tracker	es-es	Vencido
 overdue after	tracker	es-es	Vencimiento después de
 ownership of the ticket	tracker	es-es	Propietario del elemento de seguimiento
 pending	tracker	es-es	Pendiente
@@ -253,6 +265,7 @@ permit html editing in overview and comments	tracker	es-es	Permitir edición htm
 pop3	tracker	es-es	POP3
 port number	tracker	es-es	Número del puerto
 postponed	tracker	es-es	Pospuesto
+pre-selected version when creating a new tracker	tracker	es-es	Versión pre-seleccionada al crear un nuevo seguimiento
 print entry	tracker	es-es	Imprimir
 priorities	tracker	es-es	Prioridades
 priorities with empty label are not available to the user	tracker	es-es	Prioridades con la etiqueta vacía que no están disponibles para el usuario
@@ -274,6 +287,7 @@ responsible	tracker	es-es	Responsable
 restict tracker items to the creator and the staff only	tracker	es-es	Restringir elementos de seguimiento al creador y equipo solo
 restict tracker items to the creators primary group and the staff only	tracker	es-es	Restringir elementos de seguimiento al grupo primario del creador y equipo solo
 restrict tracker items to staff and:	tracker	es-es	Restringir elementos de seguimiento al equipo y:
+restricted comment	tracker	es-es	Comentario restringido
 restriction	tracker	es-es	Restricción
 same day	tracker	es-es	el mismo día
 save new report	tracker	es-es	Guardar nuevo informe
@@ -299,12 +313,14 @@ set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
 set bounty	tracker	es-es	Fijar recompensa
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
+should there be a tracker-box on main screen?	tracker	es-es	Mostrar Sistema de Segumiento en la página de inicio
 show start date and due date	tracker	es-es	Mostrar fechas de inicio y de vencimiento
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 signature	tracker	es-es	Firma
 staff	tracker	es-es	Equipo
 state	tracker	es-es	Estado
 stati	tracker	es-es	Estados
+status	tracker	es-es	Estado
 store as	tracker	es-es	Guardar como
 sum	tracker	es-es	Suma
 summary	tracker	es-es	Resumen
@@ -328,7 +344,7 @@ this week	tracker	es-es	Esta semana
 this year	tracker	es-es	Este año
 ticket count	tracker	es-es	Cuenta de tickets
 ticket modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
-times	tracker	es-es	Tiempos
+times	tracker	es-es	Veces
 titles of any entries linked to the current record, excluding attached files	tracker	es-es	Títulos de las entradas enlazadas con el registro actual, excluyendo los archivos adjuntos
 total:	tracker	es-es	Total:
 tracker	common	es-es	Sistema de seguimiento
