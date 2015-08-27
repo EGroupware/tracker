@@ -360,7 +360,7 @@ class tracker_bo extends tracker_so
 		'3 years ago' => array(-3,0,0,0, -2,0,0,0),
 	);
 
-	
+
 
 	/**
 	 * Constructor
@@ -1839,7 +1839,7 @@ class tracker_bo extends tracker_so
 			'> ('.$GLOBALS['egw']->accounts->id2name($bounty['bounty_creator']).') '.
 			$bounty['bounty_amount'].' '.$this->currency.($bounty['bounty_confirmed'] ? ' Ok' : '');
 	}
-	
+
 	/**
 	 * Provide response data of get_ticketId to client-side
 	 * JSON response to client with data = (int)ticket_id
@@ -1852,7 +1852,7 @@ class tracker_bo extends tracker_so
 		$response  = egw_json_response::get();
 		$response->data($this->get_ticketId($_subject));
 	}
-	
+
 	/**
 	 * Try to extract a ticket number from a subject line
 	 *
@@ -1930,6 +1930,7 @@ class tracker_bo extends tracker_so
 				foreach($parsedAddresses as $i => $adr)	$emails[] = $adr->mailbox.'@'.$adr->host;
 			}
 		}
+
 		$ticketId = $_ticket_id? $_ticket_id: $this->get_ticketId($_subject);
 		//_debug_array('TickedId found:'.$ticketId);
 		// we have to check if we know this ticket before proceeding
@@ -2087,7 +2088,8 @@ class tracker_bo extends tracker_so
 				{
 					egw_link::link('tracker',$trackerentry['link_to']['to_id'],egw_link::DATA_APPNAME,$attachment);
 				}
-				else if(is_readable($attachment['tmp_name']))
+				else if(is_readable($attachment['tmp_name']) ||
+					(egw_vfs::is_readable($attachment['tmp_name']) && parse_url($attachment['tmp_name'], PHP_URL_SCHEME) === 'vfs'))
 				{
 					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
 				}
