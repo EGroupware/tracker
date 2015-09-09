@@ -73,6 +73,15 @@ class tracker_hooks
 			display_sidebox($appname, lang('Favorites'), egw_framework::favorite_list($appname));
 
 			$file = array(
+				'Tracker list' => egw::link('/index.php',array(
+					'menuaction' => 'tracker.tracker_ui.index',
+					'ajax' => 'true')
+				),
+				array(
+					'text' => lang('Add %1',lang(egw_link::get_registry($appname, 'entry'))),
+					'no_lang' => true,
+					'link' => "javascript:egw.open('','$appname','add')"
+				),
 			);
 
 			$file['Placeholders'] = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
