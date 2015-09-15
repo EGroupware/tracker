@@ -117,18 +117,12 @@
 					</menulist>
 					<progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
 					<vbox>
-						<hbox readonly="true">
-							<image label="Created by" src="move2" readonly="true"/>
-							<menulist>
-								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"/>
-							</menulist>
-						</hbox>
-						<hbox readonly="true">
-							<image label="Assigned to" src="groupevent" readonly="true"/>
-							<menulist>
-								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"/>
-							</menulist>
-						</hbox>
+						<menulist>
+							<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"/>
+						</menulist>
+						<menulist>
+							<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"/>
+						</menulist>
 					</vbox>
 					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@@duration_format"/>
 					<textbox type="integer" align="center" id="${row}[votes]" readonly="true"/>

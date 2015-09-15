@@ -666,7 +666,7 @@ class tracker_ui extends tracker_bo
 		);
 		// Make link_to readonly if the user has no EDIT access
 		$readonlys['link_to'] = !$this->file_access($tr_id, EGW_ACL_EDIT);
-		
+
 		if ($tr_id && $readonlys['reply_message'])
 		{
 			$readonlys['button[save]'] = true;
@@ -1346,7 +1346,7 @@ class tracker_ui extends tracker_bo
 		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		$content['nm']['favorites'] = true; // Enable favorites
-		
+
 		$content['duration_format'] = ','.$this->duration_format.',,1';
 
 		$content['is_admin'] = $this->is_admin($tracker);
@@ -1596,7 +1596,7 @@ width:100%;
 		}
 		// Wrap a pre tag if we are using html editor
 		$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
-		
+
 		$this->edit($this->prepare_import_mail($mailContent['addresses'],
 				$mailContent['subject'],
 				$message,
