@@ -748,9 +748,9 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		$query = $query_in;
-		if (!$query['csv_export'] && !$query['action'])	// do not store query for csv-export in session
+		if (!$query['csv_export'])	// do not store query for csv-export in session
 		{
-			egw_session::appsession('index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
+			egw_session::appsession($query['session_for'] ? $query['session_for'] : 'index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
@@ -1260,12 +1260,12 @@ class tracker_ui extends tracker_bo
 		}
 
 		if (!is_array($content)) $content = array();
-		$content['nm'] = egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''));
+		$content['nm'] = egw_session::appsession($this->called_by ? $this->called_by : 'index', 'tracker'.($only_tracker ? '-'.$only_tracker : ''));
 		$content['msg'] = $msg;
 		$content['status_help'] = !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days);
 
-		if (!is_array($content['nm']))
+		if (!is_array($content['nm']) || !$content['nm']['get_rows'])
 		{
 			$date_filters = array(lang('All'));
 			foreach(array_keys($this->date_filters) as $name)
@@ -1296,12 +1296,12 @@ class tracker_ui extends tracker_bo
 				'row_modified'   => 'tr_modified'
 			);
 			// use the state of the last session stored in the user prefs
-			if (($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
+			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
 			{
 				$content['nm'] = array_merge($content['nm'],$state);
 				$tracker = $content['nm']['col_filter']['tr_tracker'];
 			}
-			elseif (!$tracker)
+			elseif (!$this->called_by && !$tracker)
 			{
 				reset($this->trackers);
 				list($tracker) = @each($this->trackers);
@@ -1321,7 +1321,7 @@ class tracker_ui extends tracker_bo
 		}
 		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
 		$content['nm']['multi_queue'] = $multi_queue;
-
+		if (!$content['nm']['session_for'] && $this->called_by) $content['nm']['session_for'] = $this->called_by;
 		if($_GET['search'])
 		{
 			$content['nm']['search'] = $_GET['search'];
@@ -1854,8 +1854,6 @@ width:100%;
 	{
 		// Load JS for tracker actions
 		egw_framework::validate_file('.','app','tracker');
-
-		$state=egw_session::appsession('index','tracker');
 
 		switch ($args['location'])
 		{
