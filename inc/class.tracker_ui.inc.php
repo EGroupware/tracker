@@ -1873,7 +1873,10 @@ width:100%;
 			return False;
 		}
 		$this->called_by = $app;	// for read/save_sessiondata, to have different sessions for the hooks
-		$GLOBALS['egw_info']['flags']['currentapp'] = 'tracker';
+
+		// Set to calling app, so actions wind up in the correct place client side
+		$GLOBALS['egw_info']['flags']['currentapp'] = $app;
+
 		translation::add_app('tracker');
 
 		$this->index(null);
