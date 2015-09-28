@@ -810,6 +810,7 @@ class tracker_ui extends tracker_bo
 			if (!($linked = egw_link::get_links_multiple($app,$id,true,'tracker')))
 			{
 				$rows = array();	// no entries linked to selected link --> no rows to return
+				$this->get_rows_options($rows, $tracker);
 				return 0;
 			}
 
@@ -936,6 +937,33 @@ class tracker_ui extends tracker_bo
 			$id=$row['tr_id'];
 		}
 
+		$this->get_rows_options($rows,$tracker,$trackers);
+		
+		// disable start date / due date column, if disabled in config
+		if(!$this->show_dates)
+		{
+			$rows['no_tr_startdate_tr_duedate'] = true;
+		}
+
+		return $total;
+	}
+
+	/**
+	 * Selectbox options vary depending on the selected tracker.
+	 *
+	 * @param Array $rows List of rows, we'll add the sel_options in
+	 * @param String[] $tracker List of tracker IDs
+	 */
+	protected function get_rows_options(&$rows, $selected_trackers, $visible_trackers=array())
+	{
+		if(!is_array($selected_trackers) && strpos($selected_trackers,',') !== false)
+		{
+			$tracker = explode(',',$selected_trackers);
+		}
+		else
+		{
+			$tracker = $selected_trackers ? $selected_trackers : array_keys($this->trackers);
+		}
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
 
 		// Add allowed staff
@@ -956,7 +984,7 @@ class tracker_ui extends tracker_bo
 			$statis += $this->get_tracker_stati($tr_id);
 		}
 
-		$trackers = array_unique($trackers);
+		$trackers = array_unique($visible_trackers);
 		if($trackers)
 		{
 			foreach($trackers as $tracker_id)
@@ -971,6 +999,7 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
 		$rows['sel_options']['tr_resolution'] =& $resolutions;
+
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
@@ -992,14 +1021,6 @@ class tracker_ui extends tracker_bo
 
 		// enable tracker column if all trackers are shown
 		if ($tracker && !$query['multi_queue']) $rows['no_tr_tracker'] = true;
-
-		// disable start date / due date column, if disabled in config
-		if(!$this->show_dates)
-		{
-			$rows['no_tr_startdate_tr_duedate'] = true;
-		}
-
-		return $total;
 	}
 
 	/**
@@ -1151,6 +1172,7 @@ class tracker_ui extends tracker_bo
 		{
 			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
 			$tracker = $content['nm']['col_filter']['tr_tracker'];
+			$this->called_by = $content['called_by']; unset($content['called_by']);
 
 			// Multiple queues at once
 			list($multi_queue_filter) = @each($content['nm']['col_filter']['multi_queue']);
@@ -1319,8 +1341,6 @@ class tracker_ui extends tracker_bo
 				$content['nm']['options-selectcols']['tr_duedate'] = false;
 			}
 		}
-		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
-		$content['nm']['multi_queue'] = $multi_queue;
 		if (!$content['nm']['session_for'] && $this->called_by) $content['nm']['session_for'] = $this->called_by;
 		if($_GET['search'])
 		{
@@ -1342,9 +1362,6 @@ class tracker_ui extends tracker_bo
 			$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		}
 
-		// Turn on multi-queue widget
-		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
-
 		$content['nm']['favorites'] = true; // Enable favorites
 
 		$content['duration_format'] = ','.$this->duration_format.',,1';
@@ -1364,6 +1381,11 @@ class tracker_ui extends tracker_bo
 			$content['nm'] = array_merge($content['nm'], egw_session::appsession($this->called_by,'tracker'));
 			$tpl->set_dom_id("{$tpl->name}-{$this->called_by}");
 		}
+
+		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
+		$content['nm']['multi_queue'] = $multi_queue;
+		// Turn on multi-queue widget
+		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
@@ -1396,8 +1418,13 @@ class tracker_ui extends tracker_bo
 width:100%;
 }</style>';
 		}
+		
+		$preserve = array(
+			'only_tracker' => $only_tracker,
+			'called_by' => $this->called_by
+		);
 
-		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,array('only_tracker' => $only_tracker),$return_html);
+		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,$preserve,$return_html);
 	}
 
 	/**
