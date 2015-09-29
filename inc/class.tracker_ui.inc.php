@@ -1362,8 +1362,16 @@ class tracker_ui extends tracker_bo
 			$content['nm']['col_filter']['tr_tracker'] = $tracker;
 		}
 
-		$content['nm']['favorites'] = true; // Enable favorites
-
+		//
+		// disable favories dropdown button, if not running as infolog
+		if ($this->called_as)
+		{
+			$values['nm']['favorites'] = false;
+		}
+		else
+		{
+			$content['nm']['favorites'] = true; // Enable favorites
+		}
 		$content['duration_format'] = ','.$this->duration_format.',,1';
 
 		$content['is_admin'] = $this->is_admin($tracker);
