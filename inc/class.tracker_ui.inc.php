@@ -1364,9 +1364,9 @@ class tracker_ui extends tracker_bo
 
 		//
 		// disable favories dropdown button, if not running as infolog
-		if ($this->called_as)
+		if ($this->called_as || $content['nm']['session_for'])
 		{
-			$values['nm']['favorites'] = false;
+			$content['nm']['favorites'] = false;
 		}
 		else
 		{
