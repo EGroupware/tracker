@@ -2103,104 +2103,34 @@ class tracker_bo extends tracker_so
 	 *
 	 * @param string $name
 	 * @param int &$start
-	 * @param int &$end_param
+	 * @param int &$end
 	 * @return string
 	 */
-	function date_filter($name,&$start,&$end_param)
+	function date_filter($name,&$start,&$end)
 	{
-		$end = $end_param;
-
-		if ($name == 'custom' && $start)
+		switch(strtolower($name))
 		{
-			if ($end)
-			{
-				$end += 24*60*60;
-			}
-			else
-			{
-				$end = $start + 8*24*60*60;
-			}
-		}
-		else if (strtolower($name) == 'overdue')
-		{
-                        $limit = $this->now - $this->overdue_days * 24*60*60;
+			case 'overdue':
+				$limit = $this->now - $this->overdue_days * 24*60*60;
 
-			return "(tr_duedate IS NOT NULL and tr_duedate < {$this->now}
+				return "(tr_duedate IS NOT NULL and tr_duedate < {$this->now}
 OR tr_duedate IS NULL AND
-    CASE
-        WHEN tr_modified IS NULL
-        THEN
-            tr_created < $limit
-        ELSE
-            tr_modified < $limit
-    END
-			) ";
-		}
-		else if (strtolower($name) == 'started')
-		{
-			return "(tr_startdate IS NULL OR tr_startdate < {$this->now} )" ;
-		}
-		else if (strtolower($name) == 'upcoming')
-		{
-			return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
-		}
-		else
-		{
-			if (!isset($this->date_filters[$name]))
-			{
-				return '1=1';
-			}
-			$year  = (int) date('Y',$this->today);
-			$month = (int) date('m',$this->today);
-			$day   = (int) date('d',$this->today);
+	CASE
+		WHEN tr_modified IS NULL
+		THEN
+			tr_created < $limit
+		ELSE
+			tr_modified < $limit
+	END
+) ";
 
-			list($syear,$smonth,$sday,$sweek,$eyear,$emonth,$eday,$eweek) = $this->date_filters[$name];
+			case 'started':
+				return "(tr_startdate IS NULL OR tr_startdate < {$this->now} )" ;
 
-			if(stripos($name, 'quarter') !== false)
-			{
-				// Handle quarters
-				$start = mktime(0,0,0,((int)floor(($smonth+$month) / 3.1)) * 3 + 1, 1, $year);
-				$end = mktime(0,0,0,((int)floor(($emonth+$month) / 3.1)+1) * 3 + 1, 1, $year);
-			}
-			elseif ($syear || $eyear)
-			{
-				$start = mktime(0,0,0,1,1,$syear+$year);
-				$end   = mktime(0,0,0,1,1,$eyear+$year);
-			}
-			elseif ($smonth || $emonth)
-			{
-				$start = mktime(0,0,0,$smonth+$month,1,$year);
-				$end   = mktime(0,0,0,$emonth+$month,1,$year);
-			}
-			elseif ($sday || $eday)
-			{
-				$start = mktime(0,0,0,$month,$sday+$day,$year);
-				$end   = mktime(0,0,0,$month,$eday+$day,$year);
-			}
-			elseif ($sweek || $eweek)
-			{
-				$wday = (int) date('w',$this->today); // 0=sun, ..., 6=sat
-				switch($GLOBALS['egw_info']['user']['preferences']['calendar']['weekdaystarts'])
-				{
-					case 'Sunday':
-						$weekstart = $this->today - $wday * 24*60*60;
-						break;
-					case 'Saturday':
-						$weekstart = $this->today - (6-$wday) * 24*60*60;
-						break;
-					case 'Moday':
-					default:
-						$weekstart = $this->today - ($wday ? $wday-1 : 6) * 24*60*60;
-						break;
-				}
-				$start = $weekstart + $sweek*7*24*60*60;
-				$end   = $weekstart + $eweek*7*24*60*60;
-			}
-			$end_param = $end - 24*60*60;
+			case 'upcoming':
+				return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
 		}
-		//echo "<p align='right'>date_filter($name,$start,$end) today=".date('l, Y-m-d H:i',$this->today)." ==> ".date('l, Y-m-d H:i:s',$start)." <= date < ".date('l, Y-m-d H:i:s',$end)."</p>\n";
-		// convert start + end from user to servertime for the filter
-		return '('.($start-$this->tz_offset_s).' <= tr_created AND tr_created < '.($end-$this->tz_offset_s).')';
+		return egw_time::sql_filter($name, $start, $end, 'tr_created', $this->date_filters);
 	}
 
 	/**
