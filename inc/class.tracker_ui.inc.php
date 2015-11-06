@@ -324,7 +324,10 @@ class tracker_ui extends tracker_bo
 					{
 						$msg = lang('Entry saved');
 						//apply defaultlinks
-						usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
+						usort($this->all_cats,function($a, $b)
+						{
+							return strcasecmp($a['name'], $b['name']);
+						});
 						foreach($this->all_cats as $cat)
 						{
 							if (!is_array($data = $cat['data'])) $data = array('type' => $data);
@@ -341,6 +344,15 @@ class tracker_ui extends tracker_bo
 						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
 						{
 							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
+
+							// check if we have dragged in images and fix their image urls
+							if (etemplate_widget_vfs::fix_html_dragins('tracker', $this->data['tr_id'],
+								$content['link_to']['to_id'], $content['tr_description']))
+							{
+								$this->update(array(
+									'tr_description' => $content['tr_description'],
+								));
+							}
 						}
 						$state = egw_session::appsession('index','tracker');
 						egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'],'edit');
@@ -938,7 +950,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		$this->get_rows_options($rows,$tracker,$trackers);
-		
+
 		// disable start date / due date column, if disabled in config
 		if(!$this->show_dates)
 		{
@@ -1426,7 +1438,7 @@ class tracker_ui extends tracker_bo
 width:100%;
 }</style>';
 		}
-		
+
 		$preserve = array(
 			'only_tracker' => $only_tracker,
 			'called_by' => $this->called_by
