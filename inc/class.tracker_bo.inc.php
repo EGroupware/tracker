@@ -802,14 +802,20 @@ class tracker_bo extends tracker_so
 	 *
 	 * @param int $tracker ID of tracker
 	 * @param int $user = null ID of user, default current user $this->user
+	 * @param boolean $checkGivenUser = false flag to force the check If the given User is admin, no matter if $this->user=0
 	 * @return boolean
 	 */
-	function is_admin($tracker,$user=null)
+	function is_admin($tracker,$user=null,$checkGivenUser=false)
 	{
 		if (is_null($user)) $user = $this->user;
 
 		$admins =& $this->get_staff($tracker,0,'admins');
-
+		// evaluate $checkGivenUser flag to force the check If the given User is admin, no matter if $this->user=0
+		// this is used and needed to control (email)notification on close-pending
+		if ($checkGivenUser)
+		{
+			return isset($admins[$user]);
+		}
 		return $this->user===0 || isset($admins[$user]); // this->user is set to 0 by close_pending
 	}
 
