@@ -1617,7 +1617,7 @@ width:100%;
 			);
 		}
 
-		$actions['documents'] = infolog_merge::document_action(
+		$actions['documents'] = tracker_merge::document_action(
 			$this->prefs['document_dir'], ++$group, 'Insert in document', 'document_',
 			$this->prefs['default_document']
 		);
