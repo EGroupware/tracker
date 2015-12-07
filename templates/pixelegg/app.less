@@ -14,6 +14,7 @@
 
 
 @import (reference) "../../../pixelegg/less/definitions.less";
+@import (reference) "../../../pixelegg/less/def_mobile.less";
 @import (less) "../default/app.css";
 
 //******************************************************************
@@ -41,6 +42,93 @@ label.tracker_trIdEdit:before { content: "#"; }
 // main
 
 
+/* tablets and smartphones  */
+@media only screen and (max-device-width:1024px) {
+	#tracker-index {
+		table.egwGridView_outer tbody {
+			td {
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+			label[id^='tracker-index'][id$='tr_modified]'] > time {
+				float: none;
+			}
+			label[id^='tracker-index'][id$='tr_created]'] > time {
+				float: left;
+				font-weight: normal;
+			}
+			label[id^='tracker-index'][id$='tr_startdate]'] {
+				float: left;
+				.mob-fontsize-s;
+				time {
+					padding-left: 5px;
+					.mob-fontsize-s;
+				}
+			}
+			label[id^='tracker-index'][id$='tr_duedate]'] >  {
+				float: right;
+				.mob-fontsize-s;
+				time {
+					padding-left: 5px;
+					.mob-fontsize-s;
+				}
+			}
+			span[id^='tracker-index'][id$='cat_id]']{
+				float:right;
+			}
+			span[id^='tracker-index'][id$='tr_description]']{
+				height: 28px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			span[id^='tracker-index'][id$='prio_label]']{
+				font-weight: normal;
+				&::first-letter {font-weight: normal;}
+				padding-top: 5px;
+			}
+			ul[id^='tracker-index'][id$='tr_assigned]'] {
+				height: 42px;
+				overflow:hidden;
+				li{
+					overflow: hidden;
+					width: 90px;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					.mob-fontsize-s;
+				}
+			}
+			tr.trackerRow {
+				td {}
+			}
+			span[id^='tracker-index'][id$='tr_id]']{
+				&::before {
+					content:'#';
+				}
+			}
+			.tracker1Col {
+				span, time,label {
+					.mob-fontsize-s;
+					padding-bottom: 5px;
+				}
+				
+			}
+			.tracker2Col {
+				.mob-fontsize-s;
+			}
+			span[id^='tracker-index'][id$='tr_description]']{
+				.mob-fontsize-s;
+				padding-bottom: 12px;
+			}
+			span[id^='tracker-index'][id$='tr_summary]']{
+				font-weight: bold;
+			}
+			.tracker2Col, .tracker1Col, .tracker3Col {
+				padding-top:5px;
+			}
+		}
+	}
+}
 
 
 
