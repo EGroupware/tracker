@@ -55,3 +55,6 @@ label.tracker_trIdEdit:before { content: "#"; }
 #tracker-admin_tracker-admin-acl tr.row {
 	border-bottom: 1px solid silver;
 }
+#tracker-edit_tr_assigned + .chzn-container .chzn-results {
+	max-height: 215px;
+}
