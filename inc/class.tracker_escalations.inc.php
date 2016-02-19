@@ -618,7 +618,7 @@ class tracker_escalations extends so_sql2
 		{
 				unset(self::$tracker->tracking->skip_notify);
 		}
-		
+
 		// Get a list of users
 		$users = self::$tracker->users_with_open_entries();
 
@@ -627,15 +627,15 @@ class tracker_escalations extends so_sql2
 			if (isset($notified)) $notified=array();
 			// Create environment for user
 			if (!($email = $GLOBALS['egw']->accounts->id2name($user,'account_email'))) continue;
-			
+
 			self::$tracker->user = $GLOBALS['egw_info']['user']['account_id'] = $user;
-			$GLOBALS['egw']->preferences->preferences($user);
+			$GLOBALS['egw']->preferences->__construct($user);
 			$GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
-			$GLOBALS['egw']->acl->acl($user);
+			$GLOBALS['egw']->acl->__construct($user);
 			$GLOBALS['egw']->acl->read_repository();
-			
+
 			// load the right language if needed
-			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != translation::$userlang)	
+			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != translation::$userlang)
 			{
 				translation::init();
 				// Make sure translations are loaded
@@ -644,7 +644,7 @@ class tracker_escalations extends so_sql2
 
 			// Load date/time preferences into egw_time
 			egw_time::init();
-			
+
 			// Keep a list of tickets so we only send the user one notification / ticket
 			$notified = array();
 
