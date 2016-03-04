@@ -18,35 +18,26 @@
   }
   #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_modified]'] > time {
     float: none;
+    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_created]'] > time {
-    float: left;
     font-weight: normal;
+    font-size: 10pt;
   }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_startdate]'] {
-    float: left;
-    font-size: 9pt;
-  }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_startdate]'] time {
-    padding-left: 5px;
-    font-size: 9pt;
-  }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_duedate]'] {
-    float: right;
-    font-size: 9pt;
-  }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_duedate]'] time {
-    padding-left: 5px;
-    font-size: 9pt;
+  #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_status]'] {
+    font-size: 10pt;
+    text-align: right;
+    width: 80px;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='cat_id]'] {
     float: right;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_description]'] {
-    height: 28px;
+    height: 18px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='prio_label]'] {
     font-weight: normal;
@@ -55,39 +46,19 @@
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='prio_label]']::first-letter {
     font-weight: normal;
   }
-  #tracker-index table.egwGridView_outer tbody ul[id^='tracker-index'][id$='tr_assigned]'] {
-    height: 42px;
-    overflow: hidden;
-  }
-  #tracker-index table.egwGridView_outer tbody ul[id^='tracker-index'][id$='tr_assigned]'] li {
-    overflow: hidden;
-    width: 90px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 9pt;
-  }
-  #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_id]']::before {
-    content: '#';
-  }
-  #tracker-index table.egwGridView_outer tbody .tracker1Col span,
-  #tracker-index table.egwGridView_outer tbody .tracker1Col time,
-  #tracker-index table.egwGridView_outer tbody .tracker1Col label {
-    font-size: 9pt;
-    padding-bottom: 5px;
-  }
-  #tracker-index table.egwGridView_outer tbody .tracker2Col {
-    font-size: 9pt;
+  #tracker-index table.egwGridView_outer tbody .tracker1Col {
+    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_description]'] {
-    font-size: 9pt;
-    padding-bottom: 12px;
+    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_summary]'] {
     font-weight: bold;
+    font-size: 12pt;
   }
-  #tracker-index table.egwGridView_outer tbody .tracker2Col,
   #tracker-index table.egwGridView_outer tbody .tracker1Col,
-  #tracker-index table.egwGridView_outer tbody .tracker3Col {
-    padding-top: 5px;
+  #tracker-index table.egwGridView_outer tbody .tracker2Col {
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 }
