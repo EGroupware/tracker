@@ -882,8 +882,6 @@ class tracker_ui extends tracker_bo
 			$trackers = array();
 		}
 
-		if ($query['col_filter']['multi_queue']) unset($query['col_filter']['multi_queue']);
-
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
 		$prio_labels = $prio_tracker = $prio_cat = null;
@@ -1029,10 +1027,13 @@ class tracker_ui extends tracker_bo
 			$query_in['options-selectcols']['bounties'] = false;
 		}
 
-		if ($query['col_filter']['cat_id']) $rows['no_cat_id'] = true;
+		if ($rows['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 
 		// enable tracker column if all trackers are shown
-		if ($tracker && !$query['multi_queue']) $rows['no_tr_tracker'] = true;
+		if ($tracker && $rows['col_filter']['tr_tracker'] && count($rows['col_filter']['tr_tracker']) == 1)
+		{
+			$rows['no_tr_tracker'] = true;
+		}
 	}
 
 	/**
@@ -1178,31 +1179,12 @@ class tracker_ui extends tracker_bo
 			{
 			      $tracker=$state['col_filter']['tr_tracker'];
 			}
-			$multi_queue = $this->prefs['multi_queue'];
 		}
 		else
 		{
 			$only_tracker = $content['only_tracker']; unset($content['only_tracker']);
 			$tracker = $content['nm']['col_filter']['tr_tracker'];
 			$this->called_by = $content['called_by']; unset($content['called_by']);
-
-			// Multiple queues at once
-			list($multi_queue_filter) = @each($content['nm']['col_filter']['multi_queue']);
-			$multi_queue = $multi_queue_filter == 'true' ? true : ($multi_queue_filter == 'false' ? false : $this->prefs['multi_queue']);
-			if($multi_queue != $this->prefs['multi_queue'])
-			{
-				// Store in preferences
-				$this->prefs['multi_queue'] = $multi_queue;
-				$GLOBALS['egw']->preferences->add('tracker','multi_queue',$multi_queue);
-				// save prefs, but do NOT invalid the cache (unnecessary)
-				$GLOBALS['egw']->preferences->save_repository(false,'user',false);
-				if(!$multi_queue)
-				{
-					// Only select 1 queue when going from multi to single
-					if (!is_array($tracker)) $tracker = explode(',', $tracker);
-					$tracker = $content['nm']['col_filter']['tr_tracker'] = $tracker[0];
-				}
-			}
 
 			if (is_array($content) && isset($content['nm']['rows']['document']))  // handle insert in default document button like an action
 			{
@@ -1311,10 +1293,10 @@ class tracker_ui extends tracker_bo
 				'cat_is_select'  => 'no_lang',
 				'filter'         => 0,  // all
 				'options-filter' => $date_filters,
-				'filter_label'   => lang('Date filter'),
+				//'filter_label'   => lang('Date filter'),
 				'filter_no_lang'=> true,
 				'filter2'        => 0,	// all
-				'filter2_label'  => lang('Version'),
+				//'filter2_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
 				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
@@ -1322,9 +1304,7 @@ class tracker_ui extends tracker_bo
 				'col_filter'     => array(
 					'tr_status'  => 'not-closed',	// default filter: not closed
 				),
-	 			'header_left'    =>	$only_tracker ? null : 'tracker.index.left', // I  template to show left of the range-value, left-aligned (optional)
 	 			'only_tracker'   => $only_tracker,
-	 			'header_right'   =>	'tracker.index.right', // I  template to show right of the range-value, left-aligned (optional)
 	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description,tr_resolution,tr_completion,tr_sum_timesheets,votes,bounties',
 				'row_id'         => 'tr_id',
 				'row_modified'   => 'tr_modified'
@@ -1332,6 +1312,7 @@ class tracker_ui extends tracker_bo
 			// use the state of the last session stored in the user prefs
 			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
 			{
+				unset($state['header_left']); unset($state['header_right']);
 				$content['nm'] = array_merge($content['nm'],$state);
 				$tracker = $content['nm']['col_filter']['tr_tracker'];
 			}
@@ -1403,9 +1384,6 @@ class tracker_ui extends tracker_bo
 		}
 
 		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
-		$content['nm']['multi_queue'] = $multi_queue;
-		// Turn on multi-queue widget
-		$content['nm']['header_left'] = $content['nm']['multi_queue'] ? 'tracker.index.left_multiqueue' : 'tracker.index.left';
 
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
