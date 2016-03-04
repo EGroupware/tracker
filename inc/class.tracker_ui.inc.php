@@ -1468,6 +1468,7 @@ width:100%;
 				'url' => 'menuaction=tracker.tracker_ui.edit&tr_id=$id',
 				'popup' => egw_link::get_registry('tracker', 'add_popup'),
 				'group' => $group=1,
+				'onExecute' => html::$ua_mobile?'javaScript:app.tracker.viewEntry':''
 			),
 			'print' => array(
 				'caption' => 'Print',
