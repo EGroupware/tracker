@@ -43,6 +43,7 @@ after how many days a not replied item should be marked overdue?	tracker	en	Afte
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatically?
 all	tracker	en	All
 all tickets are already converted to tracker	tracker	en	All tickets are already converted to Tracker
+all versions	tracker	en	All versions
 allow bounties	tracker	en	Allow bounties
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	en	Allow creating of restricted comments which are only visible for admins, technicians and assigned users
 allow creation of infolog entries from tracker tickets	tracker	en	Allow creation of infolog entries from tracker tickets

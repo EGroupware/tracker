@@ -4,7 +4,7 @@
  * @link http://www.egroupware.org
  * @package tracker
  * @author Hadi Nategh	<hn-AT-stylite.de>
- * @copyright (c) 2008-13 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2008-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -14,7 +14,7 @@
  *
  * @augments AppJS
  */
-app.classes.tracker = AppJS.extend(
+app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 {
 	appname: 'tracker',
 	/**
@@ -50,20 +50,31 @@ app.classes.tracker = AppJS.extend(
 	 * and ready.  If you must store a reference to the et2 object,
 	 * make sure to clean it up in destroy().
 	 *
-	 * @param et2 etemplate2 Newly ready object
+	 * @param {etemplate2} _et2
+	 * @param {string} _name name of template loaded
 	 */
-	et2_ready: function(et2)
+	et2_ready: function(_et2, _name)
 	{
 		// call parent
 		this._super.apply(this, arguments);
-		if (et2.name === 'tracker.admin')
-		{
-			this.acl_queue_access();
-		}
 
-		if (et2.name === 'tracker.edit')
+		switch(_name)
 		{
-			this.edit_popup();
+			case 'tracker.admin':
+				this.acl_queue_access();
+				break;
+
+			case 'tracker.edit':
+				this.edit_popup();
+				break;
+
+			case 'tracker.index':
+				if (this.et2.getArrayMgr('content').getEntry('nm[only_tracker]'))
+					// there's no this.et2.getWidgetById('colfilter[tr_tracker]').hide() and
+					// jQuery(this.et2.getWidgetById('colfilter[tr_tracker]').getDOMNode()).hide()
+					// hides already hiden selectbox and not the choosen container :(
+					jQuery('#tracker_index_col_filter_tr_tracker__chzn').hide();
+				break;
 		}
 	},
 
@@ -101,40 +112,6 @@ app.classes.tracker = AppJS.extend(
 	},
 
 	/**
-	 * Set the state / apply a favorite
-	 * Overridden from the parent to set the queue to multiple if there are
-	 * more than one in the state
-	 */
-	setState: function(state)
-	{
-		// State should be an object, not a string, but we'll parse
-		if(typeof state == "string")
-		{
-			if(state.indexOf('{') != -1 || state =='null')
-			{
-				state = JSON.parse(state);
-			}
-		}
-		if(typeof state == "object" && state != null && state.state && state.state.col_filter)
-		{
-			if(typeof state.state.col_filter.tr_tracker == 'object'
-					&& state.state.col_filter.tr_tracker &&
-					Object.keys(state.state.col_filter.tr_tracker).length > 1)
-			{
-				var template = etemplate2.getById('tracker-index') || null;
-				if(template)
-				{
-					var nm = template.widgetContainer.getWidgetById('nm');
-					nm.set_header_left('tracker.index.left_multiqueue');
-				}
-			}
-		}
-		// call parent
-		this._super.apply(this, arguments);
-	},
-
-	/**
-	 * expand_filter
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
 	 *
 	 * @param {object} _event
@@ -249,4 +226,4 @@ app.classes.tracker = AppJS.extend(
 		var widget = this.et2.getWidgetById('tr_summary');
 		if(widget) return widget.options.value;
 	}
-});
+});}).call(this);

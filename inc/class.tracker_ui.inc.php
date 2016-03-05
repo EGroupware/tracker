@@ -649,7 +649,7 @@ class tracker_ui extends tracker_bo
 		$account_select_pref = $GLOBALS['egw_info']['user']['preferences']['common']['account_selection'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'cat_id'      => $this->get_tracker_labels('cat',$tracker),
+			'cat_id'      => array_merge(array(lang('All categories')), $this->get_tracker_labels('cat',$tracker)),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
@@ -868,14 +868,13 @@ class tracker_ui extends tracker_bo
 
 		if (empty($query['col_filter']['tr_tracker']))
 		{
-			$trtofilter = array_keys($this->trackers);
-			//_debug_array($trtofilter);
-			$query['col_filter']['tr_tracker'] = $tracker = $trtofilter;
+			$tracker = array_keys($this->trackers);
 		}
 
 		// Get list of currently displayed trackers, so we can get all valid statuses
-		if($query['col_filter']['tr_tracker']) {
-			$trackers = is_array($query['col_filter']['tr_tracker']) ? $query['col_filter']['tr_tracker'] : array($query['col_filter']['tr_tracker']);
+		if ($tracker)
+		{
+			$trackers = is_array($tracker) ? $tracker : array($tracker);
 		}
 		else
 		{
@@ -972,7 +971,7 @@ class tracker_ui extends tracker_bo
 		}
 		else
 		{
-			$tracker = $selected_trackers ? $selected_trackers : array_keys($this->trackers);
+			$tracker = $selected_trackers;
 		}
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
 
@@ -984,7 +983,7 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 		unset($rows['sel_options']['assigned']['not']);
 
-		$cats =array('' => lang('all'));
+		$cats =array('' => lang('All categories'));
 		$versions =  $resolutions = $statis = array();
 		foreach((array)$tracker as $tr_id)
 		{
@@ -1006,7 +1005,7 @@ class tracker_ui extends tracker_bo
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['cat_id'] = $cats;
-		$rows['sel_options']['filter2'] = array(lang('All'))+$versions;
+		$rows['sel_options']['filter2'] = array(lang('All versions'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
 		$rows['sel_options']['tr_resolution'] =& $resolutions;
 
@@ -1030,7 +1029,7 @@ class tracker_ui extends tracker_bo
 		if ($rows['col_filter']['cat_id']) $rows['no_cat_id'] = true;
 
 		// enable tracker column if all trackers are shown
-		if ($tracker && $rows['col_filter']['tr_tracker'] && count($rows['col_filter']['tr_tracker']) == 1)
+		if ($tracker && count($tracker) == 1)
 		{
 			$rows['no_tr_tracker'] = true;
 		}
@@ -1283,7 +1282,7 @@ class tracker_ui extends tracker_bo
 
 		if (!is_array($content['nm']) || !$content['nm']['get_rows'])
 		{
-			$date_filters = array(lang('All'));
+			$date_filters = array(lang('Date filter'));
 			foreach(array_keys($this->date_filters) as $name)
 			{
 				$date_filters[$name] = lang($name);

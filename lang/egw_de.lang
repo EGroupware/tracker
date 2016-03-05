@@ -43,6 +43,7 @@ after how many days a not replied item should be marked overdue?	tracker	de	Nach
 after how many days pending items should be closed automatic	tracker	de	Nach wie vielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
 all	tracker	de	Alle
 all tickets are already converted to tracker	tracker	de	alle Tickets sind bereits umgewandelt
+all versions	tracker	de	Alle Versionen
 allow bounties	tracker	de	Prämien erlauben
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	de	Dürfen Kommentare mit eingeschränkter Sichtbarkeit (nur für Administratoren, Techniker, Zugewiesenen Benutzer) erstellt werden.
 allow creation of infolog entries from tracker tickets	tracker	de	Dürfen Infologs aus dem Ticketsystem erstellt werden.

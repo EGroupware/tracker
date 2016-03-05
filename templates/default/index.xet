@@ -123,7 +123,7 @@
 		</grid>
 	</template>
 	<template id="tracker.index.queue" template="" lang="" group="0" version="1.9.001">
-		<listbox id="col_filter[tr_tracker]" no_lang="1" multiple="true" tags="true" width="200px" class="tracker_queue" empty_label="Select tracker queues"/>
+		<listbox id="col_filter[tr_tracker]" no_lang="1" multiple="true" tags="true" width="200px" class="tracker_queue" empty_label="Select tracker queue"/>
 	</template>
 	<template id="tracker.index.add" template="" lang="" group="0" version="1.7.001">
 		<buttononly statustext="Add" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});"/>
