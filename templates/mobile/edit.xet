@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//Stylite AG//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
+		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240" imageUpload="link_to"/>
+	</template>
+	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
+		<grid width="100%" class="egwGridView_grid">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row class="th" height="29px">
+					<description value="Comments"/>
+					<textbox type="integer" id="num_replies" readonly="true"/>
+				</row>
+				<row class="row" valign="top">
+					<vbox options="0,0">
+						<date-time id="replies[$row][reply_created]" readonly="true"/>
+						<menulist>
+							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
+						</menulist>
+					</vbox>
+					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="1.9.001">
+		<grid width="100%">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row class="th" disabled="@no_canned">
+					<description value="Canned response" for="canned_response" class="3"/>
+					<menulist>
+						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one"/>
+					</menulist>
+				</row>
+				<row disabled="@no_comment_visibility">
+					<description/>
+					<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
+				</row>
+				<row class="row" valign="top" disabled="@no_reply">
+					<vbox>
+						<description value="Comment" for="reply_message"/>
+					</vbox>
+					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="200" imageUpload="link_to"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.links" template="" lang="" group="0" version="0.1.002">
+		<grid width="100%">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row disabled="@view">
+					<link-to id="link_to"/>
+				</row>
+				<row class="th">
+					<description value="Existing links"/>
+				</row>
+				<row>
+					<link-list id="link_to"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
+		<grid width="100%">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<box width="100%" overflow="auto">
+						<customfields options="@info_type"/>
+					</box>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
+		<grid width="100%">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description statustext="List of coma separated email address" value="Cc"/>
+					<taglist-email id="tr_cc"  allowFreeEntries="true" empty_label="Add email-address"  class="et2_fullWidth"/>
+				</row>
+				<row>
+					<description for="tr_assigned" value="Assigned to"/>
+					<menulist>
+						<menupopup  class="tracker_assign et2_fullWidth" id="tr_assigned" multiple="true" no_lang="1" tags="true" empty_label="User or group"/>
+					</menulist>
+				</row>
+				<row>
+					<description value="Group"/>
+					<menulist span="all" >
+						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_private" value="Private"/>
+					<checkbox id="tr_private" class="et2_fullWidth" unselected_value="0"/>
+				</row>
+				<row>
+					<description value="Close date" />
+					<date-time label=" " id="tr_closed" class="et2_fullWidth"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit.ownership" template="" lang="" group="0" version="1.9.008">
+		<grid width="100%">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description value="Created by"/>
+					<menulist>
+						<menupopup id="tr_creator" no_lang="1"/>
+					</menulist>
+				</row>
+				<row>
+					<description/>
+					<date-time id="tr_created" readonly="true"/>
+				</row>
+				<row>
+					<description value="Last modified"/>
+					<menulist>
+						<menupopup type="select-account" id="tr_modifier" readonly="true"/>
+					</menulist>
+				</row>
+				<row>
+					<description/>
+					<date-time id="tr_modified" readonly="true" class="et2_nowrap" span="2" align="right"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
+		<grid border="1" width="100%">
+			<columns>
+				<column width = "120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row disabled="@hidebuttons" class="dialogHeadbar" >
+					<hbox  span="all" width="100%">
+						<button statustext="Saves this entry" id="button[save]" image="save" background_image="1"/>
+						<button statustext="Apply the changes" id="button[apply]" image="apply" background_image="1"/>
+						<checkbox label="notification" id="no_notifications"/>
+					</hbox>
+				</row>
+				<row disabled="!@showsearchbuttons" class="dialogHeadbar">
+					<hbox span="all" width="100%">
+						<button label="Search" id="button[search]" image="search" background_image="1"/>
+						<button label="Cancel" id="button[cancelsearch]" image="cancel" background_image="1"/>
+					</hbox>
+				</row>
+				<row>
+					<description for="tr_summary" value="Summary"/>
+					<textbox id="tr_summary" needed="1" maxlength="80" span="4" class="et2_fullWidth" tabindex="1"/>
+				</row>
+				<row>
+					<description for="tr_tracker" value="Tracker Queue"/>
+					<hbox>
+						<menulist>
+							<menupopup id="tr_tracker" no_lang="1" onchange="widget.getInstanceManager().submit(null,false,true); return false;" class="et2_fullWidth"/>
+						</menulist>
+						<textbox align="right" type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
+					</hbox>
+				</row>
+				<row>
+					<description for="cat_id" value="Category"/>
+					<menulist>
+						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"  class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_version" value="Version"/>
+					<menulist>
+						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_priority" value="Priority"/>
+					<menulist>
+						<menupopup id="tr_priority" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row disabled="!@show_dates">
+					<description value="Start date"/>
+					<date-time id="tr_startdate" class="et2_fullWidth"/>
+				</row>
+				<row>
+					<description value="Due date"/>
+					<date-time id="tr_duedate" class="et2_fullWidth"/>
+				</row>
+				<row disabled="!@tr_id">
+					<description for="tr_status" value="Status"/>
+					<menulist>
+						<menupopup statustext="@status_help" id="tr_status" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_resolution" value="Resolution"/>
+					<menulist>
+						<menupopup id="tr_resolution" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<description for="tr_completion" value="Completion"/>
+					<menulist>
+						<menupopup type="select-percent" id="tr_completion" class="et2_fullWidth"/>
+					</menulist>
+				</row>
+				<row>
+					<tabbox id="tabs" span="all" width="100%" align_tabs="v">
+						<tabs>
+							<tab id="description" label="Description"/>
+							<tab id="details" label="Details"/>
+							<tab id="comments" label="Comments"/>
+							<tab id="add_comment" label="Add comment"/>
+							<tab id="links" label="Links"/>
+							<tab id="custom" label="Custom"/>
+							<tab id="ownership" label="Ownership"/>
+						</tabs>
+						<tabpanels>
+							<template id="tracker.edit.description"/>
+							<template id="tracker.edit.details"/>
+							<template id="tracker.edit.comments"/>
+							<template id="tracker.edit.add_comment"/>
+							<template id="tracker.edit.links"/>
+							<template id="tracker.edit.custom"/>
+							<template id="tracker.edit.ownership"/>
+						</tabpanels>
+					</tabbox>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>
