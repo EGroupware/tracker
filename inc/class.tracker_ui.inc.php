@@ -1009,30 +1009,27 @@ class tracker_ui extends tracker_bo
 		$rows['sel_options']['tr_version'] =& $versions;
 		$rows['sel_options']['tr_resolution'] =& $resolutions;
 
+		$rows['is_admin'] = $this->is_admin($tracker);
 		if ($this->is_admin($tracker))
 		{
 			$rows['sel_options']['canned_response'] = $this->get_tracker_labels('response',$tracker);
 			$rows['sel_options']['tr_status_admin'] =& $statis;
-			$rows['is_admin'] = true;
 		}
+		$rows['no_votes'] = !$this->allow_voting;
 		if (!$this->allow_voting)
 		{
-			$rows['no_votes'] = true;
 			$query_in['options-selectcols']['votes'] = false;
 		}
+		$rows['no_bounties'] = !$this->allow_bounties;
 		if (!$this->allow_bounties)
 		{
-			$rows['no_bounties'] = true;
 			$query_in['options-selectcols']['bounties'] = false;
 		}
 
-		if ($rows['col_filter']['cat_id']) $rows['no_cat_id'] = true;
+		$rows['no_cat_id'] = !!$rows['col_filter']['cat_id'];
 
 		// enable tracker column if all trackers are shown
-		if ($tracker && count($tracker) == 1)
-		{
-			$rows['no_tr_tracker'] = true;
-		}
+		$rows['no_tr_tracker'] = ($tracker && count($tracker) == 1);
 	}
 
 	/**
