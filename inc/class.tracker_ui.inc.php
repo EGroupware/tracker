@@ -1449,12 +1449,14 @@ width:100%;
 				'allowOnMultiple' => false,
 				'onExecute' => 'javaScript:app.tracker.tprint',
 				'group' => $group,
+				'hideOnMobile' => true
 			),
 			'add' => array(
 				'caption' => 'Add',
 				'group' => $group,
 				'url' => 'menuaction=tracker.tracker_ui.edit',
 				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'hideOnMobile' => true
 			),
 			'no_notifications' => array(
 				'caption' => 'Do not notify',
@@ -1541,6 +1543,7 @@ width:100%;
 						'nm_action' => 'open_popup',
 					),
 				),
+				'hideOnMobile' => true
 			),
 			'close' => array(
 				'caption' => 'Close',
