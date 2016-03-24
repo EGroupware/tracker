@@ -649,7 +649,7 @@ class tracker_ui extends tracker_bo
 		$account_select_pref = $GLOBALS['egw_info']['user']['preferences']['common']['account_selection'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'cat_id'      => array_merge(array(lang('All categories')), $this->get_tracker_labels('cat',$tracker)),
+			'cat_id'      => array(lang('All categories')) + $this->get_tracker_labels('cat',$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
 			'tr_status'   => &$statis,
