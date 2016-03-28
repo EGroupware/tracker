@@ -13,6 +13,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api\Mail;
+
 class tracker_mailhandler extends tracker_bo
 {
 	/**
@@ -42,13 +44,6 @@ class tracker_mailhandler extends tracker_bo
 	 * @var string
 	 */
 	var $mailBox;
-
-	/**
-	 * Identification of the mailboxclass
-	 *
-	 * @var string
-	 */
-	var $mailClass = 'emailadmin_imapbase';
 
 	/**
 	 * List with all messages retrieved from the server
@@ -112,7 +107,7 @@ class tracker_mailhandler extends tracker_bo
 		if (!is_null($mailhandlingConfig)) $this->mailhandling = $mailhandlingConfig;
 		// In case we run in fallback, make sure the original user gets restored
 		$this->originalUser = $this->user;
-		foreach($this->mailservertypes as $ind => $typ)
+		foreach($this->mailservertypes as $typ)
 		{
 			$this->serverTypes[] = $typ[0];
 		}
@@ -142,14 +137,14 @@ class tracker_mailhandler extends tracker_bo
 	static function compareMailboxSettings($reference, $profile)
 	{
 		$diff = array();
-		if (!($reference instanceof defaultimap)) return false;
-		if (!($profile instanceof defaultimap)) return false;
+		if (!($reference instanceof Mail\Imap)) return false;
+		if (!($profile instanceof Mail\Imap)) return false;
 		//error_log(__METHOD__.__LINE__.' Reference:'.get_class($reference));
 		//error_log(__METHOD__.__LINE__.' Reference:'.array2string($reference));
 		//error_log(__METHOD__.__LINE__.' Profile:'.get_class($profile));
 		//error_log(__METHOD__.__LINE__.' Profile:'.array2string($profile));
 		if (get_class($reference) != get_class($profile)) return false;
-		if ($profile instanceof emailadmin_imap)
+		if ($profile instanceof Mail\Imap)
 		{
 			if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
 			try
@@ -196,8 +191,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			try
 			{
-				$this->mailClass = 'emailadmin_imapbase';
-				$params['acc_imap_type'] = 'emailadmin_imap';
+				$params['acc_imap_type'] = 'EGroupware\\Api\\Mail\\Imap';
 				$params['acc_id'] = 'tracker_'.trim($queue);
 				$params['acc_imap_host'] = $this->mailhandling[$queue]['server'];
 				$params['acc_imap_ssl'] = ($this->mailhandling[$queue]['servertype']==2?3:($this->mailhandling[$queue]['servertype']==1?2:0));
@@ -210,8 +204,8 @@ class tracker_mailhandler extends tracker_bo
 				$params['acc_folder_template'] = 'none';
 				$params['acc_folder_junk'] = 'none';
 				$params['acc_sieve_enabled'] = false;
-				$params['acc_smtp_type'] = 'defaultsmtp'; // needed, else the constructor fails
-				$eaaccount = new emailadmin_account($params);
+				$params['acc_smtp_type'] = 'EGroupware\\Api\\Mail\\Smtp'; // needed, else the constructor fails
+				$eaaccount = new Mail\Account($params);
 				$icServer = $eaaccount->imapServer();
 //error_log(__METHOD__.__LINE__.array2string($icServer));
 				return $icServer;
@@ -345,25 +339,21 @@ class tracker_mailhandler extends tracker_bo
 					}
 				}
 			}
-			$mc =$this->mailClass;
-			$mailobject	= $mc::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
+			$mailobject	= Mail::getInstance(false,$this->mailBox->ImapServerId,false,$this->mailBox);
 			if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.'#'.array2string($this->mailBox));
 
 			$connectionFailed = false;
 			// connect
-			if ($mc=='emailadmin_imapbase')
+			try
 			{
-				try
-				{
-					$mailobject->openConnection($this->mailBox->ImapServerId);
-					$_folderName = (!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX');
-					$mailobject->reopen($_folderName);
-				}
-				catch (Exception $e)
-				{
-					$connectionFailed=true;
-					$mailobjecterrorMessage = $e->getMessage();
-				}
+				$mailobject->openConnection($this->mailBox->ImapServerId);
+				$_folderName = (!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX');
+				$mailobject->reopen($_folderName);
+			}
+			catch (Exception $e)
+			{
+				$connectionFailed=true;
+				$mailobjecterrorMessage = $e->getMessage();
 			}
 			if ($TestConnection===true)
 			{
@@ -1003,7 +993,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function process_message ($mid, $queue)
 	{
-		$mc =$this->mailClass;
 		$senderIdentified = false;
 		$this->mailBody = null; // Clear previous message
 		$msgHeader = imap_headerinfo($this->mbox, $mid);
@@ -1167,12 +1156,12 @@ class tracker_mailhandler extends tracker_bo
 			if ($this->mailhandling[$queue]['mailheaderhandling']==1) $header2desc=true;
 			if ($this->mailhandling[$queue]['mailheaderhandling']==2) $header2comment=true;
 			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $header2desc=$header2comment=true;
-			$mailHeaderInfo = $mc::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
+			$mailHeaderInfo = Mail::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
 				'TO'=>(isset($buff['to']) && !empty($buff['to'])?implode(',',$buff['to']):null),
 				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
 				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
 				'SUBJECT'=>$this->mailSubject,
-				'DATE'=>$mc::_strtotime($msgHeader->Date)),'',false/*$this->htmledit*/);
+				'DATE'=>Mail::_strtotime($msgHeader->Date)),'',false/*$this->htmledit*/);
 		}
 		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
 		$status = $this->flagMessageAsSeen($mid, $msgHeader);
@@ -1197,7 +1186,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				$this->user = $this->mailSender;
 			}
-			$this->data['tr_created'] = $mc::_strtotime($msgHeader->Date,'ts',true);
+			$this->data['tr_created'] = Mail::_strtotime($msgHeader->Date,'ts',true);
 			$this->data['tr_summary'] = $this->mailSubject;
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
@@ -1238,7 +1227,7 @@ class tracker_mailhandler extends tracker_bo
 				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
 			}
 			$this->data['reply_message'] = ($mailHeaderInfo&&$header2comment?$mailHeaderInfo:'').$this->extract_latestReply($this->mailBody);
-			$this->data['reply_created'] = $mc::_strtotime($msgHeader->Date,'ts',true);
+			$this->data['reply_created'] = Mail::_strtotime($msgHeader->Date,'ts',true);
 		}
 		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
 		// Save Current edition mode preventing mixed types
@@ -1298,7 +1287,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function process_message2 ($mailobject, $uid, $_folderName, $queue)
 	{
-		$mc =$this->mailClass;
 		$senderIdentified = true;
 		$sR = $mailobject->getHeaders($_folderName, $_startMessage=1, $_numberOfMessages=1, $_sort='INTERNALDATE', $_reverse=true, $_filter=array(),$_thisUIDOnly=$uid, $_cacheResult=false);
 		$s = $sR['header'][$uid];
@@ -1322,7 +1310,7 @@ class tracker_mailhandler extends tracker_bo
 				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
 			return false;
 		}
-		$subject = $mc::adaptSubjectForImport($subject);
+		$subject = Mail::adaptSubjectForImport($subject);
 		$tId = $this->get_ticketId($subject);
 		if ($tId)
 		{
@@ -1350,7 +1338,7 @@ class tracker_mailhandler extends tracker_bo
 		{
 			$message = $mailobject->getMessageRawBody($uid, $partid, $_folderName);
 			$headers = $mailobject->getMessageHeader($uid, $partid,true,false,$_folderName);
-			$subject = $mc::adaptSubjectForImport($headers['SUBJECT']);
+			$subject = Mail::adaptSubjectForImport($headers['SUBJECT']);
 			$attachment_file =tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
 			$tmpfile = fopen($attachment_file,'w');
 			fwrite($tmpfile,$message);
@@ -1376,7 +1364,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		// prepare the data to be saved
 		// (use bo function connected to the ui interface mail import, so after preparing we need to adjust stuff)
-		$mailcontent['subject'] = $mc::adaptSubjectForImport($mailcontent['subject']);
+		$mailcontent['subject'] = Mail::adaptSubjectForImport($mailcontent['subject']);
 		$this->data = $this->prepare_import_mail(
 			$mailcontent['mailaddress'],
 			$mailcontent['subject'],

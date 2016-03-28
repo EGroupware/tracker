@@ -5,10 +5,12 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
+
+use EGroupware\Api;
 
 /**
  * Some constants for the check_rights function
@@ -1934,8 +1936,11 @@ class tracker_bo extends tracker_so
 			}
 			else
 			{
-				$parsedAddresses = emailadmin_imapbase::parseAddressList($address);
-				foreach($parsedAddresses as $i => $adr)	$emails[] = $adr->mailbox.'@'.$adr->host;
+				$parsedAddresses = Api\Mail::parseAddressList($address);
+				foreach($parsedAddresses as $i => $adr)
+				{
+					$emails[] = $adr->mailbox.'@'.$adr->host;
+				}
 			}
 		}
 
