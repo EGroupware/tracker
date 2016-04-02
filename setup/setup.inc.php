@@ -45,14 +45,10 @@ $setup_info['tracker']['depends'][] = array(
 	 'versions' => Array('14.1')
 );
 $setup_info['tracker']['depends'][] = array(
-	 'appname' => 'etemplate',
-	 'versions' => Array('14.1')
-);
-$setup_info['tracker']['depends'][] = array(
 	 'appname' => 'notifications',
 	 'versions' => Array('14.1')
 );
 $setup_info['tracker']['depends'][] = array(
-	 'appname' => 'emailadmin',
-	 'versions' => Array('14.1')
+	 'appname' => 'api',
+	 'versions' => Array('16.1')
 );
