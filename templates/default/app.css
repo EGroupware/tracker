@@ -4,11 +4,7 @@
 	/* This prevents the multi-select from pushing down the add button */
 	max-width: 95%;
 }
-tr.dialogHeader td, tr.dialogHeader2 td, tr.dialogHeader3 td, tr.dialogHeader4 td,
-tr.dialogOperators td,.dialogFooterToolbar {
-	padding: 5px 0 5px 0;
-	vertical-align: middle;
-}
+
 #tracker-edit.et2_container
 {
 }
