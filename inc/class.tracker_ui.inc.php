@@ -1305,7 +1305,8 @@ class tracker_ui extends tracker_bo
 	 			'only_tracker'   => $only_tracker,
 	 			'default_cols'   => '!esc_id,legacy_actions,tr_summary_tr_description,tr_resolution,tr_completion,tr_sum_timesheets,votes,bounties',
 				'row_id'         => 'tr_id',
-				'row_modified'   => 'tr_modified'
+				'row_modified'   => 'tr_modified',
+				'placeholder_actions' => array('add')
 			);
 			// use the state of the last session stored in the user prefs
 			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
