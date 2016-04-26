@@ -13,6 +13,7 @@
 				<column width="40%"/>
 				<column width="135"/>
 				<column width="135" disabled="@no_tr_startdate_tr_duedate"/>
+				<column width="135"/>
 				<column width="45"/>
 				<column width="10%"/>
 				<column width="10%"/>
@@ -46,6 +47,7 @@
 						<nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
 						<nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
 					</vbox>
+					<nextmatch-sortheader label="Closed date" id="tr_closed" sortmode="DESC"/>
 					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
 					<vbox>
 						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="tracker_status_filter"/>
@@ -97,6 +99,7 @@
 						<date-time id="${row}[tr_startdate]" readonly="true" class="noWrap"/>
 						<date-time id="${row}[tr_duedate]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
 					</vbox>
+					<date-time id="${row}[tr_closed]" readonly="true" class="noWrap"/>
 					<description align="center" id="${row}[prio_label]" class="tracker_indexPrio"/>
 					<menulist>
 						<menupopup id="${row}[tr_status]" readonly="true"/>
@@ -128,6 +131,14 @@
 	<template id="tracker.index.add" template="" lang="" group="0" version="1.7.001">
 		<buttononly statustext="Add" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});"/>
 	</template>
+	<template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
+		<hbox>
+			<description value="Start"/>
+			<date id="startdate" onchange="widget.getParent().getWidgetById('enddate').set_min(widget.getValue());return true;"/>
+			<description value="End"/>
+			<date id="enddate"  onchange="widget.getParent().getWidgetById('startdate').set_max(widget.getValue());return true;"/>
+		</hbox>
+	</template>
 	<template id="tracker.index" template="" lang="" group="0" version="1.9.003">
 		<grid width="100%" class="tracker-index">
 			<columns>
@@ -139,7 +150,7 @@
 					<html id="css" span="all"/>
 				</row>
 				<row>
-					<nextmatch id="nm" template="tracker.index.rows" span="all" header_left="tracker.index.add" header_row="tracker.index.queue"/>
+					<nextmatch id="nm" template="tracker.index.rows" span="all" header_left="tracker.index.add" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
 				</row>
 				<row disabled="!@nm[selectcols]=/legacy_actions/">
 					<button label="Add" id="add" onclick="window.open(egw::link('/index.php','menuaction=tracker.tracker_ui.edit&amp;tracker={$cont[nm][col_filter][tr_tracker]}'),'_blank','dependent=yes,width=700,height=480,scrollbars=yes,status=yes'); return false;"/>

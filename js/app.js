@@ -69,6 +69,7 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 				break;
 
 			case 'tracker.index':
+				this.filter_change();
 				if (this.et2.getArrayMgr('content').getEntry('nm[only_tracker]'))
 					// there's no this.et2.getWidgetById('colfilter[tr_tracker]').hide() and
 					// jQuery(this.et2.getWidgetById('colfilter[tr_tracker]').getDOMNode()).hide()
@@ -111,6 +112,25 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 		}
 	},
 
+	/**
+	 * Tracker list filter change, used to toggle date fields
+	 */
+	filter_change: function()
+	{
+		var filter = this.et2.getWidgetById('filter');
+		var dates = this.et2.getWidgetById('tracker.index.dates');
+
+		if (filter && dates)
+		{
+			dates.set_disabled(filter.value !== "custom");
+			if (filter.value == "custom")
+			{
+				jQuery(this.et2.getWidgetById('startdate').getDOMNode()).find('input').focus();
+			}
+		}
+		return true;
+	},
+	
 	/**
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
 	 *

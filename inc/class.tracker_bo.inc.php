@@ -1460,7 +1460,7 @@ class tracker_bo extends tracker_so
 	{
 		if($query['filter'])
 		{
-			$query['col_filter'][] = $this->date_filter($query['filter'],$query['startdate'],$query['enddate']);
+			$query['col_filter'][] = $this->date_filter($query['filter'],$query['startdate'],$query['enddate'],$query['order']);
 		}
 		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count);
 	}
@@ -2114,13 +2114,26 @@ class tracker_bo extends tracker_so
 	/**
 	 * return SQL implementing filtering by date
 	 *
+	 * If the currently sorted column is a date, we filter by that date, otherwise
+	 * we sort on tr_created
+	 *
 	 * @param string $name
 	 * @param int &$start
 	 * @param int &$end
+	 * @param string &$column
 	 * @return string
 	 */
-	function date_filter($name,&$start,&$end)
+	function date_filter($name,&$start,&$end, $column = 'tr_created')
 	{
+		if(!$column ||
+			// Just these columns
+			!in_array($column, array('tr_created','tr_startdate','tr_duedate','tr_closed'))
+			// Any date column
+			//!in_array($column, tracker_egw_record::$types['date-time']))
+		)
+		{
+			$column = 'tr_created';
+		}
 		switch(strtolower($name))
 		{
 			case 'overdue':
@@ -2143,7 +2156,7 @@ OR tr_duedate IS NULL AND
 			case 'upcoming':
 				return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
 		}
-		return egw_time::sql_filter($name, $start, $end, 'tr_created', $this->date_filters);
+		return egw_time::sql_filter($name, $start, $end, $column, $this->date_filters);
 	}
 
 	/**
