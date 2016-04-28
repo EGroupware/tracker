@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Egroupware - Tracker - A portlet for displaying a list of entries on the home tab
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
@@ -9,6 +8,9 @@
  * @author Nathan Gray
  * @version $Id$
  */
+
+use EGroupware\Api;
+use EGroupware\Api\Etemplate;
 
 /**
  * The tracker_list_portlet uses a nextmatch / favorite
@@ -24,11 +26,9 @@ class tracker_favorite_portlet extends home_favorite_portlet
 	public function __construct(Array &$context = array(), &$need_reload = false)
 	{
 		$context['appname'] = 'tracker';
-		
+
 		// Let parent handle the basic stuff
 		parent::__construct($context,$need_reload);
-
-		$ui = new tracker_ui();
 
 		$this->context['template'] = 'tracker.index.rows';
 		$this->nm_settings += array(
@@ -46,7 +46,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 		);
 	}
 
-	public function exec($id = null, etemplate_new &$etemplate = null)
+	public function exec($id = null, Etemplate &$etemplate = null)
 	{
 		$ui = new tracker_ui();
 
@@ -68,7 +68,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 		);
 		$this->nm_settings['actions'] = $ui->get_actions($tracker, $this->nm_settings['cat_id']);
 
-		// disable start date / due date column, if disabled in config
+		// disable start date / due date column, if disabled in Api\Config
 		if(!$ui->show_dates)
 		{
 			// Need to set each field so parser takes the whole column
@@ -100,8 +100,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 	 * Here we need to handle any incoming data.  Setup is done in the constructor,
 	 * output is handled by parent.
 	 *
-	 * @param type $id
-	 * @param etemplate_new $etemplate
+	 * @param $content =array()
 	 */
 	public static function process($content = array())
 	{
@@ -160,13 +159,13 @@ class tracker_favorite_portlet extends home_favorite_portlet
 					$success,$failed,$action_msg,'index',$msg,$content['nm']['checkboxes']['no_notifications']))
 				{
 					$msg .= lang('%1 entries %2',$success,$action_msg);
-					egw_json_response::get()->apply('egw.message',array($msg,'success'));
+					Api\Json\Response::get()->apply('egw.message',array($msg,'success'));
 					foreach($content['nm']['selected'] as &$id)
 					{
 						$id = 'tracker::'.$id;
 					}
 					// Directly request an update - this will get tracker tab too
-					egw_json_response::get()->apply('egw.dataRefreshUIDs',array($content['nm']['selected']));
+					Api\Json\Response::get()->apply('egw.dataRefreshUIDs',array($content['nm']['selected']));
 				}
 				else
 				{
@@ -174,7 +173,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 					{
 						$msg = lang('%1 entries %2, %3 failed because of insufficent rights !!!',$success,$action_msg,$failed);
 					}
-					egw_json_response::get()->apply('egw.message',array($msg,'error'));
+					Api\Json\Response::get()->apply('egw.message',array($msg,'error'));
 				}
 			}
 		}
