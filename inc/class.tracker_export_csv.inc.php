@@ -239,14 +239,24 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 * Adjust automatically generated filter fields
 	 */
 	public function get_filter_fields(Array &$filters)
-        {
+    {
 		// When filtering, use only categories flagged as category
 		$filters['cat_id']['type'] = 'select';
 		$filters['cat_id']['values'] = $this->ui->get_tracker_labels('cat',null);
 
-                foreach($filters as $field_name => &$settings)
-                {
-                        if($this->selects[$field_name]) $settings['values'] = $this->selects[$field_name];
-                }
-        }
+		foreach($filters as $field_name => &$settings)
+		{
+			if($this->selects[$field_name]) $settings['values'] = $this->selects[$field_name];
+		}
+	}
+
+	/**
+	 * Get the class name for the egw_record to use while exporting
+	 *
+	 * @return string;
+	 */
+	public static function get_egw_record_class()
+	{
+		return 'tracker_egw_record';
+	}
 }
