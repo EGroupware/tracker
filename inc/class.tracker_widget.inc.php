@@ -10,6 +10,9 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Etemplate;
+
 /**
  * eTemplate extension: Tracker widget
  *
@@ -21,7 +24,7 @@
  * 3) colon (:) separted list of alternative fields: the first non-empty one is used if the selected value is empty
  * There's a special field "sum" in 1), which sums up all fields given in alternatives.
  */
-class tracker_widget extends etemplate_widget_entry
+class tracker_widget extends Etemplate\Widget\Entry
 {
 
 	/**
@@ -153,7 +156,7 @@ class tracker_widget extends etemplate_widget_entry
 		switch($cell['type'])
 		{
 			case 'tracker-fields':
-				translation::add_app('addressbook');
+				Api\Translation::add_app('addressbook');
 				$cell['sel_options'] = $this->_get_fields();
 				$cell['type'] = 'select';
 				$cell['no_lang'] = 1;
@@ -298,7 +301,7 @@ class tracker_widget extends etemplate_widget_entry
 		$fileds['tr_modified'] = 'Modified';
 		$fileds['tr_modifier'] = 'Modifier';
 
-		foreach(config::get_customfields('tracker') as $name => $data)
+		foreach(Api\Storage\Customfields::get('tracker') as $name => $data)
 		{
 			$fields['#'.$name] = lang($data['label']);
 		}

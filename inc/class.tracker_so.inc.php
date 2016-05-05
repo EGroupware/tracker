@@ -10,10 +10,12 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 /**
  * Storage Object of the tracker
  */
-class tracker_so extends so_sql_cf
+class tracker_so extends Api\Storage
 {
 	/**
 	 * Table-name of the main tracker table
@@ -393,7 +395,7 @@ class tracker_so extends so_sql_cf
 		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker);
 		foreach($stati as $stati_id => $stati_label)
 		{
-			$data = categories::id2name($stati_id, 'data');
+			$data = Api\Categories::id2name($stati_id, 'data');
 			if($data['closed']) $custom_closed[] = $stati_id;
 		}
 		$not_closed = substr(self::SQL_NOT_CLOSED,0,-1) . ' AND tr_status != \'' . implode('\' AND tr_status != \'', $custom_closed) . '\')';

@@ -13,6 +13,9 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
+
 use EGroupware\Api\Mail;
 
 class tracker_mailhandler extends tracker_bo
@@ -213,7 +216,7 @@ class tracker_mailhandler extends tracker_bo
 			catch (Exception $e)
 			{
 				error_log(__METHOD__.__LINE__.' Failed loading mail profile:'.$e->getMessage());
-				//throw new egw_exception(__METHOD__.' Failed loading mail profile:'.$e->getMessage());
+				//throw new Api\Exception(__METHOD__.' Failed loading mail profile:'.$e->getMessage());
 				return false;
 			}
 		}
@@ -273,7 +276,7 @@ class tracker_mailhandler extends tracker_bo
 
 		if ($this->mailBox === false)
 		{
-			if ($TestConnection) throw new egw_exception_wrong_userinput(lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
+			if ($TestConnection) throw new Api\Exception\WrongUserinput(lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue));
 			// this line should prevent adding garbage to mailhandlerconfig
 			if (!isset($this->mailhandling[$queue]) || empty($this->mailhandling[$queue]) || $this->mailhandling[$queue]['interval']==0) return false;
 			error_log(__METHOD__.','.__LINE__.lang("incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1", $queue.' # Instance='.$GLOBALS['egw_info']['user']['domain']));
@@ -291,7 +294,7 @@ class tracker_mailhandler extends tracker_bo
 				}
 				try
 				{
-					$this->smtpMail = new egw_mailer();
+					$this->smtpMail = new Api\Mailer();
 					if (self::LOG_LEVEL>2) error_log(__METHOD__.__LINE__.array2string($this->smtpMail));
 				} catch(Exception $e) {
 					// ignore exception, but log it, to block the account and give a correct error-message to user
@@ -300,7 +303,7 @@ class tracker_mailhandler extends tracker_bo
 				}
 
 			}
-			$rFP=egw_cache::getCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId));
+			$rFP=Api\Cache::getCache(Api\Cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId));
 			if ($rFP && !empty($rFP))
 			{
 				$d = self::compareMailboxSettings($this->mailBox,$rFP);
@@ -313,7 +316,7 @@ class tracker_mailhandler extends tracker_bo
 						$previousInterval = $this->mailhandling[$queue]['interval'];
 						$this->mailhandling[$queue]['interval']=$this->mailhandling[$queue]['interval']*2;
 						$this->save_config();
-						egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
+						Api\Cache::setCache(Api\Cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
 						if ($GLOBALS['egw_info']['server']['admin_mails'] && $this->smtpMail)
 						{
 							// notify admin(s) via email
@@ -358,21 +361,21 @@ class tracker_mailhandler extends tracker_bo
 			if ($TestConnection===true)
 			{
 				if (self::LOG_LEVEL>0) error_log(__METHOD__.','.__LINE__." failed to open mailbox:".array2string($mailobject->icServer));
-				if ($connectionFailed) throw new egw_exception_wrong_userinput(lang("failed to open mailbox: %1 -> disabled for automatic mailprocessing!",($mailobjecterrorMessage?$mailobjecterrorMessage:lang('could not connect'))));
+				if ($connectionFailed) throw new Api\Exception\WrongUserinput(lang("failed to open mailbox: %1 -> disabled for automatic mailprocessing!",($mailobjecterrorMessage?$mailobjecterrorMessage:lang('could not connect'))));
 				return true;//everythig all right
 			}
 			if ($connectionFailed)
 			{
-				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),$this->mailBox,$expiration=60*60*5);
+				Api\Cache::setCache(Api\Cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),$this->mailBox,$expiration=60*60*5);
 				if (self::LOG_LEVEL>0) error_log(__METHOD__.','.__LINE__." failed to open mailbox:".array2string($this->mailBox));
 				return false;
 			}
 			else
 			{
-				egw_cache::setCache(egw_cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
+				Api\Cache::setCache(Api\Cache::INSTANCE,'email','rememberFailedProfile_'.trim($this->mailBox->ImapServerId),array(),$expiration=60*10);
 			}
 			// load lang stuff for mailheaderInfoSection creation
-			translation::add_app('mail');
+			Api\Translation::add_app('mail');
 			// retrieve list
 			if (self::LOG_LEVEL>0 &&  $tretval===false) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobjecterrorMessage);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
@@ -600,7 +603,7 @@ class tracker_mailhandler extends tracker_bo
 			'[\030]','[\031]','[\032]','[\033]','[\034]','[\035]','[\036]','[\037]');
 
 		//error_log(__METHOD__." Fetching body for ID $mid, Section $section with Structure: ".print_r($structure,true));
-		$charset = $GLOBALS['egw']->translation->charset(); // set some default charset, for translation to use
+		$charset = Api\Translation::charset(); // set some default charset, for Api\Translation to use
 		$mailbodyasAttachment = false;
 		if(function_exists(mb_decode_mimeheader)) {
 			mb_internal_encoding($charset);
@@ -670,7 +673,7 @@ class tracker_mailhandler extends tracker_bo
 				default:
 					break;
 			}
-			$GLOBALS['egw']->translation->convert($body,$charset);
+			Api\Translation::convert($body,$charset);
 			if ($mimeType=='TEXT/PLAIN')
 			{
 				$newBody    = @htmlentities($body,ENT_QUOTES, strtoupper($charset));
@@ -795,7 +798,7 @@ class tracker_mailhandler extends tracker_bo
 			//error_log(__METHOD__." Attachments retrieved with attachments:".print_r($additionalAttachments,true));
 			for ($a=0; $a<sizeof($additionalAttachments);$a++) $attachments[] = $additionalAttachments[$a];
 		}
-		return array('body' => $GLOBALS['egw']->translation->convertHTMLToText(nl2br(html::purify($body))),
+		return array('body' => Api\Translation::convertHTMLToText(nl2br(Api\Html::purify($body))),
 					 'struct' => $struct,
 					 'attachments' =>  $attachments
 					);
@@ -981,7 +984,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function decode_header (&$header)
 	{
-		$header = translation::decodeMailHeader($header);
+		$header = Api\Mail\Html::decodeMailHeader($header);
 	}
 
 	/**
@@ -1268,7 +1271,7 @@ class tracker_mailhandler extends tracker_bo
 			{
 				if(is_readable($attachment['tmp_name']))
 				{
-					egw_link::attach_file('tracker',$this->data['tr_id'],$attachment);
+					Link::attach_file('tracker',$this->data['tr_id'],$attachment);
 				}
 			}
 		}
@@ -1528,7 +1531,7 @@ class tracker_mailhandler extends tracker_bo
 				if(is_readable($attachment['tmp_name']))
 				{
 					//error_log(__METHOD__.__LINE__.'# trying to link '.$attachment['tmp_name'].'# to:'.$this->data['tr_id']);
-					egw_link::attach_file('tracker',$this->data['tr_id'],$attachment);
+					Link::attach_file('tracker',$this->data['tr_id'],$attachment);
 				}
 			}
 		}
@@ -1649,7 +1652,7 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	static function set_async_job($queue=0, $interval=0)
 	{
-		$async = new asyncservice();
+		$async = new Api\Asyncservice();
 		$job_id = 'tracker-check-mail' . ($queue ? '-'.$queue : '');
 
 		// Make sure an existing timer is cancelled

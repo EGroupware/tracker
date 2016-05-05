@@ -12,10 +12,12 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 /**
  * Escalation of tickets
  */
-class tracker_escalations extends so_sql2
+class tracker_escalations extends Api\Storage\Base2
 {
 	/**
 	 * Name of escalations table
@@ -76,7 +78,7 @@ class tracker_escalations extends so_sql2
 
 		if (!is_null($id) && !$this->read($id))
 		{
-			throw new egw_exception_not_found();
+			throw new Api\Exception\NotFound();
 		}
 	}
 
@@ -153,7 +155,7 @@ class tracker_escalations extends so_sql2
 							$users = array();
 							foreach((array)$value as $uid)
 							{
-								$users[] = $GLOBALS['egw']->common->grab_owner_name($uid);
+								$users[] = Api\Accounts::username($uid);
 							}
 							$action .= implode(', ',$users);
 							break;
@@ -524,7 +526,7 @@ class tracker_escalations extends so_sql2
 	{
 		//echo '<p>'.__METHOD__.'('.($start?'true':'false').")</p>\n";
 
-		$async = new asyncservice();
+		$async = new Api\Asyncservice();
 
 		if ($start === !$async->read(self::ASYNC_JOB_NAME))
 		{
@@ -635,15 +637,15 @@ class tracker_escalations extends so_sql2
 			$GLOBALS['egw']->acl->read_repository();
 
 			// load the right language if needed
-			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != translation::$userlang)
+			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != Api\Translation::$userlang)
 			{
-				translation::init();
+				Api\Translation::init();
 				// Make sure translations are loaded
-				translation::add_app('tracker');
+				Api\Translation::add_app('tracker');
 			}
 
-			// Load date/time preferences into egw_time
-			egw_time::init();
+			// Load date/time preferences into Api\DateTime
+			Api\DateTime::init();
 
 			// Keep a list of tickets so we only send the user one notification / ticket
 			$notified = array();
@@ -688,14 +690,14 @@ class tracker_escalations extends so_sql2
 							$ticket['prefix'] = lang('Starting').' ';
 							$ticket['message'] = lang('%1 is starting %2',
 								self::$tracker->link_title($ticket['tr_id']),
-								$ticket['tr_startdate'] ? egw_time::to($ticket['tr_startdate']) : ''
+								$ticket['tr_startdate'] ? Api\DateTime::to($ticket['tr_startdate']) : ''
 							);
 							break;
 						case 'notify_due':
 							$ticket['prefix'] = lang('Due') . ' ';
 							$ticket['message'] = lang('%1 is due %2',
 								self::$tracker->link_title($ticket['tr_id']),
-								$ticket['tr_duedate'] ? egw_time::to($ticket['tr_duedate']) : ''
+								$ticket['tr_duedate'] ? Api\DateTime::to($ticket['tr_duedate']) : ''
 							);
 							break;
 					}

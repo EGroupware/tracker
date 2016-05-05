@@ -11,6 +11,9 @@
  */
 
 use EGroupware\Api;
+use EGroupware\Api\Link;
+use EGroupware\Api\Acl;
+use EGroupware\Api\Vfs;
 
 /**
  * Some constants for the check_rights function
@@ -138,7 +141,7 @@ class tracker_bo extends tracker_so
 	 */
 	var $restrictions;
 	/**
-	 * Enabled the acl queue access?
+	 * Enabled the Acl queue access?
 	 *
 	 * @var boolean
 	 */
@@ -394,7 +397,7 @@ class tracker_bo extends tracker_so
 	{
 		parent::init();
 		if (isset($keys['tr_tracker'])&&!empty($keys['tr_tracker'])) $this->data['tr_tracker']=$keys['tr_tracker'];
-		if (is_array($this->trackers)&&(!isset($this->data['tr_tracker'])||empty($this->data['tr_tracker'])))	// init is called from so_sql::__construct(), where $this->trackers is NOT set
+		if (is_array($this->trackers)&&(!isset($this->data['tr_tracker'])||empty($this->data['tr_tracker'])))	// init is called from Api\Storage\Base::__construct(), where $this->trackers is NOT set
 		{
 			$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
 		}
@@ -426,7 +429,7 @@ class tracker_bo extends tracker_so
 			foreach($data['replies'] as &$reply)
 			{
 				$reply['reply_servertime'] = $reply['reply_created'];
-				$reply['reply_created'] = egw_time::server2user($reply['reply_created'],$this->timestamp_type);
+				$reply['reply_created'] = Api\DateTime::server2user($reply['reply_created'],$this->timestamp_type);
 			}
 		}
 		// check if item is overdue
@@ -448,7 +451,7 @@ class tracker_bo extends tracker_so
 			$data[$field . '_servertime'] = $data[$field];
 		}
 
-		// will run all regular timestamps ($this->timestamps) trough egw_time::server2user()
+		// will run all regular timestamps ($this->timestamps) trough Api\DateTime::server2user()
 		return parent::db2data($intern ? null : $data);	// important to use null, if $intern!
 	}
 
@@ -466,7 +469,7 @@ class tracker_bo extends tracker_so
 		}
 		if (substr($data['tr_completion'],-1) == '%') $data['tr_completion'] = (int) round(substr($data['tr_completion'],0,-1));
 
-		// will run all regular timestamps ($this->timestamps) trough egw_time::user2server()
+		// will run all regular timestamps ($this->timestamps) through Api\DateTime::user2server()
 		return parent::data2db($intern ? null : $data);	// important to use null, if $intern!
 	}
 
@@ -548,7 +551,7 @@ class tracker_bo extends tracker_so
 			$testReply = $this->data['reply_message'];
 			if ($this->htmledit && isset($this->data['reply_message']) && !empty($this->data['reply_message']))
 			{
-				$testReply = trim(translation::convertHTMLToText(html::purify($this->data['reply_message']), false, true, true));
+				$testReply = trim(Api\Mail\Html::convertHTMLToText(Api\Html::purify($this->data['reply_message']), false, true, true));
 			}
 			//error_log(__METHOD__.__LINE__.' TestReplyMessage:'.$testReply);
 			if (!$changed && !((isset($this->data['reply_message']) && !empty($this->data['reply_message']) && !empty($testReply)) ||
@@ -634,10 +637,10 @@ class tracker_bo extends tracker_so
 		if (!($err = parent::save()))
 		{
 			// create (and remove) links in custom fields
-			customfields_widget::update_customfield_links('tracker',$this->data,$old,'tr_id');
+			Api\Storage\Customfields::update_links('tracker',$this->data,$old,'tr_id');
 
 			// so other apps can update eg. their titles and the cached title gets unset
-			egw_link::notify_update('tracker',$this->data['tr_id'],$this->data);
+			Link::notify_update('tracker',$this->data['tr_id'],$this->data);
 
 			if (!is_object($this->tracking))
 			{
@@ -768,15 +771,15 @@ class tracker_bo extends tracker_so
 		{
 			if ($GLOBALS['egw']->accounts->get_type($uid) == 'g')
 			{
-				if ($return_groups) $groups[(string)$uid] = $GLOBALS['egw']->common->grab_owner_name($uid);
+				if ($return_groups) $groups[(string)$uid] = Api\Accounts::username($uid);
 				foreach((array)$GLOBALS['egw']->accounts->members($uid,true) as $u)
 				{
-					if (!isset($users[$u])) $users[$u] = $GLOBALS['egw']->common->grab_owner_name($u);
+					if (!isset($users[$u])) $users[$u] = Api\Accounts::username($u);
 				}
 			}
 			else // users
 			{
-				if (!isset($users[$uid])) $users[$uid] = $GLOBALS['egw']->common->grab_owner_name($uid);
+				if (!isset($users[$uid])) $users[$uid] = Api\Accounts::username($uid);
 			}
 		}
 		// sort alphabetic
@@ -877,7 +880,7 @@ class tracker_bo extends tracker_so
 	 */
 	function is_anonymous($user=null)
 	{
-		static $cache = array();	// some caching to not read acl multiple times from the database ($user != $this->user)
+		static $cache = array();	// some caching to not read Acl multiple times from the database ($user != $this->user)
 
 		if (!$user) $user = $this->user;
 
@@ -906,7 +909,7 @@ class tracker_bo extends tracker_so
 	 */
 	function is_tracker_user($user=null)
 	{
-		static $cache = array();	// some caching to not read acl multiple times from the database ($user != $this->user)
+		static $cache = array();	// some caching to not read Acl multiple times from the database ($user != $this->user)
 
 		if (is_null($user)) $user = $this->user;
 
@@ -1087,7 +1090,7 @@ class tracker_bo extends tracker_so
 	 * - write access: user is allowed to upload files or link with other entries
 	 *
 	 * @param int|array $id id of entry or entry array
-	 * @param int $check EGW_ACL_READ for read and EGW_ACL_EDIT for write or delete access
+	 * @param int $check Acl::READ for read and Acl::EDIT for write or delete access
 	 * @param string $rel_path = null currently not used in Tracker
 	 * @param int $user = null for which user to check, default current user
 	 * @return boolean true if access is granted or false otherwise
@@ -1105,8 +1108,8 @@ class tracker_bo extends tracker_so
 		}
 		if (!isset($access))
 		{
-			$needed = $check == EGW_ACL_READ ? TRACKER_USER : $this->field_acl['link_to'];
-			$name = 'file_access '.($check == EGW_ACL_READ ? 'read' : 'write');
+			$needed = $check == Acl::READ ? TRACKER_USER : $this->field_acl['link_to'];
+			$name = 'file_access '.($check == Acl::READ ? 'read' : 'write');
 
 			$access = $this->check_rights($needed,null,$id,$user,$name);
 		}
@@ -1171,7 +1174,7 @@ class tracker_bo extends tracker_so
 		{
 			if (!isset($GLOBALS['egw']->categories))
 			{
-				$GLOBALS['egw']->categories = new categories($this->user,'tracker');
+				$GLOBALS['egw']->categories = new Api\Categories($this->user,'tracker');
 			}
 			if (isset($GLOBALS['egw']->categories) && $GLOBALS['egw']->categories->app_name == 'tracker')
 			{
@@ -1179,7 +1182,7 @@ class tracker_bo extends tracker_so
 			}
 			else
 			{
-				$cats = new categories($this->user,'tracker');
+				$cats = new Api\Categories($this->user,'tracker');
 			}
 			$this->all_cats = $cats->return_array('all',0,false);
 			if (!is_array($this->all_cats)) $this->all_cats = array();
@@ -1410,7 +1413,7 @@ class tracker_bo extends tracker_so
 				$titles[$ticket['tr_id']] = $this->link_title($ticket);
 			}
 		}
-		// we assume all not returned tickets are not readable by the user, as we notify egw_link about each deleted ticket
+		// we assume all not returned tickets are not readable by the user, as we notify Link about each deleted ticket
 		foreach($ids as $id)
 		{
 			if (!isset($titles[$id])) $titles[$id] = false;
@@ -1450,7 +1453,7 @@ class tracker_bo extends tracker_so
 	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
 	 *	For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
 	 * @param array &$rows returned rows/competitions
-	 * @param array &$readonlys eg. to disable buttons based on acl, not use here, maybe in a derived class
+	 * @param array &$readonlys eg. to disable buttons based on Acl, not use here, maybe in a derived class
 	 * @param string $join = '' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
 	 *	"LEFT JOIN table2 ON (x=y)", Note: there's no quoting done on $join!
 	 * @param boolean $need_full_no_count = false If true an unlimited query is run to determine the total number of rows, default false
@@ -1473,7 +1476,7 @@ class tracker_bo extends tracker_so
 	 */
 	function add_tracker($name)
 	{
-		$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
+		$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
 		if ($name && ($id = $cats->add(array(
 			'name'   => $name,
 			'descr'  => 'tracker',
@@ -1484,9 +1487,9 @@ class tracker_bo extends tracker_so
 			$this->trackers[$id] = $name;
 
 			// Update cf type list
-			$types = config::get_content_types('tracker');
+			$types = Api\Config::get_content_types('tracker');
 			$types[$id] = array('name' => $name, 'non_deletable' => true);
-			config::save_value('types',$types, 'tracker');
+			Api\Config::save_value('types',$types, 'tracker');
 
 			return $id;
 		}
@@ -1502,7 +1505,7 @@ class tracker_bo extends tracker_so
 	 */
 	function rename_tracker($tracker,$name)
 	{
-		$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');
+		$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');
 		if ($tracker > 0 && !empty($name) && ($data = $cats->read($tracker)))
 		{
 			if ($data['name'] != $name)
@@ -1511,9 +1514,9 @@ class tracker_bo extends tracker_so
 				$cats->edit($data);
 
 				// Update cf type list
-				$types = config::get_content_types('tracker');
+				$types = Api\Config::get_content_types('tracker');
 				$types[$tracker]['name'] = $name;
-				config::save_value('types',$types, 'tracker');
+				Api\Config::save_value('types',$types, 'tracker');
 			}
 			return true;
 		}
@@ -1540,9 +1543,9 @@ class tracker_bo extends tracker_so
 		$GLOBALS['egw']->categories->delete($tracker,true);
 
 		// Update cf type list
-		$types = config::get_content_types('tracker');
+		$types = Api\Config::get_content_types('tracker');
 		unset($types[$tracker]);
-		config::save_value('types',$types, 'tracker');
+		Api\Config::save_value('types',$types, 'tracker');
 
 		$this->reload_labels();
 		unset($this->admins[$tracker]);
@@ -1562,8 +1565,8 @@ class tracker_bo extends tracker_so
 	{
 		foreach($this->config_names as $name)
 		{
-			#echo "<p>calling config::save_value('$name','{$this->$name}','tracker')</p>\n";
-			config::save_value($name,$this->$name,'tracker');
+			#echo "<p>calling Api\Config::save_value('$name','{$this->$name}','tracker')</p>\n";
+			Api\Config::save_value($name,$this->$name,'tracker');
 		}
 		self::set_async_job($this->pending_close_days > 0);
 
@@ -1580,12 +1583,12 @@ class tracker_bo extends tracker_so
 	function load_config()
 	{
 		$migrate_config = false;	// update old config-values, can be removed soon
-		foreach((array)config::read('tracker') as $name => $value)
+		foreach((array)Api\Config::read('tracker') as $name => $value)
 		{
 			if (substr($name,0,13) == 'notification_')	// update old config-values, can be removed soon
 			{
 				$this->notification[0][substr($name,13)] = $value;
-				config::save_value($name,null,'tracker');
+				Api\Config::save_value($name,null,'tracker');
 				$migrate_config = true;
 				continue;
 			}
@@ -1595,7 +1598,7 @@ class tracker_bo extends tracker_so
 		{
 			foreach($this->notification as $name => $value)
 			{
-				config::save_value($name,$value,'tracker');
+				Api\Config::save_value($name,$value,'tracker');
 			}
 		}
 
@@ -1660,7 +1663,7 @@ class tracker_bo extends tracker_so
 	{
 		//echo '<p>'.__METHOD__.'('.($start?'true':'false').")</p>\n";
 
-		$async = new asyncservice();
+		$async = new Api\Asyncservice();
 
 		if ($start === !$async->read('tracker-close-pending'))
 		{
@@ -1688,13 +1691,13 @@ class tracker_bo extends tracker_so
 		))))
 		{
 			if (($default_lang = $GLOBALS['egw']->preferences->default_prefs('common','lang')) &&	// load the system default language
-				translation::$userlang != $default_lang)
+				Api\Translation::$userlang != $default_lang)
 			{
 				$save_lang = $GLOBALS['egw_info']['user']['preferences']['common']['lang'];
 				$GLOBALS['egw_info']['user']['preferences']['common']['lang'] = $default_lang;
-				translation::init();
+				Api\Translation::init();
 			}
-			translation::add_app('tracker');
+			Api\Translation::add_app('tracker');
 
 			foreach($ids as $tr_id)
 			{
@@ -1708,7 +1711,7 @@ class tracker_bo extends tracker_so
 			if ($save_lang)
 			{
 				$GLOBALS['egw_info']['user']['preferences']['common']['lang'] = $save_lang;
-				translation::init();
+				Api\Translation::init();
 			}
 		}
 	}
@@ -1859,7 +1862,7 @@ class tracker_bo extends tracker_so
 	 */
 	function ajax_getTicketId($_subject)
 	{
-		$response  = egw_json_response::get();
+		$response  = Api\Json\Response::get();
 		$response->data($this->get_ticketId($_subject));
 	}
 
@@ -1962,7 +1965,7 @@ class tracker_bo extends tracker_so
 				),
 			);
 			// find the addressbookentry to link with
-			$addressbook = new addressbook_bo();
+			$addressbook = new Api\Contacts();
 			$contacts = array();
 			$filter['owner'] = 0;
 			foreach ($emails as $mailadr)
@@ -1983,7 +1986,7 @@ class tracker_bo extends tracker_so
 				// create as "ordinary" links and try to find/set the creator according to the sender (if it is a valid user to the all queues (tracker=0))
 				foreach ($contacts as $contact)
 				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
+					Link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
@@ -2024,7 +2027,7 @@ class tracker_bo extends tracker_so
 		else
 		{
 			// find the addressbookentry to idetify the reply creator
-			$addressbook = new addressbook_bo();
+			$addressbook = new Api\Contacts();
 			$contacts = array();
 			$filter['owner'] = 0;
 			foreach ($emails as $mailadr)
@@ -2079,7 +2082,7 @@ class tracker_bo extends tracker_so
 				{
 					if (!$this->htmledit || stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false)
 					{
-						$reply['reply_message'] = nl2br(html::htmlspecialchars($reply['reply_message']));
+						$reply['reply_message'] = nl2br(Api\Html::htmlspecialchars($reply['reply_message']));
 					}
 				}
 			}
@@ -2099,12 +2102,12 @@ class tracker_bo extends tracker_so
 			{
 				if($attachment['egw_data'])
 				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],egw_link::DATA_APPNAME,$attachment);
+					Link::link('tracker',$trackerentry['link_to']['to_id'],Link::DATA_APPNAME,$attachment);
 				}
 				else if(is_readable($attachment['tmp_name']) ||
-					(egw_vfs::is_readable($attachment['tmp_name']) && parse_url($attachment['tmp_name'], PHP_URL_SCHEME) === 'vfs'))
+					(Vfs::is_readable($attachment['tmp_name']) && parse_url($attachment['tmp_name'], PHP_URL_SCHEME) === 'vfs'))
 				{
-					egw_link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
+					Link::link('tracker',$trackerentry['link_to']['to_id'],'file',$attachment);
 				}
 			}
 		}
@@ -2156,7 +2159,7 @@ OR tr_duedate IS NULL AND
 			case 'upcoming':
 				return "(tr_startdate IS NOT NULL and tr_startdate > {$this->now} )";
 		}
-		return egw_time::sql_filter($name, $start, $end, $column, $this->date_filters);
+		return Api\DateTime::sql_filter($name, $start, $end, $column, $this->date_filters);
 	}
 
 	/**

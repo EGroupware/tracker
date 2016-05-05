@@ -10,6 +10,11 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
+use EGroupware\Api\Framework;
+use EGroupware\Api\Egw;
+
 /**
  * diverse tracker hooks, all static
  */
@@ -70,30 +75,30 @@ class tracker_hooks
 		if ($location == 'sidebox_menu')
 		{
 			// Magic etemplate2 favorites menu (from nextmatch widget)
-			display_sidebox($appname, lang('Favorites'), egw_framework::favorite_list($appname));
+			display_sidebox($appname, lang('Favorites'), Framework\Favorites::list_favorites($appname));
 
 			$file = array(
-				'Tracker list' => egw::link('/index.php',array(
+				'Tracker list' => Egw::link('/index.php',array(
 					'menuaction' => 'tracker.tracker_ui.index',
 					'ajax' => 'true')
 				),
 				array(
-					'text' => lang('Add %1',lang(egw_link::get_registry($appname, 'entry'))),
+					'text' => lang('Add %1',lang(Link::get_registry($appname, 'entry'))),
 					'no_lang' => true,
 					'link' => "javascript:egw.open('','$appname','add')"
 				),
 			);
 
-			$file['Placeholders'] = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
+			$file['Placeholders'] = Egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
 			display_sidebox($appname,$GLOBALS['egw_info']['apps'][$appname]['title'].' '.lang('Menu'),$file);
 		}
 
 		if ($GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$file = Array(
-				'Site configuration' => egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
-				'Define escalations' => egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
-				'Custom fields' => egw::link('/index.php','menuaction=tracker.tracker_customfields.index&use_private=1&ajax=true'),
+				'Site configuration' => Egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
+				'Define escalations' => Egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
+				'Custom fields' => Egw::link('/index.php','menuaction=tracker.tracker_customfields.index&use_private=1&ajax=true'),
 			);
 			if ($location == 'admin')
 			{
@@ -241,7 +246,7 @@ class tracker_hooks
 		// Merge print
 		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
 		{
-			$link = egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
+			$link = Egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
 
 			$settings['default_document'] = array(
 				'type'   => 'vfs_file',
@@ -250,7 +255,7 @@ class tracker_hooks
 				'name'   => 'default_document',
 				'help'   => lang('If you specify a document (full vfs path) here, %1 displays an extra document icon for each entry. That icon allows to download the specified document with the data inserted.',lang('tracker')).' '.
 					lang('The document can contain placeholder like {{%1}}, to be replaced with the data.','tr_summary').' '.
-					lang('The following document-types are supported:'). implode(',',bo_merge::get_file_extensions()),
+					lang('The following document-types are supported:'). implode(',',Api\Storage\Merge::get_file_extensions()),
 				'run_lang' => false,
 				'xmlrpc' => True,
 				'admin'  => False,
@@ -262,7 +267,7 @@ class tracker_hooks
 				'name'   => 'document_dir',
 				'help'   => lang('If you specify a directory (full vfs path) here, %1 displays an action for each document. That action allows to download the specified document with the data inserted.', lang('tracker')).' '.
 					lang('The document can contain placeholder like {{%1}}, to be replaced with the data.','tr_summary').' '.
-					lang('The following document-types are supported:') . implode(',',bo_merge::get_file_extensions()),
+					lang('The following document-types are supported:') . implode(',',Api\Storage\Merge::get_file_extensions()),
 				'run_lang' => false,
 				'xmlrpc' => True,
 				'admin'  => False,
@@ -324,7 +329,7 @@ class tracker_hooks
 	{
 		if ($data['prefs']['notify_due'] || $data['prefs']['notify_start'])
 		{
-			$async = new asyncservice();
+			$async = new Api\Asyncservice();
 
 			if (!$async->read(tracker_escalations::ASYNC_NOTIFICATION))
 			{
@@ -343,7 +348,7 @@ class tracker_hooks
 	{
 		return array(
 			'menuaction' => 'tracker.tracker_ui.mail_import',
-			'popup' => egw_link::get_registry('tracker', 'add_popup'),
+			'popup' => Link::get_registry('tracker', 'add_popup'),
 			'app_entry_method' => 'tracker.tracker_bo.ajax_getTicketId'
 		);
 	}

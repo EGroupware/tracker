@@ -10,6 +10,12 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
+use EGroupware\Api\Framework;
+use EGroupware\Api\Egw;
+use EGroupware\Api\Etemplate;
+
 /**
  * Admin User Interface of the tracker
  */
@@ -224,7 +230,7 @@ class tracker_admin extends tracker_bo
 								{
 									$mailhandler->check_mail($queue_id,true);
 								}
-								catch (egw_exception_assertion_failed $e)
+								catch (Api\Exception\AssertionFailed $e)
 								{	// not sure that this is needed to pass on exeptions
 									$msg .= ($msg?' ':'').$e->getMessage();
 									if (is_array($this->mailhandling[$queue_id])) $this->mailhandling[$queue_id]['interval']=0;
@@ -347,7 +353,7 @@ class tracker_admin extends tracker_bo
 								//echo "update to"; _debug_array($old_cat);
 								if (!isset($cats))
 								{
-									$cats = new categories(categories::GLOBAL_ACCOUNT,'tracker');
+									$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');
 								}
 								if (($id = $cats->add($old_cat)))
 								{
@@ -362,10 +368,10 @@ class tracker_admin extends tracker_bo
 						$this->reload_labels();
 					}
 					// Reload tracker app
-					if(egw_json_response::isJSONResponse())
+					if(Api\Json\Response::isJSONResponse())
 					{
-						// egw_framework::redirect_link() will exit, we need to keep going
-						egw_json_response::get()->redirect(egw_framework::link('/index.php', array(
+						// Framework::redirect_link() will exit, we need to keep going
+						Api\Json\Response::get()->redirect(Framework::link('/index.php', array(
 							'menuaction' => 'tracker.tracker_ui.index',
 							// reload is not a special flag, it just makes a different
 							// url to avoid smart refresh of just nextmatch
@@ -376,7 +382,7 @@ class tracker_admin extends tracker_bo
 					if ($button == 'apply') break;
 					// fall-through for save
 				case 'cancel':
-					egw::redirect_link('/index.php', array(
+					Egw::redirect_link('/index.php', array(
 						'menuaction' => 'admin.admin_ui.index',
 						'ajax' => 'true'
 					), 'admin');
@@ -538,7 +544,7 @@ class tracker_admin extends tracker_bo
 			'allow_voting' => array('No','Yes'),
 			'allow_bounties' => array('No','Yes'),
 			'autoassign' => $this->get_staff($tracker),
-			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
+			'lang' => Api\Translation::get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker),
 			// Mail handling
 			'interval' => array(
@@ -568,7 +574,7 @@ class tracker_admin extends tracker_bo
 				0 => 'Creator',
 				1 => 'Nobody',
 			),
-			'exclude_app_on_timesheetcreation' => egw_link::app_list('add'),
+			'exclude_app_on_timesheetcreation' => Link::app_list('add'),
 		);
 		foreach($this->mailservertypes as $ind => $typ)
 		{
@@ -579,7 +585,7 @@ class tracker_admin extends tracker_bo
 			$sel_options['mailheaderhandling'][] = $typ[1];
 		}
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker configuration').($tracker ? ': '.$this->trackers[$tracker] : '');
-		$tpl = new etemplate_new('tracker.admin');
+		$tpl = new Etemplate('tracker.admin');
 		return $tpl->exec('tracker.tracker_admin.admin',$content,$sel_options,$readonlys,$content);
 	}
 
@@ -786,7 +792,7 @@ class tracker_admin extends tracker_bo
 		{
 			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
 		}
-		$tpl = new etemplate_new('tracker.escalations');
+		$tpl = new Etemplate('tracker.escalations');
 		if (count($content['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!

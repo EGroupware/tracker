@@ -12,10 +12,13 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
+
 /**
  * Tracker - document merge object
  */
-class tracker_merge extends bo_merge
+class tracker_merge extends Api\Storage\Merge
 {
 	/**
 	 * Functions that can be called via menuaction
@@ -55,7 +58,7 @@ class tracker_merge extends bo_merge
 		$this->bo = new tracker_bo();
 
 		// switch of handling of html formated content, if html is not used
-		$this->parse_html_styles = $this->bo->htmledit || egw_customfields::use_html('tracker');
+		$this->parse_html_styles = $this->bo->htmledit || Api\Storage\Customfields::use_html('tracker');
 
 	}
 
@@ -78,8 +81,8 @@ class tracker_merge extends bo_merge
 			$replies = array();
 			foreach($tracker['replies'] as $id => $reply) {
 				// User date format
-				$date = egw_time::to($reply['reply_created']);
-				$name = common::grab_owner_name($reply['reply_creator']);
+				$date = Api\DateTime::to($reply['reply_created']);
+				$name = Api\Accounts::username($reply['reply_creator']);
 				$message = str_replace("\r\n", "\n", $reply['reply_message']);
 				if($reply['reply_visible'] > 0) {
 					$message = '['.$message.']';
@@ -150,7 +153,7 @@ class tracker_merge extends bo_merge
 
 		// HTML link to ticket
 		$tracker = new tracker_tracking($this->bo);
-		$array['tr_link'] = html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
+		$array['tr_link'] = Api\Html::a_href($array['tr_summary'], $tracker->get_link($array, array()));
 
 		// Set any missing custom fields, or the marker will stay
 		foreach(array_keys($this->bo->customfields) as $name)
@@ -164,7 +167,7 @@ class tracker_merge extends bo_merge
 		// Timesheet time
 		if(strpos($content, 'tr_sum_timesheets'))
 		{
-			$links = egw_link::get_links('tracker',$id,'timesheet');
+			$links = Link::get_links('tracker',$id,'timesheet');
 			$sum = ExecMethod('timesheet.timesheet_bo.sum',$links);
 			$info['$$tr_sum_timesheets$$'] = $sum['duration'];
 		}
@@ -229,10 +232,10 @@ class tracker_merge extends bo_merge
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
 			$this->comment_cache[$tr_id][] = array(
-				'$$comment/date$$' => egw_time::to($reply['reply_created']),
+				'$$comment/date$$' => Api\DateTime::to($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
-				'$$comment/user$$' => common::grab_owner_name($reply['reply_creator'])
+				'$$comment/user$$' => Api\Accounts::username($reply['reply_creator'])
 			);
 			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
 			if(is_array($tracker['tr_assigned']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
@@ -241,10 +244,10 @@ class tracker_merge extends bo_merge
 		// Special comments
 		foreach(array('' => $replies[0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
 			$this->comment_cache[$tr_id][-1][$key] = array(
-				'$$comment/-1'.$key.'/date$$' => $comment ? egw_time::to($comment['reply_created']) : '',
+				'$$comment/-1'.$key.'/date$$' => $comment ? Api\DateTime::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
 				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
-				'$$comment/-1'.$key.'/user$$' => $comment ? common::grab_owner_name($comment['reply_creator']) : ''
+				'$$comment/-1'.$key.'/user$$' => $comment ? Api\Accounts::username($comment['reply_creator']) : ''
 			);
 		}
 
@@ -273,7 +276,7 @@ class tracker_merge extends bo_merge
 	{
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('tracker').' - '.lang('Replacements for inserting entries into documents');
 		$GLOBALS['egw_info']['flags']['nonavbar'] = false;
-		common::egw_header();
+		$GLOBALS['egw']->framework->header();
 
 		echo "<table width='90%' align='center'>\n";
 		echo '<tr><td colspan="4"><h3>'.lang('Tracker fields:')."</h3></td></tr>";
@@ -351,6 +354,6 @@ class tracker_merge extends bo_merge
 
 		echo "</table>\n";
 
-		common::egw_footer();
+		$GLOBALS['egw']->framework->footer();
 	}
 }

@@ -11,6 +11,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
 
 /**
  * class import_csv for tracker
@@ -146,7 +148,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			$_definition->plugin_options['record_owner'] : $this->user;
 
 		// Used to try to automatically match names to account IDs
-		$addressbook = new addressbook_so();
+		$addressbook = new Api\Contacts\Storage();
 
 		// Process cat_id as a normal select
 		$types = tracker_egw_record::$types;
@@ -184,7 +186,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 							$this->errors[$import_csv->get_current_position()] = lang(
 								'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
 								$record['tr_'.$field],
-								common::grab_owner_name($_definition->plugin_options['record_'.$option]),
+								Api\Accounts::username($_definition->plugin_options['record_'.$option]),
 								lang($this->bo->field2label['tr_'.$field])
 							);
 							$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
@@ -313,7 +315,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 						// User date format
 						$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 							($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
-						$name = common::grab_owner_name($reply['reply_creator']);
+						$name = Api\Accounts::username($reply['reply_creator']);
 						$message = str_replace("\r\n", "\n", $reply['reply_message']);
 
 						$replies[$id] = "$date\t$name\t$message";
@@ -436,7 +438,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					break;
 				}
 			default:
-				throw new egw_exception('Unsupported action');
+				throw new Api\Exception('Unsupported action');
 		}
 
 		// Process some additional fields
@@ -452,7 +454,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$id = $_data[$field];
 			}
 			if ($app && $app_id) {
-				$link_id = egw_link::link('tracker',$id,$app,$app_id);
+				$link_id = Link::link('tracker',$id,$app,$app_id);
 			}
 		}
 		return true;

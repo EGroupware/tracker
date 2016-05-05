@@ -11,6 +11,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 function tracker_upgrade0_1_005()
 {
 	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker','tr_budget',array(
@@ -475,7 +477,7 @@ function tracker_upgrade1_9_001()
 	//echo "Updating resolutions...<br />"; flush();
 	foreach($resolutions as $code => $name) {
 		$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
-			'cat_owner'  => categories::GLOBAL_ACCOUNT,
+			'cat_owner'  => Api\Categories::GLOBAL_ACCOUNT,
 			'cat_access' => 'public',
 			'cat_appname'=> 'tracker',
 			'cat_name'   => $name,
@@ -522,23 +524,23 @@ function tracker_upgrade1_9_001()
 		'uc' => array()
 	));
 
-	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use categories::GLOBAL_ACCOUNT
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use Api\Categories::GLOBAL_ACCOUNT
 }
 
 
 /**
- * Fix tracker global categories / resolutions created by 1.9.001 update, with wrong cat_onwer=-1
+ * Fix tracker global Api\Categories / resolutions created by 1.9.001 update, with wrong cat_onwer=-1
  */
 function tracker_upgrade1_9_002()
 {
 	$GLOBALS['egw_setup']->db->update($GLOBALS['egw_setup']->cats_table,array(
-		'cat_owner'  => categories::GLOBAL_ACCOUNT,
+		'cat_owner'  => Api\Categories::GLOBAL_ACCOUNT,
 	),array(
 		'cat_owner'  => -1,
 		'cat_appname'=> 'tracker',
 	),__LINE__,__FILE__);
 
-	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use categories::GLOBAL_ACCOUNT
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '1.9.003';	// we already use Api\Categories::GLOBAL_ACCOUNT
 }
 
 function tracker_upgrade1_9_003()

@@ -10,6 +10,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 {
 	public function __construct() {
@@ -46,7 +48,7 @@ class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 		);
 
 		// Custom fields
-		$custom = config::get_customfields('tracker', true);
+		$custom = Api\Storage\Customfields::get('tracker', true);
 		foreach($custom as $name => $data) {
 			$this->export_fields['#'.$name] = $data['label'];
 		}

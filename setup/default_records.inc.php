@@ -11,6 +11,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 // create some example trackers and global versions and cats
 foreach(array(
 	'Feature Requests' => 'tracker',
@@ -42,7 +44,7 @@ foreach(array(
 		$data = serialize(array('type' => $type,'isdefault'=>true));
 	}
 	$GLOBALS['egw_setup']->db->insert($GLOBALS['egw_setup']->cats_table,array(
-		'cat_owner'  => categories::GLOBAL_ACCOUNT,
+		'cat_owner'  => Api\Categories::GLOBAL_ACCOUNT,
 		'cat_access' => 'public',
 		'cat_appname'=> 'tracker',
 		'cat_name'   => $name,

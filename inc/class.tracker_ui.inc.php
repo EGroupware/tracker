@@ -10,6 +10,13 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+use EGroupware\Api\Link;
+use EGroupware\Api\Framework;
+use EGroupware\Api\Egw;
+use EGroupware\Api\Acl;
+use EGroupware\Api\Etemplate;
+
 /**
  * User Interface of the tracker
  */
@@ -59,7 +66,7 @@ class tracker_ui extends tracker_bo
 		// read the duration format from project-manager
 		if ($GLOBALS['egw_info']['apps']['projectmanager'])
 		{
-			$pm_config = config::read('projectmanager');
+			$pm_config = Api\Config::read('projectmanager');
 			$this->duration_format = str_replace(',','',implode('', (array)$pm_config['duration_units'])).','.$pm_config['hours_per_workday'];
 			unset($pm_config);
 		}
@@ -132,10 +139,10 @@ class tracker_ui extends tracker_bo
 			// edit or new?
 			if ((int)$_GET['tr_id'])
 			{
-				$own_referer = common::get_referer();
+				$own_referer = Api\Header\Referer::get();
 				if (!$this->read($_GET['tr_id']))
 				{
-					egw_framework::window_close(lang('Tracker item not found !!!'));
+					Framework::window_close(lang('Tracker item not found !!!'));
 				}
 				else
 				{
@@ -160,7 +167,7 @@ class tracker_ui extends tracker_bo
 					{
 						if (!($this->htmledit || $this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
-							$reply['reply_message'] = html::htmlspecialchars($reply['reply_message']);
+							$reply['reply_message'] = Api\Html::htmlspecialchars($reply['reply_message']);
 						}
 					}
 				}
@@ -175,7 +182,7 @@ class tracker_ui extends tracker_bo
 			if (!$this->data['tr_id'])
 			{
 				$regardInInit = array();
-				if (($state = egw_session::appsession('index','tracker'.
+				if (($state = Api\Cache::getSession('tracker','index'.
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
@@ -202,7 +209,7 @@ class tracker_ui extends tracker_bo
 				if ($popup)
 				{
 					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
-					common::egw_exit();
+					exit();
 				}
 				else
 				{
@@ -244,7 +251,7 @@ class tracker_ui extends tracker_bo
 				if ($popup)
 				{
 					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,false);
-					common::egw_exit();
+					exit();
 				}
 				else
 				{
@@ -303,8 +310,8 @@ class tracker_ui extends tracker_bo
 					if ($ret === false)
 					{
 						$msg = lang('Nothing to save.');
-						$state = egw_session::appsession('index','tracker');
-						egw_framework::refresh_opener($msg,'tracker',$this->data['tr_id'],'edit');
+						$state = Api\Cache::getSession('tracker', 'index');
+						Framework::refresh_opener($msg,'tracker',$this->data['tr_id'],'edit');
 
 						// only change to current tracker, if not all trackers displayed
 						($state['col_filter']['tr_tracker'] ? '&tracker='.$this->data['tr_tracker'] : '')."';";
@@ -313,7 +320,7 @@ class tracker_ui extends tracker_bo
 					{
 						$msg .= ($msg ? ', ' : '') .lang('Error: the entry has been updated since you opened it for editing!').'<br />'.
 							lang('Copy your changes to the clipboard, %1reload the entry%2 and merge them.','<a href="'.
-								htmlspecialchars(egw::link('/index.php',array(
+								htmlspecialchars(Egw::link('/index.php',array(
 									'menuaction' => 'tracker.tracker_ui.edit',
 									'tr_id'    => $this->data['tr_id'],
 									//'referer'    => $referer,
@@ -335,18 +342,18 @@ class tracker_ui extends tracker_bo
 
 							if ($cat['parent'] == $this->data['tr_tracker'] && $data['type'] != 'tracker' && $data['type']=='project')
 							{
-								if (!egw_link::get_link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']))
+								if (!Link::get_link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']))
 								{
-									egw_link::link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']);
+									Link::link('tracker',$this->data['tr_id'],'projectmanager',$data['projectlist']);
 								}
 							}
 						}
 						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
 						{
-							egw_link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
+							Link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 
 							// check if we have dragged in images and fix their image urls
-							if (etemplate_widget_vfs::fix_html_dragins('tracker', $this->data['tr_id'],
+							if (Etemplate\Widget\Vfs::fix_html_dragins('tracker', $this->data['tr_id'],
 								$content['link_to']['to_id'], $content['tr_description']))
 							{
 								$this->update(array(
@@ -354,8 +361,8 @@ class tracker_ui extends tracker_bo
 								));
 							}
 						}
-						$state = egw_session::appsession('index','tracker');
-						egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'],'edit');
+						$state = Api\Cache::getSession('tracker', 'index');
+						Framework::refresh_opener($msg, 'tracker',$this->data['tr_id'],'edit');
 					}
 					else
 					{
@@ -371,14 +378,14 @@ class tracker_ui extends tracker_bo
 				case 'cancel':
 					if ($popup)
 					{
-						egw_framework::window_close();
-						common::egw_exit();
+						Framework::window_close();
+						exit();
 					}
 					unset($_GET['tr_id']);	// in case it's still set
 					if($own_referer && strpos($own_referer,'cd=yes') === false)
 					{
 						// Go back to where you came from
-						egw::redirect_link($own_referer);
+						Egw::redirect_link($own_referer);
 					}
 					return $this->index(null,$this->data['tr_tracker'],$msg);
 
@@ -388,7 +395,7 @@ class tracker_ui extends tracker_bo
 						$msg = lang('Thank you for voting.');
 						if ($popup)
 						{
-							egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
+							Framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
 						}
 					}
 					break;
@@ -452,7 +459,7 @@ class tracker_ui extends tracker_bo
 									if ($this->save_bounty($this->data['bounties'][$n]))
 									{
 										$msg = lang('Bounty confirmed');
-										egw_framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
+										Framework::refresh_opener($msg, 'tracker',$this->data['tr_id'], 'edit');
 									}
 									else
 									{
@@ -574,7 +581,7 @@ class tracker_ui extends tracker_bo
 									'field'	=> 'tr_tracker',
 									'source'=> $this->trackers
 								),
-								categories::id2name($infolog['info_cat']) => array(
+								Api\Categories::id2name($infolog['info_cat']) => array(
 									'field'	=> 'cat_id',
 									'source'=> $this->get_tracker_labels('cat',$tracker)
 								)
@@ -600,22 +607,22 @@ class tracker_ui extends tracker_bo
 							}
 
 							// Copy infolog's links
-							foreach(egw_link::get_links('infolog',$link_id) as $copy_link)
+							foreach(Link::get_links('infolog',$link_id) as $copy_link)
 							{
-								egw_link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
+								Link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
 							}
 							break;
 
 					}
 					// Copy same custom fields
-					$_cfs = config::get_customfields('tracker');
-					$link_app_cfs = config::get_customfields($link_app);
+					$_cfs = Api\Storage\Customfields::get('tracker');
+					$link_app_cfs = Api\Storage\Customfields::get($link_app);
 					foreach($_cfs as $name => $settings)
 					{
 						unset($settings);
 						if($link_app_cfs[$name]) $content['#'.$name] = $app_entry['#'.$name];
 					}
-					egw_link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
+					Link::link('tracker',$content['link_to']['to_id'],$link_app,$link_id);
 				}
 			}
 		}
@@ -630,7 +637,7 @@ class tracker_ui extends tracker_bo
 		}
 		if ($content['tr_creator'] && !isset($creators[$content['tr_creator']]))
 		{
-			$creators[$content['tr_creator']] = common::grab_owner_name($content['tr_creator']);
+			$creators[$content['tr_creator']] = Api\Accounts::username($content['tr_creator']);
 		}
 
 		// Comment visibility
@@ -674,10 +681,10 @@ class tracker_ui extends tracker_bo
 			'add_comment' => !$tr_id || $readonlys['reply_message'],
 			'history'  => !$tr_id,
 			'bounties' => !$this->allow_bounties,
-			'custom'   => !config::get_customfields('tracker', false, $content['tr_tracker']),
+			'custom'   => !Api\Storage\Customfields::get('tracker', false, $content['tr_tracker']),
 		);
 		// Make link_to readonly if the user has no EDIT access
-		$readonlys['link_to'] = !$this->file_access($tr_id, EGW_ACL_EDIT);
+		$readonlys['link_to'] = !$this->file_access($tr_id, Acl::EDIT);
 
 		if ($tr_id && $readonlys['reply_message'])
 		{
@@ -716,7 +723,7 @@ class tracker_ui extends tracker_bo
 		$what = ($tracker && isset($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)]) ? $this->trackers[(is_array($tracker)?$tracker[0]:$tracker)] : lang('Tracker'));
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
-		$tpl = new etemplate_new('tracker.edit');
+		$tpl = new Etemplate('tracker.edit');
 		// use a type-specific template (tracker.edit.xyz), if one exists, otherwise fall back to the generic one
 		if (!$tpl->read('tracker.edit'.(isset($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)])?'.'.trim($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)]):'')))
 		{
@@ -751,7 +758,7 @@ class tracker_ui extends tracker_bo
 	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
 	 *	For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
 	 * @param array &$rows returned rows/competitions
-	 * @param array &$readonlys eg. to disable buttons based on acl
+	 * @param array &$readonlys eg. to disable buttons based on Acl
 	 * @return int total number of rows
 	 */
 	function get_rows(&$query_in,&$rows,&$readonlys)
@@ -762,7 +769,7 @@ class tracker_ui extends tracker_bo
 		$query = $query_in;
 		if (!$query['csv_export'])	// do not store query for csv-export in session
 		{
-			egw_session::appsession($query['session_for'] ? $query['session_for'] : 'index','tracker'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
+			Api\Cache::setSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),$query);
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
@@ -819,7 +826,7 @@ class tracker_ui extends tracker_bo
 				$id = $link['id'];
 			}
 			if(!is_array($id)) $id = explode(',',$id);
-			if (!($linked = egw_link::get_links_multiple($app,$id,true,'tracker')))
+			if (!($linked = Link::get_links_multiple($app,$id,true,'tracker')))
 			{
 				$rows = array();	// no entries linked to selected link --> no rows to return
 				$this->get_rows_options($rows, $tracker);
@@ -834,7 +841,7 @@ class tracker_ui extends tracker_bo
 			$links[$key] = array_unique($links[$key]);
 			if($key == 'linked')
 			{
-				$linked = array('app' => $app, 'id' => $id, 'title' => (count($id) == 1 ? egw_link::title($app, $id) : lang('multiple')));
+				$linked = array('app' => $app, 'id' => $id, 'title' => (count($id) == 1 ? Link::title($app, $id) : lang('multiple')));
 			}
 		}
 		if(count($links))
@@ -918,7 +925,7 @@ class tracker_ui extends tracker_bo
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				unset($links);
-				if (($links = egw_link::get_links('tracker',$row['tr_id'])) &&
+				if (($links = Link::get_links('tracker',$row['tr_id'])) &&
 					isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 				{
 					// loop through all links of the entries
@@ -1045,10 +1052,10 @@ class tracker_ui extends tracker_bo
 		if ((int)$data['id'] && ($ticket = $this->read($data['id'])))
 		{
 			//error_log(__METHOD__.__LINE__.$this->exclude_app_on_timesheetcreation);
-			foreach(egw_link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
+			foreach(Link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
 			{
-				//if ($link['app'] != 'timesheet' && $link['app'] != egw_link::VFS_APPNAME)
-				if (stripos($this->exclude_app_on_timesheetcreation.','.'timesheet'.','.egw_link::VFS_APPNAME,$link['app'])===false)
+				//if ($link['app'] != 'timesheet' && $link['app'] != Link::VFS_APPNAME)
+				if (stripos($this->exclude_app_on_timesheetcreation.','.'timesheet'.','.Link::VFS_APPNAME,$link['app'])===false)
 				{
 					$set['link_app'][] = $link['app'];
 					$set['link_id'][]  = $link['id'];
@@ -1077,7 +1084,7 @@ class tracker_ui extends tracker_bo
 			'info_contact' => 'tracker:'.$tracker['tr_id'],
 		);
 		// copy links
-		foreach(egw_link::get_links('tracker',$tracker['tr_id'],'','link_lastmod DESC',true) as $link)
+		foreach(Link::get_links('tracker',$tracker['tr_id'],'','link_lastmod DESC',true) as $link)
 		{
 			$set['link_app'][] = $link['app'];
 			$set['link_id'][]  = $link['id'];
@@ -1090,7 +1097,7 @@ class tracker_ui extends tracker_bo
 			}
 		}
 		// copy same named customfields
-		foreach(config::get_customfields('infolog') as $name => $nul)
+		foreach(Api\Storage\Customfields::get('infolog') as $name => $nul)
 		{
 			unset($nul);
 			if(array_key_exists('#'.$name, $tracker))
@@ -1171,7 +1178,7 @@ class tracker_ui extends tracker_bo
 			// if there is no tracker specified, try the tracker submitted
 			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
 			// if there is still no tracker, use the last tracker that was applied and saved to/with the view with the appsession
-			if (!$tracker && ($state=egw_session::appsession('index','tracker'.($only_tracker ? '-'.$only_tracker : ''))))
+			if (!$tracker && ($state=  Api\Cache::getSession('tracker','index'.($only_tracker ? '-'.$only_tracker : ''))))
 			{
 			      $tracker=$state['col_filter']['tr_tracker'];
 			}
@@ -1272,7 +1279,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		if (!is_array($content)) $content = array();
-		$content['nm'] = egw_session::appsession($this->called_by ? $this->called_by : 'index', 'tracker'.($only_tracker ? '-'.$only_tracker : ''));
+		$content['nm'] = Api\Cache::getSession('tracker', $this->called_by ? $this->called_by : 'index'.($only_tracker ? '-'.$only_tracker : ''));
 		$content['msg'] = $msg;
 		$content['status_help'] = !$this->pending_close_days ? lang('Pending items never get close automatic.') :
 				lang('Pending items will be closed automatic after %1 days without response.',$this->pending_close_days);
@@ -1369,7 +1376,7 @@ class tracker_ui extends tracker_bo
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
 		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
-		$tpl = new etemplate_new();
+		$tpl = new Etemplate();
 		if (!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
 		{
 			$tpl->read('tracker.index');
@@ -1378,7 +1385,7 @@ class tracker_ui extends tracker_bo
 		// Apply link / avoid DOM conflicts
 		if($this->called_by)
 		{
-			$content['nm'] = array_merge($content['nm'], egw_session::appsession($this->called_by,'tracker'));
+			$content['nm'] = array_merge($content['nm'], Api\Cache::getSession('tracker', $this->called_by));
 			$tpl->set_dom_id("{$tpl->name}-{$this->called_by}");
 		}
 
@@ -1394,14 +1401,14 @@ class tracker_ui extends tracker_bo
 			$tpl->disable_cells('use_all', true);
 		}
 
-		// Show only own groups in group popup if queue acl
+		// Show only own groups in group popup if queue Acl
 		if($this->enabled_queue_acl_access)
 		{
 			$group = explode(',',$tpl->get_cell_attribute('group', 'size'));
 			$group[1] = 'owngroups';
 			$tpl->set_cell_attribute('group', 'size', implode(',',$group));
 		}
-		egw_framework::validate_file('.','app','tracker');
+		Framework::includeJS('.','app','tracker');
 		// add scrollbar to long description, if user choose so in his prefs
 		/* @kl: why is an if used, if it is effectily commented by a semicolon?
 		if ($this->prefs['limit_des_lines'] > 0 || (string)$this->prefs['limit_des_lines'] == '');
@@ -1443,9 +1450,9 @@ width:100%;
 				'default' => true,
 				'allowOnMultiple' => false,
 				'url' => 'menuaction=tracker.tracker_ui.edit&tr_id=$id',
-				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'popup' => Link::get_registry('tracker', 'add_popup'),
 				'group' => $group=1,
-				'onExecute' => html::$ua_mobile?'javaScript:app.tracker.viewEntry':''
+				'onExecute' => Api\Header\UserAgent::mobile()?'javaScript:app.tracker.viewEntry':''
 			),
 			'print' => array(
 				'caption' => 'Print',
@@ -1458,7 +1465,7 @@ width:100%;
 				'caption' => 'Add',
 				'group' => $group,
 				'url' => 'menuaction=tracker.tracker_ui.edit',
-				'popup' => egw_link::get_registry('tracker', 'add_popup'),
+				'popup' => Link::get_registry('tracker', 'add_popup'),
 				'hideOnMobile' => true
 			),
 			'no_notifications' => array(
@@ -1583,7 +1590,7 @@ width:100%;
 				'url' => 'menuaction=timesheet.timesheet_ui.edit&link_app[]=tracker&link_id[]=$id',
 				'group' => $group,
 				'allowOnMultiple' => false,
-				'popup' => egw_link::get_registry('timesheet', 'add_popup'),
+				'popup' => Link::get_registry('timesheet', 'add_popup'),
 			);
 		}
 		if ($GLOBALS['egw_info']['user']['apps']['infolog'] && $this->allow_infolog)
@@ -1594,7 +1601,7 @@ width:100%;
 				'url' => 'menuaction=infolog.infolog_ui.edit&action=tracker&action_id=$id',
 				'group' => $group,
 				'allowOnMultiple' => false,
-				'popup' => egw_link::get_registry('infolog', 'add_popup'),
+				'popup' => Link::get_registry('infolog', 'add_popup'),
 			);
 		}
 
@@ -1619,7 +1626,7 @@ width:100%;
 		if (!is_array($mailContent) && ($_GET['egw_data']))
 		{
 			// get the mail raw data
-			egw_link::get_data ($_GET['egw_data']);
+			Link::get_data ($_GET['egw_data']);
 			return false;
 		}
 		// Wrap a pre tag if we are using html editor
@@ -1653,7 +1660,7 @@ width:100%;
 		if ($use_all)
 		{
 			// get the whole selection
-			$query = is_array($session_name) ? $session_name : $GLOBALS['egw']->session->appsession($session_name,'tracker');
+			$query = is_array($session_name) ? $session_name : Api\Cache::getSession('tracker', $session_name);
 
 			if ($use_all)
 			{
@@ -1802,7 +1809,7 @@ width:100%;
 						break;
 					}
 					error_log("APp: $app ID: $link_id");
-					$title = egw_link::title($app, $link_id);
+					$title = Link::title($app, $link_id);
 					foreach($checked as $id)
 					{
 						if (!$this->read($id))
@@ -1813,7 +1820,7 @@ width:100%;
 						if($add_remove == 'add')
 						{
 							$action_msg = lang('linked to %1', $title);
-							if(egw_link::link('tracker', $id, $app, $link_id))
+							if(Link::link('tracker', $id, $app, $link_id))
 							{
 								$success++;
 							}
@@ -1825,7 +1832,7 @@ width:100%;
 						else
 						{
 							$action_msg = lang('unlinked from %1', $title);
-							$count = egw_link::unlink(0, 'tracker', $id, '', $app, $link_id);
+							$count = Link::unlink(0, 'tracker', $id, '', $app, $link_id);
 							$success += $count;
 						}
 					}
@@ -1849,7 +1856,7 @@ width:100%;
 	 */
 	public function ajax_canned_comment($id, $ckeditor=true)
 	{
-		$response = egw_json_response::get();
+		$response = Api\Json\Response::get();
 
 		if($ckeditor)
 		{
@@ -1870,7 +1877,7 @@ width:100%;
 	 * @param $args['view_id']  name of the id-var for location == 'infolog'
 	 * @param $args[$args['view_id']] id of the entry
 	 * this function can be called for any app, which should include infolog: \
-	 * 	$GLOBALS['egw']->hooks->process(array( \
+	 * 	Api\Hooks::process(array( \
 	 * 		 * 'location' => 'infolog', \
 	 * 		 * 'app'      => <your app>, \
 	 * 		 * 'view_id'  => <id name>, \
@@ -1881,7 +1888,7 @@ width:100%;
 	public function hook_view($args)
 	{
 		// Load JS for tracker actions
-		egw_framework::validate_file('.','app','tracker');
+		Framework::includeJS('.','app','tracker');
 
 		switch ($args['location'])
 		{
@@ -1891,7 +1898,7 @@ width:100%;
 				// Just set the filter
 				$state['action'] = $app;
 				$state['action_id'] = $args[$view_id];
-				egw_session::appsession($app,'tracker',$state);
+				Api\Cache::setSession('tracker', $app, $state);
 				break;
 		}
 		if (!isset($app) || !isset($args[$view_id]))
@@ -1903,7 +1910,7 @@ width:100%;
 		// Set to calling app, so actions wind up in the correct place client side
 		$GLOBALS['egw_info']['flags']['currentapp'] = $app;
 
-		translation::add_app('tracker');
+		Api\Translation::add_app('tracker');
 
 		$this->index(null);
 	}

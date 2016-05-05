@@ -10,10 +10,12 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 /**
  * Tracker - tracking object for the tracker
  */
-class tracker_tracking extends bo_tracking
+class tracker_tracking extends Api\Storage\Tracking
 {
 	/**
 	 * Application we are tracking (required!)
@@ -260,7 +262,7 @@ class tracker_tracking extends bo_tracking
 	}
 
 	/**
-	 * Get the subject for a given entry, reimplementation for get_subject in bo_tracking
+	 * Get the subject for a given entry, reimplementation for get_subject in Api\Storage\Tracking
 	 *
 	 * Default implementation uses the link-title
 	 *
@@ -330,7 +332,7 @@ class tracker_tracking extends bo_tracking
 			error_log($error);
 			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver)."\n".$notification['signature'];
 		}
-		return $html_email ? $message : translation::convertHTMLToText(html::purify($message), false, true, true);
+		return $html_email ? $message : Api\Mail\Html::convertHTMLToText(Api\Html::purify($message), false, true, true);
 	}
 
 	/**
@@ -361,12 +363,12 @@ class tracker_tracking extends bo_tracking
 		if (!$data['tr_modified'] || !$old)
 		{
 			$r[] = lang('New ticket submitted by %1 at %2',
-				common::grab_owner_name($data['tr_creator']),
+				Api\Accounts::username($data['tr_creator']),
 				$this->datetime($data['tr_created_servertime']));
 			return $r;
 		}
 		$r[] = lang('Ticket modified by %1 at %2',
-			$data['tr_modifier'] ? common::grab_owner_name($data['tr_modifier']) : lang('Tracker'),
+			$data['tr_modifier'] ? Api\Accounts::username($data['tr_modifier']) : lang('Tracker'),
 			$this->datetime($data['tr_modified_servertime']));
 		return $r;
 	}
@@ -394,7 +396,7 @@ class tracker_tracking extends bo_tracking
 		{
 			foreach($data['tr_assigned'] as $uid)
 			{
-				$assigned[] = common::grab_owner_name($uid);
+				$assigned[] = Api\Accounts::username($uid);
 			}
 			$assigned = implode(', ',$assigned);
 		}
@@ -417,7 +419,7 @@ class tracker_tracking extends bo_tracking
 			'tr_resolution'  => lang($resolutions[$data['tr_resolution']]),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
-			'tr_creator'     => common::grab_owner_name($data['tr_creator']),
+			'tr_creator'     => Api\Accounts::username($data['tr_creator']),
 			'tr_created'     => $this->datetime($data['tr_created']),
 			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
 			'tr_cc'			 => $data['tr_cc'],
@@ -427,7 +429,7 @@ class tracker_tracking extends bo_tracking
 		);
 
 		// Don't show start date / due date if disabled or not set
-		$config = config::read('tracker');
+		$config = Api\Config::read('tracker');
 		if(!$config['show_dates'])
 		{
 			unset($detail_fields['tr_startdate']);
@@ -456,7 +458,7 @@ class tracker_tracking extends bo_tracking
 			foreach($data['replies'] as $n => $reply)
 			{
 				$details[$n ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
-					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? common::grab_owner_name($reply['reply_creator']) : lang('Tracker'),
+					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
 						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
 				);

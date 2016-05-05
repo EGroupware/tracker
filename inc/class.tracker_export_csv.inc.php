@@ -11,6 +11,8 @@
  * @version $Id
  */
 
+use EGroupware\Api;
+
 /**
  * export tickets to CSV
  */
@@ -18,7 +20,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 
 	public function __construct()
 	{
-		translation::add_app('tracker');
+		Api\Translation::add_app('tracker');
 		$this->ui = new tracker_ui();
 		$this->get_selects();
 	}
@@ -32,8 +34,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 
 
 		$selection = array();
-		$query_key = 'tracker'.($options['tracker'] ? '-'.$options['tracker'] : '');
-		$query = $old_query = egw_session::appsession('index',$query_key);
+		$query_key = 'index'.($options['tracker'] ? '-'.$options['tracker'] : '');
+		$query = $old_query = Api\Cache::getSession('tracker',$query_key);
 		switch($options['selection'])
 		{
 			case 'search':
@@ -43,12 +45,13 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				$this->ui->get_rows($query,$selection,$readonlys);
 
 				// Reset nm params
-				egw_session::appsession('index',$query_key, $old_query);
+				Api\Cache::setSession('tracker',$query_key, $old_query);
 				break;
 			case 'filter':
 			case 'all':
 				$query = array(
 					'num_rows' => -1,		// all
+					'order' => 'tr_id',
 					'csv_export' => true,	// so get_rows method _can_ produce different content or not store state in the session
 				);
 				if($options['selection'] == 'filter')
@@ -77,7 +80,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				$this->ui->get_rows($query,$selection,$readonlys);
 
 				// Reset nm params
-				egw_session::appsession('index',$query_key, $old_query);
+				Api\Cache::setSession('tracker',$query_key, $old_query);
 			break;
 			default:
 				$selection = explode(',',$options['selection']);
@@ -187,7 +190,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				// User date format
 				$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 					($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
-				$name = common::grab_owner_name($reply['reply_creator']);
+				$name = Api\Accounts::username($reply['reply_creator']);
 				$message = str_replace("\r\n", "\n", htmlspecialchars_decode(strip_tags($reply['reply_message'])));
 
 				$replies[$id] = "$date \t$name \t$message";
@@ -202,7 +205,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				foreach($record->bounties as $key => $bounty) {
 					$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 						($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$bounty['bounty_created']);
-					$name = common::grab_owner_name($bounty['bounty_creator']);
+					$name = Api\Accounts::username($bounty['bounty_creator']);
 					$total += $bounty['bounty_amount'];
 					$bounties[] = "$date\t$name\t".$bounty['bounty_amount'];
 				}

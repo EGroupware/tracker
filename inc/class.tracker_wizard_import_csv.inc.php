@@ -10,6 +10,8 @@
  * @version $Id$
  */
 
+use EGroupware\Api;
+
 class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 {
 
@@ -58,7 +60,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 		);
 
 		// List each custom field
-		$custom = config::get_customfields('tracker');
+		$custom = Api\Storage\Customfields::get('tracker');
 		foreach($custom as $name => $data) {
 			$this->mapping_fields['#'.$name] = $data['label'];
 		}
