@@ -41,12 +41,8 @@ $setup_info['tracker']['hooks']['addressbook_view'] = 'tracker.tracker_ui.hook_v
 $setup_info['tracker']['hooks']['mail_import'] = 'tracker.tracker_hooks.mail_import';
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
-	 'appname' => 'phpgwapi',
-	 'versions' => Array('14.1')
-);
-$setup_info['tracker']['depends'][] = array(
 	 'appname' => 'notifications',
-	 'versions' => Array('14.1')
+	 'versions' => Array('14.1','16.1')
 );
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'api',
