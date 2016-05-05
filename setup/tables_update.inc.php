@@ -746,3 +746,8 @@ function tracker_upgrade14_1_001()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '14.1.002';
 }
 
+
+function tracker_upgrade14_1_002()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '16.1';
+}

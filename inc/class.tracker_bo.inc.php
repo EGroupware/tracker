@@ -1459,13 +1459,13 @@ class tracker_bo extends tracker_so
 	 * @param boolean $need_full_no_count = false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
-	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false)
+	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false,$only_keys=false,$extra_cols=array())
 	{
 		if($query['filter'])
 		{
 			$query['col_filter'][] = $this->date_filter($query['filter'],$query['startdate'],$query['enddate'],$query['order']);
 		}
-		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count);
+		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count,$only_keys,$extra_cols);
 	}
 
 	/**
