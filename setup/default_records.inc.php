@@ -82,7 +82,7 @@ $GLOBALS['egw_setup']->add_acl('tracker','run',$admingroup);
 $defaultgroup = $GLOBALS['egw_setup']->add_account('Default','Default','Group',False,False);
 $GLOBALS['egw_setup']->add_acl('tracker','run',$defaultgroup);
 
-include(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_bo.inc.php');	// for the contstants
+include_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_bo.inc.php');	// for the contstants
 // save a default configuration
 foreach(array(
 	'overdue_days'       => 14,
