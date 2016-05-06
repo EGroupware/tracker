@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-14 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -39,11 +39,8 @@ $setup_info['tracker']['hooks']['infolog_set'] = 'tracker.tracker_ui.infolog_set
 $setup_info['tracker']['hooks']['verify_settings'] = 'tracker_hooks::verify_settings';
 $setup_info['tracker']['hooks']['addressbook_view'] = 'tracker.tracker_ui.hook_view';
 $setup_info['tracker']['hooks']['mail_import'] = 'tracker.tracker_hooks.mail_import';
+
 /* Dependencies for this app to work */
-$setup_info['tracker']['depends'][] = array(
-	 'appname' => 'notifications',
-	 'versions' => Array('14.1','16.1')
-);
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'api',
 	 'versions' => Array('16.1')
