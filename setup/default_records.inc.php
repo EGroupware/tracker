@@ -6,7 +6,7 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -82,7 +82,7 @@ $GLOBALS['egw_setup']->add_acl('tracker','run',$admingroup);
 $defaultgroup = $GLOBALS['egw_setup']->add_account('Default','Default','Group',False,False);
 $GLOBALS['egw_setup']->add_acl('tracker','run',$defaultgroup);
 
-include(EGW_INCLUDE_ROOT.'/tracker/inc/class.botracker.inc.php');	// for the contstants
+include(EGW_INCLUDE_ROOT.'/tracker/inc/class.tracker_bo.inc.php');	// for the contstants
 // save a default configuration
 foreach(array(
 	'overdue_days'       => 14,
