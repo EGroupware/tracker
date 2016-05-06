@@ -36,14 +36,14 @@ class tracker_hooks
 				'menuaction' => 'tracker.tracker_ui.edit',
 			),
 			'view_id' => 'tr_id',
-			'view_popup'  => '780x535',
+			'view_popup'  => '760x580',
 			'view_list' => 'tracker.tracker_ui.index',
 			'add' => array(
 				'menuaction' => 'tracker.tracker_ui.edit',
 			),
 			'add_app'    => 'link_app',
 			'add_id'     => 'link_id',
-			'add_popup'  => '750x500',
+			'add_popup'  => '760x580',
 			'file_access' => 'tracker.tracker_bo.file_access',
 			'file_access_user' => true,	// file_access supports 4th parameter $user
 			'merge' => true,
@@ -338,7 +338,7 @@ class tracker_hooks
 			}
 		}
 	}
-	
+
 	/**
 	 * Mail integration hook to import mail message contents into a tracker entry
 	 *
