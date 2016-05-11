@@ -439,18 +439,23 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		}
 
 		// Process some additional fields
-		foreach(array_keys(self::$special_fields) as $field) {
+		foreach(array_keys(self::$special_fields) as $field)
+		{
 			if(!$_data[$field]) continue;
 
 			// Links
-			if(strpos('link', $field) === 0) {
+			if(strpos('link', $field) === 0)
+			{
 				list($app, $id) = explode(':', $_data[$field]);
-			} else {
+			}
+			else
+			{
 				$app = $field;
 				$id = $_data[$field];
 			}
-			if ($app && $app_id) {	// todo nathan: $app_id is undefined
-				Link::link('tracker',$id,$app,$app_id);
+			if ($app && $id && $this->bo->data['tr_id'])
+			{
+				Link::link('tracker',$this->bo->data['tr_id'],$app,$id);
 			}
 		}
 		return true;
