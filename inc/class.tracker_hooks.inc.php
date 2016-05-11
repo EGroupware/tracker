@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-11 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -28,6 +28,8 @@ class tracker_hooks
 	 */
 	static function search_link($location)
 	{
+		unset($location);	// not used, but required by function signature
+
 		$link = array(
 			'query' => 'tracker.tracker_bo.link_query',
 			'title' => 'tracker.tracker_bo.link_title',
@@ -246,8 +248,6 @@ class tracker_hooks
 		// Merge print
 		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
 		{
-			$link = Egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
-
 			$settings['default_document'] = array(
 				'type'   => 'vfs_file',
 				'size'   => 60,
@@ -293,10 +293,11 @@ class tracker_hooks
 				}
 				catch (Exception $e)
 				{
+					unset($e);	// not used
 					// permission error
 					continue;
 				}
-				if ($title = $definition->get_title())
+				if (($title = $definition->get_title()))
 				{
 					$options[$title] = $title;
 				}
@@ -346,6 +347,8 @@ class tracker_hooks
 	 */
 	public static function mail_import($args)
 	{
+		unset($args);	// not used, but required by function signature
+
 		return array(
 			'menuaction' => 'tracker.tracker_ui.mail_import',
 			'popup' => Link::get_registry('tracker', 'add_popup'),

@@ -147,9 +147,6 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		$_definition->plugin_options['record_owner'] = isset( $_definition->plugin_options['record_owner'] ) ?
 			$_definition->plugin_options['record_owner'] : $this->user;
 
-		// Used to try to automatically match names to account IDs
-		$addressbook = new Api\Contacts\Storage();
-
 		// Process cat_id as a normal select
 		$types = tracker_egw_record::$types;
 		unset($types['select-cat']);
@@ -171,10 +168,10 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 			// don't import empty records
 			if( count( array_unique( $record ) ) < 2 ) continue;
-			
+
 			$result = importexport_import_csv::convert($record, $types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
 			if($result) $this->warnings[$import_csv->get_current_position()] = $result;
-			
+
 			// Set creator/group, unless it's supposed to come from CSV file
 			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
 				if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
@@ -215,12 +212,12 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 			// Translate lookups
 			foreach($lookups as $field => &$l_values)
 			{
-				foreach($l_values as $l_key => &$l_label)
+				foreach($l_values as &$l_label)
 				{
 					$l_label = lang($l_label);
 				}
 			}
-			$lookups = $_lookups + $lookups;
+			$all_lookups = $_lookups + $lookups;
 
 			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
 				if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
@@ -230,12 +227,12 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					//echo "Checking $field. Currently {$record[$field]}.<br />";
 
 					// Check for key as value - importing DB values, or from conversion
-					if(is_numeric($record[$field]) && $lookups[$field][$record[$field]]) $key = $record[$field];
+					if(is_numeric($record[$field]) && $all_lookups[$field][$record[$field]]) $key = $record[$field];
 
 					// Look for human values - existing ones should already be IDs
 					if(!$key)
 					{
-						$key = array_search($record[$field], $lookups[$field]);
+						$key = array_search($record[$field], $all_lookups[$field]);
 					}
 					if($key !== false) {
 						$record[$field] = $key;
@@ -282,7 +279,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 										));
 									}
 									$record[$field] = $cat_id;
-								} elseif($key = array_search($t_field, $lookups[$field])) {
+								} elseif(($key = array_search($t_field, $all_lookups[$field]))) {
 									$record[$field] = $key;
 								} else {
 									$record[$field] = $t_field;
@@ -292,8 +289,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					}
 				}
 				if($field == 'tr_tracker') {
-					$lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
-					$lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
+					$all_lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
+					$all_lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
 				}
 				//echo "Final: {$record[$field]}<br />";
 			}
@@ -402,7 +399,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 					$this->results['unchanged']++;
 					break;
 				}
-				
+
 				// Fall through
 			case 'insert' :
 				// Defaults
@@ -442,8 +439,7 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		}
 
 		// Process some additional fields
-		$_link_id = false;
-		foreach(self::$special_fields as $field => $desc) {
+		foreach(array_keys(self::$special_fields) as $field) {
 			if(!$_data[$field]) continue;
 
 			// Links
@@ -453,8 +449,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 				$app = $field;
 				$id = $_data[$field];
 			}
-			if ($app && $app_id) {
-				$link_id = Link::link('tracker',$id,$app,$app_id);
+			if ($app && $app_id) {	// todo nathan: $app_id is undefined
+				Link::link('tracker',$id,$app,$app_id);
 			}
 		}
 		return true;
@@ -550,21 +546,21 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	// end of iface_export_plugin
 
 	// Extra conversion functions - must be static
-	public static function addr_id( $n_family,$n_given=null,$org_name=null ) {
+	public static function addr_id( $_n_family,$n_given=null,$org_name=null ) {
 
 		// find in Addressbook, at least n_family AND (n_given OR org_name) have to match
-		static $contacts;
+		static $contacts=null;
+		if (!isset($contacts))
+		{
+			$contacts = new Api\Contacts();
+		}
 		if (is_null($n_given) && is_null($org_name))
 		{
 			// Maybe all in one
-			list($n_family, $n_given, $org_name) = explode(',', $n_family);
+			list($_n_family, $n_given, $org_name) = explode(',', $_n_family);
 		}
-		$n_family = trim($n_family);
+		$n_family = trim($_n_family);
 		if(!is_null($n_given)) $n_given = trim($n_given);
-		if (!is_object($contacts))
-		{
-			$contacts =& CreateObject('phpgwapi.contacts');
-		}
 		if (!is_null($org_name))        // org_name given?
 		{
 			$org_name = trim($org_name);
@@ -589,4 +585,3 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		return False;
 	}
 }
-?>

@@ -42,6 +42,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				// ui selection with checkbox 'use_all'
 				$query['num_rows'] = -1;	// all
 				$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
+				$readonlys = null;
 				$this->ui->get_rows($query,$selection,$readonlys);
 
 				// Reset nm params
@@ -56,7 +57,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 				);
 				if($options['selection'] == 'filter')
 				{
-					$fields = importexport_helper_functions::get_filter_fields($_definition->application, $this);
+					importexport_helper_functions::get_filter_fields($_definition->application, $this);
 					$query['col_filter'] = $_definition->filter;
 
 					// Backend expects a string
@@ -182,6 +183,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 * @param tracker_egw_record $record Record to be converted
 	 */
 	protected static function convert(tracker_egw_record &$record, array $options = array()) {
+		unset($options);	// not used, but required by function signature
 		$record->tr_description = htmlspecialchars_decode(strip_tags($record->tr_description));
 
 		if(is_array($record->replies)) {
@@ -202,7 +204,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			if( count($record->bounties) > 0) {
 				$bounties = array();
 				$total = 0;
-				foreach($record->bounties as $key => $bounty) {
+				foreach($record->bounties as $bounty) {
 					$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 						($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$bounty['bounty_created']);
 					$name = Api\Accounts::username($bounty['bounty_creator']);
@@ -230,7 +232,7 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			'tr_priority'	=> $this->ui->get_tracker_priorities(),
 			'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
 		);
-		foreach($this->selects['tr_tracker'] as $id => $name) {
+		foreach(array_keys($this->selects['tr_tracker']) as $id) {
 			$this->selects['tr_version'] += $this->ui->get_tracker_labels('version', $id);
 			$this->selects['tr_status'] += $this->ui->get_tracker_stati($id);
 			$this->selects['tr_resolution'] += $this->ui->get_tracker_labels('resolution',$id);

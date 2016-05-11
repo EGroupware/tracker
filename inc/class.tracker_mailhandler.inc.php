@@ -1,6 +1,6 @@
 <?php
 /**
- * eGroupWare Tracker - Handle incoming mails
+ * EGroupware Tracker - Handle incoming mails
  *
  * This class handles incoming mails in the async services.
  * It is an addition for the eGW Tracker app by Ralf Becker
@@ -159,6 +159,7 @@ class tracker_mailhandler extends tracker_bo
 			}
 			catch(Exception $e)
 			{
+				unset($e);	// not used
 				if ($reference->hostspec != $profile->hostspec) $diff['acc_imap_host']=array('reference'=>$reference->hostspec,'profile'=>$profile->hostspec);
 				if ($reference->port != $profile->port) $diff['acc_imap_port']=array('reference'=>$reference->port,'profile'=>$profile->port);
 				if ($reference->username != $profile->username) $diff['acc_imap_username']=array('reference'=>$reference->username,'profile'=>$profile->username);
@@ -377,7 +378,6 @@ class tracker_mailhandler extends tracker_bo
 			// load lang stuff for mailheaderInfoSection creation
 			Api\Translation::add_app('mail');
 			// retrieve list
-			if (self::LOG_LEVEL>0 &&  $tretval===false) error_log(__METHOD__.__LINE__.'#'.array2string($tretval).$mailobjecterrorMessage);
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__." Processing mailbox {$_folderName} with ServerID:".$mailobject->icServer->ImapServerId." for queue $queue\n".array2string($mailobject->icServer));
 			$_filter=array('status'=>array('UNSEEN','UNDELETED'));
 			if (!empty($this->mailhandling[$queue]['address']))
@@ -385,12 +385,12 @@ class tracker_mailhandler extends tracker_bo
 				$_filter['type']='TO';
 				$_filter['string']=trim($this->mailhandling[$queue]['address']);
 			}
-			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse=1, $_filter,$byUid=true,false);
+			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, 1, $_filter, true, false);
 			$sortResult = $_sortResult['match']->ids;
 			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
 			$deletedCounter = 0;
 			$mailobject->reopen($_folderName);
-			foreach ((array)$sortResult as $i => $uid)
+			foreach ((array)$sortResult as $uid)
 			{
 				if (empty($uid)) continue;
 				if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.'# fetching Data for:'.array2string(array('uid'=>$uid,'folder'=>$_folderName)).' Mode:'.$this->htmledit.' SaveAsOption:'.$GLOBALS['egw_info']['user']['preferences']['mail']['saveAsOptions']);
@@ -557,7 +557,7 @@ class tracker_mailhandler extends tracker_bo
 		$oMInx = 0;
 		$alienSender = false;
 
-		foreach ($mailCntArray as $key => $val)
+		foreach (array_keys($mailCntArray) as $key)
 		{
 			if (preg_match ("/^From:.*@gmail.*/", $mailCntArray[$key]))
 			{
@@ -683,7 +683,7 @@ class tracker_mailhandler extends tracker_bo
 				if (empty($newBody)) $newBody    = htmlentities($body,ENT_QUOTES);
 				$body = $newBody;
 			}
-			$body = preg_replace($nonDisplayAbleCharacters,'',$body);
+			$body_out = preg_replace($nonDisplayAbleCharacters,'',$body);
 
 			// handle Attachments
 			$contentParts = count($structure->parts);
@@ -737,7 +737,10 @@ class tracker_mailhandler extends tracker_bo
 								}
 							}
 							$att[$k] = $rv['struct'];
-							if (!empty($rv['attachments'])) for ($a=0; $a<sizeof($rv['attachments']);$a++) $additionalAttachments[] = $rv['attachments'][$a];
+							if (!empty($rv['attachments'])) for ($a=0; $a<sizeof($rv['attachments']);$a++)
+							{
+								$additionalAttachments[] = $rv['attachments'][$a];
+							}
 							if (empty($attachments[$num]['attachment']) && empty($rv['attachments']))
 							{
 								unset($attachments[$num]);
@@ -793,15 +796,12 @@ class tracker_mailhandler extends tracker_bo
 			}
 		}
 		//if (!empty($attachments)) error_log(__METHOD__." Attachments with this mail:".print_r($attachments,true));
-		if (!empty($additionalAttachments))
-		{
-			//error_log(__METHOD__." Attachments retrieved with attachments:".print_r($additionalAttachments,true));
-			for ($a=0; $a<sizeof($additionalAttachments);$a++) $attachments[] = $additionalAttachments[$a];
-		}
-		return array('body' => Api\Translation::convertHTMLToText(nl2br(Api\Html::purify($body))),
-					 'struct' => $struct,
-					 'attachments' =>  $attachments
-					);
+		return array(
+			'body' => Api\Translation::convertHTMLToText(nl2br(Api\Html::purify($body_out))),
+			'struct' => $struct,
+			'attachments' =>  !empty($additionalAttachments) ?
+				array_merge($attachments, $additionalAttachments) : $attachments,
+	   );
 	}
 
 	/**
@@ -875,7 +875,6 @@ class tracker_mailhandler extends tracker_bo
 						break;
 					case 'process' :	// Process normally...
 						return false;	// ...so act as if it's no automail
-						break;
 					default :			// default: 'ignore'
 						break;
 				}
@@ -937,8 +936,8 @@ class tracker_mailhandler extends tracker_bo
 						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (bounces) are configured to be forwarded"), $queue);
 						if ($returnVal)
 						{
-							$rv = $mailobject->flagMessages('seen', $uid, $_folderName);
-							$rv = $mailobject->flagMessages('forwarded', $uid, $_folderName);
+							$mailobject->flagMessages('seen', $uid, $_folderName);
+							$mailobject->flagMessages('forwarded', $uid, $_folderName);
 						}
 					default :			// default: 'ignore'
 						break;
@@ -962,13 +961,12 @@ class tracker_mailhandler extends tracker_bo
 						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (replies) are configured to be forwarded"), $queue);
 						if ($returnVal)
 						{
-							$rv = $mailobject->flagMessages('seen', $uid, $_folderName);
-							$rv = $mailobject->flagMessages('forwarded', $uid, $_folderName);
+							$mailobject->flagMessages('seen', $uid, $_folderName);
+							$mailobject->flagMessages('forwarded', $uid, $_folderName);
 						}
 						break;
 					case 'process' :	// Process normally...
 						return false;	// ...so act as if it's no automail
-						break;
 					default :			// default: 'ignore'
 						break;
 				}
@@ -1097,16 +1095,13 @@ class tracker_mailhandler extends tracker_bo
 			{
 				case 'ignore' :		// Do nothing
 					return false;
-					break;
 				case 'delete' :		// Delete, whatever the overall delete setting is
 					@imap_delete($this->mbox, $mid);
 					return false;	// Prevent from a second delete attempt
-					break;
 				case 'forward' :	// Return the status of the forward attempt
 					$returnVal = self::forward_message($mid, $msgHeader, $queue);
 					if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
 					return $returnVal;
-					break;
 				case 'default' :	// Save as default user; handled below
 				default :			// Duh ??
 					break;
@@ -1291,9 +1286,9 @@ class tracker_mailhandler extends tracker_bo
 	function process_message2 ($mailobject, $uid, $_folderName, $queue)
 	{
 		$senderIdentified = true;
-		$sR = $mailobject->getHeaders($_folderName, $_startMessage=1, $_numberOfMessages=1, $_sort='INTERNALDATE', $_reverse=true, $_filter=array(),$_thisUIDOnly=$uid, $_cacheResult=false);
+		$sR = $mailobject->getHeaders($_folderName, $_startMessage=1, 1, 'INTERNALDATE', true, array(), $uid, false);
 		$s = $sR['header'][$uid];
-		$subject = $mailobject->decode_subject($s['subject']);// we use the needed headers for determining beforehand, if we have a new ticket, or a comment
+		$subject_in = $mailobject->decode_subject($s['subject']);// we use the needed headers for determining beforehand, if we have a new ticket, or a comment
 		// FLAGS - control in case filter wont work
 		$flags = $s;//implicit with retrieved information on getHeaders
 		if ($flags['deleted'] || $flags['seen'])
@@ -1307,13 +1302,13 @@ class tracker_mailhandler extends tracker_bo
 			($flags['answered'] && $flags['seen']) || // is answered and seen
 			$flags['draft']) // is Draft
 		{
-			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'."UID:$uid in Folder $_folderName with".' Subject:'.$subject.
+			if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'."UID:$uid in Folder $_folderName with".' Subject:'.$subject_in.
 				"\n Date:".$s['date'].
 	            "\n Flags:".print_r($flags,true).
 				"\n Stopped processing Mail ($uid). Not recent, new, or already answered, or draft");
 			return false;
 		}
-		$subject = Mail::adaptSubjectForImport($subject);
+		$subject = Mail::adaptSubjectForImport($subject_in);
 		$tId = $this->get_ticketId($subject);
 		if ($tId)
 		{
@@ -1399,20 +1394,17 @@ class tracker_mailhandler extends tracker_bo
 			{
 				case 'ignore' :		// Do nothing
 					return false;
-					break;
 				case 'delete' :		// Delete, whatever the overall delete setting is
 					$mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
 					return false;	// Prevent from a second delete attempt
-					break;
 				case 'forward' :	// Return the status of the forward attempt
 					$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], $this->data['msg'], $queue);
 					if ($returnVal)
 					{
-						$rv = $mailobject->flagMessages('seen', $uid, $_folderName);
-						$rv = $mailobject->flagMessages('forwarded', $uid, $_folderName);
+						$mailobject->flagMessages('seen', $uid, $_folderName);
+						$mailobject->flagMessages('forwarded', $uid, $_folderName);
 					}
 					return $returnVal;
-					break;
 				case 'default' :	// Save as default user; handled below
 				default :			// Duh ??
 					break;
@@ -1560,6 +1552,7 @@ class tracker_mailhandler extends tracker_bo
 			return false;
 		}
 		//preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
+		$address = null;
 		preg_match_all("/([A-Za-z0-9][A-Za-z0-9._-]*)?[A-Za-z0-9]@([A-Za-z0-9ÄÖÜäöüß](|[A-Za-z0-9ÄÖÜäöüß_-]*[A-Za-z0-9ÄÖÜäöüß])\.)+[A-Za-z]{2,6}/", $addr, $address);
 		return ($address[0][0]);
 	}
@@ -1567,7 +1560,7 @@ class tracker_mailhandler extends tracker_bo
 	/**
 	 * Retrieve the user ID based on the mail address that was extracted from the mailheaders
 	 *
-	 * @param string $mail_addr, the mail address.
+	 * @param string $mail_addr ='' the mail address.
 	 */
 	function search_user($mail_addr='')
 	{
@@ -1648,7 +1641,7 @@ class tracker_mailhandler extends tracker_bo
 	 * Check if exist and if not start or stop an async job to check incoming mails
 	 *
 	 * @param int $queue ID of the queue to check email for
-	 * @param int $interval=1 >0=start, 0=stop
+	 * @param int $interval =1 >0=start, 0=stop
 	 */
 	static function set_async_job($queue=0, $interval=0)
 	{

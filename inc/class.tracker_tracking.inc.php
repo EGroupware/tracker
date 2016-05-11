@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -81,11 +81,11 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * Overridden from parent to hide restricted comments
 	 *
 	 * @param array $data current entry
-	 * @param array $old=null old/last state of the entry or null for a new entry
-	 * @param int $user=null user who made the changes, default to current user
-	 * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undeleted
-	 * @param array $changed_fields=null changed fields from ealier call to $this->changed_fields($data,$old), to not compute it again
-	 * @param boolean $skip_notification=false do NOT send any notification
+	 * @param array $old =null old/last state of the entry or null for a new entry
+	 * @param int $user =null user who made the changes, default to current user
+	 * @param boolean $deleted =null can be set to true to let the tracking know the item got deleted or undeleted
+	 * @param array $changed_fields =null changed fields from ealier call to $this->changed_fields($data,$old), to not compute it again
+	 * @param boolean $skip_notification =false do NOT send any notification
 	 * @return int|boolean false on error, integer number of changes logged or true for new entries ($old == null)
 	 */
 	public function track(array $data,array $old=null,$user=null,$deleted=null,array $changed_fields=null,$skip_notification=false)
@@ -95,7 +95,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		$changes = true;
 
 		// Hide restricted comments from reply count
-		foreach((array)$data['replies'] as $key => $reply)
+		foreach((array)$data['replies'] as $reply)
 		{
 			if($reply['reply_visible'] != 0)
 			{
@@ -129,7 +129,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * @param array $autoreply values for:
 	 *			'reply_text' => Texline to add to the mail message
 	 *			'reply_to' => UserID or email address
-	 * @param array $old=null old/last state of the entry or null for a new entry
+	 * @param array $old =null old/last state of the entry or null for a new entry
 	 */
 	function autoreply($data,$autoreply,$old=null)
 	{
@@ -167,13 +167,12 @@ class tracker_tracking extends Api\Storage\Tracking
 	 *
 	 * @internal use only track($data,$old,$user)
 	 * @param array $data current entry
-	 * @param array $old=null old/last state of the entry or null for a new entry
-	 * @param boolean $deleted=null can be set to true to let the tracking know the item got deleted or undelted
+	 * @param array $old =null old/last state of the entry or null for a new entry
+	 * @param boolean $deleted =null can be set to true to let the tracking know the item got deleted or undelted
 	 * @return boolean true on success, false on error (error messages are in $this->errors)
 	 */
 	public function do_notifications($data,$old,$deleted, $changes)
 	{
-		$success = True;
 		$skip = $this->get_config('skip_notify',$data,$old);
 		$email_notified = $skip ? $skip : array();
 
@@ -191,7 +190,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		$data['tr_private'] = true;
 
 		// Send notification - $email_notified will be skipped
-		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
+		$success = parent::do_notifications($data, $old, $deleted, $email_notified);
 
 		//error_log(__METHOD__.__LINE__." email notified with restricted comments:".array2string($email_notified));
 
@@ -219,26 +218,28 @@ class tracker_tracking extends Api\Storage\Tracking
 			$this->creator_field = $creator_field;
 		}
 		$data['tr_private'] = $private;
-		$already_notified = $email_notified;
-		$success = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
+		//$already_notified = $email_notified;
+		$ret = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
 		//error_log(__METHOD__.__LINE__." email notified, restricted comments removed:".array2string(array_diff($email_notified,$already_notified)));
 
-		return $success;
+		return $ret;
 	}
 
 	/**
 	 * Get a notification-config value
 	 *
-	 * @param string $what
+	 * @param string $name
 	 * 	- 'copy' array of email addresses notifications should be copied too, can depend on $data
 	 *  - 'lang' string lang code for copy mail
 	 *  - 'sender' string send email address
 	 * @param array $data current entry
-	 * @param array $old=null old/last state of the entry or null for a new entry
+	 * @param array $old =null old/last state of the entry or null for a new entry
 	 * @return mixed
 	 */
 	function get_config($name,$data,$old=null)
 	{
+		unset($old);	// not used
+
 		$tracker = $data['tr_tracker'];
 
 		$config = $this->tracker->notification[$tracker][$name] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
@@ -272,6 +273,8 @@ class tracker_tracking extends Api\Storage\Tracking
 	 */
 	function get_subject($data,$old)
 	{
+		unset($old);	// not used
+
 		return $data['prefix'] . $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
 	}
 
@@ -291,10 +294,10 @@ class tracker_tracking extends Api\Storage\Tracking
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
 		$merge = new tracker_merge();
-		
+
 		// Set comments according to data, avoids re-reading from DB
 		if (isset($data['replies'])) $merge->set_comments($data['tr_id'], $data['replies']);
-		
+
 		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
@@ -312,6 +315,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		}
 		else
 		{
+			$error = null;
 			$notification['signature'] = $merge->merge_string($notification['signature'], array($data['tr_id']), $error, 'text/html');
 		}
 
@@ -337,9 +341,13 @@ class tracker_tracking extends Api\Storage\Tracking
 
 	/**
 	 * Override parent to return nothing, it's taken care of in get_body()
+	 *
 	 * @see get_body()
 	 */
-	protected function get_signature($data,$old,$receiver) {
+	protected function get_signature($data,$old,$receiver)
+	{
+		unset($data,$old,$receiver);	// not used
+
 		return false;
 	}
 
@@ -383,7 +391,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	 */
 	function get_details($data)
 	{
-		static $cats,$versions,$statis,$priorities,$resolutions;
+		static $cats=null,$versions=null,$statis=null,$priorities=null,$resolutions=null;
 		if (!$cats)
 		{
 			$cats = $this->tracker->get_tracker_labels('cat',$data['tr_tracker']);
@@ -486,7 +494,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * - tr_completion is postfixed with a percent
 	 *
 	 * @param array $data
-	 * @param array $old=null
+	 * @param array $old =null
 	 * @return array of keys with different values in $data and $old
 	 */
 	public function changed_fields(array $data,array $old=null)

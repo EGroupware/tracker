@@ -138,172 +138,29 @@ class tracker_widget extends Etemplate\Widget\Entry
 		return $entry;
 	}
 
-	/**
-	 * pre-processing of the extension
-	 *
-	 * This function is called before the extension gets rendered
-	 *
-	 * @param string $name form-name of the control
-	 * @param mixed &$value value / existing content, can be modified
-	 * @param array &$cell array with the widget, can be modified for ui-independent widgets
-	 * @param array &$readonlys names of widgets as key, to be made readonly
-	 * @param mixed &$extension_data data the extension can store persisten between pre- and post-process
-	 * @param etemplate &$tmpl reference to the template we belong too
-	 * @return boolean true if extra label is allowed, false otherwise
-	 */
-	function pre_process($name,&$value,&$cell,&$readonlys,&$extension_data,&$tmpl)
-	{
-		switch($cell['type'])
-		{
-			case 'tracker-fields':
-				Api\Translation::add_app('addressbook');
-				$cell['sel_options'] = $this->_get_fields();
-				$cell['type'] = 'select';
-				$cell['no_lang'] = 1;
-				break;
-
-			case 'tracker-value':
-			default:
-				if (substr($value,0,8) == 'tracker:') $value = substr($value,8);	// link-entry syntax
-				if (!$value || !$cell['size'] || (!is_array($this->data) || $this->data['tr_id'] != $value) &&
-					!($this->data = $this->tracker->read($value)))
-				{
-					$cell = $tmpl->empty_cell();
-					$value = '';
-					break;
-				}
-				list($type,$compare,$alternatives,$contactfield,$regex,$replace) = explode(',',$cell['size'],6);
-				$value = $this->data[$type];
-				$cell['size'] = '';
-				$cell['no_lang'] = 1;
-				$cell['readonly'] = true;
-
-				switch($type)
-				{
-					case '':	// Sum of the alternatives, field-name can be prefixed with a minus to substract it's value
-						$cell['type'] = 'float';
-						$cell['size'] = ',,,%0.2lf';
-						$value = 0.0;
-						foreach(explode(':',$alternatives) as $name)
-						{
-							if ($name[0] === '-')
-							{
-								$val = '-'.$this->data[substr($name, 1)];
-							}
-							else
-							{
-								$val = $this->data[$name];
-							}
-							$value += str_replace(array(' ',','), array('','.'), $val);
-						}
-						$alternatives = '';
-						break;
-
-					case 'tr_created':
-					case 'tr_startdate':
-					case 'tr_duedate':
-					case 'tr_modified':
-					case 'tr_closed':
-						$cell['type'] = 'date-time';
-						break;
-
-					case 'tr_assigned':
-					case 'tr_creator':
-					case 'tr_group':
-					case 'tr_modifier':
-						$cell['type'] = 'select-owner';
-						break;
-
-					case 'tr_tracker':
-					case 'cat_id':
-					case 'tr_version':
-					case 'tr_status':
-					case 'tr_resolution':
-						$cell['type'] = 'select-cat';
-						break;
-
-					case 'tr_completion':
-						$cell['type'] = 'select-percent';
-						break;
-
-					case 'tr_private':
-						$cell['type'] = 'checkbox';
-						break;
-
-					default:
-						if ($type{0} == '#')	// custom field --> use field-type itself
-						{
-							$field = $this->tracker->customfields[substr($type,1)];
-							if (($cell['type'] = $field['type']))
-							{
-								if ($field['type'] == 'select')
-								{
-									$cell['sel_options'] = $field['values'];
-								}
-								break;
-							}
-						}
-						$cell['type'] = 'label';
-						break;
-				}
-				if ($alternatives && empty($value))	// use first non-empty alternative if value is empty
-				{
-					foreach(explode(':',$alternatives) as $name)
-					{
-						if (($value = $this->data[$name])) break;
-					}
-				}
-				if (!empty($compare))				// compare with value and print a X is equal and nothing otherwise
-				{
-					$value = $value == $compare ? 'X' : '';
-					$cell['type'] = 'label';
-				}
-				// modify the value with a regular expression
-				if (!empty($regex))
-				{
-					$parts = explode('/',$regex);
-					if (strchr(array_pop($parts),'e') === false)	// dont allow e modifier, which would execute arbitrary php code
-					{
-						$value = preg_replace($regex,$replace,$value);
-					}
-					$cell['type'] = 'label';
-					$cell['size'] = '';
-				}
-				// use a contact widget to render the value, eg. to fetch contact data from an linked tracker
-				if (!empty($contactfield))
-				{
-					$cell['type'] = 'contact-value';
-					$cell['size'] = $contactfield;
-				}
-				break;
-		}
-		$cell['id'] = ($cell['id'] ? $cell['id'] : $cell['name'])."[$type]";
-
-		return True;	// extra label ok
-	}
-
 	function _get_fields()
 	{
-		static $fields;
+		static $fields=null;
 
-		if (!is_null($fields)) return $fields;
-
-		$fields = array(
-			'' => lang('Sum'),
-		);
-
-		static $remove = array(
-			'link_to','canned_response','reply_message','add','vote',
-			'no_notifications','bounty','num_replies','customfields',
-		);
-		$fields += array_diff_key($this->tracker->field2label, array_flip($remove));
-		$fileds['tr_id'] = 'ID';
-		$fileds['tr_modified'] = 'Modified';
-		$fileds['tr_modifier'] = 'Modifier';
-
-		foreach(Api\Storage\Customfields::get('tracker') as $name => $data)
+		if (!isset($fields))
 		{
-			$fields['#'.$name] = lang($data['label']);
+			$fields = array(
+				'' => lang('Sum'),
+			);
+
+			static $remove = array(
+				'link_to','canned_response','reply_message','add','vote',
+				'no_notifications','bounty','num_replies','customfields',
+			);
+			$fields += array_diff_key($this->tracker->field2label, array_flip($remove));
+			$fileds['tr_id'] = 'ID';
+			$fileds['tr_modified'] = 'Modified';
+			$fileds['tr_modifier'] = 'Modifier';
+
+			foreach(Api\Storage\Customfields::get('tracker') as $name => $data)
+			{
+				$fields['#'.$name] = lang($data['label']);
+			}
 		}
 		return $fields;
 	}

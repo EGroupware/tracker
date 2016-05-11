@@ -1,13 +1,13 @@
 <?php
 /**
- * eGroupWare Tracker - Escalation of tickets
+ * EGroupware Tracker - Escalation of tickets
  *
  * Sponsored by Hexagon Metrolegy (www.hexagonmetrology.net)
  *
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2008 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2008-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -135,7 +135,7 @@ class tracker_escalations extends Api\Storage\Base2
 				$data['set'][substr($key,4)] = $value;
 				if (!is_null($value))
 				{
-					static $col2action;
+					static $col2action=null;
 					if (is_null($col2action))
 					{
 						$col2action = array(
@@ -233,7 +233,7 @@ class tracker_escalations extends Api\Storage\Base2
 	/**
 	 * Get an SQL filter to include in a tracker search returning only matches of a given escalation
 	 *
-	 * @param boolean $due=false true = return only tickets due to escalate, default false = return all tickets matching the escalation filter
+	 * @param boolean $due =false true = return only tickets due to escalate, default false = return all tickets matching the escalation filter
 	 * @return array|boolean array with filter or false if escalation not found
 	 */
 	function get_filter($due=false)
@@ -372,7 +372,7 @@ class tracker_escalations extends Api\Storage\Base2
 		}
 		self::$tracker->init($ticket);
 
-		if ($result = self::$tracker->save() != 0)
+		if (($result = self::$tracker->save()) != 0)
 		{
 			return false;	// error saving the ticket
 		}
@@ -478,7 +478,8 @@ class tracker_escalations extends Api\Storage\Base2
 		// filter only due tickets
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
-		$filter[] = tracker_bo::escalated_filter($this->id,$join,
+		$join = null;
+		$filter[] = self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
 		);
 
@@ -520,7 +521,7 @@ class tracker_escalations extends Api\Storage\Base2
 	/**
 	 * Check if exist and if not start or stop an async job to close pending items
 	 *
-	 * @param boolean $start=true true=start, false=stop
+	 * @param boolean $start =true true=start, false=stop
 	 */
 	static function set_async_job($start=true)
 	{
@@ -567,7 +568,8 @@ class tracker_escalations extends Api\Storage\Base2
 		// filter only due tickets
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
-		$filter[] = tracker_bo::escalated_filter($this->id,$join,
+		$join = null;
+		$filter[] = self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
 		);
 
@@ -624,6 +626,7 @@ class tracker_escalations extends Api\Storage\Base2
 		// Get a list of users
 		$users = self::$tracker->users_with_open_entries();
 
+		$notified = null;
 		foreach($users as $user)
 		{
 			if (isset($notified)) $notified=array();

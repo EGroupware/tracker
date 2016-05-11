@@ -1,6 +1,6 @@
 <?php
 /**
- * eGroupWare - Wizard for Tracker CSV import
+ * EGroupware - Wizard for Tracker CSV import
  *
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
@@ -14,7 +14,6 @@ use EGroupware\Api;
 
 class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 {
-
 	/**
 	 * constructor
 	 */
@@ -137,7 +136,7 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
                                 'translate_resolution'	=> $options + $add_queue + array($set_to => $ui->get_tracker_labels('resolution', null)),
                                 'translate_cat_id'	=> $options + $add_queue + array($set_to => $ui->get_tracker_labels('cat', null)),
                         );
-                        foreach($sel_options['translate_tracker'][$set_to] as $id => $name) {
+                        foreach(array_keys($sel_options['translate_tracker'][$set_to]) as $id) {
                                 $sel_options['translate_version'][$set_to] += $ui->get_tracker_labels('version', $id);
                                 $sel_options['translate_cat_id'][$set_to] += $ui->get_tracker_labels('cat', $id);
                                 $sel_options['translate_status'][$set_to] += $ui->get_tracker_stati($id);
@@ -156,10 +155,10 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 	function wizard_step50(&$content, &$sel_options, &$readonlys, &$preserv)
 	{
 		$result = parent::wizard_step50($content, $sel_options, $readonlys, $preserv);
-		
+
 		return $result;
 	}
-	
+
 	function wizard_step60(&$content, &$sel_options, &$readonlys, &$preserv)
 	{
 		if($this->debug) error_log(__METHOD__.'->$content '.print_r($content,true));
@@ -205,6 +204,6 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			unset ($preserv['button']);
 			return 'tracker.importexport_wizard_chooseowner';
 		}
-		
+
 	}
 }

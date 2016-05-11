@@ -1,6 +1,6 @@
 <?php
 /**
- * eGroupWare - Wizard for Tracker CSV export
+ * EGroupware - Wizard for Tracker CSV export
  *
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
@@ -14,11 +14,11 @@ use EGroupware\Api;
 
 class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 {
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 
 		// Field mapping
-		$bo = new tracker_bo();
 		$this->export_fields = array(
 			'tr_id'          => 'Tracker ID',
 			'tr_summary'     => 'Summary',
@@ -49,7 +49,8 @@ class tracker_wizard_export_csv extends importexport_wizard_basic_export_csv
 
 		// Custom fields
 		$custom = Api\Storage\Customfields::get('tracker', true);
-		foreach($custom as $name => $data) {
+		foreach($custom as $name => $data)
+		{
 			$this->export_fields['#'.$name] = $data['label'];
 		}
 	}

@@ -124,7 +124,7 @@ class tracker_egw_record implements importexport_iface_egw_record
 	 * @return string identifier
 	 */
 	public function save ( $_dst_identifier ) {
-
+		unset($_dst_identifier);	// not used
 	}
 
 	/**
@@ -134,7 +134,7 @@ class tracker_egw_record implements importexport_iface_egw_record
 	 * @return string dst_identifier
 	 */
 	public function copy ( $_dst_identifier ) {
-
+		unset($_dst_identifier);	// not used
 	}
 
 	/**
@@ -144,7 +144,7 @@ class tracker_egw_record implements importexport_iface_egw_record
 	 * @return string dst_identifier
 	 */
 	public function move ( $_dst_identifier ) {
-
+		unset($_dst_identifier);	// not used
 	}
 
 	/**

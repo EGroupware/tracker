@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-13 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -134,7 +134,7 @@ class tracker_so extends Api\Storage
 	 * Reimplemented to save the reply too
 	 *
 	 * @param array $keys if given $keys are copied to data before saveing => allows a save as
-	 * @param string|array $extra_where=null extra where clause, eg. to check an etag, returns true if no affected rows!
+	 * @param string|array $extra_where =null extra where clause, eg. to check an etag, returns true if no affected rows!
 	 * @return int|boolean 0 on success, or errno != 0 on error, or true if $extra_where is given and no rows affected
 	 */
 	function save($keys=null,$extra_where=null)
@@ -143,7 +143,7 @@ class tracker_so extends Api\Storage
 		{
 			$this->data_merge($keys);
 		}
-		if (($ret = parent::save()) == 0)
+		if (($ret = parent::save(null, $extra_where)) == 0)
 		{
 			$this->data2db();
 			if ($this->data['reply_message'])
@@ -189,22 +189,24 @@ class tracker_so extends Api\Storage
 	 * Reimplemented to join with the votes table and respect the private attribute
 	 *
 	 * @param array|string $criteria array of key and data cols, OR a SQL query (content for WHERE), fully quoted (!)
-	 * @param boolean|string|array $only_keys=true True returns only keys, False returns all cols. or
+	 * @param boolean|string|array $only_keys =true True returns only keys, False returns all cols. or
 	 *	comma seperated list or array of columns to return
-	 * @param string $order_by='' fieldnames + {ASC|DESC} separated by colons ',', can also contain a GROUP BY (if it contains ORDER BY)
-	 * @param string|array $extra_cols='' string or array of strings to be added to the SELECT, eg. "count(*) as num"
-	 * @param string $wildcard='' appended befor and after each criteria
-	 * @param boolean $empty=false False=empty criteria are ignored in query, True=empty have to be empty in row
-	 * @param string $op='AND' defaults to 'AND', can be set to 'OR' too, then criteria's are OR'ed together
-	 * @param mixed $start=false if != false, return only maxmatch rows begining with start, or array($start,$num), or 'UNION' for a part of a union query
-	 * @param array $filter=null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
-	 * @param string $join_in='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
+	 * @param string $order_by ='' fieldnames + {ASC|DESC} separated by colons ',', can also contain a GROUP BY (if it contains ORDER BY)
+	 * @param string|array $extra_cols ='' string or array of strings to be added to the SELECT, eg. "count(*) as num"
+	 * @param string $wildcard ='' appended befor and after each criteria
+	 * @param boolean $empty =false False=empty criteria are ignored in query, True=empty have to be empty in row
+	 * @param string $op ='AND' defaults to 'AND', can be set to 'OR' too, then criteria's are OR'ed together
+	 * @param mixed $start =false if != false, return only maxmatch rows begining with start, or array($start,$num), or 'UNION' for a part of a union query
+	 * @param array $filter =null if set (!=null) col-data pairs, to be and-ed (!) into the query without wildcards
+	 * @param string $join_in ='' sql to do a join, added as is after the table-name, eg. "JOIN table2 ON x=y" or
 	 *	"LEFT JOIN table2 ON (x=y AND z=o)", Note: there's no quoting done on $join, you are responsible for it!!!
-	 * @param boolean $need_full_no_count=false If true an unlimited query is run to determine the total number of rows, default false
+	 * @param boolean $need_full_no_count =false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return array|NULL array of matching rows (the row is an array of the cols) or NULL
 	 */
 	function &search($criteria,$only_keys=True,$order_by='',$extra_cols='',$wildcard='',$empty=False,$op='AND',$start=false,$filter=null,$join_in=true,$need_full_no_count=false)
 	{
+		unset($need_full_no_count);	// not used
+
 		if (!$this->trackers)
 		{
 			return array();	// no access to any tracker queue, but tracker app
@@ -212,7 +214,7 @@ class tracker_so extends Api\Storage
 		$join = $join_in && $join_in != 1 ? $join_in : '';
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
-		foreach ((array)$filter['tr_tracker'] as $k => $tr)
+		foreach ((array)$filter['tr_tracker'] as $tr)
 		{
 			$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($tr);
 		}
@@ -393,7 +395,7 @@ class tracker_so extends Api\Storage
 		// Add in custom filters that = closed
 		$custom_closed = array();
 		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker);
-		foreach($stati as $stati_id => $stati_label)
+		foreach(array_keys($stati) as $stati_id)
 		{
 			$data = Api\Categories::id2name($stati_id, 'data');
 			if($data['closed']) $custom_closed[] = $stati_id;
@@ -537,8 +539,8 @@ class tracker_so extends Api\Storage
 	 * Filter by a certain escalation (either done or not done)
 	 *
 	 * @param int $esc_id
-	 * @param string &$join join with escalation table is added there
-	 * @param boolean/timetamp $escalated=true default true=return only escalated tickets, false = return not escalated ticktes,
+	 * @param string& $join join with escalation table is added there
+	 * @param boolean|timetamp $escalated =true default true=return only escalated tickets, false = return not escalated ticktes,
 	 * 	timestamp = return tickets escalated before the time
 	 * @return string filter
 	 */
@@ -556,8 +558,8 @@ class tracker_so extends Api\Storage
 	/**
 	 * Delete tracker items with the given keys
 	 *
-	 * @param array|int $keys=null if given array with col => value pairs to characterise the rows to delete, or integer autoinc id
-	 * @param boolean $only_return_ids=false return $ids of delete call to db object, but not run it (can be used by extending classes!)
+	 * @param array|int $keys =null if given array with col => value pairs to characterise the rows to delete, or integer autoinc id
+	 * @param boolean $only_return_ids =false return $ids of delete call to db object, but not run it (can be used by extending classes!)
 	 * @return int|array affected rows, should be 1 if ok, 0 if an error or array with id's if $only_return_ids
 	 */
 	function delete($keys=null,$only_return_ids=false)
@@ -590,7 +592,7 @@ class tracker_so extends Api\Storage
 	 *
 	 * @param array $args hook arguments
 	 * @param int $args['account_id'] account to delete
-	 * @param int $args['new_owner']=0 new owner
+	 * @param int $args['new_owner'] =0 new owner
 	 */
 	function change_delete_owner(array $args)  // new_owner=0 means delete
 	{
@@ -621,8 +623,14 @@ class tracker_so extends Api\Storage
 					unset($toUpdate[$row['tr_id']]);
 				}
 			}
-			foreach ($toDelete as $trid => $who) $this->db->delete(self::ASSIGNEE_TABLE,array('tr_id'=>$trid,'tr_assigned'=>$who),__LINE__,__FILE__,'tracker');
-			foreach ($toUpdate as $trid => $who) $this->db->update(self::ASSIGNEE_TABLE,array('tr_assigned'=>$args['new_owner']),array('tr_id'=>$trid,'tr_assigned'=>$args['account_id']),__LINE__,__FILE__,'tracker');
+			foreach ($toDelete as $trid => $who)
+			{
+				$this->db->delete(self::ASSIGNEE_TABLE,array('tr_id'=>$trid,'tr_assigned'=>$who),__LINE__,__FILE__,'tracker');
+			}
+			foreach ($toUpdate as $trid => $who)
+			{
+				$this->db->update(self::ASSIGNEE_TABLE,array('tr_assigned'=>$args['new_owner']),array('tr_id'=>$trid,'tr_assigned'=>$args['account_id']),__LINE__,__FILE__,'tracker');
+			}
 		}
 	}
 
@@ -631,7 +639,7 @@ class tracker_so extends Api\Storage
 	 *
 	 * @param int $tr_id tracker-id
 	 * @param int $user account_id
-	 * @param string $ip=null IP, if it should be checked too
+	 * @param string $ip =null IP, if it should be checked too
 	 */
 	function check_vote($tr_id,$user,$ip=null)
 	{
@@ -692,7 +700,7 @@ class tracker_so extends Api\Storage
 	/**
 	 * Delete a bounty
 	 *
-	 * @param int $bounty_id
+	 * @param int $id
 	 * @return int number of deleted rows: 1 = success, 0 = failure
 	 */
 	function delete_bounty($id)

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<overlay>
+	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
+		<grid width="100%">
+			<columns>
+				<column width="65"/>
+				<column width="10%" disabled="@no_tr_tracker"/>
+				<column width="10%" disabled="@no_cat_id"/>
+				<column width="10%"/>
+				<column width="40%"/>
+				<column width="40%"/>
+				<column width="135"/>
+				<column width="135" disabled="@no_tr_startdate_tr_duedate"/>
+				<column width="45"/>
+				<column width="10%"/>
+				<column width="10%"/>
+				<column width="65"/>
+				<column width="135"/>
+				<column disabled="@no_tr_sum_timesheets"/>
+				<column disabled="@no_votes"/>
+				<column disabled="@no_bounties"/>
+				<column/>
+				<column width="10%"/>
+			</columns>
+			<rows>
+				<row class="th">
+					<vbox>
+						<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
+						<nextmatch-filterheader id="tr_private" options="Private"/>
+					</vbox>
+					<nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
+					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
+					<nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
+					<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+					<vbox>
+						<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+						<nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
+					</vbox>
+					<vbox>
+						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
+						<nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
+					</vbox>
+					<vbox>
+						<nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
+						<nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
+					</vbox>
+					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
+					<vbox>
+						<nextmatch-filterheader label="Status" id="tr_status" options="All" class="tracker_status_filter"/>
+					</vbox>
+					<nextmatch-filterheader label="Resolution" id="tr_resolution" options="All" class="tracker_status_filter"/>
+					<nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
+					<vbox>
+						<nextmatch-accountfilter id="tr_creator" options="Created by" class="tracker_user_filter"/>
+						<nextmatch-filterheader id="tr_assigned" no_lang="1" options="Assigned to" class="tracker_user_filter"/>
+					</vbox>
+					<nextmatch-header align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"/>
+					<nextmatch-sortheader label="Votes" id="votes" class="tracker-votes" sortmode="DESC"/>
+					<nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties" sortmode="DESC"/>
+					<nextmatch-filterheader id="esc_id" options="Escalation"/>
+					<nextmatch-customfields id="customfields"/>
+				</row>
+				<row class="$row_cont[cat_id] $row_cont[class]" valign="top">
+					<vbox no_lang="1">
+						<description id="${row}[tr_id]" no_lang="1"/>
+						<menulist>
+							<menupopup type="select-bool" id="${row}[tr_private]" readonly="true"/>
+						</menulist>
+					</vbox>
+					<menulist>
+						<menupopup id="${row}[tr_tracker]" no_lang="1" readonly="true"/>
+					</menulist>
+					<menulist>
+						<menupopup id="${row}[cat_id]" readonly="true" options="None"/>
+					</menulist>
+					<menulist>
+						<menupopup id="${row}[tr_version]" readonly="true" options="None"/>
+					</menulist>
+					<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
+					<vbox no_lang="1" class="colfullWidth">
+						<description extra_link_popup="780x535" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
+						<hrule/>
+						<box no_lang="1" class="trackerDes">
+							<html id="${row}[tr_description]" no_lang="1"/>
+						</box>
+					</vbox>
+					<vbox readonly="true">
+						<date-time id="${row}[tr_created]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
+						<date-time id="${row}[tr_modified]" readonly="true" class="noWrap"/>
+						<menulist>
+							<menupopup type="select-account" class="noWrap" id="${row}[tr_modifier]" readonly="true"/>
+						</menulist>
+					</vbox>
+					<vbox>
+						<date-time id="${row}[tr_startdate]" readonly="true" class="noWrap"/>
+						<date-time id="${row}[tr_duedate]" readonly="true" class="noWrap $row_cont[overdue_class]"/>
+					</vbox>
+					<description align="center" id="${row}[prio_label]" class="tracker_indexPrio"/>
+					<menulist>
+						<menupopup id="${row}[tr_status]" readonly="true"/>
+					</menulist>
+					<menulist>
+						<menupopup id="${row}[tr_resolution]" readonly="true" options="None"/>
+					</menulist>
+					<progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
+					<vbox>
+						<hbox readonly="true">
+							<image label="Created by" src="move2" readonly="true"/>
+							<menulist>
+								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"/>
+							</menulist>
+						</hbox>
+						<hbox readonly="true">
+							<image label="Assigned to" src="groupevent" readonly="true"/>
+							<menulist>
+								<menupopup type="select-account" class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"/>
+							</menulist>
+						</hbox>
+					</vbox>
+					<date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" options="@duration_format"/>
+					<textbox type="integer" align="center" id="${row}[votes]" readonly="true"/>
+					<textbox type="float" align="center" label="$row_cont[currency]" id="${row}[bounties]" no_lang="1" readonly="true"/>
+					<date-since id="${row}[esc_start]"/>
+					<customfields-list id="$row"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>

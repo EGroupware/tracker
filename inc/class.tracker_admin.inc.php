@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-10 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -58,13 +58,13 @@ class tracker_admin extends tracker_bo
 	/**
 	 * Site configuration
 	 *
-	 * @param array $content=null
+	 * @param array $_content=null
 	 * @return string
 	 */
-	function admin($content=null,$msg='')
+	function admin($_content=null,$msg='')
 	{
-		//_debug_array($content);
-		$tracker = (int) $content['tracker'];
+		//_debug_array($_content);
+		$tracker = (int) $_content['tracker'];
 
 		// apply preferences for assigning of defaultprojects, and provide the project list
 		if ($this->prefs['allow_defaultproject'] && $tracker)
@@ -72,24 +72,24 @@ class tracker_admin extends tracker_bo
 			$allow_defaultproject = $this->prefs['allow_defaultproject'];
 		}
 
-		if (is_array($content))
+		if (is_array($_content))
 		{
-			list($button) = @each($content['button']);
+			list($button) = @each($_content['button']);
 			$defaultresolution = false;
-			if (isset($content['resolutions']['isdefaultresolution']))
+			if (isset($_content['resolutions']['isdefaultresolution']))
 			{
 				$name = 'resolutions';
-				$defaultresolution = $content[$name]['isdefaultresolution'];
-				unset($content[$name]['isdefaultresolution']);
+				$defaultresolution = $_content[$name]['isdefaultresolution'];
+				unset($_content[$name]['isdefaultresolution']);
 			}
 			switch($button)
 			{
 				case 'add':
-					if (!$content['add_name'])
+					if (!$_content['add_name'])
 					{
 						$msg = lang('You need to enter a name');
 					}
-					elseif (($id = $this->add_tracker($content['add_name'])))
+					elseif (($id = $this->add_tracker($_content['add_name'])))
 					{
 						$tracker = $id;
 						$msg = lang('Tracker added');
@@ -101,11 +101,11 @@ class tracker_admin extends tracker_bo
 					break;
 
 				case 'rename':
-					if (!$content['add_name'])
+					if (!$_content['add_name'])
 					{
 						$msg = lang('You need to enter a name');
 					}
-					elseif($tracker && $this->rename_tracker($tracker,$content['add_name']))
+					elseif($tracker && $this->rename_tracker($tracker,$_content['add_name']))
 					{
 						$msg = lang('Tracker queue renamed');
 					}
@@ -132,18 +132,18 @@ class tracker_admin extends tracker_bo
 						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','restrictions','notification','mailhandling','priorities')) as $name)
 						{
 							if (in_array($name,array('overdue_days','pending_close_days')) &&
-								$content[$name] === '')
+								$_content[$name] === '')
 							{
-								$content[$name] = '0';	// otherwise it does NOT get stored
+								$_content[$name] = '0';	// otherwise it does NOT get stored
 							}
-							if ((string) $this->$name !== $content[$name])
+							if ((string) $this->$name !== $_content[$name])
 							{
-								$this->$name = $content[$name];
+								$this->$name = $_content[$name];
 								$need_update = true;
 							}
 						}
 						// field_acl
-						foreach($content['field_acl'] as $row)
+						foreach($_content['field_acl'] as $row)
 						{
 							$rights = 0;
 							foreach(array(
@@ -172,18 +172,18 @@ class tracker_admin extends tracker_bo
 					{
 						$staff =& $this->$name;
 						if (!isset($staff[$tracker])) $staff[$tracker] = array();
-						if (!isset($content[$name])) $content[$name] = array();
+						if (!isset($_content[$name])) $_content[$name] = array();
 
-						if ($staff[$tracker] != $content[$name])
+						if ($staff[$tracker] != $_content[$name])
 						{
-							$staff[$tracker] = $content[$name];
+							$staff[$tracker] = $_content[$name];
 							$need_update = true;
 						}
 					}
 
 					// build the (normalized!) priority array
 					$prios = array();
-					foreach($content['priorities'] as $value => $data)
+					foreach($_content['priorities'] as $value => $data)
 					{
 						if ($value == 'cat_id')
 						{
@@ -223,7 +223,8 @@ class tracker_admin extends tracker_bo
 							$validationError=true;
 						}
 						$mailhandler = new tracker_mailhandler($this->mailhandling);
-						foreach((array)$this->mailhandling as $queue_id => $handling) {
+						foreach(array_keys((array)$this->mailhandling) as $queue_id)
+						{
 							if (is_array($this->mailhandling[$queue_id]) && $this->mailhandling[$queue_id]['interval'])
 							{
 								try
@@ -253,7 +254,7 @@ class tracker_admin extends tracker_bo
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
-						foreach($content[$name] as $cat)
+						foreach($_content[$name] as $cat)
 						{
 							//_debug_array(array($name=>$cat));
 							if (!is_array($cat) || !$cat['name']) continue;	// ignore empty (new) cats
@@ -399,9 +400,9 @@ class tracker_admin extends tracker_bo
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
-						if (isset($content[$name]['delete']))
+						if (isset($_content[$name]['delete']))
 						{
-							list($id) = each($content[$name]['delete']);
+							list($id) = each($_content[$name]['delete']);
 							if ((int)$id)
 							{
 								$GLOBALS['egw']->categories->delete($id);
@@ -423,9 +424,9 @@ class tracker_admin extends tracker_bo
 			'notification' => $this->notification[$tracker],
 			'restrictions' => $this->restrictions[$tracker],
 			'mailhandling' => $this->mailhandling[$tracker],
-			'tabs' => $content['tabs'],
+			'tabs' => $_content['tabs'],
 			// keep priority cat only if tracker is unchanged, otherwise reset it
-			'priorities' => $tracker == $content['tracker'] ? array('cat_id' => $content['priorities']['cat_id']) : array(),
+			'priorities' => $tracker == $_content['tracker'] ? array('cat_id' => $_content['priorities']['cat_id']) : array(),
 		);
 
 		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
@@ -638,16 +639,16 @@ class tracker_admin extends tracker_bo
 	/**
 	 * Define escalations
 	 *
-	 * @param array $content
+	 * @param array $_content
 	 * @param string $msg
 	 */
-	function escalations(array $content=null,$msg='')
+	function escalations(array $_content=null,$msg='')
 	{
 		$escalations = new tracker_escalations();
 
-		if (!is_array($content))
+		if (!is_array($_content))
 		{
-			$content['nm'] = array(
+			$_content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_admin.get_rows',
 				'no_cat'         => true,
 				'no_filter2'=> true,
@@ -671,33 +672,33 @@ class tracker_admin extends tracker_bo
 		}
 		else
 		{
-			list($button) = @each($content['button']);
-			unset($content['button']);
-			$escalations->init($content);
+			list($button) = @each($_content['button']);
+			unset($_content['button']);
+			$escalations->init($_content);
 
 			switch($button)
 			{
 				case 'save':
 				case 'apply':
 					// 'Before' only valid for start & due dates
-					if($content['esc_before_after'] == tracker_escalations::BEFORE &&
-						!in_array($content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
+					if($_content['esc_before_after'] == tracker_escalations::BEFORE &&
+						!in_array($_content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
 					{
 						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
 						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
 						break;
 					}
 					// Handle before time
-					$escalations->data['esc_time'] *= ($content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
+					$escalations->data['esc_time'] *= ($_content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
 
 					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save(null,null,!$content['esc_run_on_existing'])) == 0)
+					elseif (($err = $escalations->save(null,null,!$_content['esc_run_on_existing'])) == 0)
 					{
-						$msg = $content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
+						$msg = $_content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
 					if ($button == 'apply' || $err) break;
 					// fall-through
@@ -705,18 +706,18 @@ class tracker_admin extends tracker_bo
 					$escalations->init();
 					break;
 			}
-			if($content['nm']['rows']['edit'] || $content['nm']['rows']['delete'])
+			if($_content['nm']['rows']['edit'] || $_content['nm']['rows']['delete'])
 			{
-				$content['nm']['action'] = key($content['nm']['rows']);
-				$content['nm']['selected'] = array(key($content['nm']['rows'][$content['nm']['action']]));
+				$_content['nm']['action'] = key($_content['nm']['rows']);
+				$_content['nm']['selected'] = array(key($_content['nm']['rows'][$_content['nm']['action']]));
 			}
-			if($content['nm']['action'])
+			if($_content['nm']['action'])
 			{
-				$action = $content['nm']['action'];
-				list($id) = $content['nm']['selected'];
-				$id = (int)$id;
-				unset($content['nm']['action']);
-				unset($content['nm']['selected']);
+				$action = $_content['nm']['action'];
+				list($_id) = $_content['nm']['selected'];
+				$id = (int)$_id;
+				unset($_content['nm']['action']);
+				unset($_content['nm']['selected']);
 				switch($action)
 				{
 					case 'edit':
@@ -740,7 +741,7 @@ class tracker_admin extends tracker_bo
 			}
 		}
 		$content = $escalations->data + array(
-			'nm' => $content['nm'],
+			'nm' => $_content['nm'],
 			'msg' => $msg,
 		);
 
