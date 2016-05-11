@@ -119,6 +119,9 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
   max-height: 215px;
 }
+#tracker-index_nm.et2_nextmatch .egwGridView_outer thead tr {
+  border-left: 12px solid transparent;
+}
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
 }

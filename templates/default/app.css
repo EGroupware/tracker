@@ -54,3 +54,5 @@ label.tracker_trIdEdit:before { content: "#"; }
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
 	max-height: 215px;
 }
+
+#tracker-index_nm.et2_nextmatch .egwGridView_outer thead tr {border-left: 12px solid transparent;}
