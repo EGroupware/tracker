@@ -171,7 +171,7 @@ class tracker_merge extends Api\Storage\Merge
 			$sum = ExecMethod('timesheet.timesheet_bo.sum',$links);
 			$info['$$tr_sum_timesheets$$'] = $sum['duration'];
 		}
-		
+
 		// Add markers
 		foreach($array as $key => &$value)
 		{
@@ -218,7 +218,7 @@ class tracker_merge extends Api\Storage\Merge
 
 		$this->bo->read($tr_id);
 		$tracker = $this->bo->data;
-		
+
 		if(array_key_exists($tr_id, $this->preset_comments))
 		{
 			$replies = $this->preset_comments[$tr_id];
@@ -276,7 +276,7 @@ class tracker_merge extends Api\Storage\Merge
 	{
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('tracker').' - '.lang('Replacements for inserting entries into documents');
 		$GLOBALS['egw_info']['flags']['nonavbar'] = false;
-		$GLOBALS['egw']->framework->header();
+		echo $GLOBALS['egw']->framework->header();
 
 		echo "<table width='90%' align='center'>\n";
 		echo '<tr><td colspan="4"><h3>'.lang('Tracker fields:')."</h3></td></tr>";
@@ -354,6 +354,6 @@ class tracker_merge extends Api\Storage\Merge
 
 		echo "</table>\n";
 
-		$GLOBALS['egw']->framework->footer();
+		echo $GLOBALS['egw']->framework->footer();
 	}
 }
