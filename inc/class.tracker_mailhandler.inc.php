@@ -797,7 +797,7 @@ class tracker_mailhandler extends tracker_bo
 		}
 		//if (!empty($attachments)) error_log(__METHOD__." Attachments with this mail:".print_r($attachments,true));
 		return array(
-			'body' => Api\Translation::convertHTMLToText(nl2br(Api\Html::purify($body_out))),
+			'body' => Api\Mail\Html::convertHTMLToText(nl2br(Api\Html::purify($body_out))),
 			'struct' => $struct,
 			'attachments' =>  !empty($additionalAttachments) ?
 				array_merge($attachments, $additionalAttachments) : $attachments,
