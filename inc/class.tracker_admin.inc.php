@@ -538,7 +538,8 @@ class tracker_admin extends tracker_bo
 			'allow_voting' => array('No','Yes'),
 			'allow_bounties' => array('No','Yes'),
 			'autoassign' => $this->get_staff($tracker),
-			'lang' => $GLOBALS['egw']->translation->get_installed_langs(),
+			'lang' => ($tracker ? array('' => lang('default')) : array() )+
+				Api\Translation::get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker),
 			// Mail handling
 			'interval' => array(
