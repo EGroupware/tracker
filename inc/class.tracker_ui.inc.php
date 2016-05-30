@@ -382,7 +382,8 @@ class tracker_ui extends tracker_bo
 						exit();
 					}
 					unset($_GET['tr_id']);	// in case it's still set
-					if($own_referer && strpos($own_referer,'cd=yes') === false)
+					if($own_referer && strpos($own_referer,'cd=yes') === false &&
+						strpos($own_referer,'tr_id='.$this->data['tr_id']) === FALSE)
 					{
 						// Go back to where you came from
 						Egw::redirect_link($own_referer);
