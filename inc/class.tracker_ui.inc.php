@@ -1345,6 +1345,9 @@ class tracker_ui extends tracker_bo
 				$content['nm']['options-selectcols']['tr_startdate'] = false;
 				$content['nm']['options-selectcols']['tr_duedate'] = false;
 			}
+			$content['nm']['no_votes'] = !$this->allow_voting;
+			$content['nm']['no_bounties'] = !$this->allow_bounties;
+			$content['nm']['no_tr_sum_timesheets'] = false;
 		}
 		if (!$content['nm']['session_for'] && $this->called_by) $content['nm']['session_for'] = $this->called_by;
 		if($_GET['search'])
@@ -1377,7 +1380,7 @@ class tracker_ui extends tracker_bo
 		{
 			$content['nm']['favorites'] = true; // Enable favorites
 		}
-		$content['duration_format'] = ','.$this->duration_format.',,1';
+		$content['duration_format'] = $this->duration_format;
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
