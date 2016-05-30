@@ -18,7 +18,7 @@ require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.sitemgr_module.inc.php');
  */
 class module_tracker extends sitemgr_module
 {
-	function module_tracker()
+	function __construct()
 	{
 		$this->arguments = array(
 			'arg3' => array(		// will be passed as $only_tracker argument to uitracker::index()

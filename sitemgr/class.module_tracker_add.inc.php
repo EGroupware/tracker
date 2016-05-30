@@ -10,8 +10,6 @@
  * @version $Id$
  */
 
-use EGroupware\Api;
-
 require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.sitemgr_module.inc.php');
 
 /**
@@ -20,7 +18,7 @@ require_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.sitemgr_module.inc.php');
  */
 class module_tracker_add extends sitemgr_module
 {
-	function module_tracker_add()
+	function __construct()
 	{
 		$this->arguments = array(
 			'tracker' => array(		// will be passed as $only_tracker argument to uitracker::index()
