@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006-12 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -387,6 +387,11 @@ class tracker_ui extends tracker_bo
 						// Go back to where you came from
 						Egw::redirect_link($own_referer);
 					}
+					if (Api\Json\Response::isJSONResponse())
+					{
+						Api\Json\Response::get()->call('egw.open_link','tracker.tracker_ui.index&ajax=true','_self',false,'tracker');
+						exit();
+					}
 					return $this->index(null,$this->data['tr_tracker'],$msg);
 
 				case 'vote':
@@ -515,7 +520,7 @@ class tracker_ui extends tracker_bo
 			'tr_description_options' => $tr_description_options,
 			'tr_description_mode'    => $readonlys['tr_description'],
 			'tr_reply_options' => $tr_reply_options,
-			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open("","tracker","list",null,"_self")',
+			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open_link("tracker.tracker_ui.index&ajax=true","_self",false,"tracker")',
 			'no_vote' => '',
 			'show_dates' => $this->show_dates,
 			'link_to' => array(
