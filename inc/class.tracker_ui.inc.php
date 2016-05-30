@@ -372,7 +372,7 @@ class tracker_ui extends tracker_bo
 					if ($button == 'apply')
 					{
 						$_GET['tr_id'] = $this->data['tr_id'];
-						return $this->edit($_GET['tr_id'], $msg);
+						return $this->edit($_GET['tr_id'], $msg, $popup);
 					}
 					// fall-through for save
 				case 'cancel':
