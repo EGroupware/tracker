@@ -130,7 +130,7 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 		}
 		return true;
 	},
-	
+
 	/**
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
 	 *
@@ -168,14 +168,13 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 	},
 
 	/**
-	 * edit_popup
 	 * Check if the edit window is a popup, then set window focus
 	 */
 	edit_popup: function()
 	{
 		if (typeof this.et2.node !='undefined' && typeof this.et2.node.baseURI != 'undefined')
 		{
-			if (!this.et2.node.baseURI.match('[no][no_]popup'))
+			if (!this.et2.node.baseURI.match(/no_?popup/))
 			{
 				window.focus();
 
