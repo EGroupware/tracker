@@ -19,7 +19,7 @@
 }
 /* Assigned context dialog */
 .action_popup-content.assigned_popup {
-  min-height: 100px !important;
+  min-height: 150px !important;
   overflow-y: hidden;
 }
 .tracker_overdue,
