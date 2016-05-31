@@ -4,7 +4,11 @@
 	/* This prevents the multi-select from pushing down the add button */
 	max-width: 95%;
 }
-
+/* Assigned context dialog */
+.action_popup-content.assigned_popup {
+	min-height: 150px !important;
+	overflow-y: hidden;
+}
 #tracker-edit.et2_container
 {
 }

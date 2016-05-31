@@ -1524,6 +1524,7 @@ width:100%;
 						'caption' => 'Assigned to',
 						'icon' => 'users',
 						'nm_action' => 'open_popup',
+						'onExecute' => 'javaScript:app.tracker.change_assigned'
 					),
 					'priority' => array(
 						'caption' => 'Priority',
@@ -1792,9 +1793,16 @@ width:100%;
 						if (!$this->read($tr_id)) continue;
 						list($add_remove, $idstr) = explode('_', $settings, 2);
 						$ids = explode(',',$idstr);
-						$this->data['tr_assigned'] = $add_remove == 'add' ?
-							array_merge($this->data['tr_assigned'],$ids) :
-							array_diff($this->data['tr_assigned'],$ids);
+						if($add_remove == 'ok')
+						{
+							$this->data['tr_assigned'] = $ids;
+						}
+						else
+						{
+							$this->data['tr_assigned'] = $add_remove == 'add' ?
+								array_merge($this->data['tr_assigned'],$ids) :
+								array_diff($this->data['tr_assigned'],$ids);
+						}
 						// No 0 allowed
 						$this->data['tr_assigned'] = array_unique(array_diff($this->data['tr_assigned'], array(0)));
 						if($no_notification) $this->data['no_notifications'] = true;

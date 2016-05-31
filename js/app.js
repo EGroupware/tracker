@@ -244,5 +244,42 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 	{
 		var widget = this.et2.getWidgetById('tr_summary');
 		if(widget) return widget.options.value;
-	}
+	},
+
+	/**
+	 * Action handler for context menu change assigned action
+	 *
+	 * We populate the dialog with the current value.
+	 *
+	 * @param {egwAction} _action
+	 * @param {egwActionObject[]} _selected
+	 */
+	change_assigned: function(_action, _selected)
+	{
+		var et2 = _selected[0].manager.data.nextmatch.getInstanceManager();
+		var assigned = et2.widgetContainer.getWidgetById('assigned');
+		if(assigned)
+		{
+			assigned.set_value([]);
+			et2.widgetContainer.getWidgetById('assigned_action[title]').set_value('');
+			et2.widgetContainer.getWidgetById('assigned_action[title]').set_class('');
+			et2.widgetContainer.getWidgetById('assigned_action[ok]').set_disabled(_selected.length !== 1);
+			et2.widgetContainer.getWidgetById('assigned_action[add]').set_disabled(_selected.length === 1)
+			et2.widgetContainer.getWidgetById('assigned_action[delete]').set_disabled(_selected.length === 1)
+		}
+
+		if(_selected.length === 1)
+		{
+			var data = egw.dataGetUIDdata(_selected[0].id);
+
+			if(assigned && data && data.data)
+			{
+				et2.widgetContainer.getWidgetById('assigned_action[title]').set_value(data.data.tr_summary);
+				et2.widgetContainer.getWidgetById('assigned_action[title]').set_class(data.data.class)
+				assigned.set_value(data.data.tr_assigned);
+			}
+		}
+
+		nm_open_popup(_action, _selected);
+	},
 });}).call(this);

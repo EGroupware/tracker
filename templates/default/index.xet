@@ -241,16 +241,15 @@
 							</vbox>
 						</box>
 						<box id="assigned_popup" class="action_popup prompt">
-							<vbox>
-								<description value="Change assigned" class="promptheader"/>
+							<description value="Change assigned" class="promptheader"/>
+							<vbox class="action_popup-content assigned_popup">
+								<description id="assigned_action[title]"/>
 								<description value="Select users or groups"/>
-								<hbox options="0,0">
-									<menulist>
-										<menupopup class="tracker_user_select" id="assigned" no_lang="1" options="Select one..."/>
-									</menulist>
-									<buttononly align="right" label="Select multiple" onclick="if (selectbox=document.getElementById(form::name('assigned'))) { selectbox.size=5; selectbox.multiple=true; if(selectbox.options[0].value=='')selectbox.options[0]=null; selectbox.name+='[]';}  this.style.display='none'; return false;" options="users"/>
-								</hbox>
+								<menulist>
+									<menupopup class="tracker_user_select" id="assigned" no_lang="1" rows="5" multiple="true" tags="true" empty_label="User or group"/>
+								</menulist>
 								<hbox>
+									<button label="Ok" id="assigned_action[ok]" onclick="nm_submit_popup(this); return false;"/>
 									<button label="Add" id="assigned_action[add]" onclick="nm_submit_popup(this); return false;"/>
 									<button label="Delete" id="assigned_action[delete]" onclick="nm_submit_popup(this); return false;"/>
 									<buttononly label="Cancel" onclick="nm_hide_popup(this,'assigned_popup');"/>
