@@ -246,7 +246,7 @@
 								<description id="assigned_action[title]"/>
 								<description value="Select users or groups"/>
 								<menulist>
-									<menupopup class="tracker_user_select" id="assigned" no_lang="1" rows="5" multiple="true" tags="true" empty_label="User or group"/>
+									<menupopup class="tracker_user_select et2_fullWidth" id="assigned" no_lang="1" rows="5" multiple="true" tags="true" empty_label="User or group"/>
 								</menulist>
 								<hbox>
 									<button label="Ok" id="assigned_action[ok]" onclick="nm_submit_popup(this); return false;"/>
