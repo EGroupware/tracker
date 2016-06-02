@@ -1461,7 +1461,8 @@ width:100%;
 				'url' => 'menuaction=tracker.tracker_ui.edit&tr_id=$id',
 				'popup' => Link::get_registry('tracker', 'add_popup'),
 				'group' => $group=1,
-				'onExecute' => Api\Header\UserAgent::mobile()?'javaScript:app.tracker.viewEntry':''
+				'onExecute' => Api\Header\UserAgent::mobile()?'javaScript:app.tracker.viewEntry':'',
+				'mobileViewTemplate' => 'edit?'.filemtime(Api\Etemplate\Widget\Template::rel2path('/tracker/templates/mobile/edit.xet'))
 			),
 			'print' => array(
 				'caption' => 'Print',
