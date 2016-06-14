@@ -259,7 +259,6 @@ class tracker_admin extends tracker_bo
 							//_debug_array(array($name=>$cat));
 							if (!is_array($cat) || !$cat['name']) continue;	// ignore empty (new) cats
 
-								if($name == 'resolutions') error_log(array2string($cat));
 							$new_cat_descr = 'tracker-';
 							switch($name)
 							{
