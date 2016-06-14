@@ -125,10 +125,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function __destruct()
 	{
-		if($this->mbox)
-		{
-			@imap_close($this->mbox);
-		}
 	}
 
 	/**
@@ -165,17 +161,6 @@ class tracker_mailhandler extends tracker_bo
 				if ($reference->username != $profile->username) $diff['acc_imap_username']=array('reference'=>$reference->username,'profile'=>$profile->username);
 				if ($reference->password != $profile->password) $diff['acc_imap_password']=array('reference'=>$reference->password,'profile'=>$profile->password);
 			}
-		}
-		else
-		{
-			if ($reference->ImapServerId != $profile->ImapServerId) $diff['ImapServerId']=array('reference'=>$reference->ImapServerId,'profile'=>$profile->ImapServerId);
-			if ($reference->encryption != $profile->encryption) $diff['encryption']=array('reference'=>$reference->encryption,'profile'=>$profile->encryption);
-			if ($reference->host != $profile->host) $diff['host']=array('reference'=>$reference->host,'profile'=>$profile->host);
-			if ($reference->port != $profile->port) $diff['port']=array('reference'=>$reference->port,'profile'=>$profile->port);
-			if ($reference->validatecert != $profile->validatecert) $diff['validatecert']=array('reference'=>$reference->validatecert,'profile'=>$profile->validatecert);
-			if ($reference->username != $profile->username) $diff['username']=array('reference'=>$reference->username,'profile'=>$profile->username);
-			if ($reference->loginName != $profile->loginName) $diff['loginName']=array('reference'=>$reference->loginName,'profile'=>$profile->loginName);
-			if ($reference->password != $profile->password) $diff['password']=array('reference'=>$reference->password,'profile'=>$profile->password);
 		}
 		return $diff;
 	}
@@ -221,29 +206,6 @@ class tracker_mailhandler extends tracker_bo
 				return false;
 			}
 		}
-		$mBox = '{'.$this->mailhandling[$queue]['server'];	// Set the servername
-
-		if(!empty($this->mailhandling[$queue]['serverport']))
-		{
-			// If set, add the portnumber
-			$mBox .= (':'.$this->mailhandling[$queue]['serverport']);
-		}
-		// Add the Servertype
-		$mBox .= ('/'.$this->serverTypes[($this->mailhandling[$queue]['servertype'])]);
-		$mBox .= '/norsh'; // do not use rsh or ssh to establish connection
-		// Close the server ID
-		$mBox .= '}';
-
-		// Add the default incoming folder or the one specified
-		if(empty($this->mailhandling[$queue]['folder']))
-		{
-			$mBox .= 'INBOX';
-		}
-		else
-		{
-			$mBox .= $this->mailhandling[$queue]['folder'];
-		}
-		return $mBox;
 	}
 
 	/**
@@ -285,7 +247,7 @@ class tracker_mailhandler extends tracker_bo
 			$this->save_config();
 			return false;
 		}
-		if ($this->mailBox instanceof defaultimap)
+		if ($this->mailBox instanceof Mail\Imap)
 		{
 			if (/*$this->mailhandling[$queue]['auto_reply'] ||*/ $this->mailhandling[$queue]['autoreplies'] || $this->mailhandling[$queue]['unrecognized_mails'])
 			{
@@ -385,7 +347,9 @@ class tracker_mailhandler extends tracker_bo
 				$_filter['type']='TO';
 				$_filter['string']=trim($this->mailhandling[$queue]['address']);
 			}
-			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, 1, $_filter, true, false);
+			$_reverse=1;
+			$_rByUid = true;
+			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse, $_filter, $_rByUid, false);
 			$sortResult = $_sortResult['match']->ids;
 			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
 			$deletedCounter = 0;
@@ -427,61 +391,6 @@ class tracker_mailhandler extends tracker_bo
 			$this->user = $this->originalUser;
 			return true;
 		}
-		if (self::LOG_LEVEL>1) error_log(__METHOD__." Processing mailbox {$this->mailBox} for queue $queue\n");
-		if (!($this->mbox = @imap_open($this->mailBox,
-									$this->mailhandling[$queue]['username'],
-									$this->mailhandling[$queue]['password'])))
-		{
-			$show_failed = true;
-			// try novalidate cert, in case of ssl connection
-			if ($this->mailhandling[$queue]['servertype']==2)
-			{
-				$this->mailBox = str_replace('/ssl','/ssl/novalidate-cert',$this->mailBox);
-				if (($this->mbox = imap_open($this->mailBox,$this->mailhandling[$queue]['username'],$this->mailhandling[$queue]['password']))) $show_failed=false;
-			}
-			if ($show_failed)
-			{
-				error_log(__METHOD__.__LINE__." failed to open mailbox:".print_r($this->mailBox,true));
-				return false;
-			}
-		}
-
-		// There seems to be a bug in imap_seach() (#48619) that causes a SegFault if all msg match
-		// This was introduced in v5.2.10 and fixed in v5.2.11, so use a workaround in 5.2.10
-		//
-		if (empty($this->mailhandling[$queue]['address']) || (version_compare(PHP_VERSION, '5.2.10') === 0))
-		{
-			// Use sort here to ensure the format returned equals search
-			$this->msgList = imap_sort ($this->mbox, SORTARRIVAL, 1);
-		}
-		else
-		{
-			$this->msgList = imap_search ($this->mbox, 'TO "' . $this->mailhandling[$queue]['address'] . '"');
-		}
-
-		if ($this->msgList)
-		{
-			$_cnt = count ($this->msgList);
-			for ($_idx = 0; $_idx < $_cnt; $_idx++)
-			{
-				//error_log(__METHOD__.':About to process Message with ID:'.$_idx.' -> '.array2string($this->msgList[$_idx]));
-				if ($this->msgList[$_idx])
-				if (self::process_message($this->msgList[$_idx], $queue) && $this->mailhandling[$queue]['delete_from_server'])
-				{
-					@imap_delete($this->mbox, $this->msgList[$_idx]);
-				}
-			}
-		}
-		// Expunge delete mails, if any
-		@imap_expunge($this->mbox);
-
-		// Close the stream
-		@imap_close($this->mbox);
-
-		// Restore original user (for fallback)
-		$this->user = $this->originalUser;
-
-		return true;
 	}
 
 	/**
@@ -491,53 +400,10 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function get_mime_type(&$structure)
 	{
-		$primary_mime_type = array("TEXT", "MULTIPART","MESSAGE", "APPLICATION", "AUDIO","IMAGE", "VIDEO", "OTHER");
-		if($structure->subtype) {
-			return $primary_mime_type[(int) $structure->type] . '/' .$structure->subtype;
-		}
-		return "TEXT/PLAIN";
 	}
 
 	function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false)
 	{
-		//error_log(__METHOD__." getting body for ID: $msg_number, $mime_type, $part_number");
-		if(!$structure) {
-			//error_log(__METHOD__." fetching structure, as no structure passed.");
-			$structure = imap_fetchstructure($stream, $msg_number);
-		}
-		if($structure)
-		{
-			if($mime_type == $this->get_mime_type($structure))
-			{
-				if(!$part_number)
-				{
-					$part_number = "1";
-				}
-				//error_log(__METHOD__." mime type matched. Part $part_number.");
-				$struct = imap_bodystruct ($stream, $msg_number, "$part_number");
-				$body = imap_fetchbody($stream, $msg_number, $part_number);
-				return array('struct'=> $struct,
-							 'body'=>$body,
-							);
-			}
-
-			if($structure->type == 1) /* multipart */
-			{
-				while(list($index, $sub_structure) = each($structure->parts))
-				{
-					if($part_number)
-					{
-						$prefix = $part_number . '.';
-					}
-					$data = $this->get_part($stream, $msg_number, $mime_type, $sub_structure,$prefix.($index + 1));
-					if($data && !empty($data['body']))
-					{
-						return $data;
-					}
-				} // END OF WHILE
-			} // END OF MULTIPART
-		} // END OF STRUTURE
-		return false;
 	} // END OF FUNCTION
 
 	/**
@@ -598,210 +464,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function get_mailbody ($mid, $section=false, $structure = false)
 	{
-		$nonDisplayAbleCharacters = array('[\016]','[\017]',
-			'[\020]','[\021]','[\022]','[\023]','[\024]','[\025]','[\026]','[\027]',
-			'[\030]','[\031]','[\032]','[\033]','[\034]','[\035]','[\036]','[\037]');
-
-		//error_log(__METHOD__." Fetching body for ID $mid, Section $section with Structure: ".print_r($structure,true));
-		$charset = Api\Translation::charset(); // set some default charset, for Api\Translation to use
-		$mailbodyasAttachment = false;
-		if(function_exists(mb_decode_mimeheader)) {
-			mb_internal_encoding($charset);
-		}
-		if ($section === false)
-		{
-			$part_number = 1;
-		}
-		else
-		{
-			$part_number = $section;
-			$mailbodyasAttachment = true;
-		}
-		if ($structure === false) $structure = imap_fetchstructure($this->mbox, $mid);
-		if($structure) {
-			$mimeType = 'TEXT/PLAIN';
-			$rv = $this->get_part($this->mbox, $mid, $mimeType, $structure,($section ? $part_number:false));
-			$struct = $rv['struct'];
-			$body = $rv['body'];
-			if (empty($body))
-			{
-				$mimeType = 'TEXT/HTML';
-				$rv = $this->get_part($this->mbox, $mid, $mimeType, $structure,($section ? $part_number:false));
-				$struct = $rv['struct'];
-				$body = $rv['body'];
-			}
-			//error_log(__METHOD__. "->get_part returned: ".print_r($rv,true));
-			/*
-			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,2));
-			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,"2.1"));
-			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,3));
-			error_log($this->get_part($this->mbox, $mid, 'TEXT/HTML', $structure,"3.1"));
-			*/
-			if (self::LOG_LEVEL) error_log(__METHOD__.'Structure:'.print_r($structure,true));
-			if (self::LOG_LEVEL>1) error_log(__METHOD__.'Struct:'.print_r($struct,true));
-			if (self::LOG_LEVEL>2) error_log(__METHOD__.'Body:'.print_r($body,true));
-			if (isset($struct->ifparameters) && $struct->ifparameters == 1)
-			{
-				//error_log(__METHOD__.__LINE__.print_r($param,true));
-				while(list($index, $param) = each($struct->parameters))
-				{
-					if (strtoupper($param->attribute) == 'CHARSET') $charset = $param->value;
-				}
-			}
-			switch ($struct->encoding)
-			{
-				case 0: // 7 BIT
-					//dont try to decode, as we do use convert anyway later on
-					//$body = imap_utf7_decode($body);
-					break;
-				case 1: // 8 BIT
-					if ($struct->subtype == 'PLAIN' && strtolower($charset) != 'iso-8859-1') {
-						// only decode if we are at utf-8, not sure that we should decode at all, since we use convert anyway
-						//$body = utf8_decode ($body);
-					}
-					break;
-				case 2: // Binary
-					$body = imap_binary($body);
-					break;
-				case 3: //BASE64
-					$body = imap_base64($body);
-					break;
-				case 4: // QUOTED Printable
-					$body = quoted_printable_decode($body);
-					break;
-				case 5: // other
-				default:
-					break;
-			}
-			Api\Translation::convert($body,$charset);
-			if ($mimeType=='TEXT/PLAIN')
-			{
-				$newBody    = @htmlentities($body,ENT_QUOTES, strtoupper($charset));
-				// if empty and charset is utf8 try sanitizing the string in question
-				if (empty($newBody) && strtolower($charset)=='utf-8') $newBody = @htmlentities(iconv('utf-8', 'utf-8', $body),ENT_QUOTES, strtoupper($charset));
-				// if the conversion to htmlentities fails somehow, try without specifying the charset, which defaults to iso-
-				if (empty($newBody)) $newBody    = htmlentities($body,ENT_QUOTES);
-				$body = $newBody;
-			}
-			$body_out = preg_replace($nonDisplayAbleCharacters,'',$body);
-
-			// handle Attachments
-			$contentParts = count($structure->parts);
-			$additionalAttachments = array();
-			$attachments = array();
-			if($structure->type == 1 && $contentParts >=2) /* multipart */
-			{
-				$att = array();
-				$partNumber = array();
-				for ($i=2;$i<=$contentParts;$i++)
-				{
-					//error_log(__METHOD__. " --> part ".$i);
-					$att[$i-2] = imap_bodystruct($this->mbox,$mid,$i);
-					$partNumber[$i-2] = array('number' => $i,
-											'substruct' => $structure->parts[$i-1],
-										);
-				}
-				for ($k=0; $k<sizeof($att);$k++)
-				{
-					//error_log(__METHOD__. " processing part->".$k." Message Part:".print_r($partNumber[$k],true));
-					if ($att[$k]->ifdisposition == 1 && strtoupper($att[$k]->disposition) == 'ATTACHMENT')
-					{
-						//$num = count($attachments) - 1;
-						$num = $k;
-						if ($num < 0) $num = 0;
-						$attachments[$num]['type'] = $this->get_mime_type($att[$k]);
-						//error_log(__METHOD__. " part:".print_r($att[$k],true));
-						// type2 = Message; get mail as attachment, with its attachments too
-						if ($att[$k]->type == 2)
-						{
-							//error_log(__METHOD__. " part $k ->".($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number'])." is MESSAGE:".print_r($partNumber[$k]['substruct']->parts[0],true));
-							$rv = $this->get_mailbody($mid,($section ? $part_number.".".$partNumber[$k]['number']:$partNumber[$k]['number']) , $partNumber[$k]['substruct']->parts[0]);
-							$attachments[$num]['attachment'] = $rv['body'];
-							$attachments[$num]['type'] = $this->get_mime_type($rv['struct']);
-							if ($att[$k]->ifparameters)
-							{
-								//error_log(__METHOD__. " parameters exist:");
-								while(list($index, $param) = each($att[$k]->parameters))
-								{
-									//error_log(__METHOD__.__LINE__.print_r($param,true));
-									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
-								}
-							}
-							if ($att[$k]->ifdparameters)
-							{
-								//error_log(__METHOD__. " dparameters exist:");
-								while(list($index, $param) = each($att[$k]->dparameters))
-								{
-									//error_log(__METHOD__.__LINE__.print_r($param,true));
-									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
-								}
-							}
-							$att[$k] = $rv['struct'];
-							if (!empty($rv['attachments'])) for ($a=0; $a<sizeof($rv['attachments']);$a++)
-							{
-								$additionalAttachments[] = $rv['attachments'][$a];
-							}
-							if (empty($attachments[$num]['attachment']) && empty($rv['attachments']))
-							{
-								unset($attachments[$num]);
-								continue;  // no content -> skip
-							}
-						}
-						else
-						{
-							$attachments[$num]['attachment'] = imap_fetchbody($this->mbox,$mid,$k+2);
-							if (empty($attachments[$num]['attachment']))
-							{
-								unset($attachments[$num]);
-								continue; // no content -> skip
-							}
-							if ($att[$k]->ifparameters)
-							{
-								//error_log(__METHOD__. " parameters exist:");
-								while(list($index, $param) = each($att[$k]->parameters))
-								{
-									//error_log(__METHOD__.__LINE__.print_r($param,true));
-									if (strtoupper($param->attribute) == 'CHARSET') $attachments[$num]['charset'] = $param->value;
-									if (strtoupper($param->attribute) == 'NAME') $attachments[$num]['name'] = $param->value;
-								}
-							}
-							if ($att[$k]->ifdparameters)
-							{
-								//error_log(__METHOD__. " dparameters exist:");
-								while(list($index, $param) = each($att[$k]->dparameters))
-								{
-									//error_log(__METHOD__.__LINE__.print_r($param,true));
-									if (strtoupper($param->attribute) == 'FILENAME') $attachments[$num]['filename'] = $param->value;
-								}
-							}
-						}
-						$this->decode_header($attachments[$num]['filename']);
-						$this->decode_header($attachments[$num]['name']);
-						if (empty($attachments[$num]['name'])) $attachments[$num]['name'] = $attachments[$num]['filename'];
-						if (empty($attachments[$num]['name']))
-						{
-							$attachments[$num]['name'] = 'noname_'.$num;
-							$st = '';
-							if (strpos($attachments[$num]['type'],'/')!==false) list($t,$st) = explode('/',$attachments[$num]['type'],2);
-							if (!empty($st)) $attachments[$num]['name'] = $attachments[$num]['name'].'.'.$st;
-						}
-						$attachments[$num]['tmp_name'] = tempnam($GLOBALS['egw_info']['server']['temp_dir'],$GLOBALS['egw_info']['flags']['currentapp']."_");
-						$tmpfile = fopen($attachments[$num]['tmp_name'],'w');
-						fwrite($tmpfile,((substr(strtolower($attachments[$num]['type']),0,4) == "text") ? $attachments[$num]['attachment']: imap_base64($attachments[$num]['attachment'])));
-						fclose($tmpfile);
-						unset($attachments[$num]['attachment']);
-						//error_log(__METHOD__.print_r($attachments[$num],true));
-					}
-				}
-			}
-		}
-		//if (!empty($attachments)) error_log(__METHOD__." Attachments with this mail:".print_r($attachments,true));
-		return array(
-			'body' => Api\Mail\Html::convertHTMLToText(nl2br(Api\Html::purify($body_out))),
-			'struct' => $struct,
-			'attachments' =>  !empty($additionalAttachments) ?
-				array_merge($attachments, $additionalAttachments) : $attachments,
-	   );
 	}
 
 	/**
@@ -815,72 +477,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function is_automail($mid, $msgHeader)
 	{
-		// This array can be filled with checks that should be made.
-		// 'bounces' and 'autoreplies' (level 1) are the keys coded below, the level 2 arrays
-		// must match $msgHeader properties.
-		//
-		$autoMails = array(
-			 'bounces' => array(
-				 'subject' => array(
-				)
-				,'fromaddress' => array(
-					 'mailer-daemon'
-				)
-			)
-			,'autoreplies' => array(
-				 'subject' => array(
-					 'out of the office'
-					,'autoreply'
-					)
-				,'fromaddress' => array(
-				)
-			)
-		);
-
-		// Check for bounced messages
-		foreach ($autoMails['bounces'] as $_k => $_v) {
-			if (count($_v) == 0) {
-				continue;
-			}
-			$_re = '/(' . implode('|', $_v) . ')/i';
-			if (preg_match($_re, $msgHeader->$_k)) {
-				switch ($this->mailhandling[0]['bounces']) {
-					case 'delete' :		// Delete, whatever the overall delete setting is
-						@imap_delete($this->mbox, $mid);
-						break;
-					case 'forward' :	// Return the status of the forward attempt
-						$returnVal = self::forward_message($mid, $msgHeader);
-						if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
-					default :			// default: 'ignore'
-						break;
-				}
-				return true;
-			}
-		}
-
-		// Check for autoreplies
-		foreach ($autoMails['autoreplies'] as $_k => $_v) {
-			if (count($_v) == 0) {
-				continue;
-			}
-			$_re = '/(' . implode('|', $_v) . ')/i';
-			if (preg_match($_re, $msgHeader->$_k)) {
-				switch ($this->mailhandling[0]['autoreplies']) {
-					case 'delete' :		// Delete, whatever the overall delete setting is
-						@imap_delete($this->mbox, $mid);
-						break;
-					case 'forward' :	// Return the status of the forward attempt
-						$returnVal = self::forward_message($mid, $msgHeader);
-						if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
-						break;
-					case 'process' :	// Process normally...
-						return false;	// ...so act as if it's no automail
-					default :			// default: 'ignore'
-						break;
-				}
-				return true;
-			}
-		}
 	}
 
 	/**
@@ -982,7 +578,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function decode_header (&$header)
 	{
-		$header = Api\Mail\Html::decodeMailHeader($header);
 	}
 
 	/**
@@ -994,284 +589,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function process_message ($mid, $queue)
 	{
-		$senderIdentified = false;
-		$this->mailBody = null; // Clear previous message
-		$msgHeader = imap_headerinfo($this->mbox, $mid);
-		if (self::LOG_LEVEL>2)  error_log(__METHOD__.':Header retrieved:'.array2string($msgHeader));
-		// Workaround for PHP bug#48619
-		//
-		if (!empty($this->mailhandling[$queue]['address']) && (version_compare(PHP_VERSION, '5.2.10') === 0))
-		{
-			if (strstr($msgHeader->toaddress, $this->mailhandling[0]['address']) === false)
-			{
-				return false;
-			}
-		}
-		/*
-		 # Recent - R if recent and seen (Read), N if recent and unseen (New), ' ' if not recent
-		 # Unseen - U if not recent AND unseen, ' ' if seen  OR unseen and recent.
-		 # Flagged - F if marked as important/urgent, else ' '
-		 # Answered - A if Answered, else ' '
-		 # Deleted - D if marked for deletion, else ' '
-		 # Draft - X if marked as draft, else ' '
-		 */
-
-		if ($msgHeader->Deleted == 'D')
-		{
-			return false; // Already deleted
-		}
-		/*
-		if ($msgHeader->Recent == 'R' ||		// Recent and seen or
-				($msgHeader->Recent == ' ' &&	// not recent but
-				$msgHeader->Unseen == ' '))		// seen
-		*/
-		// should do the same, but is more robust as recent is a flag with some sideeffects
-		// message should be marked/flagged as seen after processing
-		// (don't forget to flag the message if forwarded; as forwarded is not supported with all IMAP use Seen instead)
-		if ((($msgHeader->Recent == 'R' || $msgHeader->Recent == ' ') && $msgHeader->Unseen == ' ') ||
-			($msgHeader->Answered == 'A' && $msgHeader->Unseen == ' ') || // is answered and seen
-			$msgHeader->Draft == 'X') // is Draft
-		{
-			if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.':'."\n".' Subject:'.print_r($msgHeader->subject,true).
-				"\n Date:".print_r($msgHeader->Date,true).
-	            "\n Recent:".print_r($msgHeader->Recent,true).
-	            "\n Unseen:".print_r($msgHeader->Unseen,true).
-	            "\n Flagged:".print_r($msgHeader->Flagged,true).
-	            "\n Answered:".print_r($msgHeader->Answered,true).
-	            "\n Deleted:".print_r($msgHeader->Deleted,true)."\n Stopped processing Mail. Not recent, new, or already answered, or deleted");
-			return false;
-		}
-
-		if ($this->is_automail($mid, $msgHeader)) {
-			if (self::LOG_LEVEL>1) error_log(__METHOD__.' Automails will not be processed.');
-			return false;
-		}
-
-		if (self::LOG_LEVEL>1) error_log(__FILE__.','.__METHOD__.' Mailheader/Subject:'.print_r($msgHeader,true));
-		// Try several headers to identify the sender
-		$try_addr = array(
-			0 => $msgHeader->from[0],
-			1 => $msgHeader->sender[0],
-			2 => $msgHeader->return_path[0],
-			3 => $msgHeader->reply_to[0],
-			// Users mentioned addresses where not recognized. That was not
-			// reproducable by me, so these headers are a trial-and-error apprach :-S
-			4 => $msgHeader->fromaddress,
-			5 => $msgHeader->senderaddress,
-			6 => $msgHeader->return_pathaddress,
-			7 => $msgHeader->reply_toaddress,
-		);
-
-		foreach ($try_addr as $id => $sender)
-		{
-			if (($extracted = self::extract_mailaddress (
-					(is_object($sender)
-						? $sender->mailbox.'@'.$sender->host
-						: $sender))) !== false)
-			{
-				if ($id == 3)
-				{
-					// Save the reply-to address in case the mailaddress should be
-					// added to the CC field.
-					$replytoAddress = $extracted;
-				}
-				if (($senderIdentified = self::search_user($extracted)) === true)
-				{
-					// Save the reply-to address if we found match for use with the
-					// auto-reply
-					$replytoAddress = $extracted;
-				}
-			}
-			if ($senderIdentified === true)
-			{
-				break;
-			}
-		}
-
-		// Handle unrecognized mails
-		if (!$senderIdentified)
-		{
-			switch ($this->mailhandling[$queue]['unrecognized_mails'])
-			{
-				case 'ignore' :		// Do nothing
-					return false;
-				case 'delete' :		// Delete, whatever the overall delete setting is
-					@imap_delete($this->mbox, $mid);
-					return false;	// Prevent from a second delete attempt
-				case 'forward' :	// Return the status of the forward attempt
-					$returnVal = self::forward_message($mid, $msgHeader, $queue);
-					if ($returnVal) $status = $this->flagMessageAsSeen($mid, $msgHeader);
-					return $returnVal;
-				case 'default' :	// Save as default user; handled below
-				default :			// Duh ??
-					break;
-			}
-		}
-
-		$this->mailSubject = $msgHeader->subject;
-		$this->decode_header ($this->mailSubject);
-		$this->ticketId = $this->get_ticketId($this->mailSubject);
-
-		if ($this->ticketId == 0) // Create new ticket?
-		{
-			if (empty($this->mailhandling[$queue]['default_tracker']))
-			{
-				return false; // Not allowed
-			}
-			if (!$senderIdentified) // Unknown user
-			{
-				if (empty($this->mailhandling[$queue]['unrec_mail']))
-				{
-					return false; // Not allowed for unknown users
-				}
-				$this->mailSender = $this->mailhandling[$queue]['unrec_mail']; // Ok, set default user
-			}
-		}
-
-		// By the time we get here, we know this ticket will be updated or created
-		$rv = $this->get_mailbody ($mid);
-		//error_log(__METHOD__.__LINE__.print_r($rv,true));
-		$parsed_header=imap_rfc822_parse_headers(imap_fetchheader($this->mbox, $mid));
-		$buff=array();
-		$mailHeaderInfo = '';
-		$header2desc=$header2comment=false;
-		foreach(array('from','to','cc','bcc') as $k)
-		{
-			if (isset($parsed_header->{$k}))
-			{
-				foreach($parsed_header->{$k} as $i)
-				{
-					if ($i->mailbox)
-					{
-						$buff[$k][] = imap_rfc822_write_address($i->mailbox,$i->host,$i->personal);
-					}
-				}
-			}
-		}
-		$this->mailBody = $rv['body'];
-		if (isset($this->mailhandling[$queue]['mailheaderhandling']) && $this->mailhandling[$queue]['mailheaderhandling']>0)
-		{
-			if ($this->mailhandling[$queue]['mailheaderhandling']==1) $header2desc=true;
-			if ($this->mailhandling[$queue]['mailheaderhandling']==2) $header2comment=true;
-			if ($this->mailhandling[$queue]['mailheaderhandling']==3) $header2desc=$header2comment=true;
-			$mailHeaderInfo = Mail::createHeaderInfoSection(array('FROM'=>implode(',',$buff['from']),
-				'TO'=>(isset($buff['to']) && !empty($buff['to'])?implode(',',$buff['to']):null),
-				'CC'=>(isset($buff['cc']) && !empty($buff['cc'])?implode(',',$buff['cc']):null),
-				'BCC'=>(isset($buff['bcc']) && !empty($buff['bcc'])?implode(',',$buff['bcc']):null),
-				'SUBJECT'=>$this->mailSubject,
-				'DATE'=>Mail::_strtotime($msgHeader->Date)),'',false/*$this->htmledit*/);
-		}
-		// as we read the mail here, we should mark it as seen \Seen, \Answered, \Flagged, \Deleted  and \Draft are supported
-		$status = $this->flagMessageAsSeen($mid, $msgHeader);
-
-		if ($this->ticketId == 0)
-		{
-			$this->init();
-			// this should take care, that new tickets are created by either the identified sender or the configured user
-			// as by default the creator was the user running the async job, thus not recognizing the configuration, we assume the
-			// running user having sufficient rights (see else)
-			if (self::LOG_LEVEL>1)
-			{
-				error_log(__METHOD__.__LINE__.'->'.$this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'));
-				error_log(__METHOD__.__LINE__.'->'.$this->mailSender);
-				error_log(__METHOD__.__LINE__.'->'.$this->mailhandling[$queue]['default_tracker']);
-			}
-			if ($this->check_rights(TRACKER_ITEM_CREATOR|TRACKER_ITEM_NEW|TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_USER,$this->mailhandling[$queue]['default_tracker'],null,$this->mailSender,'add'))
-			{
-				$this->data['tr_creator'] = $this->user = $this->mailSender;
-			}
-			else
-			{
-				$this->user = $this->mailSender;
-			}
-			$this->data['tr_created'] = Mail::_strtotime($msgHeader->Date,'ts',true);
-			$this->data['tr_summary'] = $this->mailSubject;
-			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
-			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
-			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
-			$this->data['tr_priority'] = 5;
-			$this->data['tr_description'] = ($mailHeaderInfo&&$header2desc?$mailHeaderInfo:'').$this->mailBody;
-			//if ($this->htmledit) $this->data['tr_description'] = $this->data['tr_description'];
-			if (!$senderIdentified && $this->mailhandling[$queue]['auto_cc'])
-			{
-				$this->data['tr_cc'] = $replytoAddress;
-			}
-			//error_log(__METHOD__.__LINE__.array2string($this->data));
-		}
-		else
-		{
-			$this->read($this->ticketId);
-			if (!$senderIdentified)
-			{
-				switch ($this->mailhandling[$queue]['unrec_reply'])
-				{
-					case 0 :
-						$this->user = $this->data['tr_creator'];
-						break;
-					case 1 :
-						$this->user = 0;
-						break;
-					default :
-						$this->user = 0;
-						break;
-				}
-			}
-			else
-			{
-				$this->user = $this->mailSender;
-			}
-			if ($this->mailhandling[$queue]['auto_cc'] && stristr($this->data['tr_cc'], $replytoAddress) === FALSE)
-			{
-				$this->data['tr_cc'] .= (empty($this->data['tr_cc'])?'':',').$replytoAddress;
-			}
-			$this->data['reply_message'] = ($mailHeaderInfo&&$header2comment?$mailHeaderInfo:'').$this->extract_latestReply($this->mailBody);
-			$this->data['reply_created'] = Mail::_strtotime($msgHeader->Date,'ts',true);
-		}
-		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
-		// Save Current edition mode preventing mixed types
-		if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
-		{
-			$this->data['tr_edit_mode'] = 'html';
-		}
-		elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
-		{
-			$this->data['tr_edit_mode'] = 'ascii';
-		}
-		else
-		{
-			$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
-		}
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.' Replytoaddress:'.array2string($replytoAddress));
-		// Save the ticket and let tracker_bo->save() handle the autorepl, if required
-		$saverv = $this->save(null,
-			(($this->mailhandling[$queue]['auto_reply'] == 2		// Always reply or
-			|| ($this->mailhandling[$queue]['auto_reply'] == 1	// only new tickets
-				&& $this->ticketId == 0)					// and this is a new one
-				) && (										// AND
-					$senderIdentified		 				// we know this user
-				|| (!$senderIdentified						// or we don't and
-				&& $this->mailhandling[$queue]['reply_unknown'] == 1 // don't care
-			))) == true
-				? array(
-					'reply_text' => $this->mailhandling[$queue]['reply_text'],
-					// UserID or mail address
-					'reply_to' => ($this->user ? $this->user : $replytoAddress),
-				)
-				: null
-		);
-
-		if (($saverv==0) && is_array($rv['attachments']))
-		{
-			foreach ($rv['attachments'] as $attachment)
-			{
-				if(is_readable($attachment['tmp_name']))
-				{
-					Link::attach_file('tracker',$this->data['tr_id'],$attachment);
-				}
-			}
-		}
-
-		return !$saverv;
 	}
 
 	/**
@@ -1537,7 +854,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function flagMessageAsSeen($mid, $messageHeader)
 	{
-		return imap_setflag_full($this->mbox, $mid, "\\Seen".($messageHeader->Flagged == 'F' ? "\\Flagged" : ""));
 	}
 
 	/**
@@ -1547,14 +863,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function extract_mailaddress($addr='')
 	{
-		if (empty($addr))
-		{
-			return false;
-		}
-		//preg_match_all("/[a-zA-Z0-9_\-\.]+?@([a-zA-Z0-9_\-]+?\.)+?[a-zA-Z]{2,}/", $addr, $address);
-		$address = null;
-		preg_match_all("/([A-Za-z0-9][A-Za-z0-9._-]*)?[A-Za-z0-9]@([A-Za-z0-9ÄÖÜäöüß](|[A-Za-z0-9ÄÖÜäöüß_-]*[A-Za-z0-9ÄÖÜäöüß])\.)+[A-Za-z]{2,6}/", $addr, $address);
-		return ($address[0][0]);
 	}
 
 	/**
@@ -1564,12 +872,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function search_user($mail_addr='')
 	{
-		$this->mailSender = null; // Make sure previous msg data is cleared
-		if (self::LOG_LEVEL>1) error_log(__METHOD__.'Try to resolve Useraccount by mail:'.print_r($mail_addr,true));
-		$account_ID = $GLOBALS['egw']->accounts->name2id($mail_addr,'account_email');
-		if (!empty($account_ID)) $this->mailSender = $account_ID;
-		if (self::LOG_LEVEL>1 && $this->mailSender) error_log(__METHOD__.'Found User:'.print_r($this->mailSender,true));
-		return (!empty($account_ID) ? true : false);
 	}
 
 	/**
@@ -1580,21 +882,6 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function forward_message($mid=0, &$headers=null, $queue=0)
 	{
-
-		if ($mid == 0 || $headers == null) // no data
-		{
-			return false;
-		}
-
-		// Sending mail is not implemented using notifations, since it's pretty straight forward here
-		$to   = $this->mailhandling[$queue]['forward_to'];
-		$subj = $headers->subject;
-		$body = imap_body($this->mbox, $mid, FK_INTERNAL);
-		$hdrs = 'From: ' . $headers->fromaddress . "\r\n" .
-				'Reply-To: ' . $headers->reply_toaddress . "\r\n";
-
-		return (mail($to, $subj, $body, $hdrs));
-
 	}
 
 	/**
