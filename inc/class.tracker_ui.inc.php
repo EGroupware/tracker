@@ -1462,7 +1462,7 @@ width:100%;
 				'popup' => Link::get_registry('tracker', 'add_popup'),
 				'group' => $group=1,
 				'onExecute' => Api\Header\UserAgent::mobile()?'javaScript:app.tracker.viewEntry':'',
-				'mobileViewTemplate' => 'edit?'.filemtime(Api\Etemplate\Widget\Template::rel2path('/tracker/templates/mobile/edit.xet'))
+				'mobileViewTemplate' => 'view?'.filemtime(Api\Etemplate\Widget\Template::rel2path('/tracker/templates/mobile/view.xet'))
 			),
 			'print' => array(
 				'caption' => 'Print',
