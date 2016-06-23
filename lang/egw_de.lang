@@ -432,6 +432,7 @@ tracker for the main screen	tracker	de	Verfolgungssystem für die Hauptansicht
 tracker id	tracker	de	Ticketnummer (ID)
 tracker item modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
 tracker item not found !!!	tracker	de	Ticket nicht gefunden !!!
+tracker list	tracker	de	Verfolgungssystem Liste
 tracker queue	tracker	de	Fachgebiet
 tracker queue renamed	tracker	de	Verfolgungssystem-Queue umbenannt
 tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.

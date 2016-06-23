@@ -432,6 +432,7 @@ tracker for the main screen	tracker	en	Tracker for the main screen
 tracker id	tracker	en	Tracker ID
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found!
+tracker list	tracker	en	Tracker list
 tracker queue	tracker	en	Tracker queue
 tracker queue renamed	tracker	en	Tracker queue renamed.
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
