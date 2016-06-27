@@ -571,6 +571,12 @@ class tracker_bo extends tracker_so
 				}
 			}
 
+			// Auto-assign if category changed & noone assigned
+			if ($this->data['cat_id'] && $this->data['cat_id'] != $old['cat_id'] && !$this->data['tr_assigned'])
+			{
+				$this->autoassign();
+			}
+			
 			// Changes mark the ticket unseen for everbody but the current
 			// user if the ticket wasn't closed at the same time
 			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
