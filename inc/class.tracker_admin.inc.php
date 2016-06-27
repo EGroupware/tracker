@@ -353,7 +353,7 @@ class tracker_admin extends tracker_bo
 								//echo "update to"; _debug_array($old_cat);
 								if (!isset($cats))
 								{
-									$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');
+									$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');
 								}
 								if (($id = $cats->add($old_cat)))
 								{

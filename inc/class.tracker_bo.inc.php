@@ -1482,7 +1482,7 @@ class tracker_bo extends tracker_so
 	 */
 	function add_tracker($name)
 	{
-		$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
+		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
 		if ($name && ($id = $cats->add(array(
 			'name'   => $name,
 			'descr'  => 'tracker',
@@ -1511,7 +1511,7 @@ class tracker_bo extends tracker_so
 	 */
 	function rename_tracker($tracker,$name)
 	{
-		$cats = new Api\Categories(categories::GLOBAL_ACCOUNT,'tracker');
+		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');
 		if ($tracker > 0 && !empty($name) && ($data = $cats->read($tracker)))
 		{
 			if ($data['name'] != $name)
