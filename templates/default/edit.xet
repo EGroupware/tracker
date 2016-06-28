@@ -278,7 +278,7 @@
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
-						<checkbox label="Do not notify" id="no_notifications"/>
+						<checkbox label="Do not notify" id="no_notifications" statustext="Do not notify of these changes"/>
 						<vbox align="right" options="0,0">
 							<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');"/>
 							<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
