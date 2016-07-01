@@ -30,7 +30,6 @@ deleted	tracker	pt	eliminado/a
 deletes this field	tracker	pt	eliminar este campo
 determines the order the fields are displayed	tracker	pt	determina a ordem de apresentação dos campos
 directory with documents to insert entries	tracker	pt	Diretório com documentos para inserir entradas
-do not notify of these changes	tracker	pt	Não notificar dessas mudanças
 download url for links	tracker	pt	Baixe url para links
 each value is a line like <id>[=<label>]	tracker	pt	cada valor é uma linha como <id>[=<etiqueta>]
 each value is a line like id[=label]	tracker	pt	cada valor é uma linha como <id>[=etiqueta]

@@ -144,7 +144,6 @@ deletes this field	tracker	de	Löscht dieses Feld
 deny global	tracker	de	Globale verbieten
 determines the order the fields are displayed	tracker	de	Bestimmt die Reihenfolge der angezeigten Felder
 directory with documents to insert entries	tracker	de	Verzeichnis mit Dokumenten zum Einfügen.
-do not notify of these changes	tracker	de	Nicht über diese Änderungen benachrichtigen
 do you want a notification, if items you are responsible for are about to start?	tracker	de	Möchten Sie über zu startende Einträge, für die Sie verantwortlich sind benachrichtigt werden?
 do you want a notification, if items you are responsible for are due?	tracker	de	Möchten Sie über fällige Einträge, für die Sie verantwortlich sind benachrichtigt werden?
 do you want to add mailheader information to description and/or comments?	tracker	de	Möchten Sie der Beschreibung und/oder den Kommentaren Mailheaderinformationen zufügen?
