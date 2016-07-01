@@ -133,7 +133,6 @@ deleted	tracker	fi	Poistettu
 deletes this field	tracker	fi	Poistaa kentän
 determines the order the fields are displayed	tracker	fi	Määrittelee kenttien näytön järjestyksen
 directory with documents to insert entries	tracker	fi	Merkintöjen oletuskansio
-do not notify of these changes	tracker	fi	Älä lähetä huomautusviestejä muutoksista
 do you want a notification, if items you are responsible for are about to start?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä jotka ovat alkamassa?
 do you want a notification, if items you are responsible for are due?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä jotka ovat erääntymässä?
 do you want to add mailheader information to description and/or comments?	tracker	fi	Lisätäänkö "Mail header" tieto Kuvaukseen ja/tai kommenttiin?

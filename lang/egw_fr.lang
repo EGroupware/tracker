@@ -141,7 +141,6 @@ deleted	tracker	fr	Supprimé
 deletes this field	tracker	fr	Supprimer ce champ
 determines the order the fields are displayed	tracker	fr	Détermine l'ordre d'afficahge des champs
 directory with documents to insert entries	tracker	fr	Répertoire avec les documents pour insérer les entrées
-do not notify of these changes	tracker	fr	Ne pas notifier de ces changements
 do you want a notification, if items you are responsible for are about to start?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont sur le point de commencer.
 do you want a notification, if items you are responsible for are due?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont dues.
 do you want to add mailheader information to description and/or comments?	tracker	fr	Souhaitez-vous ajouter les entêtes d'email à la description et/ou aux commentaires ?

@@ -142,7 +142,6 @@ deletes this field	tracker	sk	odstráni túto položku
 deny global	tracker	sk	Odoprieť globálne
 determines the order the fields are displayed	tracker	sk	určuje poradie, v akom sa položky zobrazujú
 directory with documents to insert entries	tracker	sk	Priečinok s dokumentami pre vloženie položiek
-do not notify of these changes	tracker	sk	Neposielať upozornenia k týmto zmenám
 do you want a notification, if items you are responsible for are about to start?	tracker	sk	Chcete dostať pripomienku, keď sa majú začať položky, za ktoré ste zodpovední?
 do you want a notification, if items you are responsible for are due?	tracker	sk	Chcete dostať pripomienku, keď nastane termín splnenia tých položiek, za ktoré ste zodpovední?
 do you want to add mailheader information to description and/or comments?	tracker	sk	Chcete pridať informácie z hlavičky správy do opisu a/alebo poznámky?
