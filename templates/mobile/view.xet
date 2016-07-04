@@ -5,55 +5,6 @@
 	<template id="tracker.view.description" template="" lang="" group="0" version="1.9.005">
 		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240"/>
 	</template>
-	<template id="tracker.view.comments" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%" class="egwGridView_grid">
-			<columns>
-				<column width = "120"/>
-				<column/>
-			</columns>
-			<rows>
-				<row class="th" height="29px">
-					<description value="Comments"/>
-					<textbox type="integer" id="num_replies" readonly="true"/>
-				</row>
-				<row class="row" valign="top">
-					<vbox options="0,0">
-						<date-time id="replies[$row][reply_created]" readonly="true"/>
-						<menulist>
-							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
-						</menulist>
-					</vbox>
-					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]"/>
-				</row>
-			</rows>
-		</grid>
-	</template>
-	<template id="tracker.view.add_comment" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%">
-			<columns>
-				<column width = "120"/>
-				<column/>
-			</columns>
-			<rows>
-				<row class="th" disabled="@no_canned">
-					<description value="Canned response" for="canned_response" class="3"/>
-					<menulist>
-						<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one"/>
-					</menulist>
-				</row>
-				<row disabled="@no_comment_visibility">
-					<description/>
-					<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
-				</row>
-				<row class="row" valign="top" disabled="@no_reply">
-					<vbox>
-						<description value="Comment" for="reply_message"/>
-					</vbox>
-					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="200"/>
-				</row>
-			</rows>
-		</grid>
-	</template>
 	<template id="tracker.view.custom" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
@@ -141,17 +92,6 @@
 			</columns>
 			<rows>
 				<row disabled="@hidebuttons" class="dialogHeadbar" >
-					<hbox  span="all" width="100%">
-						<button statustext="Saves this entry" id="button[save]" image="save" background_image="1"/>
-						<button statustext="Apply the changes" id="button[apply]" image="apply" background_image="1"/>
-						<checkbox label="notification" id="no_notifications"/>
-					</hbox>
-				</row>
-				<row disabled="!@showsearchbuttons" class="dialogHeadbar">
-					<hbox span="all" width="100%">
-						<button label="Search" id="button[search]" image="search" background_image="1"/>
-						<button label="Cancel" id="button[cancelsearch]" image="cancel" background_image="1"/>
-					</hbox>
 				</row>
 				<row>
 					<description for="tr_summary" value="Summary"/>
@@ -169,13 +109,13 @@
 				<row>
 					<description for="cat_id" value="Category"/>
 					<menulist>
-						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"  class="et2_fullWidth"/>
+						<menupopup id="cat_id" readonly="true" options="None"  class="et2_fullWidth"/>
 					</menulist>
 				</row>
 				<row>
 					<description for="tr_version" value="Version"/>
 					<menulist>
-						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one" class="et2_fullWidth"/>
+						<menupopup id="tr_version" readonly="true" options="None" class="et2_fullWidth"/>
 					</menulist>
 				</row>
 				<row>
@@ -184,11 +124,11 @@
 						<menupopup id="tr_priority" class="et2_fullWidth"/>
 					</menulist>
 				</row>
-				<row disabled="!@show_dates">
+				<row  disabled="@no_tr_startdate_tr_duedate">
 					<description value="Start date"/>
 					<date-time id="tr_startdate" class="et2_fullWidth"/>
 				</row>
-				<row>
+				<row  disabled="@no_tr_startdate_tr_duedate">
 					<description value="Due date"/>
 					<date-time id="tr_duedate" class="et2_fullWidth"/>
 				</row>
@@ -215,16 +155,12 @@
 						<tabs>
 							<tab id="description" label="Description"/>
 							<tab id="details" label="Details"/>
-							<tab id="comments" label="Comments"/>
-							<tab id="add_comment" label="Add comment"/>
 							<tab id="custom" label="Custom"/>
 							<tab id="ownership" label="Ownership"/>
 						</tabs>
 						<tabpanels>
 							<template id="tracker.view.description"/>
 							<template id="tracker.view.details"/>
-							<template id="tracker.view.comments"/>
-							<template id="tracker.view.add_comment"/>
 							<template id="tracker.view.custom"/>
 							<template id="tracker.view.ownership"/>
 						</tabpanels>
