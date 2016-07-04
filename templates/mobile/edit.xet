@@ -206,7 +206,7 @@
 					<description value="Start date"/>
 					<date-time id="tr_startdate" class="et2_fullWidth"/>
 				</row>
-				<row>
+				<row disabled="!@show_dates">
 					<description value="Due date"/>
 					<date-time id="tr_duedate" class="et2_fullWidth"/>
 				</row>
