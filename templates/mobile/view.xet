@@ -124,14 +124,6 @@
 						<menupopup id="tr_priority" class="et2_fullWidth"/>
 					</menulist>
 				</row>
-				<row  disabled="@no_tr_startdate_tr_duedate">
-					<description value="Start date"/>
-					<date-time id="tr_startdate" class="et2_fullWidth"/>
-				</row>
-				<row  disabled="@no_tr_startdate_tr_duedate">
-					<description value="Due date"/>
-					<date-time id="tr_duedate" class="et2_fullWidth"/>
-				</row>
 				<row disabled="!@tr_id">
 					<description for="tr_status" value="Status"/>
 					<menulist>
