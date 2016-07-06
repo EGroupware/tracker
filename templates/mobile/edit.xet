@@ -162,7 +162,7 @@
 					<hbox  span="all" width="100%">
 						<button statustext="Saves this entry" id="button[save]" image="save" background_image="1"/>
 						<button statustext="Apply the changes" id="button[apply]" image="apply" background_image="1"/>
-						<checkbox label="do not notify" id="no_notifications"/>
+						<checkbox id="no_notifications" toggle_on=" " toggle_off=" " class="notification_check"/>
 					</hbox>
 				</row>
 				<row disabled="!@showsearchbuttons" class="dialogHeadbar">
