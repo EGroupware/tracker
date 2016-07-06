@@ -68,7 +68,7 @@
 					</menulist>
 				</row>
 				<row>
-					<description/>
+					<description value="Created date"/>
 					<date-time id="tr_created" readonly="true"/>
 				</row>
 				<row>
@@ -78,8 +78,8 @@
 					</menulist>
 				</row>
 				<row>
-					<description/>
-					<date-time id="tr_modified" readonly="true" class="et2_nowrap" span="2" align="right"/>
+					<description value="Last modified date"/>
+					<date-time id="tr_modified" readonly="true"/>
 				</row>
 			</rows>
 		</grid>
@@ -92,6 +92,9 @@
 			</columns>
 			<rows>
 				<row disabled="@hidebuttons" class="dialogHeadbar" >
+					<box>
+						<textbox align="right" type="integer" id="tr_id" readonly="true" class="entry_id"/>
+					</box>
 				</row>
 				<row>
 					<description for="tr_summary" value="Summary"/>
@@ -99,12 +102,9 @@
 				</row>
 				<row>
 					<description for="tr_tracker" value="Tracker Queue"/>
-					<hbox>
-						<menulist>
-							<menupopup id="tr_tracker" no_lang="1" onchange="widget.getInstanceManager().submit(null,false,true); return false;" class="et2_fullWidth"/>
-						</menulist>
-						<textbox align="right" type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
-					</hbox>
+					<menulist>
+						<menupopup id="tr_tracker" no_lang="1" class="et2_fullWidth"/>
+					</menulist>
 				</row>
 				<row>
 					<description for="cat_id" value="Category"/>
