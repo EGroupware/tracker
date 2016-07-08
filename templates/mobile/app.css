@@ -61,4 +61,8 @@
     padding-top: 8px;
     padding-bottom: 8px;
   }
+  #tracker-view #tracker-view_tr_modified,
+  #tracker-view #tracker-view_tr_created {
+    padding-left: 0px;
+  }
 }
