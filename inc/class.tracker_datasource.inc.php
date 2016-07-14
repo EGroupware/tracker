@@ -5,7 +5,7 @@
  * @link http://www.egroupware.org
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
- * @copyright (c) 2006 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
@@ -30,22 +30,28 @@ class tracker_datasource extends datasource
 	}
 
 	/**
+	 * Instance shared between all tracker_datasources
+	 *
+	 * @var tracker_bo
+	 */
+	protected static $botracker;
+
+	/**
 	 * get an entry from the underlaying app (if not given) and convert it into a datasource array
 	 *
 	 * @param mixed $data_id id as used in the link-class for that app, or complete entry as array
-	 * @return array/boolean array with the data supported by that source or false on error (eg. not found, not availible)
+	 * @return array|boolean array with the data supported by that source or false on error (eg. not found, not availible)
 	 */
 	function get($data_id)
 	{
 		// we use $GLOBALS['boinfolog'] as an already running instance might be availible there
-		if (!is_object($GLOBALS['botracker']))
+		if (!isset(self::$botracker))
 		{
-			include_once(EGW_INCLUDE_ROOT.'/tracker/inc/class.botracker.inc.php');
-			$GLOBALS['botracker'] = new botracker();
+			self::$botracker = new tracker_bo();
 		}
 		if (!is_array($data_id))
 		{
-			$data =& $GLOBALS['botracker']->read((int) $data_id);
+			$data =& self::$botracker->read((int) $data_id);
 
 			if (!is_array($data)) return false;
 		}
@@ -54,7 +60,7 @@ class tracker_datasource extends datasource
 			$data =& $data_id;
 		}
 		return array(
-			'pe_title'        => $GLOBALS['botracker']->link_title($data),
+			'pe_title'        => self::$botracker->link_title($data),
 			'pe_completion'   => $data['tr_completion'],
 			'pe_real_start'   => $data['tr_created'],
 			'pe_real_end'     => $data['tr_closed'],
