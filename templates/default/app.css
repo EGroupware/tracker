@@ -58,3 +58,5 @@ label.tracker_trIdEdit:before { content: "#"; }
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
 	max-height: 215px;
 }
+
+#tracker-index_tracker-index-queue {position: relative;width:200px;height: 24px;}
