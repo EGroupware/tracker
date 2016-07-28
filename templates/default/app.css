@@ -59,4 +59,4 @@ label.tracker_trIdEdit:before { content: "#"; }
 	max-height: 215px;
 }
 
-#tracker-index_tracker-index-queue {position: relative;width:200px;height: 24px;}
+#tracker-index_tracker-index-queue {position: relative;width:400px;height: 24px;margin-right:4px;}

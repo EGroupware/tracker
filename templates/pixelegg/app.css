@@ -126,8 +126,9 @@ label.tracker_trIdEdit:before {
 }
 #tracker-index_tracker-index-queue {
   position: relative;
-  width: 200px;
+  width: 400px;
   height: 24px;
+  margin-right: 4px;
 }
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
