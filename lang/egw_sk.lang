@@ -42,6 +42,7 @@ after how many days a not replied item should be marked overdue?	tracker	sk	Po k
 after how many days pending items should be closed automatic	tracker	sk	Po koľkých dňoch sa majú vybavované záležitosti automaticky uzavrieť?
 all	tracker	sk	Všetko
 all tickets are already converted to tracker	tracker	sk	Všetky karty už boli skonvertované do Sledovača
+all versions	tracker	sk	Všetky verzie
 allow bounties	tracker	sk	Povoliť odmeny
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	sk	Povoliť vytváranie poznámok s obmedzením ktoré sú viditeľné len pre správcov, technikov a zodpovedných za záležitosť
 allow creation of infolog entries from tracker tickets	tracker	sk	Povoliť vytváranie položiek Záznamníka z kariet Sledovača
@@ -428,6 +429,7 @@ tracker for the main screen	tracker	sk	Sledovač pre hlavnú obrazovku
 tracker id	tracker	sk	ID Sledovača
 tracker item modified by %1 at %2	tracker	sk	Záležitosť Sledovača upravil %1 o %2
 tracker item not found !!!	tracker	sk	Záležitosť Sledovača sa nenašla !!!
+tracker list	tracker	sk	Zoznam Sledovača
 tracker queue	tracker	sk	Fronta Sledovača
 tracker queue renamed	tracker	sk	Fronta Sledovača bola premenovaná.
 tracker-%1 '%2' added.	tracker	sk	Sledovač-%1 '%2' pridané.
