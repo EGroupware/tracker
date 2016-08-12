@@ -440,7 +440,10 @@ class tracker_admin extends tracker_bo
 		);
 		// cats & versions & responses & projects
 		$v = $c = $r = $s = $p = $i = 1;
-		usort($this->all_cats,create_function('$a,$b','return strcasecmp($a["name"],$b["name"]);'));
+		usort($this->all_cats, function($a, $b)
+		{
+			return strcasecmp($a['name'], $b['name']);
+		});
 		foreach($this->all_cats as $cat)
 		{
 			if (!is_array($data = $cat['data'])) $data = array('type' => $data);
