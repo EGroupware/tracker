@@ -157,12 +157,8 @@ label.tracker_trIdEdit:before {
     padding-top: 0;
     padding-bottom: 0;
   }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_modified]'] {
+  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_created]'] {
     float: right;
-  }
-  #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_modified]'] > time {
-    float: none;
-    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_created]'] > time {
     font-weight: normal;
@@ -172,12 +168,11 @@ label.tracker_trIdEdit:before {
     font-size: 10pt;
     text-align: right;
     width: 80px;
+    float: right;
+    padding-top: 12px;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='cat_id]'] {
     float: right;
-  }
-  #tracker-index table.egwGridView_outer tbody span.emptyRow {
-    height: 18px;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='prio_label]'] {
     font-weight: normal;

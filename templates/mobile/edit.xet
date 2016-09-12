@@ -42,7 +42,6 @@
 					</menulist>
 				</row>
 				<row disabled="@no_comment_visibility">
-					<description/>
 					<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
