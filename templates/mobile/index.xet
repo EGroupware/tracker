@@ -29,7 +29,6 @@
 				<row class="$row_cont[cat_id] $row_cont[class] trackerRow" valign="top">
 					<vbox no_lang="1" class="tracker1Col">
 						<description id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
-						<html id="${row}[tr_description]" no_lang="1"/>
 						<hbox>
 							<menulist>
 								<menupopup  id="${row}[tr_tracker]" no_lang="1" readonly="true"/>
@@ -47,9 +46,6 @@
 							<menulist>
 								<menupopup id="${row}[tr_status]" readonly="true"/>
 							</menulist>
-						</hbox>
-						<hbox>
-							<time_or_date id="${row}[tr_modified]" readonly="true" />
 						</hbox>
 					</vbox>
 				</row>

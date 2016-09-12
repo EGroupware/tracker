@@ -13,7 +13,7 @@
 
 @import (reference) "../../../pixelegg/less/definitions.less";
 @import (reference) "../../../pixelegg/less/def_mobile.less";
-
+@import (less) "../pixelegg/app.css";
 
 /* tablets and smartphones  */
 @media all {
@@ -23,10 +23,10 @@
 				padding-top: 0;
 				padding-bottom: 0;
 			}
-			label[id^='tracker-index'][id$='tr_modified]'] > time {
-				float: none;
-				.mob-fontsize-n;
+			label[id^='tracker-index'][id$='tr_created]'] {
+				float:right;
 			}
+
 			label[id^='tracker-index'][id$='tr_created]'] > time {
 				font-weight: normal;
 				.mob-fontsize-n;
@@ -35,16 +35,11 @@
 				.mob-fontsize-n;
 				text-align: right;
 				width: 80px;
+				float: right;
+				padding-top: 12px;
 			}
 			span[id^='tracker-index'][id$='cat_id]']{
 				float:right;
-			}
-			span[id^='tracker-index'][id$='tr_description]']{
-				height: 18px;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				.mob-fontsize-n;
 			}
 			span[id^='tracker-index'][id$='prio_label]']{
 				font-weight: normal;
@@ -59,8 +54,10 @@
 				.mob-fontsize-n;
 			}
 			span[id^='tracker-index'][id$='tr_summary]']{
-				font-weight: bold;
 				.mob-fontsize-l;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			.tracker1Col, .tracker2Col {
 				padding-top:8px;
@@ -70,5 +67,9 @@
 	}
 	#tracker-view {
 		#tracker-view_tr_modified, #tracker-view_tr_created {padding-left: 0px;}
+	}
+
+	#tracker-edit {
+		#tracker-edit_reply_message {height:200px !important;}
 	}
 }

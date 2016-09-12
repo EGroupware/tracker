@@ -29,7 +29,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%">
+		<grid width="100%" resize_radio="0">
 			<columns>
 				<column width = "120"/>
 				<column/>
@@ -42,14 +42,10 @@
 					</menulist>
 				</row>
 				<row disabled="@no_comment_visibility">
-					<description/>
 					<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
-					<vbox>
-						<description value="Comment" for="reply_message"/>
-					</vbox>
-					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="200" imageUpload="link_to"/>
+					<htmlarea id="reply_message" options="@tr_reply_options" height="200" resize_reatio="0" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
