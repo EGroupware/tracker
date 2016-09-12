@@ -282,4 +282,31 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 
 		nm_open_popup(_action, _selected);
 	},
+
+	/**
+	 * Override the viewEntry to remove unseen class
+	 * right after view the entry.
+	 *
+	 * @param {type} _action
+	 * @param {type} _senders
+	 */
+	viewEntry: function (_action, _senders)
+	{
+		this._super.apply(this, arguments);
+		var nm = this.et2.getWidgetById('nm');
+		var nm_indexes = nm.controller._indexMap;
+		var node = '';
+		for (var i in nm_indexes)
+		{
+			if (nm_indexes[i]['uid'] == _senders[0]['id'])
+			{
+				node = nm_indexes[i].row._nodes[0].find('.tracker_unseen');
+			}
+		}
+
+		if (node)
+		{
+			node.removeClass('tracker_unseen');
+		}
+	}
 });}).call(this);
