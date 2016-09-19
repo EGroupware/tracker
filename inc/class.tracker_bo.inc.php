@@ -576,7 +576,7 @@ class tracker_bo extends tracker_so
 			{
 				$this->autoassign();
 			}
-			
+
 			// Changes mark the ticket unseen for everbody but the current
 			// user if the ticket wasn't closed at the same time
 			if (!in_array($this->data['tr_status'],$this->get_tracker_stati(null, true)))
@@ -1541,7 +1541,7 @@ class tracker_bo extends tracker_so
 
 		if (!is_object($this->historylog))
 		{
-			$this->historylog =& CreateObject('phpgwapi.historylog','tracker');
+			$this->historylog = new Api\Storage\History('tracker');
 		}
 		$ids = $this->query_list($this->table_name.'.tr_id','',array('tr_tracker' => $tracker));
 		if ($ids) $this->historylog->delete($ids);
@@ -1828,7 +1828,7 @@ class tracker_bo extends tracker_so
 	{
 		if (!is_object($this->historylog))
 		{
-			$this->historylog =& CreateObject('phpgwapi.historylog','tracker');
+			$this->historylog = new Api\Storage\History('tracker');
 		}
 		if (is_null($new) && $old)
 		{
