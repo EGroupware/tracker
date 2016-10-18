@@ -1380,7 +1380,7 @@ class tracker_ui extends tracker_bo
 		{
 			$content['nm']['favorites'] = true; // Enable favorites
 		}
-		$content['duration_format'] = $this->duration_format;
+		$content['duration_format'] = ','.$this->duration_format;
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
