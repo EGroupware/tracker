@@ -32,6 +32,7 @@ add a ticket	tracker	de	Ticket hinzufügen
 add additionally	tracker	de	Zusätzlich hinzufügen
 add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
+add email-address	tracker	de	Füge E-Mail-Adresse hinzu
 add from addressbook	tracker	de	Aus Adressbuch hinzufügen
 add infolog	tracker	de	Infolog hinzufügen
 add restricted comment	tracker	de	Kommentar mit eingeschränkter Sichtbarkeit hinzufügen
@@ -93,6 +94,7 @@ choose 'creator' of imported data	tracker	de	Wählen Sie den 'Ersteller' der Imp
 choose a project from the drop-down list	tracker	de	Ein Projekt aus der Auswahlliste wählen
 close pending	tracker	de	Schließe schwebend
 closed	tracker	de	Geschlossen
+closed date	tracker	de	Geschlossen am
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Erledigt zu

@@ -32,6 +32,7 @@ add a ticket	tracker	en	Add a ticket
 add additionally	tracker	en	Add additionally
 add assigned	tracker	en	Add assigned
 add comment	tracker	en	Add comment
+add email-address	tracker	en	Add email address
 add from addressbook	tracker	en	Add from Address book
 add infolog	tracker	en	Add infolog
 add restricted comment	tracker	en	Add restricted comment
@@ -93,6 +94,7 @@ choose 'creator' of imported data	tracker	en	Choose 'creator' of imported data
 choose a project from the drop-down list	tracker	en	Choose a project from the drop down list
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
+closed date	tracker	en	Closed date
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed

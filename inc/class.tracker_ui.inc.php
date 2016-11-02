@@ -1297,7 +1297,7 @@ class tracker_ui extends tracker_bo
 			{
 				$date_filters[$name] = lang($name);
 			}
-			$date_filters['custom'] = 'custom';
+			$date_filters['custom'] = lang('custom');
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_ui.get_rows',
 				'cat_is_select'  => 'no_lang',
