@@ -508,10 +508,11 @@ class tracker_so extends Api\Storage
 				unset($only_keys[$id_key]);
 			}
 		}
-		// if we have a join (searching by extra_value also adds a join), we have to group be tr_id, to avoid getting rows multiple times
+		// if we have a join (searching by extra_value also adds a join), we have to group by tr_id, to avoid getting rows multiple times
 		if (($join || isset($criteria[$this->extra_value])) && stristr($order_by,'GROUP BY') === false)	// group by tr_id, as we get one row per assignee!
 		{
-			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'.tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.tr_status , '.self::TRACKER_TABLE.'.tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_startdate, '.self::TRACKER_TABLE.'.tr_duedate, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'.tr_priority, '.self::TRACKER_TABLE.'.tr_resolution, '.self::TRACKER_TABLE.'.tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'.tr_edit_mode, '.self::TRACKER_TABLE.'.tr_seen ORDER BY '.($order_by ? $order_by : 'bounties DESC');
+			$order_by = ' GROUP BY '.self::TRACKER_TABLE.'.tr_id, '.self::TRACKER_TABLE.'.tr_summary, '.self::TRACKER_TABLE.'.tr_tracker, '.self::TRACKER_TABLE.'.cat_id, '.self::TRACKER_TABLE.'.tr_version, '.self::TRACKER_TABLE.'.tr_status , '.self::TRACKER_TABLE.'.tr_description, '.self::TRACKER_TABLE.'.tr_private, '.self::TRACKER_TABLE.'.tr_budget, '.self::TRACKER_TABLE.'.tr_completion, '.self::TRACKER_TABLE.'.tr_creator , '.self::TRACKER_TABLE.'.tr_created, '.self::TRACKER_TABLE.'. tr_modifier, '.self::TRACKER_TABLE.'.tr_modified, '.self::TRACKER_TABLE.'.tr_startdate, '.self::TRACKER_TABLE.'.tr_duedate, '.self::TRACKER_TABLE.'.tr_closed, '.self::TRACKER_TABLE.'.tr_priority, '.self::TRACKER_TABLE.'.tr_resolution, '.self::TRACKER_TABLE.'.tr_cc, '.self::TRACKER_TABLE.'.tr_group, '.self::TRACKER_TABLE.'.tr_edit_mode, '.self::TRACKER_TABLE.'.tr_seen ORDER BY '.
+					($order_by ? $order_by : (($join_in === true || $join_in == 1) ? 'bounties DESC' : self::TRACKER_TABLE.'.tr_id'));
 		}
 
 		$rows =& parent::search($criteria,$only_keys,$order_by,$extra_cols,$wildcard,$empty,$op,$start,$filter,$join);
