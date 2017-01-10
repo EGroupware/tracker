@@ -48,7 +48,7 @@
 					<checkbox id="tr_private" class="et2_fullWidth" unselected_value="0"/>
 				</row>
 				<row>
-					<description value="Close date" />
+					<description value="Closed date" />
 					<date-time label=" " id="tr_closed" class="et2_fullWidth"/>
 				</row>
 			</rows>
@@ -68,7 +68,7 @@
 					</menulist>
 				</row>
 				<row>
-					<description value="Created date"/>
+					<description value="Created on"/>
 					<date-time id="tr_created" readonly="true"/>
 				</row>
 				<row>
@@ -78,7 +78,7 @@
 					</menulist>
 				</row>
 				<row>
-					<description value="Last modified date"/>
+					<description/>
 					<date-time id="tr_modified" readonly="true"/>
 				</row>
 			</rows>
@@ -137,7 +137,7 @@
 					</menulist>
 				</row>
 				<row>
-					<description for="tr_completion" value="Completion"/>
+					<description for="tr_completion" value="Completed"/>
 					<menulist>
 						<menupopup type="select-percent" id="tr_completion" class="et2_fullWidth"/>
 					</menulist>
