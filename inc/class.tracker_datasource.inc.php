@@ -10,6 +10,9 @@
  * @version $Id$
  */
 
+use EGroupware\Api\Link;
+use EGroupware\Api\Config;
+
 include_once(EGW_INCLUDE_ROOT.'/projectmanager/inc/class.datasource.inc.php');
 
 /**
@@ -59,6 +62,22 @@ class tracker_datasource extends datasource
 		{
 			$data =& $data_id;
 		}
+
+		$status = null;
+		$stati = self::$botracker->get_tracker_stati();
+		if ($data['tr_status'] == tracker_bo::STATUS_DELETED)
+		{
+			$status = 'deleted';
+		}
+		else if (in_array($data['tr_status'], self::$botracker->get_tracker_stati(null, true)))
+		{
+			$status = 'ignore';
+		}
+		else
+		{
+			// Stati in projectmanager are strings
+			$status = $stati[$data['tr_status']];
+		}
 		return array(
 			'pe_title'        => self::$botracker->link_title($data),
 			'pe_completion'   => $data['tr_completion'],
@@ -68,6 +87,61 @@ class tracker_datasource extends datasource
 			'pe_details'      => $data['tr_description'] ? nl2br($data['tr_description']) : '',
 			'pe_planned_budget'   => $data['tr_budget'],
 			'cat_id'          => $data['cat_id'],
+			'pe_status'       => $status,
 		);
+	}
+
+	/**
+	 * Delete the datasource of a project element
+	 *
+	 * @param int $id
+	 * @return boolean true on success, false on error
+	 */
+	function delete($id)
+	{
+		// dont delete entries which are linked to elements other than their project
+		if (count(Link::get_links('tracker',$id)) > 1)
+		{
+			return false;
+		}
+		// If the project is keeping history, just set status
+		// We only do this since tracker doesn't have a delete & keep, just status
+		$config = Config::read('projectmanager');
+		if($config['history'])
+		{
+			return $this->change_status($id, 'deleted');
+		}
+		return self::$botracker->delete($id);
+	}
+
+	/**
+	 * Change the status of an entry according to the project status
+	 *
+	 * @param int $id
+	 * @param string $status
+	 * @return boolean true if status changed, false otherwise
+	 */
+	function change_status($id,$status)
+	{
+		if (!is_object(self::$botracker))
+		{
+			self::$botracker = new tracker_bo();
+		}
+		if (($entry = self::$botracker->read($id)))
+		{
+			$stati = array_map('strtolower', self::$botracker->get_tracker_stati());
+			if (in_array(strtolower($status), $stati))
+			{
+				self::$botracker->save(array('tr_status' => array_search(strtolower($status), $stati)));
+				return true;
+			}
+			// Restore from deleted
+			else if ($status == 'active' && $entry['tr_status'] == tracker_bo::STATUS_DELETED)
+			{
+				self::$botracker->save(array('tr_status' => tracker_bo::STATUS_OPEN));
+				return true;
+			}
+		}
+		return false;
 	}
 }
