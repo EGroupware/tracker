@@ -1453,6 +1453,10 @@ width:100%;
 		{
 			$percent[$i] = $i.'%';
 		}
+		// Find the ID for 'Fixed' resolution, used below
+		$resolution_fixed = key(array_filter($this->get_tracker_labels('resolution'), function($a) {
+			return $a == 'Fixed';
+		}));
 		$actions = array(
 			'open' => array(
 				'caption' => 'Open',
@@ -1568,6 +1572,12 @@ width:100%;
 			),
 			'close' => array(
 				'caption' => 'Close',
+				'icon' => 'check',
+				'group' => $group,
+				'disableClass' => 'rowNoClose',
+			),
+			'close_100_'.$resolution_fixed => array(
+				'caption' => lang('Close') . ' - 100% ' . lang('fixed'),
 				'icon' => 'check',
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
@@ -1736,11 +1746,24 @@ width:100%;
 			{
 				case 'close':
 					$action_msg = lang('closed');
+					if(is_string($settings)) // ex: closed-100-fixed
+					{
+						$settings = explode('_', $settings);
+					}
 					foreach($checked as $tr_id)
 					{
 						if (!$this->read($tr_id)) continue;
 						$this->data['tr_status'] = tracker_bo::STATUS_CLOSED;
 						if($no_notification) $this->data['no_notifications'] = true;
+
+						if($settings[0])
+						{
+							$this->data['tr_completion'] = $settings[0];
+						}
+						if($settings[1])
+						{
+							$this->data['tr_resolution'] = $settings[1];
+						}
 						if (!$this->save())
 						{
 							$success++;
