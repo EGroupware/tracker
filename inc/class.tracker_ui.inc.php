@@ -195,6 +195,13 @@ class tracker_ui extends tracker_bo
 				}
 				$this->data['tr_priority'] = $regardInInit['tr_priority'] = 5;
 			}
+
+
+			// Copy
+			if($_GET['tr_id'] && $_GET['makecp'])
+			{
+				$this->copy($this->data);
+			}
 			// initialize and try to merge what we already have
 			if ($needInit)
 			{
@@ -1478,8 +1485,21 @@ width:100%;
 			'add' => array(
 				'caption' => 'Add',
 				'group' => $group,
-				'url' => 'menuaction=tracker.tracker_ui.edit',
-				'popup' => Link::get_registry('tracker', 'add_popup'),
+				'children' => array(
+					'new' => array(
+						'caption' => 'New',
+						'url' => 'menuaction=tracker.tracker_ui.edit',
+						'popup' => Link::get_registry('tracker', 'add_popup'),
+						'icon' => 'new',
+					),
+					'copy' => array(
+						'caption' => 'Copy',
+						'url' => 'menuaction=tracker.tracker_ui.edit&makecp=1&tr_id=$id',
+						'popup' => Link::get_registry('tracker', 'add_popup'),
+						'allowOnMultiple' => false,
+						'icon' => 'copy',
+					),
+				),
 				'hideOnMobile' => true
 			),
 			'no_notifications' => array(
@@ -1955,4 +1975,67 @@ width:100%;
 
 		$this->index(null);
 	}
+
+	/**
+	 * Copy a given ticket (not storing it!)
+	 *
+	 * Taken care only configured fields get copied and certain fields never to copy (uid etc.).
+	 *
+	 * @param array& $content
+	 */
+	function copy(array &$content)
+	{
+		$id = $content['tr_id'];
+
+		$exclude_fields = array('tr_id', 'tr_closed', 'tr_seen',
+			'tr_created', 'tr_modified', 'tr_modifier'
+		);
+		foreach ($exclude_fields as $field)
+		{
+			unset($content[$field]);
+		}
+		// startdate in the past --> set startdate
+		if ($content['tr_startdate'] && $content['tr_startdate'] < Api\DateTime::to('now'))
+		{
+			$content['tr_startdate'] = Api\DateTime::to('now');
+		}
+		// duedate in the past --> unset it
+		if (isset($content['tr_duedate']) && $content['tr_duedate'] < Api\DateTime::to('now'))
+		{
+			unset($content['tr_duedate']);
+		}
+
+		if(!is_array($content['link_to'])) $content['link_to'] = array();
+		$content['link_to']['to_app'] = 'tracker';
+		$content['link_to']['to_id'] = 0;
+		// Get links to be copied, if not excluded
+		if (!in_array('link_to',$exclude_fields) || !in_array('attachments',$exclude_fields))
+		{
+			foreach(Link::get_links($content['link_to']['to_app'], $id) as $link)
+			{
+				if ($link['app'] != Link::VFS_APPNAME && !in_array('link_to', $exclude_fields))
+				{
+					Link::link('tracker', $content['link_to']['to_id'], $link['app'], $link['id'], $link['remark']);
+				}
+				elseif ($link['app'] == Link::VFS_APPNAME && !in_array('attachments', $exclude_fields))
+				{
+					Link::link('tracker', $content['link_to']['to_id'], Link::VFS_APPNAME, array(
+						'tmp_name' => Link::vfs_path($link['app2'], $link['id2']).'/'.$link['id'],
+						'name' => $link['id'],
+					), $link['remark']);
+				}
+			}
+		}
+		$content['links'] = $content['link_to'];
+
+		$content['tr_owner'] = !(int)$content['owner'] || !$this->bo->check_perms(Acl::ADD,0,$content['owner']) ? $this->user : $this->owner;
+
+		if (!empty($content['tr_summary']))
+		{
+			$content['tr_summary'] = lang('Copy of:').' '.$content['tr_summary'];
+		}
+
+		$content['msg'] .= ($content['msg']?"\n":'').lang('%1 copied - the copy can now be edited', lang(Link::get_registry('tracker','entry')));
+	}
+
 }
