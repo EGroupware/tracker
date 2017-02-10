@@ -158,7 +158,7 @@ everybody	tracker	es-es	Todos
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	es-es	Ejemplo {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - buscar el campo "n_prefix", para "Mr", si se encuentra, escribir  Hello Mr., si no, escribir Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	es-es	Ejemplo {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Ejemplo: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	es-es	Ejemplo {{NELF role}} - si el rol del campo no está vacío, obtendrá una línea nueva con el valor del rol del campo
-example {{nelfnv role}} - if field role is not empty, set a lf without any value of the field	tracker	es-es	Ejemplo {{NELFNV role}} - si el rol del campo no está vacío, establece un salto de línea (LF) sin ningún valor del campo
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	es-es	Ejemplo {{nenvlf role}} - si el rol del campo no está vacío, establece un salto de línea (LF) sin ningún valor del campo
 exclude links of the following apps on timesheet creation	tracker	es-es	Excluir enlaces de las siguientes aplicaciones en la creación de la hoja te tiempos
 existing links	tracker	es-es	Enlaces existentes
 exists	tracker	es-es	Existe
