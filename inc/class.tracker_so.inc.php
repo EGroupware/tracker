@@ -583,6 +583,11 @@ class tracker_so extends Api\Storage
 				$this->db->delete(self::BOUNTIES_TABLE,$where,__LINE__,__FILE__,'tracker');
 				$this->db->delete(self::ASSIGNEE_TABLE,$where,__LINE__,__FILE__,'tracker');
 				$this->db->delete(self::ESCALATED_TABLE,$where,__LINE__,__FILE__,'tracker');
+
+				foreach($where['tr_id'] as $tr_id)
+				{
+					Api\Link::unlink(0,'tracker',$tr_id);
+				}
 			}
 		}
 		return parent::delete($keys,$only_return_ids);
