@@ -1914,7 +1914,12 @@ class tracker_bo extends tracker_so
 			return 0;
 		}
 		// Use strncmp() here, since a Fwd might add a sqr bracket.
-		if (strncmp(trim($trackerData[0]['tr_summary']), trim($tr_data[3][0]), strlen(trim($trackerData[0]['tr_summary']))))
+		if (strncmp(trim($trackerData[0]['tr_summary']), trim($tr_data[3][0]), strlen(trim($trackerData[0]['tr_summary']))) &&
+				// Some mail apps might truncate long subjects, 72 seems to be the smallest
+				// Those are OK if what remains matches
+				strlen($tr_data[3][0]) <= 70 &&
+				strpos(trim($tr_data[3][0]), trim($trackerData[0]['tr_summary'])) !== 0
+		)
 		{
 			//_debug_array($trackerData);
 			return 0; // Summary doesn't match. Should this be ok?
