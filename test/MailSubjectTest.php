@@ -36,7 +36,8 @@ class MailSubjectMatchTest extends \EGroupware\Api\AppTest
 			['Not test ticket', FALSE],
 			[' Test ticket #', FALSE],
 			['Test #: Test ticket', TRUE],
-			['RE: Test #: Test ticket', TRUE]
+			['RE: Test #: Test ticket', TRUE],
+			['RE: Different Queue even #: Right ID, but totally wrong summary', FALSE]
 		)),
 		Array('This tracker has an extremely long summary, and that may cause us a bunch of problems.  Use the description for lots of long text, not the summary', 'tests' => Array(
 			['Re: Ignored #: This tracker has an extremely long summary, and that may cause us a bunch of problems.  Use the description for lots of long text, not the summary', TRUE]
@@ -91,7 +92,7 @@ class MailSubjectMatchTest extends \EGroupware\Api\AppTest
 	 * Test various subject strings match (or not) an existing ticket
 	 * 
 	 */
-	public function testSubject($subject, $tracker_id)
+	public function testSubject()
 	{
 		foreach(self::$patterns as $index =>  $pattern)
 		{
