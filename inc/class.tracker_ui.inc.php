@@ -1065,11 +1065,13 @@ class tracker_ui extends tracker_bo
 		$set = array();
 		if ((int)$data['id'] && ($ticket = $this->read($data['id'])))
 		{
+			// Timesheet and files are always excluded
+			$excluded_apps = array('timesheet',Link::VFS_APPNAME) + $this->exclude_app_on_timesheetcreation;
+
 			//error_log(__METHOD__.__LINE__.$this->exclude_app_on_timesheetcreation);
 			foreach(Link::get_links('tracker',$ticket['tr_id'],'','link_lastmod DESC',true) as $link)
 			{
-				//if ($link['app'] != 'timesheet' && $link['app'] != Link::VFS_APPNAME)
-				if (stripos($this->exclude_app_on_timesheetcreation.','.'timesheet'.','.Link::VFS_APPNAME,$link['app'])===false)
+				if (!in_array($link['app'], $excluded_apps))
 				{
 					$set['link_app'][] = $link['app'];
 					$set['link_id'][]  = $link['id'];
