@@ -637,7 +637,6 @@ class tracker_escalations extends Api\Storage\Base2
 			$GLOBALS['egw']->preferences->__construct($user);
 			$GLOBALS['egw_info']['user']['preferences'] = $GLOBALS['egw']->preferences->read_repository();
 			$GLOBALS['egw']->acl->__construct($user);
-			$GLOBALS['egw']->acl->read_repository();
 
 			// load the right language if needed
 			if ($GLOBALS['egw_info']['user']['preferences']['common']['lang'] != Api\Translation::$userlang)
