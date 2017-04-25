@@ -783,7 +783,7 @@ class tracker_ui extends tracker_bo
 		if (!$query['csv_export'])	// do not store query for csv-export in session
 		{
 			Api\Cache::setSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
-				array_diff_key ($query, array_flip('rows','actions','action_links','placeholder_actions')));
+				array_diff_key ($query, array_flip(array('rows','actions','action_links','placeholder_actions'))));
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
