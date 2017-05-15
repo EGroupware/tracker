@@ -170,6 +170,7 @@
 				<column/>
 				<column/>
 				<column/>
+				<column/>
 			</columns>
 			<rows>
 				<row height="20">
@@ -177,15 +178,19 @@
 					<menulist span="all">
 						<menupopup statustext="Changes made below will be lost, if not applied before!" id="cat_id" onchange="1" options="All"/>
 					</menulist>
+					<description />
+					<description />
 				</row>
 				<row class="th" height="20">
 					<description value="Value" class="tracker_leftPad5"/>
 					<description value="Label"/>
+					<description value="Default" />
 					<description align="right" value="Priorities with empty label are not available to the user"/>
 				</row>
 				<row class="row">
 					<description id="${row}[value]" readonly="true" class="tracker_leftPad5"/>
 					<textbox id="${row}[label]" size="80"/>
+					<radio align="center" id="isdefaultpriority" options="$row_cont[value]"/>
 					<description id="${row}[label]"/>
 				</row>
 			</rows>

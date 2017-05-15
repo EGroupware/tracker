@@ -75,6 +75,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	protected $priorities;
+
 	/**
 	 * Stati used by all trackers
 	 *
@@ -308,7 +309,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','users','notification','projects','priorities','restrictions',	// tracker specific
+		'technicians','admins','users','notification','projects','priorities','default_priority','restrictions',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates'
 	);
@@ -1274,9 +1275,10 @@ class tracker_bo extends tracker_so
 	 * @param int $tracker = null tracker to use or null to use tracker unspecific priorities
 	 * @param int $cat_id = null category to use or null to use categorie unspecific priorities
 	 * @param boolean $remove_empty = true should empty labels be displayed, default no
+	 * @param int &$default = null on return default, if it is set
 	 * @return array
 	 */
-	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true)
+	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true, &$default = null)
 	{
 		if (isset($this->priorities[$tracker.'-'.$cat_id]))
 		{
@@ -1298,6 +1300,9 @@ class tracker_bo extends tracker_so
 		{
 			$prios = self::$stock_priorities;
 		}
+		$default = $prios['default'] ? $prios['default'] : 5;
+		unset($prios['default']);
+		
 		if ($remove_empty)
 		{
 			foreach($prios as $key => $val)
