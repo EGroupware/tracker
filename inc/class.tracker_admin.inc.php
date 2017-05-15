@@ -82,6 +82,12 @@ class tracker_admin extends tracker_bo
 				$defaultresolution = $_content[$name]['isdefaultresolution'];
 				unset($_content[$name]['isdefaultresolution']);
 			}
+			if (isset($_content['priorities']['isdefaultpriority']))
+			{
+				$name = 'priorities';
+				$default_priority = $_content[$name]['isdefaultpriority'];
+				unset($_content[$name]['isdefaultpriority']);
+			}
 			switch($button)
 			{
 				case 'add':
@@ -193,6 +199,7 @@ class tracker_admin extends tracker_bo
 						$value = (int) $data['value'];
 						$prios[(int)$value] = (string)$data['label'];
 					}
+					$prios['default'] = $default_priority;
 					if(!array_diff($prios,array('')))	// user deleted all label --> use the one from the next level above
 					{
 						$prios = null;
@@ -525,12 +532,18 @@ class tracker_admin extends tracker_bo
 		}
 
 		$n = 2;	// cat selection + table header
-		foreach($this->get_tracker_priorities($tracker,$content['priorities']['cat_id'],false) as $value => $label)
+		$default_priority = null;
+		foreach($this->get_tracker_priorities($tracker,$content['priorities']['cat_id'],false, $default_priority) as $value => $label)
 		{
 			$content['priorities'][$n++] = array(
 				'value' => self::$stock_priorities[$value],
 				'label' => $label,
+				'is_default' => $value == $default_priority
 			);
+			if($value == $default_priority)
+			{
+				$content['priorities']['isdefaultpriority'] = self::$stock_priorities[$value];
+			}
 		}
 		//_debug_array($content);
 		if (is_array($content['exclude_app_on_timesheetcreation']) && !in_array('timesheet',$content['exclude_app_on_timesheetcreation'])) $content['exclude_app_on_timesheetcreation'][]='timesheet';

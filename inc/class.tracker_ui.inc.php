@@ -193,7 +193,9 @@ class tracker_ui extends tracker_bo
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
-				$this->data['tr_priority'] = $regardInInit['tr_priority'] = 5;
+
+				$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
+				$this->data['tr_priority'] = $regardInInit['tr_priority'] = $default_priority;
 			}
 
 
