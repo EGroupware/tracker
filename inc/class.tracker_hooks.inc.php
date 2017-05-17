@@ -98,7 +98,8 @@ class tracker_hooks
 		if ($GLOBALS['egw_info']['user']['apps']['admin'])
 		{
 			$file = Array(
-				'Site configuration' => Egw::link('/index.php','menuaction=tracker.tracker_admin.admin'),
+				// As long as CKEditor needs CSP exceptions, this needs to load in an iframe
+				'Site configuration' => Egw::link('/index.php','menuaction=tracker.tracker_admin.admin&ajax=false'),
 				'Define escalations' => Egw::link('/index.php','menuaction=tracker.tracker_admin.escalations'),
 				'Custom fields' => Egw::link('/index.php','menuaction=tracker.tracker_customfields.index&use_private=1&ajax=true'),
 			);
