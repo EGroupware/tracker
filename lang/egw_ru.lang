@@ -309,7 +309,7 @@ receive notifications about created tracker-items	tracker	ru	Получать у
 receive notifications about due entries you created or are assigned to	tracker	ru	Получать уведомления о завершении записей, Вами созданных или назначенных
 receive notifications about starting entries you created or are assigned to	tracker	ru	Получать уведомления о завершении записей, Вами созданных или назначенных
 receive notifications in html	tracker	ru	Принимать сообщения в формате html
-recieve notifications about own changes in tracker-items	tracker	ru	Получать уведомления о собственных изменениях записей Трекера
+receive notifications about own changes in tracker-items	tracker	ru	Получать уведомления о собственных изменениях записей Трекера
 rejected	tracker	ru	Отклонено
 remind	tracker	ru	Напомнить
 replacements for inserting entries into documents	tracker	ru	Замена для вставленных в документы записей

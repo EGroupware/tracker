@@ -206,7 +206,7 @@ read mail address	tracker	cs	Přečíst e-mailovou adresu
 receive notifications about assigned tracker-items	tracker	cs	Přijímat upozornění na položky přidělené ve sled. systému
 receive notifications about created tracker-items	tracker	cs	Přijimat upozornění na položky vytvořené ve sled. systému
 receive notifications in html	tracker	cs	Přijímat upozornění v HTML
-recieve notifications about own changes in tracker-items	tracker	cs	Přijímat upozornění na vlastní změny v položkách sledovacího systému
+receive notifications about own changes in tracker-items	tracker	cs	Přijímat upozornění na vlastní změny v položkách sledovacího systému
 rejected	tracker	cs	Odmítnuté
 remind	tracker	cs	Připomenout
 reply also to unknown addresses	tracker	cs	Odpovídat také na neznámé adresy

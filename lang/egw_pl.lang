@@ -201,7 +201,7 @@ read mail address	tracker	pl	Czytaj wiadomości email
 receive notifications about assigned tracker-items	tracker	pl	Otrzymuj powiadomienia związane z przydzielonymi elementami.
 receive notifications about created tracker-items	tracker	pl	Otrzymuj powiadomienia związane z utworzonymi elementami
 receive notifications in html	tracker	pl	Otrzymuj powiadomienia w HTML
-recieve notifications about own changes in tracker-items	tracker	pl	Otrzymuj powiadomienia a własnych zmianach w elementach systemu śledzenia
+receive notifications about own changes in tracker-items	tracker	pl	Otrzymuj powiadomienia a własnych zmianach w elementach systemu śledzenia
 rejected	tracker	pl	Odrzucono
 remind	tracker	pl	Przypomnij
 reply also to unknown addresses	tracker	pl	Odpowiadaj również na nieznane adresy

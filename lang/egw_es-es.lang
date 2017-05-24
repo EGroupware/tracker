@@ -276,7 +276,7 @@ read mail address	tracker	es-es	Leer dirección de correo
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
 receive notifications in html	tracker	es-es	Recibir notificaciones en html
-recieve notifications about own changes in tracker-items	tracker	es-es	Recibir notificaciones cuando hay cambios propios en los elementos de seguimiento
+receive notifications about own changes in tracker-items	tracker	es-es	Recibir notificaciones cuando hay cambios propios en los elementos de seguimiento
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 replacements for inserting entries into documents	tracker	es-es	Sustituciones para insertar entradas en los documentos

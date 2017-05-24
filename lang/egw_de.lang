@@ -330,7 +330,7 @@ receive notifications about created tracker-items	tracker	de	Empfange Benachrich
 receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
 receive notifications about starting entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für zu startende Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
-recieve notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Einträge
+receive notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Einträge
 refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu der Mailbox war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
 refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen

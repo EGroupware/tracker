@@ -326,7 +326,7 @@ receive notifications about created tracker-items	tracker	sk	Dostávať pripomie
 receive notifications about due entries you created or are assigned to	tracker	sk	Dostávať pripomienky o položkách v termíne ukončenia ktoré ste vytvorili alebo za ktoré ste zodpovední
 receive notifications about starting entries you created or are assigned to	tracker	sk	Dostávať pripomienky o začínajúcich položkách ktoré ste vytvorili alebo za ktoré ste zodpovední
 receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
-recieve notifications about own changes in tracker-items	tracker	sk	Dostávať pripomienky o svojich vlastných zmenách v položkách Sledovača
+receive notifications about own changes in tracker-items	tracker	sk	Dostávať pripomienky o svojich vlastných zmenách v položkách Sledovača
 refused to open mailbox therefore changed interval from %1 to %2	tracker	sk	odmietnuté pripojenie k poštovej schránke, preto mením interval z %1 na %2
 refused to open mailbox: %1	tracker	sk	odmietnuté pripojenie k poštovej schránke: %1
 rejected	tracker	sk	Odmietnuté

@@ -211,7 +211,7 @@ class tracker_hooks
 			),
 			'notify_own_modification' => array(
 				'type'   => 'check',
-				'label'  => 'Recieve notifications about own changes in tracker-items',
+				'label'  => 'Receive notifications about own changes in tracker-items',
 				'name'   => 'notify_own_modification',
 				'help'   => 'Show the Tracker send you notification mails, in tracker items that you updates?',
 				'xmlrpc' => True,

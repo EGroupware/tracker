@@ -219,7 +219,7 @@ read mail address	tracker	nl	Lees mail adres
 receive notifications about assigned tracker-items	tracker	nl	Ontvang notificatie van toegewezen meldingen
 receive notifications about created tracker-items	tracker	nl	Ontvang notificatie van gecreëerde meldingen
 receive notifications in html	tracker	nl	Ontvang notificaties in HTML
-recieve notifications about own changes in tracker-items	tracker	nl	Ontvang notificaties van eigen wijzigingen in meldingen
+receive notifications about own changes in tracker-items	tracker	nl	Ontvang notificaties van eigen wijzigingen in meldingen
 rejected	tracker	nl	Afgewezen
 remind	tracker	nl	Herinner
 replacements for inserting entries into documents	tracker	nl	Vervanging voor het invoeren van gegevens in documenten

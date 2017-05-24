@@ -329,7 +329,7 @@ receive notifications about created tracker-items	tracker	it	Ricezione notifiche
 receive notifications about due entries you created or are assigned to	tracker	it	Ricezione di notifiche circa ticket in scadenza che hai creato oppure dei quali sei assegnatario
 receive notifications about starting entries you created or are assigned to	tracker	it	Ricevi notifiche circa i ticket nuovi che hai creato oppure di cui sei assegnatario
 receive notifications in html	tracker	it	Ricezione notifiche in html
-recieve notifications about own changes in tracker-items	tracker	it	Ricevi notifiche circa le tue modifiche nei ticket
+receive notifications about own changes in tracker-items	tracker	it	Ricevi notifiche circa le tue modifiche nei ticket
 refused to open mailbox therefore changed interval from %1 to %2	tracker	it	negata l'apertura della casella e quindi l'intervallo è stato modificato da %1 a %2
 refused to open mailbox: %1	tracker	it	negato di aprire la casella: %1
 rejected	tracker	it	Rifiutato

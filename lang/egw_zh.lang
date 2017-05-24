@@ -150,7 +150,7 @@ projects	tracker	zh	项目
 receive notifications about assigned tracker-items	tracker	zh	在被指派任务跟踪项目时发出通知
 receive notifications about created tracker-items	tracker	zh	在任务跟踪项目建立时发出通知
 receive notifications in html	tracker	zh	接收 html 格式通知
-recieve notifications about own changes in tracker-items	tracker	zh	收到有关您自己跟踪项目更改的通知
+receive notifications about own changes in tracker-items	tracker	zh	收到有关您自己跟踪项目更改的通知
 rejected	tracker	zh	拒绝
 remind	tracker	zh	提醒
 resolution	tracker	zh	决议

@@ -296,7 +296,7 @@ receive notifications about created tracker-items	tracker	fi	Vastaanota huomautu
 receive notifications about due entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti erääntyvistä merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
 receive notifications about starting entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti alkavista merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
 receive notifications in html	tracker	fi	Vastaanota huomautukset html -muodossa
-recieve notifications about own changes in tracker-items	tracker	fi	Vastaanota huomautuksia tekemistäsi muutoksista merkinnöissä.
+receive notifications about own changes in tracker-items	tracker	fi	Vastaanota huomautuksia tekemistäsi muutoksista merkinnöissä.
 rejected	tracker	fi	Kielletty
 remind	tracker	fi	Muistuta
 replacements for inserting entries into documents	tracker	fi	Asiakirjoihin syötettävät sijaismerkinnät
