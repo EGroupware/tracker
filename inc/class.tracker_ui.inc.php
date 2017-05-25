@@ -194,8 +194,6 @@ class tracker_ui extends tracker_bo
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
 
-				$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
-				$this->data['tr_priority'] = $regardInInit['tr_priority'] = (int)$default_priority;
 			}
 
 
@@ -673,7 +671,7 @@ class tracker_ui extends tracker_bo
 			'tr_tracker'  => &$this->trackers,
 			'cat_id'      => $this->get_tracker_labels('cat',is_array($tracker) && count($tracker) == 1?$tracker[0]:$tracker),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
-			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
+			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id'], true, $default_priority),
 			'tr_status'   => &$statis,
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			'tr_assigned' => $account_select_pref == 'none' ? array() : $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
@@ -682,6 +680,12 @@ class tracker_ui extends tracker_bo
 			'tr_group' => $account_select_pref == 'none' ? array() : $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
 			'canned_response' => $this->get_tracker_labels('response'),
 		);
+
+		// Keep updating priority to default until it's saved
+		if(!$tr_id)
+		{
+			$content['tr_priority'] = (int)$default_priority;
+		}
 
 		foreach($this->field2history as $field => $status)
 		{
