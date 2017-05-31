@@ -193,7 +193,11 @@ class tracker_ui extends tracker_bo
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
-
+				// State can have more than one tracker selected, edit has only 1
+				if(is_array($this->data['tr_tracker']))
+				{
+					$this->data['tr_tracker'] = $regardInInit['tr_tracker']  = (int)  array_pop($this->data['tr_tracker']);
+				}
 			}
 
 
