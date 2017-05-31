@@ -161,7 +161,7 @@ each value is a line like <id>[=<label>]	tracker	en	each value is a line like <i
 each value is a line like id[=label]	tracker	en	each value is a line like id[=label]
 edit %1	tracker	en	Edit %1
 edit entry	tracker	en	Edit entry
-egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	eGroupWare Tracker Mailhandling: could not connect previously, and profile did not change
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
 enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized mails should be forwarded

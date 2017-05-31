@@ -373,7 +373,7 @@ unrecognized mails	tracker	es-es	Correos no reconocidos
 upcoming	tracker	es-es	próxima
 updated	tracker	es-es	Actualizado
 url of the tracker	tracker	es-es	URL del seguimiento
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	es-es	URL a incluir en la notificación. Por ejemplo, a la págigna con el módulo del Administrador de sitios web, el seguimiento predeterminado dentro de eGroupWare.
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	es-es	URL a incluir en la notificación. Por ejemplo, a la págigna con el módulo del Administrador de sitios web, el seguimiento predeterminado dentro de EGroupware.
 use a default user for mails that where not recognized	tracker	es-es	Usar un usuario predeterminado para los correos no reconocidos
 use all	tracker	es-es	Usar todos
 use custom notification message	tracker	es-es	Usar mensaje de notificación personalizado
