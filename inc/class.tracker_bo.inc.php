@@ -408,6 +408,10 @@ class tracker_bo extends tracker_so
 		// set default resolution
 		$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
 
+		// set default priority
+		$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
+		$this->data['tr_priority'] = $default_priority;
+
 		$this->data_merge($keys);
 
 		return $this->data;
