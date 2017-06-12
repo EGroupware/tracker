@@ -6,12 +6,12 @@
 %1 is due %2	tracker	fr	%1 est dû %2
 %1 is starting %2	tracker	fr	%1 commence %2
 %1 tickets have been converted	tracker	fr	%1 tickets ont été convertis
-&#9830; not closed	tracker	fr	♦ Non fermés
-&#9830; own not closed	tracker	fr	♦ Mes traqueurs non fermés
-&#9830; own or assigned not closed	tracker	fr	♦ Mes traqueurs ou traqueurs assignés non fermés
-&#9830; own without reply not closed	tracker	fr	♦ Mes traqueurs sans réponse non fermés
-&#9830; without 30 days reply not closed	tracker	fr	♦ Sans réponse depuis 30 jours et non fermés
-&#9830; without reply not closed	tracker	fr	♦ Sans réponse et non fermés
+♦ not closed	tracker	fr	♦ Non fermés
+♦ own not closed	tracker	fr	♦ Mes traqueurs non fermés
+♦ own or assigned not closed	tracker	fr	♦ Mes traqueurs ou traqueurs assignés non fermés
+♦ own without reply not closed	tracker	fr	♦ Mes traqueurs sans réponse non fermés
+♦ without 30 days reply not closed	tracker	fr	♦ Sans réponse depuis 30 jours et non fermés
+♦ without reply not closed	tracker	fr	♦ Sans réponse et non fermés
 (beware of mailloops, check the help!)	tracker	fr	(attention aux boucles de mails, vérifier l'aide !)
 (new tickets as	tracker	fr	Nouveaux tickets comme
 --> choose a project from the drop-down list	tracker	fr	--> choisir un projet dans la liste déroulante

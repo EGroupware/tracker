@@ -6,11 +6,11 @@
 %1 is due %2	tracker	fi	%1 erääntyy %2
 %1 is starting %2	tracker	fi	%1 alkaa %2
 %1 tickets have been converted	tracker	fi	%1 merkintää muutettu.
-&#9830; not closed	tracker	fi	♦ Ei suljetut
-&#9830; own not closed	tracker	fi	♦ Omat, ei suljetut
-&#9830; own without reply not closed	tracker	fi	♦ Omat, ei suljetut, ilman vastausta
-&#9830; without 30 days reply not closed	tracker	fi	♦ Ei suljetut, 30 vrk ilman vastausta
-&#9830; without reply not closed	tracker	fi	♦ Ei suljetut, ilman vastausta
+♦ not closed	tracker	fi	♦ Ei suljetut
+♦ own not closed	tracker	fi	♦ Omat, ei suljetut
+♦ own without reply not closed	tracker	fi	♦ Omat, ei suljetut, ilman vastausta
+♦ without 30 days reply not closed	tracker	fi	♦ Ei suljetut, 30 vrk ilman vastausta
+♦ without reply not closed	tracker	fi	♦ Ei suljetut, ilman vastausta
 (beware of mailloops, check the help!)	tracker	fi	Varoitus! Huomioi luupit.
 (new tickets as	tracker	fi	Omistaja uudelle merkinnälle
 --> choose a project from the drop-down list	tracker	fi	--> valitse projekti pudotusvalikosta

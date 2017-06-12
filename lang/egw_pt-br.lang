@@ -1,11 +1,11 @@
 %1 days in advance	tracker	pt-br	%1 dias para frente
 %1 entries updated.	tracker	pt-br	%1 registro(s) atualizado(s).
 %1 tickets have been converted	tracker	pt-br	%1 tickets foram convertidos
-&#9830; not closed	tracker	pt-br	Não fechados
-&#9830; own not closed	tracker	pt-br	Meus / Não fechados
-&#9830; own without reply not closed	tracker	pt-br	Meus / Sem resposta / Não fechados
-&#9830; without 30 days reply not closed	tracker	pt-br	Sem resposta por 30 dias / Não fechados
-&#9830; without reply not closed	tracker	pt-br	Sem resposta / Não fechados
+♦ not closed	tracker	pt-br	Não fechados
+♦ own not closed	tracker	pt-br	Meus / Não fechados
+♦ own without reply not closed	tracker	pt-br	Meus / Sem resposta / Não fechados
+♦ without 30 days reply not closed	tracker	pt-br	Sem resposta por 30 dias / Não fechados
+♦ without reply not closed	tracker	pt-br	Sem resposta / Não fechados
 (new tickets as	tracker	pt-br	(Novos tickets como
 --> choose a project from the drop-down list	tracker	pt-br	--> escolha um projeto da lista
 --> enter new name	tracker	pt-br	--> informe o novo nome

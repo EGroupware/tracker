@@ -6,12 +6,12 @@
 %1 is due %2	tracker	ru	%1 выполнено %2
 %1 is starting %2	tracker	ru	%1 начинается %2
 %1 tickets have been converted	tracker	ru	%1 запросов было преобразовано
-&#9830; not closed	tracker	ru	♦ Незакрытые
-&#9830; own not closed	tracker	ru	♦ Свои незакрытые
-&#9830; own or assigned not closed	tracker	ru	♦ Свои или назначенные, незакрытые
-&#9830; own without reply not closed	tracker	ru	♦ Свои без ответа не закрытые
-&#9830; without 30 days reply not closed	tracker	ru	♦ 30 дней без ответа не закрытые
-&#9830; without reply not closed	tracker	ru	♦ Без ответа не закрытые
+♦ not closed	tracker	ru	♦ Незакрытые
+♦ own not closed	tracker	ru	♦ Свои незакрытые
+♦ own or assigned not closed	tracker	ru	♦ Свои или назначенные, незакрытые
+♦ own without reply not closed	tracker	ru	♦ Свои без ответа не закрытые
+♦ without 30 days reply not closed	tracker	ru	♦ 30 дней без ответа не закрытые
+♦ without reply not closed	tracker	ru	♦ Без ответа не закрытые
 (beware of mailloops, check the help!)	tracker	ru	Избегайте циклов почты, проверьте подсказки!
 (new tickets as	tracker	ru	(Новые запросы как
 --> choose a project from the drop-down list	tracker	ru	--> выберите проект из ниспадающего списка

@@ -6,12 +6,12 @@
 %1 is due %2	tracker	sk	%1 má termín do %2
 %1 is starting %2	tracker	sk	%1 začína %2
 %1 tickets have been converted	tracker	sk	%1 kariet bolo skonvertovaných
-&#9830; not closed	tracker	sk	♦ Neuzavreté
-&#9830; own not closed	tracker	sk	♦ Moje neuzavreté
-&#9830; own or assigned not closed	tracker	sk	♦ Vlastné alebo priradené, neuzavreté
-&#9830; own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté
-&#9830; without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
-&#9830; without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
+♦ not closed	tracker	sk	♦ Neuzavreté
+♦ own not closed	tracker	sk	♦ Moje neuzavreté
+♦ own or assigned not closed	tracker	sk	♦ Vlastné alebo priradené, neuzavreté
+♦ own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté
+♦ without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
+♦ without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
 (beware of mailloops, check the help!)	tracker	sk	(Pozor na nekonečné poštové slučky, konzultujte manuál!)
 (new tickets as	tracker	sk	(Nové karty ako
 --> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu

@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	pl	%1 wpisów zostało zaktualizowanych
 %1 tickets have been converted	tracker	pl	Skonwertowano %1 ticketów
-&#9830; not closed	tracker	pl	♦ Nie zamknięty
-&#9830; own not closed	tracker	pl	♦ Własny nie zamknięty
-&#9830; own without reply not closed	tracker	pl	♦ Własny bez odpowiedzi nie zamknięty
-&#9830; without 30 days reply not closed	tracker	pl	♦ Bez odpowiedzi 30 dni nie zamknięty
-&#9830; without reply not closed	tracker	pl	♦ Bez odpowiedzi nie zamknięty
+♦ not closed	tracker	pl	♦ Nie zamknięty
+♦ own not closed	tracker	pl	♦ Własny nie zamknięty
+♦ own without reply not closed	tracker	pl	♦ Własny bez odpowiedzi nie zamknięty
+♦ without 30 days reply not closed	tracker	pl	♦ Bez odpowiedzi 30 dni nie zamknięty
+♦ without reply not closed	tracker	pl	♦ Bez odpowiedzi nie zamknięty
 (new tickets as	tracker	pl	(Nowe tickety jako
 --> choose a project from the drop-down list	tracker	pl	--> wybierz projekt z listy rozwijanej
 --> enter new name	tracker	pl	--> podaj nową nazwę

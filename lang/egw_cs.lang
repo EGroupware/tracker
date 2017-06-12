@@ -1,11 +1,11 @@
 %1 days in advance	tracker	cs	%1 dní dopředu
 %1 entries updated.	tracker	cs	%1 položek zaktualizováno.
 %1 tickets have been converted	tracker	cs	%1 ohlášení bylo zkonvertováno
-&#9830; not closed	tracker	cs	Neuzavřené
-&#9830; own not closed	tracker	cs	Vlastní neuzavřené
-&#9830; own without reply not closed	tracker	cs	Vlastní bez odpovědi neuzavřené
-&#9830; without 30 days reply not closed	tracker	cs	30 dní bez odpovědi neuzavřené
-&#9830; without reply not closed	tracker	cs	Bez odpovědi neuzavřené
+♦ not closed	tracker	cs	Neuzavřené
+♦ own not closed	tracker	cs	Vlastní neuzavřené
+♦ own without reply not closed	tracker	cs	Vlastní bez odpovědi neuzavřené
+♦ without 30 days reply not closed	tracker	cs	30 dní bez odpovědi neuzavřené
+♦ without reply not closed	tracker	cs	Bez odpovědi neuzavřené
 (new tickets as	tracker	cs	(Nová ohlášení jako
 --> choose a project from the drop-down list	tracker	cs	--> vyberte projekt z rozevíracího seznamu
 --> enter new name	tracker	cs	--> zadejte nové jméno
