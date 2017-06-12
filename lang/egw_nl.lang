@@ -1,11 +1,11 @@
 %1 days in advance	tracker	nl	%1 dagen tevoren
 %1 entries updated.	tracker	nl	%1 melding(en) aangepast.
 %1 tickets have been converted	tracker	nl	%1 melding(en) zijn geconverteerd
-&#9830; not closed	tracker	nl	&#9830; Niet gesloten
-&#9830; own not closed	tracker	nl	&#9830; Mijn, niet gesloten
-&#9830; own without reply not closed	tracker	nl	&#9830; Mijn, geen antwoord, niet gesloten
-&#9830; without 30 days reply not closed	tracker	nl	&#9830; 30 dagen geen antwoord, niet gesloten
-&#9830; without reply not closed	tracker	nl	&#9830; Geen antwoord, niet gesloten
+♦ not closed	tracker	nl	♦ Niet gesloten
+♦ own not closed	tracker	nl	♦ Mijn, niet gesloten
+♦ own without reply not closed	tracker	nl	♦ Mijn, geen antwoord, niet gesloten
+♦ without 30 days reply not closed	tracker	nl	♦ 30 dagen geen antwoord, niet gesloten
+♦ without reply not closed	tracker	nl	♦ Geen antwoord, niet gesloten
 (new tickets as	tracker	nl	(Nieuwe meldingen als
 --> choose a project from the drop-down list	tracker	nl	--> kies een project van de drop-down lijst
 --> enter new name	tracker	nl	--> geef nieuwe naam

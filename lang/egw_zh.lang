@@ -1,10 +1,10 @@
 %1 entries updated.	tracker	zh	%1 条目被更新。
 %1 tickets have been converted	tracker	zh	%1 传票已转换
-&#9830; not closed	tracker	zh	♦ '没有关闭
-&#9830; own not closed	tracker	zh	♦ 自己没有关闭
-&#9830; own without reply not closed	tracker	zh	♦ 自己没答复并且没关闭
-&#9830; without 30 days reply not closed	tracker	zh	♦ 没在30天答复并且没关闭
-&#9830; without reply not closed	tracker	zh	♦ 没答复并且没关闭
+♦ not closed	tracker	zh	♦ '没有关闭
+♦ own not closed	tracker	zh	♦ 自己没有关闭
+♦ own without reply not closed	tracker	zh	♦ 自己没答复并且没关闭
+♦ without 30 days reply not closed	tracker	zh	♦ 没在30天答复并且没关闭
+♦ without reply not closed	tracker	zh	♦ 没答复并且没关闭
 --> choose a project from the drop-down list	tracker	zh	--> 从下拉列表选择一个项目
 --> enter new name	tracker	zh	--> 输入新名称
 1 - lowest	tracker	zh	1 - 最低

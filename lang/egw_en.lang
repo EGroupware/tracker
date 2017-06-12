@@ -6,12 +6,12 @@
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
-&#9830; not closed	tracker	en	♦ Not closed
-&#9830; own not closed	tracker	en	♦ Own not closed
-&#9830; own or assigned not closed	tracker	en	♦ Own or assigned, not closed
-&#9830; own without reply not closed	tracker	en	♦ Own without reply not closed
-&#9830; without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
-&#9830; without reply not closed	tracker	en	♦ Without reply not closed
+♦ not closed	tracker	en	♦ Not closed
+♦ own not closed	tracker	en	♦ Own not closed
+♦ own or assigned not closed	tracker	en	♦ Own or assigned, not closed
+♦ own without reply not closed	tracker	en	♦ Own without reply not closed
+♦ without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
+♦ without reply not closed	tracker	en	♦ Without reply not closed
 (beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
 (new tickets as	tracker	en	New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list

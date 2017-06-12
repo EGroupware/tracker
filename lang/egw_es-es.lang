@@ -5,12 +5,12 @@
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
 %1 is starting %2	tracker	es-es	%1 está empezando %2
 %1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
-&#9830; not closed	tracker	es-es	♦ No cerrado
-&#9830; own not closed	tracker	es-es	♦ Propio no cerrado
-&#9830; own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
-&#9830; own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado
-&#9830; without 30 days reply not closed	tracker	es-es	♦ Sin contestación en 30 días no cerrado
-&#9830; without reply not closed	tracker	es-es	♦ Sin contestación no cerrado
+♦ not closed	tracker	es-es	♦ No cerrado
+♦ own not closed	tracker	es-es	♦ Propio no cerrado
+♦ own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
+♦ own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado
+♦ without 30 days reply not closed	tracker	es-es	♦ Sin contestación en 30 días no cerrado
+♦ without reply not closed	tracker	es-es	♦ Sin contestación no cerrado
 (beware of mailloops, check the help!)	tracker	es-es	(Tenga cuidado con los bucles de correo, ¡revise la ayuda!)
 (new tickets as	tracker	es-es	Nueva entrada como
 --> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable

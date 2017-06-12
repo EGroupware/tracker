@@ -6,12 +6,12 @@
 %1 is due %2	tracker	it	%1 è in scadenza %2
 %1 is starting %2	tracker	it	%1 comincia %2
 %1 tickets have been converted	tracker	it	%1 tickets sono stati convertiti
-&#9830; not closed	tracker	it	♦ Non chiusi
-&#9830; own not closed	tracker	it	♦ Propri non chiusi
-&#9830; own or assigned not closed	tracker	it	♦ Propri oppure assegnati, non chiusi
-&#9830; own without reply not closed	tracker	it	♦ Propri senza risposte e non chiusi
-&#9830; without 30 days reply not closed	tracker	it	♦ Da 30 giorni senza risposte e non chiusi
-&#9830; without reply not closed	tracker	it	♦ Senza risposte  e non chiusi
+♦ not closed	tracker	it	♦ Non chiusi
+♦ own not closed	tracker	it	♦ Propri non chiusi
+♦ own or assigned not closed	tracker	it	♦ Propri oppure assegnati, non chiusi
+♦ own without reply not closed	tracker	it	♦ Propri senza risposte e non chiusi
+♦ without 30 days reply not closed	tracker	it	♦ Da 30 giorni senza risposte e non chiusi
+♦ without reply not closed	tracker	it	♦ Senza risposte  e non chiusi
 (beware of mailloops, check the help!)	tracker	it	(Attenzione ai loop di posta, controllare la guida!)
 (new tickets as	tracker	it	Nuovo ticket come
 --> choose a project from the drop-down list	tracker	it	>> scegli un progetto dal menù a tendina
