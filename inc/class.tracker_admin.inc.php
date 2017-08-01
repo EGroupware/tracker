@@ -75,6 +75,13 @@ class tracker_admin extends tracker_bo
 		if (is_array($_content))
 		{
 			list($button) = @each($_content['button']);
+			$default_category = false;
+			if (isset($_content['cats']['isdefaultcategory']))
+			{
+				$name = 'cats';
+				$default_category = $_content[$name]['isdefaultcategory'];
+				unset($_content[$name]['isdefaultcategory']);
+			}
 			$defaultresolution = false;
 			if (isset($_content['resolutions']['isdefaultresolution']))
 			{
@@ -304,7 +311,8 @@ class tracker_admin extends tracker_bo
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
 								($tracker && in_array($tracker, (array)$old_cat['data']['denyglobal']) != !empty($cat['denyglobal'])) ||
-								($name == 'cats' && (int)$cat['autoassign'] != (int)$old_cat['data']['autoassign']) ||
+								($name == 'cats' && ((int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
+										(($default_category && ($cat['id']==$default_category || $cat['isdefault'] && $cat['id']!=$default_category))||!$default_category && $cat['isdefault']))) ||
 								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
@@ -329,6 +337,21 @@ class tracker_admin extends tracker_bo
 								{
 									case 'cats':
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										if ($cat['id']==$default_category)
+										{
+											$no_change = $cat['isdefault'];
+											$old_cat['data']['isdefault'] = true;
+											if($no_change)
+											{
+												// No real change - use 2 because switch is a loop in PHP
+												continue 2;
+											}
+										}
+										else if ($cat['main'] == $tracker)
+										{
+											if (isset($old_cat['data']['isdefault'])) unset($old_cat['data']['isdefault']);
+											if (isset($cat['isdefault'])) unset($cat['isdefault']);
+										}
 										break;
 									case 'statis':
 										$old_cat['data']['closed'] = $cat['closed'];
@@ -484,7 +507,15 @@ class tracker_admin extends tracker_bo
 					default:	// cat
 						$data['type'] = 'cat';
 						$content['cats'][$n=$c++] = $cat + $data;
-						if ($tracker != $cat['parent']) $readonlys['cats'][$n]['autoassign'] = true;
+						if ($data['isdefault'] && (!isset($content['cats']['isdefaultcategory']) || $cat['main'] == $tracker))
+						{
+							$content['cats']['isdefaultcategory'] = $cat['id'];
+						}
+						if ($tracker != $cat['parent'])
+						{
+							$readonlys['cats'][$n]['autoassign'] = true;
+							//$readonlys['cats']['isdefaultcategory'][$cat['id']] = true;
+						}
 						break;
 				}
 				$namespace = $data['type'].'s';
@@ -562,7 +593,7 @@ class tracker_admin extends tracker_bo
 			'autoassign' => $this->get_staff($tracker),
 			'lang' => ($tracker ? array('' => lang('default')) : array() )+
 				Api\Translation::get_installed_langs(),
-			'cat_id' => $this->get_tracker_labels('cat',$tracker),
+			'cat_id' => $this->get_tracker_labels('cat',$tracker, $default_category),
 			// Mail handling
 			'interval' => array(
 				0 => 'Disabled',
@@ -576,7 +607,7 @@ class tracker_admin extends tracker_bo
 			'servertype' => array(),
 			'default_tracker' => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
 			// TODO; enable the default_trackers onChange() to reload categories
-			'default_cat' => $this->get_tracker_labels('cat',$content['mailhandling']['default_tracker']),
+			'default_cat' => $default_category,
 			'default_version' => $this->get_tracker_labels('version',$content['mailhandling']['default_tracker']),
 			'unrec_reply' => array(
 				0 => 'Creator',

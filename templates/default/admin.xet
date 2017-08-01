@@ -15,6 +15,7 @@
 						<columns>
 							<column/>
 							<column/>
+							<column/>
 							<column width="110" disabled="!@@tracker"/>
 							<column width="45"/>
 						</columns>
@@ -22,6 +23,7 @@
 							<row class="th">
 								<description value="Name"/>
 								<description value="Autoassign to"/>
+								<description value="Default" />
 								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
 							</row>
@@ -30,6 +32,7 @@
 								<menulist>
 									<menupopup id="${row}[autoassign]" no_lang="1" options="Noone"/>
 								</menulist>
+								<radio align="center" id="isdefaultcategory" options="$row_cont[id]"/>
 								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this category','Delete')" image="delete"/>
 							</row>

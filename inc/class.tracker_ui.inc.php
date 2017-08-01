@@ -673,7 +673,7 @@ class tracker_ui extends tracker_bo
 		$account_select_pref = $GLOBALS['egw_info']['user']['preferences']['common']['account_selection'];
 		$sel_options = array(
 			'tr_tracker'  => &$this->trackers,
-			'cat_id'      => $this->get_tracker_labels('cat',is_array($tracker) && count($tracker) == 1?$tracker[0]:$tracker),
+			'cat_id'      => $this->get_tracker_labels('cat',is_array($tracker) && count($tracker) == 1?$tracker[0]:$tracker, $default_category),
 			'tr_version'  => $this->get_tracker_labels('version',$tracker),
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id'], true, $default_priority),
 			'tr_status'   => &$statis,
@@ -685,9 +685,10 @@ class tracker_ui extends tracker_bo
 			'canned_response' => $this->get_tracker_labels('response'),
 		);
 
-		// Keep updating priority to default until it's saved
+		// Keep updating category & priority to default until it's saved
 		if(!$tr_id)
 		{
+			$content['cat_id'] = (int)$default_category;
 			$content['tr_priority'] = (int)$default_priority;
 		}
 
