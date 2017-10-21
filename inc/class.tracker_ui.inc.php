@@ -501,6 +501,7 @@ class tracker_ui extends tracker_bo
 		if ($this->data['tr_edit_mode'] == 'ascii' && $this->data['tr_description'] && $readonlys['tr_description'])
 		{
 			// non html view in a readonly htmlarea (div) needs nl2br
+			$this->data['tr_description'] = htmlspecialchars($this->data['tr_description']);
 			$tr_description_options = 'simple,240px,100%,false,,1';
 		}
 
@@ -943,7 +944,14 @@ class tracker_ui extends tracker_bo
 				}
 				$rows[$n]['prio_label'] = $prio_labels[$row['tr_priority']];
 			}
-			if (isset($rows[$n]['tr_description'])) $rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
+			if (isset($rows[$n]['tr_description']))
+			{
+				if($rows[$n]['tr_edit_mode'] == 'ascii')
+				{
+					$rows[$n]['tr_description'] = htmlspecialchars($rows[$n]['tr_description']);
+				}
+				$rows[$n]['tr_description'] = nl2br($rows[$n]['tr_description']);
+			}
 			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 

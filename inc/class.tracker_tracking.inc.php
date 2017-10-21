@@ -67,12 +67,12 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * @param tracker_bo $botracker
 	 * @return tracker_tracking
 	 */
-	function __construct(tracker_bo $botracker)
+	function __construct(tracker_bo $botracker, $notification_class=false)
 	{
 		$this->tracker = $botracker;
 		$this->field2history = $botracker->field2history;
 
-		parent::__construct('tracker');	// adding custom fields for tracker
+		parent::__construct('tracker', $notification_class);	// adding custom fields for tracker
 	}
 
 	/**
@@ -458,7 +458,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		$details += $this->get_customfields($data, $data['tr_tracker']);
 
 		$details['tr_description'] = array(
-			'value' => $data['tr_description'],
+			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
 		);
 		if ($data['replies'])
