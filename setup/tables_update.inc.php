@@ -8,7 +8,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
  * @subpackage setup
- * @version $Id$
  */
 
 use EGroupware\Api;
@@ -750,4 +749,10 @@ function tracker_upgrade14_1_001()
 function tracker_upgrade14_1_002()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '16.1';
+}
+
+
+function tracker_upgrade16_1()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1';
 }
