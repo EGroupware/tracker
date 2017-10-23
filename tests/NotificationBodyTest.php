@@ -85,6 +85,11 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 			$GLOBALS['egw']->contacts->save($account, true);
 			\EGroupware\Api\Accounts::cache_invalidate($GLOBALS['egw_info']['user']['account_id']);
 		}
+		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw']->accounts,'account_email');
+		if(!$email)
+		{
+			$this->markTestSkipped('User account needs email address');
+		}
 	}
 
 	public function tearDown()
