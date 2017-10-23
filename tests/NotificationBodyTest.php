@@ -46,35 +46,26 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 
 	public static function setUpBeforeClass()
 	{
-		parent::setUpBeforeClass();
+		// Test works on its own with this, but fails with the rest.
+		// There's no good reason commenting this out should work.
+		//parent::setUpBeforeClass();
 
 		// Change configuration
 		$config = Config::read('tracker');
 		static::$edit_mode = $config['htmledit'];
 
 		// Need to turn on self notifications
-		static::$self_notify = $GLOBALS['egw_info']['user']['preference']['tracker']['notify_own_modification'];
+		static::$self_notify = $GLOBALS['egw_info']['user']['preferences']['tracker']['notify_own_modification'];
 		$GLOBALS['egw']->preferences->add('tracker','notify_own_modification', true);
 		$GLOBALS['egw']->preferences->add('tracker','notify_creator', true);
-		$GLOBALS['egw_info']['user']['preference']['tracker']['notify_own_modification'] = true;
-		$GLOBALS['egw_info']['user']['preference']['tracker']['notify_creator'] = true;
-
-		// Notification fails if user has no email address, so try to add one
-		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw_info']['user']['account_id'],'account_email');
-		if(!$email)
-		{
-			$account = array(
-				'id' => $GLOBALS['egw_info']['user']['person_id'],
-				'email' => 'demo@example.org'
-			);
-			$GLOBALS['egw']->contacts->save($account, true);
-		}
+		$GLOBALS['egw_info']['user']['preferences']['tracker']['notify_own_modification'] = true;
+		$GLOBALS['egw_info']['user']['preferences']['tracker']['notify_creator'] = true;
 	}
 	public static function tearDownAfterClass()
 	{
 		Config::save_value('htmledit', static::$edit_mode, 'tracker', true);
 		$GLOBALS['egw']->preferences->add('tracker','notify_own_modification', static::$self_notify);
-		$GLOBALS['egw_info']['user']['preference']['tracker']['notify_own_modification'] = static::$self_notify;
+		$GLOBALS['egw_info']['user']['preferences']['tracker']['notify_own_modification'] = static::$self_notify;
 
 		parent::tearDownAfterClass();
 	}
@@ -82,6 +73,18 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 	public function setUp()
 	{
 		$this->bo = new \tracker_bo();
+
+		// Notification fails if user has no email address, so try to add one
+		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw']->accounts,'account_email');
+		if(!$email && $GLOBALS['egw_info']['user']['person_id'])
+		{
+			$account = array(
+				'id' => $GLOBALS['egw_info']['user']['person_id'],
+				'email' => 'demo@example.org'
+			);
+			$GLOBALS['egw']->contacts->save($account, true);
+			\EGroupware\Api\Accounts::cache_invalidate($GLOBALS['egw_info']['user']['account_id']);
+		}
 	}
 
 	public function tearDown()
