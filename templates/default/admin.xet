@@ -21,7 +21,10 @@
 						</columns>
 						<rows>
 							<row class="th">
-								<description value="Name"/>
+								<hbox>
+									<description value="Name"/>
+									<checkbox id="user_category_preference" label="User preference" statustext="Show as user preference" align="right"/>
+								</hbox>
 								<description value="Autoassign to"/>
 								<description value="Default" />
 								<description align="center" value="Deny global"/>

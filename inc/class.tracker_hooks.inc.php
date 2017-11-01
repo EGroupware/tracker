@@ -174,6 +174,27 @@ class tracker_hooks
 				'admin'  => False,
 				'default'=> false,
 			),
+		);
+		foreach($bo->get_tracker_labels() + array(0 => lang('All')) as $tr_id => $label)
+		{
+			if($bo->user_category_preference[$tr_id])
+			{
+				$id = $tr_id.'_cat_default';
+				$settings[$id] = array(
+					'type'   => 'select',
+					'values' => $bo->get_tracker_labels('cat',$tr_id),
+					'label'  => lang('Default category for new %1 entries',$label == lang('All') ? '' : $label),
+					'name'   => $id,
+					'help'   => 'Pre-selected category when creating a new entry',
+					'run_lang' => false,
+					'xmlrpc' => True,
+					'admin'  => False,
+					'default'=> false,
+				);
+			}
+		}
+
+		$settings += array(
 			'limit_des_lines' => array(
 				'type'   => 'input',
 				'size'   => 5,

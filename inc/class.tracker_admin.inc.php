@@ -194,6 +194,8 @@ class tracker_admin extends tracker_bo
 						}
 					}
 
+					$this->user_category_preference[$tracker] = $_content['cats']['user_category_preference'];
+
 					// build the (normalized!) priority array
 					$prios = array();
 					foreach($_content['priorities'] as $value => $data)
@@ -535,6 +537,9 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
+		$content['cats']['user_category_preference'] = $content['user_category_preference'][$tracker];
+		unset($content['user_category_preference']);
+
 		$readonlys['versions'][$v.'[denyglobal]'] = $readonlys['cats'][$c.'[denyglobal]'] =
 			$readonlys['responses'][$r.'[denyglobal]'] = $readonlys['projects'][$p.'[denyglobal]'] =
 			$readonlys['statis'][$s.'[denyglobal]'] = $readonlys['resolutions'][$i.'[denyglobal]'] = true;

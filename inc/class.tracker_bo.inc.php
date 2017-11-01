@@ -309,7 +309,7 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','users','notification','projects','priorities','default_priority','restrictions',	// tracker specific
+		'technicians','admins','users','notification','projects','priorities','default_priority','restrictions', 'user_category_preference',	// tracker specific
 		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates'
 	);
@@ -1240,6 +1240,12 @@ class tracker_bo extends tracker_so
 			}
 		}
 
+		$user_cat_default = $GLOBALS['egw_info']['user']['preferences']['tracker'][$tracker.'_cat_default'];
+		if ($type == 'cat' && $user_cat_default && $labels[$user_cat_default])
+		{
+			$default = $user_cat_default;
+		}
+
 		natcasesort($labels);
 
 		//echo "botracker::get_tracker_labels('$type',$tracker)"; _debug_array($labels);
@@ -1306,7 +1312,7 @@ class tracker_bo extends tracker_so
 		}
 		$default = $prios['default'] ? $prios['default'] : 5;
 		unset($prios['default']);
-		
+
 		if ($remove_empty)
 		{
 			foreach($prios as $key => $val)
