@@ -3,14 +3,9 @@
 %1 entries %2	tracker	es-es	%1 entradas %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	es-es	%1 entradas %2, %3 fallaron por permisos insuficientes
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
+%1 is due %2	tracker	es-es	% 1 esta vencido %2
 %1 is starting %2	tracker	es-es	%1 está empezando %2
 %1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
-♦ not closed	tracker	es-es	♦ No cerrado
-♦ own not closed	tracker	es-es	♦ Propio no cerrado
-♦ own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
-♦ own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado
-♦ without 30 days reply not closed	tracker	es-es	♦ Sin contestación en 30 días no cerrado
-♦ without reply not closed	tracker	es-es	♦ Sin contestación no cerrado
 (beware of mailloops, check the help!)	tracker	es-es	(Tenga cuidado con los bucles de correo, ¡revise la ayuda!)
 (new tickets as	tracker	es-es	Nueva entrada como
 --> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable
@@ -22,6 +17,7 @@
 3 years ago	tracker	es-es	Hace 3 años
 5 - medium	tracker	es-es	5 - media
 9 - highest	tracker	es-es	9 - la más alta
+[fwd]	tracker	es-es	[Reenviar]
 accepted	tracker	es-es	Aceptada
 acl	tracker	es-es	Lista de control de acceso
 activate users queue access control	tracker	es-es	Activar control de acceso para la cola de usuarios
@@ -30,6 +26,7 @@ add a ticket	tracker	es-es	Añadir una entrada
 add additionally	tracker	es-es	Añadir adicionalmente
 add assigned	tracker	es-es	Añadir asignados
 add comment	tracker	es-es	Añadir comentario
+add email-address	tracker	es-es	Añadir dirección de correo-e
 add from addressbook	tracker	es-es	Añadir desde la libreta de direcciones
 add infolog	tracker	es-es	Añadir InfoLog
 add restricted comment	tracker	es-es	Añadir comentario restringido
@@ -41,6 +38,7 @@ after how many days a not replied item should be marked overdue?	tracker	es-es	�
 after how many days pending items should be closed automatic	tracker	es-es	Después de cuantos días los elementos pendientes deben cerrarse automáticamente
 all	tracker	es-es	Todos
 all tickets are already converted to tracker	tracker	es-es	Todos los tickets se han convertido al sistema de seguimiento
+all versions	tracker	es-es	Todas las versiones
 allow bounties	tracker	es-es	Permitir recompensas
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	es-es	Permitir la creación de comentarios restringidos que sólo sean visibles a los administradores, técnicos y usuarios asignados
 allow creation of infolog entries from tracker tickets	tracker	es-es	Permitir la creación de entradas InfoLog desde entradas de seguimiento
@@ -48,10 +46,12 @@ allow default projects for tracker	tracker	es-es	Permitir proyectos predetermina
 allow editing by	tracker	es-es	Permitir edición por
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	es-es	Permitir predefinir proyectos que se asignarán a elementos nuevos de seguimiento.
 allow to assign groups to tracker items	tracker	es-es	Permitir asignar grupos para seguimiento de elementos
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	es-es	Permitir que asignar 'Usuarios' a una gestión adicionalmente a 'Técnicos' y a 'Administradores de Seguimiento'
 allow voting	tracker	es-es	Permitir votar
 allow voting on tracker items, show and sort after the votes	tracker	es-es	Permitir votar en elementos de seguimiento. Mostrar y ordenar después de los votos
 already escalated	tracker	es-es	Ya escalado
 amount	tracker	es-es	Cantidad
+application mail expected but got: %1	tracker	es-es	Aplicación de correo esperada pero obtenido: %1
 applies the changes	tracker	es-es	aplica los cambios
 assign to project	tracker	es-es	Asignar al proyecto
 assigned to	tracker	es-es	Asignado a
@@ -76,6 +76,10 @@ canned responses	tracker	es-es	Respuestas automatizadas
 categories, versions, canned responses	tracker	es-es	Categorías, versiones, respuestas automatizadas
 category	tracker	es-es	Categoría
 category for new tickets	tracker	es-es	Categoría para entradas nuevas
+change assigned	tracker	es-es	Cambiar asignado
+change assigned when updating	tracker	es-es	Cambiar asignado al actualizar
+change group	tracker	es-es	Cambiar grupo
+change group when updating	tracker	es-es	Cambiar grupo al actualizar
 change owner when updating	tracker	es-es	Cambiar el propietario al actualizar
 changes made below will be lost, if not applied before!	tracker	es-es	¡Los cambios realizados debajo se perderán, si no se aplican antes!
 check all	tracker	es-es	Comprobar todo
@@ -83,6 +87,7 @@ check mail interval	tracker	es-es	Intervalo para comprobar el correo
 choose a project from the drop-down list	tracker	es-es	Elegir un proyecto de la lista desplegable
 close pending	tracker	es-es	Cerrar elementos pendientes
 closed	tracker	es-es	Cerrado
+closed date	tracker	es-es	Fecha de cerrado
 comment by %1 at %2:	tracker	es-es	Comentario por %1 a las %2:
 comments	tracker	es-es	Comentarios
 completed	tracker	es-es	Completado
@@ -97,6 +102,7 @@ convert all open tickets	tracker	es-es	Convertir todos los tickets abiertos
 converted count	tracker	es-es	Cuenta de convertidos
 copy to	tracker	es-es	Copiar a
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	es-es	Copiar sus cambios en el portapapeles, %1recargar la entrada%2 y mezclarlos.
+could not connect	tracker	es-es	no pudo conectar
 create new links	tracker	es-es	Crear enlaces nuevos
 created	tracker	es-es	Creado
 created by	tracker	es-es	Creado por
@@ -105,10 +111,13 @@ creates a new field	tracker	es-es	crea un campo nuevo
 creation date	tracker	es-es	fecha de creación
 creator	tracker	es-es	Creador
 custom fields	tracker	es-es	Campos personalizados
+custom notifications	tracker	es-es	Notificaciones personalizadas
 custom tracker priorities	tracker	es-es	Prioridades del elemento personalizado
 data exchange settings	tracker	es-es	Opciones para intercambio de datos
+date filter	tracker	es-es	Filtro de fecha
 date opened	tracker	es-es	Fecha de apertura
 default document to insert entries	tracker	es-es	Documento predeterminado para insertar entradas
+default version for new tracker entries	tracker	es-es	Versión predeterminada para las nuevas entradas de seguimiento
 define escalations	common	es-es	Definir escalados
 delete mails from server	tracker	es-es	Borrar correos del servidor
 delete the mail from the server	tracker	es-es	Eliminar el correo del servidor
@@ -130,6 +139,7 @@ do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	es-es	¿Desea una notificación, si los elementos de los que es responsable han vencido?
 do you want to vote for this item	tracker	es-es	¿Desea votar por este elemento?
 donator name to show	tracker	es-es	Nombre del donante a mostrar
+due	tracker	es-es	Vencido
 due date	tracker	es-es	Vencimiento
 duplicate	tracker	es-es	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
@@ -186,6 +196,7 @@ if you specify an export definition, it will be used when you export	tracker	es-
 if you specify an export definition, it will be used when you export*	tracker	es-es	Si especifica una definición de exportación, se usará al exportar
 ignore	tracker	es-es	Ignorar
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	es-es	Ignorar los correos no reconocidos. No se borrarán del servidor, includo si 'Borrar correos' arriba está señalado.
+import options	tracker	es-es	Opciones de importación
 import tts tickets	tracker	es-es	Importar tickets de TTS
 incoming mail folder	tracker	es-es	Carpeta de correo entrante
 incoming mail rules	tracker	es-es	Reglas para el correo entrante
@@ -226,12 +237,15 @@ mark as read	tracker	es-es	Marcar como leído
 mark as unread	tracker	es-es	Marcar como sin leer
 matching filter	tracker	es-es	filtro que coincide
 max length of the input [, length of the inputfield (optional)]	tracker	es-es	longitud máxima de la entrada [, longitud del campo de entrada (opcional)]
+maximum %1 times	tracker	es-es	máximo %1 veces
+maximum %s times	tracker	es-es	máximo %s veces
 miscellaneous	tracker	es-es	Misceláneo
 multiple changes	tracker	es-es	Múltiples cambios
 name of current user, all other contact fields are valid too	tracker	es-es	Nombre del usuario actual. Todos los demás campos del contacto también son válidos.
 new %1	tracker	es-es	Nuevo %1
 new items	tracker	es-es	Nuevos elementos
 new ticket submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
+new tickets as	tracker	es-es	Gestiones nuevas como
 new tracker item submitted by %1 at %2	tracker	es-es	Nuevo elemento de seguimiento enviado por %1 a las %2
 no change	tracker	es-es	Sin cambios
 no notifications	tracker	es-es	Sin notificaciones
@@ -275,8 +289,10 @@ queue	tracker	es-es	Cola
 read mail address	tracker	es-es	Leer dirección de correo
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
-receive notifications in html	tracker	es-es	Recibir notificaciones en html
+receive notifications about due entries you created or are assigned to	tracker	es-es	Recibir notificaciones sobre las entradas pendientes que creó o está asignado a
 receive notifications about own changes in tracker-items	tracker	es-es	Recibir notificaciones cuando hay cambios propios en los elementos de seguimiento
+receive notifications about starting entries you created or are assigned to	tracker	es-es	Recibir notificaciones sobre las entradas iniciando que creó o está asignado a
+receive notifications in html	tracker	es-es	Recibir notificaciones en html
 rejected	tracker	es-es	Rechazado
 remind	tracker	es-es	Recordar
 replacements for inserting entries into documents	tracker	es-es	Sustituciones para insertar entradas en los documentos
@@ -317,10 +333,13 @@ show start date and due date	tracker	es-es	Mostrar fechas de inicio y de vencimi
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 signature	tracker	es-es	Firma
 staff	tracker	es-es	Equipo
+started	tracker	es-es	Iniciado
+starting	tracker	es-es	Iniciando
 state	tracker	es-es	Estado
 stati	tracker	es-es	Estados
 status	tracker	es-es	Estado
 store as	tracker	es-es	Guardar como
+success message	tracker	es-es	Mensaje de éxito
 sum	tracker	es-es	Suma
 summary	tracker	es-es	Resumen
 tag to mark positions for address labels	tracker	es-es	Etiqueta para marcar las posiciones para las etiquetas de direcciones
@@ -341,8 +360,10 @@ this quarter	tracker	es-es	Este trimestre
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	es-es	El sistema cerró este elemento automáticamente. Anteriormente estaba en estado Pendiente, y el remitente original no respondió durante %1 días.
 this week	tracker	es-es	Esta semana
 this year	tracker	es-es	Este año
+ticket	common	es-es	Gestión
 ticket count	tracker	es-es	Cuenta de tickets
 ticket modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
+tickets	common	es-es	Gestiones
 times	tracker	es-es	Veces
 titles of any entries linked to the current record, excluding attached files	tracker	es-es	Títulos de las entradas enlazadas con el registro actual, excluyendo los archivos adjuntos
 total:	tracker	es-es	Total:
@@ -361,6 +382,7 @@ tracker for the main screen	tracker	es-es	Seguimiento para la pantalla principal
 tracker id	tracker	es-es	Id. de seguimiento
 tracker item modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
 tracker item not found !!!	tracker	es-es	¡No se encontró el elemento de seguimiento!
+tracker list	tracker	es-es	Lista de seguimiento
 tracker queue	tracker	es-es	Cola de seguimiento
 tracker queue renamed	tracker	es-es	Cola de seguimiento renombrada.
 tracker-%1 '%2' added.	tracker	es-es	Seguimiento - %1 '%2' añadido
@@ -407,3 +429,9 @@ you need to select some entries first	tracker	es-es	Necesita seleccionar antes a
 you need to select something to change and some tracker items!	tracker	es-es	Necesita seleccionar algo para cambiar Y algunos elementos
 you need to specify amount, donators name and email address!	tracker	es-es	¡Necesita especificar la cantidad, nombre de donante Y dirección de correo electrónico!
 you voted %1.	tracker	es-es	Ha votado %1.
+♦ not closed	tracker	es-es	♦ No cerrado
+♦ own not closed	tracker	es-es	♦ Propio no cerrado
+♦ own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
+♦ own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado
+♦ without 30 days reply not closed	tracker	es-es	♦ Sin contestación en 30 días no cerrado
+♦ without reply not closed	tracker	es-es	♦ Sin contestación no cerrado

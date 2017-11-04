@@ -6,12 +6,6 @@
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
-♦ not closed	tracker	en	♦ Not closed
-♦ own not closed	tracker	en	♦ Own not closed
-♦ own or assigned not closed	tracker	en	♦ Own or assigned, not closed
-♦ own without reply not closed	tracker	en	♦ Own without reply not closed
-♦ without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
-♦ without reply not closed	tracker	en	♦ Without reply not closed
 (beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
 (new tickets as	tracker	en	New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list
@@ -328,9 +322,9 @@ read mail address	tracker	en	Filter mailbox for this mail address
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker items
 receive notifications about due entries you created or are assigned to	tracker	en	Receive notifications about due entries you created or are assigned to
+receive notifications about own changes in tracker-items	tracker	en	Receive notifications about own changes in tracker-items
 receive notifications about starting entries you created or are assigned to	tracker	en	Receive notifications about starting entries you created or are assigned to
 receive notifications in html	tracker	en	Receive notifications in HTML
-receive notifications about own changes in tracker-items	tracker	en	Receive notifications about own changes in tracker-items
 refused to open mailbox therefore changed interval from %1 to %2	tracker	en	refused to open mailbox therefore changed Interval from %1 to %2
 refused to open mailbox: %1	tracker	en	refused to open mailbox: %1
 rejected	tracker	en	Rejected
@@ -481,3 +475,9 @@ you need to select some entries first	tracker	en	You need to select some entries
 you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
 you need to specify amount, donators name and email address!	tracker	en	You need to specify amount, donators name AND email address!
 you voted %1.	tracker	en	You voted %1.
+♦ not closed	tracker	en	♦ Not closed
+♦ own not closed	tracker	en	♦ Own not closed
+♦ own or assigned not closed	tracker	en	♦ Own or assigned, not closed
+♦ own without reply not closed	tracker	en	♦ Own without reply not closed
+♦ without 30 days reply not closed	tracker	en	♦ Without 30 days reply not closed
+♦ without reply not closed	tracker	en	♦ Without reply not closed

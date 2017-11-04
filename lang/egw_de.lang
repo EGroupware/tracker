@@ -6,12 +6,6 @@
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-♦ not closed	tracker	de	♦ Nicht geschlossen
-♦ own not closed	tracker	de	♦ Eigene nicht geschlossen
-♦ own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene nicht geschlossen
-♦ own without reply not closed	tracker	de	♦ Eigene unbeantwortet nicht geschlossen
-♦ without 30 days reply not closed	tracker	de	♦ 30 Tage unbeantwortet nicht geschlossen
-♦ without reply not closed	tracker	de	♦ Unbeantwortet offen
 (beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
@@ -328,9 +322,9 @@ read mail address	tracker	de	Verarbeitung nur dieser Mailadresse
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
 receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
+receive notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Änderungen
 receive notifications about starting entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für zu startende Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
-receive notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Einträge
 refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu der Mailbox war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
 refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen
@@ -481,3 +475,9 @@ you need to select some entries first	tracker	de	Sie müssen zuerst einige Eintr
 you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
 you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und E-Mail des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
+♦ not closed	tracker	de	♦ Nicht geschlossen
+♦ own not closed	tracker	de	♦ Eigene nicht geschlossen
+♦ own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene nicht geschlossen
+♦ own without reply not closed	tracker	de	♦ Eigene unbeantwortet nicht geschlossen
+♦ without 30 days reply not closed	tracker	de	♦ 30 Tage unbeantwortet nicht geschlossen
+♦ without reply not closed	tracker	de	♦ Unbeantwortet offen
