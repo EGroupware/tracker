@@ -154,6 +154,7 @@ class tracker_ui extends tracker_bo
 					{
 						// non html items edited by html (add nl2br)
 						$tr_description_options = 'simple,240px,100%,false,,1';
+						$tr_reply_options = 'ascii,205px,99%';
 					}
 					if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
 					{
@@ -163,9 +164,10 @@ class tracker_ui extends tracker_bo
 					}
 					//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
+					// Conversion must be based on ticket setting, since it persists after the config setting is changed
 					foreach ($this->data['replies'] as &$reply)
 					{
-						if (!($this->htmledit || $this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
+						if (!($this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
 							$reply['reply_message'] = Api\Html::htmlspecialchars($reply['reply_message']);
 						}
@@ -338,7 +340,7 @@ class tracker_ui extends tracker_bo
 								))).'">','</a>');
 						break;
 					}
-					elseif ($ret == 0)
+					elseif ($ret == 0 && !is_string($ret))
 					{
 						$msg = lang('Entry saved');
 						//apply defaultlinks
@@ -498,14 +500,14 @@ class tracker_ui extends tracker_bo
 		}
 		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
 
-		if ($this->data['tr_edit_mode'] == 'ascii' && $this->data['tr_description'] && $readonlys['tr_description'])
+		$preserv = $content = $this->data;
+		if ($content['tr_edit_mode'] == 'ascii' && $content['tr_description'] && $readonlys['tr_description'])
 		{
 			// non html view in a readonly htmlarea (div) needs nl2br
-			$this->data['tr_description'] = htmlspecialchars($this->data['tr_description']);
+			$content['tr_description'] = htmlspecialchars($content['tr_description']);
 			$tr_description_options = 'simple,240px,100%,false,,1';
 		}
 
-		$preserv = $content = $this->data;
 		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
 		if ($this->allow_bounties)
 		{
