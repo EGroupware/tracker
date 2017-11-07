@@ -321,8 +321,17 @@ class tracker_tracking extends Api\Storage\Tracking
 
 		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
 		{
-			return parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
+			// Always use text mode for text tickets
+			$html = $this->html_content_allow;
+			if($data['tr_edit_mode'] == 'ascii')
+			{
+				$this->html_content_allow = false;
+			}
+			$body = parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
 				$notification['signature'];
+
+			$this->html_content_allow = $html;
+			return $body;
 		}
 
 		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
