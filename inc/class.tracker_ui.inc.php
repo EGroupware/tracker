@@ -365,6 +365,15 @@ class tracker_ui extends tracker_bo
 						{
 							Link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 
+							// Check if we have inline images from mail
+							if($this->htmledit && mail_integration::fix_inline_images('tracker', $this->data['tr_id'],
+									$content['link_to']['to_id'], $content['tr_description']))
+							{
+								$this->update(array(
+									'tr_description' => $content['tr_description'],
+								));
+							}
+
 							// check if we have dragged in images and fix their image urls
 							if (Etemplate\Widget\Vfs::fix_html_dragins('tracker', $this->data['tr_id'],
 								$content['link_to']['to_id'], $content['tr_description']))
@@ -1694,8 +1703,15 @@ width:100%;
 			Link::get_data ($_GET['egw_data']);
 			return false;
 		}
-		// Wrap a pre tag if we are using html editor
-		$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
+		if($this->htmledit && $mailContent['html_message'])
+		{
+			$message = $mailContent['html_message'];
+		}
+		else
+		{
+			// Wrap a pre tag if we are using html editor
+			$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
+		}
 
 		$this->edit($this->prepare_import_mail($mailContent['addresses'],
 				$mailContent['subject'],
