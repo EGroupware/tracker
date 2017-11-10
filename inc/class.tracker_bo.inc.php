@@ -412,6 +412,13 @@ class tracker_bo extends tracker_so
 		$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
 		$this->data['tr_priority'] = $default_priority;
 
+		// Set default category
+		if(!$this->data['cat_id'])
+		{
+			$this->get_tracker_labels('cat', $this->data['tr_tracker'], $default_category);
+			$this->data['cat_id'] = $default_category;
+		}
+
 		$this->data_merge($keys);
 
 		return $this->data;
@@ -1322,6 +1329,41 @@ class tracker_bo extends tracker_so
 		}
 		//echo "<p>".__METHOD__."(tracker=$tracker,$remove_empty) prios=".array2string($prios)."</p>\n";
 		return $prios;
+	}
+
+	/**
+	 * Set the default category for the given tracker
+	 *
+	 * @param int $tracker
+	 * @param int $category
+	 * @param string $type
+	 */
+	public function set_default_category($tracker = null, $category = false, $type = 'cat')
+	{
+		foreach($this->all_cats as $cat)
+		{
+			$cat_data =& $cat['data'];
+			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
+			if ($cat_type == $type &&	// cats need to be tracker specific
+				($cat['main'] == $tracker && $cat['id'] != $tracker ||
+				!$tracker && !$cat['parent'] // or global
+			))
+			{
+				if($cat['id'] == $category)
+				{
+					$cat_data['isdefault'] = true;
+				}
+				else
+				{
+					unset($cat_data['isdefault']);
+				}
+				$GLOBALS['egw']->categories->edit($cat);
+			}
+		}
+		// Need to reset before they're available
+		$this->all_cats = null;
+		$this->load_config();
+		$this->init();
 	}
 
 	/**
