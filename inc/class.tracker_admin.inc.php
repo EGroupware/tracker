@@ -349,6 +349,7 @@ class tracker_admin extends tracker_bo
 												// No real change - use 2 because switch is a loop in PHP
 												continue 2;
 											}
+											$this->set_default_category($tracker, $cat['id']);
 										}
 										else if ($cat['main'] == $tracker)
 										{

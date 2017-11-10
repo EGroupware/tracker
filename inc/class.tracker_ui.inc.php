@@ -54,6 +54,13 @@ class tracker_ui extends tracker_bo
 	var $duration_format = ',';	// comma is necessary!
 
 	/**
+	 * Etemplate used for rendering
+	 *
+	 * @var Etemplate
+	 */
+	public $template;
+
+	/**
 	 * Constructor
 	 *
 	 * @return tracker_ui
@@ -183,12 +190,14 @@ class tracker_ui extends tracker_bo
 			// for new items we use the session-state or $_GET['tracker']
 			if (!$this->data['tr_id'])
 			{
-				$regardInInit = array();
+				$regardInInit = array(
+					'tr_tracker' => $this->data['tr_tracker']
+				);
 				if (($state = Api\Cache::getSession('tracker','index'.
 					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
-					$this->data['cat_id']     = $regardInInit['cat_id'] = $state['cat_id'];
+					$this->data['cat_id']     = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : false;
 					$this->data['tr_version'] = $regardInInit['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
 				if (isset($this->trackers[(int)$_GET['tracker']]))
@@ -700,8 +709,8 @@ class tracker_ui extends tracker_bo
 		// Keep updating category & priority to default until it's saved
 		if(!$tr_id)
 		{
-			$content['cat_id'] = (int)$default_category;
-			$content['tr_priority'] = (int)$default_priority;
+ 			$content['cat_id'] = $this->data['cat_id'] ? $this->data['cat_id'] : (int)$default_category;
+			$content['tr_priority'] = $this->data['tr_priority'] ? (int)$this->data['tr_priority'] : (int)$default_priority;
 		}
 
 		foreach($this->field2history as $field => $status)
@@ -759,7 +768,8 @@ class tracker_ui extends tracker_bo
 		$what = ($tracker && isset($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)]) ? $this->trackers[(is_array($tracker)?$tracker[0]:$tracker)] : lang('Tracker'));
 		$GLOBALS['egw_info']['flags']['app_header'] = $tr_id ? lang('Edit %1',$what) : lang('New %1',$what);
 
-		$tpl = new Etemplate('tracker.edit');
+		$tpl = $this->template ? $this->template : new Etemplate();
+		$tpl->read('tracker.edit');
 		// use a type-specific template (tracker.edit.xyz), if one exists, otherwise fall back to the generic one
 		if (!$tpl->read('tracker.edit'.(isset($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)])?'.'.trim($this->trackers[(is_array($tracker)?$tracker[0]:$tracker)]):'')))
 		{
