@@ -261,6 +261,7 @@ class tracker_admin extends tracker_bo
 					}
 					$reload_labels = false;
 					$cats = null;
+					$this->set_default_category($tracker, $default_category);
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
