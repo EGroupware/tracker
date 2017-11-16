@@ -17,7 +17,7 @@
 					<textbox type="integer" id="num_replies" readonly="true"/>
 				</row>
 				<row class="row" valign="top">
-					<vbox options="0,0">
+					<vbox>
 						<date-time id="replies[$row][reply_created]" readonly="true"/>
 						<menulist>
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
@@ -122,7 +122,7 @@
 					<textbox type="float" label="@currency" id="${row}[bounty_amount]" no_lang="1" readonly="true"/>
 					<description id="${row}[bounty_name]" no_lang="1"/>
 					<description id="${row}[bounty_email]" no_lang="1"/>
-					<hbox align="center" options="0,0">
+					<hbox align="center">
 						<date-time id="${row}[bounty_confirmed]" readonly="true"/>
 						<button align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"/>
 						<button align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"/>
@@ -259,7 +259,7 @@
 				</row>
 				<row class="dialogOperators">
 					<description value="Created by"/>
-					<hbox options="0,0">
+					<hbox>
 						<menulist>
 							<menupopup id="tr_creator" no_lang="1"/>
 						</menulist>
@@ -274,12 +274,12 @@
 					<description/>
 				</row>
 				<row class="dialogFooterToolbar">
-					<hbox options="0,0" span="all">
+					<hbox span="all">
 						<button label="Save" id="button[save]"/>
 						<button label="Apply" id="button[apply]"/>
 						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
 						<checkbox label="Do not notify" id="no_notifications" statustext="Do not notify of these changes"/>
-						<vbox align="right" options="0,0">
+						<vbox align="right">
 							<button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');"/>
 							<description align="right" id="no_vote" no_lang="1" class="redItalic"/>
 						</vbox>
