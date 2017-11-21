@@ -94,6 +94,7 @@ class tracker_escalations extends Api\Storage\Base2
 			'tr_status' => -100,	// offen
 		);
 		$this->data_merge($keys);
+		$this->data_merge($keys['escalation']);
 
 		if (isset($keys['set']))
 		{
@@ -123,6 +124,7 @@ class tracker_escalations extends Api\Storage\Base2
 			{
 				$data[$array] = explode(',',$data[$array]);
 			}
+			$data['escalation'][$array] = $data[$array];
 		}
 		foreach($data as $key => &$value)
 		{

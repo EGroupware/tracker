@@ -688,8 +688,8 @@ class tracker_admin extends tracker_bo
 		}
 		else
 		{
-			list($button) = @each($_content['button']);
-			unset($_content['button']);
+			list($button) = @each($_content['escalation']['button']);
+			unset($_content['escalation']['button']);
 			$escalations->init($_content);
 
 			switch($button)
@@ -697,15 +697,15 @@ class tracker_admin extends tracker_bo
 				case 'save':
 				case 'apply':
 					// 'Before' only valid for start & due dates
-					if($_content['esc_before_after'] == tracker_escalations::BEFORE &&
-						!in_array($_content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
+					if($_content['escalation']['esc_before_after'] == tracker_escalations::BEFORE &&
+						!in_array($_content['escalation']['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
 					{
 						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
 						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
 						break;
 					}
 					// Handle before time
-					$escalations->data['esc_time'] *= ($_content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
+					$escalations->data['esc_time'] *= ($_content['escalation']['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
 
 					if (($err = $escalations->not_unique()))
 					{
@@ -714,7 +714,7 @@ class tracker_admin extends tracker_bo
 					}
 					elseif (($err = $escalations->save(null,null,!$_content['esc_run_on_existing'])) == 0)
 					{
-						$msg = $_content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
+						$msg = $_content['escalation']['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
 					if ($button == 'apply' || $err) break;
 					// fall-through
@@ -756,22 +756,22 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
-		$content = $escalations->data + array(
+		$content = array('escalation' => $escalations->data) + array(
 			'nm' => $_content['nm'],
 			'msg' => $msg,
 		);
 
 		// Handle before time
-		$content['esc_before_after'] = ($content['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
-		$content['esc_time'] = abs($content['esc_time']);
+		$content['escalation']['esc_before_after'] = ($content['escalation']['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+		$content['escalation']['esc_time'] = abs($content['escalation']['esc_time']);
 
 		$readonlys = $preserv = array();
-		$preserv['esc_id'] = $content['esc_id'];
+		$preserv['escalation']['esc_id'] = $content['escalation']['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
 
 		$tracker = $content['tr_tracker'];
-		$sel_options = array(
+		$sel_options['escalation'] = array(
 			'tr_tracker'  => &$this->trackers,
 			'esc_before_after' => array(
 				tracker_escalations::AFTER => lang('after'),
@@ -796,32 +796,36 @@ class tracker_admin extends tracker_bo
 			'tr_assigned' => array()
 		);
 
-		foreach(($content['tr_tracker'] ? (array)$content['tr_tracker'] : array_keys($this->trackers)) as $tracker)
+		if ($content['escalation']['set']['tr_assigned'] && !is_array($content['escalation']['set']['tr_assigned']))
 		{
-			$sel_options['cat_id'] 		+= $this->get_tracker_labels('cat',$tracker);
-			$sel_options['tr_version']	+= $this->get_tracker_labels('version',$tracker);
-			$sel_options['tr_resolution']	+= $this->get_tracker_labels('resolution',$tracker);
-			$sel_options['tr_priority']	+= $this->get_tracker_priorities($tracker,$content['cat_id']);
-			$sel_options['tr_status']	+= $this->get_tracker_stati($tracker);
-			$sel_options['tr_assigned']	+= $this->get_staff($tracker,$this->allow_assign_groups);
+			$content['escalation']['set']['tr_assigned'] = explode(',',$content['escalation']['set']['tr_assigned']);
 		}
-		if ($content['set']['tr_assigned'] && !is_array($content['set']['tr_assigned']))
-		{
-			$content['set']['tr_assigned'] = explode(',',$content['set']['tr_assigned']);
-		}
+		$sel_options['escalation']['set'] = $sel_options['escalation'];
+
+		$this->get_escalation_sel_options(
+				$sel_options['escalation'],
+				($content['escalation']['tr_tracker'] ? (array)$content['escalation']['tr_tracker'] : array_keys($this->trackers))
+		);
+		$this->get_escalation_sel_options(
+				$sel_options['escalation']['set'],
+				($content['escalation']['set']['tr_tracker'] ? (array)$content['escalation']['set']['tr_tracker'] : (
+					$content['escalation']['tr_tracker'] ? (array)$content['escalation']['tr_tracker'] : array_keys($this->trackers)))
+		);
+
+
 		$tpl = new Etemplate('tracker.escalations');
-		if (count($content['set']['tr_assigned']) > 1)
+		if (count($content['escalation']['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
 			$widget['size'] = '3+';
 		}
-		if ($content['tr_status'] && !is_array($content['tr_status']))
+		if ($content['escalation']['tr_status'] && !is_array($content['escalation']['tr_status']))
 		{
-			$content['tr_status'] = explode(',',$content['tr_status']);
+			$content['escalation']['tr_status'] = explode(',',$content['escalation']['tr_status']);
 		}
 		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
-                {
-			if (count($content[$array]) > 1)
+		{
+			if (count($content['escalation'][$array]) > 1)
 			{
 				// Old etemplate support
 				if(method_exists($tpl, 'get_widget_by_name'))
@@ -835,9 +839,29 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
-		$content['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
+		$content['escalation']['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
 		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
 		//_debug_array($content);
 		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);
+	}
+
+	/**
+	 * Get escalation select options
+	 *
+	 * @param array $sel_options
+	 * @param array $trackers
+	 */
+	protected function get_escalation_sel_options(Array &$sel_options, Array $trackers)
+	{
+		foreach($trackers as $tracker)
+		{
+			$sel_options['cat_id']			+= $this->get_tracker_labels('cat',$tracker);
+			$sel_options['tr_version']		+= $this->get_tracker_labels('version',$tracker);
+			$sel_options['tr_resolution']	+= $this->get_tracker_labels('resolution',$tracker);
+			$sel_options['tr_priority']		+= $this->get_tracker_priorities($tracker,$content['cat_id']);
+			$sel_options['tr_status']		+= $this->get_tracker_stati($tracker);
+			$sel_options['tr_assigned']		+= $this->get_staff($tracker,$this->allow_assign_groups);
+		}
+
 	}
 }
