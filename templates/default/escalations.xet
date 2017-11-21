@@ -33,15 +33,9 @@
 				</row>
 				<row class="row">
 					<description id="${row}[esc_title]" no_lang="1"/>
-					<menulist>
-						<menupopup id="${row}[tr_tracker]" readonly="true" options="All"/>
-					</menulist>
-					<menulist>
-						<menupopup id="${row}[tr_resolution]" readonly="true" options="All"/>
-					</menulist>
-					<menulist>
-						<menupopup id="${row}[cat_id]" readonly="true" options="All"/>
-					</menulist>
+					<select-cat id="${row}[tr_tracker]" readonly="true" options="All"/>
+					<select-cat id="${row}[tr_resolution]" readonly="true" options="All"/>
+					<select-cat id="${row}[cat_id]" readonly="true" options="All"/>
 					<menulist>
 						<menupopup id="${row}[tr_version]" readonly="true" options="All"/>
 					</menulist>
@@ -62,7 +56,7 @@
 						</hbox>
 					</vbox>
 					<vbox readonly="true">
-						<date-duration id="${row}[esc_match_repeat]" readonly="true" class="noWrap"/>
+						<date-duration id="${row}[esc_match_repeat]" readonly="true" options=",dhm,24" class="noWrap"/>
 						<description id="${row}[esc_limit_label]"/>
 					</vbox>
 					<hbox options="0,0">
@@ -87,6 +81,15 @@
 				<row>
 					<hrule span="all"/>
 				</row>
+			</rows>
+		</grid>
+		<grid id="escalation">
+			<columns>
+				<column width="100"/>
+				<column width="500"/>
+				<column/>
+			</columns>
+			<rows>
 				<row>
 					<description id="msg" span="all" class="message"/>
 					<description/>
@@ -134,7 +137,7 @@
 									<description value="Queue"/>
 									<hbox onchange="1" options="0,0">
 										<menulist>
-											<menupopup id="tr_tracker" options="All"/>
+											<menupopup id="tr_tracker" options="All" onchange="1"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
