@@ -397,7 +397,7 @@ class tracker_ui extends tracker_bo
 					}
 					else
 					{
-						$msg = lang('Error saving the entry!!!');
+						$msg = lang('Error saving the entry!!!') . "\n" . lang($ret);
 						break;
 					}
 					if ($button == 'apply')
