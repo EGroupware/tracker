@@ -1236,7 +1236,8 @@ class tracker_ui extends tracker_bo
 			// if there is still no tracker, use the last tracker that was applied and saved to/with the view with the appsession
 			if (!$tracker && ($state=  Api\Cache::getSession('tracker','index'.($only_tracker ? '-'.$only_tracker : ''))))
 			{
-			      $tracker=$state['col_filter']['tr_tracker'];
+			      $tracker= is_array($state['col_filter']['tr_tracker']) ?
+						  $state['col_filter']['tr_tracker'][0] : $state['col_filter']['tr_tracker'];
 			}
 		}
 		else
