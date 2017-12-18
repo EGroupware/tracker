@@ -220,25 +220,25 @@
 									<description for="reply_message" value="Comment"/>
 									<textbox multiline="true" id="reply_message" rows="5" cols="60"/>
 								</row>
-								<row>
-									<button label="Update" id="update" onclick="nm_submit_popup(this); return false;"/>
-									<buttononly label="Cancel" id="cancel" onclick="nm_hide_popup(this,'admin_popup');"/>
-								</row>
 							</rows>
 						</grid>
+						<hbox>
+							<button label="Update" id="update" onclick="nm_submit_popup(this); return false;" image="check" background_image="true"/>
+							<button label="Cancel" id="cancel" image="cancelled" background_image="true"/>
+						</hbox>
 					</box>
 					</box>
 					<hbox align="right">
 						<box id="link_popup" class="action_popup prompt">
+							<description value="Add / Remove link" class="promptheader"/>
 							<vbox>
-								<description value="Add / Remove link" class="promptheader"/>
 								<link-entry id="link" class="action_popup-content"/>
-								<hbox>
-									<button label="Add" id="link_action[add]" onclick="nm_submit_popup(this); return false;"/>
-									<button label="Delete" id="link_action[delete]" onclick="nm_submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="nm_hide_popup(this,'link_popup');"/>
-								</hbox>
 							</vbox>
+							<hbox>
+								<button label="Add" id="link_action[add]" onclick="nm_submit_popup(this); return false;"/>
+								<button label="Delete" id="link_action[delete]" onclick="nm_submit_popup(this); return false;"/>
+								<button label="Cancel" id="link_cancel" image="cancelled" background_image="true"/>
+							</hbox>
 						</box>
 						<box id="assigned_popup" class="action_popup prompt">
 							<description value="Change assigned" class="promptheader"/>
@@ -248,26 +248,26 @@
 								<menulist>
 									<menupopup class="tracker_user_select et2_fullWidth" id="assigned" no_lang="1" rows="5" multiple="true" tags="true" empty_label="User or group"/>
 								</menulist>
-								<hbox>
-									<button label="Ok" id="assigned_action[ok]" onclick="nm_submit_popup(this); return false;"/>
-									<button label="Add" id="assigned_action[add]" onclick="nm_submit_popup(this); return false;"/>
-									<button label="Delete" id="assigned_action[delete]" onclick="nm_submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="nm_hide_popup(this,'assigned_popup');"/>
-								</hbox>
 							</vbox>
+							<hbox>
+								<button label="Ok" id="assigned_action[ok]" onclick="nm_submit_popup(this); return false;" image="check" background_image="true"/>
+								<button label="Add" id="assigned_action[add]" onclick="nm_submit_popup(this); return false;"/>
+								<button label="Delete" id="assigned_action[delete]" onclick="nm_submit_popup(this); return false;"/>
+								<button label="Cancel" id="assigned_action_cancel" image="cancelled" background_image="true"/>
+							</hbox>
 						</box>
 						<box id="group_popup" class="action_popup prompt">
-							<vbox>
-								<description value="Change group" class="promptheader"/>
+							<description value="Change group" class="promptheader"/>
+							<vbox class="action_popup-content">
 								<description value="Select group"/>
 								<menulist>
-									<menupopup type="select-account" class="action_popup-content" id="group" options=",groups"/>
+									<menupopup type="select-account"  id="group" options=",groups"/>
 								</menulist>
-								<hbox>
-									<button label="Ok" id="group_set" onclick="nm_submit_popup(this); return false;"/>
-									<buttononly label="Cancel" onclick="nm_hide_popup(this,'group_popup');"/>
-								</hbox>
 							</vbox>
+							<hbox>
+								<button label="Ok" id="group_set" onclick="nm_submit_popup(this); return false;" image="check" background_image="true"/>
+								<button label="Cancel" id="group_cancel" image="cancelled" background_image="true"/>
+							</hbox>
 						</box>
 					</hbox>
 				</row>
