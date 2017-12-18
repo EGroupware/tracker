@@ -449,6 +449,7 @@ use custom signature	tracker	de	Benutzerdefinierte Signatur verwenden
 use field from csv if possible	tracker	de	Dieses Feld von der CSV Definition verwenden, wenn möglich
 use search results	tracker	de	Diese Suchanfrage verwenden
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	de	Verwenden Sie diesen Platzhalter für Adressetiketten, deren Inhalt Sie zwischen beiden Platzhaltern wiederholen möchten.
+user or group	tracker	de	Benutzer oder Gruppe
 version for new tickets	tracker	de	Version für neue Tickets
 versions	tracker	de	Versionen
 vote for it!	tracker	de	Dafür abstimmen!

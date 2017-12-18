@@ -449,6 +449,7 @@ use custom signature	tracker	en	Use custom signature
 use field from csv if possible	tracker	en	Use field from CSV if possible
 use search results	tracker	en	Use search results
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	en	Use this tag for address labels. Put the content, you want to repeat, between two tags.
+user or group	tracker	en	User or group
 version for new tickets	tracker	en	Version for new tickets
 versions	tracker	en	Versions
 vote for it!	tracker	en	Vote for it!
