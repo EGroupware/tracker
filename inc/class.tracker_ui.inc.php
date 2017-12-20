@@ -950,6 +950,12 @@ class tracker_ui extends tracker_bo
 				$rows[$n]['seen_class'] = 'tracker_unseen';
 			}
 
+			// Check rights for changing group via context menu, action looks for the CSS class
+			if($this->check_rights($this->field_acl['tr_group'], null, $row))
+			{
+				$rows[$n]['class'] .= 'group_action';
+			}
+
 			$trackers[] = $row['tr_tracker'];
 
 			// show the right tracker and/or cat specific priority label
@@ -1626,6 +1632,7 @@ width:100%;
 					'group' => array(
 						'caption' => 'Group',
 						'nm_action' => 'open_popup',
+						'enableClass' => 'group_action',
 					),
 					'link' => array(
 						'caption' => 'Links',
