@@ -11,6 +11,7 @@
  */
 
 use EGroupware\Api;
+use EGroupware\Api\Storage\Customfields;
 
 /**
  * Tracker - tracking object for the tracker
@@ -209,6 +210,20 @@ class tracker_tracking extends Api\Storage\Tracking
 			if($reply['reply_visible'] != 0)
 			{
 				unset($data['replies'][$key]);
+			}
+		}
+
+		// Remove private custom fields
+		if (($cfs = Customfields::get($this->app, true, $data['tr_tracker'])))
+		{
+			foreach((array)$cfs as $name => $field)
+			{
+				if (!array_key_exists('#'.$name, $data)) continue;
+				if($field['private'])
+				{
+					unset($data['#'.$name]);
+				}
+
 			}
 		}
 
