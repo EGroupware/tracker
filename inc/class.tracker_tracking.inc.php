@@ -213,20 +213,6 @@ class tracker_tracking extends Api\Storage\Tracking
 			}
 		}
 
-		// Remove private custom fields
-		if (($cfs = Customfields::get($this->app, true, $data['tr_tracker'])))
-		{
-			foreach((array)$cfs as $name => $field)
-			{
-				if (!array_key_exists('#'.$name, $data)) continue;
-				if($field['private'])
-				{
-					unset($data['#'.$name]);
-				}
-
-			}
-		}
-
 		// Send to creator (if not already notified) && CC
 		if(!($this->tracker->is_admin($data['tr_tracker'], $creator, true) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
 		{
