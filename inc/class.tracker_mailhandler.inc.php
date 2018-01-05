@@ -407,41 +407,29 @@ class tracker_mailhandler extends tracker_bo
 	} // END OF FUNCTION
 
 	/**
-	 * Extract the lastest reply from mail body message
+	 * Extract the latest reply from mail body message
 	 *
 	 *
 	 * @param {string} $mailBody string of mail body message
 	 *
 	 * @return {string} latest reply of mail body message
 	 *
-	 * @todo Find an optimize and accurate pattern/method to recognise content of mail message (eg. Recognition/Classification algurithm like Perceptron or similar)
+	 * @todo Find an optimize and accurate pattern/method to recognize content of mail message (e.g. Recognition/Classification algorithm like Perceptron or similar)
 	 */
 	function extract_latestReply ($mailBody)
 	{
 		$mailCntArray = preg_split("/(\r\n|\n|\r)/",$mailBody);
 		$fRline = true;
 		$oMInx = 0;
-		$alienSender = false;
-
 		foreach (array_keys($mailCntArray) as $key)
 		{
-			if (preg_match ("/^From:.*@gmail.*/", $mailCntArray[$key]))
-			{
-				$alienSender = true;
-			}
-			if (preg_match("/^-----.*original message---.*/i", $mailCntArray[$key]))
+			if (preg_match("/^-----.*".lang("original message")."---.*/i", $mailCntArray[$key]))
 			{
 				$oMInx = $key;
 			}
 			if (preg_match("/^>.*/",$mailCntArray[$key]))
 			{
-				if ($fRline && $alienSender)
-				{
-					$fRline = false;
-					unset($mailCntArray[$key-2]);
-					unset($mailCntArray[$key-1]);
-				}
-				elseif ($fRline && $oMInx > 0)
+				if ($fRline && $oMInx > 0)
 				{
 					$fRline = false;
 					for ($i =  $oMInx; $i<$key; $i++)
