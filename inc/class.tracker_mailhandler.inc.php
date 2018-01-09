@@ -785,7 +785,6 @@ class tracker_mailhandler extends tracker_bo
 		{
 			unset($this->data['tr_cc']);
 		}
-		$this->data['tr_status'] = parent::STATUS_OPEN; // If the ticket isn't new, (re)open it anyway
 
 		if ($this->data['popup']) unset($this->data['popup']);
 		// Save Current edition mode preventing mixed types
