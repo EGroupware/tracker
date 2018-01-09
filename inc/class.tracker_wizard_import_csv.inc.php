@@ -31,7 +31,6 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 
 		// Field mapping
 		$bo = new tracker_bo();
-		$this->mapping_fields = array('tr_id' => lang('Tracker ID')) + $bo->field2label;
 		$this->mapping_fields = array(
 			'tr_id'          => 'Tracker ID',
 			'tr_summary'     => 'Summary',
@@ -46,6 +45,8 @@ class tracker_wizard_import_csv extends importexport_wizard_basic_import_csv
 			'tr_resolution'  => 'Resolution',
 			'tr_completion'  => 'Completed',
 			'tr_priority'    => 'Priority',
+			'tr_startdate'   => 'Start date',
+			'tr_duedate'     => 'Due date',
 			'tr_closed'      => 'Closed',
 			'tr_creator'     => 'Created by',
 			//'tr_modifier'    => 'Modified by', // Not importable
