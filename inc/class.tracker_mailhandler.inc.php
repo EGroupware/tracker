@@ -884,24 +884,51 @@ class tracker_mailhandler extends tracker_bo
 	function forward_message2($mailobject, $uid, $subject, $_message, $queue=0)
 	{
 		$this->smtpMail->ClearAddresses();
-		$this->smtpMail->ClearAttachments();
-		$this->smtpMail->AddAddress($this->mailhandling[$queue]['forward_to'], $this->mailhandling[$queue]['forward_to']);
-		$this->smtpMail->AddCustomHeader('X-EGroupware-type: tracker-forward');
-		$this->smtpMail->AddCustomHeader('X-EGroupware-Tracker: '.$queue);
-		$this->smtpMail->AddCustomHeader('X-EGroupware-Install: '.$GLOBALS['egw_info']['server']['install_id'].'@'.$GLOBALS['egw_info']['server']['default_domain']);
-		//$this->mail->AddCustomHeader('X-EGroupware-URL: notification-mail');
-		//$this->mail->AddCustomHeader('X-EGroupware-Tracker: notification-mail');
-		$account_email = $GLOBALS['egw']->accounts->id2name($this->sender,'account_email');
-		$account_lid = $GLOBALS['egw']->accounts->id2name($this->sender,'account_lid');
-		$notificationSender = (!empty($this->notification[$queue]['sender'])?$this->notification[$queue]['sender']:$this->notification[0]['sender']);
-		$this->smtpMail->From = (!empty($notificationSender)?$notificationSender:$account_email);
-		$this->smtpMail->FromName = (!empty($notificationSender)?$notificationSender:$account_lid);
-		$this->smtpMail->Subject = lang('[FWD]').' '.$subject;
-		$this->smtpMail->IsHTML(false);
-		$this->smtpMail->Body = lang("This message was forwarded to you from EGroupware-Tracker Mailhandling: %1. \r\nSee attachment (original mail) for further details\r\n %2",$queue,$_message);
+		$this->smtpMail->clearParts();
+		$this->smtpMail->AddAddress(
+			$this->mailhandling[$queue]['forward_to'],
+			$this->mailhandling[$queue]['forward_to']
+		);
 
-		$rawBody        = $mailobject->getMessageRawBody($uid,'',(!empty($this->mailhandling[$queue]['folder'])?$this->mailhandling[$queue]['folder']:'INBOX'));
-		$this->smtpMail->AddStringAttachment($rawBody, $this->smtpMail->EncodeHeader($subject), '7bit', 'message/rfc822');
+		// Mailer Headers
+		$headers = array (
+			'X-EGroupware-type'		=> 'tracker-forward',
+			'X-EGroupware-Tracker'	=> $queue,
+			'X-EGroupware-Install'	=> $GLOBALS['egw_info']['server']['install_id'].
+				'@'.$GLOBALS['egw_info']['server']['default_domain'],
+			'Subject'				=> lang('[FWD]').' '.$subject
+		);
+
+		$notificationSender = !empty($this->notification[$queue]['sender']) ?
+				$this->notification[$queue]['sender'] : $this->notification[0]['sender'];
+
+		if (!empty($notificationSender))
+		{
+			$this->smtpMail->setFrom($notificationSender, $notificationSender);
+		}
+		else
+		{
+			$this->smtpMail->setFrom(
+				Api\Accounts::id2name($this->mailSender, 'account_email'),
+				Api\Accounts::id2name($this->mailSender, 'account_lid')
+			);
+		}
+
+		$this->smtpMail->addHeaders($headers);
+		$this->smtpMail->setBody(
+			lang("This message was forwarded to you from EGroupware-Tracker".
+					" Mailhandling: %1. \r\nSee attachment (original mail)".
+					" for further details\r\n %2", $queue, $_message)
+		);
+
+		$rawBody = $mailobject->getMessageRawBody(
+			$uid,
+			'',
+			!empty($this->mailhandling[$queue]['folder']) ?	$this->mailhandling[$queue]['folder'] : 'INBOX'
+		);
+
+		$this->smtpMail->AddStringAttachment($rawBody, $subject, 'message/rfc822');
+
 		if(!$error=$this->smtpMail->Send())
 		{
 			error_log(__METHOD__.__LINE__." Failed forwarding message via email.$error".print_r($this->smtpMail->ErrorInfo,true));
