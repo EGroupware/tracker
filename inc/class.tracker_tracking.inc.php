@@ -335,7 +335,8 @@ class tracker_tracking extends Api\Storage\Tracking
 			return $body;
 		}
 
-		$message = $merge->merge_string($notification['message'], array($data['tr_id']), $error, 'text/html');
+		$message = $this->sanitize_custom_message($notification['message'], $receiver);
+		$message = $merge->merge_string($message, array($data['tr_id']), $error, 'text/html');
 		if(strpos($notification['message'], '{{signature}}') === False)
 		{
 			$message.=($html_email?"<br />\n":"\n").
@@ -395,11 +396,10 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * Get the details of an entry
 	 *
 	 * @param array $data
-	 * @param string $datetime_format of user to notify, eg. 'Y-m-d H:i'
-	 * @param int $tz_offset_s offset in sec to be add to server-time to get the user-time of the user to notify
+	 * @param int|string $receiver numeric account_id or email address
 	 * @return array of details as array with values for keys 'label','value','type'
 	 */
-	function get_details($data)
+	function get_details($data, $receiver)
 	{
 		static $cats=null,$versions=null,$statis=null,$priorities=null,$resolutions=null;
 		if (!$cats)
@@ -465,7 +465,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			if ($name == 'tr_summary') $details[$name]['type'] = 'summary';
 		}
 		// add custom fields for given type
-		$details += $this->get_customfields($data, $data['tr_tracker']);
+		$details += $this->get_customfields($data, $data['tr_tracker'], $receiver);
 
 		$details['tr_description'] = array(
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
