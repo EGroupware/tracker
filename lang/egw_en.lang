@@ -389,6 +389,7 @@ sum	tracker	en	Sum
 summary	tracker	en	Summary
 tag to mark positions for address labels	tracker	en	Tag to mark positions for address labels
 technicians	tracker	en	Technicians
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	en	Test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to Disable)
 thank you for setting this bounty.	tracker	en	Thank you for setting this bounty
 thank you for voting.	tracker	en	Thank you for voting
 the bounty will not be shown, until the money is received.	tracker	en	The bounty will NOT be shown until the money is received

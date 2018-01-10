@@ -389,6 +389,7 @@ sum	tracker	de	Summe
 summary	tracker	de	Zusammenfassung
 tag to mark positions for address labels	tracker	de	Markiert die Position für den Adressen Eintrag.
 technicians	tracker	de	Techniker
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	de	Testen Sie die E-mailumwandlung einmalig (es führt die E-mailumwandlung direkt nach dem Speichern/Anwenden aus, unabhängig vom Intervall, auch wenn es auf Deaktiviert gesetzt ist).
 thank you for setting this bounty.	tracker	de	Danke dass Sie diese Prämie gesetzt haben.
 thank you for voting.	tracker	de	Danke dass Sie abgestimmt haben.
 the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
