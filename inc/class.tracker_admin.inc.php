@@ -76,6 +76,12 @@ class tracker_admin extends tracker_bo
 		{
 			list($button) = @each($_content['button']);
 			$default_category = false;
+			if (isset($_content['mailhandling']['test_mailhandling_once']) &&
+					$_content['mailhandling']['test_mailhandling_once'])
+			{
+				$test_mailhandling_once = true;
+				unset($_content['mailhandling']['test_mailhandling_once']);
+			}
 			if (isset($_content['cats']['isdefaultcategory']))
 			{
 				$name = 'cats';
@@ -241,11 +247,13 @@ class tracker_admin extends tracker_bo
 						$mailhandler = new tracker_mailhandler($this->mailhandling);
 						foreach(array_keys((array)$this->mailhandling) as $queue_id)
 						{
-							if (is_array($this->mailhandling[$queue_id]) && $this->mailhandling[$queue_id]['interval'])
+							if (is_array($this->mailhandling[$queue_id]) &&
+									(($queue_id == $_content['tracker'] && $test_mailhandling_once)
+									|| $this->mailhandling[$queue_id]['interval']))
 							{
 								try
 								{
-									$mailhandler->check_mail($queue_id,true);
+									$mailhandler->check_mail($queue_id, !$test_mailhandling_once);
 								}
 								catch (Api\Exception\AssertionFailed $e)
 								{	// not sure that this is needed to pass on exeptions
