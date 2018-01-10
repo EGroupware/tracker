@@ -554,6 +554,10 @@
 					<textbox statustext="Enter an opening text for the reply message" id="mailhandling[reply_text]" size="100" span="3"/>
 				</row>
 				<row>
+					<description value="Test mailhandling once (it will execute mailhandling right after save/apply regardless of the inteval even if it's set to Disable)"/>
+					<checkbox id="mailhandling[test_mailhandling_once]"/>
+				</row>
+				<row>
 					<description/>
 					<description/>
 					<description/>
