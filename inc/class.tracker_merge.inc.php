@@ -215,6 +215,7 @@ class tracker_merge extends Api\Storage\Merge
 		$this->comment_cache[$tr_id] = array();
 		$last_creator_comment = array();
 		$last_assigned_comment = array();
+		$last_non_restricted = array();
 
 		$this->bo->read($tr_id);
 		$tracker = $this->bo->data;
@@ -239,10 +240,17 @@ class tracker_merge extends Api\Storage\Merge
 			);
 			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
 			if(is_array($tracker['tr_assigned']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
+			if(!$reply['reply_visible'] && !$last_non_restricted) $last_non_restricted = $reply;
 		}
 
 		// Special comments
-		foreach(array('' => $replies[0], '/creator' => $last_creator_comment, '/assigned_to' => $last_assigned_comment) as $key => $comment) {
+		$special = array(
+			'' => $replies[0],
+			'/creator' => $last_creator_comment,
+			'/assigned_to' => $last_assigned_comment,
+			'/non_restricted' => $last_non_restricted
+		);
+		foreach($special as $key => $comment) {
 			$this->comment_cache[$tr_id][-1][$key] = array(
 				'$$comment/-1'.$key.'/date$$' => $comment ? Api\DateTime::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
@@ -293,6 +301,7 @@ class tracker_merge extends Api\Storage\Merge
 		$fields['comment/-1/...'] = 'Only the last comment';
 		$fields['comment/-1/creator/...'] = 'Only the last comment by the creator';
 		$fields['comment/-1/assigned_to/...'] = 'Only the last comment by one of the assigned users';
+		$fields['comment/-1/non_restricted/...'] = 'Only the last public visible comment';
 		$fields['tr_sum_timesheets'] = lang('Used time');
 		foreach($fields as $name => $label)
 		{
