@@ -76,6 +76,19 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 					// hides already hiden selectbox and not the choosen container :(
 					jQuery('#tracker_index_col_filter_tr_tracker__chzn').hide();
 				break;
+			case 'tracker.escalations':
+				// Set any filters with multiple values to multiple
+				_et2.widgetContainer.getWidgetById('escalation').iterateOver(function(widget) {
+					if( typeof widget.options.value === 'object' && widget.options.value.length > 1)
+					{
+						var button = null;
+						// Find associated expand button
+						widget.getParent().getParent().iterateOver(function(widget) {button = widget;}, this, et2_button);
+						this.multiple_assigned(false, button);
+						widget.set_value(widget.options.value);
+					}
+				},this,et2_selectbox);
+				break;
 		}
 	},
 

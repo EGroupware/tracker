@@ -186,7 +186,7 @@
 					</groupbox>
 					<groupbox class="tracker_escalation_action">
 						<caption label="Action"/>
-						<grid width="100%" id="set">
+						<grid width="100%">
 							<columns>
 								<column width="87"/>
 								<column width="150"/>
@@ -196,54 +196,52 @@
 							<rows>
 								<row>
 									<description value="Queue"/>
-									<menulist span="all">
-										<menupopup id="tr_tracker" onchange="1" options="Unchanged"/>
-									</menulist>
+									<select span="all" id="set[tr_tracker]" onchange="1" empty_label="Unchanged"/>
 								</row>
 								<row>
 									<description value="Category"/>
 									<menulist>
-										<menupopup id="cat_id" options="Unchanged"/>
+										<menupopup id="set[cat_id]" options="Unchanged"/>
 									</menulist>
 									<description value="Version"/>
 									<menulist>
-										<menupopup id="tr_version" options="Unchanged"/>
+										<menupopup id="set[tr_version]" options="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Status"/>
 									<menulist>
-										<menupopup id="tr_status" options="Unchanged"/>
+										<menupopup id="set[tr_status]" options="Unchanged"/>
 									</menulist>
 									<description value="Priority"/>
 									<menulist>
-										<menupopup id="tr_priority" options="Unchanged"/>
+										<menupopup id="set[tr_priority]" options="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Assigned to"/>
 									<hbox options="0,0" span="all">
 										<menulist>
-											<menupopup id="tr_assigned" options="Unchanged"/>
+											<menupopup id="set[tr_assigned]" options="Unchanged"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="users" class="tracker_leftPad5"/>
-										<checkbox label="add additionally" id="add_assigned" class="tracker_leftPad5"/>
+										<checkbox label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"/>
 									</hbox>
 								</row>
 								<row valign="top">
 									<description value="Comment"/>
-									<textbox multiline="true" id="reply_message" rows="3" span="all" class="reply"/>
+									<textbox multiline="true" id="set[reply_message]" rows="3" span="all" class="reply"/>
 									<description/>
 									<description/>
 								</row>
 								<row disabled="@no_comment_visibility">
 									<description/>
-									<checkbox label="Only for admins, technicians or assigned" id="reply_visible" span="all"/>
+									<checkbox label="Only for admins, technicians or assigned" id="set[reply_visible]" span="all"/>
 								</row>
 								<row>
 									<description value="Notification"/>
 									<menulist>
-										<menupopup id="notify"/>
+										<menupopup id="set[notify]"/>
 									</menulist>
 									<description/>
 									<description/>
