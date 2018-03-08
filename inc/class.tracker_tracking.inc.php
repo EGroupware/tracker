@@ -248,7 +248,15 @@ class tracker_tracking extends Api\Storage\Tracking
 		switch($name)
 		{
 			case 'copy':	// include the tr_cc addresses
-				if ($data['tr_private']) return array();	// no copies for private entries
+				// If not set for this queue or all queues, default to true
+				$external = array_key_exists('external_notifications', $this->tracker->notification[$tracker]) ?
+					$this->tracker->notification[$tracker]['external_notifications'] : (
+						array_key_exists('external_notifications', $this->tracker->notification[0]) ?
+						$this->tracker->notification[0]['external_notifications'] :
+						true
+					);
+
+				if ($data['tr_private'] || !$external) return array();	// no copies for private entries
 				$config = $config ? preg_split('/, ?/',$config) : array();
 				if ($data['tr_cc'])
 				{

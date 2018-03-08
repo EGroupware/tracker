@@ -574,6 +574,9 @@
 			</columns>
 			<rows>
 				<row>
+					<checkbox label="Send notifications to external email (cc field)" id="external_notifications"/>
+				</row>
+				<row>
 					<description value="Notification message"/>
 					<checkbox label="Use custom notification message" id="use_custom"/>
 				</row>
