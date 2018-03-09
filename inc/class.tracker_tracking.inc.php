@@ -249,14 +249,14 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			case 'copy':	// include the tr_cc addresses
 				// If not set for this queue or all queues, default to true
-				$external = array_key_exists('external_notifications', $this->tracker->notification[$tracker]) ?
-					$this->tracker->notification[$tracker]['external_notifications'] : (
-						array_key_exists('external_notifications', $this->tracker->notification[0]) ?
-						$this->tracker->notification[0]['external_notifications'] :
-						true
-					);
+				$no_external = $this->tracker->notification[$tracker]['no_external'] ?
+					$this->tracker->notification[$tracker]['no_external'] :
+					$this->tracker->notification[0]['no_external'];
 
-				if ($data['tr_private'] || !$external) return array();	// no copies for private entries
+				if ($data['tr_private'] || $no_external)
+				{
+					return array();	// no copies for private entries
+				}
 				$config = $config ? preg_split('/, ?/',$config) : array();
 				if ($data['tr_cc'])
 				{

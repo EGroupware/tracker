@@ -756,15 +756,3 @@ function tracker_upgrade16_1()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1';
 }
-
-function tracker_upgrade17_1()
-{
-	$bo = new tracker_bo();
-	foreach($bo->notification as $id => &$settings)
-	{
-		$settings['external_notifications'] = true;
-	}
-	Api\Config::save_value('notification',$bo->notification,'tracker');
-
-	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1.001';
-}

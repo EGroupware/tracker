@@ -140,6 +140,7 @@ deletes this field	tracker	en	deletes this field
 deny global	tracker	en	Deny global
 determines the order the fields are displayed	tracker	en	determines the order the fields are displayed
 directory with documents to insert entries	tracker	en	Directory with documents to insert entries
+do not send notifications to external email (cc field)	tracker	en	Do not send notifications to external email (cc field)
 do you want a notification, if items you are responsible for are about to start?	tracker	en	Do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	en	Do you want a notification, if items you are responsible for are due?
 do you want to add mailheader information to description and/or comments?	tracker	en	Do you want to add Mailheader Information to Description and/or Comments?
@@ -360,7 +361,6 @@ select users or groups	tracker	en	Select users or groups
 select which categories should be used in tracker for the tts categories	tracker	en	Select which categories should be used in Tracker for the TTS categories.
 select which username should be used when unrecognized mails are handled.	tracker	en	Select which user name should be used when unrecognized mails are handled.
 select which username should be used when unrecognized replies are handled	tracker	en	Select which username should be used when unrecognized replies are handled
-send notifications to external email (cc field)	tracker	en	Send notifications to external email (cc field)
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications e.g. noreply@egroupware.org
 sent autoreplies	tracker	en	Sent auto replies
