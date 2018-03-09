@@ -814,6 +814,11 @@ class tracker_admin extends tracker_bo
 		$preserv['escalation']['esc_id'] = $content['escalation']['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
+		// These two are not categories, and are needed for the list
+		$sel_options = array(
+			'tr_version' => $this->get_tracker_labels('version',$this->trackers),
+			'tr_status' => $this->get_tracker_stati($this->trackers),
+		);
 
 		$tracker = $content['tr_tracker'];
 		$sel_options['escalation'] = array(
