@@ -820,7 +820,6 @@ class tracker_admin extends tracker_bo
 			'tr_status' => $this->get_tracker_stati($this->trackers),
 		);
 
-		$tracker = $content['tr_tracker'];
 		$sel_options['escalation'] = array(
 			'tr_tracker'  => &$this->trackers,
 			'esc_before_after' => array(
@@ -908,10 +907,72 @@ class tracker_admin extends tracker_bo
 			$sel_options['cat_id']			+= $this->get_tracker_labels('cat',$tracker);
 			$sel_options['tr_version']		+= $this->get_tracker_labels('version',$tracker);
 			$sel_options['tr_resolution']	+= $this->get_tracker_labels('resolution',$tracker);
-			$sel_options['tr_priority']		+= $this->get_tracker_priorities($tracker,$content['cat_id']);
+			$sel_options['tr_priority']		+= $this->get_tracker_priorities($tracker);
 			$sel_options['tr_status']		+= $this->get_tracker_stati($tracker);
 			$sel_options['tr_assigned']		+= $this->get_staff($tracker,$this->allow_assign_groups);
 		}
 
+	}
+
+	/**
+	 * Change account_ids in track configuration hook called from admin_cmd_change_account_id
+	 *
+	 * @param array $changes
+	 * @return int number of changed account_ids
+	 */
+	public static function change_account_ids(array $changes)
+	{
+		unset($changes['location']);	// no change, but the hook name
+		$changed = 0;
+
+		// migrate staff account_ids
+		$config = Api\Config::read('tracker');
+		foreach(array('admins','technicians','users') as $name)
+		{
+			if (!isset($config[$name]) || !is_array($config[$name])) continue;
+
+			$needs_save = false;
+			foreach($config[$name] as &$accounts)
+			{
+				foreach($accounts as &$account_id)
+				{
+					if (isset($changes[$account_id]))
+					{
+						$account_id = $changes[$account_id];
+						$changed++;
+						$needs_save = true;
+					}
+				}
+			}
+			if ($needs_save)
+			{
+				Api\Config::save_value($name, $config[$name], 'tracker');
+			}
+		}
+
+		// migrate auto assign account_ids
+		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT, 'tracker');
+		foreach($cats->return_array('all', 0, false) as $cat)
+		{
+			if ($cat['data']['type'] == 'cat' && $cat['data']['autoassign'])
+			{
+				$needs_save = false;
+				foreach($cat['data']['autoassign'] as &$account_id)
+				{
+					if (isset($changes[$account_id]))
+					{
+						$account_id = $changes[$account_id];
+						$changed++;
+						$needs_save = true;
+					}
+				}
+				if ($needs_save)
+				{
+					$cats->edit($cat);
+				}
+			}
+		}
+
+		return $changed;
 	}
 }
