@@ -2052,6 +2052,15 @@ width:100%;
 	{
 		$id = $content['tr_id'];
 
+		// If original is closed, copy should be open
+		if($content['tr_closed'] && $content['tr_completion'] == '100')
+		{
+			$content['tr_status'] = self::STATUS_OPEN;
+			$content['tr_completion'] = 0;
+			// Get default resolution
+			$this->get_tracker_labels('resolution', $content['tr_tracker'], $content['tr_resolution']);
+		}
+
 		$exclude_fields = array('tr_id', 'tr_closed', 'tr_seen',
 			'tr_created', 'tr_modified', 'tr_modifier'
 		);
