@@ -226,7 +226,7 @@ imap, ssl secured	tracker	it	IMAP con SSL
 imap, tls secured	tracker	it	IMAP con TLS
 import options	tracker	it	Importa opzioni
 import tts tickets	tracker	it	Importa TTS tickets
-imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	it	Importa voci nel tracker da CSV. CSV significa "valori separati da virgola". Nelle opzioni sarà possibile selezionare anche altri separatori.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	it	Importa voci nel tracker da CSV. CSV significa "valori separati da virgola". Nelle opzioni sarà possibile selezionare anche altri separatori.
 incoming mail folder	tracker	it	Cartella della posta in arrivo
 incoming mail rules	tracker	it	Regole della posta in arrivo
 incoming mail server	tracker	it	Server della posta in arrivo

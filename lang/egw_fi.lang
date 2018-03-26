@@ -204,7 +204,7 @@ imap, ssl secured	tracker	fi	IMAP, SSL suojattu
 imap, tls secured	tracker	fi	IMAP, TSL suojattu
 import options	tracker	fi	Tuontiasetukset
 import tts tickets	tracker	fi	Tuo TTS
-imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	fi	Tuo merkintöjä CSV tiedostosta Reklamaationhallintaan. CSV 'Comma Separated Values' tarkoittaa pilkulla eroitettuja arvoja. Voit valita myös muita erotustapoja.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	fi	Tuo merkintöjä CSV tiedostosta Reklamaationhallintaan. CSV 'Comma Separated Values' tarkoittaa pilkulla eroitettuja arvoja. Voit valita myös muita erotustapoja.
 incoming mail folder	tracker	fi	Saapuvien sähköpostien kansio
 incoming mail rules	tracker	fi	Saapuvien sähköpostien säännöt
 incoming mail server	tracker	fi	Saapuvien sähköpostien palvelin

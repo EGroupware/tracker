@@ -211,7 +211,7 @@ imap, ssl secured	tracker	ru	IMAP, защищённое SSL
 imap, tls secured	tracker	ru	IMAP, защищённое TLS
 import options	tracker	ru	Настройки импорта
 import tts tickets	tracker	ru	Импортировать запросы TTS
-imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	ru	Импортирует записи в Трекер из файла формата CSV (величины, разделенные запятыми). На вкладке можно выбрать другой разделитель.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	ru	Импортирует записи в Трекер из файла формата CSV (величины, разделенные запятыми). На вкладке можно выбрать другой разделитель.
 incoming mail folder	tracker	ru	Папка входящих писем
 incoming mail rules	tracker	ru	Правила для входящих писем
 incoming mail server	tracker	ru	Сервер входящей почты

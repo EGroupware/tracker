@@ -223,7 +223,7 @@ imap, ssl secured	tracker	sk	IMAP-SSL
 imap, tls secured	tracker	sk	IMAP-TLS
 import options	tracker	sk	Importné možnosti
 import tts tickets	tracker	sk	Importovať karty TTS
-imports entries into the tracker from a csv file. csv means 'comma seperated values'. however in the options tab you can also choose other seperators.	tracker	sk	Naimportuje do Sledovača položky z CSV súboru. CSV znamená 'Comma Separated Values'. Na stránke možností môžete vybrať aj iný oddeľovač.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	sk	Naimportuje do Sledovača položky z CSV súboru. CSV znamená 'Comma Separated Values'. Na stránke možností môžete vybrať aj iný oddeľovač.
 incoming mail folder	tracker	sk	Priečinok doručenej pošty
 incoming mail rules	tracker	sk	Pravidlá doručenej pošty
 incoming mail server	tracker	sk	Server doručenej pošty
