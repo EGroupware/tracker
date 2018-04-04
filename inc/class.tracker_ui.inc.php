@@ -1669,7 +1669,7 @@ width:100%;
 			$actions['filemanager'] = array(
 				'icon' => 'filemanager/navbar',
 				'caption' => 'Filemanager',
-				'url' => 'menuaction=filemanager.filemanager_ui.index&path=/apps/tracker/$id',
+				'url' => 'menuaction=filemanager.filemanager_ui.index&path=/apps/tracker/$id&ajax=true',
 				'allowOnMultiple' => false,
 				'group' => $group,
 			);
