@@ -6,9 +6,9 @@
 %1 entries updated.	tracker	sl	%1 vnosov posodobljenih.
 %1 is due %2	tracker	sl	%1 je zaradi %2
 %1 is starting %2	tracker	sl	%1 začenja %2
-%1 tickets have been converted	tracker	sl	%1 vstopnice so bile pretvorjene.
+%1 tickets have been converted	tracker	sl	%1 zahtevki so bili pretvorjeni.
 (beware of mailloops, check the help!)	tracker	sl	(Pazite na mailloops, preverite pomoč!)
-(new tickets as	tracker	sl	Nove vstopnice kot
+(new tickets as	tracker	sl	Nove zahteve kot
 --> choose a project from the drop-down list	tracker	sl	-> izberite projekt s spustnega seznama
 --> enter new name	tracker	sl	--> vnesite novo ime
 1 - lowest	tracker	sl	1 - najnižja
@@ -23,9 +23,9 @@ accepted	tracker	sl	Sprejeto
 acl	tracker	sl	Seznam za nadzor dostopa
 activate users queue access control	tracker	sl	Aktiviranje uporabnikov za nadzor dostopa do čakalne vrste
 add	tracker	sl	Dodaj
-add %1	tracker	sl	Dodaj% 1
+add %1	tracker	sl	Dodaj %1
 add / remove link	tracker	sl	Dodaj / odstrani povezavo
-add a ticket	tracker	sl	Dodaj vozovnico
+add a ticket	tracker	sl	Dodaj zahtevo
 add additionally	tracker	sl	Dodajte dodatno
 add assigned	tracker	sl	Dodaj dodeljeno
 add comment	tracker	sl	Dodaj komentar
@@ -33,7 +33,7 @@ add email-address	tracker	sl	Dodaj e-poštni naslov
 add from addressbook	tracker	sl	Dodaj iz imenika
 add infolog	tracker	sl	Dodaj infolog
 add restricted comment	tracker	sl	Dodaj omejiti komentar
-add timesheet entry	tracker	sl	Dodaj vnos timeheet
+add timesheet entry	tracker	sl	Dodaj vnos v časovnico
 add to	tracker	sl	Dodati k
 add unrecognized mail address to the cc field	tracker	sl	Dodajanje nepripoznanega e-poštnega naslova v polje CC
 admin	tracker	sl	Skrbnik
@@ -43,7 +43,7 @@ after how many days pending items should be closed automatic	tracker	sl	Po kolik
 all	tracker	sl	Vse
 all categories	tracker	sl	Vse kategorije
 all comments together, user\tdate\tmessage	tracker	sl	Vsi komentarji skupaj, Uporabnik\tDate\tPovezava
-all tickets are already converted to tracker	tracker	sl	Vse vstopnice so že pretvorjene v Tracker
+all tickets are already converted to tracker	tracker	sl	Vse zahteveso že pretvorjene v Zahtevku
 all versions	tracker	sl	Vse različice
 allow bounties	tracker	sl	Dovoli nagrade
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	sl	Dovoli ustvarjanje omejenih komentarjev, ki so vidni samo za skrbnike, tehnike in dodeljene uporabnike
@@ -81,7 +81,7 @@ canned response	tracker	sl	Samodejni odgovor
 canned responses	tracker	sl	Samodejni odgovori
 categories, versions, canned responses	tracker	sl	Kategorije, različice, avtomatični odgovori
 category	tracker	sl	Kategorija
-category for new tickets	tracker	sl	Kategorija za nove vstopnice
+category for new tickets	tracker	sl	Kategorija za nove zahteve
 change assigned	tracker	sl	Dodeljena sprememba
 change assigned when updating	tracker	sl	Sprememba, dodeljena ob posodabljanju
 change group	tracker	sl	Spremeni skupino
@@ -222,7 +222,7 @@ how many description lines should be directly visible. further lines are availab
 html editing	tracker	sl	Urejanje HTML
 html link to the current record	tracker	sl	Povezava HTML s trenutnim zapisom
 id	tracker	sl	ID
-if a ticket has matched before, should the actions be taken again?	tracker	sl	Če se je vozovnica predhodno ujemala, ali naj se ukrepi ponovno sprejmejo?
+if a ticket has matched before, should the actions be taken again?	tracker	sl	Če se je zahteva predhodno ujemala, ali naj se ukrepi ponovno sprejmejo?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	sl	Če ni označeno, označuje vsako obstoječo, podobno vozovnico, kot je že stopnjevala, ne da bi ukrepala.
 if this item is important for you, please consider to set a bounty for it!	tracker	sl	Če je zadeva za vas pomembna, premislite o nagradi za jneno izvedbo!
 if this item is important for you, please vote for it.	tracker	sl	Če je ta element za vas pomemben, lahko glasujete zanj.
@@ -266,7 +266,7 @@ later	tracker	sl	Pozneje
 leaves without saveing	tracker	sl	Zapre brez shranjevanja
 length<br>rows	tracker	sl	Dolžina<br>Vrstic
 limit number of description lines (default 5, 0 for no limit)	tracker	sl	Omejite število opisnih vrstic. Privzeto = 5, 0 = brez omejitve.
-link to ticket	tracker	sl	Povezava do vozovnice
+link to ticket	tracker	sl	Povezava do zahteve
 linked to %1	tracker	sl	Povezano z %1
 links	tracker	sl	Povezave
 links and attached files	tracker	sl	Povezave in priložene datoteke
@@ -292,9 +292,9 @@ name of current user, all other contact fields are valid too	tracker	sl	Ime tren
 never	tracker	sl	Nikoli
 new %1	tracker	sl	Nov %1
 new items	tracker	sl	Novi elementi
-new ticket submitted by %1 at %2	tracker	sl	Nova vozovnica, ki jo je predložil %1 pri %2
-new tickets as	tracker	sl	Nove vstopnice kot
-new tracker item submitted by %1 at %2	tracker	sl	Nov element trackerja je ustvaril %1 ob %2
+new ticket submitted by %1 at %2	tracker	sl	Nova zahteva, ki jo je predložil %1 pri %2
+new tickets as	tracker	sl	Nove zahteve kot
+new tracker item submitted by %1 at %2	tracker	sl	Nov element sledilnika je ustvaril %1 ob %2
 no	tracker	sl	brez
 no change	tracker	sl	Brez sprememb
 no notifications	tracker	sl	Brez obvestil
@@ -323,7 +323,7 @@ original message	tracker	sl	originalno sporočilo
 out of date	tracker	sl	Izven roka
 overdue	tracker	sl	Zapadel
 overdue after	tracker	sl	Zapade po
-ownership of the ticket	tracker	sl	Lastnik vozovnice
+ownership of the ticket	tracker	sl	Lastnik zahtev
 pending	tracker	sl	V teku
 pending items never get close automatic.	tracker	sl	Elementi v teku naj se nikoli ne zaprejo samodejno.
 pending items will be closed automatic after %1 days without response.	tracker	sl	Naloge v teku bodo samodejno zaprte po %1 dnevih brez odgovora.
@@ -370,7 +370,7 @@ restrict tracker items to staff and:	tracker	sl	Omejite predmete za sledenje ose
 restricted	tracker	sl	omejeno
 restricted comment	tracker	sl	Omejeni komentar
 restriction	tracker	sl	Omejitev
-run on existing tickets	tracker	sl	Na obstoječih vozovnicah
+run on existing tickets	tracker	sl	Na obstoječih zahtevah
 same day	tracker	sl	Isti dan
 save new report	tracker	sl	Shranite novo poročilo
 save new report...	tracker	sl	Shranite novo poročilo...
@@ -436,34 +436,34 @@ this quarter	tracker	sl	Ta četrtletje
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	sl	Ta naloga je bil samodejno končana. Predhodno je bilo njeno stanje popravljeno na V teku ampak oseba, ki je nalogo odprla, ni odgovorila v %1 dnevih.
 this week	tracker	sl	Ta teden
 this year	tracker	sl	To leto
-ticket	common	sl	Vozovnica
-ticket count	tracker	sl	Številka vozovnic
-ticket modified by %1 at %2	tracker	sl	Vstopnica, spremenjena z %1 na %2
-tickets	common	sl	Vozovnice
+ticket	common	sl	zahtevo
+ticket count	tracker	sl	Števec zahtev
+ticket modified by %1 at %2	tracker	sl	Zahteva, spremenjena z %1 na %2
+tickets	common	sl	Zahteve
 times	tracker	sl	Časi
 titles of any entries linked to the current record, excluding attached files	tracker	sl	Naslovi vseh vnosov, povezanih s trenutnim zapisom, brez priloženih datotek
 total:	tracker	sl	Skupaj:
-tracker	common	sl	Tracker
+tracker	common	sl	Zahtevek
 tracker added	tracker	sl	Dodana je bila čakalna vrsta
-tracker admins	tracker	sl	Nadzorniki Trackerja
-tracker admins & technicians	tracker	sl	Nadzorniki in tehniki Trackerja
-tracker configuration	tracker	sl	Konfiguracija Trackerja
-tracker csv export	tracker	sl	Izvoz CSV sledenja
-tracker csv import	tracker	sl	Uvoz tracker CSV
+tracker admins	tracker	sl	Nadzorniki Zahtevka
+tracker admins & technicians	tracker	sl	Nadzorniki in tehniki Zahtevka
+tracker configuration	tracker	sl	Konfiguracija Zahtevka
+tracker csv export	tracker	sl	Izvoz CSV zahtevkov
+tracker csv import	tracker	sl	Uvoz zahtevkov CSV
 tracker deleted	tracker	sl	Čakalna vrsta je bila izbrisana
 tracker entry can only seen by creator and admins	tracker	sl	Vnos sledenja lahko vidijo samo ustvarjalci in skrbniki
-tracker fields:	tracker	sl	Polja sledilcev:
-tracker for new tickets	tracker	sl	Sledilec za nove vstopnice
-tracker for the main screen	tracker	sl	Sledilnik za glavni zaslon
-tracker id	tracker	sl	ID sledenja
-tracker item modified by %1 at %2	tracker	sl	Element Trackerja je bil spremenjen od %1 ob %2
-tracker item not found !!!	tracker	sl	Element Trackerja ni bil najden!
-tracker list	tracker	sl	Seznam sledilcev
-tracker queue	tracker	sl	Čakalna vrsta za sledenje
-tracker queue renamed	tracker	sl	Vrstica za sledenje je preimenovana.
-tracker-%1 '%2' added.	tracker	sl	Tracker-%1 '%2' dodan.
-tracker-%1 '%2' updated.	tracker	sl	Tracker-%1 '%2' posodobljen.
-tracker-%1 deleted.	tracker	sl	Tracker-%1 '%2' izbrisan.
+tracker fields:	tracker	sl	Polja zahtevkov:
+tracker for new tickets	tracker	sl	Zahtevek za nove zahteve
+tracker for the main screen	tracker	sl	Zahtevek za glavni zaslon
+tracker id	tracker	sl	ID zahtevka
+tracker item modified by %1 at %2	tracker	sl	Element Zahtevka je bil spremenjen od %1 ob %2
+tracker item not found !!!	tracker	sl	Element Zahtevka ni bil najden!
+tracker list	tracker	sl	Seznam zahtevkov
+tracker queue	tracker	sl	Čakalna vrsta za zahtevke
+tracker queue renamed	tracker	sl	Vrstica za zahtevke je preimenovana.
+tracker-%1 '%2' added.	tracker	sl	Zahtevek-%1 '%2' dodan.
+tracker-%1 '%2' updated.	tracker	sl	Zahtevek-%1 '%2' posodobljen.
+tracker-%1 deleted.	tracker	sl	Zahtevek-%1 '%2' izbrisan.
 type of customfield	tracker	sl	Vrsta polja po meri
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	sl	Ni mogoče pretvoriti »%1« v ID računa. Uporaba nastavitve vtičnika (%2) za %3.
 unchanged	tracker	sl	Nespremenjeno
@@ -485,7 +485,7 @@ used time	tracker	sl	Uporabljen čas
 user or group	tracker	sl	Uporabnik ali skupina
 username	tracker	sl	Uporabniško ime
 version	tracker	sl	različico
-version for new tickets	tracker	sl	Različica za nove vstopnice
+version for new tickets	tracker	sl	Različica za nove zahteve
 versions	tracker	sl	Različice
 vote for it!	tracker	sl	Glasuj!
 votes	tracker	sl	Glasovi
@@ -500,7 +500,7 @@ yes, add mailheader to description	tracker	sl	Da, dodajte Mailheader v opis
 yes, always	tracker	sl	Da, vedno
 yes, display groups first	tracker	sl	Da, najprej prikaži skupine
 yes, display users first	tracker	sl	Da, najprej prikaži uporabnike
-yes, new tickets only	tracker	sl	Ja, samo nove vstopnice
+yes, new tickets only	tracker	sl	Ja, samo nove zahteve
 yes, with larger fontsize	tracker	sl	Da, z večjo pisavo
 yesterday	tracker	sl	Včeraj
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	sl	Omejitve dostopa do čakalne vrste lahko omogočite / onemogočite na kartici za konfiguracijo za vse čakalne vrste
