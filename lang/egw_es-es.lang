@@ -113,6 +113,7 @@ creator	tracker	es-es	Creador
 custom fields	tracker	es-es	Campos personalizados
 custom notifications	tracker	es-es	Notificaciones personalizadas
 custom tracker priorities	tracker	es-es	Prioridades del elemento personalizado
+customfield	tracker	es-es	Campo personalizado
 data exchange settings	tracker	es-es	Opciones para intercambio de datos
 date filter	tracker	es-es	Filtro de fecha
 date opened	tracker	es-es	Fecha de apertura
@@ -332,7 +333,9 @@ should there be a tracker-box on main screen?	tracker	es-es	Mostrar Sistema de S
 show start date and due date	tracker	es-es	Mostrar fechas de inicio y de vencimiento
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 signature	tracker	es-es	Firma
+skip record	tracker	es-es	Saltar registro
 staff	tracker	es-es	Equipo
+standard imap	tracker	es-es	IMAP estándar
 started	tracker	es-es	Iniciado
 starting	tracker	es-es	Iniciando
 state	tracker	es-es	Estado
@@ -403,6 +406,7 @@ use custom signature	tracker	es-es	Usar firma personalizada
 use field from csv if possible	tracker	es-es	Usar el campo de CSV si es posible
 use search results	tracker	es-es	Usar los resultados de la búsqueda
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	es-es	Usar esta etiqueta para las etiquetas de direcciones. Ponga el contenido que quiera repetir entre dos etiquetas.
+user or group	tracker	es-es	Usuario o grupo
 version for new tickets	tracker	es-es	Versión para nuevas entradas
 versions	tracker	es-es	Versiones
 vote for it!	tracker	es-es	¡Vote por él!
