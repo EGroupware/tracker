@@ -466,6 +466,15 @@ class tracker_tracking extends Api\Storage\Tracking
 		// add custom fields for given type
 		$details += $this->get_customfields($data, $data['tr_tracker'], $receiver);
 
+		if ($data['reply_message'] && !$data['reply_visible'])
+		{
+			// A comment was just made
+			$details[] = array(
+				'type' => 'message',
+				'value' => "<br />\n" . Api\Accounts::username($data['tr_modifier']) .":<br />\n" .
+					$data['reply_message'] . "<br />\n<br />\n"
+			);
+		}
 		$details['tr_description'] = array(
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
