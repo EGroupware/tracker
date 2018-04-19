@@ -32,7 +32,7 @@ add infolog	tracker	de	Infolog hinzufügen
 add restricted comment	tracker	de	Kommentar mit eingeschränkter Sichtbarkeit hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
 add to	tracker	de	Hinzufügen zu
-add unrecognized mail address to the cc field	tracker	de	Nicht erkannte E-Mail Adresse zu CC hinzufügen
+add unrecognized mail address to the cc field	tracker	de	Nicht erkannte E-Mail Adresse zu Kopie hinzufügen
 after	tracker	de	nach
 after how many days a not replied item should be marked overdue?	tracker	de	Nach wie vielen Tagen soll ein nicht beantworteter Eintrag als überfällig markiert werden?
 after how many days pending items should be closed automatic	tracker	de	Nach wie vielen Tagen sollen schwebende Einträge automatisch geschlossen werden?
@@ -140,6 +140,7 @@ deletes this field	tracker	de	Löscht dieses Feld
 deny global	tracker	de	Globale verbieten
 determines the order the fields are displayed	tracker	de	Bestimmt die Reihenfolge der angezeigten Felder
 directory with documents to insert entries	tracker	de	Verzeichnis mit Dokumenten zum Einfügen.
+do not send notifications to external email (cc field)	tracker	de	Keine Benachrichtigungen an externe E-Mail senden (Kopie-Feld)
 do you want a notification, if items you are responsible for are about to start?	tracker	de	Möchten Sie über zu startende Einträge, für die Sie verantwortlich sind benachrichtigt werden?
 do you want a notification, if items you are responsible for are due?	tracker	de	Möchten Sie über fällige Einträge, für die Sie verantwortlich sind benachrichtigt werden?
 do you want to add mailheader information to description and/or comments?	tracker	de	Möchten Sie der Beschreibung und/oder den Kommentaren Mailheaderinformationen zufügen?
@@ -187,7 +188,7 @@ export csv	tracker	de	Export als CSV Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
-failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	de	Keiner Verbindung zur Mailbox möglich: %1 -> Automatische E-Mailanahme wurde deaktiviert.
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	de	Keiner Verbindung zur Mailbox möglich: %1 -> Automatische E-Mail-Annahme wurde deaktiviert.
 favorites	tracker	de	Favoriten
 field	tracker	de	Feld
 fixed	tracker	de	Gelöst
@@ -258,7 +259,7 @@ links to specified application.  example: {{links/infolog}}	tracker	de	Link zu e
 links wrapped in an href tag with download link	tracker	de	Verknüpfungen in einem Anker Tag (HREF) mit einem Download Link
 list of coma separated email address	tracker	de	Liste von E-Mail Adressen, durch Komma getrennt
 list of files linked to the current record	tracker	de	Liste der Dateien, die mit diesem Datensatz verbunden sind.
-mail handling	tracker	de	E-Mailumwandlung
+mail handling	tracker	de	E-Mail-Umwandlung
 mailbox settings used: %1	tracker	de	Die Einstellungen der  Mailbox %1 wurden verwendet.
 manage mapping	tracker	de	Feldzuordnungen bearbeiten
 mark as read	tracker	de	Als gelesen markieren
@@ -358,7 +359,7 @@ select one...	tracker	de	Eintrag auswählen
 select tracker queue	tracker	de	Verfolgungssystem-Queue auswählen
 select users or groups	tracker	de	Benutzer bzw. Gruppen auswählen
 select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Verfolgungssystem für die TTS Kategorien verwendet werden
-select which username should be used when unrecognized mails are handled.	tracker	de	Auswählen welcher Benutzer für nicht zuordenbare E-mails verwendet wird.
+select which username should be used when unrecognized mails are handled.	tracker	de	Auswählen welcher Benutzer für nicht zuordenbare E-Mails verwendet wird.
 select which username should be used when unrecognized replies are handled	tracker	de	Wählen Sie einen Benutzer aus, der für unbekannte Antworten verwendet werden darf
 sender address	tracker	de	Absenderadresse
 sender address for all notifications, eg. noreply@egroupware.org	tracker	de	Absenderadresse für alle Benachrichtigungen, z.B. noreply@egroupware.org
@@ -389,7 +390,7 @@ sum	tracker	de	Summe
 summary	tracker	de	Zusammenfassung
 tag to mark positions for address labels	tracker	de	Markiert die Position für den Adressen Eintrag.
 technicians	tracker	de	Techniker
-test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	de	Testen Sie die E-mailumwandlung einmalig (es führt die E-mailumwandlung direkt nach dem Speichern/Anwenden aus, unabhängig vom Intervall, auch wenn es auf Deaktiviert gesetzt ist).
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	de	Testen Sie die E-Mail-Umwandlung einmalig (es führt die E-Mail-Umwandlung direkt nach dem Speichern/Anwenden aus, unabhängig vom Intervall, auch wenn es auf Deaktiviert gesetzt ist).
 thank you for setting this bounty.	tracker	de	Danke dass Sie diese Prämie gesetzt haben.
 thank you for voting.	tracker	de	Danke dass Sie abgestimmt haben.
 the bounty will not be shown, until the money is received.	tracker	de	Die Prämie wird NICHT angezeigt, bis das Geld eingegangen ist.
@@ -442,7 +443,7 @@ unrecognized mails	tracker	de	Nicht zuordenbare E-Mails
 upcoming	tracker	de	anstehend
 updated	tracker	de	aktualisiert
 url of the tracker	tracker	de	Internetadresse des Verfolgungssystems
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der eGW
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der EGw
 use a default user for mails that where not recognized	tracker	de	Verwende einen Standardbenutzer für E-Mails die nicht zugeordnet werden können
 use all	tracker	de	Alle anwenden
 use custom notification message	tracker	de	Benutzerdefinierte Benachrichtigungen verwenden
@@ -456,7 +457,7 @@ versions	tracker	de	Versionen
 vote for it!	tracker	de	Dafür abstimmen!
 votes	tracker	de	Stimmen
 what should be done with unknown values?	tracker	de	Wie soll mit unbekannten Werten umgegangen werden?
-when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn E-Mails von einer unbekannten E-Mail Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld CC hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte E-Mail Adressen nicht behandelt werden.
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn E-Mails von einer unbekannten E-Mail Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld Kopie hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte E-Mail Adressen nicht behandelt werden.
 wont fix	tracker	de	Vorerst keine Anpassung
 works for me	tracker	de	Nicht reproduzierbar
 yes, add mailheader to both (description and comments)	tracker	de	Ja, Mailheaderinformationen für Beschreibung und Kommentare hinzufügen
