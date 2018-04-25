@@ -466,14 +466,21 @@ class tracker_tracking extends Api\Storage\Tracking
 		// add custom fields for given type
 		$details += $this->get_customfields($data, $data['tr_tracker'], $receiver);
 
-		if ($data['reply_message'] && !$data['reply_visible'])
+		if ($data['replies']) //$data['reply_message'] && !$data['reply_visible'])
 		{
-			// A comment was just made
+			// At least one comment was made
+			$reply = $data['replies'][0];
 			$details[] = array(
 				'type' => 'message',
-				'value' => "<br />\n" . Api\Accounts::username($data['tr_modifier']) .":<br />\n" .
-					$data['reply_message'] . "<br />\n<br />\n"
+				'value' => $this->format_line(true, 'message', $data['reply_message'],
+				lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
+					$this->datetime($reply['reply_servertime'])))
 			);
+			$details[] = array(
+				'type' => 'message',
+				'value' => $reply['reply_message'] . "<br />\n<br />\n"
+			);
+			$n = 2;
 		}
 		$details['tr_description'] = array(
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
@@ -481,9 +488,9 @@ class tracker_tracking extends Api\Storage\Tracking
 		);
 		if ($data['replies'])
 		{
-			foreach($data['replies'] as $n => $reply)
+			foreach($data['replies'] as $reply_index => $reply)
 			{
-				$details[$n ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
+				$details[$reply_index ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
 					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
 						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
@@ -492,6 +499,7 @@ class tracker_tracking extends Api\Storage\Tracking
 					'value' => $reply['reply_message'],
 					'type'  => 'multiline',
 				);
+				$n++;
 			}
 		}
 		return $details;
