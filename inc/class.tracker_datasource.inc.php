@@ -63,21 +63,6 @@ class tracker_datasource extends datasource
 			$data =& $data_id;
 		}
 
-		$status = null;
-		$stati = self::$botracker->get_tracker_stati();
-		if ($data['tr_status'] == tracker_bo::STATUS_DELETED)
-		{
-			$status = 'deleted';
-		}
-		else if (in_array($data['tr_status'], self::$botracker->get_tracker_stati(null, true)))
-		{
-			$status = 'ignore';
-		}
-		else
-		{
-			// Stati in projectmanager are strings
-			$status = $stati[$data['tr_status']];
-		}
 		return array(
 			'pe_title'        => self::$botracker->link_title($data),
 			'pe_completion'   => $data['tr_completion'],
@@ -87,7 +72,6 @@ class tracker_datasource extends datasource
 			'pe_details'      => $data['tr_description'] ? nl2br($data['tr_description']) : '',
 			'pe_planned_budget'   => $data['tr_budget'],
 			'cat_id'          => $data['cat_id'],
-			'pe_status'       => $status,
 		);
 	}
 
