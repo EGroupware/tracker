@@ -491,6 +491,10 @@ class tracker_tracking extends Api\Storage\Tracking
 			);
 			$n = 2;
 		}
+		$details[] = array(
+			'value' => lang('Description'),
+			'type' => 'summary'
+		);
 		$details['tr_description'] = array(
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
