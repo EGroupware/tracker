@@ -80,7 +80,7 @@ label.tracker_trIdEdit:before {
 }
 .normal,
 .normal_done {
-  color: black;
+  color: #000000;
 }
 .high {
   color: #cc0000;
@@ -135,6 +135,13 @@ label.tracker_trIdEdit:before {
 }
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
   max-height: 215px;
+}
+/* Limit image sizes */
+#tracker-edit_tracker-edit-comments img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
 }
 #tracker-index_tracker-index-queue {
   position: relative;
