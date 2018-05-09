@@ -472,13 +472,12 @@ class tracker_tracking extends Api\Storage\Tracking
 			$reply = $data['replies'][0];
 			$details[] = array(
 				'type' => 'message',
-				'value' => $this->format_line(true, 'message', $data['reply_message'],
-				lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
-					$this->datetime($reply['reply_servertime'])))
+				'label' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),$this->datetime($reply['reply_servertime'])),
+				'value' => ' '
 			);
 			$details[] = array(
-				'type' => 'message',
-				'value' => $reply['reply_message'] . "<br />\n<br />\n"
+				'type' => 'multiline',
+				'value' => $reply['reply_message']
 			);
 			$n = 2;
 		}
