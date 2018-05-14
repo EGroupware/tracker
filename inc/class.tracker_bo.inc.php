@@ -1925,7 +1925,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @param type $_subject
 	 */
-	function ajax_getTicketId($_subject)
+	function ajax_getTicketId($_subject='')
 	{
 		$response  = Api\Json\Response::get();
 		$response->data($this->get_ticketId($_subject));
