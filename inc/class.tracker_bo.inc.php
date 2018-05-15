@@ -655,6 +655,39 @@ class tracker_bo extends tracker_so
 		}
 		if (!($err = parent::save()))
 		{
+			// try to resolve inline images which are not already resolved by mail_integration,
+			// like images from mailhandling or comments.
+			$replaced = false;
+			foreach($this->data['link_to']['to_id'] as $link)
+			{
+				if (is_array($link) && !empty($link['id']['cid']))
+				{
+					$link_callback = function($cid) use($link) {
+						if ($link['id']['cid'] == $cid)
+						{
+							return Api\Egw::link(Api\Vfs::download_url(Api\Link::vfs_path('tracker', $this->data['tr_id'], Api\Vfs::basename($link['id']['name']))));
+						}
+						else
+						{
+							return "cid:".$cid;
+						}
+					};
+					foreach(array('src','url','background') as $type)
+					{
+						$this->data['tr_description'] = mail_ui::resolve_inline_image_byType($this->data['tr_description'], null, null, null, $type, $link_callback);
+						$this->data['reply_message'] = mail_ui::resolve_inline_image_byType($this->data['reply_message'], null, null, null, $type, $link_callback);
+					}
+					$replaced = true;
+				}
+			}
+			if ($replaced)
+			{
+				$this->update (array(
+				'tr_description' => $this->data['tr_description'],
+				'reply_message' => $this->data['reply_message']
+				));
+			}
+
 			// create (and remove) links in custom fields
 			Api\Storage\Customfields::update_links('tracker',$this->data,$old,'tr_id');
 
