@@ -328,6 +328,13 @@ class tracker_ui extends tracker_bo
 					{
 						$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 					}
+					
+					if ($this->htmledit && $this->data['tr_id'] && is_array($content['link_to']['to_id']))
+					{
+						mail_integration::fix_inline_images('tracker', $this->data['tr_id'], $content['link_to']['to_id'], $content['reply_message']);
+						$this->data['reply_message'] = $content['reply_message'];
+					}
+
 					$ret = $this->save();
 					if ($ret === false)
 					{
