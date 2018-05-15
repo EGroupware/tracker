@@ -2088,6 +2088,10 @@ width:100%;
 
 		$content['tr_owner'] = !(int)$content['owner'] || !$this->bo->check_perms(Acl::ADD,0,$content['owner']) ? $this->user : $this->owner;
 
+		// If current user has no permissions for creator, use them as creator
+		$readonlys = $this->readonlys_from_acl();
+		$content['tr_creator'] = $readonlys['tr_creator'] ? $this->user : $content['tr_creator'];
+
 		if (!empty($content['tr_summary']))
 		{
 			$content['tr_summary'] = lang('Copy of:').' '.$content['tr_summary'];
