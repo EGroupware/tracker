@@ -187,22 +187,15 @@ class tracker_mailhandler extends tracker_bo
 				$params['acc_imap_port'] = $this->mailhandling[$queue]['serverport'];
 				$params['acc_imap_username'] = $this->mailhandling[$queue]['username'];
 				$params['acc_imap_password'] = $this->mailhandling[$queue]['password'];
-				$params['acc_folder_sent'] = 'none';
-				$params['acc_folder_trash'] = 'none';
-				$params['acc_folder_draft'] = 'none';
-				$params['acc_folder_template'] = 'none';
-				$params['acc_folder_junk'] = 'none';
 				$params['acc_sieve_enabled'] = false;
 				$params['acc_smtp_type'] = 'EGroupware\\Api\\Mail\\Smtp'; // needed, else the constructor fails
 				$eaaccount = new Mail\Account($params);
 				$icServer = $eaaccount->imapServer();
-//error_log(__METHOD__.__LINE__.array2string($icServer));
 				return $icServer;
 			}
 			catch (Exception $e)
 			{
 				error_log(__METHOD__.__LINE__.' Failed loading mail profile:'.$e->getMessage());
-				//throw new Api\Exception(__METHOD__.' Failed loading mail profile:'.$e->getMessage());
 				return false;
 			}
 		}
