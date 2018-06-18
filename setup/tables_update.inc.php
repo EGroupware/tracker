@@ -756,3 +756,23 @@ function tracker_upgrade16_1()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1';
 }
+function tracker_upgrade17_1()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker','tr_description',array(
+		'type' => 'longtext',
+		'comment' => 'long description'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1.001';
+}
+
+
+function tracker_upgrade17_1_001()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker_replies','reply_message',array(
+		'type' => 'longtext'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1.002';
+}
+
