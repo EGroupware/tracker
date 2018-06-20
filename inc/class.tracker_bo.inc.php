@@ -670,7 +670,8 @@ class tracker_bo extends tracker_so
 				$this->tracking->notify_current_user = true;
 			}
 			$this->tracking->html_content_allow = true;
-			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$this->data['no_notifications']))
+			$no_notification = $autoreply['reply_text'] ? !($old) : $this->data['no_notifications'];
+			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$no_notification))
 			{
 				return $err == 0 && empty($this->tracking->errors) || !is_array($this->tracking->errors)?
 					0:implode(', ',$this->tracking->errors);
