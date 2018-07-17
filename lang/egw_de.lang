@@ -103,7 +103,7 @@ convert all closed tickets	tracker	de	konvertiere geschlossene Tickets
 convert all open tickets	tracker	de	konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
-copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
 could not connect	tracker	de	Konnte nicht verbinden
 create new links	tracker	de	Neue Verknüpfung anlegen
 create new tracker entry's as default "private" for approval process	tracker	de	Erzeuge neue Einträge im Verfolgungssystem als Privat zur Freigabe durch Administratoren.
@@ -169,7 +169,7 @@ error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
 error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
 error: no mail (mailbox / uid) given!	tracker	de	Fehler: keinen Mailbox/UID vorhanden!
-error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben! Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
+error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben!
 escalation	tracker	de	Eskalation
 escalation added.	tracker	de	Eskalation hinzugefügt.
 escalation deleted.	tracker	de	Eskalation gelöscht.
