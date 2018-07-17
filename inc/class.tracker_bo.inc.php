@@ -559,6 +559,8 @@ class tracker_bo extends tracker_so
 
 			if (!is_object($this->tracking)) $this->tracking = new tracker_tracking($this);
 			$changed = $this->tracking->changed_fields($new, $old);
+			// Avoid saving the entry when the same entry has been opened and modified by someone else
+			if (is_array($changed) && $new['tr_modified'] != $old['tr_modified']) return 'tr_modified';
 			//error_log(__METHOD__.__LINE__.' ReplyMessage:'.$this->data['reply_message'].' Mode:'.$this->data['tr_edit_mode'].' Config:'.$this->htmledit);
 			$testReply = $this->data['reply_message'];
 			if ($this->htmledit && isset($this->data['reply_message']) && !empty($this->data['reply_message']))
