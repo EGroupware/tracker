@@ -74,16 +74,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%" overflow="auto">
-			<columns>
-				<column/>
-			</columns>
-			<rows>
-				<row valign="top">
-					<customfields options="$cont[tr_tracker]"/>
-				</row>
-			</rows>
-		</grid>
+		<customfields type_filter="$cont[tr_tracker]"/>
 	</template>
 	<template id="tracker.edit.history" template="" lang="" group="0" version="0.1.002">
 		<historylog id="history"/>

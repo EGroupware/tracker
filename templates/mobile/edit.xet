@@ -69,19 +69,7 @@
 		</grid>
 	</template>
 	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
-		<grid width="100%">
-			<columns>
-				<column width = "120"/>
-				<column/>
-			</columns>
-			<rows>
-				<row>
-					<box width="100%" overflow="auto">
-						<customfields options="@info_type"/>
-					</box>
-				</row>
-			</rows>
-		</grid>
+		<customfields type_filter="$cont[tr_tracker]"/>
 	</template>
 	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
