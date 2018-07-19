@@ -76,10 +76,18 @@ class tracker_merge extends Api\Storage\Merge
 			return false;
 		}
 		if(strpos($content,'all_comments') !== false) {
-			$this->bo->read($id);
-			$tracker = $this->bo->data;
+			if($this->preset_comments[$id])
+			{
+				$all_replies = $this->preset_comments[$id];
+			}
+			else
+			{
+				$this->bo->read($id);
+				$tracker = $this->bo->data;
+				$all_replies = $tracker['replies'];
+			}
 			$replies = array();
-			foreach($tracker['replies'] as $id => $reply) {
+			foreach($all_replies as $c_id => $reply) {
 				// User date format
 				$date = Api\DateTime::to($reply['reply_created']);
 				$name = Api\Accounts::username($reply['reply_creator']);
@@ -88,7 +96,7 @@ class tracker_merge extends Api\Storage\Merge
 					$message = '['.$message.']';
 				}
 				$restricted = $reply['reply_visible']=='0' ? '' : lang('restricted');
-				$replies[$id] = "$date \t$name \t$restricted\n$message";
+				$replies[$c_id] = "$date \t$name \t$restricted\n$message";
 			}
 			$replacements['$$all_comments$$'] = implode("\n",$replies);
 		}

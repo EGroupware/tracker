@@ -217,6 +217,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			$this->creator_field = $creator_field;
 		}
+		$this->tracker->preset_replies[$data['tr_id']] = $data['replies'];
 		$data['tr_private'] = $private;
 		//$already_notified = $email_notified;
 		$ret = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
