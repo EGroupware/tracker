@@ -44,22 +44,20 @@
 					</menulist>
 					<description id="${row}[prio_label]"/>
 					<textbox multiline="true" id="${row}[esc_action_label]" readonly="true"/>
-					<vbox options="0,0">
+					<hbox readonly="true">
 						<date-duration id="${row}[esc_time]" readonly="true" options=",dhm,24"/>
-						<hbox readonly="true">
-							<menulist>
-								<menupopup id="${row}[esc_before_after]" no_lang="1" readonly="true"/>
-							</menulist>
-							<menulist class="noWrap">
-								<menupopup id="${row}[esc_type]" no_lang="1" readonly="true"/>
-							</menulist>
-						</hbox>
-					</vbox>
+						<menulist>
+							<menupopup id="${row}[esc_before_after]" no_lang="1" readonly="true"/>
+						</menulist>
+						<menulist class="noWrap">
+							<menupopup id="${row}[esc_type]" no_lang="1" readonly="true"/>
+						</menulist>
+					</hbox>
 					<vbox readonly="true">
 						<date-duration id="${row}[esc_match_repeat]" readonly="true" options=",dhm,24" class="noWrap"/>
 						<description id="${row}[esc_limit_label]"/>
 					</vbox>
-					<hbox options="0,0">
+					<hbox>
 						<button label="Edit" id="edit[$row_cont[esc_id]]" image="edit"/>
 						<button statustext="Delete this escalation" label="Delete" id="delete[$row_cont[esc_id]]" onclick="et2_dialog.confirm(widget,'Delete this escalation','Delete')" image="delete"/>
 					</hbox>
@@ -103,7 +101,7 @@
 				</row>
 				<row>
 					<description value="Time"/>
-					<hbox options="0,0">
+					<hbox>
 						<date-duration id="esc_time" options=",dhm,24"/>
 						<menulist>
 							<menupopup id="esc_before_after"/>
@@ -116,7 +114,7 @@
 				</row>
 				<row>
 					<description value="Match again after"/>
-					<hbox options="0,0">
+					<hbox>
 						<date-duration statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat" options=",dhm,24"/>
 						<textbox type="integer" label="maximum %s times" id="esc_limit" min="0" max="255"/>
 					</hbox>
@@ -135,14 +133,14 @@
 							<rows>
 								<row valign="top">
 									<description value="Queue"/>
-									<hbox onchange="1" options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="tr_tracker" options="All" onchange="1"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Resolution"/>
-									<hbox options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="tr_resolution" options="All"/>
 										</menulist>
@@ -151,14 +149,14 @@
 								</row>
 								<row valign="top">
 									<description value="Category"/>
-									<hbox options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="cat_id" options="All"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Version"/>
-									<hbox options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="tr_version" options="All"/>
 										</menulist>
@@ -167,14 +165,14 @@
 								</row>
 								<row valign="top">
 									<description value="Status"/>
-									<hbox options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="tr_status" options="All"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 									<description value="Priority"/>
-									<hbox options="0,0">
+									<hbox>
 										<menulist>
 											<menupopup id="tr_priority" options="All"/>
 										</menulist>
@@ -220,7 +218,7 @@
 								</row>
 								<row>
 									<description value="Assigned to"/>
-									<hbox options="0,0" span="all">
+									<hbox span="all">
 										<menulist>
 											<menupopup id="set[tr_assigned]" options="Unchanged"/>
 										</menulist>
