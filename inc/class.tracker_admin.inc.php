@@ -850,6 +850,8 @@ class tracker_admin extends tracker_bo
 			$content['escalation']['set']['tr_assigned'] = explode(',',$content['escalation']['set']['tr_assigned']);
 		}
 		$sel_options['escalation']['set'] = $sel_options['escalation'];
+		$sel_options['nm']['esc_before_after'] = $sel_options['escalation']['esc_before_after'];
+		$sel_options['nm']['esc_type'] = $sel_options['escalation']['esc_type'];
 
 		$this->get_escalation_sel_options(
 				$sel_options['escalation'],

@@ -80,7 +80,7 @@ label.tracker_trIdEdit:before {
 }
 .normal,
 .normal_done {
-  color: black;
+  color: #000000;
 }
 .high {
   color: #cc0000;
