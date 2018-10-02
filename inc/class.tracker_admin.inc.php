@@ -819,6 +819,10 @@ class tracker_admin extends tracker_bo
 			'tr_version' => $this->get_tracker_labels('version',$this->trackers),
 			'tr_status' => $this->get_tracker_stati($this->trackers),
 		);
+		foreach(array_keys($this->trackers) as $tracker)
+		{
+			$sel_options['tr_status']		+= $this->get_tracker_stati($tracker);
+		}
 
 		$sel_options['escalation'] = array(
 			'tr_tracker'  => &$this->trackers,
