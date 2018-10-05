@@ -595,6 +595,7 @@ class tracker_admin extends tracker_bo
 		if (isset($content['exclude_app_on_timesheetcreation']) && !is_array($content['exclude_app_on_timesheetcreation']) && stripos($content['exclude_app_on_timesheetcreation'],'timesheet')===false) $content['exclude_app_on_timesheetcreation']=(strlen(trim($content['exclude_app_on_timesheetcreation']))>0?$content['exclude_app_on_timesheetcreation'].',':'').'timesheet';
 		if (!isset($content['exclude_app_on_timesheetcreation'])) $content['exclude_app_on_timesheetcreation']='timesheet';
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
+		if(!property_exists($this, 'comment_reopens')) $content['comment_reopens'] = true;
 		$sel_options = array(
 			'tracker' => &$this->trackers,
 			'allow_assign_groups' => array(

@@ -317,6 +317,10 @@
 					<checkbox id="allow_restricted_comments"/>
 					<description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"/>
 				</row>
+				<row disabled="@tracker">
+					<checkbox id="comment_reopens"/>
+					<description value="Re-open closed tickets when a comment is added" span="all"/>
+				</row>
 				<row class="th">
 					<description value="E-Mail notifications" span="all"/>
 				</row>
