@@ -330,6 +330,7 @@ refused to open mailbox therefore changed interval from %1 to %2	tracker	en	refu
 refused to open mailbox: %1	tracker	en	refused to open mailbox: %1
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
+re-open closed tickets when a comment is added	tracker	en	Re-open closed tickets when a comment is added
 replacements for inserting entries into documents	tracker	en	Replacements for inserting entries into documents
 reply also to unknown addresses	tracker	en	Reply also to unknown addresses
 report as bar chart by the selected criterias	tracker	en	Report as bar chart by the selected criterias

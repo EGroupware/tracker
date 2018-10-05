@@ -330,6 +330,7 @@ refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die 
 refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
+re-open closed tickets when a comment is added	tracker	de	Setze geschlossene Tickets auf offen, wenn ein Kommentar hinzugefügt wird
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
 reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten
 report as bar chart by the selected criterias	tracker	de	Bericht als Balkendiagramm für die ausgewählten Kriterien
