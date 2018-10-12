@@ -640,7 +640,7 @@ class tracker_bo extends tracker_so
 
 				// replies set status pending back to open
 				if (($this->data['old_status'] == self::STATUS_PENDING && $this->data['old_status'] == $this->data['tr_status']) ||
-					($this->comment_reopens || !property_exists($this, 'comment_reopens') && $this->data['old_status'] == self::STATUS_CLOSED && $this->data['old_status'] == $this->data['tr_status']))
+					(($this->comment_reopens || !property_exists($this, 'comment_reopens')) && $this->data['old_status'] == self::STATUS_CLOSED && $this->data['old_status'] == $this->data['tr_status']))
 				{
 					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
