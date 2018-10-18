@@ -660,7 +660,7 @@ class tracker_bo extends tracker_so
 			// try to resolve inline images which are not already resolved by mail_integration,
 			// like images from mailhandling or comments.
 			$replaced = false;
-			foreach($this->data['link_to']['to_id'] as $link)
+			foreach((array)$this->data['link_to']['to_id'] as $link)
 			{
 				if (is_array($link) && !empty($link['id']['cid']))
 				{
