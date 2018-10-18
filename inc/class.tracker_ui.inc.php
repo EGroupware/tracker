@@ -328,7 +328,7 @@ class tracker_ui extends tracker_bo
 					{
 						$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 					}
-					
+
 					if ($this->htmledit && $this->data['tr_id'] && is_array($content['link_to']['to_id']))
 					{
 						mail_integration::fix_inline_images('tracker', $this->data['tr_id'], $content['link_to']['to_id'], $content['reply_message']);
@@ -797,7 +797,7 @@ class tracker_ui extends tracker_bo
 		{
 			$content['tr_assigned'] = explode(',',$content['tr_assigned']);
 		}
-		if (count($content['tr_assigned']) > 1)
+		if (is_array($content['tr_assigned']) && count($content['tr_assigned']) > 1)
 		{
 			$tpl->set_cell_attribute('tr_assigned','size','3+');
 		}
