@@ -785,7 +785,7 @@ class tracker_ui extends tracker_bo
 
 		if ($this->tracker_has_cat_specific_priorities($tracker))
 		{
-			$tpl->set_cell_attribute('cat_id','onchange','1');
+			$tpl->set_cell_attribute('cat_id','onchange','widget.getInstanceManager().submit(null,false,true); return false;');
 		}
 		// No notifications needs label hidden too
 		if($readonlys['no_notifications'])
