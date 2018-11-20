@@ -758,7 +758,7 @@ class tracker_admin extends tracker_bo
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save(null,null,!$_content['esc_run_on_existing'])) == 0)
+					elseif (($err = $escalations->save(null,null,!$_content['escalation']['esc_run_on_existing'])) == 0)
 					{
 						$msg = $_content['escalation']['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
