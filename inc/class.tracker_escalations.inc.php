@@ -345,19 +345,6 @@ class tracker_escalations extends Api\Storage\Base2
 					case 'add_assigned':
 						break;
 					case 'notify':
-						// Change notifications
-						if($value == 'none')
-						{
-							$ticket['no_notifications'] = true;
-						}
-						else if ($value == 'responsible')
-						{
-							// Skip owner & cc
-							$ticket['skip_notify'] = array(
-								$GLOBALS['egw']->accounts->id2name($ticket['tr_creator'],'account_email'),
-							);
-							self::$tracker->tracking->skip_notify = array_merge($ticket['skip_notify'], self::$tracker->tracking->get_config('copy',$ticket));
-						}
 						break;
 					case 'tr_assigned':
 						if ($this->set['add_assigned'])
@@ -374,7 +361,25 @@ class tracker_escalations extends Api\Storage\Base2
 		}
 		self::$tracker->init($ticket);
 
-		if (($result = self::$tracker->save()) != 0)
+		// Notifications needs to be done after init
+		if($value = $this->set['notify'])
+		{
+			// Change notifications
+			if($value == 'none')
+			{
+				self::$tracker->data['no_notifications'] = true;
+			}
+			else if ($value == 'responsible')
+			{
+				// Skip owner & cc
+				$ticket['skip_notify'] = array(
+					$GLOBALS['egw']->accounts->id2name($ticket['tr_creator'],'account_email'),
+				);
+				self::$tracker->tracking->skip_notify = array_merge($ticket['skip_notify'], self::$tracker->tracking->get_config('copy',$ticket));
+			}
+
+		}
+		if (($result = self::$tracker->save($ticket)) != 0)
 		{
 			return false;	// error saving the ticket
 		}
