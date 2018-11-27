@@ -103,10 +103,11 @@ class tracker_tracking extends Api\Storage\Tracking
 				$data['num_replies']--;
 			}
 		}
-		// If someone made a restricted comment, hide that from change tracking (notification & history)
-		$old['num_replies'] = $data['num_replies'] - (!$data['reply_message'] || $data['reply_visible'] != 0 ? 0 : 1);
 		if ($old && $this->field2history)
 		{
+			// If someone made a restricted comment, hide that from change tracking (notification & history)
+			$old['num_replies'] = $data['num_replies'] - (!$data['reply_message'] || $data['reply_visible'] != 0 ? 0 : 1);
+			
 			$changes = $this->save_history($data,$old,$deleted,$changed_fields);
 		}
 		// check if the not tracked field num_replies changed and count that as change to
