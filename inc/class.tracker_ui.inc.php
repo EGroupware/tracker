@@ -820,6 +820,7 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		$query = $query_in;
+		$old_query = Api\Cache::getSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''));
 		if (!$query['csv_export'])	// do not store query for csv-export in session
 		{
 			Api\Cache::setSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
@@ -851,6 +852,16 @@ class tracker_ui extends tracker_bo
 		}
 
 		$tracker = $query['col_filter']['tr_tracker'];
+
+		// Re-do actions on tracker or category change
+		if($old_query['col_filter']['tr_tracker'] != $tracker ||
+				$old_query['cat_id'] != $query['cat_id'])
+		{
+			$query_in['actions'] = $this->get_actions(
+				is_array($tracker) ? $tracker[0] : $tracker,
+				is_array($query['cat_id']) ? $query['cat_id'][0] : $query['cat_id']
+			);
+		}
 
 		// handle action and linked filter (show only entries linked to a certain other entry)
 		$link_filters = array();
