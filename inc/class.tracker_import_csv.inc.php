@@ -502,7 +502,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	 * 		preserv		=> array,
 	 * )
 	 */
-	public function get_options_etpl() {
+	public function get_options_etpl(importexport_definition &$definition=null)
+	{
 		// lets do it!
 	}
 
