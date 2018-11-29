@@ -16,7 +16,8 @@ use EGroupware\Api;
 /**
  * export tickets to CSV
  */
-class tracker_export_csv implements importexport_iface_export_plugin {
+class tracker_export_csv implements importexport_iface_export_plugin
+{
 
 	public function __construct()
 	{
@@ -29,7 +30,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 *
 	 * @param egw_record $_definition
 	 */
-	public function export( $_stream, importexport_definition $_definition) {
+	public function export( $_stream, importexport_definition $_definition)
+	{
 		$options = $_definition->plugin_options;
 
 
@@ -93,11 +95,13 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 
 		if($options['convert'])
 
-		foreach ($selection as $record) {
+		foreach ($selection as $record)
+		{
 			if(!is_array($record) || !$record['tr_id']) continue;
 
 			// Add in comments & bounties
-			if($options['mapping']['replies'] || $options['mapping']['bounties']) {
+			if($options['mapping']['replies'] || $options['mapping']['bounties'])
+			{
 				$this->ui->read($record['tr_id']);
 				$record = $this->ui->data;
 			}
@@ -105,16 +109,21 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			$_record = new tracker_egw_record();
 			$_record->set_record($record);
 
-			if($options['convert']) {
+			if($options['convert'])
+			{
 				// Set per-category priorities
 				$this->selects['tr_priority'] = $this->ui->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
 
 				importexport_export_csv::convert($_record, tracker_egw_record::$types, 'tracker', $this->selects);
 				$this->convert($_record, $options);
-			} else {
+			}
+			else
+			{
 				// Implode arrays, so they don't say 'Array'
-				foreach($_record->get_record_array() as $key => $value) {
-					if(in_array($key, array('replies', 'bounties'))) {
+				foreach($_record->get_record_array() as $key => $value)
+				{
+					if(in_array($key, array('replies', 'bounties')))
+					{
 						$_record->$key = count($value) > 0 ? serialize($value) : null;
 						continue;
 					}
@@ -132,7 +141,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 *
 	 * @return string name
 	 */
-	public static function get_name() {
+	public static function get_name()
+	{
 		return lang('Tracker CSV export');
 	}
 
@@ -141,7 +151,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 *
 	 * @return string descriprion
 	 */
-	public static function get_description() {
+	public static function get_description()
+	{
 		return lang("Exports a list of tracker tickets to a CSV File.");
 	}
 
@@ -150,27 +161,40 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 *
 	 * @return string suffix
 	 */
-	public static function get_filesuffix() {
+	public static function get_filesuffix()
+	{
 		return 'csv';
 	}
 
-	public static function get_mimetype() {
+	public static function get_mimetype()
+	{
 		return 'text/csv';
 	}
 
 	/**
-	 * return html for options.
-	 * this way the plugin has all opportunities for options tab
+	 * Return array of settings for export dialog
 	 *
+	 * @param $definition Specific definition
+	 *
+	 * @return array (
+	 * 		name 		=> string,
+	 * 		content		=> array,
+	 * 		sel_options	=> array,
+	 * 		readonlys	=> array,
+	 * 		preserv		=> array,
+	 * )
 	 */
-	public function get_options_etpl() {
+	public function get_options_etpl(importexport_definition &$definition = NULL)
+	{
+		return false;
 	}
 
 	/**
 	 * returns selectors information
 	 *
 	 */
-	public function get_selectors_etpl() {
+	public function get_selectors_etpl()
+	{
 		return array(
 			'name'	=> 'importexport.export_csv_selectors',
 		);
@@ -182,13 +206,16 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 	 *
 	 * @param tracker_egw_record $record Record to be converted
 	 */
-	protected static function convert(tracker_egw_record &$record, array $options = array()) {
+	protected static function convert(tracker_egw_record &$record, array $options = array())
+	{
 		unset($options);	// not used, but required by function signature
 		$record->tr_description = htmlspecialchars_decode(strip_tags($record->tr_description));
 
-		if(is_array($record->replies)) {
+		if(is_array($record->replies))
+		{
 			$replies = array();
-			foreach($record->replies as $id => $reply) {
+			foreach($record->replies as $id => $reply)
+			{
 				// User date format
 				$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 					($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
@@ -200,11 +227,14 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			$record->replies = implode("\n",$replies);
 		}
 
-		if(is_array($record->bounties)) {
-			if( count($record->bounties) > 0) {
+		if(is_array($record->bounties))
+		{
+			if( count($record->bounties) > 0)
+			{
 				$bounties = array();
 				$total = 0;
-				foreach($record->bounties as $bounty) {
+				foreach($record->bounties as $bounty)
+				{
 					$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
 						($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$bounty['bounty_created']);
 					$name = Api\Accounts::username($bounty['bounty_creator']);
@@ -212,7 +242,9 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 					$bounties[] = "$date\t$name\t".$bounty['bounty_amount'];
 				}
 				$record->bounties = lang('Total: ') . $total . "\n" . implode("\n",$bounties);
-			} else {
+			}
+			else
+			{
 				// No bounties
 				$record->bounties = '';
 			}
@@ -232,7 +264,8 @@ class tracker_export_csv implements importexport_iface_export_plugin {
 			'tr_priority'	=> $this->ui->get_tracker_priorities(),
 			'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
 		);
-		foreach(array_keys($this->selects['tr_tracker']) as $id) {
+		foreach(array_keys($this->selects['tr_tracker']) as $id)
+		{
 			$this->selects['tr_version'] += $this->ui->get_tracker_labels('version', $id);
 			$this->selects['tr_status'] += $this->ui->get_tracker_stati($id);
 			$this->selects['tr_resolution'] += $this->ui->get_tracker_labels('resolution',$id);
