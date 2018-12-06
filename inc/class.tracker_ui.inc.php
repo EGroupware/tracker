@@ -1056,7 +1056,7 @@ class tracker_ui extends tracker_bo
 		}
 		else
 		{
-			$tracker = $selected_trackers;
+			$tracker = (Array)$selected_trackers;
 		}
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
 

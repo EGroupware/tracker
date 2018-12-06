@@ -1336,6 +1336,10 @@ class tracker_bo extends tracker_so
 	 */
 	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true, &$default = null)
 	{
+		if(!$tracker)
+		{
+			$tracker = 0;
+		}
 		if (isset($this->priorities[$tracker.'-'.$cat_id]))
 		{
 			$prios = $this->priorities[$tracker.'-'.$cat_id];
