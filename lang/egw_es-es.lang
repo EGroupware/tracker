@@ -3,7 +3,7 @@
 %1 entries %2	tracker	es-es	%1 entradas %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	es-es	%1 entradas %2, %3 fallaron por permisos insuficientes
 %1 entries updated.	tracker	es-es	Se han actualizado %1 entradas.
-%1 is due %2	tracker	es-es	% 1 esta vencido %2
+%1 is due %2	tracker	es-es	%1 esta vencido %2
 %1 is starting %2	tracker	es-es	%1 está empezando %2
 %1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
 (beware of mailloops, check the help!)	tracker	es-es	(Tenga cuidado con los bucles de correo, ¡revise la ayuda!)
