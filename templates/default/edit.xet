@@ -23,7 +23,7 @@
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
 						</menulist>
 					</vbox>
-					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
+					<htmlarea id="replies[$row][reply_message]" readonly="@editable_comments" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
 				</row>
 			</rows>
 		</grid>

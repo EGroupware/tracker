@@ -731,4 +731,26 @@ class tracker_so extends Api\Storage
 		}
 		return $bounties;
 	}
+
+	/**
+	 * Save an [updated] comment
+	 *
+	 * @param Array $data
+	 */
+	function save_comment($data)
+	{
+		if(!$data['reply_id'])
+		{
+			throw new EGroupware\Api\Exception\WrongParameter();
+		}
+		return $this->db->update(
+			self::REPLIES_TABLE,
+			$data,
+			array(
+				'reply_id' => $data['reply_id']
+			),
+			__LINE__, __FILE__,'tracker'
+		);
+	}
+
 }

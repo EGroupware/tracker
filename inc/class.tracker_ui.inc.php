@@ -563,6 +563,7 @@ class tracker_ui extends tracker_bo
 			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open_link("tracker.tracker_ui.index&ajax=true","_self",false,"tracker")',
 			'no_vote' => '',
 			'show_dates' => $this->show_dates,
+			'editable_comments' => $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ? 'editable' : '',
 			'link_to' => array(
 				'to_id' => $tr_id,
 				'to_app' => 'tracker',
@@ -2003,6 +2004,27 @@ width:100%;
 		{
 			$response->call('app.tracker.canned_comment_response', $this->get_canned_response($id));
 		}
+	}
+
+	/**
+	 * Edit a comment
+	 *
+	 * @param value
+	 * @param tr_id
+	 * @param comment_id
+	 */
+	public function ajax_update_reply($value, $tr_id, $comment_id)
+	{
+		// ACL Check to make sure they can do that
+		if(!$this->check_rights($this->field_acl['edit_reply'], null, (int)$tr_id))
+		{
+			return false;
+		}
+		// Update the comment
+		$this->save_comment(array(
+			'reply_id' => (int)$comment_id,
+			'reply_message' => $value
+		));
 	}
 
 	/**
