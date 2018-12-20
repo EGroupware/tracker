@@ -852,6 +852,7 @@ class tracker_ui extends tracker_bo
 			$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 		}
 
+		$GLOBALS['egw']->session->commit_session();
 		$tracker = $query['col_filter']['tr_tracker'];
 
 		// Re-do actions on tracker or category change
