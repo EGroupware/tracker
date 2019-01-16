@@ -135,10 +135,12 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 
 		if (filter && dates)
 		{
-			dates.set_disabled(filter.value !== "custom");
+			dates.set_disabled(filter.getValue() !== "custom");
 			if (filter.value == "custom")
 			{
-				jQuery(this.et2.getWidgetById('startdate').getDOMNode()).find('input').focus();
+				window.setTimeout(function() {
+					jQuery(this.et2.getWidgetById('startdate').getDOMNode()).find('input').focus();
+				}.bind(this), 100);
 			}
 		}
 		return true;
