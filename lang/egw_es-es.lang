@@ -329,7 +329,7 @@ set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
 set bounty	tracker	es-es	Fijar recompensa
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
-should there be a tracker-box on main screen?	tracker	es-es	Mostrar Sistema de Segumiento en la página de inicio
+should there be a tracker-box on  home screen?	tracker	es-es	Mostrar Sistema de Segumiento en la página de inicio
 show start date and due date	tracker	es-es	Mostrar fechas de inicio y de vencimiento
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 signature	tracker	es-es	Firma
@@ -381,7 +381,7 @@ tracker deleted	tracker	es-es	Cola de seguimiento suprimida.
 tracker entry can only seen by creator and admins	tracker	es-es	Entrada de seguimiento puede ser vista solamente por creador y administradores
 tracker fields:	tracker	es-es	Campos de seguimiento:
 tracker for new tickets	tracker	es-es	Elemento para incidencias nuevas
-tracker for the main screen	tracker	es-es	Seguimiento para la pantalla principal
+tracker for the  home screen	tracker	es-es	Seguimiento para la pantalla principal
 tracker id	tracker	es-es	Id. de seguimiento
 tracker item modified by %1 at %2	tracker	es-es	Elemento de seguimiento modificado por %1 a las %2
 tracker item not found !!!	tracker	es-es	¡No se encontró el elemento de seguimiento!

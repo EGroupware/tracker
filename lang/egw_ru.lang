@@ -353,7 +353,7 @@ set bounty	tracker	ru	Установить премию
 set to	tracker	ru	Установить
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
-should there be a tracker-box on main screen?	tracker	ru	Показывать Трекер на домашней странице
+should there be a tracker-box on  home screen?	tracker	ru	Показывать Трекер на домашней странице
 show start date and due date	tracker	ru	Отображать даты начала и окончания
 show the tracker send you notification mails, in tracker items that you updates?	tracker	ru	Должен ли Трекер посылать письменные уведомления о записях, Вами обновленных?
 signature	tracker	ru	Подпись
@@ -401,7 +401,7 @@ tracker deleted	tracker	ru	Удалена очередь Трекера
 tracker entry can only seen by creator and admins	tracker	ru	Запись Трекера может просматривать только создатель или администратор
 tracker fields:	tracker	ru	Поля Трекера:
 tracker for new tickets	tracker	ru	Очередь трекера для новых запросов
-tracker for the main screen	tracker	ru	Трекер для основного экрана
+tracker for the  home screen	tracker	ru	Трекер для основного экрана
 tracker id	tracker	ru	Идентификатор Трекера
 tracker item modified by %1 at %2	tracker	ru	Запись трекера изменена  %1 %2
 tracker item not found !!!	tracker	ru	Запись Трекера не найдена!!!

@@ -338,7 +338,7 @@ set bounty	tracker	fi	Aseta palkkio
 set to	tracker	fi	Aseta
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos niitä merkintöjä joissa olet vastuuhenkilönä, päivitetään?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos luomaasi merkintää päivitetään?
-should there be a tracker-box on main screen?	tracker	fi	Haluatko näyttää Reklamaationhallinnan merkinnät etusivulla?
+should there be a tracker-box on  home screen?	tracker	fi	Haluatko näyttää Reklamaationhallinnan merkinnät etusivulla?
 show start date and due date	tracker	fi	Näytä aloitus- ja eräpäivät
 show the tracker send you notification mails, in tracker items that you updates?	tracker	fi	Lähetetäänkö sinulle huomautusviesti merkinnöistä joita itse päivitit?
 signature	tracker	fi	Allekirjoitus
@@ -386,7 +386,7 @@ tracker deleted	tracker	fi	Reklamaationhallintaketju poistettu
 tracker entry can only seen by creator and admins	tracker	fi	Vain merkinnän omistaja ja Ylläpitäjät voivat nähdä merkinnät
 tracker fields:	tracker	fi	Kentät:
 tracker for new tickets	tracker	fi	Reklamaationhallintaketju uusille merkinnöille
-tracker for the main screen	tracker	fi	Reklamaationhallinta -sovellus etusivulle
+tracker for the  home screen	tracker	fi	Reklamaationhallinta -sovellus etusivulle
 tracker id	tracker	fi	Merkinnän ID
 tracker item modified by %1 at %2	tracker	fi	Merkintää muokannut: %1, %2
 tracker item not found !!!	tracker	fi	Merkintää ei löytynyt!!

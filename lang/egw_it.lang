@@ -375,7 +375,7 @@ set bounty	tracker	it	Imposta bounty
 set to	tracker	it	Imposta a
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
-should there be a tracker-box on main screen?	tracker	it	Mostra il tracker nella schermata Home
+should there be a tracker-box on  home screen?	tracker	it	Mostra il tracker nella schermata Home
 show start date and due date	tracker	it	Mostra data di inizio e di scadenza
 show the tracker send you notification mails, in tracker items that you updates?	tracker	it	Il Tracker dovrà inviare notifiche via mail per i ticket che hai modificato?
 signature	tracker	it	Firma
@@ -428,7 +428,7 @@ tracker deleted	tracker	it	Coda Tracker eliminata
 tracker entry can only seen by creator and admins	tracker	it	Il ticket sarà visibile solo da chi l'ha creato e dagli amministratori.
 tracker fields:	tracker	it	Campi del tracker:
 tracker for new tickets	tracker	it	Coda di tracker per i nuovi tickets
-tracker for the main screen	tracker	it	Tracker per la schermata principale
+tracker for the  home screen	tracker	it	Tracker per la schermata principale
 tracker id	tracker	it	ID tracker
 tracker item modified by %1 at %2	tracker	it	Oggetto tracker modificato da %1 il %2
 tracker item not found !!!	tracker	it	Oggetto Tracker non trovato !!!

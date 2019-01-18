@@ -372,7 +372,7 @@ set bounty	tracker	en	Set bounty
 set to	tracker	en	Set to
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
-should there be a tracker-box on main screen?	tracker	en	Show Tracker on Home page
+should there be a tracker-box on  home screen?	tracker	en	Show Tracker on Home page
 show start date and due date	tracker	en	Show start date and due date
 show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?
 signature	tracker	en	Signature
@@ -426,7 +426,7 @@ tracker deleted	tracker	en	Tracker queue deleted.
 tracker entry can only seen by creator and admins	tracker	en	Tracker entry can be seen by creator and admins only
 tracker fields:	tracker	en	Tracker fields:
 tracker for new tickets	tracker	en	Tracker for new tickets
-tracker for the main screen	tracker	en	Tracker for the main screen
+tracker for the  home screen	tracker	en	Tracker for the  home screen
 tracker id	tracker	en	Tracker ID
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found!

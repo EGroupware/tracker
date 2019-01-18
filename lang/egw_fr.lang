@@ -372,7 +372,7 @@ set bounty	tracker	fr	Fixer une prime
 set to	tracker	fr	Mettre à
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments dont vous êtes assignés sont modifiés?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments que vous avez créé sont modifiés?
-should there be a tracker-box on main screen?	tracker	fr	Afficher le traqueur sur l'accueil
+should there be a tracker-box on  home screen?	tracker	fr	Afficher le traqueur sur l'accueil
 show start date and due date	tracker	fr	Afficher la date de début et la date d'échéance
 show the tracker send you notification mails, in tracker items that you updates?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email sur les éléments que vous mettez à jour ?
 signature	tracker	fr	Signature
@@ -423,7 +423,7 @@ tracker csv import	tracker	fr	Import CSV de traqueurs
 tracker deleted	tracker	fr	Queue de Traqueur supprimée
 tracker fields:	tracker	fr	Champs de traqueur :
 tracker for new tickets	tracker	fr	Traqueur pour les nouveaux tickets
-tracker for the main screen	tracker	fr	Traqueur pour l'écran principal
+tracker for the  home screen	tracker	fr	Traqueur pour l'écran principal
 tracker id	tracker	fr	ID Traqueur
 tracker item modified by %1 at %2	tracker	fr	Elément de Traqueur modifié par %1 à %2
 tracker item not found !!!	tracker	fr	Elément de Traqueur introuvable !!!

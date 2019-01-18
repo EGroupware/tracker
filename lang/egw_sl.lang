@@ -396,7 +396,7 @@ set bounty	tracker	sl	Nastavite nagrado
 set to	tracker	sl	Nastavljena
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sl	Naj vam Tracker pošlje elektronsko sporočilo z obvestilom, če kdo posodobi nalogo, ki je dodeljena vam?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sl	Naj vam Tracker pošlje elektronsko sporočilo z obvestilom, če kdo posodobi nalogo, ki ste jo ustvarili vi?
-should there be a tracker-box on main screen?	tracker	sl	Prikaži sledilnik na domači strani
+should there be a tracker-box on  home screen?	tracker	sl	Prikaži sledilnik na domači strani
 show start date and due date	tracker	sl	Prikaži začetni datum in datum zapadlosti
 show the tracker send you notification mails, in tracker items that you updates?	tracker	sl	Ali naj vam Tracker pošlje e-poštna obvestila o elementih sledenja, ki ste jih posodobili?
 signature	tracker	sl	Podpis
@@ -454,7 +454,7 @@ tracker deleted	tracker	sl	Čakalna vrsta je bila izbrisana
 tracker entry can only seen by creator and admins	tracker	sl	Vnos sledenja lahko vidijo samo ustvarjalci in skrbniki
 tracker fields:	tracker	sl	Polja zahtevkov:
 tracker for new tickets	tracker	sl	Zahtevek za nove zahteve
-tracker for the main screen	tracker	sl	Zahtevek za glavni zaslon
+tracker for the  home screen	tracker	sl	Zahtevek za glavni zaslon
 tracker id	tracker	sl	ID zahtevka
 tracker item modified by %1 at %2	tracker	sl	Element Zahtevka je bil spremenjen od %1 ob %2
 tracker item not found !!!	tracker	sl	Element Zahtevka ni bil najden!

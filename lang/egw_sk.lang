@@ -372,7 +372,7 @@ set bounty	tracker	sk	Zadať odmenu
 set to	tracker	sk	Nastaviť na
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v niektorej záležitosti Sledovača, za ktorú ste zodpovední?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sk	Chcete, aby Vám Sledovač posielal oznámenia, keď sa niečo stane v záležitosti Sledovača, ktorú ste vytvorili?
-should there be a tracker-box on main screen?	tracker	sk	Chcete, aby sa na hlavnej obrazovke zobrazovalo okno Sledovača?
+should there be a tracker-box on  home screen?	tracker	sk	Chcete, aby sa na hlavnej obrazovke zobrazovalo okno Sledovača?
 show start date and due date	tracker	sk	Ukázať dátum začiatku a termín ukončenia
 show the tracker send you notification mails, in tracker items that you updates?	tracker	sk	Chcete, aby vám Sledovač posielal oznámenia o položkách Sledovača, ktoré ste sami zmenili?
 signature	tracker	sk	Podpis
@@ -425,7 +425,7 @@ tracker deleted	tracker	sk	Fronta Sledovača bola odstránená
 tracker entry can only seen by creator and admins	tracker	sk	Položku Sledovača môže vidieť iba jej ohlasovateľ a správcovia
 tracker fields:	tracker	sk	Polia Sledovača:
 tracker for new tickets	tracker	sk	Sledovač pre nové karty
-tracker for the main screen	tracker	sk	Sledovač pre hlavnú obrazovku
+tracker for the  home screen	tracker	sk	Sledovač pre hlavnú obrazovku
 tracker id	tracker	sk	ID Sledovača
 tracker item modified by %1 at %2	tracker	sk	Záležitosť Sledovača upravil %1 o %2
 tracker item not found !!!	tracker	sk	Záležitosť Sledovača sa nenašla !!!
