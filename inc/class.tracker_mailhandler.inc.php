@@ -412,25 +412,23 @@ class tracker_mailhandler extends tracker_bo
 	function extract_latestReply ($mailBody)
 	{
 		$mailCntArray = preg_split("/(\r\n|\n|\r)/",$mailBody);
-		$fRline = true;
 		$oMInx = 0;
 		foreach (array_keys($mailCntArray) as $key)
 		{
-			if (preg_match("/^-----.*".lang("original message")."---.*/i", $mailCntArray[$key]))
+			if (preg_match("/-----.*".lang("original message")."---.*/i", $mailCntArray[$key]) && $oMInx === 0)
 			{
 				$oMInx = $key;
 			}
-			if (preg_match("/^>.*/",$mailCntArray[$key]))
+			if (preg_match("/^>.*|\<\/blockquote\>/",$mailCntArray[$key]))
 			{
-				if ($fRline && $oMInx > 0)
+				if ($oMInx > 0)
 				{
-					$fRline = false;
 					for ($i =  $oMInx; $i<$key; $i++)
 					{
 						unset ($mailCntArray[$i]);
 					}
+					unset ($mailCntArray[$i]);
 				}
-				unset($mailCntArray[$key]);
 			}
 		}
 		return join("\n", $mailCntArray);

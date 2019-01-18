@@ -143,13 +143,13 @@ class tracker_hooks
 			/* disabled until we have a home app again
 			'homepage_display' => array(
 				'type'   => 'check',
-				'label'  => 'Tracker for the main screen',
+				'label'  => 'Tracker for the  home screen',
 				'name'   => 'homepage_display',
 				'values' => array(
 					'no'  => 'No',
 					'yes' => 'Yes'
 				),
-				'help'   => 'Should there be a tracker-box on main screen?',
+				'help'   => 'Should there be a tracker-box on  home screen?',
 				'xmlrpc' => True,
 				'admin'  => False,
 				'default'=> false
