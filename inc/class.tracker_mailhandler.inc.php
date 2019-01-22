@@ -413,6 +413,7 @@ class tracker_mailhandler extends tracker_bo
 	{
 		$mailCntArray = preg_split("/(\r\n|\n|\r)/",$mailBody);
 		$oMInx = 0;
+		$noReplyMatch = true;
 		foreach (array_keys($mailCntArray) as $key)
 		{
 			if (preg_match("/-----.*".lang("original message")."---.*/i", $mailCntArray[$key]) && $oMInx === 0)
@@ -421,6 +422,7 @@ class tracker_mailhandler extends tracker_bo
 			}
 			if (preg_match("/^>.*|\<\/blockquote\>/",$mailCntArray[$key]))
 			{
+				$noReplyMatch = false;
 				if ($oMInx > 0)
 				{
 					for ($i =  $oMInx; $i<$key; $i++)
@@ -429,6 +431,14 @@ class tracker_mailhandler extends tracker_bo
 					}
 					unset ($mailCntArray[$i]);
 				}
+			}
+		}
+		// try to cleanup original part even if not finding ">" or "blockquote"
+		if ($noReplyMatch && $oMInx > 0)
+		{
+			foreach (array_keys($mailCntArray) as $key)
+			{
+				if ($key >= $oMInx) unset ($mailCntArray[$key]);
 			}
 		}
 		return join("\n", $mailCntArray);
