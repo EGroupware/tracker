@@ -1993,11 +1993,11 @@ width:100%;
 	 *
 	 * @param id Canned comment ID
 	 */
-	public function ajax_canned_comment($id, $ckeditor=true)
+	public function ajax_canned_comment($id, $htmlarea=true)
 	{
 		$response = Api\Json\Response::get();
 
-		if($ckeditor)
+		if($htmlarea)
 		{
 			$response->call('app.tracker.canned_comment_response',nl2br($this->get_canned_response($id)));
 		}
