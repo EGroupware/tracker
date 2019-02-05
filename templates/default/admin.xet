@@ -16,6 +16,7 @@
 							<column/>
 							<column/>
 							<column/>
+							<column/>
 							<column width="110" disabled="!@@tracker"/>
 							<column width="45"/>
 						</columns>
@@ -26,6 +27,7 @@
 									<checkbox id="user_category_preference" label="User preference" statustext="Show as user preference" align="right"/>
 								</hbox>
 								<description value="Autoassign to"/>
+								<description value="Color"/>
 								<description value="Default" />
 								<description align="center" value="Deny global"/>
 								<description value="Actions"/>
@@ -35,6 +37,7 @@
 								<menulist>
 									<menupopup id="${row}[autoassign]" no_lang="1" options="Noone"/>
 								</menulist>
+								<colorpicker id="${row}[cat_color]"/>
 								<radio align="center" id="isdefaultcategory" options="$row_cont[id]"/>
 								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
 								<button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this category','Delete')" image="delete"/>
@@ -48,17 +51,20 @@
 						<columns>
 							<column/>
 							<column width="110" disabled="!@@tracker"/>
+							<column/>
 							<column width="45"/>
 						</columns>
 						<rows>
 							<row class="th">
 								<description value="Name"/>
 								<description align="center" value="Deny global"/>
+								<description value="Color"/>
 								<description value="Actions"/>
 							</row>
 							<row class="row">
 								<textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
 								<checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
+								<colorpicker id="${row}[version_color]"/>
 								<button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this version','Delete')" image="delete"/>
 							</row>
 						</rows>

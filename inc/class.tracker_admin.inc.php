@@ -322,8 +322,9 @@ class tracker_admin extends tracker_bo
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
 								($tracker && in_array($tracker, (array)$old_cat['data']['denyglobal']) != !empty($cat['denyglobal'])) ||
-								($name == 'cats' && ((int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] ||
+								($name == 'cats' && ((int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] || $cat['cat_color'] != $old_cat['data']['cat_color'] ||
 										(($default_category && ($cat['id']==$default_category || $cat['isdefault'] && $cat['id']!=$default_category))||!$default_category && $cat['isdefault']))) ||
+								($name == 'versions' && ($cat['version_color'] != $old_cat['version_color'])) ||
 								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
@@ -348,6 +349,9 @@ class tracker_admin extends tracker_bo
 								{
 									case 'cats':
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
+										// we can't use widget id color for both cat and version becuase
+										// it will confilict as duplicated id in et2.
+										$old_cat['data']['color'] = $cat['cat_color'];
 										if ($cat['id']==$default_category)
 										{
 											$no_change = $cat['isdefault'];
@@ -363,6 +367,9 @@ class tracker_admin extends tracker_bo
 											if (isset($old_cat['data']['isdefault'])) unset($old_cat['data']['isdefault']);
 											if (isset($cat['isdefault'])) unset($cat['isdefault']);
 										}
+										break;
+									case 'versions':
+										$old_cat['data']['color'] = $cat['version_color'];
 										break;
 									case 'statis':
 										$old_cat['data']['closed'] = $cat['closed'];
@@ -496,6 +503,7 @@ class tracker_admin extends tracker_bo
 				{
 					case 'version':
 						$content['versions'][$n=$v++] = $cat + $data;
+						$content['versions'][$n]['version_color'] = $data['color'];
 						break;
 					case 'response':
 						if ($data['response']) $cat['description'] = $data['response'];
@@ -522,6 +530,7 @@ class tracker_admin extends tracker_bo
 						{
 							$content['cats']['isdefaultcategory'] = $cat['id'];
 						}
+						$content['cats'][$n]['cat_color'] = $data['color'];
 						if ($tracker != $cat['parent'])
 						{
 							$readonlys['cats'][$n]['autoassign'] = true;
