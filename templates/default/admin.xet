@@ -298,6 +298,17 @@
 					<description/>
 					<description/>
 				</row>
+				<row class="row">
+					<description span="2"/>
+					<description for="enabled_color_code_for" value="Enable color code for"/>
+					<select id="enabled_color_code_for">
+						<option value="">None</option>
+						<option value="tracker">Tracker queues</option>
+						<option value="cat">Categories</option>
+						<option value="version">Versions</option>
+					</select>
+
+				</row>
 				<row class="th" disabled="@tracker">
 					<description value="Miscellaneous" span="all"/>
 				</row>

@@ -298,6 +298,13 @@ class tracker_bo extends tracker_so
 	var $htmledit = false;
 	var $all_cats;
 	var $historylog;
+
+	/**
+	 * config var for color code
+	 * @var type
+	 */
+	var $enabled_color_code_for = '';
+
 	/**
 	 * Instance of the tracker_tracking object
 	 *
@@ -311,7 +318,7 @@ class tracker_bo extends tracker_so
 	 */
 	var $config_names = array(
 		'technicians','admins','users','notification','projects','priorities','default_priority','restrictions', 'user_category_preference',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling',	// tracker unspecific
+		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling','enabled_color_code_for',	// tracker unspecific
 		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates', 'comment_reopens'
 	);
 	/**

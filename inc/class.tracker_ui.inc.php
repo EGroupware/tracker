@@ -975,7 +975,19 @@ class tracker_ui extends tracker_bo
 			{
 				$rows[$n]['class'] .= 'group_action';
 			}
-
+			switch ($this->enabled_color_code_for)
+			{
+				case 'tracker':
+					$rows[$n]['enabled_color_code'] = $row['tr_tracker'];
+					break;
+				case 'cat':
+					$rows[$n]['enabled_color_code'] = $row['cat_id'];
+					break;
+				case 'version':
+					$rows[$n]['enabled_color_code'] = $row['tr_version'];
+					break;
+				default:
+			}
 			$trackers[] = $row['tr_tracker'];
 
 			// show the right tracker and/or cat specific priority label

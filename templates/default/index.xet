@@ -64,7 +64,7 @@
 					<nextmatch-filterheader id="esc_id" options="Escalation"/>
 					<nextmatch-customfields id="customfields"/>
 				</row>
-				<row class="$row_cont[cat_id] $row_cont[class]" valign="top">
+				<row class="$row_cont[enabled_color_code] $row_cont[class]" valign="top">
 					<vbox no_lang="1">
 						<description id="${row}[tr_id]" no_lang="1"/>
 						<menulist>
