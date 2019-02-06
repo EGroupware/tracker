@@ -1586,15 +1586,16 @@ class tracker_bo extends tracker_so
 	 * Add a new tracker-queue
 	 *
 	 * @param string $name
+	 * @param string $color
 	 * @return int|boolean integer tracker-id on success or false otherwise
 	 */
-	function add_tracker($name)
+	function add_tracker($name, $color = '')
 	{
 		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');	// global cat!
 		if ($name && ($id = $cats->add(array(
 			'name'   => $name,
 			'descr'  => 'tracker',
-			'data'   => serialize(array('type' => 'tracker')),
+			'data'   => serialize(array('type' => 'tracker', 'color' => $color)),
 			'access' => 'public',
 		))))
 		{
@@ -1606,6 +1607,25 @@ class tracker_bo extends tracker_so
 			Api\Config::save_value('types',$types, 'tracker');
 
 			return $id;
+		}
+		return false;
+	}
+
+	/**
+	 * Change color for a tracker-queue
+	 * 
+	 * @param type $tracker
+	 * @param type $color
+	 * @return boolean
+	 */
+	function change_color_tracker($tracker, $color)
+	{
+		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');
+		if ($tracker > 0 && ($data = $cats->read($tracker)))
+		{
+			$data['data']['color'] = $color;
+			$cats->edit($data);
+			return true;
 		}
 		return false;
 	}

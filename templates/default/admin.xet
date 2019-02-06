@@ -660,6 +660,12 @@
 						<button label="Add" id="button[add]"/>
 					</hbox>
 				</row>
+				<row align="right">
+					<hbox align="right">
+						<colorpicker id="tracker_color"/>
+						<button label="Change color" id="button[change_color]"/>
+					</hbox>
+				</row>
 				<row>
 					<tabbox id="tabs" span="all">
 						<tabs>

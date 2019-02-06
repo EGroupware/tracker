@@ -1396,6 +1396,7 @@ class tracker_ui extends tracker_bo
 				//'filter_label'   => lang('Date filter'),
 				'filter_no_lang'=> true,
 				'filter2'        => 0,	// all
+				'filter2_tags'	=> true,
 				//'filter2_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
 				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
@@ -1410,6 +1411,20 @@ class tracker_ui extends tracker_bo
 				'row_modified'   => 'tr_modified',
 				'placeholder_actions' => array('add')
 			);
+			switch($this->enabled_color_code_for)
+			{
+				case 'tracker':
+
+					break;
+				case 'cat':
+					$content['nm']['cat_id_class'] = 'cat_';
+					break;
+				case 'version':
+					$content['nm']['filter2_class'] = 'cat_';
+					break;
+				default:
+
+			}
 			// use the state of the last session stored in the user prefs
 			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
 			{

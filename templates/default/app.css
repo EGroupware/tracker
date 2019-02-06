@@ -67,3 +67,5 @@ label.tracker_trIdEdit:before { content: "#"; }
 }
 
 #tracker-index_tracker-index-queue {position: relative;width:400px;height: 24px;margin-right:4px;}
+
+#tracker-admin .jPicker {vertical-align: middle}

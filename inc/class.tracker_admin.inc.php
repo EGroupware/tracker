@@ -108,7 +108,7 @@ class tracker_admin extends tracker_bo
 					{
 						$msg = lang('You need to enter a name');
 					}
-					elseif (($id = $this->add_tracker($_content['add_name'])))
+					elseif (($id = $this->add_tracker($_content['add_name'], $_content['tracker_color'])))
 					{
 						$tracker = $id;
 						$msg = lang('Tracker added');
@@ -118,7 +118,12 @@ class tracker_admin extends tracker_bo
 						$msg = lang('Error adding the new tracker!');
 					}
 					break;
-
+				case 'change_color':
+					if ($_content['tracker_color'])
+					{
+						$this->change_color_tracker($tracker, $_content['tracker_color']);
+					}
+					break;
 				case 'rename':
 					if (!$_content['add_name'])
 					{
@@ -475,7 +480,12 @@ class tracker_admin extends tracker_bo
 			// keep priority cat only if tracker is unchanged, otherwise reset it
 			'priorities' => $tracker == $_content['tracker'] ? array('cat_id' => $_content['priorities']['cat_id']) : array(),
 		);
-
+		if ($tracker)
+		{
+			$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');
+			$tr_data = $cats->read($tracker);
+			$content['tracker_color'] = $tr_data['data']['color'];
+		}
 		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
 		{
 			$content[$name] = $this->$name;
@@ -484,6 +494,7 @@ class tracker_admin extends tracker_bo
 			'button[delete]' => !$tracker,
 			'delete[0]' => true,
 			'button[rename]' => !$tracker,
+			'button[change_color]' => !$tracker,
 			'tabs' => array('tracker.admin.acl'=>$tracker),
 		);
 		// cats & versions & responses & projects
