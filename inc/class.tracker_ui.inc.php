@@ -1413,9 +1413,6 @@ class tracker_ui extends tracker_bo
 			);
 			switch($this->enabled_color_code_for)
 			{
-				case 'tracker':
-
-					break;
 				case 'cat':
 					$content['nm']['cat_id_class'] = 'cat_';
 					break;
@@ -1423,7 +1420,6 @@ class tracker_ui extends tracker_bo
 					$content['nm']['filter2_class'] = 'cat_';
 					break;
 				default:
-
 			}
 			// use the state of the last session stored in the user prefs
 			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
@@ -1540,7 +1536,7 @@ width:100%;
 			'only_tracker' => $only_tracker,
 			'called_by' => $this->called_by
 		);
-
+		if ($this->enabled_color_code_for == 'tracker') $tpl->setElementAttribute ('col_filter[tr_tracker]', 'value_class', 'cat_');
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,$preserve,$return_html);
 	}
 
