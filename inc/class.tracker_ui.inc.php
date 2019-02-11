@@ -1536,7 +1536,7 @@ width:100%;
 			'only_tracker' => $only_tracker,
 			'called_by' => $this->called_by
 		);
-		if ($this->enabled_color_code_for == 'tracker') $tpl->setElementAttribute ('col_filter[tr_tracker]', 'value_class', 'cat_');
+		if ($this->enabled_color_code_for == 'tracker') $tpl->setElementAttribute ('nm[col_filter][tr_tracker]', 'value_class', 'cat_');
 		return $tpl->exec('tracker.tracker_ui.index',$content,$sel_options,$readonlys,$preserve,$return_html);
 	}
 
