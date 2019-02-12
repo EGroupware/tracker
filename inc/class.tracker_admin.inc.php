@@ -74,7 +74,7 @@ class tracker_admin extends tracker_bo
 
 		if (is_array($_content))
 		{
-			list($button) = @each($_content['button']);
+			$button = @key($_content['button']);
 			$default_category = false;
 			if (isset($_content['mailhandling']['test_mailhandling_once']) &&
 					$_content['mailhandling']['test_mailhandling_once'])
@@ -454,7 +454,7 @@ class tracker_admin extends tracker_bo
 					{
 						if (isset($_content[$name]['delete']))
 						{
-							list($id) = each($_content[$name]['delete']);
+							$id = key($_content[$name]['delete']);
 							if ((int)$id)
 							{
 								$GLOBALS['egw']->categories->delete($id);
@@ -754,7 +754,7 @@ class tracker_admin extends tracker_bo
 		}
 		else
 		{
-			list($button) = @each($_content['escalation']['button']);
+			$button = @key($_content['escalation']['button']);
 			unset($_content['escalation']['button']);
 			$escalations->init($_content);
 

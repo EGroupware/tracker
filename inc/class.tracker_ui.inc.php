@@ -285,7 +285,7 @@ class tracker_ui extends tracker_bo
 		else	// submitted form
 		{
 			//_debug_array($content);
-			list($button) = @each($content['button']); unset($content['button']);
+			$button = @key($content['button']); unset($content['button']);
 			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
 			$own_referer = $content['own_referer']; unset($content['own_referer']);
@@ -468,7 +468,7 @@ class tracker_ui extends tracker_bo
 				default:
 					if (!$this->allow_bounties) break;
 					// check delete bounty
-					list($id) = @each($this->data['bounties']['delete']);
+					$id = @key($this->data['bounties']['delete']);
 					if ($id)
 					{
 						unset($this->data['bounties']['delete']);
@@ -492,7 +492,7 @@ class tracker_ui extends tracker_bo
 					else
 					{
 						// check confirm bounty
-						list($id) = @each($this->data['bounties']['confirm']);
+						$id = @key($this->data['bounties']['confirm']);
 						if ($id)
 						{
 							unset($this->data['bounties']['confirm']);
@@ -521,7 +521,7 @@ class tracker_ui extends tracker_bo
 		if (!($tracker = $this->data['tr_tracker']))
 		{
 			reset($this->trackers);
-			list($tracker) = @each($this->trackers);
+			$tracker = @key($this->trackers);
 		}
 		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
 
@@ -1286,7 +1286,7 @@ class tracker_ui extends tracker_bo
 
 			if (is_array($content) && isset($content['nm']['rows']['document']))  // handle insert in default document button like an action
 			{
-				list($id) = @each($content['nm']['rows']['document']);
+				$id = @key($content['nm']['rows']['document']);
 				$content['nm']['action'] = 'document';
 				$content['nm']['selected'] = array($id);
 			}
@@ -1431,7 +1431,7 @@ class tracker_ui extends tracker_bo
 			elseif (!$this->called_by && !$tracker)
 			{
 				reset($this->trackers);
-				list($tracker) = @each($this->trackers);
+				$tracker = @key($this->trackers);
 			}
 			// disable times column, if no timesheet rights
 			if (!isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
@@ -1458,7 +1458,7 @@ class tracker_ui extends tracker_bo
 		if (count($this->trackers) == 1)
 		{
 			reset($this->trackers);
-			list($tracker) = @each($this->trackers);
+			$tracker = @key($this->trackers);
 			$readonlys['nm']['col_filter[tr_tracker]'] = true;
 		}
 		if (!$tracker)
