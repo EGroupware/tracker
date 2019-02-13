@@ -159,6 +159,7 @@ edit entry	tracker	en	Edit entry
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
+enable color code for	tracker	en	Enable color code for
 enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized mails should be forwarded
 enter an opening text for the reply message	tracker	en	Enter an opening text for the reply message
 enter the imap server from which emails should be fetched	tracker	en	Enter the IMAP server from which emails should be fetched
