@@ -128,14 +128,11 @@ class tracker_ui extends tracker_bo
 	{
 		if ($this->htmledit || (isset($content['tr_edit_mode']) && $content['tr_edit_mode']=='html'))
 		{
-			$rte_features = $GLOBALS['egw_info']['user']['preferences']['common']['rte_features'];
-			$tr_description_options = $rte_features.',240px,100%,false';
-			$tr_reply_options = $rte_features.',215px,100%,false';
+			$tr_editor_mode = 'html';
 		}
 		else
 		{
-			$tr_description_options = 'ascii,230px,99%';
-			$tr_reply_options = 'ascii,205px,99%';
+			$tr_editor_mode = 'ascii';
 		}
 
 		//_debug_array($content);
@@ -160,14 +157,12 @@ class tracker_ui extends tracker_bo
 					if ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
 					{
 						// non html items edited by html (add nl2br)
-						$tr_description_options = 'simple,240px,100%,false,,1';
-						$tr_reply_options = 'ascii,205px,99%';
+						$tr_editor_mode = 'ascii';
 					}
 					if ($this->data['tr_edit_mode'] == 'html' && !$this->htmledit)
 					{
 						// html items edited in ascii mode (prevent changing to html)
-						$tr_description_options = 'simple,240px,100%,false';
-						$tr_reply_options = 'simple,215px,100%,false';
+						$tr_editor_mode = 'html';
 					}
 					//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
@@ -530,7 +525,7 @@ class tracker_ui extends tracker_bo
 		{
 			// non html view in a readonly htmlarea (div) needs nl2br
 			$content['tr_description'] = htmlspecialchars($content['tr_description']);
-			$tr_description_options = 'simple,240px,100%,false,,1';
+			$tr_editor_mode = 'ascii';
 		}
 
 		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
@@ -557,9 +552,8 @@ class tracker_ui extends tracker_bo
 		$statis = $this->get_tracker_stati($tracker);
 		$content += array(
 			'msg' => $msg,
-			'tr_description_options' => $tr_description_options,
+			'tr_editor_mode' => $tr_editor_mode,
 			'tr_description_mode'    => $readonlys['tr_description'],
-			'tr_reply_options' => $tr_reply_options,
 			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open_link("tracker.tracker_ui.index&ajax=true","_self",false,"tracker")',
 			'no_vote' => '',
 			'show_dates' => $this->show_dates,

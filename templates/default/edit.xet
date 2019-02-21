@@ -3,7 +3,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="280" imageUpload="link_to"/>
+		<htmlarea mode="@tr_editor_mode" id="tr_description" needed="1" span="3" width="99%" height="280" imageUpload="link_to"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="egwGridView_grid">
@@ -48,7 +48,7 @@
 					</hbox>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
-					<htmlarea id="reply_message" options="@tr_reply_options" span="3" height="250" imageUpload="link_to"/>
+					<htmlarea id="reply_message" options="@tr_editor_mode" span="3" height="250" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
