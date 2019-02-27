@@ -3,7 +3,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea mode="@tr_editor_mode" id="tr_description" needed="1" span="3" width="99%" height="280" imageUpload="link_to"/>
+		<htmlarea mode="@tr_editor_mode" id="tr_description" needed="1" span="all" width="99%" height="274" imageUpload="link_to"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="egwGridView_grid">
@@ -23,7 +23,7 @@
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
 						</menulist>
 					</vbox>
-					<htmlarea id="replies[$row][reply_message]" readonly="@editable_comments" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
+					<htmlarea id="replies[$row][reply_message]" mode="@tr_editor_mode" readonly="@editable_comments" span="all" width="99%"  editable_height="247" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
 				</row>
 			</rows>
 		</grid>
@@ -48,7 +48,7 @@
 					</hbox>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
-					<htmlarea id="reply_message" options="@tr_editor_mode" span="3" height="250" imageUpload="link_to"/>
+					<htmlarea id="reply_message" mode="@tr_editor_mode" span="all" height="247" width="99%" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
