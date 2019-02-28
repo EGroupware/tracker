@@ -552,7 +552,6 @@ class tracker_ui extends tracker_bo
 		$statis = $this->get_tracker_stati($tracker);
 		$content += array(
 			'msg' => $msg,
-			'tr_editor_mode' => $tr_editor_mode,
 			'tr_description_mode'    => $readonlys['tr_description'],
 			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open_link("tracker.tracker_ui.index&ajax=true","_self",false,"tracker")',
 			'no_vote' => '',
@@ -796,6 +795,8 @@ class tracker_ui extends tracker_bo
 		{
 			$tpl->set_cell_attribute('tr_assigned','size','3+');
 		}
+		$tpl->set_cell_attribute('tr_description', 'mode', $tr_editor_mode);
+		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
 		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
 	}
