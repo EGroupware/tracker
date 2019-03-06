@@ -315,7 +315,7 @@ class tracker_ui extends tracker_bo
 					{
 						$this->data['tr_edit_mode'] = 'html';
 					}
-					elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit && $readonlys['tr_description'])
+					elseif ($this->data['tr_edit_mode'] == 'ascii' && $this->htmledit)
 					{
 						$this->data['tr_edit_mode'] = 'ascii';
 					}
