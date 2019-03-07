@@ -17,31 +17,8 @@ use EGroupware\Api\Link;
 /**
  * class import_csv for tracker
  */
-class tracker_import_csv implements importexport_iface_import_plugin  {
-
-	private static $plugin_options = array(
-		'fieldsep', 		// char
-		'charset', 			// string
-		'update_cats', 			// string {override|add} overides record
-								// with cat(s) from csv OR add the cat from
-								// csv file to exeisting cat(s) of record
-		'num_header_lines', // int number of header lines
-		'field_conversion', // array( $csv_col_num => conversion)
-		'field_mapping',	// array( $csv_col_num => adb_filed)
-		'conditions',		/* => array containing condition arrays:
-				'type' => exists, // exists
-				'string' => '#kundennummer',
-				'true' => array(
-					'action' => update,
-					'last' => true,
-				),
-				'false' => array(
-					'action' => insert,
-					'last' => true,
-				),*/
-
-	);
-
+class tracker_import_csv extends importexport_basic_import_csv
+{
 	public static $special_fields = array(
 		'addressbook'     => 'Link to Addressbook, use nlast,nfirst[,org] or contact_id from addressbook',
 		'link_1'      => '1. link: appname:appid the entry should be linked to, eg.: addressbook:123',
@@ -50,21 +27,11 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	);
 
 	/**
-	 * actions wich could be done to data entries
-	 */
-	protected static $actions = array( 'none', 'update', 'insert', 'delete', );
-
-	/**
 	 * conditions for actions
 	 *
 	 * @var array
 	 */
 	protected static $conditions = array( 'exists' );
-
-	/**
-	 * @var definition
-	 */
-	private $definition;
 
 	/**
 	 * @var business object
@@ -77,71 +44,21 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	protected $tracking;
 
 	/**
-	 * @var bool
-	 */
-	private $dry_run = false;
-
-	/**
-	 * @var int
-	 */
-	private $user = null;
-
-	/**
-	 * List of import warnings
-	 */
-	protected $warnings = array();
-
-	/**
-	 * List of import errors
-	 */
-	protected $errors = array();
-
-	/**
-         * List of actions, and how many times that action was taken
-         */
-        protected $results = array();
-
-	/**
 	 * imports entries according to given definition object.
 	 * @param resource $_stream
 	 * @param string $_charset
 	 * @param definition $_definition
 	 */
-	public function import( $_stream, importexport_definition $_definition ) {
-		$import_csv = new importexport_import_csv( $_stream, array(
-			'fieldsep' => $_definition->plugin_options['fieldsep'],
-			'charset' => $_definition->plugin_options['charset'],
-		));
-
-		$this->definition = $_definition;
-
-		$this->user = $GLOBALS['egw_info']['user']['account_id'];
-
-		// dry run?
-		$this->dry_run = isset( $_definition->plugin_options['dry_run'] ) ? $_definition->plugin_options['dry_run'] :  false;
-
+	public function init( importexport_definition &$_definition, importexport_import_csv &$import_csv )
+	{
 		// fetch the bo
 		$this->bo = new tracker_bo();
 
 		// Get the tracker for changes
 		$this->tracking = new tracker_tracking($this->bo);
 
-		// set FieldMapping.
-		$import_csv->mapping = $_definition->plugin_options['field_mapping'];
-
-		// set FieldConversion
-		$import_csv->conversion = $_definition->plugin_options['field_conversion'];
-
 		// Add extra conversions
 		$import_csv->conversion_class = $this;
-
-		//check if file has a header lines
-		if ( isset( $_definition->plugin_options['num_header_lines'] ) && $_definition->plugin_options['num_header_lines'] > 0) {
-			$import_csv->skip_records($_definition->plugin_options['num_header_lines']);
-		} elseif(isset($_definition->plugin_options['has_header_line']) && $_definition->plugin_options['has_header_line']) {
-			// First method is preferred
-			$import_csv->skip_records(1);
-		}
 
 		// set Owner
 		$plugin_options = $_definition->plugin_options;
@@ -150,227 +67,229 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 		$_definition->plugin_options = $plugin_options;
 
 		// Process cat_id as a normal select
-		$types = tracker_egw_record::$types;
-		unset($types['select-cat']);
-		$types['select'][] = 'cat_id';
+		$this->types = tracker_egw_record::$types;
+		unset($this->types['select-cat']);
+		$this->types['select'][] = 'cat_id';
 
-		$_lookups = array(
+		$this->lookups = array(
 			'tr_tracker'    => $this->bo->trackers,
 		);
+	}
 
-		// Start counting successes
-		$count = 0;
-		$this->results = array();
+	/**
+	* Import a single record
+	*
+	* You don't need to worry about mappings or translations, they've been done already.
+	* You do need to handle the conditions and the actions taken.
+	*
+	* Updates the count of actions taken
+	*
+	* @return boolean success
+	*/
+	protected function import_record(importexport_iface_egw_record &$egw_record, &$import_csv)
+	{
+		$record = $egw_record->get_record_array();
+		$_definition = $this->definition;
 
-		// Failures
-		$this->errors = array();
-
-		while ( $record = $import_csv->get_record() ) {
-			$success = false;
-
-			// don't import empty records
-			if( count( array_unique( $record ) ) < 2 ) continue;
-
-			$result = importexport_import_csv::convert($record, $types, 'tracker', $_lookups, $_definition->plugin_options['convert']);
-			if($result) $this->warnings[$import_csv->get_current_position()] = $result;
-
-			// Set creator/group, unless it's supposed to come from CSV file
-			foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
-				if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
-					if(!is_numeric($record['tr_'.$field]))
-					{
-						// Automatically handle text owner without explicit translation
-						$new_owner = importexport_helper_functions::account_name2id($record['tr_'.$field]);
-						if($new_owner == '') {
-							$this->errors[$import_csv->get_current_position()] = lang(
-								'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
-								$record['tr_'.$field],
-								Api\Accounts::username($_definition->plugin_options['record_'.$option]),
-								lang($this->bo->field2label['tr_'.$field])
-							);
-							$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
-						} else {
-							$record['tr_'.$field] = $new_owner;
-						}
-					}
-				} elseif ($_definition->plugin_options['record_'.$option]) {
-					$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
-				}
-			}
-
-			// Lookups - from human friendly to integer
-			$lookups = array(
-				'tr_version'    => $this->bo->get_tracker_labels('version', null),
-				'tr_status'     => $this->bo->get_tracker_stati(null),
-				'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
-				'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
-			);
-			if(($id = $record['tr_tracker']) && $lookups['tr_tracker'][$id]) {
-				$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $id);
-				$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
-				$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
-			}
-
-			// Translate lookups
-			foreach($lookups as $field => &$l_values)
-			{
-				foreach($l_values as &$l_label)
+		// Set creator/group, unless it's supposed to come from CSV file
+		foreach(array('owner' => 'creator', 'group' => 'group', 'assigned' => 'assigned') as $option => $field) {
+			if($_definition->plugin_options[$option.'_from_csv'] && $record['tr_'.$field]) {
+				if(!is_numeric($record['tr_'.$field]))
 				{
-					$l_label = lang($l_label);
-				}
-			}
-			$all_lookups = $_lookups + $lookups;
-
-			foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
-				if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
-					$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
-					$key = false;
-
-					//echo "Checking $field. Currently {$record[$field]}.<br />";
-
-					// Check for key as value - importing DB values, or from conversion
-					if(is_numeric($record[$field]) && $all_lookups[$field][$record[$field]]) $key = $record[$field];
-
-					// Look for human values - existing ones should already be IDs
-					if(!$key)
-					{
-						$key = array_search($record[$field], $all_lookups[$field]);
-					}
-					if($key !== false) {
-						$record[$field] = $key;
-					} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
-						$t_field = $_definition->plugin_options[$translate_key];
-						//echo "Got some options here :$t_field<br />";
-						switch ($t_field) {
-							case '':
-							case '0':
-								// Skip that field
-								unset($record[$field]);
-								break;
-							case '~skip~':
-								$this->results['skipped']++;
-								continue 2;
-							default:
-								if(strpos($t_field, 'add') === 0) {
-									// Add the thing in.  Takes some extra measures for tracker
-									// Check for a parent
-									list($name, $parent_name) = explode('~',$t_field);
-									if($parent_name) {
-										$parent = importexport_helper_functions::cat_name2id($parent_name);
-									}
-
-									// Get type
-									$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
-									if($type == 'status') $type = 'stati';
-
-									// Get category
-									$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
-									if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
-
-									// Add in extra data
-									if($cat_id == 0 || $cat['data']['type'] != $type
-										|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
-									{
-										$cat_id = $GLOBALS['egw']->categories->add( array(
-											'name' => $record[$field],
-											'access' => 'public',
-											'owner' => 0,
-											'parent' => $parent,
-											'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
-											'data' => serialize(array('type' => $type))
-										));
-									}
-									$record[$field] = $cat_id;
-								} elseif(($key = array_search($t_field, $all_lookups[$field]))) {
-									$record[$field] = $key;
-								} else {
-									$record[$field] = $t_field;
-								}
-								break;
-						}
+					// Automatically handle text owner without explicit translation
+					$new_owner = importexport_helper_functions::account_name2id($record['tr_'.$field]);
+					if($new_owner == '') {
+						$this->errors[$import_csv->get_current_position()] = lang(
+							'Unable to convert "%1" to account ID.  Using plugin setting (%2) for %3.',
+							$record['tr_'.$field],
+							Api\Accounts::username($_definition->plugin_options['record_'.$option]),
+							lang($this->bo->field2label['tr_'.$field])
+						);
+						$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
+					} else {
+						$record['tr_'.$field] = $new_owner;
 					}
 				}
-				if($field == 'tr_tracker') {
-					$all_lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
-					$all_lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
-				}
-				//echo "Final: {$record[$field]}<br />";
+			} elseif ($_definition->plugin_options['record_'.$option]) {
+				$record['tr_'.$field] = $_definition->plugin_options['record_'.$option];
 			}
-
-			// Special values
-			if ($record['addressbook'] && !is_numeric($record['addressbook']))
-			{
-				list($lastname,$firstname,$org_name) = explode(',',$record['addressbook']);
-				$record['addressbook'] = self::addr_id($lastname,$firstname,$org_name);
-			}
-
-			// Comments
-			if($record['replies']) {
-				if(substr($record['replies'], 0, 2) == 'a:') {
-					// Tracker export with DB values, all comments serialized
-					$record['replies'] = unserialize($record['replies']);
-					$replies = array();
-					foreach($record['replies'] as $id => $reply) {
-						// User date format
-						$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
-							($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
-						$name = Api\Accounts::username($reply['reply_creator']);
-						$message = str_replace("\r\n", "\n", $reply['reply_message']);
-
-						$replies[$id] = "$date\t$name\t$message";
-					}
-					$record['replies'] = implode("\n",$replies);
-				}
-				// Import all comments as a single comment
-				$record += array(
-					'reply_creator' => $this->user,
-					'reply_created' => time(),
-					'reply_message' => $record['replies']
-				);
-				unset($record['replies']);
-			}
-
-			if ( $_definition->plugin_options['conditions'] ) {
-				foreach ( $_definition->plugin_options['conditions'] as $condition ) {
-					$results = array();
-					switch ( $condition['type'] ) {
-						// exists
-						case 'exists' :
-							if($record[$condition['string']]) {
-								$results = $this->bo->search(array($condition['string'] => $record[$condition['string']]));
-							}
-							if ( is_array( $results ) && count( array_keys( $results )) >= 1 ) {
-								// apply action to all records matching this exists condition
-								$action = $condition['true'];
-								foreach ( (array)$results as $result ) {
-									$record['tr_id'] = $result['tr_id'];
-									if ( $_definition->plugin_options['update_cats'] == 'add' ) {
-										if ( !is_array( $result['cat_id'] ) ) $result['cat_id'] = explode( ',', $result['cat_id'] );
-										if ( !is_array( $record['cat_id'] ) ) $record['cat_id'] = explode( ',', $record['cat_id'] );
-										$record['cat_id'] = implode( ',', array_unique( array_merge( $record['cat_id'], $result['cat_id'] ) ) );
-									}
-									$success = $this->action(  $action['action'], $record, $import_csv->get_current_position() );
-								}
-							} else {
-								$action = $condition['false'];
-								$success = ($this->action(  $action['action'], $record, $import_csv->get_current_position() ));
-							}
-							break;
-
-						// not supported action
-						default :
-							die('condition / action not supported!!!');
-							break;
-					}
-					if ($action['last']) break;
-				}
-			} else {
-				// unconditional insert
-				$success = $this->action( 'insert', $record, $import_csv->get_current_position() );
-			}
-			if($success) $count++;
 		}
-		return $count;
+
+		// Lookups - from human friendly to integer
+			$lookups = array(
+			'tr_version'    => $this->bo->get_tracker_labels('version', null),
+			'tr_status'     => $this->bo->get_tracker_stati(null),
+			'tr_resolution' => $this->bo->get_tracker_labels('resolution',null),
+			'cat_id'	=> $this->bo->get_tracker_labels('cat', null)
+		);
+		if(($id = $record['tr_tracker']) && $lookups['tr_tracker'][$id]) {
+			$lookups['tr_version'] += $this->bo->get_tracker_labels('version', $id);
+			$lookups['tr_status'] += $this->bo->get_tracker_stati($id);
+			$lookups['tr_resolution'] += $this->bo->get_tracker_labels('resolution', $id);
+		}
+
+		// Translate lookups
+		foreach($lookups as $field => &$l_values)
+		{
+			foreach($l_values as &$l_label)
+			{
+				$l_label = lang($l_label);
+			}
+		}
+		$all_lookups = $this->lookups + $lookups;
+
+		foreach(array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','cat_id') as $field) {
+			if(!is_numeric($record[$field]) || $_definition->plugin_options['convert'] == 1) {
+				$translate_key = 'translate'.(substr($field,0,2) == 'tr' ? substr($field,2) : '_cat_id');
+				$key = false;
+
+				//echo "Checking $field. Currently {$record[$field]}.<br />";
+
+				// Check for key as value - importing DB values, or from conversion
+				if(is_numeric($record[$field]) && $all_lookups[$field][$record[$field]]) $key = $record[$field];
+
+				// Look for human values - existing ones should already be IDs
+				if(!$key)
+				{
+					$key = array_search($record[$field], $all_lookups[$field]);
+				}
+				if($key !== false) {
+					$record[$field] = $key;
+				} elseif(array_key_exists($translate_key, $_definition->plugin_options)) {
+					$t_field = $_definition->plugin_options[$translate_key];
+					//echo "Got some options here :$t_field<br />";
+					switch ($t_field) {
+						case '':
+						case '0':
+							// Skip that field
+							unset($record[$field]);
+							break;
+						case '~skip~':
+							$this->results['skipped']++;
+							continue 2;
+						default:
+							if(strpos($t_field, 'add') === 0) {
+								// Add the thing in.  Takes some extra measures for tracker
+								// Check for a parent
+								list($name, $parent_name) = explode('~',$t_field);
+								if($parent_name) {
+									$parent = importexport_helper_functions::cat_name2id($parent_name);
+								}
+
+								// Get type
+								$type = substr($field,0,2) == 'tr' ? substr($field,3) : 'cat';
+								if($type == 'status') $type = 'stati';
+
+								// Get category
+								$cat_id = $GLOBALS['egw']->categories->name2id( $record[$field]);
+								if($cat_id) $cat = $GLOBALS['egw']->categories->read($cat_id);
+
+								// Add in extra data
+								if($cat_id == 0 || $cat['data']['type'] != $type
+									|| $GLOBALS['egw']->categories->is_global($cat_id)) // Global doesn't count
+								{
+									$cat_id = $GLOBALS['egw']->categories->add( array(
+										'name' => $record[$field],
+										'access' => 'public',
+										'owner' => 0,
+										'parent' => $parent,
+										'descr' => $record[$field]. ' ('. lang('Automatically created by importexport'). ')',
+										'data' => serialize(array('type' => $type))
+									));
+								}
+								$record[$field] = $cat_id;
+							} elseif(($key = array_search($t_field, $all_lookups[$field]))) {
+								$record[$field] = $key;
+							} else {
+								$record[$field] = $t_field;
+							}
+							break;
+					}
+				}
+			}
+			if($field == 'tr_tracker') {
+				$all_lookups['tr_priority'] = $this->bo->get_tracker_priorities($record['tr_tracker'], $record['cat_id']);
+				$all_lookups['cat_id']	= $this->bo->get_tracker_labels('cat', $record['tr_tracker']);
+			}
+			//echo "Final: {$record[$field]}<br />";
+		}
+
+		// Special values
+		if ($record['addressbook'] && !is_numeric($record['addressbook']))
+		{
+			list($lastname,$firstname,$org_name) = explode(',',$record['addressbook']);
+			$record['addressbook'] = self::addr_id($lastname,$firstname,$org_name);
+		}
+
+		// Comments
+		if($record['replies']) {
+			if(substr($record['replies'], 0, 2) == 'a:') {
+				// Tracker export with DB values, all comments serialized
+				$record['replies'] = unserialize($record['replies']);
+				$replies = array();
+				foreach($record['replies'] as $id => $reply) {
+					// User date format
+					$date = date($GLOBALS['egw_info']['user']['preferences']['common']['dateformat'] . ', '.
+						($GLOBALS['egw_info']['user']['preferences']['common']['timeformat'] == '24' ? 'H' : 'h').':i:s',$reply['reply_created']);
+					$name = Api\Accounts::username($reply['reply_creator']);
+					$message = str_replace("\r\n", "\n", $reply['reply_message']);
+
+					$replies[$id] = "$date\t$name\t$message";
+				}
+				$record['replies'] = implode("\n",$replies);
+			}
+			// Import all comments as a single comment
+			$record += array(
+				'reply_creator' => $this->user,
+				'reply_created' => time(),
+				'reply_message' => $record['replies']
+			);
+			unset($record['replies']);
+		}
+
+
+		$egw_record->set_record($record);
+
+		if ( $_definition->plugin_options['conditions'] ) {
+			foreach ( $_definition->plugin_options['conditions'] as $condition ) {
+				$results = array();
+				switch ( $condition['type'] ) {
+					// exists
+					case 'exists' :
+						if($record[$condition['string']]) {
+							$results = $this->bo->search(array($condition['string'] => $record[$condition['string']]));
+						}
+						if ( is_array( $results ) && count( array_keys( $results )) >= 1 ) {
+							// apply action to all records matching this exists condition
+							$action = $condition['true'];
+							foreach ( (array)$results as $result ) {
+								$record['tr_id'] = $result['tr_id'];
+								if ( $_definition->plugin_options['update_cats'] == 'add' ) {
+									if ( !is_array( $result['cat_id'] ) ) $result['cat_id'] = explode( ',', $result['cat_id'] );
+									if ( !is_array( $record['cat_id'] ) ) $record['cat_id'] = explode( ',', $record['cat_id'] );
+									$record['cat_id'] = implode( ',', array_unique( array_merge( $record['cat_id'], $result['cat_id'] ) ) );
+								}
+								$egw_record->set_record($record);
+								$success = $this->action(  $action['action'], $egw_record, $import_csv->get_current_position() );
+							}
+						} else {
+							$action = $condition['false'];
+							$success = ($this->action(  $action['action'], $egw_record, $import_csv->get_current_position() ));
+						}
+						break;
+
+					// not supported action
+					default :
+						die('condition / action not supported!!!');
+						break;
+				}
+				if ($action['last']) break;
+			}
+		} else {
+			// unconditional insert
+			$success = $this->action( 'insert', $egw_record, $import_csv->get_current_position() );
+		}
+		return $success;
 	}
 
 	/**
@@ -380,7 +299,8 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 	 * @param array $_data tracker data for the action
 	 * @return bool success or not
 	 */
-	private function action ( $_action, $_data, $record_num = 0 ) {
+	protected function action ( $_action, importexport_iface_egw_record &$record, $record_num = 0 ) {
+		$_data = $record->get_record_array();
 		$result = true;
 		switch ($_action) {
 			case 'none' :
@@ -404,6 +324,10 @@ class tracker_import_csv implements importexport_iface_import_plugin  {
 
 				// Fall through
 			case 'insert' :
+				if($_action == 'insert')
+				{
+					unset($_data['tr_id']);
+				}
 				// Defaults
 				if(!$_data['tr_priority']) $_data['tr_priority'] = 5;
 				if(!$_data['tr_completion']) $_data['tr_completion'] = 0;
