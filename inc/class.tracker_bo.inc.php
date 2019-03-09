@@ -2107,7 +2107,7 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to link with
 			$addressbook = new Api\Contacts();
 			$contacts = array();
-			$filter['owner'] = 0;
+			$filter['owner'] = array();
 			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
@@ -2169,7 +2169,7 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to idetify the reply creator
 			$addressbook = new Api\Contacts();
 			$contacts = array();
-			$filter['owner'] = 0;
+			$filter['owner'] = array();
 			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
