@@ -409,12 +409,14 @@ class tracker_bo extends tracker_so
 		$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
 
 		// set default priority
+		$default_priority = null;
 		$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
 		$this->data['tr_priority'] = $default_priority;
 
 		// Set default category
 		if(!$this->data['cat_id'])
 		{
+			$default_category = null;
 			$this->get_tracker_labels('cat', $this->data['tr_tracker'], $default_category);
 			$this->data['cat_id'] = $default_category;
 		}
@@ -1331,7 +1333,7 @@ class tracker_bo extends tracker_so
 	 * @param int $tracker = null tracker to use or null to use tracker unspecific priorities
 	 * @param int $cat_id = null category to use or null to use categorie unspecific priorities
 	 * @param boolean $remove_empty = true should empty labels be displayed, default no
-	 * @param int &$default = null on return default, if it is set
+	 * @param int& $default =null on return default, if it is set
 	 * @return array
 	 */
 	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true, &$default = null)
@@ -2074,7 +2076,7 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to link with
 			$addressbook = new Api\Contacts();
 			$contacts = array();
-			$filter['owner'] = 0;
+			$filter = array();
 			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
@@ -2136,7 +2138,7 @@ class tracker_bo extends tracker_so
 			// find the addressbookentry to idetify the reply creator
 			$addressbook = new Api\Contacts();
 			$contacts = array();
-			$filter['owner'] = 0;
+			$filter = array();
 			foreach ($emails as $mailadr)
 			{
 				$contacts = array_merge($contacts,(array)$addressbook->search(
