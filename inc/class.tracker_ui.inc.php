@@ -1594,6 +1594,7 @@ width:100%;
 				'caption' => 'Do not notify',
 				'checkbox' => true,
 				'hint' => 'Do not notify of these changes',
+				'confirm_mass_selection' => "You are going to change %1 entries: Are you sure you want to send notifications about this change?",
 				'group' => $group,
 			),
 			// modifying content of one or multiple infolog(s)
@@ -1602,6 +1603,7 @@ width:100%;
 				'group' => ++$group,
 				'icon' => 'edit',
 				'disableClass' => 'rowNoEdit',
+				'confirm_mass_selection' => true,
 				'children' => array(
 					'seen' => array(
 						'caption' => 'Mark as read',
@@ -1684,12 +1686,14 @@ width:100%;
 				'icon' => 'check',
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
+				'confirm_mass_selection' => true,
 			),
 			'close_100_'.$resolution_fixed => array(
 				'caption' => lang('Close') . ' - 100% ' . lang('fixed'),
 				'icon' => 'check',
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
+				'confirm_mass_selection' => true,
 			),
 
 			'admin' => array(
