@@ -594,6 +594,10 @@
 				<column disabled="@no_checkboxes"/>
 			</columns>
 			<rows>
+				<row class="th">
+					<description value="Reply To"/>
+					<textbox statustext="Enter the email for reply to" id="reply_to" size="40"/>
+				</row>
 				<row>
 					<checkbox label="Do not send notifications to external email (cc field)" id="no_external"/>
 				</row>
