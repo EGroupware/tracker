@@ -319,6 +319,7 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 queue	tracker	de	Queue
+re-open closed tickets when a comment is added	tracker	de	Setze geschlossene Tickets auf offen, wenn ein Kommentar hinzugefügt wird
 read mail address	tracker	de	Verarbeitung nur dieser Mailadresse
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
@@ -330,7 +331,6 @@ refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die 
 refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
-re-open closed tickets when a comment is added	tracker	de	Setze geschlossene Tickets auf offen, wenn ein Kommentar hinzugefügt wird
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
 reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten
 report as bar chart by the selected criterias	tracker	de	Bericht als Balkendiagramm für die ausgewählten Kriterien
@@ -485,3 +485,5 @@ you voted %1.	tracker	de	Sie stimmten am %1 ab.
 ♦ own without reply not closed	tracker	de	♦ Eigene unbeantwortet nicht geschlossen
 ♦ without 30 days reply not closed	tracker	de	♦ 30 Tage unbeantwortet nicht geschlossen
 ♦ without reply not closed	tracker	de	♦ Unbeantwortet offen
+reply to	tracker	de	Antworten an
+enter the email for reply to	tracker	de	EMail Adresse an die Antworten gesendet werden sollen
