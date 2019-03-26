@@ -88,6 +88,9 @@ class tracker_import_csv extends importexport_basic_import_csv
 	*/
 	protected function import_record(importexport_iface_egw_record &$egw_record, &$import_csv)
 	{
+		// Reset BO data for new record
+		$this->bo->data = array();
+
 		$record = $egw_record->get_record_array();
 		$_definition = $this->definition;
 
