@@ -23,8 +23,10 @@
 							<menupopup type="select-account" id="replies[$row][reply_creator]" readonly="true"/>
 						</menulist>
 					</vbox>
-					<htmlarea id="replies[$row][reply_message]" mode="@tr_edit_mode" readonly="@editable_comments" span="all" width="99%"  editable_height="247" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
-					<file id="tracker:{$cont[tr_id]}:comments/{replies[$row][reply_id]}" readonly="true" label=""/>
+					<vbox>
+						<htmlarea id="replies[$row][reply_message]" mode="@tr_edit_mode" readonly="@editable_comments" span="all" width="99%"  editable_height="247" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
+						<vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[replies][$row][reply_id]}/" readonly="true" label=""/>
+					</vbox>
 				</row>
 			</rows>
 		</grid>
@@ -48,7 +50,7 @@
 						<description/>
 						<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 					</hbox>
-					<file id="tracker:$cont[tr_id]:comments/.new/" label=""/>
+					<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<htmlarea id="reply_message" span="all" height="225" width="99%" imageUpload="link_to"/>

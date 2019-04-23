@@ -330,12 +330,13 @@ class tracker_ui extends tracker_bo
 						$this->data['reply_message'] = $content['reply_message'];
 					}
 
-					$ret = $this->save();
-
 					$this->comment_files($this->data['tr_id'],
 						$content['replies'][0]['reply_id'] + 1,
-						$content["tracker:{$this->data['tr_id']}:comments/.new/"]
+						$this->data
 					);
+
+					$ret = $this->save();
+
 					if ($ret === false)
 					{
 						$msg = lang('Nothing to save.');
@@ -526,6 +527,7 @@ class tracker_ui extends tracker_bo
 		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
 
 		$preserv = $content = $this->data;
+		$content['id'] = $tr_id;
 		if ($content['tr_edit_mode'] == 'ascii' && $content['tr_description'] && $readonlys['tr_description'])
 		{
 			// non html view in a readonly htmlarea (div) needs nl2br
@@ -811,16 +813,16 @@ class tracker_ui extends tracker_bo
 	 *
 	 * @param Arra $content
 	 */
-	protected function comment_files($tr_id, $reply_id, $files = array())
+	protected function comment_files($tr_id, $reply_id, &$content = array())
 	{
 		$path = "/apps/tracker/{$tr_id}/comments/";
 
-		// Get files.  Established tickets let files go to VFS, we'll move them.
-		$files = $files + Api\Vfs::find(
-				"{$path}new/",
+		// Get files.  Established tickets (should) let files go to VFS, we'll move them.
+		$files = Api\Vfs::find(
+				"{$path}.new/",
 				array('type' => 'f', 'maxdepth' => 1)
 			);
-		if(!$content['reply_message'])
+		if(count($files) && !$content['reply_message'])
 		{
 			$content['reply_message'] = lang('File(s) added');
 		}
@@ -828,14 +830,15 @@ class tracker_ui extends tracker_bo
 			Api\DateTime::to();
 		foreach($files as $key => $file)
 		{
-			$file_path = is_array($file) ? $file['path'] : $file;
 			$file_name = is_array($file) && $file['name'] ? $file['name'] : Api\Vfs::basename($file);
-
-			// Comment with user and date
-			$result = Api\Vfs::proppatch($file_path, array(array('name' => 'comment', 'val' => $comment)));
+			$file_path = is_array($file) ? ($file['tmp_name'] ? $file['tmp_name'] : $file['path']) : $file;
+			$target = "$path{$reply_id}/{$file_name}";
 
 			// Move to final destination
-			Api\Vfs::rename($file_path, "$path{$reply_id}/{$file_name}");
+			Api\Vfs::rename($file_path, $target);
+
+			// Comment with user and date
+			$result = Api\Vfs::proppatch($target, array(array('name' => 'comment', 'val' => $comment)));
 		}
 		Api\Vfs::rmdir($path.'.new');
 	}

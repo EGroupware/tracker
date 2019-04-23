@@ -131,6 +131,17 @@ label.tracker_trIdEdit:before {
   height: auto;
   width: auto;
 }
+/* Add comment file button */
+#tracker-edit_tracker-edit-add_comment .et2_file_span {
+    width: 22px;
+    height: 22px;
+    background-position: center;
+}
+/* Files linked to comments */
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs tbody,
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs td {
+	border: none;
+}
 #tracker-index_tracker-index-queue {
   position: relative;
   width: 400px;
