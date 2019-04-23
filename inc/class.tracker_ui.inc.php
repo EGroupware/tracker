@@ -331,6 +331,11 @@ class tracker_ui extends tracker_bo
 					}
 
 					$ret = $this->save();
+
+					$this->comment_files($this->data['tr_id'],
+						$content['replies'][0]['reply_id'] + 1,
+						$content["tracker:{$this->data['tr_id']}:comments/.new/"]
+					);
 					if ($ret === false)
 					{
 						$msg = lang('Nothing to save.');
@@ -799,6 +804,40 @@ class tracker_ui extends tracker_bo
 		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
 		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
+	}
+
+	/**
+	 * Deal with files from Add comment tab
+	 *
+	 * @param Arra $content
+	 */
+	protected function comment_files($tr_id, $reply_id, $files = array())
+	{
+		$path = "/apps/tracker/{$tr_id}/comments/";
+
+		// Get files.  Established tickets let files go to VFS, we'll move them.
+		$files = $files + Api\Vfs::find(
+				"{$path}new/",
+				array('type' => 'f', 'maxdepth' => 1)
+			);
+		if(!$content['reply_message'])
+		{
+			$content['reply_message'] = lang('File(s) added');
+		}
+		$comment = Api\Accounts::username($GLOBALS['egw_info']['user']['account_id']) . ' ' .
+			Api\DateTime::to();
+		foreach($files as $key => $file)
+		{
+			$file_path = is_array($file) ? $file['path'] : $file;
+			$file_name = is_array($file) && $file['name'] ? $file['name'] : Api\Vfs::basename($file);
+
+			// Comment with user and date
+			$result = Api\Vfs::proppatch($file_path, array(array('name' => 'comment', 'val' => $comment)));
+
+			// Move to final destination
+			Api\Vfs::rename($file_path, "$path{$reply_id}/{$file_name}");
+		}
+		Api\Vfs::rmdir($path.'.new');
 	}
 
 	/**
