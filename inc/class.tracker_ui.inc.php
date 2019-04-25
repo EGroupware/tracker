@@ -330,12 +330,12 @@ class tracker_ui extends tracker_bo
 						$this->data['reply_message'] = $content['reply_message'];
 					}
 
+					$ret = $this->save();
+
 					$this->comment_files($this->data['tr_id'],
-						$content['replies'][0]['reply_id'] + 1,
+						$this->data['replies'][0]['reply_id'],
 						$this->data
 					);
-
-					$ret = $this->save();
 
 					if ($ret === false)
 					{
@@ -824,7 +824,10 @@ class tracker_ui extends tracker_bo
 			);
 		if(count($files) && !$content['reply_message'])
 		{
+			// No comment makes no sense, add something then get that reply ID
 			$content['reply_message'] = lang('File(s) added');
+			$this->save();
+			return $this->comment_files($tr_id, $this->data['replies'][0]['reply_id'], $this->data);
 		}
 		$comment = Api\Accounts::username($GLOBALS['egw_info']['user']['account_id']) . ' ' .
 			Api\DateTime::to();

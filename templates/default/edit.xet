@@ -34,23 +34,23 @@
 	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
-				<column width="200"/>
+				<column width="60"/>
 				<column/>
 				<column/>
 			</columns>
 			<rows>
-				<row class="th" >
+				<row class="th" valign="top" >
+					<hbox align="left" class="et2_link_to et2_toolbar">
+						<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
+						<vfs-select method_id="tracker:$cont[id]:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" />
+					</hbox>
 					<hbox disabled="@no_canned">
 						<description value="Canned response" for="canned_response" class="3"/>
-						<menulist>
-							<menupopup statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one"/>
-						</menulist>
+						<select statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one" align="right"/>
 					</hbox>
 					<hbox align="right" disabled="@no_comment_visibility">
-						<description/>
 						<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 					</hbox>
-					<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<htmlarea id="reply_message" span="all" height="225" width="99%" imageUpload="link_to"/>

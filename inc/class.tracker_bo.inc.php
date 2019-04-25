@@ -2240,6 +2240,10 @@ class tracker_bo extends tracker_so
 			$trackerentry = $this->data;
 			$trackerentry['reply_message'] = $_message;
 			$trackerentry['popup'] = true;
+			$trackerentry['link_to'] = array(
+				'to_app' => 'tracker',
+				'to_id' => $ticketId
+			);
 			if (isset($msg['msg'])) $trackerentry['msg'] = $msg['msg'];
 			if (isset($msg['reply_creator'])) $trackerentry['reply_creator'] = $msg['reply_creator'];
 		}
@@ -2251,7 +2255,16 @@ class tracker_bo extends tracker_so
 		{
 			foreach ($_attachments as $attachment)
 			{
-				if($attachment['egw_data'])
+				if($ticketId)
+				{
+					// Put it where it will be tied to the comment
+					$attachment['name'] = 'comments/.new/'.$attachment['name'];
+				}
+				if($ticketId && $attachment['egw_data'])
+				{
+					Link::link('tracker',$trackerentry['link_to']['to_id'],array(array('app' => Link::DATA_APPNAME,'id'=>$attachment)));
+				}
+				else if($attachment['egw_data'])
 				{
 					Link::link('tracker',$trackerentry['link_to']['to_id'],Link::DATA_APPNAME,$attachment);
 				}
