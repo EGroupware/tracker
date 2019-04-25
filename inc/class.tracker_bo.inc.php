@@ -2079,6 +2079,15 @@ class tracker_bo extends tracker_so
 			$filter = array();
 			foreach ($emails as $mailadr)
 			{
+				// for LDAP, AD or UCS, check if the email belongs to an account first
+				if ($GLOBALS['egw']->accounts->name2id($mailadr, 'account_email'))
+				{
+					$filter['owner'] = 0;
+				}
+				else
+				{
+					unset($filter['owner']);
+				}
 				$contacts = array_merge($contacts,(array)$addressbook->search(
 					array(
 						'email' => $mailadr,
