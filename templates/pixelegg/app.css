@@ -136,6 +136,9 @@ label.tracker_trIdEdit:before {
     vertical-align: top
 }
 /* Files linked to comments */
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs tr:first-child {
+	border-top: 2ex solid transparent;
+}
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs tbody,
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs td {
 	border: none;

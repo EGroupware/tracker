@@ -70,6 +70,10 @@ label.tracker_trIdEdit:before { content: "#"; }
     vertical-align: top
 }
 /* Files linked to comments */
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs tr:first-child {
+	border-collapse:separate;
+	border-spacing: 30px;
+}
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs tbody,
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs td {
 	border: none;

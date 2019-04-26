@@ -8,7 +8,7 @@
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="egwGridView_grid">
 			<columns>
-				<column width="100"/>
+				<column width="120"/>
 				<column/>
 			</columns>
 			<rows>
