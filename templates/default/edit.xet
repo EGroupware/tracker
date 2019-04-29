@@ -16,7 +16,7 @@
 					<description value="Comments"/>
 					<textbox type="integer" id="num_replies" readonly="true"/>
 				</row>
-				<row class="row" valign="top">
+				<row class="row" valign="middle">
 					<vbox>
 						<date-time id="replies[$row][reply_created]" readonly="true"/>
 						<menulist>
@@ -25,7 +25,7 @@
 					</vbox>
 					<vbox>
 						<htmlarea id="replies[$row][reply_message]" mode="@tr_edit_mode" readonly="@editable_comments" span="all" width="99%"  editable_height="247" class="@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$cont[tr_id],$cont[replies][$row][reply_id]"/>
-						<vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[replies][$row][reply_id]}/" readonly="true" label=""/>
+						<vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[replies][$row][reply_id]}/" label=""/>
 					</vbox>
 				</row>
 			</rows>
