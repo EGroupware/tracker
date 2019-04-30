@@ -827,10 +827,20 @@ class tracker_mailhandler extends tracker_bo
 				//error_log(__METHOD__.__LINE__.'#'.$attachment['tmp_name'].'#'.$this->data['tr_id']);
 				if(is_readable($attachment['tmp_name']))
 				{
+					// Put it where it will be tied to the comment
+					if($this->ticketId)
+					{
+						$attachment['name'] = 'comments/.new/'.$attachment['name'];
+					}
+
 					//error_log(__METHOD__.__LINE__.'# trying to link '.$attachment['tmp_name'].'# to:'.$this->data['tr_id']);
 					Link::attach_file('tracker',$this->data['tr_id'],$attachment);
 				}
 			}
+			$this->comment_files($this->data['tr_id'],
+				$this->data['replies'][0]['reply_id'],
+				$this->data
+			);
 		}
 
 		return !$saverv;

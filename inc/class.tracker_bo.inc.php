@@ -2400,4 +2400,58 @@ OR tr_duedate IS NULL AND
 
 		return array_unique($users);
 	}
+
+
+	/**
+	 * Deal with files from Add comment tab
+	 *
+	 * @param Arra $content
+	 */
+	protected function comment_files($tr_id, $reply_id, &$content = array())
+	{
+		$path = "/apps/tracker/{$tr_id}/comments/";
+
+		// Get files.  Established tickets (should) let files go to VFS, we'll move them.
+		$files = Api\Vfs::find(
+				"{$path}.new/",
+				array('type' => 'f', 'maxdepth' => 1)
+			);
+		if(count($files) && !$content['reply_message'])
+		{
+			// No comment makes no sense, add something then get that reply ID
+			$content['reply_message'] = lang('File(s) added');
+			$this->save();
+			return $this->comment_files($tr_id, $this->data['replies'][0]['reply_id'], $this->data);
+		}
+		$comment = Api\Accounts::username($GLOBALS['egw_info']['user']['account_id']) . ' ' .
+			Api\DateTime::to();
+		foreach($files as $key => $file)
+		{
+			$file_name = is_array($file) && $file['name'] ? $file['name'] : Api\Vfs::basename($file);
+			$file_path = is_array($file) ? ($file['tmp_name'] ? $file['tmp_name'] : $file['path']) : $file;
+			$target = "$path{$reply_id}/{$file_name}";
+
+			// Move to final destination
+			Api\Vfs::rename($file_path, $target);
+
+			// Comment with user and date
+			$result = Api\Vfs::proppatch($target, array(array('name' => 'comment', 'val' => $comment)));
+		}
+		$this->remove_comment_dir($tr_id);
+	}
+
+	/**
+	 * Empty and remove the 'Add comment' temporary directory
+	 *
+	 * @param int $tr_id
+	 */
+	protected function remove_comment_dir($tr_id)
+	{
+		$path = "/apps/tracker/{$tr_id}/comments/.new";
+		$files = array_diff(Api\Vfs::scandir($path), array('.','..'));
+		foreach ($files as $file) {
+		  Api\Vfs::unlink("$path/$file");
+		}
+		Api\Vfs::rmdir($path);
+	}
 }
