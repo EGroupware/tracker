@@ -739,6 +739,12 @@ class tracker_ui extends tracker_bo
 		// Make link_to readonly if the user has no EDIT access
 		$readonlys['link_to'] = !$this->file_access($tr_id, Acl::EDIT);
 
+		// Make sure add comment file directory is empty, in case someone closed
+		// it without saving after selecting or uploading a file
+		if($this->file_access($tr_id, Acl::DELETE))
+		{
+			$this->remove_comment_dir($tr_id);
+		}
 		if ($tr_id && $readonlys['reply_message'])
 		{
 			$readonlys['button[save]'] = true;
@@ -843,9 +849,23 @@ class tracker_ui extends tracker_bo
 			// Comment with user and date
 			$result = Api\Vfs::proppatch($target, array(array('name' => 'comment', 'val' => $comment)));
 		}
-		Api\Vfs::rmdir($path.'.new');
+		$this->remove_comment_dir($tr_id);
 	}
 
+	/**
+	 * Empty and remove the 'Add comment' temporary directory
+	 *
+	 * @param int $tr_id
+	 */
+	protected function remove_comment_dir($tr_id)
+	{
+		$path = "/apps/tracker/{$tr_id}/comments/.new";
+		$files = array_diff(Api\Vfs::scandir($path), array('.','..'));
+		foreach ($files as $file) {
+		  Api\Vfs::unlink("$path/$file");
+		}
+		Api\Vfs::rmdir($path);
+	}
 	/**
 	 * query rows for the nextmatch widget
 	 *
