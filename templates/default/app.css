@@ -85,8 +85,9 @@ label.tracker_trIdEdit:before { content: "#"; }
 	width: 300px;
 }
 #tracker-edit_tracker-edit-add_comment .et2_hbox .et2_checkbox_label {
-	margin-top: 3px;
+	margin-top: 10px;
 }
+
 #tracker-edit_tracker-edit-comments .et2_vfs td.icon,
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
 	display:none
