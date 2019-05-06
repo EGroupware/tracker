@@ -2448,6 +2448,10 @@ OR tr_duedate IS NULL AND
 	protected function remove_comment_dir($tr_id)
 	{
 		$path = "/apps/tracker/{$tr_id}/comments/.new";
+		if(!Api\Vfs::is_dir($path))
+		{
+			return;
+		}
 		$files = array_diff(Api\Vfs::scandir($path), array('.','..'));
 		foreach ($files as $file) {
 		  Api\Vfs::unlink("$path/$file");
