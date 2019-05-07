@@ -650,7 +650,7 @@ class tracker_bo extends tracker_so
 
 				// replies set status pending back to open
 				if (($this->data['old_status'] == self::STATUS_PENDING && $this->data['old_status'] == $this->data['tr_status']) ||
-					(($this->comment_reopens || !property_exists($this, 'comment_reopens')) && $this->data['old_status'] == self::STATUS_CLOSED && $this->data['old_status'] == $this->data['tr_status']))
+					(($this->comment_reopens || !property_exists($this, 'comment_reopens')) && $this->is_closed_status($this->data['old_status']) && $this->data['old_status'] == $this->data['tr_status']))
 				{
 					$this->data['tr_status'] = self::STATUS_OPEN;
 				}
@@ -1333,6 +1333,18 @@ class tracker_bo extends tracker_so
 		return $filtered;
 	}
 
+	/**
+	 * Check if the given status is a closed status
+	 *
+	 * @param int $status ID of a status
+	 * @param int [$tracker] Optional tracker queue ID.  If not provided, current tracker
+	 *	will be used
+	 */
+	public function is_closed_status($status, $tracker = null)
+	{
+		$stati = $this->get_tracker_stati($tracker, true);
+		return (array_key_exists($status, $stati));
+	}
 	/**
 	 * Get tracker and category specific priorities
 	 *
