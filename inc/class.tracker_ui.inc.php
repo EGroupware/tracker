@@ -174,6 +174,12 @@ class tracker_ui extends tracker_bo
 							$reply['reply_message'] = Api\Html::htmlspecialchars($reply['reply_message']);
 						}
 					}
+					//// Make sure add comment file directory is empty, in case someone closed
+					// it without saving after selecting or uploading a file
+					if($this->file_access($tr_id, Acl::DELETE))
+					{
+						$this->remove_comment_dir($tr_id);
+					}
 				}
 				$needInit = false;
 			}
@@ -739,12 +745,6 @@ class tracker_ui extends tracker_bo
 		// Make link_to readonly if the user has no EDIT access
 		$readonlys['link_to'] = !$this->file_access($tr_id, Acl::EDIT);
 
-		// Make sure add comment file directory is empty, in case someone closed
-		// it without saving after selecting or uploading a file
-		if($this->file_access($tr_id, Acl::DELETE))
-		{
-			$this->remove_comment_dir($tr_id);
-		}
 		if ($tr_id && $readonlys['reply_message'])
 		{
 			$readonlys['button[save]'] = true;
