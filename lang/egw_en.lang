@@ -78,6 +78,7 @@ category	tracker	en	Category
 category for new tickets	tracker	en	Category for new tickets
 change assigned	tracker	en	Change assigned
 change assigned when updating	tracker	en	Change assigned when updating
+change color	tracker	en	Change color
 change group	tracker	en	Change group
 change group when updating	tracker	en	Change group when updating
 change owner when updating	tracker	en	Change owner when updating
@@ -89,6 +90,7 @@ choose a project from the drop-down list	tracker	en	Choose a project from the dr
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
 closed date	tracker	en	Closed date
+color	tracker	en	Color
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
@@ -155,6 +157,7 @@ e-mail notifications	tracker	en	Email notifications
 each value is a line like <id>[=<label>]	tracker	en	each value is a line like <id>[=<label>]
 each value is a line like id[=label]	tracker	en	each value is a line like id[=label]
 edit %1	tracker	en	Edit %1
+edit comment	tracker	en	Edit comment
 edit entry	tracker	en	Edit entry
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
@@ -237,6 +240,7 @@ introduction message	tracker	en	Introduction message
 invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
 item creator	tracker	en	Item creator
+language	tracker	en	Language
 language for the copy	tracker	en	Language for the copy
 last 3 months	tracker	en	Last 3 months
 last modified	tracker	en	Last modified
@@ -436,6 +440,7 @@ tracker item not found !!!	tracker	en	Tracker item not found!
 tracker list	tracker	en	Tracker list
 tracker queue	tracker	en	Tracker queue
 tracker queue renamed	tracker	en	Tracker queue renamed.
+tracker queues	tracker	en	Tracker queues
 tracker-%1 '%2' added.	tracker	en	Tracker-%1 '%2' added.
 tracker-%1 '%2' updated.	tracker	en	Tracker-%1 '%2' updated.
 tracker-%1 deleted.	tracker	en	Tracker-%1 deleted.
@@ -456,6 +461,7 @@ use field from csv if possible	tracker	en	Use field from CSV if possible
 use search results	tracker	en	Use search results
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	en	Use this tag for address labels. Put the content, you want to repeat, between two tags.
 user or group	tracker	en	User or group
+user preference	tracker	en	User preference
 version for new tickets	tracker	en	Version for new tickets
 versions	tracker	en	Versions
 vote for it!	tracker	en	Vote for it!

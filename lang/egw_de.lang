@@ -78,6 +78,7 @@ category	tracker	de	Kategorie
 category for new tickets	tracker	de	Kategorie für neue Tickets
 change assigned	tracker	de	Zugewiesener Benutzer ändern
 change assigned when updating	tracker	de	Zugewiesener Benutzer ändern bei der der Aktualisierung
+change color	tracker	de	Farbe ändern
 change group	tracker	de	Gruppe ändern
 change group when updating	tracker	de	Gruppe ändern bei der der Aktualisierung
 change owner when updating	tracker	de	Besitzer ändern bei der der Aktualisierung
@@ -89,6 +90,7 @@ choose a project from the drop-down list	tracker	de	Ein Projekt aus der Auswahll
 close pending	tracker	de	Schließe schwebend
 closed	tracker	de	Geschlossen
 closed date	tracker	de	Geschlossen am
+color	tracker	de	Farbe
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Erledigt zu
@@ -155,6 +157,7 @@ e-mail notifications	tracker	de	E-Mail Benachrichtigungen
 each value is a line like <id>[=<label>]	tracker	de	Jeder Wert entspricht einer Zeile in dem Format <id>[=<label>]
 each value is a line like id[=label]	tracker	de	Jeder Wert entspricht einer Zeile in dem Format  id[=label]
 edit %1	tracker	de	%1 bearbeiten
+edit comment	tracker	de	Kommentar bearbeiten
 edit entry	tracker	de	Ticket bearbeiten
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zur Mailbox Möglich, bitte passen die Sie Einstellungen an.
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
@@ -235,6 +238,7 @@ introduction message	tracker	de	Willkommensnachricht
 invalid	tracker	de	Ungültig
 item assignee	tracker	de	Eintrag Zugewiesener
 item creator	tracker	de	Eintrag Ersteller
+language	tracker	de	Sprache
 language for the copy	tracker	de	Sprache für die Kopie
 last 3 months	tracker	de	Letzten 3 Monate
 last modified	tracker	de	Zuletzt geändert
@@ -433,6 +437,7 @@ tracker item not found !!!	tracker	de	Ticket nicht gefunden !!!
 tracker list	tracker	de	Verfolgungssystem Liste
 tracker queue	tracker	de	Fachgebiet
 tracker queue renamed	tracker	de	Verfolgungssystem-Queue umbenannt
+tracker queues	tracker	de	Verfolgungssystem-Queues
 tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.
 tracker-%1 '%2' updated.	tracker	de	Verfolgungssystem-%1 '%2' aktualisiert.
 tracker-%1 deleted.	tracker	de	Verfolgungssystem-%1 gelöscht.
@@ -453,6 +458,7 @@ use field from csv if possible	tracker	de	Dieses Feld von der CSV Definition ver
 use search results	tracker	de	Diese Suchanfrage verwenden
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	de	Verwenden Sie diesen Platzhalter für Adressetiketten, deren Inhalt Sie zwischen beiden Platzhaltern wiederholen möchten.
 user or group	tracker	de	Benutzer oder Gruppe
+user preference	tracker	de	Benutzer-Einstellungen
 version for new tickets	tracker	de	Version für neue Tickets
 versions	tracker	de	Versionen
 vote for it!	tracker	de	Dafür abstimmen!
