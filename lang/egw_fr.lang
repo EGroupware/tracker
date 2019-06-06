@@ -57,6 +57,7 @@ allow voting	tracker	fr	Permettre les votes
 allow voting on tracker items, show and sort after the votes	tracker	fr	Permettre de voter, afficher et trier des éléments du traqueur
 already escalated	tracker	fr	Déjà escaladés
 amount	tracker	fr	Montant
+application mail expected but got: %1	tracker	fr	Module Mail attendu mais retour : %1
 applies the changes	tracker	fr	appliquer les changements
 assign to project	tracker	fr	Assigné au projet
 assigned to	tracker	fr	Assigné à
@@ -153,6 +154,7 @@ deny global	tracker	fr	Refus global
 description	tracker	fr	Description
 determines the order the fields are displayed	tracker	fr	Détermine l'ordre d'afficahge des champs
 directory with documents to insert entries	tracker	fr	Répertoire avec les documents pour insérer les entrées
+do not send notifications to external email (cc field)	tracker	fr	Ne pas envoyer de notifications aux emails externes (champ cc)
 do you want a notification, if items you are responsible for are about to start?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont sur le point de commencer.
 do you want a notification, if items you are responsible for are due?	tracker	fr	Etre notifiés si des entrées dont vous êtes responsables sont dues.
 do you want to add mailheader information to description and/or comments?	tracker	fr	Souhaitez-vous ajouter les entêtes d'email à la description et/ou aux commentaires ?
@@ -187,6 +189,7 @@ escalation deleted.	tracker	fr	Escalade supprimée.
 escalation not found!	tracker	fr	Escalade non trouvée !
 escalation saved.	tracker	fr	Escalade enregistrée.
 everybody	tracker	fr	Tout le monde
+exclude links of the following apps on timesheet creation	tracker	fr	Exclure les liens des modules suivants sur la création de feuilles de temps
 existing links	tracker	fr	Liens existants
 exists	tracker	fr	Existe
 export as csv	tracker	fr	Exporter au format CSV
@@ -264,6 +267,8 @@ mailbox settings used: %1	tracker	fr	Paramètres email utiilisé : %1
 manage mapping	tracker	fr	Gestion des correspondances
 mark as read	tracker	fr	Marqué comme lu
 mark as unread	tracker	fr	Marqué comme non-lu
+match again after	tracker	fr	Refaire correspondre après
+matching filter	tracker	fr	Filtre de correspondance
 max length of the input [, length of the inputfield (optional)]	tracker	fr	Longueur maximum de l'entrée [, longueur du champ de saisi (optionnel)]
 maximum %1 times	tracker	fr	maximum %1 fois
 maximum %s times	tracker	fr	maximum %s fois
@@ -316,6 +321,7 @@ permit html editing in overview and comments	tracker	fr	Autoriser l'édition en 
 pop3	tracker	fr	POP3
 port number	tracker	fr	Numéro de port
 postponed	tracker	fr	Remis à plus tard
+pre-selected version when creating a new tracker	tracker	fr	Version pré-sélectionné à la création d'un nouveau traqueur
 print entry	tracker	fr	Imprimer l'entrée
 priorities	tracker	fr	Priorités
 priorities with empty label are not available to the user	tracker	fr	Les priorités sans label ne sont pas disponibles pour l'utilisateur.
@@ -329,6 +335,7 @@ read mail address	tracker	fr	Lire l'adresse email
 receive notifications about assigned tracker-items	tracker	fr	Recevoir les notifications des éléments de traqueur assignés
 receive notifications about created tracker-items	tracker	fr	Recevoir les notifications des éléments de traqueur créés
 receive notifications about due entries you created or are assigned to	tracker	fr	Recevoir les notifications sur les éléments échus que vous avez créés ou dont vous êtes assignés.
+receive notifications about own changes in tracker-items	tracker	fr	Recevoir les notifications sur ses propres changements sur les éléments du traqueur
 receive notifications about starting entries you created or are assigned to	tracker	fr	Recevoir les notifications sur les éléments débutants que vous avez créés ou dont vous êtes assignés.
 receive notifications in html	tracker	fr	Recevoir les notifications en HTML
 refused to open mailbox: %1	tracker	fr	ouverture de boîte email refusée : %1
@@ -358,6 +365,7 @@ saves the changes made and leaves	tracker	fr	Enregistrer les modifications et qu
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	fr	Sélectionner un traqueur par défaut pour les nouveaux tickets ou "Rejet" pour ne pas permettre la création de tickets par email.
 select accounts for which the custom field should be visible	tracker	fr	Sélectionner les comptes pour lesquels le champ personnalisé devrait être visible.
 select existing report	tracker	fr	Sélectionner un rapport existant
+select how autoreplies should be sent when mails are received	tracker	fr	Choisir comment les réponses automatiques seront envoyées à la réception d'un mail
 select multiple	tracker	fr	Sélectionner plusieurs
 select one...	tracker	fr	sélectionnez un...
 select tracker queue	tracker	fr	Sélectionner une queue de traqueur
@@ -399,6 +407,7 @@ the following document-types are supported:	tracker	fr	Les types de documents su
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	fr	Nom utilisé en interne (<= 20 caractères), le changer rendra certaines données inaccessibles.
 the text displayed to the user	tracker	fr	le texte montré à l'utilisateur
 there already an escalation for that filter!	tracker	fr	Il y a déjà une escalade pour ce filtre !
+this message was forwarded to you from egroupware-tracker	tracker	fr	Ce message vous a été transmis depuis le module Traqueur de EGroupware
 this module allows to add a ticket.	tracker	fr	Ce module permet d'ajouter un ticket.
 this module displays information from the tracker.	tracker	fr	Ce module affiche les informations du Traqueur
 this month	tracker	fr	Ce mois
@@ -421,6 +430,7 @@ tracker configuration	tracker	fr	Configuration du Traqueur
 tracker csv export	tracker	fr	Export CSV de traqueurs
 tracker csv import	tracker	fr	Import CSV de traqueurs
 tracker deleted	tracker	fr	Queue de Traqueur supprimée
+tracker entry can only seen by creator and admins	tracker	fr	L'élément Traqueur sera seulement visible par le créateur et les administrateurs
 tracker fields:	tracker	fr	Champs de traqueur :
 tracker for new tickets	tracker	fr	Traqueur pour les nouveaux tickets
 tracker for the  home screen	tracker	fr	Traqueur pour l'écran principal

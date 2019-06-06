@@ -28,7 +28,7 @@ add assigned	tracker	de	Zugewiesen hinzufügen
 add comment	tracker	de	Kommentar hinzufügen
 add email-address	tracker	de	Füge E-Mail-Adresse hinzu
 add from addressbook	tracker	de	Aus Adressbuch hinzufügen
-add infolog	tracker	de	Infolog hinzufügen
+add infolog	tracker	de	InfoLog hinzufügen
 add restricted comment	tracker	de	Kommentar mit eingeschränkter Sichtbarkeit hinzufügen
 add timesheet entry	tracker	de	Stundenzettel hinzufügen
 add to	tracker	de	Hinzufügen zu
@@ -41,7 +41,7 @@ all tickets are already converted to tracker	tracker	de	alle Tickets sind bereit
 all versions	tracker	de	Alle Versionen
 allow bounties	tracker	de	Prämien erlauben
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	de	Dürfen Kommentare mit eingeschränkter Sichtbarkeit (nur für Administratoren, Techniker, Zugewiesenen Benutzer) erstellt werden.
-allow creation of infolog entries from tracker tickets	tracker	de	Dürfen Infologs aus dem Ticketsystem erstellt werden.
+allow creation of infolog entries from tracker tickets	tracker	de	Dürfen InfoLogs aus dem Ticketsystem erstellt werden
 allow default projects for tracker	tracker	de	Erlaube Zuordnung von Projekten in der Tracker Konfiguration
 allow editing by	tracker	de	Bearbeiten erlauben von
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	de	Erlaube die Voreinstellung von Projektzuordnungen für Tickets.
@@ -85,7 +85,7 @@ change owner when updating	tracker	de	Besitzer ändern bei der der Aktualisierun
 changes made below will be lost, if not applied before!	tracker	de	Änderungen darunter gehen verloren, wenn sie nicht vorher übernommen werden!
 check all	tracker	de	Alle auswählen
 check mail interval	tracker	de	Überprüfungsintervall für E-Mails
-choose 'creator' of imported data	tracker	de	Wählen Sie den 'Ersteller' der Importierten Daten.
+choose 'creator' of imported data	tracker	de	Wählen Sie den 'Ersteller' der importierten Daten.
 choose a project from the drop-down list	tracker	de	Ein Projekt aus der Auswahlliste wählen
 close pending	tracker	de	Schließe schwebend
 closed	tracker	de	Geschlossen
@@ -164,6 +164,7 @@ email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umwandlung kann nur für alle Verfolgungssysteme konfiguriert werden.
 enter an email address here if unrecognized mails should be forwarded	tracker	de	E-Mail Adresse zu der nicht zuordenbare E-Mails weitergeleitet werden
 enter an opening text for the reply message	tracker	de	Geben Sie einen Anfangstext für die Antwortnachricht ein
+enter the email for reply to	tracker	de	EMail Adresse an die Antworten gesendet werden sollen
 enter the imap server from which emails should be fetched	tracker	de	IMAP Server von dem E-Mail gelesen werden sollen
 enter the mail address that will be read.	tracker	de	Tragen sie hier eine E-Mail Adresse ein, die als zusätzlicher Filter für ungelesene E-Mails angewendet werden soll. Lassen Sie das Feld leer, wenn Sie alle ungelesenen E-Mails verarbeiten möchten.
 entry saved	tracker	de	Eintrag gespeichert
@@ -337,6 +338,7 @@ rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
 reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten
+reply to	tracker	de	Antworten an
 report as bar chart by the selected criterias	tracker	de	Bericht als Balkendiagramm für die ausgewählten Kriterien
 report as pie chart for the main criterias	tracker	de	Bericht als Tortendiagramm für die Hauptkriterien
 report parameter	tracker	de	Parameter der Berichte
@@ -377,7 +379,7 @@ set to	tracker	de	Änderungen anwenden für
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
 should there be a tracker-box on  home screen?	tracker	de	Soll in Home eine Box des Verfolgungssystems erscheinen?
-show start date and due date	tracker	de	Zeige das Start und Fälligkeitsdatum an
+show start date and due date	tracker	de	Zeige das Start-und Fälligkeitsdatum an
 show the tracker send you notification mails, in tracker items that you updates?	tracker	de	Empfange Sie Benachrichtigungen über Einträge die Sie selbst geändert haben
 signature	tracker	de	Signatur
 skip record	tracker	de	Eintrag überspringen
@@ -491,5 +493,3 @@ you voted %1.	tracker	de	Sie stimmten am %1 ab.
 ♦ own without reply not closed	tracker	de	♦ Eigene unbeantwortet nicht geschlossen
 ♦ without 30 days reply not closed	tracker	de	♦ 30 Tage unbeantwortet nicht geschlossen
 ♦ without reply not closed	tracker	de	♦ Unbeantwortet offen
-reply to	tracker	de	Antworten an
-enter the email for reply to	tracker	de	EMail Adresse an die Antworten gesendet werden sollen
