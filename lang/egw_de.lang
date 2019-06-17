@@ -162,6 +162,7 @@ edit entry	tracker	de	Ticket bearbeiten
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zur Mailbox Möglich, bitte passen die Sie Einstellungen an.
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umwandlung kann nur für alle Verfolgungssysteme konfiguriert werden.
+enable color code for	tracker	de	Farbliche Kennzeichnung einschalten für
 enter an email address here if unrecognized mails should be forwarded	tracker	de	E-Mail Adresse zu der nicht zuordenbare E-Mails weitergeleitet werden
 enter an opening text for the reply message	tracker	de	Geben Sie einen Anfangstext für die Antwortnachricht ein
 enter the email for reply to	tracker	de	EMail Adresse an die Antworten gesendet werden sollen

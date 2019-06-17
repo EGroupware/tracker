@@ -350,7 +350,7 @@
 				<row class="row">
 					<description value="Copy to"/>
 					<textbox statustext="E-Mail address to which a copy of all tracker-notifications should be send" id="notification[copy]" size="30"/>
-					<description for="notification_lang" value="Language" no_lang="1"/>
+					<description for="notification_lang" value="Language"/>
 					<menulist>
 						<menupopup statustext="Language for the copy" id="notification[lang]" no_lang="1"/>
 					</menulist>
