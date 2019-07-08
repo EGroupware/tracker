@@ -716,8 +716,8 @@ class tracker_ui extends tracker_bo
 		// Keep updating category & priority to default until it's saved
 		if(!$tr_id)
 		{
- 			$content['cat_id'] = $this->data['cat_id'] ? $this->data['cat_id'] : (int)$default_category;
-			$content['tr_priority'] = $this->data['tr_priority'] ? (int)$this->data['tr_priority'] : (int)$default_priority;
+ 			$content['cat_id'] = $default_category ? (int)$default_category : $this->data['cat_id'];
+			$content['tr_priority'] = $default_priority ? (int)$this->data['tr_priority'] : $this->data['tr_priority'];
 		}
 
 		foreach($this->field2history as $field => $status)
