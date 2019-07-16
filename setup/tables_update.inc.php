@@ -776,3 +776,13 @@ function tracker_upgrade17_1_001()
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '17.1.002';
 }
 
+
+/**
+ * Bump version to 19.1
+ *
+ * @return string
+ */
+function tracker_upgrade17_1_002()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '19.1';
+}

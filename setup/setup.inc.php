@@ -6,12 +6,12 @@
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @package tracker
  * @subpackage setup
- * @copyright (c) 2006-17 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (c) 2006-19 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  */
 
 $setup_info['tracker']['name']      = 'tracker';
-$setup_info['tracker']['version']   = '17.1.002';
+$setup_info['tracker']['version']   = '19.1';
 $setup_info['tracker']['app_order'] = 5;
 $setup_info['tracker']['tables']    = array('egw_tracker','egw_tracker_replies','egw_tracker_votes','egw_tracker_bounties','egw_tracker_assignee','egw_tracker_escalations','egw_tracker_escalated','egw_tracker_extra');
 $setup_info['tracker']['enable']    = 1;
@@ -43,5 +43,5 @@ $setup_info['tracker']['hooks']['change_account_ids'] = 'tracker_admin::change_a
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(
 	 'appname' => 'api',
-	 'versions' => Array('17.1')
+	 'versions' => Array('19.1')
 );
