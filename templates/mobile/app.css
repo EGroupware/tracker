@@ -119,6 +119,10 @@ label.tracker_trIdEdit:before {
   background: beige;
   width: 100%;
   display: inline-block;
+  overflow: hidden;
+}
+.reply_visible_0 {
+  overflow: hidden;
 }
 #tracker-edit_tr_creator {
   white-space: nowrap;
@@ -143,6 +147,32 @@ label.tracker_trIdEdit:before {
   height: auto;
   width: auto;
 }
+/* Add comment file buttons */
+#tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar * {
+  vertical-align: top;
+}
+#tracker-edit_tracker-edit-add_comment .et2_hbox .et2_label[for="canned_response"] {
+  padding-top: 6px;
+}
+/* Files linked to comments */
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs tr:first-child {
+  border-collapse: separate;
+  border-spacing: 30px;
+}
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs tbody,
+#tracker-edit_tracker-edit-comments .et2_file.et2_vfs td {
+  border: none;
+}
+#tracker-edit_tracker-edit-add_comment .et2_file.et2_vfs table {
+  width: 300px;
+}
+#tracker-edit_tracker-edit-add_comment .et2_hbox .et2_checkbox_label {
+  margin-top: 10px;
+}
+#tracker-edit_tracker-edit-comments .et2_vfs td.icon,
+#tracker-edit_tracker-edit-comments .et2_vfs .progress {
+  display: none;
+}
 #tracker-index_tracker-index-queue {
   position: relative;
   width: 400px;
@@ -151,6 +181,9 @@ label.tracker_trIdEdit:before {
 }
 #tracker-admin .jPicker {
   vertical-align: middle;
+}
+.et2_editable {
+  width: 100%;
 }
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
   font-size: 1.15em !important;
