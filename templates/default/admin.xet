@@ -520,7 +520,6 @@
 						<menulist>
 							<menupopup type="select-account" statustext="Select which username should be used when unrecognized mails are handled." id="mailhandling[unrec_mail]" options="Reject"/>
 						</menulist>
-						<description value=")"/>
 					</hbox>
 				</row>
 				<row class="row">
