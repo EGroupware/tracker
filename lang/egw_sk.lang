@@ -6,12 +6,6 @@
 %1 is due %2	tracker	sk	%1 má termín do %2
 %1 is starting %2	tracker	sk	%1 začína %2
 %1 tickets have been converted	tracker	sk	%1 kariet bolo skonvertovaných
-♦ not closed	tracker	sk	♦ Neuzavreté
-♦ own not closed	tracker	sk	♦ Moje neuzavreté
-♦ own or assigned not closed	tracker	sk	♦ Vlastné alebo priradené, neuzavreté
-♦ own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté
-♦ without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
-♦ without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
 (beware of mailloops, check the help!)	tracker	sk	(Pozor na nekonečné poštové slučky, konzultujte manuál!)
 (new tickets as	tracker	sk	(Nové karty ako
 --> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu
@@ -31,6 +25,7 @@ add a ticket	tracker	sk	Pridať kartu
 add additionally	tracker	sk	Pridať dodatočne
 add assigned	tracker	sk	Pridať zodpovedných
 add comment	tracker	sk	Pridať poznámku
+add email-address	tracker	sk	Pridať e-mailovú adresu
 add from addressbook	tracker	sk	Pridať z Adresára
 add infolog	tracker	sk	Pridať položku Záznamníka
 add restricted comment	tracker	sk	Pridať poznámku s obmedzením
@@ -82,6 +77,7 @@ category	tracker	sk	Kategória
 category for new tickets	tracker	sk	Kategória pre nové karty
 change assigned	tracker	sk	Zmeniť zodpovedných
 change assigned when updating	tracker	sk	Zmeniť zodpovedných pri aktualizácii
+change color	tracker	sk	Zmeniť farbu
 change group	tracker	sk	Zmeniť skupinu
 change group when updating	tracker	sk	Zmeniť skupinu pri aktualizácii
 change owner when updating	tracker	sk	Zmeniť vlastníka pri aktualizovaní
@@ -92,6 +88,8 @@ choose 'creator' of imported data	tracker	sk	Vyberte 'ohlasovateľa' importovan�
 choose a project from the drop-down list	tracker	sk	Vyberte projekt z rozbaľovacieho zoznamu
 close pending	tracker	sk	Uzavrieť 'vybavované'
 closed	tracker	sk	Uzavreté
+closed date	tracker	sk	Dátum zatvorenia
+color	tracker	sk	Farba
 comment by %1 at %2:	tracker	sk	Poznámka od %1 k %2:
 comments	tracker	sk	Poznámky
 completed	tracker	sk	Hotovo
@@ -143,6 +141,7 @@ deletes this field	tracker	sk	odstráni túto položku
 deny global	tracker	sk	Odoprieť globálne
 determines the order the fields are displayed	tracker	sk	určuje poradie, v akom sa položky zobrazujú
 directory with documents to insert entries	tracker	sk	Priečinok s dokumentami pre vloženie položiek
+do not send notifications to external email (cc field)	tracker	sk	Neposielať upozornenia na externý e-mail (pole CC)
 do you want a notification, if items you are responsible for are about to start?	tracker	sk	Chcete dostať pripomienku, keď sa majú začať položky, za ktoré ste zodpovední?
 do you want a notification, if items you are responsible for are due?	tracker	sk	Chcete dostať pripomienku, keď nastane termín splnenia tých položiek, za ktoré ste zodpovední?
 do you want to add mailheader information to description and/or comments?	tracker	sk	Chcete pridať informácie z hlavičky správy do opisu a/alebo poznámky?
@@ -157,12 +156,15 @@ e-mail notifications	tracker	sk	E-mailové pripomienky
 each value is a line like <id>[=<label>]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
 each value is a line like id[=label]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
 edit %1	tracker	sk	Upraviť %1
+edit comment	tracker	sk	Upraviť poznámku
 edit entry	tracker	sk	Upraviť položku
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	sk	EGroupware - obsluha e-mailov Sledovača: raz sa už nepodarilo pripojiť, a profil sa odvtedy nezmenil
 email address to contact you	tracker	sk	Vaša e-mailová adresa
 email handling can be configured only for all trackers	tracker	sk	Obsluha e-mailov sa dá konfigurovať len pre všetky sledovače.
+enable color code for	tracker	sk	Zapnúť farebný kód pre
 enter an email address here if unrecognized mails should be forwarded	tracker	sk	Zadajte e-mailovú adresu, ak sa majú preposielať nerozpoznané správy
 enter an opening text for the reply message	tracker	sk	Zadajte úvodný text pre odpovedaciu správu
+enter the email for reply to	tracker	sk	Zadajte e-mail na ktorý sa vráti odpoveď (reply to)
 enter the imap server from which emails should be fetched	tracker	sk	Zadajte IMAP server, z ktorého sa majú správy preberať.
 enter the mail address that will be read.	tracker	sk	Zadajte e-mailovú adresu, ktorá sa použije ako prídavný filter pre neprečítané správy. Ak sa majú čítať všetky neprečítané správy, ponechajte prázdne.
 entry saved	tracker	sk	Položka bola uložená
@@ -324,15 +326,16 @@ read mail address	tracker	sk	Filtrovať poštu pre túto e-mailovú adresu
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
 receive notifications about created tracker-items	tracker	sk	Dostávať pripomienky o vytvorených záležitostiach Sledovača
 receive notifications about due entries you created or are assigned to	tracker	sk	Dostávať pripomienky o položkách v termíne ukončenia ktoré ste vytvorili alebo za ktoré ste zodpovední
+receive notifications about own changes in tracker-items	tracker	sk	Dostávať pripomienky o svojich vlastných zmenách v položkách Sledovača
 receive notifications about starting entries you created or are assigned to	tracker	sk	Dostávať pripomienky o začínajúcich položkách ktoré ste vytvorili alebo za ktoré ste zodpovední
 receive notifications in html	tracker	sk	Dostávať pripomienky vo formáte HTML
-receive notifications about own changes in tracker-items	tracker	sk	Dostávať pripomienky o svojich vlastných zmenách v položkách Sledovača
 refused to open mailbox therefore changed interval from %1 to %2	tracker	sk	odmietnuté pripojenie k poštovej schránke, preto mením interval z %1 na %2
 refused to open mailbox: %1	tracker	sk	odmietnuté pripojenie k poštovej schránke: %1
 rejected	tracker	sk	Odmietnuté
 remind	tracker	sk	Pripomenúť
 replacements for inserting entries into documents	tracker	sk	Náhrady pre vkladanie polí do dokumentov
 reply also to unknown addresses	tracker	sk	Odpovedať aj na neznáme adresy
+reply to	tracker	sk	Odpovedať na
 report as bar chart by the selected criterias	tracker	sk	Hlásenie vo forme stĺpcového grafu podľa zadaných kritérií
 report as pie chart for the main criterias	tracker	sk	Hlásenie vo forme koláčového grafu pre hlavné kritériá
 report parameter	tracker	sk	Parameter hlásenia
@@ -391,6 +394,7 @@ sum	tracker	sk	Suma
 summary	tracker	sk	Zhrnutie
 tag to mark positions for address labels	tracker	sk	Značka pre vyznačenie pozícií pre štítky s adresami
 technicians	tracker	sk	Technici
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	sk	Vyskúšať spracovanie pošty (vykoná spracovanie pošty hneď po uložení/potvrdení bez ohľadu na interval, a to aj keď je vypnuté)
 thank you for setting this bounty.	tracker	sk	Ďakujeme za vypísanie tejto odmeny.
 thank you for voting.	tracker	sk	Ďakujeme za Váš hlas.
 the bounty will not be shown, until the money is received.	tracker	sk	Odmena sa NEBUDE zobrazovať, až kým nebudú prijaté peniaze.
@@ -432,6 +436,7 @@ tracker item not found !!!	tracker	sk	Záležitosť Sledovača sa nenašla !!!
 tracker list	tracker	sk	Zoznam Sledovača
 tracker queue	tracker	sk	Fronta Sledovača
 tracker queue renamed	tracker	sk	Fronta Sledovača bola premenovaná.
+tracker queues	tracker	sk	Fronty Sledovača
 tracker-%1 '%2' added.	tracker	sk	Sledovač-%1 '%2' pridané.
 tracker-%1 '%2' updated.	tracker	sk	Sledovač-%1 '%2' aktualizované.
 tracker-%1 deleted.	tracker	sk	Sledovač-%1 '%2' odstránené.
@@ -451,6 +456,8 @@ use custom signature	tracker	sk	Použiť vlastný podpis
 use field from csv if possible	tracker	sk	Použiť pole z CSV ak je možné
 use search results	tracker	sk	Použiť výsledok vyhľadávania
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	sk	Túto značku použite pre štítky s adresou. Obsah, ktorý chcete opakovať, vložte medzi dve takéto značky.
+user or group	tracker	sk	Používateľ alebo skupina
+user preference	tracker	sk	Používateľské predvoľby
 version for new tickets	tracker	sk	Verzia nových kariet
 versions	tracker	sk	Verzie
 vote for it!	tracker	sk	Hlasovať za vyriešenie
@@ -477,3 +484,9 @@ you need to select some entries first	tracker	sk	Najprv musíte vybrať nejakú 
 you need to select something to change and some tracker items!	tracker	sk	Mali by ste vybrať, čo chcete zmeniť, a tiež niektoré záležitosti Sledovača!
 you need to specify amount, donators name and email address!	tracker	sk	Musíte zadať obnos, meno darcu A E-mailovú adresu!
 you voted %1.	tracker	sk	Hlasovali ste %1.
+♦ not closed	tracker	sk	♦ Neuzavreté
+♦ own not closed	tracker	sk	♦ Moje neuzavreté
+♦ own or assigned not closed	tracker	sk	♦ Vlastné alebo priradené, neuzavreté
+♦ own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté
+♦ without 30 days reply not closed	tracker	sk	♦ Bez 30-dňovej odpovede neuzavreté
+♦ without reply not closed	tracker	sk	♦ Bez odpovede neuzavreté
