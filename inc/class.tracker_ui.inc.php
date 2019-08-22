@@ -1754,6 +1754,12 @@ width:100%;
 			);
 		}
 
+		$actions += EGroupware\Api\Link\Sharing::get_actions('tracker', $group);
+		// ACL blocks most access right now TODO: allow access
+		unset($actions['share']['children']['shareWritable']);
+		unset($actions['share']['children']['shareFiles']);
+
+
 		$actions['documents'] = tracker_merge::document_action(
 			$this->prefs['document_dir'], ++$group, 'Insert in document', 'document_',
 			$this->prefs['default_document']
