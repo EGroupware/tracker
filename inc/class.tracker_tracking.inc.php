@@ -107,7 +107,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			// If someone made a restricted comment, hide that from change tracking (notification & history)
 			$old['num_replies'] = $data['num_replies'] - (!$data['reply_message'] || $data['reply_visible'] != 0 ? 0 : 1);
-			
+
 			$changes = $this->save_history($data,$old,$deleted,$changed_fields);
 		}
 		// check if the not tracked field num_replies changed and count that as change to
@@ -267,6 +267,14 @@ class tracker_tracking extends Api\Storage\Tracking
 				break;
 			case 'skip_notify':
 				$config = array_merge((array)$config,$data['skip_notify'] ? $data['skip_notify'] : (array)$this->skip_notify);
+				break;
+			case 'reply_to':
+				if (empty($config))	// if no explicit reply_to set in notifications use sender from mail config
+				{
+					$config = $this->tracker->notification[$tracker]['sender'] ?
+						$this->tracker->notification[$tracker]['sender'] :
+						$this->tracker->notification[0]['sender'];
+				}
 				break;
 		}
 		//error_log(__METHOD__.__LINE__.' Name:'.$name.' -> '.array2string($config).' Data:'.array2string($data));
