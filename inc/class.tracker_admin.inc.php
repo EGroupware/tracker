@@ -119,10 +119,7 @@ class tracker_admin extends tracker_bo
 					}
 					break;
 				case 'change_color':
-					if ($_content['tracker_color'])
-					{
-						$this->change_color_tracker($tracker, $_content['tracker_color']);
-					}
+					$this->change_color_tracker($tracker, $_content['tracker_color']);
 					break;
 				case 'rename':
 					if (!$_content['add_name'])
@@ -327,9 +324,9 @@ class tracker_admin extends tracker_bo
 							// check if new cat or changed, in case of projects the id and a free name is stored
 							if (!$old_cat || $cat['name'] != $old_cat['name'] ||
 								($tracker && in_array($tracker, (array)$old_cat['data']['denyglobal']) != !empty($cat['denyglobal'])) ||
-								($name == 'cats' && ((int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] || $cat['cat_color'] != $old_cat['data']['cat_color'] ||
+								($name == 'cats' && ((int)$cat['autoassign'] != (int)$old_cat['data']['autoassign'] || $cat['cat_color'] != $old_cat['data']['color'] ||
 										(($default_category && ($cat['id']==$default_category || $cat['isdefault'] && $cat['id']!=$default_category))||!$default_category && $cat['isdefault']))) ||
-								($name == 'versions' && ($cat['version_color'] != $old_cat['version_color'])) ||
+								($name == 'versions' && ($cat['version_color'] != $old_cat['data']['color'])) ||
 								($name == 'statis' && (int)$cat['closed'] != (int)$old_cat['data']['closed']) ||
 								($name == 'projects' && (int)$cat['projectlist'] != (int)$old_cat['data']['projectlist']) ||
 								($name == 'responses' && $cat['description'] != $old_cat['data']['response']) ||
@@ -356,10 +353,11 @@ class tracker_admin extends tracker_bo
 										$old_cat['data']['autoassign'] = $cat['autoassign'];
 										// we can't use widget id color for both cat and version becuase
 										// it will confilict as duplicated id in et2.
+										$no_change = ($old_cat['data']['color'] == $cat['cat_color']);
 										$old_cat['data']['color'] = $cat['cat_color'];
 										if ($cat['id']==$default_category)
 										{
-											$no_change = $cat['isdefault'];
+											$no_change = $no_change && $cat['isdefault'];
 											$old_cat['data']['isdefault'] = true;
 											if($no_change)
 											{
