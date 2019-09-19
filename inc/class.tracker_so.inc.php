@@ -743,6 +743,28 @@ class tracker_so extends Api\Storage
 		{
 			throw new EGroupware\Api\Exception\WrongParameter();
 		}
+
+		// Get previous value for history
+		$old = $this->db->select(
+				self::REPLIES_TABLE,
+				array('*'),
+				array('reply_id' => (int)$data['reply_id']),
+				false,__LINE__,__FILE__
+		)->fetch();
+
+		// History - log ID, date & diff
+		$diff = new \Horde_Text_Diff('auto', array(explode("\n",$old['reply_message']), explode("\n",$data['reply_message'])));
+		$renderer = new \Horde_Text_Diff_Renderer_Unified();
+		$new = $renderer->render($diff);
+		EGroupware\Api\Storage\History::static_add(
+				'tracker', (int)$old['tr_id'], $GLOBALS['egw_info']['user']['account_id'], 'comment',
+				'ID: ' . $old['reply_id'] . Api\Storage\Tracking::ONE2N_SEPERATOR .
+				$old['reply_created'] . Api\Storage\Tracking::ONE2N_SEPERATOR .
+				$new,
+				Api\Storage\Tracking::DIFF_MARKER
+		);
+
+		// Update comment
 		return $this->db->update(
 			self::REPLIES_TABLE,
 			$data,
