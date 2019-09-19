@@ -593,6 +593,7 @@ class tracker_ui extends tracker_bo
 					'tr_duedate' => 'date-time',
 					'Re' => self::$resolutions + $this->get_tracker_labels('resolution',$tracker),
 					'Gr' => 'select-account',
+					'comment' => array('label','date-time','diff'),
 				),
 			),
 		);
@@ -734,6 +735,7 @@ class tracker_ui extends tracker_bo
 		$sel_options['status']['xb'] = 'Bounty deleted';
 		$sel_options['status']['bo'] = 'Bounty set';
 		$sel_options['status']['Bo'] = 'Bounty confirmed';
+		$sel_options['status']['comment'] = 'Comment';
 
 		$readonlys['tabs'] = array(
 			'comments' => !$tr_id || !$content['num_replies'],
@@ -2185,4 +2187,46 @@ width:100%;
 		$content['msg'] .= ($content['msg']?"\n":'').lang('%1 copied - the copy can now be edited', lang(Link::get_registry('tracker','entry')));
 	}
 
+	/**
+	 * Modify history to hide changes on restricted comments if the current user
+	 * is not allowed to see them.
+	 *
+	 * @param array $data values for keys "data" (data) and "args":
+	 *  values for keys "value", "rows" (reference) and "total" (reference)
+	 */
+	public function modify_history(array &$data)
+	{
+		// Is current user restricted?
+		$this->read($data['value']['record_id']);
+		$user = $GLOBALS['egw_info']['user']['account_id'];
+		$is_admin = $this->is_admin($this->data['tr_tracker'], $user);
+		$is_technician = $this->is_technician($this->data['tr_tracker'], $user);
+
+		$read_restricted = $is_admin || $is_technician || in_array($user, $this->data['tr_assigned']) ||
+				// if assigned to a group, we need to check memberships of $user
+				$GLOBALS['egw']->accounts->get_type($this->data['tr_assigned']) == 'g' &&
+					in_array($this->data['tr_assigned'], $GLOBALS['egw']->accounts->memberships($user, true));
+
+		// Can read the hidden comments, no changes needed
+		if($read_restricted)
+		{
+			return;
+		}
+
+		// Hide restricted comments
+		foreach($data['rows'] as $index => $row)
+		{
+			if($row['status'] !== 'comment')
+			{
+				continue;
+			}
+			list(,$comment_id) = explode(': ',$row['new_value'][0]);
+			$comment = $this->data['replies'][array_search($comment_id, array_column($this->data['replies'],'reply_id'))];
+			if(!$comment || $comment && !$comment['reply_visible'])
+			{
+				array_splice($data['rows'], $index, 1);
+				$data['total']--;
+			}
+		}
+	}
 }
