@@ -266,6 +266,11 @@ class tracker_ui extends tracker_bo
 					{
 						$restrict = true;
 					}
+					// Check for specific access
+					if($GLOBALS['egw']->acl->check('A'.$this->data['tr_id'], Acl::READ, 'tracker'))
+					{
+						$restrict = false;
+					}
 				}
 			}
 			if ($restrict)
