@@ -323,5 +323,48 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 		{
 			node.removeClass('tracker_unseen');
 		}
+	},
+
+	/**
+	 * Handle context menu action on the comments to show the file buttons
+	 *
+	 * @param {egwAction} _action
+	 * @param {egwActionObject[]} _entries
+	 */
+	reply_files: function(_action, _entries)
+	{
+		for(var i in _entries)
+		{
+			var row = _entries[i].iface.getDOMNode();
+			jQuery('.et2_toolbar',row).removeClass('hide_buttons')
+					.get(0).scrollIntoView();
+		}
+		jQuery("body").one('click',function() {
+				jQuery('.et2_toolbar', row).addClass('hide_buttons');
+			});
+	},
+
+	/**
+	 * Handle context menu action on the comments to edit the comment
+	 *
+	 * @param {egwAction} _action
+	 * @param {egwActionObject[]} _entries
+	 */
+	reply_edit: function(_action, _entries)
+	{
+		for(var i in _entries)
+		{
+			var row_id = _entries[i].id.split('row_')[1];
+			if(typeof row_id !== 'string')
+			{
+				return;
+			}
+			var widget_id = row_id + '[reply_message]';
+			var widget = _entries[i].iface.getWidget().getWidgetById(widget_id);
+
+			// Trigger the edit mode
+			widget.dblclick();
+		}
+
 	}
 });}).call(this);

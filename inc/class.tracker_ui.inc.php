@@ -817,6 +817,22 @@ class tracker_ui extends tracker_bo
 		}
 		$tpl->set_cell_attribute('tr_description', 'mode', $tr_editor_mode);
 		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
+
+		$tpl->set_cell_attribute('replies', 'actions', array(
+			'replies_edit' => array(
+				'default' => true,
+				'icon' => 'edit',
+				'caption' => 'Edit',
+				'allowOnMultiple' => false,
+				'onExecute' => 'javaScript:app.tracker.reply_edit'
+			),
+			'replies_files' => array(
+				'icon' => 'filemanager/navbar',
+				'caption' => 'Files',
+				'allowOnMultiple' => false,
+				'onExecute' => 'javaScript:app.tracker.reply_files'
+			),
+		));
 		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
 	}
