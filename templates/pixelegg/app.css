@@ -143,6 +143,9 @@ label.tracker_trIdEdit:before {
   padding-top: 6px;
 }
 /* Files linked to comments */
+#tracker-edit_tracker-edit-comments .et2_link_to.et2_toolbar * {
+  vertical-align: top
+}
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs tr:first-child {
   border-collapse: separate;
   border-spacing: 30px;
@@ -160,6 +163,12 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-comments .et2_vfs td.icon,
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
   display: none;
+}
+#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons .et2_button {
+  display: none;
+}
+#tracker-edit_tracker-edit-comments .et2_button .et2_vfs_btn {
+  float:left;
 }
 #tracker-index_tracker-index-queue {
   position: relative;
