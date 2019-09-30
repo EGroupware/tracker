@@ -147,6 +147,27 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 	},
 
 	/**
+	 * User wants to share
+	 *
+	 * @param {egwAction} _action
+	 * @param {egwActionObject} _selected
+	 */
+	share_link: function(_action, _selected, _target)
+	{
+		if(_action.id == 'shareWritableFilemanager')
+		{
+			debugger;
+			// No checkbox for parent to find, explicitly set writable
+			this._super.apply(this, [_action.parent.getActionById('shareFilemanager'), _selected, _target, true]);
+		}
+		else
+		{
+			// Leave writable parameter undefined so parent can check
+			this._super.apply(this, [_action, _selected, _target]);
+		}
+	},
+
+	/**
 	 * Used in escalations on buttons to change filters from a single select to a multi-select
 	 *
 	 * @param {object} _event
