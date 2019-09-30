@@ -327,6 +327,7 @@ projects	tracker	en	Projects
 queue	tracker	en	Queue
 re-open closed tickets when a comment is added	tracker	en	Re-open closed tickets when a comment is added
 read mail address	tracker	en	Filter mailbox for this mail address
+read only filemanager directory	tracker	en	Read-only Filemanger directory
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker items
 receive notifications about due entries you created or are assigned to	tracker	en	Receive notifications about due entries you created or are assigned to
@@ -470,6 +471,7 @@ what should be done with unknown values?	tracker	en	What should be done with unk
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	en	When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled.
 wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
+writable filemanager directory	tracker	en	Writable filemanager directory
 yes, add mailheader to both (description and comments)	tracker	en	yes, add Mailheader to both (description and comments)
 yes, add mailheader to comments	tracker	en	yes, add Mailheader to comments
 yes, add mailheader to description	tracker	en	yes, add Mailheader to description

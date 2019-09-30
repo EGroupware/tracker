@@ -1779,6 +1779,12 @@ width:100%;
 		// ACL blocks most access right now TODO: allow access
 		unset($actions['share']['children']['shareWritable']);
 		unset($actions['share']['children']['shareFiles']);
+		// Give a readonly & writable filemanager directory actions
+		$actions['share']['children']['shareFilemanger']['caption'] = 'Readonly filemanager directory';
+		$actions['share']['children']['shareWritableFilemanager'] = array_merge(
+			$actions['share']['children']['shareFilemanager'],
+			array('caption' => 'Writable filemanager directory')
+		);
 
 
 		$actions['documents'] = tracker_merge::document_action(
