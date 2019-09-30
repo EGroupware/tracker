@@ -2254,8 +2254,10 @@ width:100%;
 				continue;
 			}
 			list(,$comment_id) = explode(': ',$row['new_value'][0]);
-			$comment = $this->data['replies'][array_search($comment_id, array_column($this->data['replies'],'reply_id'))];
-			if(!$comment || $comment && !$comment['reply_visible'])
+			$comment_index = array_search($comment_id, array_column($this->data['replies'],'reply_id'));
+			$comment = $this->data['replies'][$comment_index];
+			
+			if(!$comment || $comment_index === FALSE || $comment && $comment['reply_visible'])
 			{
 				array_splice($data['rows'], $index, 1);
 				$data['total']--;
