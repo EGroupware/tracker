@@ -1764,7 +1764,7 @@ width:100%;
 		unset($actions['share']['children']['shareWritable']);
 		unset($actions['share']['children']['shareFiles']);
 		// Give a readonly & writable filemanager directory actions
-		$actions['share']['children']['shareFilemanger']['caption'] = 'Readonly filemanager directory';
+		$actions['share']['children']['shareFilemanager']['caption'] = 'Readonly filemanager directory';
 		$actions['share']['children']['shareWritableFilemanager'] = array_merge(
 			$actions['share']['children']['shareFilemanager'],
 			array('caption' => 'Writable filemanager directory')
@@ -2241,7 +2241,7 @@ width:100%;
 			list(,$comment_id) = explode(': ',$row['new_value'][0]);
 			$comment_index = array_search($comment_id, array_column($this->data['replies'],'reply_id'));
 			$comment = $this->data['replies'][$comment_index];
-			
+
 			if(!$comment || $comment_index === FALSE || $comment && $comment['reply_visible'])
 			{
 				$remove_indexes[] = $index;
