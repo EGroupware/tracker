@@ -144,7 +144,10 @@ label.tracker_trIdEdit:before {
 }
 /* Files linked to comments */
 #tracker-edit_tracker-edit-comments .et2_link_to.et2_toolbar * {
-  vertical-align: top
+  vertical-align: top;
+}
+#tracker-edit_tracker-edit-comments .et2_link_to.et2_toolbar div.et2_file {
+  width: 95%;
 }
 #tracker-edit_tracker-edit-comments .et2_file.et2_vfs tr:first-child {
   border-collapse: separate;

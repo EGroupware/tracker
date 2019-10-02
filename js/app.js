@@ -248,6 +248,41 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 			editor.set_value(_replyMsg);
 		}
 	},
+
+	/**
+	 * Update the UI to show the file after user adds a file to a comment
+	 *
+	 * @param {DOMNode} dom_node
+	 * @param {et2_widget} widget
+	 * @returns {undefined}
+	 */
+	comment_add_vfs: function(dom_node, widget) {
+		// Add the file into the existing list of files
+		if(widget._type === 'vfs-select')
+		{
+			var upload = widget.getParent().getWidgetById(widget.options.method_id);
+
+			// Could not find the upload widget
+			if(!upload)
+			{
+				return;
+			}
+			var value = widget.get_value();
+			for(var i in value)
+			{
+				upload._addFile({name: value[i], path: value[i]});
+			}
+		}
+
+		// Update link widget on links tab
+		widget.getRoot().iterateOver(
+			function(widget) {
+				widget._get_links();
+			},
+			this, et2_link_list
+		);
+	},
+
 	/**
 	 * acl_queue_access
 	 *
