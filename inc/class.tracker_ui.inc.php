@@ -824,7 +824,9 @@ class tracker_ui extends tracker_bo
 				'icon' => 'edit',
 				'caption' => 'Edit',
 				'allowOnMultiple' => false,
-				'onExecute' => 'javaScript:app.tracker.reply_edit'
+				'onExecute' => 'javaScript:app.tracker.reply_edit',
+				'enabled' => $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply'),
+				'hideOnDisabled' => true
 			),
 			'replies_files' => array(
 				'icon' => 'filemanager/navbar',
