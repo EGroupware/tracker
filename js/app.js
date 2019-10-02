@@ -156,7 +156,6 @@ app.classes.tracker = (function(){ "use strict"; return AppJS.extend(
 	{
 		if(_action.id == 'shareWritableFilemanager')
 		{
-			debugger;
 			// No checkbox for parent to find, explicitly set writable
 			this._super.apply(this, [_action.parent.getActionById('shareFilemanager'), _selected, _target, true]);
 		}
