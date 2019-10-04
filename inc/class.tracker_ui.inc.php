@@ -2214,6 +2214,7 @@ width:100%;
 		}
 
 		// Hide restricted comments
+		$remove_indexes = Array();
 		foreach($data['rows'] as $index => $row)
 		{
 			if($row['status'] !== 'comment')
@@ -2226,9 +2227,10 @@ width:100%;
 			
 			if(!$comment || $comment_index === FALSE || $comment && $comment['reply_visible'])
 			{
-				array_splice($data['rows'], $index, 1);
-				$data['total']--;
+				$remove_indexes[] = $index;
 			}
 		}
+		$data['rows'] = array_diff_key($data['rows'], array_flip($remove_indexes));
+		$data['total'] -= count($remove_indexes);
 	}
 }
