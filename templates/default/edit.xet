@@ -16,7 +16,7 @@
 					<description value="Comments"/>
 					<textbox type="integer" id="num_replies" readonly="true"/>
 				</row>
-				<row class="row" valign="top">
+				<row class="row $row_cont[class]" valign="top">
 					<vbox>
 						<date-time id="{$row}[reply_created]" readonly="true"/>
 						<menulist>

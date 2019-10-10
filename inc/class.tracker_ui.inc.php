@@ -546,7 +546,6 @@ class tracker_ui extends tracker_bo
 			$tr_editor_mode = 'ascii';
 		}
 
-		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
 		if ($this->allow_bounties)
 		{
 			if (is_array($content['bounties']))
@@ -574,7 +573,6 @@ class tracker_ui extends tracker_bo
 			'on_cancel' => $popup ? 'egw(window).close();' : 'egw.open_link("tracker.tracker_ui.index&ajax=true","_self",false,"tracker")',
 			'no_vote' => '',
 			'show_dates' => $this->show_dates,
-			'editable_comments' => $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ? 'editable' : '',
 			'link_to' => array(
 				'to_id' => $tr_id,
 				'to_app' => 'tracker',
@@ -698,18 +696,6 @@ class tracker_ui extends tracker_bo
 			$creators[$content['tr_creator']] = Api\Accounts::username($content['tr_creator']);
 		}
 
-		// Comment visibility
-		if (is_array($content['replies']))
-		{
-			foreach($content['replies'] as $key => &$reply)
-			{
-				if (isset($content['replies'][$key]['reply_visible'])) {
-					$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
-				}
-			}
-		}
-		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
-			!$this->allow_restricted_comments;
 
 		$account_select_pref = $GLOBALS['egw_info']['user']['preferences']['common']['account_selection'];
 		$sel_options = array(
@@ -818,6 +804,44 @@ class tracker_ui extends tracker_bo
 		$tpl->set_cell_attribute('tr_description', 'mode', $tr_editor_mode);
 		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
 
+		$this->setup_comments($tpl, $content);
+
+		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
+		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
+	}
+
+	/**
+	 * Set up the template / content for editable comments
+	 *
+	 * Editable widgets, context menu actions
+	 */
+	protected function setup_comments(Etemplate &$tpl, Array &$content)
+	{
+		// Comment visibility
+		if (is_array($content['replies']))
+		{
+			foreach($content['replies'] as $key => &$reply)
+			{
+				if (isset($content['replies'][$key]['reply_visible'])) {
+					$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
+					if($this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
+							$reply['reply_creator'] == $GLOBALS['egw_info']['user']['account_id'] && $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply'))
+					{
+						$reply['class'] = 'editable';
+					}
+				}
+			}
+		}
+		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
+		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
+			!$this->allow_restricted_comments;
+
+		// Toggle editable comments
+		$content['editable_comments'] = $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
+				 $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply')
+				? 'editable' : '';
+
+		// Context menu
 		$tpl->set_cell_attribute('replies', 'actions', array(
 			'replies_edit' => array(
 				'default' => true,
@@ -825,18 +849,18 @@ class tracker_ui extends tracker_bo
 				'caption' => 'Edit',
 				'allowOnMultiple' => false,
 				'onExecute' => 'javaScript:app.tracker.reply_edit',
-				'enabled' => $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply'),
+				'enableClass' => 'editable',
 				'hideOnDisabled' => true
 			),
 			'replies_files' => array(
 				'icon' => 'filemanager/navbar',
 				'caption' => 'Files',
 				'allowOnMultiple' => false,
-				'onExecute' => 'javaScript:app.tracker.reply_files'
+				'onExecute' => 'javaScript:app.tracker.reply_files',
+				'enableClass' => 'editable',
+				'hideOnDisabled' => true
 			),
 		));
-		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
-		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
 	}
 
 	/**
@@ -2088,11 +2112,33 @@ width:100%;
 	 */
 	public function ajax_update_reply($value, $tr_id, $comment_id)
 	{
-		// ACL Check to make sure they can do that
-		if(!$this->check_rights($this->field_acl['edit_reply'], null, (int)$tr_id))
+		if(!$this->check_rights($this->field_acl['edit_reply'], null, (int)$tr_id) && !$this->check_rights($this->field_acl['edit_own_reply'], null, (int)$tr_id))
 		{
+			// No rights for any edit
 			return false;
 		}
+
+		if(!$this->check_rights($this->field_acl['edit_reply'], null, (int)$tr_id))
+		{
+			// Need to read ticket so we can get comment owner & verify
+			$verified = false;
+			$this->read((int)$tr_id);
+			foreach($this->data['replies'] as $key => &$reply)
+			{
+				if($reply['reply_id'] == $comment_id &&
+						$reply['reply_creator'] == $GLOBALS['egw_info']['user']['account_id'] &&
+						$this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply'))
+				{
+					$verified = true;
+					break;
+				}
+			}
+			if(!$verified)
+			{
+				return false;
+			}
+		}
+		
 		// Update the comment
 		$this->save_comment(array(
 			'reply_id' => (int)$comment_id,
