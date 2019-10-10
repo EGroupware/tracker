@@ -157,7 +157,8 @@ e-mail notifications	tracker	en	Email notifications
 each value is a line like <id>[=<label>]	tracker	en	each value is a line like <id>[=<label>]
 each value is a line like id[=label]	tracker	en	each value is a line like id[=label]
 edit %1	tracker	en	Edit %1
-edit comment	tracker	en	Edit comment
+edit others' comments	tracker	en	Edit others' comments
+edit own comments	tracker	en	Edit own comments
 edit entry	tracker	en	Edit entry
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you

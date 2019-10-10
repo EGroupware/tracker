@@ -226,7 +226,8 @@ class tracker_bo extends tracker_so
 		'link_to'        => 'Attachments & Links',
 		'canned_response' => 'Canned response',
 		'reply_message'  => 'Add comment',
-		'edit_reply'     => 'Edit comment',
+		'edit_own_reply' => 'Edit own comments',
+		'edit_reply'     => 'Edit others comments',
 		'add'            => 'Add',
 		'vote'           => 'Vote for it!',
 		'no_notifications'	=> 'No notifications',
@@ -1783,6 +1784,7 @@ class tracker_bo extends tracker_so
 			'link_to'        => TRACKER_ITEM_CREATOR|TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'canned_response' => TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN,
 			'reply_message'  => TRACKER_USER,
+			'edit_own_reply' => 0,
 			'edit_reply'     => TRACKER_ADMIN|TRACKER_TECHNICIAN,
 			'add'            => TRACKER_USER,
 			'vote'           => TRACKER_EVERYBODY,	// TRACKER_USER for NO anon user
