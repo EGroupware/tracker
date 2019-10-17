@@ -844,7 +844,6 @@ class tracker_ui extends tracker_bo
 		// Context menu
 		$tpl->set_cell_attribute('replies', 'actions', array(
 			'replies_edit' => array(
-				'default' => true,
 				'icon' => 'edit',
 				'caption' => 'Edit',
 				'allowOnMultiple' => false,
@@ -2138,7 +2137,7 @@ width:100%;
 				return false;
 			}
 		}
-		
+
 		// Update the comment
 		$this->save_comment(array(
 			'reply_id' => (int)$comment_id,

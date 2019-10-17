@@ -142,6 +142,10 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-add_comment .et2_hbox .et2_label[for="canned_response"] {
   padding-top: 6px;
 }
+/* Turn off edit cursor, use context menu instead */
+#tracker-edit_tracker-edit-comments .et2_editable {
+	cursor: default;
+}
 /* Files linked to comments */
 #tracker-edit_tracker-edit-comments .et2_link_to.et2_toolbar * {
   vertical-align: top;
