@@ -114,4 +114,4 @@ label.tracker_trIdEdit:before { content: "#"; }
 
 #tracker-admin .jPicker {vertical-align: middle}
 
-.et2_editable {width: 100%;}
+.et2_editable, .et2_editable_readonly {width: 100%;}

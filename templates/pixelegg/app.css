@@ -144,7 +144,7 @@ label.tracker_trIdEdit:before {
 }
 /* Turn off edit cursor, use context menu instead */
 #tracker-edit_tracker-edit-comments .et2_editable {
-	cursor: default;
+  cursor: default;
 }
 /* Files linked to comments */
 #tracker-edit_tracker-edit-comments .et2_link_to.et2_toolbar * {
@@ -186,7 +186,8 @@ label.tracker_trIdEdit:before {
 #tracker-admin .jPicker {
   vertical-align: middle;
 }
-.et2_editable {
+.et2_editable,
+.et2_editable_readonly {
   width: 100%;
 }
 #egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
