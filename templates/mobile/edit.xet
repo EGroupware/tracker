@@ -45,7 +45,7 @@
 					<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
-					<htmlarea id="reply_message" options="@tr_reply_options" height="200" resize_reatio="0" imageUpload="link_to"/>
+					<htmlarea id="reply_message" options="@tr_reply_options" height="200" resize_reatio="0" imageUpload="link_to" toggle_readonly="false"/>
 				</row>
 			</rows>
 		</grid>
