@@ -512,19 +512,27 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			foreach($data['replies'] as $reply_index => $reply)
 			{
+				if(!$reply['reply_message']) continue;
 				$reply['reply_message'] = $data['tr_edit_mode'] == 'ascii' ?
 						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
 						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message']);
-				$details[$reply_index ? 2*$n : 'replies'] = array(	// first reply need to be checked against old to marked modified for new
+				$msg = array(	// first reply need to be checked against old to marked modified for new
 					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
 						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
 				);
-				$details[2*$n+1] = array(
+				if(!$reply_index)
+				{
+					$details['replies'] = $msg;
+				}
+				else
+				{
+					$details[] = $msg;
+				}
+				$details[] = array(
 					'value' => $reply['reply_message'],
 					'type'  => 'multiline',
 				);
-				$n++;
 			}
 		}
 		return $details;
