@@ -340,12 +340,10 @@ class tracker_tracking extends Api\Storage\Tracking
 
 		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
 		{
-			// Always use text mode for text tickets
+			// Always use text mode for text tickets, HTML for HTML tickets
 			$html = $this->html_content_allow;
-			if($data['tr_edit_mode'] == 'ascii')
-			{
-				$this->html_content_allow = false;
-			}
+			$this->html_content_allow = $data['tr_edit_mode'] !== 'ascii';
+
 			$body = parent::get_body($html_email,$data,$old,$integrate_link,$receiver).($html_email?"<br />\n":"\n").
 				$notification['signature'];
 
@@ -495,11 +493,14 @@ class tracker_tracking extends Api\Storage\Tracking
 				'value' => ' '
 			);
 			$details[] = array(
-				'type' => 'multiline',
-				'value' => $reply['reply_message']
+				'type' => 'reply',
+				'value' => $data['tr_edit_mode'] == 'ascii' ?
+						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
+						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message'])
 			);
 			$n = 2;
 		}
+		$details[] = array('type' => 'message', 'value' => 'edit mode is ' . $data['tr_edit_mode']);
 		$details[] = array(
 			'value' => lang('Description'),
 			'type' => 'summary'
