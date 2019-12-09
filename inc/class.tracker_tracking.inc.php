@@ -500,7 +500,6 @@ class tracker_tracking extends Api\Storage\Tracking
 			);
 			$n = 2;
 		}
-		$details[] = array('type' => 'message', 'value' => 'edit mode is ' . $data['tr_edit_mode']);
 		$details[] = array(
 			'value' => lang('Description'),
 			'type' => 'summary'
