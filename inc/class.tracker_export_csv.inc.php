@@ -44,8 +44,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 				// ui selection with checkbox 'use_all'
 				$query['num_rows'] = -1;	// all
 				$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
-				$readonlys = null;
-				$this->ui->get_rows($query,$selection,$readonlys);
+				$selection = new Api\Storage\RowsIterator($this->ui, $query, 'tr_id');
 
 				// Reset nm params
 				Api\Cache::setSession('tracker',$query_key, $old_query);
@@ -80,7 +79,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 					}
 				}
 
-				$this->ui->get_rows($query,$selection,$readonlys);
+				$selection = new Api\Storage\RowsIterator($this->ui, $query, 'tr_id');
 
 				// Reset nm params
 				Api\Cache::setSession('tracker',$query_key, $old_query);
