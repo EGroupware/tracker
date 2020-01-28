@@ -804,7 +804,7 @@ class tracker_ui extends tracker_bo
 		$tpl->set_cell_attribute('tr_description', 'mode', $tr_editor_mode);
 		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
 
-		$this->setup_comments($tpl, $content);
+		$this->setup_comments($tpl, $content, $preserv);
 
 		if (!empty($content['tr_cc'])&&!is_array($content['tr_cc']))$content['tr_cc'] = explode(',',$content['tr_cc']);
 		return $tpl->exec('tracker.tracker_ui.edit',$content,$sel_options,$readonlys,$preserv,$popup ? 2 : 0);
@@ -815,7 +815,7 @@ class tracker_ui extends tracker_bo
 	 *
 	 * Editable widgets, context menu actions
 	 */
-	protected function setup_comments(Etemplate &$tpl, Array &$content)
+	protected function setup_comments(Etemplate &$tpl, Array &$content, Array &$preserve)
 	{
 		// Comment visibility
 		if (is_array($content['replies']))
@@ -832,7 +832,11 @@ class tracker_ui extends tracker_bo
 				}
 			}
 		}
-		if ($content['num_replies']) array_unshift($content['replies'],false);	// need array index starting with 1!
+		if ($content['num_replies'])
+        {
+            array_unshift($content['replies'],false);
+            array_unshift($preserve['replies'],false);
+        }	// need array index starting with 1!
 		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
 			!$this->allow_restricted_comments;
 
