@@ -1,124 +1,455 @@
-(don't offer the possibility)	admin	bg	Не предлагайте възможността
-<em>but</em> display at least this many entries in recentchanges and other subscription lists:	wiki	bg	<em>But</em> покажи поне тези записи в RecentChanges и други списъци с абонаменти:
-add document to category	wiki	bg	Добавяне на документ към категорията
-added	wiki	bg	Добавен
-administration features are disabled for this wiki.	wiki	bg	Функциите на администрацията са деактивирани за тази wiki.
-admins	wiki	bg	Администратори
-after how many days should old versions of a page be removed (0 for never)	admin	bg	След колко дни да бъдат премахнати стари версии на страница, 0 = никога.
-allow anonymous access	admin	bg	Разрешаване на анонимен достъп
-allow creating new pages (blank for all)	wiki	bg	Разрешаване създаването на нови страници (празно за всички)
-anonymous password	admin	bg	Анонимна парола
-anonymous session type	admin	bg	Тип анонимна сесия
-anonymous username	admin	bg	Анонимно потребителско име
-automatically convert pages with wiki-syntax to richtext (if edited)?	admin	bg	Автоматично преобразуване на страници с wiki синтаксис, в "богат текст", ако е редактиран?
-block	wiki	bg	Блокиране
-block / unblock hosts	common	bg	Блокиране | Разблокиране на хостове
-blocked ip address ranges	wiki	bg	Блокирани диапазони на IP адреси
-cancel without saving	wiki	bg	Затваряне без запазване
-change notification	wiki	bg	Промяна на известието
-changed	wiki	bg	Променон
-changes by last author	wiki	bg	Промени от последния автор
-choose your current time here, so the server may figure out what time zone you are in.	wiki	bg	Изберете текущото си време.
-columns	wiki	bg	Колони
-compute difference	wiki	bg	Изчислете разликата
-converts the page to richtext	wiki	bg	Преобразува страницата в "богат текст"
-current version	wiki	bg	Сегашна версия
-default read permission	wiki	bg	Разрешение за четене по подразбиране
-default read permissions for creating a new page	preferences	bg	Разрешения за четене по подразбиране за създаване на нова страница
-default write permission	preferences	bg	Разрешение за писане по подразбиране
-default write permissions for creating a new page	preferences	bg	Разрешения за писане по подразбиране за създаване на нова страница
-deleted	wiki	bg	Изтрит
-deletes this page	wiki	bg	Изтриване на тази страница
-difference between versions	wiki	bg	Разлика между версиите
-differences in	wiki	bg	Разлики в
-different languages can have different titles	wiki	bg	Различните езици могат да имат различни заглавия
-document last modified	wiki	bg	Документът е последно променен на
-edit box	wiki	bg	Поле за редактиране
-edit this <em>archive version</em> of this document	wiki	bg	Редактирайте <em>ARCHIVE VERSION</em> на този документ
-edit this document	wiki	bg	Редактиране на този документ
-edit with preview	admin	bg	Редактиране с визуализация
-editable	admin	bg	Може да се редактира
-editing	wiki	bg	Редактиране
-emailaddress administrator	admin	bg	Имейл адрес на администратора
-enable free links	admin	bg	Активиране на свободни връзки
-enable wiki links	admin	bg	Активиране на връзки към Wiki
-enter here the maximum number of entries to display in a document's history list.	wiki	bg	Максимален брой записи за показване в списъка с историята на документа.
-enter here the number of days of edits to display on recentchanges or any other subscription list.  set this to zero if you wish to see all pages in recentchanges, regardless of how recently they were edited.	wiki	bg	Брой дни за редакции, които да се показват в RecentChanges или друг списък с абонаменти. 0 = Покажи всички.
-enter ip address range in form <tt>12.*</tt>, <tt>34.56.*</tt>, or <tt>78.90.123.*</tt>	wiki	bg	Въведете диапазон на IP адреси във формата <tt>12.*</tt>, <tt>34.56.*</tt>, or <tt>78.90.123.*</tt>
-error creating temporary file.	wiki	bg	Грешка при създаването на временния файл
-error writing to temporary file.	wiki	bg	Грешка при писането във временния файл
-everyone	wiki	bg	Всеки
-find	wiki	bg	Намери
-history	wiki	bg	История
-history display should show <em>all</em> changes made by the latest author.  otherwise, show only the last change made.	wiki	bg	Екранът на историята показва <em>all</em> промени, направени от последния автор. Или да показва само последната направена промяна.
-history lists	wiki	bg	Списъци с история
-history of	wiki	bg	Историята на
-if a page i have read access to is changed, send a notification	wiki	bg	Ако страница, до която съм стигнал, е променена, изпратете известие
-if a page i have write access to is changed, send a notification	wiki	bg	Ако страница, до която имам запис, е променена, изпратете известие
-invalid page name.	wiki	bg	Невалидно име на страницата!
-load	wiki	bg	Зареждане
-loads the named page in the given language, all change so far get lost !!!	wiki	bg	Зарежда посочената страница на избран език, всички промени досега се губят!
-lock / unlock pages	common	bg	Заключване | Отключване на страници
-locked	wiki	bg	Заключен
-message to send	wiki	bg	Съобщение за изпращане
-name wiki home link	admin	bg	Име на домашната връзка на Wiki
-newer	wiki	bg	По-нов(и)
-no never	admin	bg	Не, никога
-no only on request	admin	bg	Не, само при поискване
-not set	wiki	bg	Не е зададено
-older	wiki	bg	По-стар(и)
-on all pages	wiki	bg	На всички страници
-only if browser supports a richtext-editor	admin	bg	Само ако браузърът поддържа "богат текстов редактор"
-only on the first page	wiki	bg	Само на първата страница
-page '%1' not found !!!	wiki	bg	Страница '%1' не е намерена!
-page content	wiki	bg	Съдържание на страницата
-pages i have read access	wiki	bg	Страници, до които имам достъп за четене
-pages i have write access	wiki	bg	Страници, до които имам достъп за запис
-pages that match this regular expression	wiki	bg	Страници, които съответстват на този обичаен израз
-person who changed the page	wiki	bg	Лице, което е променило страницата
-please contact the %1administrator%2 for assistance.	wiki	bg	Моля, свържете се с %1Administrator%2 за съдействие.
-preview	wiki	bg	Предварителен преглед
-preview of current version	wiki	bg	Предварителен преглед на текущата версия
-rate control / ip blocking disabled	wiki	bg	Контрол на качеството | IP блокирането е деактивирано
-readable by	wiki	bg	Четимо от
-readonly	admin	bg	Само за четене
-rebuild links	wiki	bg	Възстановете връзки
-recent changes	wiki	bg	Последни промени
-renames page to the given name and language	wiki	bg	Преименува страница на определеното име и език
-richtext	wiki	bg	"Богат текст"
-rows	wiki	bg	Редове
-save the changes and exit	wiki	bg	Запази промените и излез
-saves and continues editing	wiki	bg	Запазва и продължава редактирането
-search for	wiki	bg	Търсене за
-see complete list (%1 entries)	wiki	bg	Вижте пълен списък, %1 записи
-show a search	wiki	bg	Показване на търсене
-show the title of the wiki page	wiki	bg	Показване на заглавието на wiki страницата
-summary	wiki	bg	Обобщение
-summary of change	wiki	bg	Обобщение на промяната
-the search returned no result!	wiki	bg	Търсенето беше без резултат!
-this page can not be edited.	wiki	bg	Тази страница не може да бъде редактирана!
-twin pages	wiki	bg	Еднакви страници (двойници)
-unblock	wiki	bg	Отблокиране
-updates the preview	wiki	bg	Актуализира визуализацията
-upload directory for pasted or dragged in images in egroupware vfs (filemanager).	wiki	bg	Качване на директория за копирани или влачени изображения в EGroupware VFS (filemanager).
-url of the upload directory	admin	bg	URL адрес на директорията за качване
-use this module for displaying wiki-pages	wiki	bg	Използване на този модул за показване на wiki страници
-users	wiki	bg	Потребители
-view document history	wiki	bg	Преглед на историята на документите
-visit %1 to set your user name	wiki	bg	Посетете %1, за да зададете потребителското си име
-warning: since you started editing, this document has been changed by someone else.  please merge your edits into the current version of this document.	wiki	bg	Внимание: Документът е променен от някой друг, откакто сте започнали да редактирате. Обединете редакциите си в текущата версия на този документ.
-who should be able to edit this page	wiki	bg	Кой да има възможността да редактира тази страница
-who should be able to read this page	wiki	bg	Кой да има възможността да чете тази страница
-wiki	common	bg	Wiki
-wiki administration	wiki	bg	Администрация на Wiki
-wiki menu	wiki	bg	Wiki меню
-wiki startpage	wiki	bg	Начална страница на Wiki
-writable by	wiki	bg	Писано от
-yes always	admin	bg	Да, винаги
-yes with navbar	admin	bg	Да, с навигация
-you have been denied access to this site.	wiki	bg	Нямате достъп до този сайт
-you have entered an invalid user name.	wiki	bg	Въвели сте невалидно потребителско име
-you have exeeded the number of pages you are allowed to visit in a given period of time. please return later.	wiki	bg	Превишили сте броя на страниците, които Ви е разрешено да посещавате за даден период от време. Моля, върнете се по-късно.
-you have no rights to view wiki content !!!	wiki	bg	Нямате права да гледате wiki съдържание!
-your changes	wiki	bg	Вашите промени
-your user name is "%1".	wiki	bg	Вашето потребителско име е "%1".
+"%2" only valid for start date and due date.  use "%1".	tracker	bg	"% 2" важи само за начална дата и дата на плащане. Използвайте "% 1".
+%1 days in advance	tracker	bg	%1 дни предварително
+%1 entries %2	tracker	bg	%1 записа %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	bg	%1 записа %2, %3 не успяха поради недостатъчни права!
+%1 entries updated.	tracker	bg	Актуализирани са %1 записа.
+%1 is due %2	tracker	bg	%1 се дължи на %2
+%1 is starting %2	tracker	bg	%1 започва %2
+%1 tickets have been converted	tracker	bg	Преобразувани са %1 билети.
+(beware of mailloops, check the help!)	tracker	bg	(Внимавайте за mailloops, проверете помощта!)
+(new tickets as	tracker	bg	Нови билети като
+--> choose a project from the drop-down list	tracker	bg	-> изберете проект от падащия списък
+--> enter new name	tracker	bg	-> въведете ново име
+1 - lowest	tracker	bg	1 - най-ниско
+2 days in advance	tracker	bg	2 дни предварително
+2 years ago	tracker	bg	Преди 2 години
+3 days in advance	tracker	bg	3 дни предварително
+3 years ago	tracker	bg	Преди 3 години
+5 - medium	tracker	bg	5 - средно
+9 - highest	tracker	bg	9 - най-високо
+[fwd]	tracker	bg	[FWD]
+accepted	tracker	bg	Приет
+acl	tracker	bg	Списък за контрол на достъпа
+activate users queue access control	tracker	bg	Активиране контрола за достъп на опашката на потребителите
+add / remove link	tracker	bg	Добавяне / Премахване на връзка (линк)
+add a ticket	tracker	bg	Добавете билет
+add additionally	tracker	bg	Добавете допълнително
+add comment	tracker	bg	Добавете коментар
+add email-address	tracker	bg	Добавете имейл адрес
+add from addressbook	tracker	bg	Добавяне от Адресния указател
+add infolog	tracker	bg	Добавяне на инфолог
+add restricted comment	tracker	bg	Добавяне на ограничаващ коментар
+add timesheet entry	tracker	bg	Добавяне на запис в таблицата
+add to	tracker	bg	Добави към
+add unrecognized mail address to the cc field	tracker	bg	Добавете неразпознат имейл адрес в CC полето
+after	tracker	bg	След
+after how many days a not replied item should be marked overdue?	tracker	bg	След колко дни елементът, на който не е отговорено, трябва да бъде маркиран като просрочен?
+after how many days pending items should be closed automatic	tracker	bg	След колко дни чакащите елементи трябва да бъдат затворени автоматично?
+all	tracker	bg	Всички
+all tickets are already converted to tracker	tracker	bg	Всички билети вече са преобразувани в Tracker
+all versions	tracker	bg	Всички версии
+allow bounties	tracker	bg	Позволява бонуси
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	bg	Разрешава създаване на ограничаващи коментари, които са видими само за администратори, техници и упълномощени потребители
+allow default projects for tracker	tracker	bg	Проекти по подразбиране
+allow editing by	tracker	bg	Позволява редакция от
+allow voting	tracker	bg	Разрешава гласуване
+allow voting on tracker items, show and sort after the votes	tracker	bg	Разрешава гласуване по елементи на проследяване, покажете и подредете след гласовете
+already escalated	tracker	bg	Вече нараства
+amount	tracker	bg	Количество
+applies the changes	tracker	bg	Прилага промените
+assign to project	tracker	bg	Назначаване на проект
+assigned to	tracker	bg	Назначен на
+assigning groups	tracker	bg	Назначаване на групи
+attachments & links	tracker	bg	Приложения и Връзки
+attention: no contact with address %1 found.	tracker	bg	Внимание: Няма намерен контакт с адрес %1
+autoassign to	tracker	bg	Автоматично възлагане на
+automatic email handling	tracker	bg	Автоматична работа с имейл
+automatic mails (bounces) are configured to be forwarded	tracker	bg	автоматичните писма (bounces) са конфигурирани да бъдат препращани
+automatic mails (replies) are configured to be forwarded	tracker	bg	автоматичните писма (replies) са конфигурирани да бъдат препращани
+automatically created by importexport	tracker	bg	Автоматично създадено от importtexport
+before	tracker	bg	Преди
+bounties	tracker	bg	Бонуси / Суми
+bounty	tracker	bg	Бонус / Сума
+bounty confirmed	tracker	bg	Бонусът е потвърден.
+bounty confirmed.	tracker	bg	Бонусът е потвърден.
+bounty deleted	tracker	bg	Бонусът е изтрит.
+bounty deleted.	tracker	bg	Бонусът е изтрит.
+bounty set	tracker	bg	Бонусът е определен.
+category	tracker	bg	Категория
+category for new tickets	tracker	bg	Категория за нови билети
+change assigned	tracker	bg	Назначена промяна
+change assigned when updating	tracker	bg	Промяна, назначена при актуализиране
+change color	tracker	bg	Промяна на цвета
+change group	tracker	bg	Промяна на група
+change group when updating	tracker	bg	Промяна на група при актуализиране
+change owner when updating	tracker	bg	Промяна на притежателя при актуализиране
+changes made below will be lost, if not applied before!	tracker	bg	Промените, направени по-назад, ще бъдат загубени, ако не бъдат приложени преди това!
+check all	tracker	bg	Провери всички
+check mail interval	tracker	bg	Проверете интервала на пощата
+choose 'creator' of imported data	tracker	bg	Изберете "създател" на импортирани данни
+choose a project from the drop-down list	tracker	bg	Изберете проект от падащия списък
+close pending	tracker	bg	Затваряне на още неуредените (висящи без потвърждение)
+closed	tracker	bg	Затворено
+closed date	tracker	bg	Премахната дата
+color	tracker	bg	Цвят
+comment by %1 at %2:	tracker	bg	Коментар от %1 на %2:
+comments	tracker	bg	Коментари
+completed	tracker	bg	Завършен
+configuration	tracker	bg	Конфигурация
+configuration for all trackers	tracker	bg	Конфигурация за всички опашки за проследяване
+configuration updated.	tracker	bg	Конфигурацията е актуализирана
+configuration, notifications	tracker	bg	Конфигурация, Известия
+confirm that you pay the specified bounty to implement or fix the issue	tracker	bg	Потвърдете, че плащате определената сума, за да изпълните или отстраните проблема.
+confirm the receipt of money for this bounty	tracker	bg	Потвърдете получаването на пари за тази сума (бонус)
+confirmed	tracker	bg	Потвърдено
+convert all closed tickets	tracker	bg	Преобразуване на всички затворени билети
+convert all open tickets	tracker	bg	Преобразуване на всички отворени билети
+converted count	tracker	bg	Преобразуване на сума
+copy to	tracker	bg	Копирай в/ към
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	bg	Копирайте промените си в клипборда, %1 заредете записа %2 и ги обединете.
+could not connect	tracker	bg	Свързването е неуспешно.
+create new links	tracker	bg	Създайте нови връзки
+create new tracker entry's as default "private" for approval process	tracker	bg	Създайте нов запис за проследяване, по подразбиране като"частен" за процеса на одобрение.
+created	tracker	bg	Създаден
+created by	tracker	bg	Създаден от
+created on	tracker	bg	Създаден на
+creates a new field	tracker	bg	създава ново поле
+creation date	tracker	bg	Дата на създаване
+creator	tracker	bg	Автор
+custom fields	tracker	bg	Персонализирани полета
+custom notifications	tracker	bg	Персонализирани известия
+custom tracker priorities	tracker	bg	Приоритети на персонализирания тракер
+customfield	tracker	bg	Персонализирано поле
+data exchange settings	tracker	bg	Настройки за обмен на данни
+date opened	tracker	bg	Дата на отваряне
+default document to insert entries	tracker	bg	Документ по подразбиране за въвеждане на записи
+default version for new tracker entries	tracker	bg	Версия по подразбиране за нови записи за проследяване
+delete mails from server	tracker	bg	Изтриване на имейли от сървъра
+delete the mail from the server	tracker	bg	Изтрива пощата от сървъра
+delete the mail from the server.	tracker	bg	Изтрива пощата от сървъра.
+delete this bounty	tracker	bg	Изтриване на този бонус
+delete this category	tracker	bg	Изтриване на тази категория
+delete this entry	tracker	bg	Изтриване на този запис
+delete this status	tracker	bg	Изтриване на този статус (състояние)
+delete this tracker including all its items and categories	tracker	bg	Изтриване на този тракер, включително всичките му елементи и категории
+delete this version	tracker	bg	Изтриване на тази версия
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	bg	Изтриване на неразпознатите мейли от сървъра, дори ако "Изтриване на имейлите" не е маркирано.
+deleted	tracker	bg	Изтрит
+deletes this field	tracker	bg	Изтриване на това поле
+determines the order the fields are displayed	tracker	bg	определя реда, в който се показват полетата
+directory with documents to insert entries	tracker	bg	Директория с документи за въвеждане на записи
+do not send notifications to external email (cc field)	tracker	bg	Не изпращайте известия на външен имейл (cc field)
+do you want a notification, if items you are responsible for are about to start?	tracker	bg	Искате ли да получавате известие, ако елементите, за които сте отговорни започват?
+do you want to add mailheader information to description and/or comments?	tracker	bg	Искате ли да добавите информация за Mailheader към Описание и/или Коментари?
+do you want to vote for this item	tracker	bg	Искате ли да гласувате за този елемент?
+donator name to show	tracker	bg	Да покаже името на дарителя
+download url for links	tracker	bg	Изтегляне на URL адреса за връзки
+duplicate	tracker	bg	Дубликат
+e-mail address to which a copy of all tracker-notifications should be send	tracker	bg	Имейл адрес, на който трябва да се изпрати копие от всички известия за проследяване
+e-mail notifications	tracker	bg	Известия по имейл
+each value is a line like <id>[=<label>]	tracker	bg	всяка стойност е ред като <id>[=<label>]
+each value is a line like id[=label]	tracker	bg	всяка стойност е ред като id[=label]
+edit %1	tracker	bg	Редактиране на %1
+edit entry	tracker	bg	Редактиране на записа
+edit others' comments	tracker	bg	Редактиране на коментарите на другите
+edit own comments	tracker	bg	Редактиране на собствените коментари
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	bg	EGroupware Tracker Mailhandling: не успя да се свърже по-рано и профилът не се промени
+email address to contact you	tracker	bg	Имейл адрес за връзка с вас
+email handling can be configured only for all trackers	tracker	bg	Обработката на имейли може да бъде конфигурирана само и единствено за всички тракери.
+enable color code for	tracker	bg	Активиране на цветовия код за
+enter an email address here if unrecognized mails should be forwarded	tracker	bg	Въведете имейл адрес, ако трябва да се препращат неразпознати писма
+enter an opening text for the reply message	tracker	bg	Въведете встъпителен текст за отговора
+enter the email for reply to	tracker	bg	Въведете имейла за отговор на/към
+enter the imap server from which emails should be fetched	tracker	bg	Въведете IMAP сървъра, от който трябва да се извличат имейли
+enter the mail address that will be read.	tracker	bg	Въведете пощенския адрес, който трябва да се използва като допълнителен филтър за непрочетени съобщения.
+entry saved	tracker	bg	Записът е запазен
+error adding the new tracker!	tracker	bg	Грешка при добавяне на новия тракер!
+error saving the entry!!!	tracker	bg	Грешка при запазването на записа !!!
+error: no mail (mailbox / uid) given!	tracker	bg	Грешка: не е зададена пощенска кутия (Mailbox / UID)!
+error: the entry has been updated since you opened it for editing!	tracker	bg	Грешка: записът е актуализиран, откакто го отворихте за редактиране!
+everybody	tracker	bg	Всеки
+exclude links of the following apps on timesheet creation	tracker	bg	Изключете връзките на следните приложения при създаването на Графика
+existing links	tracker	bg	Съществуващи връзки
+exists	tracker	bg	Съществува
+export as csv	tracker	bg	Експорт като CSV
+export csv	tracker	bg	Експортира CSV
+export definition to use for nextmatch export	tracker	bg	Дефиниция за експорт, която да се използва за nextmatch експорт
+export definitition to use for nextmatch export	tracker	bg	Дефиниция за експорт, която да се използва за nextmatch експорт
+exports a list of tracker tickets to a csv file.	tracker	bg	Експортира списък с билети за проследяване в CSV файл.
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	bg	не успя да отвори пощенската кутия: %1 -> деактивирана за автоматична обработка на поща!
+favorites	tracker	bg	Любими
+field	tracker	bg	Поле
+fixed	tracker	bg	Фиксиран
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	bg	За последователно писмо използвайте този маркер. Поставете съдържанието, което искате да повторите, в рамките на двата тага.
+forward	tracker	bg	Препрати
+forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	bg	Препратете пощата до същия адрес, където могат да бъдат препратени неразпознати писма (този адрес трябва да бъде въведен!). След това пощата ще бъде изтрита от сървъра.
+forward to	tracker	bg	Препрати към
+forward unrecognized mails to the email address that has to be specified here.	tracker	bg	Препращайте неразпознати писма до имейл адреса, който трябва да бъде посочен тук.
+from	tracker	bg	От
+general fields:	tracker	bg	Основни полета:
+general settings	tracker	bg	Основни настройки
+handling autoreplies	tracker	bg	Обработка на автоматични отговори
+handling bounced mails	tracker	bg	Обработка на отхвърлени имейли
+handling mailheader information	tracker	bg	Обработка на информация за Mailheader
+history	tracker	bg	История
+how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	bg	Колко реда за описание трябва да са видими директно. Допълнителните да бъдат достъпни чрез скролване.
+html editing	tracker	bg	HTML редактиране
+html link to the current record	tracker	bg	HTML връзка към текущия запис
+id	tracker	bg	Документ за самоличност / ID
+if this item is important for you, please consider to set a bounty for it!	tracker	bg	Ако този елемент е важен за вас, моля, помислете за определяне на бонус за него!
+if this item is important for you, please vote for it.	tracker	bg	Ако този елемент е важен за вас, моля, гласувайте за него.
+if you specify an export definition, it will be used when you export	tracker	bg	Ако посочите дефиниция за експортиране, тя ще се използва, когато експортирате
+if you specify an export definition, it will be used when you export*	tracker	bg	Ако посочите дефиниция за експортиране, тя ще се използва, когато експортирате*
+ignore	tracker	bg	Игнориране
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	bg	Игнориране на пощата. Тя ще остане в пощенската кутия, дори ако е маркирано "Изтриване на имейли от сървъра".
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	bg	Игнориране на неразпознати писма. Те няма да бъдат изтрити от сървъра, дори ако е маркирано "Изтриване на имейли".
+imap, ssl secured	tracker	bg	IMAP, SSL защитени
+imap, tls secured	tracker	bg	IMAP, TLS защитени
+import options	tracker	bg	Опции за импортиране
+import tts tickets	tracker	bg	Импортирайте на TTS билети
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	bg	Импортира записи в тракера от CSV файл. CSV означава "Стойности, разделени със запетая". В раздела с опции можете да изберете и други варианти.
+incoming mail folder	tracker	bg	Папка за входяща поща
+incoming mail rules	tracker	bg	Правила за входяща поща
+incoming mail server	tracker	bg	Входящ пощенски сървър
+info only	tracker	bg	Само информация
+insert	tracker	bg	Вмъкване
+insert in document	tracker	bg	Вмъкване в документ
+interval in minutes for checking the incoming mails	tracker	bg	Интервал (в минути) за проверка на входящите писма
+introduction message	tracker	bg	Встъпително съобщение
+invalid	tracker	bg	Невалиден
+item assignee	tracker	bg	Пълномощник на
+item creator	tracker	bg	Автор на
+language	tracker	bg	Език
+language for the copy	tracker	bg	Език за копието
+last 3 months	tracker	bg	Последни 3 месеца
+last modified	tracker	bg	Последно обновен
+last modified by	tracker	bg	Последна промяна от
+last month	tracker	bg	Миналия месец
+last quarter	tracker	bg	Последно тримесечие
+last reply	tracker	bg	Последен отговор
+last reply by anyone but creator	tracker	bg	Последен отговор от всеки, без автора
+last reply by creator	tracker	bg	Последен отговор от автора
+last week	tracker	bg	Миналата седмица
+last year	tracker	bg	Миналата година
+later	tracker	bg	По - късно
+leaves without saveing	tracker	bg	напусни без да запазиш
+length<br>rows	tracker	bg	Дължина <br> Редове
+limit number of description lines (default 5, 0 for no limit)	tracker	bg	Ограничете броя на видовете редове. По подразбиране =5, 0= няма ограничение.
+link to ticket	tracker	bg	Връзка (линк) към билет
+linked to %1	tracker	bg	Свързан с %1
+links	tracker	bg	Връзки (линкове)
+links and attached files	tracker	bg	Връзки (линкове) и прикачени файлове
+links to specified application.  example: {{links/infolog}}	tracker	bg	Връзки към посоченото приложение. Например: {{links/infolog}}
+list of coma separated email address	tracker	bg	Списък на имейл адрес, разделен със запетая
+list of files linked to the current record	tracker	bg	Списък с файлове, свързани с текущия запис
+mail handling	tracker	bg	Обработка на поща
+mailbox settings used: %1	tracker	bg	Използвани настройки на пощенската кутия: %1
+manage mapping	tracker	bg	Управление на съответствия
+mark as read	tracker	bg	Маркирай като прочетено
+mark as unread	tracker	bg	Маркирай като непрочетено
+match again after	tracker	bg	Съчетай отново след
+matching filter	tracker	bg	Съвпадащ филтър
+maximum %1 times	tracker	bg	максимум %1 пъти
+maximum %s times	tracker	bg	максимум %s пъти
+miscellaneous	tracker	bg	Разни
+multiple changes	tracker	bg	Множество промени
+name of current user, all other contact fields are valid too	tracker	bg	Име на текущия потребител, всички други полета за контакт също са валидни
+new %1	tracker	bg	Нов %1
+new items	tracker	bg	Нови елементи
+new ticket submitted by %1 at %2	tracker	bg	Нов билет, предоставен от %1 в %2
+new tickets as	tracker	bg	Нови билети като
+new tracker item submitted by %1 at %2	tracker	bg	Нов елемент за проследяване, изпратен от %1 в %2
+no change	tracker	bg	Няма промяна
+no notifications	tracker	bg	Без известия
+no trackers found, aborting	tracker	bg	Неуспех при намирането на Тракери (Системи за проследяване).
+no, no additional mailheader to description and comments	tracker	bg	не, без допълнителен Mailheader за описание и коментари
+non-anonymous users	tracker	bg	Неанонимни потребители
+noone	tracker	bg	Никой
+not-closed	tracker	bg	не е затворен
+note: timesheet itself is always excluded	tracker	bg	Забележка: Самият timesheet е изключен винаги
+notification	tracker	bg	Известие
+notification message	tracker	bg	Съобщение за известие
+notification settings	tracker	bg	Настройки за известията
+notification signature	tracker	bg	Известие за подпис
+old fixed definition	tracker	bg	Стара фиксирана дефиниция
+one day after	tracker	bg	Един ден след това
+one day in advance	tracker	bg	Един ден предварително
+only explicitly named users have read access (otherwise everyone)	tracker	bg	Само изрично наименовани потребители имат достъп за четене, в противен случай се отнася за всички
+only for admins, technicians or assigned	tracker	bg	Само за администратори, техници или упълномощени
+open(status)	tracker	bg	Отворен
+order	tracker	bg	Поръчка
+out of date	tracker	bg	Изтекъл
+overdue	tracker	bg	Просрочен
+overdue after	tracker	bg	Просрочено след
+ownership of the ticket	tracker	bg	Собственик на билета
+pending	tracker	bg	В очакване
+pending items never get close automatic.	tracker	bg	Елементите, които са в очакване на становище, да не се затварят никога автоматично.
+pending items will be closed automatic after %1 days without response.	tracker	bg	Елементите, които са в очакване на становище ще бъдат затворени автоматично след %1 дни без отговор.
+permission denied !!!	tracker	bg	Разрешението е отказано !!!
+permissions error - %1 could not %2	tracker	bg	Грешка в разрешенията - %1 не можа да бъде %2
+permit html editing in overview and comments	tracker	bg	Разрешете HTML редактиране в преглед и коментари
+pop3	tracker	bg	POP3
+postponed	tracker	bg	Отложено
+pre-selected version when creating a new tracker	tracker	bg	Предварително избрана версия при създаване на нов тракер
+print entry	tracker	bg	Запис за печат
+priorities	tracker	bg	Приоритети
+priorities with empty label are not available to the user	tracker	bg	Приоритетите с празен етикет не са достъпни за потребителя.
+process	tracker	bg	Обработване
+process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	bg	Обработване на съобщението нормално. *ЗАБЕЛЕЖКА* Това може да причини mail loops, когато "Изпратени автоматични отговори" по-долу са активирани!
+project selection	tracker	bg	Избор на проект
+projects	tracker	bg	Проекти
+re-open closed tickets when a comment is added	tracker	bg	Отворете отново затворени билети, когато бъде добавен нов коментар
+read mail address	tracker	bg	Филтриране на пощенската кутия за този имейл адрес
+read only filemanager directory	tracker	bg	Директорията на Filemanger само за четене
+receive notifications about assigned tracker-items	tracker	bg	Получаване на известия за зададени елементи на проследяване
+receive notifications about created tracker-items	tracker	bg	Получаване на известия за създадени елементи за проследяване
+receive notifications about due entries you created or are assigned to	tracker	bg	Получаване на известия за дължимите записи, които сте създали или са ви зададени
+receive notifications about own changes in tracker-items	tracker	bg	Получаване на известия за собствени промени в проследяващите елементи
+receive notifications about starting entries you created or are assigned to	tracker	bg	Получаване на известия за стартиращи записи, които сте създали или са ви зададени
+receive notifications in html	tracker	bg	Получаване на известия в HTML
+refused to open mailbox therefore changed interval from %1 to %2	tracker	bg	отказа да отвори пощенската кутия поради променен Интервал от %1 на %2
+refused to open mailbox: %1	tracker	bg	отказа да отвори пощенска кутия: %1
+rejected	tracker	bg	Отхвърлен
+remind	tracker	bg	Напомни
+replacements for inserting entries into documents	tracker	bg	Замени за вмъкване на записи в документи
+reply also to unknown addresses	tracker	bg	Отговорете и на неизвестни адреси
+reply to	tracker	bg	Отговорете на
+report as bar chart by the selected criterias	tracker	bg	Отчитане по избраните критерии в стълбови диаграми (bar chart)
+report as pie chart for the main criterias	tracker	bg	Отчитане на основните критерии в кръгови диаграми (pie chart)
+report parameter	tracker	bg	Параметър на отчета
+report parameters	tracker	bg	Параметри на отчета
+reporting timeframe	tracker	bg	Времева рамка за отчитане
+reports	tracker	bg	Доклади
+resolution	tracker	bg	Резолюция
+responsible	tracker	bg	Отговорен за
+restict tracker items to the creator and the staff only	tracker	bg	Ограничете проследяващите елементи единствено за автора и персонала
+restict tracker items to the creators primary group and the staff only	tracker	bg	Ограничете проследяващите елементи единствено за авторите, основната група и персонала
+restrict tracker items to staff and:	tracker	bg	Ограничете проследяващите елементи до персонала и:
+restricted comment	tracker	bg	Ограничаващ коментар
+restriction	tracker	bg	Ограничение
+same day	tracker	bg	Същия ден
+save new report	tracker	bg	Запазване на нов отчет
+save new report...	tracker	bg	Запазване на нов отчет ...
+saves the changes made and leaves	tracker	bg	запази направените промени и напусни
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	bg	Изберете стандартно проследяване за нови билети или "Отхвърляне", за да забраните създаването на билети чрез пощата.
+select accounts for which the custom field should be visible	tracker	bg	Изберете акаунти, за които да се виждат полета за избор (персонализирани)
+select existing report	tracker	bg	Изберете съществуващ отчет
+select how autoreplies should be sent when mails are received	tracker	bg	Изберете как трябва да се изпращат Автоматичните отговори при получаване на имейли
+select multiple	tracker	bg	Изберете няколко
+select one...	tracker	bg	Изберете един...
+select users or groups	tracker	bg	Изберете потребители или групи
+select which categories should be used in tracker for the tts categories	tracker	bg	Изберете кои категории да се използват в Тракер за TTS категории.
+select which username should be used when unrecognized mails are handled.	tracker	bg	Изберете кое потребителско име да се използва, когато се обработват неразпознати имейли.
+select which username should be used when unrecognized replies are handled	tracker	bg	Изберете кое потребителско име да се използва, когато се обработват неразпознати отговори
+sender address	tracker	bg	Адрес на подателя
+sender address for all notifications, eg. noreply@egroupware.org	tracker	bg	Адрес на подателя за всички известия (например: noreply@egroupware.org)
+sent autoreplies	tracker	bg	Изпратени автоматични отговори
+server type	tracker	bg	Тип сървър
+set %1	tracker	bg	Задайте %1
+set an own bounty (in %s)	tracker	bg	Задаване на собствен бонус (в %s)
+set bounty	tracker	bg	Задаване на бонус
+set to	tracker	bg	Задаване на
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	bg	Искате ли Тракерът да ви изпраща известия по пощата, ако зададените ви проследяващи елементи се актуализират?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	bg	Искате ли Тракерът да ви изпраща известия по пощата, ако създадените от Вас проследяващи елементи се актуализират?
+should there be a tracker-box on  home screen?	tracker	bg	Покажи Тракер на началната страница
+show start date and due date	tracker	bg	Показване на начална и крайна дата
+show the tracker send you notification mails, in tracker items that you updates?	tracker	bg	Искате ли Тракерът да ви изпрати съобщения с известия, за елементи от проследяване, които сте актуализирали?
+signature	tracker	bg	Подпис
+skip record	tracker	bg	Пропуснете записа
+staff	tracker	bg	Персонал / състав
+staff  "users" will be allowed for assignment to tracker tickets	tracker	bg	Състав от "Потребители", на които ще им бъде позволено да задават билети за проследяване (tracker tickets)
+standard imap	tracker	bg	Стандартен IMAP
+started	tracker	bg	Започнат
+starting	tracker	bg	Стартиране
+state	tracker	bg	Състояние
+stati	tracker	bg	Състояние
+status	tracker	bg	Статус
+store as	tracker	bg	Съхранявайте като
+sum	tracker	bg	Сума
+summary	tracker	bg	Обобщение
+tag to mark positions for address labels	tracker	bg	Отбележете, за да маркирате позиции от адр. етикети
+technicians	tracker	bg	Техници
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	bg	Тествайте mailhandling веднъж (ще бъде изпълнено веднага след запазване/прилагане независимо от интервала, дори ако е зададено "Деактивиране")
+thank you for setting this bounty.	tracker	bg	Благодарим Ви, че зададохте този бонус
+thank you for voting.	tracker	bg	Благодарим Ви за гласуването
+the bounty will not be shown, until the money is received.	tracker	bg	Бонусът НЯМА да бъде показан, докато парите не бъдат получени
+the canned response will be prefix the text you type.	tracker	bg	Отговорите "шаблони" могат да бъде редактирани.
+the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	bg	Документът може да съдържа заместител като {{%3}}, който да бъде заменен с данните (%1full list of placeholder names%2).
+the following document-types are supported:	tracker	bg	Поддържат се следните типове документи:
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	bg	Промяната на името, използвано вътрешно (<= 20 знака), прави съществуващите данни недостъпни
+the text displayed to the user	tracker	bg	текстът, показан на потребителя
+this module allows to add a ticket.	tracker	bg	Този модул позволява да добавите билет.
+this module displays information from the tracker.	tracker	bg	Този модул показва информация от Тракера
+this month	tracker	bg	Този месец
+this quarter	tracker	bg	Това тримесечие
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	bg	Този елемент за проследяване е затворен автоматично от системата. Предварително зададения статус "в очакване", не беше потвърден в рамките на %1 дни.
+this week	tracker	bg	Тази седмица
+this year	tracker	bg	Тази година
+ticket	common	bg	Билет
+ticket count	tracker	bg	Брой на билетите
+ticket modified by %1 at %2	tracker	bg	Билет обновен от %1 на %2
+tickets	common	bg	Билети
+titles of any entries linked to the current record, excluding attached files	tracker	bg	Заглавия на всички записи, свързани с текущия запис, с изключение на прикачените файлове
+total:	tracker	bg	Общо:
+tracker	common	bg	Система за проследяване
+tracker added	tracker	bg	Добавена е опашка за проследяване.
+tracker admins	tracker	bg	Администратори на Тракера
+tracker admins & technicians	tracker	bg	Администратори и техници на Тракера
+tracker configuration	tracker	bg	Конфигурация на Тракера
+tracker csv export	tracker	bg	Проследяване на CSV експортиране
+tracker csv import	tracker	bg	Проследяване на CSV импортиране
+tracker deleted	tracker	bg	Опашката за проследяване е изтрита.
+tracker entry can only seen by creator and admins	tracker	bg	Вписването в Тракера може да бъде видяно само от автора и администраторите
+tracker fields:	tracker	bg	Полета за проследяване:
+tracker for new tickets	tracker	bg	Тракер за нови билети
+tracker for the  home screen	tracker	bg	Тракер за началния екран
+tracker id	tracker	bg	ID на Тракер
+tracker item modified by %1 at %2	tracker	bg	Елемент за проследяване, променен от %1 на %2
+tracker item not found !!!	tracker	bg	Елементът за проследяване не е намерен!
+tracker list	tracker	bg	Тракер списък
+tracker queue	tracker	bg	Опашка за проследяване
+tracker queue renamed	tracker	bg	Опашката за проследяване е преименувана.
+tracker queues	tracker	bg	Опашки за проследяване
+tracker-%1 '%2' added.	tracker	bg	Добавен е Тракер-%1 '%2'.
+tracker-%1 '%2' updated.	tracker	bg	Тракер-%1 '%2' актуализиран.
+tracker-%1 deleted.	tracker	bg	Тракер -%1 изтрит.
+type of customfield	tracker	bg	Тип потребителско поле
+unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	bg	Невъзможно е да се преобразува "%1" в ID на акаунта. Използване на настройката на плъгин (%2) за %3.
+unchanged	tracker	bg	Непроменен
+unlinked from %1	tracker	bg	Прекратена връзка от %1
+unrecognized mails	tracker	bg	Неразпознати имейли
+upcoming	tracker	bg	Предстоящ
+updated	tracker	bg	Обновен
+url of the tracker	tracker	bg	URL адрес на тракера
+use a default user for mails that where not recognized	tracker	bg	Използвайте потребител по подразбиране за имейли, там където не е изветно
+use all	tracker	bg	Използвайте всички
+use custom notification message	tracker	bg	Използвайте персонализирано съобщение за известяване
+use custom signature	tracker	bg	Използвайте персонализиран подпис
+use field from csv if possible	tracker	bg	Използвайте поле от CSV, ако е възможно
+use search results	tracker	bg	Използвайте резултати от търсенето
+use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	bg	Използвайте този маркер за адресни етикети. Поставете съдържанието, което искате да повторите, в рамките на двата маркера.
+user or group	tracker	bg	Потребител или група
+user preference	tracker	bg	Предпочитания на потребителя
+version for new tickets	tracker	bg	Версия за нови билети
+versions	tracker	bg	Версии
+vote for it!	tracker	bg	Гласувайте за това!
+votes	tracker	bg	Гласове
+what should be done with unknown values?	tracker	bg	Какво трябва да се направи с неизвестни стойности?
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	bg	Когато имейлите се получат от неизвестен имейл адрес, маркирайте това поле, за да ги добавите автоматично в Tracker CC полето.
+wont fix	tracker	bg	Няма да се поправи
+works for me	tracker	bg	Работи за мен
+writable filemanager directory	tracker	bg	Записваща директория за управление на файлове
+yes, add mailheader to both (description and comments)	tracker	bg	да, добавете Mailheader и към двете (описание и коментари)
+yes, add mailheader to comments	tracker	bg	Да, добавете Mailheader към коментарите
+yes, add mailheader to description	tracker	bg	Да, добавете Mailheader към описанието
+yes, always	tracker	bg	Да, винаги
+yes, display groups first	tracker	bg	Да, първо покажете групите
+yes, display users first	tracker	bg	Да, първо покажете потребителите
+yes, new tickets only	tracker	bg	Да, само нови билети
+yes, with larger fontsize	tracker	bg	Да, с по-голям размер на шрифта
+yesterday	tracker	bg	Вчера
+you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	bg	Можете да активирате/деактивирате ограниченията за достъп на опашката, в раздела за конфигурация за всички опашки
+you can respond by visiting:	tracker	bg	Можете да отговорите, като отидете на:
+you need to enter a name	tracker	bg	Трябва да въведете име
+you need to login to vote!	tracker	bg	За да гласувате, първо трябва да влезете в профила си!
+you need to select an entry for linking.	tracker	bg	Трябва да изберете запис за свързване.
+you need to select some entries first	tracker	bg	Първо трябва да изберете записи.
+you need to select something to change and some tracker items!	tracker	bg	Трябва да изберете нещо, което да промените, както и проследяващи елементи!
+you need to specify amount, donators name and email address!	tracker	bg	Трябва да посочите сума, име на дарителите и имейл адрес!
+you voted %1.	tracker	bg	Гласувахте %1.
+♦ not closed	tracker	bg	♦ Не е затворен
+♦ own not closed	tracker	bg	♦ Собствен, не е затворен
+♦ own or assigned not closed	tracker	bg	♦ Собствен или възложен на някого, не е затворен
+♦ own without reply not closed	tracker	bg	♦ Собствен без отговор, не е затворен
+♦ without 30 days reply not closed	tracker	bg	♦ Без отговор от 30 дни, не е затворен
+♦ without reply not closed	tracker	bg	♦ Без отговор, не е затворен
