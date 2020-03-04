@@ -44,7 +44,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 	 */
 	protected $tr_id;
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		// Test works on its own with this, but fails with the rest.
 		// There's no good reason commenting this out should work.
@@ -61,7 +61,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 		$GLOBALS['egw_info']['user']['preferences']['tracker']['notify_own_modification'] = true;
 		$GLOBALS['egw_info']['user']['preferences']['tracker']['notify_creator'] = true;
 	}
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		Config::save_value('htmledit', static::$edit_mode, 'tracker', true);
 		$GLOBALS['egw']->preferences->add('tracker','notify_own_modification', static::$self_notify);
@@ -70,7 +70,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 		parent::tearDownAfterClass();
 	}
 
-	public function setUp()
+	protected function setUp() : void
 	{
 		$this->bo = new \tracker_bo();
 
@@ -92,7 +92,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 		}
 	}
 
-	public function tearDown()
+	protected function tearDown() : void
 	{
 		parent::tearDown();
 
@@ -104,7 +104,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 		$this->bo = null;
 	}
 
-	public function assertPreConditions()
+	protected function assertPreConditions() : void
 	{
 		// Make sure we can change the fields needed to trigger the notification
 		$readonlys = $this->bo->readonlys_from_acl();
