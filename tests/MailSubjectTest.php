@@ -60,7 +60,7 @@ class MailSubjectMatchTest extends \EGroupware\Api\AppTest
 	/**
 	 * Create the tickets to match against
 	 */
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 
@@ -81,7 +81,7 @@ class MailSubjectMatchTest extends \EGroupware\Api\AppTest
 		}
 	}
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		foreach(self::$tracker_ids as $tracker_id)
 		{

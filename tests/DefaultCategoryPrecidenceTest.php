@@ -58,14 +58,14 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 	public static $preference = '';
 	public static $filter_setting = '';
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		// Test works on its own with this, but fails with the rest.
 		// There's no good reason commenting this out should work.
 		parent::setUpBeforeClass();
 
 	}
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 
 		parent::tearDownAfterClass();
@@ -119,7 +119,7 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		$cats->delete(static::$filter_setting);
 	}
 
-	public function setUp()
+	protected function setUp() : void
 	{
 		parent::setUp();
 
@@ -136,7 +136,7 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 
 	}
 
-	public function tearDown()
+	protected function tearDown() : void
 	{
 		parent::tearDown();
 
