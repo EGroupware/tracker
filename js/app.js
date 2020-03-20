@@ -33,7 +33,7 @@ var trackerAPP = /** @class */ (function (_super) {
      * Constructor
      */
     function trackerAPP() {
-        return _super.call(this) || this;
+        return _super.call(this, 'tracker') || this;
     }
     /**
      * Destructor
@@ -342,7 +342,6 @@ var trackerAPP = /** @class */ (function (_super) {
             widget.dblclick();
         }
     };
-    trackerAPP.appname = 'tracker';
     return trackerAPP;
 }(egw_app_1.EgwApp));
 app.classes.tracker = trackerAPP;

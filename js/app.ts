@@ -17,14 +17,13 @@ import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
  */
  class trackerAPP extends EgwApp
 {
-	static readonly appname: string = 'tracker';
 
 	/**
 	 * Constructor
 	 */
 	constructor()
 	{
-		super();
+		super('tracker');
 	}
 
 	/**
