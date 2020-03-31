@@ -1812,7 +1812,8 @@ width:100%;
 		$actions['share']['children']['shareFilemanager']['caption'] = 'Readonly filemanager directory';
 		$actions['share']['children']['shareWritableFilemanager'] = array_merge(
 			$actions['share']['children']['shareFilemanager'],
-			array('caption' => 'Writable filemanager directory')
+			array('caption' => 'Writable filemanager directory',
+					'hint' => 'Share the filemanager directory, allowing editing')
 		);
 
 
