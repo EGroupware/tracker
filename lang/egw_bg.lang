@@ -126,14 +126,17 @@ delete this version	tracker	bg	Изтриване на тази версия
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	bg	Изтриване на неразпознатите мейли от сървъра, дори ако "Изтриване на имейлите" не е маркирано.
 deleted	tracker	bg	Изтрит
 deletes this field	tracker	bg	Изтриване на това поле
+deny global	tracker	bg	Откажи глобално
 determines the order the fields are displayed	tracker	bg	определя реда, в който се показват полетата
 directory with documents to insert entries	tracker	bg	Директория с документи за въвеждане на записи
 do not send notifications to external email (cc field)	tracker	bg	Не изпращайте известия на външен имейл (cc field)
 do you want a notification, if items you are responsible for are about to start?	tracker	bg	Искате ли да получавате известие, ако елементите, за които сте отговорни започват?
+do you want a notification, if items you are responsible for are due?	tracker	bg	Искате ли известие, заради очакващи се елементи, за които сте отговорни?
 do you want to add mailheader information to description and/or comments?	tracker	bg	Искате ли да добавите информация за Mailheader към Описание и/или Коментари?
 do you want to vote for this item	tracker	bg	Искате ли да гласувате за този елемент?
 donator name to show	tracker	bg	Да покаже името на дарителя
 download url for links	tracker	bg	Изтегляне на URL адреса за връзки
+due date	tracker	bg	Краен срок
 duplicate	tracker	bg	Дубликат
 e-mail address to which a copy of all tracker-notifications should be send	tracker	bg	Имейл адрес, на който трябва да се изпрати копие от всички известия за проследяване
 e-mail notifications	tracker	bg	Известия по имейл
