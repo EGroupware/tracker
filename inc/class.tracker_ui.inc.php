@@ -1071,7 +1071,7 @@ class tracker_ui extends tracker_bo
 				}
 				$rows[$n]['tr_description'] = nl2br(trim($rows[$n]['tr_description']));
 			}
-			if ($row['overdue']) $rows[$n]['overdue_class'] = 'tracker_overdue';
+			if ($row['overdue'] && !$row['tr_closed']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;
 
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
