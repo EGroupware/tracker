@@ -68,7 +68,7 @@ label.tracker_trIdEdit:before {
 }
 .normal,
 .normal_done {
-  color: black;
+  color: #000000;
 }
 .high {
   color: #cc0000;
@@ -117,9 +117,6 @@ label.tracker_trIdEdit:before {
   text-overflow: ellipsis;
   width: 50%;
   overflow: hidden;
-}
-.trackerDes {
-  white-space: pre-wrap;
 }
 /* Add border to ACL's table for more reading convenient*/
 #tracker-admin_tracker-admin-acl tr.row {
@@ -171,11 +168,8 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
   display: none;
 }
-#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons .et2_button {
-  display: none;
-}
 #tracker-edit_tracker-edit-comments .et2_button .et2_vfs_btn {
-  float:left;
+  float: left;
 }
 #tracker-index_tracker-index-queue {
   position: relative;
