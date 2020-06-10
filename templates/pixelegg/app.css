@@ -68,7 +68,7 @@ label.tracker_trIdEdit:before {
 }
 .normal,
 .normal_done {
-  color: #000000;
+  color: black;
 }
 .high {
   color: #cc0000;
@@ -167,6 +167,9 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-comments .et2_vfs td.icon,
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
   display: none;
+}
+#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons .et2_button {
+  display: none !important;
 }
 #tracker-edit_tracker-edit-comments .et2_button .et2_vfs_btn {
   float: left;
