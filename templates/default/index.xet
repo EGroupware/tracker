@@ -83,7 +83,6 @@
 					<description extra_link_popup="780x535" extra_link_target="_blank" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
 					<vbox no_lang="1" class="colfullWidth">
 						<description extra_link_popup="780x535" extra_link_target="_blank" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" no_lang="1" class="$row_cont[seen_class]"/>
-						<hrule/>
 						<box no_lang="1" class="trackerDes">
 							<html id="${row}[tr_description]" no_lang="1"/>
 						</box>
