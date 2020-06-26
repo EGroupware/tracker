@@ -786,3 +786,21 @@ function tracker_upgrade17_1_002()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '19.1';
 }
+
+/**
+ * Remove custom field types config, we read queues from categories
+ */
+function tracker_upgrade19_1()
+{
+	$GLOBALS['egw_setup']->db->delete(
+		'egw_config',
+		array(
+			'config_app' => 'tracker',
+			'config_name' => 'types'
+		),
+		__LINE__, __FILE__
+	);
+
+	Api\Cache::flush(Api\Cache::INSTANCE);
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '19.1.001';
+}
