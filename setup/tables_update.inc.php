@@ -804,3 +804,13 @@ function tracker_upgrade19_1()
 	Api\Cache::flush(Api\Cache::INSTANCE);
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '19.1.001';
 }
+
+/**
+ * Bump version to 20.1
+ *
+ * @return string
+ */
+function tracker_upgrade19_1_001()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '20.1';
+}
