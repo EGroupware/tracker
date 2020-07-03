@@ -77,6 +77,16 @@ class tracker_export_csv implements importexport_iface_export_plugin
 						if($value['to']) $query['col_filter'][] = "$field <= " . (int)$value['to'];
 						unset($query['col_filter'][$field]);
 					}
+
+					// Handle cat_id & version, which do not go in col_filter
+					if($_definition->filter['cat_id'])
+					{
+						$query['cat_id'] = $_definition->filter['cat_id'];
+					}
+					if($_definition->filter['tr_version'])
+					{
+						$query['filter2'] = $_definition->filter['tr_version'];
+					}
 				}
 
 				$selection = new Api\Storage\RowsIterator($this->ui, $query, 'tr_id');
@@ -257,6 +267,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 	{
 		$this->selects = array(
 			'tr_tracker'	=> $this->ui->trackers,
+			'cat_id'      => $this->ui->get_tracker_labels('cat', null),
 			'tr_version'	=> $this->ui->get_tracker_labels('version', null),
 			'tr_status'	=> $this->ui->get_tracker_stati(null),
 			'tr_resolution'	=> $this->ui->get_tracker_labels('resolution',null),
@@ -265,6 +276,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 		);
 		foreach(array_keys($this->selects['tr_tracker']) as $id)
 		{
+			$this->selects['cat_id'] += $this->ui->get_tracker_labels('cat', $id);
 			$this->selects['tr_version'] += $this->ui->get_tracker_labels('version', $id);
 			$this->selects['tr_status'] += $this->ui->get_tracker_stati($id);
 			$this->selects['tr_resolution'] += $this->ui->get_tracker_labels('resolution',$id);
