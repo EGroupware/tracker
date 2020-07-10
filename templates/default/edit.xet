@@ -27,8 +27,8 @@
 						<htmlarea resize_ratio="0" id="{$row}[reply_message]" mode="@@tr_edit_mode" readonly="@@editable_comments" span="all" width="99%"  editable_height="247" class="@@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$row_cont[tr_id],$row_cont[reply_id]" toggle_readonly="false"/>
 
 						<hbox align="left" class="et2_link_to et2_toolbar hide_buttons">
-							<vfs-select method_id="tracker:{$row_cont[tr_id]}:comments/{$row_cont[reply_id]}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
-							<vfs-upload id="tracker:{$row_cont[tr_id]}:comments/{$row_cont[reply_id]}/" label="" path="tracker:{$row_cont[tr_id]}:comments/{$row_cont[reply_id]}/" onchange="app.tracker.comment_add_vfs"/>
+							<vfs-select method_id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
+							<vfs-upload id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" label="" path="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" onchange="app.tracker.comment_add_vfs"/>
 						</hbox>
 					</vbox>
 				</row>
@@ -46,7 +46,7 @@
 				<row class="th" valign="top">
 					<hbox align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
 						<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
-						<vfs-select method_id="tracker:$cont[id]:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" />
+						<vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" />
 					</hbox>
 					<hbox disabled="@no_canned">
 						<description value="Canned response" for="canned_response" class="3"/>
