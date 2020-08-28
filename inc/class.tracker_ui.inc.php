@@ -822,6 +822,11 @@ class tracker_ui extends tracker_bo
 		{
 			foreach($content['replies'] as $key => &$reply)
 			{
+				if(!$reply)
+				{
+					unset($content['replies'][$key]);
+					continue;
+				}
 				if (isset($content['replies'][$key]['reply_visible'])) {
 					$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
 					if($this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
@@ -832,11 +837,11 @@ class tracker_ui extends tracker_bo
 				}
 			}
 		}
-		if ($content['num_replies'])
-        {
-            array_unshift($content['replies'],false);
-            array_unshift($preserve['replies'],false);
-        }	// need array index starting with 1!
+		if ($content['num_replies'] && (!array_key_exists(0,$content['replies']) || $content['replies'][0]))
+    {
+        array_unshift($content['replies'],false);
+        array_unshift($preserve['replies'],false);
+    }	// need array index starting with 1!
 		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
 			!$this->allow_restricted_comments;
 
