@@ -24,6 +24,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var egw_app_1 = require("../../api/js/jsapi/egw_app");
+var et2_extension_nextmatch_1 = require("../../api/js/etemplate/et2_extension_nextmatch");
 /**
  * UI for tracker
  */
@@ -106,6 +107,27 @@ var trackerAPP = /** @class */ (function (_super) {
                     nm.applyFilters();
             }
         }
+    };
+    /**
+     * Retrieve the current state of the application for future restoration
+     *
+     * The state can be anything, as long as it's an object.  The contents are
+     * application specific.  Overriding the default implementation to always use
+     * the tracker list, not escalations.
+     * The return value of this function cannot be passed directly to setState(),
+     * since setState is expecting an additional wrapper, eg:
+     * {name: 'something', state: getState()}
+     *
+     * @return {object} Application specific map representing the current state
+     */
+    trackerAPP.prototype.getState = function () {
+        var state = {};
+        // Try and find a nextmatch widget, and set its filters
+        var et2 = etemplate2.getById('tracker-index');
+        et2.widgetContainer.iterateOver(function (_widget) {
+            state = _widget.getValue();
+        }, this, et2_extension_nextmatch_1.et2_nextmatch);
+        return state;
     };
     /**
      * Tracker list filter change, used to toggle date fields

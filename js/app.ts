@@ -109,6 +109,32 @@ import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 		}
 	}
 
+
+	/**
+	 * Retrieve the current state of the application for future restoration
+	 *
+	 * The state can be anything, as long as it's an object.  The contents are
+	 * application specific.  Overriding the default implementation to always use
+	 * the tracker list, not escalations.
+	 * The return value of this function cannot be passed directly to setState(),
+	 * since setState is expecting an additional wrapper, eg:
+	 * {name: 'something', state: getState()}
+	 *
+	 * @return {object} Application specific map representing the current state
+	 */
+	getState() : {[propName:string]: any}
+	{
+		var state = {};
+
+		// Try and find a nextmatch widget, and set its filters
+		var et2 = etemplate2.getById('tracker-index');
+		et2.widgetContainer.iterateOver(function(_widget) {
+				state = _widget.getValue();
+			}, this, et2_nextmatch);
+
+		return state;
+	}
+
 	/**
 	 * Tracker list filter change, used to toggle date fields
 	 */
