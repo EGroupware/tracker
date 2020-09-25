@@ -11,6 +11,10 @@
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
 import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
+import {et2_button} from "../../api/js/etemplate/et2_widget_button";
+import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
+import {etemplate2} from "../../api/js/etemplate/etemplate2";
+import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 
 /**
  * UI for tracker
@@ -124,10 +128,11 @@ import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 	 */
 	getState() : {[propName:string]: any}
 	{
-		var state = {};
+		let state = {};
 
 		// Try and find a nextmatch widget, and set its filters
-		var et2 = etemplate2.getById('tracker-index');
+		let et2 = etemplate2.getById('tracker-index');
+		if(!et2) return {};
 		et2.widgetContainer.iterateOver(function(_widget) {
 				state = _widget.getValue();
 			}, this, et2_nextmatch);
