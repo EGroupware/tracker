@@ -25,6 +25,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var egw_app_1 = require("../../api/js/jsapi/egw_app");
 var et2_extension_nextmatch_1 = require("../../api/js/etemplate/et2_extension_nextmatch");
+var et2_widget_button_1 = require("../../api/js/etemplate/et2_widget_button");
+var et2_widget_selectbox_1 = require("../../api/js/etemplate/et2_widget_selectbox");
+var etemplate2_1 = require("../../api/js/etemplate/etemplate2");
+var et2_widget_link_1 = require("../../api/js/etemplate/et2_widget_link");
 /**
  * UI for tracker
  */
@@ -74,11 +78,11 @@ var trackerAPP = /** @class */ (function (_super) {
                     if (typeof widget.options.value === 'object' && widget.options.value.length > 1) {
                         var button_1 = null;
                         // Find associated expand button
-                        widget.getParent().getParent().iterateOver(function (widget) { button_1 = widget; }, this, et2_button);
+                        widget.getParent().getParent().iterateOver(function (widget) { button_1 = widget; }, this, et2_widget_button_1.et2_button);
                         this.multiple_assigned(false, button_1);
                         widget.set_value(widget.options.value);
                     }
-                }, this, et2_selectbox);
+                }, this, et2_widget_selectbox_1.et2_selectbox);
                 break;
         }
     };
@@ -123,7 +127,9 @@ var trackerAPP = /** @class */ (function (_super) {
     trackerAPP.prototype.getState = function () {
         var state = {};
         // Try and find a nextmatch widget, and set its filters
-        var et2 = etemplate2.getById('tracker-index');
+        var et2 = etemplate2_1.etemplate2.getById('tracker-index');
+        if (!et2)
+            return {};
         et2.widgetContainer.iterateOver(function (_widget) {
             state = _widget.getValue();
         }, this, et2_extension_nextmatch_1.et2_nextmatch);
@@ -250,7 +256,7 @@ var trackerAPP = /** @class */ (function (_super) {
         // Update link widget on links tab
         widget.getRoot().iterateOver(function (widget) {
             widget._get_links();
-        }, this, et2_link_list);
+        }, this, et2_widget_link_1.et2_link_list);
     };
     /**
      * acl_queue_access
