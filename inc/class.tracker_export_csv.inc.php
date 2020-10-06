@@ -102,8 +102,6 @@ class tracker_export_csv implements importexport_iface_export_plugin
 		$export_object = new importexport_export_csv($_stream, (array)$options);
 		$export_object->set_mapping($options['mapping']);
 
-		if($options['convert'])
-
 		foreach ($selection as $record)
 		{
 			if(!is_array($record) || !$record['tr_id']) continue;
