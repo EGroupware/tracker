@@ -1560,7 +1560,7 @@ class tracker_ui extends tracker_bo
 		if($this->called_by)
 		{
 			$content['nm'] = array_merge($content['nm'], Api\Cache::getSession('tracker', $this->called_by));
-			$tpl->set_dom_id("{$tpl->name}-{$this->called_by}");
+			$tpl->set_dom_id("{$tpl->name}-{$this->called_by}-{$content['nm']['action_id']}");
 		}
 
 		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
