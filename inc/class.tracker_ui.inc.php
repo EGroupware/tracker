@@ -441,7 +441,7 @@ class tracker_ui extends tracker_bo
 					if (Api\Json\Response::isJSONResponse())
 					{
 						Api\Json\Response::get()->call('egw.open_link','tracker.tracker_ui.index&ajax=true','_self',false,'tracker');
-						exit();
+						return;
 					}
 					return $this->index(null,$this->data['tr_tracker'],$msg);
 
