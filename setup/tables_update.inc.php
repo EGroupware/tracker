@@ -814,3 +814,20 @@ function tracker_upgrade19_1_001()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '20.1';
 }
+
+/**
+ * Add esc_run_on_existing column
+ *
+ * @return string
+ */
+function tracker_upgrade20_1()
+{
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations','esc_tr_resolution',array(
+			'type' => 'int',
+			'precision' => '1',
+			'nullable' => False,
+			'default' => '1'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '20.1.001';
+}
