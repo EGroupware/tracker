@@ -194,33 +194,37 @@
 							<rows>
 								<row>
 									<description value="Queue"/>
-									<select span="all" id="set[tr_tracker]" onchange="1" empty_label="Unchanged"/>
-								</row>
-								<row>
+									<select id="set[tr_tracker]" onchange="1" empty_label="Unchanged"/>
 									<description value="Category"/>
 									<menulist>
-										<menupopup id="set[cat_id]" options="Unchanged"/>
+										<menupopup id="set[cat_id]" empty_label="Unchanged"/>
 									</menulist>
+								</row>
+								<row>
 									<description value="Version"/>
 									<menulist>
-										<menupopup id="set[tr_version]" options="Unchanged"/>
+										<menupopup id="set[tr_version]" empty_label="Unchanged"/>
+									</menulist>
+									<description value="Priority"/>
+									<menulist>
+										<menupopup id="set[tr_priority]" empty_label="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Status"/>
 									<menulist>
-										<menupopup id="set[tr_status]" options="Unchanged"/>
+										<menupopup id="set[tr_status]" empty_label="Unchanged"/>
 									</menulist>
-									<description value="Priority"/>
+									<description value="Resolution"/>
 									<menulist>
-										<menupopup id="set[tr_priority]" options="Unchanged"/>
+										<menupopup id="set[tr_resolution]" empty_label="Unchanged"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Assigned to"/>
 									<hbox span="all">
 										<menulist>
-											<menupopup id="set[tr_assigned]" options="Unchanged"/>
+											<menupopup id="set[tr_assigned]" empty_label="Unchanged"/>
 										</menulist>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="users" class="tracker_leftPad5"/>
 										<checkbox label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"/>

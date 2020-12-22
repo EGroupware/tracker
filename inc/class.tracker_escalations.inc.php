@@ -126,6 +126,7 @@ class tracker_escalations extends Api\Storage\Base2
 			}
 			$data['escalation'][$array] = $data[$array];
 		}
+		$bo = new tracker_bo();
 		foreach($data as $key => &$value)
 		{
 			if (substr($key,0,4) == 'esc_' && !in_array($key,array('esc_id','esc_title','esc_time','esc_type','esc_match_repeat','esc_limit','esc_run_on_existing')))
@@ -147,6 +148,7 @@ class tracker_escalations extends Api\Storage\Base2
 							'esc_cat_id'      => lang('category'),
 							'esc_tr_version'  => lang('version'),
 							'esc_tr_assigned' => lang('assigned to'),
+							'esc_tr_resolution'=>lang('resolution'),
 						);
 					}
 					$action = lang('Set %1',$col2action[$key]).': ';
@@ -167,10 +169,14 @@ class tracker_escalations extends Api\Storage\Base2
 							continue 2;
 						case 'esc_tr_priority':
 							$priorities = ExecMethod('tracker.tracker_bo.get_tracker_priorities',
-								is_array($data['tr_tracker']) ? $data['tr_tracker'][0] : $data['tr_tracker']
+									is_array($data['tr_tracker']) ? $data['tr_tracker'][0] : $data['tr_tracker']
 							);
 							$action .= $priorities[$value];
 							break;
+						case 'esc_tr_resolution':
+							$resolutions = $bo->get_tracker_labels('resolution',is_array($data['tr_tracker']) ? $data['tr_tracker'][0] : $data['tr_tracker']);
+							$action .= $resolutions[$value];
+						break;
 						case 'esc_tr_status':
 							if ($value < 0)
 							{

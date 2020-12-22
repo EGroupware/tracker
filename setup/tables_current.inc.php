@@ -121,7 +121,8 @@ $phpgw_baseline = array(
 			'esc_notify' => array('type' => 'varchar','precision' => '15'),
 			'esc_limit' => array('type' => 'int','precision' => '1','comment' => 'Limit on how many times one ticket will match'),
 			'tr_resolution' => array('type' => 'varchar','meta' => 'category','precision' => '55','nullable' => False),
-			'esc_run_on_existing' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1','comment' => 'When saving the escalation, marks existing tickets as matched without taking action, or leave them to run next time async job runs')
+			'esc_run_on_existing' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1','comment' => 'When saving the escalation, marks existing tickets as matched without taking action, or leave them to run next time async job runs'),
+			'esc_tr_resolution' => array('type' => 'int','precision' => '1','nullable' => False,'default' => '1')
 		),
 		'pk' => array('esc_id'),
 		'fk' => array(),
