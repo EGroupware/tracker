@@ -58,6 +58,10 @@ label.tracker_trIdEdit:before { content: "#"; }
 #tracker-admin_tracker-admin-acl tr.row {
 	border-bottom: 1px solid silver;
 }
+/* Nicer sizine for escalation selectboxes */
+.tracker_escalation_action select {
+    width: 150px;
+}
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
 	max-height: 215px;
 }
