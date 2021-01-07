@@ -179,7 +179,7 @@ var trackerAPP = /** @class */ (function (_super) {
      */
     trackerAPP.prototype.multiple_assigned = function (_event, _widget) {
         _widget.set_disabled(true);
-        var selectbox = _widget.getParent()._children[0]._children[0];
+        var selectbox = _widget.getParent()._children[0];
         selectbox.set_multiple(true);
         selectbox.set_tags(true, '98%');
         return false;

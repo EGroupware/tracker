@@ -126,56 +126,48 @@
 						<grid class="big_boxes">
 							<columns>
 								<column width="87"/>
-								<column width="200"/>
+								<column width="180"/>
+								<column width="30"/>
 								<column width="60"/>
-								<column width="200"/>
+								<column width="180"/>
 							</columns>
 							<rows>
 								<row valign="top">
 									<description value="Queue"/>
 									<hbox>
-										<menulist>
-											<menupopup id="tr_tracker" options="All" onchange="1"/>
-										</menulist>
+										<select id="tr_tracker" options="All" onchange="1" class="et2_fullWidth"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
-									<description value="Resolution"/>
+									<description/>
+									<description value="Category"/>
 									<hbox>
-										<menulist>
-											<menupopup id="tr_resolution" options="All"/>
-										</menulist>
+										<select id="cat_id" options="All" class="et2_fullWidth"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
-									<description value="Category"/>
-									<hbox>
-										<menulist>
-											<menupopup id="cat_id" options="All"/>
-										</menulist>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
 									<description value="Version"/>
 									<hbox>
-										<menulist>
-											<menupopup id="tr_version" options="All"/>
-										</menulist>
+										<select id="tr_version" options="All" class="et2_fullWidth"/>
+										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
+									</hbox>
+									<description/>
+									<description value="Priority"/>
+									<hbox>
+										<select id="tr_priority" options="All" class="et2_fullWidth"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
 								<row valign="top">
 									<description value="Status"/>
 									<hbox>
-										<menulist>
-											<menupopup id="tr_status" options="All"/>
-										</menulist>
+										<select id="tr_status" options="All" width="80%" class="et2_fullWidth"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
-									<description value="Priority"/>
+									<description/>
+									<description value="Resolution"/>
 									<hbox>
-										<menulist>
-											<menupopup id="tr_priority" options="All"/>
-										</menulist>
+										<select id="tr_resolution" options="All" class="et2_fullWidth"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
 									</hbox>
 								</row>
@@ -194,38 +186,36 @@
 							<rows>
 								<row>
 									<description value="Queue"/>
-									<select id="set[tr_tracker]" onchange="1" empty_label="Unchanged"/>
+									<select id="set[tr_tracker]" onchange="1" empty_label="Unchanged" width="150px"/>
 									<description value="Category"/>
 									<menulist>
-										<menupopup id="set[cat_id]" empty_label="Unchanged"/>
+										<menupopup id="set[cat_id]" empty_label="Unchanged" width="150"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Version"/>
 									<menulist>
-										<menupopup id="set[tr_version]" empty_label="Unchanged"/>
+										<menupopup id="set[tr_version]" empty_label="Unchanged" width="150"/>
 									</menulist>
 									<description value="Priority"/>
 									<menulist>
-										<menupopup id="set[tr_priority]" empty_label="Unchanged"/>
+										<menupopup id="set[tr_priority]" empty_label="Unchanged" width="150"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Status"/>
 									<menulist>
-										<menupopup id="set[tr_status]" empty_label="Unchanged"/>
+										<menupopup id="set[tr_status]" empty_label="Unchanged" width="150"/>
 									</menulist>
 									<description value="Resolution"/>
 									<menulist>
-										<menupopup id="set[tr_resolution]" empty_label="Unchanged"/>
+										<menupopup id="set[tr_resolution]" empty_label="Unchanged" width="150px"/>
 									</menulist>
 								</row>
 								<row>
 									<description value="Assigned to"/>
 									<hbox span="all">
-										<menulist>
-											<menupopup id="set[tr_assigned]" empty_label="Unchanged"/>
-										</menulist>
+										<select id="set[tr_assigned]" empty_label="Unchanged"/>
 										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="users" class="tracker_leftPad5"/>
 										<checkbox label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"/>
 									</hbox>

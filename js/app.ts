@@ -195,7 +195,7 @@ import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 	{
 		_widget.set_disabled(true);
 
-		let selectbox = _widget.getParent()._children[0]._children[0];
+		let selectbox = _widget.getParent()._children[0];
 		selectbox.set_multiple(true);
 		selectbox.set_tags(true, '98%');
 		return false;
