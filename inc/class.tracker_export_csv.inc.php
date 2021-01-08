@@ -291,6 +291,9 @@ class tracker_export_csv implements importexport_iface_export_plugin
 		$filters['cat_id']['type'] = 'select';
 		$filters['cat_id']['values'] = $this->ui->get_tracker_labels('cat',null);
 
+		// Restrict groups to just groups
+    $filters['tr_group']['account_type'] = 'groups';
+
 		foreach($filters as $field_name => &$settings)
 		{
 			if($this->selects[$field_name]) $settings['values'] = $this->selects[$field_name];
