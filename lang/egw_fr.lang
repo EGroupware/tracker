@@ -114,6 +114,7 @@ copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker
 could not connect	tracker	fr	la connexion n'a pu être établie
 create new links	tracker	fr	Créer de nouveaux liens
 create new tracker entry's as default "private" for approval process	tracker	fr	Créer un nouveau traqueur comme privé par défaut pour le processus d'approbation
+create new tracker entry's as default &quot;private&quot; for approval process	tracker	fr	créer une nouvelle entrée traqueur comme "privée" par défaut pour le processus d'approbation
 created	tracker	fr	Créé
 created by	tracker	fr	Créé par
 created on	tracker	fr	Créé le
@@ -166,6 +167,7 @@ edit %1	tracker	fr	Modifier %1
 edit entry	tracker	fr	Ajouter une entrée
 edit others' comments	tracker	fr	Modifier les commentaires d'autres
 edit own comments	tracker	fr	Modifier ses propes commentaires
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	fr	Traitement par email des Traqueurs eGroupware : connexion préalable non effectuée, le profile reste inchangé
 email address to contact you	tracker	fr	Adresse email pour vous contacter
 email handling can be configured only for all trackers	tracker	fr	Le traitement des emails ne peut être configuré que pour tous les traqueurs.
 enable color code for	tracker	fr	Permettre le code couleur pour
@@ -204,7 +206,8 @@ fixed	tracker	fr	Corrigé
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	fr	Pour les lettres en série utiliser cette balise. Placer le contenu que vous voulez répéter entre deux balises.
 forward	tracker	fr	Transférer
 forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	fr	Transférer le mail à la même adresse où les emails non reconnus peuvent être transférés (cette adresse doit être entrée).  Après cela, l' email a supprimé du serveur.
-forward to	tracker	fr	transférer à
+forward to	tracker	fr	Transférer à
+forward unrecognized mails to the email address that has to be specified here.	tracker	fr	Transférer les mails non reconnus à l'adresse email qui doit être spécifiée ici.
 from	tracker	fr	De
 full list of placeholder names	tracker	fr	Liste complète de mots clé
 general fields:	tracker	fr	Champs généraux :
@@ -222,6 +225,8 @@ if this item is important for you, please vote for it.	tracker	fr	Si cet éléme
 if you specify an export definition, it will be used when you export	tracker	fr	Si vous spécifier un format d'export, il sera utilisé à l'export.
 if you specify an export definition, it will be used when you export*	tracker	fr	Si vous spécifier un format d'export, il sera utilisé à l'export*
 ignore	tracker	fr	Ignorer
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	fr	Ignorer le mail. Il va rester dans la boîte email, même si "Supprimer les mails du serveur" est coché ci-dessus
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	fr	Ignorer les mails non reconnus. Il ne seront pas supprimé du serveur, même si "Supprimer les mails" ci-dessus est coché
 imap, ssl secured	tracker	fr	IMAP, sécurisé par SSL
 imap, tls secured	tracker	fr	IMAP, sécurisé par TLS
 import options	tracker	fr	Options d'import
@@ -322,6 +327,7 @@ priorities	tracker	fr	Priorités
 priorities with empty label are not available to the user	tracker	fr	Les priorités sans label ne sont pas disponibles pour l'utilisateur.
 process	tracker	fr	Procéder
 process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	fr	Traiter le message normalement.  *NOTE* Ceci peut engendre une boucle lorsque l'option ci-dessous est activée "envoyer une réponse automatique"
+process the message normally. *note* this might cause mailloops when &quot;sent autoreplies&quot; below is enabled!	tracker	fr	Traiter le message normalement. *NOTE* Ceci peut causer des boucles de mails si "Envoyer des réponses automatiques" est activée ci-dessous !
 project selection	tracker	fr	Sélection de projets
 projects	tracker	fr	Projets
 queue	tracker	fr	Queue
@@ -334,6 +340,7 @@ receive notifications about due entries you created or are assigned to	tracker	f
 receive notifications about own changes in tracker-items	tracker	fr	Recevoir les notifications sur ses propres changements sur les éléments du traqueur
 receive notifications about starting entries you created or are assigned to	tracker	fr	Recevoir les notifications sur les éléments débutants que vous avez créés ou dont vous êtes assignés.
 receive notifications in html	tracker	fr	Recevoir les notifications en HTML
+refused to open mailbox therefore changed interval from %1 to %2	tracker	fr	refusé à ouvrir la boîte email, donc l'intervalle est changée de %1 à %2
 refused to open mailbox: %1	tracker	fr	ouverture de boîte email refusée : %1
 rejected	tracker	fr	Rejeté
 remind	tracker	fr	Rappeler
