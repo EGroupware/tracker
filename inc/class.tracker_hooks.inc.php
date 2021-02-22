@@ -51,6 +51,7 @@ class tracker_hooks
 			'merge' => true,
 			'entry' => 'Ticket',
 			'entries' => 'Tickets',
+			'push_data'  => ['tr_tracker','tr_category','tr_version','tr_owner','tr_assigned'],
 		);
 
 		// Populate default types with queues

@@ -532,10 +532,12 @@ class tracker_bo extends tracker_so
 	 */
 	function save($keys=null, $autoreply=null)
 	{
+		$update_type = 'update';
 		if ($keys) $this->data_merge($keys);
 
 		if (!$this->data['tr_id'])	// new entry
 		{
+			$update_type = 'add';
 			$this->data['tr_created'] = (isset($this->data['tr_created'])&&!empty($this->data['tr_created'])?$this->data['tr_created']:$this->now);
 			$this->data['tr_creator'] = $this->data['tr_creator'] ? $this->data['tr_creator'] : $this->user;
 			$this->data['tr_version'] = $this->data['tr_version'] ? $this->data['tr_version'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
@@ -705,7 +707,7 @@ class tracker_bo extends tracker_so
 			Api\Storage\Customfields::update_links('tracker',$this->data,$old,'tr_id');
 
 			// so other apps can update eg. their titles and the cached title gets unset
-			Link::notify_update('tracker',$this->data['tr_id'],$this->data);
+			Link::notify_update('tracker',$this->data['tr_id'],$this->data, $update_type);
 
 			if (!is_object($this->tracking))
 			{
