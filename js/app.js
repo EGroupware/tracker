@@ -38,7 +38,10 @@ var trackerAPP = /** @class */ (function (_super) {
      * Constructor
      */
     function trackerAPP() {
-        return _super.call(this, 'tracker') || this;
+        var _this = _super.call(this, 'tracker') || this;
+        // Filter push messages to see if we can ignore it
+        _this.push_filter_fields = ["tr_tracker", "tr_version", "tr_creator", "tr_assigned"];
+        return _this;
     }
     /**
      * Destructor
@@ -85,85 +88,6 @@ var trackerAPP = /** @class */ (function (_super) {
                 }, this, et2_widget_selectbox_1.et2_selectbox);
                 break;
         }
-    };
-    /**
-     * Handle a push notification about entry changes from the websocket
-     *
-     * @param  pushData
-     * @param {string} pushData.app application name
-     * @param {(string|number)} pushData.id id of entry to refresh or null
-     * @param {string} pushData.type either 'update', 'edit', 'delete', 'add' or null
-     * - update: request just modified data from given rows.  Sorting is not considered,
-     *		so if the sort field is changed, the row will not be moved.
-     * - edit: rows changed, but sorting may be affected.  Requires full reload.
-     * - delete: just delete the given rows clientside (no server interaction neccessary)
-     * - add: ask server for data, add in intelligently
-     * @param {object|null} pushData.acl Extra data for determining relevance.  eg: queue, version
-     * @param {number} pushData.account_id User that caused the notification
-     */
-    trackerAPP.prototype.push = function (pushData) {
-        if (pushData.app !== this.appname)
-            return;
-        // pushData does not contain everything, just the minimum.
-        var entry = pushData.acl || {};
-        if (pushData.type === 'delete') {
-            return _super.prototype.push.call(this, pushData);
-        }
-        // If we know about it and it's an update, just update.
-        // This must be before all ACL checks, as responsible might have changed and entry need to be removed
-        // (server responds then with null / no entry causing the entry to disappear)
-        if (pushData.type !== "add" && this.egw.dataHasUID(this.uid(pushData))) {
-            return this.et2.getInstanceManager().refresh("", pushData.app, pushData.id, pushData.type);
-        }
-        // check visibility - grants is ID => permission of people we're allowed to see, but this is tracker
-        // which uses queue permissions
-        // Filter what's allowed down to those we can see / care about
-        var filters = {
-            queue: { col: "tr_tracker", filter_values: [] },
-            version: { col: "tr_version", filter_values: [] },
-            owner: { col: "tr_creator", filter_values: [] },
-            responsible: { col: "tr_assigned", filter_values: [] }
-            // No need to check status, you can't set it on new tickets
-        };
-        if (this.et2) {
-            this.et2.iterateOver(function (nm) {
-                var value = nm.getValue();
-                if (!value || !value.col_filter)
-                    return;
-                for (var _i = 0, _a = Object.values(filters); _i < _a.length; _i++) {
-                    var field_filter = _a[_i];
-                    if (value.col_filter[field_filter.col]) {
-                        field_filter.filter_values.push(value.col_filter[field_filter.col]);
-                    }
-                }
-            }, this, et2_extension_nextmatch_1.et2_nextmatch);
-        }
-        var _loop_1 = function (field_filter) {
-            // no filter set
-            if (field_filter.filter_values.length == 0)
-                return "continue";
-            // acl value is a scalar (not array) --> check contained in filter
-            if (pushData.acl && typeof pushData.acl[field_filter.col] !== 'object') {
-                if (field_filter.filter_values.indexOf(pushData.acl[field_filter.col]) < 0) {
-                    return { value: void 0 };
-                }
-                return "continue";
-            }
-            // acl value is an array (eg. tr_assigned) --> check intersection with filter
-            if (!field_filter.filter_values.filter(function (account) { return pushData.acl[field_filter.col].indexOf(account) >= 0; }).length) {
-                return { value: void 0 };
-            }
-        };
-        // check filters against ACL data
-        for (var _i = 0, _a = Object.values(filters); _i < _a.length; _i++) {
-            var field_filter = _a[_i];
-            var state_1 = _loop_1(field_filter);
-            if (typeof state_1 === "object")
-                return state_1.value;
-        }
-        // Pass actual refresh on to just nextmatch
-        var nm = this.et2.getDOMWidgetById('nm');
-        nm.refresh(pushData.id, pushData.type);
     };
     /**
      * Observer method receives update notifications from all applications

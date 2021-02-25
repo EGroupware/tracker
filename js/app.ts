@@ -22,6 +22,9 @@ import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
  class trackerAPP extends EgwApp
 {
 
+	// Filter push messages to see if we can ignore it
+	protected push_filter_fields = ["tr_tracker", "tr_version","tr_creator","tr_assigned"];
+
 	/**
 	 * Constructor
 	 */
@@ -83,94 +86,6 @@ import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 				},this,et2_selectbox);
 				break;
 		}
-	}
-
-	/**
-	 * Handle a push notification about entry changes from the websocket
-	 *
-	 * @param  pushData
-	 * @param {string} pushData.app application name
-	 * @param {(string|number)} pushData.id id of entry to refresh or null
-	 * @param {string} pushData.type either 'update', 'edit', 'delete', 'add' or null
-	 * - update: request just modified data from given rows.  Sorting is not considered,
-	 *		so if the sort field is changed, the row will not be moved.
-	 * - edit: rows changed, but sorting may be affected.  Requires full reload.
-	 * - delete: just delete the given rows clientside (no server interaction neccessary)
-	 * - add: ask server for data, add in intelligently
-	 * @param {object|null} pushData.acl Extra data for determining relevance.  eg: queue, version
-	 * @param {number} pushData.account_id User that caused the notification
-	 */
-	push(pushData)
-	{
-		if(pushData.app !== this.appname) return;
-
-		// pushData does not contain everything, just the minimum.
-		let entry = pushData.acl || {};
-
-		if(pushData.type === 'delete')
-		{
-			return super.push(pushData);
-		}
-
-		// If we know about it and it's an update, just update.
-		// This must be before all ACL checks, as responsible might have changed and entry need to be removed
-		// (server responds then with null / no entry causing the entry to disappear)
-		if (pushData.type !== "add" && this.egw.dataHasUID(this.uid(pushData)))
-		{
-			return this.et2.getInstanceManager().refresh("", pushData.app, pushData.id, pushData.type);
-		}
-
-		// check visibility - grants is ID => permission of people we're allowed to see, but this is tracker
-		// which uses queue permissions
-		// Filter what's allowed down to those we can see / care about
-		let filters = {
-			queue: {col: "tr_tracker", filter_values: []},
-			version: {col: "tr_version", filter_values: []},
-			owner: {col: "tr_creator", filter_values: []},
-			responsible: {col: "tr_assigned", filter_values: []}
-			// No need to check status, you can't set it on new tickets
-		};
-		if(this.et2)
-		{
-			this.et2.iterateOver( function(nm) {
-				let value = nm.getValue();
-				if(!value || !value.col_filter) return;
-
-				for(let field_filter of Object.values(filters))
-				{
-					if(value.col_filter[field_filter.col])
-					{
-						field_filter.filter_values.push(value.col_filter[field_filter.col]);
-					}
-				}
-			},this, et2_nextmatch);
-		}
-
-		// check filters against ACL data
-		for(let field_filter of Object.values(filters))
-		{
-			// no filter set
-			if (field_filter.filter_values.length == 0) continue;
-
-			// acl value is a scalar (not array) --> check contained in filter
-			if (pushData.acl && typeof pushData.acl[field_filter.col] !== 'object')
-			{
-				if (field_filter.filter_values.indexOf(pushData.acl[field_filter.col]) < 0)
-				{
-					return;
-				}
-				continue;
-			}
-			// acl value is an array (eg. tr_assigned) --> check intersection with filter
-			if(!field_filter.filter_values.filter(account => pushData.acl[field_filter.col].indexOf(account) >= 0).length)
-			{
-				return;
-			}
-		}
-
-		// Pass actual refresh on to just nextmatch
-		let nm = <et2_nextmatch>this.et2.getDOMWidgetById('nm');
-		nm.refresh(pushData.id, pushData.type);
 	}
 
 	/**
