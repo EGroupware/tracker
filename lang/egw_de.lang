@@ -157,8 +157,9 @@ e-mail notifications	tracker	de	E-Mail Benachrichtigungen
 each value is a line like <id>[=<label>]	tracker	de	Jeder Wert entspricht einer Zeile in dem Format <id>[=<label>]
 each value is a line like id[=label]	tracker	de	Jeder Wert entspricht einer Zeile in dem Format  id[=label]
 edit %1	tracker	de	%1 bearbeiten
-edit comment	tracker	de	Kommentar bearbeiten
 edit entry	tracker	de	Ticket bearbeiten
+edit others' comments	tracker	de	Kommentare von anderen bearbeiten
+edit own comments	tracker	de	Eigene Kommentare bearbeiten
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zur Mailbox Möglich, bitte passen die Sie Einstellungen an.
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umwandlung kann nur für alle Verfolgungssysteme konfiguriert werden.
