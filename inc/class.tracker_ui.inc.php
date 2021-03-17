@@ -1780,7 +1780,7 @@ width:100%;
 			'admin' => array(
 				'caption' => 'Multiple changes',
 				'group' => $group,
-				'enabled' => isset($GLOBALS['egw_info']['user']['apps']['admin']),
+				'enabled' => $this->is_admin($tracker),
 				'hideOnDisabled' => true,
 				'nm_action' => 'open_popup',
 				'icon' => 'user',
