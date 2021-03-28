@@ -766,7 +766,11 @@ class tracker_bo extends tracker_so
 		}
 		$primary_group[$GLOBALS['egw']->accounts->data['account_primary_group']] = $groups[$GLOBALS['egw']->accounts->data['account_primary_group']];
 
-		return ($primary ? $primary_group : $groups);
+		if ($primary)
+		{
+			return $primary_group;
+		}
+		return $groups;
 	}
 
 	/**
@@ -1188,22 +1192,24 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
-	 * Check if users is allowed to vote and has not already voted
+	 * Check if users is allowed to vote - has not already voted
 	 *
-	 * @param int $tr_id = null tracker-id, default current tracker-item ($this->data)
+	 * @param int $tr_id tracker-id
+	 * @param int $user account_id
+	 * @param string $ip =null IP, if it should be checked too
 	 * @return int|boolean true for no rights, timestamp voted or null
 	 */
-	function check_vote($tr_id=null)
+	function check_vote($tr_id, $user, $ip=null)
 	{
 		if (is_null($tr_id)) $tr_id = $this->data['tr_id'];
 
 		if (!$tr_id || !$this->check_rights($this->field_acl['vote'],null,null,null,'vote')) return true;
 
-		if ($this->is_anonymous())
+		if (!isset($ip) || $this->is_anonymous())
 		{
 			$ip = $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? ':'.$_SERVER['HTTP_X_FORWARDED_FOR'] : '');
 		}
-		if (($time = parent::check_vote($tr_id,$this->user,$ip)))
+		if (($time = parent::check_vote($tr_id, $user ?: $this->user, $ip)))
 		{
 			$time += $this->tz_offset_s;
 		}
@@ -1214,17 +1220,18 @@ class tracker_bo extends tracker_so
 	 * Cast vote for given tracker-item
 	 *
 	 * @param int $tr_id = null tracker-id, default current tracker-item ($this->data)
+	 * @param int $user account_id
+	 * @param string $ip IP
 	 * @return boolean true = vote casted, false=already voted before
 	 */
-	function cast_vote($tr_id=null)
+	function cast_vote($tr_id=null, $user=null, $ip=null)
 	{
 		if (is_null($tr_id)) $tr_id = $this->data['tr_id'];
 
 		if ($this->check_vote($tr_id)) return false;
 
-		$ip = $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? ':'.$_SERVER['HTTP_X_FORWARDED_FOR'] : '');
-
-		return parent::cast_vote($tr_id,$this->user,$ip);
+		return parent::cast_vote($tr_id, $user ?? $this->user,
+			$ip ?? $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? ':'.$_SERVER['HTTP_X_FORWARDED_FOR'] : ''));
 	}
 
 	/**
@@ -1590,7 +1597,7 @@ class tracker_bo extends tracker_so
 	 * @param boolean $need_full_no_count = false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
-	function get_rows(&$query,&$rows,&$readonlys,$join=true,$need_full_no_count=false,$only_keys=false,$extra_cols=array())
+	function get_rrows(&$query, &$rows, &$readonlys, $join=true, $need_full_no_count=false, $only_keys=false, $extra_cols=array())
 	{
 		if($query['filter'])
 		{
@@ -1886,7 +1893,7 @@ class tracker_bo extends tracker_so
 	 * @param array &$data
 	 * @return int|boolean integer bounty_id or false on error
 	 */
-	function save_bounty(&$data)
+	function save_bounty(array &$data)
 	{
 		if (!$this->allow_bounties) return false;
 

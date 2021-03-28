@@ -679,10 +679,10 @@ class tracker_so extends Api\Storage
 	/**
 	 * Save or update a bounty
 	 *
-	 * @param array $data
+	 * @param array& $data
 	 * @return int|boolean integer bounty_id or false on error
 	 */
-	function save_bounty($data)
+	function save_bounty(array &$data)
 	{
 		if ((int) $data['bounty_id'])
 		{

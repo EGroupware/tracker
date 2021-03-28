@@ -45,11 +45,10 @@ class tracker_import_csv extends importexport_basic_import_csv
 
 	/**
 	 * imports entries according to given definition object.
-	 * @param resource $_stream
-	 * @param string $_charset
-	 * @param definition $_definition
+	 * @param importexport_definition $definition
+	 * @param ?importexport_import_csv $import_csv
 	 */
-	public function init( importexport_definition &$_definition, importexport_import_csv &$import_csv )
+	public function init(importexport_definition $definition, importexport_import_csv $import_csv=null)
 	{
 		// fetch the bo
 		$this->bo = new tracker_bo();
@@ -61,10 +60,10 @@ class tracker_import_csv extends importexport_basic_import_csv
 		$import_csv->conversion_class = $this;
 
 		// set Owner
-		$plugin_options = $_definition->plugin_options;
-		$plugin_options['record_owner'] = isset( $_definition->plugin_options['record_owner'] ) ?
-			$_definition->plugin_options['record_owner'] : $this->user;
-		$_definition->plugin_options = $plugin_options;
+		$plugin_options = $definition->plugin_options;
+		$plugin_options['record_owner'] = isset( $definition->plugin_options['record_owner'] ) ?
+			$definition->plugin_options['record_owner'] : $this->user;
+		$definition->plugin_options = $plugin_options;
 
 		// Process cat_id as a normal select
 		$this->types = tracker_egw_record::$types;
@@ -481,8 +480,8 @@ class tracker_import_csv extends importexport_basic_import_csv
 	// end of iface_export_plugin
 
 	// Extra conversion functions - must be static
-	public static function addr_id( $_n_family,$n_given=null,$org_name=null ) {
-
+	public static function addr_id($_n_family, $n_given=null, $org_name=null, &$record = null)
+	{
 		// find in Addressbook, at least n_family AND (n_given OR org_name) have to match
 		static $contacts=null;
 		if (!isset($contacts))

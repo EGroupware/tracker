@@ -761,7 +761,7 @@ class tracker_ui extends tracker_bo
 			$readonlys['tr_assigned'] = true;
 			$readonlys['tr_group'] = true;
 		}
-		if (!$this->allow_voting || !$tr_id || $readonlys['vote'] || ($voted = $this->check_vote()))
+		if (!$this->allow_voting || !$tr_id || $readonlys['vote'] || ($voted = $this->check_vote($tr_id)))
 		{
 			$readonlys['button[vote]'] = true;
 			if ($tr_id && $this->allow_voting)
@@ -881,13 +881,16 @@ class tracker_ui extends tracker_bo
 	/**
 	 * query rows for the nextmatch widget
 	 *
-	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
+	 * @param array $query_in with keys 'start', 'search', 'order', 'sort', 'col_filter'
 	 *	For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
 	 * @param array &$rows returned rows/competitions
 	 * @param array &$readonlys eg. to disable buttons based on Acl
+	 * @param string $join = '' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
+	 *	"LEFT JOIN table2 ON (x=y)", Note: there's no quoting done on $join!
+	 * @param boolean $need_full_no_count = false If true an unlimited query is run to determine the total number of rows, default false
 	 * @return int total number of rows
 	 */
-	function get_rows(&$query_in,&$rows,&$readonlys)
+	function get_rrows(&$query_in, &$rows, &$readonlys, $join=true, $need_full_no_count=false, $only_keys=false, $extra_cols=array())
 	{
 		if (!$this->allow_voting && $query_in['order'] == 'votes' ||	// in case the tracker-config changed in that session
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
@@ -1028,7 +1031,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
-		$total = parent::get_rows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties);	// true = count votes and/or bounties
+		$total = parent::get_rrows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties||$join, $need_full_no_count, $only_keys, $extra_cols);	// true = count votes and/or bounties
 		$prio_labels = $prio_tracker = $prio_cat = null;
 		foreach($rows as $n => $row)
 		{
@@ -1464,7 +1467,7 @@ class tracker_ui extends tracker_bo
 			}
 			$date_filters['custom'] = lang('custom');
 			$content['nm'] = array(
-				'get_rows'       =>	'tracker.tracker_ui.get_rows',
+				'get_rows'       =>	'tracker.tracker_ui.get_rrows',
 				'cat_is_select'  => 'no_lang',
 				'filter'         => 0,  // all
 				'options-filter' => $date_filters,
@@ -1902,7 +1905,7 @@ width:100%;
 				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
 				$query['num_rows'] = -1;	// all
 				$readonlys = null;
-				$this->get_rows($query,$checked,$readonlys);
+				$this->get_rrows($query,$checked,$readonlys);
 				// $this->get_rows gives some extra data.
 				foreach($checked as $row => $data)
 				{

@@ -676,12 +676,17 @@ class tracker_admin extends tracker_bo
 	 * @param array $query
 	 * @param array &$rows
 	 * @param array &$readonlys
-	 * @return int|boolean
+	 * @param string $join ='' sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
+	 *	"LEFT JOIN table2 ON (x=y)", Note: there's no quoting done on $join!
+	 * @param boolean $need_full_no_count =false If true an unlimited query is run to determine the total number of rows, default false
+	 * @param mixed $only_keys =false, see search
+	 * @param string|array $extra_cols =array()
+	 * @return int total number of rows
 	 */
-	function get_rows($query,&$rows,&$readonlys)
+	function get_rows($query,&$rows,&$readonlys,$join='',$need_full_no_count=false,$only_keys=false,$extra_cols=array())
 	{
 		$escalations = new tracker_escalations();
-		$Ok = $escalations->get_rows($query,$rows,$readonlys);
+		$Ok = $escalations->get_rows($query,$rows,$readonlys, $join, $need_full_no_count, $only_keys, $extra_cols);
 
 		if ($rows)
 		{
@@ -888,7 +893,7 @@ class tracker_admin extends tracker_bo
 
 
 		$tpl = new Etemplate('tracker.escalations');
-		if (count($content['escalation']['set']['tr_assigned']) > 1)
+		if (!empty($content['escalation']['set']['tr_assigned']) && count($content['escalation']['set']['tr_assigned']) > 1)
 		{
 			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
 			$widget['size'] = '3+';
@@ -899,7 +904,7 @@ class tracker_admin extends tracker_bo
 		}
 		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
 		{
-			if (count($content['escalation'][$array]) > 1)
+			if (!empty($content['escalation'][$array]) && count($content['escalation'][$array]) > 1)
 			{
 				// Old etemplate support
 				if(method_exists($tpl, 'get_widget_by_name'))
