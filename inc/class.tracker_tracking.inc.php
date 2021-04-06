@@ -117,7 +117,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			$changes = true;
 		}
 		// do not run do_notifications if we have no changes, unless there was a restricted comment just made
-		if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications($data,$old,$deleted,$changes))
+		if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications2($data,$old,$deleted,$changes))
 		{
 			$changes = false;
 		}
@@ -165,7 +165,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	/**
 	 * Send notifications for changed entry
 	 *
-	 * Overridden to hide restricted comments.  Sends restricted first to all but creator, then unrestricted to creator
+	 * Overridden to keep signature
 	 *
 	 * @internal use only track($data,$old,$user)
 	 * @param array $data current entry
@@ -173,7 +173,21 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * @param boolean $deleted =null can be set to true to let the tracking know the item got deleted or undelted
 	 * @return boolean true on success, false on error (error messages are in $this->errors)
 	 */
-	public function do_notifications($data,$old,$deleted, $changes)
+	public function do_notifications($data, $old, $deleted = null, &$email_notified = null)
+	{
+		return $this->do_notifications2($data, $old, $deleted);
+	}
+
+	/**
+	 * Send notifications for changed entry (different name, as we are no longer allowed to change function signature)
+	 *
+	 * @internal use only track($data,$old,$user)
+	 * @param array $data current entry
+	 * @param array $old =null old/last state of the entry or null for a new entry
+	 * @param boolean $deleted =null can be set to true to let the tracking know the item got deleted or undelted
+	 * @return boolean true on success, false on error (error messages are in $this->errors)
+	 */
+	public function do_notifications2($data,$old,$deleted, $changes)
 	{
 		$skip = $this->get_config('skip_notify',$data,$old);
 		$email_notified = $skip ? $skip : array();
@@ -290,7 +304,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * @param array $old
 	 * @return string
 	 */
-	function get_subject($data,$old)
+	function get_subject($data, $old, $deleted = null, $receiver = null)
 	{
 		unset($old);	// not used
 
@@ -385,7 +399,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * @param array $old
 	 * @return array (of strings) for multiline messages
 	 */
-	function get_message($data,$old)
+	function get_message($data, $old, $receiver = null)
 	{
 		if($data['message']) return $data['message'];
 
@@ -412,10 +426,10 @@ class tracker_tracking extends Api\Storage\Tracking
 	 * Get the details of an entry
 	 *
 	 * @param array $data
-	 * @param int|string $receiver numeric account_id or email address
+	 * @param int|string $receiver =null numeric account_id or email address
 	 * @return array of details as array with values for keys 'label','value','type'
 	 */
-	function get_details($data, $receiver)
+	function get_details($data, $receiver=null)
 	{
 		static $cats=null,$versions=null,$statis=null,$priorities=null,$resolutions=null;
 		if (!$cats)
