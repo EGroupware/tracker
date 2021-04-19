@@ -92,6 +92,7 @@ class tracker_hooks
 				),
 			);
 
+			$file[] = ['text'=>'--'];
 			$file['Placeholders'] = Egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
 			display_sidebox($appname,$GLOBALS['egw_info']['apps'][$appname]['title'].' '.lang('Menu'),$file);
 		}
