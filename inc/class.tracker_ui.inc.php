@@ -761,7 +761,8 @@ class tracker_ui extends tracker_bo
 			$readonlys['tr_assigned'] = true;
 			$readonlys['tr_group'] = true;
 		}
-		if (!$this->allow_voting || !$tr_id || $readonlys['vote'] || ($voted = $this->check_vote($tr_id)))
+		if (!$this->allow_voting || !$tr_id || $readonlys['vote'] ||
+			($voted = $this->check_vote($tr_id, $GLOBALS['egw_info']['user']['account_id'])))
 		{
 			$readonlys['button[vote]'] = true;
 			if ($tr_id && $this->allow_voting)
