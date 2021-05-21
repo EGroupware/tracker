@@ -379,8 +379,6 @@ class tracker_bo extends tracker_so
 
 	/**
 	 * Constructor
-	 *
-	 * @return tracker_bo
 	 */
 	function __construct()
 	{
@@ -968,7 +966,7 @@ class tracker_bo extends tracker_so
 			}
 			else
 			{
-				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'phpgwapi',$use_memberships=false);
+				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'phpgwapi', false);
 				$anonymous = (boolean)$rights['anonymous'];
 			}
 		}
@@ -1003,7 +1001,7 @@ class tracker_bo extends tracker_so
 			}
 			else
 			{
-				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'tracker',$use_memberships=true);
+				$rights = $GLOBALS['egw']->acl->get_all_location_rights($user,'tracker', true);
 				$is_user = (boolean)$rights['run'];
 				$reason = 'has '.(!$is_user ? 'NO' : '').'run rights';
 			}
@@ -1274,7 +1272,7 @@ class tracker_bo extends tracker_so
 			$cat_data =& $cat['data'];
 			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
 			if ($cat_type == $type &&	// cats need to be either tracker specific or global and tracker NOT in denyglobal
-				(!$cat['parent'] && !($tracker && in_array($tracker, (array)$cat_data['denyglobal'])) ||
+				(!$cat['parent'] && !($tracker && is_array($cat_data['denyglobal']) && in_array($tracker, $cat_data['denyglobal'])) ||
 				$cat['main'] == $tracker && $cat['id'] != $tracker))
 			{
 				$labels[$cat['id']] = $cat['name'];
@@ -1634,8 +1632,8 @@ class tracker_bo extends tracker_so
 	/**
 	 * Change color for a tracker-queue
 	 *
-	 * @param type $tracker
-	 * @param type $color
+	 * @param int $tracker
+	 * @param string $color
 	 * @return boolean
 	 */
 	function change_color_tracker($tracker, $color)
@@ -2149,7 +2147,7 @@ class tracker_bo extends tracker_so
 				{
 					Link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
-					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
+					$staff = $this->get_staff(0,0,'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
 					{
 						$buff = explode(',',strtolower($trackerentry['tr_cc'])) ;
@@ -2213,7 +2211,7 @@ class tracker_bo extends tracker_so
 				{
 					if (empty($contact['account_id'])) continue;
 					//error_log(__METHOD__.__LINE__.' Contact Found:'.array2string($contact));
-					$staff = $this->get_staff($tracker=0,0,'usersANDtechnicians');
+					$staff = $this->get_staff(0,0,'usersANDtechnicians');
 					//error_log(__METHOD__.__LINE__.array2string($staff));
 					if ($found==false && $contact['account_id']>0)
 					{
@@ -2415,7 +2413,7 @@ OR tr_duedate IS NULL AND
 	/**
 	 * Deal with files from Add comment tab
 	 *
-	 * @param Arra $content
+	 * @param Array $content
 	 */
 	protected function comment_files($tr_id, $reply_id, &$content = array())
 	{
