@@ -665,7 +665,10 @@ class tracker_ui extends tracker_bo
 							// Copy infolog's links
 							foreach(Link::get_links('infolog',$link_id) as $copy_link)
 							{
-								Link::link('tracker', $content['link_to']['to_id'], $copy_link['app'], $copy_link['id'],$copy_link['remark']);
+								Link::link('tracker', $content['link_to']['to_id'], $copy_link['app'],
+									$copy_link['app'] == Link::VFS_APPNAME ? Api\Vfs::PREFIX."/apps/{$copy_link['app2']}/{$copy_link['id2']}/{$copy_link['id']}": $copy_link['id'],
+									$copy_link['remark']
+								);
 							}
 							break;
 
