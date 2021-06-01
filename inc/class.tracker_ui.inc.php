@@ -296,7 +296,7 @@ class tracker_ui extends tracker_bo
 		else	// submitted form
 		{
 			//_debug_array($content);
-			$button = @key($content['button']); unset($content['button']);
+			$button = @key((array)$content['button']); unset($content['button']);
 			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
 			$own_referer = $content['own_referer']; unset($content['own_referer']);
