@@ -1,54 +1,38 @@
-"use strict";
 /**
  * EGroupware - Tracker - Javascript UI
  *
- * @link http://www.egroupware.org
+ * @link https://www.egroupware.org
  * @package tracker
- * @author Hadi Nategh	<hn-AT-stylite.de>
- * @copyright (c) 2008-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @author Hadi Nategh	<hn-AT-egroupware.org>
+ * @author Ralf Becker <rb-AT-egroupware.org>
+ * @copyright (c) 2008-21 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var egw_app_1 = require("../../api/js/jsapi/egw_app");
-var et2_extension_nextmatch_1 = require("../../api/js/etemplate/et2_extension_nextmatch");
-var et2_widget_button_1 = require("../../api/js/etemplate/et2_widget_button");
-var et2_widget_selectbox_1 = require("../../api/js/etemplate/et2_widget_selectbox");
-var etemplate2_1 = require("../../api/js/etemplate/etemplate2");
-var et2_widget_link_1 = require("../../api/js/etemplate/et2_widget_link");
+import { EgwApp } from "../../api/js/jsapi/egw_app";
+import { et2_nextmatch } from "../../api/js/etemplate/et2_extension_nextmatch";
+import { et2_button } from "../../api/js/etemplate/et2_widget_button";
+import { et2_selectbox } from "../../api/js/etemplate/et2_widget_selectbox";
+import { etemplate2 } from "../../api/js/etemplate/etemplate2";
+import { et2_link_list } from "../../api/js/etemplate/et2_widget_link";
+import { nm_open_popup } from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
 /**
  * UI for tracker
  */
-var trackerAPP = /** @class */ (function (_super) {
-    __extends(trackerAPP, _super);
+class trackerAPP extends EgwApp {
     /**
      * Constructor
      */
-    function trackerAPP() {
-        var _this = _super.call(this, 'tracker') || this;
+    constructor() {
+        super('tracker');
         // Filter push messages to see if we can ignore it
-        _this.push_filter_fields = ["tr_tracker", "tr_version", "tr_creator", "tr_assigned"];
-        return _this;
+        this.push_filter_fields = ["tr_tracker", "tr_version", "tr_creator", "tr_assigned"];
     }
     /**
      * Destructor
      */
-    trackerAPP.prototype.destroy = function (_app) {
-        _super.prototype.destroy.call(this, _app);
-    };
+    destroy(_app) {
+        super.destroy(_app);
+    }
     /**
      * This function is called when the etemplate2 object is loaded
      * and ready.  If you must store a reference to the et2 object,
@@ -57,9 +41,9 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {etemplate2} _et2
      * @param {string} _name name of template loaded
      */
-    trackerAPP.prototype.et2_ready = function (_et2, _name) {
+    et2_ready(_et2, _name) {
         // call parent
-        _super.prototype.et2_ready.call(this, _et2, _name);
+        super.et2_ready(_et2, _name);
         switch (_name) {
             case 'tracker.admin':
                 this.acl_queue_access();
@@ -79,16 +63,16 @@ var trackerAPP = /** @class */ (function (_super) {
                 // Set any filters with multiple values to multiple
                 _et2.widgetContainer.getWidgetById('escalation').iterateOver(function (widget) {
                     if (typeof widget.options.value === 'object' && widget.options.value.length > 1) {
-                        var button_1 = null;
+                        let button = null;
                         // Find associated expand button
-                        widget.getParent().getParent().iterateOver(function (widget) { button_1 = widget; }, this, et2_widget_button_1.et2_button);
-                        this.multiple_assigned(false, button_1);
+                        widget.getParent().getParent().iterateOver(function (widget) { button = widget; }, this, et2_button);
+                        this.multiple_assigned(false, button);
                         widget.set_value(widget.options.value);
                     }
-                }, this, et2_widget_selectbox_1.et2_selectbox);
+                }, this, et2_selectbox);
                 break;
         }
-    };
+    }
     /**
      * Observer method receives update notifications from all applications
      *
@@ -105,15 +89,15 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {object|null} _links app => array of ids of linked entries
      * or null, if not triggered on server-side, which adds that info
      */
-    trackerAPP.prototype.observer = function (_msg, _app, _id, _type, _msg_type, _links) {
+    observer(_msg, _app, _id, _type, _msg_type, _links) {
         if (typeof (_links === null || _links === void 0 ? void 0 : _links.tracker) != 'undefined') {
             if (_app === 'timesheet') {
-                var nm = this.et2 ? this.et2.getWidgetById('nm') : null;
+                let nm = this.et2 ? this.et2.getWidgetById('nm') : null;
                 if (nm)
                     nm.applyFilters();
             }
         }
-    };
+    }
     /**
      * Retrieve the current state of the application for future restoration
      *
@@ -126,23 +110,23 @@ var trackerAPP = /** @class */ (function (_super) {
      *
      * @return {object} Application specific map representing the current state
      */
-    trackerAPP.prototype.getState = function () {
-        var state = {};
+    getState() {
+        let state = {};
         // Try and find a nextmatch widget, and set its filters
-        var et2 = etemplate2_1.etemplate2.getById('tracker-index');
+        let et2 = etemplate2.getById('tracker-index');
         if (!et2)
             return {};
         et2.widgetContainer.iterateOver(function (_widget) {
             state = _widget.getValue();
-        }, this, et2_extension_nextmatch_1.et2_nextmatch);
+        }, this, et2_nextmatch);
         return state;
-    };
+    }
     /**
      * Tracker list filter change, used to toggle date fields
      */
-    trackerAPP.prototype.filter_change = function () {
-        var filter = this.et2.getWidgetById('filter');
-        var dates = this.et2.getWidgetById('tracker.index.dates');
+    filter_change() {
+        let filter = this.et2.getWidgetById('filter');
+        let dates = this.et2.getWidgetById('tracker.index.dates');
         if (filter && dates) {
             dates.set_disabled(filter.getValue() !== "custom");
             if (filter.value == "custom") {
@@ -152,7 +136,7 @@ var trackerAPP = /** @class */ (function (_super) {
             }
         }
         return true;
-    };
+    }
     /**
      * User wants to share
      *
@@ -160,16 +144,16 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {egwActionObject} _selected
      * @param _target
      */
-    trackerAPP.prototype.share_link = function (_action, _selected, _target) {
+    share_link(_action, _selected, _target) {
         if (_action.id == 'shareWritableFilemanager') {
             // No checkbox for parent to find, explicitly set writable
-            _super.prototype.share_link.call(this, _action.parent.getActionById('shareFilemanager'), _selected, _target, true);
+            super.share_link(_action.parent.getActionById('shareFilemanager'), _selected, _target, true);
         }
         else {
             // Leave writable parameter undefined so parent can check
-            _super.prototype.share_link.call(this, _action, _selected, _target);
+            super.share_link(_action, _selected, _target);
         }
-    };
+    }
     /**
      * Used in escalations on buttons to change filters from a single select to a multi-select
      *
@@ -179,29 +163,29 @@ var trackerAPP = /** @class */ (function (_super) {
      * Note: It's important to consider the menupop widget needs to be always first child of
      * buttononly's parent, since we are getting the right selectbox by orders
      */
-    trackerAPP.prototype.multiple_assigned = function (_event, _widget) {
+    multiple_assigned(_event, _widget) {
         _widget.set_disabled(true);
-        var selectbox = _widget.getParent()._children[0];
+        let selectbox = _widget.getParent()._children[0];
         selectbox.set_multiple(true);
         selectbox.set_tags(true, '98%');
         return false;
-    };
+    }
     /**
      * tprint
      * @param _action
      * @param _senders
      */
-    trackerAPP.prototype.tprint = function (_action, _senders) {
-        var id = _senders[0].id.split('::');
+    tprint(_action, _senders) {
+        let id = _senders[0].id.split('::');
         if (_action.id === 'print') {
-            var popup = egw().open_link('/index.php?menuaction=tracker.tracker_ui.tprint&tr_id=' + id[1], '', egw().link_get_registry('tracker', 'add_popup'), 'tracker');
+            let popup = egw().open_link('/index.php?menuaction=tracker.tracker_ui.tprint&tr_id=' + id[1], '', egw().link_get_registry('tracker', 'add_popup'), 'tracker');
             popup.onload = function () { this.print(); };
         }
-    };
+    }
     /**
      * Check if the edit window is a popup, then set window focus
      */
-    trackerAPP.prototype.edit_popup = function () {
+    edit_popup() {
         if (typeof this.et2.node != 'undefined' && typeof this.et2.node.baseURI != 'undefined') {
             if (!this.et2.node.baseURI.match(/no_?popup/)) {
                 window.focus();
@@ -211,30 +195,30 @@ var trackerAPP = /** @class */ (function (_super) {
                 }
             }
         }
-    };
+    }
     /**
      * canned_comment_request
      *
      */
-    trackerAPP.prototype.canned_comment_requst = function () {
-        var editor = this.et2.getWidgetById('reply_message');
-        var id = this.et2.getWidgetById('canned_response').get_value();
+    canned_comment_requst() {
+        let editor = this.et2.getWidgetById('reply_message');
+        let id = this.et2.getWidgetById('canned_response').get_value();
         if (id && editor) {
             // Need to specify the popup's egw
             this.et2.egw().json('tracker.tracker_ui.ajax_canned_comment', [id, document.getElementById('tracker-edit_reply_message').style.display == 'none']).sendRequest(true);
         }
-    };
+    }
     /**
      * canned_comment_response
      * @param _replyMsg
      */
-    trackerAPP.prototype.canned_comment_response = function (_replyMsg) {
+    canned_comment_response(_replyMsg) {
         this.et2.getWidgetById('canned_response').set_value('');
-        var editor = this.et2.getWidgetById('reply_message');
+        let editor = this.et2.getWidgetById('reply_message');
         if (editor) {
             editor.set_value(_replyMsg);
         }
-    };
+    }
     /**
      * Update the UI to show the file after user adds a file to a comment
      *
@@ -242,51 +226,51 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {et2_widget} widget
      * @returns {undefined}
      */
-    trackerAPP.prototype.comment_add_vfs = function (dom_node, widget) {
+    comment_add_vfs(dom_node, widget) {
         // Add the file into the existing list of files
         if (widget._type === 'vfs-select') {
-            var upload = widget.getParent().getWidgetById(widget.options.method_id);
+            let upload = widget.getParent().getWidgetById(widget.options.method_id);
             // Could not find the upload widget
             if (!upload) {
                 return;
             }
-            var value = widget.get_value();
-            for (var i in value) {
+            let value = widget.get_value();
+            for (let i in value) {
                 upload._addFile({ name: value[i], path: value[i] });
             }
         }
         // Update link widget on links tab
         widget.getRoot().iterateOver(function (widget) {
             widget._get_links();
-        }, this, et2_widget_link_1.et2_link_list);
-    };
+        }, this, et2_link_list);
+    }
     /**
      * acl_queue_access
      *
      * Enables or disables the Site configuration 'Staff'tab 'Users' widget
      * based on the 'enabled_queue_acl_access' config setting
      */
-    trackerAPP.prototype.acl_queue_access = function () {
-        var queue_acl = this.et2.getWidgetById('enabled_queue_acl_access');
+    acl_queue_access() {
+        let queue_acl = this.et2.getWidgetById('enabled_queue_acl_access');
         // Check content too, in case we're viewing a specific queue and that widget
         // isn't there
-        var content = this.et2.getArrayMgr('content').getEntry('enabled_queue_acl_access');
+        let content = this.et2.getArrayMgr('content').getEntry('enabled_queue_acl_access');
         if (queue_acl && queue_acl.get_value() === 'false' || content !== null && !content) {
             this.et2.getWidgetById('users').set_disabled(true);
         }
         else {
             this.et2.getWidgetById('users').set_disabled(false);
         }
-    };
+    }
     /**
      * Get title in order to set it as document title
      * @returns {string}
      */
-    trackerAPP.prototype.getWindowTitle = function () {
-        var widget = this.et2.getWidgetById('tr_summary');
+    getWindowTitle() {
+        let widget = this.et2.getWidgetById('tr_summary');
         if (widget)
             return widget.options.value;
-    };
+    }
     /**
      * Action handler for context menu change assigned action
      *
@@ -295,9 +279,9 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {egwAction} _action
      * @param {egwActionObject[]} _selected
      */
-    trackerAPP.prototype.change_assigned = function (_action, _selected) {
-        var et2 = _selected[0].manager.data.nextmatch.getInstanceManager();
-        var assigned = et2.widgetContainer.getWidgetById('assigned');
+    change_assigned(_action, _selected) {
+        let et2 = _selected[0].manager.data.nextmatch.getInstanceManager();
+        let assigned = et2.widgetContainer.getWidgetById('assigned');
         if (assigned) {
             assigned.set_value([]);
             et2.widgetContainer.getWidgetById('assigned_action[title]').set_value('');
@@ -307,7 +291,7 @@ var trackerAPP = /** @class */ (function (_super) {
             et2.widgetContainer.getWidgetById('assigned_action[delete]').set_disabled(_selected.length === 1);
         }
         if (_selected.length === 1) {
-            var data = egw.dataGetUIDdata(_selected[0].id);
+            let data = egw.dataGetUIDdata(_selected[0].id);
             if (assigned && data && data.data) {
                 et2.widgetContainer.getWidgetById('assigned_action[title]').set_value(data.data.tr_summary);
                 et2.widgetContainer.getWidgetById('assigned_action[title]').set_class(data.data.class);
@@ -315,7 +299,7 @@ var trackerAPP = /** @class */ (function (_super) {
             }
         }
         nm_open_popup(_action, _selected);
-    };
+    }
     /**
      * Override the viewEntry to remove unseen class
      * right after view the entry.
@@ -323,12 +307,12 @@ var trackerAPP = /** @class */ (function (_super) {
      * @param {type} _action
      * @param {type} _senders
      */
-    trackerAPP.prototype.viewEntry = function (_action, _senders) {
-        _super.prototype.viewEntry.call(this, _action, _senders);
-        var nm = this.et2.getWidgetById('nm');
-        var nm_indexes = nm.getController()._indexMap;
-        var node = null;
-        for (var i in nm_indexes) {
+    viewEntry(_action, _senders) {
+        super.viewEntry(_action, _senders);
+        let nm = this.et2.getWidgetById('nm');
+        let nm_indexes = nm.getController()._indexMap;
+        let node = null;
+        for (let i in nm_indexes) {
             if (nm_indexes[i]['uid'] == _senders[0]['id']) {
                 node = nm_indexes[i].row._nodes[0].find('.tracker_unseen');
             }
@@ -336,16 +320,16 @@ var trackerAPP = /** @class */ (function (_super) {
         if (node) {
             node.removeClass('tracker_unseen');
         }
-    };
+    }
     /**
      * Handle context menu action on the comments to show the file buttons
      *
      * @param {egwAction} _action
      * @param {egwActionObject[]} _entries
      */
-    trackerAPP.prototype.reply_files = function (_action, _entries) {
-        var row = null;
-        for (var i in _entries) {
+    reply_files(_action, _entries) {
+        let row = null;
+        for (let i in _entries) {
             row = _entries[i].iface.getDOMNode();
             jQuery('.et2_toolbar', row).removeClass('hide_buttons')
                 .get(0).scrollIntoView();
@@ -353,26 +337,25 @@ var trackerAPP = /** @class */ (function (_super) {
         jQuery("body").one('click', function () {
             jQuery('.et2_toolbar', row).addClass('hide_buttons');
         });
-    };
+    }
     /**
      * Handle context menu action on the comments to edit the comment
      *
      * @param {egwAction} _action
      * @param {egwActionObject[]} _entries
      */
-    trackerAPP.prototype.reply_edit = function (_action, _entries) {
-        for (var i in _entries) {
-            var row_id = _entries[i].id.split('row_')[1];
+    reply_edit(_action, _entries) {
+        for (let i in _entries) {
+            let row_id = _entries[i].id.split('row_')[1];
             if (typeof row_id !== 'string') {
                 return;
             }
-            var widget_id = row_id + '[reply_message]';
-            var widget = _entries[i].iface.getWidget().getWidgetById(widget_id);
+            let widget_id = row_id + '[reply_message]';
+            let widget = _entries[i].iface.getWidget().getWidgetById(widget_id);
             // Trigger the edit mode
             widget.dblclick();
         }
-    };
-    return trackerAPP;
-}(egw_app_1.EgwApp));
+    }
+}
 app.classes.tracker = trackerAPP;
 //# sourceMappingURL=app.js.map

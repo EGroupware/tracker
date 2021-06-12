@@ -1,12 +1,12 @@
 /**
  * EGroupware - Tracker - Javascript UI
  *
- * @link http://www.egroupware.org
+ * @link https://www.egroupware.org
  * @package tracker
- * @author Hadi Nategh	<hn-AT-stylite.de>
- * @copyright (c) 2008-16 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @author Hadi Nategh	<hn-AT-egroupware.org>
+ * @author Ralf Becker <rb-AT-egroupware.org>
+ * @copyright (c) 2008-21 by Ralf Becker <RalfBecker-AT-outdoor-training.de>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$
  */
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
@@ -15,6 +15,7 @@ import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
+import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
 
 /**
  * UI for tracker
@@ -110,7 +111,7 @@ import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 		{
 			if (_app === 'timesheet')
 			{
-				let nm = this.et2 ? this.et2.getWidgetById('nm') : null;
+				let nm = this.et2 ? <et2_nextmatch>this.et2.getWidgetById('nm') : null;
 				if (nm) nm.applyFilters();
 			}
 		}
@@ -381,7 +382,7 @@ import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 	viewEntry(_action, _senders)
 	{
 		super.viewEntry(_action, _senders);
-		let nm : et2_nextmatch = this.et2.getWidgetById('nm');
+		let nm : et2_nextmatch = <et2_nextmatch>this.et2.getWidgetById('nm');
 		let nm_indexes = nm.getController()._indexMap;
 		let node : JQuery = null;
 		for (let i in nm_indexes)
