@@ -15,6 +15,7 @@ import { et2_selectbox } from "../../api/js/etemplate/et2_widget_selectbox";
 import { etemplate2 } from "../../api/js/etemplate/etemplate2";
 import { et2_link_list } from "../../api/js/etemplate/et2_widget_link";
 import { nm_open_popup } from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
+import { egw } from "../../api/js/jsapi/egw_global";
 /**
  * UI for tracker
  */
@@ -202,7 +203,7 @@ class trackerAPP extends EgwApp {
      */
     canned_comment_requst() {
         let editor = this.et2.getWidgetById('reply_message');
-        let id = this.et2.getWidgetById('canned_response').get_value();
+        let id = this.et2.getValueById('canned_response');
         if (id && editor) {
             // Need to specify the popup's egw
             this.et2.egw().json('tracker.tracker_ui.ajax_canned_comment', [id, document.getElementById('tracker-edit_reply_message').style.display == 'none']).sendRequest(true);

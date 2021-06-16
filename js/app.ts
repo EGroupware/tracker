@@ -16,6 +16,11 @@ import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
+import {egw} from "../../api/js/jsapi/egw_global";
+import {et2_template} from "../../api/js/etemplate/et2_widget_template";
+import {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
+import {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
+import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
 
 /**
  * UI for tracker
@@ -149,8 +154,8 @@ import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_acti
 	 */
 	filter_change() : boolean
 	{
-		let filter = this.et2.getWidgetById('filter');
-		let dates = this.et2.getWidgetById('tracker.index.dates');
+		let filter = <et2_selectbox>this.et2.getWidgetById('filter');
+		let dates = <et2_template>this.et2.getWidgetById('tracker.index.dates');
 
 		if (filter && dates)
 		{
@@ -247,7 +252,7 @@ import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_acti
 	canned_comment_requst()
 	{
 		let editor = this.et2.getWidgetById('reply_message');
-		let id = this.et2.getWidgetById('canned_response').get_value();
+		let id = this.et2.getValueById('canned_response');
 		if (id && editor)
 		{
 			// Need to specify the popup's egw
@@ -260,8 +265,8 @@ import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_acti
 	 */
 	canned_comment_response(_replyMsg)
 	{
-		this.et2.getWidgetById('canned_response').set_value('');
-		let editor = this.et2.getWidgetById('reply_message');
+		(<et2_selectbox> this.et2.getWidgetById('canned_response')).set_value('');
+		let editor = <et2_htmlarea> this.et2.getWidgetById('reply_message');
 		if(editor)
 		{
 			editor.set_value(_replyMsg);
@@ -310,18 +315,18 @@ import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_acti
 	 */
 	acl_queue_access()
 	{
-		let queue_acl = this.et2.getWidgetById('enabled_queue_acl_access');
+		let queue_acl = <et2_checkbox> this.et2.getWidgetById('enabled_queue_acl_access');
 
 		// Check content too, in case we're viewing a specific queue and that widget
 		// isn't there
 		let content = this.et2.getArrayMgr('content').getEntry('enabled_queue_acl_access');
 		if(queue_acl && queue_acl.get_value() === 'false' || content !== null && !content)
 		{
-			this.et2.getWidgetById('users').set_disabled(true);
+			(<et2_selectAccount> this.et2.getWidgetById('users')).set_disabled(true);
 		}
 		else
 		{
-			this.et2.getWidgetById('users').set_disabled(false);
+			(<et2_selectAccount> this.et2.getWidgetById('users')).set_disabled(false);
 		}
 	}
 
