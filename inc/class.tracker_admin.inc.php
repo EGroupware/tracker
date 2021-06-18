@@ -418,6 +418,9 @@ class tracker_admin extends tracker_bo
 					{
 						$this->reload_labels();
 					}
+					if ($button == 'apply') break;
+					// fall-through for save
+				case 'cancel':
 					// Reload tracker app
 					if(Api\Json\Response::isJSONResponse())
 					{
@@ -430,9 +433,6 @@ class tracker_admin extends tracker_bo
 							'ajax' => 'true'
 						)), false, 'tracker');
 					}
-					if ($button == 'apply') break;
-					// fall-through for save
-				case 'cancel':
 					Egw::redirect_link('/index.php', array(
 						'menuaction' => 'admin.admin_ui.index',
 						'ajax' => 'true'
@@ -440,7 +440,6 @@ class tracker_admin extends tracker_bo
 					break;
 
 				default:
-
 					foreach(array(
 						'cats'      => lang('Category'),
 						'versions'  => lang('Version'),
