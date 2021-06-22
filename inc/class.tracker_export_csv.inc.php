@@ -271,6 +271,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 			'tr_resolution'	=> $this->ui->get_tracker_labels('resolution',null),
 			'tr_priority'	=> $this->ui->get_tracker_priorities(),
 			'tr_private'	=> array('' => lang('no'),0 => lang('no'),'1'=>lang('yes')),
+			'tr_completion'  => Api\Etemplate\Widget\Select::typeOptions('select-percent',"")
 		);
 		foreach(array_keys($this->selects['tr_tracker']) as $id)
 		{
@@ -292,7 +293,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 		$filters['cat_id']['values'] = $this->ui->get_tracker_labels('cat',null);
 
 		// Restrict groups to just groups
-    $filters['tr_group']['account_type'] = 'groups';
+    	$filters['tr_group']['account_type'] = 'groups';
 
 		foreach($filters as $field_name => &$settings)
 		{

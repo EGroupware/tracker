@@ -28,7 +28,7 @@ class tracker_egw_record implements importexport_iface_egw_record
 		'select-account' => array('tr_creator','tr_modifier','tr_group','tr_assigned'),
 		'date-time' => array('tr_modified','tr_created','tr_closed','tr_startdate','tr_duedate'),
 		'select-cat' => array('cat_id'),
-		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution'),
+		'select' => array('tr_tracker', 'tr_version','tr_status','tr_priority','tr_resolution','tr_completion'),
 		'select-bool' => array('tr_private'),
 	);
 
