@@ -302,7 +302,7 @@ class tracker_bo extends tracker_so
 
 	/**
 	 * config var for color code
-	 * @var type
+	 * @var string
 	 */
 	var $enabled_color_code_for = '';
 
@@ -405,7 +405,7 @@ class tracker_bo extends tracker_so
 	 */
 	function init($keys=array())
 	{
-		parent::init();
+		parent::init($keys);
 		if (isset($keys['tr_tracker'])&&!empty($keys['tr_tracker'])) $this->data['tr_tracker']=$keys['tr_tracker'];
 		if (is_array($this->trackers)&&(!isset($this->data['tr_tracker'])||empty($this->data['tr_tracker'])))	// init is called from Api\Storage\Base::__construct(), where $this->trackers is NOT set
 		{
@@ -2004,7 +2004,7 @@ class tracker_bo extends tracker_so
 	 * JSON response to client with data = (int)ticket_id
 	 * or 0 if there was no ticket registered for the given subject
 	 *
-	 * @param type $_subject
+	 * @param string $_subject
 	 */
 	function ajax_getTicketId($_subject='')
 	{
