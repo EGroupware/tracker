@@ -180,7 +180,7 @@ class tracker_admin extends tracker_bo
 							{
 								if ($row[$name]) $rights |= $right;
 							}
-							if ($this->field_acl[$row['name']] != $rights)
+							if($this->field_acl[$row['name']] != $rights)
 							{
 								//echo "<p>$row[name] / $row[label]: rights: ".$this->field_acl[$row['name']]." => $rights</p>\n";
 								$this->field_acl[$row['name']] = $rights;
@@ -188,21 +188,22 @@ class tracker_admin extends tracker_bo
 							}
 						}
 					}
-					// tracker specific config and mail handling
-					foreach(array('technicians','admins','users','notification','restrictions','mailhandling') as $name)
-					{
-						$staff =& $this->$name;
+				// tracker specific config and mail handling
+				foreach(array('technicians', 'admins', 'users', 'notification', 'restrictions', 'mailhandling',
+							  'default_group') as $name)
+				{
+					$staff =& $this->$name;
 						if (!isset($staff[$tracker])) $staff[$tracker] = array();
 						if (!isset($_content[$name])) $_content[$name] = array();
 
-						if ($staff[$tracker] != $_content[$name])
-						{
-							$staff[$tracker] = $_content[$name];
-							$need_update = true;
-						}
+					if($staff[$tracker] != $_content[$name])
+					{
+						$staff[$tracker] = $_content[$name];
+						$need_update = true;
 					}
+				}
 
-					$this->user_category_preference[$tracker] = $_content['cats']['user_category_preference'];
+				$this->user_category_preference[$tracker] = $_content['cats']['user_category_preference'];
 
 					// build the (normalized!) priority array
 					$prios = array();
@@ -466,34 +467,36 @@ class tracker_admin extends tracker_bo
 
 		}
 		$content = array(
-			'msg' => $msg,
-			'tracker' => $tracker,
-			'admins' => $this->admins[$tracker],
-			'technicians' => $this->technicians[$tracker],
-			'users' => $this->users[$tracker],
-			'notification' => $this->notification[$tracker],
-			'restrictions' => $this->restrictions[$tracker],
-			'mailhandling' => $this->mailhandling[$tracker],
-			'tabs' => $_content['tabs'],
+			'msg'           => $msg,
+			'tracker'       => $tracker,
+			'admins'        => $this->admins[$tracker],
+			'technicians'   => $this->technicians[$tracker],
+			'users'         => $this->users[$tracker],
+			'notification'  => $this->notification[$tracker],
+			'restrictions'  => $this->restrictions[$tracker],
+			'mailhandling'  => $this->mailhandling[$tracker],
+			'default_group' => $this->default_group[$tracker],
+			'tabs'          => $_content['tabs'],
 			// keep priority cat only if tracker is unchanged, otherwise reset it
-			'priorities' => $tracker == $_content['tracker'] ? array('cat_id' => $_content['priorities']['cat_id']) : array(),
+			'priorities'    => $tracker == $_content['tracker'] ? array('cat_id' => $_content['priorities']['cat_id']) : array(),
 		);
-		if ($tracker)
+		if($tracker)
 		{
-			$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT,'tracker');
+			$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT, 'tracker');
 			$tr_data = $cats->read($tracker);
 			$content['tracker_color'] = $tr_data['data']['color'];
 		}
-		foreach(array_diff($this->config_names,array('admins','technicians','users','notification','restrictions','mailhandling','priorities')) as $name)
+		foreach(array_diff($this->config_names, array('admins', 'technicians', 'users', 'notification', 'restrictions',
+													  'mailhandling', 'priorities', 'default_group')) as $name)
 		{
 			$content[$name] = $this->$name;
 		}
 		$readonlys = array(
-			'button[delete]' => !$tracker,
-			'delete[0]' => true,
-			'button[rename]' => !$tracker,
+			'button[delete]'       => !$tracker,
+			'delete[0]'            => true,
+			'button[rename]'       => !$tracker,
 			'button[change_color]' => !$tracker,
-			'tabs' => array('tracker.admin.acl'=>$tracker),
+			'tabs'                 => array('tracker.admin.acl' => $tracker),
 		);
 		// cats & versions & responses & projects
 		$v = $c = $r = $s = $p = $i = 1;
@@ -628,30 +631,31 @@ class tracker_admin extends tracker_bo
 				Api\Translation::get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker, $default_category),
 			// Mail handling
-			'interval' => array(
-				0 => 'Disabled',
-				5 => 5,
+			'interval'            => array(
+				0  => 'Disabled',
+				5  => 5,
 				10 => 10,
 				15 => 15,
 				20 => 20,
 				30 => 30,
 				60 => 60
 			),
-			'servertype' => array(),
-			'default_tracker' => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
+			'servertype'          => array(),
+			'default_tracker'     => ($tracker ? array($tracker => $this->trackers[$tracker]) : $this->trackers),
 			// TODO; enable the default_trackers onChange() to reload categories
-			'default_cat' => $this->get_tracker_labels('cat',$content['mailhandling']['default_tracker']),
-			'default_version' => $this->get_tracker_labels('version',$content['mailhandling']['default_tracker']),
-			'unrec_reply' => array(
+			'default_cat'         => $this->get_tracker_labels('cat', $content['mailhandling']['default_tracker']),
+			'default_version'     => $this->get_tracker_labels('version', $content['mailhandling']['default_tracker']),
+			'default_group'       => array('' => lang('None')) + $this->get_groups(false),
+			'unrec_reply'         => array(
 				0 => 'Creator',
 				1 => 'Nobody',
 			),
-			'auto_reply' => array(
+			'auto_reply'          => array(
 				0 => lang('Never'),
 				1 => lang('Yes, new tickets only'),
 				2 => lang('Yes, always'),
 			),
-			'reply_unknown' => array(
+			'reply_unknown'       => array(
 				0 => 'Creator',
 				1 => 'Nobody',
 			),

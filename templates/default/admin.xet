@@ -279,7 +279,8 @@
 					<checkbox statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="app.tracker.acl_queue_access()"/>
 				</row>
 				<row class="row">
-					<description span="2"/>
+					<description for="default_group" value="Default group"/>
+					<select id="default_group"/>
 					<description for="enabled_color_code_for" value="Enable color code for"/>
 					<select id="enabled_color_code_for">
 						<option value="">None</option>

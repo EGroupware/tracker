@@ -318,9 +318,13 @@ class tracker_bo extends tracker_so
 	 * @var array
 	 */
 	var $config_names = array(
-		'technicians','admins','users','notification','projects','priorities','default_priority','restrictions', 'user_category_preference',	// tracker specific
-		'field_acl','allow_assign_groups','allow_voting','overdue_days','pending_close_days','htmledit','create_new_as_private','allow_assign_users','allow_infolog','allow_restricted_comments','mailhandling','enabled_color_code_for',	// tracker unspecific
-		'allow_bounties','currency','enabled_queue_acl_access','exclude_app_on_timesheetcreation','show_dates', 'comment_reopens'
+		'technicians', 'admins', 'users', 'notification', 'projects', 'priorities', 'default_priority', 'restrictions',
+		'user_category_preference', 'default_group',    // tracker specific
+		'field_acl', 'allow_assign_groups', 'allow_voting', 'overdue_days', 'pending_close_days', 'htmledit',
+		'create_new_as_private', 'allow_assign_users', 'allow_infolog', 'allow_restricted_comments', 'mailhandling',
+		'enabled_color_code_for',    // tracker unspecific
+		'allow_bounties', 'currency', 'enabled_queue_acl_access', 'exclude_app_on_timesheetcreation', 'show_dates',
+		'comment_reopens'
 	);
 	/**
 	 * Notification settings (tracker specific, keys: sender, link, copy, lang)
@@ -413,13 +417,12 @@ class tracker_bo extends tracker_so
 		}
 		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
 		$this->data['tr_private'] = $this->create_new_as_private;
-		$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
 		// set default resolution
 		$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
 
 		// set default priority
 		$default_priority = null;
-		$this->get_tracker_priorities($this->data['tr_tracker'],$this->data['cat_id'], true, $default_priority);
+		$this->get_tracker_priorities($this->data['tr_tracker'], $this->data['cat_id'], true, $default_priority);
 		$this->data['tr_priority'] = $default_priority;
 
 		// Set default category
@@ -428,6 +431,16 @@ class tracker_bo extends tracker_so
 			$default_category = null;
 			$this->get_tracker_labels('cat', $this->data['tr_tracker'], $default_category);
 			$this->data['cat_id'] = $default_category;
+		}
+
+		// Set group to default or preference if no queue default
+		if($this->default_group[$this->data['tr_tracker']])
+		{
+			$this->data['tr_group'] = $this->default_group[$this->data['tr_tracker']];
+		}
+		else
+		{
+			$this->data['tr_group'] = $GLOBALS['egw_info']['user']['account_primary_group'];
 		}
 
 		$this->data_merge($keys);
