@@ -150,14 +150,16 @@ class tracker_admin extends tracker_bo
 					$need_update = false;
 					if (!$tracker)	// tracker unspecific config
 					{
-						foreach(array_diff($this->config_names,array('field_acl','technicians','admins','users','restrictions','notification','mailhandling','priorities')) as $name)
+						foreach(array_diff($this->config_names, array('field_acl', 'technicians', 'admins', 'users',
+																	  'restrictions', 'notification', 'mailhandling',
+																	  'priorities', 'default_group')) as $name)
 						{
-							if (in_array($name,array('overdue_days','pending_close_days')) &&
+							if(in_array($name, array('overdue_days', 'pending_close_days')) &&
 								$_content[$name] === '')
 							{
-								$_content[$name] = '0';	// otherwise it does NOT get stored
+								$_content[$name] = '0';    // otherwise it does NOT get stored
 							}
-							if ((string) $this->$name !== $_content[$name])
+							if((string)$this->$name !== $_content[$name])
 							{
 								$this->$name = $_content[$name];
 								$need_update = true;
