@@ -194,21 +194,26 @@ class tracker_ui extends tracker_bo
 				$regardInInit = array(
 					'tr_tracker' => $this->data['tr_tracker']
 				);
-				if (($state = Api\Cache::getSession('tracker','index'.
-					(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-'.$_GET['only_tracker'] : ''))))
+				if(($state = Api\Cache::getSession('tracker', 'index' .
+															(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-' . $_GET['only_tracker'] : '')
+				)))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
-					$this->data['cat_id']     = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : false;
+					$this->data['cat_id'] = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : false;
 					$this->data['tr_version'] = $regardInInit['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
-				if (isset($this->trackers[(int)$_GET['tracker']]))
+				if($_GET['tracker'] && is_array($_GET['tracker']))
+				{
+					$_GET['tracker'] = array_pop($_GET['tracker']);
+				}
+				if(isset($this->trackers[(int)$_GET['tracker']]))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
 				// State can have more than one tracker selected, edit has only 1
 				if(is_array($this->data['tr_tracker']))
 				{
-					$this->data['tr_tracker'] = $regardInInit['tr_tracker']  = (int)  array_pop($this->data['tr_tracker']);
+					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)array_pop($this->data['tr_tracker']);
 				}
 			}
 
@@ -727,6 +732,7 @@ class tracker_ui extends tracker_bo
 		{
  			$content['cat_id'] = $regardInInit['cat_id'] ? $regardInInit['cat_id'] : ($default_category ? (int)$default_category : $this->data['cat_id']);
 			$content['tr_priority'] = $default_priority ? (int)$this->data['tr_priority'] : $this->data['tr_priority'];
+			$content['tr_group'] = $this->default_group[$content['tr_tracker']] ?: $this->default_group[0] ?: $GLOBALS['egw_info']['user']['account_primary_group'] ?: $content['tr_group'];
 		}
 
 		foreach($this->field2history as $field => $status)
