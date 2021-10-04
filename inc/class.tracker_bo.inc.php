@@ -1278,7 +1278,7 @@ class tracker_bo extends tracker_so
 			$cat_data =& $cat['data'];
 			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
 			if ($cat_type == $type &&	// cats need to be either tracker specific or global and tracker NOT in denyglobal
-				(!$cat['parent'] && !($tracker && is_array($cat_data['denyglobal']) && in_array($tracker, $cat_data['denyglobal'])) ||
+				(!$cat['parent'] && !($tracker && isset($cat_data['denyglobal']) && is_array($cat_data['denyglobal']) && in_array($tracker, $cat_data['denyglobal'])) ||
 				$cat['main'] == $tracker && $cat['id'] != $tracker))
 			{
 				$labels[$cat['id']] = $cat['name'];
