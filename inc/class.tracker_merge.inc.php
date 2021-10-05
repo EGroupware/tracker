@@ -346,14 +346,71 @@ class tracker_merge extends Api\Storage\Merge
 			echo '<tr><td>{{#'.$name.'}}</td><td colspan="3">'.$field['label']."</td></tr>\n";
 		}
 
-		echo '<tr><td colspan="4"><h3>'.lang('General fields:')."</h3></td></tr>";
+		echo '<tr><td colspan="4"><h3>' . lang('General fields:') . "</h3></td></tr>";
 		foreach($this->get_common_replacements() as $name => $label)
 		{
-			echo '<tr><td>{{'.$name.'}}</td><td colspan="3">'.$label."</td></tr>\n";
+			echo '<tr><td>{{' . $name . '}}</td><td colspan="3">' . $label . "</td></tr>\n";
 		}
 
 		echo "</table>\n";
 
 		echo $GLOBALS['egw']->framework->footer();
+	}
+
+
+	/**
+	 * Get a list of placeholders provided.
+	 *
+	 * Placeholders are grouped logically.  Group key should have a user-friendly translation.
+	 */
+	public function get_placeholder_list($prefix = '')
+	{
+		$placeholders = array(
+				'tracker' => [],
+				'comment' => []
+			) + parent::get_placeholder_list($prefix);
+
+		$fields = array('tr_id' => lang('Tracker ID')) +
+			$this->bo->field2label + array(
+				'tr_modifier' => lang('Last modified by'),
+				'tr_modified' => lang('last modified'),
+			);
+		$fields['bounty'] = lang('bounty');
+		$fields['tr_link'] = lang('Link to ticket');
+		$fields['tr_sum_timesheets'] = lang('Used time');
+		$fields['signature'] = lang('Notification signature');
+		$fields['all_comments'] = lang("All comments together, User\tDate\tMessage");
+		$fields['comment/-1/...'] = 'Only the last comment';
+		$fields['comment/-1/creator/...'] = 'Only the last comment by the creator';
+		$fields['comment/-1/assigned_to/...'] = 'Only the last comment by one of the assigned users';
+		$fields['comment/-1/non_restricted/...'] = 'Only the last public visible comment';
+
+		$group = 'tracker';
+		foreach($fields as $name => $label)
+		{
+			if(in_array($name, array('link_to', 'canned_response', 'reply_message', 'add', 'vote', 'no_notifications',
+									 'num_replies', 'customfields')))
+			{
+				// dont show them
+				continue;
+			}
+			if(strpos($name, 'comment') !== false)
+			{
+				$group = 'comment';
+			}
+			$marker = $this->prefix($prefix, $name, '{');
+			if(!array_filter($placeholders, function ($a) use ($marker)
+			{
+				return array_key_exists($marker, $a);
+			}))
+			{
+				$placeholders[$group][] = [
+					'value' => $marker,
+					'label' => $label
+				];
+			}
+		}
+
+		return $placeholders;
 	}
 }
