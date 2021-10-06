@@ -452,7 +452,7 @@ class tracker_admin extends tracker_bo
 						'responses' => lang('Canned response'),
 					) as $name => $what)
 					{
-						if (isset($_content[$name]['delete']))
+						if (!empty($_content[$name]['delete']))
 						{
 							$id = key($_content[$name]['delete']);
 							if ((int)$id)
@@ -796,12 +796,12 @@ class tracker_admin extends tracker_bo
 					$escalations->init();
 					break;
 			}
-			if($_content['nm']['rows']['edit'] || $_content['nm']['rows']['delete'])
+			if (!empty($_content['nm']['rows']['edit']) || !empty($_content['nm']['rows']['delete']))
 			{
 				$_content['nm']['action'] = key($_content['nm']['rows']);
 				$_content['nm']['selected'] = array(key($_content['nm']['rows'][$_content['nm']['action']]));
 			}
-			if($_content['nm']['action'])
+			if (!empty($_content['nm']['action']))
 			{
 				$action = $_content['nm']['action'];
 				list($_id) = $_content['nm']['selected'];
