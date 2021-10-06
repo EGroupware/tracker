@@ -246,7 +246,7 @@ class tracker_merge extends Api\Storage\Merge
 				'$$comment/date$$' => Api\DateTime::to($reply['reply_created']),
 				'$$comment/message$$' => $reply['reply_message'],
 				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
-				'$$comment/user$$' => Api\Accounts::username($reply['reply_creator'])
+				'$$comment/user$$' => isset($reply['reply_creator']) ? Api\Accounts::username($reply['reply_creator']) : '',
 			);
 			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
 			if(is_array($tracker['tr_assigned']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
