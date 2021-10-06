@@ -1011,7 +1011,11 @@ class tracker_ui extends tracker_bo
 
 		if (!($query['col_filter']['tr_creator'])) unset($query['col_filter']['tr_creator']);
 
-		if ($query['col_filter']['tr_assigned'] < 0)	// resolve groups with it's members
+		if (empty($query['col_filter']['tr_assigned']))
+		{
+			unset($query['col_filter']['tr_assigned']);
+		}
+		elseif ($query['col_filter']['tr_assigned'] < 0)	// resolve groups with its members
 		{
 			$query['col_filter']['tr_assigned'] = $GLOBALS['egw']->accounts->members($query['col_filter']['tr_assigned'],true);
 			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
@@ -1019,10 +1023,6 @@ class tracker_ui extends tracker_bo
 		elseif($query['col_filter']['tr_assigned'] === 'not')
 		{
 			$query['col_filter']['tr_assigned'] = null;
-		}
-		elseif(!$query['col_filter']['tr_assigned'])
-		{
-			unset($query['col_filter']['tr_assigned']);
 		}
 
 		if (empty($query['col_filter']['tr_tracker']))
