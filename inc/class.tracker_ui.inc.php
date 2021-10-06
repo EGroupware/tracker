@@ -1400,7 +1400,7 @@ class tracker_ui extends tracker_bo
 					if(in_array($multi_action, array('link', 'assigned','group')))
 					{
 						$action = $content[$multi_action.'_popup'];
-						$content['nm']['action'] .= '_' . key($action[$multi_action . '_action']);
+						$content['nm']['action'] .= '_' . key($action[$multi_action . '_action'] ?? []);
 
 						// Action handling function wants a single string value, so mush it together
 						if(is_array($action[$multi_action]))
