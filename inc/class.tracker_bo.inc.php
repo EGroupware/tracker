@@ -855,9 +855,9 @@ class tracker_bo extends tracker_so
 					if (!isset($users[$u])) $users[$u] = Api\Accounts::username($u);
 				}
 			}
-			else // users
+			elseif (!isset($users[$uid]) && is_numeric($uid))
 			{
-				if (!isset($users[$uid])) $users[$uid] = Api\Accounts::username($uid);
+				$users[$uid] = Api\Accounts::username($uid);
 			}
 		}
 		// sort alphabetic
