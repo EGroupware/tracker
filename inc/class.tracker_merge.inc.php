@@ -136,16 +136,16 @@ class tracker_merge extends Api\Storage\Merge
 		$array = array();
 
 		// Signature
-		if($this->bo->notification[$record->tr_tracker]['use_signature'] || $this->bo->notification[0]['use_signature'])
+		if (!empty($this->bo->notification[$record->tr_tracker]['use_signature']) || !empty($this->bo->notification[0]['use_signature']))
 		{
-			if(trim(strip_tags($this->bo->notification[$record->tr_tracker]['signature'])) &&
-				$this->bo->notification[$record->tr_tracker]['use_signature'])
+			if (!empty($this->bo->notification[$record->tr_tracker]['use_signature']) &&
+				trim(strip_tags($this->bo->notification[$record->tr_tracker]['signature'])))
 			{
 				$array['signature'] = $this->bo->notification[$record->tr_tracker]['signature'];
 			}
 			else
 			{
-				$array['signature'] = $this->bo->notification[0]['signature'];
+				$array['signature'] = $this->bo->notification[0]['signature'] ?? null;
 			}
 		}
 
@@ -167,7 +167,7 @@ class tracker_merge extends Api\Storage\Merge
 		// Set any missing custom fields, or the marker will stay
 		foreach(array_keys($this->bo->customfields) as $name)
 		{
-			if(!$array['#'.$name]) $array['#'.$name] = '';
+			if (empty($array['#'.$name])) $array['#'.$name] = '';
 		}
 
 		// Timesheet time
@@ -219,7 +219,7 @@ class tracker_merge extends Api\Storage\Merge
 	 */
 	protected function get_comments($tr_id)
 	{
-		if($this->comment_cache[$tr_id]) return $this->comment_cache[$tr_id];
+		if (!empty($this->comment_cache[$tr_id])) return $this->comment_cache[$tr_id];
 
 		// Clear it to keep memory down - just this ticket
 		$this->comment_cache[$tr_id] = array();
@@ -263,8 +263,8 @@ class tracker_merge extends Api\Storage\Merge
 		foreach($special as $key => $comment) {
 			$this->comment_cache[$tr_id][-1][$key] = array(
 				'$$comment/-1'.$key.'/date$$' => $comment ? Api\DateTime::to($comment['reply_created']) : '',
-				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'],
-				'$$comment/-1'.$key.'/restricted$$' => $comment['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
+				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'] ?? null,
+				'$$comment/-1'.$key.'/restricted$$' => !empty($comment['reply_visible']) ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/-1'.$key.'/user$$' => $comment ? Api\Accounts::username($comment['reply_creator']) : ''
 			);
 		}

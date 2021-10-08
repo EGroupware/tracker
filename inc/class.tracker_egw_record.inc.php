@@ -1,6 +1,6 @@
 <?php
 /**
- * eGroupWare - Tracker - importexport
+ * EGroupware - Tracker - importexport
  *
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package tracker
@@ -8,12 +8,11 @@
  * @link http://www.egroupware.org
  * @author Nathan Gray
  * @copyright 2010 Nathan Gray
- * @version $Id
  */
 
 /**
  * class tracker_egw_record
- * compability layer for iface_egw_record needet for importexport
+ * compatibility layer for iface_egw_record needed for importexport
  */
 class tracker_egw_record implements importexport_iface_egw_record
 {
@@ -55,7 +54,7 @@ class tracker_egw_record implements importexport_iface_egw_record
 	 * @param string $_attribute_name
 	 */
 	public function __get($_attribute_name) {
-		return $this->record[$_attribute_name];
+		return $this->record[$_attribute_name] ?? null;
 	}
 
 	/**

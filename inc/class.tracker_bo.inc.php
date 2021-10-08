@@ -414,25 +414,25 @@ class tracker_bo extends tracker_so
 			$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
 		}
 		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
-		$this->data['tr_private'] = $this->create_new_as_private;
+		$this->data['tr_private'] = $this->create_new_as_private ?? null;
 		// set default resolution
-		$this->get_tracker_labels('resolution', $this->data['tr_tracker'], $this->data['tr_resolution']);
+		$this->get_tracker_labels('resolution', $this->data['tr_tracker'] ?? null, $this->data['tr_resolution']);
 
 		// set default priority
 		$default_priority = null;
-		$this->get_tracker_priorities($this->data['tr_tracker'], $this->data['cat_id'], true, $default_priority);
+		$this->get_tracker_priorities($this->data['tr_tracker'] ?? null, $this->data['cat_id'] ?? null, true, $default_priority);
 		$this->data['tr_priority'] = $default_priority;
 
 		// Set default category
-		if(!$this->data['cat_id'])
+		if(empty($this->data['cat_id']))
 		{
 			$default_category = null;
-			$this->get_tracker_labels('cat', $this->data['tr_tracker'], $default_category);
+			$this->get_tracker_labels('cat', $this->data['tr_tracker'] ?? null, $default_category);
 			$this->data['cat_id'] = $default_category;
 		}
 
 		// Set group to default or preference if no queue default
-		$this->data['tr_group'] = $this->default_group[$this->data['tr_tracker']] ?: $this->default_group[0] ?: $GLOBALS['egw_info']['user']['account_primary_group'];
+		$this->data['tr_group'] = $this->default_group[$this->data['tr_tracker']] ?? $this->default_group[0] ?? $GLOBALS['egw_info']['user']['account_primary_group'];
 
 		$this->data_merge($keys);
 
@@ -451,7 +451,7 @@ class tracker_bo extends tracker_so
  		{
  			$data =& $this->data;
  		}
-		if (is_array($data['replies']))
+		if (isset($data['replies']) && is_array($data['replies']))
 		{
 			foreach($data['replies'] as &$reply)
 			{
@@ -462,20 +462,20 @@ class tracker_bo extends tracker_so
 		// check if item is overdue
 		if ($this->overdue_days > 0)
 		{
-			$modified = $data['tr_modified'] ? $data['tr_modified'] : $data['tr_created'];
+			$modified = $data['tr_modified'] ?? $data['tr_created'] ?? null;
 			$limit = $this->now - $this->overdue_days * 24*60*60;
-			$data['overdue'] = !in_array($data['tr_status'],$this->get_tracker_stati(null,true)) && 	// only open items can be overdue
-				(!$data['tr_modified'] || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
+			$data['overdue'] = !in_array($data['tr_status'] ?? null, $this->get_tracker_stati(null,true)) && 	// only open items can be overdue
+				(empty($data['tr_modified']) || $data['tr_modifier'] == $data['tr_creator']) && $modified < $limit;
 
 		}
 
 		// Consider due date independent of overdue days
-		$data['overdue'] |= ($data['tr_duedate'] && $this->now > $data['tr_duedate'] && !in_array($data['tr_status'], $this->get_tracker_stati(null,true)));
+		$data['overdue'] |= (!empty($data['tr_duedate']) && $this->now > $data['tr_duedate'] && !in_array($data['tr_status'], $this->get_tracker_stati(null,true)));
 
 		// Keep a copy of the timestamps in server time, so notifications can change them for each user
 		foreach($this->timestamps as $field)
 		{
-			$data[$field . '_servertime'] = $data[$field];
+			if (isset($data[$field])) $data[$field . '_servertime'] = $data[$field];
 		}
 
 		// will run all regular timestamps ($this->timestamps) trough Api\DateTime::server2user()
@@ -494,7 +494,7 @@ class tracker_bo extends tracker_so
 		{
 			$data = &$this->data;
 		}
-		if (substr($data['tr_completion'],-1) == '%') $data['tr_completion'] = (int) round(substr($data['tr_completion'],0,-1));
+		if (isset($data['tr_completion']) && substr($data['tr_completion'],-1) === '%') $data['tr_completion'] = (int) round(substr($data['tr_completion'],0,-1));
 
 		// will run all regular timestamps ($this->timestamps) through Api\DateTime::user2server()
 		return parent::data2db($intern ? null : $data);	// important to use null, if $intern!
@@ -1269,7 +1269,7 @@ class tracker_bo extends tracker_so
 			if (!is_array($this->all_cats)) $this->all_cats = array();
 			//_debug_array($this->all_cats);
 		}
-		if (!$tracker) $tracker = $this->data['tr_tracker'];
+		if (!$tracker) $tracker = $this->data['tr_tracker'] ?? null;
 
 		$labels = array();
 		$default = $none_id = null;
@@ -1299,7 +1299,7 @@ class tracker_bo extends tracker_so
 			$default = $none_id;
 		}
 
-		if ($type == 'tracker' && !$GLOBALS['egw_info']['user']['apps']['admin'] && $this->enabled_queue_acl_access)
+		if ($type === 'tracker' && empty($GLOBALS['egw_info']['user']['apps']['admin']) && $this->enabled_queue_acl_access)
 		{
 			foreach (array_keys($labels) as $tracker_id)
 			{
@@ -1310,7 +1310,7 @@ class tracker_bo extends tracker_so
 			}
 		}
 
-		$user_cat_default = $GLOBALS['egw_info']['user']['preferences']['tracker'][$tracker.'_cat_default'];
+		$user_cat_default = $GLOBALS['egw_info']['user']['preferences']['tracker'][$tracker.'_cat_default'] ?? null;
 		if ($type == 'cat' && $user_cat_default && $labels[$user_cat_default])
 		{
 			$default = $user_cat_default;
@@ -1341,7 +1341,7 @@ class tracker_bo extends tracker_so
 		{
 			if($id > 0 && $data = $GLOBALS['egw']->categories->id2name($id,'data'))
 			{
-				if($closed == $data['closed']) $filtered[$id] = $name;
+				if ($closed == ($data['closed'] ?? null)) $filtered[$id] = $name;
 			}
 		}
 		return $filtered;
@@ -1396,7 +1396,7 @@ class tracker_bo extends tracker_so
 		{
 			$prios = self::$stock_priorities;
 		}
-		$default = $prios['default'] ? $prios['default'] : 5;
+		$default = $prios['default'] ?? 5;
 		unset($prios['default']);
 
 		if ($remove_empty)

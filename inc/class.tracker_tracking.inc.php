@@ -259,7 +259,7 @@ class tracker_tracking extends Api\Storage\Tracking
 
 		$tracker = $data['tr_tracker'];
 
-		$config = $this->tracker->notification[$tracker][$name] ? $this->tracker->notification[$tracker][$name] : $this->tracker->notification[0][$name];
+		$config = $this->tracker->notification[$tracker][$name] ?? $this->tracker->notification[0][$name] ?? null;
 
 		switch($name)
 		{
@@ -308,7 +308,7 @@ class tracker_tracking extends Api\Storage\Tracking
 	{
 		unset($old);	// not used
 
-		return $data['prefix'] . $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
+		return ($data['prefix']??'') . $this->tracker->trackers[$data['tr_tracker']].' #'.$data['tr_id'].': '.$data['tr_summary'];
 	}
 
 	/**
@@ -331,18 +331,18 @@ class tracker_tracking extends Api\Storage\Tracking
 		// Set comments according to data, avoids re-reading from DB
 		if (isset($data['replies'])) $merge->set_comments($data['tr_id'], $data['replies']);
 
-		if(trim(strip_tags($notification['message'])) == '' || !$notification['use_custom'])
+		if(empty($notification['message']) || trim(strip_tags($notification['message'])) == '' || empty($notification['use_custom']))
 		{
 			$notification['message'] = $this->tracker->notification[0]['message'];
 		}
-		if(trim(strip_tags($notification['signature'])) == '' || !$notification['use_signature'])
+		if(empty($notification['signature']) || trim(strip_tags($notification['signature'])) == '' || empty($notification['use_signature']))
 		{
 			$notification['signature'] = $this->tracker->notification[0]['signature'];
 		}
-		if(!$notification['use_signature'] && !$this->tracker->notification[0]['use_signature']) $notification['signature'] = '';
+		if(empty($notification['use_signature']) && empty($this->tracker->notification[0]['use_signature'])) $notification['signature'] = '';
 
 		// If no signature set, use the global one
-		if(!$notification['signature'])
+		if(empty($notification['signature']))
 		{
 			$notification['signature'] = parent::get_signature($data,$old,$receiver);
 		}
@@ -352,7 +352,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			$notification['signature'] = $merge->merge_string($notification['signature'], array($data['tr_id']), $error, 'text/html');
 		}
 
-		if((!$notification['use_custom'] && !$this->tracker->notification[0]['use_custom']) || !$notification['message'])
+		if((empty($notification['use_custom']) && empty($this->tracker->notification[0]['use_custom'])) || empty($notification['message']))
 		{
 			// Always use text mode for text tickets, HTML for HTML tickets
 			$html = $this->html_content_allow;
@@ -401,15 +401,15 @@ class tracker_tracking extends Api\Storage\Tracking
 	 */
 	function get_message($data, $old, $receiver = null)
 	{
-		if($data['message']) return $data['message'];
+		if (!empty($data['message'])) return $data['message'];
 
-		if ($data['reply_text'])
+		$r = [];
+		if (!empty($data['reply_text']))
 		{
 			$r[] = $data['reply_text'];
 			$r[] = '---';// this is wanted for separation of reply_text to status/creation text
 		}
-
-		if (!$data['tr_modified'] || !$old)
+		if (empty($data['tr_modified']) || !$old)
 		{
 			$r[] = lang('New ticket submitted by %1 at %2',
 				Api\Accounts::username($data['tr_creator']),
@@ -464,7 +464,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			'tr_startdate'   => $this->datetime(new Api\DateTime($data['tr_startdate'])),
 			'tr_duedate'     => $this->datetime(new Api\DateTime($data['tr_duedate'])),
 			'tr_status'      => lang($statis[$data['tr_status']]),
-			'tr_resolution'  => lang($resolutions[$data['tr_resolution']]),
+			'tr_resolution'  => lang($resolutions[$data['tr_resolution']] ?? ''),
 			'tr_completion'  => (int)$data['tr_completion'].'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']]),
 			'tr_creator'     => Api\Accounts::username($data['tr_creator']),
