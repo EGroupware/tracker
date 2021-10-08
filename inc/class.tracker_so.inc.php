@@ -394,11 +394,11 @@ class tracker_so extends Api\Storage
 
 		// Add in custom filters that = closed
 		$custom_closed = array();
-		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker);
+		$stati = ExecMethod('tracker.tracker_bo.get_tracker_stati', $tracker ?? null);
 		foreach(array_keys($stati) as $stati_id)
 		{
 			$data = Api\Categories::id2name($stati_id, 'data');
-			if($data['closed']) $custom_closed[] = $stati_id;
+			if (!empty($data['closed'])) $custom_closed[] = $stati_id;
 		}
 		$not_closed = substr(self::SQL_NOT_CLOSED,0,-1) . ' AND tr_status != \'' . implode('\' AND tr_status != \'', $custom_closed) . '\')';
 		if (empty($custom_closed)) $not_closed = self::SQL_NOT_CLOSED;
