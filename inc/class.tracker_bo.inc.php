@@ -1364,15 +1364,19 @@ class tracker_bo extends tracker_so
 	 *
 	 * Currently priorities are a fixed list with numeric values from 1 to 9 as keys and customizable labels
 	 *
-	 * @param int $tracker = null tracker to use or null to use tracker unspecific priorities
-	 * @param int $cat_id = null category to use or null to use categorie unspecific priorities
+	 * @param int|int[] $tracker = null tracker(s) to use or null to use tracker unspecific priorities
+	 * @param int $cat_id = null category to use or null to use category unspecific priorities
 	 * @param boolean $remove_empty = true should empty labels be displayed, default no
 	 * @param int& $default =null on return default, if it is set
 	 * @return array
 	 */
 	function get_tracker_priorities($tracker=null,$cat_id=null,$remove_empty=true, &$default = null)
 	{
-		if(!$tracker)
+		if (is_array($tracker))
+		{
+			$tracker = count($tracker) > 1 ? 0 : array_shift($tracker);
+		}
+		if (!$tracker || !is_scalar($tracker))
 		{
 			$tracker = 0;
 		}
