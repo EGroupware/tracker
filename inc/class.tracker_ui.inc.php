@@ -2308,7 +2308,7 @@ width:100%;
 	 * @param array $data values for keys "data" (data) and "args":
 	 *  values for keys "value", "rows" (reference) and "total" (reference)
 	 */
-	public function modify_history(array &$data)
+	public function modify_history(array $data)
 	{
 		// Is current user restricted?
 		$this->read($data['value']['record_id']);
