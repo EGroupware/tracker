@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- This template adds the extra bits to the replacements list UI -->
+<overlay>
+    <template id="tracker.replacements">
+        <vbox>
+            <description class="title" value="Comment table"/>
+            <description value="{{{table/comment}}}"/>
+            <grid width="100%">
+                <columns>
+                    <column width="30px"/>
+                    <column width="200px"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <description/>
+                        <description value="{{{comment/date}}}"/>
+                        <description value="Date"/>
+                    </row>
+                    <row>
+                        <description/>
+                        <description value="{{{comment/user}}}"/>
+                        <description value="Username"/>
+                    </row>
+                    <row>
+                        <description/>
+                        <description value="{{{comment/message}}}"/>
+                        <description value="Message"/>
+                    </row>
+                    <row>
+                        <description/>
+                        <description value="{{{comment/restricted}}}"/>
+                        <description value="If the message was restricted"/>
+                    </row>
+                </rows>
+            </grid>
+            <description value="{{{endtable}}}"/>
+        </vbox>
+    </template>
+</overlay>
