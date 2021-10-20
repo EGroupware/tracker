@@ -98,7 +98,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		// Hide restricted comments from reply count
 		foreach((array)$data['replies'] as $reply)
 		{
-			if($reply['reply_visible'] != 0)
+			if (!empty($reply['reply_visible']))
 			{
 				$data['num_replies']--;
 			}
@@ -220,9 +220,9 @@ class tracker_tracking extends Api\Storage\Tracking
 		$this->ClearBodyCache();
 
 		// Edit messages
-		foreach((array)$data['replies'] as $key => $reply)
+		foreach($data['replies'] ?? [] as $key => $reply)
 		{
-			if($reply['reply_visible'] != 0)
+			if (!empty($reply['reply_visible']))
 			{
 				unset($data['replies'][$key]);
 			}
@@ -233,7 +233,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			$this->creator_field = $creator_field;
 		}
-		$this->tracker->preset_replies[$data['tr_id']] = $data['replies'];
+		$this->tracker->preset_replies[$data['tr_id']] = $data['replies'] ?? [];
 		$data['tr_private'] = $private;
 		//$already_notified = $email_notified;
 		$ret = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
@@ -263,11 +263,11 @@ class tracker_tracking extends Api\Storage\Tracking
 
 		switch($name)
 		{
-			case 'copy':	// include the tr_cc addresses
+			case 'copy':
+				// include the tr_cc addresses
 				// If not set for this queue or all queues, default to true
-				$no_external = $this->tracker->notification[$tracker]['no_external'] ?
-					$this->tracker->notification[$tracker]['no_external'] :
-					$this->tracker->notification[0]['no_external'];
+				$no_external = $this->tracker->notification[$tracker]['no_external'] ??
+					$this->tracker->notification[0]['no_external'] ?? null;
 
 				if ($data['tr_private'] || $no_external)
 				{
@@ -280,7 +280,7 @@ class tracker_tracking extends Api\Storage\Tracking
 				}
 				break;
 			case 'skip_notify':
-				$config = array_merge((array)$config,$data['skip_notify'] ? $data['skip_notify'] : (array)$this->skip_notify);
+				$config = array_merge((array)$config, $data['skip_notify'] ?? (array)($this->skip_notify ?? []));
 				break;
 			case 'reply_to':
 				if (empty($config))	// if no explicit reply_to set in notifications use sender from mail config
@@ -461,12 +461,12 @@ class tracker_tracking extends Api\Storage\Tracking
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
-			'tr_startdate'   => $this->datetime(new Api\DateTime($data['tr_startdate'])),
-			'tr_duedate'     => $this->datetime(new Api\DateTime($data['tr_duedate'])),
+			'tr_startdate'   => !empty($data['tr_startdate']) ? $this->datetime(new Api\DateTime($data['tr_startdate'])) : '',
+			'tr_duedate'     => !empty($data['tr_duedate']) ? $this->datetime(new Api\DateTime($data['tr_duedate'])) : '',
 			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($resolutions[$data['tr_resolution']] ?? ''),
-			'tr_completion'  => (int)$data['tr_completion'].'%',
-			'tr_priority'    => lang($priorities[$data['tr_priority']]),
+			'tr_completion'  => (int)($data['tr_completion'] ?? 0).'%',
+			'tr_priority'    => lang($priorities[$data['tr_priority']] ?? ''),
 			'tr_creator'     => Api\Accounts::username($data['tr_creator']),
 			'tr_created'     => $this->datetime(new Api\DateTime($data['tr_created'])),
 			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
@@ -483,8 +483,8 @@ class tracker_tracking extends Api\Storage\Tracking
 			unset($detail_fields['tr_startdate']);
 			unset($detail_fields['tr_duedate']);
 		}
-		if(!$data['tr_startdate']) unset($detail_fields['tr_startdate']);
-		if(!$data['tr_duedate']) unset($detail_fields['tr_duedate']);
+		if (empty($data['tr_startdate'])) unset($detail_fields['tr_startdate']);
+		if (empty($data['tr_duedate'])) unset($detail_fields['tr_duedate']);
 
 		foreach($detail_fields as $name => $value)
 		{
@@ -497,20 +497,20 @@ class tracker_tracking extends Api\Storage\Tracking
 		// add custom fields for given type
 		$details += $this->get_customfields($data, $data['tr_tracker'], $receiver);
 
-		if ($data['replies']) //$data['reply_message'] && !$data['reply_visible'])
+		if (!empty($data['replies'])) //$data['reply_message'] && !$data['reply_visible'])
 		{
 			// At least one comment was made
-			$reply = $data['replies'][0];
+			$reply = $data['replies'][0] ?? [];
 			$details[] = array(
 				'type' => 'message',
-				'label' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),$this->datetime($reply['reply_servertime'])),
+				'label' => lang('Comment by %1 at %2:', !empty($reply['reply_creator']) ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'), $this->datetime($reply['reply_servertime'])),
 				'value' => ' '
 			);
 			$details[] = array(
 				'type' => 'reply',
 				'value' => $data['tr_edit_mode'] == 'ascii' ?
-						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
-						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message'])
+						preg_replace("@\n\n+@", "\n", $reply['reply_message'] ?? '') :
+						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message'] ?? '')
 			);
 			$n = 2;
 		}
@@ -522,11 +522,11 @@ class tracker_tracking extends Api\Storage\Tracking
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
 		);
-		if ($data['replies'])
+		if (!empty($data['replies']))
 		{
 			foreach($data['replies'] as $reply_index => $reply)
 			{
-				if(!$reply['reply_message']) continue;
+				if (empty($reply['reply_message'])) continue;
 				$reply['reply_message'] = $data['tr_edit_mode'] == 'ascii' ?
 						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
 						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message']);
