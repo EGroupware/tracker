@@ -211,7 +211,7 @@ class tracker_merge extends Api\Storage\Merge
 
 		$comments = $this->get_comments($id);
 
-		return $comments[$n];
+		return $comments[$n] ?? null;
 	}
 
 	/**
@@ -239,23 +239,23 @@ class tracker_merge extends Api\Storage\Merge
 			$replies = $tracker['replies'];
 		}
 		foreach($replies as $reply) {
-			if($reply['reply_visible'] > 0) {
+			if (!empty($reply['reply_visible'])) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
 			$this->comment_cache[$tr_id][] = array(
 				'$$comment/date$$' => Api\DateTime::to($reply['reply_created']),
-				'$$comment/message$$' => $reply['reply_message'],
-				'$$comment/restricted$$' => $reply['reply_visible'] ? ('[' .lang('restricted comment').']') : '',
+				'$$comment/message$$' => $reply['reply_message'] ?? '',
+				'$$comment/restricted$$' => !empty($reply['reply_visible']) ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => isset($reply['reply_creator']) ? Api\Accounts::username($reply['reply_creator']) : '',
 			);
-			if($reply['reply_creator'] == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
-			if(is_array($tracker['tr_assigned']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
-			if(!$reply['reply_visible'] && !$last_non_restricted) $last_non_restricted = $reply;
+			if (($reply['reply_creator']??null) == $tracker['tr_creator'] && !$last_creator_comment) $last_creator_comment = $reply;
+			if (is_array($tracker['tr_assigned']) && isset($reply['reply_creator']) && in_array($reply['reply_creator'], $tracker['tr_assigned']) && !$last_assigned_comment) $last_assigned_comment = $reply;
+			if (empty($reply['reply_visible']) && !$last_non_restricted) $last_non_restricted = $reply;
 		}
 
 		// Special comments
 		$special = array(
-			'' => $replies[0],
+			'' => $replies[0] ?? '',
 			'/creator' => $last_creator_comment,
 			'/assigned_to' => $last_assigned_comment,
 			'/non_restricted' => $last_non_restricted
@@ -265,7 +265,7 @@ class tracker_merge extends Api\Storage\Merge
 				'$$comment/-1'.$key.'/date$$' => $comment ? Api\DateTime::to($comment['reply_created']) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'] ?? null,
 				'$$comment/-1'.$key.'/restricted$$' => !empty($comment['reply_visible']) ? ('[' .lang('restricted comment').']') : '',
-				'$$comment/-1'.$key.'/user$$' => $comment ? Api\Accounts::username($comment['reply_creator']) : ''
+				'$$comment/-1'.$key.'/user$$' => $comment && !empty($comment['reply_creator']) ? Api\Accounts::username($comment['reply_creator']) : ''
 			);
 		}
 
