@@ -2316,10 +2316,11 @@ width:100%;
 		$is_admin = $this->is_admin($this->data['tr_tracker'], $user);
 		$is_technician = $this->is_technician($this->data['tr_tracker'], $user);
 
-		$read_restricted = $is_admin || $is_technician || in_array($user, $this->data['tr_assigned']) ||
+		$read_restricted = $is_admin || $is_technician || !empty($this->data['tr_assigned']) &&
+			(in_array($user, $this->data['tr_assigned']) ||
 				// if assigned to a group, we need to check memberships of $user
-				$GLOBALS['egw']->accounts->get_type($this->data['tr_assigned']) == 'g' &&
-					in_array($this->data['tr_assigned'], $GLOBALS['egw']->accounts->memberships($user, true));
+				$GLOBALS['egw']->accounts->get_type($this->data['tr_assigned']) === 'g' &&
+					in_array($this->data['tr_assigned'], $GLOBALS['egw']->accounts->memberships($user, true)));
 
 		// Can read the hidden comments, no changes needed
 		if($read_restricted)
