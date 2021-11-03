@@ -296,7 +296,7 @@ class tracker_ui extends tracker_bo
 		else	// submitted form
 		{
 			//_debug_array($content);
-			$button = @key((array)$content['button']); unset($content['button']);
+			$button = key($content['button'] ?? []); unset($content['button']);
 			if ($content['bounties']['bounty']) $button = 'bounty'; unset($content['bounties']['bounty']);
 			$popup = $content['popup']; unset($content['popup']);
 			$own_referer = $content['own_referer']; unset($content['own_referer']);
@@ -485,7 +485,7 @@ class tracker_ui extends tracker_bo
 				default:
 					if (!$this->allow_bounties) break;
 					// check delete bounty
-					$id = @key($this->data['bounties']['delete']);
+					$id = key($this->data['bounties']['delete'] ?? []);
 					if ($id)
 					{
 						unset($this->data['bounties']['delete']);
@@ -509,7 +509,7 @@ class tracker_ui extends tracker_bo
 					else
 					{
 						// check confirm bounty
-						$id = @key($this->data['bounties']['confirm']);
+						$id = key($this->data['bounties']['confirm'] ?? []);
 						if ($id)
 						{
 							unset($this->data['bounties']['confirm']);
@@ -1375,7 +1375,7 @@ class tracker_ui extends tracker_bo
 
 			if (is_array($content) && isset($content['nm']['rows']['document']))  // handle insert in default document button like an action
 			{
-				$id = @key($content['nm']['rows']['document']);
+				$id = key($content['nm']['rows']['document'] ?? []);
 				$content['nm']['action'] = 'document';
 				$content['nm']['selected'] = array($id);
 			}

@@ -768,7 +768,7 @@ class tracker_admin extends tracker_bo
 		}
 		else
 		{
-			$button = @key($_content['escalation']['button']);
+			$button = key($_content['escalation']['button'] ?? []);
 			unset($_content['escalation']['button']);
 			$escalations->init($_content);
 
@@ -804,7 +804,7 @@ class tracker_admin extends tracker_bo
 			}
 			if (!empty($_content['nm']['rows']['edit']) || !empty($_content['nm']['rows']['delete']))
 			{
-				$_content['nm']['action'] = key($_content['nm']['rows']);
+				$_content['nm']['action'] = key($_content['nm']['rows'] ?? []);
 				$_content['nm']['selected'] = array(key($_content['nm']['rows'][$_content['nm']['action']]));
 			}
 			if (!empty($_content['nm']['action']))
