@@ -396,13 +396,13 @@ class tracker_escalations extends Api\Storage\Base2
 			),__LINE__,__FILE__,'tracker'
 		)->fetchColumn(0);
 
-
-		$this->db->insert(tracker_so::ESCALATED_TABLE,array('match_count' => min($count + 1,255)),
-		array(
-			'tr_id' =>  $ticket['tr_id'],
-			'esc_id' => $this->id
-		),__LINE__,__FILE__,'tracker');
-
+		if ($count < 127)
+		{
+			$this->db->insert(tracker_so::ESCALATED_TABLE, ['match_count' => $count + 1], [
+				'tr_id' => $ticket['tr_id'],
+				'esc_id' => $this->id
+			], __LINE__, __FILE__, 'tracker');
+		}
 		return true;
 	}
 
