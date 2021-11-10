@@ -1593,7 +1593,7 @@ class tracker_ui extends tracker_bo
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
 
 		// Disable actions if there are none
-		if(count($sel_options['action']) == 0)
+		if (empty($sel_options['action']))
 		{
 			$tpl->disable_cells('action', true);
 			$tpl->disable_cells('use_all', true);
