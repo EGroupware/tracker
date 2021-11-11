@@ -1199,11 +1199,11 @@ class tracker_bo extends tracker_so
 	 * Check if users is allowed to vote - has not already voted
 	 *
 	 * @param int $tr_id tracker-id
-	 * @param int $user account_id
+	 * @param ?int $user account_id
 	 * @param string $ip =null IP, if it should be checked too
 	 * @return int|boolean true for no rights, timestamp voted or null
 	 */
-	function check_vote($tr_id, $user, $ip=null)
+	function check_vote($tr_id, $user=null, $ip=null)
 	{
 		if (is_null($tr_id)) $tr_id = $this->data['tr_id'];
 
@@ -1232,7 +1232,7 @@ class tracker_bo extends tracker_so
 	{
 		if (is_null($tr_id)) $tr_id = $this->data['tr_id'];
 
-		if ($this->check_vote($tr_id)) return false;
+		if ($this->check_vote($tr_id, $user ?? $this->user)) return false;
 
 		return parent::cast_vote($tr_id, $user ?? $this->user,
 			$ip ?? $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? ':'.$_SERVER['HTTP_X_FORWARDED_FOR'] : ''));
