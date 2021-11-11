@@ -678,7 +678,7 @@ class tracker_ui extends tracker_bo
 							break;
 
 						default:
-							$content = array_merge($content, Api\Hooks::single(['location' => 'tracker_set', 'id' => $link_id], $link_app));
+							$content = array_merge($content, Api\Hooks::single(['location' => 'tracker_set', 'id' => $link_id], $link_app) ?: []);
 							foreach((array)$content['link_app'] as $key => $app)
 							{
 								Link::link('tracker', $content['link_to']['to_id'], $app, $content['link_id'][$key]);
