@@ -195,6 +195,10 @@ class tracker_admin extends tracker_bo
 							  'default_group') as $name)
 				{
 					$staff =& $this->$name;
+					if(!is_array($staff))
+					{
+						$staff = array();
+					}
 					if(!isset($staff[$tracker]) || !is_array($staff[$tracker]))
 					{
 						$staff[$tracker] = array();
