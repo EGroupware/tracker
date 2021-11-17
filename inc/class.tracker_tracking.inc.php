@@ -259,7 +259,7 @@ class tracker_tracking extends Api\Storage\Tracking
 
 		$tracker = $data['tr_tracker'];
 
-		$config = $this->tracker->notification[$tracker][$name] ?? $this->tracker->notification[0][$name] ?? null;
+		$config = $this->tracker->notification[$tracker][$name] ?: $this->tracker->notification[0][$name] ?: null;
 
 		switch($name)
 		{
