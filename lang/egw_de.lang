@@ -6,7 +6,7 @@
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-(beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen, prüfen Sie die Hilfe!)
+(beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
 --> enter new name	tracker	de	-> Neuer Name für eine Queue
@@ -123,6 +123,7 @@ data exchange settings	tracker	de	Einstellungen für den Datenaustausch
 date filter	tracker	de	Filter nach Datum
 date opened	tracker	de	Datum angelegt
 default document to insert entries	tracker	de	Standarddokument zum Einfügen von Daten
+default group	tracker	de	Standard Gruppe
 default version for new tracker entries	tracker	de	Vorgabe für die Version neuer Tickets
 define escalations	common	de	Eskalation definieren
 delete mails from server	tracker	de	E-Mails auf dem Server löschen

@@ -6,7 +6,7 @@
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
-(beware of mailloops, check the help!)	tracker	en	(Beware of mailloops, check the help!)
+(beware of mailloops, check the help!)	tracker	en	(Beware of mailloops!)
 (new tickets as	tracker	en	New tickets as
 --> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list
 --> enter new name	tracker	en	--> enter new name
@@ -123,6 +123,7 @@ data exchange settings	tracker	en	Data exchange settings
 date filter	tracker	en	Date filter
 date opened	tracker	en	Date opened
 default document to insert entries	tracker	en	Default document to insert entries
+default group	tracker	en	Default group
 default version for new tracker entries	tracker	en	Default version for new tracker entries
 define escalations	common	en	Define escalations
 delete mails from server	tracker	en	Delete mails from server
@@ -157,9 +158,9 @@ e-mail notifications	tracker	en	Email notifications
 each value is a line like <id>[=<label>]	tracker	en	each value is a line like <id>[=<label>]
 each value is a line like id[=label]	tracker	en	each value is a line like id[=label]
 edit %1	tracker	en	Edit %1
+edit entry	tracker	en	Edit entry
 edit others' comments	tracker	en	Edit others' comments
 edit own comments	tracker	en	Edit own comments
-edit entry	tracker	en	Edit entry
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
