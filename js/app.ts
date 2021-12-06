@@ -336,8 +336,7 @@ import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount
 	 */
 	getWindowTitle()
 	{
-		let widget = this.et2.getWidgetById('tr_summary');
-		if(widget) return widget.options.value;
+		return this.et2.getValueById('tr_summary');
 	}
 
 	/**
