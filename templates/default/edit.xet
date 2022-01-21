@@ -193,10 +193,9 @@
 					</menulist>
 					<description/>
 					<description for="cat_id" value="Category"/>
-					<menulist span="3">
+					<menulist span="4">
 						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"  class="et2_fullWidth"/>
 					</menulist>
-					<description/>
 				</row>
 				<row class="dialogHeader3">
 					<description for="tr_version" value="Version"/>
