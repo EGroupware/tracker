@@ -416,7 +416,7 @@ class tracker_mailhandler extends tracker_bo
 		$noReplyMatch = true;
 		foreach (array_keys($mailCntArray) as $key)
 		{
-			if (preg_match("/-----.*".lang("original message")."---.*/i", $mailCntArray[$key]) && $oMInx === 0)
+			if (preg_match("/-----.*(".lang("original message")."|"."original message".")---.*/i", $mailCntArray[$key]) && $oMInx === 0)
 			{
 				$oMInx = $key;
 			}
