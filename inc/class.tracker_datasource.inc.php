@@ -64,14 +64,16 @@ class tracker_datasource extends datasource
 		}
 
 		return array(
-			'pe_title'        => self::$botracker->link_title($data),
-			'pe_completion'   => $data['tr_completion'],
-			'pe_real_start'   => $data['tr_created'],
-			'pe_real_end'     => $data['tr_closed'],
-			'pe_resources'    => $data['tr_assigned'] ? (array)$data['tr_assigned'] : null,
-			'pe_details'      => $data['tr_description'] ? nl2br($data['tr_description']) : '',
-			'pe_planned_budget'   => $data['tr_budget'],
-			'cat_id'          => $data['cat_id'],
+			'pe_title'          => self::$botracker->link_title($data),
+			'pe_completion'     => $data['tr_completion'],
+			'pe_real_start'     => $data['tr_startdate'] ?: $data['tr_created'],
+			'pe_real_end'       => $data['tr_duedate'] ?: $data['tr_closed'],
+			'pe_planned_start'  => $data['tr_startdate'],
+			'pe_planned_end'    => $data['tr_duedate'],
+			'pe_resources'      => $data['tr_assigned'] ? (array)$data['tr_assigned'] : null,
+			'pe_details'        => $data['tr_description'] ? nl2br($data['tr_description']) : '',
+			'pe_planned_budget' => $data['tr_budget'],
+			'cat_id'            => $data['cat_id'],
 		);
 	}
 
