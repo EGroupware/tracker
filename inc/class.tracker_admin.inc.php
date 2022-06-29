@@ -920,14 +920,16 @@ class tracker_admin extends tracker_bo
 		}
 		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
 		{
-			if (!empty($content['escalation'][$array]) && count($content['escalation'][$array]) > 1)
+			if(!empty($content['escalation'][$array]) && is_array($content['escalation'][$array]) && count($content['escalation'][$array]) > 1)
 			{
 				// Old etemplate support
 				if(method_exists($tpl, 'get_widget_by_name'))
 				{
 					$widget =& $tpl->get_widget_by_name($array);
 					$widget['size'] = '3+';
-				} else {
+				}
+				else
+				{
 					$tpl->setElementAttribute($array, 'empty_label', 'all');
 					$tpl->setElementAttribute($array, 'rows', '3');
 					$tpl->setElementAttribute($array, 'tags', true);
