@@ -68,7 +68,7 @@ label.tracker_trIdEdit:before {
 }
 .normal,
 .normal_done {
-  color: #000000;
+  color: black;
 }
 .high {
   color: #cc0000;
@@ -180,9 +180,12 @@ label.tracker_trIdEdit:before {
 }
 #tracker-index_tracker-index-queue {
   position: relative;
+  flex: 2 1 auto;
   width: 400px;
-  height: 24px;
-  margin-right: 4px;
+}
+#tracker-index_tracker-index-queue > * {
+  flex: 1 1 auto;
+  max-width: initial;
 }
 #tracker-admin .jPicker {
   vertical-align: middle;
