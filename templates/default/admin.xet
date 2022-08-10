@@ -213,7 +213,7 @@
 			<columns>
 				<column width="100"/>
 				<column/>
-				<column/>
+				<column width="30%"/>
 				<column width="30%"/>
 			</columns>
 			<rows>
@@ -658,7 +658,7 @@
 						<menupopup class="bold" label="Tracker Queue" id="tracker" no_lang="1" onchange="1" options="All"/>
 					</menulist>
 					<hbox align="right" span="all">
-						<textbox blur="--&gt; enter new name" id="add_name" size="32" maxlength="150"/>
+						<textbox blur="--&gt; enter new name" id="add_name" maxlength="150"/>
 						<button label="Rename" id="button[rename]"/>
 						<button label="Add" id="button[add]"/>
 					</hbox>
