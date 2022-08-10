@@ -1426,6 +1426,10 @@ class tracker_bo extends tracker_so
 		foreach($this->all_cats as $cat)
 		{
 			$cat_data =& $cat['data'];
+			if (isset($cat_data) && !is_array($cat_data))
+			{
+				$cat_data = $cat_data ? json_php_unserialize($cat_data) : [];
+			}
 			$cat_type = isset($cat_data['type']) ? $cat_data['type'] : 'cat';
 			if ($cat_type == $type &&	// cats need to be tracker specific
 				($cat['main'] == $tracker && $cat['id'] != $tracker ||
