@@ -848,7 +848,7 @@ class tracker_admin extends tracker_bo
 
 		// Handle before time
 		$content['escalation']['esc_before_after'] = ($content['escalation']['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
-		$content['escalation']['esc_time'] = abs($content['escalation']['esc_time']);
+		$content['escalation']['esc_time'] = abs($content['escalation']['esc_time'] ?: 0);
 
 		$readonlys = $preserv = array();
 		$preserv['escalation']['esc_id'] = $content['escalation']['esc_id'];
