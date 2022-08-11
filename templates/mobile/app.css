@@ -10,19 +10,6 @@
  * @package tracker
  * @version $Id: app.less 55033 2016-02-16 18:49:17Z hnategh $
  */
-/**
- * EGroupware: CSS with less preprocessor
- *
- * TRACKER
- *
- * Please do NOT change app.css directly, instead change app.less and compile it!
- *
- * @link http://www.egroupware.org
- * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @author Stefan Reinhardt <stefan.reinhardt@pixelegg.de>
- * @package tracker
- * @version $Id$
- */
 /* $Id$ */
 /* Header classes*/
 #tracker-index_tracker-index-left_multiqueue {
@@ -130,12 +117,13 @@ label.tracker_trIdEdit:before {
   width: 50%;
   overflow: hidden;
 }
-.trackerDes {
-  white-space: pre-wrap;
-}
 /* Add border to ACL's table for more reading convenient*/
 #tracker-admin_tracker-admin-acl tr.row {
   border-bottom: 1px solid silver;
+}
+/* Nicer sizine for escalation selectboxes */
+.tracker_escalation_action select {
+  width: 150px;
 }
 #tracker-edit_tr_assigned + .chzn-container .chzn-results {
   max-height: 215px;
@@ -183,11 +171,20 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
   display: none;
 }
+#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons .et2_button {
+  display: none !important;
+}
+#tracker-edit_tracker-edit-comments .et2_button .et2_vfs_btn {
+  float: left;
+}
 #tracker-index_tracker-index-queue {
   position: relative;
+  flex: 2 1 auto;
   width: 400px;
-  height: 24px;
-  margin-right: 4px;
+}
+#tracker-index_tracker-index-queue > * {
+  flex: 1 1 auto;
+  max-width: initial;
 }
 #tracker-admin .jPicker {
   vertical-align: middle;
@@ -195,15 +192,6 @@ label.tracker_trIdEdit:before {
 .et2_editable,
 .et2_editable_readonly {
   width: 100%;
-}
-#egw_fw_sidebar #egw_fw_sidemenu .egw_fw_ui_scrollarea_outerdiv .egw_fw_ui_sidemenu_entry_header_active h1 {
-  font-size: 1.15em !important;
-}
-label.tracker_trIdEdit:before {
-  content: "#";
-}
-.tracker_assign {
-  width: 100% !important;
 }
 /* tablets and smartphones  */
 @media all {
@@ -263,3 +251,4 @@ label.tracker_trIdEdit:before {
     height: 200px !important;
   }
 }
+/*# sourceMappingURL=app.css.map */
