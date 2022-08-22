@@ -5,9 +5,6 @@
 	<template id="tracker.index.queue" template="" lang="" group="0" version="1.9.001">
 		<listbox id="col_filter[tr_tracker]" no_lang="1" multiple="true" tags="true" height="32px" width="200px" class="tracker_queue" empty_label="Select tracker queues"/>
 	</template>
-	<template id="tracker.index.add" template="" lang="" group="0" version="1.7.001">
-		<buttononly class="plus_button" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" parent_node="tracker-index_plus_button_container"/>
-	</template>
 	<template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
 		<hbox>
 			<description value="Start"/>
@@ -67,5 +64,6 @@
 				</row>
 			</rows>
 		</grid>
+		<buttononly class="plus_button" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" />
 	</template>
 </overlay>
