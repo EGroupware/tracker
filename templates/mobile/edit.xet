@@ -144,14 +144,14 @@
 			<rows>
 				<row disabled="@hidebuttons" class="dialogHeadbar" >
 					<hbox  span="all" width="100%">
-						<button statustext="Apply the changes" id="button[apply]" image="apply" background_image="1"/>
+						<button statustext="Apply the changes" id="button[apply]" image="apply"/>
 						<checkbox id="no_notifications" toggle_on=" " toggle_off=" " class="notification_check"/>
 					</hbox>
 				</row>
 				<row disabled="!@showsearchbuttons" class="dialogHeadbar">
 					<hbox span="all" width="100%">
-						<button label="Search" id="button[search]" image="search" background_image="1"/>
-						<button label="Cancel" id="button[cancelsearch]" image="cancel" background_image="1"/>
+						<button label="Search" id="button[search]" image="search"/>
+						<button label="Cancel" id="button[cancelsearch]" image="cancel"/>
 					</hbox>
 				</row>
 				<row>
