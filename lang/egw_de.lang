@@ -140,7 +140,7 @@ delete this version	tracker	de	Diese Version löschen
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	de	Löscht nicht zuordenbare E-Mails vom Server, selbst wenn oben 'E-Mails löschen' nicht ausgewählt wurde.
 deleted	tracker	de	Gelöscht
 deletes this field	tracker	de	Löscht dieses Feld
-deny global	tracker	de	Globale verbieten
+deny global	tracker	de	Global verbieten
 determines the order the fields are displayed	tracker	de	Bestimmt die Reihenfolge der angezeigten Felder
 directory with documents to insert entries	tracker	de	Ordner mit Dokumenten zum Einfügen.
 do not send notifications to external email (cc field)	tracker	de	Keine Benachrichtigungen an externe E-Mail senden (Kopie-Feld)
