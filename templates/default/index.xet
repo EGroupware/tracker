@@ -146,7 +146,7 @@
 				<column/>
 			</columns>
 			<rows>
-				<row disabled="!@css">
+				<row disabled="!@css" class="hideme">
 					<html id="css" span="all"/>
 				</row>
 				<row>
