@@ -60,7 +60,7 @@
 					<description id="plus_button_container"/>
 				</row>
 				<row>
-					<nextmatch id="nm" template="tracker.index.rows" header_left="tracker.index.add" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
+					<nextmatch id="nm" template="tracker.index.rows" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
 				</row>
 			</rows>
 		</grid>
