@@ -1820,6 +1820,20 @@ width:100%;
 				'allowOnMultiple' => false,
 				'popup' => Link::get_registry('timesheet', 'add_popup'),
 			);
+			// if specific timer is NOT disabled, allow to book further time on existing sheets
+			$config = Api\Config::read('timesheet');
+			if (!in_array('specific', $config['disable_timer'] ?? []))
+			{
+				$actions['timesheet']['children'] = [
+					'timesheet_add' => ['caption' => 'Add']+$actions['timesheet'],
+					'timer' => [
+						'icon' => 'timesheet/navbar',
+						'caption' => 'Start timer',
+						'onExecute' => 'javaScript:app.timesheet.egw.start_timer',
+						'allowOnMultiple' => false,
+				]];
+				unset($actions['timesheet']['url'], $actions['timesheet']['popup'], $actions['timesheet']['timesheet_add']['group']);
+			}
 		}
 		if ($GLOBALS['egw_info']['user']['apps']['infolog'] && $this->allow_infolog)
 		{
