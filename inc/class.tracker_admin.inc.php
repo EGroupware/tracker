@@ -629,16 +629,16 @@ class tracker_admin extends tracker_bo
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		if(!property_exists($this, 'comment_reopens')) $content['comment_reopens'] = true;
 		$sel_options = array(
-			'tracker' => &$this->trackers,
+			'tracker'             => array_merge(['0' => lang('All')], $this->trackers),
 			'allow_assign_groups' => array(
 				0 => lang('No'),
 				1 => lang('Yes, display groups first'),
 				2 => lang('Yes, display users first'),
 			),
-			'allow_voting' => array('No','Yes'),
-			'allow_bounties' => array('No','Yes'),
-			'autoassign' => $this->get_staff($tracker),
-			'lang' => ($tracker ? array('' => lang('default')) : array() )+
+			'allow_voting'        => array('No', 'Yes'),
+			'allow_bounties'      => array('No', 'Yes'),
+			'autoassign'          => $this->get_staff($tracker),
+			'lang'                => ($tracker ? array('' => lang('default')) : array()) +
 				Api\Translation::get_installed_langs(),
 			'cat_id' => $this->get_tracker_labels('cat',$tracker, $default_category),
 			// Mail handling
