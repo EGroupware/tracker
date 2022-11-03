@@ -11,11 +11,11 @@
             <rows>
                 <row class="row" valign="top">
                     <description value="Categories"/>
-                    <grid width="100%" height="140" overflow="auto" id="cats">
+                    <grid width="100%" id="cats">
                         <columns>
                             <column/>
                             <column/>
-                            <column width="100"/>
+                            <column width="45"/>
                             <column width="100"/>
                             <column width="110" disabled="!@@tracker"/>
                             <column width="100"/>
@@ -51,10 +51,10 @@
                 </row>
                 <row class="row" valign="top">
                     <description value="Versions"/>
-                    <grid width="100%" height="100" overflow="auto" id="versions">
+                    <grid width="100%" id="versions">
                         <columns>
                             <column/>
-                            <column width="200"/>
+                            <column width="150"/>
                             <column width="110" disabled="!@@tracker"/>
                             <column width="100"/>
                         </columns>
@@ -79,7 +79,7 @@
                 </row>
                 <row class="row" valign="top">
                     <description value="Status"/>
-                    <grid width="100%" height="100" overflow="auto" id="statis">
+                    <grid width="100%" id="statis">
                         <columns>
                             <column/>
                             <column/>
@@ -107,10 +107,10 @@
                 </row>
                 <row valign="top">
                     <description value="Resolution"/>
-                    <grid width="100%" height="100" overflow="auto" id="resolutions">
+                    <grid width="100%" id="resolutions">
                         <columns>
                             <column/>
-                            <column/>
+                            <column width="100"/>
                             <column width="110" disabled="!@@tracker"/>
                             <column width="100"/>
                         </columns>
@@ -167,7 +167,7 @@
                 </row>
                 <row class="row" valign="top" disabled="!@allow_defaultproject">
                     <description value="Assign to project"/>
-                    <grid width="100%" height="90" overflow="auto" id="projects">
+                    <grid width="100%" id="projects">
                         <columns>
                             <column/>
                             <column/>
@@ -410,7 +410,7 @@
         </grid>
     </template>
     <template id="tracker.admin.acl" template="" lang="" group="0" version="1.9.002">
-        <grid width="100%" height="450" overflow="auto">
+        <grid width="100%">
             <columns>
                 <column width="100"/>
                 <column/>
@@ -423,18 +423,18 @@
                 </row>
                 <row class="row" valign="top" disabled="@tracker">
                     <description value="Allow editing by"/>
-                    <grid width="100%" height="425" overflow="auto" id="field_acl">
+                    <grid width="100%" id="field_acl">
                         <columns>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-							<column/>
-						</columns>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                            <column/>
+                        </columns>
 						<rows>
 							<row class="th">
 								<description value="Field"/>
@@ -566,11 +566,9 @@
                     <hbox>
                         <radio statustext="Use a default user for mails that where not recognized" label="Store as"
                                id="mailhandling[unrecognized_mails]" options="default"/>
-                        <menulist>
-                            <menupopup
-                                    statustext="Select which username should be used when unrecognized replies are handled"
-                                    id="mailhandling[unrec_reply]"/>
-                        </menulist>
+                        <select statustext="Select which username should be used when unrecognized replies are handled"
+                                id="mailhandling[unrec_reply]">
+                        </select>
                     </hbox>
                     <hbox span="all">
                         <description value="(New tickets as"/>
@@ -719,7 +717,7 @@
                     <button align="right" label="Change color" id="button[change_color]"/>
                 </hbox>
             </hbox>
-            <tabbox id="tabs" style="min-height:450px">
+            <tabbox id="tabs">
                 <tabs>
                     <tab id="tracker.admin.cats" label="Categories"
                          statustext="Categories, versions, canned responses"/>
@@ -749,7 +747,18 @@
                         span="all"/>
 
             </hbox>
-
         </vbox>
+        <styles>
+            #tracker-admin > div > et2-vbox {
+            height: 100%;
+            }
+            et2-tabbox {
+            flex-grow: 1;
+            min-height:450px;
+            }
+            et2-tab-panel > div {
+            height: 100%;
+            }
+        </styles>
     </template>
 </overlay>
