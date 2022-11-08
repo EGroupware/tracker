@@ -437,14 +437,7 @@ class tracker_admin extends tracker_bo
 					// Reload tracker app
 					if(Api\Json\Response::isJSONResponse())
 					{
-						// Framework::redirect_link() will exit, we need to keep going
-						Api\Json\Response::get()->redirect(Framework::link('/index.php', array(
-							'menuaction' => 'tracker.tracker_ui.index',
-							// reload is not a special flag, it just makes a different
-							// url to avoid smart refresh of just nextmatch
-							'reload',
-							'ajax' => 'true'
-						)), false, 'tracker');
+						Api\Json\Response::get()->apply('app.admin.load');
 					}
 					Egw::redirect_link('/index.php', array(
 						'menuaction' => 'admin.admin_ui.index',
