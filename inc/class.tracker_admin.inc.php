@@ -229,22 +229,28 @@ class tracker_admin extends tracker_bo
 						$value = (int) $data['value'];
 						$prios[(int)$value] = (string)$data['label'];
 					}
-					$prios['default'] = $default_priority;
-					if(!array_diff($prios,array('')))	// user deleted all label --> use the one from the next level above
+					if(!array_diff($prios, array('')))    // user deleted all label --> use the one from the next level above
 					{
 						$prios = null;
 					}
 					// priorities are only stored if they differ from the stock-priorities or the default chain of get_tracker_priorities()
-					if ($prios !== $this->get_tracker_priorities($tracker,$cat_id,false))
+					$current_default_priority = null;
+					if($prios !== $this->get_tracker_priorities($tracker, $cat_id, false, $current_default_priority) ||
+						(int)$current_default_priority != (int)$default_priority
+					)
 					{
 						$key = (int)$tracker;
-						if ($cat_id) $key .= '-'.$cat_id;
-						if (is_null($prios))
+						if($cat_id)
+						{
+							$key .= '-' . $cat_id;
+						}
+						if(is_null($prios))
 						{
 							unset($this->priorities[$key]);
 						}
 						else
 						{
+							$prios['default'] = $default_priority;
 							$this->priorities[$key] = $prios;
 						}
 						$need_update = true;
@@ -622,8 +628,8 @@ class tracker_admin extends tracker_bo
 		if ($allow_defaultproject)	$content['allow_defaultproject'] = $this->prefs['allow_defaultproject'];
 		if(!property_exists($this, 'comment_reopens')) $content['comment_reopens'] = true;
 		$sel_options = array(
-			'tracker'             => array_merge(['0' => lang('All')], $this->trackers),
-			'allow_assign_groups' => array(
+			'tracker'                          => $this->trackers,
+			'allow_assign_groups'              => array(
 				0 => lang('No'),
 				1 => lang('Yes, display groups first'),
 				2 => lang('Yes, display users first'),
@@ -664,6 +670,15 @@ class tracker_admin extends tracker_bo
 				1 => 'Nobody',
 			),
 			'exclude_app_on_timesheetcreation' => Link::app_list('add'),
+		);
+		// Get tracker options in proper format before adding 'all', or else we lose IDs with array_merge
+		array_walk($sel_options['tracker'], function (&$value, $key)
+		{
+			$value = ['value' => '' . $key, 'label' => $value];
+		});
+		$sel_options['tracker'] = array_merge(
+			[['label' => lang('all'), 'value' => '0']],
+			$sel_options['tracker']
 		);
 		foreach($this->mailservertypes as $ind => $typ)
 		{
