@@ -575,6 +575,10 @@ class tracker_admin extends tracker_bo
 				{
 					$content[$namespace][$n]['denyglobal'] = $tracker;
 				}
+				else
+				{
+					$content[$namespace][$n]['denyglobal'] = false;
+				}
 			}
 		}
 		$content['cats']['user_category_preference'] = $content['user_category_preference'][$tracker];

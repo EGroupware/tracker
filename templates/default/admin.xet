@@ -68,7 +68,7 @@
                             <row class="row">
                                 <textbox blur="--&gt; enter new name" id="${row}[name]" size="80" maxlength="150"/>
                                 <colorpicker id="${row}[version_color]"/>
-                                <checkbox align="center" id="${row}[denyglobal]" options="@@tracker"/>
+                                <checkbox align="center" id="${row}[denyglobal]" selected_value="@@tracker"/>
                                 <button align="center" statustext="Delete this version" label="Delete"
                                         id="delete[$row_cont[id]]"
                                         onclick="et2_dialog.confirm(widget,'Delete this version','Delete')"
