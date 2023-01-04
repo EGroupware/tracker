@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="tracker.customfields.fields" template="" lang="" group="0" version="1.9.001">
 		<grid>
@@ -17,41 +16,41 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<description value="Queue"/>
-					<description statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" value="Name"/>
-					<description value="Label"/>
-					<description value="Type of field"/>
-					<description value="Private"/>
-					<description statustext="each value is a line like &lt;id&gt;[=&lt;label&gt;]" value="Options"/>
-					<vbox>
-						<description value="Length"/>
-						<description value="Rows"/>
-					</vbox>
-					<description value="Order"/>
-					<description align="center" statustext="deletes this field" value="Action"/>
+					<et2-description  value="Queue"></et2-description>
+					<et2-description  statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" value="Name"></et2-description>
+					<et2-description  value="Label"></et2-description>
+					<et2-description  value="Type of field"></et2-description>
+					<et2-description  value="Private"></et2-description>
+					<et2-description  statustext="each value is a line like &lt;id&gt;[=&lt;label&gt;]" value="Options"></et2-description>
+					<et2-vbox>
+						<et2-description  value="Length"></et2-description>
+						<et2-description  value="Rows"></et2-description>
+					</et2-vbox>
+					<et2-description  value="Order"></et2-description>
+					<et2-description  align="center" statustext="deletes this field" value="Action"></et2-description>
 				</row>
 				<row class="row" valign="top">
-					<listbox id="${row}[type2]" no_lang="1" rows="3"/>
-					<textbox statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" id="${row}[name]" size="20" maxlength="32"/>
-					<vbox>
-						<textbox statustext="the text displayed to the user" id="${row}[label]" maxlength="255"/>
-						<description id="${row}[label]"/>
-					</vbox>
-					<vbox options="0,0">
+					<et2-select  id="${row}[type2]" rows="3" multiple="1" noLang="1"></et2-select>
+					<et2-textbox  statustext="the name used internaly (&lt;= 20 chars), changeing it makes existing data unavailible" id="${row}[name]" maxlength="32"></et2-textbox>
+					<et2-vbox>
+						<et2-textbox  statustext="the text displayed to the user" id="${row}[label]" maxlength="255"></et2-textbox>
+						<et2-description  id="${row}[label]"></et2-description>
+					</et2-vbox>
+					<et2-vbox  cellpadding="0" cellspacing="0" >
 						<customfields-types statustext="Type of customfield" id="{$row}[type]"/>
-						<checkbox label="required" id="${row}[needed]"/>
-					</vbox>
-					<select-account statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" account_type="both"/>
-					<textbox multiline="true" statustext="each value is a line like id[=label]" id="${row}[values]" rows="4" cols="30"/>
-					<vbox>
-						<textbox statustext="max length of the input [, length of the inputfield (optional)]" id="${row}[len]" size="5"/>
-						<textbox type="integer" blur="1" statustext="number of row for a multiline inputfield or line of a multi-select-box" id="${row}[rows]" min="0" max="10" size="2"/>
-					</vbox>
-					<textbox type="integer" statustext="determines the order the fields are displayed" id="${row}[order]" min="1" size="3"/>
-					<hbox>
-						<button statustext="deletes this field" label="Delete" id="delete[$row_cont[name]]"/>
-						<button statustext="creates a new field" label="Create" id="create$row_cont[name]"/>
-					</hbox>
+						<et2-checkbox  label="required" id="${row}[needed]"></et2-checkbox>
+					</et2-vbox>
+					<et2-select-account  statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" multiple="1" accountType="both"></et2-select-account>
+					<et2-textarea  statustext="each value is a line like id[=label]" id="${row}[values]" rows="4" cols="30"></et2-textarea>
+					<et2-vbox>
+						<et2-textbox  statustext="max length of the input [, length of the inputfield (optional)]" id="${row}[len]"></et2-textbox>
+						<et2-number  statustext="number of row for a multiline inputfield or line of a multi-select-box" id="${row}[rows]" min="0" max="10" precision="0" placeholder="1"></et2-number>
+					</et2-vbox>
+					<et2-number  statustext="determines the order the fields are displayed" id="${row}[order]" min="1" precision="0"></et2-number>
+					<et2-hbox>
+						<et2-button  statustext="deletes this field" label="Delete" id="delete[$row_cont[name]]"></et2-button>
+						<et2-button  statustext="creates a new field" label="Create" id="create$row_cont[name]"></et2-button>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>
@@ -69,26 +68,26 @@
 			</columns>
 			<rows>
 				<row>
-					<description align="center" id="error_msg" no_lang="1" span="all" class="message"/>
-					<description/>
-					<description/>
-					<description/>
-					<description/>
-					<description/>
-					<description no_lang="1"/>
+					<et2-description  align="center" id="error_msg" span="all" class="message" noLang="1"></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description  noLang="1"></et2-description>
 				</row>
 				<row>
-					<description span="all"/>
+					<et2-description  span="all"></et2-description>
 				</row>
 				<row>
 					<template id="tracker.customfields.fields" content="fields" span="all"/>
 				</row>
 				<row>
-					<hbox span="all">
-						<button statustext="saves the changes made and leaves" label="Save" id="button[save]"/>
-						<button statustext="applies the changes" label="Apply" id="button[apply]"/>
-						<button statustext="leaves without saveing" label="Cancel" id="button[cancel]"/>
-					</hbox>
+					<et2-hbox  span="all">
+						<et2-button  statustext="saves the changes made and leaves" label="Save" id="button[save]"></et2-button>
+						<et2-button  statustext="applies the changes" label="Apply" id="button[apply]"></et2-button>
+						<et2-button  statustext="leaves without saveing" label="Cancel" id="button[cancel]"></et2-button>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="tracker.escalations.rows" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
@@ -20,7 +19,7 @@
 			<rows>
 				<row class="th">
 					<nextmatch-sortheader label="Title" id="esc_title"/>
-					<nextmatch-filterheader id="tr_tracker" options="Queue"/>
+					<et2-nextmatch-header-filter  id="tr_tracker" emptyLabel="Queue"/>
 					<nextmatch-header label="Resolution" id="tr_resolution"/>
 					<nextmatch-header label="Category" id="cat_id"/>
 					<nextmatch-header label="Version" id="tr_version"/>
@@ -32,35 +31,27 @@
 					<nextmatch-header label="Actions" id="actions"/>
 				</row>
 				<row class="row">
-					<description id="${row}[esc_title]" no_lang="1"/>
-					<select-cat id="${row}[tr_tracker]" readonly="true" options="All"/>
-					<select-cat id="${row}[tr_resolution]" readonly="true" options="All"/>
-					<select-cat id="${row}[cat_id]" readonly="true" options="All"/>
-					<menulist>
-						<menupopup id="${row}[tr_version]" readonly="true" options="All"/>
-					</menulist>
-					<menulist>
-						<menupopup id="${row}[tr_status]" readonly="true" options="All"/>
-					</menulist>
-					<description id="${row}[prio_label]"/>
-					<textbox multiline="true" id="${row}[esc_action_label]" readonly="true"/>
-					<hbox readonly="true">
-						<date-duration id="${row}[esc_time]" readonly="true" options=",dhm,24"/>
-						<menulist>
-							<menupopup id="${row}[esc_before_after]" no_lang="1" readonly="true"/>
-						</menulist>
-						<menulist class="noWrap">
-							<menupopup id="${row}[esc_type]" no_lang="1" readonly="true"/>
-						</menulist>
-					</hbox>
-					<vbox readonly="true">
-						<date-duration id="${row}[esc_match_repeat]" readonly="true" options=",dhm,24" class="noWrap"/>
-						<description id="${row}[esc_limit_label]"/>
-					</vbox>
-					<hbox>
-						<button label="Edit" id="edit[$row_cont[esc_id]]" image="edit"/>
-						<button statustext="Delete this escalation" label="Delete" id="delete[$row_cont[esc_id]]" onclick="et2_dialog.confirm(widget,'Delete this escalation','Delete')" image="delete"/>
-					</hbox>
+					<et2-description  id="${row}[esc_title]" noLang="1"></et2-description>
+					<et2-select-cat  id="${row}[tr_tracker]" readonly="true" emptyLabel="All"></et2-select-cat>
+					<et2-select-cat  id="${row}[tr_resolution]" readonly="true" emptyLabel="All"></et2-select-cat>
+					<et2-select-cat  id="${row}[cat_id]" readonly="true" emptyLabel="All"></et2-select-cat>
+					<et2-select  id="${row}[tr_version]" readonly="true" emptyLabel="All"></et2-select>
+					<et2-select  id="${row}[tr_status]" readonly="true" emptyLabel="All"></et2-select>
+					<et2-description  id="${row}[prio_label]"></et2-description>
+					<et2-textarea  id="${row}[esc_action_label]" readonly="true"></et2-textarea>
+					<et2-hbox  readonly="true">
+						<et2-date-duration  id="${row}[esc_time]" readonly="true" ></et2-date-duration>
+						<et2-select  id="${row}[esc_before_after]" readonly="true" noLang="1"></et2-select>
+						<et2-select  class="noWrap" id="${row}[esc_type]" readonly="true" noLang="1"></et2-select>
+					</et2-hbox>
+					<et2-vbox  readonly="true">
+						<et2-date-duration  id="${row}[esc_match_repeat]" readonly="true" class="noWrap"></et2-date-duration>
+						<et2-description  id="${row}[esc_limit_label]"></et2-description>
+					</et2-vbox>
+					<et2-hbox>
+						<et2-button  label="Edit" id="edit[$row_cont[esc_id]]" image="edit"></et2-button>
+						<et2-button  statustext="Delete this escalation" label="Delete" id="delete[$row_cont[esc_id]]" onclick="et2_dialog.confirm(widget,'Delete this escalation','Delete')" image="delete"></et2-button>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>
@@ -89,36 +80,32 @@
 			</columns>
 			<rows>
 				<row>
-					<description id="msg" span="all" class="message"/>
-					<description/>
-					<description/>
-					<description/>
-					<description/>
+					<et2-description  id="msg" span="all" class="message"></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
+					<et2-description></et2-description>
 				</row>
 				<row>
-					<description value="Title"/>
-					<textbox id="esc_title" size="80" maxlength="128" span="all" />
+					<et2-description  value="Title"></et2-description>
+					<et2-textbox  id="esc_title" maxlength="128" span="all" ></et2-textbox>
 				</row>
 				<row>
-					<description value="Time"/>
-					<hbox>
-						<date-duration id="esc_time" options=",dhm,24"/>
-						<menulist>
-							<menupopup id="esc_before_after"/>
-						</menulist>
-						<menulist>
-							<menupopup class="tracker_leftPad5" id="esc_type"/>
-						</menulist>
-					</hbox>
-					<description/>
+					<et2-description  value="Time"></et2-description>
+					<et2-hbox>
+						<et2-date-duration  id="esc_time" ></et2-date-duration>
+						<et2-select  id="esc_before_after"></et2-select>
+						<et2-select  class="tracker_leftPad5" id="esc_type"></et2-select>
+					</et2-hbox>
+					<et2-description></et2-description>
 				</row>
 				<row>
-					<description value="Match again after"/>
-					<hbox>
-						<date-duration statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat" options=",dhm,24"/>
-						<textbox type="integer" label="maximum %s times" id="esc_limit" min="0" max="255"/>
-					</hbox>
-					<description/>
+					<et2-description  value="Match again after"></et2-description>
+					<et2-hbox>
+						<et2-date-duration  statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat" ></et2-date-duration>
+						<et2-number  label="maximum %s times" id="esc_limit" min="0" max="255" precision="0"></et2-number>
+					</et2-hbox>
+					<et2-description></et2-description>
 				</row>
 				<row>
 					<groupbox span="2">
@@ -133,43 +120,43 @@
 							</columns>
 							<rows>
 								<row valign="top">
-									<description value="Queue"/>
-									<hbox>
-										<select id="tr_tracker" options="All" onchange="1" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
-									<description/>
-									<description value="Category"/>
-									<hbox>
-										<select id="cat_id" options="All" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
+									<et2-description  value="Queue"></et2-description>
+									<et2-hbox>
+										<et2-select  id="tr_tracker" onchange="1" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
+									<et2-description></et2-description>
+									<et2-description  value="Category"></et2-description>
+									<et2-hbox>
+										<et2-select  id="cat_id" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
 								</row>
 								<row valign="top">
-									<description value="Version"/>
-									<hbox>
-										<select id="tr_version" options="All" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
-									<description/>
-									<description value="Priority"/>
-									<hbox>
-										<select id="tr_priority" options="All" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
+									<et2-description  value="Version"></et2-description>
+									<et2-hbox>
+										<et2-select  id="tr_version" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
+									<et2-description></et2-description>
+									<et2-description  value="Priority"></et2-description>
+									<et2-hbox>
+										<et2-select  id="tr_priority" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
 								</row>
 								<row valign="top">
-									<description value="Status"/>
-									<hbox>
-										<select id="tr_status" options="All" width="80%" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
-									<description/>
-									<description value="Resolution"/>
-									<hbox>
-										<select id="tr_resolution" options="All" class="et2_fullWidth"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="navbar" class="mStatus"/>
-									</hbox>
+									<et2-description  value="Status"></et2-description>
+									<et2-hbox>
+										<et2-select  id="tr_status" width="80%" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
+									<et2-description></et2-description>
+									<et2-description  value="Resolution"></et2-description>
+									<et2-hbox>
+										<et2-select  id="tr_resolution" emptyLabel="All"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="navbar" class="mStatus" noSubmit="true"></et2-button>
+									</et2-hbox>
 								</row>
 							</rows>
 						</grid>
@@ -185,70 +172,58 @@
 							</columns>
 							<rows>
 								<row>
-									<description value="Queue"/>
-									<select id="set[tr_tracker]" onchange="1" empty_label="Unchanged" width="150px"/>
-									<description value="Category"/>
-									<menulist>
-										<menupopup id="set[cat_id]" empty_label="Unchanged" width="150"/>
-									</menulist>
+									<et2-description  value="Queue"></et2-description>
+									<et2-select  id="set[tr_tracker]" onchange="1" width="150px" emptyLabel="Unchanged"></et2-select>
+									<et2-description  value="Category"></et2-description>
+									<et2-select  id="set[cat_id]" width="150" emptyLabel="Unchanged"></et2-select>
 								</row>
 								<row>
-									<description value="Version"/>
-									<menulist>
-										<menupopup id="set[tr_version]" empty_label="Unchanged" width="150"/>
-									</menulist>
-									<description value="Priority"/>
-									<menulist>
-										<menupopup id="set[tr_priority]" empty_label="Unchanged" width="150"/>
-									</menulist>
+									<et2-description  value="Version"></et2-description>
+									<et2-select  id="set[tr_version]" width="150" emptyLabel="Unchanged"></et2-select>
+									<et2-description  value="Priority"></et2-description>
+									<et2-select  id="set[tr_priority]" width="150" emptyLabel="Unchanged"></et2-select>
 								</row>
 								<row>
-									<description value="Status"/>
-									<menulist>
-										<menupopup id="set[tr_status]" empty_label="Unchanged" width="150"/>
-									</menulist>
-									<description value="Resolution"/>
-									<menulist>
-										<menupopup id="set[tr_resolution]" empty_label="Unchanged" width="150px"/>
-									</menulist>
+									<et2-description  value="Status"></et2-description>
+									<et2-select  id="set[tr_status]" width="150" emptyLabel="Unchanged"></et2-select>
+									<et2-description  value="Resolution"></et2-description>
+									<et2-select  id="set[tr_resolution]" width="150px" emptyLabel="Unchanged"></et2-select>
 								</row>
 								<row>
-									<description value="Assigned to"/>
-									<hbox span="all">
-										<select id="set[tr_assigned]" empty_label="Unchanged"/>
-										<buttononly label="Select multiple" onclick="app.tracker.multiple_assigned" options="users" class="tracker_leftPad5"/>
-										<checkbox label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"/>
-									</hbox>
+									<et2-description  value="Assigned to"></et2-description>
+									<et2-hbox  span="all">
+										<et2-select  id="set[tr_assigned]" emptyLabel="Unchanged"></et2-select>
+										<et2-button  label="Select multiple" onclick="app.tracker.multiple_assigned" image="users" class="tracker_leftPad5" noSubmit="true"></et2-button>
+										<et2-checkbox  label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"></et2-checkbox>
+									</et2-hbox>
 								</row>
 								<row valign="top">
-									<description value="Comment"/>
-									<textbox multiline="true" id="set[reply_message]" rows="3" span="all" class="reply"/>
-									<description/>
-									<description/>
+									<et2-description  value="Comment"></et2-description>
+									<et2-textarea  id="set[reply_message]" rows="3" span="all" class="reply"></et2-textarea>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
 								</row>
 								<row disabled="@no_comment_visibility">
-									<description/>
-									<checkbox label="Only for admins, technicians or assigned" id="set[reply_visible]" span="all"/>
+									<et2-description></et2-description>
+									<et2-checkbox  label="Only for admins, technicians or assigned" id="set[reply_visible]" span="all"></et2-checkbox>
 								</row>
 								<row>
-									<description value="Notification"/>
-									<menulist>
-										<menupopup id="set[notify]"/>
-									</menulist>
-									<description/>
-									<description/>
+									<et2-description  value="Notification"></et2-description>
+									<et2-select  id="set[notify]"></et2-select>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
 								</row>
 							</rows>
 						</grid>
 					</groupbox>
 				</row>
 				<row class="dialogFooterToolbar">
-					<hbox span="all">
-						<button label="Save" id="button[save]"/>
-						<button label="Apply" id="button[apply]"/>
-						<button label="Cancel" id="button[cancel]"/>
-						<checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"/>
-					</hbox>
+					<et2-hbox  span="all">
+						<et2-button  label="Save" id="button[save]"></et2-button>
+						<et2-button  label="Apply" id="button[apply]"></et2-button>
+						<et2-button  label="Cancel" id="button[cancel]"></et2-button>
+						<et2-checkbox  statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"></et2-checkbox>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>

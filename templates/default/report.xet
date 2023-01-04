@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="tracker.report" template="" lang="" group="0" version="1.9.001">
 		<grid>
@@ -21,14 +20,12 @@
 							</columns>
 							<rows>
 								<row>
-									<menulist>
-										<menupopup id="tracker_reports" options="select one"/>
-									</menulist>
-									<button align="right" label="Delete" id="delete"/>
+									<et2-select  id="tracker_reports" emptyLabel="select one"></et2-select>
+									<et2-button  align="right" label="Delete" id="delete"></et2-button>
 								</row>
 								<row>
-									<textbox blur="Save new report" id="new_report"/>
-									<button align="right" label="Save" id="save"/>
+									<et2-textbox  id="new_report" placeholder="Save new report"></et2-textbox>
+									<et2-button  align="right" label="Save" id="save"></et2-button>
 								</row>
 							</rows>
 						</grid>
@@ -48,79 +45,61 @@
 							</columns>
 							<rows>
 								<row valign="baseline">
-									<description value="Tracker Queue"/>
-									<menulist>
-										<menupopup id="tr_tracker" options="All"/>
-									</menulist>
-									<description value="Category"/>
-									<menulist>
-										<menupopup type="select-cat" id="cat_id" onchange="1" options="All"/>
-									</menulist>
-									<description value="Version"/>
-									<menulist>
-										<menupopup id="tr_version" options="All"/>
-									</menulist>
+									<et2-description  value="Tracker Queue"></et2-description>
+									<et2-select  id="tr_tracker" emptyLabel="All"></et2-select>
+									<et2-description  value="Category"></et2-description>
+									<et2-select-cat  id="cat_id" onchange="1" emptyLabel="All"></et2-select-cat>
+									<et2-description  value="Version"></et2-description>
+									<et2-select  id="tr_version" emptyLabel="All"></et2-select>
 								</row>
 								<row valign="baseline">
-									<description value="Status"/>
-									<menulist>
-										<menupopup id="tr_status" options="All"/>
-									</menulist>
-									<description value="Resolution" for="filter"/>
-									<menulist>
-										<menupopup id="tr_resolution" onchange="1" options="All"/>
-									</menulist>
-									<description value="Customfield"/>
-									<menulist>
-										<menupopup options="Select one"/>
-									</menulist>
+									<et2-description  value="Status"></et2-description>
+									<et2-select  id="tr_status" emptyLabel="All"></et2-select>
+									<et2-description  value="Resolution" for="filter"></et2-description>
+									<et2-select  id="tr_resolution" onchange="1" emptyLabel="All"></et2-select>
+									<et2-description  value="Customfield"></et2-description>
+									<et2-select  emptyLabel="Select one"></et2-select>
 								</row>
 								<row valign="top">
-									<description value="Creator"/>
-									<menulist>
-										<menupopup type="select-account" id="tr_creator" options="All"/>
-									</menulist>
-									<description value="Assigned to"/>
-									<menulist>
-										<menupopup type="select-account" id="tr_assigned" options="All"/>
-									</menulist>
-									<description/>
-									<description/>
+									<et2-description  value="Creator"></et2-description>
+									<et2-select-account  id="tr_creator" emptyLabel="All"></et2-select-account>
+									<et2-description  value="Assigned to"></et2-description>
+									<et2-select-account  id="tr_assigned" emptyLabel="All"></et2-select-account>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
 								</row>
 								<row valign="top">
-									<description value="Reporting Timeframe" span="2"/>
-									<menulist span="2">
-										<menupopup id="tr_timeframe" options="All"/>
-									</menulist>
-									<description/>
-									<description/>
+									<et2-description  value="Reporting Timeframe" span="2"></et2-description>
+									<et2-select  span="2" id="tr_timeframe" emptyLabel="All"></et2-select>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
 								</row>
 								<row>
-									<button label="Update" id="update"/>
-									<description/>
-									<description/>
-									<description/>
-									<description/>
-									<button align="right" label="Export as CSV" id="export"/>
+									<et2-button  label="Update" id="update"></et2-button>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
+									<et2-description></et2-description>
+									<et2-button  align="right" label="Export as CSV" id="export"></et2-button>
 								</row>
 							</rows>
 						</grid>
 					</groupbox>
 				</row>
 				<row valign="bottom" height="30">
-					<description align="center" value="Report as bar chart by the selected criterias" span="all"/>
+					<et2-description  align="center" value="Report as bar chart by the selected criterias" span="all"></et2-description>
 				</row>
 				<row>
 					<html id="map"/>
 				</row>
 				<row>
-					<image src="reportchart" imagemap="reportchart"/>
+					<et2-image  src="reportchart" imagemap="reportchart"></et2-image>
 				</row>
 				<row>
 					<hrule/>
 				</row>
 				<row height="30">
-					<description align="center" value="Report as pie chart for the main criterias"/>
+					<et2-description  align="center" value="Report as pie chart for the main criterias"></et2-description>
 				</row>
 				<row>
 					<grid>
@@ -131,24 +110,24 @@
 						</columns>
 						<rows>
 							<row>
-								<description value="Status"/>
-								<description value="Category"/>
-								<description value="Version"/>
+								<et2-description  value="Status"></et2-description>
+								<et2-description  value="Category"></et2-description>
+								<et2-description  value="Version"></et2-description>
 							</row>
 							<row>
-								<image src="statuschart" imagemap="statuschart"/>
-								<image src="categorychart" imagemap="categorychart"/>
-								<image src="versionchart" imagemap="versionchart"/>
+								<et2-image  src="statuschart" imagemap="statuschart"></et2-image>
+								<et2-image  src="categorychart" imagemap="categorychart"></et2-image>
+								<et2-image  src="versionchart" imagemap="versionchart"></et2-image>
 							</row>
 							<row>
-								<description value="Creator"/>
-								<description value="Assigned to"/>
-								<description value="Customfield"/>
+								<et2-description  value="Creator"></et2-description>
+								<et2-description  value="Assigned to"></et2-description>
+								<et2-description  value="Customfield"></et2-description>
 							</row>
 							<row>
-								<image src="creatorchart" imagemap="creatorchart"/>
-								<image src="assignedchart" imagemap="assignedchart"/>
-								<image src="customchart" imagemap="customchart"/>
+								<et2-image  src="creatorchart" imagemap="creatorchart"></et2-image>
+								<et2-image  src="assignedchart" imagemap="assignedchart"></et2-image>
+								<et2-image  src="customchart" imagemap="customchart"></et2-image>
 							</row>
 						</rows>
 					</grid>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
 		<htmlarea id="tr_description" needed="1" span="all" width="99%" height="274" imageUpload="link_to"/>
@@ -13,24 +12,22 @@
 			</columns>
 			<rows>
 				<row class="th" height="29px">
-					<description value="Comments"/>
-					<textbox type="integer" id="num_replies" readonly="true"/>
+					<et2-description  value="Comments"></et2-description>
+					<et2-number  id="num_replies" readonly="true" precision="0"></et2-number>
 				</row>
 				<row class="row $row_cont[class]" valign="top">
-					<vbox>
-						<date-time id="{$row}[reply_created]" readonly="true"/>
-						<menulist>
-							<menupopup type="select-account" id="{$row}[reply_creator]" readonly="true"/>
-						</menulist>
-					</vbox>
-					<vbox>
+					<et2-vbox>
+						<et2-date-time  id="{$row}[reply_created]" readonly="true"></et2-date-time>
+						<et2-select-account  id="{$row}[reply_creator]" readonly="true"></et2-select-account>
+					</et2-vbox>
+					<et2-vbox>
 						<htmlarea resize_ratio="0" id="{$row}[reply_message]" mode="@@tr_edit_mode" readonly="@@editable_comments" span="all" width="99%"  editable_height="247" class="@@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$row_cont[tr_id],$row_cont[reply_id]" toggle_readonly="false"/>
 
-						<hbox align="left" class="et2_link_to et2_toolbar hide_buttons">
+						<et2-hbox  align="left" class="et2_link_to et2_toolbar hide_buttons">
 							<vfs-select method_id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
 							<vfs-upload id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" label="" path="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" onchange="app.tracker.comment_add_vfs"/>
-						</hbox>
-					</vbox>
+						</et2-hbox>
+					</et2-vbox>
 				</row>
 			</rows>
 		</grid>
@@ -44,17 +41,17 @@
 			</columns>
 			<rows>
 				<row class="th" valign="top">
-					<hbox align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
+					<et2-hbox  align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
 						<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
 						<vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" />
-					</hbox>
-					<hbox disabled="@no_canned">
-						<description value="Canned response" for="canned_response" class="3"/>
-						<select statustext="The canned response will be prefix the text you type." id="canned_response" no_lang="1" onchange="app.tracker.canned_comment_requst" options="Select one" align="right"/>
-					</hbox>
-					<hbox align="right" disabled="@no_comment_visibility">
-						<checkbox label="Only for admins, technicians or assigned" id="reply_visible"/>
-					</hbox>
+					</et2-hbox>
+					<et2-hbox  disabled="@no_canned">
+						<et2-description  value="Canned response" for="canned_response" class="3"></et2-description>
+						<et2-select  statustext="The canned response will be prefix the text you type." id="canned_response" onchange="app.tracker.canned_comment_requst" align="right" noLang="1" emptyLabel="Select one"></et2-select>
+					</et2-hbox>
+					<et2-hbox  align="right" disabled="@no_comment_visibility">
+						<et2-checkbox  label="Only for admins, technicians or assigned" id="reply_visible"></et2-checkbox>
+					</et2-hbox>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<htmlarea id="reply_message" span="all" height="225" width="99%" imageUpload="link_to"/>
@@ -70,13 +67,13 @@
 			</columns>
 			<rows>
 				<row class="row" disabled="@status_only">
-					<link-to id="link_to" span="all"/>
+					<et2-link-to  id="link_to" span="all"></et2-link-to>
 				</row>
 				<row class="th">
-					<description value="Existing links" span="all"/>
+					<et2-description  value="Existing links" span="all"></et2-description>
 				</row>
 				<row class="row_off" valign="top">
-					<link-list id="link_to" span="all"/>
+					<et2-link-list  id="link_to" span="all"></et2-link-list>
 				</row>
 			</rows>
 		</grid>
@@ -99,33 +96,31 @@
 			</columns>
 			<rows>
 				<row disabled="@no_set_bounty">
-					<description value="Set an own bounty (in %s)" id="currency" no_lang="1" span="2"/>
-					<textbox type="float" id="new[bounty_amount]"/>
-					<textbox blur="@user_name" statustext="Donator name to show" id="new[bounty_name]" size="16" maxlength="64"/>
-					<textbox blur="@user_email" statustext="Email address to contact you" id="new[bounty_email]" size="24" maxlength="64"/>
-					<button statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="et2_dialog.confirm(widget,'Confirm that you pay the specified bounty to implement or fix the issue','Confirmation')" span="all"/>
+					<et2-description  value="Set an own bounty (in %s)" id="currency" span="2" noLang="1"></et2-description>
+					<et2-number  id="new[bounty_amount]"></et2-number>
+					<et2-textbox  statustext="Donator name to show" id="new[bounty_name]" maxlength="64" placeholder="@user_name"></et2-textbox>
+					<et2-textbox  statustext="Email address to contact you" id="new[bounty_email]" maxlength="64" placeholder="@user_email"></et2-textbox>
+					<et2-button  statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="et2_dialog.confirm(widget,'Confirm that you pay the specified bounty to implement or fix the issue','Confirmation')" span="all"></et2-button>
 				</row>
 				<row class="th">
-					<description value="Datum"/>
-					<description value="User"/>
-					<textbox type="float" label="Amount" id="total" readonly="true"/>
-					<description value="Name"/>
-					<description value="Email"/>
-					<description value="Confirmed"/>
+					<et2-description  value="Datum"></et2-description>
+					<et2-description  value="User"></et2-description>
+					<et2-number  label="Amount" id="total" readonly="true"></et2-number>
+					<et2-description  value="Name"></et2-description>
+					<et2-description  value="Email"></et2-description>
+					<et2-description  value="Confirmed"></et2-description>
 				</row>
 				<row class="row" disabled="!@num_bounties">
-					<date-time id="${row}[bounty_created]" readonly="true"/>
-					<menulist>
-						<menupopup type="select-account" id="${row}[bounty_creator]" readonly="true"/>
-					</menulist>
-					<textbox type="float" label="@currency" id="${row}[bounty_amount]" no_lang="1" readonly="true"/>
-					<description id="${row}[bounty_name]" no_lang="1"/>
-					<description id="${row}[bounty_email]" no_lang="1"/>
-					<hbox align="center">
-						<date-time id="${row}[bounty_confirmed]" readonly="true"/>
-						<button align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"/>
-						<button align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"/>
-					</hbox>
+					<et2-date-time  id="${row}[bounty_created]" readonly="true"></et2-date-time>
+					<et2-select-account  id="${row}[bounty_creator]" readonly="true"></et2-select-account>
+					<et2-number  label="@currency" id="${row}[bounty_amount]" readonly="true" noLang="1"></et2-number>
+					<et2-description  id="${row}[bounty_name]" noLang="1"></et2-description>
+					<et2-description  id="${row}[bounty_email]" noLang="1"></et2-description>
+					<et2-hbox  align="center">
+						<et2-date-time  id="${row}[bounty_confirmed]" readonly="true"></et2-date-time>
+						<et2-button  align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"></et2-button>
+						<et2-button  align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"></et2-button>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>
@@ -141,27 +136,23 @@
 			</columns>
 			<rows>
 				<row>
-					<description statustext="List of coma separated email address" value="Cc"/>
-					<taglist-email id="tr_cc"  allowFreeEntries="true" empty_label="Add email-address"  class="et2_fullWidth"/>
-					<description/>
-					<description value="Group"/>
-					<menulist span="all" >
-						<menupopup statustext="Ownership of the ticket" id="tr_group" no_lang="1" class="et2_fullWidth"/>
-					</menulist>
+					<et2-description  statustext="List of coma separated email address" value="Cc"></et2-description>
+					<et2-select-email  id="tr_cc" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Taglist::ajax_email" placeholder="Add email-address"></et2-select-email>
+					<et2-description></et2-description>
+					<et2-description  value="Group"></et2-description>
+					<et2-select  span="all" statustext="Ownership of the ticket" id="tr_group" noLang="1"></et2-select>
 				</row>
 				<row>
-					<description for="tr_assigned" value="Assigned to"/>
-					<menulist>
-						<menupopup  class="tracker_assign" id="tr_assigned" multiple="true" no_lang="1" tags="true" empty_label="User or group"/>
-					</menulist>
-					<description/>
-					<description for="tr_private" value="Private"/>
-					<checkbox id="tr_private" span="all" class="et2_fullWidth" unselected_value="0"/>
+					<et2-description  for="tr_assigned" value="Assigned to"></et2-description>
+					<et2-select  class="tracker_assign" id="tr_assigned" multiple="true" placeholder="User or group" noLang="1"></et2-select>
+					<et2-description></et2-description>
+					<et2-description  for="tr_private" value="Private"></et2-description>
+					<et2-checkbox  id="tr_private" span="all" unselectedValue="0"></et2-checkbox>
 				</row>
 				<row>
-					<description value="Closed date" />
-					<date-time label=" " id="tr_closed" class="et2_fullWidth"/>
-					<description/>
+					<et2-description  value="Closed date"></et2-description>
+					<et2-date-time  label=" " id="tr_closed"></et2-date-time>
+					<et2-description></et2-description>
 				</row>
 			</rows>
 		</grid>
@@ -180,44 +171,36 @@
 			</columns>
 			<rows>
 				<row class="dialogHeader">
-					<description for="tr_summary" value="Summary"/>
-					<textbox id="tr_summary" needed="1" maxlength="80" span="4" class="et2_fullWidth" tabindex="1"/>
-					<textbox type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"/>
-					<appicon/>
-					<description/>
+					<et2-description  for="tr_summary" value="Summary"></et2-description>
+					<et2-textbox  id="tr_summary" maxlength="80" span="4" tabindex="1" required="1"></et2-textbox>
+					<et2-number  id="tr_id" readonly="true" class="tracker_trIdEdit" precision="0"></et2-number>
+					<et2-appicon></et2-appicon>
+					<et2-description></et2-description>
 				</row>
 				<row class="dialogHeader2">
-					<description for="tr_tracker" value="Tracker Queue"/>
-					<menulist>
-						<menupopup id="tr_tracker" no_lang="1" onchange="widget.getInstanceManager().submit(null,false,true); return false;" class="et2_fullWidth"/>
-					</menulist>
-					<description/>
-					<description for="cat_id" value="Category"/>
-					<menulist span="4">
-						<menupopup id="cat_id" needed="1" no_lang="1" options="Select one"  class="et2_fullWidth"/>
-					</menulist>
+					<et2-description  for="tr_tracker" value="Tracker Queue"></et2-description>
+					<et2-select  id="tr_tracker" onchange="widget.getInstanceManager().submit(null,false,true); return false;" noLang="1"></et2-select>
+					<et2-description></et2-description>
+					<et2-description  for="cat_id" value="Category"></et2-description>
+					<et2-select  span="4" id="cat_id" required="1" noLang="1" emptyLabel="Select one"></et2-select>
 				</row>
 				<row class="dialogHeader3">
-					<description for="tr_version" value="Version"/>
-					<menulist>
-						<menupopup id="tr_version" needed="1" no_lang="1" options="Select one" class="et2_fullWidth"/>
-					</menulist>
-					<description/>
-					<description for="tr_priority" value="Priority"/>
-					<menulist span="all" >
-						<menupopup id="tr_priority" class="et2_fullWidth"/>
-					</menulist>
+					<et2-description  for="tr_version" value="Version"></et2-description>
+					<et2-select  id="tr_version" required="1" noLang="1" emptyLabel="Select one"></et2-select>
+					<et2-description></et2-description>
+					<et2-description  for="tr_priority" value="Priority"></et2-description>
+					<et2-select  span="all" id="tr_priority"></et2-select>
 				</row>
 				<row class="dialogHeader4" disabled="!@show_dates">
-					<description value="Start date"/>
-					<date-time id="tr_startdate" class="et2_fullWidth"/>
-					<description/>
-					<description value="Due date"/>
-					<date-time id="tr_duedate" class="et2_fullWidth" span="3"/>
-					<description/>
+					<et2-description  value="Start date"></et2-description>
+					<et2-date-time  id="tr_startdate"></et2-date-time>
+					<et2-description></et2-description>
+					<et2-description  value="Due date"></et2-description>
+					<et2-date-time  id="tr_duedate" span="3"></et2-date-time>
+					<et2-description></et2-description>
 				</row>
 				<row valign="top">
-					<tabbox id="tabs" span="all" tab_height="290">
+					<et2-tabbox  id="tabs" span="all" tabHeight="290">
 						<tabs>
 							<tab id="description" label="Description" statustext="Description"/>
 							<tab id="details" label="Details" statustext="Details"/>
@@ -238,53 +221,40 @@
 							<template id="tracker.edit.history"/>
 							<template id="tracker.edit.bounties"/>
 						</tabpanels>
-					</tabbox>
+					</et2-tabbox>
 				</row>
 				<row class="dialogOperators" disabled="!@tr_id">
-					<description for="tr_status" value="Status"/>
-					<menulist>
-						<menupopup statustext="@status_help" id="tr_status" class="et2_fullWidth"/>
-					</menulist>
-					<description/>
-					<description for="tr_resolution" value="Resolution"/>
-					<menulist>
-						<menupopup id="tr_resolution" class="et2_fullWidth"/>
-					</menulist>
-					<menulist span="2">
-						<menupopup type="select-percent" id="tr_completion" class="et2_fullWidth"/>
-					</menulist>
-					<description/>
+					<et2-description  for="tr_status" value="Status"></et2-description>
+					<et2-select  statustext="@status_help" id="tr_status"></et2-select>
+					<et2-description></et2-description>
+					<et2-description  for="tr_resolution" value="Resolution"></et2-description>
+					<et2-select  id="tr_resolution"></et2-select>
+					<et2-select-percent  span="2" id="tr_completion"></et2-select-percent>
+					<et2-description></et2-description>
 				</row>
 				<row class="dialogOperators">
-					<description value="Created by"/>
-					<hbox>
-						<menulist>
-							<menupopup id="tr_creator" no_lang="1"/>
-						</menulist>
-						<date-time id="tr_created" readonly="true" align="right"/>
-					</hbox>
-					<description/>
-					<description value="Last modified"/>
-					<menulist>
-						<menupopup type="select-account" id="tr_modifier" readonly="true"/>
-					</menulist>
-					<date-time id="tr_modified" readonly="true" class="et2_nowrap" span="2" align="right"/>
-					<description/>
+					<et2-description  value="Created by"></et2-description>
+					<et2-hbox>
+						<et2-select  id="tr_creator" noLang="1"></et2-select>
+						<et2-date-time  id="tr_created" readonly="true" align="right"></et2-date-time>
+					</et2-hbox>
+					<et2-description></et2-description>
+					<et2-description  value="Last modified"></et2-description>
+					<et2-select-account  id="tr_modifier" readonly="true"></et2-select-account>
+					<et2-date-time  id="tr_modified" readonly="true" class="et2_nowrap" span="2" align="right"></et2-date-time>
+					<et2-description></et2-description>
 				</row>
 				<row class="dialogFooterToolbar">
-					<hbox span="all">
-						<button label="Save" id="button[save]"/>
-						<button label="Apply" id="button[apply]"/>
-						<button label="Cancel" id="button[cancel]" onclick="@on_cancel"/>
-						<checkbox label="Do not notify" id="no_notifications" statustext="Do not notify of these changes"/>
-						<vbox align="right">
-                            <button align="right" statustext="If this item is important for you, please vote for it."
-                                    label="Vote for it!" id="button[vote]"
-                                    onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');"
-                                    hideOnReadonly="true"/>
-                            <description align="right" id="no_vote" no_lang="1" class="redItalic"/>
-                        </vbox>
-					</hbox>
+					<et2-hbox  span="all">
+						<et2-button  label="Save" id="button[save]"></et2-button>
+						<et2-button  label="Apply" id="button[apply]"></et2-button>
+						<et2-button  label="Cancel" id="button[cancel]" onclick="@on_cancel"></et2-button>
+						<et2-checkbox  label="Do not notify" id="no_notifications" statustext="Do not notify of these changes"></et2-checkbox>
+						<et2-vbox  align="right">
+                            <et2-button  align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');" hideOnReadonly="true"></et2-button>
+                            <et2-description  align="right" id="no_vote" class="redItalic" noLang="1"></et2-description>
+                        </et2-vbox>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>

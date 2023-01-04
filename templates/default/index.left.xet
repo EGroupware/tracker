@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="tracker.index.left" template="" lang="" group="0" version="1.9.001">
-		<hbox>
-			<menulist class="bold">
-				<menupopup cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" no_lang="1" rows="1" options="All"/>
-			</menulist>
-			<button id="col_filter[multi_queue][true]" image="foldertree_nolines_plus"/>
-		</hbox>
+		<et2-hbox>
+			<et2-select  class="bold" cols="1" label="Tracker Queue" id="col_filter[tr_tracker]" noLang="1" emptyLabel="All"></et2-select>
+			<et2-button  id="col_filter[multi_queue][true]" image="foldertree_nolines_plus"></et2-button>
+		</et2-hbox>
 	</template>
 </overlay>

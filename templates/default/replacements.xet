@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <!-- This template adds the extra bits to the replacements list UI -->
 <overlay>
     <template id="tracker.replacements">
-        <vbox>
-            <description class="title" value="Comment table"/>
-            <description value="{{{table/comment}}}"/>
+        <et2-vbox>
+            <et2-description  class="title" value="Comment table"></et2-description>
+            <et2-description  value="{{{table/comment}}}"></et2-description>
             <grid width="100%">
                 <columns>
                     <column width="30px"/>
@@ -14,28 +14,28 @@
                 </columns>
                 <rows>
                     <row>
-                        <description/>
-                        <description value="{{{comment/date}}}"/>
-                        <description value="Date"/>
+                        <et2-description></et2-description>
+                        <et2-description  value="{{{comment/date}}}"></et2-description>
+                        <et2-description  value="Date"></et2-description>
                     </row>
                     <row>
-                        <description/>
-                        <description value="{{{comment/user}}}"/>
-                        <description value="Username"/>
+                        <et2-description></et2-description>
+                        <et2-description  value="{{{comment/user}}}"></et2-description>
+                        <et2-description  value="Username"></et2-description>
                     </row>
                     <row>
-                        <description/>
-                        <description value="{{{comment/message}}}"/>
-                        <description value="Message"/>
+                        <et2-description></et2-description>
+                        <et2-description  value="{{{comment/message}}}"></et2-description>
+                        <et2-description  value="Message"></et2-description>
                     </row>
                     <row>
-                        <description/>
-                        <description value="{{{comment/restricted}}}"/>
-                        <description value="If the message was restricted"/>
+                        <et2-description></et2-description>
+                        <et2-description  value="{{{comment/restricted}}}"></et2-description>
+                        <et2-description  value="If the message was restricted"></et2-description>
                     </row>
                 </rows>
             </grid>
-            <description value="{{{endtable}}}"/>
-        </vbox>
+            <et2-description  value="{{{endtable}}}"></et2-description>
+        </et2-vbox>
     </template>
 </overlay>
