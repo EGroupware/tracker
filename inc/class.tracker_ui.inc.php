@@ -74,7 +74,8 @@ class tracker_ui extends tracker_bo
 		if ($GLOBALS['egw_info']['apps']['projectmanager'])
 		{
 			$pm_config = Api\Config::read('projectmanager');
-			$this->duration_format = str_replace(',','',implode('', (array)$pm_config['duration_units'])).','.$pm_config['hours_per_workday'];
+			$this->duration_format = str_replace(',', '', implode('', (array)$pm_config['duration_units']));
+			$this->hours_per_workday = $pm_config['hours_per_workday'];
 			unset($pm_config);
 		}
 	}
@@ -1562,7 +1563,7 @@ class tracker_ui extends tracker_bo
 
 		//
 		// disable favories dropdown button, if not running as infolog
-		if ($this->called_as || $content['nm']['session_for'])
+		if($this->called_as || $content['nm']['session_for'])
 		{
 			$content['nm']['favorites'] = false;
 		}
@@ -1570,13 +1571,14 @@ class tracker_ui extends tracker_bo
 		{
 			$content['nm']['favorites'] = true; // Enable favorites
 		}
-		$content['duration_format'] = ','.$this->duration_format;
+		$content['duration_format'] = $this->duration_format;
+		$content['hours_per_workday'] = $this->hours_per_workday;
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
-		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'],$tracker,null,null,'add');
+		$readonlys['add'] = $readonlys['nm']['add'] = !$this->check_rights($this->field_acl['add'], $tracker, null, null, 'add');
 		$tpl = new Etemplate();
-		if (!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
+		if(!$tpl->sitemgr || !$tpl->read('tracker.index.sitemgr'))
 		{
 			$tpl->read('tracker.index');
 		}
