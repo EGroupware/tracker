@@ -185,17 +185,17 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-					<et2-vbox  id="tabs" span="all" width="100%">
-						<et2-details  id="description" summary="Description" title="">
-							<template id="tracker.edit.description"/>
-						</et2-details>
-						<et2-details  id="details" summary="Details" title="">
-							<template id="tracker.edit.details"/>
-						</et2-details>
-						<et2-details  id="comments" summary="Comments" title="">
-							<template id="tracker.edit.comments"/>
-						</et2-details>
-						<et2-details  id="add_comment" summary="Add comment" title="">
+					<et2-vbox span="all" width="100%">
+                        <et2-details id="description" summary="Description" title="">
+                            <template id="tracker.edit.description"/>
+                        </et2-details>
+                        <et2-details id="details" summary="Details" title="">
+                            <template id="tracker.edit.details"/>
+                        </et2-details>
+                        <et2-details id="comments" summary="Comments" title="">
+                            <template id="tracker.edit.comments"/>
+                        </et2-details>
+                        <et2-details id="add_comment" summary="Add comment" title="">
 							<template id="tracker.edit.add_comment"/>
 						</et2-details>
 						<et2-details  id="links" summary="Links" title="">
