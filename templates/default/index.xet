@@ -101,7 +101,7 @@
                                             readonly="true"></et2-select-account>
                     </et2-vbox>
                     <et2-date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true"
-                                       dataFormat="@@duration_format"></et2-date-duration>
+                                       displayFormat="@@duration_format"></et2-date-duration>
                     <et2-number align="center" id="${row}[votes]" readonly="true" precision="0"></et2-number>
                     <et2-number align="center" label="$row_cont[currency]" id="${row}[bounties]" readonly="true"
                                 noLang="1"></et2-number>
