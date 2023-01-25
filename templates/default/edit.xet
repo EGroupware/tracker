@@ -235,7 +235,7 @@
 				<row class="dialogOperators">
 					<et2-description  value="Created by"></et2-description>
 					<et2-hbox>
-						<et2-select  id="tr_creator" noLang="1"></et2-select>
+						<et2-select  id="tr_creator" noLang="1" placement="top"></et2-select>
 						<et2-date-time  id="tr_created" readonly="true" align="right"></et2-date-time>
 					</et2-hbox>
 					<et2-description></et2-description>
