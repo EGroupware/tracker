@@ -228,7 +228,7 @@
 					<et2-select  statustext="@status_help" id="tr_status"></et2-select>
 					<et2-description></et2-description>
 					<et2-description  for="tr_resolution" value="Resolution"></et2-description>
-					<et2-select  id="tr_resolution"></et2-select>
+					<et2-select id="tr_resolution" placement="top"></et2-select>
 					<et2-select-percent  span="2" id="tr_completion"></et2-select-percent>
 					<et2-description></et2-description>
 				</row>
