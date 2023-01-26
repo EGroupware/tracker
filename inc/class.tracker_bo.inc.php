@@ -455,8 +455,11 @@ class tracker_bo extends tracker_so
 		{
 			foreach($data['replies'] as &$reply)
 			{
-				$reply['reply_servertime'] = $reply['reply_created'];
-				$reply['reply_created'] = Api\DateTime::server2user($reply['reply_created'],$this->timestamp_type);
+				if(is_array($reply))
+				{
+					$reply['reply_servertime'] = $reply['reply_created'];
+					$reply['reply_created'] = Api\DateTime::server2user($reply['reply_created'], $this->timestamp_type);
+				}
 			}
 		}
 		// check if item is overdue
