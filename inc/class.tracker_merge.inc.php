@@ -283,7 +283,11 @@ class tracker_merge extends Api\Storage\Merge
 	 */
 	public function set_comments($tr_id, array $comments)
 	{
-		$this->preset_comments[$tr_id] = $comments;
+		$this->preset_comments[$tr_id] = array_values(array_filter($comments, function ($v)
+		{
+			return strlen(trim($v['reply_message'])) > 0;
+		})
+		);
 	}
 
 	/**
