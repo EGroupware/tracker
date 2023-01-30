@@ -100,7 +100,7 @@
                         <et2-select-account class="tracker_leftPad5" id="${row}[tr_assigned]"
                                             readonly="true"></et2-select-account>
                     </et2-vbox>
-                    <et2-date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true"
+                    <et2-date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" selectUnit="true"
                                        displayFormat="@@duration_format"></et2-date-duration>
                     <et2-number align="center" id="${row}[votes]" readonly="true" precision="0"></et2-number>
                     <et2-number align="center" label="$row_cont[currency]" id="${row}[bounties]" readonly="true"
