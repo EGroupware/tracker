@@ -44,9 +44,6 @@ label.tracker_trIdEdit:before {
 .lpadding5 {
   padding-left: 5px;
 }
-.tracker_assign {
-  width: 100% !important;
-}
 .redItalic {
   color: red;
   font-style: italic;
@@ -251,4 +248,3 @@ label.tracker_trIdEdit:before {
     height: 200px !important;
   }
 }
-/*# sourceMappingURL=app.css.map */
