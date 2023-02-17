@@ -1,0 +1,500 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	km	"%2" មានសុពលភាពសម្រាប់តែកាលបរិច្ឆេទចាប់ផ្តើម និងកាលបរិច្ឆេទផុតកំណត់ប៉ុណ្ណោះ ប្រើ "%1"
+%1 days in advance	tracker	km	%1 ថ្ងៃជាមុន
+%1 entries %2	tracker	km	ធាតុ %1 %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	km	ធាតុ %1 %2, %3 បានបរាជ័យដោយសារតែសិទ្ធិមិនគ្រប់គ្រាន់!
+%1 entries updated.	tracker	km	ធាតុ %1 បានធ្វើបច្ចុប្បន្នភាព
+%1 is due %2	tracker	km	%1 គឺដល់ពេល %2
+%1 is starting %2	tracker	km	%1 កំពុងចាប់ផ្តើម %2
+%1 tickets have been converted	tracker	km	សំបុត្រ %1 ត្រូវបានបំប្លែង
+(beware of mailloops, check the help!)	tracker	km	(ប្រយ័ត្នប្រយែង!)
+(new tickets as	tracker	km	សំបុត្រថ្មីដូចជា
+--> choose a project from the drop-down list	tracker	km	--> ជ្រើសរើសគម្រោងពីបញ្ជីទម្លាក់ចុះ
+--> enter new name	tracker	km	--> បញ្ចូលឈ្មោះថ្មី
+1 - lowest	tracker	km	1 - ទាបបំផុត
+2 days in advance	tracker	km	2 ថ្ងៃជាមុន
+2 years ago	tracker	km	2 ឆ្នាំមុន
+3 days in advance	tracker	km	3 ថ្ងៃជាមុន
+3 years ago	tracker	km	3 ឆ្នាំមុន
+5 - medium	tracker	km	5 - មធ្យម
+9 - highest	tracker	km	9 - ខ្ពស់បំផុត
+[fwd]	tracker	km	[FWD]
+accepted	tracker	km	ទទួលយក
+acl	tracker	km	បញ្ជីត្រួតពិនិត្យការចូលប្រើ
+activate users queue access control	tracker	km	បើកដំណើរការការគ្រប់គ្រងការចូលប្រើជួរអ្នកប្រើប្រាស់
+add / remove link	tracker	km	បន្ថែម / លុបតំណ
+add a ticket	tracker	km	បន្ថែមសំបុត្រ
+add additionally	tracker	km	បន្ថែម
+add assigned	tracker	km	បន្ថែមដែលបានកំណត់
+add comment	tracker	km	បន្ថែមមតិ
+add email-address	tracker	km	បន្ថែមអាសយដ្ឋានអ៊ីមែល
+add from addressbook	tracker	km	បន្ថែមពីសៀវភៅអាសយដ្ឋាន
+add infolog	tracker	km	បន្ថែមព័ត៌មាន
+add restricted comment	tracker	km	បន្ថែមមតិដែលដាក់កម្រិត
+add timesheet entry	tracker	km	បន្ថែមធាតុតារាងពេលវេលា
+add to	tracker	km	បន្ថែម​លើ
+add unrecognized mail address to the cc field	tracker	km	បន្ថែមអាសយដ្ឋានអ៊ីមែលដែលមិនស្គាល់ទៅវាល CC
+after	tracker	km	បន្ទាប់ពី
+after how many days a not replied item should be marked overdue?	tracker	km	បន្ទាប់ពីរយៈពេលប៉ុន្មានថ្ងៃ ធាតុដែលមិនបានឆ្លើយតបគួរតែត្រូវបានសម្គាល់ថាហួសកាលកំណត់?
+after how many days pending items should be closed automatic	tracker	km	បន្ទាប់ពីប៉ុន្មានថ្ងៃ ធាតុដែលមិនទាន់សម្រេច គួរតែបិទដោយស្វ័យប្រវត្តិ?
+all	tracker	km	ទាំងអស់
+all tickets are already converted to tracker	tracker	km	សំបុត្រទាំងអស់ត្រូវបានបំប្លែងទៅជា Tracker រួចហើយ
+all versions	tracker	km	កំណែទាំងអស់
+allow bounties	tracker	km	អនុញ្ញាតឱ្យមានរង្វាន់
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	km	អនុញ្ញាតឱ្យបង្កើតមតិយោបល់ដាក់កម្រិត ដែលអាចមើលឃើញសម្រាប់តែអ្នកគ្រប់គ្រង អ្នកបច្ចេកទេស និងអ្នកប្រើប្រាស់ដែលបានចាត់តាំងប៉ុណ្ណោះ
+allow creation of infolog entries from tracker tickets	tracker	km	អនុញ្ញាតឱ្យបង្កើតធាតុ infolog ពីសំបុត្រតាមដាន
+allow default projects for tracker	tracker	km	គម្រោងលំនាំដើម
+allow editing by	tracker	km	អនុញ្ញាតឱ្យកែសម្រួលដោយ
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	km	អនុញ្ញាតឱ្យកំណត់ជាមុននៃគម្រោងដែលនឹងត្រូវបានកំណត់ទៅធាតុកម្មវិធីតាមដានថ្មី
+allow to assign groups to tracker items	tracker	km	អនុញ្ញាតឱ្យចាត់តាំងក្រុម
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	km	អនុញ្ញាតឱ្យ 'អ្នកប្រើប្រាស់' ត្រូវបានចាត់តាំងទៅសំបុត្របន្ថែមទៅ 'អ្នកបច្ចេកទេស' និង 'អ្នកគ្រប់គ្រងតាមដាន'
+allow voting	tracker	km	អនុញ្ញាតឱ្យបោះឆ្នោត
+allow voting on tracker items, show and sort after the votes	tracker	km	អនុញ្ញាតឱ្យបោះឆ្នោតលើធាតុតាមដាន បង្ហាញ និងតម្រៀបបន្ទាប់ពីការបោះឆ្នោត
+already escalated	tracker	km	កើនឡើងរួចហើយ
+amount	tracker	km	ចំនួនទឹកប្រាក់
+application mail expected but got: %1	tracker	km	អ៊ីមែល​កម្មវិធី​ត្រូវ​បាន​រំពឹង​ទុក ប៉ុន្តែ​បាន​ទទួល៖ %1
+applies the changes	tracker	km	អនុវត្តការផ្លាស់ប្តូរ
+assign to project	tracker	km	ចាត់តាំងទៅគម្រោង
+assigned to	tracker	km	ចាត់តាំងទៅ
+assigning groups	tracker	km	ការចាត់តាំងក្រុម
+attachments & links	tracker	km	ឯកសារភ្ជាប់ និងតំណភ្ជាប់
+attention: no contact with address %1 found.	tracker	km	យកចិត្តទុកដាក់៖ រកមិនឃើញទំនាក់ទំនងជាមួយអាសយដ្ឋាន%1 ទេ
+autoassign to	tracker	km	កំណត់ដោយស្វ័យប្រវត្តិទៅ
+automatic email handling	tracker	km	ការគ្រប់គ្រងអ៊ីមែលដោយស្វ័យប្រវត្តិ
+automatic mails (bounces) are configured to be forwarded	tracker	km	សំបុត្រដោយស្វ័យប្រវត្តិ (លោត) ត្រូវបានកំណត់រចនាសម្ព័ន្ធដើម្បីបញ្ជូនបន្ត
+automatic mails (replies) are configured to be forwarded	tracker	km	សំបុត្រដោយស្វ័យប្រវត្តិ (ឆ្លើយតប) ត្រូវបានកំណត់រចនាសម្ព័ន្ធដើម្បីបញ្ជូនបន្ត
+automatically created by importexport	tracker	km	បង្កើតដោយស្វ័យប្រវត្តិដោយការនាំចេញនាំចូល
+before	tracker	km	ពីមុន
+bounties	tracker	km	ប្រាក់រង្វាន់
+bounty	tracker	km	រង្វាន់
+bounty confirmed	tracker	km	ប្រាក់រង្វាន់បានបញ្ជាក់
+bounty confirmed.	tracker	km	ប្រាក់រង្វាន់បានបញ្ជាក់
+bounty deleted	tracker	km	ប្រាក់រង្វាន់ត្រូវបានលុប
+bounty deleted.	tracker	km	ប្រាក់រង្វាន់ត្រូវបានលុប
+bounty set	tracker	km	សំណុំប្រាក់រង្វាន់
+canned response	tracker	km	ការឆ្លើយតបកំប៉ុង
+canned responses	tracker	km	ការឆ្លើយតបដែលបានលុបចោល
+categories, versions, canned responses	tracker	km	ប្រភេទ កំណែ ការឆ្លើយតបដែលបានលុបចោល
+category	tracker	km	ប្រភេទ
+category for new tickets	tracker	km	ប្រភេទសម្រាប់សំបុត្រថ្មី
+change assigned	tracker	km	ការផ្លាស់ប្តូរដែលបានកំណត់
+change assigned when updating	tracker	km	ការផ្លាស់ប្តូរដែលបានកំណត់នៅពេលធ្វើបច្ចុប្បន្នភាព
+change color	tracker	km	ផ្លាស់ប្តូរពណ៌
+change group	tracker	km	ផ្លាស់ប្តូរក្រុម
+change group when updating	tracker	km	ផ្លាស់ប្តូរក្រុមនៅពេលធ្វើបច្ចុប្បន្នភាព
+change owner when updating	tracker	km	ផ្លាស់ប្តូរម្ចាស់នៅពេលធ្វើបច្ចុប្បន្នភាព
+changes made below will be lost, if not applied before!	tracker	km	ការផ្លាស់ប្តូរដែលបានធ្វើឡើងខាងក្រោមនឹងត្រូវបាត់បង់ ប្រសិនបើមិនបានអនុវត្តពីមុន!
+check all	tracker	km	ពិនិត្យ​ទាំងអស់
+check mail interval	tracker	km	ពិនិត្យចន្លោះពេលសំបុត្រ
+choose 'creator' of imported data	tracker	km	ជ្រើសរើស 'អ្នកបង្កើត' នៃទិន្នន័យដែលបាននាំចូល
+choose a project from the drop-down list	tracker	km	ជ្រើសរើសគម្រោងពីបញ្ជីទម្លាក់ចុះ
+close pending	tracker	km	បិទការរង់ចាំ
+closed	tracker	km	បិទ
+closed date	tracker	km	កាលបរិច្ឆេទបិទ
+color	tracker	km	ពណ៌
+comment by %1 at %2:	tracker	km	ផ្ដល់មតិដោយ%1 នៅ%2៖
+comments	tracker	km	មតិយោបល់
+completed	tracker	km	បានបញ្ចប់
+configuration	tracker	km	ការកំណត់​រចនាសម្ព័ន្ធ
+configuration for all trackers	tracker	km	ការកំណត់រចនាសម្ព័ន្ធសម្រាប់ជួរកម្មវិធីតាមដានទាំងអស់
+configuration updated.	tracker	km	បានធ្វើបច្ចុប្បន្នភាពការកំណត់រចនាសម្ព័ន្ធ
+configuration, notifications	tracker	km	ការកំណត់រចនាសម្ព័ន្ធ, ការជូនដំណឹង
+confirm that you pay the specified bounty to implement or fix the issue	tracker	km	បញ្ជាក់​ថា​អ្នក​បង់​ប្រាក់​ឧបត្ថម្ភ​ដែល​បាន​បញ្ជាក់​ដើម្បី​អនុវត្ត ឬ​ដោះស្រាយ​បញ្ហា
+confirm the receipt of money for this bounty	tracker	km	បញ្ជាក់ការទទួលប្រាក់សម្រាប់អំណោយនេះ
+confirmed	tracker	km	បញ្ជាក់
+convert all closed tickets	tracker	km	បំប្លែងសំបុត្របិទទាំងអស់
+convert all open tickets	tracker	km	បំប្លែងសំបុត្របើកទាំងអស់
+converted count	tracker	km	ការរាប់ដែលបានបំប្លែង
+copy to	tracker	km	ចម្លង​ទៅ
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	km	ចម្លងការផ្លាស់ប្ដូររបស់អ្នកទៅក្ដារតម្បៀតខ្ទាស់ %1 ផ្ទុកធាតុឡើងវិញ%2 ហើយបញ្ចូលពួកវាចូលគ្នា
+could not connect	tracker	km	មិនអាច​ភ្ជាប់​បាន
+create new links	tracker	km	បង្កើតតំណថ្មី
+create new tracker entry's as default "private" for approval process	tracker	km	បង្កើតធាតុកម្មវិធីតាមដានថ្មីជា 'ឯកជន' លំនាំដើមសម្រាប់ដំណើរការអនុម័ត
+created	tracker	km	បានបង្កើត
+created by	tracker	km	បង្កើត​ឡើង​ដោយ
+created on	tracker	km	បានបង្កើតនៅលើ
+creates a new field	tracker	km	បង្កើតវាលថ្មីមួយ
+creation date	tracker	km	កាលបរិច្ឆេទ​បង្កើត
+creator	tracker	km	អ្នកបង្កើត
+custom fields	tracker	km	វាលផ្ទាល់ខ្លួន
+custom notifications	tracker	km	ការជូនដំណឹងផ្ទាល់ខ្លួន
+custom tracker priorities	tracker	km	អាទិភាពកម្មវិធីតាមដានផ្ទាល់ខ្លួន
+customfield	tracker	km	វាលផ្ទាល់ខ្លួន
+data exchange settings	tracker	km	ការកំណត់ការផ្លាស់ប្តូរទិន្នន័យ
+date filter	tracker	km	តម្រងកាលបរិច្ឆេទ
+date opened	tracker	km	កាលបរិច្ឆេទបើក
+default document to insert entries	tracker	km	ឯកសារលំនាំដើមដើម្បីបញ្ចូលធាតុ
+default group	tracker	km	ក្រុមលំនាំដើម
+default version for new tracker entries	tracker	km	កំណែលំនាំដើមសម្រាប់ធាតុកម្មវិធីតាមដានថ្មី
+define escalations	common	km	កំណត់ការកើនឡើង
+delete mails from server	tracker	km	លុបសំបុត្រចេញពីម៉ាស៊ីនមេ
+delete the mail from the server	tracker	km	លុបសំបុត្រចេញពីម៉ាស៊ីនមេ
+delete the mail from the server.	tracker	km	លុបសំបុត្រចេញពីម៉ាស៊ីនមេ
+delete this bounty	tracker	km	លុបប្រាក់បំណាច់នេះ
+delete this canned response	tracker	km	លុបការឆ្លើយតបដែលបានលុបចោលនេះ
+delete this category	tracker	km	លុបប្រភេទនេះ
+delete this entry	tracker	km	លុបធាតុនេះ
+delete this escalation	tracker	km	លុបការកើនឡើងនេះ
+delete this status	tracker	km	លុបស្ថានភាពនេះ
+delete this tracker including all its items and categories	tracker	km	លុបកម្មវិធីតាមដាននេះ រួមទាំងធាតុ និងប្រភេទរបស់វាទាំងអស់
+delete this version	tracker	km	លុបកំណែនេះ
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	km	លុបសំបុត្រដែលមិនស្គាល់ពីម៉ាស៊ីនមេ ទោះបីជា 'លុបសំបុត្រ' ខាងលើមិនត្រូវបានដាក់ស្លាកក៏ដោយ
+deleted	tracker	km	បានលុប
+deletes this field	tracker	km	លុបវាលនេះ
+deny global	tracker	km	បដិសេធជាសកល
+determines the order the fields are displayed	tracker	km	កំណត់លំដាប់ដែលវាលត្រូវបានបង្ហាញ
+directory with documents to insert entries	tracker	km	ថតជាមួយឯកសារដើម្បីបញ្ចូលធាតុ
+do not send notifications to external email (cc field)	tracker	km	កុំផ្ញើការជូនដំណឹងទៅអ៊ីមែលខាងក្រៅ (វាល cc)
+do you want a notification, if items you are responsible for are about to start?	tracker	km	តើ​អ្នក​ចង់​បាន​ការ​ជូន​ដំណឹង​ដែរ​ឬ​ទេ ប្រសិន​បើ​ធាតុ​ដែល​អ្នក​ទទួល​ខុស​ត្រូវ​ជិត​នឹង​ចាប់​ផ្តើម?
+do you want a notification, if items you are responsible for are due?	tracker	km	តើ​អ្នក​ចង់​បាន​ការ​ជូន​ដំណឹង​ដែរ​ឬ​ទេ ប្រសិន​បើ​ទំនិញ​ដែល​អ្នក​ទទួល​ខុស​ត្រូវ​ដល់​ពេល​កំណត់?
+do you want to add mailheader information to description and/or comments?	tracker	km	តើ​អ្នក​ចង់​បន្ថែម​ព័ត៌មាន​បឋមកថា​សំបុត្រ​ទៅ​ការ​ពិពណ៌នា និង/ឬ​មតិយោបល់​ដែរ​ឬ​ទេ?
+do you want to vote for this item	tracker	km	តើអ្នកចង់បោះឆ្នោតសម្រាប់ធាតុនេះ
+donator name to show	tracker	km	ឈ្មោះអ្នកបរិច្ចាគដែលត្រូវបង្ហាញ
+download url for links	tracker	km	ទាញយក url សម្រាប់តំណ
+due	tracker	km	ដល់កំណត់
+due date	tracker	km	កាលបរិច្ឆេទ​កំណត់
+duplicate	tracker	km	ស្ទួន
+e-mail address to which a copy of all tracker-notifications should be send	tracker	km	អាសយដ្ឋានអ៊ីមែលដែលច្បាប់ចម្លងនៃការជូនដំណឹងរបស់អ្នកតាមដានទាំងអស់គួរតែត្រូវបានផ្ញើ
+e-mail notifications	tracker	km	ការជូនដំណឹងតាមអ៊ីមែល
+each value is a line like <id>[=<label>]	tracker	km	តម្លៃនីមួយៗគឺជាបន្ទាត់ដូចជា <id>[=<label>]
+each value is a line like id[=label]	tracker	km	តម្លៃនីមួយៗគឺជាបន្ទាត់ដូចលេខសម្គាល់[=label]
+edit %1	tracker	km	កែសម្រួល%1
+edit entry	tracker	km	កែសម្រួលធាតុ
+edit others' comments	tracker	km	កែ​សម្រួល​យោបល់​អ្នក​ដទៃ
+edit own comments	tracker	km	កែ​សម្រួល​យោបល់​របស់​ខ្លួន
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	km	EGroupware Tracker Mailhandling៖ មិនអាចភ្ជាប់ពីមុនបានទេ ហើយទម្រង់មិនផ្លាស់ប្តូរទេ
+email address to contact you	tracker	km	អាសយដ្ឋានអ៊ីមែលដើម្បីទាក់ទងអ្នក
+email handling can be configured only for all trackers	tracker	km	ការគ្រប់គ្រងអ៊ីមែលអាចត្រូវបានកំណត់រចនាសម្ព័ន្ធសម្រាប់តែអ្នកតាមដានទាំងអស់
+enable color code for	tracker	km	បើកកូដពណ៌សម្រាប់
+enter an email address here if unrecognized mails should be forwarded	tracker	km	បញ្ចូលអាសយដ្ឋានអ៊ីមែល ប្រសិនបើសំបុត្រដែលមិនស្គាល់គួរតែត្រូវបានបញ្ជូនបន្ត
+enter an opening text for the reply message	tracker	km	បញ្ចូលអត្ថបទបើកសម្រាប់សារឆ្លើយតប
+enter the email for reply to	tracker	km	បញ្ចូលអ៊ីមែលសម្រាប់ការឆ្លើយតប
+enter the imap server from which emails should be fetched	tracker	km	បញ្ចូលម៉ាស៊ីនមេ IMAP ដែលអ៊ីមែលគួរត្រូវបានទាញយក
+enter the mail address that will be read.	tracker	km	បញ្ចូលអាសយដ្ឋានអ៊ីមែលដែលគួរប្រើជាតម្រងបន្ថែមលើសារដែលមើលមិនឃើញ ទុកទទេដើម្បីអានសារទាំងអស់ដែលត្រូវបានសម្គាល់ថាមើលមិនឃើញ
+entry saved	tracker	km	បានរក្សាទុកធាតុ
+error adding the new tracker!	tracker	km	កំហុសក្នុងការបន្ថែមកម្មវិធីតាមដានថ្មី!
+error deleting escalation!	tracker	km	កំហុសក្នុងការលុបការកើនឡើង!
+error renaming tracker queue!	tracker	km	មានបញ្ហាក្នុងការដាក់ឈ្មោះជួរកម្មវិធីតាមដានឡើងវិញ!
+error saving the entry!!!	tracker	km	កំហុសក្នុងការរក្សាទុកធាតុ !!!
+error: no mail (mailbox / uid) given!	tracker	km	កំហុស៖ គ្មានសំបុត្រ (ប្រអប់សំបុត្រ / UID) ត្រូវបានផ្តល់ឱ្យ!
+error: the entry has been updated since you opened it for editing!	tracker	km	កំហុស៖ ធាតុត្រូវបានធ្វើបច្ចុប្បន្នភាពចាប់តាំងពីអ្នកបើកវាសម្រាប់កែសម្រួល!
+escalation	tracker	km	ការកើនឡើង
+escalation added.	tracker	km	ការកើនឡើងបន្ថែម
+escalation deleted.	tracker	km	បានលុបការកើនឡើង
+escalation not found!	tracker	km	រកមិនឃើញការកើនឡើងទេ!
+escalation saved.	tracker	km	ការកើនឡើងត្រូវបានរក្សាទុក
+everybody	tracker	km	ទាំងអស់គ្នា
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	km	ឧទាហរណ៍ {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - search the field "n_prefix", for "Mr", if found, write Hello Mr., else write Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	km	ឧទាហរណ៍ {{LETTERPREFIXCUSTOM n_prefix title n_family}} - ឧទាហរណ៍៖ លោកបណ្ឌិត James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	km	ឧទាហរណ៍ {{NELF role}} - ប្រសិនបើតួនាទីវាលមិនទទេ អ្នកនឹងទទួលបានបន្ទាត់ថ្មីជាមួយនឹងតម្លៃនៃតួនាទីវាល
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	km	ឧទាហរណ៍ {{nenvlf role}} - ប្រសិនបើតួនាទីវាលមិនទទេ កំណត់ LF ដោយគ្មានតម្លៃណាមួយនៃវាល
+exclude links of the following apps on timesheet creation	tracker	km	មិនរាប់បញ្ចូលតំណភ្ជាប់នៃកម្មវិធីខាងក្រោមនៅលើការបង្កើតតារាងពេលវេលា
+existing links	tracker	km	តំណភ្ជាប់ដែលមានស្រាប់
+exists	tracker	km	មាន
+export as csv	tracker	km	នាំចេញជា CSV
+export csv	tracker	km	នាំចេញ CSV
+export definition to use for nextmatch export	tracker	km	នាំចេញនិយមន័យដែលត្រូវប្រើសម្រាប់ការនាំចេញការប្រកួតបន្ទាប់
+export definitition to use for nextmatch export	tracker	km	នាំចេញនិយមន័យដែលត្រូវប្រើសម្រាប់ការនាំចេញការប្រកួតបន្ទាប់
+exports a list of tracker tickets to a csv file.	tracker	km	នាំចេញបញ្ជីសំបុត្រតាមដានទៅឯកសារ CSV
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	km	បរាជ័យក្នុងការបើកប្រអប់សំបុត្រ៖ %1 -> ត្រូវបានបិទសម្រាប់ការដំណើរការសំបុត្រដោយស្វ័យប្រវត្តិ!
+favorites	tracker	km	ចំណូលចិត្ត
+field	tracker	km	វាល
+fixed	tracker	km	ជួសជុល
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	km	សម្រាប់អក្សរសៀរៀលប្រើស្លាកនេះ ដាក់មាតិកាដែលអ្នកចង់ធ្វើម្តងទៀតរវាងស្លាកពីរ
+forward	tracker	km	ទៅមុខ
+forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	km	បញ្ជូនបន្តសំបុត្រទៅអាសយដ្ឋានដូចគ្នាដែលសំបុត្រដែលមិនស្គាល់អាចត្រូវបានបញ្ជូនបន្តទៅ (ដូច្នេះអាសយដ្ឋាននេះត្រូវតែបញ្ចូល!) បន្ទាប់ពីនោះ សំបុត្រនឹងត្រូវបានលុបចេញពីម៉ាស៊ីនមេ
+forward to	tracker	km	បញ្ជូនបន្តទៅ
+forward unrecognized mails to the email address that has to be specified here.	tracker	km	បញ្ជូនបន្តសំបុត្រដែលមិនស្គាល់ទៅអាសយដ្ឋានអ៊ីមែលដែលត្រូវបញ្ជាក់នៅទីនេះ
+from	tracker	km	ពី
+full list of placeholder names	tracker	km	បញ្ជីពេញលេញនៃឈ្មោះកន្លែងដាក់
+general fields:	tracker	km	វាលទូទៅ៖
+general settings	tracker	km	ការកំណត់​ទូទៅ
+handling autoreplies	tracker	km	គ្រប់គ្រងការឆ្លើយតបដោយស្វ័យប្រវត្តិ
+handling bounced mails	tracker	km	ដោះស្រាយសំបុត្រដែលលោតឡើង
+handling mailheader information	tracker	km	ការគ្រប់គ្រងព័ត៌មានក្បាលសំបុត្រ
+history	tracker	km	ប្រវត្តិសាស្ត្រ
+how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	km	តើ​មាន​បន្ទាត់​ពណ៌នា​ប៉ុន្មាន​ដែល​គួរ​មើល​ឃើញ​ដោយ​ផ្ទាល់ បន្ទាត់បន្ថែមទៀតអាចរកបានតាមរយៈរបាររមូរ
+html editing	tracker	km	ការកែសម្រួល HTML
+html link to the current record	tracker	km	តំណភ្ជាប់ HTML ទៅកំណត់ត្រាបច្ចុប្បន្ន
+id	tracker	km	លេខសម្គាល់
+if a ticket has matched before, should the actions be taken again?	tracker	km	ប្រសិនបើសំបុត្រត្រូវគ្នាពីមុន តើគួរចាត់វិធានការម្តងទៀតទេ?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	km	ប្រសិនបើមិនបានគូសធីកទេ សម្គាល់រាល់សំបុត្រដែលមានស្រាប់ ដែលត្រូវគ្នាថាបានកើនឡើងរួចហើយ ដោយមិនចាំបាច់ធ្វើសកម្មភាព
+if this item is important for you, please consider to set a bounty for it!	tracker	km	ប្រសិនបើធាតុនេះមានសារៈសំខាន់សម្រាប់អ្នក សូមពិចារណាដើម្បីកំណត់អំណោយសម្រាប់វា!
+if this item is important for you, please vote for it.	tracker	km	ប្រសិនបើធាតុនេះមានសារៈសំខាន់សម្រាប់អ្នក សូមបោះឆ្នោតឱ្យវា
+if you specify an export definition, it will be used when you export	tracker	km	ប្រសិនបើអ្នកបញ្ជាក់និយមន័យនាំចេញ វានឹងត្រូវបានប្រើនៅពេលអ្នកនាំចេញ
+if you specify an export definition, it will be used when you export*	tracker	km	ប្រសិនបើអ្នកបញ្ជាក់និយមន័យនាំចេញ វានឹងត្រូវបានប្រើនៅពេលអ្នកនាំចេញ*
+ignore	tracker	km	មិនអើពើ
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	km	មិនអើពើនឹងសំបុត្រ វានឹងនៅតែមាននៅក្នុងប្រអប់សំបុត្រ បើទោះបីជា 'លុបសំបុត្រពីម៉ាស៊ីនមេ' ខាងលើត្រូវបានធីកក៏ដោយ
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	km	មិនអើពើនឹងសំបុត្រដែលមិនស្គាល់ ពួកវានឹងមិនត្រូវបានលុបចេញពីម៉ាស៊ីនមេទេ ទោះបីជា 'លុបសំបុត្រ' ខាងលើត្រូវបានដាក់ស្លាកក៏ដោយ
+imap, ssl secured	tracker	km	IMAP, SSL មានសុវត្ថិភាព
+imap, tls secured	tracker	km	IMAP, TLS ធានា
+import options	tracker	km	ជម្រើសនាំចូល
+import tts tickets	tracker	km	នាំចូលសំបុត្រ TTS
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	km	នាំចូលធាតុទៅក្នុងកម្មវិធីតាមដានពីឯកសារ CSV  CSV មានន័យថា 'តម្លៃបំបែកដោយសញ្ញាក្បៀស' នៅក្នុងផ្ទាំងជម្រើស អ្នកក៏អាចជ្រើសរើសសញ្ញាបំបែកផ្សេងទៀត
+incoming mail folder	tracker	km	ថតសំបុត្រចូល
+incoming mail rules	tracker	km	ច្បាប់សំបុត្រចូល
+incoming mail server	tracker	km	ម៉ាស៊ីនមេសំបុត្រចូល
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	km	ទម្រង់ម៉ាស៊ីនមេមិនពេញលេញសម្រាប់ការចាត់ចែងសំបុត្រដែលបានផ្តល់ឱ្យ; បិទការចាត់ចែងសំបុត្រសម្រាប់ជួរ%1
+info only	tracker	km	ព័ត៌មានតែប៉ុណ្ណោះ
+insert	tracker	km	បញ្ចូល
+insert in document	tracker	km	បញ្ចូលក្នុងឯកសារ
+interval in minutes for checking the incoming mails	tracker	km	ចន្លោះពេលជានាទីសម្រាប់ពិនិត្យមើលសំបុត្រចូល
+introduction message	tracker	km	សារណែនាំ
+invalid	tracker	km	មិនត្រឹមត្រូវ
+item assignee	tracker	km	អ្នកទទួលធាតុ
+item creator	tracker	km	អ្នកបង្កើតធាតុ
+language	tracker	km	ភាសា
+language for the copy	tracker	km	ភាសាសម្រាប់ចម្លង
+last 3 months	tracker	km	3 ខែចុងក្រោយ
+last modified	tracker	km	កែប្រែចុងក្រោយ
+last modified by	tracker	km	កែប្រែចុងក្រោយដោយ
+last month	tracker	km	ខែមុន
+last quarter	tracker	km	ត្រីមាសចុងក្រោយ
+last reply	tracker	km	ការឆ្លើយតបចុងក្រោយ
+last reply by anyone but creator	tracker	km	ការឆ្លើយតបចុងក្រោយដោយនរណាម្នាក់ លើកលែងតែអ្នកបង្កើត
+last reply by assigned	tracker	km	ការឆ្លើយតបចុងក្រោយដោយចាត់តាំង
+last reply by creator	tracker	km	ការឆ្លើយតបចុងក្រោយដោយអ្នកបង្កើត
+last week	tracker	km	សប្ដាហ៍​មុន
+last year	tracker	km	ឆ្នាំមុន
+later	tracker	km	ពេលក្រោយ
+leaves without saveing	tracker	km	ទុកដោយមិនរក្សាទុក
+length<br>rows	tracker	km	ប្រវែង<br>ជួរដេក
+limit number of description lines (default 5, 0 for no limit)	tracker	km	កំណត់ចំនួនបន្ទាត់ពិពណ៌នា លំនាំដើម = 5, 0 = គ្មានដែនកំណត់
+link to ticket	tracker	km	ភ្ជាប់ទៅសំបុត្រ
+linked to %1	tracker	km	បានភ្ជាប់ទៅ%1
+links	tracker	km	តំណភ្ជាប់
+links and attached files	tracker	km	តំណភ្ជាប់និងឯកសារភ្ជាប់
+links to specified application.  example: {{links/infolog}}	tracker	km	តំណភ្ជាប់ទៅកម្មវិធីដែលបានបញ្ជាក់ ឧទាហរណ៍៖ {{links/infolog}}
+links wrapped in an href tag with download link	tracker	km	តំណភ្ជាប់ត្រូវបានរុំដោយស្លាក HREF ជាមួយនឹងតំណទាញយក
+list of coma separated email address	tracker	km	បញ្ជីអាសយដ្ឋានអ៊ីមែលដែលបំបែកដោយសញ្ញាក្បៀស
+list of files linked to the current record	tracker	km	បញ្ជីឯកសារដែលភ្ជាប់ទៅកំណត់ត្រាបច្ចុប្បន្ន
+mail handling	tracker	km	ការគ្រប់គ្រងសំបុត្រ
+mailbox settings used: %1	tracker	km	ការ​កំណត់​ប្រអប់​សំបុត្រ​ត្រូវ​បាន​ប្រើ៖ %1
+manage mapping	tracker	km	គ្រប់គ្រងការធ្វើផែនទី
+mark as read	tracker	km	សម្គាល់ថាបានអានហើយ
+mark as unread	tracker	km	សម្គាល់ថាមិនទាន់អាន
+match again after	tracker	km	ប្រកួតម្តងទៀតបន្ទាប់ពី
+matching filter	tracker	km	តម្រងដែលត្រូវគ្នា
+max length of the input [, length of the inputfield (optional)]	tracker	km	ប្រវែងអតិបរមានៃការបញ្ចូល [, ប្រវែងនៃវាលបញ្ចូល (ជាជម្រើស)]
+maximum %1 times	tracker	km	អតិបរមា %1 ដង
+maximum %s times	tracker	km	អតិបរមា %s ដង
+miscellaneous	tracker	km	ផ្សេងៗ
+multiple changes	tracker	km	ការផ្លាស់ប្តូរច្រើន
+name of current user, all other contact fields are valid too	tracker	km	ឈ្មោះអ្នកប្រើប្រាស់បច្ចុប្បន្ន វាលទំនាក់ទំនងផ្សេងទៀតទាំងអស់ក៏មានសុពលភាពផងដែរ
+new %1	tracker	km	ថ្មី%1
+new items	tracker	km	ធាតុថ្មី
+new ticket submitted by %1 at %2	tracker	km	សំបុត្រថ្មីត្រូវបានដាក់ជូនដោយ%1 នៅ%2
+new tickets as	tracker	km	សំបុត្រថ្មីដូចជា
+new tracker item submitted by %1 at %2	tracker	km	ធាតុកម្មវិធីតាមដានថ្មីបានដាក់ជូនដោយ %1 នៅ %2
+no change	tracker	km	គ្មានការផ្លាស់ប្តូរទេ
+no notifications	tracker	km	គ្មានការជូនដំណឹងទេ
+no trackers found, aborting	tracker	km	រកមិនឃើញកម្មវិធីតាមដានទេ បោះបង់
+no, no additional mailheader to description and comments	tracker	km	ទេ គ្មាន​ក្បាល​សំបុត្រ​បន្ថែម​សម្រាប់​ការ​ពិពណ៌នា និង​មតិយោបល់
+non-anonymous users	tracker	km	អ្នកប្រើប្រាស់ដែលមិនបញ្ចេញឈ្មោះ
+noone	tracker	km	គ្មាន​នរណា​ម្នាក់
+not-closed	tracker	km	មិនបានបិទ
+note: timesheet itself is always excluded	tracker	km	ចំណាំ៖ តារាងពេលវេលាខ្លួនឯងតែងតែត្រូវបានដកចេញ
+notification	tracker	km	សេចក្តីជូនដំណឹង
+notification message	tracker	km	សារជូនដំណឹង
+notification settings	tracker	km	ការកំណត់ការជូនដំណឹង
+notification signature	tracker	km	ហត្ថលេខាជូនដំណឹង
+number of row for a multiline inputfield or line of a multi-select-box	tracker	km	ចំនួន​ជួរ​ដេក​សម្រាប់​វាល​បញ្ចូល​ច្រើន​បន្ទាត់ ឬ​បន្ទាត់​នៃ​ប្រអប់​ជ្រើសរើស​ច្រើន​
+old fixed definition	tracker	km	និយមន័យចាស់ថេរ
+one day after	tracker	km	មួយថ្ងៃក្រោយមក
+one day in advance	tracker	km	មួយថ្ងៃជាមុន
+only explicitly named users have read access (otherwise everyone)	tracker	km	មានតែអ្នកប្រើប្រាស់ដែលមានឈ្មោះច្បាស់លាស់ប៉ុណ្ណោះដែលអាចចូលអានបាន បើមិនដូច្នេះទេអ្នកគ្រប់គ្នា
+only for admins, technicians or assigned	tracker	km	សម្រាប់តែអ្នកគ្រប់គ្រង អ្នកបច្ចេកទេស ឬចាត់តាំងប៉ុណ្ណោះ
+open(status)	tracker	km	បើក
+order	tracker	km	បញ្ជាទិញ
+out of date	tracker	km	ថ្ងៃ​ផុតកំណត់
+overdue	tracker	km	ហួសកាលកំណត់
+overdue after	tracker	km	ហួសកាលកំណត់បន្ទាប់ពី
+ownership of the ticket	tracker	km	ម្ចាស់សំបុត្រ
+pending	tracker	km	កំពុងរង់ចាំ
+pending items never get close automatic.	tracker	km	ធាតុដែលមិនទាន់ត្រូវបានបិទដោយស្វ័យប្រវត្តិ
+pending items will be closed automatic after %1 days without response.	tracker	km	ធាតុដែលមិនទាន់សម្រេចនឹងត្រូវបានបិទដោយស្វ័យប្រវត្តិបន្ទាប់ពី %1 ថ្ងៃដោយគ្មានការឆ្លើយតប
+permission denied !!!	tracker	km	ការអនុញ្ញាតត្រូវបានបដិសេធ !!!
+permissions error - %1 could not %2	tracker	km	កំហុស​ការ​អនុញ្ញាត -%1 មិន​អាច%2
+permit html editing in overview and comments	tracker	km	អនុញ្ញាតឱ្យកែសម្រួល HTML នៅក្នុងទិដ្ឋភាពទូទៅ និងមតិយោបល់
+pop3	tracker	km	POP3
+port number	tracker	km	លេខច្រក
+postponed	tracker	km	ពន្យារពេល
+pre-selected version when creating a new tracker	tracker	km	កំណែដែលបានជ្រើសរើសជាមុននៅពេលបង្កើតកម្មវិធីតាមដានថ្មី
+print entry	tracker	km	បោះពុម្ពធាតុ
+priorities	tracker	km	អាទិភាព
+priorities with empty label are not available to the user	tracker	km	អាទិភាពដែលមានស្លាកទទេមិនមានសម្រាប់អ្នកប្រើប្រាស់ទេ
+process	tracker	km	ដំណើរការ
+process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	km	ដំណើរការសារជាធម្មតា *ចំណាំ* វា​អាច​នឹង​បង្ក​ឱ្យ​មាន​បញ្ហា​សំបុត្រ​នៅ​ពេល "បាន​ផ្ញើ​ការ​ឆ្លើយតប​ដោយ​ស្វ័យ​ប្រវត្តិ" ខាងក្រោម​ត្រូវ​បាន​បើក!
+project selection	tracker	km	ការជ្រើសរើសគម្រោង
+projects	tracker	km	គម្រោង
+queue	tracker	km	ជួរ
+re-open closed tickets when a comment is added	tracker	km	បើកសំបុត្រដែលបានបិទឡើងវិញ នៅពេលដែលមតិយោបល់ត្រូវបានបន្ថែម
+read mail address	tracker	km	ត្រងប្រអប់សំបុត្រសម្រាប់អាសយដ្ឋានអ៊ីមែលនេះ
+read only filemanager directory	tracker	km	ថតឯកសារ Filemanger បានតែអាន
+receive notifications about assigned tracker-items	tracker	km	ទទួលបានការជូនដំណឹងអំពីធាតុកម្មវិធីតាមដានដែលបានកំណត់
+receive notifications about created tracker-items	tracker	km	ទទួលបានការជូនដំណឹងអំពីធាតុកម្មវិធីតាមដានដែលបានបង្កើត
+receive notifications about due entries you created or are assigned to	tracker	km	ទទួល​បាន​ការ​ជូន​ដំណឹង​អំពី​ធាតុ​កំណត់​ដែល​អ្នក​បាន​បង្កើត​ឬ​ត្រូវ​បាន​ចាត់​ឱ្យ​ទៅ​
+receive notifications about own changes in tracker-items	tracker	km	ទទួលបានការជូនដំណឹងអំពីការផ្លាស់ប្តូរផ្ទាល់ខ្លួននៅក្នុងធាតុតាមដាន
+receive notifications about starting entries you created or are assigned to	tracker	km	ទទួលបានការជូនដំណឹងអំពីការចាប់ផ្តើមធាតុដែលអ្នកបានបង្កើត ឬត្រូវបានចាត់តាំងឱ្យ
+receive notifications in html	tracker	km	ទទួលការជូនដំណឹងជា HTML
+refused to open mailbox therefore changed interval from %1 to %2	tracker	km	បដិសេធមិនបើកប្រអប់សំបុត្រ ដូច្នេះបានផ្លាស់ប្តូរចន្លោះពេលពី%1 ទៅ %2
+refused to open mailbox: %1	tracker	km	បដិសេធមិនបើកប្រអប់សំបុត្រ៖ %1
+rejected	tracker	km	ច្រានចោល
+remind	tracker	km	រំលឹក
+replacements for inserting entries into documents	tracker	km	ការជំនួសសម្រាប់ការបញ្ចូលធាតុទៅក្នុងឯកសារ
+reply also to unknown addresses	tracker	km	ឆ្លើយតបទៅអាសយដ្ឋានដែលមិនស្គាល់ផងដែរ
+reply to	tracker	km	ឆ្លើយតបទៅ
+report as bar chart by the selected criterias	tracker	km	រាយការណ៍ជាតារាងរបារតាមលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
+report as pie chart for the main criterias	tracker	km	រាយការណ៍ជាតារាងចំណិតសម្រាប់លក្ខណៈវិនិច្ឆ័យសំខាន់ៗ
+report parameter	tracker	km	រាយការណ៍ប៉ារ៉ាម៉ែត្រ
+report parameters	tracker	km	រាយការណ៍ប៉ារ៉ាម៉ែត្រ
+reporting timeframe	tracker	km	ពេលវេលារាយការណ៍
+reports	tracker	km	របាយការណ៍
+resolution	tracker	km	ដំណោះស្រាយ
+responsible	tracker	km	ទទួលខុសត្រូវ
+restict tracker items to the creator and the staff only	tracker	km	ដាក់កម្រិតធាតុតាមដានចំពោះអ្នកបង្កើត និងបុគ្គលិកតែប៉ុណ្ណោះ
+restict tracker items to the creators primary group and the staff only	tracker	km	ដាក់កម្រិតធាតុតាមដានចំពោះអ្នកបង្កើត ក្រុមចម្បង និងបុគ្គលិកតែប៉ុណ្ណោះ
+restrict tracker items to staff and:	tracker	km	ដាក់កម្រិតលើធាតុតាមដានចំពោះបុគ្គលិក និង៖
+restricted comment	tracker	km	មតិដែលបានដាក់កម្រិត
+restriction	tracker	km	ការដាក់កម្រិត
+run on existing tickets	tracker	km	ដំណើរការលើសំបុត្រដែលមានស្រាប់
+same day	tracker	km	ថ្ងៃដដែល
+save new report	tracker	km	រក្សាទុករបាយការណ៍ថ្មី
+save new report...	tracker	km	រក្សាទុករបាយការណ៍ថ្មី...
+saves the changes made and leaves	tracker	km	រក្សាទុកការផ្លាស់ប្តូរដែលបានធ្វើហើយចាកចេញ
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	km	ជ្រើសរើសកម្មវិធីតាមដានលំនាំដើមសម្រាប់សំបុត្រថ្មី ឬ 'បដិសេធ' ដើម្បីមិនអនុញ្ញាតឱ្យបង្កើតសំបុត្រតាមរយៈសំបុត្រ
+select accounts for which the custom field should be visible	tracker	km	ជ្រើសរើសគណនីដែលវាលផ្ទាល់ខ្លួនគួរតែអាចមើលឃើញ
+select existing report	tracker	km	ជ្រើសរើសរបាយការណ៍ដែលមានស្រាប់
+select how autoreplies should be sent when mails are received	tracker	km	ជ្រើសរើសពីរបៀបដែលការឆ្លើយតបដោយស្វ័យប្រវត្តិគួរតែត្រូវបានផ្ញើនៅពេលទទួលសំបុត្រ
+select multiple	tracker	km	ជ្រើសរើសច្រើន
+select one...	tracker	km	ជ្រើសរើស​មួយ...
+select tracker queue	tracker	km	ជ្រើសរើសជួរកម្មវិធីតាមដាន
+select users or groups	tracker	km	ជ្រើសរើសអ្នកប្រើប្រាស់ ឬក្រុម
+select which categories should be used in tracker for the tts categories	tracker	km	ជ្រើសរើសប្រភេទណាដែលគួរប្រើនៅក្នុងកម្មវិធីតាមដានសម្រាប់ប្រភេទ TTS
+select which username should be used when unrecognized mails are handled.	tracker	km	ជ្រើសរើស​ឈ្មោះ​អ្នក​ប្រើ​ណា​ដែល​គួរ​ត្រូវ​បាន​ប្រើ​នៅ​ពេល​ដែល​សំបុត្រ​មិន​ស្គាល់​ត្រូវ​បាន​ចាត់ចែង
+select which username should be used when unrecognized replies are handled	tracker	km	ជ្រើសរើស​ឈ្មោះ​អ្នក​ប្រើ​ណា​ដែល​គួរ​ត្រូវ​បាន​ប្រើ​នៅ​ពេល​ការ​ឆ្លើយតប​ដែល​មិន​ស្គាល់​ត្រូវ​បាន​ដោះស្រាយ
+sender address	tracker	km	អាសយដ្ឋានអ្នកផ្ញើ
+sender address for all notifications, eg. noreply@egroupware.org	tracker	km	អាសយដ្ឋានអ្នកផ្ញើសម្រាប់ការជូនដំណឹងទាំងអស់ ឧ. noreply@egroupware.org
+sent autoreplies	tracker	km	បានផ្ញើការឆ្លើយតបដោយស្វ័យប្រវត្តិ
+server type	tracker	km	ប្រភេទម៉ាស៊ីនមេ
+set %1	tracker	km	កំណត់%1
+set an own bounty (in %s)	tracker	km	កំណត់ប្រាក់រង្វាន់ផ្ទាល់ខ្លួន (គិតជា %s)
+set bounty	tracker	km	កំណត់អំណោយ
+set to	tracker	km	កំណត់​ទៅ
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	km	តើកម្មវិធីតាមដានគួរតែផ្ញើអ៊ីមែលជូនដំណឹងទៅអ្នក ប្រសិនបើធាតុតាមដានដែលបានកំណត់ឱ្យអ្នកទទួលបានបច្ចុប្បន្នភាព?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	km	តើកម្មវិធីតាមដានគួរតែផ្ញើអ៊ីមែលជូនដំណឹងដល់អ្នក ប្រសិនបើធាតុតាមដានដែលអ្នកបានបង្កើតត្រូវបានធ្វើបច្ចុប្បន្នភាព?
+should there be a tracker-box on  home screen?	tracker	km	បង្ហាញកម្មវិធីតាមដាននៅលើទំព័រដើម
+show start date and due date	tracker	km	បង្ហាញកាលបរិច្ឆេទចាប់ផ្តើម និងកាលបរិច្ឆេទផុតកំណត់
+show the tracker send you notification mails, in tracker items that you updates?	tracker	km	តើកម្មវិធីតាមដានគួរតែផ្ញើអ៊ីមែលជូនដំណឹងដល់អ្នកអំពីធាតុតាមដានដែលអ្នកបានធ្វើបច្ចុប្បន្នភាពទេ?
+signature	tracker	km	ហត្ថលេខា
+skip record	tracker	km	រំលងកំណត់ត្រា
+staff	tracker	km	បុគ្គលិក
+staff  "users" will be allowed for assignment to tracker tickets	tracker	km	បុគ្គលិក 'អ្នកប្រើប្រាស់' នឹងត្រូវបានអនុញ្ញាតសម្រាប់ការចាត់តាំងទៅសំបុត្រតាមដាន
+standard imap	tracker	km	IMAP ស្តង់ដារ
+started	tracker	km	បានចាប់ផ្តើម
+starting	tracker	km	ចាប់ផ្តើម
+state	tracker	km	រដ្ឋ
+stati	tracker	km	រដ្ឋ
+status	tracker	km	ស្ថានភាព
+store as	tracker	km	រក្សាទុកជា
+success message	tracker	km	សារជោគជ័យ
+sum	tracker	km	ផលបូក
+summary	tracker	km	សង្ខេប
+tag to mark positions for address labels	tracker	km	ដាក់ស្លាកដើម្បីសម្គាល់ទីតាំងសម្រាប់ស្លាកអាសយដ្ឋាន
+technicians	tracker	km	អ្នកបច្ចេកទេស
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	km	សាកល្បងការចាត់ចែងសំបុត្រម្តង (វានឹងដំណើរការការចាត់ចែងសំបុត្រភ្លាមៗបន្ទាប់ពីរក្សាទុក/អនុវត្តដោយមិនគិតពីចន្លោះពេល ទោះបីជាវាត្រូវបានកំណត់ឱ្យបិទក៏ដោយ)
+thank you for setting this bounty.	tracker	km	សូមអរគុណចំពោះការកំណត់ប្រាក់រង្វាន់នេះ
+thank you for voting.	tracker	km	អរគុណ​សម្រាប់​ការបោះឆ្នោត
+the bounty will not be shown, until the money is received.	tracker	km	រង្វាន់នឹងមិនត្រូវបានបង្ហាញទេ រហូតទាល់តែទទួលបានប្រាក់
+the canned response will be prefix the text you type.	tracker	km	ការឆ្លើយតបដែលបានលុបចោលអាចត្រូវបានកែសម្រួល
+the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	km	ឯកសារអាចមានកន្លែងដាក់ដូចជា {{%3}} ដែលត្រូវជំនួសដោយទិន្នន័យ (%1បញ្ជីពេញនៃឈ្មោះកន្លែងដាក់%2)
+the following document-types are supported:	tracker	km	ប្រភេទឯកសារខាងក្រោមត្រូវបានគាំទ្រ៖
+the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	km	ឈ្មោះដែលបានប្រើខាងក្នុង (<= 20 តួអក្សរ) ការផ្លាស់ប្តូរវាធ្វើឱ្យទិន្នន័យដែលមានស្រាប់មិនអាចប្រើបាន
+the text displayed to the user	tracker	km	អត្ថបទបង្ហាញដល់អ្នកប្រើប្រាស់
+there already an escalation for that filter!	tracker	km	មានការកើនឡើងសម្រាប់តម្រងនោះរួចហើយ!
+this module allows to add a ticket.	tracker	km	ម៉ូឌុលនេះអនុញ្ញាតឱ្យបន្ថែមសំបុត្រ
+this module displays information from the tracker.	tracker	km	ម៉ូឌុលនេះបង្ហាញព័ត៌មានពីកម្មវិធីតាមដាន
+this month	tracker	km	ខែ​នេះ
+this quarter	tracker	km	ត្រីមាសនេះ
+this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	km	ធាតុកម្មវិធីតាមដាននេះត្រូវបានបិទដោយស្វ័យប្រវត្តិដោយប្រព័ន្ធ វាត្រូវបានកំណត់ពីមុនទៅជាស្ថានភាពមិនទាន់សម្រេច ហើយមិនត្រូវបានឆ្លើយតបក្នុងរយៈពេល %1 ថ្ងៃ
+this week	tracker	km	ស​ប្តា​ហ៍​នេះ
+this year	tracker	km	ឆ្នាំ​នេះ
+ticket	common	km	សំបុត្រ
+ticket count	tracker	km	ចំនួនសំបុត្រ
+ticket modified by %1 at %2	tracker	km	សំបុត្របានកែប្រែដោយ%1 នៅ%2
+tickets	common	km	សំបុត្រ
+times	tracker	km	ដង
+titles of any entries linked to the current record, excluding attached files	tracker	km	ចំណងជើងនៃធាតុណាមួយដែលភ្ជាប់ទៅនឹងកំណត់ត្រាបច្ចុប្បន្ន ដោយមិនរាប់បញ្ចូលឯកសារដែលបានភ្ជាប់
+total:	tracker	km	សរុប៖
+tracker	common	km	ប្រព័ន្ធតាមដាន
+tracker added	tracker	km	បានបន្ថែមជួរតាមដាន
+tracker admins	tracker	km	អ្នកគ្រប់គ្រងកម្មវិធីតាមដាន
+tracker admins & technicians	tracker	km	អ្នកតាមដាន អ្នកគ្រប់គ្រង និងអ្នកបច្ចេកទេស
+tracker configuration	tracker	km	ការកំណត់រចនាសម្ព័ន្ធកម្មវិធីតាមដាន
+tracker csv export	tracker	km	ការនាំចេញ CSV កម្មវិធីតាមដាន
+tracker csv import	tracker	km	ការនាំចូល CSV កម្មវិធីតាមដាន
+tracker deleted	tracker	km	បានលុបជួរកម្មវិធីតាមដាន
+tracker entry can only seen by creator and admins	tracker	km	ធាតុកម្មវិធីតាមដានអាចមើលឃើញដោយអ្នកបង្កើត និងអ្នកគ្រប់គ្រងតែប៉ុណ្ណោះ
+tracker fields:	tracker	km	វាលតាមដាន៖
+tracker for new tickets	tracker	km	កម្មវិធីតាមដានសម្រាប់សំបុត្រថ្មី
+tracker for the  home screen	tracker	km	កម្មវិធីតាមដានសម្រាប់អេក្រង់ដើម
+tracker id	tracker	km	លេខសម្គាល់កម្មវិធីតាមដាន
+tracker item modified by %1 at %2	tracker	km	ធាតុកម្មវិធីតាមដានបានកែប្រែដោយ%1 នៅ%2
+tracker item not found !!!	tracker	km	រកមិនឃើញធាតុកម្មវិធីតាមដានទេ!
+tracker list	tracker	km	បញ្ជីតាមដាន
+tracker queue	tracker	km	ជួរតាមដាន
+tracker queue renamed	tracker	km	បានប្តូរឈ្មោះជួរកម្មវិធីតាមដាន
+tracker queues	tracker	km	ជួរកម្មវិធីតាមដាន
+tracker-%1 '%2' added.	tracker	km	កម្មវិធីតាមដាន-%1 '%2' បានបន្ថែម
+tracker-%1 '%2' updated.	tracker	km	កម្មវិធីតាមដាន-%1 '%2' បានធ្វើបច្ចុប្បន្នភាព
+tracker-%1 deleted.	tracker	km	កម្មវិធីតាមដាន-%1 ត្រូវបានលុប
+type of customfield	tracker	km	ប្រភេទនៃវាលផ្ទាល់ខ្លួន
+unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	km	មិនអាចបំប្លែង "%1" ទៅជាលេខសម្គាល់គណនីបានទេ ការប្រើប្រាស់ការកំណត់កម្មវិធីជំនួយ (%2) សម្រាប់ %3
+unchanged	tracker	km	មិនផ្លាស់ប្តូរ
+unlinked from %1	tracker	km	បានផ្ដាច់ពី%1
+unrecognized mails	tracker	km	សំបុត្រដែលមិនស្គាល់
+upcoming	tracker	km	នាពេលខាងមុខ
+updated	tracker	km	បានធ្វើបច្ចុប្បន្នភាព
+url of the tracker	tracker	km	URL របស់កម្មវិធីតាមដាន
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	km	URL ដែលត្រូវបញ្ចូលក្នុងការជូនដំណឹង ឧ. ទៅទំព័រដែលមានម៉ូឌុលគ្រប់គ្រងគេហទំព័រ កម្មវិធីតាមដានលំនាំដើមនៅខាងក្នុង eGW
+use a default user for mails that where not recognized	tracker	km	ប្រើអ្នកប្រើប្រាស់លំនាំដើមសម្រាប់សំបុត្រដែលមិនស្គាល់
+use all	tracker	km	ប្រើទាំងអស់
+use custom notification message	tracker	km	ប្រើសារជូនដំណឹងផ្ទាល់ខ្លួន
+use custom signature	tracker	km	ប្រើហត្ថលេខាផ្ទាល់ខ្លួន
+use field from csv if possible	tracker	km	ប្រើវាលពី CSV ប្រសិនបើអាចធ្វើបាន
+use search results	tracker	km	ប្រើលទ្ធផលស្វែងរក
+use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	km	ប្រើស្លាកនេះសម្រាប់ស្លាកអាសយដ្ឋាន ដាក់មាតិកាដែលអ្នកចង់ធ្វើម្តងទៀតរវាងស្លាកពីរ
+user or group	tracker	km	អ្នកប្រើប្រាស់ ឬក្រុម
+user preference	tracker	km	ចំណូលចិត្តអ្នកប្រើប្រាស់
+version for new tickets	tracker	km	កំណែសម្រាប់សំបុត្រថ្មី
+versions	tracker	km	កំណែ
+vote for it!	tracker	km	បោះឆ្នោតឱ្យវា!
+votes	tracker	km	ការបោះឆ្នោត
+what should be done with unknown values?	tracker	km	អ្វីដែលត្រូវធ្វើជាមួយតម្លៃដែលមិនស្គាល់?
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	km	នៅពេលដែលអ៊ីមែលត្រូវបានទទួលពីអាសយដ្ឋានអ៊ីមែលដែលមិនស្គាល់ សូមដាក់ស្លាកវាលនេះដើម្បីឱ្យពួកគេបញ្ចូលទៅក្នុងវាល CC របស់អ្នកតាមដានដោយស្វ័យប្រវត្តិ វាលនេះមិនត្រូវបានអើពើទេ ប្រសិនបើអាសយដ្ឋានអ៊ីមែលដែលមិនស្គាល់មិនត្រូវបានគ្រប់គ្រង
+wont fix	tracker	km	នឹងមិនជួសជុល
+works for me	tracker	km	ធ្វើការសម្រាប់ខ្ញុំ
+writable filemanager directory	tracker	km	ថតឯកសារគ្រប់គ្រងឯកសារដែលអាចសរសេរបាន
+yes, add mailheader to both (description and comments)	tracker	km	យល់ព្រម បន្ថែម Mailheader ទៅទាំងពីរ (ការពិពណ៌នា និងមតិយោបល់)
+yes, add mailheader to comments	tracker	km	យល់ព្រម បន្ថែម Mailheader ទៅមតិយោបល់
+yes, add mailheader to description	tracker	km	យល់ព្រម បន្ថែម Mailheader ទៅការពណ៌នា
+yes, always	tracker	km	បាទ ជានិច្ច
+yes, display groups first	tracker	km	យល់ព្រម បង្ហាញក្រុមជាមុនសិន
+yes, display users first	tracker	km	យល់ព្រម បង្ហាញអ្នកប្រើប្រាស់ជាមុនសិន
+yes, new tickets only	tracker	km	បាទ សំបុត្រថ្មីតែប៉ុណ្ណោះ
+yes, with larger fontsize	tracker	km	យល់ព្រម ជាមួយនឹងទំហំពុម្ពអក្សរធំជាង
+yesterday	tracker	km	ម្សិលមិញ
+you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	km	អ្នកអាចបើក/បិទការរឹតបន្តឹងការចូលប្រើជួរនៅក្នុងផ្ទាំងការកំណត់រចនាសម្ព័ន្ធសម្រាប់ជួរទាំងអស់
+you can respond by visiting:	tracker	km	អ្នកអាចឆ្លើយតបដោយចូលទៅកាន់៖
+you need to enter a name	tracker	km	អ្នកត្រូវបញ្ចូលឈ្មោះ
+you need to login to vote!	tracker	km	អ្នកត្រូវតែចូលដើម្បីបោះឆ្នោត!
+you need to select an entry for linking.	tracker	km	អ្នកត្រូវជ្រើសរើសធាតុសម្រាប់ការភ្ជាប់
+you need to select some entries first	tracker	km	អ្នកត្រូវជ្រើសរើសធាតុមួយចំនួនជាមុនសិន
+you need to select something to change and some tracker items!	tracker	km	អ្នកត្រូវជ្រើសរើសអ្វីមួយដើម្បីផ្លាស់ប្តូរ និងធាតុតាមដានមួយចំនួន!
+you need to specify amount, donators name and email address!	tracker	km	អ្នកត្រូវបញ្ជាក់ចំនួនទឹកប្រាក់ ឈ្មោះម្ចាស់ជំនួយ និងអាសយដ្ឋានអ៊ីមែល!
+you voted %1.	tracker	km	អ្នកបានបោះឆ្នោត%1
+♦ not closed	tracker	km	♦ មិនបានបិទ
+♦ own not closed	tracker	km	♦ ខ្លួនឯងមិនបិទ
+♦ own or assigned not closed	tracker	km	♦ កាន់កាប់ ឬចាត់ចែង មិនបានបិទ
+♦ own without reply not closed	tracker	km	♦ ជាម្ចាស់ដោយមិនឆ្លើយតប មិនបានបិទ
+♦ without 30 days reply not closed	tracker	km	♦ ដោយគ្មានការឆ្លើយតប 30 ថ្ងៃមិនត្រូវបានបិទទេ
+♦ without reply not closed	tracker	km	♦ បើគ្មានការឆ្លើយតប មិនត្រូវបានបិទទេ
