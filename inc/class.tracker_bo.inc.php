@@ -2120,15 +2120,15 @@ class tracker_bo extends tracker_so
 		if ($ticketId == 0)
 		{
 			$trackerentry = array(
-				'tr_id' => 0,
-				'tr_cc' => implode(', ',$emails),
-				'tr_summary' => $_subject,
+				'tr_id'          => 0,
+				'tr_cc'          => implode(',', $emails),
+				'tr_summary'     => $_subject,
 				'tr_description' => $_message,
-				'referer' => false,
-				'popup' => true,
-				'link_to' => array(
+				'referer'        => false,
+				'popup'          => true,
+				'link_to'        => array(
 					'to_app' => 'tracker',
-					'to_id' => 0,
+					'to_id'  => 0,
 				),
 			);
 			// find the addressbookentry to link with
