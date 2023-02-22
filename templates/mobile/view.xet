@@ -108,21 +108,21 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-					<et2-vbox span="all" width="100%">
-                        <et2-details id="description" summary="Description" title="">
+                    <et2-tabbox id="tabs" span="all" tabHeight="290">
+                        <tabs>
+                            <tab id="description" label="Description" statustext="Description"/>
+                            <tab id="details" label="Details" statustext="Details"/>
+                            <tab id="custom" label="Custom" statustext="Custom fields"/>
+                            <tab id="ownership" label="Ownership" statustext="Ownership"/>
+                        </tabs>
+                        <tabpanels>
                             <template id="tracker.view.description"/>
-                        </et2-details>
-                        <et2-details id="details" summary="Details" title="">
                             <template id="tracker.view.details"/>
-                        </et2-details>
-                        <et2-details id="custom" summary="Custom" title="">
                             <template id="tracker.view.custom"/>
-                        </et2-details>
-                        <et2-details id="ownership" summary="Ownership" title="">
-							<template id="tracker.view.ownership"/>
-						</et2-details>
-					</et2-vbox>
-				</row>
+                            <template id="tracker.view.ownership"/>
+                        </tabpanels>
+                    </et2-tabbox>
+                </row>
 			</rows>
 		</grid>
 	</template>

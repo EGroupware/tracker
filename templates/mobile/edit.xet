@@ -185,30 +185,27 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-					<et2-vbox span="all" width="100%">
-                        <et2-details id="description" summary="Description" title="">
+                    <et2-tabbox id="tabs" span="all" tabHeight="290">
+                        <tabs>
+                            <tab id="description" label="Description" statustext="Description"/>
+                            <tab id="details" label="Details" statustext="Details"/>
+                            <tab id="comments" label="Comments" statustext="Comments"/>
+                            <tab id="add_comment" label="Add comment" statustext="Add comment"/>
+                            <tab id="links" label="Links" statustext="Attachments &amp; Links"/>
+                            <tab id="custom" label="Custom" statustext="Custom fields"/>
+                            <tab id="ownership" label="Ownership" statustext="Ownership"/>
+                        </tabs>
+                        <tabpanels>
                             <template id="tracker.edit.description"/>
-                        </et2-details>
-                        <et2-details id="details" summary="Details" title="">
                             <template id="tracker.edit.details"/>
-                        </et2-details>
-                        <et2-details id="comments" summary="Comments" title="">
                             <template id="tracker.edit.comments"/>
-                        </et2-details>
-                        <et2-details id="add_comment" summary="Add comment" title="">
-							<template id="tracker.edit.add_comment"/>
-						</et2-details>
-						<et2-details  id="links" summary="Links" title="">
-							<template id="tracker.edit.links"/>
-						</et2-details>
-						<et2-details  id="custom" summary="Custom" title="">
-							<template id="tracker.edit.custom"/>
-						</et2-details>
-						<et2-details  id="ownership" summary="Ownership" title="">
-							<template id="tracker.edit.ownership"/>
-						</et2-details>
-					</et2-vbox>
-				</row>
+                            <template id="tracker.edit.add_comment"/>
+                            <template id="tracker.edit.links"/>
+                            <template id="tracker.edit.custom"/>
+                            <template id="tracker.edit.ownership"/>
+                        </tabpanels>
+                    </et2-tabbox>
+                </row>
 			</rows>
 		</grid>
 	</template>
