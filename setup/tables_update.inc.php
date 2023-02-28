@@ -841,3 +841,13 @@ function tracker_upgrade20_1_001()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '21.1';
 }
+
+/**
+ * Bump version to 23.1
+ *
+ * @return string
+ */
+function tracker_upgrade21_1()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1';
+}
