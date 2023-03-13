@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
+<overlay>
+    <template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
+        <grid width="100%">
+            <columns>
+                <column width="65"/>
+                <column width="10%" disabled="@no_tr_tracker"/>
+                <column width="10%" disabled="@no_cat_id"/>
+                <column width="10%"/>
+                <column width="40%"/>
+                <column width="40%"/>
+                <column width="135"/>
+                <column width="135" disabled="@no_tr_startdate_tr_duedate"/>
+                <column width="135"/>
+                <column width="45"/>
+                <column width="10%"/>
+                <column width="10%"/>
+                <column width="65"/>
+                <column width="135"/>
+                <column disabled="@no_tr_sum_timesheets"/>
+                <column disabled="@no_votes"/>
+                <column disabled="@no_bounties"/>
+                <column/>
+                <column width="10%"/>
+                <column width="120"/>
+            </columns>
+            <rows>
+                <row class="th">
+                    <et2-vbox>
+                        <nextmatch-sortheader label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
+                        <et2-nextmatch-header-filter id="tr_private" emptyLabel="Private"/>
+                    </et2-vbox>
+                    <nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
+                    <nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
+                    <nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
+                    <nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+                        <nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created"
+                                              sortmode="DESC"/>
+                        <nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
+                        <nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
+                    </et2-vbox>
+                    <nextmatch-sortheader label="Closed date" id="tr_closed" sortmode="DESC"/>
+                    <nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority"
+                                          sortmode="DESC"/>
+                    <et2-vbox>
+                        <et2-nextmatch-header-filter label="Status" id="tr_status" class="tracker_status_filter"
+                                                     emptyLabel="All"/>
+                    </et2-vbox>
+                    <et2-nextmatch-header-filter label="Resolution" id="tr_resolution" class="tracker_status_filter"
+                                                 emptyLabel="All"/>
+                    <nextmatch-sortheader align="center" label="Completed" id="tr_completion"
+                                          class="tracker-completion"/>
+                    <et2-vbox>
+                        <et2-nextmatch-header-account id="tr_creator" class="tracker_user_filter"
+                                                      emptyLabel="Created by"/>
+                        <et2-nextmatch-header-filter id="tr_assigned" class="tracker_user_filter"
+                                                     emptyLabel="Assigned to"/>
+                    </et2-vbox>
+                    <nextmatch-header align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"/>
+                    <nextmatch-sortheader label="Votes" id="votes" class="tracker-votes" sortmode="DESC"/>
+                    <nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties" sortmode="DESC"/>
+                    <et2-nextmatch-header-filter id="esc_id" emptyLabel="Escalation"/>
+                    <nextmatch-customfields id="customfields"/>
+                    <nextmatch-header label="Kanban" id="kanban"/>
+                </row>
+                <row class="$row_cont[enabled_color_code] $row_cont[class]" valign="top">
+                    <et2-vbox noLang="1">
+                        <et2-description id="${row}[tr_id]" noLang="1"></et2-description>
+                        <et2-select-bool id="${row}[tr_private]" readonly="true"></et2-select-bool>
+                    </et2-vbox>
+                    <et2-select id="${row}[tr_tracker]" readonly="true" noLang="1"></et2-select>
+                    <et2-select id="${row}[cat_id]" readonly="true" emptyLabel="None"></et2-select>
+                    <et2-select id="${row}[tr_version]" readonly="true" emptyLabel="None"></et2-select>
+                    <et2-description href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]"
+                                     class="$row_cont[seen_class]" extraLinkPopup="780x535" extraLinkTarget="_blank"
+                                     noLang="1"></et2-description>
+                    <et2-vbox class="colfullWidth" noLang="1">
+                        <et2-description href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]"
+                                         id="${row}[tr_summary]" class="$row_cont[seen_class]" extraLinkPopup="780x535"
+                                         extraLinkTarget="_blank" noLang="1"></et2-description>
+                        <et2-box class="trackerDes" noLang="1">
+                            <html id="${row}[tr_description]" no_lang="1"/>
+                        </et2-box>
+                    </et2-vbox>
+                    <et2-vbox readonly="true">
+                        <et2-date-time id="${row}[tr_created]" readonly="true"
+                                       class="noWrap $row_cont[overdue_class]"></et2-date-time>
+                        <et2-date-time id="${row}[tr_modified]" readonly="true" class="noWrap"></et2-date-time>
+                        <et2-select-account class="noWrap" id="${row}[tr_modifier]"
+                                            readonly="true"></et2-select-account>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <et2-date-time id="${row}[tr_startdate]" readonly="true" class="noWrap"></et2-date-time>
+                        <et2-date-time id="${row}[tr_duedate]" readonly="true"
+                                       class="noWrap $row_cont[overdue_class]"></et2-date-time>
+                    </et2-vbox>
+                    <et2-date-time id="${row}[tr_closed]" readonly="true" class="noWrap"></et2-date-time>
+                    <et2-description align="center" id="${row}[prio_label]" class="tracker_indexPrio"></et2-description>
+                    <et2-select id="${row}[tr_status]" readonly="true"></et2-select>
+                    <et2-select id="${row}[tr_resolution]" readonly="true" emptyLabel="None"></et2-select>
+                    <progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
+                    <et2-vbox>
+                        <et2-select-account class="tracker_leftPad5" id="${row}[tr_creator]"
+                                            readonly="true"></et2-select-account>
+                        <et2-select-account class="tracker_leftPad5" id="${row}[tr_assigned]"
+                                            readonly="true"></et2-select-account>
+                    </et2-vbox>
+                    <et2-date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" selectUnit="true"
+                                       displayFormat="@@duration_format"></et2-date-duration>
+                    <et2-number align="center" id="${row}[votes]" readonly="true" precision="0"></et2-number>
+                    <et2-number align="center" label="$row_cont[currency]" id="${row}[bounties]" readonly="true"
+                                noLang="1"></et2-number>
+                    <et2-date-since id="${row}[esc_start]"></et2-date-since>
+                    <customfields-list id="$row"/>
+                    <et2-link-string entryId="${row_cont[tr_id]}" application="tracker"
+                                     onlyApp="kanban"></et2-link-string>
+                </row>
+            </rows>
+        </grid>
+    </template>
+</overlay>
