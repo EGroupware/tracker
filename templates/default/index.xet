@@ -122,9 +122,11 @@
 	<template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
 		<et2-hbox>
 			<et2-description  value="Start"></et2-description>
-			<et2-date  id="startdate" onchange="widget.getParent().getWidgetById('enddate').set_min(widget.getValue());return true;"></et2-date>
+			<et2-date id="startdate"
+                      onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
 			<et2-description  value="End"></et2-description>
-			<et2-date  id="enddate" onchange="widget.getParent().getWidgetById('startdate').set_max(widget.getValue());return true;"></et2-date>
+            <et2-date id="enddate"
+                      onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
 		</et2-hbox>
 	</template>
 	<template id="tracker.index" template="" lang="" group="0" version="1.9.003">
