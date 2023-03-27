@@ -247,4 +247,7 @@ label.tracker_trIdEdit:before {
   #tracker-edit #tracker-edit_reply_message {
     height: 200px !important;
   }
+  #tracker-edit textarea#tracker-edit_tr_description {
+    height: 240px !important;
+  }
 }
