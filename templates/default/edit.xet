@@ -225,7 +225,7 @@
 				</row>
 				<row class="dialogOperators" disabled="!@tr_id">
 					<et2-description  for="tr_status" value="Status"></et2-description>
-					<et2-select  statustext="@status_help" id="tr_status"></et2-select>
+					<et2-select statustext="@status_help" id="tr_status" placement="top"></et2-select>
 					<et2-description></et2-description>
 					<et2-description  for="tr_resolution" value="Resolution"></et2-description>
 					<et2-select id="tr_resolution" placement="top"></et2-select>
