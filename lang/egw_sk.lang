@@ -17,6 +17,7 @@
 3 years ago	tracker	sk	3 roky späť
 5 - medium	tracker	sk	5 - priemerná
 9 - highest	tracker	sk	9 - najvyššia
+[fwd]	tracker	sk	[FWD]
 accepted	tracker	sk	Prijaté
 acl	tracker	sk	ACL
 activate users queue access control	tracker	sk	Zapnúť používateľskú kontrolu prístupu k frontám
@@ -122,6 +123,7 @@ data exchange settings	tracker	sk	Nastavenia výmeny údajov
 date filter	tracker	sk	Filter dátumu
 date opened	tracker	sk	Dátum otvorenia
 default document to insert entries	tracker	sk	Predvolený dokument pre vkladanie položiek
+default group	tracker	sk	Predvolená skupina
 default version for new tracker entries	tracker	sk	Predvolená verzia pre nové položky Sledovača
 define escalations	common	sk	Definovať stupňovanie
 delete mails from server	tracker	sk	Odstrániť správy zo servera
@@ -156,8 +158,9 @@ e-mail notifications	tracker	sk	E-mailové pripomienky
 each value is a line like <id>[=<label>]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
 each value is a line like id[=label]	tracker	sk	každá hodnota je riadok ako <id>[=<label>]
 edit %1	tracker	sk	Upraviť %1
-edit comment	tracker	sk	Upraviť poznámku
 edit entry	tracker	sk	Upraviť položku
+edit others' comments	tracker	sk	Upraviť poznámky ostatných
+edit own comments	tracker	sk	Upraviť vlastné poznámky
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	sk	EGroupware - obsluha e-mailov Sledovača: raz sa už nepodarilo pripojiť, a profil sa odvtedy nezmenil
 email address to contact you	tracker	sk	Vaša e-mailová adresa
 email handling can be configured only for all trackers	tracker	sk	Obsluha e-mailov sa dá konfigurovať len pre všetky sledovače.
@@ -238,6 +241,7 @@ introduction message	tracker	sk	Úvodná správa
 invalid	tracker	sk	Neplatné
 item assignee	tracker	sk	Zodpovedný za záležitosť
 item creator	tracker	sk	Ohlasovateľ záležitosti
+language	tracker	sk	Jazyk
 language for the copy	tracker	sk	Jazyk kópie
 last 3 months	tracker	sk	Posledné 3 mesiace
 last modified	tracker	sk	Naposledy zmenené
@@ -322,7 +326,9 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	sk	Výber projektov
 projects	tracker	sk	Projekty
 queue	tracker	sk	Fronta
+re-open closed tickets when a comment is added	tracker	sk	Znovu otvoriť uzavreté karty
 read mail address	tracker	sk	Filtrovať poštu pre túto e-mailovú adresu
+read only filemanager directory	tracker	sk	Priečinok Správcu súborov iba na čítanie
 receive notifications about assigned tracker-items	tracker	sk	Dostávať pripomienky o priradených záležitostiach Sledovača
 receive notifications about created tracker-items	tracker	sk	Dostávať pripomienky o vytvorených záležitostiach Sledovača
 receive notifications about due entries you created or are assigned to	tracker	sk	Dostávať pripomienky o položkách v termíne ukončenia ktoré ste vytvorili alebo za ktoré ste zodpovední
@@ -466,6 +472,7 @@ what should be done with unknown values?	tracker	sk	Čo sa má diať s neznámym
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	sk	Keď sa prijmajú správy z neznámych adries, a chcete mať tieto adresy automaticky pridané do poľa Kópia, začiarknite toto pole. Toto pole sa ignoruje ak nie je aktivovaná obsluha nerozpoznaných adries.
 wont fix	tracker	sk	Nebude sa riešiť
 works for me	tracker	sk	Mne to funguje
+writable filemanager directory	tracker	sk	Zapisovateľný priečinok Správcu súborov
 yes, add mailheader to both (description and comments)	tracker	sk	Áno, pridať hlavičku správy aj do opisu, aj do poznámky
 yes, add mailheader to comments	tracker	sk	Áno, pridať hlavičku správy do poznámky
 yes, add mailheader to description	tracker	sk	Áno, pridať hlavičku správy do opisu
