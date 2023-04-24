@@ -1704,7 +1704,18 @@ class tracker_bo extends tracker_so
 		$ids = $this->query_list($this->table_name.'.tr_id','',array('tr_tracker' => $tracker));
 		if ($ids) $this->historylog->delete($ids);
 
-		$GLOBALS['egw']->categories->delete($tracker,true);
+		$GLOBALS['egw']->categories->delete($tracker, true);
+
+		// Remove from customfields
+		$cfs = Api\Storage\Customfields::get('tracker');
+		foreach($cfs as &$cf)
+		{
+			if(is_array($cf['type2']) && in_array($tracker, $cf['type2']))
+			{
+				array_splice($cf['type2'], array_search($tracker, $cf['type2']), 1);
+			}
+		}
+		Api\Storage\Customfields::save('tracker', $cfs);
 
 		$this->reload_labels();
 		unset($this->admins[$tracker]);
