@@ -350,6 +350,7 @@ report parameter	tracker	de	Parameter der Berichte
 report parameters	tracker	de	Parameter für Ihren Bericht
 reporting timeframe	tracker	de	Zeitfenster der Berichte
 reports	tracker	de	Berichte
+respect timesheet run and read permissions for time totals	tracker	de	Respektieren Sie die Ausführungs- und Leseberechtigungen für Zeittabellen
 resolution	tracker	de	Lösung
 responsible	tracker	de	Verantwortlich
 restict tracker items to the creator and the staff only	tracker	de	Tickets auf Ersteller und Mitarbeiter einschränken

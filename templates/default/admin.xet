@@ -322,25 +322,29 @@
                 </row>
                 <row class="row" disabled="@tracker">
                     <et2-checkbox  statustext="Allow creation of infolog entries from tracker tickets" id="allow_infolog"></et2-checkbox>
-                    <et2-description  value="Allow creation of infolog entries from tracker tickets" span="3"></et2-description>
+                    <et2-description value="Allow creation of infolog entries from tracker tickets" span="3"></et2-description>
                 </row>
                 <row disabled="@tracker">
-                    <et2-checkbox  id="allow_restricted_comments"></et2-checkbox>
-                    <et2-description  value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"></et2-description>
+                    <et2-checkbox id="allow_restricted_comments"></et2-checkbox>
+                    <et2-description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"></et2-description>
                 </row>
                 <row disabled="@tracker">
-                    <et2-checkbox  id="comment_reopens"></et2-checkbox>
-                    <et2-description  value="Re-open closed tickets when a comment is added" span="all"></et2-description>
+                    <et2-checkbox id="comment_reopens"></et2-checkbox>
+                    <et2-description value="Re-open closed tickets when a comment is added" span="all"></et2-description>
+                </row>
+                <row disabled="@tracker">
+                    <et2-checkbox id="respect_timesheet_rights"></et2-checkbox>
+                    <et2-description value="Respect timesheet run and read permissions for time totals" span="all" labelFor="respect_timesheet_rights"></et2-description>
                 </row>
                 <row class="th">
-                    <et2-description  value="E-Mail notifications" span="all"></et2-description>
+                    <et2-description value="E-Mail notifications" span="all"></et2-description>
                 </row>
                 <row class="row">
-                    <et2-description  for="notification_sender" value="Sender address"></et2-description>
-                    <et2-textbox  statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]"></et2-textbox>
-                    <et2-description  for="notification_link" value="URL of the tracker"></et2-description>
+                    <et2-description for="notification_sender" value="Sender address"></et2-description>
+                    <et2-textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]"></et2-textbox>
+                    <et2-description for="notification_link" value="URL of the tracker"></et2-description>
                     <et2-textbox
- statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]"></et2-textbox>
+                            statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]"></et2-textbox>
                 </row>
                 <row class="row">
                     <et2-description  value="Copy to"></et2-description>

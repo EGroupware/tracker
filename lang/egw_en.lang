@@ -351,6 +351,7 @@ report parameter	tracker	en	Report parameter
 report parameters	tracker	en	Report parameters
 reporting timeframe	tracker	en	Reporting Timeframe
 reports	tracker	en	Reports
+respect timesheet run and read permissions for time totals	tracker	en	Respect timesheet run and read permissions for time totals
 resolution	tracker	en	Resolution
 responsible	tracker	en	Responsible
 restict tracker items to the creator and the staff only	tracker	en	Restrict tracker items to the creator and the staff only

@@ -1047,12 +1047,19 @@ class tracker_ui extends tracker_bo
 		}
 
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
-		$total = parent::get_rrows($query,$rows,$readonlys,$this->allow_voting||$this->allow_bounties||$join, $need_full_no_count, $only_keys, $extra_cols);	// true = count votes and/or bounties
+		$total = parent::get_rrows($query, $rows, $readonlys, $this->allow_voting || $this->allow_bounties || $join, $need_full_no_count, $only_keys, $extra_cols);    // true = count votes and/or bounties
 		$prio_labels = $prio_tracker = $prio_cat = null;
+		$reset_timesheet = false;
+		if(!$this->respect_timesheet_rights && !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+		{
+			$reset_timesheet = true;
+			$GLOBALS['egw_info']['user']['apps']['timesheet'] = true;
+		}
+		$timesheet_bo = new timesheet_bo();
 		foreach($rows as $n => $row)
 		{
 			// Check if this is a new (unseen) ticket for the current user
-			if (self::seen($row, false))
+			if(self::seen($row, false))
 			{
 				$rows[$n]['seen_class'] = 'tracker_seen';
 			}
@@ -1108,35 +1115,44 @@ class tracker_ui extends tracker_bo
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				unset($links);
-				if (($links = Link::get_links('tracker',$row['tr_id'])) &&
-					isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+				if(($links = Link::get_links('tracker', $row['tr_id'])))
 				{
 					// loop through all links of the entries
 					$timesheets = array();
-					foreach ($links as $link)
+					foreach($links as $link)
 					{
-						if ($link['app'] == 'projectmanager')
+						if($link['app'] == 'projectmanager')
 						{
 							//$info['pm_id'] = $link['id'];
 						}
-						if ($link['app'] == 'timesheet') $timesheets[] = $link['id'];
+						if($link['app'] == 'timesheet')
+						{
+							$timesheets[] = $link['id'];
+						}
 					}
-					if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+					if(isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 					{
-						$sum = ExecMethod('timesheet.timesheet_bo.sum',$timesheets);
+						$sum = $timesheet_bo->sum($timesheets, !$this->respect_timesheet_rights);
 						$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
 					}
 				}
 			}
 			// do NOT display public tickets with "No", just display "Yes" for private ticktes
-			if ((string)$row['tr_private'] === '0') $rows[$n]['tr_private'] = '';
+			if((string)$row['tr_private'] === '0')
+			{
+				$rows[$n]['tr_private'] = '';
+			}
 
 			//_debug_array($rows[$n]);
 			//echo "<p>".$this->trackers[$row['tr_tracker']]."</p>";
-			$id=$row['tr_id'];
+			$id = $row['tr_id'];
+		}
+		if($reset_timesheet)
+		{
+			unset($GLOBALS['egw_info']['user']['apps']['timesheet']);
 		}
 
-		$this->get_rows_options($rows,$tracker,$trackers);
+		$this->get_rows_options($rows, $tracker, $trackers);
 
 		// disable start date / due date column, if disabled in config
 		if(!$this->show_dates)
@@ -1536,7 +1552,7 @@ class tracker_ui extends tracker_bo
 				$tracker = @key($this->trackers);
 			}
 			// disable times column, if no timesheet rights
-			if (!isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
+			if($this->respect_timesheet_rights && !isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
 				$content['nm']['options-selectcols']['tr_sum_timesheets'] = false;
 			}
