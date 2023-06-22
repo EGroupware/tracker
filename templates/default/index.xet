@@ -27,34 +27,37 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<et2-vbox>
-						<nextmatch-sortheader label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
-						<et2-nextmatch-header-filter  id="tr_private" emptyLabel="Private"/>
-					</et2-vbox>
-					<nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
-					<nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
-					<nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
-					<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
-					<et2-vbox>
-						<nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
-						<nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
-					</et2-vbox>
-					<et2-vbox>
-						<nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
-						<nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
-					</et2-vbox>
-					<et2-vbox>
-						<nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
-						<nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
-					</et2-vbox>
-					<nextmatch-sortheader label="Closed date" id="tr_closed" sortmode="DESC"/>
-					<nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
-					<et2-vbox>
-						<et2-nextmatch-header-filter  label="Status" id="tr_status" class="tracker_status_filter" emptyLabel="All"/>
-					</et2-vbox>
-					<et2-nextmatch-header-filter  label="Resolution" id="tr_resolution" class="tracker_status_filter" emptyLabel="All"/>
-					<nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
-					<et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
+                        <et2-nextmatch-header-filter id="tr_private" emptyLabel="Private"/>
+                    </et2-vbox>
+                    <nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
+                    <nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
+                    <nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+                        <et2-nextmatch-header-filter emptyLabel="Read / unread" id="read"></et2-nextmatch-header-filter>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Summary" id="tr_summary" options="1" class="tracker-summary"/>
+                        <nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
+                        <nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
+                    </et2-vbox>
+                    <et2-vbox>
+                        <nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
+                        <nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
+                    </et2-vbox>
+                    <nextmatch-sortheader label="Closed date" id="tr_closed" sortmode="DESC"/>
+                    <nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
+                    <et2-vbox>
+                        <et2-nextmatch-header-filter label="Status" id="tr_status" class="tracker_status_filter" emptyLabel="All"/>
+                    </et2-vbox>
+                    <et2-nextmatch-header-filter label="Resolution" id="tr_resolution" class="tracker_status_filter" emptyLabel="All"/>
+                    <nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
+                    <et2-vbox>
 						<et2-nextmatch-header-account  id="tr_creator" class="tracker_user_filter" emptyLabel="Created by"/>
 						<et2-nextmatch-header-filter  id="tr_assigned" class="tracker_user_filter" emptyLabel="Assigned to"/>
 					</et2-vbox>
