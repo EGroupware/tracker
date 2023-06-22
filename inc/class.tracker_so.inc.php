@@ -265,26 +265,32 @@ class tracker_so extends Api\Storage
 				else
 				{
 					$escalation = new tracker_escalations(abs($filter['esc_id']));
-					$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE,$f = $escalation->get_filter());
+					$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE, $f = $escalation->get_filter());
 					//echo "filter($filter[esc_id])='$fs'="; _debug_array($f);
-					$extra_cols[] = $escalation->get_time_col().' AS esc_start';
+					$extra_cols[] = $escalation->get_time_col() . ' AS esc_start';
 				}
 			}
 			unset($filter['esc_id']);
 		}
-		if ($need_private_acl)
+		if(is_array($filter) && array_key_exists('read', $filter) && $filter['read'] !== '')
 		{
-			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
-				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
+			$filter[] = 'tr_seen ' . (!$filter['read'] ? ' NOT ' : '') . $this->db->capabilities['case_insensitive_like'] .
+				' "%i:' . $this->user . ';%"';
+			unset($filter['read']);
 		}
-		if (is_string($criteria) && $criteria)
+		if($need_private_acl)
+		{
+			$filter[] = '(tr_private=0 OR tr_creator=' . $this->user . ' OR tr_assigned IN (' . $this->user . ',' .
+				implode(',', $GLOBALS['egw']->accounts->memberships($this->user, true)) . '))';
+		}
+		if(is_string($criteria) && $criteria)
 		{
 			$criteria = $this->search2criteria($criteria, $wildcard, $op);
-			$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
+			$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
 		}
 		elseif(isset($criteria['tr_id']))
 		{
-			$criteria[self::TRACKER_TABLE.'.tr_id'] = $criteria['tr_id'];
+			$criteria[self::TRACKER_TABLE . '.tr_id'] = $criteria['tr_id'];
 			unset($criteria['tr_id']);
 		}
 

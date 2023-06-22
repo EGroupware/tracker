@@ -1444,6 +1444,7 @@ class tracker_ui extends tracker_bo
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			// Still need to provide options for the column filter
 			'tr_private'  => array('No', 'Yes'),
+			'read' => array('Unread', 'Read')
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
