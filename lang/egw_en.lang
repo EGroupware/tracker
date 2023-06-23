@@ -328,6 +328,8 @@ project selection	tracker	en	Project selection
 projects	tracker	en	Projects
 queue	tracker	en	Queue
 re-open closed tickets when a comment is added	tracker	en	Re-open closed tickets when a comment is added
+read	tracker	en	Read
+read / unread	tracker	en	Read / unread
 read mail address	tracker	en	Filter mailbox for this mail address
 read only filemanager directory	tracker	en	Read-only Filemanger directory
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker items
@@ -451,6 +453,7 @@ type of customfield	tracker	en	Type of customfield
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	en	Unable to convert "%1" to account ID. Using plugin setting (%2) for %3.
 unchanged	tracker	en	Unchanged
 unlinked from %1	tracker	en	Unlinked from %1
+unread	tracker	en	Unread
 unrecognized mails	tracker	en	Unrecognized mails
 upcoming	tracker	en	Upcoming
 updated	tracker	en	Updated

@@ -851,3 +851,22 @@ function tracker_upgrade21_1()
 {
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1';
 }
+
+function tracker_upgrade23_1()
+{
+	// Update column name summary -> summary, read/unread so it doesn't disappear
+	$change = function ($attr, $old_value)
+	{
+		error_log(print_r($attr, true));
+		error_log(print_r($old_value, true));
+		if(!$old_value || is_string($old_value) && !str_contains($old_value, 'tr_summary') ||
+			is_array($old_value) && !in_array('tr_summary', $old_value)
+		)
+		{
+			return $old_value;
+		}
+		return str_replace('tr_summary,', 'tr_summary_read,', $old_value);
+	};
+	Api\Preferences::change_preference('tracker', 'nextmatch-tracker.index.rows', $change);
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.001';
+}
