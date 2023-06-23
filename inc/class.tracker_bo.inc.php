@@ -2130,26 +2130,28 @@ class tracker_bo extends tracker_so
 		// we have to check if we know this ticket before proceeding
 		if ($ticketId == 0)
 		{
-			$trackerentry = array(
-				'tr_id'          => 0,
-				'tr_cc'          => implode(',', $emails),
-				'tr_summary'     => $_subject,
-				'tr_description' => $_message,
-				'referer'        => false,
-				'popup'          => true,
-				'link_to'        => array(
-					'to_app' => 'tracker',
-					'to_id'  => 0,
-				),
+			$trackerentry = $this->init(
+				array(
+					'tr_id'          => 0,
+					'tr_cc'          => implode(',', $emails),
+					'tr_summary'     => $_subject,
+					'tr_description' => $_message,
+					'referer'        => false,
+					'popup'          => true,
+					'link_to'        => array(
+						'to_app' => 'tracker',
+						'to_id'  => 0,
+					),
+				)
 			);
 			// find the addressbookentry to link with
 			$addressbook = new Api\Contacts();
 			$contacts = array();
 			$filter = array();
-			foreach ($emails as $mailadr)
+			foreach($emails as $mailadr)
 			{
 				// for LDAP, AD or UCS, check if the email belongs to an account first
-				if ($GLOBALS['egw']->accounts->name2id($mailadr, 'account_email'))
+				if($GLOBALS['egw']->accounts->name2id($mailadr, 'account_email'))
 				{
 					$filter['owner'] = 0;
 				}
