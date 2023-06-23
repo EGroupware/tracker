@@ -392,6 +392,7 @@ skip record	tracker	de	Eintrag überspringen
 staff	tracker	de	Mitarbeiter
 staff  "users" will be allowed for assignment to tracker tickets	tracker	de	Mitarbeiter "Benutzer" können Tickets zugewiesen bekommen
 standard imap	tracker	de	IMAP, unverschlüsselt
+start date from email	tracker	de	Setze Startdatum basierend auf der E-Mail
 started	tracker	de	gestartet
 starting	tracker	de	wird gestartet
 state	tracker	de	Status

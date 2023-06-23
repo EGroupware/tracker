@@ -751,8 +751,15 @@ class tracker_mailhandler extends tracker_bo
 			$this->data['tr_tracker'] = $this->mailhandling[$queue]['default_tracker'];
 			$this->data['cat_id'] = $this->mailhandling[$queue]['default_cat'];
 			$this->data['tr_version'] = $this->mailhandling[$queue]['default_version'];
-			$this->data['tr_priority'] = 5;
-			if (!$senderIdentified && isset($this->mailSender))  $this->data['tr_creator'] = $this->user = $this->mailSender;
+			if($this->mailhandling[$queue]['startdate_from_email'])
+			{
+				$this->data['tr_startdate'] = (new Api\DateTime($mailcontent['headers']['DATE']))->setUser()
+																								 ->format('ts');
+			}
+			if(!$senderIdentified && isset($this->mailSender))
+			{
+				$this->data['tr_creator'] = $this->user = $this->mailSender;
+			}
 			//error_log(__METHOD__.__LINE__.array2string($this->data));
 		}
 		else

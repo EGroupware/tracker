@@ -453,27 +453,27 @@
 					<et2-select  statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail." id="mailhandling[default_tracker]" emptyLabel="Reject"></et2-select>
 				</row>
 				<row class="row">
-					<et2-description></et2-description>
-					<et2-description></et2-description>
-					<et2-box  span="2">
-						<grid>
-							<columns>
-								<column width="199"/>
-								<column/>
-							</columns>
-							<rows>
-								<row>
-									<et2-description  value="Category for new tickets"></et2-description>
-									<et2-select  class="tracker_cat_select" id="mailhandling[default_cat]" emptyLabel="select one"></et2-select>
-								</row>
-								<row>
-									<et2-description  value="Version for new tickets"></et2-description>
-									<et2-select  class="tracker_cat_select" id="mailhandling[default_version]" emptyLabel="select one"></et2-select>
-								</row>
-							</rows>
-						</grid>
-					</et2-box>
-				</row>
+                    <et2-description value="Start date from email"></et2-description>
+                    <et2-checkbox id="mailhandling[startdate_from_email]" statustext="Set the ticket start date to the email received date"></et2-checkbox>
+                    <et2-box span="2">
+                        <grid>
+                            <columns>
+                                <column width="199"/>
+                                <column/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <et2-description value="Category for new tickets"></et2-description>
+                                    <et2-select class="tracker_cat_select" id="mailhandling[default_cat]" emptyLabel="select one"></et2-select>
+                                </row>
+                                <row>
+                                    <et2-description value="Version for new tickets"></et2-description>
+                                    <et2-select class="tracker_cat_select" id="mailhandling[default_version]" emptyLabel="select one"></et2-select>
+                                </row>
+                            </rows>
+                        </grid>
+                    </et2-box>
+                </row>
 				<row class="row">
 					<et2-description  value="Unrecognized mails"></et2-description>
 					<radio statustext="Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged." label="Ignore" id="mailhandling[unrecognized_mails]" set_value="ignore" />

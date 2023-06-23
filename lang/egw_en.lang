@@ -382,6 +382,7 @@ server type	tracker	en	Server type
 set %1	tracker	en	Set %1
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
 set bounty	tracker	en	Set bounty
+set the ticket start date to the email received date	tracker	en	Set the ticket start date to the email received date
 set to	tracker	en	Set to
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
@@ -393,6 +394,7 @@ skip record	tracker	en	Skip record
 staff	tracker	en	Staff
 staff  "users" will be allowed for assignment to tracker tickets	tracker	en	Staff 'Users' will be allowed for assignment to tracker tickets
 standard imap	tracker	en	Standard IMAP
+start date from email	tracker	en	Start date from email
 started	tracker	en	Started
 starting	tracker	en	Starting
 state	tracker	en	State
