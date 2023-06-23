@@ -328,6 +328,8 @@ project selection	tracker	de	Projektauswahl
 projects	tracker	de	Projekte
 queue	tracker	de	Queue
 re-open closed tickets when a comment is added	tracker	de	Setze geschlossene Tickets auf offen, wenn ein Kommentar hinzugefügt wird
+read	tracker	de	Gelesen
+read / unread	tracker	de	Gelesen / ungelesen
 read mail address	tracker	de	Verarbeitung nur dieser Mailadresse
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
@@ -451,6 +453,7 @@ type of customfield	tracker	de	Typ des Benutzerdefinierten Feldes
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	de	Das System konnte "%1" nicht in die Benutzer-ID umwandeln. Verwenden Sie besser die Einstellung (%2) für %3.
 unchanged	tracker	de	Unverändert
 unlinked from %1	tracker	de	Verknüpfung entfernt von %1
+unread	tracker	de	Ungelesen
 unrecognized mails	tracker	de	Nicht zuordenbare E-Mails
 upcoming	tracker	de	anstehend
 updated	tracker	de	aktualisiert
