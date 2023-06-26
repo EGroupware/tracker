@@ -216,6 +216,11 @@ class tracker_ui extends tracker_bo
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)array_pop($this->data['tr_tracker']);
 				}
+				// Don't send empty or we won't get the default
+				if(empty($regardInInit['tr_tracker']))
+				{
+					unset($regardInInit['tr_tracker']);
+				}
 			}
 
 
@@ -1193,9 +1198,9 @@ class tracker_ui extends tracker_bo
 		$versions =  $resolutions = $statis = array();
 		foreach((array)$tracker as $tr_id)
 		{
-			$versions += $this->get_tracker_labels('version',$tr_id);
-			$cats += $this->get_tracker_labels('cat',$tr_id);
-			$resolutions += $this->get_tracker_labels('resolution',$tr_id);
+			$versions += $this->get_tracker_labels('version', $tr_id);
+			$cats += $this->get_tracker_labels('cat', $tr_id);
+			$resolutions += $this->get_tracker_labels('resolution', $tr_id);
 			$statis += $this->get_tracker_stati($tr_id);
 		}
 
