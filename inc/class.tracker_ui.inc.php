@@ -1172,14 +1172,19 @@ class tracker_ui extends tracker_bo
 		}
 		else
 		{
-			$tracker = (Array)$selected_trackers;
+			$tracker = (array)$selected_trackers;
 		}
 		$rows['sel_options']['tr_assigned'] = array('not' => lang('Not assigned'));
+		$rows['sel_options']['tr_creator'] = array(
+			[
+				'value' => $GLOBALS['egw_info']['user']['account_id'],
+				'label' => Api\Accounts::title($GLOBALS['egw_info']['user']['account_id'])
+			]);
 
 		// Add allowed staff
 		foreach((array)$tracker as $tr_id)
 		{
-			$rows['sel_options']['tr_assigned'] += $this->get_staff($tr_id,2,$this->allow_assign_users?'usersANDtechnicians':'technicians');
+			$rows['sel_options']['tr_assigned'] += $this->get_staff($tr_id, 2, $this->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
 		}
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 		unset($rows['sel_options']['assigned']['not']);
