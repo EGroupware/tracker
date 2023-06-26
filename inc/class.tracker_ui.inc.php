@@ -1925,7 +1925,7 @@ width:100%;
 		else
 		{
 			// Wrap a pre tag if we are using html editor
-			$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
+			$message = $this->htmledit ? "<pre>" . $mailContent['message'] . "</pre>" : $mailContent['message'];
 		}
 
 		$ticket = $this->prepare_import_mail(
@@ -1935,6 +1935,11 @@ width:100%;
 			$mailContent['attachments'],
 			$mailContent['entry_id']
 		);
+		if(empty($ticket['tr_startdate']) && $mailContent['date'])
+		{
+			$ticket['tr_startdate'] = $mailContent['date'];
+		}
+		$this->edit($ticket);
 
 		// Make sure to open as popup
 		$ticket['popup'] = true;
