@@ -1925,7 +1925,10 @@ width:100%;
 			$mailContent['attachments'],
 			$mailContent['entry_id']
 		);
-		if(empty($ticket['tr_startdate']) && $mailContent['date'])
+		if(empty($ticket['tr_startdate']) && $mailContent['date'] && (
+				$this->mailhandling[$ticket['tr_tracker']]['startdate_from_email'] ||
+				$this->mailhandling[0]['startdate_from_email']
+			))
 		{
 			$ticket['tr_startdate'] = $mailContent['date'];
 		}
