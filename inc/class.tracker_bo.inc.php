@@ -322,7 +322,7 @@ class tracker_bo extends tracker_so
 		'user_category_preference', 'default_group',    // tracker specific
 		'field_acl', 'allow_assign_groups', 'allow_voting', 'overdue_days', 'pending_close_days', 'htmledit',
 		'create_new_as_private', 'allow_assign_users', 'allow_infolog', 'allow_restricted_comments', 'mailhandling',
-		'enabled_color_code_for',    // tracker unspecific
+		'enabled_color_code_for', 'default_tracker',   // tracker unspecific
 		'allow_bounties', 'currency', 'enabled_queue_acl_access', 'exclude_app_on_timesheetcreation', 'show_dates',
 		'comment_reopens'
 	);
@@ -411,7 +411,7 @@ class tracker_bo extends tracker_so
 		if (isset($keys['tr_tracker'])&&!empty($keys['tr_tracker'])) $this->data['tr_tracker']=$keys['tr_tracker'];
 		if (is_array($this->trackers)&&(!isset($this->data['tr_tracker'])||empty($this->data['tr_tracker'])))	// init is called from Api\Storage\Base::__construct(), where $this->trackers is NOT set
 		{
-			$this->data['tr_tracker'] = key($this->trackers);	// Need some tracker so creator rights are correct
+			$this->data['tr_tracker'] = $this->default_tracker ?: key($this->trackers);    // Need some tracker so creator rights are correct
 		}
 		$this->data['tr_creator'] = $GLOBALS['egw_info']['user']['account_id'];
 		$this->data['tr_private'] = $this->create_new_as_private ?? null;

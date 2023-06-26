@@ -233,7 +233,7 @@
     <template id="tracker.admin.config" template="" lang="" group="0" version="1.9.004">
         <grid width="100%" overflow="auto">
             <columns>
-                <column width="100"/>
+                <column width="150"/>
                 <column/>
                 <column/>
                 <column width="40%"/>
@@ -266,11 +266,17 @@
                     <et2-description  for="enabled_queue_acl_access" value="Activate users queue access control"></et2-description>
                     <et2-checkbox  statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="app.tracker.acl_queue_access()"></et2-checkbox>
                 </row>
+                <row class="row" disabled="@tracker">
+                    <et2-description for="default_tracker" value="Default tracker queue"></et2-description>
+                    <et2-select id="default_tracker"></et2-select>
+                    <et2-description></et2-description>
+                    <et2-description></et2-description>
+                </row>
                 <row class="row">
-                    <et2-description  for="default_group" value="Default group"></et2-description>
-                    <et2-select  id="default_group"></et2-select>
-                    <et2-description  for="enabled_color_code_for" value="Enable color code for"></et2-description>
-                    <et2-select  id="enabled_color_code_for">
+                    <et2-description for="default_group" value="Default group"></et2-description>
+                    <et2-select id="default_group"></et2-select>
+                    <et2-description for="enabled_color_code_for" value="Enable color code for"></et2-description>
+                    <et2-select id="enabled_color_code_for">
                         <option value="">None</option>
                         <option value="tracker">Tracker queues</option>
                         <option value="cat">Categories</option>
