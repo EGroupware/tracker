@@ -470,6 +470,12 @@
                                     <et2-description value="Version for new tickets"></et2-description>
                                     <et2-select class="tracker_cat_select" id="mailhandling[default_version]" emptyLabel="select one"></et2-select>
                                 </row>
+                                <row>
+                                    <et2-description value="Due date for new tickets" for="mailhandling[due_date]"></et2-description>
+                                    <et2-number id="mailhandling[due_date]" precision="0">
+                                        <et2-description value="days" slot="suffix"></et2-description>
+                                    </et2-number>
+                                </row>
                             </rows>
                         </grid>
                     </et2-box>
