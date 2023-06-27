@@ -149,6 +149,7 @@ class tracker_escalations extends Api\Storage\Base2
 							'esc_tr_version'  => lang('version'),
 							'esc_tr_assigned' => lang('assigned to'),
 							'esc_tr_resolution'=>lang('resolution'),
+							'esc_tr_duedate' => lang('due date')
 						);
 					}
 					$action = lang('Set %1',$col2action[$key]).': ';
@@ -183,14 +184,17 @@ class tracker_escalations extends Api\Storage\Base2
 								$action .= lang(tracker_bo::$stati[$value]);
 								break;
 							}
-							// fall through for category labels
+						// fall through for category labels
 						case 'esc_cat_id':
 						case 'esc_tr_version':
 						case 'esc_tr_tracker':
 							$action .= $GLOBALS['egw']->categories->id2name($value);
 							break;
 						case 'esc_reply_message':
-							$action = ($data['esc_reply_visible'] ? lang('Add restricted comment') : lang('Add comment')).":\n".$value;
+							$action = ($data['esc_reply_visible'] ? lang('Add restricted comment') : lang('Add comment')) . ":\n" . $value;
+							break;
+						case 'esc_tr_duedate':
+							$action .= (is_numeric($value) ? lang("%1 days", $value) : $value);
 							break;
 					}
 					$actions[] = $action;
@@ -352,13 +356,25 @@ class tracker_escalations extends Api\Storage\Base2
 						break;
 					case 'notify':
 						break;
-					case 'tr_assigned':
-						if ($this->set['add_assigned'])
+					case 'tr_duedate':
+						$due_date = (new Api\DateTime($ticket['tr_duedate']))
+							->setUser()
+							->modify(is_numeric($value) ?
+										 '+' . ((int)$value) . ' days' :
+										 $value
+							);
+						if($due_date !== false)
 						{
-							$ticket['tr_assigned'] = array_unique(array_merge($ticket['tr_assigned'],(array)$value));
+							$ticket['tr_duedate'] = $due_date->format('ts');
+						}
+						break;
+					case 'tr_assigned':
+						if($this->set['add_assigned'])
+						{
+							$ticket['tr_assigned'] = array_unique(array_merge($ticket['tr_assigned'], (array)$value));
 							break;
 						}
-						// fall through for SET assigned
+					// fall through for SET assigned
 					default:
 						$ticket[$name] = $value;
 						break;

@@ -756,6 +756,19 @@ class tracker_mailhandler extends tracker_bo
 				$this->data['tr_startdate'] = (new Api\DateTime($mailcontent['headers']['DATE']))->setUser()
 																								 ->format('ts');
 			}
+			if($this->mailhandling[$queue]['due_date'])
+			{
+				$due_date = (new Api\DateTime($mailcontent['headers']['DATE']))
+					->setUser()
+					->modify(is_numeric($this->mailhandling[$queue]['due_date']) ?
+								 '+' . ((int)$this->mailhandling[$queue]['due_date']) . ' days' :
+								 $this->mailhandling[$queue]['due_date']
+					);
+				if($due_date !== false)
+				{
+					$this->data['tr_duedate'] = $due_date->format('ts');
+				}
+			}
 			if(!$senderIdentified && isset($this->mailSender))
 			{
 				$this->data['tr_creator'] = $this->user = $this->mailSender;

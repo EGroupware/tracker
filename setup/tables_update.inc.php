@@ -870,3 +870,14 @@ function tracker_upgrade23_1()
 	Api\Preferences::change_preference('tracker', 'nextmatch-tracker.index.rows', $change);
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.001';
 }
+
+function tracker_upgrade23_1_001()
+{
+	// Add due date to escalation action
+
+	$GLOBALS['egw_setup']->oProc->AddColumn('egw_tracker_escalations', 'esc_tr_duedate', array(
+		'type' => 'text',
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.002';
+}
