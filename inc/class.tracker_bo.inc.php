@@ -2289,15 +2289,18 @@ class tracker_bo extends tracker_so
 		$queue = $_queue; // all; we use this, as we do not have a queue, when preparing a new ticket
 		if (isset($trackerentry['tr_tracker']) && !empty($trackerentry['tr_tracker'])) $queue = $trackerentry['tr_tracker'];
 		// since we only add replies for existing tickets, we do not mess with tr_cc in that case
-		if ($ticketId==0 && (!isset($this->mailhandling[$queue]['auto_cc']) || empty($this->mailhandling[$queue]['auto_cc']))) unset($trackerentry['tr_cc']);
-		if (is_array($_attachments))
+		if($ticketId == 0 && (!isset($this->mailhandling[$_queue]['auto_cc']) || empty($this->mailhandling[$_queue]['auto_cc'])))
 		{
-			foreach ($_attachments as $attachment)
+			unset($trackerentry['tr_cc']);
+		}
+		if(is_array($_attachments))
+		{
+			foreach($_attachments as $attachment)
 			{
 				if($ticketId)
 				{
 					// Put it where it will be tied to the comment
-					$attachment['name'] = 'comments/.new/'.$attachment['name'];
+					$attachment['name'] = 'comments/.new/' . $attachment['name'];
 				}
 				if($ticketId && $attachment['egw_data'])
 				{
