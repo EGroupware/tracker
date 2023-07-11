@@ -1937,6 +1937,8 @@ width:100%;
 		{
 			$ticket['tr_startdate'] = $mailContent['date'];
 		}
+		// Make sure to open as popup
+		$ticket['popup'] = true;
 		$this->edit($ticket);
 	}
 
