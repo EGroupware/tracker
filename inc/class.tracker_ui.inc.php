@@ -1037,7 +1037,7 @@ class tracker_ui extends tracker_bo
 		}
 
 		// Get list of currently displayed trackers, so we can get all valid statuses
-		if ($tracker)
+		if($tracker)
 		{
 			$trackers = is_array($tracker) ? $tracker : array($tracker);
 		}
@@ -1907,11 +1907,17 @@ width:100%;
 			$message = $this->htmledit? "<pre>".$mailContent['message']."</pre>": $mailContent['message'];
 		}
 
-		$this->edit($this->prepare_import_mail($mailContent['addresses'],
-				$mailContent['subject'],
-				$message,
-				$mailContent['attachments'],
-				$mailContent['entry_id']));
+		$ticket = $this->prepare_import_mail(
+			$mailContent['addresses'],
+			$mailContent['subject'],
+			$message,
+			$mailContent['attachments'],
+			$mailContent['entry_id']
+		);
+
+		// Make sure to open as popup
+		$ticket['popup'] = true;
+		$this->edit($ticket);
 	}
 
 	/**
