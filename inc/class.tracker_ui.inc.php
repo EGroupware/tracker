@@ -1600,6 +1600,11 @@ class tracker_ui extends tracker_bo
 		}
 		$content['duration_format'] = $this->duration_format;
 		$content['hours_per_workday'] = $this->hours_per_workday;
+		// disable kanban column if we have no kanban
+		if(empty($GLOBALS['egw_info']['user']['apps']['kanban']))
+		{
+			$content['nm']['no_kanban'] = true;
+		}
 
 		$content['is_admin'] = $this->is_admin($tracker);
 		//_debug_array($content);
