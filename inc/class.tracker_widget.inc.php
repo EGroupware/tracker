@@ -43,9 +43,8 @@ class tracker_widget extends Etemplate\Widget\Entry
 			),
 			'__default__' => array(
 				'options' => array(
-					''            => array('id' => '@value[@id]'),
 					// Others added automatically in constructor
-					'__default__' => array('type' => 'label', 'options' => ''),
+					'__default__' => array('type' => 'label'),
 				),
 				'no_lang' => true,
 			),
