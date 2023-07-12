@@ -23,7 +23,7 @@
 				<column disabled="@no_bounties"/>
 				<column/>
 				<column width="10%"/>
-                <column width="120"/>
+                <column width="120" disabled="@no_kanban"/>
 			</columns>
 			<rows>
 				<row class="th">
