@@ -432,7 +432,8 @@ class tracker_bo extends tracker_so
 		}
 
 		// Set group to default or preference if no queue default
-		$this->data['tr_group'] = $this->default_group[$this->data['tr_tracker']] ?? $this->default_group[0] ?? $GLOBALS['egw_info']['user']['account_primary_group'];
+		$this->data['tr_group'] = (isset($this->data['tr_tracker']) ? $this->default_group[$this->data['tr_tracker']] : null) ??
+			$this->default_group[0] ?? $GLOBALS['egw_info']['user']['account_primary_group'];
 
 		$this->data_merge($keys);
 
