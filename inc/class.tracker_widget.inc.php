@@ -114,14 +114,28 @@ class tracker_widget extends Etemplate\Widget\Entry
 	 */
 	public function get_entry($value, array $attrs)
 	{
+		if(!$value)
+		{
+			return [];
+		}
+
 		// Already done
-		if (is_array($value) && !(array_key_exists('app',$value) && array_key_exists('id', $value))) return $value;
+		if(is_array($value) && !(array_key_exists('app', $value) && array_key_exists('id', $value)))
+		{
+			return $value;
+		}
 
 		// Link entry, already in array format
-		if(is_array($value) && array_key_exists('app', $value) && array_key_exists('id', $value)) $value = $value['id'];
+		if(is_array($value) && array_key_exists('app', $value) && array_key_exists('id', $value))
+		{
+			$value = $value['id'];
+		}
 
 		// Link entry, in string format
-		if (substr($value,0,8) == 'tracker:') $value = substr($value,8);
+		if(substr($value, 0, 8) == 'tracker:')
+		{
+			$value = substr($value, 8);
+		}
 
 		switch($attrs['type'])
 		{
@@ -133,7 +147,7 @@ class tracker_widget extends Etemplate\Widget\Entry
 				}
 				break;
 		}
-		error_log(__METHOD__."('$value') returning ".array2string($entry));
+		//error_log(__METHOD__."('$value') returning ".array2string($entry));
 		return $entry;
 	}
 
