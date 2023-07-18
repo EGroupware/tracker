@@ -2056,43 +2056,60 @@ class tracker_bo extends tracker_so
 		// [Re: |Fwd: |etc ]<Tracker name> #<id>: <Summary>
 		// allow colon or dash to separate Id from summary, as our notifications use a dash (' - ') and not a colon (': ')
 		$tr_data = null;
-		if (!preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$subj, $tr_data) && !$tr_data[2])
+		if(!preg_match_all("/(.*)( ?#[0-9]+:? ?-? )(.*)$/", $subj, $tr_data) && !$tr_data[2])
 		{
 			return 0; //
 		}
-		if (strpos($tr_data[1][0],'#') !== false) // there is more than one part of the subject, that could be a tracker ID
+		if(strpos($tr_data[1][0], '#') !== false) // there is more than one part of the subject, that could be a tracker ID
 		{
 			// try once more, and modify the tr_data as we go for comparsion with tracker subject
 			$buff = $tr_data;
 			unset($tr_data);
-			preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/",$buff[1][0], $tr_data);
+			preg_match_all("/(.*)( #[0-9]+:? ?-? )(.*)$/", $buff[1][0], $tr_data);
 			$tr_data[0][0] = $buff[0][0];
-			$tr_data[3][0] = $tr_data[3][0].$buff[2][0].$buff[3][0];
+			$tr_data[3][0] = $tr_data[3][0] . $buff[2][0] . $buff[3][0];
 		}
 		$tr_id = null;
-		$tracker_id = preg_match_all("/[0-9]+/",$tr_data[2][0], $tr_id) ? $tr_id[0][0] : null;
-		if (!is_numeric($tracker_id)) return 0; // nothing found that looks like an ID
+		$tracker_id = preg_match_all("/[0-9]+/", $tr_data[2][0], $tr_id) ? $tr_id[0][0] : null;
+		if(!is_numeric($tracker_id))
+		{
+			return 0;
+		} // nothing found that looks like an ID
 		//error_log(__METHOD__.array2string(array(0=>$tracker_id,1=>$subj)));
-		$trackerData = $this->search(array('tr_id' => $tracker_id),'tr_summary');
-		if (is_numeric($tracker_id) && empty($trackerData)) // we have a numeric ID, but we could not find it in our database, is it external?
+		$trackerData = $this->search(array('tr_id' => $tracker_id), ['tr_id', 'tr_summary']);
+		if(is_numeric($tracker_id) && empty($trackerData)) // we have a numeric ID, but we could not find it in our database, is it external?
 		{
 			// we modify the subject as external tracker ids mess up our recognition of tracker ids
-			if ($tracker_id > 0) $subj = $tr_data[1][0].str_replace('#','ID:',$tr_data[2][0]).$tr_data[3][0];
+			if($tracker_id > 0)
+			{
+				$subj = $tr_data[1][0] . str_replace('#', 'ID:', $tr_data[2][0]) . $tr_data[3][0];
+			}
 			return 0;
 		}
-		$tr_summary = Api\Mail::adaptSubjectForImport($trackerData[0]['tr_summary']);
-		// Use strncmp() here, since a Fwd might add a sqr bracket.
-		if (strncmp(trim($tr_summary), trim($tr_data[3][0]), strlen(trim($tr_summary))) &&
-				// Some mail apps might truncate long subjects, 72 seems to be the smallest
-				// Those are OK if what remains matches
-				strlen($tr_data[3][0]) <= 70 &&
-				strpos(trim($tr_data[3][0]), trim($tr_summary)) !== 0
-		)
+
+		// One exact match
+		if(count($trackerData) == 1 && $trackerData[0]['tr_summary'] == $tr_data[3][0])
 		{
-			//_debug_array($trackerData);
-			return 0; // Summary doesn't match. Should this be ok?
+			return $tracker_id;
 		}
-		return $tracker_id;
+
+		// Looser match on subject that allows a few characters difference
+		$best_match = false;
+		$best_similarity = 0;
+		$mail_summary = strtoupper($tr_data[3][0]);
+		foreach($trackerData as $idx => $matchOption)
+		{
+			$tr_summary = strtoupper(Api\Mail::adaptSubjectForImport($matchOption['tr_summary']));
+			$match_percent = 0;
+			$similarity = similar_text($mail_summary, $tr_summary, $match_percent);
+
+			if($match_percent >= 90 && $similarity > $best_similarity)
+			{
+				$best_similarity = $similarity;
+				$best_match = $matchOption['tr_id'];
+			}
+		}
+		return $best_match ?: 0;
 	}
 
 	/**
