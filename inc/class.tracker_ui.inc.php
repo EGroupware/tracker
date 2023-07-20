@@ -1942,6 +1942,22 @@ width:100%;
 		{
 			$ticket['tr_startdate'] = $mailContent['date'];
 		}
+		if(empty($ticket['tr_duedate']) && (
+				$this->mailhandling[$ticket['tr_tracker']]['due_date'] || $this->mailhandling[0]['due_date']
+			))
+		{
+			$days = $this->mailhandling[$ticket['tr_tracker']]['due_date'] ?: $this->mailhandling[0]['due_date'];
+			$due_date = (new Api\DateTime($mailContent['date']))
+				->setUser()
+				->modify(is_numeric($days) ?
+							 '+' . ((int)$days) . ' days' :
+							 $days
+				);
+			if($due_date !== false)
+			{
+				$ticket['tr_duedate'] = $due_date->format('ts');
+			}
+		}
 		// Make sure to open as popup
 		$ticket['popup'] = true;
 		$this->edit($ticket);
