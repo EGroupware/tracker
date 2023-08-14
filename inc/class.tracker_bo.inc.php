@@ -2147,13 +2147,15 @@ class tracker_bo extends tracker_so
 		// we have to check if we know this ticket before proceeding
 		if ($ticketId == 0)
 		{
-			$trackerentry = $this->init(
+			$trackerentry = array_merge($this->init(
 				array(
 					'tr_id'          => 0,
 					'tr_tracker'     => $this->mailhandling[$_queue]['default_tracker'],
 					'tr_cc'          => implode(',', $emails),
 					'tr_summary'     => $_subject,
-					'tr_description' => $_message,
+					'tr_description' => $_message
+				)
+			),                          array(
 					'referer'        => false,
 					'popup'          => true,
 					'link_to'        => array(
