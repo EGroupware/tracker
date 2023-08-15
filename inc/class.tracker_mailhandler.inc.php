@@ -593,7 +593,7 @@ class tracker_mailhandler extends tracker_bo
 	{
 		$senderIdentified = true;
 		$sR = $mailobject->getHeaders($_folderName, $_startMessage=1, 1, 'INTERNALDATE', true, array(), $uid, false);
-		$s = $sR['header'][$uid];
+		$s = $sR['header'][0];
 		$subject_in = $mailobject->decode_subject($s['subject']);// we use the needed headers for determining beforehand, if we have a new ticket, or a comment
 		// FLAGS - control in case filter wont work
 		$flags = $s;//implicit with retrieved information on getHeaders
