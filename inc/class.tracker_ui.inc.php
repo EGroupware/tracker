@@ -1474,10 +1474,12 @@ class tracker_ui extends tracker_bo
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
-			$sel_options['esc_id']['already escalated'] = $escalations;
+			$sel_options['esc_id'][0] = array('label' => 'already escalated', 'value' => []);
+			$sel_options['esc_id'][1] = array('label' => 'matching filter', 'value' => []);
 			foreach($escalations as $esc_id => $label)
 			{
-				$sel_options['esc_id']['matching filter']['-'.$esc_id] = $label;
+				$sel_options['esc_id'][0]['value'][] = ['label' => $label, 'value' => '' . $esc_id];
+				$sel_options['esc_id'][1]['value'][] = ['label' => $label, 'value' => '-' . $esc_id];
 			}
 		}
 		// Merge print
