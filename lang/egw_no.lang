@@ -13,11 +13,13 @@ created	tracker	no	Opprettet
 creates a new field	tracker	no	lager nytt felt
 creation date	tracker	no	Først opprettet
 custom fields	tracker	no	Egendefinerte Felter
+default tracker queue	tracker	no	Standard kø
 delete this category	tracker	no	slett denne kategorien
 delete this entry	tracker	no	slett dette forekomsten
 deleted	tracker	no	slettet
 deletes this field	tracker	no	sletter dette feltet
 determines the order the fields are displayed	tracker	no	avgjør rekkefølge feltene vises i
+due date for new tickets	tracker	no	Forfallsdato for nye billetter
 each value is a line like <id>[=<label>]	tracker	no	hver verdi er en linje som <id>[=<label>]
 entry saved	tracker	no	Registrering lagret
 error saving the entry!!!	tracker	no	Feil ved lagring av forekomst!
@@ -26,6 +28,7 @@ everybody	tracker	no	alle
 existing links	tracker	no	Eksisterende lenker
 forward	tracker	no	Videresend
 from	tracker	no	Fra
+full list of placeholder names	tracker	no	Liste over plassholdere
 history	tracker	no	Historikk
 id	tracker	no	Id
 last modified	tracker	no	Sist endret
@@ -42,11 +45,16 @@ order	tracker	no	Ordre
 overdue	tracker	no	forfalt
 permission denied !!!	tracker	no	Adgang nektet !
 process	tracker	no	Prosess
+read	tracker	no	Lest
+read / unread	tracker	no	Lest / Ulest
 rejected	tracker	no	Avslått
 responsible	tracker	no	Ansvarlig
 saves the changes made and leaves	tracker	no	lagrer endringene og lukker
 select one...	tracker	no	Velg en...
+set due date this many days after escalation runs	tracker	no	Angi forfallsdato (antall dager) etter eskaleringskjøringen
+set the ticket start date to the email received date	tracker	no	Sett startdatoen for saken til datoen for mottatt e-post
 signature	tracker	no	Signatur
+start date from email	tracker	no	Startdato fra e-post
 state	tracker	no	Fylke
 summary	tracker	no	Sammendrag
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	no	navnet benyttet intertnt(<= 20 kar.), endring gjør eksisterende data utilgjengelige.
@@ -55,6 +63,7 @@ this month	tracker	no	Denne måneden
 this week	tracker	no	Denne uken
 this year	tracker	no	Dette året
 times	tracker	no	Ant. ganger
+unread	tracker	no	Ulest
 upcoming	tracker	no	nært forestående
 updated	tracker	no	Oppdatert
 yesterday	tracker	no	I går

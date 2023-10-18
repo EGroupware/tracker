@@ -4,14 +4,17 @@ configuration	tracker	uk	Конфігурація
 create new links	tracker	uk	Створити нові посилання
 creates a new field	tracker	uk	створює нові поля
 custom fields	tracker	uk	Власні поля
+default tracker queue	tracker	uk	Стандартна черга
 delete this category	tracker	uk	Видалити цю категорію
 delete this entry	tracker	uk	видалити цей запис
 deleted	tracker	uk	Видалено
 deletes this field	tracker	uk	видаляє це поле
 determines the order the fields are displayed	tracker	uk	визначає послідовність показу полів
+due date for new tickets	tracker	uk	Термін оплати нових квитків
 each value is a line like <id>[=<label>]	tracker	uk	Кожне значення є рядком у вигляді <id>[=<label>]
 existing links	tracker	uk	Існуючі посилання
 from	tracker	uk	Від
+full list of placeholder names	tracker	uk	Список плейсхолдерів
 id	tracker	uk	Id
 last modified	tracker	uk	Востаннє змінено
 leaves without saveing	tracker	uk	вийти без збереження
@@ -22,14 +25,20 @@ number of row for a multiline inputfield or line of a multi-select-box	tracker	u
 open(status)	tracker	uk	відкрито
 order	tracker	uk	Послідовність
 overdue	tracker	uk	прострочено
+read	tracker	uk	Читати
+read / unread	tracker	uk	Прочитано / Непрочитаний
 rejected	tracker	uk	Відхилено
 responsible	tracker	uk	Відповідальний
 saves the changes made and leaves	tracker	uk	зберігає зроблені зміни та виходить
+set due date this many days after escalation runs	tracker	uk	Встановіть термін виконання (кількість днів) після запуску ескалації
+set the ticket start date to the email received date	tracker	uk	Встановити дату початку тікета на дату отриманого листа
+start date from email	tracker	uk	Дата початку з листа
 state	tracker	uk	Область
 the text displayed to the user	tracker	uk	текст, що показуються користувачу
 this month	tracker	uk	Поточний місяць
 this week	tracker	uk	Поточний тиждень
 this year	tracker	uk	Поточний рік
 times	tracker	uk	Раз
+unread	tracker	uk	Непрочитаний
 upcoming	tracker	uk	майбутні
 updated	tracker	uk	Змінено

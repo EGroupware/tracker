@@ -1,0 +1,9 @@
+default tracker queue	tracker	lt	Standartinė eilė
+due date for new tickets	tracker	lt	Naujų bilietų pateikimo terminas
+full list of placeholder names	tracker	lt	Vietos žymeklių sąrašas
+read	tracker	lt	Skaityti
+read / unread	tracker	lt	Perskaityta / Neperskaityta
+set due date this many days after escalation runs	tracker	lt	Nustatykite terminą (dienų skaičių) po eskalavimo paleidimo
+set the ticket start date to the email received date	tracker	lt	Nustatykite bilieto pradžios datą pagal el. laiško gavimo datą
+start date from email	tracker	lt	Pradžios data iš el. laiško
+unread	tracker	lt	Neskaitytas

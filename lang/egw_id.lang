@@ -43,6 +43,7 @@ creation date	tracker	id	creation date
 creator	tracker	id	Creator
 custom fields	tracker	id	Custom fields
 date opened	tracker	id	Date opened
+default tracker queue	tracker	id	Antrian standar
 define escalations	common	id	Define escalations
 delete this category	tracker	id	hapus kategori ini
 delete this entry	tracker	id	Hapus entri ini
@@ -50,6 +51,7 @@ delete this status	tracker	id	Hapus status ini
 deleted	tracker	id	Deleted
 deletes this field	tracker	id	hapus field ini
 determines the order the fields are displayed	tracker	id	menentukan urutan field ditampilkan
+due date for new tickets	tracker	id	Tanggal jatuh tempo untuk tiket baru
 duplicate	tracker	id	Duplicate
 e-mail notifications	tracker	id	E-Mail notifications
 each value is a line like <id>[=<label>]	tracker	id	setiap nilai adalah sebuah baris seperti <id>[=<label>]
@@ -70,6 +72,7 @@ fixed	tracker	id	Fixed
 forward	tracker	id	Forward
 forward to	tracker	id	Forward to
 from	tracker	id	From
+full list of placeholder names	tracker	id	Daftar penampung
 general fields:	tracker	id	Field Umum:
 history	tracker	id	History
 html editing	tracker	id	Html editing
@@ -117,6 +120,8 @@ process	tracker	id	Proses
 project selection	tracker	id	Project selection
 projects	tracker	id	Projects
 queue	tracker	id	Queue
+read	tracker	id	Baca
+read / unread	tracker	id	Baca / Belum dibaca
 rejected	tracker	id	Rejected
 remind	tracker	id	Remind
 resolution	tracker	id	Resolution
@@ -131,8 +136,11 @@ sent autoreplies	tracker	id	Sent autoreplies
 server type	tracker	id	Server type
 set %1	tracker	id	Set %1
 set bounty	tracker	id	Set bounty
+set due date this many days after escalation runs	tracker	id	Mengatur tanggal jatuh tempo (jumlah hari) setelah proses eskalasi berjalan
+set the ticket start date to the email received date	tracker	id	Mengatur tanggal mulai tiket ke tanggal penerimaan email
 signature	tracker	id	Tandatangan
 staff	tracker	id	Staff
+start date from email	tracker	id	Tanggal mulai dari email
 state	tracker	id	State
 stati	tracker	id	Stati
 store as	tracker	id	Store as
@@ -154,6 +162,7 @@ tracker queue	tracker	id	Tracker Queue
 tracker-%1 deleted.	tracker	id	Tracker-%1 deleted.
 type of customfield	tracker	id	Type of customfield
 unchanged	tracker	id	Unchanged
+unread	tracker	id	Belum dibaca
 unrecognized mails	tracker	id	Unrecognized mails
 upcoming	tracker	id	mendatang
 updated	tracker	id	Dikinikan

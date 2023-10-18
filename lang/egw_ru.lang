@@ -6,12 +6,6 @@
 %1 is due %2	tracker	ru	%1 выполнено %2
 %1 is starting %2	tracker	ru	%1 начинается %2
 %1 tickets have been converted	tracker	ru	%1 запросов было преобразовано
-♦ not closed	tracker	ru	♦ Незакрытые
-♦ own not closed	tracker	ru	♦ Свои незакрытые
-♦ own or assigned not closed	tracker	ru	♦ Свои или назначенные, незакрытые
-♦ own without reply not closed	tracker	ru	♦ Свои без ответа не закрытые
-♦ without 30 days reply not closed	tracker	ru	♦ 30 дней без ответа не закрытые
-♦ without reply not closed	tracker	ru	♦ Без ответа не закрытые
 (beware of mailloops, check the help!)	tracker	ru	Избегайте циклов почты, проверьте подсказки!
 (new tickets as	tracker	ru	(Новые запросы как
 --> choose a project from the drop-down list	tracker	ru	--> выберите проект из ниспадающего списка
@@ -115,6 +109,7 @@ data exchange settings	tracker	ru	Установки обмена данных
 date filter	tracker	ru	Фильтр даты
 date opened	tracker	ru	Дата открытия
 default document to insert entries	tracker	ru	Документ по умолчанию для вставки записей
+default tracker queue	tracker	ru	Стандартная очередь
 default version for new tracker entries	tracker	ru	Версия по умолчанию для новых записей Трекера
 define escalations	common	ru	Назначение эскалаций
 delete mails from server	tracker	ru	Удаление писем с сервера
@@ -141,6 +136,7 @@ donator name to show	tracker	ru	Показать имя жертвователя
 download url for links	tracker	ru	Загрузить URL ссылок
 due	tracker	ru	Выполнено
 due date	tracker	ru	дата выполнения
+due date for new tickets	tracker	ru	Срок исполнения новых талонов
 duplicate	tracker	ru	Дублирует
 e-mail address to which a copy of all tracker-notifications should be send	tracker	ru	Адрес e-mail, по которому должна быть выслана копия всех уведомлений трекера
 e-mail notifications	tracker	ru	уведомление по e-mail
@@ -187,7 +183,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	ru	Переслать на
 forward unrecognized mails to the email address that has to be specified here.	tracker	ru	Пересылать нераспознанные письма на адрес эл. почты указанный здесь.
 from	tracker	ru	От
-full list of placeholder names	tracker	ru	Полный список имён владельцев
+full list of placeholder names	tracker	ru	Список заполнителей
 general fields:	tracker	ru	Общие поля:
 general settings	tracker	ru	Основные настройки
 handling autoreplies	tracker	ru	Управление автоответчиком
@@ -303,13 +299,15 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	ru	Выбор проекта
 projects	tracker	ru	Проекты
 queue	tracker	ru	Очередь
+read	tracker	ru	Читать
+read / unread	tracker	ru	Прочитано / Непрочитано
 read mail address	tracker	ru	Адрес почты для чтения
 receive notifications about assigned tracker-items	tracker	ru	Получать уведомление о назначенных пунктах трекера
 receive notifications about created tracker-items	tracker	ru	Получать уведомление о созданных пунктах трекера
 receive notifications about due entries you created or are assigned to	tracker	ru	Получать уведомления о завершении записей, Вами созданных или назначенных
+receive notifications about own changes in tracker-items	tracker	ru	Получать уведомления о собственных изменениях записей Трекера
 receive notifications about starting entries you created or are assigned to	tracker	ru	Получать уведомления о завершении записей, Вами созданных или назначенных
 receive notifications in html	tracker	ru	Принимать сообщения в формате html
-receive notifications about own changes in tracker-items	tracker	ru	Получать уведомления о собственных изменениях записей Трекера
 rejected	tracker	ru	Отклонено
 remind	tracker	ru	Напомнить
 replacements for inserting entries into documents	tracker	ru	Замена для вставленных в документы записей
@@ -350,6 +348,8 @@ server type	tracker	ru	Тип сервера
 set %1	tracker	ru	Установить %1
 set an own bounty (in %s)	tracker	ru	Установить свою премию (%s)
 set bounty	tracker	ru	Установить премию
+set due date this many days after escalation runs	tracker	ru	Установить срок исполнения (количество дней) после запуска эскалации
+set the ticket start date to the email received date	tracker	ru	Установить дату начала тикета в соответствии с датой получения письма
 set to	tracker	ru	Установить
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
@@ -361,6 +361,7 @@ skip record	tracker	ru	Пропустить запись
 staff	tracker	ru	Персонал
 staff  "users" will be allowed for assignment to tracker tickets	tracker	ru	Персонал 'Пользователи' может быть назначен для работы с записями Трекера
 standard imap	tracker	ru	Стандартный IMAP
+start date from email	tracker	ru	Дата начала из электронного письма
 started	tracker	ru	Начато
 starting	tracker	ru	Начинается
 state	tracker	ru	Состояние
@@ -414,6 +415,7 @@ type of customfield	tracker	ru	Тип пользовательского пол�
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	ru	Невозможно преобразовать "%1" в идентификатор пользователя. Используйте установки плагина %2 для %2.
 unchanged	tracker	ru	Без изменений
 unlinked from %1	tracker	ru	Удалена ссылка из %1
+unread	tracker	ru	Непрочитанные
 unrecognized mails	tracker	ru	Нераспознанные письма
 upcoming	tracker	ru	Входящие
 updated	tracker	ru	Изменено
@@ -451,3 +453,9 @@ you need to select some entries first	tracker	ru	Необходимо снача
 you need to select something to change and some tracker items!	tracker	ru	Вы должны выбрать что-нибудь для изменения И какие-нибудь запросы в трекере!
 you need to specify amount, donators name and email address!	tracker	ru	Вы должны указать количество, имя жертвователя И адрес email!
 you voted %1.	tracker	ru	Вы проголосовали %1
+♦ not closed	tracker	ru	♦ Незакрытые
+♦ own not closed	tracker	ru	♦ Свои незакрытые
+♦ own or assigned not closed	tracker	ru	♦ Свои или назначенные, незакрытые
+♦ own without reply not closed	tracker	ru	♦ Свои без ответа не закрытые
+♦ without 30 days reply not closed	tracker	ru	♦ 30 дней без ответа не закрытые
+♦ without reply not closed	tracker	ru	♦ Без ответа не закрытые

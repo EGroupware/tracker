@@ -6,11 +6,6 @@
 %1 is due %2	tracker	fi	%1 erääntyy %2
 %1 is starting %2	tracker	fi	%1 alkaa %2
 %1 tickets have been converted	tracker	fi	%1 merkintää muutettu.
-♦ not closed	tracker	fi	♦ Ei suljetut
-♦ own not closed	tracker	fi	♦ Omat, ei suljetut
-♦ own without reply not closed	tracker	fi	♦ Omat, ei suljetut, ilman vastausta
-♦ without 30 days reply not closed	tracker	fi	♦ Ei suljetut, 30 vrk ilman vastausta
-♦ without reply not closed	tracker	fi	♦ Ei suljetut, ilman vastausta
 (beware of mailloops, check the help!)	tracker	fi	Varoitus! Huomioi luupit.
 (new tickets as	tracker	fi	Omistaja uudelle merkinnälle
 --> choose a project from the drop-down list	tracker	fi	--> valitse projekti pudotusvalikosta
@@ -115,6 +110,7 @@ customfield	tracker	fi	Muokattavat kentät
 date filter	tracker	fi	Suodatin
 date opened	tracker	fi	Avauspäivä
 default document to insert entries	tracker	fi	Merkintöjen oletusasiakirja
+default tracker queue	tracker	fi	Tavallinen jono
 default version for new tracker entries	tracker	fi	Oletusversio uusille merkinnöille
 define escalations	common	fi	Määrittele eskalaatiot
 delete mails from server	tracker	fi	Poista sähköpostit palvelimelta
@@ -141,6 +137,7 @@ donator name to show	tracker	fi	Näytä lahjoittajan nimi
 download url for links	tracker	fi	Linkkien URL
 due	tracker	fi	Eräpäivä
 due date	tracker	fi	Eräpäivä
+due date for new tickets	tracker	fi	Uusien lippujen eräpäivä
 duplicate	tracker	fi	Tuplaa
 e-mail address to which a copy of all tracker-notifications should be send	tracker	fi	Sähköpostiosoite, johon kaikki Reklamaationhallinnan huomautusviestit tulisi lähettää.
 e-mail notifications	tracker	fi	Huomautusviestit
@@ -187,6 +184,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	fi	Lähetä edelleen
 forward unrecognized mails to the email address that has to be specified here.	tracker	fi	Lähetä tunnistamattomat sähköpostit määrittelemääsi sähköpostiosoitteeseen
 from	tracker	fi	Keneltä
+full list of placeholder names	tracker	fi	Luettelo paikanhaltijoista
 general fields:	tracker	fi	Yleiset kentät:
 handling autoreplies	tracker	fi	Automaattistan vastausten hallinta
 history	tracker	fi	Historia
@@ -290,13 +288,15 @@ process	tracker	fi	Prosessi
 project selection	tracker	fi	Projektinvalinta
 projects	tracker	fi	Projektit
 queue	tracker	fi	Queue
+read	tracker	fi	Luettu
+read / unread	tracker	fi	Luettu / Lukematon
 read mail address	tracker	fi	Luettava sähköpostiosoite
 receive notifications about assigned tracker-items	tracker	fi	Vastaanota huomautuksia delegoiduista merkinnöistä
 receive notifications about created tracker-items	tracker	fi	Vastaanota huomautuksia uusista merkinnöistä
 receive notifications about due entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti erääntyvistä merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
+receive notifications about own changes in tracker-items	tracker	fi	Vastaanota huomautuksia tekemistäsi muutoksista merkinnöissä.
 receive notifications about starting entries you created or are assigned to	tracker	fi	Lähetetäänkö sinulle huomautusviesti alkavista merkinnöistä, jotka sinä joko loit tai olet vastuulisena?
 receive notifications in html	tracker	fi	Vastaanota huomautukset html -muodossa
-receive notifications about own changes in tracker-items	tracker	fi	Vastaanota huomautuksia tekemistäsi muutoksista merkinnöissä.
 rejected	tracker	fi	Kielletty
 remind	tracker	fi	Muistuta
 replacements for inserting entries into documents	tracker	fi	Asiakirjoihin syötettävät sijaismerkinnät
@@ -335,6 +335,8 @@ server type	tracker	fi	Palvelimen tyyppi
 set %1	tracker	fi	Aseta %1
 set an own bounty (in %s)	tracker	fi	Aseta oma maksullinen lisätyö (%s)
 set bounty	tracker	fi	Aseta palkkio
+set due date this many days after escalation runs	tracker	fi	Aseta eräpäivä (päivien lukumäärä) eskalointiajon jälkeen.
+set the ticket start date to the email received date	tracker	fi	Aseta tiketin alkamispäiväksi sähköpostin vastaanottamispäivämäärä
 set to	tracker	fi	Aseta
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos niitä merkintöjä joissa olet vastuuhenkilönä, päivitetään?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	fi	Lähetetäänkö sinulle huomautusviesti, jos luomaasi merkintää päivitetään?
@@ -345,6 +347,7 @@ signature	tracker	fi	Allekirjoitus
 skip record	tracker	fi	Ohita
 staff	tracker	fi	Henkilökunta
 staff  "users" will be allowed for assignment to tracker tickets	tracker	fi	Salli "Käyttäjien" vastuulliseksi määrittely merkintöihin.
+start date from email	tracker	fi	Aloituspäivämäärä sähköpostista
 started	tracker	fi	Aloitettu
 starting	tracker	fi	Alkamassa
 state	tracker	fi	Tila
@@ -399,6 +402,7 @@ type of customfield	tracker	fi	Lisäkentän tyyppi
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	fi	'%1' ei voitu muuttaa tili IDksi. Käytetty sen sijaan (%2) %3
 unchanged	tracker	fi	Ei muutetut
 unlinked from %1	tracker	fi	Linkki poistettu: %1
+unread	tracker	fi	Lukematon
 unrecognized mails	tracker	fi	Tunnistamattomat sähköpostit
 upcoming	tracker	fi	Tulevat
 updated	tracker	fi	Päivitetty
@@ -432,3 +436,8 @@ you need to select some entries first	tracker	fi	Valitse ensin merkinnät!
 you need to select something to change and some tracker items!	tracker	fi	Sinun pitää valita jotain muutettavaa JA joku merkintä!
 you need to specify amount, donators name and email address!	tracker	fi	Sinun pitää antaa summa, lahjoittajan nimi JA sähköpostiosoite!
 you voted %1.	tracker	fi	Annoit äänesi %1.
+♦ not closed	tracker	fi	♦ Ei suljetut
+♦ own not closed	tracker	fi	♦ Omat, ei suljetut
+♦ own without reply not closed	tracker	fi	♦ Omat, ei suljetut, ilman vastausta
+♦ without 30 days reply not closed	tracker	fi	♦ Ei suljetut, 30 vrk ilman vastausta
+♦ without reply not closed	tracker	fi	♦ Ei suljetut, ilman vastausta

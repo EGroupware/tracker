@@ -9,13 +9,16 @@ created	tracker	ko	생성됨
 creates a new field	tracker	ko	새 필드 만들기
 creation date	tracker	ko	생성일
 custom fields	tracker	ko	사용자정의 필드
+default tracker queue	tracker	ko	표준 대기열
 delete this category	tracker	ko	카테고리 삭제
 delete this entry	tracker	ko	이 엔트리 삭제
 deleted	tracker	ko	삭제됨
 deletes this field	tracker	ko	이 필드 삭제
+due date for new tickets	tracker	ko	새 티켓의 마감일
 error: the entry has been updated since you opened it for editing!	tracker	ko	오류: 이 엔트리는 당신이 수정하는 중간에 업데이트 되었습니다.
 existing links	tracker	ko	기존링크
 from	tracker	ko	부터
+full list of placeholder names	tracker	ko	자리 표시자 목록
 history	tracker	ko	내역
 last modified	tracker	ko	마지막 수정
 leaves without saveing	tracker	ko	저장없이 나가기
@@ -23,12 +26,18 @@ links	tracker	ko	링크
 open(status)	tracker	ko	개설
 overdue	tracker	ko	만기초과
 process	tracker	ko	프로세스
+read	tracker	ko	읽기
+read / unread	tracker	ko	읽음/읽지 않음
 rejected	tracker	ko	거부됨
 responsible	tracker	ko	응답대상
 saves the changes made and leaves	tracker	ko	저장하고 나가기
 select one...	tracker	ko	하나를 선택하세요...
+set due date this many days after escalation runs	tracker	ko	에스컬레이션 실행 후 마감일(일 수)을 설정합니다.
+set the ticket start date to the email received date	tracker	ko	티켓 시작 날짜를 이메일 수신 날짜로 설정합니다.
+start date from email	tracker	ko	이메일에서 시작 날짜
 state	tracker	ko	주
 summary	tracker	ko	요약
 times	tracker	ko	시간
+unread	tracker	ko	읽지 않음
 upcoming	tracker	ko	예정
 updated	tracker	ko	갱신됨

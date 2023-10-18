@@ -1,13 +1,22 @@
 configuration	tracker	ja	環境設定
 created	tracker	ja	作成
 custom fields	tracker	ja	カスタム項目
+default tracker queue	tracker	ja	スタンダードキュー
+due date for new tickets	tracker	ja	新規チケットの期限
 forward	tracker	ja	転送
 from	tracker	ja	差出人
+full list of placeholder names	tracker	ja	プレースホルダ一覧
 id	tracker	ja	ID
 order	tracker	ja	順序
+read	tracker	ja	既読
+read / unread	tracker	ja	既読/未読
 rejected	tracker	ja	拒否済み
+set due date this many days after escalation runs	tracker	ja	エスカレーション実行後の期限（日数）を設定する
+set the ticket start date to the email received date	tracker	ja	チケットの開始日をメール受信日に設定する
 signature	tracker	ja	署名
+start date from email	tracker	ja	メール受信日
 state	tracker	ja	都道府県
 this month	tracker	ja	今月
 this week	tracker	ja	今週
 this year	tracker	ja	今年
+unread	tracker	ja	未読

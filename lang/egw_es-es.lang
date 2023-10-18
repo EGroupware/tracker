@@ -118,6 +118,7 @@ data exchange settings	tracker	es-es	Opciones para intercambio de datos
 date filter	tracker	es-es	Filtro de fecha
 date opened	tracker	es-es	Fecha de apertura
 default document to insert entries	tracker	es-es	Documento predeterminado para insertar entradas
+default tracker queue	tracker	es-es	Cola estándar
 default version for new tracker entries	tracker	es-es	Versión predeterminada para las nuevas entradas de seguimiento
 define escalations	common	es-es	Definir escalados
 delete mails from server	tracker	es-es	Borrar correos del servidor
@@ -142,6 +143,7 @@ do you want to vote for this item	tracker	es-es	¿Desea votar por este elemento?
 donator name to show	tracker	es-es	Nombre del donante a mostrar
 due	tracker	es-es	Vencido
 due date	tracker	es-es	Vencimiento
+due date for new tickets	tracker	es-es	Fecha de vencimiento de las nuevas entradas
 duplicate	tracker	es-es	Duplicado
 e-mail address to which a copy of all tracker-notifications should be send	tracker	es-es	Dirección de correo electrónico a la que enviar una copia de todas las notificaciones
 e-mail notifications	tracker	es-es	Notificaciones por correo
@@ -185,6 +187,7 @@ forward	tracker	es-es	Reenviar
 forward to	tracker	es-es	Reenviar a
 forward unrecognized mails to the email address that has to be specified here.	tracker	es-es	Reenviar los correos no reconocidos a la dirección de correo especificada aquí.
 from	tracker	es-es	De
+full list of placeholder names	tracker	es-es	Lista de marcadores de posición
 general fields:	tracker	es-es	Campos generales:
 general settings	tracker	es-es	Opciones generales
 history	tracker	es-es	Historial
@@ -287,6 +290,8 @@ process	tracker	es-es	Procesar
 project selection	tracker	es-es	Selección de proyecto
 projects	tracker	es-es	Proyectos
 queue	tracker	es-es	Cola
+read	tracker	es-es	Leer
+read / unread	tracker	es-es	Leído / No leído
 read mail address	tracker	es-es	Leer dirección de correo
 receive notifications about assigned tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe asignados
 receive notifications about created tracker-items	tracker	es-es	Recibir notificaciones acerca de elementos del informe creados
@@ -327,6 +332,8 @@ server type	tracker	es-es	Tipo de servidor
 set %1	tracker	es-es	Establecer %1
 set an own bounty (in %s)	tracker	es-es	Fijar una recompensa propia (en %s)
 set bounty	tracker	es-es	Fijar recompensa
+set due date this many days after escalation runs	tracker	es-es	Establezca la fecha de vencimiento (número de días) después de la ejecución del escalado
+set the ticket start date to the email received date	tracker	es-es	Establezca la fecha de inicio del ticket en la fecha de recepción del correo electrónico
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
 should there be a tracker-box on  home screen?	tracker	es-es	Mostrar Sistema de Segumiento en la página de inicio
@@ -336,6 +343,7 @@ signature	tracker	es-es	Firma
 skip record	tracker	es-es	Saltar registro
 staff	tracker	es-es	Equipo
 standard imap	tracker	es-es	IMAP estándar
+start date from email	tracker	es-es	Fecha de inicio del correo electrónico
 started	tracker	es-es	Iniciado
 starting	tracker	es-es	Iniciando
 state	tracker	es-es	Estado
@@ -394,6 +402,7 @@ tracker-%1 deleted.	tracker	es-es	Seguimiento - %1 borrado
 type of customfield	tracker	es-es	Tipo de campo personalizado
 unchanged	tracker	es-es	Sin cambios
 unlinked from %1	tracker	es-es	Se ha desvinculado de %1
+unread	tracker	es-es	No leído
 unrecognized mails	tracker	es-es	Correos no reconocidos
 upcoming	tracker	es-es	próxima
 updated	tracker	es-es	Actualizado

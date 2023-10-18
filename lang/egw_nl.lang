@@ -1,11 +1,6 @@
 %1 days in advance	tracker	nl	%1 dagen tevoren
 %1 entries updated.	tracker	nl	%1 melding(en) aangepast.
 %1 tickets have been converted	tracker	nl	%1 melding(en) zijn geconverteerd
-♦ not closed	tracker	nl	♦ Niet gesloten
-♦ own not closed	tracker	nl	♦ Mijn, niet gesloten
-♦ own without reply not closed	tracker	nl	♦ Mijn, geen antwoord, niet gesloten
-♦ without 30 days reply not closed	tracker	nl	♦ 30 dagen geen antwoord, niet gesloten
-♦ without reply not closed	tracker	nl	♦ Geen antwoord, niet gesloten
 (new tickets as	tracker	nl	(Nieuwe meldingen als
 --> choose a project from the drop-down list	tracker	nl	--> kies een project van de drop-down lijst
 --> enter new name	tracker	nl	--> geef nieuwe naam
@@ -83,6 +78,7 @@ custom tracker priorities	tracker	nl	Aangepaste tracker eigenschappen
 data exchange settings	tracker	nl	Data exchange instellingen
 date opened	tracker	nl	Datum geopend
 default document to insert entries	tracker	nl	Standaard dokument voor het invoegen van gegevens
+default tracker queue	tracker	nl	Standaard wachtrij
 define escalations	common	nl	Defineer escalaties
 delete mails from server	tracker	nl	Verwijder mails van de server
 delete this bounty	tracker	nl	Verwijder deze gift
@@ -102,6 +98,7 @@ do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	nl	Wilt u een notificatie ontvangen indien item, waarvoor u verantwoordelijk bent, op het punt staan te vervallen?
 do you want to vote for this item	tracker	nl	Wilt u uw stem uitbrengen op deze melding
 donator name to show	tracker	nl	Naam van de donateur om te tonen
+due date for new tickets	tracker	nl	Vervaldatum voor nieuwe tickets
 duplicate	tracker	nl	Duplicaat
 e-mail address to which a copy of all tracker-notifications should be send	tracker	nl	Email adres waar een copie van alle tracker notificaties heen moet worden gestuurd
 e-mail notifications	tracker	nl	Email notificaties
@@ -215,11 +212,13 @@ process	tracker	nl	Proces
 project selection	tracker	nl	Project selectie
 projects	tracker	nl	Projecten
 queue	tracker	nl	Reeks
+read	tracker	nl	Lezen
+read / unread	tracker	nl	Gelezen / Ongelezen
 read mail address	tracker	nl	Lees mail adres
 receive notifications about assigned tracker-items	tracker	nl	Ontvang notificatie van toegewezen meldingen
 receive notifications about created tracker-items	tracker	nl	Ontvang notificatie van gecreëerde meldingen
-receive notifications in html	tracker	nl	Ontvang notificaties in HTML
 receive notifications about own changes in tracker-items	tracker	nl	Ontvang notificaties van eigen wijzigingen in meldingen
+receive notifications in html	tracker	nl	Ontvang notificaties in HTML
 rejected	tracker	nl	Afgewezen
 remind	tracker	nl	Herinner
 replacements for inserting entries into documents	tracker	nl	Vervanging voor het invoeren van gegevens in documenten
@@ -244,11 +243,14 @@ server type	tracker	nl	Server type
 set %1	tracker	nl	Zet %1
 set an own bounty (in %s)	tracker	nl	Ken een eigen gift toe (in %s)
 set bounty	tracker	nl	Gift toekennen
+set due date this many days after escalation runs	tracker	nl	Stel de vervaldatum in (aantal dagen) na de escalatie run
+set the ticket start date to the email received date	tracker	nl	Stel de startdatum van het ticket in op de datum waarop de e-mail is ontvangen
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, aan u toegewezen, worden aangepast?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, door u gecreëerd, worden aangepast?
 show the tracker send you notification mails, in tracker items that you updates?	tracker	nl	Moet Tracker notificatie mails verzenden van meldingen die u zelf heeft aangepast?
 signature	tracker	nl	Ondertekening
 staff	tracker	nl	Medewerkers
+start date from email	tracker	nl	Begindatum van e-mail
 state	tracker	nl	Status
 stati	tracker	nl	Stati
 store as	tracker	nl	Opslaan als
@@ -289,6 +291,7 @@ tracker-%1 '%2' updated.	tracker	nl	Tracker-%1 '%2' aangepast.
 tracker-%1 deleted.	tracker	nl	Tracker-%1 verwijderd.
 type of customfield	tracker	nl	Type van een aangepast veld
 unchanged	tracker	nl	Ongewijzigd
+unread	tracker	nl	Ongelezen
 unrecognized mails	tracker	nl	Niet herkende mails
 upcoming	tracker	nl	aankomende
 updated	tracker	nl	Bijgewerkt
@@ -313,3 +316,8 @@ you need to login to vote!	tracker	nl	U moet ingelogd zijn om te kunnen stemmen!
 you need to select something to change and some tracker items!	tracker	nl	U moet iets selecteren om te wijzigen EN enkele meldingen!
 you need to specify amount, donators name and email address!	tracker	nl	U moet het bedrag specificeren, de naam van de donateur EN het email adres!
 you voted %1.	tracker	nl	U heeft %1 gestemd.
+♦ not closed	tracker	nl	♦ Niet gesloten
+♦ own not closed	tracker	nl	♦ Mijn, niet gesloten
+♦ own without reply not closed	tracker	nl	♦ Mijn, geen antwoord, niet gesloten
+♦ without 30 days reply not closed	tracker	nl	♦ 30 dagen geen antwoord, niet gesloten
+♦ without reply not closed	tracker	nl	♦ Geen antwoord, niet gesloten

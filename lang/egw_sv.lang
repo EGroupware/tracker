@@ -50,6 +50,7 @@ creates a new field	tracker	sv	Skapar nytt fält
 creation date	tracker	sv	Skapat datum
 custom fields	tracker	sv	Anpassade fält
 date opened	tracker	sv	Datum öppnat
+default tracker queue	tracker	sv	Standard kö
 delete this bounty	tracker	sv	Radera belöningen
 delete this canned response	tracker	sv	Radera det sparade svaret
 delete this category	tracker	sv	Radera kategorin
@@ -60,6 +61,7 @@ deleted	tracker	sv	Raderat
 deletes this field	tracker	sv	Raderar detta fält
 determines the order the fields are displayed	tracker	sv	Avgör sorteringen av visade fält
 donator name to show	tracker	sv	Donator namn som visas
+due date for new tickets	tracker	sv	Förfallodag för nya biljetter
 duplicate	tracker	sv	Dublett
 e-mail address to which a copy of all tracker-notifications should be send	tracker	sv	E-post adress till vilken kopior på alla Tracker meddelanden ska skickas
 e-mail notifications	tracker	sv	E-post meddelanden
@@ -79,6 +81,7 @@ fixed	tracker	sv	Klar
 forward	tracker	sv	Vidarebefodra
 forward to	tracker	sv	Vidarebefodra till
 from	tracker	sv	Från
+full list of placeholder names	tracker	sv	Lista över platshållare
 history	tracker	sv	Historik
 id	tracker	sv	ID
 if this item is important for you, please consider to set a bounty for it!	tracker	sv	Om ärendet är viktigt för dig, överväg att utlysa en belöning
@@ -116,6 +119,8 @@ pending items will be closed automatic after %1 days without response.	tracker	s
 permission denied !!!	tracker	sv	Åtkomst nekas!
 postponed	tracker	sv	Framskjutet
 process	tracker	sv	Process
+read	tracker	sv	Läst
+read / unread	tracker	sv	Läst / Oläst
 receive notifications about assigned tracker-items	tracker	sv	Mottag meddelanden om tilldelade Tracker ärenden
 receive notifications about created tracker-items	tracker	sv	Mottag meddelanden om skapade Tracker ärenden
 rejected	tracker	sv	Avvisat
@@ -128,10 +133,13 @@ sender address	tracker	sv	Avsändaradress
 sender address for all notifications, eg. noreply@egroupware.org	tracker	sv	Avsändaradress för alla meddelanden, ex. noreply@egroupware.org
 set an own bounty (in %s)	tracker	sv	Utlys belöning (i %s)
 set bounty	tracker	sv	Utlys belöning
+set due date this many days after escalation runs	tracker	sv	Ange förfallodatum (antal dagar) efter eskaleringskörningen
+set the ticket start date to the email received date	tracker	sv	Ställ in startdatum för ärendet till datum för mottaget e-postmeddelande
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sv	Ska Trackern skicka meddelanden till dig om dina tilldelade ärenden blir uppdaterade?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sv	Ska Trackern skicka meddelanden till dig om dina skapade ärenden blir uppdaterade?
 signature	tracker	sv	Signatur
 staff	tracker	sv	Bemanning
+start date from email	tracker	sv	Startdatum från e-post
 state	tracker	sv	Län
 summary	tracker	sv	Rubrik
 technicians	tracker	sv	Tekniker
@@ -159,6 +167,7 @@ tracker-%1 '%2' added.	tracker	sv	Tracker - %1 '%2' skapat
 tracker-%1 '%2' updated.	tracker	sv	Tracker - %1 '%2' uppdaterat
 tracker-%1 deleted.	tracker	sv	Tracker - %1 '%2' raderat
 type of customfield	tracker	sv	Typ av anpassat fält
+unread	tracker	sv	Oläst
 upcoming	tracker	sv	Kommande
 updated	tracker	sv	Uppdaterad
 url of the tracker	tracker	sv	URL till Tracker

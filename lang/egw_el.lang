@@ -12,6 +12,7 @@ created	tracker	el	Δημιουργήθηκε
 creates a new field	tracker	el	δημιουργεί νέο πεδίο
 creation date	tracker	el	Ημερομηνία δημιουργίας
 custom fields	tracker	el	Προσαρμοσμένα πεδία
+default tracker queue	tracker	el	Τυπική ουρά αναμονής
 delete this category	tracker	el	διέγραψε αυτή την κατηγορία
 delete this entry	tracker	el	δαγραφή αυτής της καταχώρησης
 deleted	tracker	el	διεγράφη
@@ -19,6 +20,7 @@ deletes this field	tracker	el	διαγράφει αυτό το πεδίο
 determines the order the fields are displayed	tracker	el	καθορίζει τη σειρά εμφάνισης των πεδίων
 do you want a notification, if items you are responsible for are about to start?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος πρόκειται να ξεκινήσουν;
 do you want a notification, if items you are responsible for are due?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος έχουν καθυστερήσει;
+due date for new tickets	tracker	el	Ημερομηνία λήξης για νέα εισιτήρια
 each value is a line like <id>[=<label>]	tracker	el	κάθε τιμή είναι μία γραμμή σαν <id>[=<label>]
 each value is a line like id[=label]	tracker	el	κάθε τιμή είναι μία γραμμή σαν id[=label]
 error: the entry has been updated since you opened it for editing!	tracker	el	Σφάλμα:η καταχώρηση έχει ενημερωθεί από όταν την ανοίξατε για προσαρμογή!
@@ -27,6 +29,7 @@ export as csv	tracker	el	Εξαγωγή ως CSV
 forward	tracker	el	Προώθηση
 forward to	tracker	el	προώθηση σε
 from	tracker	el	Από
+full list of placeholder names	tracker	el	Κατάλογος των σημείων τοποθέτησης
 general fields:	tracker	el	Γενικά πεδία:
 history	tracker	el	Ιστορικό
 id	tracker	el	Id
@@ -44,11 +47,16 @@ open(status)	tracker	el	ανοικτά
 order	tracker	el	Ταξινόμηση
 overdue	tracker	el	καθυστερημένα
 permission denied !!!	tracker	el	Άδεια απορρίπτεται !!!
+read	tracker	el	Διαβάστε
+read / unread	tracker	el	Ανάγνωση / Μη αναγνωσμένο
 rejected	tracker	el	Απορρίφθηκε
 responsible	tracker	el	υπεύθυνος
 same day	tracker	el	ίδια ημέρα
 saves the changes made and leaves	tracker	el	αποθηκέυει όλες τις αλλαγές που έγιναν και αποχωρεί
+set due date this many days after escalation runs	tracker	el	Ορίστε την ημερομηνία λήξης (αριθμός ημερών) μετά την εκτέλεση της κλιμάκωσης
+set the ticket start date to the email received date	tracker	el	Ορίστε την ημερομηνία έναρξης του εισιτηρίου στην ημερομηνία λήψης του email
 signature	tracker	el	Υπογραφή
+start date from email	tracker	el	Ημερομηνία έναρξης από το μήνυμα ηλεκτρονικού ταχυδρομείου
 state	tracker	el	Νομός
 sum	tracker	el	Σύνολο
 summary	tracker	el	Περίληψη
@@ -56,6 +64,7 @@ the name used internaly (<= 20 chars), changeing it makes existing data unavaili
 the text displayed to the user	tracker	el	το κείμενο που προβάλεται στον χρήστη
 times	tracker	el	Φορες
 type of customfield	tracker	el	Τύπος συνήθους πεδίου
+unread	tracker	el	Μη αναγνωσμένο
 upcoming	tracker	el	επερχόμενο
 updated	tracker	el	Ενημερώθηκε
 yes, with larger fontsize	tracker	el	Ναι,  με μεγαλύτερο μέγεθος φόντου
