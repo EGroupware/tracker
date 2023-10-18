@@ -78,7 +78,7 @@ category	tracker	en	Category
 category for new tickets	tracker	en	Category for new tickets
 change assigned	tracker	en	Change assigned
 change assigned when updating	tracker	en	Change assigned when updating
-change color	tracker	en	Change color
+change color	tracker	en	Change colour
 change group	tracker	en	Change group
 change group when updating	tracker	en	Change group when updating
 change owner when updating	tracker	en	Change owner when updating
@@ -90,7 +90,7 @@ choose a project from the drop-down list	tracker	en	Choose a project from the dr
 close pending	tracker	en	Close pending
 closed	tracker	en	Closed
 closed date	tracker	en	Closed date
-color	tracker	en	Color
+color	tracker	en	Colour
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
@@ -124,6 +124,7 @@ date filter	tracker	en	Date filter
 date opened	tracker	en	Date opened
 default document to insert entries	tracker	en	Default document to insert entries
 default group	tracker	en	Default group
+default tracker queue	tracker	en	Default tracker queue
 default version for new tracker entries	tracker	en	Default version for new tracker entries
 define escalations	common	en	Define escalations
 delete mails from server	tracker	en	Delete mails from server
@@ -152,6 +153,7 @@ donator name to show	tracker	en	Donator name to show
 download url for links	tracker	en	Download url for links
 due	tracker	en	Due
 due date	tracker	en	Due date
+due date for new tickets	tracker	en	Due date for new tickets
 duplicate	tracker	en	Duplicate
 e-mail address to which a copy of all tracker-notifications should be send	tracker	en	Email address to which a copy of all tracker notifications should be send
 e-mail notifications	tracker	en	Email notifications
@@ -164,7 +166,7 @@ edit own comments	tracker	en	Edit own comments
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
-enable color code for	tracker	en	Enable color code for
+enable color code for	tracker	en	Enable colour code for
 enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized mails should be forwarded
 enter an opening text for the reply message	tracker	en	Enter an opening text for the reply message
 enter the email for reply to	tracker	en	Enter the email for reply to
@@ -205,7 +207,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	en	Forward to
 forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized mails to the email address that has to be specified here.
 from	tracker	en	From
-full list of placeholder names	tracker	en	Full list of placeholder names
+full list of placeholder names	tracker	en	List of placeholder
 general fields:	tracker	en	General fields:
 general settings	tracker	en	General settings
 handling autoreplies	tracker	en	Handling auto replies
@@ -329,7 +331,7 @@ projects	tracker	en	Projects
 queue	tracker	en	Queue
 re-open closed tickets when a comment is added	tracker	en	Re-open closed tickets when a comment is added
 read	tracker	en	Read
-read / unread	tracker	en	Read / unread
+read / unread	tracker	en	Read / Unread
 read mail address	tracker	en	Filter mailbox for this mail address
 read only filemanager directory	tracker	en	Read-only Filemanger directory
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker items
@@ -351,8 +353,8 @@ report parameter	tracker	en	Report parameter
 report parameters	tracker	en	Report parameters
 reporting timeframe	tracker	en	Reporting Timeframe
 reports	tracker	en	Reports
-respect timesheet run and read permissions for time totals	tracker	en	Respect timesheet run and read permissions for time totals
 resolution	tracker	en	Resolution
+respect timesheet run and read permissions for time totals	tracker	en	Respect timesheet run and read permissions for time totals
 responsible	tracker	en	Responsible
 restict tracker items to the creator and the staff only	tracker	en	Restrict tracker items to the creator and the staff only
 restict tracker items to the creators primary group and the staff only	tracker	en	Restrict tracker items to the creators, primary group and the staff only
@@ -382,7 +384,7 @@ server type	tracker	en	Server type
 set %1	tracker	en	Set %1
 set an own bounty (in %s)	tracker	en	Set an own bounty (in %s)
 set bounty	tracker	en	Set bounty
-set due date this many days after escalation runs	tracker	en	Set due date this many days after escalation runs
+set due date this many days after escalation runs	tracker	en	Set the due date (number of days) after the escalation run
 set the ticket start date to the email received date	tracker	en	Set the ticket start date to the email received date
 set to	tracker	en	Set to
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?

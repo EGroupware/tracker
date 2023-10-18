@@ -113,6 +113,7 @@ customfield	tracker	bg	Персонализирано поле
 data exchange settings	tracker	bg	Настройки за обмен на данни
 date opened	tracker	bg	Дата на отваряне
 default document to insert entries	tracker	bg	Документ по подразбиране за въвеждане на записи
+default tracker queue	tracker	bg	Стандартна опашка
 default version for new tracker entries	tracker	bg	Версия по подразбиране за нови записи за проследяване
 delete mails from server	tracker	bg	Изтриване на имейли от сървъра
 delete the mail from the server	tracker	bg	Изтрива пощата от сървъра
@@ -137,6 +138,7 @@ do you want to vote for this item	tracker	bg	Искате ли да гласув
 donator name to show	tracker	bg	Да покаже името на дарителя
 download url for links	tracker	bg	Изтегляне на URL адреса за връзки
 due date	tracker	bg	Краен срок
+due date for new tickets	tracker	bg	Краен срок за нови билети
 duplicate	tracker	bg	Дубликат
 e-mail address to which a copy of all tracker-notifications should be send	tracker	bg	Имейл адрес, на който трябва да се изпрати копие от всички известия за проследяване
 e-mail notifications	tracker	bg	Известия по имейл
@@ -179,6 +181,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	bg	Препрати към
 forward unrecognized mails to the email address that has to be specified here.	tracker	bg	Препращайте неразпознати писма до имейл адреса, който трябва да бъде посочен тук.
 from	tracker	bg	От
+full list of placeholder names	tracker	bg	Списък на заместителите
 general fields:	tracker	bg	Основни полета:
 general settings	tracker	bg	Основни настройки
 handling autoreplies	tracker	bg	Обработка на автоматични отговори
@@ -292,6 +295,8 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	bg	Избор на проект
 projects	tracker	bg	Проекти
 re-open closed tickets when a comment is added	tracker	bg	Отворете отново затворени билети, когато бъде добавен нов коментар
+read	tracker	bg	Прочетете
+read / unread	tracker	bg	Прочетено / непрочетено
 read mail address	tracker	bg	Филтриране на пощенската кутия за този имейл адрес
 read only filemanager directory	tracker	bg	Директорията на Filemanger само за четене
 receive notifications about assigned tracker-items	tracker	bg	Получаване на известия за зададени елементи на проследяване
@@ -341,6 +346,8 @@ server type	tracker	bg	Тип сървър
 set %1	tracker	bg	Задайте %1
 set an own bounty (in %s)	tracker	bg	Задаване на собствен бонус (в %s)
 set bounty	tracker	bg	Задаване на бонус
+set due date this many days after escalation runs	tracker	bg	Задайте датата на падеж (брой дни) след изпълнението на ескалацията
+set the ticket start date to the email received date	tracker	bg	Задайте началната дата на билета на датата на полученото електронно писмо
 set to	tracker	bg	Задаване на
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	bg	Искате ли Тракерът да ви изпраща известия по пощата, ако зададените ви проследяващи елементи се актуализират?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	bg	Искате ли Тракерът да ви изпраща известия по пощата, ако създадените от Вас проследяващи елементи се актуализират?
@@ -352,6 +359,7 @@ skip record	tracker	bg	Пропуснете записа
 staff	tracker	bg	Персонал / състав
 staff  "users" will be allowed for assignment to tracker tickets	tracker	bg	Състав от "Потребители", на които ще им бъде позволено да задават билети за проследяване (tracker tickets)
 standard imap	tracker	bg	Стандартен IMAP
+start date from email	tracker	bg	Начална дата от имейл
 started	tracker	bg	Започнат
 starting	tracker	bg	Стартиране
 state	tracker	bg	Състояние
@@ -410,6 +418,7 @@ type of customfield	tracker	bg	Тип потребителско поле
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	bg	Невъзможно е да се преобразува "%1" в ID на акаунта. Използване на настройката на плъгин (%2) за %3.
 unchanged	tracker	bg	Непроменен
 unlinked from %1	tracker	bg	Прекратена връзка от %1
+unread	tracker	bg	Непрочетен
 unrecognized mails	tracker	bg	Неразпознати имейли
 upcoming	tracker	bg	Предстоящ
 updated	tracker	bg	Обновен

@@ -2,14 +2,23 @@ accepted	tracker	tr	Kabul Edildi
 configuration	tracker	tr	Ayarlar
 created by	tracker	tr	Oluşturan
 custom fields	tracker	tr	Özel Alanlar
+default tracker queue	tracker	tr	Standart kuyruk
 delete this category	tracker	tr	bu kategoriyi sil
 deleted	tracker	tr	Silindi
+due date for new tickets	tracker	tr	Yeni biletler için son tarih
 from	tracker	tr	Nereden
+full list of placeholder names	tracker	tr	Yer tutucu listesi
 order	tracker	tr	Sıralama
+read	tracker	tr	Okuyun
+read / unread	tracker	tr	Okundu / Okunmadı
 rejected	tracker	tr	Reddedildi
+set due date this many days after escalation runs	tracker	tr	Eskalasyon çalışmasından sonraki son tarihi (gün sayısı) ayarlayın
+set the ticket start date to the email received date	tracker	tr	Bilet başlangıç tarihini e-postanın alındığı tarih olarak ayarlayın
+start date from email	tracker	tr	E-postadan itibaren başlangıç tarihi
 state	tracker	tr	Durum
 this month	tracker	tr	Bu Ay
 this week	tracker	tr	Bu Hafta
 this year	tracker	tr	Bu Yıl
 times	tracker	tr	Kere
+unread	tracker	tr	Okunmadı
 updated	tracker	tr	Güncelle

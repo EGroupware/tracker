@@ -9,17 +9,20 @@ created	tracker	da	Oprettet
 creates a new field	tracker	da	opretter et nyt felt
 creation date	tracker	da	Lavet (dato:)
 custom fields	tracker	da	Valgfri Felter
+default tracker queue	tracker	da	Standard kø
 delete this category	tracker	da	Slet denne kategori
 delete this entry	tracker	da	Slet denne indtastning
 deleted	tracker	da	slettet
 deletes this field	tracker	da	sletter dette felt
 determines the order the fields are displayed	tracker	da	bestemmer rækkefølgen felterne bliver vist
+due date for new tickets	tracker	da	Forfaldsdato for nye billetter
 each value is a line like <id>[=<label>]	tracker	da	hver værdi er en linie som <id>[=<label>]
 error: the entry has been updated since you opened it for editing!	tracker	da	Fejl: Dette emne er opdateret siden du åbnede det for redigering
 everybody	tracker	da	alle
 existing links	tracker	da	eksisterende links
 forward	tracker	da	Vidersend
 from	tracker	da	Fra
+full list of placeholder names	tracker	da	Liste over pladsholdere
 history	tracker	da	Historisk
 id	tracker	da	ID
 last modified	tracker	da	Sidst opdateret
@@ -31,14 +34,20 @@ number of row for a multiline inputfield or line of a multi-select-box	tracker	d
 open(status)	tracker	da	åben
 order	tracker	da	Rækkefølge
 overdue	tracker	da	forfalden
+read	tracker	da	Læst
+read / unread	tracker	da	Læst / Ulæst
 rejected	tracker	da	Forkastet
 responsible	tracker	da	Ansvarlig
 saves the changes made and leaves	tracker	da	gem ændringerne og afslut
+set due date this many days after escalation runs	tracker	da	Indstil forfaldsdatoen (antal dage) efter eskaleringskørslen
+set the ticket start date to the email received date	tracker	da	Indstil startdatoen for sagen til datoen for modtagelse af e-mailen
 signature	tracker	da	Signatur
+start date from email	tracker	da	Startdato fra e-mail
 state	tracker	da	Land
 summary	tracker	da	Opsummering
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	da	Navn brugt internt (<= 20 tegn), ændring gør eksisterende data utilgængelige
 the text displayed to the user	tracker	da	teksten som vises til brugeren
 times	tracker	da	Gange
+unread	tracker	da	Ulæst
 upcoming	tracker	da	kommende
 updated	tracker	da	Opdateret

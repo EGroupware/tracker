@@ -40,6 +40,7 @@ created	tracker	et	Tehtud
 creates a new field	tracker	et	teeb uue välja
 creation date	tracker	et	Tegemise kuupäev
 date opened	tracker	et	Kuupäev avatud
+default tracker queue	tracker	et	Standardne järjekord
 delete this bounty	tracker	et	Kustuta see vaevatasu
 delete this canned response	tracker	et	Kustuta see eelsalvestatud vastus
 delete this category	tracker	et	Kustuta see kategooria
@@ -50,6 +51,7 @@ delete this version	tracker	et	Kustuta see versioon
 deleted	tracker	et	Kustutatud
 deletes this field	tracker	et	kustutab selle välja
 do you want to vote for this item	tracker	et	Kas soovid seda hääletada
+due date for new tickets	tracker	et	Uute piletite tähtaeg
 duplicate	tracker	et	Dublikaat
 e-mail notifications	tracker	et	E-Mail meeldetuletused
 each value is a line like <id>[=<label>]	tracker	et	iga väärtus on rida nagu <id>[=<label>]
@@ -63,6 +65,7 @@ existing links	tracker	et	Eksisteerivad lingid
 field	tracker	et	Väli
 fixed	tracker	et	Parandatud
 forward	tracker	et	Edasi
+full list of placeholder names	tracker	et	Loetelu paigutuskirjade kohta
 history	tracker	et	Ajalugu
 id	tracker	et	ID
 invalid	tracker	et	Vigane
@@ -91,6 +94,8 @@ pending items will be closed automatic after %1 days without response.	tracker	e
 permission denied !!!	tracker	et	Ligipääs keelatud !!!
 project selection	tracker	et	Projekti valik
 projects	tracker	et	Projektid
+read	tracker	et	Loetud
+read / unread	tracker	et	Loetud / Lugemata
 rejected	tracker	et	Tagasilükatud
 remind	tracker	et	Meeldetuletus
 resolution	tracker	et	Lahendus
@@ -100,7 +105,10 @@ select one...	tracker	et	vali üks...
 sender address	tracker	et	Saatja aadress
 set an own bounty (in %s)	tracker	et	Sea oma vaevatasu (%s)
 set bounty	tracker	et	Sea vaevatasu
+set due date this many days after escalation runs	tracker	et	Määrake tähtaeg (päevade arv) pärast eskaleerimise käivitamist
+set the ticket start date to the email received date	tracker	et	Määrake pileti alguskuupäevaks e-kirja saamise kuupäev
 staff	tracker	et	Töötajad
+start date from email	tracker	et	E-posti alguskuupäev
 state	tracker	et	Maakond
 summary	tracker	et	Summaarselt
 technicians	tracker	et	Tehnikud
@@ -115,6 +123,7 @@ tracker queue	tracker	et	Valdkond
 tracker-%1 '%2' added.	tracker	et	Jälgija-%1 '%2' lisatud.
 tracker-%1 '%2' updated.	tracker	et	Jälgija-%1 '%2' uuendatud.
 tracker-%1 deleted.	tracker	et	Jälgija-%1 kustutatud
+unread	tracker	et	Lugemata
 upcoming	tracker	et	kavandatav
 updated	tracker	et	uuendatud
 versions	tracker	et	Versioonid

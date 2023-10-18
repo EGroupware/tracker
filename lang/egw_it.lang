@@ -6,12 +6,6 @@
 %1 is due %2	tracker	it	%1 è in scadenza %2
 %1 is starting %2	tracker	it	%1 comincia %2
 %1 tickets have been converted	tracker	it	%1 tickets sono stati convertiti
-♦ not closed	tracker	it	♦ Non chiusi
-♦ own not closed	tracker	it	♦ Propri non chiusi
-♦ own or assigned not closed	tracker	it	♦ Propri oppure assegnati, non chiusi
-♦ own without reply not closed	tracker	it	♦ Propri senza risposte e non chiusi
-♦ without 30 days reply not closed	tracker	it	♦ Da 30 giorni senza risposte e non chiusi
-♦ without reply not closed	tracker	it	♦ Senza risposte  e non chiusi
 (beware of mailloops, check the help!)	tracker	it	(Attenzione ai loop di posta, controllare la guida!)
 (new tickets as	tracker	it	Nuovo ticket come
 --> choose a project from the drop-down list	tracker	it	>> scegli un progetto dal menù a tendina
@@ -125,6 +119,7 @@ data exchange settings	tracker	it	Impostazioni di scambio dati
 date filter	tracker	it	Filtro per data
 date opened	tracker	it	Data apertura
 default document to insert entries	tracker	it	Documento predefinito per l'inserimento
+default tracker queue	tracker	it	Coda standard
 default version for new tracker entries	tracker	it	Versione predefinita per i nuovi ticket
 define escalations	common	it	Definisci azioni
 delete mails from server	tracker	it	Elimina le mail dal server
@@ -144,7 +139,6 @@ deletes this field	tracker	it	Cancella questo campo
 deny global	tracker	it	Nega globale
 determines the order the fields are displayed	tracker	it	Determina l'ordine di visualizzazione dei campi
 directory with documents to insert entries	tracker	it	Cartella con documenti per l'inserimento
-do not notify of these changes	tracker	it	Non notificarmi le modifiche
 do you want a notification, if items you are responsible for are about to start?	tracker	it	Inviare notifica quando attività per le quali sei responsabile stanno per avviarsi.
 do you want a notification, if items you are responsible for are due?	tracker	it	Inviare notifica quando attività per le quali sei responsabile sono in scadenza.
 do you want to add mailheader information to description and/or comments?	tracker	it	Vuoi aggiungere le informazioni di intestazione della mail (header) alla descrizione e/o ai commenti?
@@ -153,6 +147,7 @@ donator name to show	tracker	it	Nome donatore da mostrare
 download url for links	tracker	it	URL di scaricamento per i collegamenti
 due	tracker	it	Scadenza
 due date	tracker	it	Data di scadenza
+due date for new tickets	tracker	it	Data di scadenza per i nuovi biglietti
 duplicate	tracker	it	Duplica
 e-mail address to which a copy of all tracker-notifications should be send	tracker	it	Indirizzo e-mail al quale inviare una copia di tutte le notifiche tracker
 e-mail notifications	tracker	it	Notifiche e-mail
@@ -202,7 +197,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	it	Inoltra a
 forward unrecognized mails to the email address that has to be specified here.	tracker	it	Inoltra le mail non roconosciute all'indirizzo email che ho specificato qui.
 from	tracker	it	Da
-full list of placeholder names	tracker	it	Lista completa dei nomi dei segnaposto
+full list of placeholder names	tracker	it	Elenco dei segnaposto
 general fields:	tracker	it	Campi generali
 general settings	tracker	it	Impostazioni generali
 handling autoreplies	tracker	it	Gestire le risposte automatiche
@@ -323,13 +318,15 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	it	Selezione progetto
 projects	tracker	it	Progetti
 queue	tracker	it	Code
+read	tracker	it	Letto
+read / unread	tracker	it	Letto / Non letto
 read mail address	tracker	it	Leggi la posta
 receive notifications about assigned tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker assegnati
 receive notifications about created tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker creati
 receive notifications about due entries you created or are assigned to	tracker	it	Ricezione di notifiche circa ticket in scadenza che hai creato oppure dei quali sei assegnatario
+receive notifications about own changes in tracker-items	tracker	it	Ricevi notifiche circa le tue modifiche nei ticket
 receive notifications about starting entries you created or are assigned to	tracker	it	Ricevi notifiche circa i ticket nuovi che hai creato oppure di cui sei assegnatario
 receive notifications in html	tracker	it	Ricezione notifiche in html
-receive notifications about own changes in tracker-items	tracker	it	Ricevi notifiche circa le tue modifiche nei ticket
 refused to open mailbox therefore changed interval from %1 to %2	tracker	it	negata l'apertura della casella e quindi l'intervallo è stato modificato da %1 a %2
 refused to open mailbox: %1	tracker	it	negato di aprire la casella: %1
 rejected	tracker	it	Rifiutato
@@ -372,6 +369,8 @@ server type	tracker	it	Tipo del server
 set %1	tracker	it	Imposta %1
 set an own bounty (in %s)	tracker	it	Imposta un bounty (in %s)
 set bounty	tracker	it	Imposta bounty
+set due date this many days after escalation runs	tracker	it	Imposta la data di scadenza (numero di giorni) dopo l'esecuzione dell'escalation
+set the ticket start date to the email received date	tracker	it	Impostare la data di inizio del ticket sulla data di ricezione dell'e-mail
 set to	tracker	it	Imposta a
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker a te assegnati vengono aggiornati?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	it	Tracker dovrà inviarti una mail di notifica, se gli oggetti tracker da te creati vengono aggiornati?
@@ -383,6 +382,7 @@ skip record	tracker	it	Salta voce
 staff	tracker	it	Staff
 staff  "users" will be allowed for assignment to tracker tickets	tracker	it	Sarà permesso assegnare gli "User" dello staff ai ticket
 standard imap	tracker	it	IMAP standard
+start date from email	tracker	it	Data di inizio dall'e-mail
 started	tracker	it	Iniziato
 starting	tracker	it	Inizia
 state	tracker	it	Stato
@@ -441,6 +441,7 @@ type of customfield	tracker	it	Tipo di campo personalizzato
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	it	Impossibile convertire "%1" a ID account. Impostazione plugin (%2) per %3 in uso.
 unchanged	tracker	it	Non cambiare
 unlinked from %1	tracker	it	Link annullato da %1
+unread	tracker	it	Non letto
 unrecognized mails	tracker	it	Email non ricosciute
 upcoming	tracker	it	imminente
 updated	tracker	it	Aggiornato
@@ -479,3 +480,9 @@ you need to select some entries first	tracker	it	Devi prima selezionare alcune v
 you need to select something to change and some tracker items!	tracker	it	Devi selezionare qualcosa da cambiare E qualche oggetto tracker!
 you need to specify amount, donators name and email address!	tracker	it	Devi specificare l'importo, i nomi dei donatori E l'indirizzo email!
 you voted %1.	tracker	it	Hai votato %1.
+♦ not closed	tracker	it	♦ Non chiusi
+♦ own not closed	tracker	it	♦ Propri non chiusi
+♦ own or assigned not closed	tracker	it	♦ Propri oppure assegnati, non chiusi
+♦ own without reply not closed	tracker	it	♦ Propri senza risposte e non chiusi
+♦ without 30 days reply not closed	tracker	it	♦ Da 30 giorni senza risposte e non chiusi
+♦ without reply not closed	tracker	it	♦ Senza risposte  e non chiusi

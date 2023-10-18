@@ -49,6 +49,7 @@ creates a new field	tracker	hu	Új mező létrehozása
 creation date	tracker	hu	Létrehozás dátuma
 custom fields	tracker	hu	Egyedi mezők
 date opened	tracker	hu	Megnyitás dátuma
+default tracker queue	tracker	hu	Normál várólista
 delete this category	tracker	hu	Kategória törlése
 delete this entry	tracker	hu	Aktuális bejegyzés törlése
 deleted	tracker	hu	Törölt
@@ -56,6 +57,7 @@ deletes this field	tracker	hu	Aktuális mező törlése
 determines the order the fields are displayed	tracker	hu	megjelenített mezők rendezésének meghatározása
 do you want a notification, if items you are responsible for are about to start?	tracker	hu	Kér értesítést, ha egy saját feladatát rövidesen el kell kezdenie?
 do you want a notification, if items you are responsible for are due?	tracker	hu	Kér értesítést, ha egy saját feladatának a határideje rövidesen lejár?
+due date for new tickets	tracker	hu	Új jegyek esedékessége
 duplicate	tracker	hu	Duplikál
 e-mail notifications	tracker	hu	Email értesítés
 each value is a line like <id>[=<label>]	tracker	hu	minden érték egy sor, ehhez hasonlóan: <id>[=<címke>]
@@ -72,6 +74,7 @@ field	tracker	hu	Mező
 forward	tracker	hu	Továbbít
 forward to	tracker	hu	Továbbítás ide
 from	tracker	hu	Tól:
+full list of placeholder names	tracker	hu	Helytartók listája
 general fields:	tracker	hu	Általános mezők:
 history	tracker	hu	Történet
 id	tracker	hu	Azonosító
@@ -99,13 +102,18 @@ order	tracker	hu	Rendezés
 overdue	tracker	hu	lejárt
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
+read	tracker	hu	Olvasás
+read / unread	tracker	hu	Olvasott / Olvasatlan
 rejected	tracker	hu	Elutasított
 remind	tracker	hu	Emlékeztető
 resolution	tracker	hu	Határozat
 responsible	tracker	hu	Felelős
 same day	tracker	hu	azonos napon
 saves the changes made and leaves	tracker	hu	Változások mentése és kilépés
+set due date this many days after escalation runs	tracker	hu	Az esedékesség dátumának beállítása (napok száma) az eszkalációs futtatás után
+set the ticket start date to the email received date	tracker	hu	A jegy kezdeti dátumának beállítása az e-mail beérkezésének dátumára
 signature	tracker	hu	Aláírás
+start date from email	tracker	hu	Az e-mail kezdő dátuma
 state	tracker	hu	Állapot
 sum	tracker	hu	Összesen
 summary	tracker	hu	Összefoglaló
@@ -116,6 +124,7 @@ this week	tracker	hu	Folyó hét
 this year	tracker	hu	Folyó év
 times	tracker	hu	Időigény
 type of customfield	tracker	hu	Egyedi mező típusa
+unread	tracker	hu	Olvasatlan
 upcoming	tracker	hu	közelgő
 updated	tracker	hu	frissítve
 yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel

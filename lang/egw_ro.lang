@@ -1,0 +1,9 @@
+default tracker queue	tracker	ro	Coadă standard
+due date for new tickets	tracker	ro	Data scadentă pentru bilete noi
+full list of placeholder names	tracker	ro	Listă de placeholder
+read	tracker	ro	Citiți
+read / unread	tracker	ro	Citit / Necitit
+set due date this many days after escalation runs	tracker	ro	Stabiliți data scadentă (număr de zile) după rularea escaladării
+set the ticket start date to the email received date	tracker	ro	Setați data de începere a tichetului la data primirii e-mailului
+start date from email	tracker	ro	Data de începere din e-mail
+unread	tracker	ro	Necitit

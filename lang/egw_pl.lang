@@ -1,10 +1,5 @@
 %1 entries updated.	tracker	pl	%1 wpisów zostało zaktualizowanych
 %1 tickets have been converted	tracker	pl	Skonwertowano %1 ticketów
-♦ not closed	tracker	pl	♦ Nie zamknięty
-♦ own not closed	tracker	pl	♦ Własny nie zamknięty
-♦ own without reply not closed	tracker	pl	♦ Własny bez odpowiedzi nie zamknięty
-♦ without 30 days reply not closed	tracker	pl	♦ Bez odpowiedzi 30 dni nie zamknięty
-♦ without reply not closed	tracker	pl	♦ Bez odpowiedzi nie zamknięty
 (new tickets as	tracker	pl	(Nowe tickety jako
 --> choose a project from the drop-down list	tracker	pl	--> wybierz projekt z listy rozwijanej
 --> enter new name	tracker	pl	--> podaj nową nazwę
@@ -79,6 +74,7 @@ creator	tracker	pl	Twórca
 custom fields	tracker	pl	Pola użytkownika
 custom tracker priorities	tracker	pl	Własne priorytety dla systemu śledzenia
 date opened	tracker	pl	Data utworzenia
+default tracker queue	tracker	pl	Standardowa kolejka
 define escalations	common	pl	Zdefiniuj eskalacje
 delete mails from server	tracker	pl	Usuń maile z serwera
 delete this bounty	tracker	pl	Usuń wskazaną premię
@@ -95,6 +91,7 @@ deletes this field	tracker	pl	usuwa to pole
 determines the order the fields are displayed	tracker	pl	decyduje o kolejności, w jakiej pola zostaną pokazane
 do you want to vote for this item	tracker	pl	Czy chcesz zagłosować na to zgłoszenie?
 donator name to show	tracker	pl	Nazwisko fundatora do pokazania
+due date for new tickets	tracker	pl	Data wymagalności dla nowych biletów
 duplicate	tracker	pl	Kopia
 e-mail address to which a copy of all tracker-notifications should be send	tracker	pl	Adres poczty elektronicznej, na który wysyłane będą kopie wszystkich powiadomień aplikacji System śledzenia
 e-mail notifications	tracker	pl	Powiadomienia poczty elektronicznej
@@ -130,6 +127,7 @@ forward	tracker	pl	Prześlij dalej
 forward to	tracker	pl	Prześlij do
 forward unrecognized mails to the email address that has to be specified here.	tracker	pl	Wpisz tutaj adres na który będą przekazywane nie rozpoznane wiadomości.
 from	tracker	pl	Od
+full list of placeholder names	tracker	pl	Lista symboli zastępczych
 general fields:	tracker	pl	Pola ogólne:
 history	tracker	pl	Historia
 html editing	tracker	pl	Edycja HTML
@@ -197,11 +195,13 @@ process	tracker	pl	Process
 project selection	tracker	pl	Wybór projektu
 projects	tracker	pl	Projekty
 queue	tracker	pl	Kolejka
+read	tracker	pl	Przeczytane
+read / unread	tracker	pl	Przeczytane / Nieprzeczytane
 read mail address	tracker	pl	Czytaj wiadomości email
 receive notifications about assigned tracker-items	tracker	pl	Otrzymuj powiadomienia związane z przydzielonymi elementami.
 receive notifications about created tracker-items	tracker	pl	Otrzymuj powiadomienia związane z utworzonymi elementami
-receive notifications in html	tracker	pl	Otrzymuj powiadomienia w HTML
 receive notifications about own changes in tracker-items	tracker	pl	Otrzymuj powiadomienia a własnych zmianach w elementach systemu śledzenia
+receive notifications in html	tracker	pl	Otrzymuj powiadomienia w HTML
 rejected	tracker	pl	Odrzucono
 remind	tracker	pl	Przypomnij
 reply also to unknown addresses	tracker	pl	Odpowiadaj również na nieznane adresy
@@ -228,11 +228,14 @@ server type	tracker	pl	Typ serwera
 set %1	tracker	pl	Ustaw %1
 set an own bounty (in %s)	tracker	pl	Ustal własną premię (w %s)
 set bounty	tracker	pl	Ustal premię
+set due date this many days after escalation runs	tracker	pl	Ustaw datę wymagalności (liczbę dni) po uruchomieniu eskalacji
+set the ticket start date to the email received date	tracker	pl	Ustaw datę rozpoczęcia zgłoszenia na datę otrzymania wiadomości e-mail
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy przypisane do Ciebie są aktualizowane?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy utworzone przez Ciebie są aktualizowane?
 show the tracker send you notification mails, in tracker items that you updates?	tracker	pl	Czy system śledzenia powinien przesyłać ci powiadomienia
 signature	tracker	pl	Sygnaturka
 staff	tracker	pl	Personel
+start date from email	tracker	pl	Data rozpoczęcia od wiadomości e-mail
 state	tracker	pl	Stan
 stati	tracker	pl	Statys
 store as	tracker	pl	Zachowaj jako
@@ -269,6 +272,7 @@ tracker-%1 '%2' updated.	tracker	pl	System śledzenia - %1 '%2' zaktualizowano.
 tracker-%1 deleted.	tracker	pl	System śledzenia - %1 usunięto.
 type of customfield	tracker	pl	Typ pola użytkownika
 unchanged	tracker	pl	Niezmieniony
+unread	tracker	pl	Nieprzeczytane
 unrecognized mails	tracker	pl	Nierozpoznane maile
 upcoming	tracker	pl	nadchodzące
 updated	tracker	pl	Uaktualniony
@@ -295,3 +299,8 @@ you need to login to vote!	tracker	pl	Musisz być zalogowany aby móc głosować
 you need to select something to change and some tracker items!	tracker	pl	Musisz wybrać coś do zmiany ORAZ jakieś zgłoszenia systemu śledzenia!
 you need to specify amount, donators name and email address!	tracker	pl	Musisz określić kwotę, nazwisko ofiarodawcy ORAZ adres poczty elektronicznej!
 you voted %1.	tracker	pl	Zagłosowano %1
+♦ not closed	tracker	pl	♦ Nie zamknięty
+♦ own not closed	tracker	pl	♦ Własny nie zamknięty
+♦ own without reply not closed	tracker	pl	♦ Własny bez odpowiedzi nie zamknięty
+♦ without 30 days reply not closed	tracker	pl	♦ Bez odpowiedzi 30 dni nie zamknięty
+♦ without reply not closed	tracker	pl	♦ Bez odpowiedzi nie zamknięty

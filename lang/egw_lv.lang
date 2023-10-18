@@ -10,17 +10,20 @@ created	tracker	lv	Izveidots
 creates a new field	tracker	lv	veido jaunu lauku
 creation date	tracker	lv	Izveiodšanas datums
 custom fields	tracker	lv	Mainīti lauki
+default tracker queue	tracker	lv	Standarta rinda
 delete this category	tracker	lv	izdzēst šo kategoriju
 delete this entry	tracker	lv	dzēst šo ierakstu
 deleted	tracker	lv	Izdzēsts
 deletes this field	tracker	lv	dzēš šo lauku
 determines the order the fields are displayed	tracker	lv	nosaka kārtību, kādā tiek attēloti lauki
+due date for new tickets	tracker	lv	Jaunu biļešu iesniegšanas termiņš
 each value is a line like <id>[=<label>]	tracker	lv	katra vēr'tiba ir līniija kā <id>[=<iezīme>]
 entry saved	tracker	lv	Ieraksts saglabāts
 everybody	tracker	lv	ikviens
 existing links	tracker	lv	Eksistējošas saites
 forward	tracker	lv	Pārsūtīt
 from	tracker	lv	No
+full list of placeholder names	tracker	lv	Vietvārdu saraksts
 history	tracker	lv	Vēsture
 id	tracker	lv	ID
 last modified	tracker	lv	Pēdējo reizi pārveidots
@@ -32,11 +35,16 @@ open(status)	tracker	lv	atvērt
 order	tracker	lv	Kārtība
 permission denied !!!	tracker	lv	Atļauja liegta!!!
 process	tracker	lv	Process
+read	tracker	lv	Lasīt
+read / unread	tracker	lv	Lasīt / Neizlasīts
 rejected	tracker	lv	Noraidīts
 responsible	tracker	lv	Atbildīgs
 saves the changes made and leaves	tracker	lv	saglabā izdarītās izmaiņas un aiziet
 select one...	tracker	lv	atzīmē vienu
+set due date this many days after escalation runs	tracker	lv	Iestatiet izpildes termiņu (dienu skaits) pēc eskalācijas palaišanas
+set the ticket start date to the email received date	tracker	lv	Iestatiet biļetes sākuma datumu kā e-pasta saņemšanas datumu.
 signature	tracker	lv	Paraksts
+start date from email	tracker	lv	Sākuma datums no e-pasta
 state	tracker	lv	Štats
 summary	tracker	lv	Kopsavilkums
 the text displayed to the user	tracker	lv	lietotājam parādīts teksts
@@ -44,5 +52,6 @@ this month	tracker	lv	Šis mēnesis
 this week	tracker	lv	Šī nedēļa
 this year	tracker	lv	Šis gads
 times	tracker	lv	Reizes
+unread	tracker	lv	Neizlasīts
 upcoming	tracker	lv	ienākošs
 updated	tracker	lv	Atjaunināts

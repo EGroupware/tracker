@@ -1,10 +1,5 @@
 %1 entries updated.	tracker	zh	%1 条目被更新。
 %1 tickets have been converted	tracker	zh	%1 传票已转换
-♦ not closed	tracker	zh	♦ '没有关闭
-♦ own not closed	tracker	zh	♦ 自己没有关闭
-♦ own without reply not closed	tracker	zh	♦ 自己没答复并且没关闭
-♦ without 30 days reply not closed	tracker	zh	♦ 没在30天答复并且没关闭
-♦ without reply not closed	tracker	zh	♦ 没答复并且没关闭
 --> choose a project from the drop-down list	tracker	zh	--> 从下拉列表选择一个项目
 --> enter new name	tracker	zh	--> 输入新名称
 1 - lowest	tracker	zh	1 - 最低
@@ -68,6 +63,7 @@ creation date	tracker	zh	创建日期
 creator	tracker	zh	创建者
 custom fields	tracker	zh	自定义字段
 date opened	tracker	zh	被打开的日期
+default tracker queue	tracker	zh	标准排队
 delete this bounty	tracker	zh	删除这个奖金
 delete this canned response	tracker	zh	删除这个制式回应
 delete this category	tracker	zh	删除这个类别
@@ -80,6 +76,7 @@ deletes this field	tracker	zh	删除此字段域
 determines the order the fields are displayed	tracker	zh	确定显示字段域顺序
 do you want to vote for this item	tracker	zh	您是否要为这个项目投票
 donator name to show	tracker	zh	要显示的赞助者名称
+due date for new tickets	tracker	zh	新票到期日
 duplicate	tracker	zh	副本
 e-mail address to which a copy of all tracker-notifications should be send	tracker	zh	所有任务跟踪提醒通知的副本要发送的信箱
 e-mail notifications	tracker	zh	发送通知邮件
@@ -99,6 +96,7 @@ fixed	tracker	zh	固定的
 forward	tracker	zh	转发
 forward to	tracker	zh	转发到
 from	tracker	zh	来自
+full list of placeholder names	tracker	zh	占位符列表
 general fields:	tracker	zh	通用字段：
 history	tracker	zh	历史
 html editing	tracker	zh	HTML 编辑
@@ -147,10 +145,12 @@ postponed	tracker	zh	延期
 process	tracker	zh	进程
 project selection	tracker	zh	项目选择
 projects	tracker	zh	项目
+read	tracker	zh	已读
+read / unread	tracker	zh	已读/未读
 receive notifications about assigned tracker-items	tracker	zh	在被指派任务跟踪项目时发出通知
 receive notifications about created tracker-items	tracker	zh	在任务跟踪项目建立时发出通知
-receive notifications in html	tracker	zh	接收 html 格式通知
 receive notifications about own changes in tracker-items	tracker	zh	收到有关您自己跟踪项目更改的通知
+receive notifications in html	tracker	zh	接收 html 格式通知
 rejected	tracker	zh	拒绝
 remind	tracker	zh	提醒
 resolution	tracker	zh	决议
@@ -164,11 +164,14 @@ sender address	tracker	zh	发件人信箱
 sender address for all notifications, eg. noreply@egroupware.org	tracker	zh	所有提醒通知的寄件人信箱，例如 noreply@egroupware.org
 set an own bounty (in %s)	tracker	zh	设定一个自己的奖金(在 %s)
 set bounty	tracker	zh	设定奖金
+set due date this many days after escalation runs	tracker	zh	设置升级运行后的到期日期（天数
+set the ticket start date to the email received date	tracker	zh	将票单开始日期设置为收到电子邮件的日期
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	zh	如果指派给您的任务跟踪项目更新了，是否要发送通知给您？
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	zh	如果您建立的任务跟踪项目更新了，是否要发送通知给您？
 show the tracker send you notification mails, in tracker items that you updates?	tracker	zh	显示跟踪系统发送给您的通知邮件，您在跟踪项目中进行了更新？
 signature	tracker	zh	签名
 staff	tracker	zh	职员
+start date from email	tracker	zh	来自电子邮件的开始日期
 state	tracker	zh	状态
 stati	tracker	zh	状态
 summary	tracker	zh	摘要
@@ -200,6 +203,7 @@ tracker-%1 '%2' added.	tracker	zh	任务跟踪 -%1 '%2' 被添加。
 tracker-%1 '%2' updated.	tracker	zh	任务跟踪 -%1 '%2' 已更新。
 tracker-%1 deleted.	tracker	zh	任务跟踪 -%1 已删除。
 type of customfield	tracker	zh	自定义字段类型
+unread	tracker	zh	未读
 upcoming	tracker	zh	临近事项
 updated	tracker	zh	更新
 url of the tracker	tracker	zh	任务跟踪的网址
@@ -220,3 +224,8 @@ you need to login to vote!	tracker	zh	您必须登录才能投票！
 you need to select something to change and some tracker items!	tracker	zh	您必须选择要修改的一或多个任务跟踪项目！
 you need to specify amount, donators name and email address!	tracker	zh	您必须指定数量、捐赠人名称与联系信箱！
 you voted %1.	tracker	zh	您的投票%1。
+♦ not closed	tracker	zh	♦ '没有关闭
+♦ own not closed	tracker	zh	♦ 自己没有关闭
+♦ own without reply not closed	tracker	zh	♦ 自己没答复并且没关闭
+♦ without 30 days reply not closed	tracker	zh	♦ 没在30天答复并且没关闭
+♦ without reply not closed	tracker	zh	♦ 没答复并且没关闭

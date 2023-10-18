@@ -24,6 +24,7 @@ creator	tracker	pt	Criador
 custom fields	tracker	pt	Personalizar campos
 data exchange settings	tracker	pt	Configurações de troca de dados
 default document to insert entries	tracker	pt	Documento padrão para inserir entradas
+default tracker queue	tracker	pt	Fila de espera normal
 delete this category	tracker	pt	eliminar esta categoria
 delete this entry	tracker	pt	eliminar este registo
 deleted	tracker	pt	eliminado/a
@@ -31,6 +32,7 @@ deletes this field	tracker	pt	eliminar este campo
 determines the order the fields are displayed	tracker	pt	determina a ordem de apresentação dos campos
 directory with documents to insert entries	tracker	pt	Diretório com documentos para inserir entradas
 download url for links	tracker	pt	Baixe url para links
+due date for new tickets	tracker	pt	Data de vencimento dos novos bilhetes
 each value is a line like <id>[=<label>]	tracker	pt	cada valor é uma linha como <id>[=<etiqueta>]
 each value is a line like id[=label]	tracker	pt	cada valor é uma linha como <id>[=etiqueta]
 entry saved	tracker	pt	Registo guardado
@@ -47,7 +49,7 @@ field	tracker	pt	Campo
 forward	tracker	pt	Encaminhar
 forward to	tracker	pt	encaminhar à
 from	tracker	pt	De
-full list of placeholder names	tracker	pt	Lista completa de nomes de espaço reservado
+full list of placeholder names	tracker	pt	Lista de marcadores de posição
 general fields:	tracker	pt	Campos gerais:
 general settings	tracker	pt	Definições gerais
 history	tracker	pt	Histórico
@@ -81,6 +83,8 @@ overdue	tracker	pt	Em atraso
 permission denied !!!	tracker	pt	Permissão negada !!!
 permissions error - %1 could not %2	tracker	pt	Erro de permissões -% 1 não pôde% 2
 process	tracker	pt	Processar
+read	tracker	pt	Lido
+read / unread	tracker	pt	Lido / Não lido
 rejected	tracker	pt	Rejeitado
 replacements for inserting entries into documents	tracker	pt	Substitutos para a inserção de entradas em documentos
 responsible	tracker	pt	Responsável
@@ -88,7 +92,10 @@ same day	tracker	pt	Mesmo dia
 saves the changes made and leaves	tracker	pt	guarda as alterações e deixa
 select one...	tracker	pt	seleccione um(a)...
 select users or groups	tracker	pt	Selecione os usuários ou grupos
+set due date this many days after escalation runs	tracker	pt	Definir a data de vencimento (número de dias) após a execução do escalonamento
+set the ticket start date to the email received date	tracker	pt	Definir a data de início do bilhete para a data de receção do correio eletrónico
 signature	tracker	pt	Assinatura
+start date from email	tracker	pt	Data de início do correio eletrónico
 state	tracker	pt	Bairro
 sum	tracker	pt	Soma
 summary	tracker	pt	Assunto
@@ -102,6 +109,7 @@ this year	tracker	pt	Este ano
 times	tracker	pt	Tempo
 type of customfield	tracker	pt	Tipo de campo personalizado
 unlinked from %1	tracker	pt	Desvinculada de 1%
+unread	tracker	pt	Não lido
 upcoming	tracker	pt	A chegar
 updated	tracker	pt	Actualizado
 use all	tracker	pt	Use todos

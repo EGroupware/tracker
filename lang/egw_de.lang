@@ -124,6 +124,7 @@ date filter	tracker	de	Filter nach Datum
 date opened	tracker	de	Datum angelegt
 default document to insert entries	tracker	de	Standarddokument zum Einfügen von Daten
 default group	tracker	de	Standard Gruppe
+default tracker queue	tracker	de	Standard-Warteschlange
 default version for new tracker entries	tracker	de	Vorgabe für die Version neuer Tickets
 define escalations	common	de	Eskalation definieren
 delete mails from server	tracker	de	E-Mails auf dem Server löschen
@@ -152,6 +153,7 @@ donator name to show	tracker	de	Name des Spenders der angezeigt wird
 download url for links	tracker	de	Download URL für Verknüpfungen
 due	tracker	de	fällig
 due date	tracker	de	Fälligkeitsdatum
+due date for new tickets	tracker	de	Fälligkeitsdatum für neue Tickets
 duplicate	tracker	de	Doppelt
 e-mail address to which a copy of all tracker-notifications should be send	tracker	de	E-Mail Adresse zu der eine Kopie aller Benachrichtigungen des Verfolgungssystem geschickt werden soll
 e-mail notifications	tracker	de	E-Mail Benachrichtigungen
@@ -205,7 +207,7 @@ forward the mail to the same address where unrecognized mails can be forwarded t
 forward to	tracker	de	Weiterleiten an
 forward unrecognized mails to the email address that has to be specified here.	tracker	de	Leitet nicht zuordenbare E-Mail an die hier eingetragene Adresse weiter.
 from	tracker	de	Von
-full list of placeholder names	tracker	de	komplette Liste der Platzhalter
+full list of placeholder names	tracker	de	Liste der Platzhalter
 general fields:	tracker	de	Allgemeine Felder
 general settings	tracker	de	Allgemeine Einstellungen
 handling autoreplies	tracker	de	Handhabung von automatischen Antworten
@@ -350,8 +352,8 @@ report parameter	tracker	de	Parameter der Berichte
 report parameters	tracker	de	Parameter für Ihren Bericht
 reporting timeframe	tracker	de	Zeitfenster der Berichte
 reports	tracker	de	Berichte
-respect timesheet run and read permissions for time totals	tracker	de	Respektieren Sie die Ausführungs- und Leseberechtigungen für Zeittabellen
 resolution	tracker	de	Lösung
+respect timesheet run and read permissions for time totals	tracker	de	Respektieren Sie die Ausführungs- und Leseberechtigungen für Zeittabellen
 responsible	tracker	de	Verantwortlich
 restict tracker items to the creator and the staff only	tracker	de	Tickets auf Ersteller und Mitarbeiter einschränken
 restict tracker items to the creators primary group and the staff only	tracker	de	Tickets auf primäre Gruppe des Ersteller und Mitarbeiter einschränken
@@ -381,6 +383,8 @@ server type	tracker	de	Server Typ
 set %1	tracker	de	%1 setzen
 set an own bounty (in %s)	tracker	de	Eigene Prämie setzen (in %s)
 set bounty	tracker	de	Prämie setzen
+set due date this many days after escalation runs	tracker	de	Legen Sie das Fälligkeitsdatum (Anzahl Tage) nach dem Eskalationslauf fest
+set the ticket start date to the email received date	tracker	de	Setzen Sie das Startdatum des Tickets auf das Eingangsdatum der E-Mail
 set to	tracker	de	Änderungen anwenden für
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die Ihnen zugewiesen sind aktualisiert werden?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	de	Soll das Verfolgungssystem Ihnen Benachrichtigungsmails senden, wenn Einträge die von Ihnen angelegt wurden aktualisiert werden?
