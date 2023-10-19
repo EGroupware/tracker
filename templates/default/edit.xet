@@ -144,7 +144,7 @@
 				</row>
 				<row>
 					<et2-description  for="tr_assigned" value="Assigned to"></et2-description>
-					<et2-select  class="tracker_assign" id="tr_assigned" multiple="true" placeholder="User or group" noLang="1"></et2-select>
+                    <et2-tracker-assigned class="tracker_assign" id="tr_assigned" multiple="true" placeholder="User or group" noLang="1" tracker="@tr_tracker"></et2-tracker-assigned>
 					<et2-description></et2-description>
 					<et2-description  for="tr_private" value="Private"></et2-description>
 					<et2-checkbox  id="tr_private" span="all" unselectedValue="0"></et2-checkbox>

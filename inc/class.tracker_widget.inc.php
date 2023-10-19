@@ -178,3 +178,5 @@ class tracker_widget extends Etemplate\Widget\Entry
 		return $fields;
 	}
 }
+
+Etemplate\Widget::registerWidget(__NAMESPACE__ . '\\tracker_widget', array('tracker_widget'));
