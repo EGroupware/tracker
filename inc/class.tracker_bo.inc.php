@@ -2148,18 +2148,22 @@ class tracker_bo extends tracker_so
 		// we have to check if we know this ticket before proceeding
 		if ($ticketId == 0)
 		{
-			$trackerentry = array_merge($this->init(
+			$trackerentry = array_merge(
+				$this->init(
+					array(
+						'tr_id'          => 0,
+						'tr_tracker'     => $this->mailhandling[$_queue]['default_tracker'],
+						'tr_cc'          => implode(',', $emails),
+						'tr_summary'     => $_subject,
+						'tr_description' => $_message
+					)
+				),
 				array(
-					'tr_id'          => 0,
-					'tr_tracker'     => $this->mailhandling[$_queue]['default_tracker'],
-					'tr_cc'          => implode(',', $emails),
-					'tr_summary'     => $_subject,
-					'tr_description' => $_message
-				)
-			),                          array(
-					'referer'        => false,
-					'popup'          => true,
-					'link_to'        => array(
+					// Clear creator, we determine it from email
+					'tr_creator' => null,
+					'referer'    => false,
+					'popup'      => true,
+					'link_to'    => array(
 						'to_app' => 'tracker',
 						'to_id'  => 0,
 					),
@@ -2184,7 +2188,9 @@ class tracker_bo extends tracker_so
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,$filter,'',false));
+					), 'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id,freebusy_uri', '', '', '', false, 'OR', false, $filter, '', false
+				)
+				);
 			}
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
 			{
