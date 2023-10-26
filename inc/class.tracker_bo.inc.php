@@ -833,7 +833,7 @@ class tracker_bo extends tracker_so
 	public function &_get_staff()
 	{
 		$staff_cache = array();
-		$_tracker = array_keys($this->trackers);
+		$_tracker = array_keys($this->trackers ?? []);
 		array_unshift($_tracker, 0);
 		foreach(['technicians', 'admins', 'users', 'usersANDtechnicians'] as $what)
 		{
