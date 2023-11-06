@@ -259,6 +259,7 @@ class tracker_admin extends tracker_bo
 					{
 						$this->save_config();
 						$validationError=false;
+						EGroupware\Api\Cache::unsetCache(EGroupware\Api\Cache::INSTANCE, 'tracker', 'staff_cache');
 						//$this->load_config();
 						if (!is_array($this->mailhandling) && !empty($this->mailhandling))
 						{
