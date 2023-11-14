@@ -795,12 +795,20 @@ class tracker_bo extends tracker_so
 		$staff_cache = Cache::getInstance(
 			'tracker', 'staff_cache',
 			array($this, '_get_staff'), [],
-			//86400 // 1 day
-			60
+			86400 // 1 day
 		);
 
 		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
 		//error_log(__METHOD__.__LINE__.array2string($tracker));
+		if(is_array($tracker))
+		{
+			array_unshift($tracker, 0);
+		}
+		else
+		{
+			$tracker = array(0, $tracker);
+		}
+
 		$users = array();
 		$groups = array();
 		foreach ((array)$tracker as $track)
@@ -811,7 +819,7 @@ class tracker_bo extends tracker_so
 					isset($staff_cache[$track][$who][$what]))
 				{
 					//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
-					$$who = array_merge($$who, $staff_cache[$track][$who][$what]);
+					$$who = $$who + $staff_cache[$track][$who][$what];
 				}
 			}
 		}
