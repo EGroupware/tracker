@@ -314,4 +314,12 @@ class tracker_hooks
 			'app_entry_method' => 'tracker.tracker_bo.ajax_getTicketId'
 		);
 	}
+
+	/**
+	 * Returns a list of custom widgets classes for etemplate2
+	 */
+	public static function widgets()
+	{
+		return array('tracker_assigned_etemplate_widget');
+	}
 }

@@ -40,6 +40,7 @@ $setup_info['tracker']['hooks']['addressbook_view'] = 'tracker.tracker_ui.hook_v
 $setup_info['tracker']['hooks']['mail_import'] = 'tracker.tracker_hooks.mail_import';
 $setup_info['tracker']['hooks']['change_account_ids'] = 'tracker_admin::change_account_ids';
 $setup_info['tracker']['hooks']['etemplate2_history_get_rows'] = 'tracker.tracker_ui.modify_history';
+$setup_info['tracker']['hooks']['etemplate2_register_widgets'] = 'tracker_hooks::widgets';
 
 /* Dependencies for this app to work */
 $setup_info['tracker']['depends'][] = array(

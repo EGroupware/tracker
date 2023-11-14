@@ -726,7 +726,7 @@ class tracker_ui extends tracker_bo
 			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id'], true, $default_priority),
 			'tr_status'   => &$statis,
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
-			'tr_assigned' => $account_select_pref == 'none' ? array() : $this->get_staff($tracker,$this->allow_assign_groups,$this->allow_assign_users?'usersANDtechnicians':'technicians'),
+			'tr_assigned' => $account_select_pref == 'none' ? array() : array_slice($this->get_staff($tracker, $this->allow_assign_groups, $this->allow_assign_users ? 'usersANDtechnicians' : 'technicians'), 0, Link::DEFAULT_NUM_ROWS, true),
 			'tr_creator'  => $creators,
 			// New items default to primary group is no right to change the group
 			'tr_group' => $account_select_pref == 'none' ? array() : $this->get_groups(!$this->check_rights($this->field_acl['tr_group'],$tracker,null,null,'tr_group') && !$this->data['tr_id']),
@@ -1151,8 +1151,10 @@ class tracker_ui extends tracker_bo
 		{
 			unset($GLOBALS['egw_info']['user']['apps']['timesheet']);
 		}
-
-		$this->get_rows_options($rows, $tracker, $trackers);
+		if($old_query['col_filter']['tr_tracker'] != $tracker)
+		{
+			$this->get_rows_options($rows, $tracker, $trackers);
+		}
 
 		// disable start date / due date column, if disabled in config
 		if(!$this->show_dates)
@@ -1191,6 +1193,7 @@ class tracker_ui extends tracker_bo
 		{
 			$rows['sel_options']['tr_assigned'] += $this->get_staff($tr_id, 2, $this->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
 		}
+		$rows['sel_options']['tr_assigned'] = array_slice($rows['sel_options']['tr_assigned'], 0, Link::DEFAULT_NUM_ROWS, true);
 		$rows['sel_options']['assigned'] = $rows['sel_options']['tr_assigned']; // For context menu popup
 		unset($rows['sel_options']['assigned']['not']);
 

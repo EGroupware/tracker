@@ -49,9 +49,9 @@ allow to assign groups to tracker items	tracker	de	Erlaube Tickets Gruppen zuzuw
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	de	Erlaube das Zuweisen von Tickets auch an Benutzer, nicht nur an Techniker und/oder Administratoren.
 allow voting	tracker	de	Abstimmungen erlauben
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Tickets, zeige und sortiere nach den Stimmen
-already escalated	tracker	de	bereits eskaliert
+already escalated	tracker	de	Bereits eskaliert
 amount	tracker	de	Betrag
-application mail expected but got: %1	tracker	de	falsche Werte für die Anwendung Mail: %1
+application mail expected but got: %1	tracker	de	Falsche Werte für die Anwendung E-Mail: %1
 applies the changes	tracker	de	Diese Änderungen übernehmen
 assign to project	tracker	de	Projektzuweisung
 assigned to	tracker	de	Zugewiesen an
@@ -101,8 +101,8 @@ configuration, notifications	tracker	de	Konfiguration, Benachrichtigungen
 confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie für die Umsetzung bzw. Behebung dieses Themas zahlen.
 confirm the receipt of money for this bounty	tracker	de	Bestätigen Sie den Zahlungseingang dieser Prämie
 confirmed	tracker	de	Bestätigt
-convert all closed tickets	tracker	de	konvertiere geschlossene Tickets
-convert all open tickets	tracker	de	konvertiere alle offenen Tickets
+convert all closed tickets	tracker	de	Konvertiere geschlossene Tickets
+convert all open tickets	tracker	de	Konvertiere alle offenen Tickets
 converted count	tracker	de	Anzahl konvertiert
 copy to	tracker	de	Kopie an
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	de	Kopieren Sie ihre Änderungen in die Zwischenablage, %1laden den Eintrag neu%2 und fügen diese wieder ein.
@@ -192,7 +192,7 @@ example {{nenvlf role}} - if field role is not empty, set a lf without any value
 exclude links of the following apps on timesheet creation	tracker	de	Ignoriere die Verknüpfungen der folgenden Anwendungen bei der Erzeugung von Stundenzetteln
 existing links	tracker	de	Bestehende Verknüpfungen
 exists	tracker	de	existiert
-export as csv	tracker	de	als CSV Datei exportieren
+export as csv	tracker	de	Als CSV Datei exportieren
 export csv	tracker	de	Export als CSV Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)

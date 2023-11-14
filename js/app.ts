@@ -21,6 +21,7 @@ import {et2_template} from "../../api/js/etemplate/et2_widget_template";
 import {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
 import {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
 import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
+import "./Et2TrackerAssigned.ts";
 
 /**
  * UI for tracker
@@ -350,7 +351,7 @@ import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount
 	change_assigned(_action, _selected)
 	{
 		let et2 = _selected[0].manager.data.nextmatch.getInstanceManager();
-		let assigned = et2.widgetContainer.getWidgetById('assigned');
+		let assigned = <Et2TrackerAssigned>et2.widgetContainer.getWidgetById('assigned');
 		if(assigned)
 		{
 			assigned.set_value([]);

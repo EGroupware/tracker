@@ -11,6 +11,7 @@
  */
 
 use EGroupware\Api;
+use EGroupware\Api\Cache;
 use EGroupware\Api\Link;
 use EGroupware\Api\Acl;
 use EGroupware\Api\Vfs;
@@ -432,7 +433,8 @@ class tracker_bo extends tracker_so
 		}
 
 		// Set group to default or preference if no queue default
-		$this->data['tr_group'] = $this->default_group[$this->data['tr_tracker']] ?? $this->default_group[0] ?? $GLOBALS['egw_info']['user']['account_primary_group'];
+		$this->data['tr_group'] = (isset($this->data['tr_tracker']) ? $this->default_group[$this->data['tr_tracker']] : null) ??
+			$this->default_group[0] ?? $GLOBALS['egw_info']['user']['account_primary_group'];
 
 		$this->data_merge($keys);
 
@@ -790,97 +792,142 @@ class tracker_bo extends tracker_so
 	 */
 	function &get_staff($tracker,$return_groups=2,$what='technicians')
 	{
-		static $staff_cache = null;
+		$staff_cache = Cache::getInstance(
+			'tracker', 'staff_cache',
+			array($this, '_get_staff'), [],
+			86400 // 1 day
+		);
 
 		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
 		//error_log(__METHOD__.__LINE__.array2string($tracker));
-		// some caching
-		$r = 0;
-		$rv = array();
-		foreach ((array)$tracker as $track)
+		if(is_array($tracker))
 		{
-			if (!empty($tracker) && isset($staff_cache[$track]) && isset($staff_cache[$track][(int)$return_groups]) &&
-				isset($staff_cache[$track][(int)$return_groups][$what]))
-			{
-				$r++;
-				//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
-				$rv = $rv+$staff_cache[$track][(int)$return_groups][$what];
-			}
-		}
-		if (!empty($rv) && $r==count((array)$tracker)) return $rv;
-
-		$staff = array();
-		if (is_array($tracker))
-		{
-			$_tracker = $tracker;
-			array_unshift($_tracker,0);
+			array_unshift($tracker, 0);
 		}
 		else
 		{
-			$_tracker = array(0,$tracker);
+			$tracker = array(0, $tracker);
 		}
 
-		switch($what)
+		$users = array();
+		$groups = array();
+		foreach ((array)$tracker as $track)
 		{
-			case 'users':
-			case 'usersANDtechnicians':
-				if (is_null($this->users) || $this->users==='NULL') $this->users = array();
-				foreach($tracker ? $_tracker : array_keys($this->users) as $t)
+			foreach($return_groups == 0 ? ['users'] : ['users', 'groups'] as $who)
+			{
+				if(isset($staff_cache[$track]) && isset($staff_cache[$track][$who]) &&
+					isset($staff_cache[$track][$who][$what]))
 				{
-					if (is_array($this->users[$t])) $staff = array_merge($staff,$this->users[$t]);
+					//echo "from cache"; _debug_array($staff_cache[$tracker][$return_groups][$what]);
+					$$who = $$who + $staff_cache[$track][$who][$what];
 				}
-				if ($what == 'users') break;
-			case 'technicians':
-				if (is_null($this->technicians) || $this->technicians==='NULL') $this->technicians = array();
-				foreach($tracker ? $_tracker : array_keys($this->technicians) as $t)
-				{
-					if (is_array($this->technicians[$t])) $staff = array_merge($staff,$this->technicians[$t]);
-				}
-				// fall through, as technicians include admins
-			case 'admins':
-				if (is_null($this->admins) || $this->admins==='NULL') $this->admins = array();
-				foreach($tracker ? $_tracker : array_keys($this->admins) as $t)
-				{
-					if (is_array($this->admins[$t])) $staff = array_merge($staff,$this->admins[$t]);
-				}
-				break;
+			}
 		}
 
-		// split users and groups and resolve the groups into there users
-		$users = $groups = array();
-		foreach(array_unique($staff) as $uid)
+		if($return_groups == 0)
 		{
-			if ($GLOBALS['egw']->accounts->get_type($uid) == 'g')
-			{
-				if ($return_groups) $groups[(string)$uid] = Api\Accounts::username($uid);
-				foreach((array)$GLOBALS['egw']->accounts->members($uid,true) as $u)
-				{
-					if (!isset($users[$u])) $users[$u] = Api\Accounts::username($u);
-				}
-			}
-			elseif (!isset($users[$uid]) && is_numeric($uid))
-			{
-				$users[$uid] = Api\Accounts::username($uid);
-			}
+			return $users;
 		}
-		// sort alphabetic
-		natcasesort($users);
-		natcasesort($groups);
 
 		// groups or users first
-		$staff_sorted = $this->allow_assign_groups == 1 ? $groups : $users;
-
-		if ($this->allow_assign_groups)	// do we need a second one
-		{
-			foreach($this->allow_assign_groups == 1 ? $users : $groups as $uid => $label)
-			{
-				$staff_sorted[$uid] = $label;
-			}
-		}
-		//_debug_array($staff);
-		if (!is_array($tracker)) $staff_cache[$tracker][(int)$return_groups][$what] = $staff_sorted;
+		$staff_sorted = array_merge(
+			$this->allow_assign_groups == 1 ? $groups : $users,
+			$this->allow_assign_groups == 1 ? $users : $groups
+		);
 
 		return $staff_sorted;
+	}
+
+	public function &_get_staff()
+	{
+		$staff_cache = array();
+		$_tracker = array_keys($this->trackers ?? []);
+		array_unshift($_tracker, 0);
+		foreach(['technicians', 'admins', 'users', 'usersANDtechnicians'] as $what)
+		{
+			$staff = array_fill_keys($_tracker, []);
+			switch($what)
+			{
+				case 'users':
+				case 'usersANDtechnicians':
+					if(is_null($this->users) || $this->users === 'NULL')
+					{
+						$this->users = array();
+					}
+					foreach($_tracker as $t)
+					{
+						if(is_array($this->users[$t]))
+						{
+							$staff[$t] = array_merge($staff[$t], $this->users[$t]);
+						}
+					}
+					if($what == 'users')
+					{
+						break;
+					}
+				case 'technicians':
+					if(is_null($this->technicians) || $this->technicians === 'NULL')
+					{
+						$this->technicians = array();
+					}
+					foreach($_tracker as $t)
+					{
+						if(is_array($this->technicians[$t]))
+						{
+							$staff[$t] = array_merge($staff[$t], $this->technicians[$t]);
+						}
+					}
+				// fall through, as technicians include admins
+				case 'admins':
+					if(is_null($this->admins) || $this->admins === 'NULL')
+					{
+						$this->admins = array();
+					}
+					foreach($_tracker as $t)
+					{
+						if(is_array($this->admins[$t]))
+						{
+							$staff[$t] = array_merge($staff[$t], $this->admins[$t]);
+						}
+					}
+					break;
+			}
+
+
+			// split users and groups and resolve the groups into their users
+			foreach($_tracker as $t)
+			{
+				$users = $groups = array();
+				foreach(array_unique($staff[$t]) as $uid)
+				{
+					if($GLOBALS['egw']->accounts->get_type($uid) == 'g')
+					{
+						$groups[(string)$uid] = Api\Accounts::username($uid);
+						foreach((array)$GLOBALS['egw']->accounts->members($uid, true) as $u)
+						{
+							if(!isset($users[(string)$u]))
+							{
+								$users[(string)$u] = Api\Accounts::username($u);
+							}
+						}
+					}
+					elseif(!isset($users[(string)$uid]) && is_numeric($uid))
+					{
+						$users[(string)$uid] = Api\Accounts::username($uid);
+					}
+				}
+
+				// sort alphabetic
+				natcasesort($users);
+				natcasesort($groups);
+
+				//_debug_array($staff);
+				$staff_cache[$t]['users'][$what] = $users;
+				$staff_cache[$t]['groups'][$what] = $groups;
+			}
+		}
+
+		return $staff_cache;
 	}
 
 	/**
@@ -2147,18 +2194,22 @@ class tracker_bo extends tracker_so
 		// we have to check if we know this ticket before proceeding
 		if ($ticketId == 0)
 		{
-			$trackerentry = array_merge($this->init(
+			$trackerentry = array_merge(
+				$this->init(
+					array(
+						'tr_id'          => 0,
+						'tr_tracker'     => $this->mailhandling[$_queue]['default_tracker'],
+						'tr_cc'          => implode(',', $emails),
+						'tr_summary'     => $_subject,
+						'tr_description' => $_message
+					)
+				),
 				array(
-					'tr_id'          => 0,
-					'tr_tracker'     => $this->mailhandling[$_queue]['default_tracker'],
-					'tr_cc'          => implode(',', $emails),
-					'tr_summary'     => $_subject,
-					'tr_description' => $_message
-				)
-			),                          array(
-					'referer'        => false,
-					'popup'          => true,
-					'link_to'        => array(
+					// Clear creator, we determine it from email
+					'tr_creator' => null,
+					'referer'    => false,
+					'popup'      => true,
+					'link_to'    => array(
 						'to_app' => 'tracker',
 						'to_id'  => 0,
 					),
@@ -2183,7 +2234,9 @@ class tracker_bo extends tracker_so
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					),'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id','','','',false,'OR',false,$filter,'',false));
+					), 'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id,freebusy_uri', '', '', '', false, 'OR', false, $filter, '', false
+				)
+				);
 			}
 			if (!$contacts || !is_array($contacts) || !is_array($contacts[0]))
 			{

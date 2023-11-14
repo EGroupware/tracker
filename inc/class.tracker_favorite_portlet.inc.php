@@ -65,6 +65,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 			'tr_priority' => $ui->get_tracker_priorities($tracker,$this->nm_settings['cat_id']),
 			'tr_resolution' => $ui->get_tracker_labels('resolution',$tracker),
 			'tr_private'  => array('No', 'Yes'),
+			'tr_assigned' => array('not' => lang('Noone'))
 		);
 		$this->nm_settings['actions'] = $ui->get_actions($tracker, $this->nm_settings['cat_id']);
 
@@ -91,7 +92,7 @@ class tracker_favorite_portlet extends home_favorite_portlet
 		$ui = new tracker_ui();
 		// Don't save in session, it causes problems with real tracker
 		$query['csv_export'] = true;
-		$total = $ui->get_rows($query, $rows, $readonlys);
+		$total = $ui->get_rrows($query, $rows, $readonlys);
 		unset($GLOBALS['egw_info']['flags']['app_header']);
 		return $total;
 	}
