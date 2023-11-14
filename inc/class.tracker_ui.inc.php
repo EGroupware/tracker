@@ -711,6 +711,7 @@ class tracker_ui extends tracker_bo
 		else
 		{
 			$creators = $this->get_staff($tracker,0,'usersANDtechnicians');
+			asort($creators);
 		}
 		if ($content['tr_creator'] && !isset($creators[$content['tr_creator']]))
 		{
