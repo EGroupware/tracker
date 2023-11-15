@@ -242,8 +242,7 @@ class tracker_ui extends tracker_bo
 				$msg = lang('Permission denied !!!');
 				if ($popup)
 				{
-					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,true);
-					exit();
+					EGroupware\Api\Framework::window_close($msg);
 				}
 				else
 				{
@@ -289,8 +288,7 @@ class tracker_ui extends tracker_bo
 				$msg = lang('Permission denied !!!');
 				if ($popup)
 				{
-					$GLOBALS['egw']->framework->render('<h1 style="color: red;">'.$msg."</h1>\n",null,false);
-					exit();
+					EGroupware\Api\Framework::window_close($msg);
 				}
 				else
 				{
