@@ -792,15 +792,21 @@ class tracker_bo extends tracker_so
 	 */
 	function &get_staff($tracker,$return_groups=2,$what='technicians')
 	{
+		// staff(-cache) depends on the users account_display preference
+		$account_display = $GLOBALS['egw_info']['user']['preferences']['common']['account_display'] ?? 'all';
 		//Cache::unsetInstance('tracker', 'staff_cache');
-		$staff_cache = Cache::getInstance(
-			'tracker', 'staff_cache',
-			array($this, '_get_staff'), [],
-			86400 // 1 day
-		);
+		if (empty($staff_cache = Cache::getInstance('tracker', 'staff_cache')) ||
+			!isset($staff_cache[$account_display]))
+		{
+			if (!isset($staff_cache) || isset($staff_cache[0]))
+			{
+				$staff_cache = [];
+			}
+			$staff_cache[$account_display] = $this->_get_staff();
+			Cache::setInstance('tracker', 'staff_cache', $staff_cache, 86400);
+		}
+		$staff_cache = $staff_cache[$account_display];
 
-		//echo "botracker::get_staff($tracker,$return_groups,$what)".function_backtrace()."<br>";
-		//error_log(__METHOD__.__LINE__.array2string($tracker));
 		if(is_array($tracker))
 		{
 			array_unshift($tracker, 0);
