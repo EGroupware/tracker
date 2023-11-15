@@ -831,10 +831,8 @@ class tracker_bo extends tracker_so
 		}
 
 		// groups or users first
-		$staff_sorted = array_merge(
-			$this->allow_assign_groups == 1 ? $groups : $users,
-			$this->allow_assign_groups == 1 ? $users : $groups
-		);
+		$staff_sorted = ($this->allow_assign_groups == 1 ? $groups : $users) +
+			($this->allow_assign_groups == 1 ? $users : $groups);
 
 		return $staff_sorted;
 	}
