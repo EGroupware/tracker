@@ -845,7 +845,7 @@ class tracker_bo extends tracker_so
 			return $cat['id'];
 		}, array_filter($this->all_cats, static function(array $cat)
 			{
-				return $cat['data']['type'] === 'tracker';
+				return is_array($cat['data']) && $cat['data']['type'] === 'tracker';
 			}));
 		array_unshift($_tracker, 0);
 		foreach(['technicians', 'admins', 'users', 'usersANDtechnicians'] as $what)
