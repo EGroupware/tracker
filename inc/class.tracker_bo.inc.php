@@ -792,6 +792,7 @@ class tracker_bo extends tracker_so
 	 */
 	function &get_staff($tracker,$return_groups=2,$what='technicians')
 	{
+		//Cache::unsetInstance('tracker', 'staff_cache');
 		$staff_cache = Cache::getInstance(
 			'tracker', 'staff_cache',
 			array($this, '_get_staff'), [],
@@ -841,7 +842,13 @@ class tracker_bo extends tracker_so
 	public function &_get_staff()
 	{
 		$staff_cache = array();
-		$_tracker = array_keys($this->trackers ?? []);
+		// get all trackers, without using not yet set and/or user specific limited $this->trackers
+		$_tracker = array_map(static function (array $cat) {
+			return $cat['id'];
+		}, array_filter($this->all_cats, static function(array $cat)
+			{
+				return $cat['data']['type'] === 'tracker';
+			}));
 		array_unshift($_tracker, 0);
 		foreach(['technicians', 'admins', 'users', 'usersANDtechnicians'] as $what)
 		{
