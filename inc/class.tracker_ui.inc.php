@@ -200,7 +200,7 @@ class tracker_ui extends tracker_bo
 				)))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
-					$this->data['cat_id'] = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : false;
+					$this->data['cat_id'] = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : '';
 					$this->data['tr_version'] = $regardInInit['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
 				if($_GET['tracker'] && is_array($_GET['tracker']))
