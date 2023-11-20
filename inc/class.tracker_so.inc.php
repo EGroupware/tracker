@@ -214,7 +214,8 @@ class tracker_so extends Api\Storage
 		$join = $join_in && $join_in != 1 ? $join_in : '';
 
 		// private ACL: private items are only visible for create, assiged or tracker admins
-		foreach ((array)$filter['tr_tracker'] as $tr)
+		$need_private_acl = false;
+		foreach((array)($filter['tr_tracker'] ?? []) as $tr)
 		{
 			$need_private_acl = $this->user && method_exists($this,'is_admin') && !$this->is_admin($tr);
 		}
