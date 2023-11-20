@@ -94,7 +94,10 @@ class tracker_escalations extends Api\Storage\Base2
 			'tr_status' => -100,	// offen
 		);
 		$this->data_merge($keys);
-		$this->data_merge($keys['escalation']);
+		if(isset($keys['escalation']))
+		{
+			$this->data_merge($keys['escalation']);
+		}
 
 		if (isset($keys['set']))
 		{
@@ -152,7 +155,7 @@ class tracker_escalations extends Api\Storage\Base2
 							'esc_tr_duedate' => lang('due date')
 						);
 					}
-					$action = lang('Set %1',$col2action[$key]).': ';
+					$action = lang('Set %1', $col2action[$key] ?? $key) . ': ';
 					switch($key)
 					{
 						case 'esc_tr_assigned':
@@ -176,7 +179,7 @@ class tracker_escalations extends Api\Storage\Base2
 							break;
 						case 'esc_tr_resolution':
 							$resolutions = $bo->get_tracker_labels('resolution',is_array($data['tr_tracker']) ? $data['tr_tracker'][0] : $data['tr_tracker']);
-							$action .= $resolutions[$value];
+							$action .= $resolutions[$value] ?? $value;
 						break;
 						case 'esc_tr_status':
 							if ($value < 0)
@@ -234,7 +237,7 @@ class tracker_escalations extends Api\Storage\Base2
 		}
 		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
 		{
-			if (is_array($data[$array]))
+			if(isset($data[$array]) && is_array($data[$array]))
 			{
 				$data[$array] = implode(',',$data[$array]);
 			}

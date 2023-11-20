@@ -465,6 +465,7 @@ class tracker_bo extends tracker_so
 			}
 		}
 		// check if item is overdue
+		$data['overdue'] = false;
 		if ($this->overdue_days > 0)
 		{
 			$modified = $data['tr_modified'] ?? $data['tr_created'] ?? null;
