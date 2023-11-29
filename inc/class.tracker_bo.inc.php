@@ -2246,7 +2246,7 @@ class tracker_bo extends tracker_so
 					array(
 						'email' => $mailadr,
 						'email_home' => $mailadr
-					), 'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id,freebusy_uri', '', '', '', false, 'OR', false, $filter, '', false
+					), 'contact_id,contact_email,contact_email_home,egw_addressbook.account_id as account_id', '', '', '', false, 'OR', false, $filter, '', false
 				)
 				);
 			}
