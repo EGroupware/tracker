@@ -109,7 +109,7 @@ class tracker_assigned_etemplate_widget extends Etemplate\Widget\Select
 			$valid =& self::get_array($validated, $form_name, true);
 
 			$bo = new tracker_bo();
-			$tracker = $this->attrs['tracker'] ?? 0;
+			$tracker = self::expand_name($this->attrs['tracker'] ?? 0, $expand['c'] ?? '', $expand['row'] ?? '', 0, 0, $content ?? $expand['cont'] ?? []);
 			$staff = $bo->get_staff($tracker, 2, $bo->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
 
 			$value = array_intersect($value, array_keys($staff));
