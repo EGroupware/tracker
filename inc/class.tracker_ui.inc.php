@@ -205,7 +205,15 @@ class tracker_ui extends tracker_bo
 				}
 				if($_GET['tracker'] && is_array($_GET['tracker']))
 				{
-					$_GET['tracker'] = array_pop($_GET['tracker']);
+					// Prefer default, if it's there, otherwise just pick the first
+					if($this->default_tracker && in_array($this->default_tracker, $_GET['tracker']))
+					{
+						$this->data['tr_tracker'] = $_GET['tracker'] = $this->default_tracker;
+					}
+					else
+					{
+						$_GET['tracker'] = array_pop($_GET['tracker']);
+					}
 				}
 				if(isset($this->trackers[(int)$_GET['tracker']]))
 				{
