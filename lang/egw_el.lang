@@ -1,29 +1,76 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	el	"%2" ισχύει μόνο για την ημερομηνία έναρξης και την ημερομηνία λήξης. Χρησιμοποιήστε "%1".
 %1 days in advance	tracker	el	%1 ημέρες πριν
+%1 entries %2	tracker	el	%1 καταχωρήσεις %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	el	%1 καταχωρήσεις %2, %3 απέτυχαν λόγω ανεπαρκών δικαιωμάτων!
+%1 entries updated.	tracker	el	%1 εγγραφές ενημερώθηκαν.
+%1 is due %2	tracker	el	%1 οφείλει %2
+%1 is starting %2	tracker	el	%1 αρχίζει %2
+%1 tickets have been converted	tracker	el	%1 εισιτήρια έχουν μετατραπεί.
+(beware of mailloops, check the help!)	tracker	el	(Προσοχή στα mailloops!)
+(new tickets as	tracker	el	Νέα εισιτήρια ως
+--> choose a project from the drop-down list	tracker	el	--> επιλέξτε ένα έργο από την αναπτυσσόμενη λίστα
+2 days in advance	tracker	el	2 ημέρες νωρίτερα
+2 years ago	tracker	el	2 χρόνια πριν
+3 days in advance	tracker	el	3 ημέρες νωρίτερα
+3 years ago	tracker	el	3 χρόνια πριν
 accepted	tracker	el	Αποδέχτηκε
+add a ticket	tracker	el	Προσθέστε ένα εισιτήριο
+add assigned	tracker	el	Προσθήκη εκχωρημένου
+add email-address	tracker	el	Προσθήκη διεύθυνσης email
+all	tracker	el	Όλα
+allow bounties	tracker	el	Όλες οι εκδόσεις
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	el	Επιτρέψτε τη δημιουργία περιορισμένων σχολίων που είναι ορατά μόνο για τους διαχειριστές, τους τεχνικούς και τους χρήστες που τους έχουν ανατεθεί
+allow creation of infolog entries from tracker tickets	tracker	el	Επιτρέπεται η δημιουργία καταχωρίσεων InfoLog από εισιτήρια Tracker
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	el	Να επιτρέπεται ο προκαθορισμός των έργων που θα ανατίθενται σε νέα στοιχεία παρακολούθησης
+allow to assign groups to tracker items	tracker	el	Να επιτρέπεται η ανάθεση ομάδων
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση "χρηστών" σε ένα εισιτήριο επιπλέον των "τεχνικών" και των "διαχειριστών του ιχνηλάτη".
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση σε ένα εισιτήριο όχι μόνο σε "Tracker Admins" και "Τεχνικούς", αλλά και σε "Χρήστες" στην καρτέλα προσωπικού
+application mail expected but got: %1	tracker	el	Αναμενόμενο μήνυμα ηλεκτρονικού ταχυδρομείου της αίτησης, το οποίο όμως πήρατε: %1
 applies the changes	tracker	el	εφαρμόζει τις αλλαγές
 attention: no contact with address %1 found.	tracker	el	Προσοχή: Καμία Επαφή με τη διεύθυνση %1 δεν βρέθηκε.
+change color	tracker	el	Αλλαγή χρώματος
 check all	tracker	el	Έλεγχος όλων
+choose 'creator' of imported data	tracker	el	Επιλέξτε τον "δημιουργό" των εισαγόμενων δεδομένων
+closed date	tracker	el	Ημερομηνία κλεισίματος
+color	tracker	el	Χρώμα
 comments	tracker	el	Σχόλια
 completed	tracker	el	Ολοκληρώθηκε
 configuration	tracker	el	Διαμόρφωση
+configuration, notifications	tracker	el	Διαμόρφωση, Ειδοποιήσεις
 copy to	tracker	el	Αντιγραφή στο
 create new links	tracker	el	Δημιουργία νέων συνδέσμων
+create new tracker entry's as default "private" for approval process	tracker	el	Δημιουργία νέας καταχώρησης παρακολούθησης ως προεπιλεγμένη "ιδιωτική" για τη διαδικασία έγκρισης
 created	tracker	el	Δημιουργήθηκε
 creates a new field	tracker	el	δημιουργεί νέο πεδίο
 creation date	tracker	el	Ημερομηνία δημιουργίας
 custom fields	tracker	el	Προσαρμοσμένα πεδία
+default group	tracker	el	Προεπιλεγμένη ομάδα
 default tracker queue	tracker	el	Τυπική ουρά αναμονής
 delete this category	tracker	el	διέγραψε αυτή την κατηγορία
 delete this entry	tracker	el	δαγραφή αυτής της καταχώρησης
 deleted	tracker	el	διεγράφη
 deletes this field	tracker	el	διαγράφει αυτό το πεδίο
+deny global	tracker	el	Άρνηση παγκόσμιας
 determines the order the fields are displayed	tracker	el	καθορίζει τη σειρά εμφάνισης των πεδίων
+directory with documents to insert entries	tracker	el	Κατάλογος με έγγραφα για εισαγωγή καταχωρήσεων
+do not send notifications to external email (cc field)	tracker	el	Να μην αποστέλλονται ειδοποιήσεις σε εξωτερικό email (πεδίο cc)
 do you want a notification, if items you are responsible for are about to start?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος πρόκειται να ξεκινήσουν;
 do you want a notification, if items you are responsible for are due?	tracker	el	Επιθυμείτε ειδοποίηση, αν αντικείμενα για τα οποία είστε υπεύθυνος έχουν καθυστερήσει;
+do you want to add mailheader information to description and/or comments?	tracker	el	Θέλετε να προσθέσετε πληροφορίες κεφαλίδας αλληλογραφίας στην περιγραφή ή/και στα σχόλια;
+download url for links	tracker	el	Λήψη διεύθυνσης URL για συνδέσμους
+due	tracker	el	Λόγω
+due date	tracker	el	Ημερομηνία λήξης
 due date for new tickets	tracker	el	Ημερομηνία λήξης για νέα εισιτήρια
 each value is a line like <id>[=<label>]	tracker	el	κάθε τιμή είναι μία γραμμή σαν <id>[=<label>]
 each value is a line like id[=label]	tracker	el	κάθε τιμή είναι μία γραμμή σαν id[=label]
+edit others' comments	tracker	el	Επεξεργασία σχολίων άλλων
+edit own comments	tracker	el	Επεξεργασία δικών σας σχολίων
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	el	EGroupware Tracker διαχείριση αλληλογραφίας: δεν ήταν δυνατή η σύνδεση προηγουμένως και το προφίλ δεν άλλαξε
 error: the entry has been updated since you opened it for editing!	tracker	el	Σφάλμα:η καταχώρηση έχει ενημερωθεί από όταν την ανοίξατε για προσαρμογή!
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	el	Παράδειγμα {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - ψάξε στο πεδίο "n_prefix", για "Mr", αν βρεθεί, γράψε Hello Mr., αλλιώς γράψε Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	el	Παράδειγμα {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Παράδειγμα: Mr Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	el	Παράδειγμα {{NELF role}} - αν το πεδίο role δεν είναι κενό, θα λάβετε μια νέα γραμμή με την τιμή του πεδίου role
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	el	Παράδειγμα {{nenvlf role}} - αν το πεδίο role δεν είναι κενό, θα ορίσετε μια LF χωρίς καμία τιμή του πεδίου
 existing links	tracker	el	Υπάρχοντες σύνδεσμοι
 export as csv	tracker	el	Εξαγωγή ως CSV
 forward	tracker	el	Προώθηση
@@ -33,6 +80,15 @@ full list of placeholder names	tracker	el	Κατάλογος των σημείω
 general fields:	tracker	el	Γενικά πεδία:
 history	tracker	el	Ιστορικό
 id	tracker	el	Id
+if a ticket has matched before, should the actions be taken again?	tracker	el	Εάν ένα εισιτήριο έχει ταυτιστεί στο παρελθόν, θα πρέπει να γίνουν ξανά οι ενέργειες;
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	el	Αν δεν επιλεγεί, κάθε υπάρχον, αντίστοιχο εισιτήριο χαρακτηρίζεται ως ήδη κλιμακούμενο, χωρίς να αναληφθεί η ενέργεια.
+ignore	tracker	el	Αγνοήστε το
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	el	Αγνοήστε το μήνυμα ηλεκτρονικού ταχυδρομείου. Θα παραμείνει στο γραμματοκιβώτιο, ακόμη και αν έχει επιλεγεί η επιλογή "Διαγραφή μηνυμάτων ηλεκτρονικού ταχυδρομείου από το διακομιστή" παραπάνω.
+imap, ssl secured	tracker	el	IMAP, ασφαλές SSL
+imap, tls secured	tracker	el	IMAP, με ασφάλεια TLS
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	el	Εισάγει καταχωρήσεις στον ανιχνευτή από αρχείο CSV. CSV σημαίνει 'Comma Separated Values'. Στην καρτέλα επιλογών μπορείτε επίσης να επιλέξετε άλλα διαχωριστικά.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	el	Ανεπαρκές προφίλ διακομιστή για την επεξεργασία αλληλογραφίας παρέχεται- Απενεργοποίηση της επεξεργασίας αλληλογραφίας για την ουρά %1
+language	tracker	el	Γλώσσα
 last modified	tracker	el	Τελευταία τροποποίηση
 last modified by	tracker	el	Τελευταία τροποποίηση από
 leaves without saveing	tracker	el	αποχώρηση χωρίς αποθήκευση
@@ -43,13 +99,15 @@ new %1	tracker	el	Νέο %1
 number of row for a multiline inputfield or line of a multi-select-box	tracker	el	αριθμός σειρών για ένα πολυγραμμικό πεδίο εισαγωγής ή γραμμών για ένα πολυ-επιλογών-κουτί
 one day after	tracker	el	μία μέρα μετά
 one day in advance	tracker	el	Μία μέρα νωρίτερα
-open(status)	tracker	el	ανοικτά
+open(status)	tracker	el	Άνοιγμα
 order	tracker	el	Ταξινόμηση
 overdue	tracker	el	καθυστερημένα
 permission denied !!!	tracker	el	Άδεια απορρίπτεται !!!
 read	tracker	el	Διαβάστε
 read / unread	tracker	el	Ανάγνωση / Μη αναγνωσμένο
+read only filemanager directory	tracker	el	Κατάλογος διαχείρισης αρχείων μόνο για ανάγνωση
 rejected	tracker	el	Απορρίφθηκε
+respect timesheet run and read permissions for time totals	tracker	el	Σεβασμός των δικαιωμάτων εκτέλεσης και ανάγνωσης του φύλλου χρόνου για τα σύνολα χρόνου
 responsible	tracker	el	υπεύθυνος
 same day	tracker	el	ίδια ημέρα
 saves the changes made and leaves	tracker	el	αποθηκέυει όλες τις αλλαγές που έγιναν και αποχωρεί
@@ -67,5 +125,6 @@ type of customfield	tracker	el	Τύπος συνήθους πεδίου
 unread	tracker	el	Μη αναγνωσμένο
 upcoming	tracker	el	επερχόμενο
 updated	tracker	el	Ενημερώθηκε
+writable filemanager directory	tracker	el	Κατάλογος Filemanager με δυνατότητα εγγραφής
 yes, with larger fontsize	tracker	el	Ναι,  με μεγαλύτερο μέγεθος φόντου
 you can respond by visiting:	tracker	el	Για να το δείτε επισκεφθείτε:

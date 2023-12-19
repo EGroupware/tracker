@@ -1,15 +1,72 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	ja	"%2" は開始日と期日にのみ有効です。%1 "を使用してください。
+%1 days in advance	tracker	ja	%1日前
+%1 entries %2	tracker	ja	%1 エントリ %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	ja	権限不足のため、%1 エントリ %2、%3 が失敗しました！
+%1 entries updated.	tracker	ja	%1 エントリが更新されました。
+%1 is due %2	tracker	ja	%1 の期限は %2 です。
+%1 is starting %2	tracker	ja	% 1 は %2 を開始します。
+%1 tickets have been converted	tracker	ja	% 1 チケットが変換されました。
+(beware of mailloops, check the help!)	tracker	ja	(mailloops に注意してください!)
+(new tickets as	tracker	ja	新しいチケット
+--> choose a project from the drop-down list	tracker	ja	--> ドロップダウンリストからプロジェクトを選択
+2 days in advance	tracker	ja	2日前
+2 years ago	tracker	ja	2年前
+3 days in advance	tracker	ja	3日前
+3 years ago	tracker	ja	3年前
+add a ticket	tracker	ja	チケットを追加する
+add assigned	tracker	ja	割り当てを追加
+add email-address	tracker	ja	メールアドレスの追加
+all	tracker	ja	すべてのバージョン
+all versions	tracker	ja	すべてのバージョン
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	ja	管理者、技術者、割り当てられたユーザにのみ表示される制限付きコメントの作成が可能
+allow creation of infolog entries from tracker tickets	tracker	ja	Tracker チケットから InfoLog エントリを作成できるようにしました。
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	ja	技術者' と 'トラッカー管理者' に加えて 'ユーザ' をチケットに割り当てることができます。
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	ja	チケットに "Tracker Admins" と "Technians" だけでなく、"Users" も割り当てられるようにしました。
+application mail expected but got: %1	tracker	ja	申請メールを期待したが %1
+change color	tracker	ja	色の変更
+choose 'creator' of imported data	tracker	ja	インポートしたデータの「作成者」を選択する
+closed date	tracker	ja	閉鎖日
+color	tracker	ja	カラー
 configuration	tracker	ja	環境設定
+configuration, notifications	tracker	ja	設定、通知
+create new tracker entry's as default "private" for approval process	tracker	ja	承認プロセスのデフォルト「非公開」として新しいトラッカー・エントリーを作成する
 created	tracker	ja	作成
 custom fields	tracker	ja	カスタム項目
+default group	tracker	ja	デフォルトグループ
 default tracker queue	tracker	ja	スタンダードキュー
+deny global	tracker	ja	グローバル拒否
+directory with documents to insert entries	tracker	ja	エントリを挿入するドキュメントのあるディレクトリ
+do not send notifications to external email (cc field)	tracker	ja	外部メールに通知を送信しない (cc フィールド)
+do you want to add mailheader information to description and/or comments?	tracker	ja	説明やコメントにメールヘッダー情報を追加しますか？
+download url for links	tracker	ja	リンク用ダウンロードURL
+due	tracker	ja	期限
+due date	tracker	ja	期限
 due date for new tickets	tracker	ja	新規チケットの期限
+edit others' comments	tracker	ja	他人のコメントを編集する
+edit own comments	tracker	ja	自分のコメントを編集する
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ja	EGroupware Trackerのメールハンドリング：以前は接続できませんでした。
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ja	例 {{IF n_prefix~Mr~こんにちはMr.~こんにちはMs.}}。- フィールド "n_prefix "で "Mr "を検索し、見つかればHello Mr.と書き、見つからなければHello Ms.と書く。
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ja	例 {{LETTERPREFIXCUSTOM n_prefix title n_family}}. - 例 ジェームズ・ミラー博士
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ja	例 {{NELF role}} - フィールドroleが空でなければ、フィールドroleの値で改行されます。
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ja	例 {{nenvlf role}} - フィールドroleが空でない場合、フィールドの値なしでLFを設定します。
 forward	tracker	ja	転送
 from	tracker	ja	差出人
 full list of placeholder names	tracker	ja	プレースホルダ一覧
 id	tracker	ja	ID
+if a ticket has matched before, should the actions be taken again?	tracker	ja	チケットが以前にマッチしたことがある場合、再度アクションを実行しますか?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	ja	チェックされていない場合、アクションを実行せずに、既にマッチしたチケットをエスカレーション済みとしてマークします。
+ignore	tracker	ja	無視
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	ja	メールを無視します。上記の「サーバーからメールを削除する」がチェックされていても、メールはメールボックスに残ります。
+imap, ssl secured	tracker	ja	IMAP、SSLセキュア
+imap, tls secured	tracker	ja	IMAP、TLSセキュア
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	ja	CSVファイルからトラッカーにエントリーをインポートします。CSVは「カンマ区切り値」を意味します。オプションタブで他の区切り文字を選択することもできます。
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	ja	メールハンドリング用の不完全なサーバ・プロファイルが提供されました; キュー %1 のメールハンドリングを無効にします。
+language	tracker	ja	言語
+open(status)	tracker	ja	オープン
 order	tracker	ja	順序
 read	tracker	ja	既読
 read / unread	tracker	ja	既読/未読
+read only filemanager directory	tracker	ja	読み取り専用ファイルマネージャーディレクトリ
 rejected	tracker	ja	拒否済み
 set due date this many days after escalation runs	tracker	ja	エスカレーション実行後の期限（日数）を設定する
 set the ticket start date to the email received date	tracker	ja	チケットの開始日をメール受信日に設定する
@@ -20,3 +77,4 @@ this month	tracker	ja	今月
 this week	tracker	ja	今週
 this year	tracker	ja	今年
 unread	tracker	ja	未読
+writable filemanager directory	tracker	ja	書き込み可能なFile Managerディレクトリ

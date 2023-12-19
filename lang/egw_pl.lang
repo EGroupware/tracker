@@ -1,24 +1,36 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	pl	"%2" jest ważne tylko dla daty rozpoczęcia i terminu płatności. Użyj "%1".
+%1 days in advance	tracker	pl	%1 dni wcześniej
+%1 entries %2	tracker	pl	%1 wpisy %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	pl	%1 wpisy %2, %3 nie powiodły się z powodu niewystarczających uprawnień!
 %1 entries updated.	tracker	pl	%1 wpisów zostało zaktualizowanych
-%1 tickets have been converted	tracker	pl	Skonwertowano %1 ticketów
-(new tickets as	tracker	pl	(Nowe tickety jako
+%1 is due %2	tracker	pl	%1 jest wymagalny %2
+%1 is starting %2	tracker	pl	%1 rozpoczyna się %2
+%1 tickets have been converted	tracker	pl	%1 zgłoszeń zostało przekonwertowanych.
+(beware of mailloops, check the help!)	tracker	pl	(Uwaga na mailloops!)
+(new tickets as	tracker	pl	Nowe bilety jako
 --> choose a project from the drop-down list	tracker	pl	--> wybierz projekt z listy rozwijanej
 --> enter new name	tracker	pl	--> podaj nową nazwę
 1 - lowest	tracker	pl	1 - w ogóle nie warto się przejmować
+2 days in advance	tracker	pl	2 dni wcześniej
 2 years ago	tracker	pl	2 lata temu
+3 days in advance	tracker	pl	3 dni wcześniej
 3 years ago	tracker	pl	2 lata temu
 5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
 9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
+[fwd]	tracker	pl	[FWD]
 accepted	tracker	pl	Zaakceptowany
 activate users queue access control	tracker	pl	Aktywuj kontrolę dostępu kolejki użytkowników
-add additionally	tracker	pl	dodaj dodatkowo
+add a ticket	tracker	pl	Dodaj zgłoszenie
+add additionally	tracker	pl	Dodaj dodatkowo
 add assigned	tracker	pl	Dodaj przypisane
 add comment	tracker	pl	Dodaj komentarz
+add email-address	tracker	pl	Dodaj adres e-mail
 add timesheet entry	tracker	pl	Dodaj wpis czasu pracy
 add unrecognized mail address to the cc field	tracker	pl	Dodaj nierpozoznane adresy e-mail jako adresata CC
-after	tracker	pl	po
+after	tracker	pl	Po
 after how many days a not replied item should be marked overdue?	tracker	pl	Po ilu dniach zgłoszenie bez odpowiedzi powinno być oznaczone jako zaległe?
 after how many days pending items should be closed automatic	tracker	pl	Po ilu dniach zgłoszenia będące w toku powinny być automatycznie zamknięte?
-all tickets are already converted to tracker	tracker	pl	wszystkie tickety są już skonwertowane do Systemu Śledzenia
+all tickets are already converted to tracker	tracker	pl	Wszystkie tickety są już skonwertowane do Systemu Śledzenia
 allow bounties	tracker	pl	Zezwalaj na przypisywanie premii
 allow default projects for tracker	tracker	pl	Dopuść domyślne projekty do systemu śledzenia
 allow editing by	tracker	pl	Zezwalaj na edycję przez
@@ -26,7 +38,7 @@ allow the predefinition of projects that will be assigned to new tracker-items.	
 allow to assign groups to tracker items	tracker	pl	Zezwalaj na przypisywanie grup do wspisów śledzenia
 allow voting	tracker	pl	Zezwalaj na głosowanie
 allow voting on tracker items, show and sort after the votes	tracker	pl	Zezwalaj na głosowanie zgłoszeń, pokazuj i sortuj według wyniku głosowania
-already escalated	tracker	pl	już eskalowany
+already escalated	tracker	pl	Już eskalowany
 amount	tracker	pl	Kwota
 applies the changes	tracker	pl	zapisuje zmiany
 assign to project	tracker	pl	Przypisz do projektu
@@ -46,27 +58,33 @@ canned response	tracker	pl	Odpowiedź predefiniowana
 canned responses	tracker	pl	Odpowiedzi predefiniowane
 categories, versions, canned responses	tracker	pl	Kategorie, wersje, odpowiedzi predefiniowane
 category for new tickets	tracker	pl	Kategoria dla nowych tiketów
+change color	tracker	pl	Zmień kolor
 changes made below will be lost, if not applied before!	tracker	pl	Poniższe zmiany zostaną utracone jeśli nie zostaną uprzednio zastosowane!
 check all	tracker	pl	Sprawdź wszystkie
 check mail interval	tracker	pl	Okres sprawdzania email
+choose 'creator' of imported data	tracker	pl	Wybierz "twórcę" importowanych danych
 choose a project from the drop-down list	tracker	pl	wybierz projekt z listy rozwijanej
 close pending	tracker	pl	Zamknij będące w toku
 closed	tracker	pl	Zamknięto
+closed date	tracker	pl	Data zamknięcia
+color	tracker	pl	Kolor
 comment by %1 at %2:	tracker	pl	Komentarz dodany %2, przez %1
 comments	tracker	pl	Komentarze
 completed	tracker	pl	Zakończono
 configuration	tracker	pl	Konfiguracja
 configuration for all trackers	tracker	pl	Konfiguracja dla wszystkich kolejek śledzenia
 configuration updated.	tracker	pl	Konfiguracja została zaktualizowana
+configuration, notifications	tracker	pl	Konfiguracja, powiadomienia
 confirm that you pay the specified bounty to implement or fix the issue	tracker	pl	Potwierdź, że zapłacisz wskazaną premię za utworzenie lub poprawę wskazanego zagadnienia
 confirm the receipt of money for this bounty	tracker	pl	Potwierdź otrzymanie pieniędzy za tą premię
 confirmed	tracker	pl	Potwierdzono
 convert all closed tickets	tracker	pl	skonwertuj wszystkie zamknięte tickety
 convert all open tickets	tracker	pl	skonwertuj wszystkie otwarte tickety
-converted count	tracker	pl	ilość skonwertowanych
+converted count	tracker	pl	Ilość skonwertowanych
 copy to	tracker	pl	Skopiuj do
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	pl	Skopiuj zmiany do schowka, %1przeładuj wpis%2 i zastosuj je.
 create new links	tracker	pl	Utwórz nowe odnośniki
+create new tracker entry's as default "private" for approval process	tracker	pl	Utwórz nowy wpis w module śledzenia jako domyślny "prywatny" dla procesu zatwierdzania
 created	tracker	pl	Utworzono
 creates a new field	tracker	pl	utwórz nowe pole
 creation date	tracker	pl	Data stworzenia
@@ -74,13 +92,14 @@ creator	tracker	pl	Twórca
 custom fields	tracker	pl	Pola użytkownika
 custom tracker priorities	tracker	pl	Własne priorytety dla systemu śledzenia
 date opened	tracker	pl	Data utworzenia
+default group	tracker	pl	Domyślna grupa
 default tracker queue	tracker	pl	Standardowa kolejka
 define escalations	common	pl	Zdefiniuj eskalacje
 delete mails from server	tracker	pl	Usuń maile z serwera
 delete this bounty	tracker	pl	Usuń wskazaną premię
 delete this canned response	tracker	pl	Usuń wskazaną odpowiedź predefiniowaną
 delete this category	tracker	pl	Usuń wskazaną kategorię
-delete this entry	tracker	pl	skasuj ten wpis
+delete this entry	tracker	pl	Usuń ten wpis
 delete this escalation	tracker	pl	Usuń tą eskalacje
 delete this status	tracker	pl	Usuń wskazany status
 delete this tracker including all its items and categories	tracker	pl	Usuń kolejkę śledzenia wraz ze wszystkimi zgłoszeniami i kategoriami
@@ -88,9 +107,16 @@ delete this version	tracker	pl	Usuń wskazaną wersję
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	pl	Usuń nierozpoznane maile z serwera, nawet jeśli ''
 deleted	tracker	pl	Usunięto
 deletes this field	tracker	pl	usuwa to pole
+deny global	tracker	pl	Odmów globalnie
 determines the order the fields are displayed	tracker	pl	decyduje o kolejności, w jakiej pola zostaną pokazane
+directory with documents to insert entries	tracker	pl	Katalog z dokumentami do wstawiania wpisów
+do not send notifications to external email (cc field)	tracker	pl	Nie wysyłaj powiadomień na zewnętrzny adres e-mail (pole cc)
+do you want to add mailheader information to description and/or comments?	tracker	pl	Czy chcesz dodać informacje nagłówka poczty do opisu i/lub komentarzy?
 do you want to vote for this item	tracker	pl	Czy chcesz zagłosować na to zgłoszenie?
 donator name to show	tracker	pl	Nazwisko fundatora do pokazania
+download url for links	tracker	pl	Pobierz adres URL dla linków
+due	tracker	pl	Termin
+due date	tracker	pl	Termin płatności
 due date for new tickets	tracker	pl	Data wymagalności dla nowych biletów
 duplicate	tracker	pl	Kopia
 e-mail address to which a copy of all tracker-notifications should be send	tracker	pl	Adres poczty elektronicznej, na który wysyłane będą kopie wszystkich powiadomień aplikacji System śledzenia
@@ -99,6 +125,9 @@ each value is a line like <id>[=<label>]	tracker	pl	każda wartość jest linią
 each value is a line like id[=label]	tracker	pl	każda wartość jest linią jak <id>[=label]
 edit %1	tracker	pl	Edytuj %1
 edit entry	tracker	pl	Edytuj wpis
+edit others' comments	tracker	pl	Edytuj komentarze innych osób
+edit own comments	tracker	pl	Edytuj własne komentarze
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pl	Obsługa poczty EGroupware Tracker: nie można było się wcześniej połączyć, a profil się nie zmienił
 email address to contact you	tracker	pl	Adres poczty elektronicznej do kontaktu
 email handling can be configured only for all trackers	tracker	pl	Obsługa email może być skonfigurowana tylko dla wszystkich systemów śledzenia
 enter an email address here if unrecognized mails should be forwarded	tracker	pl	Wpisz tutaj adres na który będą przekazywane nie rozpoznane wiadomości
@@ -116,8 +145,12 @@ escalation deleted.	tracker	pl	Usunięto eskalację.
 escalation not found!	tracker	pl	Eskalacja nie odnaleziona!
 escalation saved.	tracker	pl	Zapisano eskalację.
 everybody	tracker	pl	Każdy
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	pl	Przykład {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - przeszukaj pole "n_prefix", dla "Mr", jeśli znaleziono, napisz Hello Mr., w przeciwnym razie napisz Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	pl	Przykład {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Przykład: Pan Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	pl	Przykład {{NELF role}} - jeśli pole rola nie jest puste, pojawi się nowy wiersz z wartością pola rola.
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	pl	Przykład {{nenvlf role}} - jeśli pole role nie jest puste, ustaw LF bez żadnej wartości pola
 existing links	tracker	pl	Istniejące odnośniki
-exists	tracker	pl	istnieje
+exists	tracker	pl	Istnieje
 export as csv	tracker	pl	Eksport jako CSV
 favorites	tracker	pl	Ulubione
 field	tracker	pl	Pole
@@ -132,27 +165,35 @@ general fields:	tracker	pl	Pola ogólne:
 history	tracker	pl	Historia
 html editing	tracker	pl	Edycja HTML
 id	tracker	pl	ID
+if a ticket has matched before, should the actions be taken again?	tracker	pl	Jeśli zgłoszenie zostało już wcześniej dopasowane, czy działania powinny zostać podjęte ponownie?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	pl	Jeśli opcja pozostanie niezaznaczona, oznacza każde istniejące, pasujące zgłoszenie jako już eskalowane, bez podejmowania działania.
 if this item is important for you, please consider to set a bounty for it!	tracker	pl	Jeżeli jest to ważne zgłoszenie, rozważ ustanowienie dla niego premii.
 if this item is important for you, please vote for it.	tracker	pl	Jeżeli ten element jest dla Ciebie ważny, zagłosuj na niego.
 ignore	tracker	pl	Ignoruj
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	pl	Zignoruj wiadomość e-mail. Pozostanie on w skrzynce pocztowej, nawet jeśli opcja "Usuń wiadomości e-mail z serwera" jest zaznaczona powyżej.
 ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	pl	Ignoruj nierozpoznane wiadomości.  Nie będą kasowane z serwera nawet jeśli zaznaczona jest opcja "Usuwaj wiadomości".
+imap, ssl secured	tracker	pl	IMAP, zabezpieczony SSL
+imap, tls secured	tracker	pl	IMAP, zabezpieczony TLS
 import tts tickets	tracker	pl	Importuj tickety TTS
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	pl	Importuje wpisy do trackera z pliku CSV. CSV oznacza "Wartości oddzielone przecinkami". Na karcie opcji można również wybrać inne separatory.
 incoming mail folder	tracker	pl	Folder wiadomości przychodzących
 incoming mail rules	tracker	pl	Zasady wiadomości przychodzących
 incoming mail server	tracker	pl	Serwer wiadomości przychodzących
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	pl	Podano niekompletny profil serwera dla obsługi poczty; Wyłączenie obsługi poczty dla kolejki %1
 info only	tracker	pl	Tylko informacje
-insert	tracker	pl	wstaw
+insert	tracker	pl	Wstaw
 insert in document	tracker	pl	Wstaw w dokumencie
 interval in minutes for checking the incoming mails	tracker	pl	Odstęp (w minutach) sprawdzania wiadomości przychodzących
 introduction message	tracker	pl	Wiadmomość wprowadzająca
 invalid	tracker	pl	Nieprawidłowe
 item assignee	tracker	pl	Osoba przypisująca element
 item creator	tracker	pl	Kreator elementu
+language	tracker	pl	Język
 language for the copy	tracker	pl	Język dla kopii
 last modified	tracker	pl	Ostatnio zmodyfikowano
-last modified by	tracker	pl	ostatnio zmodyfikowany przez
+last modified by	tracker	pl	Ostatnio zmodyfikowany przez
 last month	tracker	pl	Ostatni miesiąc
-last reply	tracker	pl	ostatnia odpowiedź
+last reply	tracker	pl	Ostatnia odpowiedź
 last week	tracker	pl	Ostatni tydzień
 last year	tracker	pl	Ostatni rok
 later	tracker	pl	Później
@@ -162,7 +203,7 @@ links	tracker	pl	Linki
 list of coma separated email address	tracker	pl	Lista adresów e-mail, rozdzielona przecinkami
 mail handling	tracker	pl	Obsługa wiadomości email
 manage mapping	tracker	pl	Zarządzaj mapowaniem
-matching filter	tracker	pl	filtr dopasowania
+matching filter	tracker	pl	Filtr dopasowania
 max length of the input [, length of the inputfield (optional)]	tracker	pl	maksymalna długość danych [,długość pola (opcjonalnie)]
 name of current user, all other contact fields are valid too	tracker	pl	Nazwa aktualnego użytkownika, wszystkie pozostałe pola kontaktu są prawidłowe
 new %1	tracker	pl	Nowy %1
@@ -178,7 +219,7 @@ number of row for a multiline inputfield or line of a multi-select-box	tracker	p
 open(status)	tracker	pl	Otwarto
 order	tracker	pl	Porządek
 out of date	tracker	pl	Przeterminowany
-overdue	tracker	pl	zaległe
+overdue	tracker	pl	Zaległe
 overdue after	tracker	pl	Zaznacz jako zaległe po
 ownership of the ticket	tracker	pl	Własność ticketu
 pending	tracker	pl	W toku
@@ -198,6 +239,7 @@ queue	tracker	pl	Kolejka
 read	tracker	pl	Przeczytane
 read / unread	tracker	pl	Przeczytane / Nieprzeczytane
 read mail address	tracker	pl	Czytaj wiadomości email
+read only filemanager directory	tracker	pl	Katalog menedżera plików tylko do odczytu
 receive notifications about assigned tracker-items	tracker	pl	Otrzymuj powiadomienia związane z przydzielonymi elementami.
 receive notifications about created tracker-items	tracker	pl	Otrzymuj powiadomienia związane z utworzonymi elementami
 receive notifications about own changes in tracker-items	tracker	pl	Otrzymuj powiadomienia a własnych zmianach w elementach systemu śledzenia
@@ -206,7 +248,8 @@ rejected	tracker	pl	Odrzucono
 remind	tracker	pl	Przypomnij
 reply also to unknown addresses	tracker	pl	Odpowiadaj również na nieznane adresy
 resolution	tracker	pl	Postanowienie
-responsible	tracker	pl	oddelegowane na Ciebie - wszystkie
+respect timesheet run and read permissions for time totals	tracker	pl	Respektowanie uprawnień do uruchamiania i odczytu arkusza czasu dla sum czasu
+responsible	tracker	pl	Odpowiedzialny
 restict tracker items to the creator and the staff only	tracker	pl	Ogranicz elementy systemu śledzenia do twórcy i pracowników
 restict tracker items to the creators primary group and the staff only	tracker	pl	Ogranicz elementy systemu śledzenia do grupy twórcy i pracowników
 restrict tracker items to staff and:	tracker	pl	Ogranicz elementy systemu śledzenia do pracowników i:
@@ -216,9 +259,9 @@ select a default tracker for new tickets or 'reject' to disallow ticket creation
 select accounts for which the custom field should be visible	tracker	pl	Wybierz konta dla których ma być widoczne pole własne
 select how autoreplies should be sent when mails are received	tracker	pl	Wybierz reguły dla automatycznych odpowiedzi na wiadomości e-mail, gdy są odbierane.
 select multiple	tracker	pl	Wybierz wiele
-select one...	tracker	pl	wybierz jeden...
-select tracker queue	tracker	pl	wybierz kolejkę systemu śledzenia
-select which categories should be used in tracker for the tts categories	tracker	pl	wybierz które kategorię powinny być użyte w systemie śledzenia dla kategorii TTS
+select one...	tracker	pl	Wybierz jeden...
+select tracker queue	tracker	pl	Wybierz kolejkę systemu śledzenia
+select which categories should be used in tracker for the tts categories	tracker	pl	Wybierz które kategorię powinny być użyte w systemie śledzenia dla kategorii TTS
 select which username should be used when unrecognized mails are handled.	tracker	pl	Wybierz nazwę użytkownika która będzie używana przy obsłudze nierozpoznanych wiadomości
 select which username should be used when unrecognized replies are handled	tracker	pl	Wybierz nazwę użytkownika która będzie używana przy obsłudze nierozpoznanych odpowiedzi
 sender address	tracker	pl	Adres nadawcy
@@ -254,9 +297,9 @@ this month	tracker	pl	Bieżący miesiąc
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pl	To zgłoszenie zostało automatycznie zamknięte przez system. Wcześniej było w toku ale osoba zgłaszająca nie odpowiedziała w czasie %1 dni.
 this week	tracker	pl	Bieżący tydzień
 this year	tracker	pl	Bieżący rok
-ticket count	tracker	pl	liczba ticketów
+ticket count	tracker	pl	Liczba biletów
 ticket modified by %1 at %2	tracker	pl	Ticket zmodyfikowany przez %1, %2
-times	tracker	pl	razy
+times	tracker	pl	Razy
 tracker	common	pl	System śledzenia
 tracker added	tracker	pl	Kolejka śledzenia została dodana
 tracker admins	tracker	pl	Administratorzy systemu śledzenia
@@ -277,7 +320,7 @@ unrecognized mails	tracker	pl	Nierozpoznane maile
 upcoming	tracker	pl	nadchodzące
 updated	tracker	pl	Uaktualniony
 url of the tracker	tracker	pl	Odnośnik URL do systemu śledzenia
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	pl	Odnośnik URL do dołączenia w powiadomieniu - np. do strony modułu SiteMgr, domyślnego systemu śledzenia w eGW
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	pl	Odnośnik URL do dołączenia w powiadomieniu - np. do strony modułu SiteMgr, domyślnego systemu śledzenia w EGw
 use a default user for mails that where not recognized	tracker	pl	Użyj domyślnego użytkownika dla nie rozpoznanych wiadomości
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	pl	Użyj tego znacznika dla etykiet adresu. Wstaw zawartość którą chcesz powtórzyć pomiędzy dwa znaczniki.
 versions	tracker	pl	Wersje
@@ -286,6 +329,7 @@ votes	tracker	pl	Głosy
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	pl	Gdy e-maile są odbierane od nieznanych adresatów, oznacz to pole by automatycznie dodawać te adresy w pole CC. Ta opcja jest ignorowana jeśli obsługa nieznanych adresatów nie jest aktywna.
 wont fix	tracker	pl	Nie będzie poprawione
 works for me	tracker	pl	Dla mnie działa
+writable filemanager directory	tracker	pl	Katalog menedżera plików z możliwością zapisu
 yes, always	tracker	pl	Tak, zawsze
 yes, display groups first	tracker	pl	Tak, pokazuj wpierw grupy
 yes, display users first	tracker	pl	Tak, pokazuj wpierw użytkowników

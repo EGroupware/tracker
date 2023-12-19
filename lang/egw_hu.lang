@@ -1,16 +1,32 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	hu	"%2" csak a kezdeti és az esedékességi dátumra érvényes. Használja a "%1" szót.
 %1 days in advance	tracker	hu	%1 napot előre
+%1 entries %2	tracker	hu	%1 bejegyzések %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	hu	%1 bejegyzések %2, %3 nem sikerült, mert a jogok nem elegendőek!
 %1 entries updated.	tracker	hu	%1 bejegyzés frissítve.
---> enter new name	tracker	hu	-> Adjon meg új nevet
+%1 is due %2	tracker	hu	%1 esedékes %2
+%1 is starting %2	tracker	hu	%1 kezdődik %2
+%1 tickets have been converted	tracker	hu	%1 jegyet konvertáltak.
+(beware of mailloops, check the help!)	tracker	hu	(Vigyázz a mailloopokkal!)
+(new tickets as	tracker	hu	Új jegyek mint
+--> choose a project from the drop-down list	tracker	hu	--> válasszon egy projektet a legördülő listából
+--> enter new name	tracker	hu	--> új név megadása
 1 - lowest	tracker	hu	1 - legalacsonyabb
+2 days in advance	tracker	hu	2 nappal előre
 2 years ago	tracker	hu	2 évvel korábban
+3 days in advance	tracker	hu	3 nappal előre
 3 years ago	tracker	hu	3 évvel korábban
 5 - medium	tracker	hu	5 - közepes
 9 - highest	tracker	hu	9 - legmagasabb
+[fwd]	tracker	hu	[FWD]
 accepted	tracker	hu	Elfogadva
+add a ticket	tracker	hu	Jegy hozzáadása
+add additionally	tracker	hu	Kiegészítés hozzáadása
 add comment	tracker	hu	Megjegyzés hozzáadása
+add email-address	tracker	hu	E-mail cím hozzáadása
 add timesheet entry	tracker	hu	Regiszter bejegyzés hozzáadása
 after how many days a not replied item should be marked overdue?	tracker	hu	A nem megválaszolt bejegyzést hány nap után jelöljük Lejártnak?
 after how many days pending items should be closed automatic	tracker	hu	A függőben lévő bejegyzést hány nap után zárjuk le automatikusan?
+all tickets are already converted to tracker	tracker	hu	Minden jegyet már átalakítottak Tracker-be
 allow bounties	tracker	hu	Pénzjutalom engedélyezve
 allow editing by	tracker	hu	Szerkeszthető általa:
 allow to assign groups to tracker items	tracker	hu	Tracker bejegyzések csoportokhoz rendelhetősége engedélyezve
@@ -30,43 +46,64 @@ bounty set	tracker	hu	Pénzjutalom beállítása
 canned response	tracker	hu	Instant válasz
 canned responses	tracker	hu	Instant válaszok
 categories, versions, canned responses	tracker	hu	Kategóriák, verziók, instant válaszok
+change color	tracker	hu	Színváltoztatás
 check all	tracker	hu	Összes kijelölése
+choose 'creator' of imported data	tracker	hu	Válassza ki az importált adatok létrehozóját
 close pending	tracker	hu	Függő tétel lezárása
 closed	tracker	hu	Lezárt
+closed date	tracker	hu	Lezárt dátum
+color	tracker	hu	Szín
 comment by %1 at %2:	tracker	hu	%1 megjegyzése ekkor %2:
 comments	tracker	hu	Megjegyzések
 completed	tracker	hu	Teljesítve
 configuration	tracker	hu	Konfiguráció
 configuration for all trackers	tracker	hu	Összes Tracker sor konfigurálása
 configuration updated.	tracker	hu	Konfiguráció frissítve.
+configuration, notifications	tracker	hu	Konfiguráció, Értesítések
 confirm that you pay the specified bounty to implement or fix the issue	tracker	hu	Erősítse meg, hogy hajlandó kifizetni a jutalmat a megvalósításért vagy a hiba kijavításáért
 confirm the receipt of money for this bounty	tracker	hu	Erősítse meg a pénz átvételét ehhez a pénzjutalomhoz
 copy to	tracker	hu	Másold ide:
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	hu	Másold a módosításokat a vágólapra, %1frissítsd az oldalat%2 és fűzd hozzá.
 create new links	tracker	hu	Új hivatkozások létrehozása
+create new tracker entry's as default "private" for approval process	tracker	hu	Új nyomkövető bejegyzés létrehozása alapértelmezett "privátként" a jóváhagyási folyamathoz
 created	tracker	hu	Létrehozva
 creates a new field	tracker	hu	Új mező létrehozása
 creation date	tracker	hu	Létrehozás dátuma
 custom fields	tracker	hu	Egyedi mezők
 date opened	tracker	hu	Megnyitás dátuma
+default group	tracker	hu	Alapértelmezett csoport
 default tracker queue	tracker	hu	Normál várólista
 delete this category	tracker	hu	Kategória törlése
 delete this entry	tracker	hu	Aktuális bejegyzés törlése
 deleted	tracker	hu	Törölt
 deletes this field	tracker	hu	Aktuális mező törlése
+deny global	tracker	hu	Globális tagadás
 determines the order the fields are displayed	tracker	hu	megjelenített mezők rendezésének meghatározása
+directory with documents to insert entries	tracker	hu	Dokumentumokat tartalmazó könyvtár a bejegyzések beillesztéséhez
+do not send notifications to external email (cc field)	tracker	hu	Ne küldjön értesítéseket külső e-mail címre (cc mező)
 do you want a notification, if items you are responsible for are about to start?	tracker	hu	Kér értesítést, ha egy saját feladatát rövidesen el kell kezdenie?
 do you want a notification, if items you are responsible for are due?	tracker	hu	Kér értesítést, ha egy saját feladatának a határideje rövidesen lejár?
+do you want to add mailheader information to description and/or comments?	tracker	hu	Szeretné, hogy a leíráshoz és/vagy a megjegyzésekhez mailheader információt adjon?
+download url for links	tracker	hu	URL letöltése a linkekhez
+due	tracker	hu	Esedékes
+due date	tracker	hu	Esedékesség
 due date for new tickets	tracker	hu	Új jegyek esedékessége
 duplicate	tracker	hu	Duplikál
 e-mail notifications	tracker	hu	Email értesítés
 each value is a line like <id>[=<label>]	tracker	hu	minden érték egy sor, ehhez hasonlóan: <id>[=<címke>]
 each value is a line like id[=label]	tracker	hu	minden érték egy sor, ehhez hasonlóan: id[=címke]
 edit %1	tracker	hu	%1 szerkesztése
+edit others' comments	tracker	hu	Mások megjegyzéseinek szerkesztése
+edit own comments	tracker	hu	Saját megjegyzések szerkesztése
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	hu	EGroupware Tracker mailhandling: korábban nem tudott csatlakozni, és a profil nem változott meg
 entry saved	tracker	hu	Bejegyzés elmentve
-error saving the entry!!!	tracker	hu	Hiba történt a bejegyzés mentése közben !!!
+error saving the entry!!!	tracker	hu	Hiba történt a bejegyzés mentése közben!
 error: the entry has been updated since you opened it for editing!	tracker	hu	Hiba: a bejegyzés módosult mióta megnyitottad!
 everybody	tracker	hu	Mindenki
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	hu	Példa {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - keressük az "n_prefix" mezőben a "Mr" szót, ha találunk, írjuk Hello Mr., különben írjuk Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	hu	Példa {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Példa: Mr Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	hu	Példa {{NELF role}} - ha a szerep mező nem üres, akkor egy új sort kap a szerep mező értékével.
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	hu	Példa {{nenvlf role}} - ha a mező szerep nem üres, akkor a mező értéke nélkül egy LF-t állít be.
 existing links	tracker	hu	Létezõ hivatkozások
 export as csv	tracker	hu	Export CSV formában
 favorites	tracker	hu	Kedvencek
@@ -78,9 +115,18 @@ full list of placeholder names	tracker	hu	Helytartók listája
 general fields:	tracker	hu	Általános mezők:
 history	tracker	hu	Történet
 id	tracker	hu	Azonosító
+if a ticket has matched before, should the actions be taken again?	tracker	hu	Ha egy jegy már korábban is megfelelt, újra meg kell-e tenni a műveleteket?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	hu	Ha a jelölőnégyzet nincs bejelölve, minden meglévő, egyező jegyet már eszkaláltnak jelöl, anélkül, hogy a műveletet végrehajtaná.
+ignore	tracker	hu	Ne törődj a
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	hu	Figyelmen kívül hagyja az e-mailt. A postafiókban marad, még akkor is, ha a fenti "E-mailek törlése a kiszolgálóról" opció be van jelölve.
+imap, ssl secured	tracker	hu	IMAP, SSL védett
+imap, tls secured	tracker	hu	IMAP, TLS védett
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	hu	Bejegyzések importálása a nyomkövetőbe CSV fájlból. A CSV jelentése 'vesszővel elválasztott értékek'. Az opciók lapon más elválasztójeleket is választhat.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	hu	A levelezéskezeléshez megadott szerverprofil nem teljes; A levelezéskezelés letiltása a %1 várólistához.
 invalid	tracker	hu	Érvénytelen
+language	tracker	hu	Nyelv
 last modified	tracker	hu	Utolsó módosítás
-last modified by	tracker	hu	utoljára módosította
+last modified by	tracker	hu	Utoljára módosította
 last month	tracker	hu	Korábbi hónap
 last week	tracker	hu	Korábbi hét
 last year	tracker	hu	Korábbi év
@@ -95,20 +141,22 @@ new items	tracker	hu	Új tételek
 no change	tracker	hu	Nincs változás
 noone	tracker	hu	Senki
 number of row for a multiline inputfield or line of a multi-select-box	tracker	hu	sorok száma a többsoros beviteli mező, vagy egy kiválasztó lista esetén (ilyen 'magas' lesz a doboz/szerkesztő mező)
-one day after	tracker	hu	egy nappal ezután
-one day in advance	tracker	hu	egy nappal előre
+one day after	tracker	hu	Egy nappal ezután
+one day in advance	tracker	hu	Egy nappal előre
 open(status)	tracker	hu	Nyitott
 order	tracker	hu	Rendezés
-overdue	tracker	hu	lejárt
+overdue	tracker	hu	Késedelmes
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
 read	tracker	hu	Olvasás
 read / unread	tracker	hu	Olvasott / Olvasatlan
+read only filemanager directory	tracker	hu	Csak olvasható fájlkezelő könyvtár
 rejected	tracker	hu	Elutasított
 remind	tracker	hu	Emlékeztető
 resolution	tracker	hu	Határozat
+respect timesheet run and read permissions for time totals	tracker	hu	A munkaidő-nyilvántartás futtatásának és az időösszegek olvasási jogainak tiszteletben tartása
 responsible	tracker	hu	Felelős
-same day	tracker	hu	azonos napon
+same day	tracker	hu	Azonos napon
 saves the changes made and leaves	tracker	hu	Változások mentése és kilépés
 set due date this many days after escalation runs	tracker	hu	Az esedékesség dátumának beállítása (napok száma) az eszkalációs futtatás után
 set the ticket start date to the email received date	tracker	hu	A jegy kezdeti dátumának beállítása az e-mail beérkezésének dátumára
@@ -122,11 +170,13 @@ the text displayed to the user	tracker	hu	a szöveg megjelenítve a felhasznál�
 this month	tracker	hu	Folyó hónap
 this week	tracker	hu	Folyó hét
 this year	tracker	hu	Folyó év
-times	tracker	hu	Időigény
+ticket count	tracker	hu	Jegyek száma
+times	tracker	hu	Idők
 type of customfield	tracker	hu	Egyedi mező típusa
 unread	tracker	hu	Olvasatlan
-upcoming	tracker	hu	közelgő
-updated	tracker	hu	frissítve
+upcoming	tracker	hu	Közelgő
+updated	tracker	hu	Frissítve
+writable filemanager directory	tracker	hu	Írható fájlkezelő könyvtár
 yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
 yesterday	tracker	hu	Tegnap
 you can respond by visiting:	tracker	hu	Megtekintéshez látogasson el ide:

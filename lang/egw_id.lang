@@ -1,17 +1,40 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	id	"%2" hanya berlaku untuk tanggal mulai dan tanggal jatuh tempo. Gunakan "%1".
 %1 days in advance	tracker	id	%1 hari dimuka
+%1 entries %2	tracker	id	%1 entri %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	id	%1 entri %2, %3 gagal karena hak yang tidak mencukupi!
+%1 entries updated.	tracker	id	%1 entri diperbarui.
+%1 is due %2	tracker	id	%1 sudah jatuh tempo %2
+%1 is starting %2	tracker	id	%1 sudah mulai %2
+%1 tickets have been converted	tracker	id	%1 tiket telah dikonversi.
+(beware of mailloops, check the help!)	tracker	id	(Waspadalah terhadap mailloops!)
+(new tickets as	tracker	id	Tiket baru sebagai
+--> choose a project from the drop-down list	tracker	id	--> pilih proyek dari daftar drop-down
 --> enter new name	tracker	id	--> masukan nama baru
+2 days in advance	tracker	id	2 hari sebelumnya
 2 years ago	tracker	id	2 tahun yang lalu
+3 days in advance	tracker	id	3 hari sebelumnya
 3 years ago	tracker	id	3 tahun yang lalu
-accepted	tracker	id	Accepted
-add additionally	tracker	id	add additionally
-add assigned	tracker	id	Add assigned
-add comment	tracker	id	Add comment
+accepted	tracker	id	Diterima
+add a ticket	tracker	id	Tambahkan tiket
+add additionally	tracker	id	Tambahkan tambahan
+add assigned	tracker	id	Tambahkan ditugaskan
+add comment	tracker	id	Tambahkan komentar
+add email-address	tracker	id	Tambahkan alamat email
 add timesheet entry	tracker	id	Tamba entri lembarwaktu
-after	tracker	id	after
-allow bounties	tracker	id	Allow bounties
-allow voting	tracker	id	Allow voting
-already escalated	tracker	id	already escalated
+after	tracker	id	Setelah
+all	tracker	id	Semua
+all versions	tracker	id	Semua versi
+allow bounties	tracker	id	Izinkan hadiah
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	id	Memungkinkan pembuatan komentar terbatas yang hanya dapat dilihat oleh admin, teknisi, dan pengguna yang ditugaskan
+allow creation of infolog entries from tracker tickets	tracker	id	Memungkinkan pembuatan entri InfoLog dari tiket Tracker
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	id	Memungkinkan pra-definisi proyek yang akan ditugaskan ke item pelacak baru
+allow to assign groups to tracker items	tracker	id	Memungkinkan untuk menetapkan grup
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	id	Memungkinkan 'Pengguna' untuk ditugaskan ke tiket selain untuk 'Teknisi' dan 'Admin Tracker'
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	id	Memungkinkan untuk menetapkan ke tiket tidak hanya "Admin Tracker" dan "Teknisi", tetapi juga "Pengguna" di tab staf
+allow voting	tracker	id	Izinkan pemungutan suara
+already escalated	tracker	id	Sudah meningkat
 amount	tracker	id	Amount
+application mail expected but got: %1	tracker	id	Email aplikasi yang diharapkan tetapi tidak diterima: %1
 applies the changes	tracker	id	terapkan perubahan
 assigned to	tracker	id	Assigned to
 assigning groups	tracker	id	Assigning groups
@@ -25,24 +48,31 @@ bounty deleted.	tracker	id	Bounty deleted.
 bounty set	tracker	id	Bounty set
 canned response	tracker	id	Canned response
 canned responses	tracker	id	Canned responses
+change color	tracker	id	Mengubah warna
 check all	tracker	id	Check all
+choose 'creator' of imported data	tracker	id	Pilih 'pembuat' data yang diimpor
 close pending	tracker	id	Close pending
 closed	tracker	id	Closed
+closed date	tracker	id	Tanggal penutupan
+color	tracker	id	Warna
 comment by %1 at %2:	tracker	id	Komentar oleh %1 pada %2:
 comments	tracker	id	Comments
 completed	tracker	id	Completed
 configuration	tracker	id	Configuration
 configuration updated.	tracker	id	Configuration updated.
+configuration, notifications	tracker	id	Konfigurasi, Pemberitahuan
 confirmed	tracker	id	Confirmed
 converted count	tracker	id	converted count
 copy to	tracker	id	Copy to
 create new links	tracker	id	Bikin tautan baru
+create new tracker entry's as default "private" for approval process	tracker	id	Membuat entri pelacak baru sebagai 'pribadi' default untuk proses persetujuan
 created	tracker	id	Created
 creates a new field	tracker	id	bikin field baru
 creation date	tracker	id	creation date
 creator	tracker	id	Creator
 custom fields	tracker	id	Custom fields
 date opened	tracker	id	Date opened
+default group	tracker	id	Grup default
 default tracker queue	tracker	id	Antrian standar
 define escalations	common	id	Define escalations
 delete this category	tracker	id	hapus kategori ini
@@ -50,20 +80,34 @@ delete this entry	tracker	id	Hapus entri ini
 delete this status	tracker	id	Hapus status ini
 deleted	tracker	id	Deleted
 deletes this field	tracker	id	hapus field ini
+deny global	tracker	id	Tolak global
 determines the order the fields are displayed	tracker	id	menentukan urutan field ditampilkan
+directory with documents to insert entries	tracker	id	Direktori dengan dokumen untuk memasukkan entri
+do not send notifications to external email (cc field)	tracker	id	Jangan mengirim pemberitahuan ke email eksternal (bidang cc)
+do you want to add mailheader information to description and/or comments?	tracker	id	Apakah Anda ingin menambahkan informasi kop surat ke deskripsi dan/atau komentar?
+download url for links	tracker	id	Unduh URL untuk tautan
+due	tracker	id	Jatuh tempo
+due date	tracker	id	Tanggal jatuh tempo
 due date for new tickets	tracker	id	Tanggal jatuh tempo untuk tiket baru
 duplicate	tracker	id	Duplicate
 e-mail notifications	tracker	id	E-Mail notifications
 each value is a line like <id>[=<label>]	tracker	id	setiap nilai adalah sebuah baris seperti <id>[=<label>]
 edit %1	tracker	id	Edit %1
 edit entry	tracker	id	Edit entry
+edit others' comments	tracker	id	Mengedit komentar orang lain
+edit own comments	tracker	id	Mengedit komentar sendiri
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	id	Penanganan surat EGroupware Tracker: tidak dapat terhubung sebelumnya, dan profil tidak berubah
 entry saved	tracker	id	Entry saved
-error saving the entry!!!	tracker	id	Error saving the entry!!!
+error saving the entry!!!	tracker	id	Error saving the entry!
 escalation	tracker	id	Escalation
 escalation added.	tracker	id	Escalation added.
 escalation deleted.	tracker	id	Escalation deleted.
 escalation saved.	tracker	id	Escalation saved.
 everybody	tracker	id	Everybody
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	id	Contoh {{IF n_awalan~Mr~Hello Mr.~Hello Ms.}} - cari di kolom "n_prefix", untuk "Mr", jika ditemukan, tulis Hello Mr, jika tidak, tulis Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	id	Contoh {{LETTERPREFIXCUSTOM n_prefix judul n_keluarga}} - Contoh Bapak Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	id	Contoh {{NELF role}} - jika peran bidang tidak kosong, Anda akan mendapatkan baris baru dengan nilai peran bidang
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	id	Contoh {{nenvlf role}} - jika peran bidang tidak kosong, tetapkan LF tanpa nilai bidang apa pun
 existing links	tracker	id	Existing links
 export as csv	tracker	id	Ekspor sebagai CSV
 favorites	tracker	id	Favorit
@@ -77,12 +121,20 @@ general fields:	tracker	id	Field Umum:
 history	tracker	id	History
 html editing	tracker	id	Html editing
 id	tracker	id	ID
-ignore	tracker	id	Ignore
+if a ticket has matched before, should the actions be taken again?	tracker	id	Jika sebuah tiket sudah pernah dicocokkan sebelumnya, haruskah tindakan diambil lagi?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	id	Jika dibiarkan, tandai setiap tiket yang sudah ada dan cocok sebagai tiket yang sudah dieskalasi, tanpa mengambil tindakan.
+ignore	tracker	id	Abaikan
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	id	Abaikan email. Email tersebut akan tetap berada di kotak surat, meskipun 'Hapus email dari server' di atas dicentang.
+imap, ssl secured	tracker	id	IMAP, SSL aman
+imap, tls secured	tracker	id	IMAP, TLS diamankan
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	id	Mengimpor entri ke pelacak dari file CSV. CSV berarti 'Nilai yang Dipisahkan dengan Koma'. Pada Tab opsi Anda juga dapat memilih pemisah lainnya.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	id	Profil server tidak lengkap untuk penanganan email yang disediakan; Menonaktifkan penanganan email untuk Antrian %1
 insert in document	tracker	id	Sisipkan dalam dokumen
 introduction message	tracker	id	Introduction message
 invalid	tracker	id	Invalid
 item assignee	tracker	id	Item assignee
 item creator	tracker	id	Item creator
+language	tracker	id	Bahasa
 last modified	tracker	id	Last modified
 last modified by	tracker	id	Diubah terakhir oleh
 last month	tracker	id	Bulan lalu
@@ -106,12 +158,12 @@ notification	tracker	id	Notification
 number of row for a multiline inputfield or line of a multi-select-box	tracker	id	number of row for a multiline inputfield or line of a multi-select-box
 one day after	tracker	id	sehari setelah
 one day in advance	tracker	id	sehari dimuka
-open(status)	tracker	id	Open
+open(status)	tracker	id	Buka
 order	tracker	id	Urutan
 overdue	tracker	id	lewat waktu
 overdue after	tracker	id	Overdue after
 pending	tracker	id	Pending
-permission denied !!!	tracker	id	Ijin ditolak !!!
+permission denied !!!	tracker	id	Ijin ditolak!
 port number	tracker	id	Port number
 postponed	tracker	id	Postponed
 print entry	tracker	id	Print entry
@@ -122,9 +174,11 @@ projects	tracker	id	Projects
 queue	tracker	id	Queue
 read	tracker	id	Baca
 read / unread	tracker	id	Baca / Belum dibaca
-rejected	tracker	id	Rejected
-remind	tracker	id	Remind
+read only filemanager directory	tracker	id	Direktori Manajer File hanya-baca
+rejected	tracker	id	Ditolak
+remind	tracker	id	Mengingatkan
 resolution	tracker	id	Resolution
+respect timesheet run and read permissions for time totals	tracker	id	Hormati izin menjalankan dan membaca lembar waktu untuk total waktu
 responsible	tracker	id	penanggungjawab
 restriction	tracker	id	Restriction
 same day	tracker	id	hari yang sama
@@ -169,5 +223,6 @@ updated	tracker	id	Dikinikan
 versions	tracker	id	Versions
 votes	tracker	id	Votes
 wont fix	tracker	id	Wont fix
+writable filemanager directory	tracker	id	Direktori Manajer File yang dapat ditulis
 yesterday	tracker	id	Kemarin
 you can respond by visiting:	tracker	id	Untuk melihatnya, kunjungi:

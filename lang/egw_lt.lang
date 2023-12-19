@@ -1,9 +1,72 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	lt	"%2" galioja tik pradžios datai ir terminui. Naudokite "%1".
+%1 days in advance	tracker	lt	%1 dienų iš anksto
+%1 entries %2	tracker	lt	%1 įrašai %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	lt	%1 įrašai %2, %3 nepavyko dėl nepakankamų teisių!
+%1 entries updated.	tracker	lt	%1 įrašai atnaujinti.
+%1 is due %2	tracker	lt	%1 turi būti atliktas %2
+%1 is starting %2	tracker	lt	%1 prasideda %2
+%1 tickets have been converted	tracker	lt	%1 bilietai buvo konvertuoti.
+(beware of mailloops, check the help!)	tracker	lt	(Saugokitės mailloops!)
+(new tickets as	tracker	lt	Nauji bilietai kaip
+--> choose a project from the drop-down list	tracker	lt	--> pasirinkite projektą iš išskleidžiamojo sąrašo
+2 days in advance	tracker	lt	Prieš 2 dienas
+2 years ago	tracker	lt	Prieš 2 metus
+3 days in advance	tracker	lt	Prieš 3 dienas
+3 years ago	tracker	lt	prieš 3 metus
+[fwd]	tracker	lt	[FWD]
+accepted	tracker	lt	Priimta
+add a ticket	tracker	lt	Pridėti bilietą
+add additionally	tracker	lt	Pridėti papildomai
+add assigned	tracker	lt	Pridėti priskirtą
+add comment	tracker	lt	Pridėti komentarą
+add email-address	tracker	lt	Pridėti el. pašto adresą
+after	tracker	lt	Po
+allow bounties	tracker	lt	Leisti premijas
+allow voting	tracker	lt	Leisti balsuoti
+already escalated	tracker	lt	Jau eskaluojama
+change color	tracker	lt	Pakeisti spalvą
+choose 'creator' of imported data	tracker	lt	Pasirinkite importuojamų duomenų "kūrėją
+closed date	tracker	lt	Uždarymo data
+color	tracker	lt	Spalva
+configuration, notifications	tracker	lt	Konfigūracija, Pranešimai
+create new tracker entry's as default "private" for approval process	tracker	lt	Sukurti naują stebėjimo įrašą kaip numatytąjį "privatų" patvirtinimo procesui
+default group	tracker	lt	Numatytoji grupė
 default tracker queue	tracker	lt	Standartinė eilė
+deny global	tracker	lt	Neigti visuotinį
+directory with documents to insert entries	tracker	lt	Katalogas su dokumentais, į kurį galima įterpti įrašus
+do not send notifications to external email (cc field)	tracker	lt	Nesiųsti pranešimų į išorinį el. paštą (cc laukas)
+do you want to add mailheader information to description and/or comments?	tracker	lt	Ar į aprašymą ir (arba) komentarus norite įtraukti pašto antraštės informaciją?
+download url for links	tracker	lt	Atsisiųsti nuorodų URL
+due	tracker	lt	Dėl
+due date	tracker	lt	Terminas
 due date for new tickets	tracker	lt	Naujų bilietų pateikimo terminas
+edit others' comments	tracker	lt	Redaguoti kitų komentarus
+edit own comments	tracker	lt	Redaguoti savo komentarus
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	lt	EGroupware Tracker mailhandling: anksčiau nepavyko prisijungti, o profilis nepasikeitė
+entry saved	tracker	lt	Įrašas išsaugotas
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	lt	Pavyzdys {{IF n_prefiksas~Mr~Hello Mr.~Hello Ms.}}} - ieškokite lauke "n_prefix" žodžio "Mr", jei radote, rašykite Hello Mr., kitu atveju rašykite Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	lt	Pavyzdys {{{LETTERPREFIXCUSTOM n_prefix pavadinimas n_family}} - Pavyzdys: James Miller.
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	lt	Pavyzdys {{{NELF vaidmuo}} - jei laukas role nėra tuščias, bus pateikta nauja eilutė su lauko role reikšme
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	lt	Pavyzdys {{nenvlf role}} - jei laukas role nėra tuščias, nustatysite LF be jokios lauko reikšmės
 full list of placeholder names	tracker	lt	Vietos žymeklių sąrašas
+if a ticket has matched before, should the actions be taken again?	tracker	lt	Jei bilietas jau buvo sutapatintas anksčiau, ar reikia vėl imtis veiksmų?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	lt	Jei nepažymėta, kiekvienas esamas sutampantis bilietas pažymimas kaip jau eskaluotas, neatliekant veiksmų.
+ignore	tracker	lt	Ignoruokite
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	lt	Ignoruoti laišką. Jis liks pašto dėžutėje, net jei aukščiau pažymėta "Ištrinti laiškus iš serverio".
+imap, ssl secured	tracker	lt	IMAP, apsaugotas SSL
+imap, tls secured	tracker	lt	IMAP, apsaugotas TLS
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	lt	Importuoja įrašus į sekimo priemonę iš CSV failo. CSV reiškia "kableliais atskirtos vertės". Parinkčių skirtuke galite pasirinkti ir kitus skirtukus.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	lt	Pateiktas nepilnas serverio profilis pašto tvarkymui; Išjungti pašto tvarkymą eilei %1
+language	tracker	lt	Kalba
+open(status)	tracker	lt	Atviras
 read	tracker	lt	Skaityti
 read / unread	tracker	lt	Perskaityta / Neperskaityta
+read only filemanager directory	tracker	lt	Tik skaitymui skirtas failų tvarkyklės katalogas
+rejected	tracker	lt	Atmesta
+remind	tracker	lt	Priminti
+respect timesheet run and read permissions for time totals	tracker	lt	Gerbti darbo laiko apskaitos žiniaraščio paleidimo ir skaitymo leidimus laiko sumoms
 set due date this many days after escalation runs	tracker	lt	Nustatykite terminą (dienų skaičių) po eskalavimo paleidimo
 set the ticket start date to the email received date	tracker	lt	Nustatykite bilieto pradžios datą pagal el. laiško gavimo datą
 start date from email	tracker	lt	Pradžios data iš el. laiško
 unread	tracker	lt	Neskaitytas
+writable filemanager directory	tracker	lt	Įrašomas failų tvarkyklės katalogas

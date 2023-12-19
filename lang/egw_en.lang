@@ -32,7 +32,7 @@ add infolog	tracker	en	Add infolog
 add restricted comment	tracker	en	Add restricted comment
 add timesheet entry	tracker	en	Add timesheet entry
 add to	tracker	en	Add to
-add unrecognized mail address to the cc field	tracker	en	Add unrecognized mail address to the CC field
+add unrecognized mail address to the cc field	tracker	en	Add unrecognized email address to the CC field
 after	tracker	en	After
 after how many days a not replied item should be marked overdue?	tracker	en	After how many days a not replied item should be marked overdue?
 after how many days pending items should be closed automatic	tracker	en	After how many days pending items should be closed automatically?
@@ -41,17 +41,18 @@ all tickets are already converted to tracker	tracker	en	All tickets are already 
 all versions	tracker	en	All versions
 allow bounties	tracker	en	Allow bounties
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	en	Allow creating of restricted comments which are only visible for admins, technicians and assigned users
-allow creation of infolog entries from tracker tickets	tracker	en	Allow creation of infolog entries from tracker tickets
+allow creation of infolog entries from tracker tickets	tracker	en	Allow creation of InfoLog entries from Tracker tickets
 allow default projects for tracker	tracker	en	Default projects
 allow editing by	tracker	en	Allow editing by
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	en	Allow the pre-definition of projects that will be assigned to new tracker items
 allow to assign groups to tracker items	tracker	en	Allow to assign groups
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	en	Allow 'Users' to be assigned to a ticket additionally to 'Technicians' and 'Tracker Admins'
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	en	Allow to assign to a ticket not only "Tracker Admins" and "Technians", but also "Users" in the staff tab
 allow voting	tracker	en	Allow voting
 allow voting on tracker items, show and sort after the votes	tracker	en	Allow voting on tracker items, show and sort after the votes
 already escalated	tracker	en	Already escalated
 amount	tracker	en	Amount
-application mail expected but got: %1	tracker	en	Application mail expected but got: %1
+application mail expected but got: %1	tracker	en	Application email expected but got: %1
 applies the changes	tracker	en	applies the changes
 assign to project	tracker	en	Assign to project
 assigned to	tracker	en	Assigned to
@@ -60,8 +61,8 @@ attachments & links	tracker	en	Attachments & Links
 attention: no contact with address %1 found.	tracker	en	Attention: No contact with address %1 found
 autoassign to	tracker	en	Auto assign to
 automatic email handling	tracker	en	Automatic email handling
-automatic mails (bounces) are configured to be forwarded	tracker	en	automatic mails (bounces) are configured to be forwarded
-automatic mails (replies) are configured to be forwarded	tracker	en	automatic mails (replies) are configured to be forwarded
+automatic mails (bounces) are configured to be forwarded	tracker	en	automatic emails (bounces) are configured to be forwarded
+automatic mails (replies) are configured to be forwarded	tracker	en	automatic emails (replies) are configured to be forwarded
 automatically created by importexport	tracker	en	Automatically created by importexport
 before	tracker	en	Before
 bounties	tracker	en	Bounties
@@ -84,7 +85,7 @@ change group when updating	tracker	en	Change group when updating
 change owner when updating	tracker	en	Change owner when updating
 changes made below will be lost, if not applied before!	tracker	en	Changes made below will be lost, if not applied before!
 check all	tracker	en	Check all
-check mail interval	tracker	en	Check mail interval
+check mail interval	tracker	en	Check email interval
 choose 'creator' of imported data	tracker	en	Choose 'creator' of imported data
 choose a project from the drop-down list	tracker	en	Choose a project from the drop down list
 close pending	tracker	en	Close pending
@@ -95,7 +96,7 @@ comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
 configuration	tracker	en	Configuration
-configuration for all trackers	tracker	en	Configuration for all tracker queues
+configuration for all trackers	tracker	en	Configuration for all queues
 configuration updated.	tracker	en	Configuration updated
 configuration, notifications	tracker	en	Configuration, Notifications
 confirm that you pay the specified bounty to implement or fix the issue	tracker	en	Confirm that you pay the specified bounty to implement or fix the issue
@@ -127,9 +128,9 @@ default group	tracker	en	Default group
 default tracker queue	tracker	en	Default tracker queue
 default version for new tracker entries	tracker	en	Default version for new tracker entries
 define escalations	common	en	Define escalations
-delete mails from server	tracker	en	Delete mails from server
-delete the mail from the server	tracker	en	Delete the mail from the server
-delete the mail from the server.	tracker	en	Delete the mail from the server.
+delete mails from server	tracker	en	Delete emails from server
+delete the mail from the server	tracker	en	Delete the email from the server
+delete the mail from the server.	tracker	en	Delete the email from the server.
 delete this bounty	tracker	en	Delete this bounty
 delete this canned response	tracker	en	Delete this canned response
 delete this category	tracker	en	Delete this category
@@ -138,7 +139,7 @@ delete this escalation	tracker	en	Delete this escalation
 delete this status	tracker	en	Delete this status
 delete this tracker including all its items and categories	tracker	en	Delete this tracker including all its items and categories
 delete this version	tracker	en	Delete this version
-delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	en	Delete unrecognized mails from the server, even if 'Delete mails' above is not tagged.
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	en	Delete unrecognized emails from the server, even if 'Delete emails' above is not tagged.
 deleted	tracker	en	Deleted
 deletes this field	tracker	en	deletes this field
 deny global	tracker	en	Deny global
@@ -147,10 +148,10 @@ directory with documents to insert entries	tracker	en	Directory with documents t
 do not send notifications to external email (cc field)	tracker	en	Do not send notifications to external email (cc field)
 do you want a notification, if items you are responsible for are about to start?	tracker	en	Do you want a notification, if items you are responsible for are about to start?
 do you want a notification, if items you are responsible for are due?	tracker	en	Do you want a notification, if items you are responsible for are due?
-do you want to add mailheader information to description and/or comments?	tracker	en	Do you want to add Mailheader Information to Description and/or Comments?
+do you want to add mailheader information to description and/or comments?	tracker	en	Do you want to add mailheader information to description and/or comments?
 do you want to vote for this item	tracker	en	Do you want to vote for this item
 donator name to show	tracker	en	Donator name to show
-download url for links	tracker	en	Download url for links
+download url for links	tracker	en	Download URL for links
 due	tracker	en	Due
 due date	tracker	en	Due date
 due date for new tickets	tracker	en	Due date for new tickets
@@ -163,21 +164,21 @@ edit %1	tracker	en	Edit %1
 edit entry	tracker	en	Edit entry
 edit others' comments	tracker	en	Edit others' comments
 edit own comments	tracker	en	Edit own comments
-egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker Mailhandling: could not connect previously, and profile did not change
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	en	EGroupware Tracker email handling: could not connect previously, and profile did not change
 email address to contact you	tracker	en	Email address to contact you
 email handling can be configured only for all trackers	tracker	en	Email handling can be configured only for all trackers.
 enable color code for	tracker	en	Enable colour code for
-enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized mails should be forwarded
+enter an email address here if unrecognized mails should be forwarded	tracker	en	Enter an email address, if unrecognized emails should be forwarded
 enter an opening text for the reply message	tracker	en	Enter an opening text for the reply message
 enter the email for reply to	tracker	en	Enter the email for reply to
 enter the imap server from which emails should be fetched	tracker	en	Enter the IMAP server from which emails should be fetched
-enter the mail address that will be read.	tracker	en	Enter the mail address that should be used as additional filter on unseen messages. Leave empty to read all messages marked as unseen.
+enter the mail address that will be read.	tracker	en	Enter the email address that should be used as additional filter on unseen messages. Leave empty to read all messages marked as unseen.
 entry saved	tracker	en	Entry saved
 error adding the new tracker!	tracker	en	Error adding the new tracker!
 error deleting escalation!	tracker	en	Error deleting escalation!
 error renaming tracker queue!	tracker	en	Error re-naming tracker queue!
-error saving the entry!!!	tracker	en	Error saving the entry!!!
-error: no mail (mailbox / uid) given!	tracker	en	Error: no mail (Mailbox / UID) given!
+error saving the entry!!!	tracker	en	Error saving the entry!
+error: no mail (mailbox / uid) given!	tracker	en	Error: no email (Mailbox / UID) given!
 error: the entry has been updated since you opened it for editing!	tracker	en	Error: the entry has been updated since you opened it for editing!
 escalation	tracker	en	Escalation
 escalation added.	tracker	en	Escalation added.
@@ -203,16 +204,16 @@ field	tracker	en	Field
 fixed	tracker	en	Fixed
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	en	For serial letter use this tag. Place the content you want to repeat between two tags.
 forward	tracker	en	Forward
-forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	en	Forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). Afterward, the mail will be deleted from the server.
+forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	en	Forward the email to the same address where unrecognized emails can be forwarded to (so this address must be entered!). Afterward, the email will be deleted from the server.
 forward to	tracker	en	Forward to
-forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized mails to the email address that has to be specified here.
+forward unrecognized mails to the email address that has to be specified here.	tracker	en	Forward unrecognized emails to the email address that has to be specified here.
 from	tracker	en	From
 full list of placeholder names	tracker	en	List of placeholder
 general fields:	tracker	en	General fields:
 general settings	tracker	en	General settings
 handling autoreplies	tracker	en	Handling auto replies
-handling bounced mails	tracker	en	Handling bounced mails
-handling mailheader information	tracker	en	Handling Mailheader Information
+handling bounced mails	tracker	en	Handling bounced emails
+handling mailheader information	tracker	en	Handling mailheader Information
 history	tracker	en	History
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	en	How many description lines should be directly visible. Further lines are available via a scroll bar.
 html editing	tracker	en	HTML editing
@@ -225,21 +226,21 @@ if this item is important for you, please vote for it.	tracker	en	If this item i
 if you specify an export definition, it will be used when you export	tracker	en	If you specify an export definition, it will be used when you export
 if you specify an export definition, it will be used when you export*	tracker	en	If you specify an export definition, it will be used when you export*
 ignore	tracker	en	Ignore
-ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	en	Ignore the mail. It will remain in the mailbox, even if 'Delete mails from server' above is checked.
-ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	en	Ignore unrecognized mails. They will not be deleted from the server, even if 'Delete mails' above is tagged.
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	en	Ignore the email. It will remain in the mailbox, even if 'Delete emails from server' above is checked.
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	en	Ignore unrecognized emails. They will not be deleted from the server, even if 'Delete emails' above is tagged.
 imap, ssl secured	tracker	en	IMAP, SSL secured
 imap, tls secured	tracker	en	IMAP, TLS secured
 import options	tracker	en	Import options
 import tts tickets	tracker	en	Import TTS tickets
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	en	Imports entries into the tracker from CSV File. CSV means 'Comma Separated Values'. In the options Tab you can also choose other separators.
-incoming mail folder	tracker	en	Incoming mail folder
-incoming mail rules	tracker	en	Incoming mail rules
-incoming mail server	tracker	en	Incoming mail server
-incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	en	incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1
+incoming mail folder	tracker	en	Incoming email folder
+incoming mail rules	tracker	en	Incoming email rules
+incoming mail server	tracker	en	Incoming email server
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	en	Incomplete server profile for mailhandling provided; Disabling mailhandling for Queue %1
 info only	tracker	en	Info only
 insert	tracker	en	Insert
 insert in document	tracker	en	Insert in document
-interval in minutes for checking the incoming mails	tracker	en	Interval in minutes for checking the incoming mails
+interval in minutes for checking the incoming mails	tracker	en	Interval in minutes for checking the incoming emails
 introduction message	tracker	en	Introduction message
 invalid	tracker	en	Invalid
 item assignee	tracker	en	Item assignee
@@ -290,7 +291,7 @@ new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by 
 no change	tracker	en	No change
 no notifications	tracker	en	No notifications
 no trackers found, aborting	tracker	en	No Trackers found, aborting.
-no, no additional mailheader to description and comments	tracker	en	no, no additional Mailheader to description and comments
+no, no additional mailheader to description and comments	tracker	en	no, no additional mailheader to description and comments
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	No one
 not-closed	tracker	en	not closed
@@ -314,7 +315,7 @@ ownership of the ticket	tracker	en	Owner of the ticket
 pending	tracker	en	Pending
 pending items never get close automatic.	tracker	en	Pending items never get closed automatically.
 pending items will be closed automatic after %1 days without response.	tracker	en	Pending items will be closed automatically after %1 days without response.
-permission denied !!!	tracker	en	Permission denied !!!
+permission denied !!!	tracker	en	Permission denied!
 permissions error - %1 could not %2	tracker	en	Permissions error - %1 could not %2
 permit html editing in overview and comments	tracker	en	Permit HTML editing in overview and comments
 pop3	tracker	en	POP3
@@ -325,15 +326,15 @@ print entry	tracker	en	Print entry
 priorities	tracker	en	Priorities
 priorities with empty label are not available to the user	tracker	en	Priorities with empty label are not available to the user.
 process	tracker	en	Process
-process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	en	Process the message normally. *NOTE* This might cause mail loops when "Sent auto replies" below is enabled!
+process the message normally. *note* this might cause mailloops when "sent autoreplies" below is enabled!	tracker	en	Process the message normally. *NOTE* This might cause email loops when "Sent auto replies" below is enabled!
 project selection	tracker	en	Project selection
 projects	tracker	en	Projects
 queue	tracker	en	Queue
 re-open closed tickets when a comment is added	tracker	en	Re-open closed tickets when a comment is added
 read	tracker	en	Read
 read / unread	tracker	en	Read / Unread
-read mail address	tracker	en	Filter mailbox for this mail address
-read only filemanager directory	tracker	en	Read-only Filemanger directory
+read mail address	tracker	en	Filter mailbox for this email address
+read only filemanager directory	tracker	en	Read-only File Manager directory
 receive notifications about assigned tracker-items	tracker	en	Receive notifications about assigned tracker items
 receive notifications about created tracker-items	tracker	en	Receive notifications about created tracker items
 receive notifications about due entries you created or are assigned to	tracker	en	Receive notifications about due entries you created or are assigned to
@@ -366,16 +367,16 @@ same day	tracker	en	Same day
 save new report	tracker	en	Save new report
 save new report...	tracker	en	Save new report...
 saves the changes made and leaves	tracker	en	saves the changes made and leaves
-select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via email.
 select accounts for which the custom field should be visible	tracker	en	Select accounts for which the custom field should be visible
 select existing report	tracker	en	Select existing report
-select how autoreplies should be sent when mails are received	tracker	en	Select how auto replies should be sent when mails are received
+select how autoreplies should be sent when mails are received	tracker	en	Select how auto replies should be sent when emails are received
 select multiple	tracker	en	Select multiple
 select one...	tracker	en	Select one...
 select tracker queue	tracker	en	Select tracker queue
 select users or groups	tracker	en	Select users or groups
 select which categories should be used in tracker for the tts categories	tracker	en	Select which categories should be used in Tracker for the TTS categories.
-select which username should be used when unrecognized mails are handled.	tracker	en	Select which user name should be used when unrecognized mails are handled.
+select which username should be used when unrecognized mails are handled.	tracker	en	Select which user name should be used when unrecognized emails are handled.
 select which username should be used when unrecognized replies are handled	tracker	en	Select which username should be used when unrecognized replies are handled
 sender address	tracker	en	Sender address
 sender address for all notifications, eg. noreply@egroupware.org	tracker	en	Sender address for all notifications e.g. noreply@egroupware.org
@@ -387,11 +388,11 @@ set bounty	tracker	en	Set bounty
 set due date this many days after escalation runs	tracker	en	Set the due date (number of days) after the escalation run
 set the ticket start date to the email received date	tracker	en	Set the ticket start date to the email received date
 set to	tracker	en	Set to
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items assigned to you get updated?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification mails, if tracker items you created get updated?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification emails, if tracker items assigned to you get updated?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification emails, if tracker items you created get updated?
 should there be a tracker-box on  home screen?	tracker	en	Show Tracker on Home page
 show start date and due date	tracker	en	Show start date and due date
-show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification mails of tracker items that you updated?
+show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification emails of tracker items that you updated?
 signature	tracker	en	Signature
 skip record	tracker	en	Skip record
 staff	tracker	en	Staff
@@ -460,12 +461,12 @@ unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker
 unchanged	tracker	en	Unchanged
 unlinked from %1	tracker	en	Unlinked from %1
 unread	tracker	en	Unread
-unrecognized mails	tracker	en	Unrecognized mails
+unrecognized mails	tracker	en	Unrecognized emails
 upcoming	tracker	en	Upcoming
 updated	tracker	en	Updated
 url of the tracker	tracker	en	URL of the tracker
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	en	URL to be included in the notification, e.g. to the page with the Site Manager module, default tracker inside eGW
-use a default user for mails that where not recognized	tracker	en	Use a default user for mails that where not recognized
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	en	URL to be included in the notification, e.g. to the page with the Site Manager module, default tracker inside EGw
+use a default user for mails that where not recognized	tracker	en	Use a default user for emails that where not recognized
 use all	tracker	en	Use all
 use custom notification message	tracker	en	Use custom notification message
 use custom signature	tracker	en	Use custom signature
@@ -479,13 +480,13 @@ versions	tracker	en	Versions
 vote for it!	tracker	en	Vote for it!
 votes	tracker	en	Votes
 what should be done with unknown values?	tracker	en	What should be done with unknown values?
-when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	en	When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized mail addresses are not handled.
+when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	en	When emails are received from an unknown email address, tag this field to have them added to the Tracker's CC field automatically. This field is ignored if unrecognized email addresses are not handled.
 wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
-writable filemanager directory	tracker	en	Writable filemanager directory
-yes, add mailheader to both (description and comments)	tracker	en	yes, add Mailheader to both (description and comments)
-yes, add mailheader to comments	tracker	en	yes, add Mailheader to comments
-yes, add mailheader to description	tracker	en	yes, add Mailheader to description
+writable filemanager directory	tracker	en	Writable File Manager directory
+yes, add mailheader to both (description and comments)	tracker	en	yes, add mailheader to both (description and comments)
+yes, add mailheader to comments	tracker	en	yes, add mailheader to comments
+yes, add mailheader to description	tracker	en	yes, add mailheader to description
 yes, always	tracker	en	Yes, always
 yes, display groups first	tracker	en	Yes, display groups first
 yes, display users first	tracker	en	Yes, display users first

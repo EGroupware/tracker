@@ -1,9 +1,78 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	ro	"%2" este valabil numai pentru data de început și data scadenței. Folosiți "%1".
+%1 days in advance	tracker	ro	%1 zile în avans
+%1 entries %2	tracker	ro	%1 intrări %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	ro	%1 intrări %2, %3 au eșuat din cauza drepturilor insuficiente!
+%1 entries updated.	tracker	ro	%1 intrări actualizate.
+%1 is due %2	tracker	ro	%1 trebuie să se înregistreze %2
+%1 is starting %2	tracker	ro	%1 începe %2
+%1 tickets have been converted	tracker	ro	%1 bilete au fost convertite.
+(beware of mailloops, check the help!)	tracker	ro	(Atenție la mailloops!)
+(new tickets as	tracker	ro	Bilete noi ca
+--> choose a project from the drop-down list	tracker	ro	--> alegeți un proiect din lista derulantă
+2 days in advance	tracker	ro	2 zile în avans
+2 years ago	tracker	ro	Acum 2 ani
+3 days in advance	tracker	ro	Cu 3 zile în avans
+3 years ago	tracker	ro	Acum 3 ani
+[fwd]	tracker	ro	[FWD]
+accepted	tracker	ro	Acceptat
+add a ticket	tracker	ro	Adaugă un bilet
+add additionally	tracker	ro	Adăugați în plus
+add assigned	tracker	ro	Adaugă atribuit
+add comment	tracker	ro	Adăugați un comentariu
+add email-address	tracker	ro	Adăugați adresa de e-mail
+after	tracker	ro	După
+all tickets are already converted to tracker	tracker	ro	Toate biletele sunt deja convertite în Tracker
+allow bounties	tracker	ro	Permiteți recompensele
+allow voting	tracker	ro	Permiteți votul
+already escalated	tracker	ro	Deja escaladat
+change color	tracker	ro	Schimbă culoarea
+choose 'creator' of imported data	tracker	ro	Alegeți "creatorul" datelor importate
+close pending	tracker	ro	Închidere în așteptare
+closed date	tracker	ro	Data închiderii
+color	tracker	ro	Culoare
+configuration, notifications	tracker	ro	Configurație, Notificări
+create new tracker entry's as default "private" for approval process	tracker	ro	Creați o nouă intrare în tracker ca fiind implicit "privată" pentru procesul de aprobare
+default group	tracker	ro	Grup implicit
 default tracker queue	tracker	ro	Coadă standard
+deny global	tracker	ro	Refuzați global
+directory with documents to insert entries	tracker	ro	Director cu documente pentru a introduce intrări
+do not send notifications to external email (cc field)	tracker	ro	Nu trimiteți notificări la e-mail extern (câmpul cc)
+do you want to add mailheader information to description and/or comments?	tracker	ro	Doriți să adăugați informații de tip mailheader la descriere și/sau comentarii?
+download url for links	tracker	ro	Descărcați URL pentru linkuri
+due	tracker	ro	Datorita
+due date	tracker	ro	Data scadentă
 due date for new tickets	tracker	ro	Data scadentă pentru bilete noi
+edit others' comments	tracker	ro	Editați comentariile altora
+edit own comments	tracker	ro	Editați propriile comentarii
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ro	EGroupware Tracker mailhandling: nu s-a putut conecta anterior, iar profilul nu s-a schimbat
+entry saved	tracker	ro	Intrare salvată
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ro	Exemplu {{IF n_prefix~Mr~Bună ziua domnule ~Bună ziua doamnă}} - caută în câmpul "n_prefix", pentru "Mr", dacă se găsește, scrie Hello Mr., altfel scrie Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ro	Exemplu {{LETTERPREFIXCUSTOM n_prefix titlu n_familie}}. - Exemplu: Dl Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ro	Exemplu {{NELF rol}} - dacă câmpul role nu este gol, se va obține o nouă linie cu valoarea câmpului role
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ro	Exemplu {{nenvlf role}} - dacă câmpul rol nu este gol, se va seta un LF fără nicio valoare a câmpului
 full list of placeholder names	tracker	ro	Listă de placeholder
+if a ticket has matched before, should the actions be taken again?	tracker	ro	În cazul în care un bilet a mai avut o potrivire înainte, ar trebui să se întreprindă din nou aceste acțiuni?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	ro	Dacă nu se bifează, marchează fiecare bilet existent, care corespunde ca fiind deja escaladat, fără a întreprinde acțiunea.
+ignore	tracker	ro	Ignoră
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	ro	Ignorați e-mailul. Acesta va rămâne în căsuța poștală, chiar dacă opțiunea "Delete emails from server" (Ștergeți e-mailurile de pe server) de mai sus este bifată.
+imap, ssl secured	tracker	ro	IMAP, securizat SSL
+imap, tls secured	tracker	ro	IMAP, securizat TLS
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	ro	Importă intrările în tracker din fișierul CSV. CSV înseamnă 'Comma Separated Values' (Valori separate prin virgulă). În Tab-ul de opțiuni puteți alege și alți separatori.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	ro	Profil de server incomplet pentru mailhandling furnizat; Dezactivarea mailhandling pentru Coada %1
+language	tracker	ro	Limba
+last modified	tracker	ro	Ultima modificare
+last modified by	tracker	ro	Modificat ultima dată de
+later	tracker	ro	Mai târziu
+open(status)	tracker	ro	Deschideți
 read	tracker	ro	Citiți
 read / unread	tracker	ro	Citit / Necitit
+read only filemanager directory	tracker	ro	Directorul Manager de fișiere numai pentru citire
+rejected	tracker	ro	Respins
+remind	tracker	ro	Reamintiți
+respect timesheet run and read permissions for time totals	tracker	ro	Respectați permisiunile de execuție a foii de pontaj și de citire a totalurilor de timp
 set due date this many days after escalation runs	tracker	ro	Stabiliți data scadentă (număr de zile) după rularea escaladării
 set the ticket start date to the email received date	tracker	ro	Setați data de începere a tichetului la data primirii e-mailului
 start date from email	tracker	ro	Data de începere din e-mail
+ticket count	tracker	ro	Număr de bilete
 unread	tracker	ro	Necitit
+writable filemanager directory	tracker	ro	Director File Manager cu posibilitatea de scriere
