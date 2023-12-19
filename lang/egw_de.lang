@@ -47,6 +47,7 @@ allow editing by	tracker	de	Bearbeiten erlauben von
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	de	Erlaube die Voreinstellung von Projektzuordnungen für Tickets.
 allow to assign groups to tracker items	tracker	de	Erlaube Tickets Gruppen zuzuweisen
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	de	Erlaube das Zuweisen von Tickets auch an Benutzer, nicht nur an Techniker und/oder Administratoren.
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	de	Erlaubt es, einem Ticket nicht nur "Tracker-Admins" und "Techniker" zuzuweisen, sondern auch "Benutzer" in der Registerkarte Personal
 allow voting	tracker	de	Abstimmungen erlauben
 allow voting on tracker items, show and sort after the votes	tracker	de	Erlauben das Abstimmen über Tickets, zeige und sortiere nach den Stimmen
 already escalated	tracker	de	Bereits eskaliert
@@ -95,7 +96,7 @@ comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Erledigt zu
 configuration	tracker	de	Konfiguration
-configuration for all trackers	tracker	de	Konfiguration für alle Verfolgungssystem-Queues
+configuration for all trackers	tracker	de	Konfiguration für alle Queues
 configuration updated.	tracker	de	Konfiguration aktualisiert.
 configuration, notifications	tracker	de	Konfiguration, Benachrichtigungen
 confirm that you pay the specified bounty to implement or fix the issue	tracker	de	Bestätigen Sie, dass Sie die angegebenen Prämie für die Umsetzung bzw. Behebung dieses Themas zahlen.
@@ -151,7 +152,7 @@ do you want to add mailheader information to description and/or comments?	tracke
 do you want to vote for this item	tracker	de	Möchten Sie für dieses Ticket stimmen
 donator name to show	tracker	de	Name des Spenders der angezeigt wird
 download url for links	tracker	de	Download URL für Verknüpfungen
-due	tracker	de	fällig
+due	tracker	de	Fällig
 due date	tracker	de	Fälligkeitsdatum
 due date for new tickets	tracker	de	Fälligkeitsdatum für neue Tickets
 duplicate	tracker	de	Doppelt
@@ -237,7 +238,7 @@ incoming mail rules	tracker	de	Regeln für eingehende E-Mails
 incoming mail server	tracker	de	Server für eingehende E-Mails
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	de	Das E-Mail Profil für die automatische E-Mail-Annahme ist nicht vollständig; Automatische E-Mailanahme wurde für Queue %1 deaktiviert.
 info only	tracker	de	Nur zur Information
-insert	tracker	de	einfügen
+insert	tracker	de	Einfügen
 insert in document	tracker	de	Einfügen in Dokument
 interval in minutes for checking the incoming mails	tracker	de	Intervall in Minuten zur Überprüfung der eingehenden E-Mails
 introduction message	tracker	de	Willkommensnachricht
@@ -308,7 +309,7 @@ only for admins, technicians or assigned	tracker	de	Nur sichtbar für Administra
 open(status)	tracker	de	Offen
 order	tracker	de	Reihenfolge
 out of date	tracker	de	Nicht mehr aktuell
-overdue	tracker	de	überfällig
+overdue	tracker	de	Überfällig
 overdue after	tracker	de	Überfällig nach
 ownership of the ticket	tracker	de	Besitzer des Tickets
 pending	tracker	de	Schwebend
@@ -333,6 +334,7 @@ re-open closed tickets when a comment is added	tracker	de	Setze geschlossene Tic
 read	tracker	de	Gelesen
 read / unread	tracker	de	Gelesen / ungelesen
 read mail address	tracker	de	Verarbeitung nur dieser Mailadresse
+read only filemanager directory	tracker	de	Schreibgeschütztes Dateimanager-Verzeichnis
 receive notifications about assigned tracker-items	tracker	de	Empfange Benachrichtigungen über zugewiesene Einträge
 receive notifications about created tracker-items	tracker	de	Empfange Benachrichtigungen über selbst angelegte Einträge
 receive notifications about due entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für fällige Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
@@ -481,6 +483,7 @@ what should be done with unknown values?	tracker	de	Wie soll mit unbekannten Wer
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	de	Wenn E-Mails von einer unbekannten E-Mail Adresse empfangen werden, diese Feld ankreuzen um sie automatisch zum Feld Kopie hinzu zu fügen. Diese Feld wird ignoriert, wenn unbekannte E-Mail Adressen nicht behandelt werden.
 wont fix	tracker	de	Vorerst keine Anpassung
 works for me	tracker	de	Nicht reproduzierbar
+writable filemanager directory	tracker	de	Beschreibbares Dateimanager-Verzeichnis
 yes, add mailheader to both (description and comments)	tracker	de	Ja, Mailheaderinformationen für Beschreibung und Kommentare hinzufügen
 yes, add mailheader to comments	tracker	de	Ja, Mailheaderinformationen für Kommentare hinzufügen
 yes, add mailheader to description	tracker	de	Ja, Mailheaderinformationen zur Beschreibung hinzufügen

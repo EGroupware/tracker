@@ -1,46 +1,104 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	lv	"%2" ir derīgs tikai sākuma datumam un izpildes termiņam. Izmantojiet "%1".
+%1 days in advance	tracker	lv	%1 dienas iepriekš
+%1 entries %2	tracker	lv	%1 ieraksti %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	lv	%1 ieraksti %2, %3 neizdevās nepietiekamu tiesību dēļ!
+%1 entries updated.	tracker	lv	%1 ieraksti atjaunināti.
+%1 is due %2	tracker	lv	%1 ir jāveic %2
+%1 is starting %2	tracker	lv	%1 sākas %2
+%1 tickets have been converted	tracker	lv	%1 biļetes ir konvertētas.
+(beware of mailloops, check the help!)	tracker	lv	(Uzmanieties no mailloops!)
+(new tickets as	tracker	lv	Jaunas biļetes kā
+--> choose a project from the drop-down list	tracker	lv	--> no izlaižamā saraksta izvēlieties projektu
+2 days in advance	tracker	lv	2 dienas iepriekš
+2 years ago	tracker	lv	Pirms 2 gadiem
+3 days in advance	tracker	lv	3 dienas iepriekš
+3 years ago	tracker	lv	pirms 3 gadiem
+[fwd]	tracker	lv	[FWD]
 accepted	tracker	lv	Akceptēts
+add a ticket	tracker	lv	Pievienot biļeti
+add additionally	tracker	lv	Pievienot papildus
+add assigned	tracker	lv	Pievienot piešķirto
+add comment	tracker	lv	Pievienot komentāru
+add email-address	tracker	lv	Pievienot e-pasta adresi
+after	tracker	lv	Pēc
+allow bounties	tracker	lv	Atļaut prēmijas
+allow voting	tracker	lv	Atļaut balsošanu
+already escalated	tracker	lv	Jau eskalēts
 applies the changes	tracker	lv	apstiprināt izmaiņas
+change color	tracker	lv	Mainīt krāsu
 check all	tracker	lv	Parbaudīt visu
+choose 'creator' of imported data	tracker	lv	Izvēlieties importēto datu "radītāju
+closed date	tracker	lv	Slēgšanas datums
+color	tracker	lv	Krāsa
 comments	tracker	lv	Komentāri
 completed	tracker	lv	Pabeigts
 configuration	tracker	lv	Konfigurācija
+configuration, notifications	tracker	lv	Konfigurēšana, Paziņojumi
 copy to	tracker	lv	Kopēt Uz:
 create new links	tracker	lv	Izveidot jaunas saites
+create new tracker entry's as default "private" for approval process	tracker	lv	Izveidot jaunu izsekošanas ierakstu kā noklusējuma "privātu" apstiprināšanas procesam
 created	tracker	lv	Izveidots
 creates a new field	tracker	lv	veido jaunu lauku
 creation date	tracker	lv	Izveiodšanas datums
 custom fields	tracker	lv	Mainīti lauki
+default group	tracker	lv	Noklusējuma grupa
 default tracker queue	tracker	lv	Standarta rinda
-delete this category	tracker	lv	izdzēst šo kategoriju
-delete this entry	tracker	lv	dzēst šo ierakstu
+delete this category	tracker	lv	Izdzēst šo kategoriju
+delete this entry	tracker	lv	Dzēst šo ierakstu
 deleted	tracker	lv	Izdzēsts
 deletes this field	tracker	lv	dzēš šo lauku
+deny global	tracker	lv	Noliegt globālo
 determines the order the fields are displayed	tracker	lv	nosaka kārtību, kādā tiek attēloti lauki
+directory with documents to insert entries	tracker	lv	Katalogs ar dokumentiem, kuros ievietot ierakstus
+do not send notifications to external email (cc field)	tracker	lv	Nesūtīt paziņojumus uz ārējo e-pastu (cc lauks)
+do you want to add mailheader information to description and/or comments?	tracker	lv	Vai vēlaties pievienot aprakstu un/vai komentārus ar e-pasta galvenes informāciju?
+download url for links	tracker	lv	Lejupielādējiet URL saites
+due	tracker	lv	Pienācīgs
+due date	tracker	lv	Termiņš
 due date for new tickets	tracker	lv	Jaunu biļešu iesniegšanas termiņš
 each value is a line like <id>[=<label>]	tracker	lv	katra vēr'tiba ir līniija kā <id>[=<iezīme>]
+edit others' comments	tracker	lv	Rediģēt citu komentārus
+edit own comments	tracker	lv	Rediģēt savus komentārus
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	lv	EGroupware Tracker mailhandling: iepriekš nevarēja izveidot savienojumu, un profils nemainījās
 entry saved	tracker	lv	Ieraksts saglabāts
 everybody	tracker	lv	ikviens
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	lv	Piemērs {{{IF n_prefikss~Mr~Hello Mr.~Hello Ms.}}} - meklēt laukā "n_prefix", lai atrastu "Mr", ja atrasts, rakstiet Hello Mr., citādi rakstiet Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	lv	Piemērs {{{LETTERPREFIXCUSTOM n_prefiksa virsraksts n_dzimene}} - Piemērs: Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	lv	Piemērs {{{NELF role}} - ja lauks role nav tukšs, parādīsies jauna rinda ar lauka role vērtību
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	lv	Piemērs {{{nenvlf role}} - ja lauka loma nav tukša, iestatiet LF bez lauka vērtības
 existing links	tracker	lv	Eksistējošas saites
 forward	tracker	lv	Pārsūtīt
 from	tracker	lv	No
 full list of placeholder names	tracker	lv	Vietvārdu saraksts
 history	tracker	lv	Vēsture
 id	tracker	lv	ID
+if a ticket has matched before, should the actions be taken again?	tracker	lv	Ja biļete jau iepriekš ir atbilstusi, vai darbības ir jāveic atkārtoti?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	lv	Ja nav atzīmēts, katra esošā atbilstošā biļete tiek atzīmēta kā jau eskalēta, bet darbība netiek veikta.
+ignore	tracker	lv	Ignorēt
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	lv	Ignorēt e-pastu. Tā paliks pastkastītē, pat ja iepriekš ir atzīmēta izvēles rūtiņa "Dzēst e-pastus no servera".
+imap, ssl secured	tracker	lv	IMAP, aizsargāts ar SSL
+imap, tls secured	tracker	lv	IMAP, TLS nodrošināts
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	lv	Importē ierakstus izsekotājā no CSV faila. CSV nozīmē "komatā atdalītas vērtības". Iespēju cilnē var izvēlēties arī citus atdalītājus.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	lv	Sniegts nepilnīgs servera profils pasta apstrādei; Izslēgt pasta apstrādi rindai %1
+language	tracker	lv	Valoda
 last modified	tracker	lv	Pēdējo reizi pārveidots
 leaves without saveing	tracker	lv	aiziet bez saglabāšanas
 length<br>rows	tracker	lv	Garums<br>Rindas
 links	tracker	lv	Saites
 max length of the input [, length of the inputfield (optional)]	tracker	lv	ievades datu maksimālais garums[, ievades lauka garums (pēc izvēles)]
-open(status)	tracker	lv	atvērt
+open(status)	tracker	lv	Atvērt
 order	tracker	lv	Kārtība
 permission denied !!!	tracker	lv	Atļauja liegta!!!
 process	tracker	lv	Process
 read	tracker	lv	Lasīt
 read / unread	tracker	lv	Lasīt / Neizlasīts
+read only filemanager directory	tracker	lv	Tikai lasīšanai File Manager direktorija
 rejected	tracker	lv	Noraidīts
+remind	tracker	lv	Atgādināt
+respect timesheet run and read permissions for time totals	tracker	lv	Respektēt darba laika uzskaites izpildes un lasīšanas atļaujas laika kopsummām
 responsible	tracker	lv	Atbildīgs
 saves the changes made and leaves	tracker	lv	saglabā izdarītās izmaiņas un aiziet
-select one...	tracker	lv	atzīmē vienu
+select one...	tracker	lv	Atzīmē vienu
 set due date this many days after escalation runs	tracker	lv	Iestatiet izpildes termiņu (dienu skaits) pēc eskalācijas palaišanas
 set the ticket start date to the email received date	tracker	lv	Iestatiet biļetes sākuma datumu kā e-pasta saņemšanas datumu.
 signature	tracker	lv	Paraksts
@@ -53,5 +111,6 @@ this week	tracker	lv	Šī nedēļa
 this year	tracker	lv	Šis gads
 times	tracker	lv	Reizes
 unread	tracker	lv	Neizlasīts
-upcoming	tracker	lv	ienākošs
+upcoming	tracker	lv	Ienākošs
 updated	tracker	lv	Atjaunināts
+writable filemanager directory	tracker	lv	Failu pārvaldnieka direktorija, kurā var rakstīt

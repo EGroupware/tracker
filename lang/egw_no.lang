@@ -1,36 +1,89 @@
-2 years ago	tracker	no	2 år siden
+"%2" only valid for start date and due date.  use "%1".	tracker	no	"%2" er bare gyldig for startdato og forfallsdato. Bruk "%1".
+%1 days in advance	tracker	no	%1 dager i forveien
+%1 entries %2	tracker	no	%1 oppføringer %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	no	%1 oppføringer %2, %3 mislyktes på grunn av utilstrekkelige rettigheter!
+%1 entries updated.	tracker	no	%1 oppføringer oppdatert.
+%1 is due %2	tracker	no	%1 forfaller %2
+%1 is starting %2	tracker	no	%1 starter %2
+%1 tickets have been converted	tracker	no	%1 billetter har blitt konvertert.
+(beware of mailloops, check the help!)	tracker	no	(Se opp for mailloops!)
+(new tickets as	tracker	no	Nye billetter som
+--> choose a project from the drop-down list	tracker	no	--> velg et prosjekt fra nedtrekkslisten
+2 days in advance	tracker	no	2 dager i forveien
+2 years ago	tracker	no	2 år tilbake i tid
+3 days in advance	tracker	no	3 dager i forveien
 3 years ago	tracker	no	3 år siden
-accepted	tracker	no	Godtatt
+[fwd]	tracker	no	[FWD]
+accepted	tracker	no	Godkjent
+add a ticket	tracker	no	Legg til en sak
+add additionally	tracker	no	Legg til i tillegg
+add assigned	tracker	no	Legg til tildelt
+add comment	tracker	no	Legg til kommentar
+add email-address	tracker	no	Legg til e-postadresse
 add timesheet entry	tracker	no	Legg til forekomst i timeregistrering
+after	tracker	no	Etter
+allow bounties	tracker	no	Tillat dusører
+allow voting	tracker	no	Tillat avstemning
+already escalated	tracker	no	Allerede eskalert
+change color	tracker	no	Endre farge
 check all	tracker	no	Kontroller alle
+choose 'creator' of imported data	tracker	no	Velg "oppretter" av importerte data
+closed date	tracker	no	Avsluttet dato
+color	tracker	no	Farge
 comments	tracker	no	Kommentarer
 completed	tracker	no	Utført
 configuration	tracker	no	Konfigurasjon
+configuration, notifications	tracker	no	Konfigurasjon, Varsler
 copy to	tracker	no	Kopier til
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	no	Kopier endringene dine til utklippstavlen, %1oppfrisk forekomsten%2 og sammenstill de
 create new links	tracker	no	Opprette nye lenker
+create new tracker entry's as default "private" for approval process	tracker	no	Opprett ny sporingsoppføring som standard "privat" for godkjenningsprosessen
 created	tracker	no	Opprettet
 creates a new field	tracker	no	lager nytt felt
 creation date	tracker	no	Først opprettet
 custom fields	tracker	no	Egendefinerte Felter
+default group	tracker	no	Standard gruppe
 default tracker queue	tracker	no	Standard kø
-delete this category	tracker	no	slett denne kategorien
-delete this entry	tracker	no	slett dette forekomsten
-deleted	tracker	no	slettet
+delete this category	tracker	no	Slett denne kategorien
+delete this entry	tracker	no	Slett dette forekomsten
+deleted	tracker	no	Slettet
 deletes this field	tracker	no	sletter dette feltet
+deny global	tracker	no	Avslå global
 determines the order the fields are displayed	tracker	no	avgjør rekkefølge feltene vises i
+directory with documents to insert entries	tracker	no	Katalog med dokumenter for å legge inn oppføringer
+do not send notifications to external email (cc field)	tracker	no	Ikke send varsler til ekstern e-post (cc-feltet)
+do you want to add mailheader information to description and/or comments?	tracker	no	Vil du legge til mailheader-informasjon i beskrivelse og/eller kommentarer?
+download url for links	tracker	no	Last ned URL for lenker
+due	tracker	no	Forfall
+due date	tracker	no	Forfallsdato
 due date for new tickets	tracker	no	Forfallsdato for nye billetter
 each value is a line like <id>[=<label>]	tracker	no	hver verdi er en linje som <id>[=<label>]
-entry saved	tracker	no	Registrering lagret
+edit others' comments	tracker	no	Rediger andres kommentarer
+edit own comments	tracker	no	Rediger egne kommentarer
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	no	EGroupware Tracker-posthåndtering: kunne ikke koble til tidligere, og profilen ble ikke endret
+entry saved	tracker	no	Oppføring lagret
 error saving the entry!!!	tracker	no	Feil ved lagring av forekomst!
 error: the entry has been updated since you opened it for editing!	tracker	no	Feil: Denne forekomsten er endret siden du åpnet den for redigering!
-everybody	tracker	no	alle
+everybody	tracker	no	Alle
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	no	Eksempel {{IF n_prefiks~Mr~Hallo Mr.~Hello Ms.}} - søk i feltet "n_prefix" etter "Mr", hvis funnet, skriv Hello Mr., ellers skriv Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	no	Eksempel {{LETTERPREFIXCUSTOM n_prefiks tittel n_familie}} - Eksempel: Herr Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	no	Eksempel {{NELF rolle}} - hvis feltet rolle ikke er tomt, får du en ny linje med verdien for feltet rolle.
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	no	Eksempel {{nenvlf rolle}} - hvis feltet rolle ikke er tomt, settes en LF uten noen verdi for feltet
 existing links	tracker	no	Eksisterende lenker
 forward	tracker	no	Videresend
 from	tracker	no	Fra
 full list of placeholder names	tracker	no	Liste over plassholdere
 history	tracker	no	Historikk
-id	tracker	no	Id
+id	tracker	no	ID
+if a ticket has matched before, should the actions be taken again?	tracker	no	Hvis en sak har matchet tidligere, skal handlingene utføres på nytt?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	no	Hvis dette alternativet ikke er merket av, markeres alle eksisterende, matchende saker som allerede eskalerte, uten at handlingen utføres.
+ignore	tracker	no	Ignorer
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	no	Ignorer e-posten. Den blir liggende i postkassen, selv om det er merket av for "Slett e-post fra serveren" ovenfor.
+imap, ssl secured	tracker	no	IMAP, SSL-sikret
+imap, tls secured	tracker	no	IMAP, TLS-sikret
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	no	Importerer oppføringer til trackeren fra en CSV-fil. CSV betyr "kommaseparerte verdier". I alternativfanen kan du også velge andre separatorer.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	no	Ufullstendig serverprofil for posthåndtering oppgitt; Deaktivering av posthåndtering for køen %1
+language	tracker	no	Språk
 last modified	tracker	no	Sist endret
 last month	tracker	no	Siste måned
 last week	tracker	no	Siste uke
@@ -40,14 +93,17 @@ length<br>rows	tracker	no	Lengde<br>Kolonner
 links	tracker	no	Lenker
 max length of the input [, length of the inputfield (optional)]	tracker	no	maks. lengde på innslag [,feltlengde (valgfri)]
 number of row for a multiline inputfield or line of a multi-select-box	tracker	no	antall rekker i multi-linje felter eller linjer i multi-valg bokser
-open(status)	tracker	no	åpen
+open(status)	tracker	no	Åpent
 order	tracker	no	Ordre
-overdue	tracker	no	forfalt
+overdue	tracker	no	Forfalt
 permission denied !!!	tracker	no	Adgang nektet !
 process	tracker	no	Prosess
 read	tracker	no	Lest
 read / unread	tracker	no	Lest / Ulest
+read only filemanager directory	tracker	no	Skrivebeskyttet filbehandlingskatalog
 rejected	tracker	no	Avslått
+remind	tracker	no	Påminn
+respect timesheet run and read permissions for time totals	tracker	no	Respekter kjøring av timelister og lesetillatelser for tidstotaler
 responsible	tracker	no	Ansvarlig
 saves the changes made and leaves	tracker	no	lagrer endringene og lukker
 select one...	tracker	no	Velg en...
@@ -64,6 +120,7 @@ this week	tracker	no	Denne uken
 this year	tracker	no	Dette året
 times	tracker	no	Ant. ganger
 unread	tracker	no	Ulest
-upcoming	tracker	no	nært forestående
+upcoming	tracker	no	Nært forestående
 updated	tracker	no	Oppdatert
+writable filemanager directory	tracker	no	Skrivebeskyttet filbehandlingskatalog
 yesterday	tracker	no	I går

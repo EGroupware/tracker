@@ -7,7 +7,7 @@
 %1 is starting %2	tracker	sk	%1 začína %2
 %1 tickets have been converted	tracker	sk	%1 kariet bolo skonvertovaných
 (beware of mailloops, check the help!)	tracker	sk	(Pozor na nekonečné poštové slučky, konzultujte manuál!)
-(new tickets as	tracker	sk	(Nové karty ako
+(new tickets as	tracker	sk	Nové lístky ako
 --> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu
 --> enter new name	tracker	sk	--> zadajte nový názov
 1 - lowest	tracker	sk	1 - najnižšia
@@ -47,6 +47,7 @@ allow editing by	tracker	sk	Komu povoliť úpravy
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	sk	Povolí preddefinovanie projektov, ktoré budú priradené k novým položkám sledovača.
 allow to assign groups to tracker items	tracker	sk	Povoliť priradenie skupín položkám Sledovača
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	sk	Povoliť priradenie karty nielen 'Správcom Sledovača' a 'Technikom', ale aj určeným 'Používateľom'
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	sk	Umožniť priradiť k tiketu nielen "Tracker Admins" a "Technians", ale aj "Users" (Používatelia) na karte Staff (Zamestnanci)
 allow voting	tracker	sk	Povoliť hlasovanie
 allow voting on tracker items, show and sort after the votes	tracker	sk	Povoliť hlasovanie o položkách sledovača, zobraziť a zoradiť podľa hlasovania
 already escalated	tracker	sk	Už vystupňované
@@ -354,6 +355,7 @@ report parameters	tracker	sk	Parametre hlásenia
 reporting timeframe	tracker	sk	Časový rámec hlásenia
 reports	tracker	sk	Hlásenia
 resolution	tracker	sk	Riešenie
+respect timesheet run and read permissions for time totals	tracker	sk	Rešpektovať oprávnenia na spúšťanie a čítanie časových súčtov
 responsible	tracker	sk	Zodpovednosť
 restict tracker items to the creator and the staff only	tracker	sk	Obmedziť karty Sledovača na ich ohlasovateľa a personál
 restict tracker items to the creators primary group and the staff only	tracker	sk	Obmedziť karty Sledovača na primárnu skupinu ich ohlasovateľa a personál

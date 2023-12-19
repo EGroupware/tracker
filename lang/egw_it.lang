@@ -26,6 +26,7 @@ add a ticket	tracker	it	Aggiungi un ticket
 add additionally	tracker	it	Aggiungi inoltre
 add assigned	tracker	it	Aggiungi assegnatario
 add comment	tracker	it	Aggiungi commento
+add email-address	tracker	it	Aggiungi indirizzo e-mail
 add from addressbook	tracker	it	Aggiungi dalla rubrica
 add infolog	tracker	it	Aggiungi scheda attività
 add restricted comment	tracker	it	Aggiungi commento ad accesso ristretto
@@ -36,16 +37,17 @@ after	tracker	it	dopo
 after how many days a not replied item should be marked overdue?	tracker	it	Dopo quanti giorni un oggetto senza risposta sarà considerato scaduto?
 after how many days pending items should be closed automatic	tracker	it	Dopo quanti giorni gli oggetti in sospeso saranno chiusi automaticamente?
 all	tracker	it	Tutti
-all tickets are already converted to tracker	tracker	it	tutti i tickets sono già convertite al Tracker
+all tickets are already converted to tracker	tracker	it	Tutti i tickets sono già convertite al Tracker
 all versions	tracker	it	Tutte le versioni
 allow bounties	tracker	it	Consenti bounty
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	it	Permettere la creazione di commenti ad accesso ristretto che sono visibili solo amministratori, tecnici e utenti assegnati
-allow creation of infolog entries from tracker tickets	tracker	it	Permettere la creazione di schede attività partendo dai ticket del tracker
+allow creation of infolog entries from tracker tickets	tracker	it	Permettere la creazione di voci InfoLog dai ticket Tracker
 allow default projects for tracker	tracker	it	Consenti progetto di default per Tracker
 allow editing by	tracker	it	Consenti modifica di
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	it	Consenti di definire il progetto di riferimento alla creazione di un nuovo oggetto tracker
 allow to assign groups to tracker items	tracker	it	Permetti di assegnare gruppi agli oggetti tracker
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	it	Permettere l'assegnazione degli "Utenti" ad un ticket, in aggiunta ai "Tecnici" e gli "Amministratori del Tracker"
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	it	Permettere di assegnare a un ticket non solo "Tracker Admins" e "Technians", ma anche "Users" nella scheda del personale
 allow voting	tracker	it	Permetti votazione
 allow voting on tracker items, show and sort after the votes	tracker	it	Permetti votazione degli oggetti tracker, mostra e ordina in base alle votazioni
 already escalated	tracker	it	Già in escalation
@@ -62,7 +64,7 @@ automatic email handling	tracker	it	Elaborazione automatica mail
 automatic mails (bounces) are configured to be forwarded	tracker	it	le mail automatiche (i "rimbalzi") sono configurate in modo da essere inoltrate
 automatic mails (replies) are configured to be forwarded	tracker	it	le mail automatiche (le risposte) sono configurate in modo da essere inoltrate
 automatically created by importexport	tracker	it	Automaticamente creto da Importa|Esporta
-before	tracker	it	prima di
+before	tracker	it	Prima di
 bounties	tracker	it	Bounty
 bounty	tracker	it	Bounty
 bounty confirmed	tracker	it	Bounty confermato
@@ -77,6 +79,7 @@ category	tracker	it	Categorie
 category for new tickets	tracker	it	Categoria prefefinita per i ticket nuovi
 change assigned	tracker	it	Modifica assegnazioni
 change assigned when updating	tracker	it	Modifica assegnazioni quando si aggiorna
+change color	tracker	it	Cambia colore
 change group	tracker	it	Modifica gruppo
 change group when updating	tracker	it	Modifica il gruppo quando si aggiorna
 change owner when updating	tracker	it	Modifica il proprietario quando si aggiorna
@@ -87,6 +90,8 @@ choose 'creator' of imported data	tracker	it	Seleziona "creatore" dei dati impor
 choose a project from the drop-down list	tracker	it	scegli il progetto dal menù a tendina
 close pending	tracker	it	Chiudi in sospeso
 closed	tracker	it	Chiuso
+closed date	tracker	it	Data di chiusura
+color	tracker	it	Colore
 comment by %1 at %2:	tracker	it	Commento di %1 il %2:
 comments	tracker	it	Commenti
 completed	tracker	it	Completato
@@ -109,7 +114,7 @@ created	tracker	it	Creato
 created by	tracker	it	Creato da
 created on	tracker	it	Creato il
 creates a new field	tracker	it	Crea un nuovo campo
-creation date	tracker	it	date di creazione
+creation date	tracker	it	Date di creazione
 creator	tracker	it	Creatore
 custom fields	tracker	it	Campi personalizzati
 custom notifications	tracker	it	Notiche personalizzate
@@ -119,6 +124,7 @@ data exchange settings	tracker	it	Impostazioni di scambio dati
 date filter	tracker	it	Filtro per data
 date opened	tracker	it	Data apertura
 default document to insert entries	tracker	it	Documento predefinito per l'inserimento
+default group	tracker	it	Gruppo predefinito
 default tracker queue	tracker	it	Coda standard
 default version for new tracker entries	tracker	it	Versione predefinita per i nuovi ticket
 define escalations	common	it	Definisci azioni
@@ -139,6 +145,7 @@ deletes this field	tracker	it	Cancella questo campo
 deny global	tracker	it	Nega globale
 determines the order the fields are displayed	tracker	it	Determina l'ordine di visualizzazione dei campi
 directory with documents to insert entries	tracker	it	Cartella con documenti per l'inserimento
+do not send notifications to external email (cc field)	tracker	it	Non inviare notifiche a e-mail esterne (campo cc)
 do you want a notification, if items you are responsible for are about to start?	tracker	it	Inviare notifica quando attività per le quali sei responsabile stanno per avviarsi.
 do you want a notification, if items you are responsible for are due?	tracker	it	Inviare notifica quando attività per le quali sei responsabile sono in scadenza.
 do you want to add mailheader information to description and/or comments?	tracker	it	Vuoi aggiungere le informazioni di intestazione della mail (header) alla descrizione e/o ai commenti?
@@ -155,11 +162,15 @@ each value is a line like <id>[=<label>]	tracker	it	ogni valore è una linea com
 each value is a line like id[=label]	tracker	it	ogni valore è una linea come id[=label]
 edit %1	tracker	it	Modifica %1
 edit entry	tracker	it	Edita voce
+edit others' comments	tracker	it	Modificare i commenti degli altri
+edit own comments	tracker	it	Modificare i propri commenti
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	it	Gestione email da parte del Tracker di EGroupware: non è stato possibile connettersi in precedenza e il profilo non è stato modificato.
 email address to contact you	tracker	it	Indirizzo e-mail per contattarti
 email handling can be configured only for all trackers	tracker	it	L'elaborazione delle mail può essere configurato solo per tutti i trackers
+enable color code for	tracker	it	Abilitare il codice colore per
 enter an email address here if unrecognized mails should be forwarded	tracker	it	Inserire un indirizzo email se le mail non riconosciuto dovranno essere inoltrate
 enter an opening text for the reply message	tracker	it	Inserire un testo di introduzione per il messaggio di risposta
+enter the email for reply to	tracker	it	Inserire l'e-mail per la risposta a
 enter the imap server from which emails should be fetched	tracker	it	Inserire il server IMAP dal quale reperire le mail
 enter the mail address that will be read.	tracker	it	Inserisci l'indirizzo email che vuoi venga legga
 entry saved	tracker	it	Voce salvata
@@ -205,7 +216,7 @@ handling bounced mails	tracker	it	Gestire le mail rimbalzate
 handling mailheader information	tracker	it	Gestire le informazioni di intestazione della mail (header)
 history	tracker	it	Cronologia
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	it	Quante linee di descrizione dovranno essere visibili direttamente. Ulteriori righe saranno consultabili con la barra di scorrimento.
-html editing	tracker	it	Editor Html
+html editing	tracker	it	Editor HTML
 html link to the current record	tracker	it	Collegamento HTML al record attuale
 id	tracker	it	ID
 if a ticket has matched before, should the actions be taken again?	tracker	it	Se un ticket è stato trovato in precedenza, intraprendere nuovamente le azioni?
@@ -234,6 +245,7 @@ introduction message	tracker	it	Messaggio di introduzione
 invalid	tracker	it	Non valido
 item assignee	tracker	it	Assegnatario oggetto
 item creator	tracker	it	Creatore oggetto
+language	tracker	it	Lingua
 language for the copy	tracker	it	Lingua per la copia
 last 3 months	tracker	it	Ultimi 3 mesi
 last modified	tracker	it	Ultima modifica
@@ -318,9 +330,11 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	it	Selezione progetto
 projects	tracker	it	Progetti
 queue	tracker	it	Code
+re-open closed tickets when a comment is added	tracker	it	Riaprire i ticket chiusi quando viene aggiunto un commento
 read	tracker	it	Letto
 read / unread	tracker	it	Letto / Non letto
 read mail address	tracker	it	Leggi la posta
+read only filemanager directory	tracker	it	Directory del File Manager di sola lettura
 receive notifications about assigned tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker assegnati
 receive notifications about created tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker creati
 receive notifications about due entries you created or are assigned to	tracker	it	Ricezione di notifiche circa ticket in scadenza che hai creato oppure dei quali sei assegnatario
@@ -333,6 +347,7 @@ rejected	tracker	it	Rifiutato
 remind	tracker	it	Ricorda
 replacements for inserting entries into documents	tracker	it	Sostituzioni per inserimento voci in documenti
 reply also to unknown addresses	tracker	it	Rispondere anche a indirizzi sconosciuti
+reply to	tracker	it	Rispondi a
 report as bar chart by the selected criterias	tracker	it	Report come istogramma per i criteri selezionati
 report as pie chart for the main criterias	tracker	it	Report come "torta" per i criteri principali
 report parameter	tracker	it	Parametro report
@@ -340,9 +355,10 @@ report parameters	tracker	it	Parametri report
 reporting timeframe	tracker	it	Intervallo di tempo del report
 reports	tracker	it	Rapporti
 resolution	tracker	it	Soluzione
+respect timesheet run and read permissions for time totals	tracker	it	Rispettare le autorizzazioni di esecuzione e lettura del timesheet per i totali di tempo
 responsible	tracker	it	responsabile
 restict tracker items to the creator and the staff only	tracker	it	Restringi l'accesso agli oggetti-tracker solo al creatore e allo Staff
-restict tracker items to the creators primary group and the staff only	tracker	it	Restringi l'accesso agli oggetti-tracker solo ai creatori del gruppo primario e allo Staff
+restict tracker items to the creators primary group and the staff only	tracker	it	Limita le voci del tracker solo ai creatori, al gruppo primario e allo staff
 restrict tracker items to staff and:	tracker	it	Restringi l'accesso agli oggetti-tracker allo staff e:
 restricted comment	tracker	it	Commento ad accesso ristretto
 restriction	tracker	it	Restrizioni
@@ -394,6 +410,7 @@ sum	tracker	it	Somma
 summary	tracker	it	Riepilogo
 tag to mark positions for address labels	tracker	it	Tagga per marcare le posizioni per le etichette di indirizzo
 technicians	tracker	it	Tecnici
+test mailhandling once (it will execute mailhandling right after save/apply regardless of the interval even if it's set to disable)	tracker	it	Testare il mailhandling una volta (eseguirà il mailhandling subito dopo il salvataggio/applicazione, indipendentemente dall'intervallo, anche se è impostato su Disabilita)
 thank you for setting this bounty.	tracker	it	Grazie per avere impostato questo bounty.
 thank you for voting.	tracker	it	Grazie per avere votato.
 the bounty will not be shown, until the money is received.	tracker	it	Il bounty NON sarà mostrato fino al ricevimento del denaro.
@@ -431,9 +448,11 @@ tracker for new tickets	tracker	it	Coda di tracker per i nuovi tickets
 tracker for the  home screen	tracker	it	Tracker per la schermata principale
 tracker id	tracker	it	ID tracker
 tracker item modified by %1 at %2	tracker	it	Oggetto tracker modificato da %1 il %2
-tracker item not found !!!	tracker	it	Oggetto Tracker non trovato !!!
+tracker item not found !!!	tracker	it	Oggetto Tracker non trovato!
+tracker list	tracker	it	Elenco dei tracker
 tracker queue	tracker	it	Code del tracker
 tracker queue renamed	tracker	it	La coda è stata rinominata
+tracker queues	tracker	it	Code di tracciatura
 tracker-%1 '%2' added.	tracker	it	Tracker-%1 '%2' aggiunto.
 tracker-%1 '%2' updated.	tracker	it	Tracker-%1 '%2' aggiornato.
 tracker-%1 deleted.	tracker	it	Tracker-%1 eliminato.
@@ -443,10 +462,10 @@ unchanged	tracker	it	Non cambiare
 unlinked from %1	tracker	it	Link annullato da %1
 unread	tracker	it	Non letto
 unrecognized mails	tracker	it	Email non ricosciute
-upcoming	tracker	it	imminente
+upcoming	tracker	it	Imminente
 updated	tracker	it	Aggiornato
 url of the tracker	tracker	it	URL del tracker
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	it	URL da includere nella notifica, es. alla pagina con il modulo SiteMgr, tracker predefinito in eGW
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	it	URL da includere nella notifica, es. alla pagina con il modulo SiteMgr, tracker predefinito in EGw
 use a default user for mails that where not recognized	tracker	it	Usa un utente di default per quelle email che non vengono riconosciute
 use all	tracker	it	Usa tutti
 use custom notification message	tracker	it	Utilizza un messaggio di notifica personalizzato
@@ -454,6 +473,8 @@ use custom signature	tracker	it	Usa firma personalizzata
 use field from csv if possible	tracker	it	Usa campo da CSV se possibile
 use search results	tracker	it	Usa i risultati della ricerca
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	it	Usa questo tag per le etichette di indirizzo. Posiziona il contenuto da ripetere, tra due tag.
+user or group	tracker	it	Utente o gruppo
+user preference	tracker	it	Preferenze dell'utente
 version for new tickets	tracker	it	Versione per i nuovi ticket
 versions	tracker	it	Versioni
 vote for it!	tracker	it	Votalo!
@@ -462,15 +483,16 @@ what should be done with unknown values?	tracker	it	Cosa fare con i valori scono
 when emails are received from an unknown email address, tag this field to have them added to the tracker's cc field automatically. this field is ignored if unrecognized mail addresses are not handled.	tracker	it	Quando i messaggi arrivano da indirizzi email sconosciuti, marca questo campo perché vengano aggiunti al campo CC del tracker in automatico. Questo campo viene ignorato se le email sconosciute non vengono gestite.
 wont fix	tracker	it	Non funzionerà
 works for me	tracker	it	Funziona per me
+writable filemanager directory	tracker	it	Directory del File Manager scrivibile
 yes, add mailheader to both (description and comments)	tracker	it	si, aggiungi intestazioni mail a entrambi (descrizione e commenti)
-yes, add mailheader to comments	tracker	it	sì, aggiungi intestazioni mail ai commenti
-yes, add mailheader to description	tracker	it	sì, aggiungi intestazioni mail alla descrizione
+yes, add mailheader to comments	tracker	it	Sì, aggiungi intestazioni mail ai commenti
+yes, add mailheader to description	tracker	it	Sì, aggiungi intestazioni mail alla descrizione
 yes, always	tracker	it	Sì, sempre
 yes, display groups first	tracker	it	Sì, mostra prima i gruppi
 yes, display users first	tracker	it	Sì, mostra prima gli utenti
 yes, new tickets only	tracker	it	Sì, solo per i nuovi ticket
 yes, with larger fontsize	tracker	it	Si, di dimensioni più grandi
-yesterday	tracker	it	Ieri
+yesterday	tracker	it	Leri
 you can enable/disable the queue access restrictions in the configuration tab (for all queues)	tracker	it	Puoi abilitare/disabilitare le restrizioni sulle code di tracker nella scheda di configurazione (per tutte le code)
 you can respond by visiting:	tracker	it	Puoi rispondere visitando:
 you need to enter a name	tracker	it	Devi inserire un nome

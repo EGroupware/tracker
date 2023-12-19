@@ -24,6 +24,7 @@ activate users queue access control	tracker	bg	Активиране контро
 add / remove link	tracker	bg	Добавяне / Премахване на връзка (линк)
 add a ticket	tracker	bg	Добавете билет
 add additionally	tracker	bg	Добавете допълнително
+add assigned	tracker	bg	Добавяне на назначени
 add comment	tracker	bg	Добавете коментар
 add email-address	tracker	bg	Добавете имейл адрес
 add from addressbook	tracker	bg	Добавяне от Адресния указател
@@ -40,12 +41,18 @@ all tickets are already converted to tracker	tracker	bg	Всички билет�
 all versions	tracker	bg	Всички версии
 allow bounties	tracker	bg	Позволява бонуси
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	bg	Разрешава създаване на ограничаващи коментари, които са видими само за администратори, техници и упълномощени потребители
+allow creation of infolog entries from tracker tickets	tracker	bg	Позволява създаването на записи в InfoLog от билети за проследяване
 allow default projects for tracker	tracker	bg	Проекти по подразбиране
 allow editing by	tracker	bg	Позволява редакция от
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	bg	Позволява предварително дефиниране на проекти, които ще бъдат присвоявани на нови елементи от тракера
+allow to assign groups to tracker items	tracker	bg	Позволява да се назначават групи
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	bg	Позволява на "Потребители" да бъдат назначени към даден билет в допълнение към "Техници" и "Администратори на тракери
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	bg	Позволява да се присвояват към даден билет не само "администратори на тракери" и "техници", но и "потребители" в раздела за персонала
 allow voting	tracker	bg	Разрешава гласуване
 allow voting on tracker items, show and sort after the votes	tracker	bg	Разрешава гласуване по елементи на проследяване, покажете и подредете след гласовете
 already escalated	tracker	bg	Вече нараства
 amount	tracker	bg	Количество
+application mail expected but got: %1	tracker	bg	Имейл за кандидатстване, който се очакваше, но се получи: %1
 applies the changes	tracker	bg	Прилага промените
 assign to project	tracker	bg	Назначаване на проект
 assigned to	tracker	bg	Назначен на
@@ -113,6 +120,7 @@ customfield	tracker	bg	Персонализирано поле
 data exchange settings	tracker	bg	Настройки за обмен на данни
 date opened	tracker	bg	Дата на отваряне
 default document to insert entries	tracker	bg	Документ по подразбиране за въвеждане на записи
+default group	tracker	bg	Група по подразбиране
 default tracker queue	tracker	bg	Стандартна опашка
 default version for new tracker entries	tracker	bg	Версия по подразбиране за нови записи за проследяване
 delete mails from server	tracker	bg	Изтриване на имейли от сървъра
@@ -137,6 +145,7 @@ do you want to add mailheader information to description and/or comments?	tracke
 do you want to vote for this item	tracker	bg	Искате ли да гласувате за този елемент?
 donator name to show	tracker	bg	Да покаже името на дарителя
 download url for links	tracker	bg	Изтегляне на URL адреса за връзки
+due	tracker	bg	Задължение
 due date	tracker	bg	Краен срок
 due date for new tickets	tracker	bg	Краен срок за нови билети
 duplicate	tracker	bg	Дубликат
@@ -192,6 +201,8 @@ how many description lines should be directly visible. further lines are availab
 html editing	tracker	bg	HTML редактиране
 html link to the current record	tracker	bg	HTML връзка към текущия запис
 id	tracker	bg	Документ за самоличност / ID
+if a ticket has matched before, should the actions be taken again?	tracker	bg	Ако билетът е съвпаднал преди, трябва ли действията да бъдат предприети отново?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	bg	Ако не е поставена отметка, всеки съществуващ, съвпадащ билет се отбелязва като вече ескалиран, без да се предприемат действия.
 if this item is important for you, please consider to set a bounty for it!	tracker	bg	Ако този елемент е важен за вас, моля, помислете за определяне на бонус за него!
 if this item is important for you, please vote for it.	tracker	bg	Ако този елемент е важен за вас, моля, гласувайте за него.
 if you specify an export definition, it will be used when you export	tracker	bg	Ако посочите дефиниция за експортиране, тя ще се използва, когато експортирате
@@ -207,6 +218,7 @@ imports entries into the tracker from a csv file. csv means 'comma separated val
 incoming mail folder	tracker	bg	Папка за входяща поща
 incoming mail rules	tracker	bg	Правила за входяща поща
 incoming mail server	tracker	bg	Входящ пощенски сървър
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	bg	Предоставен е непълен профил на сървъра за обработка на поща; Деактивиране на обработката на поща за опашка %1
 info only	tracker	bg	Само информация
 insert	tracker	bg	Вмъкване
 insert in document	tracker	bg	Вмъкване в документ

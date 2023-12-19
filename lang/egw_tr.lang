@@ -1,17 +1,83 @@
+"%2" only valid for start date and due date.  use "%1".	tracker	tr	"%2" yalnızca başlangıç tarihi ve bitiş tarihi için geçerlidir. "%1" kullanın.
+%1 days in advance	tracker	tr	%1 gün önceden
+%1 entries %2	tracker	tr	%1 girişler %2
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	tr	%1 girişleri %2, %3 yetersiz haklar nedeniyle başarısız oldu!
+%1 entries updated.	tracker	tr	%1 girdileri güncellendi.
+%1 is due %2	tracker	tr	%1'in %2 olması gerekiyor
+%1 is starting %2	tracker	tr	%1 %2'yi başlatıyor
+%1 tickets have been converted	tracker	tr	%1 bilet dönüştürüldü.
+(beware of mailloops, check the help!)	tracker	tr	(Mailloops'a dikkat edin!)
+(new tickets as	tracker	tr	Yeni biletler
+--> choose a project from the drop-down list	tracker	tr	--> açılır listeden bir proje seçin
+--> enter new name	tracker	tr	--> yeni isim girin
+2 days in advance	tracker	tr	2 gün önceden
+2 years ago	tracker	tr	2 yıl önce
+3 days in advance	tracker	tr	3 gün önceden
+3 years ago	tracker	tr	3 yıl önce
+[fwd]	tracker	tr	[FWD]
 accepted	tracker	tr	Kabul Edildi
+add a ticket	tracker	tr	Bir bilet ekleyin
+add additionally	tracker	tr	Ek olarak ekleyin
+add assigned	tracker	tr	Atanmış ekle
+add comment	tracker	tr	Yorum ekle
+add email-address	tracker	tr	E-posta adresi ekle
+after	tracker	tr	Sonra
+all tickets are already converted to tracker	tracker	tr	Tüm biletler zaten Tracker'a dönüştürülmüştür
+allow bounties	tracker	tr	Ödüllere izin verin
+allow voting	tracker	tr	Oylamaya izin verin
+already escalated	tracker	tr	Çoktan tırmandırıldı
+change color	tracker	tr	Renk değiştir
+choose 'creator' of imported data	tracker	tr	İçe aktarılan verilerin 'oluşturucusunu' seçin
+close pending	tracker	tr	Kapanış beklemede
+closed date	tracker	tr	Kapanış tarihi
+color	tracker	tr	Renk
 configuration	tracker	tr	Ayarlar
+configuration, notifications	tracker	tr	Yapılandırma, Bildirimler
+create new tracker entry's as default "private" for approval process	tracker	tr	Onay süreci için varsayılan 'özel' olarak yeni izleyici girişi oluşturun
 created by	tracker	tr	Oluşturan
 custom fields	tracker	tr	Özel Alanlar
+default group	tracker	tr	Varsayılan grup
 default tracker queue	tracker	tr	Standart kuyruk
-delete this category	tracker	tr	bu kategoriyi sil
+delete this category	tracker	tr	Bu kategoriyi sil
 deleted	tracker	tr	Silindi
+deny global	tracker	tr	Küresel red
+directory with documents to insert entries	tracker	tr	Giriş eklemek için belgelerin bulunduğu dizin
+do not send notifications to external email (cc field)	tracker	tr	Bildirimleri harici e-postaya göndermeyin (cc alanı)
+do you want to add mailheader information to description and/or comments?	tracker	tr	Açıklama ve/veya yorumlara posta başlığı bilgisi eklemek istiyor musunuz?
+download url for links	tracker	tr	Bağlantılar için URL'yi indirin
+due	tracker	tr	Neden
+due date	tracker	tr	Son tarih
 due date for new tickets	tracker	tr	Yeni biletler için son tarih
+edit others' comments	tracker	tr	Başkalarının yorumlarını düzenleme
+edit own comments	tracker	tr	Kendi yorumlarınızı düzenleyin
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	tr	EGroupware Tracker mailhandling: önceden bağlanılamadı ve profil değişmedi
+entry saved	tracker	tr	Giriş kaydedildi
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	tr	Örnek {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - "n_prefix" alanında "Mr" için arama yapın, bulunursa Merhaba Mr. yazın, aksi takdirde Merhaba Ms. yazın.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	tr	Örnek {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Örnek: Bay Dr. James Miller
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	tr	Örnek {{NELF rolü}} - eğer rol alanı boş değilse, rol alanının değerini içeren yeni bir satır alırsınız
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	tr	Örnek {{nenvlf role}} - alan rolü boş değilse, alanın herhangi bir değeri olmadan bir LF ayarlayın
 from	tracker	tr	Nereden
 full list of placeholder names	tracker	tr	Yer tutucu listesi
+if a ticket has matched before, should the actions be taken again?	tracker	tr	Bir destek talebi daha önce eşleşmişse, eylemler tekrar yapılmalı mı?
+if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	tr	İşaretlenmezse, mevcut, eşleşen her bileti, eylemi gerçekleştirmeden zaten yükseltilmiş olarak işaretler.
+ignore	tracker	tr	Görmezden gel
+ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	tr	E-postayı yoksay. Yukarıdaki 'E-postaları sunucudan sil' işaretli olsa bile posta kutusunda kalacaktır.
+imap, ssl secured	tracker	tr	IMAP, SSL güvenlikli
+imap, tls secured	tracker	tr	IMAP, TLS güvenlikli
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	tr	CSV Dosyasından izleyiciye girişleri içe aktarır. CSV, 'Virgülle Ayrılmış Değerler' anlamına gelir. Seçenekler Sekmesinde diğer ayırıcıları da seçebilirsiniz.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	tr	Mailhandling için eksik sunucu profili sağlandı; %1 Kuyruğu için mailhandling devre dışı bırakılıyor
+language	tracker	tr	Dil
+last modified	tracker	tr	Son değişiklik
+last modified by	tracker	tr	Son değişiklik
+later	tracker	tr	Daha sonra
+open(status)	tracker	tr	Açık
 order	tracker	tr	Sıralama
 read	tracker	tr	Okuyun
 read / unread	tracker	tr	Okundu / Okunmadı
+read only filemanager directory	tracker	tr	Salt okunur Dosya Yöneticisi dizini
 rejected	tracker	tr	Reddedildi
+remind	tracker	tr	Hatırlatmak
+respect timesheet run and read permissions for time totals	tracker	tr	Zaman toplamları için zaman çizelgesi çalıştırma ve okuma izinlerine saygı gösterin
 set due date this many days after escalation runs	tracker	tr	Eskalasyon çalışmasından sonraki son tarihi (gün sayısı) ayarlayın
 set the ticket start date to the email received date	tracker	tr	Bilet başlangıç tarihini e-postanın alındığı tarih olarak ayarlayın
 start date from email	tracker	tr	E-postadan itibaren başlangıç tarihi
@@ -19,6 +85,8 @@ state	tracker	tr	Durum
 this month	tracker	tr	Bu Ay
 this week	tracker	tr	Bu Hafta
 this year	tracker	tr	Bu Yıl
+ticket count	tracker	tr	Bilet sayısı
 times	tracker	tr	Kere
 unread	tracker	tr	Okunmadı
 updated	tracker	tr	Güncelle
+writable filemanager directory	tracker	tr	Yazılabilir Dosya Yöneticisi dizini
