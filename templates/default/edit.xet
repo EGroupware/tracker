@@ -137,7 +137,7 @@
 			<rows>
 				<row>
 					<et2-description  statustext="List of coma separated email address" value="Cc"></et2-description>
-					<et2-select-email  id="tr_cc" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Taglist::ajax_email" placeholder="Add email-address"></et2-select-email>
+					<et2-email  id="tr_cc" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Taglist::ajax_email" placeholder="Add email-address"></et2-email>
 					<et2-description></et2-description>
 					<et2-description  value="Group"></et2-description>
 					<et2-select  span="all" statustext="Ownership of the ticket" id="tr_group" noLang="1"></et2-select>
