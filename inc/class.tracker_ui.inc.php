@@ -827,10 +827,6 @@ class tracker_ui extends tracker_bo
 		{
 			$content['tr_assigned'] = explode(',',$content['tr_assigned']);
 		}
-		if (is_array($content['tr_assigned']) && count($content['tr_assigned']) > 1)
-		{
-			$tpl->set_cell_attribute('tr_assigned','size','3+');
-		}
 		$tpl->set_cell_attribute('tr_description', 'mode', $tr_editor_mode);
 		$tpl->set_cell_attribute('reply_message', 'mode',$tr_editor_mode);
 
