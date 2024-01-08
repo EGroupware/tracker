@@ -921,11 +921,6 @@ class tracker_admin extends tracker_bo
 
 
 		$tpl = new Etemplate('tracker.escalations');
-		if (!empty($content['escalation']['set']['tr_assigned']) && count($content['escalation']['set']['tr_assigned']) > 1)
-		{
-			$widget =& $tpl->get_widget_by_name('tr_assigned');	//$tpl->set_cell_attribute() sets all widgets with this name, so the action too!
-			$widget['size'] = '3+';
-		}
 		if ($content['escalation']['tr_status'] && !is_array($content['escalation']['tr_status']))
 		{
 			$content['escalation']['tr_status'] = explode(',',$content['escalation']['tr_status']);
@@ -934,18 +929,9 @@ class tracker_admin extends tracker_bo
 		{
 			if(!empty($content['escalation'][$array]) && is_array($content['escalation'][$array]) && count($content['escalation'][$array]) > 1)
 			{
-				// Old etemplate support
-				if(method_exists($tpl, 'get_widget_by_name'))
-				{
-					$widget =& $tpl->get_widget_by_name($array);
-					$widget['size'] = '3+';
-				}
-				else
-				{
-					$tpl->setElementAttribute($array, 'empty_label', 'all');
-					$tpl->setElementAttribute($array, 'rows', '3');
-					$tpl->setElementAttribute($array, 'tags', true);
-				}
+				$tpl->setElementAttribute($array, 'empty_label', 'all');
+				$tpl->setElementAttribute($array, 'rows', '3');
+				$tpl->setElementAttribute($array, 'tags', true);
 			}
 		}
 		$content['escalation']['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
