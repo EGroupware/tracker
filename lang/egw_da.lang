@@ -8,22 +8,56 @@
 %1 tickets have been converted	tracker	da	%1 billetter er blevet konverteret.
 (beware of mailloops, check the help!)	tracker	da	(Pas på mailloops!)
 (new tickets as	tracker	da	Nye billetter som
+--> choose a project from the drop-down list	tracker	da	--> vælg et projekt fra rullelisten
+--> enter new name	tracker	da	--> Indtast nyt navn
+1 - lowest	tracker	da	1 - laveste
 2 days in advance	tracker	da	2 dage i forvejen
+2 years ago	tracker	da	2 år siden
 3 days in advance	tracker	da	3 dage i forvejen
+3 years ago	tracker	da	3 år siden
+5 - medium	tracker	da	5 - medium
+9 - highest	tracker	da	9 - højeste
+[fwd]	tracker	da	[FWD]
 accepted	tracker	da	Accepteret
+acl	tracker	da	Adgangskontrol-liste
+activate users queue access control	tracker	da	Aktivér adgangskontrol til brugerkøen
+add / remove link	tracker	da	Tilføj / fjern link
+add a ticket	tracker	da	Tilføj en billet
+add additionally	tracker	da	Tilføj yderligere
 add assigned	tracker	da	Tilføj tildelt
+add comment	tracker	da	Tilføj kommentar
 add email-address	tracker	da	Tilføj e-mailadresse
+add from addressbook	tracker	da	Tilføj fra adressebog
+add infolog	tracker	da	Tilføj InfoLog
+add restricted comment	tracker	da	Tilføj begrænset kommentar
+add timesheet entry	tracker	da	Tilføj timeseddel-post
+add to	tracker	da	Tilføj til
+add unrecognized mail address to the cc field	tracker	da	Tilføj en ikke-genkendt e-mailadresse til CC-feltet
+after how many days a not replied item should be marked overdue?	tracker	da	Efter hvor mange dage skal et ikke besvaret emne markeres som forfaldent?
+after how many days pending items should be closed automatic	tracker	da	Efter hvor mange dage skal ventende emner lukkes automatisk?
 all	tracker	da	Alle
+all tickets are already converted to tracker	tracker	da	Alle billetter er allerede konverteret til Tracker
 all versions	tracker	da	Alle versioner
+allow bounties	tracker	da	Tillad dusører
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	da	Tillad oprettelse af begrænsede kommentarer, som kun er synlige for administratorer, teknikere og tildelte brugere
 allow creation of infolog entries from tracker tickets	tracker	da	Tillad oprettelse af InfoLog-poster fra Tracker-billetter
+allow default projects for tracker	tracker	da	Standard projekter
+allow editing by	tracker	da	Tillad redigering af
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	da	Tillad foruddefinering af projekter, der vil blive tildelt nye tracker-emner
 allow to assign groups to tracker items	tracker	da	Mulighed for at tildele grupper
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	da	Tillad at tildele 'Brugere' til en billet ud over 'Teknikere' og 'Tracker-administratorer'
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	da	Tillad at tildele en sag ikke kun "Tracker Admins" og "Technians", men også "Users" i fanen "Staff".
 application mail expected but got: %1	tracker	da	Ansøgnings-e-mail forventet, men modtaget: %1
 applies the changes	tracker	da	udfør ændringerne
+before	tracker	da	Før
+bounty	tracker	da	Dusør
+canned response	tracker	da	Dåsesvar
+canned responses	tracker	da	Dåsesvar
+categories, versions, canned responses	tracker	da	Kategorier, versioner, dåsesvar
+change assigned	tracker	da	Tildelt ændring
 change color	tracker	da	Skift farve
+change group when updating	tracker	da	Skift gruppe ved opdatering
+change owner when updating	tracker	da	Skift ejer, når du opdaterer
 choose 'creator' of imported data	tracker	da	Vælg 'skaber' af importerede data
 closed date	tracker	da	Lukket dato
 color	tracker	da	Farve
@@ -32,16 +66,30 @@ configuration	tracker	da	Konfiguration
 configuration, notifications	tracker	da	Konfiguration, Notifikationer
 copy to	tracker	da	Kopier til
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	da	Kopier dine ændringer til 'Udklipsholderen', %1reload indtastning%2 og bland dem
+could not connect	tracker	da	kunne ikke oprette forbindelse
 create new links	tracker	da	Lav nyt link
 create new tracker entry's as default "private" for approval process	tracker	da	Opret ny tracker-post som standard 'privat' til godkendelsesproces
 created	tracker	da	Oprettet
+created by	tracker	da	Oprettet af
+created on	tracker	da	Oprettet på
 creates a new field	tracker	da	opretter et nyt felt
 creation date	tracker	da	Lavet (dato:)
 custom fields	tracker	da	Valgfri Felter
+custom notifications	tracker	da	Brugerdefinerede meddelelser
+customfield	tracker	da	Brugerdefineret felt
+data exchange settings	tracker	da	Indstillinger for dataudveksling
+date filter	tracker	da	Dato filter
+default document to insert entries	tracker	da	Standarddokument til indsættelse af poster
 default group	tracker	da	Standardgruppe
 default tracker queue	tracker	da	Standard kø
+default version for new tracker entries	tracker	da	Standardversion for nye tracker-poster
+delete the mail from the server	tracker	da	Slet e-mailen fra serveren
+delete the mail from the server.	tracker	da	Slet e-mailen fra serveren.
+delete this canned response	tracker	da	Slet dette dåsesvar
 delete this category	tracker	da	Slet denne kategori
 delete this entry	tracker	da	Slet denne indtastning
+delete this escalation	tracker	da	Slet denne eskalering
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	da	Slet ikke-genkendte e-mails fra serveren, selv om 'Slet e-mails' ovenfor ikke er markeret.
 deleted	tracker	da	Slettet
 deletes this field	tracker	da	sletter dette felt
 deny global	tracker	da	Afvis globalt
@@ -57,13 +105,26 @@ each value is a line like <id>[=<label>]	tracker	da	hver værdi er en linie som 
 edit others' comments	tracker	da	Rediger andres kommentarer
 edit own comments	tracker	da	Rediger egne kommentarer
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	da	EGroupware Tracker mailhåndtering: kunne ikke oprette forbindelse tidligere, og profilen blev ikke ændret
+enable color code for	tracker	da	Aktivér farvekode for
+enter the email for reply to	tracker	da	Indtast e-mail for svar til
+error deleting escalation!	tracker	da	Fejl ved sletning af eskalering!
+error renaming tracker queue!	tracker	da	Fejl ved omdøbning af tracker-kø!
+error: no mail (mailbox / uid) given!	tracker	da	Fejl: ingen e-mail (postkasse / UID) angivet!
 error: the entry has been updated since you opened it for editing!	tracker	da	Fejl: Dette emne er opdateret siden du åbnede det for redigering
+escalation	tracker	da	Eskalering
+escalation added.	tracker	da	Eskalering tilføjet.
+escalation deleted.	tracker	da	Eskalering slettet.
+escalation not found!	tracker	da	Eskalering ikke fundet!
+escalation saved.	tracker	da	Eskalering gemt.
 everybody	tracker	da	alle
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	da	Eksempel {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - søg i feltet "n_prefix", efter "Mr", hvis fundet, skriv Hello Mr. ellers skriv Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	da	Eksempel {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Eksempel: Hr. Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	da	Eksempel {{NELF rolle}} - Hvis feltet role ikke er tomt, får du en ny linje med værdien af feltet role.
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	da	Eksempel {{nenvlf rolle}} - hvis feltet rolle ikke er tomt, sættes en LF uden nogen værdi for feltet
-existing links	tracker	da	eksisterende links
+exclude links of the following apps on timesheet creation	tracker	da	Ekskluder links til følgende apps ved oprettelse af timesedler
+existing links	tracker	da	Eksisterende links
+exists	tracker	da	Eksisterer
+export csv	tracker	da	Eksporter CSV
 forward	tracker	da	Vidersend
 from	tracker	da	Fra
 full list of placeholder names	tracker	da	Liste over pladsholdere
@@ -106,3 +167,7 @@ unread	tracker	da	Ulæst
 upcoming	tracker	da	Kommende
 updated	tracker	da	Opdateret
 writable filemanager directory	tracker	da	Skrivbar filhåndteringsmappe
+yes, add mailheader to both (description and comments)	tracker	da	Ja, tilføj mailheader til begge (beskrivelse og kommentarer)
+yes, add mailheader to comments	tracker	da	Ja, tilføj mailheader til kommentarer
+yes, add mailheader to description	tracker	da	Ja, tilføj mailheader til beskrivelse
+yes, always	tracker	da	Ja, altid

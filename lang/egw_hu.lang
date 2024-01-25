@@ -19,34 +19,59 @@
 9 - highest	tracker	hu	9 - legmagasabb
 [fwd]	tracker	hu	[FWD]
 accepted	tracker	hu	Elfogadva
+acl	tracker	hu	Hozzáférés-vezérlési lista
+activate users queue access control	tracker	hu	Felhasználói várólista hozzáférés-szabályozás aktiválása
+add / remove link	tracker	hu	Link hozzáadása / eltávolítása
 add a ticket	tracker	hu	Jegy hozzáadása
 add additionally	tracker	hu	Kiegészítés hozzáadása
+add assigned	tracker	hu	Hozzárendelt hozzáadása
 add comment	tracker	hu	Megjegyzés hozzáadása
 add email-address	tracker	hu	E-mail cím hozzáadása
+add from addressbook	tracker	hu	Hozzáadás a címjegyzékből
+add infolog	tracker	hu	InfoLog hozzáadása
+add restricted comment	tracker	hu	Add korlátozott megjegyzés
 add timesheet entry	tracker	hu	Regiszter bejegyzés hozzáadása
+add to	tracker	hu	Hozzáadás a
+add unrecognized mail address to the cc field	tracker	hu	Ismeretlen e-mail cím hozzáadása a CC mezőhöz
 after how many days a not replied item should be marked overdue?	tracker	hu	A nem megválaszolt bejegyzést hány nap után jelöljük Lejártnak?
 after how many days pending items should be closed automatic	tracker	hu	A függőben lévő bejegyzést hány nap után zárjuk le automatikusan?
+all	tracker	hu	Minden
 all tickets are already converted to tracker	tracker	hu	Minden jegyet már átalakítottak Tracker-be
+all versions	tracker	hu	Minden változat
 allow bounties	tracker	hu	Pénzjutalom engedélyezve
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	hu	Csak az adminok, a technikusok és a kijelölt felhasználók számára látható korlátozott megjegyzések létrehozásának lehetővé tétele.
+allow creation of infolog entries from tracker tickets	tracker	hu	InfoLog bejegyzések létrehozásának lehetővé tétele a Tracker jegyekből
+allow default projects for tracker	tracker	hu	Alapértelmezett projektek
 allow editing by	tracker	hu	Szerkeszthető általa:
-allow to assign groups to tracker items	tracker	hu	Tracker bejegyzések csoportokhoz rendelhetősége engedélyezve
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	hu	Lehetővé teszi az új nyomkövető elemekhez hozzárendelt projektek előzetes meghatározását
+allow to assign groups to tracker items	tracker	hu	Csoportok hozzárendelésének lehetővé tétele
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	hu	Lehetővé teszi, hogy a "felhasználók" a "technikusok" és a "nyomkövető adminok" mellett "felhasználók" is hozzárendelhetők legyenek egy jegyhez.
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	hu	Lehetővé teszi, hogy egy jegyhez ne csak "Tracker Admins" és "Technikusok", hanem "Felhasználók" is hozzárendelhetők legyenek a személyzet lapon.
 allow voting	tracker	hu	Szavazás engedélyezve
 allow voting on tracker items, show and sort after the votes	tracker	hu	Engedélyezi a Tracker bejegyzésekre szavazást, megjelenítést és rendezést a szavazás szerint
 amount	tracker	hu	Mennyiség
+application mail expected but got: %1	tracker	hu	Alkalmazási e-mail várt, de megkapta: %1
 applies the changes	tracker	hu	változások végrehajtása
 assigned to	tracker	hu	Megbízva
 assigning groups	tracker	hu	Csoportokhoz rendelés
 attachments & links	tracker	hu	Mellékletek és hivatkozások
 attention: no contact with address %1 found.	tracker	hu	Figyelem: %1 címmel Kapcsolat nem található.
 autoassign to	tracker	hu	Auto hozzárendelés
+before	tracker	hu	A  előtt
 bounties	tracker	hu	Pénzjutalmak
+bounty	tracker	hu	Bounty
 bounty confirmed	tracker	hu	Pénzjutalom megerősítve
+bounty confirmed.	tracker	hu	Konzerv válasz
 bounty deleted	tracker	hu	Pénzjutalom törölve
+bounty deleted.	tracker	hu	Konzervált válaszok
 bounty set	tracker	hu	Pénzjutalom beállítása
 canned response	tracker	hu	Instant válasz
 canned responses	tracker	hu	Instant válaszok
 categories, versions, canned responses	tracker	hu	Kategóriák, verziók, instant válaszok
+change assigned	tracker	hu	Hozzárendelt módosítás
 change color	tracker	hu	Színváltoztatás
+change group when updating	tracker	hu	Csoport módosítása frissítéskor
+change owner when updating	tracker	hu	Tulajdonos módosítása frissítéskor
 check all	tracker	hu	Összes kijelölése
 choose 'creator' of imported data	tracker	hu	Válassza ki az importált adatok létrehozóját
 close pending	tracker	hu	Függő tétel lezárása
@@ -62,19 +87,34 @@ configuration updated.	tracker	hu	Konfiguráció frissítve.
 configuration, notifications	tracker	hu	Konfiguráció, Értesítések
 confirm that you pay the specified bounty to implement or fix the issue	tracker	hu	Erősítse meg, hogy hajlandó kifizetni a jutalmat a megvalósításért vagy a hiba kijavításáért
 confirm the receipt of money for this bounty	tracker	hu	Erősítse meg a pénz átvételét ehhez a pénzjutalomhoz
+converted count	tracker	hu	Átalakított szám
 copy to	tracker	hu	Másold ide:
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	hu	Másold a módosításokat a vágólapra, %1frissítsd az oldalat%2 és fűzd hozzá.
+could not connect	tracker	hu	nem tudott csatlakozni
 create new links	tracker	hu	Új hivatkozások létrehozása
 create new tracker entry's as default "private" for approval process	tracker	hu	Új nyomkövető bejegyzés létrehozása alapértelmezett "privátként" a jóváhagyási folyamathoz
 created	tracker	hu	Létrehozva
+created by	tracker	hu	Létrehozta
+created on	tracker	hu	Létrehozva a
 creates a new field	tracker	hu	Új mező létrehozása
 creation date	tracker	hu	Létrehozás dátuma
 custom fields	tracker	hu	Egyedi mezők
+custom notifications	tracker	hu	Egyéni értesítések
+customfield	tracker	hu	Egyéni mező
+data exchange settings	tracker	hu	Adatcsere-beállítások
+date filter	tracker	hu	Dátum szűrő
 date opened	tracker	hu	Megnyitás dátuma
+default document to insert entries	tracker	hu	Alapértelmezett dokumentum a bejegyzések beillesztéséhez
 default group	tracker	hu	Alapértelmezett csoport
 default tracker queue	tracker	hu	Normál várólista
+default version for new tracker entries	tracker	hu	Alapértelmezett verzió az új nyomkövető bejegyzésekhez
+delete the mail from the server	tracker	hu	E-mail törlése a szerverről
+delete the mail from the server.	tracker	hu	E-mail törlése a szerverről.
+delete this canned response	tracker	hu	A konzervált válasz törlése
 delete this category	tracker	hu	Kategória törlése
 delete this entry	tracker	hu	Aktuális bejegyzés törlése
+delete this escalation	tracker	hu	Törölje ezt az eszkalációt
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	hu	A fel nem ismert e-mailek törlése a kiszolgálóról, még akkor is, ha a fenti 'E-mailek törlése' nincs megjelölve.
 deleted	tracker	hu	Törölt
 deletes this field	tracker	hu	Aktuális mező törlése
 deny global	tracker	hu	Globális tagadás
@@ -177,6 +217,11 @@ unread	tracker	hu	Olvasatlan
 upcoming	tracker	hu	Közelgő
 updated	tracker	hu	Frissítve
 writable filemanager directory	tracker	hu	Írható fájlkezelő könyvtár
+yes, add mailheader to both (description and comments)	tracker	hu	Igen, mindkettőhöz (leírás és megjegyzések) levélcím hozzáadása
+yes, add mailheader to comments	tracker	hu	Igen, mailheader hozzáadása a megjegyzésekhez
+yes, add mailheader to description	tracker	hu	Igen, mailheader hozzáadása a leíráshoz
+yes, always	tracker	hu	Igen, mindig
 yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
 yesterday	tracker	hu	Tegnap
 you can respond by visiting:	tracker	hu	Megtekintéshez látogasson el ide:
+you need to select some entries first	tracker	hu	Először ki kell választania néhány bejegyzést.

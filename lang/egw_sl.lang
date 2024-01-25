@@ -167,8 +167,10 @@ edit own comments	tracker	sl	Urejanje lastnih komentarjev
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	sl	EGroupware Tracker Mailhandling: predhodno se ni mogel povezati in profil se ni spremenil
 email address to contact you	tracker	sl	Vaš kontaktni elektronski naslov
 email handling can be configured only for all trackers	tracker	sl	Upravljanje e-pošte je mogoče konfigurirati samo za vse sledilce.
+enable color code for	tracker	sl	Omogoči barvno kodo za
 enter an email address here if unrecognized mails should be forwarded	tracker	sl	Vnesite e-poštni naslov, če se neprepoznana pošta pošilja
 enter an opening text for the reply message	tracker	sl	Vnesite začetno besedilo za odgovor
+enter the email for reply to	tracker	sl	Vnesite e-poštni naslov za odgovor
 enter the imap server from which emails should be fetched	tracker	sl	Vnesite strežnik IMAP, iz katerega bodo pridobili e-poštna sporočila
 enter the mail address that will be read.	tracker	sl	Vnesite e-poštni naslov, ki ga je treba uporabiti kot dodaten filter za nevidna sporočila. Pustite prazno, da preberete vsa sporočila, ki so označena kot nevidna.
 entry saved	tracker	sl	Vnos shranjen
@@ -272,7 +274,7 @@ mail handling	tracker	sl	Upravljanje pošte
 mailbox settings used: %1	tracker	sl	Uporabljene nastavitve nabiralnika: %1
 manage mapping	tracker	sl	Upravljaj mapiranje
 mark as read	tracker	sl	Označi kot prebrano
-mark as unread	tracker	sl	označi kot neprebrano
+mark as unread	tracker	sl	Označi kot neprebrano
 match again after	tracker	sl	Ponovi po ujemanju
 matching filter	tracker	sl	Ujemanje filtra
 max length of the input [, length of the inputfield (optional)]	tracker	sl	Največja dolžina vnosa [, dolžina vnosnega polja (opcijsko)]
@@ -328,6 +330,7 @@ process the message normally. *note* this might cause mailloops when "sent autor
 project selection	tracker	sl	Izbira projekta
 projects	tracker	sl	Projekti
 queue	tracker	sl	Vrstica
+re-open closed tickets when a comment is added	tracker	sl	Ponovno odprite zaprte vozovnice, ko je dodan komentar
 read	tracker	sl	Preberite
 read / unread	tracker	sl	Prebrano / Neprebrano
 read mail address	tracker	sl	Filter za poštni predal za ta e-poštni naslov
@@ -344,6 +347,7 @@ rejected	tracker	sl	Zavrnjeno
 remind	tracker	sl	Opomni
 replacements for inserting entries into documents	tracker	sl	Zamenjava za vstavljanje vnose v dokumente
 reply also to unknown addresses	tracker	sl	Odgovori tudi na neznane naslove
+reply to	tracker	sl	Odgovori na
 report as bar chart by the selected criterias	tracker	sl	Prijavite se kot bar chart z izbranimi kriteriji
 report as pie chart for the main criterias	tracker	sl	Prijavite kot pito grafikon za glavna merila
 report parameter	tracker	sl	Parameter poročanja
@@ -351,6 +355,7 @@ report parameters	tracker	sl	Parametri prijave
 reporting timeframe	tracker	sl	Časovni okvir poročanja
 reports	tracker	sl	Poročila
 resolution	tracker	sl	Odločitev
+respect timesheet run and read permissions for time totals	tracker	sl	Upoštevajte dovoljenja za zagon časovnice in branje skupnih časovnih zneskov
 responsible	tracker	sl	Odgovoren
 restict tracker items to the creator and the staff only	tracker	sl	Omejite predmete sledenja ustvarjalcu in osebju
 restict tracker items to the creators primary group and the staff only	tracker	sl	Omejite predmete sledenja ustvarjalcem, primarni skupini in osebju
@@ -360,14 +365,14 @@ restriction	tracker	sl	Omejitev
 run on existing tickets	tracker	sl	Na obstoječih zahtevah
 same day	tracker	sl	Isti dan
 save new report	tracker	sl	Shranite novo poročilo
-save new report...	tracker	sl	Shranite novo poročilo...
+save new report...	tracker	sl	Shranite novo poročilo ...
 saves the changes made and leaves	tracker	sl	Shrani narejene spremembe in zapusti program
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	sl	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail.
 select accounts for which the custom field should be visible	tracker	sl	Izberite račune, za katere bi bilo treba videti polje po meri
 select existing report	tracker	sl	Izberite obstoječe poročilo
 select how autoreplies should be sent when mails are received	tracker	sl	Izberite, kako naj se pošiljajo samodejni odgovori, ko prejmete e-poštna sporočila
 select multiple	tracker	sl	Izberite več
-select one...	tracker	sl	Izberite enega...
+select one...	tracker	sl	Izberite enega ...
 select tracker queue	tracker	sl	Izberite vrsto sledenja
 select users or groups	tracker	sl	Izberite uporabnike ali skupine
 select which categories should be used in tracker for the tts categories	tracker	sl	Izberite, katere kategorije naj bodo uporabljene v Trackerju za kategorije TTS.
@@ -447,6 +452,7 @@ tracker item not found !!!	tracker	sl	Element Zahtevka ni bil najden!
 tracker list	tracker	sl	Seznam zahtevkov
 tracker queue	tracker	sl	Čakalna vrsta za zahtevke
 tracker queue renamed	tracker	sl	Vrstica za zahtevke je preimenovana.
+tracker queues	tracker	sl	Čakalne vrste sledilcev
 tracker-%1 '%2' added.	tracker	sl	Zahtevek-%1 '%2' dodan.
 tracker-%1 '%2' updated.	tracker	sl	Zahtevek-%1 '%2' posodobljen.
 tracker-%1 deleted.	tracker	sl	Zahtevek-%1 '%2' izbrisan.
@@ -459,7 +465,7 @@ unrecognized mails	tracker	sl	Neprepoznana pošta
 upcoming	tracker	sl	Prihajajoč
 updated	tracker	sl	Podosodobljeno
 url of the tracker	tracker	sl	Naslov URL trackerja
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sl	URL, ki naj bo vključen v obvestilo, npr. do strani z modulom SiteMgr, privzetim trackerjem znotraj eGW
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sl	URL, ki naj bo vključen v obvestilo, npr. do strani z modulom SiteMgr, privzetim trackerjem znotraj EGw
 use a default user for mails that where not recognized	tracker	sl	Uporabite privzetega uporabnika za e-poštna sporočila, ki niso prepoznana
 use all	tracker	sl	Uporabite vse
 use custom notification message	tracker	sl	Uporabite obvestilo po meri
@@ -468,6 +474,7 @@ use field from csv if possible	tracker	sl	Če je mogoče, uporabite polje CSV
 use search results	tracker	sl	Uporabite rezultate iskanja
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	sl	Uporabi to značko za naslov nalepk. Stik, ki ga želite ponoviti, dajte med dve znački.
 user or group	tracker	sl	Uporabnik ali skupina
+user preference	tracker	sl	Prednost uporabnika
 version for new tickets	tracker	sl	Različica za nove zahteve
 versions	tracker	sl	Različice
 vote for it!	tracker	sl	Glasuj!

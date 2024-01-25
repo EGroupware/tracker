@@ -72,6 +72,9 @@ bounty confirmed.	tracker	bg	Бонусът е потвърден.
 bounty deleted	tracker	bg	Бонусът е изтрит.
 bounty deleted.	tracker	bg	Бонусът е изтрит.
 bounty set	tracker	bg	Бонусът е определен.
+canned response	tracker	bg	Отговор на консерви
+canned responses	tracker	bg	Консервирани отговори
+categories, versions, canned responses	tracker	bg	Категории, версии, консервирани отговори
 category	tracker	bg	Категория
 category for new tickets	tracker	bg	Категория за нови билети
 change assigned	tracker	bg	Назначена промяна
@@ -118,17 +121,21 @@ custom notifications	tracker	bg	Персонализирани известия
 custom tracker priorities	tracker	bg	Приоритети на персонализирания тракер
 customfield	tracker	bg	Персонализирано поле
 data exchange settings	tracker	bg	Настройки за обмен на данни
+date filter	tracker	bg	Филтър за дата
 date opened	tracker	bg	Дата на отваряне
 default document to insert entries	tracker	bg	Документ по подразбиране за въвеждане на записи
 default group	tracker	bg	Група по подразбиране
 default tracker queue	tracker	bg	Стандартна опашка
 default version for new tracker entries	tracker	bg	Версия по подразбиране за нови записи за проследяване
+define escalations	common	bg	Дефиниране на ескалации
 delete mails from server	tracker	bg	Изтриване на имейли от сървъра
 delete the mail from the server	tracker	bg	Изтрива пощата от сървъра
 delete the mail from the server.	tracker	bg	Изтрива пощата от сървъра.
 delete this bounty	tracker	bg	Изтриване на този бонус
+delete this canned response	tracker	bg	Изтриване на този консервиран отговор
 delete this category	tracker	bg	Изтриване на тази категория
 delete this entry	tracker	bg	Изтриване на този запис
+delete this escalation	tracker	bg	Изтрийте тази ескалация
 delete this status	tracker	bg	Изтриване на този статус (състояние)
 delete this tracker including all its items and categories	tracker	bg	Изтриване на този тракер, включително всичките му елементи и категории
 delete this version	tracker	bg	Изтриване на тази версия
@@ -168,10 +175,21 @@ enter the imap server from which emails should be fetched	tracker	bg	Въвед�
 enter the mail address that will be read.	tracker	bg	Въведете пощенския адрес, който трябва да се използва като допълнителен филтър за непрочетени съобщения.
 entry saved	tracker	bg	Записът е запазен
 error adding the new tracker!	tracker	bg	Грешка при добавяне на новия тракер!
+error deleting escalation!	tracker	bg	Грешка при изтриване на ескалация!
+error renaming tracker queue!	tracker	bg	Грешка при преименуване на опашката за проследяване!
 error saving the entry!!!	tracker	bg	Грешка при запазването на записа !!!
 error: no mail (mailbox / uid) given!	tracker	bg	Грешка: не е зададена пощенска кутия (Mailbox / UID)!
 error: the entry has been updated since you opened it for editing!	tracker	bg	Грешка: записът е актуализиран, откакто го отворихте за редактиране!
+escalation	tracker	bg	Ескалация
+escalation added.	tracker	bg	Добавена ескалация.
+escalation deleted.	tracker	bg	Изтриване на ескалация.
+escalation not found!	tracker	bg	Ескалация не е намерена!
+escalation saved.	tracker	bg	Ескалация е запазена.
 everybody	tracker	bg	Всеки
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	bg	Пример {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - потърсете в полето "n_prefix" за "Mr", ако е намерено, напишете Hello Mr., в противен случай напишете Hello Ms.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	bg	Пример {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Пример: Г-н д-р Джеймс Милър
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	bg	Пример {{NELF role}} - ако полето role не е празно, ще получите нов ред със стойността на полето role
+example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	bg	Пример {{nenvlf role}} - ако полето role не е празно, се задава LF без никаква стойност на полето
 exclude links of the following apps on timesheet creation	tracker	bg	Изключете връзките на следните приложения при създаването на Графика
 existing links	tracker	bg	Съществуващи връзки
 exists	tracker	bg	Съществува

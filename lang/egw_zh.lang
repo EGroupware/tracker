@@ -17,12 +17,23 @@
 3 years ago	tracker	zh	三年前
 5 - medium	tracker	zh	5 - 中等
 9 - highest	tracker	zh	9 - 最高
+[fwd]	tracker	zh	[FWD]
 accepted	tracker	zh	接受
+acl	tracker	zh	访问控制列表
 activate users queue access control	tracker	zh	激活用户队列访问控制
+add / remove link	tracker	zh	添加/删除链接
+add a ticket	tracker	zh	添加票单
+add additionally	tracker	zh	额外添加
 add assigned	tracker	zh	添加指定
 add comment	tracker	zh	添加注释
 add email-address	tracker	zh	添加电子邮件地址
+add from addressbook	tracker	zh	从地址簿添加
+add infolog	tracker	zh	添加 InfoLog
+add restricted comment	tracker	zh	添加限制性评论
 add timesheet entry	tracker	zh	添加时间表条目
+add to	tracker	zh	添加到
+add unrecognized mail address to the cc field	tracker	zh	在抄送字段中添加未识别的电子邮件地址
+after	tracker	zh	之后
 after how many days a not replied item should be marked overdue?	tracker	zh	在多少天后没有答复的项目将视为过期？
 after how many days pending items should be closed automatic	tracker	zh	在多少天未决项目将自动关闭？
 all	tracker	zh	全部
@@ -79,23 +90,34 @@ convert all open tickets	tracker	zh	转换所有打开的传票
 converted count	tracker	zh	已转换的计数
 copy to	tracker	zh	复制到
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	zh	复制您的改变到剪贴板，%1重新载入条目%2并合并它们。
+could not connect	tracker	zh	无法连接
 create new links	tracker	zh	建立新链接
 create new tracker entry's as default "private" for approval process	tracker	zh	将新跟踪条目创建为默认 "私人 "审批流程
 created	tracker	zh	建立时间
+created by	tracker	zh	创建者
+created on	tracker	zh	创建于
 creates a new field	tracker	zh	创建一新字段
 creation date	tracker	zh	创建日期
 creator	tracker	zh	创建者
 custom fields	tracker	zh	自定义字段
+data exchange settings	tracker	zh	数据交换设置
+date filter	tracker	zh	日期过滤器
 date opened	tracker	zh	被打开的日期
+default document to insert entries	tracker	zh	插入条目的默认文档
 default group	tracker	zh	默认组
 default tracker queue	tracker	zh	标准排队
+default version for new tracker entries	tracker	zh	新跟踪条目的默认版本
+delete the mail from the server	tracker	zh	从服务器上删除电子邮件
+delete the mail from the server.	tracker	zh	从服务器上删除电子邮件.
 delete this bounty	tracker	zh	删除这个奖金
 delete this canned response	tracker	zh	删除这个制式回应
 delete this category	tracker	zh	删除这个类别
 delete this entry	tracker	zh	删除这条条目
+delete this escalation	tracker	zh	删除此升级
 delete this status	tracker	zh	删除这个状态
 delete this tracker including all its items and categories	tracker	zh	删除这个任务跟踪，包含其中的所有项目与类别
 delete this version	tracker	zh	删除这个版本
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	zh	从服务器删除无法识别的电子邮件，即使未标记上述 "删除电子邮件"。
 deleted	tracker	zh	已删除
 deletes this field	tracker	zh	删除此字段域
 deny global	tracker	zh	拒绝全球
@@ -115,14 +137,30 @@ e-mail notifications	tracker	zh	发送通知邮件
 each value is a line like <id>[=<label>]	tracker	zh	每个数值是一行像是<id>[=<label>]这样的文字
 each value is a line like id[=label]	tracker	zh	每个数值是一行像是 id[=label] 这样的文字
 edit %1	tracker	zh	编辑%1
+edit entry	tracker	zh	编辑条目
 edit others' comments	tracker	zh	编辑他人的评论
 edit own comments	tracker	zh	编辑自己的评论
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	zh	EGroupware Tracker 邮件处理：之前无法连接，且配置文件没有更改
 email address to contact you	tracker	zh	联系信箱
+email handling can be configured only for all trackers	tracker	zh	只能为所有跟踪器配置电子邮件处理。
+enable color code for	tracker	zh	启用颜色代码
+enter an email address here if unrecognized mails should be forwarded	tracker	zh	如果要转发未识别的电子邮件，请输入电子邮件地址
+enter an opening text for the reply message	tracker	zh	输入回复信息的开头文本
+enter the email for reply to	tracker	zh	输入要回复的电子邮件
+enter the imap server from which emails should be fetched	tracker	zh	输入获取邮件的 IMAP 服务器
+enter the mail address that will be read.	tracker	zh	输入用于过滤未读邮件的电子邮件地址。留空表示读取所有标记为 "未读 "的邮件。
 entry saved	tracker	zh	条目被保存
 error adding the new tracker!	tracker	zh	添加任务跟踪时发生错误！
+error deleting escalation!	tracker	zh	删除升级时出错！
+error renaming tracker queue!	tracker	zh	重新命名跟踪器队列出错！
 error saving the entry!!!	tracker	zh	保存条目时发生错误！
+error: no mail (mailbox / uid) given!	tracker	zh	错误：未提供电子邮件（邮箱/UID）！
 error: the entry has been updated since you opened it for editing!	tracker	zh	错误：条目自从您打开编辑以来已经更新！
+escalation	tracker	zh	升级
+escalation added.	tracker	zh	已添加升级。
+escalation deleted.	tracker	zh	删除升级。
+escalation not found!	tracker	zh	未找到升级！
+escalation saved.	tracker	zh	Escalation 已保存。
 everybody	tracker	zh	所有人
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	zh	示例 {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - 搜索字段 "n_prefix "中的 "Mr"，如果找到，则写 "Hello Mr."，否则写 "Hello Ms."。
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	zh	示例 {{LETTERPREFIXCUSTOM n_prefix title n_family}} - 示例 詹姆斯-米勒博士先生

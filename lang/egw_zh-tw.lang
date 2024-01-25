@@ -27,7 +27,9 @@ assigning groups	tracker	zh-tw	指派給群組
 attachments & links	tracker	zh-tw	附加檔案與連結
 attention: no contact with address %1 found.	tracker	zh-tw	注意：找不到住址為 %1 的聯絡人。
 autoassign to	tracker	zh-tw	自動指派給
+before	tracker	zh-tw	之前
 bounties	tracker	zh-tw	獎金
+bounty	tracker	zh-tw	赏金
 bounty confirmed	tracker	zh-tw	獎金確認了
 bounty confirmed.	tracker	zh-tw	獎金確認了。
 bounty deleted	tracker	zh-tw	獎金刪除了
@@ -36,6 +38,9 @@ bounty set	tracker	zh-tw	獎金設定
 canned response	tracker	zh-tw	制式回應
 canned responses	tracker	zh-tw	制式回應
 categories, versions, canned responses	tracker	zh-tw	類別、版本、制式回應
+change assigned	tracker	zh-tw	指定更改
+change group when updating	tracker	zh-tw	更新时更改组
+change owner when updating	tracker	zh-tw	更新时更改所有者
 check all	tracker	zh-tw	全選
 choose a project from the drop-down list	tracker	zh-tw	選擇一個專案
 close pending	tracker	zh-tw	關閉等待的
@@ -193,6 +198,10 @@ vote for it!	tracker	zh-tw	投票
 votes	tracker	zh-tw	個投票
 wont fix	tracker	zh-tw	不會修正
 works for me	tracker	zh-tw	適用於我
+yes, add mailheader to both (description and comments)	tracker	zh-tw	是，在描述和注释中都添加邮件标题
+yes, add mailheader to comments	tracker	zh-tw	是，在注释中添加邮件标题
+yes, add mailheader to description	tracker	zh-tw	是，在描述中添加邮件标题
+yes, always	tracker	zh-tw	是，始终
 yes, display groups first	tracker	zh-tw	是的，先顯示群組
 yes, display users first	tracker	zh-tw	是的，先顯示使用者
 yes, with larger fontsize	tracker	zh-tw	是，使用較大的字體

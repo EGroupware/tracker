@@ -9,18 +9,41 @@
 (beware of mailloops, check the help!)	tracker	el	(Προσοχή στα mailloops!)
 (new tickets as	tracker	el	Νέα εισιτήρια ως
 --> choose a project from the drop-down list	tracker	el	--> επιλέξτε ένα έργο από την αναπτυσσόμενη λίστα
+--> enter new name	tracker	el	--> εισάγετε νέο όνομα
+1 - lowest	tracker	el	1 - χαμηλότερη
 2 days in advance	tracker	el	2 ημέρες νωρίτερα
 2 years ago	tracker	el	2 χρόνια πριν
 3 days in advance	tracker	el	3 ημέρες νωρίτερα
 3 years ago	tracker	el	3 χρόνια πριν
+5 - medium	tracker	el	5 - μέσο
+9 - highest	tracker	el	9 - υψηλότερη
+[fwd]	tracker	el	[FWD]
 accepted	tracker	el	Αποδέχτηκε
+acl	tracker	el	Λίστα ελέγχου πρόσβασης
+activate users queue access control	tracker	el	Ενεργοποίηση ελέγχου πρόσβασης στην ουρά χρηστών
+add / remove link	tracker	el	Προσθήκη / Αφαίρεση συνδέσμου
 add a ticket	tracker	el	Προσθέστε ένα εισιτήριο
+add additionally	tracker	el	Προσθήκη επιπλέον
 add assigned	tracker	el	Προσθήκη εκχωρημένου
+add comment	tracker	el	Προσθήκη σχολίου
 add email-address	tracker	el	Προσθήκη διεύθυνσης email
+add from addressbook	tracker	el	Προσθήκη από το βιβλίο διευθύνσεων
+add infolog	tracker	el	Προσθήκη InfoLog
+add restricted comment	tracker	el	Προσθήκη περιορισμένου σχολίου
+add timesheet entry	tracker	el	Προσθήκη καταχώρησης φύλλου εργασίας
+add to	tracker	el	Προσθήκη σε
+add unrecognized mail address to the cc field	tracker	el	Προσθήκη μη αναγνωρισμένης διεύθυνσης ηλεκτρονικού ταχυδρομείου στο πεδίο CC
+after	tracker	el	Μετά το
+after how many days a not replied item should be marked overdue?	tracker	el	Μετά από πόσες ημέρες ένα στοιχείο που δεν έχει απαντηθεί θα πρέπει να χαρακτηρίζεται ως καθυστερημένο;
+after how many days pending items should be closed automatic	tracker	el	Μετά από πόσες ημέρες τα εκκρεμή στοιχεία θα πρέπει να κλείνουν αυτόματα;
 all	tracker	el	Όλα
+all tickets are already converted to tracker	tracker	el	Όλα τα εισιτήρια έχουν ήδη μετατραπεί σε Tracker
+all versions	tracker	el	Όλες οι εκδόσεις
 allow bounties	tracker	el	Όλες οι εκδόσεις
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	el	Επιτρέψτε τη δημιουργία περιορισμένων σχολίων που είναι ορατά μόνο για τους διαχειριστές, τους τεχνικούς και τους χρήστες που τους έχουν ανατεθεί
 allow creation of infolog entries from tracker tickets	tracker	el	Επιτρέπεται η δημιουργία καταχωρίσεων InfoLog από εισιτήρια Tracker
+allow default projects for tracker	tracker	el	Προεπιλεγμένα έργα
+allow editing by	tracker	el	Επιτρέψτε την επεξεργασία από
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	el	Να επιτρέπεται ο προκαθορισμός των έργων που θα ανατίθενται σε νέα στοιχεία παρακολούθησης
 allow to assign groups to tracker items	tracker	el	Να επιτρέπεται η ανάθεση ομάδων
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση "χρηστών" σε ένα εισιτήριο επιπλέον των "τεχνικών" και των "διαχειριστών του ιχνηλάτη".
@@ -28,7 +51,14 @@ allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;techni
 application mail expected but got: %1	tracker	el	Αναμενόμενο μήνυμα ηλεκτρονικού ταχυδρομείου της αίτησης, το οποίο όμως πήρατε: %1
 applies the changes	tracker	el	εφαρμόζει τις αλλαγές
 attention: no contact with address %1 found.	tracker	el	Προσοχή: Καμία Επαφή με τη διεύθυνση %1 δεν βρέθηκε.
+before	tracker	el	Πριν από το
+canned response	tracker	el	Απάντηση σε κονσέρβα
+canned responses	tracker	el	Προετοιμασμένες απαντήσεις
+categories, versions, canned responses	tracker	el	Κατηγορίες, εκδόσεις, κονσερβοποιημένες απαντήσεις
+change assigned	tracker	el	Αλλαγή που ανατέθηκε
 change color	tracker	el	Αλλαγή χρώματος
+change group when updating	tracker	el	Αλλαγή ομάδας κατά την ενημέρωση
+change owner when updating	tracker	el	Αλλαγή ιδιοκτήτη κατά την ενημέρωση
 check all	tracker	el	Έλεγχος όλων
 choose 'creator' of imported data	tracker	el	Επιλέξτε τον "δημιουργό" των εισαγόμενων δεδομένων
 closed date	tracker	el	Ημερομηνία κλεισίματος
@@ -37,17 +67,32 @@ comments	tracker	el	Σχόλια
 completed	tracker	el	Ολοκληρώθηκε
 configuration	tracker	el	Διαμόρφωση
 configuration, notifications	tracker	el	Διαμόρφωση, Ειδοποιήσεις
+converted count	tracker	el	Μετατρεπόμενος αριθμός
 copy to	tracker	el	Αντιγραφή στο
+could not connect	tracker	el	δεν μπόρεσε να συνδεθεί
 create new links	tracker	el	Δημιουργία νέων συνδέσμων
 create new tracker entry's as default "private" for approval process	tracker	el	Δημιουργία νέας καταχώρησης παρακολούθησης ως προεπιλεγμένη "ιδιωτική" για τη διαδικασία έγκρισης
 created	tracker	el	Δημιουργήθηκε
+created by	tracker	el	Δημιουργήθηκε από
+created on	tracker	el	Δημιουργήθηκε στις
 creates a new field	tracker	el	δημιουργεί νέο πεδίο
 creation date	tracker	el	Ημερομηνία δημιουργίας
 custom fields	tracker	el	Προσαρμοσμένα πεδία
+custom notifications	tracker	el	Προσαρμοσμένες ειδοποιήσεις
+customfield	tracker	el	Προσαρμοσμένο πεδίο
+data exchange settings	tracker	el	Ρυθμίσεις ανταλλαγής δεδομένων
+date filter	tracker	el	Φίλτρο ημερομηνίας
+default document to insert entries	tracker	el	Προεπιλεγμένο έγγραφο για την εισαγωγή καταχωρίσεων
 default group	tracker	el	Προεπιλεγμένη ομάδα
 default tracker queue	tracker	el	Τυπική ουρά αναμονής
+default version for new tracker entries	tracker	el	Προεπιλεγμένη έκδοση για νέες καταχωρήσεις παρακολούθησης
+delete the mail from the server	tracker	el	Διαγραφή του ηλεκτρονικού ταχυδρομείου από το διακομιστή
+delete the mail from the server.	tracker	el	Διαγραφή του ηλεκτρονικού ταχυδρομείου από το διακομιστή.
+delete this canned response	tracker	el	Διαγραφή αυτής της κονσερβοποιημένης απάντησης
 delete this category	tracker	el	διέγραψε αυτή την κατηγορία
 delete this entry	tracker	el	δαγραφή αυτής της καταχώρησης
+delete this escalation	tracker	el	Διαγραφή αυτής της κλιμάκωσης
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	el	Διαγραφή μη αναγνωρισμένων μηνυμάτων ηλεκτρονικού ταχυδρομείου από το διακομιστή, ακόμη και αν δεν έχει επισημανθεί η παραπάνω επιλογή 'Διαγραφή μηνυμάτων ηλεκτρονικού ταχυδρομείου'.
 deleted	tracker	el	διεγράφη
 deletes this field	tracker	el	διαγράφει αυτό το πεδίο
 deny global	tracker	el	Άρνηση παγκόσμιας
@@ -66,13 +111,26 @@ each value is a line like id[=label]	tracker	el	κάθε τιμή είναι μ�
 edit others' comments	tracker	el	Επεξεργασία σχολίων άλλων
 edit own comments	tracker	el	Επεξεργασία δικών σας σχολίων
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	el	EGroupware Tracker διαχείριση αλληλογραφίας: δεν ήταν δυνατή η σύνδεση προηγουμένως και το προφίλ δεν άλλαξε
+enable color code for	tracker	el	Ενεργοποίηση κωδικού χρώματος για
+enter the email for reply to	tracker	el	Εισάγετε το email για απάντηση στο
+error deleting escalation!	tracker	el	Σφάλμα διαγραφής κλιμάκωσης!
+error renaming tracker queue!	tracker	el	Σφάλμα στην αλλαγή της ονομασίας της ουράς παρακολούθησης!
+error: no mail (mailbox / uid) given!	tracker	el	Σφάλμα: δεν έχει δοθεί email (Mailbox / UID)!
 error: the entry has been updated since you opened it for editing!	tracker	el	Σφάλμα:η καταχώρηση έχει ενημερωθεί από όταν την ανοίξατε για προσαρμογή!
+escalation	tracker	el	Κλιμάκωση
+escalation added.	tracker	el	Προστέθηκε κλιμάκωση.
+escalation deleted.	tracker	el	Διαγραφή κλιμάκωσης.
+escalation not found!	tracker	el	Δεν βρέθηκε κλιμάκωση!
+escalation saved.	tracker	el	Η κλιμάκωση αποθηκεύτηκε.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	el	Παράδειγμα {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - ψάξε στο πεδίο "n_prefix", για "Mr", αν βρεθεί, γράψε Hello Mr., αλλιώς γράψε Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	el	Παράδειγμα {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Παράδειγμα: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	el	Παράδειγμα {{NELF role}} - αν το πεδίο role δεν είναι κενό, θα λάβετε μια νέα γραμμή με την τιμή του πεδίου role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	el	Παράδειγμα {{nenvlf role}} - αν το πεδίο role δεν είναι κενό, θα ορίσετε μια LF χωρίς καμία τιμή του πεδίου
+exclude links of the following apps on timesheet creation	tracker	el	Εξαίρεση των συνδέσμων των ακόλουθων εφαρμογών κατά τη δημιουργία φύλλου εργασίας
 existing links	tracker	el	Υπάρχοντες σύνδεσμοι
+exists	tracker	el	Υπάρχει
 export as csv	tracker	el	Εξαγωγή ως CSV
+export csv	tracker	el	Εξαγωγή CSV
 forward	tracker	el	Προώθηση
 forward to	tracker	el	προώθηση σε
 from	tracker	el	Από
@@ -126,5 +184,9 @@ unread	tracker	el	Μη αναγνωσμένο
 upcoming	tracker	el	επερχόμενο
 updated	tracker	el	Ενημερώθηκε
 writable filemanager directory	tracker	el	Κατάλογος Filemanager με δυνατότητα εγγραφής
+yes, add mailheader to both (description and comments)	tracker	el	Ναι, προσθήκη κεφαλίδας αλληλογραφίας και στις δύο (περιγραφή και σχόλια)
+yes, add mailheader to comments	tracker	el	Ναι, προσθήκη κεφαλίδας αλληλογραφίας στα σχόλια
+yes, add mailheader to description	tracker	el	Ναι, προσθήκη κεφαλίδας αλληλογραφίας στην περιγραφή
+yes, always	tracker	el	Ναι, πάντα
 yes, with larger fontsize	tracker	el	Ναι,  με μεγαλύτερο μέγεθος φόντου
 you can respond by visiting:	tracker	el	Για να το δείτε επισκεφθείτε:

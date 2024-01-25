@@ -104,9 +104,11 @@ convert all open tickets	tracker	ru	преобразовать все откры
 converted count	tracker	ru	счетчик преобразованых
 copy to	tracker	ru	Копия
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	ru	Скопируйте изменения в буфер обмена, %1 перезагрузите запись%2 и отобразите их.
+could not connect	tracker	ru	не удалось подключиться
 create new links	tracker	ru	Создать новую ссылку
 create new tracker entry's as default "private" for approval process	tracker	ru	Создать новую запись Трекера как "личную" по умолчанию для соответствующего процесса
 created	tracker	ru	Создано
+created by	tracker	ru	Создано
 created on	tracker	ru	Создано
 creates a new field	tracker	ru	Создать новое поле
 creation date	tracker	ru	даты создания

@@ -10,35 +10,78 @@
 (new tickets as	tracker	tr	Yeni biletler
 --> choose a project from the drop-down list	tracker	tr	--> açılır listeden bir proje seçin
 --> enter new name	tracker	tr	--> yeni isim girin
+1 - lowest	tracker	tr	1 - en düşük
 2 days in advance	tracker	tr	2 gün önceden
 2 years ago	tracker	tr	2 yıl önce
 3 days in advance	tracker	tr	3 gün önceden
 3 years ago	tracker	tr	3 yıl önce
+5 - medium	tracker	tr	5 - orta
+9 - highest	tracker	tr	9 - en yüksek
 [fwd]	tracker	tr	[FWD]
 accepted	tracker	tr	Kabul Edildi
+acl	tracker	tr	Erişim Kontrol Listesi
+activate users queue access control	tracker	tr	Kullanıcı kuyruğu erişim kontrolünü etkinleştirin
+add / remove link	tracker	tr	Bağlantı Ekle / Kaldır
 add a ticket	tracker	tr	Bir bilet ekleyin
 add additionally	tracker	tr	Ek olarak ekleyin
 add assigned	tracker	tr	Atanmış ekle
 add comment	tracker	tr	Yorum ekle
 add email-address	tracker	tr	E-posta adresi ekle
+add from addressbook	tracker	tr	Adres Defterinden Ekle
+add infolog	tracker	tr	InfoLog Ekle
+add restricted comment	tracker	tr	Kısıtlı yorum ekle
+add timesheet entry	tracker	tr	Zaman çizelgesi girişi ekleme
+add to	tracker	tr	Eklemek için
+add unrecognized mail address to the cc field	tracker	tr	CC alanına tanınmayan e-posta adresi ekleyin
 after	tracker	tr	Sonra
+after how many days a not replied item should be marked overdue?	tracker	tr	Yanıtlanmamış bir öğe kaç gün sonra gecikmiş olarak işaretlenmelidir?
+all	tracker	tr	Tümü
 all tickets are already converted to tracker	tracker	tr	Tüm biletler zaten Tracker'a dönüştürülmüştür
+all versions	tracker	tr	Tüm versiyonlar
 allow bounties	tracker	tr	Ödüllere izin verin
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	tr	Yalnızca yöneticiler, teknisyenler ve atanmış kullanıcılar tarafından görülebilen kısıtlı yorumların oluşturulmasına izin verin
+allow creation of infolog entries from tracker tickets	tracker	tr	Tracker biletlerinden InfoLog girdileri oluşturulmasına izin ver
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	tr	Yeni izleyici öğelerine atanacak projelerin önceden tanımlanmasına izin verin
+allow to assign groups to tracker items	tracker	tr	Grup atamaya izin ver
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	tr	'Teknisyenlere' ve 'Takipçi Yöneticilerine' ek olarak 'Kullanıcıların' da bir bilete atanmasına izin verin
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	tr	Bir bilete yalnızca "İzleyici Yöneticileri" ve "Teknisyenler" değil, aynı zamanda personel sekmesindeki "Kullanıcılar" da atanmasına izin verin
 allow voting	tracker	tr	Oylamaya izin verin
 already escalated	tracker	tr	Çoktan tırmandırıldı
+application mail expected but got: %1	tracker	tr	Başvuru e-postası bekleniyordu ancak alındı: %1
+before	tracker	tr	Önce
+bounty	tracker	tr	Bounty
+canned response	tracker	tr	Konserve yanıt
+canned responses	tracker	tr	Konserve yanıtlar
+categories, versions, canned responses	tracker	tr	Kategoriler, sürümler, hazır yanıtlar
+change assigned	tracker	tr	Atanan değişiklik
 change color	tracker	tr	Renk değiştir
+change group when updating	tracker	tr	Güncelleme yaparken grubu değiştir
+change owner when updating	tracker	tr	Güncelleme sırasında sahibi değiştir
 choose 'creator' of imported data	tracker	tr	İçe aktarılan verilerin 'oluşturucusunu' seçin
 close pending	tracker	tr	Kapanış beklemede
 closed date	tracker	tr	Kapanış tarihi
 color	tracker	tr	Renk
 configuration	tracker	tr	Ayarlar
 configuration, notifications	tracker	tr	Yapılandırma, Bildirimler
+converted count	tracker	tr	Dönüştürülen sayısı
+could not connect	tracker	tr	bağlanılamadı
 create new tracker entry's as default "private" for approval process	tracker	tr	Onay süreci için varsayılan 'özel' olarak yeni izleyici girişi oluşturun
 created by	tracker	tr	Oluşturan
+created on	tracker	tr	Oluşturulduğu tarih
 custom fields	tracker	tr	Özel Alanlar
+custom notifications	tracker	tr	Özel bildirimler
+data exchange settings	tracker	tr	Veri alışverişi ayarları
+date filter	tracker	tr	Tarih filtresi
+default document to insert entries	tracker	tr	Girişleri eklemek için varsayılan belge
 default group	tracker	tr	Varsayılan grup
 default tracker queue	tracker	tr	Standart kuyruk
+default version for new tracker entries	tracker	tr	Yeni izleyici girişleri için varsayılan sürüm
+delete the mail from the server	tracker	tr	E-postayı sunucudan silme
+delete the mail from the server.	tracker	tr	E-postayı sunucudan silme.
+delete this canned response	tracker	tr	Bu hazır yanıtı silin
 delete this category	tracker	tr	Bu kategoriyi sil
+delete this escalation	tracker	tr	Bu eskalasyonu silin
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	tr	Yukarıdaki 'E-postaları sil' etiketlenmemiş olsa bile, tanınmayan e-postaları sunucudan silin.
 deleted	tracker	tr	Silindi
 deny global	tracker	tr	Küresel red
 directory with documents to insert entries	tracker	tr	Giriş eklemek için belgelerin bulunduğu dizin
@@ -90,3 +133,8 @@ times	tracker	tr	Kere
 unread	tracker	tr	Okunmadı
 updated	tracker	tr	Güncelle
 writable filemanager directory	tracker	tr	Yazılabilir Dosya Yöneticisi dizini
+yes, add mailheader to both (description and comments)	tracker	tr	Evet, her ikisine de posta başlığı ekleyin (açıklama ve yorumlar)
+yes, add mailheader to comments	tracker	tr	Evet, yorumlara posta başlığı ekleyin
+yes, add mailheader to description	tracker	tr	Evet, açıklamaya posta başlığı ekleyin
+yes, always	tracker	tr	Evet, her zaman
+you need to select some entries first	tracker	tr	Önce bazı girişleri seçmeniz gerekir.

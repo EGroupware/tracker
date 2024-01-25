@@ -177,7 +177,7 @@ entry saved	tracker	fr	Entrée enregistrée
 error adding the new tracker!	tracker	fr	Erreur lors de l'ajout du nouveau traqueur!
 error deleting escalation!	tracker	fr	Erreur à la suppression de l'escalade !
 error renaming tracker queue!	tracker	fr	Erreur au renommage du traqueur !
-error saving the entry!!!	tracker	fr	Erreur à l'enregistrement de l'entrée !!!
+error saving the entry!!!	tracker	fr	Erreur à l'enregistrement de l'entrée !
 error: no mail (mailbox / uid) given!	tracker	fr	Erreur : pas d'email indiqué (mailbox / uid) !
 error: the entry has been updated since you opened it for editing!	tracker	fr	Erreur: cette entrée a été mise à jour depuis que vous l'ayez ouverte pour la modifier !
 escalation	tracker	fr	Escalade
@@ -365,14 +365,14 @@ restriction	tracker	fr	Restriction
 run on existing tickets	tracker	fr	Exécuter sur les tickets existants
 same day	tracker	fr	Même jour
 save new report	tracker	fr	Enregistrer le nouveau rapport
-save new report...	tracker	fr	Enregistrer le nouveau rapport...
+save new report...	tracker	fr	Enregistrer le nouveau rapport ...
 saves the changes made and leaves	tracker	fr	Enregistrer les modifications et quitter
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	fr	Sélectionner un traqueur par défaut pour les nouveaux tickets ou "Rejet" pour ne pas permettre la création de tickets par email.
 select accounts for which the custom field should be visible	tracker	fr	Sélectionner les comptes pour lesquels le champ personnalisé devrait être visible.
 select existing report	tracker	fr	Sélectionner un rapport existant
 select how autoreplies should be sent when mails are received	tracker	fr	Choisir comment les réponses automatiques seront envoyées à la réception d'un mail
 select multiple	tracker	fr	Sélectionner plusieurs
-select one...	tracker	fr	sélectionnez un...
+select one...	tracker	fr	sélectionnez un ...
 select tracker queue	tracker	fr	Sélectionner un traqueur
 select users or groups	tracker	fr	Sélectionner des utilisateurs et groupes
 select which categories should be used in tracker for the tts categories	tracker	fr	Sélectionner quelles catégories à utiliser dans le Traqueur pour les catégories TTS.
@@ -388,8 +388,8 @@ set bounty	tracker	fr	Fixer une prime
 set due date this many days after escalation runs	tracker	fr	Fixer la date d'échéance (nombre de jours) après l'exécution de l'escalade
 set the ticket start date to the email received date	tracker	fr	Fixer la date de début du ticket à la date de réception de l'email
 set to	tracker	fr	Mettre à
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments dont vous êtes assignés sont modifiés?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments que vous avez créé sont modifiés?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments dont vous êtes assignés sont modifiés ?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email si des éléments que vous avez créé sont modifiés ?
 should there be a tracker-box on  home screen?	tracker	fr	Afficher le traqueur sur l'accueil
 show start date and due date	tracker	fr	Afficher la date de début et la date d'échéance
 show the tracker send you notification mails, in tracker items that you updates?	tracker	fr	Le Traqueur doit-il vous envoyer des notifications par email sur les éléments que vous mettez à jour ?

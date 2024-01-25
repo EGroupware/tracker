@@ -9,31 +9,80 @@
 (beware of mailloops, check the help!)	tracker	ja	(mailloops に注意してください!)
 (new tickets as	tracker	ja	新しいチケット
 --> choose a project from the drop-down list	tracker	ja	--> ドロップダウンリストからプロジェクトを選択
+--> enter new name	tracker	ja	--> 新しい名前を入力
+1 - lowest	tracker	ja	1最低
 2 days in advance	tracker	ja	2日前
 2 years ago	tracker	ja	2年前
 3 days in advance	tracker	ja	3日前
 3 years ago	tracker	ja	3年前
+5 - medium	tracker	ja	5中程度
+9 - highest	tracker	ja	9最高
+[fwd]	tracker	ja	[FWD]
+accepted	tracker	ja	承認
+acl	tracker	ja	アクセス制御リスト
+activate users queue access control	tracker	ja	ユーザーキューのアクセス制御を有効にする
+add / remove link	tracker	ja	リンクの追加/削除
 add a ticket	tracker	ja	チケットを追加する
+add additionally	tracker	ja	追加追加
 add assigned	tracker	ja	割り当てを追加
+add comment	tracker	ja	コメント追加
 add email-address	tracker	ja	メールアドレスの追加
+add from addressbook	tracker	ja	アドレス帳から追加
+add infolog	tracker	ja	インフォログに追加
+add restricted comment	tracker	ja	制限付きコメントの追加
+add timesheet entry	tracker	ja	タイムシートエントリーの追加
+add to	tracker	ja	追加先
+add unrecognized mail address to the cc field	tracker	ja	認識できないメールアドレスをCCフィールドに追加する
+after	tracker	ja	その後
+after how many days a not replied item should be marked overdue?	tracker	ja	未返信のアイテムは何日後に期限切れと表示されますか？
+after how many days pending items should be closed automatic	tracker	ja	何日後に保留中の項目は自動的にクローズされますか？
 all	tracker	ja	すべてのバージョン
+all tickets are already converted to tracker	tracker	ja	すべてのチケットはすでにトラッカーに変換されています
 all versions	tracker	ja	すべてのバージョン
+allow bounties	tracker	ja	報奨金を許可する
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	ja	管理者、技術者、割り当てられたユーザにのみ表示される制限付きコメントの作成が可能
 allow creation of infolog entries from tracker tickets	tracker	ja	Tracker チケットから InfoLog エントリを作成できるようにしました。
+allow default projects for tracker	tracker	ja	デフォルトプロジェクト
+allow editing by	tracker	ja	による編集を許可する
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	ja	新しいトラッカーアイテムに割り当てられるプロジェクトを事前に定義できるようになりました。
+allow to assign groups to tracker items	tracker	ja	グループの割り当て
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	ja	技術者' と 'トラッカー管理者' に加えて 'ユーザ' をチケットに割り当てることができます。
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	ja	チケットに "Tracker Admins" と "Technians" だけでなく、"Users" も割り当てられるようにしました。
 application mail expected but got: %1	tracker	ja	申請メールを期待したが %1
+before	tracker	ja	以前
+bounty	tracker	ja	バウンティ
+canned response	tracker	ja	返信定型文
+canned responses	tracker	ja	定型応答
+categories, versions, canned responses	tracker	ja	カテゴリー、バージョン、定型回答
+change assigned	tracker	ja	割り当てられた変更
 change color	tracker	ja	色の変更
+change group when updating	tracker	ja	更新時のグループ変更
+change owner when updating	tracker	ja	更新時に所有者を変更する
 choose 'creator' of imported data	tracker	ja	インポートしたデータの「作成者」を選択する
 closed date	tracker	ja	閉鎖日
 color	tracker	ja	カラー
 configuration	tracker	ja	環境設定
 configuration, notifications	tracker	ja	設定、通知
+converted count	tracker	ja	変換数
+could not connect	tracker	ja	接続できませんでした
 create new tracker entry's as default "private" for approval process	tracker	ja	承認プロセスのデフォルト「非公開」として新しいトラッカー・エントリーを作成する
 created	tracker	ja	作成
+created by	tracker	ja	作成者
+created on	tracker	ja	作成日
 custom fields	tracker	ja	カスタム項目
+custom notifications	tracker	ja	カスタム通知
+customfield	tracker	ja	カスタムフィールド
+data exchange settings	tracker	ja	データ交換設定
+date filter	tracker	ja	日付フィルター
+default document to insert entries	tracker	ja	エントリーを挿入するデフォルト・ドキュメント
 default group	tracker	ja	デフォルトグループ
 default tracker queue	tracker	ja	スタンダードキュー
+default version for new tracker entries	tracker	ja	新しいトラッカー・エントリーのデフォルト・バージョン
+delete the mail from the server	tracker	ja	サーバーからメールを削除する
+delete the mail from the server.	tracker	ja	サーバーからメールを削除します。
+delete this canned response	tracker	ja	この定型応答を削除する
+delete this escalation	tracker	ja	このエスカレーションを削除する
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	ja	上記の 'Delete emails' がタグ付けされていない場合でも、サーバーから認識できないメールを削除します。
 deny global	tracker	ja	グローバル拒否
 directory with documents to insert entries	tracker	ja	エントリを挿入するドキュメントのあるディレクトリ
 do not send notifications to external email (cc field)	tracker	ja	外部メールに通知を送信しない (cc フィールド)
@@ -45,10 +94,23 @@ due date for new tickets	tracker	ja	新規チケットの期限
 edit others' comments	tracker	ja	他人のコメントを編集する
 edit own comments	tracker	ja	自分のコメントを編集する
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ja	EGroupware Trackerのメールハンドリング：以前は接続できませんでした。
+enable color code for	tracker	ja	のカラーコードを有効にする
+enter the email for reply to	tracker	ja	返信用Eメールを入力してください
+error deleting escalation!	tracker	ja	エスカレーションの削除エラー
+error renaming tracker queue!	tracker	ja	トラッカーキューの名前変更エラー！
+error: no mail (mailbox / uid) given!	tracker	ja	エラー: メールボックス/UIDが指定されていません！
+escalation	tracker	ja	エスカレーション
+escalation added.	tracker	ja	エスカレーションを追加しました。
+escalation deleted.	tracker	ja	エスカレーションが削除されました。
+escalation not found!	tracker	ja	エスカレーションが見つかりません！
+escalation saved.	tracker	ja	エスカレーションを保存しました。
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ja	例 {{IF n_prefix~Mr~こんにちはMr.~こんにちはMs.}}。- フィールド "n_prefix "で "Mr "を検索し、見つかればHello Mr.と書き、見つからなければHello Ms.と書く。
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ja	例 {{LETTERPREFIXCUSTOM n_prefix title n_family}}. - 例 ジェームズ・ミラー博士
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ja	例 {{NELF role}} - フィールドroleが空でなければ、フィールドroleの値で改行されます。
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ja	例 {{nenvlf role}} - フィールドroleが空でない場合、フィールドの値なしでLFを設定します。
+exclude links of the following apps on timesheet creation	tracker	ja	タイムシート作成時に以下のアプリのリンクを除外する
+exists	tracker	ja	存在する
+export csv	tracker	ja	CSVエクスポート
 forward	tracker	ja	転送
 from	tracker	ja	差出人
 full list of placeholder names	tracker	ja	プレースホルダ一覧
@@ -78,3 +140,7 @@ this week	tracker	ja	今週
 this year	tracker	ja	今年
 unread	tracker	ja	未読
 writable filemanager directory	tracker	ja	書き込み可能なFile Managerディレクトリ
+yes, add mailheader to both (description and comments)	tracker	ja	はい、両方にメールヘッダを追加（説明とコメント）
+yes, add mailheader to comments	tracker	ja	はい、コメントにメールヘッダを追加
+yes, add mailheader to description	tracker	ja	はい、説明文にメールヘッダを追加
+yes, always	tracker	ja	はい、常に

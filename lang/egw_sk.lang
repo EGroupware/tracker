@@ -365,14 +365,14 @@ restriction	tracker	sk	Obmedzenie
 run on existing tickets	tracker	sk	Vykonať pre existujúce karty
 same day	tracker	sk	V ten deň
 save new report	tracker	sk	Uložiť nové hlásenie
-save new report...	tracker	sk	Uložiť nové hlásenie...
+save new report...	tracker	sk	Uložiť nové hlásenie ...
 saves the changes made and leaves	tracker	sk	Uloží vykonané zmeny a odíde.
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	sk	Zadajte predvolený sledovač pre nové karty, alebo 'Odmietnuť', ak sa má zamedziť vytváraniu položky cez E-mail.
 select accounts for which the custom field should be visible	tracker	sk	Vyberte účty, pre ktoré bude vlastné pole viditeľné
 select existing report	tracker	sk	Vybrať existujúce hlásenie
 select how autoreplies should be sent when mails are received	tracker	sk	Vybrať, ako sa majú posielať automatické odpovede, keď je prijatá správa
 select multiple	tracker	sk	Vybrať viacero
-select one...	tracker	sk	Vyberte jednu...
+select one...	tracker	sk	Vyberte jednu ...
 select tracker queue	tracker	sk	Vyberte frontu sledovača
 select users or groups	tracker	sk	Vyberte používateľov alebo skupiny
 select which categories should be used in tracker for the tts categories	tracker	sk	Vyberte, ktoré kategórie sa majú v Sledovači použiť pre kategórie TTS

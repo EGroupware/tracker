@@ -10,34 +10,80 @@
 (new tickets as	tracker	uk	Нові квитки як
 --> choose a project from the drop-down list	tracker	uk	--> виберіть проект з випадаючого списку
 --> enter new name	tracker	uk	--> введіть нову назву
+1 - lowest	tracker	uk	1 - найнижчий
 2 days in advance	tracker	uk	за 2 дні до початку
 2 years ago	tracker	uk	2 роки тому
 3 days in advance	tracker	uk	За 3 дні до початку
 3 years ago	tracker	uk	3 роки тому
+5 - medium	tracker	uk	5 - середній
+9 - highest	tracker	uk	9 - найвищий
 [fwd]	tracker	uk	[FWD]
 accepted	tracker	uk	Прийнято
+acl	tracker	uk	Список контролю доступу
+activate users queue access control	tracker	uk	Увімкніть контроль доступу користувачів до черги
+add / remove link	tracker	uk	Додати / видалити посилання
+add a ticket	tracker	uk	Додати квиток
 add additionally	tracker	uk	Додати додатково
 add assigned	tracker	uk	Додати призначене
+add comment	tracker	uk	Додати коментар
 add email-address	tracker	uk	Додати адресу електронної пошти
+add from addressbook	tracker	uk	Додати з адресної книги
+add infolog	tracker	uk	Додати InfoLog
+add restricted comment	tracker	uk	Додати коментар з обмеженим доступом
+add timesheet entry	tracker	uk	Додати запис до табеля обліку робочого часу
+add to	tracker	uk	Додати до
+add unrecognized mail address to the cc field	tracker	uk	Додайте нерозпізнану адресу електронної пошти в поле CC
+after how many days a not replied item should be marked overdue?	tracker	uk	Через скільки днів лист, на який не надійшла відповідь, буде позначений як прострочений?
+all	tracker	uk	Всі
 all tickets are already converted to tracker	tracker	uk	Всі квитки вже конвертовані в Tracker
+all versions	tracker	uk	Всі версії
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	uk	Дозволити створення коментарів з обмеженим доступом, видимих лише адміністраторам, технічним спеціалістам та призначеним користувачам
+allow creation of infolog entries from tracker tickets	tracker	uk	Дозволити створення записів у InfoLog з тікетів трекера
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	uk	Дозволити попереднє визначення проектів, які будуть призначені новим елементам трекера
+allow to assign groups to tracker items	tracker	uk	Дозволяє призначати групи
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	uk	Дозволяє призначати "Користувачів" до тікета на додаток до "Технічних спеціалістів" та "Адміністраторів трекера
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	uk	Дозволити призначати до тікета не лише "Адміністраторів трекера" та "Техніків", але й "Користувачів" у вкладці "Персонал
 allow voting	tracker	uk	Дозволити голосування
 already escalated	tracker	uk	Вже ескалація
+application mail expected but got: %1	tracker	uk	Очікується лист з заявкою, але отримано: %1
 applies the changes	tracker	uk	Застосувати зміни
+before	tracker	uk	До того, як
+bounty	tracker	uk	Баунті
+canned response	tracker	uk	Заздалегідь підготовлені відповіді
+canned responses	tracker	uk	Консервовані відповіді
+categories, versions, canned responses	tracker	uk	Категорії, версії, збережені відповіді
+change assigned	tracker	uk	Призначено зміну
 change color	tracker	uk	Змінити колір
+change group when updating	tracker	uk	Змінювати групу при оновленні
+change owner when updating	tracker	uk	Змінювати власника при оновленні
 choose 'creator' of imported data	tracker	uk	Виберіть "творця" імпортованих даних
 close pending	tracker	uk	Закрити в очікуванні
 closed date	tracker	uk	Дата закриття
 color	tracker	uk	Колір
 configuration	tracker	uk	Конфігурація
 configuration, notifications	tracker	uk	Конфігурація, Сповіщення
+converted count	tracker	uk	Кількість конвертованих
+could not connect	tracker	uk	не вдалося підключитися
 create new links	tracker	uk	Створити нові посилання
 create new tracker entry's as default "private" for approval process	tracker	uk	Створити новий запис у трекері як "приватний" за замовчуванням для процесу затвердження
+created by	tracker	uk	Створено
+created on	tracker	uk	Створено на
 creates a new field	tracker	uk	створює нові поля
 custom fields	tracker	uk	Власні поля
+custom notifications	tracker	uk	Кастомні сповіщення
+data exchange settings	tracker	uk	Налаштування обміну даними
+date filter	tracker	uk	Фільтр за датою
+default document to insert entries	tracker	uk	Документ за замовчуванням для вставки записів
 default group	tracker	uk	Група за замовчуванням
 default tracker queue	tracker	uk	Стандартна черга
+default version for new tracker entries	tracker	uk	Версія за замовчуванням для нових записів у трекері
+delete the mail from the server	tracker	uk	Видалити імейл з сервера
+delete the mail from the server.	tracker	uk	Видалити імейл з сервера.
+delete this canned response	tracker	uk	Видалити цю стандартну відповідь
 delete this category	tracker	uk	Видалити цю категорію
 delete this entry	tracker	uk	видалити цей запис
+delete this escalation	tracker	uk	Видалити цю ескалацію
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	uk	Видалити з сервера нерозпізнані імейли, навіть якщо опція "Видалити імейли" не позначена.
 deleted	tracker	uk	Видалено
 deletes this field	tracker	uk	видаляє це поле
 deny global	tracker	uk	Заборонити глобально
@@ -104,3 +150,8 @@ unread	tracker	uk	Непрочитаний
 upcoming	tracker	uk	майбутні
 updated	tracker	uk	Змінено
 writable filemanager directory	tracker	uk	Доступний для запису каталог файлового менеджера
+yes, add mailheader to both (description and comments)	tracker	uk	Так, додавати поштовий заголовок до обох (опису та коментарів)
+yes, add mailheader to comments	tracker	uk	Так, додавати поштовий заголовок до коментарів
+yes, add mailheader to description	tracker	uk	Так, додавати заголовок до опису
+yes, always	tracker	uk	Так, завжди
+you need to select some entries first	tracker	uk	Спочатку потрібно вибрати деякі записи.

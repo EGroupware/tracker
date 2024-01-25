@@ -19,12 +19,21 @@
 9 - highest	tracker	sv	9 - Högst
 [fwd]	tracker	sv	[FWD]
 accepted	tracker	sv	Accepterad
+acl	tracker	sv	Åtkomstkontrollista
+activate users queue access control	tracker	sv	Aktivera åtkomstkontroll för användarkö
+add / remove link	tracker	sv	Lägg till / ta bort länk
 add a ticket	tracker	sv	Lägg till ett ärende
 add additionally	tracker	sv	Lägg till ytterligare
 add assigned	tracker	sv	Lägg till tilldelad
 add comment	tracker	sv	Lägg till kommentar
 add email-address	tracker	sv	Lägg till e-postadress
+add from addressbook	tracker	sv	Lägg till från adressboken
+add infolog	tracker	sv	Lägg till InfoLog
+add restricted comment	tracker	sv	Lägg till begränsad kommentar
 add timesheet entry	tracker	sv	Lägg till tidredovisnings post
+add to	tracker	sv	Lägg till i
+add unrecognized mail address to the cc field	tracker	sv	Lägg till okänd e-postadress i CC-fältet
+after	tracker	sv	Efter
 after how many days a not replied item should be marked overdue?	tracker	sv	Efter hur många dagar ska obesvarade ärenden markeras som förfallen?
 after how many days pending items should be closed automatic	tracker	sv	Efter hur många dagar som vilande ska ärenden automatiskt stängas?
 all	tracker	sv	Alla
@@ -33,6 +42,7 @@ all versions	tracker	sv	Alla versioner
 allow bounties	tracker	sv	Tillåt belöningar
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	sv	Möjliggör skapande av begränsade kommentarer som endast är synliga för administratörer, tekniker och tilldelade användare
 allow creation of infolog entries from tracker tickets	tracker	sv	Tillåt skapande av InfoLog-poster från Tracker-ärenden
+allow default projects for tracker	tracker	sv	Standardprojekt
 allow editing by	tracker	sv	Tillåt ändringar av
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	sv	Tillåt fördefiniering av projekt som kommer att tilldelas nya tracker-objekt
 allow to assign groups to tracker items	tracker	sv	Tillåt tilldelning av grupper
@@ -47,7 +57,9 @@ assigned to	tracker	sv	Tilldelad
 assigning groups	tracker	sv	Tilldela grupper
 attachments & links	tracker	sv	Bilagor och länkar
 autoassign to	tracker	sv	Automatiskt tilldelad
+before	tracker	sv	Före
 bounties	tracker	sv	Belöningar
+bounty	tracker	sv	Belöning
 bounty confirmed	tracker	sv	Belöningen bekräftad
 bounty confirmed.	tracker	sv	Belöningen bekräftad
 bounty deleted	tracker	sv	Belöningen raderad
@@ -56,7 +68,10 @@ bounty set	tracker	sv	Belöning
 canned response	tracker	sv	Sparade svar
 canned responses	tracker	sv	Sparade svar
 categories, versions, canned responses	tracker	sv	Kategorier, Versioner, Sparade svar
+change assigned	tracker	sv	Ändra tilldelad
 change color	tracker	sv	Ändra färg
+change group when updating	tracker	sv	Ändra grupp vid uppdatering
+change owner when updating	tracker	sv	Ändra ägare vid uppdatering
 check all	tracker	sv	Markera alla
 choose 'creator' of imported data	tracker	sv	Välj "skapare" av importerade data
 close pending	tracker	sv	Stäng vilande
@@ -72,23 +87,37 @@ configuration updated.	tracker	sv	Inställningar uppdaterade
 confirm that you pay the specified bounty to implement or fix the issue	tracker	sv	Bekräfta att du kommer att betala belöningen för funktionen eller problemlösningen!
 confirm the receipt of money for this bounty	tracker	sv	Bekräfta mottagandet av pengarna för belöningen
 confirmed	tracker	sv	Bekräftad
+converted count	tracker	sv	Konverterat antal
 copy to	tracker	sv	Kopia
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	sv	Kopiera dina ändringar till urklipp, %1 ladda om posten och migrera.
+could not connect	tracker	sv	kunde inte ansluta
 create new links	tracker	sv	Skapa ny länk
 create new tracker entry's as default "private" for approval process	tracker	sv	Skapa ny spårningspost som standard "privat" för godkännandeprocessen
 created	tracker	sv	Skapat
+created by	tracker	sv	Skapad av
+created on	tracker	sv	Skapad på
 creates a new field	tracker	sv	Skapar nytt fält
 creation date	tracker	sv	Skapat datum
 custom fields	tracker	sv	Anpassade fält
+custom notifications	tracker	sv	Anpassade aviseringar
+customfield	tracker	sv	Anpassat fält
+data exchange settings	tracker	sv	Inställningar för datautbyte
+date filter	tracker	sv	Datumfilter
 date opened	tracker	sv	Datum öppnat
+default document to insert entries	tracker	sv	Standarddokument för att infoga poster
 default group	tracker	sv	Standardgrupp
 default tracker queue	tracker	sv	Standard kö
+default version for new tracker entries	tracker	sv	Standardversion för nya spårningsposter
+delete the mail from the server	tracker	sv	Ta bort e-postmeddelandet från servern
+delete the mail from the server.	tracker	sv	Ta bort e-postmeddelandet från servern.
 delete this bounty	tracker	sv	Radera belöningen
 delete this canned response	tracker	sv	Radera det sparade svaret
 delete this category	tracker	sv	Radera kategorin
 delete this entry	tracker	sv	Radera posten
+delete this escalation	tracker	sv	Ta bort denna eskalering
 delete this tracker including all its items and categories	tracker	sv	Radera Trackern inklusive alla ärenden och kategorier
 delete this version	tracker	sv	Radera versionen
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	sv	Ta bort okända e-postmeddelanden från servern, även om 'Ta bort e-postmeddelanden' ovan inte är taggad.
 deleted	tracker	sv	Raderat
 deletes this field	tracker	sv	raderar detta fält
 deny global	tracker	sv	Avvisa globalt
@@ -235,12 +264,17 @@ votes	tracker	sv	Röster
 wont fix	tracker	sv	Ingen åtgärd
 works for me	tracker	sv	Fungerar för mig
 writable filemanager directory	tracker	sv	Skrivbar filhanterarkatalog
+yes, add mailheader to both (description and comments)	tracker	sv	Ja, lägg till posthuvud i båda (beskrivning och kommentarer)
+yes, add mailheader to comments	tracker	sv	Ja, lägg till posthuvud till kommentarer
+yes, add mailheader to description	tracker	sv	Ja, lägg till posthuvud till beskrivning
+yes, always	tracker	sv	Ja, alltid
 yes, display groups first	tracker	sv	Ja, visa grupper först
 yes, display users first	tracker	sv	Ja, visa användare först
 yesterday	tracker	sv	Igår
 you can respond by visiting:	tracker	sv	Du kan svara genom att besöka:
 you need to enter a name	tracker	sv	Du måste ange ett namn
 you need to login to vote!	tracker	sv	Du måste vara inloggad för att rösta!
+you need to select some entries first	tracker	sv	Du måste välja några poster först.
 you need to select something to change and some tracker items!	tracker	sv	Du måste välja något att ändra och något Tracker ärende!
 you need to specify amount, donators name and email address!	tracker	sv	Du måste ange summan, donatörens namn och e-postadress!
 you voted %1.	tracker	sv	Du röstade %1

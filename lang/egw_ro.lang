@@ -9,31 +9,77 @@
 (beware of mailloops, check the help!)	tracker	ro	(Atenție la mailloops!)
 (new tickets as	tracker	ro	Bilete noi ca
 --> choose a project from the drop-down list	tracker	ro	--> alegeți un proiect din lista derulantă
+--> enter new name	tracker	ro	--> introduceți un nume nou
+1 - lowest	tracker	ro	1 - cel mai mic
 2 days in advance	tracker	ro	2 zile în avans
 2 years ago	tracker	ro	Acum 2 ani
 3 days in advance	tracker	ro	Cu 3 zile în avans
 3 years ago	tracker	ro	Acum 3 ani
+5 - medium	tracker	ro	5 - mediu
+9 - highest	tracker	ro	9 - cel mai mare
 [fwd]	tracker	ro	[FWD]
 accepted	tracker	ro	Acceptat
+acl	tracker	ro	Lista de control al accesului
+activate users queue access control	tracker	ro	Activați controlul accesului la coada utilizatorilor
+add / remove link	tracker	ro	Adăugare / Eliminare link
 add a ticket	tracker	ro	Adaugă un bilet
 add additionally	tracker	ro	Adăugați în plus
 add assigned	tracker	ro	Adaugă atribuit
 add comment	tracker	ro	Adăugați un comentariu
 add email-address	tracker	ro	Adăugați adresa de e-mail
+add from addressbook	tracker	ro	Adăugați din agendă
+add infolog	tracker	ro	Adăugați InfoLog
+add restricted comment	tracker	ro	Adaugă comentariu restricționat
+add timesheet entry	tracker	ro	Adăugați intrare în foaia de pontaj
+add to	tracker	ro	Adăugați la
+add unrecognized mail address to the cc field	tracker	ro	Adăugați o adresă de e-mail nerecunoscută în câmpul CC
 after	tracker	ro	După
+after how many days a not replied item should be marked overdue?	tracker	ro	După câte zile trebuie marcat ca fiind întârziat un element la care nu s-a răspuns?
+all	tracker	ro	Toate
 all tickets are already converted to tracker	tracker	ro	Toate biletele sunt deja convertite în Tracker
+all versions	tracker	ro	Toate versiunile
 allow bounties	tracker	ro	Permiteți recompensele
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	ro	Permiteți crearea de comentarii restricționate, care sunt vizibile doar pentru administratori, tehnicieni și utilizatori atribuiți
+allow creation of infolog entries from tracker tickets	tracker	ro	Permiteți crearea de intrări InfoLog din tichetele Tracker
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	ro	Permiteți definirea prealabilă a proiectelor care vor fi atribuite noilor elemente din tracker
+allow to assign groups to tracker items	tracker	ro	Permiteți atribuirea de grupuri
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	ro	Permiterea atribuirii de "Utilizatori" la un bilet în plus față de "Tehnicieni" și "Administratori Tracker
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	ro	Permiterea atribuirii la un bilet nu numai "Tracker Admins" și "Technici", ci și "Users" în fila Staff (personal)
 allow voting	tracker	ro	Permiteți votul
 already escalated	tracker	ro	Deja escaladat
+application mail expected but got: %1	tracker	ro	E-mail de solicitare așteptat, dar primit: %1
+before	tracker	ro	Înainte de
+bounty	tracker	ro	Bounty
+canned response	tracker	ro	Răspuns la conserve
+canned responses	tracker	ro	Răspunsuri conservate
+categories, versions, canned responses	tracker	ro	Categorii, versiuni, răspunsuri predefinite
+change assigned	tracker	ro	Modificare atribuită
 change color	tracker	ro	Schimbă culoarea
+change group when updating	tracker	ro	Modificarea grupului la actualizare
+change owner when updating	tracker	ro	Modificarea proprietarului la actualizare
 choose 'creator' of imported data	tracker	ro	Alegeți "creatorul" datelor importate
 close pending	tracker	ro	Închidere în așteptare
 closed date	tracker	ro	Data închiderii
 color	tracker	ro	Culoare
 configuration, notifications	tracker	ro	Configurație, Notificări
+converted count	tracker	ro	Numărătoarea convertită
+could not connect	tracker	ro	nu s-a putut conecta
 create new tracker entry's as default "private" for approval process	tracker	ro	Creați o nouă intrare în tracker ca fiind implicit "privată" pentru procesul de aprobare
+created by	tracker	ro	Creat de
+created on	tracker	ro	Creat pe
+custom notifications	tracker	ro	Notificări personalizate
+customfield	tracker	ro	Câmpul personalizat
+data exchange settings	tracker	ro	Setări privind schimbul de date
+date filter	tracker	ro	Filtru de date
+default document to insert entries	tracker	ro	Document implicit pentru a insera intrări
 default group	tracker	ro	Grup implicit
 default tracker queue	tracker	ro	Coadă standard
+default version for new tracker entries	tracker	ro	Versiune implicită pentru noile intrări în tracker
+delete the mail from the server	tracker	ro	Ștergeți e-mailul de pe server
+delete the mail from the server.	tracker	ro	Ștergeți e-mailul de pe server.
+delete this canned response	tracker	ro	Ștergeți acest răspuns prestabilit
+delete this escalation	tracker	ro	Ștergeți această escaladare
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	ro	Ștergeți e-mailurile nerecunoscute de pe server, chiar dacă "Ștergeți e-mailurile" de mai sus nu este marcat.
 deny global	tracker	ro	Refuzați global
 directory with documents to insert entries	tracker	ro	Director cu documente pentru a introduce intrări
 do not send notifications to external email (cc field)	tracker	ro	Nu trimiteți notificări la e-mail extern (câmpul cc)
@@ -76,3 +122,8 @@ start date from email	tracker	ro	Data de începere din e-mail
 ticket count	tracker	ro	Număr de bilete
 unread	tracker	ro	Necitit
 writable filemanager directory	tracker	ro	Director File Manager cu posibilitatea de scriere
+yes, add mailheader to both (description and comments)	tracker	ro	Da, adăugați antetul de e-mail la ambele (descriere și comentarii)
+yes, add mailheader to comments	tracker	ro	Da, adăugați antetul de e-mail la comentarii
+yes, add mailheader to description	tracker	ro	Da, adăugați antetul de e-mail la descriere
+yes, always	tracker	ro	Da, întotdeauna
+you need to select some entries first	tracker	ro	Trebuie să selectați mai întâi câteva intrări.
