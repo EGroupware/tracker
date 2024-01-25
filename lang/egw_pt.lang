@@ -9,27 +9,55 @@
 (beware of mailloops, check the help!)	tracker	pt	(Cuidado com os mailloops!)
 (new tickets as	tracker	pt	Novos bilhetes como
 --> choose a project from the drop-down list	tracker	pt	--> escolha um projeto na lista pendente
+--> enter new name	tracker	pt	--> introduzir novo nome
+1 - lowest	tracker	pt	1 - mais baixo
 2 days in advance	tracker	pt	2 dias antes
 2 years ago	tracker	pt	2 anos atrás
 3 days in advance	tracker	pt	3 dias de antecedência
 3 years ago	tracker	pt	3 anos atrás
+5 - medium	tracker	pt	5 - médio
+9 - highest	tracker	pt	9 - mais alto
 [fwd]	tracker	pt	[FWD]
 accepted	tracker	pt	Aceite
+acl	tracker	pt	Lista de controlo de acesso
+activate users queue access control	tracker	pt	Ativar o controlo de acesso à fila de utilizadores
 add / remove link	tracker	pt	Adicionar / remover ligação
 add a ticket	tracker	pt	Adicionar um bilhete
 add additionally	tracker	pt	Adicionar adicionalmente
 add assigned	tracker	pt	Adicionar atribuído
 add comment	tracker	pt	Adicionar comentário
 add email-address	tracker	pt	Adicionar endereço de correio eletrónico
+add from addressbook	tracker	pt	Adicionar a partir do Livro de Endereços
+add infolog	tracker	pt	Adicionar InfoLog
+add restricted comment	tracker	pt	Adicionar comentário restrito
 add timesheet entry	tracker	pt	Adicionar registo da folha de tempo
+add to	tracker	pt	Adicionar a
+add unrecognized mail address to the cc field	tracker	pt	Adicionar um endereço de correio eletrónico não reconhecido ao campo CC
 after	tracker	pt	Depois de
+after how many days a not replied item should be marked overdue?	tracker	pt	Após quantos dias um item não respondido deve ser marcado como atrasado?
+after how many days pending items should be closed automatic	tracker	pt	Após quantos dias os itens pendentes devem ser fechados automaticamente?
+all	tracker	pt	Todas
+all versions	tracker	pt	Todas as versões
 allow bounties	tracker	pt	Permitir prémios
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	pt	Permitir a criação de comentários restritos que só são visíveis para administradores, técnicos e utilizadores atribuídos
+allow creation of infolog entries from tracker tickets	tracker	pt	Permitir a criação de entradas no InfoLog a partir de bilhetes do Tracker
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	pt	Permitir a pré-definição de projectos que serão atribuídos a novos itens do Tracker
+allow to assign groups to tracker items	tracker	pt	Permitir a atribuição de grupos
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	pt	Permitir que os "Utilizadores" sejam atribuídos a um bilhete, para além dos "Técnicos" e dos "Administradores do Tracker
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	pt	Permitir atribuir a um bilhete não só "Administradores do Tracker" e "Técnicos", mas também "Utilizadores" no separador do pessoal
 allow voting	tracker	pt	Permitir votação
 already escalated	tracker	pt	Já escalado
 application mail expected but got: %1	tracker	pt	Correio Aplicação esperava, mas tenho: 1%
 applies the changes	tracker	pt	Aplicar as alterações
 attention: no contact with address %1 found.	tracker	pt	Atenção: Nenhum contato com o endereço %1 encontrado.
+before	tracker	pt	Antes de
+bounty	tracker	pt	Recompensa
+canned response	tracker	pt	Resposta enlatada
+canned responses	tracker	pt	Respostas enlatadas
+categories, versions, canned responses	tracker	pt	Categorias, versões, respostas predefinidas
+change assigned	tracker	pt	Modificação atribuída
 change color	tracker	pt	Alterar a cor
+change group when updating	tracker	pt	Alterar grupo ao atualizar
 change owner when updating	tracker	pt	Alterar proprietário ao atualizar
 check all	tracker	pt	Marcar todas
 choose 'creator' of imported data	tracker	pt	Selecionar o "criador" dos dados importados
@@ -39,21 +67,34 @@ color	tracker	pt	Cor
 comments	tracker	pt	Comentários
 completed	tracker	pt	Concluído
 configuration	tracker	pt	Configuração
+converted count	tracker	pt	Contagem convertida
 copy to	tracker	pt	Copiar para
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	pt	Copia as suas alterações para a área de transferência, %1recarrega o registo%2 e funde-os
+could not connect	tracker	pt	não foi possível ligar
 create new links	tracker	pt	Criar novas ligações
 create new tracker entry's as default "private" for approval process	tracker	pt	Criar uma nova entrada no rastreador como "privada" por defeito para o processo de aprovação
 created	tracker	pt	Criado
+created by	tracker	pt	Criado por
+created on	tracker	pt	Criado em
 creates a new field	tracker	pt	cria um novo campo
 creation date	tracker	pt	Data de criação
 creator	tracker	pt	Criador
 custom fields	tracker	pt	Personalizar campos
+custom notifications	tracker	pt	Notificações personalizadas
+customfield	tracker	pt	Campo personalizado
 data exchange settings	tracker	pt	Configurações de troca de dados
+date filter	tracker	pt	Filtro de datas
 default document to insert entries	tracker	pt	Documento padrão para inserir entradas
 default group	tracker	pt	Grupo predefinido
 default tracker queue	tracker	pt	Fila de espera normal
+default version for new tracker entries	tracker	pt	Versão predefinida para as novas entradas do tracker
+delete the mail from the server	tracker	pt	Eliminar a mensagem de correio eletrónico do servidor
+delete the mail from the server.	tracker	pt	Eliminar a mensagem de correio eletrónico do servidor.
+delete this canned response	tracker	pt	Eliminar esta resposta automática
 delete this category	tracker	pt	Eliminar esta categoria
 delete this entry	tracker	pt	Eliminar este registo
+delete this escalation	tracker	pt	Eliminar este escalonamento
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	pt	Eliminar mensagens de correio eletrónico não reconhecidas do servidor, mesmo que a opção "Eliminar mensagens de correio eletrónico" acima não esteja marcada.
 deleted	tracker	pt	Eliminado/a
 deletes this field	tracker	pt	eliminar este campo
 deny global	tracker	pt	Recusar global
@@ -67,6 +108,8 @@ due date	tracker	pt	Data de vencimento
 due date for new tickets	tracker	pt	Data de vencimento dos novos bilhetes
 each value is a line like <id>[=<label>]	tracker	pt	cada valor é uma linha como <id>[=<etiqueta>]
 each value is a line like id[=label]	tracker	pt	cada valor é uma linha como <id>[=etiqueta]
+edit %1	tracker	pt	Editar %1
+edit entry	tracker	pt	Editar registo
 edit others' comments	tracker	pt	Editar comentários de outros
 edit own comments	tracker	pt	Editar os seus próprios comentários
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pt	Tratamento de correio eletrónico do EGroupware Tracker: não foi possível estabelecer ligação anteriormente e o perfil não foi alterado
@@ -92,6 +135,7 @@ full list of placeholder names	tracker	pt	Lista de marcadores de posição
 general fields:	tracker	pt	Campos gerais:
 general settings	tracker	pt	Definições gerais
 history	tracker	pt	Histórico
+html editing	tracker	pt	Edição HTML
 html link to the current record	tracker	pt	Link HTML para o registro atual
 id	tracker	pt	ID
 if a ticket has matched before, should the actions be taken again?	tracker	pt	Se um ticket já foi correspondido anteriormente, as ações devem ser tomadas novamente?
@@ -140,8 +184,9 @@ replacements for inserting entries into documents	tracker	pt	Substitutos para a 
 respect timesheet run and read permissions for time totals	tracker	pt	Respeitar a execução da folha de tempos e as permissões de leitura para os totais de tempo
 responsible	tracker	pt	Responsável
 same day	tracker	pt	Mesmo dia
+save new report...	tracker	pt	Guardar novo relatório ...
 saves the changes made and leaves	tracker	pt	guarda as alterações e deixa
-select one...	tracker	pt	Seleccione um(a)...
+select one...	tracker	pt	Seleccione um(a) ...
 select users or groups	tracker	pt	Selecione os usuários ou grupos
 set due date this many days after escalation runs	tracker	pt	Definir a data de vencimento (número de dias) após a execução do escalonamento
 set the ticket start date to the email received date	tracker	pt	Definir a data de início do bilhete para a data de receção do correio eletrónico
@@ -169,8 +214,18 @@ use custom notification message	tracker	pt	Utilize mensagem de notificação per
 use field from csv if possible	tracker	pt	Use o campo de CSV, se possível
 use search results	tracker	pt	Utilizar os resultados da pesquisa
 writable filemanager directory	tracker	pt	Diretório do gestor de ficheiros gravável
+yes, add mailheader to both (description and comments)	tracker	pt	Sim, adicionar cabeçalho de correio a ambos (descrição e comentários)
+yes, add mailheader to comments	tracker	pt	Sim, adicionar cabeçalho de correio aos comentários
+yes, add mailheader to description	tracker	pt	Sim, adicionar cabeçalho de correio à descrição
+yes, always	tracker	pt	Sim, sempre
 yes, with larger fontsize	tracker	pt	Sim, com maior tamanho da fonte
 yesterday	tracker	pt	Ontem
 you can respond by visiting:	tracker	pt	Você pode responder, visitando
 you need to select an entry for linking.	tracker	pt	Você precisa selecionar uma entrada para a ligação.
 you need to select some entries first	tracker	pt	Você precisa selecionar algumas entradas em primeiro lugar.
+♦ not closed	tracker	pt	♦ Não encerrado
+♦ own not closed	tracker	pt	♦ Não fechado
+♦ own or assigned not closed	tracker	pt	♦ Próprio ou atribuído, não encerrado
+♦ own without reply not closed	tracker	pt	♦ Propriedade sem resposta não encerrada
+♦ without 30 days reply not closed	tracker	pt	♦ Sem 30 dias de resposta não encerrada
+♦ without reply not closed	tracker	pt	♦ Sem resposta não encerrada

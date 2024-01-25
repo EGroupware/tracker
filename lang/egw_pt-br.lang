@@ -19,26 +19,40 @@
 9 - highest	tracker	pt-br	9 - maior
 [fwd]	tracker	pt-br	[FWD]
 accepted	tracker	pt-br	Aceito
+acl	tracker	pt-br	Lista de controle de acesso
 activate users queue access control	tracker	pt-br	Ativar acesso de controle aos elementos dos usuários
+add / remove link	tracker	pt-br	Adicionar / Remover link
 add a ticket	tracker	pt-br	Adicionar um ticket
 add additionally	tracker	pt-br	Adicionar incrementando
 add assigned	tracker	pt-br	Adicionar designado
 add comment	tracker	pt-br	Adicionar comentário
 add email-address	tracker	pt-br	Adicionar endereço de e-mail
+add from addressbook	tracker	pt-br	Adicionar do Catálogo de Endereços
+add infolog	tracker	pt-br	Adicionar InfoLog
+add restricted comment	tracker	pt-br	Adicionar comentário restrito
 add timesheet entry	tracker	pt-br	Adicionar registro da Planilha de Tempo
+add to	tracker	pt-br	Adicionar comentário restrito
+add unrecognized mail address to the cc field	tracker	pt-br	Adicionar endereço de e-mail não reconhecido ao campo CC
 after	tracker	pt-br	Após
-after how many days a not replied item should be marked overdue?	tracker	pt-br	Após quantos dias um ticket sem resposta deverá ser marcado como arquivado ?
-after how many days pending items should be closed automatic	tracker	pt-br	Após quantos dias pendente tickets deverão ser fechados automaticamente ?
+after how many days a not replied item should be marked overdue?	tracker	pt-br	Após quantos dias um ticket sem resposta deverá ser marcado como arquivado?
+after how many days pending items should be closed automatic	tracker	pt-br	Após quantos dias pendente tickets deverão ser fechados automaticamente?
+all	tracker	pt-br	Todas
 all tickets are already converted to tracker	tracker	pt-br	Todos os tíquetes já foram convertidos para o Tracker
+all versions	tracker	pt-br	Todas as versões
 allow bounties	tracker	pt-br	Permitir pagamento
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	pt-br	Permitir a criação de comentários restritos que são visíveis apenas para administradores, técnicos e usuários atribuídos
+allow creation of infolog entries from tracker tickets	tracker	pt-br	Permitir a criação de entradas no InfoLog a partir de tíquetes do Tracker
 allow default projects for tracker	tracker	pt-br	Permitir projetos padrões para o Sistema de Tickets
 allow editing by	tracker	pt-br	Permitir edição por
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	pt-br	Permitir a definição prévia de projetos que serão designados para novos tickets.
 allow to assign groups to tracker items	tracker	pt-br	Permitir designar grupos para tickets
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	pt-br	Permitir que "Usuários" sejam atribuídos a um tíquete, além de "Técnicos" e "Administradores do Tracker".
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	pt-br	Permitir atribuir a um tíquete não apenas "Administradores do rastreador" e "Técnicos", mas também "Usuários" na guia da equipe
 allow voting	tracker	pt-br	Permitir votação
 allow voting on tracker items, show and sort after the votes	tracker	pt-br	Permitir votação nos tickets, exibir e ordenar após o voto
 already escalated	tracker	pt-br	Já escalado
 amount	tracker	pt-br	Quantidade
+application mail expected but got: %1	tracker	pt-br	O e-mail do aplicativo era esperado, mas foi recebido: %1
 applies the changes	tracker	pt-br	aplicar as alterações
 assign to project	tracker	pt-br	Designar para projeto
 assigned to	tracker	pt-br	Designado para
@@ -50,6 +64,7 @@ automatic email handling	tracker	pt-br	Tratamento automático de email
 automatically created by importexport	tracker	pt-br	Automaticamente criado por importar/exportar
 before	tracker	pt-br	Antes
 bounties	tracker	pt-br	Pagamentos
+bounty	tracker	pt-br	Recompensa
 bounty confirmed	tracker	pt-br	Pagamento confirmado
 bounty confirmed.	tracker	pt-br	Pagamento confirmado
 bounty deleted	tracker	pt-br	Pagamento removido
@@ -58,7 +73,10 @@ bounty set	tracker	pt-br	Definição de pagamento
 canned response	tracker	pt-br	Resposta automática
 canned responses	tracker	pt-br	Respostas automáticas
 categories, versions, canned responses	tracker	pt-br	Categorias, versões, respostas automáticas
+change assigned	tracker	pt-br	Modificação atribuída
 change color	tracker	pt-br	Alterar a cor
+change group when updating	tracker	pt-br	Alterar grupo ao atualizar
+change owner when updating	tracker	pt-br	Alterar o proprietário ao atualizar
 changes made below will be lost, if not applied before!	tracker	pt-br	Alterações realizadas abaixo serão perdidas se não aplicadas antes.
 check all	tracker	pt-br	Marcar todos
 check mail interval	tracker	pt-br	Intervalo para checagem de email
@@ -75,29 +93,38 @@ configuration	tracker	pt-br	Configuração
 configuration for all trackers	tracker	pt-br	Configuração para todos os elementos
 configuration updated.	tracker	pt-br	Configuração atualizada
 configuration, notifications	tracker	pt-br	Configuração, Notificações
-confirm that you pay the specified bounty to implement or fix the issue	tracker	pt-br	Confirma que você deseja pagar o valor especificado para resolver esta entrada ?
-confirm the receipt of money for this bounty	tracker	pt-br	Confirma o recebimento deste pagamento ?
+confirm that you pay the specified bounty to implement or fix the issue	tracker	pt-br	Confirma que você deseja pagar o valor especificado para resolver esta entrada?
+confirm the receipt of money for this bounty	tracker	pt-br	Confirma o recebimento deste pagamento?
 confirmed	tracker	pt-br	Confirmado
 convert all closed tickets	tracker	pt-br	Converter todos os tickets fechados
 convert all open tickets	tracker	pt-br	Converter todos os tickets abertos
 converted count	tracker	pt-br	Quantidade convertidos
 copy to	tracker	pt-br	Com cópia para
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	pt-br	Copiar suas alterações para a área de transferência, %1recarregar o registro%2 e mesclá-los.
+could not connect	tracker	pt-br	Não foi possível conectar
 create new links	tracker	pt-br	Criar novos links
 create new tracker entry's as default "private" for approval process	tracker	pt-br	Criar nova entrada no rastreador como "privada" padrão para o processo de aprovação
 created	tracker	pt-br	Criado
+created by	tracker	pt-br	Criado por
+created on	tracker	pt-br	Criado em
 creates a new field	tracker	pt-br	criar um novo campo
 creation date	tracker	pt-br	Data de criação
 creator	tracker	pt-br	Criador
 custom fields	tracker	pt-br	Campos personalizados
+custom notifications	tracker	pt-br	Notificações personalizadas
 custom tracker priorities	tracker	pt-br	Prioridades personalizadas para tipos de ticket
+customfield	tracker	pt-br	Campo personalizado
 data exchange settings	tracker	pt-br	Configurações de troca de dados
+date filter	tracker	pt-br	Filtro de data
 date opened	tracker	pt-br	Data de abertura
 default document to insert entries	tracker	pt-br	Documento padrão para inserir entradas
 default group	tracker	pt-br	Grupo padrão
 default tracker queue	tracker	pt-br	Fila padrão
+default version for new tracker entries	tracker	pt-br	Versão padrão para novas entradas do rastreador
 define escalations	common	pt-br	Definir escalas
 delete mails from server	tracker	pt-br	Remover emails do servidor
+delete the mail from the server	tracker	pt-br	Excluir o e-mail do servidor
+delete the mail from the server.	tracker	pt-br	Excluir o e-mail do servidor.
 delete this bounty	tracker	pt-br	Remover este pagamento
 delete this canned response	tracker	pt-br	Remover esta resposta automática
 delete this category	tracker	pt-br	Remover esta categoria
@@ -116,7 +143,7 @@ do not send notifications to external email (cc field)	tracker	pt-br	Não enviar
 do you want a notification, if items you are responsible for are about to start?	tracker	pt-br	Você quer receber uma notificação, caso algum item esteja prestes a iniciar e você seja o responsável?
 do you want a notification, if items you are responsible for are due?	tracker	pt-br	Você quer receber uma notificação, caso itens excedam o prazo e você seja o responsável?
 do you want to add mailheader information to description and/or comments?	tracker	pt-br	Deseja adicionar informações de cabeçalho de e-mail à descrição e/ou aos comentários?
-do you want to vote for this item	tracker	pt-br	Você deseja votar neste ticket ?
+do you want to vote for this item	tracker	pt-br	Você deseja votar neste ticket?
 donator name to show	tracker	pt-br	Nome do doador a ser exibido
 download url for links	tracker	pt-br	Baixar URL para links
 due	tracker	pt-br	Data de vencimento
@@ -262,12 +289,15 @@ responsible	tracker	pt-br	Responsável
 restict tracker items to the creator and the staff only	tracker	pt-br	Restringir tickets somente ao criador e à equipe
 restict tracker items to the creators primary group and the staff only	tracker	pt-br	Restringir tickets somente ao grupo principal do criador e à equipe
 restrict tracker items to staff and:	tracker	pt-br	Restringir tickets à equipe e:
+restricted comment	tracker	pt-br	Comentário restrito
 restriction	tracker	pt-br	Restrição
 same day	tracker	pt-br	Mesmo dia
+save new report	tracker	pt-br	Salvar novo relatório
+save new report...	tracker	pt-br	Salvar novo relatório ...
 saves the changes made and leaves	tracker	pt-br	salvar as alterações feitas e sair
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	pt-br	Selecionar um tipo de ticket para novos tickets ou 'Rejeitar' para não permitir criação de tickets por email.
 select multiple	tracker	pt-br	Selecionar múltiplos
-select one...	tracker	pt-br	Selecione um
+select one...	tracker	pt-br	Selecione um ...
 select tracker queue	tracker	pt-br	Selecionar elemento do Sistema de Tickets
 select which categories should be used in tracker for the tts categories	tracker	pt-br	Selecione quais categorias deverão ser utilizadas no Sistema de Tickets para as categorias do Tickets (TTS)
 select which username should be used when unrecognized mails are handled.	tracker	pt-br	Selecionar qual nome de usuário deverá ser utilizado quando emails não reconhecidos forem tratados.
@@ -280,8 +310,8 @@ set an own bounty (in %s)	tracker	pt-br	Definir um pagamento (em %s)
 set bounty	tracker	pt-br	Definir pagamento
 set due date this many days after escalation runs	tracker	pt-br	Definir a data de vencimento (número de dias) após a execução do escalonamento
 set the ticket start date to the email received date	tracker	pt-br	Definir a data de início do tíquete como a data de recebimento do e-mail
-should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado ?
-should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado ?
+should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket designado a você seja atualizado?
+should the tracker send you notification mails, if tracker items you created get updated?	tracker	pt-br	O Sistema de Tickets deverá notificá-lo, por e-mail, caso um ticket que você criou seja atualizado?
 signature	tracker	pt-br	Assinatura
 staff	tracker	pt-br	Equipe
 start date from email	tracker	pt-br	Data de início do e-mail
@@ -305,7 +335,7 @@ this month	tracker	pt-br	Este mês
 this tracker item was closed automatically by the system. it was previously set to a pending status, and the original submitter did not respond within %1 days.	tracker	pt-br	Este ticket foi fechado automaticamente pelo sistema. O mesmo foi, previamente, definido como Pendente e o criador não respondeu em %1 dia(s).
 this week	tracker	pt-br	Esta semana
 this year	tracker	pt-br	Este ano
-ticket count	tracker	pt-br	quantidade de tickets
+ticket count	tracker	pt-br	Quantidade de tickets
 ticket modified by %1 at %2	tracker	pt-br	Ticket modificado por %1 em %2
 times	tracker	pt-br	Horários
 tracker	common	pt-br	Sistema de Tickets
@@ -337,6 +367,10 @@ votes	tracker	pt-br	Votos
 wont fix	tracker	pt-br	Não será resolvido
 works for me	tracker	pt-br	Funciona para mim
 writable filemanager directory	tracker	pt-br	Diretório do gerenciador de arquivos gravável
+yes, add mailheader to both (description and comments)	tracker	pt-br	Sim, adicionar cabeçalho de correio a ambos (descrição e comentários)
+yes, add mailheader to comments	tracker	pt-br	Sim, adicionar cabeçalho de correio aos comentários
+yes, add mailheader to description	tracker	pt-br	Sim, adicionar cabeçalho de correio à descrição
+yes, always	tracker	pt-br	Sim, sempre
 yes, display groups first	tracker	pt-br	Sim, exibir grupos primeiro
 yes, display users first	tracker	pt-br	Sim, exibir usuários primeiro
 yes, with larger fontsize	tracker	pt-br	Sim, com fontes grandes
@@ -345,11 +379,13 @@ you can enable/disable the queue access restrictions in the configuration tab (f
 you can respond by visiting:	tracker	pt-br	Você pode responder visitando:
 you need to enter a name	tracker	pt-br	Você precisa informar um nome
 you need to login to vote!	tracker	pt-br	Você precisa fazer login para votar
+you need to select an entry for linking.	tracker	pt-br	Você precisa selecionar uma entrada para vinculação.
 you need to select something to change and some tracker items!	tracker	pt-br	Você precisa selecionar algo para alterar E alguns tickets!
 you need to specify amount, donators name and email address!	tracker	pt-br	Você precisa especificar valor, nome do doador E e-mail
 you voted %1.	tracker	pt-br	Você votou %1
 ♦ not closed	tracker	pt-br	Não fechados
 ♦ own not closed	tracker	pt-br	Meus / Não fechados
+♦ own or assigned not closed	tracker	pt-br	Próprio ou atribuído, não fechado
 ♦ own without reply not closed	tracker	pt-br	Meus / Sem resposta / Não fechados
 ♦ without 30 days reply not closed	tracker	pt-br	Sem resposta por 30 dias / Não fechados
 ♦ without reply not closed	tracker	pt-br	Sem resposta / Não fechados

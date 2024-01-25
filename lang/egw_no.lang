@@ -9,23 +9,55 @@
 (beware of mailloops, check the help!)	tracker	no	(Se opp for mailloops!)
 (new tickets as	tracker	no	Nye billetter som
 --> choose a project from the drop-down list	tracker	no	--> velg et prosjekt fra nedtrekkslisten
+--> enter new name	tracker	no	--> skriv inn nytt navn
+1 - lowest	tracker	no	1 - laveste
 2 days in advance	tracker	no	2 dager i forveien
 2 years ago	tracker	no	2 år tilbake i tid
 3 days in advance	tracker	no	3 dager i forveien
 3 years ago	tracker	no	3 år siden
+5 - medium	tracker	no	5 - middels
+9 - highest	tracker	no	9 - høyest
 [fwd]	tracker	no	[FWD]
 accepted	tracker	no	Godkjent
+acl	tracker	no	Liste over tilgangskontroller
+activate users queue access control	tracker	no	Aktiver tilgangskontroll for brukerkøen
+add / remove link	tracker	no	Legg til / fjern lenke
 add a ticket	tracker	no	Legg til en sak
 add additionally	tracker	no	Legg til i tillegg
 add assigned	tracker	no	Legg til tildelt
 add comment	tracker	no	Legg til kommentar
 add email-address	tracker	no	Legg til e-postadresse
+add from addressbook	tracker	no	Legg til fra adressebok
+add infolog	tracker	no	Legg til InfoLog
+add restricted comment	tracker	no	Legg til begrenset kommentar
 add timesheet entry	tracker	no	Legg til forekomst i timeregistrering
+add to	tracker	no	Legg til
+add unrecognized mail address to the cc field	tracker	no	Legg til ukjent e-postadresse i CC-feltet
 after	tracker	no	Etter
+after how many days a not replied item should be marked overdue?	tracker	no	Etter hvor mange dager skal et ikke-besvart element markeres som forfalt?
+after how many days pending items should be closed automatic	tracker	no	Etter hvor mange dager skal ventende saker lukkes automatisk?
+all	tracker	no	Alle
+all tickets are already converted to tracker	tracker	no	Alle saker er allerede konvertert til Tracker
+all versions	tracker	no	Alle versjoner
 allow bounties	tracker	no	Tillat dusører
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	no	Gjør det mulig å opprette begrensede kommentarer som bare er synlige for administratorer, teknikere og tildelte brukere.
+allow creation of infolog entries from tracker tickets	tracker	no	Tillat opprettelse av InfoLog-oppføringer fra Tracker-saker
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	no	Tillat forhåndsdefinering av prosjekter som skal tilordnes nye tracker-elementer
+allow to assign groups to tracker items	tracker	no	Gjør det mulig å tilordne grupper
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	no	Mulighet for å tilordne "brukere" til en sak i tillegg til "teknikere" og "Tracker-administratorer".
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	no	Tillat å tilordne ikke bare "Tracker Admins" og "Technians" til en sak, men også "Brukere" i personalfanen.
 allow voting	tracker	no	Tillat avstemning
 already escalated	tracker	no	Allerede eskalert
+application mail expected but got: %1	tracker	no	Forventet e-post for søknad, men fikk: %1
+before	tracker	no	Før
+bounty	tracker	no	Belønning
+canned response	tracker	no	Svar i boks
+canned responses	tracker	no	Hermetiske svar
+categories, versions, canned responses	tracker	no	Kategorier, versjoner, hermetiske svar
+change assigned	tracker	no	Endre tildelt
 change color	tracker	no	Endre farge
+change group when updating	tracker	no	Endre gruppe ved oppdatering
+change owner when updating	tracker	no	Endre eier ved oppdatering
 check all	tracker	no	Kontroller alle
 choose 'creator' of imported data	tracker	no	Velg "oppretter" av importerte data
 closed date	tracker	no	Avsluttet dato
@@ -34,18 +66,33 @@ comments	tracker	no	Kommentarer
 completed	tracker	no	Utført
 configuration	tracker	no	Konfigurasjon
 configuration, notifications	tracker	no	Konfigurasjon, Varsler
+converted count	tracker	no	Antall konverterte
 copy to	tracker	no	Kopier til
 copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	no	Kopier endringene dine til utklippstavlen, %1oppfrisk forekomsten%2 og sammenstill de
+could not connect	tracker	no	kunne ikke koble til
 create new links	tracker	no	Opprette nye lenker
 create new tracker entry's as default "private" for approval process	tracker	no	Opprett ny sporingsoppføring som standard "privat" for godkjenningsprosessen
 created	tracker	no	Opprettet
+created by	tracker	no	Opprettet av
+created on	tracker	no	Opprettet på
 creates a new field	tracker	no	lager nytt felt
 creation date	tracker	no	Først opprettet
 custom fields	tracker	no	Egendefinerte Felter
+custom notifications	tracker	no	Egendefinerte varsler
+customfield	tracker	no	Tilpasset felt
+data exchange settings	tracker	no	Innstillinger for datautveksling
+date filter	tracker	no	Datofilter
+default document to insert entries	tracker	no	Standarddokument for å legge inn oppføringer
 default group	tracker	no	Standard gruppe
 default tracker queue	tracker	no	Standard kø
+default version for new tracker entries	tracker	no	Standardversjon for nye sporingsoppføringer
+delete the mail from the server	tracker	no	Slett e-posten fra serveren
+delete the mail from the server.	tracker	no	Slett e-posten fra serveren.
+delete this canned response	tracker	no	Slett dette forhåndsdefinerte svaret
 delete this category	tracker	no	Slett denne kategorien
 delete this entry	tracker	no	Slett dette forekomsten
+delete this escalation	tracker	no	Slett denne eskaleringen
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	no	Slett ukjente e-poster fra serveren, selv om "Slett e-poster" ovenfor ikke er merket.
 deleted	tracker	no	Slettet
 deletes this field	tracker	no	sletter dette feltet
 deny global	tracker	no	Avslå global
@@ -96,7 +143,7 @@ number of row for a multiline inputfield or line of a multi-select-box	tracker	n
 open(status)	tracker	no	Åpent
 order	tracker	no	Ordre
 overdue	tracker	no	Forfalt
-permission denied !!!	tracker	no	Adgang nektet !
+permission denied !!!	tracker	no	Adgang nektet!
 process	tracker	no	Prosess
 read	tracker	no	Lest
 read / unread	tracker	no	Lest / Ulest
@@ -106,7 +153,7 @@ remind	tracker	no	Påminn
 respect timesheet run and read permissions for time totals	tracker	no	Respekter kjøring av timelister og lesetillatelser for tidstotaler
 responsible	tracker	no	Ansvarlig
 saves the changes made and leaves	tracker	no	lagrer endringene og lukker
-select one...	tracker	no	Velg en...
+select one...	tracker	no	Velg en ...
 set due date this many days after escalation runs	tracker	no	Angi forfallsdato (antall dager) etter eskaleringskjøringen
 set the ticket start date to the email received date	tracker	no	Sett startdatoen for saken til datoen for mottatt e-post
 signature	tracker	no	Signatur
@@ -123,4 +170,8 @@ unread	tracker	no	Ulest
 upcoming	tracker	no	Nært forestående
 updated	tracker	no	Oppdatert
 writable filemanager directory	tracker	no	Skrivebeskyttet filbehandlingskatalog
+yes, add mailheader to both (description and comments)	tracker	no	Ja, legg til posthode i begge (beskrivelse og kommentarer)
+yes, add mailheader to comments	tracker	no	Ja, legg til posthode i kommentarer
+yes, add mailheader to description	tracker	no	Ja, legg til posthode i beskrivelse
+yes, always	tracker	no	Ja, alltid
 yesterday	tracker	no	I går

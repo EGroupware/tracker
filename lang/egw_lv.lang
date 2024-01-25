@@ -9,23 +9,55 @@
 (beware of mailloops, check the help!)	tracker	lv	(Uzmanieties no mailloops!)
 (new tickets as	tracker	lv	Jaunas biļetes kā
 --> choose a project from the drop-down list	tracker	lv	--> no izlaižamā saraksta izvēlieties projektu
+--> enter new name	tracker	lv	--> ievadiet jaunu nosaukumu
+1 - lowest	tracker	lv	1 - zemākais
 2 days in advance	tracker	lv	2 dienas iepriekš
 2 years ago	tracker	lv	Pirms 2 gadiem
 3 days in advance	tracker	lv	3 dienas iepriekš
 3 years ago	tracker	lv	pirms 3 gadiem
+5 - medium	tracker	lv	5 - vidējs
+9 - highest	tracker	lv	9 - augstākais
 [fwd]	tracker	lv	[FWD]
 accepted	tracker	lv	Akceptēts
+acl	tracker	lv	Piekļuves kontroles saraksts
+activate users queue access control	tracker	lv	Aktivizēt lietotāju rindas piekļuves kontroli
+add / remove link	tracker	lv	Pievienot / Noņemt saiti
 add a ticket	tracker	lv	Pievienot biļeti
 add additionally	tracker	lv	Pievienot papildus
 add assigned	tracker	lv	Pievienot piešķirto
 add comment	tracker	lv	Pievienot komentāru
 add email-address	tracker	lv	Pievienot e-pasta adresi
+add from addressbook	tracker	lv	Pievienot no adrešu grāmatas
+add infolog	tracker	lv	Pievienot InfoLog
+add restricted comment	tracker	lv	Pievienot ierobežotu komentāru
+add timesheet entry	tracker	lv	Pievienot darba laika uzskaites ierakstu
+add to	tracker	lv	Pievienot
+add unrecognized mail address to the cc field	tracker	lv	Pievienot neatpazītu e-pasta adresi CC laukā
 after	tracker	lv	Pēc
+after how many days a not replied item should be marked overdue?	tracker	lv	Pēc cik dienām neatbildēts sūtījums jāatzīmē kā nokavēts?
+after how many days pending items should be closed automatic	tracker	lv	Pēc cik dienām neizskatītie vienumi būtu automātiski jāslēdz?
+all	tracker	lv	Visi
+all versions	tracker	lv	Visas versijas
 allow bounties	tracker	lv	Atļaut prēmijas
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	lv	Ļauj izveidot ierobežotas piekļuves komentārus, kas ir redzami tikai administratoriem, tehniskajiem darbiniekiem un piešķirtajiem lietotājiem
+allow creation of infolog entries from tracker tickets	tracker	lv	Ļauj izveidot InfoLog ierakstus no Tracker biļetēm
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	lv	Ļauj iepriekš definēt projektus, kas tiks piešķirti jauniem izsekošanas elementiem.
+allow to assign groups to tracker items	tracker	lv	Ļauj piešķirt grupas
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lv	Atļaut "Lietotājus" piešķirt biļetei papildus "Tehniķiem" un "Tracker administratoriem".
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	lv	Atļaut piešķirt biļetei ne tikai "Tracker Admins" un "Technians", bet arī "Users" personāla cilnē.
 allow voting	tracker	lv	Atļaut balsošanu
 already escalated	tracker	lv	Jau eskalēts
+application mail expected but got: %1	tracker	lv	Pieteikuma e-pasts gaidīts, bet saņemts: %1
 applies the changes	tracker	lv	apstiprināt izmaiņas
+before	tracker	lv	Pirms
+bounty	tracker	lv	Bounty
+canned response	tracker	lv	Reakcija uz konserviem
+canned responses	tracker	lv	Konservētas atbildes
+categories, versions, canned responses	tracker	lv	Kategorijas, versijas, konservētas atbildes
+change assigned	tracker	lv	Piešķirtās izmaiņas
 change color	tracker	lv	Mainīt krāsu
+change group when updating	tracker	lv	Mainīt grupu atjaunināšanas laikā
+change owner when updating	tracker	lv	Atjaunināšanas laikā mainīt īpašnieku
 check all	tracker	lv	Parbaudīt visu
 choose 'creator' of imported data	tracker	lv	Izvēlieties importēto datu "radītāju
 closed date	tracker	lv	Slēgšanas datums
@@ -34,17 +66,32 @@ comments	tracker	lv	Komentāri
 completed	tracker	lv	Pabeigts
 configuration	tracker	lv	Konfigurācija
 configuration, notifications	tracker	lv	Konfigurēšana, Paziņojumi
+converted count	tracker	lv	Pārveidoto skaits
 copy to	tracker	lv	Kopēt Uz:
+could not connect	tracker	lv	nevarēja izveidot savienojumu
 create new links	tracker	lv	Izveidot jaunas saites
 create new tracker entry's as default "private" for approval process	tracker	lv	Izveidot jaunu izsekošanas ierakstu kā noklusējuma "privātu" apstiprināšanas procesam
 created	tracker	lv	Izveidots
+created by	tracker	lv	Izveidoja
+created on	tracker	lv	Izveidots
 creates a new field	tracker	lv	veido jaunu lauku
 creation date	tracker	lv	Izveiodšanas datums
 custom fields	tracker	lv	Mainīti lauki
+custom notifications	tracker	lv	Pielāgotie paziņojumi
+customfield	tracker	lv	Pielāgotais lauks
+data exchange settings	tracker	lv	Datu apmaiņas iestatījumi
+date filter	tracker	lv	Datuma filtrs
+default document to insert entries	tracker	lv	Noklusējuma dokuments ierakstu ievietošanai
 default group	tracker	lv	Noklusējuma grupa
 default tracker queue	tracker	lv	Standarta rinda
+default version for new tracker entries	tracker	lv	Noklusējuma versija jauniem izsekotāja ierakstiem
+delete the mail from the server	tracker	lv	Dzēst e-pastu no servera
+delete the mail from the server.	tracker	lv	Dzēst e-pastu no servera.
+delete this canned response	tracker	lv	Dzēst šo konservēto atbildi
 delete this category	tracker	lv	Izdzēst šo kategoriju
 delete this entry	tracker	lv	Dzēst šo ierakstu
+delete this escalation	tracker	lv	Dzēst šo eskalāciju
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	lv	Dzēst neatpazītus e-pastus no servera, pat ja iepriekš nav atzīmēts "Dzēst e-pastus".
 deleted	tracker	lv	Izdzēsts
 deletes this field	tracker	lv	dzēš šo lauku
 deny global	tracker	lv	Noliegt globālo
@@ -88,7 +135,7 @@ links	tracker	lv	Saites
 max length of the input [, length of the inputfield (optional)]	tracker	lv	ievades datu maksimālais garums[, ievades lauka garums (pēc izvēles)]
 open(status)	tracker	lv	Atvērt
 order	tracker	lv	Kārtība
-permission denied !!!	tracker	lv	Atļauja liegta!!!
+permission denied !!!	tracker	lv	Atļauja liegta!
 process	tracker	lv	Process
 read	tracker	lv	Lasīt
 read / unread	tracker	lv	Lasīt / Neizlasīts
@@ -114,3 +161,7 @@ unread	tracker	lv	Neizlasīts
 upcoming	tracker	lv	Ienākošs
 updated	tracker	lv	Atjaunināts
 writable filemanager directory	tracker	lv	Failu pārvaldnieka direktorija, kurā var rakstīt
+yes, add mailheader to both (description and comments)	tracker	lv	Jā, pievienot abām (aprakstam un komentāriem) e-pasta galveni.
+yes, add mailheader to comments	tracker	lv	Jā, komentāriem pievienot e-pasta galveni
+yes, add mailheader to description	tracker	lv	Jā, pievienot nosaukuma virsrakstu aprakstam
+yes, always	tracker	lv	Jā, vienmēr

@@ -27,8 +27,8 @@ add additionally	tracker	en	Add additionally
 add assigned	tracker	en	Add assigned
 add comment	tracker	en	Add comment
 add email-address	tracker	en	Add email address
-add from addressbook	tracker	en	Add from Address book
-add infolog	tracker	en	Add infolog
+add from addressbook	tracker	en	Add from Address Book
+add infolog	tracker	en	Add InfoLog
 add restricted comment	tracker	en	Add restricted comment
 add timesheet entry	tracker	en	Add timesheet entry
 add to	tracker	en	Add to
@@ -213,7 +213,7 @@ general fields:	tracker	en	General fields:
 general settings	tracker	en	General settings
 handling autoreplies	tracker	en	Handling auto replies
 handling bounced mails	tracker	en	Handling bounced emails
-handling mailheader information	tracker	en	Handling mailheader Information
+handling mailheader information	tracker	en	Handling mailheader information
 history	tracker	en	History
 how many description lines should be directly visible. further lines are available via a scrollbar.	tracker	en	How many description lines should be directly visible. Further lines are available via a scroll bar.
 html editing	tracker	en	HTML editing
@@ -291,7 +291,7 @@ new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by 
 no change	tracker	en	No change
 no notifications	tracker	en	No notifications
 no trackers found, aborting	tracker	en	No Trackers found, aborting.
-no, no additional mailheader to description and comments	tracker	en	no, no additional mailheader to description and comments
+no, no additional mailheader to description and comments	tracker	en	No, no additional mailheader to description and comments
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	No one
 not-closed	tracker	en	not closed
@@ -365,14 +365,14 @@ restriction	tracker	en	Restriction
 run on existing tickets	tracker	en	Run on existing tickets
 same day	tracker	en	Same day
 save new report	tracker	en	Save new report
-save new report...	tracker	en	Save new report...
+save new report...	tracker	en	Save new report ...
 saves the changes made and leaves	tracker	en	saves the changes made and leaves
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	en	Select a default tracker for new tickets or 'Reject' to disallow ticket creation via email.
 select accounts for which the custom field should be visible	tracker	en	Select accounts for which the custom field should be visible
 select existing report	tracker	en	Select existing report
 select how autoreplies should be sent when mails are received	tracker	en	Select how auto replies should be sent when emails are received
 select multiple	tracker	en	Select multiple
-select one...	tracker	en	Select one...
+select one...	tracker	en	Select one ...
 select tracker queue	tracker	en	Select tracker queue
 select users or groups	tracker	en	Select users or groups
 select which categories should be used in tracker for the tts categories	tracker	en	Select which categories should be used in Tracker for the TTS categories.
@@ -484,9 +484,9 @@ when emails are received from an unknown email address, tag this field to have t
 wont fix	tracker	en	Wont fix
 works for me	tracker	en	Works for me
 writable filemanager directory	tracker	en	Writable File Manager directory
-yes, add mailheader to both (description and comments)	tracker	en	yes, add mailheader to both (description and comments)
-yes, add mailheader to comments	tracker	en	yes, add mailheader to comments
-yes, add mailheader to description	tracker	en	yes, add mailheader to description
+yes, add mailheader to both (description and comments)	tracker	en	Yes, add mailheader to both (description and comments)
+yes, add mailheader to comments	tracker	en	Yes, add mailheader to comments
+yes, add mailheader to description	tracker	en	Yes, add mailheader to description
 yes, always	tracker	en	Yes, always
 yes, display groups first	tracker	en	Yes, display groups first
 yes, display users first	tracker	en	Yes, display users first

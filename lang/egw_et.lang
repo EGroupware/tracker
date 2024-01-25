@@ -17,17 +17,31 @@
 3 years ago	tracker	et	3 aastat tagasi
 5 - medium	tracker	et	5 - keskmine
 9 - highest	tracker	et	9 - kõrgeim
+[fwd]	tracker	et	[FWD]
 accepted	tracker	et	Kinnitatud
+acl	tracker	et	Juurdepääsu kontrollnimekiri
+activate users queue access control	tracker	et	Aktiveeri kasutajate järjekorra juurdepääsukontroll
+add / remove link	tracker	et	Lingi lisamine / eemaldamine
+add a ticket	tracker	et	Pileti lisamine
+add additionally	tracker	et	Lisa täiendavalt
+add assigned	tracker	et	Lisa määratud
 add comment	tracker	et	Lisa kommentaar
 add email-address	tracker	et	Lisa e-posti aadress
+add from addressbook	tracker	et	Lisa aadressiraamatust
+add infolog	tracker	et	Lisa InfoLog
+add restricted comment	tracker	et	Lisa piiratud kommentaar
 add timesheet entry	tracker	et	Lisa Timesheet kirje
+add to	tracker	et	Lisada
+add unrecognized mail address to the cc field	tracker	et	Lisage tunnustamata e-posti aadressi CC-väljale
+after	tracker	et	Pärast
 after how many days a not replied item should be marked overdue?	tracker	et	Mitme päevapärast vastamatta asjad määratakse kui hilinenud?
 after how many days pending items should be closed automatic	tracker	et	Mitme päevapärast otsustamatta asjad suletakse automaatselt?
 all	tracker	et	Kõik
+all tickets are already converted to tracker	tracker	et	Kõik piletid on juba teisendatud Trackerisse
 all versions	tracker	et	Kõik versioonid
 allow bounties	tracker	et	Luba vaevatasud
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	et	Võimaldab luua piiratud kommentaare, mis on nähtavad ainult administraatoritele, tehnikutele ja määratud kasutajatele.
-allow creation of infolog entries from tracker tickets	tracker	et	Võimaldab InfoLogi kirjete loomist jälgimisseadme piletitest
+allow creation of infolog entries from tracker tickets	tracker	et	Võimaldab InfoLog kirjete loomist jälgimisseadme piletitest
 allow default projects for tracker	tracker	et	Luba vaikimisi projektid Trackeris
 allow editing by	tracker	et	Luba muuta
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	et	Võimaldab uute jälgimisobjektide jaoks määratud projektide eeldefineerimist.
@@ -36,13 +50,18 @@ allow to assign to a ticket not only "tracker admins" and "technians", but also 
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	et	Lubada määrata piletile mitte ainult "Tracker Admins" ja "Technians", vaid ka "Users" personali vahekaardil
 allow voting	tracker	et	Luba hääletamine
 allow voting on tracker items, show and sort after the votes	tracker	et	Luba Trackeri asjade hääletamine, näita ja sorteeri pärast hääletusi
+already escalated	tracker	et	Juba eskaleeritud
 amount	tracker	et	Kogus
 application mail expected but got: %1	tracker	et	Taotluse e-kiri oodatud, kuid sai: %1
+applies the changes	tracker	et	rakendab muudatused
+assign to project	tracker	et	Projektile määramine
 assigned to	tracker	et	Vastutaja
 attachments & links	tracker	et	Manused & Lingid
 autoassign to	tracker	et	Vaikimisi vastutab
 automatically created by importexport	tracker	et	Automaatselt tehtud Import-Eksport poolt
+before	tracker	et	Enne
 bounties	tracker	et	Vaevatasud
+bounty	tracker	et	Bounty
 bounty confirmed	tracker	et	Vaevatasu kinnitatud
 bounty confirmed.	tracker	et	Vaevatasu kinnitatud.
 bounty deleted	tracker	et	Vaevatasu kustutatud
@@ -51,7 +70,10 @@ bounty set	tracker	et	Vaevatasu seatud
 canned response	tracker	et	Eelsalvestatud vastus
 canned responses	tracker	et	Eelsalvestatud vastused
 categories, versions, canned responses	tracker	et	Kategooriad, versioonid, eelsalvestatud vastused
+change assigned	tracker	et	Määratud muudatus
 change color	tracker	et	Muuda värvi
+change group when updating	tracker	et	Muuda rühma uuendamisel
+change owner when updating	tracker	et	Muuda omanikku uuendamisel
 check all	tracker	et	Kontrolli kõik
 choose 'creator' of imported data	tracker	et	Valige imporditud andmete looja
 close pending	tracker	et	Sule otsustamatta
@@ -64,21 +86,34 @@ configuration	tracker	et	Konfiguratsioon
 configuration updated.	tracker	et	Konfiguratsioon uuendatud.
 configuration, notifications	tracker	et	Konfigureerimine, Teated
 confirmed	tracker	et	Kinnitatud
+could not connect	tracker	et	ei saanud ühendust luua
 create new links	tracker	et	Tee uued lingid
 create new tracker entry's as default "private" for approval process	tracker	et	Loo uus jälgimiskirje vaikimisi "privaatne" heakskiitmise protsessi jaoks.
 created	tracker	et	Tehtud
+created by	tracker	et	Loodud
+created on	tracker	et	Loodud aadressil
 creates a new field	tracker	et	teeb uue välja
 creation date	tracker	et	Tegemise kuupäev
+custom notifications	tracker	et	Kohandatud teated
+customfield	tracker	et	Customfield
+data exchange settings	tracker	et	Andmevahetuse seaded
+date filter	tracker	et	Kuupäeva filter
 date opened	tracker	et	Kuupäev avatud
+default document to insert entries	tracker	et	Standardne dokument kirjete sisestamiseks
 default group	tracker	et	Vaikimisi grupp
 default tracker queue	tracker	et	Standardne järjekord
+default version for new tracker entries	tracker	et	Uute jälgimiskirjete vaikeversioon
+delete the mail from the server	tracker	et	E-posti kustutamine serverist
+delete the mail from the server.	tracker	et	E-posti kustutamine serverist.
 delete this bounty	tracker	et	Kustuta see vaevatasu
 delete this canned response	tracker	et	Kustuta see eelsalvestatud vastus
 delete this category	tracker	et	Kustuta see kategooria
 delete this entry	tracker	et	Kustuta see kirje
+delete this escalation	tracker	et	Kustutage see eskalatsioon
 delete this status	tracker	et	Kustuta see staatus
 delete this tracker including all its items and categories	tracker	et	Kustuta see jälgija koos tema asjade ja kategoorjatega
 delete this version	tracker	et	Kustuta see versioon
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	et	Kustutage serverist tuvastamata e-kirjad, isegi kui eespool pole märgitud 'Kustuta e-kirjad'.
 deleted	tracker	et	Kustutatud
 deletes this field	tracker	et	kustutab selle välja
 deny global	tracker	et	Keelata globaalne
@@ -98,15 +133,28 @@ edit others' comments	tracker	et	Muuda teiste kommentaare
 edit own comments	tracker	et	Muuda enda kommentaare
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	et	EGroupware Tracker mailhandling: ei saanud varem ühendust luua ja profiili ei muutnud
 email address to contact you	tracker	et	E-mail aadress kontakteerumaks sinuga
+enable color code for	tracker	et	Värvikoodi lubamine
+enter the email for reply to	tracker	et	Sisestage e-posti aadress, millele vastatakse
 entry saved	tracker	et	Kirje salvestatud
 error adding the new tracker!	tracker	et	Viga uue jälgija lisamisel!
-error saving the entry!!!	tracker	et	Viga kirje salvestamisel !!!
+error deleting escalation!	tracker	et	Viga eskalatsiooni kustutamisel!
+error renaming tracker queue!	tracker	et	Viga jälgimisjärjekorra ümbernimetamisel!
+error saving the entry!!!	tracker	et	Viga kirje salvestamisel!
+error: no mail (mailbox / uid) given!	tracker	et	Viga: e-posti (postkasti / UID) ei ole antud!
+escalation	tracker	et	Eskalatsioon
+escalation added.	tracker	et	Eskalatsioon lisatud.
+escalation deleted.	tracker	et	Eskalatsioon kustutatud.
+escalation not found!	tracker	et	Eskalatsiooni ei leitud!
+escalation saved.	tracker	et	Eskalatsioon salvestatud.
 everybody	tracker	et	Igaüks
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	et	Näide {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - otsi väljal "n_prefix", et leida "Mr", kui leitakse, siis kirjuta Hello Mr., muidu kirjuta Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	et	Näide {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Näide: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	et	Näide {{NELF roll}} - kui väli roll ei ole tühi, saate uue rea, kus on välja roll väärtus
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	et	Näide {{nenvlf roll}} - kui väli roll ei ole tühi, seatakse LF ilma väljal oleva väärtuseta
+exclude links of the following apps on timesheet creation	tracker	et	Järgmiste rakenduste linkide välistamine töölehe loomisel
 existing links	tracker	et	Eksisteerivad lingid
+exists	tracker	et	Olemas
+export csv	tracker	et	CSV eksportimine
 field	tracker	et	Väli
 fixed	tracker	et	Parandatud
 forward	tracker	et	Edasi
@@ -145,7 +193,7 @@ out of date	tracker	et	Aegunud
 pending	tracker	et	Otsustamatta
 pending items never get close automatic.	tracker	et	Otsustamatta ei suleta kunagi automaatselt.
 pending items will be closed automatic after %1 days without response.	tracker	et	Otsustamatta asjad suletakse automaatselt pärast %1 päeva ilma vastusetta.
-permission denied !!!	tracker	et	Ligipääs keelatud !!!
+permission denied !!!	tracker	et	Ligipääs keelatud!
 project selection	tracker	et	Projekti valik
 projects	tracker	et	Projektid
 read	tracker	et	Loetud
@@ -156,7 +204,7 @@ remind	tracker	et	Meeldetuletus
 resolution	tracker	et	Lahendus
 responsible	tracker	et	Vastutav
 same day	tracker	et	Sama päev
-select one...	tracker	et	Vali üks...
+select one...	tracker	et	Vali üks ...
 sender address	tracker	et	Saatja aadress
 set an own bounty (in %s)	tracker	et	Sea oma vaevatasu (%s)
 set bounty	tracker	et	Sea vaevatasu
@@ -187,6 +235,10 @@ votes	tracker	et	Hääletused
 wont fix	tracker	et	Pole parandatav
 works for me	tracker	et	Töötab minujaoks
 writable filemanager directory	tracker	et	Kirjutatav failihalduri kataloog
+yes, add mailheader to both (description and comments)	tracker	et	Jah, lisada postipealkiri mõlemale (kirjeldus ja kommentaarid)
+yes, add mailheader to comments	tracker	et	Jah, lisada postipealkiri kommentaaridele
+yes, add mailheader to description	tracker	et	Jah, lisada postipealkiri kirjeldusele
+yes, always	tracker	et	Jah, alati
 yes, display groups first	tracker	et	Jah, näita gruppe esmalt
 yes, display users first	tracker	et	Jah, näita kasutajaid esmalt
 yesterday	tracker	et	Eile

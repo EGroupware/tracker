@@ -365,14 +365,14 @@ restriction	tracker	it	Restrizioni
 run on existing tickets	tracker	it	Esegui su ticket esistenti
 same day	tracker	it	Stesso giorno
 save new report	tracker	it	Salva nuovo report
-save new report...	tracker	it	Salva nuovo report...
+save new report...	tracker	it	Salva nuovo report ...
 saves the changes made and leaves	tracker	it	salva le modifiche fatte ed esce
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	it	Seleziona un tracker di default per i nuovi tickets o 'Rifiuta' la possibilità di creazione di ticket tramite email
 select accounts for which the custom field should be visible	tracker	it	Seleziona account ai quali il campo personalizzato sarà visibile
 select existing report	tracker	it	Seleziona report esistente
 select how autoreplies should be sent when mails are received	tracker	it	Selezionare come dovranno essere inviate le risposte automatiche all'arrivo di posta.
 select multiple	tracker	it	Selezione multipla
-select one...	tracker	it	selezionane uno...
+select one...	tracker	it	selezionane uno ...
 select tracker queue	tracker	it	Seleziona coda del tracker
 select users or groups	tracker	it	Seleziona utenti o gruppi
 select which categories should be used in tracker for the tts categories	tracker	it	seleziona quali categorie dovrebbero essere utilizzate in Tracker per le categorie TTS

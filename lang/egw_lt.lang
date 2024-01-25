@@ -9,29 +9,77 @@
 (beware of mailloops, check the help!)	tracker	lt	(Saugokitės mailloops!)
 (new tickets as	tracker	lt	Nauji bilietai kaip
 --> choose a project from the drop-down list	tracker	lt	--> pasirinkite projektą iš išskleidžiamojo sąrašo
+--> enter new name	tracker	lt	--> įveskite naują pavadinimą
+1 - lowest	tracker	lt	1 - mažiausias
 2 days in advance	tracker	lt	Prieš 2 dienas
 2 years ago	tracker	lt	Prieš 2 metus
 3 days in advance	tracker	lt	Prieš 3 dienas
 3 years ago	tracker	lt	prieš 3 metus
+5 - medium	tracker	lt	5 - vidutinis
+9 - highest	tracker	lt	9 - didžiausias
 [fwd]	tracker	lt	[FWD]
 accepted	tracker	lt	Priimta
+acl	tracker	lt	Prieigos kontrolės sąrašas
+activate users queue access control	tracker	lt	Įjungti naudotojų eilės prieigos kontrolę
+add / remove link	tracker	lt	Pridėti / pašalinti nuorodą
 add a ticket	tracker	lt	Pridėti bilietą
 add additionally	tracker	lt	Pridėti papildomai
 add assigned	tracker	lt	Pridėti priskirtą
 add comment	tracker	lt	Pridėti komentarą
 add email-address	tracker	lt	Pridėti el. pašto adresą
+add from addressbook	tracker	lt	Pridėti iš adresų knygos
+add infolog	tracker	lt	Pridėti InfoLog
+add restricted comment	tracker	lt	Pridėti ribotą komentarą
+add timesheet entry	tracker	lt	Pridėti darbo laiko apskaitos žiniaraščio įrašą
+add to	tracker	lt	Pridėti į
+add unrecognized mail address to the cc field	tracker	lt	Pridėti neatpažintą el. pašto adresą į CC lauką
 after	tracker	lt	Po
+after how many days a not replied item should be marked overdue?	tracker	lt	Po kiek dienų neatsakytas elementas turėtų būti pažymėtas kaip vėluojantis?
+after how many days pending items should be closed automatic	tracker	lt	Po kiek dienų laukiantys straipsniai turėtų būti automatiškai uždaromi?
+all	tracker	lt	Visi
+all tickets are already converted to tracker	tracker	lt	Visi bilietai jau konvertuoti į "Tracker
+all versions	tracker	lt	Visos versijos
 allow bounties	tracker	lt	Leisti premijas
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	lt	Leidimas kurti riboto naudojimo komentarus, kurie matomi tik administratoriams, technikams ir priskirtiems naudotojams
+allow creation of infolog entries from tracker tickets	tracker	lt	Leisti kurti informacinio žurnalo įrašus iš "Tracker" bilietų
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	lt	Leisti iš anksto apibrėžti projektus, kurie bus priskirti naujiems sekimo elementams
+allow to assign groups to tracker items	tracker	lt	Leisti priskirti grupes
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lt	Leisti prie bilieto papildomai priskirti "Naudotojus", "Technikus" ir "Sekimo administratorius".
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	lt	Leisti priskirti bilietui ne tik "Tracker Admins" ir "Technians", bet ir "Users" personalo skirtuke
 allow voting	tracker	lt	Leisti balsuoti
 already escalated	tracker	lt	Jau eskaluojama
+application mail expected but got: %1	tracker	lt	Tikėtasi gauti paraiškos el. laišką, bet gauta: %1
+before	tracker	lt	Prieš
+bounty	tracker	lt	Bounty
+canned response	tracker	lt	Konservų atsakas
+canned responses	tracker	lt	Konservuoti atsakymai
+categories, versions, canned responses	tracker	lt	Kategorijos, versijos, konservuoti atsakymai
+change assigned	tracker	lt	Priskirti pakeitimai
 change color	tracker	lt	Pakeisti spalvą
+change group when updating	tracker	lt	Pakeisti grupę atnaujinant
+change owner when updating	tracker	lt	Atnaujinant pakeisti savininką
 choose 'creator' of imported data	tracker	lt	Pasirinkite importuojamų duomenų "kūrėją
 closed date	tracker	lt	Uždarymo data
 color	tracker	lt	Spalva
 configuration, notifications	tracker	lt	Konfigūracija, Pranešimai
+converted count	tracker	lt	Konvertuotas skaičius
+could not connect	tracker	lt	nepavyko prisijungti
 create new tracker entry's as default "private" for approval process	tracker	lt	Sukurti naują stebėjimo įrašą kaip numatytąjį "privatų" patvirtinimo procesui
+created by	tracker	lt	Sukūrė
+created on	tracker	lt	Sukurta
+custom notifications	tracker	lt	Pasirinktiniai pranešimai
+customfield	tracker	lt	Pasirinktinis laukas
+data exchange settings	tracker	lt	Keitimosi duomenimis nustatymai
+date filter	tracker	lt	Datos filtras
+default document to insert entries	tracker	lt	Numatytasis dokumentas įrašams įterpti
 default group	tracker	lt	Numatytoji grupė
 default tracker queue	tracker	lt	Standartinė eilė
+default version for new tracker entries	tracker	lt	Numatytoji naujų sekimo įrašų versija
+delete the mail from the server	tracker	lt	Ištrinti el. laišką iš serverio
+delete the mail from the server.	tracker	lt	Ištrinkite el. laišką iš serverio.
+delete this canned response	tracker	lt	Ištrinkite šį konservuotą atsakymą
+delete this escalation	tracker	lt	Ištrinti šį eskalavimą
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	lt	Ištrinti neatpažintus el. laiškus iš serverio, net jei aukščiau esantis "Ištrinti el. laiškus" nėra pažymėtas.
 deny global	tracker	lt	Neigti visuotinį
 directory with documents to insert entries	tracker	lt	Katalogas su dokumentais, į kurį galima įterpti įrašus
 do not send notifications to external email (cc field)	tracker	lt	Nesiųsti pranešimų į išorinį el. paštą (cc laukas)
@@ -70,3 +118,7 @@ set the ticket start date to the email received date	tracker	lt	Nustatykite bili
 start date from email	tracker	lt	Pradžios data iš el. laiško
 unread	tracker	lt	Neskaitytas
 writable filemanager directory	tracker	lt	Įrašomas failų tvarkyklės katalogas
+yes, add mailheader to both (description and comments)	tracker	lt	Taip, pridėkite pašto antraštę prie abiejų (aprašymo ir komentarų)
+yes, add mailheader to comments	tracker	lt	Taip, pridėti pašto antraštę prie komentarų
+yes, add mailheader to description	tracker	lt	Taip, prie aprašymo pridėti antraštę
+yes, always	tracker	lt	Taip, visada
