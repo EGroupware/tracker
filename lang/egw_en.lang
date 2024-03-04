@@ -178,7 +178,7 @@ error adding the new tracker!	tracker	en	Error adding the new tracker!
 error deleting escalation!	tracker	en	Error deleting escalation!
 error renaming tracker queue!	tracker	en	Error re-naming tracker queue!
 error saving the entry!!!	tracker	en	Error saving the entry!
-error: no mail (mailbox / uid) given!	tracker	en	Error: no email (Mailbox / UID) given!
+error: no mail (mailbox / uid) given!	tracker	en	Error: no email (Mailbox/UID) given!
 error: the entry has been updated since you opened it for editing!	tracker	en	Error: the entry has been updated since you opened it for editing!
 escalation	tracker	en	Escalation
 escalation added.	tracker	en	Escalation added.
@@ -294,8 +294,8 @@ no trackers found, aborting	tracker	en	No Trackers found, aborting.
 no, no additional mailheader to description and comments	tracker	en	No, no additional mailheader to description and comments
 non-anonymous users	tracker	en	Non-anonymous users
 noone	tracker	en	No one
-not-closed	tracker	en	not closed
-note: timesheet itself is always excluded	tracker	en	Note: timesheet itself is always excluded
+not-closed	tracker	en	Not closed
+note: timesheet itself is always excluded	tracker	en	Note: Timesheet itself is always excluded
 notification	tracker	en	Notification
 notification message	tracker	en	Notification message
 notification settings	tracker	en	Notification settings
@@ -341,18 +341,18 @@ receive notifications about due entries you created or are assigned to	tracker	e
 receive notifications about own changes in tracker-items	tracker	en	Receive notifications about own changes in tracker-items
 receive notifications about starting entries you created or are assigned to	tracker	en	Receive notifications about starting entries you created or are assigned to
 receive notifications in html	tracker	en	Receive notifications in HTML
-refused to open mailbox therefore changed interval from %1 to %2	tracker	en	refused to open mailbox therefore changed Interval from %1 to %2
-refused to open mailbox: %1	tracker	en	refused to open mailbox: %1
+refused to open mailbox therefore changed interval from %1 to %2	tracker	en	Refused to open mailbox therefore changed interval from %1 to %2
+refused to open mailbox: %1	tracker	en	Refused to open mailbox: %1
 rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 replacements for inserting entries into documents	tracker	en	Replacements for inserting entries into documents
 reply also to unknown addresses	tracker	en	Reply also to unknown addresses
-reply to	tracker	en	Reply To
+reply to	tracker	en	Reply to
 report as bar chart by the selected criterias	tracker	en	Report as bar chart by the selected criterias
 report as pie chart for the main criterias	tracker	en	Report as pie chart for the main criterias
 report parameter	tracker	en	Report parameter
 report parameters	tracker	en	Report parameters
-reporting timeframe	tracker	en	Reporting Timeframe
+reporting timeframe	tracker	en	Reporting timeframe
 reports	tracker	en	Reports
 resolution	tracker	en	Resolution
 respect timesheet run and read permissions for time totals	tracker	en	Respect timesheet run and read permissions for time totals
@@ -502,6 +502,7 @@ you need to select some entries first	tracker	en	You need to select some entries
 you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
 you need to specify amount, donators name and email address!	tracker	en	You need to specify amount, donators name AND email address!
 you voted %1.	tracker	en	You voted %1.
+♦ closed	tracker	en	♦ Closed
 ♦ not closed	tracker	en	♦ Not closed
 ♦ own not closed	tracker	en	♦ Own not closed
 ♦ own or assigned not closed	tracker	en	♦ Own or assigned, not closed

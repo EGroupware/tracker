@@ -1,12 +1,12 @@
 "%2" only valid for start date and due date.  use "%1".	tracker	de	"%2" ist nur gültig für Start- und Fälligkeitsdatum. Verwenden Sie stattdessen "%1".
 %1 days in advance	tracker	de	%1 Tage im Voraus
 %1 entries %2	tracker	de	%1 Einträge %2
-%1 entries %2, %3 failed because of insufficent rights !!!	tracker	de	%1 Einträge %2, %3 fehlgeschlagen wegen fehlender Rechte !!!
+%1 entries %2, %3 failed because of insufficent rights !!!	tracker	de	%1 Einträge %2, %3 fehlgeschlagen wegen fehlender Rechte!
 %1 entries updated.	tracker	de	%1 Einträge aktualisiert.
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
-(beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mailschleifen!)
+(beware of mailloops, check the help!)	tracker	de	(Achten Sie auf Mail-Schleifen!)
 (new tickets as	tracker	de	Neue Tickets als
 --> choose a project from the drop-down list	tracker	de	--> ein Projekt aus der Auswahlliste wählen
 --> enter new name	tracker	de	-> Neuer Name für eine Queue
@@ -164,7 +164,7 @@ edit %1	tracker	de	%1 bearbeiten
 edit entry	tracker	de	Ticket bearbeiten
 edit others' comments	tracker	de	Kommentare von anderen bearbeiten
 edit own comments	tracker	de	Eigene Kommentare bearbeiten
-egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zur Mailbox Möglich, bitte passen die Sie Einstellungen an.
+egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	de	Automatischer Mailworkflow: Keine Verbindung zum Postfach Möglich, bitte passen die Sie Einstellungen an.
 email address to contact you	tracker	de	E-Mail-Adresse um Sie zu kontaktieren
 email handling can be configured only for all trackers	tracker	de	Die E-Mail-Umwandlung kann nur für alle Verfolgungssysteme konfiguriert werden.
 enable color code for	tracker	de	Farbliche Kennzeichnung einschalten für
@@ -177,7 +177,7 @@ entry saved	tracker	de	Eintrag gespeichert
 error adding the new tracker!	tracker	de	Fehler beim Anlegen des neuen Verfolgungssystems!
 error deleting escalation!	tracker	de	Fehler beim Löschen der Eskalation!
 error renaming tracker queue!	tracker	de	Fehler beim Umbenennen der Verfolgungssystem-Queue!
-error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!!!
+error saving the entry!!!	tracker	de	Fehler beim Speichern des Eintrags!
 error: no mail (mailbox / uid) given!	tracker	de	Fehler: keinen Mailbox/UID vorhanden!
 error: the entry has been updated since you opened it for editing!	tracker	de	Fehler: Der Eintrag wurde geändert seit Sie ihn zum Bearbeiten geöffnet haben!
 escalation	tracker	de	Eskalation
@@ -193,8 +193,8 @@ example {{nenvlf role}} - if field role is not empty, set a lf without any value
 exclude links of the following apps on timesheet creation	tracker	de	Ignoriere die Verknüpfungen der folgenden Anwendungen bei der Erzeugung von Stundenzetteln
 existing links	tracker	de	Bestehende Verknüpfungen
 exists	tracker	de	existiert
-export as csv	tracker	de	Als CSV Datei exportieren
-export csv	tracker	de	Export als CSV Datei
+export as csv	tracker	de	Als CSV-Datei exportieren
+export csv	tracker	de	Export als CSV-Datei
 export definition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
@@ -202,7 +202,7 @@ failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	de	
 favorites	tracker	de	Favoriten
 field	tracker	de	Feld
 fixed	tracker	de	Gelöst
-for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	de	Wenn Sie Serienbriefe erzeugen möchten, dann benutzen Sie dieses 'Markierungszeichen'. Setzen Sie den Inhalt, der wiederholt werden soll (Anschriftstags und Briefinhalt) zwischen zwei 'Seiten-Wiederholungs-Zeichen'.
+for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	de	Wenn Sie Serienbriefe erzeugen möchten, dann benutzen Sie dieses 'Markierungszeichen'. Setzen Sie den Inhalt, der wiederholt werden soll (Anschrift-Tags und Briefinhalt) zwischen zwei 'Seiten-Wiederholungs-Zeichen'.
 forward	tracker	de	Weiterleiten
 forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	de	E-Mail an die gleiche Adresse weiterleiten, an die auch nicht erkannte E-Mails weitergeleitet werden (muss gesetzt sein!). Danach wird die E-Mail auf dem Server gelöscht.
 forward to	tracker	de	Weiterleiten an
@@ -232,7 +232,7 @@ imap, ssl secured	tracker	de	IMAP, SSL verschlüsselt
 imap, tls secured	tracker	de	IMAP, TLS verschlüsselt
 import options	tracker	de	Import Optionen
 import tts tickets	tracker	de	TTS Tickets importieren
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	de	Importiert Datensätze in das Verfolgungssystem aus einer CSV Datei. CSV bedeutet: 'Komma getrennte Werte'. Unter dem Seitenreiter Optionen können Sie den Feldtrenner auswählen.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	de	Importiert Datensätze in das Verfolgungssystem aus einer CSV-Datei. Unter dem Seitenreiter Optionen können Sie den Feldtrenner auswählen.
 incoming mail folder	tracker	de	Ordner für eingehende E-Mails
 incoming mail rules	tracker	de	Regeln für eingehende E-Mails
 incoming mail server	tracker	de	Server für eingehende E-Mails
@@ -267,7 +267,7 @@ linked to %1	tracker	de	Verknüpft mit %1
 links	tracker	de	Verknüpfungen
 links and attached files	tracker	de	Verknüpfungen und verknüpfte Dateien
 links to specified application.  example: {{links/infolog}}	tracker	de	Link zu einer ausgewählten Anwendung. Beispiel {{links/infolog}}
-links wrapped in an href tag with download link	tracker	de	Verknüpfungen in einem Anker Tag (HREF) mit einem Download Link
+links wrapped in an href tag with download link	tracker	de	Verknüpfungen in einem Anker Tag (HREF) mit einem Download-Link
 list of coma separated email address	tracker	de	Liste von E-Mail Adressen, durch Komma getrennt
 list of files linked to the current record	tracker	de	Liste der Dateien, die mit diesem Datensatz verbunden sind.
 mail handling	tracker	de	E-Mail-Umwandlung
@@ -304,7 +304,7 @@ number of row for a multiline inputfield or line of a multi-select-box	tracker	d
 old fixed definition	tracker	de	Feste Definitionsdateien, die nicht angepasst werden können
 one day after	tracker	de	Einen Tag danach
 one day in advance	tracker	de	Einen Tag im Voraus
-only explicitly named users have read access (otherwise everyone)	tracker	de	nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
+only explicitly named users have read access (otherwise everyone)	tracker	de	Nur explizit benannte Benutzer haben Leserecht (ansonsten jeder)
 only for admins, technicians or assigned	tracker	de	Nur sichtbar für Administratoren, Techniker bzw. zugewiesenen Benutzern
 open(status)	tracker	de	Offen
 order	tracker	de	Reihenfolge
@@ -315,7 +315,7 @@ ownership of the ticket	tracker	de	Besitzer des Tickets
 pending	tracker	de	Schwebend
 pending items never get close automatic.	tracker	de	Schwebende Einträge werden nie automatisch geschlossen.
 pending items will be closed automatic after %1 days without response.	tracker	de	Schwebende Einträge werden nach %1 Tagen ohne Antwort automatisch geschlossen.
-permission denied !!!	tracker	de	Zugriff verweigert !!!
+permission denied !!!	tracker	de	Zugriff verweigert!
 permissions error - %1 could not %2	tracker	de	Zugriff verweigert - %1 konnte nicht %2
 permit html editing in overview and comments	tracker	de	Formatierte Textbearbeitung im Überblick und in den Antworten
 pop3	tracker	de	POP3
@@ -341,8 +341,8 @@ receive notifications about due entries you created or are assigned to	tracker	d
 receive notifications about own changes in tracker-items	tracker	de	Empfange Benachrichtigungen über eigene Änderungen
 receive notifications about starting entries you created or are assigned to	tracker	de	Empfange Benachrichtigungen für zu startende Einträge, die Sie erstellt haben oder für die Sie verantwortlich sind
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
-refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu der Mailbox war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
-refused to open mailbox: %1	tracker	de	Verbindung zu der Mailbox %1 wurde abgewiesen.
+refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu dem Postfach war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
+refused to open mailbox: %1	tracker	de	Verbindung zu dem Postfach %1 wurde abgewiesen.
 rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
@@ -365,10 +365,10 @@ restriction	tracker	de	Einschränkungen
 run on existing tickets	tracker	de	Auf  bestehende Tickets anwenden
 same day	tracker	de	am gleichen Tag
 save new report	tracker	de	Neuen Bericht speichern
-save new report...	tracker	de	Neuen Bericht speichern...
+save new report...	tracker	de	Neuen Bericht speichern ...
 saves the changes made and leaves	tracker	de	Änderungen speichern und diesen Menüpunkt verlassen
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	de	Einen Tracker für neue Tickets auswählen oder 'Zurückweisen' um das Erzeugen von Tickets per Mail zu verbieten
-select accounts for which the custom field should be visible	tracker	de	Wählen Sie die Benutzer aus, für die das Benutzerdefinierte Feld sichtbar sein darf
+select accounts for which the custom field should be visible	tracker	de	Wählen Sie die Benutzer aus, für die das benutzerdefinierte Feld sichtbar sein darf
 select existing report	tracker	de	Wählen Sie einen bestehenden Bericht aus
 select how autoreplies should be sent when mails are received	tracker	de	Auswählen wie automatische Antworten gesendet werden, wenn E-Mails empfangen werden
 select multiple	tracker	de	Mehrere Auswählen
@@ -439,8 +439,8 @@ tracker added	tracker	de	Verfolgungssystem-Queue hinzugefügt
 tracker admins	tracker	de	Administratoren des Verfolgungssystems
 tracker admins & technicians	tracker	de	Administratoren & Techniker des Verfolgungssystems
 tracker configuration	tracker	de	Konfiguration des Verfolgungssystems
-tracker csv export	tracker	de	CSV Export aus dem Verfolgungssystem
-tracker csv import	tracker	de	CSV Import in das Verfolgungssystem
+tracker csv export	tracker	de	CSV-Export aus dem Verfolgungssystem
+tracker csv import	tracker	de	CSV-Import in das Verfolgungssystem
 tracker deleted	tracker	de	Verfolgungssystem-Queue gelöscht
 tracker entry can only seen by creator and admins	tracker	de	Tickets können nur vom Ersteller oder einem Administrator gesehen werden
 tracker fields:	tracker	de	Felder des Verfolgungssystems:
@@ -448,7 +448,7 @@ tracker for new tickets	tracker	de	Queue für neue Tickets
 tracker for the  home screen	tracker	de	Verfolgungssystem für die Hauptansicht
 tracker id	tracker	de	Ticketnummer (ID)
 tracker item modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
-tracker item not found !!!	tracker	de	Ticket nicht gefunden !!!
+tracker item not found !!!	tracker	de	Ticket nicht gefunden!
 tracker list	tracker	de	Verfolgungssystem Liste
 tracker queue	tracker	de	Fachgebiet
 tracker queue renamed	tracker	de	Verfolgungssystem-Queue umbenannt
@@ -456,21 +456,21 @@ tracker queues	tracker	de	Verfolgungssystem-Queues
 tracker-%1 '%2' added.	tracker	de	Verfolgungssystem-%1 '%2' zugefügt.
 tracker-%1 '%2' updated.	tracker	de	Verfolgungssystem-%1 '%2' aktualisiert.
 tracker-%1 deleted.	tracker	de	Verfolgungssystem-%1 gelöscht.
-type of customfield	tracker	de	Typ des Benutzerdefinierten Feldes
+type of customfield	tracker	de	Typ des benutzerdefinierten Feldes
 unable to convert "%1" to account id.  using plugin setting (%2) for %3.	tracker	de	Das System konnte "%1" nicht in die Benutzer-ID umwandeln. Verwenden Sie besser die Einstellung (%2) für %3.
 unchanged	tracker	de	Unverändert
 unlinked from %1	tracker	de	Verknüpfung entfernt von %1
 unread	tracker	de	Ungelesen
 unrecognized mails	tracker	de	Nicht zuordenbare E-Mails
-upcoming	tracker	de	anstehend
-updated	tracker	de	aktualisiert
+upcoming	tracker	de	Anstehend
+updated	tracker	de	Aktualisiert
 url of the tracker	tracker	de	Internetadresse des Verfolgungssystems
 url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der EGw
 use a default user for mails that where not recognized	tracker	de	Verwende einen Standardbenutzer für E-Mails die nicht zugeordnet werden können
 use all	tracker	de	Alle anwenden
 use custom notification message	tracker	de	Benutzerdefinierte Benachrichtigungen verwenden
 use custom signature	tracker	de	Benutzerdefinierte Signatur verwenden
-use field from csv if possible	tracker	de	Dieses Feld von der CSV Definition verwenden, wenn möglich
+use field from csv if possible	tracker	de	Dieses Feld von der CSV-Definition verwenden, wenn möglich
 use search results	tracker	de	Diese Suchanfrage verwenden
 use this tag for addresslabels. put the content, you want to repeat, between two tags.	tracker	de	Verwenden Sie diesen Platzhalter für Adressetiketten, deren Inhalt Sie zwischen beiden Platzhaltern wiederholen möchten.
 user or group	tracker	de	Benutzer oder Gruppe
@@ -502,6 +502,7 @@ you need to select some entries first	tracker	de	Sie müssen zuerst einige Eintr
 you need to select something to change and some tracker items!	tracker	de	Sie müssen etwas zum Ändern UND einige Einträge auswählen!
 you need to specify amount, donators name and email address!	tracker	de	Sie müssen Betrag, Name und E-Mail des Spenders angeben!
 you voted %1.	tracker	de	Sie stimmten am %1 ab.
+♦ closed	tracker	de	♦ Geschlossen
 ♦ not closed	tracker	de	♦ Nicht geschlossen
 ♦ own not closed	tracker	de	♦ Eigene nicht geschlossen
 ♦ own or assigned not closed	tracker	de	♦ Eigene oder zugewiesene nicht geschlossen

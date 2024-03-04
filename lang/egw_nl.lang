@@ -185,6 +185,7 @@ example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", fo
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	nl	Example {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Example: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	nl	Example {{NELF role}} - if field role is not empty, you will get a new line with the value of field role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	nl	Example {{nenvlf role}} - if field role is not empty, set a LF without any value of the field
+exclude links of the following apps on timesheet creation	tracker	nl	Sluit koppelingen van de volgende apps uit bij het maken van timesheets
 existing links	tracker	nl	Bestaande links
 exists	tracker	nl	Bestaat
 export as csv	tracker	nl	Exporteer als CSV

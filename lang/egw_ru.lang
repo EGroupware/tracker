@@ -164,8 +164,10 @@ edit own comments	tracker	ru	Редактировать собственные �
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ru	Обработка почты EGroupware Tracker: ранее не удавалось подключиться, а профиль не менялся
 email address to contact you	tracker	ru	Адрес e-mail для контакта с Вами
 email handling can be configured only for all trackers	tracker	ru	Управление эл. письмами может быть сконфигурировано только для всех очередей трекера
+enable color code for	tracker	ru	Включить цветовой код для
 enter an email address here if unrecognized mails should be forwarded	tracker	ru	Введите здесь адрес эл. почты если нераспознанные письма должны быть перенаправлены
 enter an opening text for the reply message	tracker	ru	Введите текст, открывающий ответное сообщение
+enter the email for reply to	tracker	ru	Введите адрес электронной почты для ответа
 enter the imap server from which emails should be fetched	tracker	ru	Введите название сервера IMAP с которого будет приниматься почта
 enter the mail address that will be read.	tracker	ru	Введите адрес эл. почты для чтения.
 entry saved	tracker	ru	Запись сохранена
@@ -173,6 +175,7 @@ error adding the new tracker!	tracker	ru	Ошибка при добавлени�
 error deleting escalation!	tracker	ru	Ошибка при удаленииэскалации!
 error renaming tracker queue!	tracker	ru	Ошибка переименования очереди Трекера!
 error saving the entry!!!	tracker	ru	Ошибка сохранения записи!
+error: no mail (mailbox / uid) given!	tracker	ru	Ошибка: не указан email (Mailbox/UID)!
 error: the entry has been updated since you opened it for editing!	tracker	ru	Ошибка: запись была обновлена с тех пор, как Вы открыли ее для редактирования!
 escalation	tracker	ru	Эскалация
 escalation added.	tracker	ru	Добавлена эскалация

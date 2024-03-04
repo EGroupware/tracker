@@ -107,13 +107,26 @@ each value is a line like <id>[=<label>]	tracker	lv	katra vēr'tiba ir līniija 
 edit others' comments	tracker	lv	Rediģēt citu komentārus
 edit own comments	tracker	lv	Rediģēt savus komentārus
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	lv	EGroupware Tracker mailhandling: iepriekš nevarēja izveidot savienojumu, un profils nemainījās
+enable color code for	tracker	lv	Ieslēgt krāsu kodu
+enter the email for reply to	tracker	lv	Ievadiet e-pasta adresi, uz kuru vēlaties atbildēt
 entry saved	tracker	lv	Ieraksts saglabāts
+error deleting escalation!	tracker	lv	Kļūda, dzēšot eskalāciju!
+error renaming tracker queue!	tracker	lv	Kļūda pārsaucot izsekošanas rindu!
+error: no mail (mailbox / uid) given!	tracker	lv	Kļūda: nav norādīts e-pasts (pastkastīte/UID)!
+escalation	tracker	lv	Eskalācija
+escalation added.	tracker	lv	Pievienota eskalācija.
+escalation deleted.	tracker	lv	Eskalācija dzēsta.
+escalation not found!	tracker	lv	Eskalācija nav atrasta!
+escalation saved.	tracker	lv	Eskalācija saglabāta.
 everybody	tracker	lv	ikviens
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	lv	Piemērs {{{IF n_prefikss~Mr~Hello Mr.~Hello Ms.}}} - meklēt laukā "n_prefix", lai atrastu "Mr", ja atrasts, rakstiet Hello Mr., citādi rakstiet Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	lv	Piemērs {{{LETTERPREFIXCUSTOM n_prefiksa virsraksts n_dzimene}} - Piemērs: Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	lv	Piemērs {{{NELF role}} - ja lauks role nav tukšs, parādīsies jauna rinda ar lauka role vērtību
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	lv	Piemērs {{{nenvlf role}} - ja lauka loma nav tukša, iestatiet LF bez lauka vērtības
+exclude links of the following apps on timesheet creation	tracker	lv	Izslēgt šādu programmu saites darba laika uzskaites saraksta izveidē
 existing links	tracker	lv	Eksistējošas saites
+exists	tracker	lv	Pastāv
+export csv	tracker	lv	Eksportēt CSV
 forward	tracker	lv	Pārsūtīt
 from	tracker	lv	No
 full list of placeholder names	tracker	lv	Vietvārdu saraksts

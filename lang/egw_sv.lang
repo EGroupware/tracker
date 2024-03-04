@@ -140,17 +140,30 @@ edit others' comments	tracker	sv	Redigera andras kommentarer
 edit own comments	tracker	sv	Redigera egna kommentarer
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	sv	EGroupware Tracker mailhantering: kunde inte ansluta tidigare, och profilen ändrades inte
 email address to contact you	tracker	sv	E-post adress för att kontakta dig
+enable color code for	tracker	sv	Aktivera färgkod för
+enter the email for reply to	tracker	sv	Ange e-post för svar till
 entry saved	tracker	sv	Posten sparad
 error adding the new tracker!	tracker	sv	Kunde inte lägga till nytt ärende!
+error deleting escalation!	tracker	sv	Fel vid radering av eskalering!
+error renaming tracker queue!	tracker	sv	Fel vid namnändring av tracker-kö!
 error saving the entry!!!	tracker	sv	Kunde inte spara ärendet!
+error: no mail (mailbox / uid) given!	tracker	sv	Fel: ingen e-postadress (brevlåda/UID) angiven!
 error: the entry has been updated since you opened it for editing!	tracker	sv	Posten har ändrats sedan du öppnade den för skrivning!
+escalation	tracker	sv	Upptrappning
+escalation added.	tracker	sv	Upptrappning tillagd.
+escalation deleted.	tracker	sv	Upptrappning borttagen.
+escalation not found!	tracker	sv	Upptrappning hittades inte!
+escalation saved.	tracker	sv	Upptrappning sparad.
 everybody	tracker	sv	Alla
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	sv	Exempel {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - sök i fältet "n_prefix", efter "Mr", om det hittas, skriv Hello Mr., annars skriv Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	sv	Exempel {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Exempel: Herr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	sv	Exempel {{NELF roll}} - om fältet role inte är tomt får du en ny rad med värdet i fältet role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	sv	Exempel {{nenvlf roll}} - om fältet role inte är tomt, skapa en LF utan något värde för fältet
+exclude links of the following apps on timesheet creation	tracker	sv	Uteslut länkar till följande appar vid skapande av tidrapporter
 existing links	tracker	sv	Befintliga länkar
+exists	tracker	sv	Existerar
 export as csv	tracker	sv	Exportera som CSV
+export csv	tracker	sv	Exportera CSV
 field	tracker	sv	Fält
 fixed	tracker	sv	Klar
 forward	tracker	sv	Vidarebefodra

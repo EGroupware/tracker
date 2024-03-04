@@ -136,16 +136,29 @@ edit %1	tracker	hu	%1 szerkesztése
 edit others' comments	tracker	hu	Mások megjegyzéseinek szerkesztése
 edit own comments	tracker	hu	Saját megjegyzések szerkesztése
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	hu	EGroupware Tracker mailhandling: korábban nem tudott csatlakozni, és a profil nem változott meg
+enable color code for	tracker	hu	Színkód engedélyezése a
+enter the email for reply to	tracker	hu	Adja meg a válasz e-mail címét
 entry saved	tracker	hu	Bejegyzés elmentve
+error deleting escalation!	tracker	hu	Hiba az eszkaláció törlése!
+error renaming tracker queue!	tracker	hu	Hiba a nyomkövető sor átnevezése!
 error saving the entry!!!	tracker	hu	Hiba történt a bejegyzés mentése közben!
+error: no mail (mailbox / uid) given!	tracker	hu	Hiba: nincs megadva e-mail (postafiók/UID)!
 error: the entry has been updated since you opened it for editing!	tracker	hu	Hiba: a bejegyzés módosult mióta megnyitottad!
+escalation	tracker	hu	Escalation
+escalation added.	tracker	hu	Eszkaláció hozzáadása.
+escalation deleted.	tracker	hu	Eszkaláció törölve.
+escalation not found!	tracker	hu	Escalation not found!
+escalation saved.	tracker	hu	Eszkaláció mentve.
 everybody	tracker	hu	Mindenki
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	hu	Példa {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - keressük az "n_prefix" mezőben a "Mr" szót, ha találunk, írjuk Hello Mr., különben írjuk Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	hu	Példa {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Példa: Mr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	hu	Példa {{NELF role}} - ha a szerep mező nem üres, akkor egy új sort kap a szerep mező értékével.
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	hu	Példa {{nenvlf role}} - ha a mező szerep nem üres, akkor a mező értéke nélkül egy LF-t állít be.
+exclude links of the following apps on timesheet creation	tracker	hu	A következő alkalmazások linkjeinek kizárása a munkaidő-nyilvántartás létrehozásakor
 existing links	tracker	hu	Létezõ hivatkozások
+exists	tracker	hu	Létezik
 export as csv	tracker	hu	Export CSV formában
+export csv	tracker	hu	CSV exportálása
 favorites	tracker	hu	Kedvencek
 field	tracker	hu	Mező
 forward	tracker	hu	Továbbít
