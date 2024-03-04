@@ -108,15 +108,28 @@ each value is a line like <id>[=<label>]	tracker	no	hver verdi er en linje som <
 edit others' comments	tracker	no	Rediger andres kommentarer
 edit own comments	tracker	no	Rediger egne kommentarer
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	no	EGroupware Tracker-posthåndtering: kunne ikke koble til tidligere, og profilen ble ikke endret
+enable color code for	tracker	no	Aktiver fargekode for
+enter the email for reply to	tracker	no	Skriv inn e-postadressen for svar til
 entry saved	tracker	no	Oppføring lagret
+error deleting escalation!	tracker	no	Feil ved sletting av eskalering!
+error renaming tracker queue!	tracker	no	Feil ved endring av navn på sporingskø!
 error saving the entry!!!	tracker	no	Feil ved lagring av forekomst!
+error: no mail (mailbox / uid) given!	tracker	no	Feil: ingen e-post (postkasse/UID) oppgitt!
 error: the entry has been updated since you opened it for editing!	tracker	no	Feil: Denne forekomsten er endret siden du åpnet den for redigering!
+escalation	tracker	no	Eskalering
+escalation added.	tracker	no	Eskalering lagt til.
+escalation deleted.	tracker	no	Opptrapping slettet.
+escalation not found!	tracker	no	Opptrapping ikke funnet!
+escalation saved.	tracker	no	Opptrapping lagret.
 everybody	tracker	no	Alle
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	no	Eksempel {{IF n_prefiks~Mr~Hallo Mr.~Hello Ms.}} - søk i feltet "n_prefix" etter "Mr", hvis funnet, skriv Hello Mr., ellers skriv Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	no	Eksempel {{LETTERPREFIXCUSTOM n_prefiks tittel n_familie}} - Eksempel: Herr Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	no	Eksempel {{NELF rolle}} - hvis feltet rolle ikke er tomt, får du en ny linje med verdien for feltet rolle.
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	no	Eksempel {{nenvlf rolle}} - hvis feltet rolle ikke er tomt, settes en LF uten noen verdi for feltet
+exclude links of the following apps on timesheet creation	tracker	no	Ekskluder lenker til følgende apper ved opprettelse av timelister
 existing links	tracker	no	Eksisterende lenker
+exists	tracker	no	Eksisterer
+export csv	tracker	no	Eksporter CSV
 forward	tracker	no	Videresend
 from	tracker	no	Fra
 full list of placeholder names	tracker	no	Liste over plassholdere

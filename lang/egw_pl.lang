@@ -158,14 +158,18 @@ edit own comments	tracker	pl	Edytuj własne komentarze
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pl	Obsługa poczty EGroupware Tracker: nie można było się wcześniej połączyć, a profil się nie zmienił
 email address to contact you	tracker	pl	Adres poczty elektronicznej do kontaktu
 email handling can be configured only for all trackers	tracker	pl	Obsługa email może być skonfigurowana tylko dla wszystkich systemów śledzenia
+enable color code for	tracker	pl	Włącz kod koloru dla
 enter an email address here if unrecognized mails should be forwarded	tracker	pl	Wpisz tutaj adres na który będą przekazywane nie rozpoznane wiadomości
 enter an opening text for the reply message	tracker	pl	Wpisz tutaj tekst domyślny dla wiadomości na które odpowiadasz
+enter the email for reply to	tracker	pl	Wprowadź adres e-mail, na który ma zostać wysłana odpowiedź
 enter the imap server from which emails should be fetched	tracker	pl	Wpisz adres serwera IMAP z którego będą pobierane wiadomości
 enter the mail address that will be read.	tracker	pl	Wprowadź adres email który będzie czytany.
 entry saved	tracker	pl	Wpis został zachowany
 error adding the new tracker!	tracker	pl	Błąd przy dodawaniu nowej kolejki śledzenia!
 error deleting escalation!	tracker	pl	Błąd przy usuwaniu eskalacji!
+error renaming tracker queue!	tracker	pl	Błąd podczas zmiany nazwy kolejki trackera!
 error saving the entry!!!	tracker	pl	Błąd przy zapisywaniu nowego zgłoszenia!
+error: no mail (mailbox / uid) given!	tracker	pl	Błąd: nie podano adresu e-mail (skrzynki pocztowej/UID)!
 error: the entry has been updated since you opened it for editing!	tracker	pl	Błąd: wpis został zaktualizowany od czasu jego otwarcia do edycji!
 escalation	tracker	pl	Eskalacja
 escalation added.	tracker	pl	Dodano eskalację.
@@ -177,9 +181,11 @@ example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", fo
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	pl	Przykład {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Przykład: Pan Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	pl	Przykład {{NELF role}} - jeśli pole rola nie jest puste, pojawi się nowy wiersz z wartością pola rola.
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	pl	Przykład {{nenvlf role}} - jeśli pole role nie jest puste, ustaw LF bez żadnej wartości pola
+exclude links of the following apps on timesheet creation	tracker	pl	Wyklucz linki następujących aplikacji podczas tworzenia karty czasu pracy
 existing links	tracker	pl	Istniejące odnośniki
 exists	tracker	pl	Istnieje
 export as csv	tracker	pl	Eksport jako CSV
+export csv	tracker	pl	Eksport CSV
 favorites	tracker	pl	Ulubione
 field	tracker	pl	Pole
 fixed	tracker	pl	Rozwiązany

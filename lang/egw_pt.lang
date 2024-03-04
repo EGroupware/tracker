@@ -113,17 +113,28 @@ edit entry	tracker	pt	Editar registo
 edit others' comments	tracker	pt	Editar comentários de outros
 edit own comments	tracker	pt	Editar os seus próprios comentários
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pt	Tratamento de correio eletrónico do EGroupware Tracker: não foi possível estabelecer ligação anteriormente e o perfil não foi alterado
+enable color code for	tracker	pt	Ativar o código de cores para
+enter the email for reply to	tracker	pt	Introduzir o e-mail de resposta para
 entry saved	tracker	pt	Registo guardado
+error deleting escalation!	tracker	pt	Erro ao eliminar o escalonamento!
+error renaming tracker queue!	tracker	pt	Erro ao renomear a fila do tracker!
 error saving the entry!!!	tracker	pt	Erro ao guardar o registo!
-error: no mail (mailbox / uid) given!	tracker	pt	Erro: nenhum e-mail (caixa de correio / UID) dado!
+error: no mail (mailbox / uid) given!	tracker	pt	Erro: nenhum e-mail (caixa de correio/UID) dado!
 error: the entry has been updated since you opened it for editing!	tracker	pt	Erro: o registo foi actualizado desde que começou a editar!
+escalation	tracker	pt	Escalonamento
+escalation added.	tracker	pt	Escalonamento adicionado.
+escalation deleted.	tracker	pt	Escalonamento eliminado.
+escalation not found!	tracker	pt	Escalonamento não encontrado!
+escalation saved.	tracker	pt	Escalonamento guardado.
 everybody	tracker	pt	Todos
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	pt	Exemplo {{IF n_prefixo~Sr~Olá Sr.~Olá Sra.}} - procura no campo "n_prefixo", por "Sr.", se encontrado, escreve Olá Sr., senão escreve Olá Sra.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	pt	Exemplo {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Exemplo: Sr. Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	pt	Exemplo {{NELF role}} - se o campo função não estiver vazio, obterá uma nova linha com o valor do campo função
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	pt	Exemplo {{nenvlf role}} - se o campo função não estiver vazio, define um LF sem qualquer valor do campo
+exclude links of the following apps on timesheet creation	tracker	pt	Excluir ligações das seguintes aplicações na criação da folha de horas
 existing links	tracker	pt	Ligações existentes
 exists	tracker	pt	Existe
+export csv	tracker	pt	Exportar CSV
 export definition to use for nextmatch export	tracker	pt	Definição Exportar para usar para exportação nextmatch
 export definitition to use for nextmatch export	tracker	pt	Definição Exportar para usar para exportação nextmatch
 favorites	tracker	pt	Favoritos

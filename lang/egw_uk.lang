@@ -99,12 +99,25 @@ each value is a line like <id>[=<label>]	tracker	uk	Кожне значення 
 edit others' comments	tracker	uk	Редагувати чужі коментарі
 edit own comments	tracker	uk	Редагувати власні коментарі
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	uk	Обробка пошти EGroupware Tracker: раніше не вдавалося підключитися, а профіль не змінювався
+enable color code for	tracker	uk	Увімкнути кольоровий код для
+enter the email for reply to	tracker	uk	Введіть email для відповіді
 entry saved	tracker	uk	Запис збережено
+error deleting escalation!	tracker	uk	Помилка видалення ескалації!
+error renaming tracker queue!	tracker	uk	Помилка перейменування черги трекерів!
+error: no mail (mailbox / uid) given!	tracker	uk	Помилка: не вказано email (поштова скринька/UID)!
+escalation	tracker	uk	Ескалація
+escalation added.	tracker	uk	Ескалацію додано.
+escalation deleted.	tracker	uk	Ескалацію видалено.
+escalation not found!	tracker	uk	Ескалацію не знайдено!
+escalation saved.	tracker	uk	Ескалацію збережено.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	uk	Приклад {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - шукає поле "n_prefix", для "Mr", якщо знайдено, пише "Hello Mr.", інакше пише "Hello Ms.".
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	uk	Приклад {{LETTERPREFIXCUSTOM n_префікс назва n_сім'я}} - Приклад: Пан доктор Джеймс Міллер
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	uk	Приклад {{NELF роль}} - якщо поле role не порожнє, ви отримаєте новий рядок зі значенням поля role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	uk	Приклад {{nenvlf role}} - якщо роль поля не порожня, виведеться LF без значення поля
+exclude links of the following apps on timesheet creation	tracker	uk	Виключити посилання наступних додатків при створенні табеля обліку робочого часу
 existing links	tracker	uk	Існуючі посилання
+exists	tracker	uk	Існує
+export csv	tracker	uk	Експорт CSV
 from	tracker	uk	Від
 full list of placeholder names	tracker	uk	Список плейсхолдерів
 id	tracker	uk	ID

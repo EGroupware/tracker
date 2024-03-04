@@ -161,13 +161,18 @@ edit own comments	tracker	pt-br	Editar seus próprios comentários
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pt-br	Tratamento de correio do EGroupware Tracker: não foi possível conectar-se anteriormente e o perfil não foi alterado
 email address to contact you	tracker	pt-br	E-mail para contactar você
 email handling can be configured only for all trackers	tracker	pt-br	Tratamento de email pode ser configurado apenas para todos os tipos de tickets.
+enable color code for	tracker	pt-br	Ativar código de cores para
 enter an email address here if unrecognized mails should be forwarded	tracker	pt-br	Informe um endereço de email aqui se emails não reconhecidos precisarem ser encaminhados.
+enter an opening text for the reply message	tracker	pt-br	Digite um texto de abertura para a mensagem de resposta
+enter the email for reply to	tracker	pt-br	Digite o e-mail de resposta para
 enter the imap server from which emails should be fetched	tracker	pt-br	Informe o servidor IMAP do qual emails deverão ser recuperados
 enter the mail address that will be read.	tracker	pt-br	Informe o endereço de emailque será lido
 entry saved	tracker	pt-br	Entrada salva
 error adding the new tracker!	tracker	pt-br	Erro incluindo o novo tipo de ticket
 error deleting escalation!	tracker	pt-br	Erro removendo escala!
+error renaming tracker queue!	tracker	pt-br	Erro ao renomear a fila do rastreador!
 error saving the entry!!!	tracker	pt-br	Erro salvando a entrada
+error: no mail (mailbox / uid) given!	tracker	pt-br	Erro: nenhum e-mail (caixa de correio/UID) fornecido!
 error: the entry has been updated since you opened it for editing!	tracker	pt-br	Erro: o registro foi atualizado desde que você o abriu para edição!
 escalation	tracker	pt-br	Escala
 escalation added.	tracker	pt-br	Escala adicionada.
@@ -179,9 +184,11 @@ example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", fo
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	pt-br	Exemplo {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Exemplo: Sr. Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	pt-br	Exemplo {{NELF role}} - se o campo role não estiver vazio, você obterá uma nova linha com o valor do campo role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	pt-br	Exemplo {{nenvlf role}} - se a função do campo não estiver vazia, você definirá uma LF sem nenhum valor do campo
+exclude links of the following apps on timesheet creation	tracker	pt-br	Excluir links dos seguintes aplicativos na criação da planilha de horas
 existing links	tracker	pt-br	Links existentes
 exists	tracker	pt-br	Existe
 export as csv	tracker	pt-br	Exportar como CSV
+export csv	tracker	pt-br	Exportar CSV
 export definition to use for nextmatch export	tracker	pt-br	Definição Exportar para usar para exportação nextmatch
 field	tracker	pt-br	Campo
 fixed	tracker	pt-br	Resolvido
@@ -362,7 +369,7 @@ url to be included in the notification, eg. to the page with the sitemgr module,
 use a default user for mails that where not recognized	tracker	pt-br	Usar um usuário padrão para emails que não forem reconhecidos
 use field from csv if possible	tracker	pt-br	Use o campo de CSV, se possível
 versions	tracker	pt-br	Versões
-vote for it!	tracker	pt-br	Vote !
+vote for it!	tracker	pt-br	Vote!
 votes	tracker	pt-br	Votos
 wont fix	tracker	pt-br	Não será resolvido
 works for me	tracker	pt-br	Funciona para mim

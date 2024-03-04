@@ -101,12 +101,25 @@ due date for new tickets	tracker	ko	새 티켓의 마감일
 edit others' comments	tracker	ko	다른 사람의 댓글 수정하기
 edit own comments	tracker	ko	내 댓글 수정
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ko	E그룹웨어 트래커 메일 처리: 이전에 연결할 수 없었고 프로필이 변경되지 않았습니다.
+enable color code for	tracker	ko	다음에 대한 색상 코드 사용
+enter the email for reply to	tracker	ko	회신할 이메일을 입력하세요.
+error deleting escalation!	tracker	ko	에스컬레이션을 삭제하는 동안 오류가 발생했습니다!
+error renaming tracker queue!	tracker	ko	트래커 대기열 이름 변경 중 오류!
+error: no mail (mailbox / uid) given!	tracker	ko	오류: 제공된 이메일(사서함/UID)이 없습니다!
 error: the entry has been updated since you opened it for editing!	tracker	ko	오류: 이 엔트리는 당신이 수정하는 중간에 업데이트 되었습니다.
+escalation	tracker	ko	에스컬레이션
+escalation added.	tracker	ko	에스컬레이션이 추가되었습니다.
+escalation deleted.	tracker	ko	에스컬레이션이 삭제되었습니다.
+escalation not found!	tracker	ko	에스컬레이션을 찾을 수 없습니다!
+escalation saved.	tracker	ko	에스컬레이션이 저장되었습니다.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ko	예시 {{IF n_prefix~미스터~헬로 미스터~헬로 미스}} - "n_prefix" 필드를 검색하여 "Mr"을 찾으면 Hello Mr를 쓰고, 그렇지 않으면 Hello Ms를 씁니다.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ko	예 {{LETTERPREFIXCUSTOM n_prefix title n_family}}}} - 예제: 미스터 제임스 밀러 박사
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ko	예 {{NELF role}} - 필드 역할이 비어 있지 않으면 필드 역할의 값이 있는 새 줄이 표시됩니다.
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ko	예 {{NENVLF 역할}} - 필드 역할이 비어 있지 않은 경우 필드 값 없이 LF를 설정합니다.
+exclude links of the following apps on timesheet creation	tracker	ko	작업표 생성 시 다음 앱의 링크를 제외하세요.
 existing links	tracker	ko	기존링크
+exists	tracker	ko	존재
+export csv	tracker	ko	CSV 내보내기
 from	tracker	ko	부터
 full list of placeholder names	tracker	ko	자리 표시자 목록
 history	tracker	ko	내역

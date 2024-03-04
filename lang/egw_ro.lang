@@ -91,11 +91,24 @@ due date for new tickets	tracker	ro	Data scadentă pentru bilete noi
 edit others' comments	tracker	ro	Editați comentariile altora
 edit own comments	tracker	ro	Editați propriile comentarii
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	ro	EGroupware Tracker mailhandling: nu s-a putut conecta anterior, iar profilul nu s-a schimbat
+enable color code for	tracker	ro	Activați codul de culori pentru
+enter the email for reply to	tracker	ro	Introduceți adresa de e-mail pentru răspuns la
 entry saved	tracker	ro	Intrare salvată
+error deleting escalation!	tracker	ro	Eroare de ștergere a escaladării!
+error renaming tracker queue!	tracker	ro	Eroare de redenumire a cozii de urmărire!
+error: no mail (mailbox / uid) given!	tracker	ro	Eroare: nu a fost indicat niciun e-mail (Mailbox/UID)!
+escalation	tracker	ro	Escaladare
+escalation added.	tracker	ro	Escaladare adăugată.
+escalation deleted.	tracker	ro	Escaladare eliminată.
+escalation not found!	tracker	ro	Nu s-a găsit escaladarea!
+escalation saved.	tracker	ro	Escaladare salvată.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ro	Exemplu {{IF n_prefix~Mr~Bună ziua domnule ~Bună ziua doamnă}} - caută în câmpul "n_prefix", pentru "Mr", dacă se găsește, scrie Hello Mr., altfel scrie Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ro	Exemplu {{LETTERPREFIXCUSTOM n_prefix titlu n_familie}}. - Exemplu: Dl Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ro	Exemplu {{NELF rol}} - dacă câmpul role nu este gol, se va obține o nouă linie cu valoarea câmpului role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ro	Exemplu {{nenvlf role}} - dacă câmpul rol nu este gol, se va seta un LF fără nicio valoare a câmpului
+exclude links of the following apps on timesheet creation	tracker	ro	Excludeți legăturile următoarelor aplicații la crearea foii de pontaj
+exists	tracker	ro	Existentă
+export csv	tracker	ro	Export CSV
 full list of placeholder names	tracker	ro	Listă de placeholder
 if a ticket has matched before, should the actions be taken again?	tracker	ro	În cazul în care un bilet a mai avut o potrivire înainte, ar trebui să se întreprindă din nou aceste acțiuni?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	ro	Dacă nu se bifează, marchează fiecare bilet existent, care corespunde ca fiind deja escaladat, fără a întreprinde acțiunea.

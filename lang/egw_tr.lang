@@ -35,19 +35,23 @@ add to	tracker	tr	Eklemek için
 add unrecognized mail address to the cc field	tracker	tr	CC alanına tanınmayan e-posta adresi ekleyin
 after	tracker	tr	Sonra
 after how many days a not replied item should be marked overdue?	tracker	tr	Yanıtlanmamış bir öğe kaç gün sonra gecikmiş olarak işaretlenmelidir?
+after how many days pending items should be closed automatic	tracker	tr	Bekleyen öğeler kaç gün sonra otomatik olarak kapatılmalıdır?
 all	tracker	tr	Tümü
 all tickets are already converted to tracker	tracker	tr	Tüm biletler zaten Tracker'a dönüştürülmüştür
 all versions	tracker	tr	Tüm versiyonlar
 allow bounties	tracker	tr	Ödüllere izin verin
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	tr	Yalnızca yöneticiler, teknisyenler ve atanmış kullanıcılar tarafından görülebilen kısıtlı yorumların oluşturulmasına izin verin
 allow creation of infolog entries from tracker tickets	tracker	tr	Tracker biletlerinden InfoLog girdileri oluşturulmasına izin ver
+allow editing by	tracker	tr	Tarafından düzenlenmesine izin ver
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	tr	Yeni izleyici öğelerine atanacak projelerin önceden tanımlanmasına izin verin
 allow to assign groups to tracker items	tracker	tr	Grup atamaya izin ver
 allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	tr	'Teknisyenlere' ve 'Takipçi Yöneticilerine' ek olarak 'Kullanıcıların' da bir bilete atanmasına izin verin
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	tr	Bir bilete yalnızca "İzleyici Yöneticileri" ve "Teknisyenler" değil, aynı zamanda personel sekmesindeki "Kullanıcılar" da atanmasına izin verin
 allow voting	tracker	tr	Oylamaya izin verin
+allow voting on tracker items, show and sort after the votes	tracker	tr	İzleyici öğelerinde oylamaya izin verin, oylardan sonra gösterin ve sıralayın
 already escalated	tracker	tr	Çoktan tırmandırıldı
 application mail expected but got: %1	tracker	tr	Başvuru e-postası bekleniyordu ancak alındı: %1
+assigned to	tracker	tr	Şuraya atandı
 before	tracker	tr	Önce
 bounty	tracker	tr	Bounty
 canned response	tracker	tr	Konserve yanıt
@@ -94,11 +98,24 @@ due date for new tickets	tracker	tr	Yeni biletler için son tarih
 edit others' comments	tracker	tr	Başkalarının yorumlarını düzenleme
 edit own comments	tracker	tr	Kendi yorumlarınızı düzenleyin
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	tr	EGroupware Tracker mailhandling: önceden bağlanılamadı ve profil değişmedi
+enable color code for	tracker	tr	için renk kodunu etkinleştirin
+enter the email for reply to	tracker	tr	Yanıt için e-posta adresini girin
 entry saved	tracker	tr	Giriş kaydedildi
+error deleting escalation!	tracker	tr	Eskalasyon silinirken hata oluştu!
+error renaming tracker queue!	tracker	tr	İzleyici kuyruğu yeniden adlandırılırken hata oluştu!
+error: no mail (mailbox / uid) given!	tracker	tr	Hata: e-posta (Posta Kutusu/UID) verilmedi!
+escalation	tracker	tr	Eskalasyon
+escalation added.	tracker	tr	Eskalasyon eklendi.
+escalation deleted.	tracker	tr	Eskalasyon silindi.
+escalation not found!	tracker	tr	Eskalasyon bulunamadı!
+escalation saved.	tracker	tr	Eskalasyon kaydedildi.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	tr	Örnek {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - "n_prefix" alanında "Mr" için arama yapın, bulunursa Merhaba Mr. yazın, aksi takdirde Merhaba Ms. yazın.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	tr	Örnek {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Örnek: Bay Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	tr	Örnek {{NELF rolü}} - eğer rol alanı boş değilse, rol alanının değerini içeren yeni bir satır alırsınız
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	tr	Örnek {{nenvlf role}} - alan rolü boş değilse, alanın herhangi bir değeri olmadan bir LF ayarlayın
+exclude links of the following apps on timesheet creation	tracker	tr	Zaman çizelgesi oluşturulurken aşağıdaki uygulamaların bağlantılarını hariç tutun
+exists	tracker	tr	Varolmak
+export csv	tracker	tr	CSV'yi Dışa Aktar
 from	tracker	tr	Nereden
 full list of placeholder names	tracker	tr	Yer tutucu listesi
 if a ticket has matched before, should the actions be taken again?	tracker	tr	Bir destek talebi daha önce eşleşmişse, eylemler tekrar yapılmalı mı?
