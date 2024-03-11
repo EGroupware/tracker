@@ -41,6 +41,7 @@ class tracker_export_csv implements importexport_iface_export_plugin
 		switch($options['selection'])
 		{
 			case 'search':
+				$this->cleanFilters($query);
 				// ui selection with checkbox 'use_all'
 				$query['num_rows'] = -1;	// all
 				$query['csv_export'] = true;	// so get_rows method _can_ produce different content or not store state in the session
@@ -141,6 +142,23 @@ class tracker_export_csv implements importexport_iface_export_plugin
 			unset($_record);
 		}
 		return $export_object;
+	}
+
+	protected function cleanFilters(&$query)
+	{
+		if(empty($query['col_filter']['tr_assigned']))
+		{
+			unset($query['col_filter']['tr_assigned']);
+		}
+		elseif($query['col_filter']['tr_assigned'] < 0)    // resolve groups with its members
+		{
+			$query['col_filter']['tr_assigned'] = $GLOBALS['egw']->accounts->members($query['col_filter']['tr_assigned'], true);
+			$query['col_filter']['tr_assigned'][] = $query_in['col_filter']['tr_assigned'];
+		}
+		elseif($query['col_filter']['tr_assigned'] === 'not')
+		{
+			$query['col_filter']['tr_assigned'] = null;
+		}
 	}
 
 	/**
