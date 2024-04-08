@@ -2262,7 +2262,7 @@ class tracker_bo extends tracker_so
 				{
 					Link::link('tracker',$trackerentry['link_to']['to_id'],'addressbook',(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
 					//error_log(__METHOD__.__LINE__.'linking ->'.array2string($trackerentry['link_to']['to_id']).' Status:'.$gg.': for'.(isset($contact['contact_id'])?$contact['contact_id']:$contact['id']));
-					$staff = $this->get_staff(0,0,'usersANDtechnicians');
+					$staff = $this->get_staff($trackerentry['tr_tracker'] ?? $_queue, 0, 'usersANDtechnicians');
 					if (empty($trackerentry['tr_creator'])&& $contact['account_id']>0)
 					{
 						$buff = explode(',',strtolower($trackerentry['tr_cc'])) ;
