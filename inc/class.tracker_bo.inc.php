@@ -2293,7 +2293,6 @@ class tracker_bo extends tracker_so
 				}
 				if (empty($trackerentry['tr_creator']))
 				{
-					$trackerentry['msg'] = lang('Attention: No Contact with address %1 found.',implode(', ',$emails));
 					$trackerentry['tr_creator']=$this->user;
 				}
 			}
