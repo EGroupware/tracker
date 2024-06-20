@@ -238,6 +238,8 @@ class tracker_so extends Api\Storage
 		{
 			$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
 		}
+		$order_by = self::sanitizeOrderBy($order_by);
+		$this->sanitize_order_by = false;
 		// check if we order by tr_id, replace it with egr_tracker.tr_id, as tr_id is ambigues
 		if (strpos($order_by,'tr_id') !== false && strpos($order_by,self::TRACKER_TABLE.'.tr_id') === false)
 		{
@@ -245,7 +247,7 @@ class tracker_so extends Api\Storage
 		}
 
 		// Check if we order by tr_modified, and use tr_created for null rows
-		static $order_replace = 'CASE WHEN tr_modified IS NULL THEN tr_created ELSE tr_modified END';
+		static $order_replace = 'COALESC(tr_modified,tr_created)';
 		if (strpos($order_by,'tr_modified') !== false && strpos($order_by,$order_replace) === false)
 		{
 			$order_by = str_replace('tr_modified',$order_replace,$order_by);
@@ -313,7 +315,7 @@ class tracker_so extends Api\Storage
 				// fixes to get tr_id non-ambigues
 				if (is_bool($only_keys)) $only_keys = self::TRACKER_TABLE.($only_keys ? '.tr_id' : '.*');
 			}
-			// default sort is after bountes and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
+			// default sort is after bounties and votes, only adding them if they are not already there, as doublicate order gives probs on MsSQL
 			if (strpos($order_by,'bounties') === false) $order_by .= ($order_by ? ',' : '').'bounties DESC';
 			if (strpos($order_by,'votes') === false) $order_by .= ($order_by ? ',' : '').'votes DESC';
 		}
