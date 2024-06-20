@@ -247,7 +247,7 @@ class tracker_so extends Api\Storage
 		}
 
 		// Check if we order by tr_modified, and use tr_created for null rows
-		static $order_replace = 'COALESC(tr_modified,tr_created)';
+		static $order_replace = 'COALESCE(tr_modified,tr_created)';
 		if (strpos($order_by,'tr_modified') !== false && strpos($order_by,$order_replace) === false)
 		{
 			$order_by = str_replace('tr_modified',$order_replace,$order_by);
