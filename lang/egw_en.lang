@@ -1,4 +1,4 @@
-"%2" only valid for start date and due date.  use "%1".	tracker	en	"%2" only valid for start date and due date.  Use "%1".
+"%2" only valid for start date and due date.  use "%1".	tracker	en	"%2" only valid for start date and due date. Use "%1".
 %1 days in advance	tracker	en	%1 days in advance
 %1 entries %2	tracker	en	%1 entries %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	en	%1 entries %2, %3 failed because of insufficient rights!
@@ -266,7 +266,7 @@ link to ticket	tracker	en	Link to ticket
 linked to %1	tracker	en	Linked to %1
 links	tracker	en	Links
 links and attached files	tracker	en	Links and attached files
-links to specified application.  example: {{links/infolog}}	tracker	en	Links to specified application.  Example: {{links/infolog}}
+links to specified application.  example: {{links/infolog}}	tracker	en	Links to specified application. Example: {{links/infolog}}
 links wrapped in an href tag with download link	tracker	en	Links wrapped in an HREF tag with download link
 list of coma separated email address	tracker	en	List of comma separated email address
 list of files linked to the current record	tracker	en	List of files linked to the current record
@@ -391,6 +391,7 @@ set to	tracker	en	Set to
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	en	Should the Tracker send you notification emails, if tracker items assigned to you get updated?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	en	Should the Tracker send you notification emails, if tracker items you created get updated?
 should there be a tracker-box on  home screen?	tracker	en	Show Tracker on Home page
+show as user preference	tracker	en	Show as user preference
 show start date and due date	tracker	en	Show start date and due date
 show the tracker send you notification mails, in tracker items that you updates?	tracker	en	Should the Tracker send you notification emails of tracker items that you updated?
 signature	tracker	en	Signature
@@ -445,7 +446,7 @@ tracker deleted	tracker	en	Tracker queue deleted.
 tracker entry can only seen by creator and admins	tracker	en	Tracker entry can be seen by creator and admins only
 tracker fields:	tracker	en	Tracker fields:
 tracker for new tickets	tracker	en	Tracker for new tickets
-tracker for the  home screen	tracker	en	Tracker for the  home screen
+tracker for the  home screen	tracker	en	Tracker for the home screen
 tracker id	tracker	en	Tracker ID
 tracker item modified by %1 at %2	tracker	en	Tracker item modified by %1 at %2
 tracker item not found !!!	tracker	en	Tracker item not found!

@@ -391,6 +391,7 @@ set to	tracker	es-es	Ajustar a
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe asignados a usted?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	es-es	¿Enviarle a usted correo de notificación si se actualizan elementos de un informe creado por usted?
 should there be a tracker-box on  home screen?	tracker	es-es	Mostrar Sistema de Segumiento en la página de inicio
+show as user preference	tracker	es-es	Mostrar como preferencia del usuario
 show start date and due date	tracker	es-es	Mostrar fechas de inicio y de vencimiento
 show the tracker send you notification mails, in tracker items that you updates?	tracker	es-es	¿Deben enviarse correos de notificación cuando se actualicen los elementos propios?
 signature	tracker	es-es	Firma
@@ -502,6 +503,7 @@ you need to select some entries first	tracker	es-es	Necesita seleccionar antes a
 you need to select something to change and some tracker items!	tracker	es-es	Necesita seleccionar algo para cambiar Y algunos elementos
 you need to specify amount, donators name and email address!	tracker	es-es	¡Necesita especificar la cantidad, nombre de donante Y dirección de correo electrónico!
 you voted %1.	tracker	es-es	Ha votado %1.
+♦ closed	tracker	es-es	♦ Cerrado
 ♦ not closed	tracker	es-es	♦ No cerrado
 ♦ own not closed	tracker	es-es	♦ Propio no cerrado
 ♦ own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
