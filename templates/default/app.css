@@ -109,7 +109,8 @@ label.tracker_trIdEdit:before { content: "#"; }
     display: none
 }
 
-#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons et2-button {
+#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons et2-button,
+#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons *::part(button) {
     display: none !important;
 }
 
