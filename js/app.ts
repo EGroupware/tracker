@@ -22,6 +22,7 @@ import {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
 import {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
 import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
 import "./Et2TrackerAssigned.ts";
+import {waitForEvent} from "../../api/js/etemplate/Et2Widget/event";
 
 /**
  * UI for tracker
@@ -419,8 +420,15 @@ import "./Et2TrackerAssigned.ts";
 			jQuery('.et2_toolbar',row).removeClass('hide_buttons')
 				.get(0).scrollIntoView();
 		}
-		jQuery("body").one('click',function() {
-			jQuery('.et2_toolbar', row).addClass('hide_buttons');
+		jQuery("body").one('click', async function(e)
+		{
+			// If vfs-select, need to wait to hide or we'll hide the dialog too
+			if(e.target.tagName == "ET2-VFS-SELECT")
+			{
+				await waitForEvent(e.target, "close");
+				debugger;
+			}
+			row.querySelector(".et2_toolbar").classList.add("hide_buttons");
 		});
 	}
 
