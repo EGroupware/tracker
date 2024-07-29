@@ -642,7 +642,7 @@
                     <et2-button  align="right" label="Change color" id="button[change_color]"></et2-button>
                 </et2-hbox>
             </et2-hbox>
-            <et2-tabbox  id="tabs">
+            <et2-tabbox id="tabs" cfDisabled="true">
                 <tabs>
                     <tab id="tracker.admin.cats" label="Categories"
                          statustext="Categories, versions, canned responses"/>
