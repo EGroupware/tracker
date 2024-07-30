@@ -466,7 +466,7 @@ unrecognized mails	tracker	de	Nicht zuordenbare E-Mails
 upcoming	tracker	de	Anstehend
 updated	tracker	de	Aktualisiert
 url of the tracker	tracker	de	Internetadresse des Verfolgungssystems
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse die in den Benachrichtigungen enthalten ist, z.B. zur Seite mit dem SiteMgr Module, Vorgabe das Verfolgungssystem innerhalb der EGw
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	de	Internetadresse, welche in den Benachrichtigungen enthalten ist. Vorgabe das Verfolgungssystem innerhalb der EGw
 use a default user for mails that where not recognized	tracker	de	Verwende einen Standardbenutzer für E-Mails die nicht zugeordnet werden können
 use all	tracker	de	Alle anwenden
 use custom notification message	tracker	de	Benutzerdefinierte Benachrichtigungen verwenden

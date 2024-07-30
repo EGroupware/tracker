@@ -56,16 +56,20 @@ canned responses	tracker	da	Dåsesvar
 categories, versions, canned responses	tracker	da	Kategorier, versioner, dåsesvar
 change assigned	tracker	da	Tildelt ændring
 change color	tracker	da	Skift farve
+change group	tracker	da	Skift gruppe
 change group when updating	tracker	da	Skift gruppe ved opdatering
 change owner when updating	tracker	da	Skift ejer, når du opdaterer
+check mail interval	tracker	da	Tjek e-mail-interval
 choose 'creator' of imported data	tracker	da	Vælg 'skaber' af importerede data
+closed	tracker	da	Lukket
 closed date	tracker	da	Lukket dato
 color	tracker	da	Farve
 comments	tracker	da	Kommentarer
+completed	tracker	da	Afsluttet
 configuration	tracker	da	Konfiguration
 configuration, notifications	tracker	da	Konfiguration, Notifikationer
 copy to	tracker	da	Kopier til
-copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	da	Kopier dine ændringer til 'Udklipsholderen', %1reload indtastning%2 og bland dem
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	da	Kopier dine ændringer til 'Udklipsholderen', %1reload indtastning%2 og bland dem.
 could not connect	tracker	da	kunne ikke oprette forbindelse
 create new links	tracker	da	Lav nyt link
 create new tracker entry's as default "private" for approval process	tracker	da	Opret ny tracker-post som standard 'privat' til godkendelsesproces
@@ -73,7 +77,7 @@ created	tracker	da	Oprettet
 created by	tracker	da	Oprettet af
 created on	tracker	da	Oprettet på
 creates a new field	tracker	da	opretter et nyt felt
-creation date	tracker	da	Lavet (dato:)
+creation date	tracker	da	Dato for oprettelse
 custom fields	tracker	da	Valgfri Felter
 custom notifications	tracker	da	Brugerdefinerede meddelelser
 customfield	tracker	da	Brugerdefineret felt
@@ -83,12 +87,15 @@ default document to insert entries	tracker	da	Standarddokument til indsættelse 
 default group	tracker	da	Standardgruppe
 default tracker queue	tracker	da	Standard kø
 default version for new tracker entries	tracker	da	Standardversion for nye tracker-poster
+define escalations	common	da	Definer eskaleringer
+delete mails from server	tracker	da	Slet e-mails fra serveren
 delete the mail from the server	tracker	da	Slet e-mailen fra serveren
 delete the mail from the server.	tracker	da	Slet e-mailen fra serveren.
 delete this canned response	tracker	da	Slet dette dåsesvar
 delete this category	tracker	da	Slet denne kategori
 delete this entry	tracker	da	Slet denne indtastning
 delete this escalation	tracker	da	Slet denne eskalering
+delete this tracker including all its items and categories	tracker	da	Slet denne tracker inklusive alle dens elementer og kategorier
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	da	Slet ikke-genkendte e-mails fra serveren, selv om 'Slet e-mails' ovenfor ikke er markeret.
 deleted	tracker	da	Slettet
 deletes this field	tracker	da	sletter dette felt
@@ -96,6 +103,8 @@ deny global	tracker	da	Afvis globalt
 determines the order the fields are displayed	tracker	da	bestemmer rækkefølgen felterne bliver vist
 directory with documents to insert entries	tracker	da	Mappe med dokumenter til at indsætte poster
 do not send notifications to external email (cc field)	tracker	da	Send ikke notifikationer til ekstern e-mail (cc-felt)
+do you want a notification, if items you are responsible for are about to start?	tracker	da	Vil du have en meddelelse, hvis de opgaver, du er ansvarlig for, er ved at starte?
+do you want a notification, if items you are responsible for are due?	tracker	da	Vil du have en besked, hvis de ting, du er ansvarlig for, forfalder?
 do you want to add mailheader information to description and/or comments?	tracker	da	Ønsker du at tilføje mailheader-information til beskrivelse og/eller kommentarer?
 download url for links	tracker	da	Download URL til links
 due	tracker	da	Forfald
@@ -107,6 +116,7 @@ edit own comments	tracker	da	Rediger egne kommentarer
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	da	EGroupware Tracker mailhåndtering: kunne ikke oprette forbindelse tidligere, og profilen blev ikke ændret
 enable color code for	tracker	da	Aktivér farvekode for
 enter the email for reply to	tracker	da	Indtast e-mail for svar til
+enter the mail address that will be read.	tracker	da	Indtast den e-mailadresse, der skal bruges som ekstra filter på usete beskeder. Lad den stå tom for at læse alle beskeder, der er markeret som usete.
 error deleting escalation!	tracker	da	Fejl ved sletning af eskalering!
 error renaming tracker queue!	tracker	da	Fejl ved omdøbning af tracker-kø!
 error: no mail (mailbox / uid) given!	tracker	da	Fejl: ingen e-mail (postkasse / UID) angivet!
@@ -119,7 +129,7 @@ escalation saved.	tracker	da	Eskalering gemt.
 everybody	tracker	da	alle
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	da	Eksempel {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - søg i feltet "n_prefix", efter "Mr", hvis fundet, skriv Hello Mr. ellers skriv Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	da	Eksempel {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Eksempel: Hr. Dr. James Miller
-example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	da	Eksempel {{NELF rolle}} - Hvis feltet role ikke er tomt, får du en ny linje med værdien af feltet role.
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	da	Eksempel {{NELF rolle}} - Hvis feltet role ikke er tomt, får du en ny linje med værdien af feltet role
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	da	Eksempel {{nenvlf rolle}} - hvis feltet rolle ikke er tomt, sættes en LF uden nogen værdi for feltet
 exclude links of the following apps on timesheet creation	tracker	da	Ekskluder links til følgende apps ved oprettelse af timesedler
 existing links	tracker	da	Eksisterende links
@@ -129,6 +139,7 @@ forward	tracker	da	Vidersend
 from	tracker	da	Fra
 full list of placeholder names	tracker	da	Liste over pladsholdere
 history	tracker	da	Historisk
+html editing	tracker	da	HTML-redigering
 id	tracker	da	ID
 if a ticket has matched before, should the actions be taken again?	tracker	da	Hvis en sag har matchet før, skal handlingerne så udføres igen?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	da	Hvis den ikke er markeret, markeres alle eksisterende, matchende sager som allerede eskalerede, uden at handlingen udføres.
@@ -137,6 +148,9 @@ ignore the mail. it will remain in the mailbox, even if 'delete mails from serve
 imap, ssl secured	tracker	da	IMAP, SSL-sikret
 imap, tls secured	tracker	da	IMAP, TLS-sikret
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	da	Importerer poster til trackeren fra en CSV-fil. CSV betyder 'kommaseparerede værdier'. I fanen Indstillinger kan du også vælge andre separatorer.
+incoming mail folder	tracker	da	Mappe for indgående e-mail
+incoming mail rules	tracker	da	Regler for indgående e-mail
+incoming mail server	tracker	da	Server for indgående e-mail
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	da	Ufuldstændig serverprofil til mailhåndtering angivet; Deaktivering af mailhåndtering for køen %1
 language	tracker	da	Sprog
 last modified	tracker	da	Sidst opdateret
@@ -156,6 +170,7 @@ responsible	tracker	da	Ansvarlig
 saves the changes made and leaves	tracker	da	gem ændringerne og afslut
 set due date this many days after escalation runs	tracker	da	Indstil forfaldsdatoen (antal dage) efter eskaleringskørslen
 set the ticket start date to the email received date	tracker	da	Indstil startdatoen for sagen til datoen for modtagelse af e-mailen
+show as user preference	tracker	da	Vis som brugerpræference
 signature	tracker	da	Signatur
 start date from email	tracker	da	Startdato fra e-mail
 state	tracker	da	Land
@@ -171,3 +186,6 @@ yes, add mailheader to both (description and comments)	tracker	da	Ja, tilføj ma
 yes, add mailheader to comments	tracker	da	Ja, tilføj mailheader til kommentarer
 yes, add mailheader to description	tracker	da	Ja, tilføj mailheader til beskrivelse
 yes, always	tracker	da	Ja, altid
+you need to enter a name	tracker	da	Du skal indtaste et navn
+♦ closed	tracker	da	♦ Lukket
+♦ not closed	tracker	da	♦ Ikke lukket
