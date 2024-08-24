@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	tr	%1 bilet dönüştürüldü.
 (beware of mailloops, check the help!)	tracker	tr	(Mailloops'a dikkat edin!)
 (new tickets as	tracker	tr	Yeni biletler
---> choose a project from the drop-down list	tracker	tr	--> açılır listeden bir proje seçin
 --> enter new name	tracker	tr	--> yeni isim girin
 1 - lowest	tracker	tr	1 - en düşük
 2 days in advance	tracker	tr	2 gün önceden
@@ -109,7 +108,7 @@ escalation added.	tracker	tr	Eskalasyon eklendi.
 escalation deleted.	tracker	tr	Eskalasyon silindi.
 escalation not found!	tracker	tr	Eskalasyon bulunamadı!
 escalation saved.	tracker	tr	Eskalasyon kaydedildi.
-example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	tr	Örnek {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - "n_prefix" alanında "Mr" için arama yapın, bulunursa Merhaba Mr. yazın, aksi takdirde Merhaba Ms. yazın.
+example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	tr	Örnek {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - "n_prefix" alanında "Mr" için arama yapın, bulunursa Merhaba Mr. yazın, aksi takdirde Merhaba Ms. yazın
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	tr	Örnek {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Örnek: Bay Dr. James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	tr	Örnek {{NELF rolü}} - eğer rol alanı boş değilse, rol alanının değerini içeren yeni bir satır alırsınız
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	tr	Örnek {{nenvlf role}} - alan rolü boş değilse, alanın herhangi bir değeri olmadan bir LF ayarlayın
@@ -140,6 +139,7 @@ remind	tracker	tr	Hatırlatmak
 respect timesheet run and read permissions for time totals	tracker	tr	Zaman toplamları için zaman çizelgesi çalıştırma ve okuma izinlerine saygı gösterin
 set due date this many days after escalation runs	tracker	tr	Eskalasyon çalışmasından sonraki son tarihi (gün sayısı) ayarlayın
 set the ticket start date to the email received date	tracker	tr	Bilet başlangıç tarihini e-postanın alındığı tarih olarak ayarlayın
+show as user preference	tracker	tr	Kullanıcı tercihi olarak göster
 start date from email	tracker	tr	E-postadan itibaren başlangıç tarihi
 state	tracker	tr	Durum
 this month	tracker	tr	Bu Ay
@@ -155,3 +155,5 @@ yes, add mailheader to comments	tracker	tr	Evet, yorumlara posta başlığı ekl
 yes, add mailheader to description	tracker	tr	Evet, açıklamaya posta başlığı ekleyin
 yes, always	tracker	tr	Evet, her zaman
 you need to select some entries first	tracker	tr	Önce bazı girişleri seçmeniz gerekir.
+♦ closed	tracker	tr	♦ Kapalı
+♦ not closed	tracker	tr	♦ Kapalı değil

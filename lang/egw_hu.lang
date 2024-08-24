@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	hu	%1 jegyet konvertáltak.
 (beware of mailloops, check the help!)	tracker	hu	(Vigyázz a mailloopokkal!)
 (new tickets as	tracker	hu	Új jegyek mint
---> choose a project from the drop-down list	tracker	hu	--> válasszon egy projektet a legördülő listából
 --> enter new name	tracker	hu	--> új név megadása
 1 - lowest	tracker	hu	1 - legalacsonyabb
 2 days in advance	tracker	hu	2 nappal előre
@@ -39,14 +38,14 @@ all	tracker	hu	Minden
 all tickets are already converted to tracker	tracker	hu	Minden jegyet már átalakítottak Tracker-be
 all versions	tracker	hu	Minden változat
 allow bounties	tracker	hu	Pénzjutalom engedélyezve
-allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	hu	Csak az adminok, a technikusok és a kijelölt felhasználók számára látható korlátozott megjegyzések létrehozásának lehetővé tétele.
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	hu	Csak az adminok, a technikusok és a kijelölt felhasználók számára látható korlátozott megjegyzések létrehozásának lehetővé tétele
 allow creation of infolog entries from tracker tickets	tracker	hu	InfoLog bejegyzések létrehozásának lehetővé tétele a Tracker jegyekből
 allow default projects for tracker	tracker	hu	Alapértelmezett projektek
 allow editing by	tracker	hu	Szerkeszthető általa:
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	hu	Lehetővé teszi az új nyomkövető elemekhez hozzárendelt projektek előzetes meghatározását
 allow to assign groups to tracker items	tracker	hu	Csoportok hozzárendelésének lehetővé tétele
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	hu	Lehetővé teszi, hogy a "felhasználók" a "technikusok" és a "nyomkövető adminok" mellett "felhasználók" is hozzárendelhetők legyenek egy jegyhez.
-allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	hu	Lehetővé teszi, hogy egy jegyhez ne csak "Tracker Admins" és "Technikusok", hanem "Felhasználók" is hozzárendelhetők legyenek a személyzet lapon.
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	hu	Lehetővé teszi, hogy a "felhasználók" a "technikusok" és a "nyomkövető adminok" mellett "felhasználók" is hozzárendelhetők legyenek egy jegyhez
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	hu	Lehetővé teszi, hogy egy jegyhez ne csak "Tracker Admins" és "Technikusok", hanem "Felhasználók" is hozzárendelhetők legyenek a személyzet lapon
 allow voting	tracker	hu	Szavazás engedélyezve
 allow voting on tracker items, show and sort after the votes	tracker	hu	Engedélyezi a Tracker bejegyzésekre szavazást, megjelenítést és rendezést a szavazás szerint
 amount	tracker	hu	Mennyiség
@@ -55,15 +54,15 @@ applies the changes	tracker	hu	változások végrehajtása
 assigned to	tracker	hu	Megbízva
 assigning groups	tracker	hu	Csoportokhoz rendelés
 attachments & links	tracker	hu	Mellékletek és hivatkozások
-attention: no contact with address %1 found.	tracker	hu	Figyelem: %1 címmel Kapcsolat nem található.
+attention: no contact with address %1 found.	tracker	hu	Figyelem: %1 címmel Kapcsolat nem található
 autoassign to	tracker	hu	Auto hozzárendelés
-before	tracker	hu	A  előtt
+before	tracker	hu	A előtt
 bounties	tracker	hu	Pénzjutalmak
 bounty	tracker	hu	Bounty
-bounty confirmed	tracker	hu	Pénzjutalom megerősítve
-bounty confirmed.	tracker	hu	Konzerv válasz
-bounty deleted	tracker	hu	Pénzjutalom törölve
-bounty deleted.	tracker	hu	Konzervált válaszok
+bounty confirmed	tracker	hu	Pénzjutalom megerősítve.
+bounty confirmed.	tracker	hu	Konzerv válasz.
+bounty deleted	tracker	hu	Pénzjutalom törölve.
+bounty deleted.	tracker	hu	Konzervált válaszok.
 bounty set	tracker	hu	Pénzjutalom beállítása
 canned response	tracker	hu	Instant válasz
 canned responses	tracker	hu	Instant válaszok
@@ -159,7 +158,6 @@ existing links	tracker	hu	Létezõ hivatkozások
 exists	tracker	hu	Létezik
 export as csv	tracker	hu	Export CSV formában
 export csv	tracker	hu	CSV exportálása
-favorites	tracker	hu	Kedvencek
 field	tracker	hu	Mező
 forward	tracker	hu	Továbbít
 forward to	tracker	hu	Továbbítás ide
@@ -175,7 +173,7 @@ ignore the mail. it will remain in the mailbox, even if 'delete mails from serve
 imap, ssl secured	tracker	hu	IMAP, SSL védett
 imap, tls secured	tracker	hu	IMAP, TLS védett
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	hu	Bejegyzések importálása a nyomkövetőbe CSV fájlból. A CSV jelentése 'vesszővel elválasztott értékek'. Az opciók lapon más elválasztójeleket is választhat.
-incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	hu	A levelezéskezeléshez megadott szerverprofil nem teljes; A levelezéskezelés letiltása a %1 várólistához.
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	hu	A levelezéskezeléshez megadott szerverprofil nem teljes; A levelezéskezelés letiltása a %1 várólistához
 invalid	tracker	hu	Érvénytelen
 language	tracker	hu	Nyelv
 last modified	tracker	hu	Utolsó módosítás
@@ -213,6 +211,7 @@ same day	tracker	hu	Azonos napon
 saves the changes made and leaves	tracker	hu	Változások mentése és kilépés
 set due date this many days after escalation runs	tracker	hu	Az esedékesség dátumának beállítása (napok száma) az eszkalációs futtatás után
 set the ticket start date to the email received date	tracker	hu	A jegy kezdeti dátumának beállítása az e-mail beérkezésének dátumára
+show as user preference	tracker	hu	Felhasználói preferenciaként megjeleníteni
 signature	tracker	hu	Aláírás
 start date from email	tracker	hu	Az e-mail kezdő dátuma
 state	tracker	hu	Állapot
@@ -238,3 +237,5 @@ yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
 yesterday	tracker	hu	Tegnap
 you can respond by visiting:	tracker	hu	Megtekintéshez látogasson el ide:
 you need to select some entries first	tracker	hu	Először ki kell választania néhány bejegyzést.
+♦ closed	tracker	hu	♦ Zárva
+♦ not closed	tracker	hu	♦ Nem zárt

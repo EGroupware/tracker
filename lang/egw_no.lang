@@ -44,8 +44,8 @@ allow creating of restricted comments which are only visible for admins, technic
 allow creation of infolog entries from tracker tickets	tracker	no	Tillat opprettelse av InfoLog-oppføringer fra Tracker-saker
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	no	Tillat forhåndsdefinering av prosjekter som skal tilordnes nye tracker-elementer
 allow to assign groups to tracker items	tracker	no	Gjør det mulig å tilordne grupper
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	no	Mulighet for å tilordne "brukere" til en sak i tillegg til "teknikere" og "Tracker-administratorer".
-allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	no	Tillat å tilordne ikke bare "Tracker Admins" og "Technians" til en sak, men også "Brukere" i personalfanen.
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	no	Mulighet for å tilordne "brukere" til en sak i tillegg til "teknikere" og "Tracker-administratorer"
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	no	Tillat å tilordne ikke bare "Tracker Admins" og "Technians" til en sak, men også "Brukere" i personalfanen
 allow voting	tracker	no	Tillat avstemning
 already escalated	tracker	no	Allerede eskalert
 application mail expected but got: %1	tracker	no	Forventet e-post for søknad, men fikk: %1
@@ -68,7 +68,7 @@ configuration	tracker	no	Konfigurasjon
 configuration, notifications	tracker	no	Konfigurasjon, Varsler
 converted count	tracker	no	Antall konverterte
 copy to	tracker	no	Kopier til
-copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	no	Kopier endringene dine til utklippstavlen, %1oppfrisk forekomsten%2 og sammenstill de
+copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	no	Kopier endringene dine til utklippstavlen, %1oppfrisk forekomsten%2 og sammenstill de.
 could not connect	tracker	no	kunne ikke koble til
 create new links	tracker	no	Opprette nye lenker
 create new tracker entry's as default "private" for approval process	tracker	no	Opprett ny sporingsoppføring som standard "privat" for godkjenningsprosessen
@@ -124,7 +124,7 @@ escalation saved.	tracker	no	Opptrapping lagret.
 everybody	tracker	no	Alle
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	no	Eksempel {{IF n_prefiks~Mr~Hallo Mr.~Hello Ms.}} - søk i feltet "n_prefix" etter "Mr", hvis funnet, skriv Hello Mr., ellers skriv Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	no	Eksempel {{LETTERPREFIXCUSTOM n_prefiks tittel n_familie}} - Eksempel: Herr Dr. James Miller
-example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	no	Eksempel {{NELF rolle}} - hvis feltet rolle ikke er tomt, får du en ny linje med verdien for feltet rolle.
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	no	Eksempel {{NELF rolle}} - hvis feltet rolle ikke er tomt, får du en ny linje med verdien for feltet rolle
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	no	Eksempel {{nenvlf rolle}} - hvis feltet rolle ikke er tomt, settes en LF uten noen verdi for feltet
 exclude links of the following apps on timesheet creation	tracker	no	Ekskluder lenker til følgende apper ved opprettelse av timelister
 existing links	tracker	no	Eksisterende lenker
@@ -157,6 +157,8 @@ open(status)	tracker	no	Åpent
 order	tracker	no	Ordre
 overdue	tracker	no	Forfalt
 permission denied !!!	tracker	no	Adgang nektet!
+pop3	tracker	no	POP3
+port number	tracker	no	Portnummer
 process	tracker	no	Prosess
 read	tracker	no	Lest
 read / unread	tracker	no	Lest / Ulest
@@ -169,7 +171,9 @@ saves the changes made and leaves	tracker	no	lagrer endringene og lukker
 select one...	tracker	no	Velg en ...
 set due date this many days after escalation runs	tracker	no	Angi forfallsdato (antall dager) etter eskaleringskjøringen
 set the ticket start date to the email received date	tracker	no	Sett startdatoen for saken til datoen for mottatt e-post
+show as user preference	tracker	no	Vis som brukerpreferanse
 signature	tracker	no	Signatur
+standard imap	tracker	no	Standard IMAP
 start date from email	tracker	no	Startdato fra e-post
 state	tracker	no	Fylke
 summary	tracker	no	Sammendrag
@@ -188,3 +192,6 @@ yes, add mailheader to comments	tracker	no	Ja, legg til posthode i kommentarer
 yes, add mailheader to description	tracker	no	Ja, legg til posthode i beskrivelse
 yes, always	tracker	no	Ja, alltid
 yesterday	tracker	no	I går
+♦ closed	tracker	no	♦ Stengt
+♦ not closed	tracker	no	♦ Ikke lukket
+♦ own not closed	tracker	no	♦ Egen ikke lukket

@@ -44,7 +44,7 @@ allow creating of restricted comments which are only visible for admins, technic
 allow creation of infolog entries from tracker tickets	tracker	lt	Leisti kurti informacinio žurnalo įrašus iš "Tracker" bilietų
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	lt	Leisti iš anksto apibrėžti projektus, kurie bus priskirti naujiems sekimo elementams
 allow to assign groups to tracker items	tracker	lt	Leisti priskirti grupes
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lt	Leisti prie bilieto papildomai priskirti "Naudotojus", "Technikus" ir "Sekimo administratorius".
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lt	Leisti prie bilieto papildomai priskirti "Naudotojus", "Technikus" ir "Sekimo administratorius"
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	lt	Leisti priskirti bilietui ne tik "Tracker Admins" ir "Technians", bet ir "Users" personalo skirtuke
 allow voting	tracker	lt	Leisti balsuoti
 already escalated	tracker	lt	Jau eskaluojama
@@ -58,7 +58,7 @@ change assigned	tracker	lt	Priskirti pakeitimai
 change color	tracker	lt	Pakeisti spalvą
 change group when updating	tracker	lt	Pakeisti grupę atnaujinant
 change owner when updating	tracker	lt	Atnaujinant pakeisti savininką
-choose 'creator' of imported data	tracker	lt	Pasirinkite importuojamų duomenų "kūrėją
+choose 'creator' of imported data	tracker	lt	Pasirinkite importuojamų duomenų "kūrėją"
 closed date	tracker	lt	Uždarymo data
 color	tracker	lt	Spalva
 configuration, notifications	tracker	lt	Konfigūracija, Pranešimai
@@ -103,7 +103,7 @@ escalation deleted.	tracker	lt	Eskalavimas pašalintas.
 escalation not found!	tracker	lt	Eskalavimas nerastas!
 escalation saved.	tracker	lt	Eskalavimas išsaugotas.
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	lt	Pavyzdys {{IF n_prefiksas~Mr~Hello Mr.~Hello Ms.}}} - ieškokite lauke "n_prefix" žodžio "Mr", jei radote, rašykite Hello Mr., kitu atveju rašykite Hello Ms.
-example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	lt	Pavyzdys {{{LETTERPREFIXCUSTOM n_prefix pavadinimas n_family}} - Pavyzdys: James Miller.
+example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	lt	Pavyzdys {{{LETTERPREFIXCUSTOM n_prefix pavadinimas n_family}} - Pavyzdys: James Miller
 example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	lt	Pavyzdys {{{NELF vaidmuo}} - jei laukas role nėra tuščias, bus pateikta nauja eilutė su lauko role reikšme
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	lt	Pavyzdys {{nenvlf role}} - jei laukas role nėra tuščias, nustatysite LF be jokios lauko reikšmės
 exclude links of the following apps on timesheet creation	tracker	lt	Neįtraukti šių programų nuorodų kuriant darbo laiko apskaitos žiniaraštį
@@ -119,15 +119,23 @@ imap, tls secured	tracker	lt	IMAP, apsaugotas TLS
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	lt	Importuoja įrašus į sekimo priemonę iš CSV failo. CSV reiškia "kableliais atskirtos vertės". Parinkčių skirtuke galite pasirinkti ir kitus skirtukus.
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	lt	Pateiktas nepilnas serverio profilis pašto tvarkymui; Išjungti pašto tvarkymą eilei %1
 language	tracker	lt	Kalba
+last 3 months	tracker	lt	Paskutiniai 3 mėnesiai
 open(status)	tracker	lt	Atviras
+pop3	tracker	lt	POP3
+port number	tracker	lt	Prievado numeris
 read	tracker	lt	Skaityti
 read / unread	tracker	lt	Perskaityta / Neperskaityta
 read only filemanager directory	tracker	lt	Tik skaitymui skirtas failų tvarkyklės katalogas
 rejected	tracker	lt	Atmesta
 remind	tracker	lt	Priminti
+resolution	tracker	lt	Sprendimas
 respect timesheet run and read permissions for time totals	tracker	lt	Gerbti darbo laiko apskaitos žiniaraščio paleidimo ir skaitymo leidimus laiko sumoms
+select multiple	tracker	lt	Pasirinkite kelis
+sender address	tracker	lt	Siuntėjo adresas
+server type	tracker	lt	Serverio tipas
 set due date this many days after escalation runs	tracker	lt	Nustatykite terminą (dienų skaičių) po eskalavimo paleidimo
 set the ticket start date to the email received date	tracker	lt	Nustatykite bilieto pradžios datą pagal el. laiško gavimo datą
+show as user preference	tracker	lt	Rodyti kaip naudotojo pageidavimą
 start date from email	tracker	lt	Pradžios data iš el. laiško
 unread	tracker	lt	Neskaitytas
 writable filemanager directory	tracker	lt	Įrašomas failų tvarkyklės katalogas
@@ -135,3 +143,5 @@ yes, add mailheader to both (description and comments)	tracker	lt	Taip, pridėki
 yes, add mailheader to comments	tracker	lt	Taip, pridėti pašto antraštę prie komentarų
 yes, add mailheader to description	tracker	lt	Taip, prie aprašymo pridėti antraštę
 yes, always	tracker	lt	Taip, visada
+♦ closed	tracker	lt	♦ Uždaryta
+♦ not closed	tracker	lt	♦ Neuždaryta

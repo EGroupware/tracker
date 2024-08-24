@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	it	%1 tickets sono stati convertiti.
 (beware of mailloops, check the help!)	tracker	it	(Attenzione ai loop di posta, controllare la guida!)
 (new tickets as	tracker	it	Nuovo ticket come
---> choose a project from the drop-down list	tracker	it	>> scegli un progetto dal menù a tendina
 --> enter new name	tracker	it	>> inserisci nuovo nome
 1 - lowest	tracker	it	1 - più bassa
 2 days in advance	tracker	it	2 giorni di anticipo
@@ -199,7 +198,6 @@ export definition to use for nextmatch export	tracker	it	Definizione di esportaz
 export definitition to use for nextmatch export	tracker	it	Esporta la definizione da utilizzare per la esportazione
 exports a list of tracker tickets to a csv file.	tracker	it	Esporta una lista di ticket in CSV
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	it	impossibile aprire la casella: %1 -> il processo automatico di acquisizione è stato disabilitato!
-favorites	tracker	it	Preferiti
 field	tracker	it	Campo
 fixed	tracker	it	Corretto
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	it	Per una lettera seriale, utilizzare questo tag. Immettere il contenuto che si vuole ripetere tra due tag.
@@ -232,7 +230,7 @@ imap, ssl secured	tracker	it	IMAP con SSL
 imap, tls secured	tracker	it	IMAP con TLS
 import options	tracker	it	Importa opzioni
 import tts tickets	tracker	it	Importa TTS tickets
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	it	Importa voci nel tracker da CSV. CSV significa "valori separati da virgola". Nelle opzioni sarà possibile selezionare anche altri separatori.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	it	Importa voci nel tracker da CSV. Nelle opzioni sarà possibile selezionare anche altri separatori.
 incoming mail folder	tracker	it	Cartella della posta in arrivo
 incoming mail rules	tracker	it	Regole della posta in arrivo
 incoming mail server	tracker	it	Server della posta in arrivo

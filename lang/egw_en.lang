@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
 (beware of mailloops, check the help!)	tracker	en	(Beware of mailloops!)
 (new tickets as	tracker	en	New tickets as
---> choose a project from the drop-down list	tracker	en	--> choose a project from the drop down list
 --> enter new name	tracker	en	--> enter new name
 1 - lowest	tracker	en	1 - lowest
 2 days in advance	tracker	en	2 days in advance
@@ -199,7 +198,6 @@ export definition to use for nextmatch export	tracker	en	Export definition to us
 export definitition to use for nextmatch export	tracker	en	Export definition to use for nextmatch export
 exports a list of tracker tickets to a csv file.	tracker	en	Exports a list of tracker tickets to a CSV file.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	en	failed to open mailbox: %1 -> disabled for automatic mailprocessing!
-favorites	tracker	en	Favorites
 field	tracker	en	Field
 fixed	tracker	en	Fixed
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	en	For serial letter use this tag. Place the content you want to repeat between two tags.
@@ -232,7 +230,7 @@ imap, ssl secured	tracker	en	IMAP, SSL secured
 imap, tls secured	tracker	en	IMAP, TLS secured
 import options	tracker	en	Import options
 import tts tickets	tracker	en	Import TTS tickets
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	en	Imports entries into the tracker from CSV File. CSV means 'Comma Separated Values'. In the options Tab you can also choose other separators.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	en	Imports entries into the tracker from CSV File. In the options Tab you can also choose other separators.
 incoming mail folder	tracker	en	Incoming email folder
 incoming mail rules	tracker	en	Incoming email rules
 incoming mail server	tracker	en	Incoming email server

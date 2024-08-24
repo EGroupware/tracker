@@ -65,7 +65,7 @@ automatically created by importexport	tracker	nl	Automatisch aangemaakt door imp
 before	tracker	nl	Voor
 bounties	tracker	nl	Giften
 bounty	tracker	nl	Bounty
-bounty confirmed	tracker	nl	Gift bevestigd
+bounty confirmed	tracker	nl	Gift bevestigd.
 bounty confirmed.	tracker	nl	Gift bevestigd.
 bounty deleted	tracker	nl	Gift verwijderd
 bounty deleted.	tracker	nl	Gift verwijderd.
@@ -134,7 +134,7 @@ delete this escalation	tracker	nl	Verwijder deze escalatie
 delete this status	tracker	nl	Verwijder deze status
 delete this tracker including all its items and categories	tracker	nl	Verwijder deze tracker inclusief alle meldingen en categorieën
 delete this version	tracker	nl	Verwijder deze versie
-delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	nl	Verwijder niet herkende mail van de server, zelfs als 'Verwijder mails' hierboven niet is aangevinkt
+delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	nl	Verwijder niet herkende mail van de server, zelfs als 'Verwijder mails' hierboven niet is aangevinkt.
 deleted	tracker	nl	Verwijderd
 deletes this field	tracker	nl	verwijdert dit veld
 deny global	tracker	nl	Globaal weigeren
@@ -161,13 +161,13 @@ edit others' comments	tracker	nl	Opmerkingen van anderen bewerken
 edit own comments	tracker	nl	Eigen opmerkingen bewerken
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	nl	EGroupware Tracker mailhandling: kon eerder geen verbinding maken en profiel is niet gewijzigd
 email address to contact you	tracker	nl	Email address om contact met u op te nemen
-email handling can be configured only for all trackers	tracker	nl	Email afhandeling kan alleen voor alle tracker-reeksen worden geconfigureerd
+email handling can be configured only for all trackers	tracker	nl	Email afhandeling kan alleen voor alle tracker-reeksen worden geconfigureerd.
 enable color code for	tracker	nl	Kleurcode inschakelen voor
 enter an email address here if unrecognized mails should be forwarded	tracker	nl	Geef hier een email adres op als niet herkende mails moeten worden doorgestuurd
 enter an opening text for the reply message	tracker	nl	Voer een openingstekst in voor het antwoordbericht
 enter the email for reply to	tracker	nl	Voer het e-mailadres in voor antwoord aan
 enter the imap server from which emails should be fetched	tracker	nl	Geef de IMAP server waar emails moeten worden opgehaald
-enter the mail address that will be read.	tracker	nl	Geef het email adres dat moet worden uitgelezen
+enter the mail address that will be read.	tracker	nl	Geef het email adres dat moet worden uitgelezen.
 entry saved	tracker	nl	Invoer opgeslagen
 error adding the new tracker!	tracker	nl	Fout bij het toevoegen van een nieuwe tracker-reeks!
 error deleting escalation!	tracker	nl	Fout bij het verwijderen van de escalatie!
@@ -192,14 +192,13 @@ export as csv	tracker	nl	Exporteer als CSV
 export csv	tracker	nl	Exporteer CSV
 export definition to use for nextmatch export	tracker	nl	Export definitie om te gebruiken bij nextmatch export
 export definitition to use for nextmatch export	tracker	nl	Export definitie om te gebruiken bij nextmatch export
-favorites	tracker	nl	Favorieten
 field	tracker	nl	Veld
 fixed	tracker	nl	Hersteld
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	nl	Gebruik deze tag voor serie brieven. Plaats de inhoud die herhaald moet worden tussen de twee tags.
 forward	tracker	nl	Doorsturen
 forward the mail to the same address where unrecognized mails can be forwarded to (so this address must be entered!). afterwards, the mail will be deleted from the server.	tracker	nl	Stuur de e-mail door naar hetzelfde adres waarnaar niet-herkende e-mails kunnen worden doorgestuurd (dit adres moet dus worden ingevoerd!). Daarna wordt de e-mail van de server verwijderd.
 forward to	tracker	nl	Doorsturen aan
-forward unrecognized mails to the email address that has to be specified here.	tracker	nl	Stuur niet herkende mails door naar het email adres dat hier moet worden opgegeven
+forward unrecognized mails to the email address that has to be specified here.	tracker	nl	Stuur niet herkende mails door naar het email adres dat hier moet worden opgegeven.
 from	tracker	nl	Van
 full list of placeholder names	tracker	nl	Lijst met plaatsaanduidingen
 general fields:	tracker	nl	Algemene velden:
@@ -216,12 +215,12 @@ if you specify an export definition, it will be used when you export	tracker	nl	
 if you specify an export definition, it will be used when you export*	tracker	nl	Als u een export definitie kiest, zal deze worden gebruikt bij de export*
 ignore	tracker	nl	Negeren
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	nl	Negeer de e-mail. De e-mail blijft in de mailbox, zelfs als 'E-mails van server verwijderen' hierboven is aangevinkt.
-ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	nl	Negeer niet herkende mails. Ze zullen niet van de server worden verwijderd, zels als 'Verwijder mails' hierboven is aangevinkt
+ignore unrecognized mails. they will not be deleted from the server, even if 'delete mails' above is tagged.	tracker	nl	Negeer niet herkende mails. Ze zullen niet van de server worden verwijderd, zels als 'Verwijder mails' hierboven is aangevinkt.
 imap, ssl secured	tracker	nl	IMAP, SSL beveiligd
 imap, tls secured	tracker	nl	IMAP, TLS beveiligd
 import options	tracker	nl	Opties importeren
 import tts tickets	tracker	nl	Importeer TTS meldingen
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	nl	Importeert items in de tracker vanuit CSV-bestand. CSV betekent 'Komma Gescheiden Waarden'. In de tab Opties kun je ook andere scheidingstekens kiezen.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	nl	Importeert items in de tracker vanuit CSV-bestand. In de tab Opties kun je ook andere scheidingstekens kiezen.
 incoming mail folder	tracker	nl	Inkomende mail folder
 incoming mail rules	tracker	nl	Regels voor inkomende mails
 incoming mail server	tracker	nl	Inkomende mail server
@@ -279,14 +278,14 @@ overdue after	tracker	nl	Achterstallig ne
 ownership of the ticket	tracker	nl	Eigendom van de melding
 pending	tracker	nl	Afwachtend
 pending items never get close automatic.	tracker	nl	Afwachtende meldingen worden niet automatisch gesloten
-pending items will be closed automatic after %1 days without response.	tracker	nl	Afwachtende meldingen worden automatisch gesloten na %1 dagen zonder antwoord
+pending items will be closed automatic after %1 days without response.	tracker	nl	Afwachtende meldingen worden automatisch gesloten na %1 dagen zonder antwoord.
 permission denied !!!	tracker	nl	Geen toestemming!
 permit html editing in overview and comments	tracker	nl	Sta HTML wijzigingen toe in overzichen en commentaren
 port number	tracker	nl	Port nummer
 postponed	tracker	nl	Uitgesteld
 print entry	tracker	nl	Invoer afdrukken
 priorities	tracker	nl	Prioriteiten
-priorities with empty label are not available to the user	tracker	nl	Prioriteiten zonder label zijn niet beschikbaar voor de gebruikers
+priorities with empty label are not available to the user	tracker	nl	Prioriteiten zonder label zijn niet beschikbaar voor de gebruikers.
 process	tracker	nl	Proces
 project selection	tracker	nl	Project selectie
 projects	tracker	nl	Projecten
@@ -311,12 +310,12 @@ restrict tracker items to staff and:	tracker	nl	Beperk zichtbaarheid van de meld
 restriction	tracker	nl	Beperking
 same day	tracker	nl	Dezelfde dag
 saves the changes made and leaves	tracker	nl	bewaart de gemaakte wijzigingen en verlaat
-select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	nl	Selecteer een standaard tracker reeks voor nieuwe meldingen, of 'Afwijzen' om het creëren van nieuwe meldingen via email niet toe te staan
+select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	nl	Selecteer een standaard tracker reeks voor nieuwe meldingen, of 'Afwijzen' om het creëren van nieuwe meldingen via email niet toe te staan.
 select multiple	tracker	nl	Selecteer meerdere
 select one...	tracker	nl	Selecteer een ...
 select tracker queue	tracker	nl	Selecteer tracker reeks
-select which categories should be used in tracker for the tts categories	tracker	nl	Selecteer welke categorieën in tracker gebruikt moeten worden voor de TTS categorieën
-select which username should be used when unrecognized mails are handled.	tracker	nl	Selecteer welke gebruiker gehanteerd moet worden als niet herkende mails worden afgehandeld
+select which categories should be used in tracker for the tts categories	tracker	nl	Selecteer welke categorieën in tracker gebruikt moeten worden voor de TTS categorieën.
+select which username should be used when unrecognized mails are handled.	tracker	nl	Selecteer welke gebruiker gehanteerd moet worden als niet herkende mails worden afgehandeld.
 select which username should be used when unrecognized replies are handled	tracker	nl	Selecteer welke gebruiker gehanteerd moet worden als niet herkende antwoord mails worden afgehandeld
 sender address	tracker	nl	Adres afzender
 sender address for all notifications, eg. noreply@egroupware.org	tracker	nl	Adres afzender voor alle notificaties, bv. noreply@egroupware.org
@@ -329,6 +328,7 @@ set due date this many days after escalation runs	tracker	nl	Stel de vervaldatum
 set the ticket start date to the email received date	tracker	nl	Stel de startdatum van het ticket in op de datum waarop de e-mail is ontvangen
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, aan u toegewezen, worden aangepast?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	nl	Moeten notificatie mails worden verstuurd indien meldingen, door u gecreëerd, worden aangepast?
+show as user preference	tracker	nl	Toon als gebruikersvoorkeur
 show the tracker send you notification mails, in tracker items that you updates?	tracker	nl	Moet Tracker notificatie mails verzenden van meldingen die u zelf heeft aangepast?
 signature	tracker	nl	Ondertekening
 staff	tracker	nl	Medewerkers
@@ -344,9 +344,9 @@ technicians	tracker	nl	Technici
 thank you for setting this bounty.	tracker	nl	Dank u voor het toekennen van deze gift
 thank you for voting.	tracker	nl	Dank u voor uw stem
 the bounty will not be shown, until the money is received.	tracker	nl	De gift wordt NIET getoond tot het bedrag is ontvangen
-the canned response will be prefix the text you type.	tracker	nl	Het standaard antwoord wordt voor de tekst ingevoegd
-the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	nl	Het document kan een tijdelijke aanduiding als {{%3}} hebben, maar kan vervangen worden met data (%1 volledige lijst van tijdelijke aanduidingen %2)
-the following document-types are supported:	tracker	nl	De volgende document types worden ondersteund :
+the canned response will be prefix the text you type.	tracker	nl	Het standaard antwoord wordt voor de tekst ingevoegd.
+the document can contain placeholder like {{%3}}, to be replaced with the data (%1full list of placeholder names%2).	tracker	nl	Het document kan een tijdelijke aanduiding als {{%3}} hebben, maar kan vervangen worden met data (%1 volledige lijst van tijdelijke aanduidingen %2).
+the following document-types are supported:	tracker	nl	De volgende document types worden ondersteund:
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	nl	de intern gebruikte naam (<= 20 tekens), wijziging maakt bestaande gegevens onbereikbaar
 the text displayed to the user	tracker	nl	de tekst die aan de gebruiker getoond wordt
 there already an escalation for that filter!	tracker	nl	Er bestaat al een escalatie voor dit filter!
@@ -360,11 +360,11 @@ ticket modified by %1 at %2	tracker	nl	Melding gewijzigd door %1 op %2
 times	tracker	nl	Tijden
 titles of any entries linked to the current record, excluding attached files	tracker	nl	Namen van alle invoer gelinked aan huidig record, behalve de bijgesloten bestanden
 tracker	common	nl	Tracking Systeem
-tracker added	tracker	nl	Tracker reeks toegevoegd
+tracker added	tracker	nl	Tracker reeks toegevoegd.
 tracker admins	tracker	nl	Tracker administrators
 tracker admins & technicians	tracker	nl	Tracker administrators & technici
 tracker configuration	tracker	nl	Tracker configuratie
-tracker deleted	tracker	nl	Tracker reeks verwijderd
+tracker deleted	tracker	nl	Tracker reeks verwijderd.
 tracker for new tickets	tracker	nl	Tracker reeks voor nieuwe meldingen
 tracker item modified by %1 at %2	tracker	nl	Melding gewijzigd door %1 op %2
 tracker item not found !!!	tracker	nl	Melding niet gevonden!
@@ -407,6 +407,7 @@ you need to select some entries first	tracker	nl	Je moet eerst een aantal items 
 you need to select something to change and some tracker items!	tracker	nl	U moet iets selecteren om te wijzigen EN enkele meldingen!
 you need to specify amount, donators name and email address!	tracker	nl	U moet het bedrag specificeren, de naam van de donateur EN het email adres!
 you voted %1.	tracker	nl	U heeft %1 gestemd.
+♦ closed	tracker	nl	♦ Gesloten
 ♦ not closed	tracker	nl	♦ Niet gesloten
 ♦ own not closed	tracker	nl	♦ Mijn, niet gesloten
 ♦ own or assigned not closed	tracker	nl	♦ Eigen of toegewezen, niet afgesloten

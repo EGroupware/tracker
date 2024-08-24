@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	ro	%1 bilete au fost convertite.
 (beware of mailloops, check the help!)	tracker	ro	(Atenție la mailloops!)
 (new tickets as	tracker	ro	Bilete noi ca
---> choose a project from the drop-down list	tracker	ro	--> alegeți un proiect din lista derulantă
 --> enter new name	tracker	ro	--> introduceți un nume nou
 1 - lowest	tracker	ro	1 - cel mai mic
 2 days in advance	tracker	ro	2 zile în avans
@@ -123,6 +122,8 @@ last modified	tracker	ro	Ultima modificare
 last modified by	tracker	ro	Modificat ultima dată de
 later	tracker	ro	Mai târziu
 open(status)	tracker	ro	Deschideți
+pop3	tracker	ro	POP3
+port number	tracker	ro	Numărul portului
 read	tracker	ro	Citiți
 read / unread	tracker	ro	Citit / Necitit
 read only filemanager directory	tracker	ro	Directorul Manager de fișiere numai pentru citire
@@ -131,6 +132,7 @@ remind	tracker	ro	Reamintiți
 respect timesheet run and read permissions for time totals	tracker	ro	Respectați permisiunile de execuție a foii de pontaj și de citire a totalurilor de timp
 set due date this many days after escalation runs	tracker	ro	Stabiliți data scadentă (număr de zile) după rularea escaladării
 set the ticket start date to the email received date	tracker	ro	Setați data de începere a tichetului la data primirii e-mailului
+show as user preference	tracker	ro	Arată ca preferință a utilizatorului
 start date from email	tracker	ro	Data de începere din e-mail
 ticket count	tracker	ro	Număr de bilete
 unread	tracker	ro	Necitit
@@ -140,3 +142,5 @@ yes, add mailheader to comments	tracker	ro	Da, adăugați antetul de e-mail la c
 yes, add mailheader to description	tracker	ro	Da, adăugați antetul de e-mail la descriere
 yes, always	tracker	ro	Da, întotdeauna
 you need to select some entries first	tracker	ro	Trebuie să selectați mai întâi câteva intrări.
+♦ closed	tracker	ro	♦ Închis
+♦ not closed	tracker	ro	♦ Neînchis

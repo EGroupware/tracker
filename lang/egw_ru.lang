@@ -185,7 +185,7 @@ escalation saved.	tracker	ru	Эскалация сохранена.
 everybody	tracker	ru	Каждому
 example {{if n_prefix~mr~hello mr.~hello ms.}} - search the field "n_prefix", for "mr", if found, write hello mr., else write hello ms.	tracker	ru	Пример {{IF n_prefix~Mr~Hello Mr.~Hello Ms.}} - ищет в поле "n_prefix" вхождение М. Если находит, пишет Hello Mr., если нет - Hello Ms.
 example {{letterprefixcustom n_prefix title n_family}} - example: mr dr. james miller	tracker	ru	Пример {{LETTERPREFIXCUSTOM n_prefix title n_family}} - Пример: Mr Dr. James Miller
-example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ru	Пример  {{NELF role}} - если поле Роль не пусто, будет выдана новая строка со значением поля Роль
+example {{nelf role}} - if field role is not empty, you will get a new line with the value of field role	tracker	ru	Пример {{NELF role}} - если поле Роль не пусто, будет выдана новая строка со значением поля Роль
 example {{nenvlf role}} - if field role is not empty, set a lf without any value of the field	tracker	ru	Пример {{nenvlf role}} - если поле Роль не пуст, установит LF без значения поля
 exclude links of the following apps on timesheet creation	tracker	ru	Исключить связи следующего приложения при создании записи Табеля
 existing links	tracker	ru	Существующие ссылки
@@ -195,7 +195,7 @@ export csv	tracker	ru	Экспорт CSV
 export definition to use for nextmatch export	tracker	ru	Определение экспорта для последующего экспорта
 export definitition to use for nextmatch export	tracker	ru	Определение экспорта для последующего экспорта
 exports a list of tracker tickets to a csv file.	tracker	ru	Экспортирует список записей Трекера в файл формата CSV.
-favorites	tracker	ru	Избранное
+failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	ru	не удалось открыть почтовый ящик: %1 -> отключена автоматическая обработка почты!
 field	tracker	ru	Поле
 fixed	tracker	ru	Исправлено
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	ru	Для серии писем используйте этот тэг. Поместите содержание, которое нужно повторить, между двумя тэгами.
@@ -379,6 +379,7 @@ set to	tracker	ru	Установить
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если назначенные Вам запросы трекера обновлены?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	ru	Должен ли Трекер высылать Вам почтовое уведомление, если созданные Вами запросы трекера обновлены?
 should there be a tracker-box on  home screen?	tracker	ru	Показывать Трекер на домашней странице
+show as user preference	tracker	ru	Показать как предпочтение пользователя
 show start date and due date	tracker	ru	Отображать даты начала и окончания
 show the tracker send you notification mails, in tracker items that you updates?	tracker	ru	Должен ли Трекер посылать письменные уведомления о записях, Вами обновленных?
 signature	tracker	ru	Подпись
@@ -479,6 +480,7 @@ you need to select some entries first	tracker	ru	Необходимо снача
 you need to select something to change and some tracker items!	tracker	ru	Вы должны выбрать что-нибудь для изменения И какие-нибудь запросы в трекере!
 you need to specify amount, donators name and email address!	tracker	ru	Вы должны указать количество, имя жертвователя И адрес email!
 you voted %1.	tracker	ru	Вы проголосовали %1
+♦ closed	tracker	ru	♦ Закрыто
 ♦ not closed	tracker	ru	♦ Незакрытые
 ♦ own not closed	tracker	ru	♦ Свои незакрытые
 ♦ own or assigned not closed	tracker	ru	♦ Свои или назначенные, незакрытые

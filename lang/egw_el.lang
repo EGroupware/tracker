@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	el	%1 εισιτήρια έχουν μετατραπεί.
 (beware of mailloops, check the help!)	tracker	el	(Προσοχή στα mailloops!)
 (new tickets as	tracker	el	Νέα εισιτήρια ως
---> choose a project from the drop-down list	tracker	el	--> επιλέξτε ένα έργο από την αναπτυσσόμενη λίστα
 --> enter new name	tracker	el	--> εισάγετε νέο όνομα
 1 - lowest	tracker	el	1 - χαμηλότερη
 2 days in advance	tracker	el	2 ημέρες νωρίτερα
@@ -46,17 +45,20 @@ allow default projects for tracker	tracker	el	Προεπιλεγμένα έργ�
 allow editing by	tracker	el	Επιτρέψτε την επεξεργασία από
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	el	Να επιτρέπεται ο προκαθορισμός των έργων που θα ανατίθενται σε νέα στοιχεία παρακολούθησης
 allow to assign groups to tracker items	tracker	el	Να επιτρέπεται η ανάθεση ομάδων
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση "χρηστών" σε ένα εισιτήριο επιπλέον των "τεχνικών" και των "διαχειριστών του ιχνηλάτη".
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση "χρηστών" σε ένα εισιτήριο επιπλέον των "τεχνικών" και των "διαχειριστών του ιχνηλάτη"
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	el	Να επιτρέπεται η ανάθεση σε ένα εισιτήριο όχι μόνο σε "Tracker Admins" και "Τεχνικούς", αλλά και σε "Χρήστες" στην καρτέλα προσωπικού
 application mail expected but got: %1	tracker	el	Αναμενόμενο μήνυμα ηλεκτρονικού ταχυδρομείου της αίτησης, το οποίο όμως πήρατε: %1
 applies the changes	tracker	el	εφαρμόζει τις αλλαγές
-attention: no contact with address %1 found.	tracker	el	Προσοχή: Καμία Επαφή με τη διεύθυνση %1 δεν βρέθηκε.
+assigned to	tracker	el	Ανατέθηκε σε
+attention: no contact with address %1 found.	tracker	el	Προσοχή: Καμία Επαφή με τη διεύθυνση %1 δεν βρέθηκε
+autoassign to	tracker	el	Αυτόματη ανάθεση σε
 before	tracker	el	Πριν από το
 canned response	tracker	el	Απάντηση σε κονσέρβα
 canned responses	tracker	el	Προετοιμασμένες απαντήσεις
 categories, versions, canned responses	tracker	el	Κατηγορίες, εκδόσεις, κονσερβοποιημένες απαντήσεις
 change assigned	tracker	el	Αλλαγή που ανατέθηκε
 change color	tracker	el	Αλλαγή χρώματος
+change group	tracker	el	Αλλαγή ομάδας
 change group when updating	tracker	el	Αλλαγή ομάδας κατά την ενημέρωση
 change owner when updating	tracker	el	Αλλαγή ιδιοκτήτη κατά την ενημέρωση
 check all	tracker	el	Έλεγχος όλων
@@ -82,16 +84,19 @@ custom notifications	tracker	el	Προσαρμοσμένες ειδοποιήσ�
 customfield	tracker	el	Προσαρμοσμένο πεδίο
 data exchange settings	tracker	el	Ρυθμίσεις ανταλλαγής δεδομένων
 date filter	tracker	el	Φίλτρο ημερομηνίας
+date opened	tracker	el	Ημερομηνία ανοίγματος
 default document to insert entries	tracker	el	Προεπιλεγμένο έγγραφο για την εισαγωγή καταχωρίσεων
 default group	tracker	el	Προεπιλεγμένη ομάδα
 default tracker queue	tracker	el	Τυπική ουρά αναμονής
 default version for new tracker entries	tracker	el	Προεπιλεγμένη έκδοση για νέες καταχωρήσεις παρακολούθησης
+delete mails from server	tracker	el	Διαγραφή μηνυμάτων ηλεκτρονικού ταχυδρομείου από το διακομιστή
 delete the mail from the server	tracker	el	Διαγραφή του ηλεκτρονικού ταχυδρομείου από το διακομιστή
 delete the mail from the server.	tracker	el	Διαγραφή του ηλεκτρονικού ταχυδρομείου από το διακομιστή.
 delete this canned response	tracker	el	Διαγραφή αυτής της κονσερβοποιημένης απάντησης
 delete this category	tracker	el	διέγραψε αυτή την κατηγορία
 delete this entry	tracker	el	δαγραφή αυτής της καταχώρησης
 delete this escalation	tracker	el	Διαγραφή αυτής της κλιμάκωσης
+delete this version	tracker	el	Διαγράψτε αυτή την έκδοση
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	el	Διαγραφή μη αναγνωρισμένων μηνυμάτων ηλεκτρονικού ταχυδρομείου από το διακομιστή, ακόμη και αν δεν έχει επισημανθεί η παραπάνω επιλογή 'Διαγραφή μηνυμάτων ηλεκτρονικού ταχυδρομείου'.
 deleted	tracker	el	διεγράφη
 deletes this field	tracker	el	διαγράφει αυτό το πεδίο
@@ -137,6 +142,7 @@ from	tracker	el	Από
 full list of placeholder names	tracker	el	Κατάλογος των σημείων τοποθέτησης
 general fields:	tracker	el	Γενικά πεδία:
 history	tracker	el	Ιστορικό
+html editing	tracker	el	Επεξεργασία HTML
 id	tracker	el	Id
 if a ticket has matched before, should the actions be taken again?	tracker	el	Εάν ένα εισιτήριο έχει ταυτιστεί στο παρελθόν, θα πρέπει να γίνουν ξανά οι ενέργειες;
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	el	Αν δεν επιλεγεί, κάθε υπάρχον, αντίστοιχο εισιτήριο χαρακτηρίζεται ως ήδη κλιμακούμενο, χωρίς να αναληφθεί η ενέργεια.
@@ -144,11 +150,17 @@ ignore	tracker	el	Αγνοήστε το
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	el	Αγνοήστε το μήνυμα ηλεκτρονικού ταχυδρομείου. Θα παραμείνει στο γραμματοκιβώτιο, ακόμη και αν έχει επιλεγεί η επιλογή "Διαγραφή μηνυμάτων ηλεκτρονικού ταχυδρομείου από το διακομιστή" παραπάνω.
 imap, ssl secured	tracker	el	IMAP, ασφαλές SSL
 imap, tls secured	tracker	el	IMAP, με ασφάλεια TLS
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	el	Εισάγει καταχωρήσεις στον ανιχνευτή από αρχείο CSV. CSV σημαίνει 'Comma Separated Values'. Στην καρτέλα επιλογών μπορείτε επίσης να επιλέξετε άλλα διαχωριστικά.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	el	Εισάγει καταχωρήσεις στον ανιχνευτή από αρχείο CSV. Στην καρτέλα επιλογών μπορείτε επίσης να επιλέξετε άλλα διαχωριστικά.
+incoming mail folder	tracker	el	Φάκελος εισερχόμενου ηλεκτρονικού ταχυδρομείου
+incoming mail rules	tracker	el	Κανόνες εισερχόμενου ηλεκτρονικού ταχυδρομείου
+incoming mail server	tracker	el	Διακομιστής εισερχόμενου ηλεκτρονικού ταχυδρομείου
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	el	Ανεπαρκές προφίλ διακομιστή για την επεξεργασία αλληλογραφίας παρέχεται- Απενεργοποίηση της επεξεργασίας αλληλογραφίας για την ουρά %1
 language	tracker	el	Γλώσσα
 last modified	tracker	el	Τελευταία τροποποίηση
 last modified by	tracker	el	Τελευταία τροποποίηση από
+last month	tracker	el	Τελευταίος μήνας
+last week	tracker	el	Τελευταία εβδομάδα
+last year	tracker	el	Πέρυσι
 leaves without saveing	tracker	el	αποχώρηση χωρίς αποθήκευση
 length<br>rows	tracker	el	Μήκος<br>Γραμμές
 links	tracker	el	Σύνδεσμοι
@@ -157,10 +169,12 @@ new %1	tracker	el	Νέο %1
 number of row for a multiline inputfield or line of a multi-select-box	tracker	el	αριθμός σειρών για ένα πολυγραμμικό πεδίο εισαγωγής ή γραμμών για ένα πολυ-επιλογών-κουτί
 one day after	tracker	el	μία μέρα μετά
 one day in advance	tracker	el	Μία μέρα νωρίτερα
+only for admins, technicians or assigned	tracker	el	Μόνο για διαχειριστές, τεχνικούς ή εντεταλμένους
 open(status)	tracker	el	Άνοιγμα
 order	tracker	el	Ταξινόμηση
 overdue	tracker	el	καθυστερημένα
-permission denied !!!	tracker	el	Άδεια απορρίπτεται !!!
+permission denied !!!	tracker	el	Άδεια απορρίπτεται!
+pop3	tracker	el	POP3
 read	tracker	el	Διαβάστε
 read / unread	tracker	el	Ανάγνωση / Μη αναγνωσμένο
 read only filemanager directory	tracker	el	Κατάλογος διαχείρισης αρχείων μόνο για ανάγνωση
@@ -171,6 +185,7 @@ same day	tracker	el	ίδια ημέρα
 saves the changes made and leaves	tracker	el	αποθηκέυει όλες τις αλλαγές που έγιναν και αποχωρεί
 set due date this many days after escalation runs	tracker	el	Ορίστε την ημερομηνία λήξης (αριθμός ημερών) μετά την εκτέλεση της κλιμάκωσης
 set the ticket start date to the email received date	tracker	el	Ορίστε την ημερομηνία έναρξης του εισιτηρίου στην ημερομηνία λήψης του email
+show as user preference	tracker	el	Εμφάνιση ως προτίμηση χρήστη
 signature	tracker	el	Υπογραφή
 start date from email	tracker	el	Ημερομηνία έναρξης από το μήνυμα ηλεκτρονικού ταχυδρομείου
 state	tracker	el	Νομός
@@ -178,6 +193,10 @@ sum	tracker	el	Σύνολο
 summary	tracker	el	Περίληψη
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	el	το όνομα χρησιμοποιείται εσωτερικά (<=20 χαρακτ), ενδεχόμενη αλλαγή του προκαλεί μη διαθεσιμότητα των δεδομένων
 the text displayed to the user	tracker	el	το κείμενο που προβάλεται στον χρήστη
+this month	tracker	el	Αυτόν τον μήνα
+this quarter	tracker	el	Αυτό το τρίμηνο
+this week	tracker	el	Αυτή την εβδομάδα
+this year	tracker	el	Φέτος
 times	tracker	el	Φορες
 type of customfield	tracker	el	Τύπος συνήθους πεδίου
 unread	tracker	el	Μη αναγνωσμένο
@@ -188,5 +207,7 @@ yes, add mailheader to both (description and comments)	tracker	el	Ναι, προ
 yes, add mailheader to comments	tracker	el	Ναι, προσθήκη κεφαλίδας αλληλογραφίας στα σχόλια
 yes, add mailheader to description	tracker	el	Ναι, προσθήκη κεφαλίδας αλληλογραφίας στην περιγραφή
 yes, always	tracker	el	Ναι, πάντα
-yes, with larger fontsize	tracker	el	Ναι,  με μεγαλύτερο μέγεθος φόντου
+yes, with larger fontsize	tracker	el	Ναι, με μεγαλύτερο μέγεθος φόντου
 you can respond by visiting:	tracker	el	Για να το δείτε επισκεφθείτε:
+♦ closed	tracker	el	♦ Κλειστό
+♦ not closed	tracker	el	♦ Δεν έχει κλείσει
