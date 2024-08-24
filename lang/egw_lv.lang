@@ -41,10 +41,10 @@ all versions	tracker	lv	Visas versijas
 allow bounties	tracker	lv	Atļaut prēmijas
 allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	lv	Ļauj izveidot ierobežotas piekļuves komentārus, kas ir redzami tikai administratoriem, tehniskajiem darbiniekiem un piešķirtajiem lietotājiem
 allow creation of infolog entries from tracker tickets	tracker	lv	Ļauj izveidot InfoLog ierakstus no Tracker biļetēm
-allow the predefinition of projects that will be assigned to new tracker-items.	tracker	lv	Ļauj iepriekš definēt projektus, kas tiks piešķirti jauniem izsekošanas elementiem.
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	lv	Ļauj iepriekš definēt projektus, kas tiks piešķirti jauniem izsekošanas elementiem
 allow to assign groups to tracker items	tracker	lv	Ļauj piešķirt grupas
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lv	Atļaut "Lietotājus" piešķirt biļetei papildus "Tehniķiem" un "Tracker administratoriem".
-allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	lv	Atļaut piešķirt biļetei ne tikai "Tracker Admins" un "Technians", bet arī "Users" personāla cilnē.
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	lv	Atļaut "Lietotājus" piešķirt biļetei papildus "Tehniķiem" un "Tracker administratoriem"
+allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	lv	Atļaut piešķirt biļetei ne tikai "Tracker Admins" un "Technians", bet arī "Users" personāla cilnē
 allow voting	tracker	lv	Atļaut balsošanu
 already escalated	tracker	lv	Jau eskalēts
 application mail expected but got: %1	tracker	lv	Pieteikuma e-pasts gaidīts, bet saņemts: %1
@@ -103,7 +103,7 @@ download url for links	tracker	lv	Lejupielādējiet URL saites
 due	tracker	lv	Pienācīgs
 due date	tracker	lv	Termiņš
 due date for new tickets	tracker	lv	Jaunu biļešu iesniegšanas termiņš
-each value is a line like <id>[=<label>]	tracker	lv	katra vēr'tiba ir līniija kā <id>[=<iezīme>]
+each value is a line like <id>[=<label>]	tracker	lv	katra vēr'tiba ir līniija kā <id>[=<label>]
 edit others' comments	tracker	lv	Rediģēt citu komentārus
 edit own comments	tracker	lv	Rediģēt savus komentārus
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	lv	EGroupware Tracker mailhandling: iepriekš nevarēja izveidot savienojumu, un profils nemainījās
@@ -160,7 +160,8 @@ responsible	tracker	lv	Atbildīgs
 saves the changes made and leaves	tracker	lv	saglabā izdarītās izmaiņas un aiziet
 select one...	tracker	lv	Atzīmē vienu
 set due date this many days after escalation runs	tracker	lv	Iestatiet izpildes termiņu (dienu skaits) pēc eskalācijas palaišanas
-set the ticket start date to the email received date	tracker	lv	Iestatiet biļetes sākuma datumu kā e-pasta saņemšanas datumu.
+set the ticket start date to the email received date	tracker	lv	Iestatiet biļetes sākuma datumu kā e-pasta saņemšanas datumu
+show as user preference	tracker	lv	Rādīt kā lietotāja preferenci
 signature	tracker	lv	Paraksts
 start date from email	tracker	lv	Sākuma datums no e-pasta
 state	tracker	lv	Štats
@@ -174,7 +175,9 @@ unread	tracker	lv	Neizlasīts
 upcoming	tracker	lv	Ienākošs
 updated	tracker	lv	Atjaunināts
 writable filemanager directory	tracker	lv	Failu pārvaldnieka direktorija, kurā var rakstīt
-yes, add mailheader to both (description and comments)	tracker	lv	Jā, pievienot abām (aprakstam un komentāriem) e-pasta galveni.
+yes, add mailheader to both (description and comments)	tracker	lv	Jā, pievienot abām (aprakstam un komentāriem) e-pasta galveni
 yes, add mailheader to comments	tracker	lv	Jā, komentāriem pievienot e-pasta galveni
 yes, add mailheader to description	tracker	lv	Jā, pievienot nosaukuma virsrakstu aprakstam
 yes, always	tracker	lv	Jā, vienmēr
+♦ closed	tracker	lv	♦ Slēgts
+♦ not closed	tracker	lv	♦ Nav slēgts

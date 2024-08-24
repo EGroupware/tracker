@@ -46,7 +46,7 @@ allow default projects for tracker	tracker	pl	Dopuść domyślne projekty do sys
 allow editing by	tracker	pl	Zezwalaj na edycję przez
 allow the predefinition of projects that will be assigned to new tracker-items.	tracker	pl	Zezwój na predefiniowanie projektów które będą przypisane do nowych wpisów w systemie śledzenia
 allow to assign groups to tracker items	tracker	pl	Umożliwienie przypisywania grup
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	pl	Zezwalanie na przypisywanie "użytkowników" do zgłoszeń dodatkowo do "techników" i "administratorów Trackera".
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	pl	Zezwalanie na przypisywanie "użytkowników" do zgłoszeń dodatkowo do "techników" i "administratorów Trackera"
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	pl	Umożliwienie przypisywania do zgłoszenia nie tylko "Adminów trackera" i "Techników", ale także "Użytkowników" w zakładce personelu
 allow voting	tracker	pl	Zezwalaj na głosowanie
 allow voting on tracker items, show and sort after the votes	tracker	pl	Zezwalaj na głosowanie zgłoszeń, pokazuj i sortuj według wyniku głosowania
@@ -58,15 +58,16 @@ assign to project	tracker	pl	Przypisz do projektu
 assigned to	tracker	pl	Przypisany do
 assigning groups	tracker	pl	Przypisywanie grup
 attachments & links	tracker	pl	Załączniki i odnośniki
+attention: no contact with address %1 found.	tracker	pl	Uwaga: Nie znaleziono kontaktu z adresem %1
 autoassign to	tracker	pl	Automatycznie przypisuj do
 automatic email handling	tracker	pl	Automatyczna obsługa email
 automatically created by importexport	tracker	pl	Automatycznie utworzone przez Import/Export
 before	tracker	pl	Przed
 bounties	tracker	pl	Premie
 bounty	tracker	pl	Bounty
-bounty confirmed	tracker	pl	Premia zatwierdzona
+bounty confirmed	tracker	pl	Premia zatwierdzona.
 bounty confirmed.	tracker	pl	Premia potwierdzona.
-bounty deleted	tracker	pl	Premia usunięta
+bounty deleted	tracker	pl	Premia usunięta.
 bounty deleted.	tracker	pl	Premia usunięta.
 bounty set	tracker	pl	Premia ustanowiona
 canned response	tracker	pl	Odpowiedź predefiniowana
@@ -139,8 +140,10 @@ deny global	tracker	pl	Odmów globalnie
 determines the order the fields are displayed	tracker	pl	decyduje o kolejności, w jakiej pola zostaną pokazane
 directory with documents to insert entries	tracker	pl	Katalog z dokumentami do wstawiania wpisów
 do not send notifications to external email (cc field)	tracker	pl	Nie wysyłaj powiadomień na zewnętrzny adres e-mail (pole cc)
+do you want a notification, if items you are responsible for are about to start?	tracker	pl	Czy chcesz otrzymywać powiadomienia, jeśli elementy, za które jesteś odpowiedzialny, mają się rozpocząć?
+do you want a notification, if items you are responsible for are due?	tracker	pl	Czy chcesz otrzymywać powiadomienia, jeśli elementy, za które jesteś odpowiedzialny, są wymagalne?
 do you want to add mailheader information to description and/or comments?	tracker	pl	Czy chcesz dodać informacje nagłówka poczty do opisu i/lub komentarzy?
-do you want to vote for this item	tracker	pl	Czy chcesz zagłosować na to zgłoszenie?
+do you want to vote for this item	tracker	pl	Czy chcesz zagłosować na to zgłoszenie
 donator name to show	tracker	pl	Nazwisko fundatora do pokazania
 download url for links	tracker	pl	Pobierz adres URL dla linków
 due	tracker	pl	Termin
@@ -157,13 +160,13 @@ edit others' comments	tracker	pl	Edytuj komentarze innych osób
 edit own comments	tracker	pl	Edytuj własne komentarze
 egroupware tracker mailhandling: could not connect previously, and profile did not change	tracker	pl	Obsługa poczty EGroupware Tracker: nie można było się wcześniej połączyć, a profil się nie zmienił
 email address to contact you	tracker	pl	Adres poczty elektronicznej do kontaktu
-email handling can be configured only for all trackers	tracker	pl	Obsługa email może być skonfigurowana tylko dla wszystkich systemów śledzenia
+email handling can be configured only for all trackers	tracker	pl	Obsługa email może być skonfigurowana tylko dla wszystkich systemów śledzenia.
 enable color code for	tracker	pl	Włącz kod koloru dla
 enter an email address here if unrecognized mails should be forwarded	tracker	pl	Wpisz tutaj adres na który będą przekazywane nie rozpoznane wiadomości
 enter an opening text for the reply message	tracker	pl	Wpisz tutaj tekst domyślny dla wiadomości na które odpowiadasz
 enter the email for reply to	tracker	pl	Wprowadź adres e-mail, na który ma zostać wysłana odpowiedź
 enter the imap server from which emails should be fetched	tracker	pl	Wpisz adres serwera IMAP z którego będą pobierane wiadomości
-enter the mail address that will be read.	tracker	pl	Wprowadź adres email który będzie czytany.
+enter the mail address that will be read.	tracker	pl	Wprowadź adres e-mail, który powinien być używany jako dodatkowy filtr dla nieodebranych wiadomości. Pozostaw pusty, aby odczytywać wszystkie wiadomości oznaczone jako nieodebrane.
 entry saved	tracker	pl	Wpis został zachowany
 error adding the new tracker!	tracker	pl	Błąd przy dodawaniu nowej kolejki śledzenia!
 error deleting escalation!	tracker	pl	Błąd przy usuwaniu eskalacji!
@@ -186,7 +189,6 @@ existing links	tracker	pl	Istniejące odnośniki
 exists	tracker	pl	Istnieje
 export as csv	tracker	pl	Eksport jako CSV
 export csv	tracker	pl	Eksport CSV
-favorites	tracker	pl	Ulubione
 field	tracker	pl	Pole
 fixed	tracker	pl	Rozwiązany
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	pl	Użyj tego tagu dla listów seryjnych. Wstaw zawartość którą chcesz powtórzyć pomiędzy dwa tagi.
@@ -202,7 +204,7 @@ html link to the current record	tracker	pl	Łącze HTML do bieżącego rekordu
 id	tracker	pl	ID
 if a ticket has matched before, should the actions be taken again?	tracker	pl	Jeśli zgłoszenie zostało już wcześniej dopasowane, czy działania powinny zostać podjęte ponownie?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	pl	Jeśli opcja pozostanie niezaznaczona, oznacza każde istniejące, pasujące zgłoszenie jako już eskalowane, bez podejmowania działania.
-if this item is important for you, please consider to set a bounty for it!	tracker	pl	Jeżeli jest to ważne zgłoszenie, rozważ ustanowienie dla niego premii.
+if this item is important for you, please consider to set a bounty for it!	tracker	pl	Jeżeli jest to ważne zgłoszenie, rozważ ustanowienie dla niego premii!
 if this item is important for you, please vote for it.	tracker	pl	Jeżeli ten element jest dla Ciebie ważny, zagłosuj na niego.
 ignore	tracker	pl	Ignoruj
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	pl	Zignoruj wiadomość e-mail. Pozostanie on w skrzynce pocztowej, nawet jeśli opcja "Usuń wiadomości e-mail z serwera" jest zaznaczona powyżej.
@@ -225,6 +227,7 @@ item assignee	tracker	pl	Osoba przypisująca element
 item creator	tracker	pl	Kreator elementu
 language	tracker	pl	Język
 language for the copy	tracker	pl	Język dla kopii
+last 3 months	tracker	pl	Ostatnie 3 miesiące
 last modified	tracker	pl	Ostatnio zmodyfikowano
 last modified by	tracker	pl	Ostatnio zmodyfikowany przez
 last month	tracker	pl	Ostatni miesiąc
@@ -244,7 +247,7 @@ max length of the input [, length of the inputfield (optional)]	tracker	pl	maksy
 name of current user, all other contact fields are valid too	tracker	pl	Nazwa aktualnego użytkownika, wszystkie pozostałe pola kontaktu są prawidłowe
 new %1	tracker	pl	Nowy %1
 new items	tracker	pl	Nowe elementy
-new ticket submitted by %1 at %2	tracker	pl	Nowy ticket przesłany przez %1 , %2
+new ticket submitted by %1 at %2	tracker	pl	Nowe tickety przesłane przez %1 w %2
 new tracker item submitted by %1 at %2	tracker	pl	Nowy element wprowadzony %2, przez %1
 no change	tracker	pl	Brak zmian
 no trackers found, aborting	tracker	pl	Nie znaleziono Systemów Śledzenia, anulowanie
@@ -298,13 +301,13 @@ save new report...	tracker	pl	Zapisz nowy raport ...
 saves the changes made and leaves	tracker	pl	zapisz zmiany i zamknij
 select a default tracker for new tickets or 'reject' to disallow ticket creation via mail.	tracker	pl	Wybierz domyślny system śledzenia dla nowych ticketów lub "Odrzuć" aby zablokować tworzenie ich przez email.
 select accounts for which the custom field should be visible	tracker	pl	Wybierz konta dla których ma być widoczne pole własne
-select how autoreplies should be sent when mails are received	tracker	pl	Wybierz reguły dla automatycznych odpowiedzi na wiadomości e-mail, gdy są odbierane.
+select how autoreplies should be sent when mails are received	tracker	pl	Wybierz reguły dla automatycznych odpowiedzi na wiadomości e-mail, gdy są odbierane
 select multiple	tracker	pl	Wybierz wiele
 select one...	tracker	pl	Wybierz jeden ...
 select tracker queue	tracker	pl	Wybierz kolejkę systemu śledzenia
 select users or groups	tracker	pl	Wybierz użytkowników lub grupy
-select which categories should be used in tracker for the tts categories	tracker	pl	Wybierz które kategorię powinny być użyte w systemie śledzenia dla kategorii TTS
-select which username should be used when unrecognized mails are handled.	tracker	pl	Wybierz nazwę użytkownika która będzie używana przy obsłudze nierozpoznanych wiadomości
+select which categories should be used in tracker for the tts categories	tracker	pl	Wybierz które kategorię powinny być użyte w systemie śledzenia dla kategorii TTS.
+select which username should be used when unrecognized mails are handled.	tracker	pl	Wybierz nazwę użytkownika która będzie używana przy obsłudze nierozpoznanych wiadomości.
 select which username should be used when unrecognized replies are handled	tracker	pl	Wybierz nazwę użytkownika która będzie używana przy obsłudze nierozpoznanych odpowiedzi
 sender address	tracker	pl	Adres nadawcy
 sender address for all notifications, eg. noreply@egroupware.org	tracker	pl	Adres nadawcy dla wszystkich powiadomień, np. nieodpowiadaj@domena.pl
@@ -317,7 +320,8 @@ set due date this many days after escalation runs	tracker	pl	Ustaw datę wymagal
 set the ticket start date to the email received date	tracker	pl	Ustaw datę rozpoczęcia zgłoszenia na datę otrzymania wiadomości e-mail
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy przypisane do Ciebie są aktualizowane?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	pl	Czy system śledzenia powinien wysyłać Ci maile, jeżeli elementy utworzone przez Ciebie są aktualizowane?
-show the tracker send you notification mails, in tracker items that you updates?	tracker	pl	Czy system śledzenia powinien przesyłać ci powiadomienia
+show as user preference	tracker	pl	Pokaż jako preferencje użytkownika
+show the tracker send you notification mails, in tracker items that you updates?	tracker	pl	Czy system śledzenia powinien przesyłać ci powiadomienia?
 signature	tracker	pl	Sygnaturka
 staff	tracker	pl	Personel
 start date from email	tracker	pl	Data rozpoczęcia od wiadomości e-mail
@@ -329,7 +333,7 @@ tag to mark positions for address labels	tracker	pl	Zaznacz, aby oznaczyć pozyc
 technicians	tracker	pl	Technicy
 thank you for setting this bounty.	tracker	pl	Dziękujemy za ustalenie premii
 thank you for voting.	tracker	pl	Dziękujemy za głosowanie
-the bounty will not be shown, until the money is received.	tracker	pl	Premia nie będzie pokazana przed uiszczeniem opłaty.
+the bounty will not be shown, until the money is received.	tracker	pl	Premia nie będzie pokazana przed uiszczeniem opłaty
 the canned response will be prefix the text you type.	tracker	pl	Odpowiedź predefiniowana będzie prefiksem dla tekstu, który wpiszesz.
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	pl	ta nazwa jest wykorzystywana wewnętrznie (<=20 liter), zmienienie jej spowoduje blokowanie dostępu do danych
 the text displayed to the user	tracker	pl	Tekst wyświetlany dla użytkownika
@@ -392,6 +396,7 @@ you need to select some entries first	tracker	pl	Najpierw należy wybrać niekt�
 you need to select something to change and some tracker items!	tracker	pl	Musisz wybrać coś do zmiany ORAZ jakieś zgłoszenia systemu śledzenia!
 you need to specify amount, donators name and email address!	tracker	pl	Musisz określić kwotę, nazwisko ofiarodawcy ORAZ adres poczty elektronicznej!
 you voted %1.	tracker	pl	Zagłosowano %1
+♦ closed	tracker	pl	♦ Zamknięte
 ♦ not closed	tracker	pl	♦ Nie zamknięty
 ♦ own not closed	tracker	pl	♦ Własny nie zamknięty
 ♦ own or assigned not closed	tracker	pl	♦ Własny lub przypisany, niezamknięty

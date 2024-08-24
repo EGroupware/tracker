@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	ko	%1 티켓이 변환되었습니다.
 (beware of mailloops, check the help!)	tracker	ko	(마이룹을 조심하세요!)
 (new tickets as	tracker	ko	새 티켓은
---> choose a project from the drop-down list	tracker	ko	--> 드롭다운 목록에서 프로젝트를 선택하세요.
 --> enter new name	tracker	ko	--> 새 이름 입력
 1 - lowest	tracker	ko	1 - 가장 낮음
 2 days in advance	tracker	ko	2일 전
@@ -149,6 +148,7 @@ saves the changes made and leaves	tracker	ko	저장하고 나가기
 select one...	tracker	ko	하나를 선택하세요...
 set due date this many days after escalation runs	tracker	ko	에스컬레이션 실행 후 마감일(일 수)을 설정합니다.
 set the ticket start date to the email received date	tracker	ko	티켓 시작 날짜를 이메일 수신 날짜로 설정합니다.
+show as user preference	tracker	ko	사용자 기본 설정으로 표시
 start date from email	tracker	ko	이메일에서 시작 날짜
 state	tracker	ko	주
 summary	tracker	ko	요약
@@ -161,3 +161,5 @@ yes, add mailheader to both (description and comments)	tracker	ko	예, 둘 다�
 yes, add mailheader to comments	tracker	ko	예, 댓글에 메일 헤더 추가
 yes, add mailheader to description	tracker	ko	예, 설명에 메일 헤더 추가
 yes, always	tracker	ko	예, 항상
+♦ closed	tracker	ko	♦ 닫힘
+♦ not closed	tracker	ko	♦ 닫혀 있지 않음

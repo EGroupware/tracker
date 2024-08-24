@@ -110,6 +110,7 @@ default group	tracker	id	Grup default
 default tracker queue	tracker	id	Antrian standar
 default version for new tracker entries	tracker	id	Versi default untuk entri pelacak baru
 define escalations	common	id	Define escalations
+delete mails from server	tracker	id	Menghapus email dari server
 delete the mail from the server	tracker	id	Menghapus email dari server
 delete the mail from the server.	tracker	id	Menghapus email dari server.
 delete this canned response	tracker	id	Menghapus tanggapan kaleng ini
@@ -117,6 +118,7 @@ delete this category	tracker	id	Hapus kategori ini
 delete this entry	tracker	id	Hapus entri ini
 delete this escalation	tracker	id	Menghapus eskalasi ini
 delete this status	tracker	id	Hapus status ini
+delete this version	tracker	id	Hapus versi ini
 delete unrecognized mails from the server, even if 'delete mails' above is not tagged.	tracker	id	Menghapus email yang tidak dikenali dari server, meskipun 'Hapus email' di atas tidak ditandai.
 deleted	tracker	id	Deleted
 deletes this field	tracker	id	hapus field ini
@@ -124,6 +126,8 @@ deny global	tracker	id	Tolak global
 determines the order the fields are displayed	tracker	id	menentukan urutan field ditampilkan
 directory with documents to insert entries	tracker	id	Direktori dengan dokumen untuk memasukkan entri
 do not send notifications to external email (cc field)	tracker	id	Jangan mengirim pemberitahuan ke email eksternal (bidang cc)
+do you want a notification, if items you are responsible for are about to start?	tracker	id	Apakah Anda ingin mendapatkan notifikasi, jika item yang menjadi tanggung jawab Anda akan segera dimulai?
+do you want a notification, if items you are responsible for are due?	tracker	id	Apakah Anda ingin mendapatkan notifikasi, jika item yang menjadi tanggung jawab Anda telah jatuh tempo?
 do you want to add mailheader information to description and/or comments?	tracker	id	Apakah Anda ingin menambahkan informasi kop surat ke deskripsi dan/atau komentar?
 download url for links	tracker	id	Unduh URL untuk tautan
 due	tracker	id	Jatuh tempo
@@ -159,7 +163,6 @@ existing links	tracker	id	Existing links
 exists	tracker	id	Ada
 export as csv	tracker	id	Ekspor sebagai CSV
 export csv	tracker	id	Ekspor CSV
-favorites	tracker	id	Favorit
 field	tracker	id	Field
 fixed	tracker	id	Fixed
 forward	tracker	id	Forward
@@ -177,6 +180,9 @@ ignore the mail. it will remain in the mailbox, even if 'delete mails from serve
 imap, ssl secured	tracker	id	IMAP, SSL aman
 imap, tls secured	tracker	id	IMAP, TLS diamankan
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	id	Mengimpor entri ke pelacak dari file CSV. CSV berarti 'Nilai yang Dipisahkan dengan Koma'. Pada Tab opsi Anda juga dapat memilih pemisah lainnya.
+incoming mail folder	tracker	id	Folder email masuk
+incoming mail rules	tracker	id	Aturan email masuk
+incoming mail server	tracker	id	Server email masuk
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	id	Profil server tidak lengkap untuk penanganan email yang disediakan; Menonaktifkan penanganan email untuk Antrian %1
 insert in document	tracker	id	Sisipkan dalam dokumen
 introduction message	tracker	id	Introduction message
@@ -232,15 +238,16 @@ responsible	tracker	id	Penanggungjawab
 restriction	tracker	id	Restriction
 same day	tracker	id	Hari yang sama
 saves the changes made and leaves	tracker	id	simpan perubahan dan tinggalkan
-select multiple	tracker	id	Select multiple
-select one...	tracker	id	Select satu ...
-sender address	tracker	id	Sender address
+select multiple	tracker	id	Pilih beberapa
+select one...	tracker	id	Pilih salah satu ...
+sender address	tracker	id	Alamat pengirim
 sent autoreplies	tracker	id	Sent autoreplies
 server type	tracker	id	Server type
 set %1	tracker	id	Set %1
 set bounty	tracker	id	Set bounty
 set due date this many days after escalation runs	tracker	id	Mengatur tanggal jatuh tempo (jumlah hari) setelah proses eskalasi berjalan
 set the ticket start date to the email received date	tracker	id	Mengatur tanggal mulai tiket ke tanggal penerimaan email
+show as user preference	tracker	id	Tampilkan sebagai preferensi pengguna
 signature	tracker	id	Tandatangan
 staff	tracker	id	Staff
 start date from email	tracker	id	Tanggal mulai dari email
@@ -279,3 +286,5 @@ yes, add mailheader to description	tracker	id	Ya, tambahkan kop surat ke deskrip
 yes, always	tracker	id	Ya, selalu
 yesterday	tracker	id	Kemarin
 you can respond by visiting:	tracker	id	Untuk melihatnya, kunjungi:
+♦ closed	tracker	id	♦ Ditutup
+♦ not closed	tracker	id	♦ Tidak ditutup

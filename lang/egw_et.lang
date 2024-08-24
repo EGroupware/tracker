@@ -2,7 +2,7 @@
 %1 days in advance	tracker	et	%1 päeva ette
 %1 entries %2	tracker	et	%1 kirjed %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	et	%1 kanded %2, %3 ebaõnnestusid ebapiisavate õiguste tõttu!
-%1 entries updated.	tracker	et	%1kirjed uuendatud.
+%1 entries updated.	tracker	et	%1 kirjed uuendatud.
 %1 is due %2	tracker	et	%1 peab olema %2
 %1 is starting %2	tracker	et	%1 alustab %2
 %1 tickets have been converted	tracker	et	%1 piletid on teisendatud.
@@ -40,13 +40,13 @@ all	tracker	et	Kõik
 all tickets are already converted to tracker	tracker	et	Kõik piletid on juba teisendatud Trackerisse
 all versions	tracker	et	Kõik versioonid
 allow bounties	tracker	et	Luba vaevatasud
-allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	et	Võimaldab luua piiratud kommentaare, mis on nähtavad ainult administraatoritele, tehnikutele ja määratud kasutajatele.
+allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	et	Võimaldab luua piiratud kommentaare, mis on nähtavad ainult administraatoritele, tehnikutele ja määratud kasutajatele
 allow creation of infolog entries from tracker tickets	tracker	et	Võimaldab InfoLog kirjete loomist jälgimisseadme piletitest
 allow default projects for tracker	tracker	et	Luba vaikimisi projektid Trackeris
 allow editing by	tracker	et	Luba muuta
-allow the predefinition of projects that will be assigned to new tracker-items.	tracker	et	Võimaldab uute jälgimisobjektide jaoks määratud projektide eeldefineerimist.
+allow the predefinition of projects that will be assigned to new tracker-items.	tracker	et	Võimaldab uute jälgimisobjektide jaoks määratud projektide eeldefineerimist
 allow to assign groups to tracker items	tracker	et	Võimaldab rühmade määramist
-allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	et	Võimaldab määrata piletile lisaks "tehnikutele" ja "jälgimisseadmete haldajatele" ka "kasutajaid".
+allow to assign to a ticket not only "tracker admins" and "technians", but also "users" in the staff tab	tracker	et	Võimaldab määrata piletile lisaks "tehnikutele" ja "jälgimisseadmete haldajatele" ka "kasutajaid"
 allow to assign to a ticket not only &quot;tracker admins&quot; and &quot;technians&quot;, but also &quot;users&quot; in the staff tab	tracker	et	Lubada määrata piletile mitte ainult "Tracker Admins" ja "Technians", vaid ka "Users" personali vahekaardil
 allow voting	tracker	et	Luba hääletamine
 allow voting on tracker items, show and sort after the votes	tracker	et	Luba Trackeri asjade hääletamine, näita ja sorteeri pärast hääletusi
@@ -58,13 +58,14 @@ assign to project	tracker	et	Projektile määramine
 assigned to	tracker	et	Vastutaja
 attachments & links	tracker	et	Manused & Lingid
 autoassign to	tracker	et	Vaikimisi vastutab
+automatic email handling	tracker	et	Automaatne e-posti käsitlemine
 automatically created by importexport	tracker	et	Automaatselt tehtud Import-Eksport poolt
 before	tracker	et	Enne
 bounties	tracker	et	Vaevatasud
 bounty	tracker	et	Bounty
-bounty confirmed	tracker	et	Vaevatasu kinnitatud
+bounty confirmed	tracker	et	Vaevatasu kinnitatud.
 bounty confirmed.	tracker	et	Vaevatasu kinnitatud.
-bounty deleted	tracker	et	Vaevatasu kustutatud
+bounty deleted	tracker	et	Vaevatasu kustutatud.
 bounty deleted.	tracker	et	Vaevatasu kustutatud.
 bounty set	tracker	et	Vaevatasu seatud
 canned response	tracker	et	Eelsalvestatud vastus
@@ -83,12 +84,12 @@ color	tracker	et	Värv
 comments	tracker	et	Kommentaarid
 completed	tracker	et	Lõpetatud
 configuration	tracker	et	Konfiguratsioon
-configuration updated.	tracker	et	Konfiguratsioon uuendatud.
+configuration updated.	tracker	et	Konfiguratsioon uuendatud
 configuration, notifications	tracker	et	Konfigureerimine, Teated
 confirmed	tracker	et	Kinnitatud
 could not connect	tracker	et	ei saanud ühendust luua
 create new links	tracker	et	Tee uued lingid
-create new tracker entry's as default "private" for approval process	tracker	et	Loo uus jälgimiskirje vaikimisi "privaatne" heakskiitmise protsessi jaoks.
+create new tracker entry's as default "private" for approval process	tracker	et	Loo uus jälgimiskirje vaikimisi "privaatne" heakskiitmise protsessi jaoks
 created	tracker	et	Tehtud
 created by	tracker	et	Loodud
 created on	tracker	et	Loodud aadressil
@@ -103,6 +104,7 @@ default document to insert entries	tracker	et	Standardne dokument kirjete sisest
 default group	tracker	et	Vaikimisi grupp
 default tracker queue	tracker	et	Standardne järjekord
 default version for new tracker entries	tracker	et	Uute jälgimiskirjete vaikeversioon
+define escalations	common	et	Määrake eskalatsioonid
 delete the mail from the server	tracker	et	E-posti kustutamine serverist
 delete the mail from the server.	tracker	et	E-posti kustutamine serverist.
 delete this bounty	tracker	et	Kustuta see vaevatasu
@@ -135,6 +137,7 @@ egroupware tracker mailhandling: could not connect previously, and profile did n
 email address to contact you	tracker	et	E-mail aadress kontakteerumaks sinuga
 enable color code for	tracker	et	Värvikoodi lubamine
 enter the email for reply to	tracker	et	Sisestage e-posti aadress, millele vastatakse
+enter the imap server from which emails should be fetched	tracker	et	Sisestage IMAP-server, kust kirjad tuleks kätte saada
 entry saved	tracker	et	Kirje salvestatud
 error adding the new tracker!	tracker	et	Viga uue jälgija lisamisel!
 error deleting escalation!	tracker	et	Viga eskalatsiooni kustutamisel!
@@ -160,6 +163,8 @@ fixed	tracker	et	Parandatud
 forward	tracker	et	Edasi
 full list of placeholder names	tracker	et	Loetelu paigutuskirjade kohta
 history	tracker	et	Ajalugu
+html editing	tracker	et	HTML redigeerimine
+html link to the current record	tracker	et	HTML-link praegusele kirjele
 id	tracker	et	ID
 if a ticket has matched before, should the actions be taken again?	tracker	et	Kui pilet on juba varem vastavusse viidud, kas siis peaks neid meetmeid uuesti võtma?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	et	Kui see jäetakse märkimata, märgistatakse iga olemasolev vastav pilet juba eskaleeritud piletiks, ilma et seda tegevust rakendataks.
@@ -167,13 +172,18 @@ ignore	tracker	et	Ignoreeri
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	et	Ignoreeri e-kiri. See jääb postkasti, isegi kui eespool on märgitud "E-kirjade kustutamine serverist".
 imap, ssl secured	tracker	et	IMAP, SSL turvatud
 imap, tls secured	tracker	et	IMAP, TLS turvatud
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	et	Impordib kirjed jälgimisse CSV-failist. CSV tähendab 'Comma Separated Values' (komadega eraldatud väärtused). Valikute vahekaardil saate valida ka teisi eraldajaid.
-incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	et	Puudulik serveriprofiil postikäsitluse jaoks esitatud; Postikäsitluse keelamine järjekorra %1 jaoks.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	et	Impordib kirjed jälgimisse CSV-failist. Valikute vahekaardil saate valida ka teisi eraldajaid.
+incoming mail folder	tracker	et	Saabuvate kirjade kaust
+incoming mail rules	tracker	et	Saabuvate e-kirjade reeglid
+incoming mail server	tracker	et	Saabuva e-posti server
+incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	et	Puudulik serveriprofiil postikäsitluse jaoks esitatud; Postikäsitluse keelamine järjekorra %1 jaoks
 invalid	tracker	et	Vigane
 item assignee	tracker	et	Vastutaja
 item creator	tracker	et	Autor
 language	tracker	et	Keel
+last 3 months	tracker	et	Viimased 3 kuud
 last modified	tracker	et	Viimati muudetud
+last modified by	tracker	et	Viimati muutnud
 last month	tracker	et	Viimane kuu
 last week	tracker	et	Viimane nädal
 last year	tracker	et	Viimane aasta
@@ -188,12 +198,15 @@ noone	tracker	et	Mittekeegi
 notification	tracker	et	Meeldetuletus
 one day after	tracker	et	Üks päev pärast
 one day in advance	tracker	et	Üks päev enne
+only for admins, technicians or assigned	tracker	et	Ainult administraatorite, tehnikute või määratud
 open(status)	tracker	et	Avatud
 out of date	tracker	et	Aegunud
 pending	tracker	et	Otsustamatta
 pending items never get close automatic.	tracker	et	Otsustamatta ei suleta kunagi automaatselt.
 pending items will be closed automatic after %1 days without response.	tracker	et	Otsustamatta asjad suletakse automaatselt pärast %1 päeva ilma vastusetta.
 permission denied !!!	tracker	et	Ligipääs keelatud!
+pop3	tracker	et	POP3
+port number	tracker	et	Pordi number
 project selection	tracker	et	Projekti valik
 projects	tracker	et	Projektid
 read	tracker	et	Loetud
@@ -206,18 +219,24 @@ responsible	tracker	et	Vastutav
 same day	tracker	et	Sama päev
 select one...	tracker	et	Vali üks ...
 sender address	tracker	et	Saatja aadress
+server type	tracker	et	Serveri tüüp
 set an own bounty (in %s)	tracker	et	Sea oma vaevatasu (%s)
 set bounty	tracker	et	Sea vaevatasu
 set due date this many days after escalation runs	tracker	et	Määrake tähtaeg (päevade arv) pärast eskaleerimise käivitamist
 set the ticket start date to the email received date	tracker	et	Määrake pileti alguskuupäevaks e-kirja saamise kuupäev
+show as user preference	tracker	et	Näita kasutaja eelistusena
 staff	tracker	et	Töötajad
+standard imap	tracker	et	Standard IMAP
 start date from email	tracker	et	E-posti alguskuupäev
 state	tracker	et	Maakond
 summary	tracker	et	Summaarselt
 technicians	tracker	et	Tehnikud
-thank you for setting this bounty.	tracker	et	Suur tänu vaevatasueest.
-thank you for voting.	tracker	et	Tänan, et hääletasid.
-the bounty will not be shown, until the money is received.	tracker	et	Vaevatasu ei näidata kuni raha pole saabunud.
+thank you for setting this bounty.	tracker	et	Suur tänu vaevatasueest
+thank you for voting.	tracker	et	Tänan, et hääletasid
+the bounty will not be shown, until the money is received.	tracker	et	Vaevatasu ei näidata kuni raha pole saabunud
+this month	tracker	et	See kuu
+this week	tracker	et	Sel nädalal
+this year	tracker	et	See aasta
 tracker	common	et	Jälgimise Süsteem
 tracker admins	tracker	et	Jälgija administraatorid
 tracker admins & technicians	tracker	et	Jälgija administraatorid & tehnikud
@@ -229,6 +248,7 @@ tracker-%1 deleted.	tracker	et	Jälgija-%1 kustutatud
 unread	tracker	et	Lugemata
 upcoming	tracker	et	Kavandatav
 updated	tracker	et	Uuendatud
+use custom notification message	tracker	et	Kasutage kohandatud teavitussõnumit
 versions	tracker	et	Versioonid
 vote for it!	tracker	et	Hääleta selle poolt!
 votes	tracker	et	Hääletused
@@ -246,3 +266,5 @@ you can respond by visiting:	tracker	et	Sa saad vastata külastates:
 you need to enter a name	tracker	et	Pead sisestama nime
 you need to login to vote!	tracker	et	Pead sisse logima, et hääletada!
 you voted %1.	tracker	et	Sa hääletasid %1.
+♦ closed	tracker	et	♦ Suletud
+♦ not closed	tracker	et	♦ Ei ole suletud

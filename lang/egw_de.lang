@@ -199,7 +199,6 @@ export definition to use for nextmatch export	tracker	de	Export Definition für 
 export definitition to use for nextmatch export	tracker	de	Export Definition für den Export über die Benutzeroberfläche (nextmatch)
 exports a list of tracker tickets to a csv file.	tracker	de	Exportiert eine Liste von Tickets in eine CSV Datei.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	de	Keiner Verbindung zur Mailbox möglich: %1 -> Automatische E-Mail-Annahme wurde deaktiviert.
-favorites	tracker	de	Favoriten
 field	tracker	de	Feld
 fixed	tracker	de	Gelöst
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	de	Wenn Sie Serienbriefe erzeugen möchten, dann benutzen Sie dieses 'Markierungszeichen'. Setzen Sie den Inhalt, der wiederholt werden soll (Anschrift-Tags und Briefinhalt) zwischen zwei 'Seiten-Wiederholungs-Zeichen'.

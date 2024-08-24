@@ -199,7 +199,6 @@ export definition to use for nextmatch export	tracker	cs	Definice exportu, kter�
 export definitition to use for nextmatch export	tracker	cs	Definice exportu pro export nextmatch
 exports a list of tracker tickets to a csv file.	tracker	cs	Exportuje seznam tipů trackeru do souboru CSV.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	cs	Nepodařilo se otevřít schránku: %1 -> zakázáno automatické zpracování pošty!
-favorites	tracker	cs	Oblíbené
 field	tracker	cs	Položka
 fixed	tracker	cs	Opraveno
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	cs	Pro hromadný dopis použijte tento štítek. Obsah, který chcete opakovat vložte mezi dva štítky.

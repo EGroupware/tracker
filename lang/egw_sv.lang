@@ -2,7 +2,7 @@
 %1 days in advance	tracker	sv	%1 dagar i förväg
 %1 entries %2	tracker	sv	%1 poster %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	sv	%1-posterna %2, %3 misslyckades på grund av otillräckliga rättigheter!
-%1 entries updated.	tracker	sv	%1 poster uppdaterade
+%1 entries updated.	tracker	sv	%1 poster uppdaterade.
 %1 is due %2	tracker	sv	%1 ska inkomma %2
 %1 is starting %2	tracker	sv	%1 börjar %2
 %1 tickets have been converted	tracker	sv	%1 ärenden har konverterats.
@@ -53,6 +53,7 @@ allow voting on tracker items, show and sort after the votes	tracker	sv	Tillåt 
 amount	tracker	sv	Summa
 application mail expected but got: %1	tracker	sv	Förväntat e-postmeddelande men fick det: %1
 applies the changes	tracker	sv	Sparar ändringar
+assign to project	tracker	sv	Tilldela till projekt
 assigned to	tracker	sv	Tilldelad
 assigning groups	tracker	sv	Tilldela grupper
 attachments & links	tracker	sv	Bilagor och länkar
@@ -60,10 +61,10 @@ autoassign to	tracker	sv	Automatiskt tilldelad
 before	tracker	sv	Före
 bounties	tracker	sv	Belöningar
 bounty	tracker	sv	Belöning
-bounty confirmed	tracker	sv	Belöningen bekräftad
-bounty confirmed.	tracker	sv	Belöningen bekräftad
-bounty deleted	tracker	sv	Belöningen raderad
-bounty deleted.	tracker	sv	Belöningen raderad
+bounty confirmed	tracker	sv	Belöningen bekräftad.
+bounty confirmed.	tracker	sv	Belöningen bekräftad.
+bounty deleted	tracker	sv	Belöningen raderad.
+bounty deleted.	tracker	sv	Belöningen raderad.
 bounty set	tracker	sv	Belöning
 canned response	tracker	sv	Sparade svar
 canned responses	tracker	sv	Sparade svar
@@ -124,6 +125,8 @@ deny global	tracker	sv	Avvisa globalt
 determines the order the fields are displayed	tracker	sv	Avgör sorteringen av visade fält
 directory with documents to insert entries	tracker	sv	Katalog med dokument för att infoga poster
 do not send notifications to external email (cc field)	tracker	sv	Skicka inte aviseringar till extern e-post (cc-fält)
+do you want a notification, if items you are responsible for are about to start?	tracker	sv	Vill du ha ett meddelande om objekt som du ansvarar för ska startas?
+do you want a notification, if items you are responsible for are due?	tracker	sv	Vill du ha en notis om saker som du är ansvarig för förfaller?
 do you want to add mailheader information to description and/or comments?	tracker	sv	Vill du lägga till mailheader-information i beskrivning och/eller kommentarer?
 donator name to show	tracker	sv	Donator namn som visas
 download url for links	tracker	sv	Ladda ner URL för länkar
@@ -174,7 +177,7 @@ history	tracker	sv	Historik
 id	tracker	sv	ID
 if a ticket has matched before, should the actions be taken again?	tracker	sv	Om ett ärende har matchat tidigare, ska åtgärderna vidtas igen?
 if left unchecked, marks every existing, matching ticket as already escalated, without taking the action.	tracker	sv	Om den lämnas omarkerad markeras varje befintligt, matchande ärende som redan eskalerat, utan att åtgärden vidtas.
-if this item is important for you, please consider to set a bounty for it!	tracker	sv	Om ärendet är viktigt för dig, överväg att utlysa en belöning
+if this item is important for you, please consider to set a bounty for it!	tracker	sv	Om ärendet är viktigt för dig, överväg att utlysa en belöning!
 if this item is important for you, please vote for it.	tracker	sv	Om ärendet är viktigt för dig, rösta på det.
 ignore	tracker	sv	Ignorera
 ignore the mail. it will remain in the mailbox, even if 'delete mails from server' above is checked.	tracker	sv	Ignorera e-postmeddelandet. Det kommer att finnas kvar i brevlådan, även om "Radera e-post från servern" ovan är markerad.
@@ -199,12 +202,14 @@ links	tracker	sv	Länkar
 max length of the input [, length of the inputfield (optional)]	tracker	sv	max indata längd[, Indatafälts längd (option)]
 new %1	tracker	sv	Nytt %1
 new items	tracker	sv	Nytt ärende
-new tracker item submitted by %1 at %2	tracker	sv	Nytt Tracker ärende skapat av %1 den %2.
+new tracker item submitted by %1 at %2	tracker	sv	Nytt Tracker ärende skapat av %1 den %2
 no change	tracker	sv	Ingen ändring
 non-anonymous users	tracker	sv	Inloggade användare
 noone	tracker	sv	Ingen
 notification	tracker	sv	Meddelande
+notification settings	tracker	sv	Inställningar för notifieringar
 number of row for a multiline inputfield or line of a multi-select-box	tracker	sv	Antal rader för flerraders indatafält eller flervalsruta
+one day after	tracker	sv	En dag efter
 open(status)	tracker	sv	Öppet
 order	tracker	sv	Sortering
 out of date	tracker	sv	Förfallen
@@ -214,8 +219,11 @@ pending	tracker	sv	Vilande
 pending items never get close automatic.	tracker	sv	Vilande ärenden stängs inte automatiskt
 pending items will be closed automatic after %1 days without response.	tracker	sv	Vilande ärenden stängs automatiskt efter %1 dagar utan svar.
 permission denied !!!	tracker	sv	Åtkomst nekas!
+pop3	tracker	sv	POP3
+port number	tracker	sv	Portnummer
 postponed	tracker	sv	Framskjutet
 process	tracker	sv	Process
+projects	tracker	sv	Projekt
 read	tracker	sv	Läst
 read / unread	tracker	sv	Läst / Oläst
 read only filemanager directory	tracker	sv	Skrivskyddad filhanterarkatalog
@@ -230,21 +238,24 @@ saves the changes made and leaves	tracker	sv	Sparar ändringar och avslutar
 select one...	tracker	sv	Markera en ...
 sender address	tracker	sv	Avsändaradress
 sender address for all notifications, eg. noreply@egroupware.org	tracker	sv	Avsändaradress för alla meddelanden, ex. noreply@egroupware.org
+server type	tracker	sv	Typ av server
 set an own bounty (in %s)	tracker	sv	Utlys belöning (i %s)
 set bounty	tracker	sv	Utlys belöning
 set due date this many days after escalation runs	tracker	sv	Ange förfallodatum (antal dagar) efter eskaleringskörningen
 set the ticket start date to the email received date	tracker	sv	Ställ in startdatum för ärendet till datum för mottaget e-postmeddelande
 should the tracker send you notification mails, if tracker items assigned to you get updated?	tracker	sv	Ska Trackern skicka meddelanden till dig om dina tilldelade ärenden blir uppdaterade?
 should the tracker send you notification mails, if tracker items you created get updated?	tracker	sv	Ska Trackern skicka meddelanden till dig om dina skapade ärenden blir uppdaterade?
+show as user preference	tracker	sv	Visa som användarens preferenser
 signature	tracker	sv	Signatur
 staff	tracker	sv	Bemanning
+standard imap	tracker	sv	Standard IMAP
 start date from email	tracker	sv	Startdatum från e-post
 state	tracker	sv	Län
 summary	tracker	sv	Rubrik
 technicians	tracker	sv	Tekniker
-thank you for setting this bounty.	tracker	sv	Tack för ditt bidrag till belöningen.
-thank you for voting.	tracker	sv	Tack för din röst.
-the bounty will not be shown, until the money is received.	tracker	sv	Belöningen visas INTE innan pengarna är överförda.
+thank you for setting this bounty.	tracker	sv	Tack för ditt bidrag till belöningen
+thank you for voting.	tracker	sv	Tack för din röst
+the bounty will not be shown, until the money is received.	tracker	sv	Belöningen visas INTE innan pengarna är överförda
 the canned response will be prefix the text you type.	tracker	sv	Det sparade svaret blir inledning till det du skriver.
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	sv	det interna namnet (<= 20 tecken), att ändra det gör existerande data otillgängligt
 the text displayed to the user	tracker	sv	texten som visas för användaren
@@ -270,7 +281,8 @@ unread	tracker	sv	Oläst
 upcoming	tracker	sv	Kommande
 updated	tracker	sv	Uppdaterad
 url of the tracker	tracker	sv	URL till Tracker
-url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sv	URL inkluderas i meddelandet. Ex. till sidan med Sajthanterings modulen, standard Tracker i EGw.
+url to be included in the notification, eg. to the page with the sitemgr module, default tracker inside egw	tracker	sv	URL inkluderas i meddelandet. Ex. till sidan med Sajthanterings modulen, standard Tracker i EGw
+user or group	tracker	sv	Användare eller grupp
 versions	tracker	sv	Versioner
 vote for it!	tracker	sv	Rösta!
 votes	tracker	sv	Röster
@@ -291,3 +303,6 @@ you need to select some entries first	tracker	sv	Du måste välja några poster 
 you need to select something to change and some tracker items!	tracker	sv	Du måste välja något att ändra och något Tracker ärende!
 you need to specify amount, donators name and email address!	tracker	sv	Du måste ange summan, donatörens namn och e-postadress!
 you voted %1.	tracker	sv	Du röstade %1
+♦ closed	tracker	sv	♦ Stängt
+♦ not closed	tracker	sv	♦ Ej stängt
+♦ own not closed	tracker	sv	♦ Egen inte stängd

@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	fr	%1 tickets ont été convertis.
 (beware of mailloops, check the help!)	tracker	fr	(attention aux boucles de mails, vérifier l'aide !)
 (new tickets as	tracker	fr	Nouveaux tickets comme
---> choose a project from the drop-down list	tracker	fr	--> choisir un projet dans la liste déroulante
 --> enter new name	tracker	fr	--> entrez un nouveau nom
 1 - lowest	tracker	fr	1- basse
 2 days in advance	tracker	fr	2 jours en avance
@@ -199,7 +198,6 @@ export definition to use for nextmatch export	tracker	fr	Définition de l'export
 export definitition to use for nextmatch export	tracker	fr	Définition de l'export à utiliser pour l'export "nextmatch"
 exports a list of tracker tickets to a csv file.	tracker	fr	Exporter une liste de traqueurs vers un fichier CSV.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	fr	échec de l'ouverture de la boîte email %1 -> désactvé pour le traitement automatique !
-favorites	tracker	fr	Favoris
 field	tracker	fr	Champ
 fixed	tracker	fr	Corrigé
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	fr	Pour les lettres en série utiliser cette balise. Placer le contenu que vous voulez répéter entre deux balises.
@@ -232,7 +230,7 @@ imap, ssl secured	tracker	fr	IMAP, sécurisé par SSL
 imap, tls secured	tracker	fr	IMAP, sécurisé par TLS
 import options	tracker	fr	Options d'import
 import tts tickets	tracker	fr	Importer des tickets TTS
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	fr	Importer les entrées dans le traqueur à partir d'un fichier CSV. CSV tient pour "Valeurs Séparées par des Virgules". Dans l'onglet des option, vous pouvez aussi choisir d'autres séparateurs.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	fr	Importer les entrées dans le traqueur à partir d'un fichier CSV. Dans l'onglet des option, vous pouvez aussi choisir d'autres séparateurs.
 incoming mail folder	tracker	fr	Dossier des emails entrants
 incoming mail rules	tracker	fr	Règles des emails entrants
 incoming mail server	tracker	fr	Serveur des emails entrant

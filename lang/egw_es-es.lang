@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	es-es	Se han convertido %1 tickets
 (beware of mailloops, check the help!)	tracker	es-es	(Tenga cuidado con los bucles de correo, ¡revise la ayuda!)
 (new tickets as	tracker	es-es	Nueva entrada como
---> choose a project from the drop-down list	tracker	es-es	--> elija un proyecto de la lista desplegable
 --> enter new name	tracker	es-es	--> introduzca un nombre nuevo
 1 - lowest	tracker	es-es	1 - la más baja
 2 days in advance	tracker	es-es	2 días de antelación
@@ -199,7 +198,6 @@ export definition to use for nextmatch export	tracker	es-es	Exportar la definici
 export definitition to use for nextmatch export	tracker	es-es	Exportar la definición a usar para exportar nextmatch
 exports a list of tracker tickets to a csv file.	tracker	es-es	Exporta una lista de tickets de seguimiento a un archivo CSV.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	es-es	Error al abrir el buzón: %1 -> ¡deshabilitado para el procesamiento automático de correo!
-favorites	tracker	es-es	Favoritos
 field	tracker	es-es	Campo
 fixed	tracker	es-es	Corregido
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	es-es	Para carta de serie use esta etiqueta. Ponga el contenido que quiera repetir entre dos etiquetas.
@@ -232,7 +230,7 @@ imap, ssl secured	tracker	es-es	IMAP, seguro SSL
 imap, tls secured	tracker	es-es	IMAP, TLS seguro
 import options	tracker	es-es	Opciones de importación
 import tts tickets	tracker	es-es	Importar tickets de TTS
-imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	es-es	Importa entradas en el rastreador desde un archivo CSV. CSV significa "Valores separados por comas". En la pestaña de opciones también puede elegir otros separadores.
+imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	es-es	Importa entradas en el rastreador desde un archivo CSV. En la pestaña de opciones también puede elegir otros separadores.
 incoming mail folder	tracker	es-es	Carpeta de correo entrante
 incoming mail rules	tracker	es-es	Reglas para el correo entrante
 incoming mail server	tracker	es-es	Servidor de correo entrante

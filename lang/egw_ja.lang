@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	ja	% 1 チケットが変換されました。
 (beware of mailloops, check the help!)	tracker	ja	(mailloops に注意してください!)
 (new tickets as	tracker	ja	新しいチケット
---> choose a project from the drop-down list	tracker	ja	--> ドロップダウンリストからプロジェクトを選択
 --> enter new name	tracker	ja	--> 新しい名前を入力
 1 - lowest	tracker	ja	1最低
 2 days in advance	tracker	ja	2日前
@@ -132,6 +131,7 @@ read only filemanager directory	tracker	ja	読み取り専用ファイルマネ�
 rejected	tracker	ja	拒否済み
 set due date this many days after escalation runs	tracker	ja	エスカレーション実行後の期限（日数）を設定する
 set the ticket start date to the email received date	tracker	ja	チケットの開始日をメール受信日に設定する
+show as user preference	tracker	ja	ユーザー設定として表示
 signature	tracker	ja	署名
 start date from email	tracker	ja	メール受信日
 state	tracker	ja	都道府県
@@ -144,3 +144,5 @@ yes, add mailheader to both (description and comments)	tracker	ja	はい、両�
 yes, add mailheader to comments	tracker	ja	はい、コメントにメールヘッダを追加
 yes, add mailheader to description	tracker	ja	はい、説明文にメールヘッダを追加
 yes, always	tracker	ja	はい、常に
+♦ closed	tracker	ja	閉じる
+♦ not closed	tracker	ja	閉じていない
