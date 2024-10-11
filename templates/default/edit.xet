@@ -78,9 +78,6 @@
 			</rows>
 		</grid>
 	</template>
-	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
-		<customfields type_filter="$cont[tr_tracker]"/>
-	</template>
 	<template id="tracker.edit.history" template="" lang="" group="0" version="0.1.002">
 		<historylog id="history"/>
 	</template>
@@ -207,7 +204,6 @@
 							<tab id="comments" label="Comments" statustext="Comments"/>
 							<tab id="add_comment" label="Add comment" statustext="Add comment"/>
 							<tab id="links" label="Links" statustext="Attachments &amp; Links"/>
-							<tab id="custom" label="Custom" statustext="Custom fields"/>
 							<tab id="history" label="History" statustext="History"/>
 							<tab id="bounties" label="Bounties" statustext="If this item is important for you, please consider to set a bounty for it!"/>
 						</tabs>
@@ -217,7 +213,6 @@
 							<template id="tracker.edit.comments"/>
 							<template id="tracker.edit.add_comment"/>
 							<template id="tracker.edit.links"/>
-							<template id="tracker.edit.custom"/>
 							<template id="tracker.edit.history"/>
 							<template id="tracker.edit.bounties"/>
 						</tabpanels>
