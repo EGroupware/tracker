@@ -197,7 +197,7 @@
 					<et2-description></et2-description>
 				</row>
 				<row valign="top">
-					<et2-tabbox  id="tabs" span="all" tabHeight="290">
+					<et2-tabbox id="tabs" span="all" tabHeight="290" cfTypeFilter="$cont[tr_tracker]">
 						<tabs>
 							<tab id="description" label="Description" statustext="Description"/>
 							<tab id="details" label="Details" statustext="Details"/>
