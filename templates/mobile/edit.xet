@@ -16,7 +16,7 @@
 					<et2-number  id="num_replies" readonly="true" precision="0"></et2-number>
 				</row>
 				<row class="row" valign="top">
-					<et2-vbox  cellpadding="0" cellspacing="0" >
+					<et2-vbox>
 						<et2-date-time  id="replies[$row][reply_created]" readonly="true"></et2-date-time>
 						<et2-select-account  id="replies[$row][reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
@@ -62,9 +62,6 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit.custom" template="" lang="" group="0" version="1.9.001">
-		<customfields type_filter="$cont[tr_tracker]"/>
 	</template>
 	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
@@ -185,14 +182,13 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-                    <et2-tabbox id="tabs" span="all" tabHeight="290">
+                    <et2-tabbox id="tabs" span="all" tabHeight="290" cfTypeFilter="$cont[tr_tracker]">
                         <tabs>
                             <tab id="description" label="Description" statustext="Description"/>
                             <tab id="details" label="Details" statustext="Details"/>
                             <tab id="comments" label="Comments" statustext="Comments"/>
                             <tab id="add_comment" label="Add comment" statustext="Add comment"/>
                             <tab id="links" label="Links" statustext="Attachments &amp; Links"/>
-                            <tab id="custom" label="Custom" statustext="Custom fields"/>
                             <tab id="ownership" label="Ownership" statustext="Ownership"/>
                         </tabs>
                         <tabpanels>
@@ -201,7 +197,6 @@
                             <template id="tracker.edit.comments"/>
                             <template id="tracker.edit.add_comment"/>
                             <template id="tracker.edit.links"/>
-                            <template id="tracker.edit.custom"/>
                             <template id="tracker.edit.ownership"/>
                         </tabpanels>
                     </et2-tabbox>
