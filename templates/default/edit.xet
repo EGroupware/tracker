@@ -41,17 +41,19 @@
 			</columns>
 			<rows>
 				<row class="th" valign="top">
-					<et2-hbox  align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
-						<vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
-						<vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" />
-					</et2-hbox>
-					<et2-hbox  disabled="@no_canned">
-						<et2-description  value="Canned response" for="canned_response" class="3"></et2-description>
-						<et2-select  statustext="The canned response will be prefix the text you type." id="canned_response" onchange="app.tracker.canned_comment_requst" align="right" noLang="1" emptyLabel="Select one"></et2-select>
-					</et2-hbox>
-					<et2-hbox  align="right" disabled="@no_comment_visibility">
-						<et2-checkbox  label="Only for admins, technicians or assigned" id="reply_visible"></et2-checkbox>
-					</et2-hbox>
+                    <et2-hbox align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
+                        <vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
+                        <vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing"/>
+                    </et2-hbox>
+                    <et2-hbox class="add_comment_header">
+                        <et2-hbox disabled="@no_canned">
+                            <et2-description value="Canned response" for="canned_response" class="3"></et2-description>
+                            <et2-select statustext="The canned response will be prefix the text you type." id="canned_response" onchange="app.tracker.canned_comment_requst" align="right" noLang="1" emptyLabel="Select one"></et2-select>
+                        </et2-hbox>
+                        <et2-hbox align="right" disabled="@no_comment_visibility">
+                            <et2-checkbox label="Only for admins, technicians or assigned" id="reply_visible"></et2-checkbox>
+                        </et2-hbox>
+                    </et2-hbox>
 				</row>
 				<row class="row" valign="top" disabled="@no_reply">
 					<htmlarea id="reply_message" span="all" height="225" width="99%" imageUpload="link_to"/>
