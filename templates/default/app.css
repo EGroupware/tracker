@@ -72,6 +72,9 @@ label.tracker_trIdEdit:before { content: "#"; }
     width: auto;
 }
 /* Add comment file buttons */
+#tracker-edit_tracker-edit-add_comment .add_comment_header::part(base), #tracker-edit_tracker-edit-add_comment .add_comment_header et2-hbox::part(base) {
+	align-items: center;
+}
 #tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar * {
     vertical-align: top
 }
