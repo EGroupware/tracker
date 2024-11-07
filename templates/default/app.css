@@ -73,7 +73,7 @@ label.tracker_trIdEdit:before { content: "#"; }
 }
 /* Add comment file buttons */
 #tracker-edit_tracker-edit-add_comment td.add_comment_header {
-	padding-top: 10px;
+	padding-bottom: 0px;
 }
 #tracker-edit_tracker-edit-add_comment .add_comment_header::part(base), #tracker-edit_tracker-edit-add_comment .add_comment_header et2-hbox::part(base) {
 	align-items: center;
