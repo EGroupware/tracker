@@ -5,29 +5,40 @@
 		<htmlarea id="tr_description" needed="1" span="all" width="99%" height="274" imageUpload="link_to"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
+        <nextmatch id="replies" template="tracker.edit.comment_row"/>
+    </template>
+    <template id="tracker.edit.comment_edit">
+        <et2-hbox align="left" class="et2_link_to et2_toolbar" disabled="!@file_edit">
+            <vfs-select method_id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
+            <vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" label="" path="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" onchange="app.tracker.comment_add_vfs"/>
+        </et2-hbox>
+        <et2-link-list id="attachments" hidden="!@file_edit" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
+        <htmlarea id="reply_message" mode="@tr_edit_mode" imageUpload="link_to" disabled="@file_edit"></htmlarea>
+    </template>
+    <template id="tracker.edit.comment_row">
 		<grid width="100%" class="egwGridView_grid" id="replies">
 			<columns>
-				<column width="120"/>
-				<column/>
+                <column width="200"/>
+                <column width="*"/>
 			</columns>
 			<rows>
-				<row class="th" height="29px">
-					<et2-description  value="Comments"></et2-description>
-					<et2-number  id="num_replies" readonly="true" precision="0"></et2-number>
-				</row>
-				<row class="row $row_cont[class]" valign="top">
+                <row>
+                    <et2-hbox>
+                        <et2-nextmatch-header-account id="reply_creator" placeholder="Username"></et2-nextmatch-header-account>
+                    </et2-hbox>
+                    <et2-hbox>
+                        <nextmatch-header id="reply_message" label="Comment"></nextmatch-header>
+                    </et2-hbox>
+                </row>
+                <row class="row $row_cont[class] $row_cont[reply_visible_class]" valign="top">
 					<et2-vbox>
 						<et2-date-time  id="{$row}[reply_created]" readonly="true"></et2-date-time>
 						<et2-select-account  id="{$row}[reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
 					<et2-vbox>
-						<htmlarea resize_ratio="0" id="{$row}[reply_message]" mode="@@tr_edit_mode" readonly="@@editable_comments" span="all" width="99%"  editable_height="247" class="@@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$row_cont[tr_id],$row_cont[reply_id]" toggle_readonly="false"/>
-
-						<et2-hbox  align="left" class="et2_link_to et2_toolbar hide_buttons">
-							<vfs-select method_id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
-							<vfs-upload id="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" label="" path="tracker:{$row_cont['tr_id']}:comments/{$row_cont['reply_id']}/" onchange="app.tracker.comment_add_vfs"/>
-						</et2-hbox>
-					</et2-vbox>
+                        <htmlarea resize_ratio="0" id="{$row}[reply_message]" data-reply_id="${row_cont[reply_id]}" mode="@@tr_edit_mode" readonly="@@editable_comments" span="all" width="99%" editable_height="247" class="@@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$row_cont[tr_id],$row_cont[reply_id]" toggle_readonly="false"/>
+                        <et2-link-string id="${row}[attachments]"></et2-link-string>
+                    </et2-vbox>
 				</row>
 			</rows>
 		</grid>

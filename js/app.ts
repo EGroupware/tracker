@@ -22,7 +22,8 @@ import {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
 import {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
 import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
 import "./Et2TrackerAssigned.ts";
-import {waitForEvent} from "../../api/js/etemplate/Et2Widget/event";
+import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
+import {LitElement} from "lit";
 
 /**
  * UI for tracker
@@ -413,23 +414,12 @@ import {waitForEvent} from "../../api/js/etemplate/Et2Widget/event";
 	 */
 	reply_files(_action, _entries)
 	{
-		let row = null;
-		for(let i in _entries)
-		{
-			row = _entries[i].iface.getDOMNode();
-			jQuery('.et2_toolbar',row).removeClass('hide_buttons')
-				.get(0).scrollIntoView();
-		}
-		jQuery("body").one('click', async function(e)
-		{
-			// If vfs-select, need to wait to hide or we'll hide the dialog too
-			if(e.target.tagName == "ET2-VFS-SELECT")
-			{
-				await waitForEvent(e.target, "close");
-				debugger;
-			}
-			row.querySelector(".et2_toolbar").classList.add("hide_buttons");
-		});
+		let data = this.egw.dataGetUIDdata(_entries[0].id)?.data ?? {};
+		let dialog = this.editCommentDialog(_entries[0].id, {...data, file_edit: true});
+		// @ts-ignore
+		dialog.buttons = Et2Dialog.BUTTONS_OK;
+
+		// Widgets & dialog handle the rest
 	}
 
 	/**
@@ -440,20 +430,60 @@ import {waitForEvent} from "../../api/js/etemplate/Et2Widget/event";
 	 */
 	reply_edit(_action, _entries)
 	{
-		for(let i in _entries)
+		let data = this.egw.dataGetUIDdata(_entries[0].id)?.data ?? {};
+
+		// Create dialog
+		let dialog = this.editCommentDialog(_entries[0].id, {
+			...data,
+			tr_edit_mode: this.et2.getArrayMgr("content").getEntry("tr_edit_mode")
+		});
+		dialog.updateComplete.then(() => {dialog.querySelector('textarea')?.focus();});
+
+		// Update reply - This is a race with the update done in editCommentDialog()
+		dialog.getComplete().then(async([button, value]) =>
 		{
-			let row_id = _entries[i].id.split('row_')[1];
-			if(typeof row_id !== 'string')
+			if(!button)
 			{
 				return;
 			}
-			let widget_id = row_id + '[reply_message]';
-			let widget = _entries[i].iface.getWidget().getWidgetById(widget_id);
+			let result = await this.egw.request("tracker_ui::ajax_update_reply",
+				[value.reply_message, data.tr_id, data.reply_id]
+			);
 
-			// Trigger the edit mode
-			widget.dblclick();
-		}
+			// Update UI directly in case we lose the race
+			if(result)
+			{
+				data.reply_message = value.reply_message;
+				this.egw.dataStoreUID(_entries[0].id, data);
+			}
+		});
+	}
 
+	protected editCommentDialog(comment_id, data) : Et2Dialog
+	{
+		let dialog = <Et2Dialog><unknown>document.createElement('et2-dialog');
+		dialog._setApiInstance(this.egw);
+		dialog.transformAttributes({
+			title: this.egw.lang('Edit comment'),
+			id: "tracker-edit-comment-dialog",
+			buttons: Et2Dialog.BUTTONS_OK_CANCEL,
+			isModal: true,
+			destroyOnClose: false,
+			value: {
+				etemplate_exec_id: this.et2.getInstanceManager().etemplate_exec_id,
+				content: data
+			},
+			template: "tracker.edit.comment_edit"
+		});
+		document.body.appendChild(<LitElement><unknown>dialog);
+		dialog.getComplete().then(([button, value]) =>
+		{
+			if(button)
+			{
+				this.egw.dataRefreshUID(comment_id);
+			}
+		})
+		return dialog;
 	}
 }
 

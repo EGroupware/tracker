@@ -83,9 +83,8 @@ class tracker_merge extends Api\Storage\Merge
 			}
 			else
 			{
-				$this->bo->read($id);
-				$tracker = $this->bo->data;
-				$all_replies = $tracker['replies'];
+				$comments = new tracker_comments();
+				$all_replies = $comments->get_tracker_comments($id, $replacements['$$see_restricted_replies$$']);
 			}
 			$replies = array();
 			foreach($all_replies as $c_id => $reply) {
@@ -189,7 +188,7 @@ class tracker_merge extends Api\Storage\Merge
 		$info += $this->get_all_links('tracker', $id, $prefix, $content);
 
 		// Special comments - already have $$
-		$comments = $this->get_comments($id);
+		$comments = $this->get_comments($id, $array['see_restricted_replies']);
 		foreach($comments[-1] as $key => $comment)
 		{
 			$info += $comment;
@@ -217,7 +216,7 @@ class tracker_merge extends Api\Storage\Merge
 	/**
 	 * Get the comments for this tracker entry
 	 */
-	protected function get_comments($tr_id)
+	protected function get_comments($tr_id, $include_restricted_replies = false)
 	{
 		if (!empty($this->comment_cache[$tr_id])) return $this->comment_cache[$tr_id];
 
@@ -236,14 +235,15 @@ class tracker_merge extends Api\Storage\Merge
 		}
 		else
 		{
-			$replies = $tracker['replies'];
+			$replies_obj = new tracker_comments();
+			$replies = $replies_obj->get_tracker_comments($tr_id, $include_restricted_replies);
 		}
 		foreach($replies as $reply) {
 			if (!empty($reply['reply_visible'])) {
 				$reply['reply_message'] = '['.$reply['reply_message'].']';
 			}
 			$this->comment_cache[$tr_id][] = array(
-				'$$comment/date$$' => Api\DateTime::to($reply['reply_created']),
+				'$$comment/date$$' => Api\DateTime::to(new Api\DateTime($reply['reply_created'], Api\DateTime::$server_timezone)),
 				'$$comment/message$$' => $reply['reply_message'] ?? '',
 				'$$comment/restricted$$' => !empty($reply['reply_visible']) ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/user$$' => isset($reply['reply_creator']) ? Api\Accounts::username($reply['reply_creator']) : '',
@@ -262,7 +262,7 @@ class tracker_merge extends Api\Storage\Merge
 		);
 		foreach($special as $key => $comment) {
 			$this->comment_cache[$tr_id][-1][$key] = array(
-				'$$comment/-1'.$key.'/date$$' => $comment ? Api\DateTime::to($comment['reply_created']) : '',
+				'$$comment/-1' . $key . '/date$$' => $comment ? Api\DateTime::to(new Api\DateTime($comment['reply_created'], Api\DateTime::$server_timezone)) : '',
 				'$$comment/-1'.$key.'/message$$' => $comment['reply_message'] ?? null,
 				'$$comment/-1'.$key.'/restricted$$' => !empty($comment['reply_visible']) ? ('[' .lang('restricted comment').']') : '',
 				'$$comment/-1'.$key.'/user$$' => $comment && !empty($comment['reply_creator']) ? Api\Accounts::username($comment['reply_creator']) : ''
@@ -285,7 +285,7 @@ class tracker_merge extends Api\Storage\Merge
 	{
 		$this->preset_comments[$tr_id] = array_values(array_filter($comments, function ($v)
 		{
-			return strlen(trim($v['reply_message'])) > 0;
+			return strlen(trim(is_array($v) ? $v['reply_message'] : '')) > 0;
 		})
 		);
 	}

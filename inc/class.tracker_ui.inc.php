@@ -844,57 +844,57 @@ class tracker_ui extends tracker_bo
 	protected function setup_comments(Etemplate &$tpl, Array &$content, Array &$preserve)
 	{
 		// Comment visibility
-		if (is_array($content['replies']))
+		if($content['num_replies'])
 		{
-			foreach($content['replies'] as $key => &$reply)
-			{
-				if(!$reply)
-				{
-					unset($content['replies'][$key]);
-					continue;
-				}
-				if (isset($content['replies'][$key]['reply_visible'])) {
-					$reply['reply_visible_class'] = 'reply_visible_'.$reply['reply_visible'];
-					if($this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
-							$reply['reply_creator'] == $GLOBALS['egw_info']['user']['account_id'] && $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply'))
-					{
-						$reply['class'] = 'editable';
-					}
-				}
-			}
+			$content['replies'] = array(
+				'get_rows'              => 'tracker.tracker_ui.get_comment_rows',
+				'no_cat'                => true,
+				'no_filter'             => true,
+				'no_filter2'            => true,
+				'order'                 => 'reply_created',
+				'sort'                  => 'DESC',
+				'col_filter'            => ['tr_id' => $content['tr_id']],
+				'row_id'                => 'reply_id',
+				'dataStorePrefix'       => 'tracker_reply',
+				'row_modified'          => 'reply_created',
+				'add_on_top_sort_field' => 'reply_created',
+			);
 		}
-		if ($content['num_replies'] && (!array_key_exists(0,$content['replies']) || $content['replies'][0]))
-    {
-        array_unshift($content['replies'],false);
-        array_unshift($preserve['replies'],false);
-    }	// need array index starting with 1!
+
 		$content['no_comment_visibility'] = !$this->check_rights(TRACKER_ADMIN|TRACKER_TECHNICIAN|TRACKER_ITEM_ASSIGNEE,null,null,null,'no_comment_visibility') ||
 			!$this->allow_restricted_comments;
 
+
 		// Toggle editable comments
 		$content['editable_comments'] = $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
-				 $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply')
-				? 'editable' : '';
-
+		$this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply')
+			? 'editable' : '';
 		// Context menu
-		$tpl->set_cell_attribute('replies', 'actions', array(
-			'replies_edit' => array(
-				'icon' => 'edit',
-				'caption' => 'Edit',
-				'allowOnMultiple' => false,
-				'onExecute' => 'javaScript:app.tracker.reply_edit',
-				'enableClass' => 'editable',
-				'hideOnDisabled' => true
-			),
-			'replies_files' => array(
-				'icon' => 'filemanager/navbar',
-				'caption' => 'Files',
-				'allowOnMultiple' => false,
-				'onExecute' => 'javaScript:app.tracker.reply_files',
-				'enableClass' => 'editable',
-				'hideOnDisabled' => true
-			),
-		));
+		if($content['editable_comments'])
+		{
+			$content['replies']['actions'] = array(
+				'egw_copy'      => array('enabled' => false, 'hideOnDisabled' => true),
+				'egw_copy_add'  => array('enabled' => false, 'hideOnDisabled' => true),
+				'egw_paste'     => array('enabled' => false, 'hideOnDisabled' => true),
+				'replies_edit'  => array(
+					'icon'            => 'edit',
+					'caption'         => 'Edit',
+					'allowOnMultiple' => false,
+					'onExecute'       => 'javaScript:app.tracker.reply_edit',
+					'enableClass'     => 'editable',
+					'hideOnDisabled'  => true,
+					'default'         => true
+				),
+				'replies_files' => array(
+					'icon'            => 'filemanager/navbar',
+					'caption'         => 'Files',
+					'allowOnMultiple' => false,
+					'onExecute'       => 'javaScript:app.tracker.reply_files',
+					'enableClass'     => 'editable',
+					'hideOnDisabled'  => true
+				),
+			);
+		}
 	}
 
 	/**
@@ -1166,6 +1166,55 @@ class tracker_ui extends tracker_bo
 		}
 
 		return $total;
+	}
+
+	/**
+	 * Query comments for edit dialog
+	 *
+	 * @param array $query_in with keys 'start', 'search', 'order', 'sort', 'col_filter'
+	 *    For other keys like 'filter', 'cat_id' you have to reimplement this method in a derived class.
+	 * @param array &$rows returned rows/competitions
+	 * @param array &$readonlys eg. to disable buttons based on Acl
+	 * @return int total number of rows
+	 */
+	public function get_comment_rows(&$query, &$rows, &$readonlys)
+	{
+		$tracker = "";
+		$comments = new tracker_comments();
+		if(!$query['col_filter']['tr_id'] || !($tracker = $this->read((int)$query['col_filter']['tr_id'])) || !$tracker['num_replies'])
+		{
+			$rows = [];
+			return 0;
+		}
+		if(!$tracker['see_restricted_replies'])
+		{
+			$query['col_filter']['reply_visible'] = 0;
+		}
+
+		$count = $comments->get_rows($query, $rows, $readonlys);
+
+		$check_rights = $this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply');
+		$edit_own = $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply');
+		foreach($rows as &$reply)
+		{
+			$reply['reply_visible_class'] = 'reply_visible_' . $reply['reply_visible'];
+			$reply['reply_created'] = Api\DateTime::server2user($reply['reply_created']);
+
+			if($check_rights || $edit_own && $reply['reply_creator'] == $GLOBALS['egw_info']['user']['account_id'])
+			{
+				$reply['class'] = 'editable';
+			}
+			// Add comment attachments
+			$path = "comments/{$reply['reply_id']}/";
+			$reply['attachments'] = array_values(EGroupware\Api\Link::list_attached('tracker', $reply['tr_id'], $path));
+			// Extra data needed to open it with link_string
+			foreach($reply['attachments'] as &$attachment)
+			{
+				$attachment['title'] = $attachment['id'];
+				$attachment['id'] = $path . $attachment['id'];
+			}
+		}
+		return $count;
 	}
 
 	/**
@@ -2257,10 +2306,13 @@ width:100%;
 		}
 
 		// Update the comment
-		$this->save_comment(array(
+		$result = $this->save_comment(array(
 			'reply_id' => (int)$comment_id,
 			'reply_message' => $value
 		));
+
+		$response = Api\Json\Response::get();
+		$response->data($result ? true : false);
 	}
 
 	/**
