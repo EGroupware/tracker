@@ -205,6 +205,9 @@ class tracker_tracking extends Api\Storage\Tracking
 		$private = $data['tr_private'];
 		$data['tr_private'] = true;
 
+		// Clear out any nextmatch stuff in replies array, merge will get as needed
+		unset($data['replies']);
+
 		// Send notification - $email_notified will be skipped
 		$success = parent::do_notifications($data, $old, $deleted, $email_notified);
 
@@ -219,21 +222,14 @@ class tracker_tracking extends Api\Storage\Tracking
 		// clears the cached notifications body
 		$this->ClearBodyCache();
 
-		// Edit messages
-		foreach($data['replies'] ?? [] as $key => $reply)
-		{
-			if (!empty($reply['reply_visible']))
-			{
-				unset($data['replies'][$key]);
-			}
-		}
+		// Restrict replies
+		$data['see_restricted_replies'] = false;
 
 		// Send to creator (if not already notified) && CC
 		if(!($this->tracker->is_admin($data['tr_tracker'], $creator, true) || $this->tracker->is_technician($data['tr_tracker'], $creator)))
 		{
 			$this->creator_field = $creator_field;
 		}
-		$this->tracker->preset_replies[$data['tr_id']] = $data['replies'] ?? [];
 		$data['tr_private'] = $private;
 		//$already_notified = $email_notified;
 		$ret = $success && parent::do_notifications($data, $old, $deleted, $email_notified);
@@ -327,9 +323,13 @@ class tracker_tracking extends Api\Storage\Tracking
 	{
 		$notification = $this->tracker->notification[$data['tr_tracker']];
 		$merge = new tracker_merge();
+		$comments = new tracker_comments();
 
 		// Set comments according to data, avoids re-reading from DB
-		if (isset($data['replies'])) $merge->set_comments($data['tr_id'], $data['replies']);
+		if(isset($data['num_replies']))
+		{
+			$merge->set_comments($data['tr_id'], $comments->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']));
+		}
 
 		if(empty($notification['message']) || trim(strip_tags($notification['message'])) == '' || empty($notification['use_custom']))
 		{
@@ -497,7 +497,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		// add custom fields for given type
 		$details += $this->get_customfields($data, $data['tr_tracker'], $receiver);
 
-		if (!empty($data['replies'])) //$data['reply_message'] && !$data['reply_visible'])
+		if(!empty($data['replies']) && !empty($data['replies'][0])) //$data['reply_message'] && !$data['reply_visible'])
 		{
 			// At least one comment was made
 			$reply = $data['replies'][0] ?? [];
@@ -522,9 +522,10 @@ class tracker_tracking extends Api\Storage\Tracking
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
 		);
-		if (!empty($data['replies']))
+		if($data['num_replies'])
 		{
-			foreach($data['replies'] as $reply_index => $reply)
+			$replies = new tracker_comments();
+			foreach($replies->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) as $reply_index => $reply)
 			{
 				if (empty($reply['reply_message'])) continue;
 				$reply['reply_message'] = $data['tr_edit_mode'] == 'ascii' ?

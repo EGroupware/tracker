@@ -60,6 +60,7 @@ class tracker_so extends Api\Storage
 	 * @var array
 	 */
 	var $non_db_cols = array('tr_assigned','reply_message','reply_visible');
+	private tracker_comments $comments;
 
 	/**
 	 * Constructor
@@ -76,6 +77,8 @@ class tracker_so extends Api\Storage
 		{
 			$this->columns_to_search[] = self::EXTRA_TABLE.'.tr_extra_value';
 		}
+
+		$this->comments = new tracker_comments();
 	}
 
 	/**
@@ -111,18 +114,8 @@ class tracker_so extends Api\Storage
 					in_array($row['tr_assigned'], $GLOBALS['egw']->accounts->memberships($user, true));
 		}
 
-		$this->data['replies'] = array();
-		$filter = array('tr_id' => $this->data['tr_id']);
-		if(!$read_restricted)
-		{
-			$filter['reply_visible'] = 0;
-		}
-		foreach($this->db->select(self::REPLIES_TABLE,'*',$filter,
-			__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
-		{
-			$this->data['replies'][] = $row;
-		}
-		$this->data['num_replies'] = count($this->data['replies']);
+		$this->data['see_restricted_replies'] = $read_restricted;
+		$this->data['num_replies'] = $this->comments->get_comment_count($this->data['tr_id'], $read_restricted);
 		$this->db2data();
 
 		return $this->data;
