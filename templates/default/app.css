@@ -140,12 +140,20 @@ label.tracker_trIdEdit:before { content: "#"; }
 
 #tracker-edit-comment_edit > div {
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 #tracker-edit-comment_edit #_reply_message {
 	width: 100%;
 	height: 100%;
 	padding: 0;
+	flex: 1 0 10em;
+}
+
+/* HTML comment edit */
+#tracker-edit-comment_edit #_reply_message + div {
+	flex: 1 0 15em;
 }
 
 #tracker-edit-comment_edit .et2_toolbar > * {

@@ -8,12 +8,12 @@
         <nextmatch id="replies" template="tracker.edit.comment_row"/>
     </template>
     <template id="tracker.edit.comment_edit">
-        <et2-hbox align="left" class="et2_link_to et2_toolbar" disabled="!@file_edit">
+        <et2-hbox align="left" class="et2_link_to et2_toolbar">
             <vfs-select method_id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
             <vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" label="" path="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" onchange="app.tracker.comment_add_vfs"/>
         </et2-hbox>
-        <et2-link-list id="attachments" hidden="!@file_edit" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
-        <htmlarea id="reply_message" mode="@tr_edit_mode" imageUpload="link_to" disabled="@file_edit"></htmlarea>
+        <et2-link-list id="attachments" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
+        <htmlarea id="reply_message" mode="@tr_edit_mode" imageUpload="link_to"></htmlarea>
     </template>
     <template id="tracker.edit.comment_row">
 		<grid width="100%" class="egwGridView_grid" id="replies">
@@ -36,7 +36,7 @@
 						<et2-select-account  id="{$row}[reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
 					<et2-vbox>
-                        <htmlarea resize_ratio="0" id="{$row}[reply_message]" data-reply_id="${row_cont[reply_id]}" mode="@@tr_edit_mode" readonly="@@editable_comments" span="all" width="99%" editable_height="247" class="@@replies[$row][reply_visible_class]" imageUpload="link_to" save_callback="tracker_ui::ajax_update_reply" save_callback_params="$row_cont[tr_id],$row_cont[reply_id]" toggle_readonly="false"/>
+                        <html id="{$row}[reply_message]" class="@@replies[$row][reply_visible_class]"/>
                         <et2-link-string id="${row}[attachments]"></et2-link-string>
                     </et2-vbox>
 				</row>

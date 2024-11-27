@@ -407,22 +407,6 @@ import {LitElement} from "lit";
 	}
 
 	/**
-	 * Handle context menu action on the comments to show the file buttons
-	 *
-	 * @param {egwAction} _action
-	 * @param {egwActionObject[]} _entries
-	 */
-	reply_files(_action, _entries)
-	{
-		let data = this.egw.dataGetUIDdata(_entries[0].id)?.data ?? {};
-		let dialog = this.editCommentDialog(_entries[0].id, {...data, file_edit: true});
-		// @ts-ignore
-		dialog.buttons = Et2Dialog.BUTTONS_OK;
-
-		// Widgets & dialog handle the rest
-	}
-
-	/**
 	 * Handle context menu action on the comments to edit the comment
 	 *
 	 * @param {egwAction} _action
@@ -432,10 +416,15 @@ import {LitElement} from "lit";
 	{
 		let data = this.egw.dataGetUIDdata(_entries[0].id)?.data ?? {};
 
+		// If you have more than one edit dialog open, we need the right data
+		let instance = _entries[0].manager?.data?.context?.tracker?.et2.getInstanceManager() ?? this.et2.getInstanceManager();
+
 		// Create dialog
-		let dialog = this.editCommentDialog(_entries[0].id, {
+		let dialog = this.editCommentDialog(
+			instance.etemplate_exec_id,
+			_entries[0].id, {
 			...data,
-			tr_edit_mode: this.et2.getArrayMgr("content").getEntry("tr_edit_mode")
+				tr_edit_mode: instance.widgetContainer.getArrayMgr("content").getEntry("tr_edit_mode")
 		});
 		dialog.updateComplete.then(() => {dialog.querySelector('textarea')?.focus();});
 
@@ -459,7 +448,7 @@ import {LitElement} from "lit";
 		});
 	}
 
-	protected editCommentDialog(comment_id, data) : Et2Dialog
+	protected editCommentDialog(etemplate_exec_id : string, comment_id : string, data) : Et2Dialog
 	{
 		let dialog = <Et2Dialog><unknown>document.createElement('et2-dialog');
 		dialog._setApiInstance(this.egw);
@@ -470,7 +459,7 @@ import {LitElement} from "lit";
 			isModal: true,
 			destroyOnClose: false,
 			value: {
-				etemplate_exec_id: this.et2.getInstanceManager().etemplate_exec_id,
+				etemplate_exec_id: etemplate_exec_id,
 				content: data
 			},
 			template: "tracker.edit.comment_edit"
@@ -482,6 +471,9 @@ import {LitElement} from "lit";
 			{
 				this.egw.dataRefreshUID(comment_id);
 			}
+			// Carefully clear template preserving session
+			dialog.template.clear(true, true);
+			dialog.remove();
 		})
 		return dialog;
 	}
