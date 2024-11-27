@@ -884,15 +884,7 @@ class tracker_ui extends tracker_bo
 					'enableClass'     => 'editable',
 					'hideOnDisabled'  => true,
 					'default'         => true
-				),
-				'replies_files' => array(
-					'icon'            => 'filemanager/navbar',
-					'caption'         => 'Files',
-					'allowOnMultiple' => false,
-					'onExecute'       => 'javaScript:app.tracker.reply_files',
-					'enableClass'     => 'editable',
-					'hideOnDisabled'  => true
-				),
+				)
 			);
 		}
 	}
@@ -1212,6 +1204,8 @@ class tracker_ui extends tracker_bo
 			{
 				$attachment['title'] = $attachment['id'];
 				$attachment['id'] = $path . $attachment['id'];
+				$attachment['icon'] = Link::vfs_path('tracker', $reply['tr_id'], $attachment['id'], true);
+				$attachment['download_url'] = Api\Vfs::download_url($attachment['icon']);
 			}
 		}
 		return $count;
