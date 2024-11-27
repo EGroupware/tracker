@@ -438,13 +438,6 @@ import {LitElement} from "lit";
 			let result = await this.egw.request("tracker_ui::ajax_update_reply",
 				[value.reply_message, data.tr_id, data.reply_id]
 			);
-
-			// Update UI directly in case we lose the race
-			if(result)
-			{
-				data.reply_message = value.reply_message;
-				this.egw.dataStoreUID(_entries[0].id, data);
-			}
 		});
 	}
 
