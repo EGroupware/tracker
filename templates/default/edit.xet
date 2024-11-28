@@ -36,7 +36,8 @@
 						<et2-select-account  id="{$row}[reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
 					<et2-vbox>
-                        <html id="{$row}[reply_message]" class="@@replies[$row][reply_visible_class]"/>
+                        <html id="{$row}[reply_message]" class="@@replies[$row][reply_visible_class]" disabled="!@@tr_edit_mode=html"/>
+                        <et2-description id="${row}[reply_message]" disabled="@@tr_edit_mode=html"></et2-description>
                         <et2-link-string id="${row}[attachments]"></et2-link-string>
                     </et2-vbox>
 				</row>

@@ -894,6 +894,7 @@ class tracker_ui extends tracker_bo
 				'dataStorePrefix'       => 'tracker_reply',
 				'row_modified'          => 'reply_created',
 				'add_on_top_sort_field' => 'reply_created',
+				'no_columnselection' => true,
 			);
 		}
 
