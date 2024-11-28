@@ -104,7 +104,8 @@ class tracker_assigned_etemplate_widget extends Etemplate\Widget\Select
 			{
 				$value = array($value);
 			}
-			$multiple = $this->attrs['multiple'] || $this->getElementAttribute($form_name, 'multiple') || $this->getElementAttribute($form_name, 'rows') > 1;
+			$multiple = $this->attrs['multiple'] || self::getElementAttribute($form_name, 'multiple') ||
+				self::getElementAttribute($form_name, 'rows') > 1;
 
 			$valid =& self::get_array($validated, $form_name, true);
 
