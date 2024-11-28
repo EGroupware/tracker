@@ -87,9 +87,10 @@ class tracker_so extends Api\Storage
 	 * @param boolean $is_admin =false
 	 * @param boolean $is_technician =false
 	 * @param int $user =null
+	 * @param boolean $read_replies
 	 * @return array $this->data incl. replies, bounties, etc.
 	 */
-	function read_extra($is_admin=false, $is_technician=false, $user=null)
+	function read_extra($is_admin=false, $is_technician=false, $user=null, $read_replies=false)
 	{
 		$read_restricted = $is_admin || $is_technician;
 		if (!$user) $user = $this->user;
@@ -115,7 +116,25 @@ class tracker_so extends Api\Storage
 		}
 
 		$this->data['see_restricted_replies'] = $read_restricted;
-		$this->data['num_replies'] = $this->comments->get_comment_count($this->data['tr_id'], $read_restricted);
+		if ($read_replies)
+		{
+			$this->data['replies'] = array();
+			$filter = array('tr_id' => $this->data['tr_id']);
+			if(!$read_restricted)
+			{
+				$filter['reply_visible'] = 0;
+			}
+			foreach($this->db->select(self::REPLIES_TABLE,'*',$filter,
+				__LINE__,__FILE__,false,'ORDER BY reply_id DESC','tracker') as $row)
+			{
+				$this->data['replies'][] = $row;
+			}
+			$this->data['num_replies'] = count($this->data['replies']);
+		}
+		else
+		{
+			$this->data['num_replies'] = $this->comments->get_comment_count($this->data['tr_id'], $read_restricted);
+		}
 		$this->db2data();
 
 		return $this->data;

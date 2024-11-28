@@ -145,7 +145,7 @@ class tracker_ui extends tracker_bo
 			if ((int)$_GET['tr_id'])
 			{
 				$own_referer = Api\Header\Referer::get();
-				if (!$this->read($_GET['tr_id']))
+				if (!$this->read($_GET['tr_id'], '', '', null, Api\Header\UserAgent::mobile()))
 				{
 					Framework::window_close(lang('Tracker item not found !!!'));
 				}
@@ -853,7 +853,34 @@ class tracker_ui extends tracker_bo
 	protected function setup_comments(Etemplate &$tpl, Array &$content, Array &$preserve)
 	{
 		// Comment visibility
-		if($content['num_replies'])
+		// this is only used for mobile, not desktop anymore
+		if (!empty($content['replies']))
+		{
+			foreach ($content['replies'] as $key => &$reply)
+			{
+				if (!$reply)
+				{
+					unset($content['replies'][$key]);
+					continue;
+				}
+				if (isset($content['replies'][$key]['reply_visible']))
+				{
+					$reply['reply_visible_class'] = 'reply_visible_' . $reply['reply_visible'];
+					if ($this->check_rights($this->field_acl['edit_reply'], null, null, null, 'edit_reply') ||
+						$reply['reply_creator'] == $GLOBALS['egw_info']['user']['account_id'] && $this->check_rights($this->field_acl['edit_own_reply'], null, null, null, 'edit_own_reply'))
+					{
+						$reply['class'] = 'editable';
+					}
+				}
+			}
+			if ($content['num_replies'] && (!array_key_exists(0,$content['replies']) || $content['replies'][0]))
+			{
+				array_unshift($content['replies'],false);
+				array_unshift($preserve['replies'],false);
+			}
+		}
+		// this is used for desktop, if we have replies
+		elseif ($content['num_replies'])
 		{
 			$content['replies'] = array(
 				'get_rows'              => 'tracker.tracker_ui.get_comment_rows',
