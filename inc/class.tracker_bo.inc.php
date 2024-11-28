@@ -515,15 +515,16 @@ class tracker_bo extends tracker_so
 	 * @param string|array $extra_cols string or array of strings to be added to the SELECT, eg. "count(*) as num"
 	 * @param string $join sql to do a join, added as is after the table-name, eg. ", table2 WHERE x=y" or
 	 * @param int $user = null for which user to check, default current user
+	 * @param boolean $read_replies true: read replies, false: only set num_replies
 	 * @return array|boolean data if row could be retrived else False
 	*/
-	function read($keys,$extra_cols='',$join='',$user=null)
+	function read($keys,$extra_cols='',$join='',$user=null, $read_replies=false)
 	{
 		if (($ret = parent::read($keys, $extra_cols, $join)))
 		{
 			// read_extras need to know if $user is admin and/or technician of queue of ticket
 			$ret = $this->read_extra($this->is_admin($this->data['tr_tracker'], $user),
-				$this->is_technician($this->data['tr_tracker'], $user), $user);
+				$this->is_technician($this->data['tr_tracker'], $user), $user, $read_replies);
 
 			$this->data['old_status'] = $this->data['tr_status'];
 
