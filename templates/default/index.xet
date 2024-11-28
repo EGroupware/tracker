@@ -76,9 +76,11 @@
 					<et2-select  id="${row}[tr_tracker]" readonly="true" noLang="1"></et2-select>
 					<et2-select  id="${row}[cat_id]" readonly="true" emptyLabel="None"></et2-select>
 					<et2-select  id="${row}[tr_version]" readonly="true" emptyLabel="None"></et2-select>
-					<et2-description id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1"></et2-description>
+					<et2-description id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1" style="display: inline-flex"
+						href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
 					<et2-vbox  class="colfullWidth" noLang="1">
-						<et2-description id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1"></et2-description>
+						<et2-description id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1" style="display: inline-flex"
+							href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
 						<et2-box  class="trackerDes" noLang="1">
 							<html id="${row}[tr_description]" no_lang="1"/>
 						</et2-box>
