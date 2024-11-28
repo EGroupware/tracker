@@ -428,7 +428,7 @@ import {LitElement} from "lit";
 		});
 		dialog.updateComplete.then(() => {dialog.querySelector('textarea')?.focus();});
 
-		// Update reply - This is a race with the update done in editCommentDialog()
+		// Update reply
 		dialog.getComplete().then(async([button, value]) =>
 		{
 			if(!button)
@@ -438,6 +438,9 @@ import {LitElement} from "lit";
 			let result = await this.egw.request("tracker_ui::ajax_update_reply",
 				[value.reply_message, data.tr_id, data.reply_id]
 			);
+
+			// Update the row
+			this.egw.dataRefreshUID(_entries[0].id);
 		});
 	}
 
@@ -457,13 +460,14 @@ import {LitElement} from "lit";
 			},
 			template: "tracker.edit.comment_edit"
 		});
+		// Stop [Enter] key from closing the dialog
+		dialog.updateComplete.then(() =>
+		{
+			dialog.querySelector("#tracker-edit-comment_edit").addEventListener("keyup", (e) => {e.stopImmediatePropagation()});
+		})
 		document.body.appendChild(<LitElement><unknown>dialog);
 		dialog.getComplete().then(([button, value]) =>
 		{
-			if(button)
-			{
-				this.egw.dataRefreshUID(comment_id);
-			}
 			// Carefully clear template preserving session
 			dialog.template.clear(true, true);
 			dialog.remove();
