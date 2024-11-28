@@ -438,6 +438,15 @@ class tracker_ui extends tracker_bo
 					}
 					if ($button == 'apply')
 					{
+						// fix not shown comments tab, after first reply added
+						if (empty($content['num_comments']) && !empty($content['reply_message']))
+						{
+							Framework::redirect_link('/index.php', [
+								'menuaction' => 'tracker.tracker_ui.edit',
+								'tr_id'=>$this->data['tr_id'],
+								'msg' => $msg,
+							]);
+						}
 						$_GET['tr_id'] = $this->data['tr_id'];
 						return $this->edit($_GET['tr_id'], $msg, $popup);
 					}
