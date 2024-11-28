@@ -328,7 +328,7 @@ class tracker_tracking extends Api\Storage\Tracking
 		// Set comments according to data, avoids re-reading from DB
 		if(isset($data['num_replies']))
 		{
-			$merge->set_comments($data['tr_id'], $comments->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']));
+			$merge->set_comments($data['tr_id'], $comments->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) ?: []);
 		}
 
 		if(empty($notification['message']) || trim(strip_tags($notification['message'])) == '' || empty($notification['use_custom']))
