@@ -184,8 +184,8 @@
 				<row class="dialogHeader">
 					<et2-description  for="tr_summary" value="Summary"></et2-description>
 					<et2-textbox  id="tr_summary" maxlength="80" span="4" tabindex="1" required="1"></et2-textbox>
-					<et2-number  id="tr_id" readonly="true" class="tracker_trIdEdit" precision="0"></et2-number>
-					<et2-appicon></et2-appicon>
+					<et2-description  id="tr_id" class="tracker_trIdEdit" ></et2-description>
+					<et2-appicon align="right"></et2-appicon>
 					<et2-description></et2-description>
 				</row>
 				<row class="dialogHeader2">
