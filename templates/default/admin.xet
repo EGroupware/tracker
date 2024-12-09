@@ -37,7 +37,7 @@
                                 <et2-colorpicker  id="${row}[cat_color]"></et2-colorpicker>
                                 <radio align="center" id="isdefaultcategory" set_value="$row_cont[id]" />
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this category','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this category','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -62,7 +62,7 @@
                                 <et2-textbox  id="${row}[name]" maxlength="150" placeholder="--&gt; enter new name"></et2-textbox>
                                 <et2-colorpicker  id="${row}[version_color]"></et2-colorpicker>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker"></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this version','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this version','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -87,7 +87,7 @@
                                 <et2-textbox  id="${row}[name]" maxlength="150" placeholder="--&gt; enter new name"></et2-textbox>
                                 <et2-checkbox  align="center" id="${row}[closed]"></et2-checkbox>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -115,7 +115,7 @@
                                 </et2-hbox>
                                 <radio align="center" id="isdefaultresolution" set_value="$row_cont[id]" />
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -140,7 +140,7 @@
                                 <et2-textbox  id="${row}[name]" placeholder="--&gt; enter new name"></et2-textbox>
                                 <et2-textarea  id="${row}[description]"></et2-textarea>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -166,7 +166,7 @@
                                 <projectmanager-select id="${row}[projectlist]" no_lang="1"
                                                        options="--&gt; choose a project from the drop-down list"/>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button  align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="et2_dialog.confirm(widget,'Delete this entry','Delete')" image="delete"></et2-button>
+                                <et2-button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this entry','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -667,7 +667,7 @@
                 <et2-button  label="Save" id="button[save]"></et2-button>
                 <et2-button  label="Apply" id="button[apply]"></et2-button>
                 <et2-button  label="Cancel" id="button[cancel]"></et2-button>
-                <et2-button  align="right" label="Delete" id="button[delete]" onclick="et2_dialog.confirm(widget,'Delete this tracker including all its items and categories','Delete')" span="all"></et2-button>
+                <et2-button align="right" label="Delete" id="button[delete]" onclick="Et2Dialog.confirm(widget,'Delete this tracker including all its items and categories','Delete')" span="all"></et2-button>
 
             </et2-hbox>
         </et2-vbox>
