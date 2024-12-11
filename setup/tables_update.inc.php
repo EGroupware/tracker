@@ -881,3 +881,67 @@ function tracker_upgrade23_1_001()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.002';
 }
+
+// Fix startdate & duedate were always in timezone of last user who saved
+function tracker_upgrade23_1_002()
+{
+	$user_list = [];
+
+	// Get users who last modified a ticket with startdate or enddate
+	$rs = $GLOBALS['egw_setup']->db->select(
+		'egw_tracker',
+		['tr_modifier'],
+		$GLOBALS['egw_setup']->db->column_data_implode(' OR ', ['tr_startdate IS NOT NULL', 'tr_duedate IS NOT NULL']),
+		__LINE__, __FILE__, false,
+		'GROUP BY tr_modifier'
+	);
+	foreach($rs as $r)
+	{
+		$user_list[] = $r['tr_modifier'];
+	}
+
+	// Get timezone for modifiers
+	foreach($user_list as $user_id)
+	{
+		$preferences = new Api\Preferences($user_id);
+		$pref_list = $preferences->read();
+		$tz = timezone_open($pref_list['common']['tz'] ?? "");
+		if(!$tz || $tz == Api\DateTime::$server_timezone)
+		{
+			continue;
+		}
+
+		// Update timezone
+		$rs = $GLOBALS['egw_setup']->db->select(
+			'egw_tracker',
+			['tr_id', 'tr_startdate', 'tr_duedate'],
+			['tr_modifier' => $user_id,
+			 '(' . $GLOBALS['egw_setup']->db->column_data_implode(' OR ', ['tr_startdate IS NOT NULL',
+																		   'tr_duedate IS NOT NULL']) . ')'
+			],
+			__LINE__, __FILE__
+		);
+		foreach($rs as $r)
+		{
+			foreach(['tr_startdate', 'tr_duedate'] as $date_field)
+			{
+				if(!empty($r[$date_field]))
+				{
+					$date = new Api\DateTime($r[$date_field], $tz);
+					$date->setServer();
+					// Tracker uses timestamps for these
+					$r[$date_field] = $date->format('ts');
+				}
+			}
+
+			$GLOBALS['egw_setup']->db->update(
+				'egw_tracker',
+				$r,
+				['tr_id' => $r['tr_id']],
+				__LINE__, __FILE__, 'tracker', true
+			);
+		}
+	}
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.003';
+}
