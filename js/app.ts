@@ -469,7 +469,7 @@ import {LitElement} from "lit";
 		dialog.getComplete().then(([button, value]) =>
 		{
 			// Carefully clear template preserving session
-			dialog.template.clear(true, true);
+			dialog.eTemplate.clear(true, true);
 			dialog.remove();
 		})
 		return dialog;
