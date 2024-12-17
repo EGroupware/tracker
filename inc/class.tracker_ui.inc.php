@@ -1941,12 +1941,21 @@ width:100%;
 				'group' => $group,
 				'allowOnMultiple' => false,
 				'popup' => Link::get_registry('timesheet', 'add_popup'),
+											  'children' => array(
+												  'timesheet_list' => array(
+													  'caption'         => lang('View linked %1 entries', lang('timesheet')),
+													  'icon'            => 'tracker/navbar',
+													  'onExecute'       => 'javaScript:app.tracker.timesheet_list',
+													  'allowOnMultiple' => false,
+													  'hideOnDisabled'  => true,
+												  )
+											  )
 			);
 			// if specific timer is NOT disabled, allow to book further time on existing sheets
 			$config = Api\Config::read('timesheet');
 			if (!in_array('specific', $config['disable_timer'] ?? []))
 			{
-				$actions['timesheet']['children'] = [
+				$actions['timesheet']['children'] += [
 					'timesheet_add' => ['caption' => 'Add']+$actions['timesheet'],
 					'timer' => [
 						'icon' => 'timesheet/navbar',

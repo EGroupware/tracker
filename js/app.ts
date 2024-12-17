@@ -474,6 +474,34 @@ import {LitElement} from "lit";
 		})
 		return dialog;
 	}
+
+	/**
+	 * View a list of timesheets for the linked tracker entry
+	 *
+	 * Only one tracker entry at a time is allowed, we just pick the first one
+	 *
+	 * @param {egwAction} _action
+	 * @param {egwActionObject[]} _selected
+	 */
+	timesheet_list(_action, _selected)
+	{
+		var extras = {
+			link_app: 'tracker',
+			link_id: false
+		};
+		for(var i = 0; i < _selected.length; i++)
+		{
+			// Remove UID prefix for just contact_id
+			var ids = _selected[i].id.split('::');
+			ids.shift();
+			ids = ids.join('::');
+
+			extras.link_id = ids;
+			break;
+		}
+
+		egw.open("", "timesheet", "list", extras, 'timesheet');
+	}
 }
 
 app.classes.tracker = trackerAPP;
