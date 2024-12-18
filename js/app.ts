@@ -269,7 +269,7 @@ import {LitElement} from "lit";
 	canned_comment_response(_replyMsg)
 	{
 		(<et2_selectbox> this.et2.getWidgetById('canned_response')).set_value('');
-		let editor = <et2_htmlarea> this.et2.getWidgetById('reply_message');
+		let editor = <et2_htmlarea>this.et2.getWidgetById('add_comment[reply_message]');
 		if(editor)
 		{
 			editor.set_value(_replyMsg);
