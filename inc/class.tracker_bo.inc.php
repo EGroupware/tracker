@@ -1557,7 +1557,7 @@ class tracker_bo extends tracker_so
 	{
 		foreach($this->all_cats as $cat)
 		{
-			if ($cat['data']['type'] == 'response' && $cat['id'] == $id)
+			if(is_array($cat['data']) && $cat['data']['type'] == 'response' && $cat['id'] == $id)
 			{
 				return $cat['data']['response'] ? $cat['data']['response'] : $cat['description'];
 			}
