@@ -1955,14 +1955,18 @@ width:100%;
 			$config = Api\Config::read('timesheet');
 			if (!in_array('specific', $config['disable_timer'] ?? []))
 			{
-				$actions['timesheet']['children'] += [
-					'timesheet_add' => ['caption' => 'Add']+$actions['timesheet'],
-					'timer' => [
+				$actions['timesheet']['children']['timesheet_add'] = [
+					'icon'    => 'timesheet/navbar',
+					'caption' => 'Add timesheet entry',
+					'url'     => 'menuaction=timesheet.timesheet_ui.edit&link_app[]=tracker&link_id[]=$id',
+					'popup'   => Link::get_registry('timesheet', 'add_popup'),
+				];
+				$actions['timesheet']['children']['timer'] = [
 						'icon' => 'timesheet/navbar',
 						'caption' => 'Start timer',
 						'onExecute' => 'javaScript:app.timesheet.egw.start_timer',
 						'allowOnMultiple' => false,
-				]];
+				];
 				unset($actions['timesheet']['url'], $actions['timesheet']['popup'], $actions['timesheet']['timesheet_add']['group']);
 			}
 		}
