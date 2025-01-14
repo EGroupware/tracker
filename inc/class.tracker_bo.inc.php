@@ -351,6 +351,7 @@ class tracker_bo extends tracker_so
 	var $filters = array(
 		'closed'				=> '&#9830; Closed',
 		'not-closed'				=> '&#9830; Not closed',
+		'not-closed-or-pending' => '&#9830; Not closed or pending',
 		'own-not-closed'			=> '&#9830; Own not closed',
 		'ownorassigned-not-closed'		=> '&#9830; Own or assigned not closed',
 		'without-reply-not-closed' 		=> '&#9830; Without reply not closed',

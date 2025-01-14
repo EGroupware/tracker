@@ -16,7 +16,6 @@
 3 years ago	tracker	en	3 years ago
 5 - medium	tracker	en	5 - medium
 9 - highest	tracker	en	9 - highest
-[fwd]	tracker	en	[FWD]
 accepted	tracker	en	Accepted
 acl	tracker	en	Access Control List
 activate users queue access control	tracker	en	Activate users queue access control
@@ -372,6 +371,7 @@ select how autoreplies should be sent when mails are received	tracker	en	Select 
 select multiple	tracker	en	Select multiple
 select one...	tracker	en	Select one ...
 select tracker queue	tracker	en	Select tracker queue
+select tracker queues	tracker	en	Select tracker queues
 select users or groups	tracker	en	Select users or groups
 select which categories should be used in tracker for the tts categories	tracker	en	Select which categories should be used in Tracker for the TTS categories.
 select which username should be used when unrecognized mails are handled.	tracker	en	Select which user name should be used when unrecognized emails are handled.
@@ -419,6 +419,7 @@ the following document-types are supported:	tracker	en	The following document-ty
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	en	the name used internaly (<= 20 chars), changeing it makes existing data unavailible
 the text displayed to the user	tracker	en	the text displayed to the user
 there already an escalation for that filter!	tracker	en	There already an escalation for that filter!
+this message was forwarded to you from egroupware-tracker	tracker	en	This message was forwarded to you from EGroupware-Tracker
 this module allows to add a ticket.	tracker	en	This module allows to add a ticket.
 this module displays information from the tracker.	tracker	en	This module displays information from the Tracker
 this month	tracker	en	This month
@@ -501,8 +502,10 @@ you need to select some entries first	tracker	en	You need to select some entries
 you need to select something to change and some tracker items!	tracker	en	You need to select something to change AND some tracker items!
 you need to specify amount, donators name and email address!	tracker	en	You need to specify amount, donators name AND email address!
 you voted %1.	tracker	en	You voted %1.
+[fwd]	tracker	en	[FWD]
 ♦ closed	tracker	en	♦ Closed
 ♦ not closed	tracker	en	♦ Not closed
+♦ not closed or pending	tracker	en	♦ Not closed or pending
 ♦ own not closed	tracker	en	♦ Own not closed
 ♦ own or assigned not closed	tracker	en	♦ Own or assigned, not closed
 ♦ own without reply not closed	tracker	en	♦ Own without reply not closed

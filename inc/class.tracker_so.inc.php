@@ -435,6 +435,10 @@ class tracker_so extends Api\Storage
 				unset($filter['tr_status']);
 				$filter[] = $not_closed;
 				break;
+			case 'not-closed-or-pending':
+				unset($filter['tr_status']);
+				$filter[] = substr($not_closed, 0, -1).' AND tr_status <> '.$this->db->quote(self::STATUS_PENDING).')';
+				break;
 			case 'own-not-closed':
 				unset($filter['tr_status']);
 				$filter['tr_creator'] = $this->user;
