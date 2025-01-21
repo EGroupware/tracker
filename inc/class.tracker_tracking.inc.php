@@ -457,18 +457,19 @@ class tracker_tracking extends Api\Storage\Tracking
 			);
 		}
 */
+		$timezone = $data['user_timezone_read'] ? new DateTimeZone($data['user_timezone_read']) : null;
 		$detail_fields = array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
 			'tr_version'     => $versions[$data['tr_version']],
-			'tr_startdate'   => !empty($data['tr_startdate']) ? $this->datetime(new Api\DateTime($data['tr_startdate'])) : '',
-			'tr_duedate'     => !empty($data['tr_duedate']) ? $this->datetime(new Api\DateTime($data['tr_duedate'])) : '',
+			'tr_startdate' => !empty($data['tr_startdate']) ? $this->datetime(new Api\DateTime($data['tr_startdate'], $timezone)) : '',
+			'tr_duedate'   => !empty($data['tr_duedate']) ? $this->datetime(new Api\DateTime($data['tr_duedate'], $timezone)) : '',
 			'tr_status'      => lang($statis[$data['tr_status']]),
 			'tr_resolution'  => lang($resolutions[$data['tr_resolution']] ?? ''),
 			'tr_completion'  => (int)($data['tr_completion'] ?? 0).'%',
 			'tr_priority'    => lang($priorities[$data['tr_priority']] ?? ''),
 			'tr_creator'     => Api\Accounts::username($data['tr_creator']),
-			'tr_created'     => $this->datetime(new Api\DateTime($data['tr_created'])),
+			'tr_created'   => $this->datetime(new Api\DateTime($data['tr_created'], $timezone)),
 			'tr_assigned'	 => !$data['tr_assigned'] ? lang('Not assigned') : $assigned,
 			'tr_cc'			 => $data['tr_cc'],
 			// The layout of tr_summary should NOT be changed in order for
