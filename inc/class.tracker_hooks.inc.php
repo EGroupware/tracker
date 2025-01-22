@@ -51,6 +51,7 @@ class tracker_hooks
 			'merge' => true,
 			'entry' => 'Ticket',
 			'entries' => 'Tickets',
+			'notify' => self::class . '::link_notify',
 			'push_data'  => ['tr_tracker','tr_category','tr_version','tr_owner','tr_assigned'],
 		);
 
@@ -62,6 +63,36 @@ class tracker_hooks
 			$link['default_types'][$id] = array('name' => $name, 'non_deletable' => true);
 		}
 		return $link;
+	}
+
+
+	/**
+	 * Get notified about changes to linked entries
+	 *
+	 *  'type'       => $type,
+	 *  'id'         => $notify_id,
+	 *    'target_app' => $target_app,
+	 *    'target_id'  => $target_id,
+	 *    'link_id'    => $link_id,
+	 *    'data'       => $data,
+	 */
+	static public function link_notify($data)
+	{
+		switch($data['target_app'])
+		{
+			case 'timesheet':
+				// Something changed with a timesheet linked to a ticket.  Trigger update in place to update times.
+				$bo = new tracker_bo();
+				$push_data = $bo->read($data['id']);
+				Api\Hooks::process([
+									   'location' => 'notify-all',
+									   'type'     => 'update-in-place',
+									   'app'      => 'tracker',
+									   'id'       => $data['id'],
+									   'data'     => $push_data,
+								   ], null, true);
+				break;
+		}
 	}
 
 	/**
