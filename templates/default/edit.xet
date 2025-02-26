@@ -12,7 +12,7 @@
             <vfs-select method_id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
             <vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" label="" path="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" onchange="app.tracker.comment_add_vfs"/>
         </et2-hbox>
-        <et2-link-list id="attachments" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
+        <et2-link-list id="attachments" application="tracker" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
         <htmlarea id="reply_message" mode="@tr_edit_mode" imageUpload="link_to"></htmlarea>
     </template>
     <template id="tracker.edit.comment_row">
@@ -54,8 +54,8 @@
 			<rows>
 				<row class="th" valign="top">
                     <et2-hbox align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
-                        <vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
-                        <vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing"/>
+                        <et2-vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true" display="list" inline="true"/>
+                        <vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" Label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing"/>
                     </et2-hbox>
                     <et2-hbox class="add_comment_header">
                         <et2-hbox disabled="@no_canned">

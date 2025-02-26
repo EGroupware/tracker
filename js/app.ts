@@ -14,7 +14,6 @@ import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {et2_link_list} from "../../api/js/etemplate/et2_widget_link";
 import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
 import {egw} from "../../api/js/jsapi/egw_global";
 import {et2_template} from "../../api/js/etemplate/et2_widget_template";
@@ -284,30 +283,22 @@ import {LitElement} from "lit";
 	 * @returns {undefined}
 	 */
 	comment_add_vfs(dom_node, widget) {
+		const wait = [];
 		// Add the file into the existing list of files
-		if(widget._type === 'vfs-select')
+		widget.getInstanceManager().widgetContainer.querySelectorAll('et2-link-list').forEach(link =>
 		{
-			let upload = widget.getParent().getWidgetById(widget.options.method_id);
+			link.get_links();
+			wait.push(link.updateComplete)
+		});
 
-			// Could not find the upload widget
-			if(!upload)
-			{
-				return;
-			}
-			let value = widget.get_value();
-			for(let i in value)
-			{
-				upload._addFile({name: value[i], path: value[i]});
-			}
-		}
-
-		// Update link widget on links tab
-		widget.getRoot().iterateOver(
-			function(widget) {
-				widget._get_links();
-			},
-			this, et2_link_list
-		);
+		// Update link list widgets (including on links tab)
+		this.et2.querySelectorAll('et2-link-list').forEach(link =>
+		{
+			link.get_links();
+			wait.push(link.updateComplete)
+		});
+		// Files have been put where they need to be, clear widget value
+		Promise.all([wait, wait]).then(() => {widget.value = null});
 	}
 
 	/**
