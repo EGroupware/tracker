@@ -2516,8 +2516,8 @@ width:100%;
 				continue;
 			}
 			list(,$comment_id) = explode(': ',$row['new_value'][0]);
-			$comment_index = array_search($comment_id, array_column($this->data['replies'],'reply_id'));
-			$comment = $this->data['replies'][$comment_index];
+			$comment_index = array_search($comment_id, array_column($this->data['replies'] ?? [],'reply_id'));
+			$comment = $comment_index !== false ? $this->data['replies'][$comment_index] : null;
 
 			if(!$comment || $comment_index === FALSE || $comment && $comment['reply_visible'])
 			{
