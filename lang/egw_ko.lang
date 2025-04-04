@@ -16,7 +16,6 @@
 3 years ago	tracker	ko	3년 전
 5 - medium	tracker	ko	5 - 중간
 9 - highest	tracker	ko	9 - 가장 높음
-[fwd]	tracker	ko	[FWD]
 accepted	tracker	ko	승락됨
 acl	tracker	ko	액세스 제어 목록
 activate users queue access control	tracker	ko	사용자 대기열 액세스 제어 활성화
@@ -56,6 +55,7 @@ change color	tracker	ko	색상 변경
 change group when updating	tracker	ko	업데이트 시 그룹 변경
 change owner when updating	tracker	ko	업데이트 시 소유자 변경
 choose 'creator' of imported data	tracker	ko	가져온 데이터의 '작성자' 선택
+close pending	tracker	ko	마감 보류 중
 closed date	tracker	ko	마감일
 color	tracker	ko	색상
 comments	tracker	ko	커멘트들
@@ -74,7 +74,6 @@ creation date	tracker	ko	생성일
 custom fields	tracker	ko	사용자정의 필드
 custom notifications	tracker	ko	사용자 지정 알림
 customfield	tracker	ko	사용자 지정 필드
-data exchange settings	tracker	ko	데이터 교환 설정
 date filter	tracker	ko	날짜 필터
 default document to insert entries	tracker	ko	항목을 삽입할 기본 문서
 default group	tracker	ko	기본 그룹
@@ -134,9 +133,11 @@ language	tracker	ko	언어
 last modified	tracker	ko	마지막 수정
 leaves without saveing	tracker	ko	저장없이 나가기
 links	tracker	ko	링크
+not-closed	tracker	ko	종료되지 않음
 open(status)	tracker	ko	개설
 overdue	tracker	ko	만기초과
 process	tracker	ko	프로세스
+re-open closed tickets when a comment is added	tracker	ko	댓글이 추가되면 종료된 티켓 다시 열기
 read	tracker	ko	읽기
 read / unread	tracker	ko	읽음/읽지 않음
 read only filemanager directory	tracker	ko	읽기 전용 파일 관리자 디렉토리
@@ -161,5 +162,8 @@ yes, add mailheader to both (description and comments)	tracker	ko	예, 둘 다�
 yes, add mailheader to comments	tracker	ko	예, 댓글에 메일 헤더 추가
 yes, add mailheader to description	tracker	ko	예, 설명에 메일 헤더 추가
 yes, always	tracker	ko	예, 항상
+[fwd]	tracker	ko	[FWD]
 ♦ closed	tracker	ko	♦ 닫힘
 ♦ not closed	tracker	ko	♦ 닫혀 있지 않음
+♦ not closed or pending	tracker	ko	♦ 종료되지 않음 또는 보류 중
+♦ without reply not closed	tracker	ko	♦ 답변이 없으면 닫히지 않음

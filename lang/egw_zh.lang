@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	zh	%1 传票已转换
 (beware of mailloops, check the help!)	tracker	zh	(小心 "循环"！）。
 (new tickets as	tracker	zh	新票为
---> choose a project from the drop-down list	tracker	zh	--> 从下拉列表选择一个项目
 --> enter new name	tracker	zh	--> 输入新名称
 1 - lowest	tracker	zh	1 - 最低
 2 days in advance	tracker	zh	提前 2 天
@@ -17,7 +16,6 @@
 3 years ago	tracker	zh	三年前
 5 - medium	tracker	zh	5 - 中等
 9 - highest	tracker	zh	9 - 最高
-[fwd]	tracker	zh	[FWD]
 accepted	tracker	zh	接受
 acl	tracker	zh	访问控制列表
 activate users queue access control	tracker	zh	激活用户队列访问控制
@@ -100,7 +98,6 @@ creates a new field	tracker	zh	创建一新字段
 creation date	tracker	zh	创建日期
 creator	tracker	zh	创建者
 custom fields	tracker	zh	自定义字段
-data exchange settings	tracker	zh	数据交换设置
 date filter	tracker	zh	日期过滤器
 date opened	tracker	zh	被打开的日期
 default document to insert entries	tracker	zh	插入条目的默认文档
@@ -216,6 +213,7 @@ no change	tracker	zh	没有改变
 no trackers found, aborting	tracker	zh	未找到任务跟踪，异常退出
 non-anonymous users	tracker	zh	非匿名用户
 noone	tracker	zh	无
+not-closed	tracker	zh	未关闭
 notification	tracker	zh	提醒通知
 number of row for a multiline inputfield or line of a multi-select-box	tracker	zh	多行输入字段的列数或多选框的行数
 open(status)	tracker	zh	打开
@@ -231,8 +229,9 @@ postponed	tracker	zh	延期
 process	tracker	zh	进程
 project selection	tracker	zh	项目选择
 projects	tracker	zh	项目
+re-open closed tickets when a comment is added	tracker	zh	添加评论时重新打开已关闭的票单
 read	tracker	zh	已读
-read / unread	tracker	zh	已读/未读
+read / unread	tracker	zh	已读 / 未读
 read only filemanager directory	tracker	zh	只读文件管理器目录
 receive notifications about assigned tracker-items	tracker	zh	在被指派任务跟踪项目时发出通知
 receive notifications about created tracker-items	tracker	zh	在任务跟踪项目建立时发出通知
@@ -312,8 +311,12 @@ you need to login to vote!	tracker	zh	您必须登录才能投票！
 you need to select something to change and some tracker items!	tracker	zh	您必须选择要修改的一或多个任务跟踪项目！
 you need to specify amount, donators name and email address!	tracker	zh	您必须指定数量、捐赠人名称与联系信箱！
 you voted %1.	tracker	zh	您的投票%1。
+[fwd]	tracker	zh	[FWD]
+♦ closed	tracker	zh	♦ 已关闭
 ♦ not closed	tracker	zh	♦ '没有关闭
+♦ not closed or pending	tracker	zh	♦ 未关闭或待处理
 ♦ own not closed	tracker	zh	♦ 自己没有关闭
+♦ own or assigned not closed	tracker	zh	♦ 拥有或分配，未关闭
 ♦ own without reply not closed	tracker	zh	♦ 自己没答复并且没关闭
 ♦ without 30 days reply not closed	tracker	zh	♦ 没在30天答复并且没关闭
 ♦ without reply not closed	tracker	zh	♦ 没答复并且没关闭

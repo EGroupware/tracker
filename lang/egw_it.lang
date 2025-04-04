@@ -16,7 +16,6 @@
 3 years ago	tracker	it	3 anni fa
 5 - medium	tracker	it	5 - media
 9 - highest	tracker	it	9 - più alta
-[fwd]	tracker	it	[Inoltro]
 accepted	tracker	it	Accettato
 acl	tracker	it	Lista di controllo di accesso (ACL)
 activate users queue access control	tracker	it	Attivazione controllo accessi utenti
@@ -119,7 +118,6 @@ custom fields	tracker	it	Campi personalizzati
 custom notifications	tracker	it	Notiche personalizzate
 custom tracker priorities	tracker	it	Priorità del tracker personalizzate
 customfield	tracker	it	Campo personalizzato
-data exchange settings	tracker	it	Impostazioni di scambio dati
 date filter	tracker	it	Filtro per data
 date opened	tracker	it	Data apertura
 default document to insert entries	tracker	it	Documento predefinito per l'inserimento
@@ -330,7 +328,7 @@ projects	tracker	it	Progetti
 queue	tracker	it	Code
 re-open closed tickets when a comment is added	tracker	it	Riaprire i ticket chiusi quando viene aggiunto un commento
 read	tracker	it	Letto
-read / unread	tracker	it	Letto / Non letto
+read / unread	tracker	it	Letti / Non letti
 read mail address	tracker	it	Leggi la posta
 read only filemanager directory	tracker	it	Directory del File Manager di sola lettura
 receive notifications about assigned tracker-items	tracker	it	Ricezione notifiche riguardo oggetti-tracker assegnati
@@ -402,7 +400,6 @@ started	tracker	it	Iniziato
 starting	tracker	it	Inizia
 state	tracker	it	Stato
 stati	tracker	it	Stati
-status	tracker	it	Stato
 store as	tracker	it	Archivio come
 success message	tracker	it	Messaggio di successo
 sum	tracker	it	Somma
@@ -501,8 +498,10 @@ you need to select some entries first	tracker	it	Devi prima selezionare alcune v
 you need to select something to change and some tracker items!	tracker	it	Devi selezionare qualcosa da cambiare E qualche oggetto tracker!
 you need to specify amount, donators name and email address!	tracker	it	Devi specificare l'importo, i nomi dei donatori E l'indirizzo email!
 you voted %1.	tracker	it	Hai votato %1.
+[fwd]	tracker	it	[Inoltro]
 ♦ closed	tracker	it	♦ Chiuso
 ♦ not closed	tracker	it	♦ Non chiusi
+♦ not closed or pending	tracker	it	♦ Non chiuso o in sospeso
 ♦ own not closed	tracker	it	♦ Propri non chiusi
 ♦ own or assigned not closed	tracker	it	♦ Propri oppure assegnati, non chiusi
 ♦ own without reply not closed	tracker	it	♦ Propri senza risposte e non chiusi

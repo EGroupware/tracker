@@ -16,7 +16,6 @@
 3 years ago	tracker	uk	3 роки тому
 5 - medium	tracker	uk	5 - середній
 9 - highest	tracker	uk	9 - найвищий
-[fwd]	tracker	uk	[FWD]
 accepted	tracker	uk	Прийнято
 acl	tracker	uk	Список контролю доступу
 activate users queue access control	tracker	uk	Увімкніть контроль доступу користувачів до черги
@@ -71,7 +70,6 @@ created on	tracker	uk	Створено на
 creates a new field	tracker	uk	створює нові поля
 custom fields	tracker	uk	Власні поля
 custom notifications	tracker	uk	Кастомні сповіщення
-data exchange settings	tracker	uk	Налаштування обміну даними
 date filter	tracker	uk	Фільтр за датою
 default document to insert entries	tracker	uk	Документ за замовчуванням для вставки записів
 default group	tracker	uk	Група за замовчуванням
@@ -137,14 +135,16 @@ leaves without saveing	tracker	uk	вийти без збереження
 length<br>rows	tracker	uk	Довжина<br>Рядки
 links	tracker	uk	Посилання
 max length of the input [, length of the inputfield (optional)]	tracker	uk	максимальна довжина вводу[, видима довжина поля вводу (необов'язково)]
+not-closed	tracker	uk	Не закрито
 number of row for a multiline inputfield or line of a multi-select-box	tracker	uk	кількість рядків для багаторядкового поля вводу або рядків віконця вибору множини
 open(status)	tracker	uk	відкрито
 order	tracker	uk	Послідовність
 overdue	tracker	uk	прострочено
 pop3	tracker	uk	POP3
 port number	tracker	uk	Номер порту
+re-open closed tickets when a comment is added	tracker	uk	Повторне відкриття закритих тікетів після додавання коментаря
 read	tracker	uk	Читати
-read / unread	tracker	uk	Прочитано / Непрочитаний
+read / unread	tracker	uk	Прочитано / Не прочитано
 read only filemanager directory	tracker	uk	Тільки для читання каталог файлового менеджера
 rejected	tracker	uk	Відхилено
 remind	tracker	uk	Нагадати
@@ -173,5 +173,9 @@ yes, add mailheader to comments	tracker	uk	Так, додавати поштов
 yes, add mailheader to description	tracker	uk	Так, додавати заголовок до опису
 yes, always	tracker	uk	Так, завжди
 you need to select some entries first	tracker	uk	Спочатку потрібно вибрати деякі записи.
+[fwd]	tracker	uk	[FWD]
 ♦ closed	tracker	uk	♦ Закрито
 ♦ not closed	tracker	uk	♦ Не закрито
+♦ not closed or pending	tracker	uk	♦ Не закритий або на розгляді
+♦ own or assigned not closed	tracker	uk	♦ Власний або призначений, не закритий
+♦ without reply not closed	tracker	uk	♦ Без відповіді не закритий

@@ -16,7 +16,6 @@
 3 years ago	tracker	hu	3 évvel korábban
 5 - medium	tracker	hu	5 - közepes
 9 - highest	tracker	hu	9 - legmagasabb
-[fwd]	tracker	hu	[FWD]
 accepted	tracker	hu	Elfogadva
 acl	tracker	hu	Hozzáférés-vezérlési lista
 activate users queue access control	tracker	hu	Felhasználói várólista hozzáférés-szabályozás aktiválása
@@ -100,7 +99,6 @@ creation date	tracker	hu	Létrehozás dátuma
 custom fields	tracker	hu	Egyedi mezők
 custom notifications	tracker	hu	Egyéni értesítések
 customfield	tracker	hu	Egyéni mező
-data exchange settings	tracker	hu	Adatcsere-beállítások
 date filter	tracker	hu	Dátum szűrő
 date opened	tracker	hu	Megnyitás dátuma
 default document to insert entries	tracker	hu	Alapértelmezett dokumentum a bejegyzések beillesztéséhez
@@ -191,6 +189,7 @@ new %1	tracker	hu	Új %1
 new items	tracker	hu	Új tételek
 no change	tracker	hu	Nincs változás
 noone	tracker	hu	Senki
+not-closed	tracker	hu	Nem zárt
 number of row for a multiline inputfield or line of a multi-select-box	tracker	hu	sorok száma a többsoros beviteli mező, vagy egy kiválasztó lista esetén (ilyen 'magas' lesz a doboz/szerkesztő mező)
 one day after	tracker	hu	Egy nappal ezután
 one day in advance	tracker	hu	Egy nappal előre
@@ -199,6 +198,7 @@ order	tracker	hu	Rendezés
 overdue	tracker	hu	Késedelmes
 pending	tracker	hu	Függőben
 permission denied !!!	tracker	hu	Hozzáférés megtagadva!
+re-open closed tickets when a comment is added	tracker	hu	Zárt jegyek újranyitása megjegyzés hozzáadásakor
 read	tracker	hu	Olvasás
 read / unread	tracker	hu	Olvasott / Olvasatlan
 read only filemanager directory	tracker	hu	Csak olvasható fájlkezelő könyvtár
@@ -237,5 +237,8 @@ yes, with larger fontsize	tracker	hu	Igen, nagyobb karaktermérettel
 yesterday	tracker	hu	Tegnap
 you can respond by visiting:	tracker	hu	Megtekintéshez látogasson el ide:
 you need to select some entries first	tracker	hu	Először ki kell választania néhány bejegyzést.
+[fwd]	tracker	hu	[FWD]
 ♦ closed	tracker	hu	♦ Zárva
 ♦ not closed	tracker	hu	♦ Nem zárt
+♦ not closed or pending	tracker	hu	♦ Nem zárt vagy függőben lévő
+♦ without reply not closed	tracker	hu	♦ Válasz nélkül nem zárt

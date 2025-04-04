@@ -16,7 +16,6 @@
 3 years ago	tracker	es-es	Hace 3 años
 5 - medium	tracker	es-es	5 - media
 9 - highest	tracker	es-es	9 - la más alta
-[fwd]	tracker	es-es	[Reenviar]
 accepted	tracker	es-es	Aceptada
 acl	tracker	es-es	Lista de control de acceso
 activate users queue access control	tracker	es-es	Activar control de acceso para la cola de usuarios
@@ -402,7 +401,6 @@ started	tracker	es-es	Iniciado
 starting	tracker	es-es	Iniciando
 state	tracker	es-es	Estado
 stati	tracker	es-es	Estados
-status	tracker	es-es	Estado
 store as	tracker	es-es	Guardar como
 success message	tracker	es-es	Mensaje de éxito
 sum	tracker	es-es	Suma
@@ -419,6 +417,7 @@ the following document-types are supported:	tracker	es-es	Los siguientes tipos d
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	es-es	el nombre usado internamente (<= 20 caracteres). Si se cambia, los datos ya no están disponibles.
 the text displayed to the user	tracker	es-es	el texto mostrado al usuario
 there already an escalation for that filter!	tracker	es-es	¡Ya existe un escalado para ese filtro!
+this message was forwarded to you from egroupware-tracker	tracker	es-es	Este mensaje le ha sido reenviado desde EGroupware-Tracker
 this module allows to add a ticket.	tracker	es-es	Este módulo permite añadir una entrada.
 this module displays information from the tracker.	tracker	es-es	Este módulo muestra información de los informes
 this month	tracker	es-es	Este mes
@@ -501,8 +500,10 @@ you need to select some entries first	tracker	es-es	Necesita seleccionar antes a
 you need to select something to change and some tracker items!	tracker	es-es	Necesita seleccionar algo para cambiar Y algunos elementos
 you need to specify amount, donators name and email address!	tracker	es-es	¡Necesita especificar la cantidad, nombre de donante Y dirección de correo electrónico!
 you voted %1.	tracker	es-es	Ha votado %1.
+[fwd]	tracker	es-es	[Reenviar]
 ♦ closed	tracker	es-es	♦ Cerrado
 ♦ not closed	tracker	es-es	♦ No cerrado
+♦ not closed or pending	tracker	es-es	♦ No cerrado o pendiente
 ♦ own not closed	tracker	es-es	♦ Propio no cerrado
 ♦ own or assigned not closed	tracker	es-es	♦ Propio o asignado, no cerrado
 ♦ own without reply not closed	tracker	es-es	♦ Propio sin contestación no cerrado

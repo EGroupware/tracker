@@ -16,7 +16,6 @@
 3 years ago	tracker	ja	3年前
 5 - medium	tracker	ja	5中程度
 9 - highest	tracker	ja	9最高
-[fwd]	tracker	ja	[FWD]
 accepted	tracker	ja	承認
 acl	tracker	ja	アクセス制御リスト
 activate users queue access control	tracker	ja	ユーザーキューのアクセス制御を有効にする
@@ -58,6 +57,7 @@ change color	tracker	ja	色の変更
 change group when updating	tracker	ja	更新時のグループ変更
 change owner when updating	tracker	ja	更新時に所有者を変更する
 choose 'creator' of imported data	tracker	ja	インポートしたデータの「作成者」を選択する
+close pending	tracker	ja	閉じる
 closed date	tracker	ja	閉鎖日
 color	tracker	ja	カラー
 configuration	tracker	ja	環境設定
@@ -71,7 +71,6 @@ created on	tracker	ja	作成日
 custom fields	tracker	ja	カスタム項目
 custom notifications	tracker	ja	カスタム通知
 customfield	tracker	ja	カスタムフィールド
-data exchange settings	tracker	ja	データ交換設定
 date filter	tracker	ja	日付フィルター
 default document to insert entries	tracker	ja	エントリーを挿入するデフォルト・ドキュメント
 default group	tracker	ja	デフォルトグループ
@@ -123,10 +122,12 @@ imap, tls secured	tracker	ja	IMAP、TLSセキュア
 imports entries into the tracker from a csv file. csv means 'comma separated values'. however in the options tab you can also choose other seperators.	tracker	ja	CSVファイルからトラッカーにエントリーをインポートします。CSVは「カンマ区切り値」を意味します。オプションタブで他の区切り文字を選択することもできます。
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	ja	メールハンドリング用の不完全なサーバ・プロファイルが提供されました; キュー %1 のメールハンドリングを無効にします。
 language	tracker	ja	言語
+not-closed	tracker	ja	クローズしていない
 open(status)	tracker	ja	オープン
 order	tracker	ja	順序
+re-open closed tickets when a comment is added	tracker	ja	コメントが追加された場合、クローズされたチケットを再オープンする
 read	tracker	ja	既読
-read / unread	tracker	ja	既読/未読
+read / unread	tracker	ja	既読 / 未読
 read only filemanager directory	tracker	ja	読み取り専用ファイルマネージャーディレクトリ
 rejected	tracker	ja	拒否済み
 set due date this many days after escalation runs	tracker	ja	エスカレーション実行後の期限（日数）を設定する
@@ -144,5 +145,8 @@ yes, add mailheader to both (description and comments)	tracker	ja	はい、両�
 yes, add mailheader to comments	tracker	ja	はい、コメントにメールヘッダを追加
 yes, add mailheader to description	tracker	ja	はい、説明文にメールヘッダを追加
 yes, always	tracker	ja	はい、常に
+[fwd]	tracker	ja	[FWD]
 ♦ closed	tracker	ja	閉じる
 ♦ not closed	tracker	ja	閉じていない
+♦ not closed or pending	tracker	ja	♦ 非公開または保留
+♦ without reply not closed	tracker	ja	♦ 返信がない場合、クローズされない

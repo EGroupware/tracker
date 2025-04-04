@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	da	%1 billetter er blevet konverteret.
 (beware of mailloops, check the help!)	tracker	da	(Pas på mailloops!)
 (new tickets as	tracker	da	Nye billetter som
---> choose a project from the drop-down list	tracker	da	--> vælg et projekt fra rullelisten
 --> enter new name	tracker	da	--> Indtast nyt navn
 1 - lowest	tracker	da	1 - laveste
 2 days in advance	tracker	da	2 dage i forvejen
@@ -17,7 +16,6 @@
 3 years ago	tracker	da	3 år siden
 5 - medium	tracker	da	5 - medium
 9 - highest	tracker	da	9 - højeste
-[fwd]	tracker	da	[FWD]
 accepted	tracker	da	Accepteret
 acl	tracker	da	Adgangskontrol-liste
 activate users queue access control	tracker	da	Aktivér adgangskontrol til brugerkøen
@@ -61,6 +59,7 @@ change group when updating	tracker	da	Skift gruppe ved opdatering
 change owner when updating	tracker	da	Skift ejer, når du opdaterer
 check mail interval	tracker	da	Tjek e-mail-interval
 choose 'creator' of imported data	tracker	da	Vælg 'skaber' af importerede data
+close pending	tracker	da	Luk afventende
 closed	tracker	da	Lukket
 closed date	tracker	da	Lukket dato
 color	tracker	da	Farve
@@ -158,10 +157,12 @@ leaves without saveing	tracker	da	forlad uden at gemme
 length<br>rows	tracker	da	Længde<br>række
 links	tracker	da	Links
 max length of the input [, length of the inputfield (optional)]	tracker	da	maks længde af inputtet [længde af input feltet (valg frit)]
+not-closed	tracker	da	Ikke lukket
 number of row for a multiline inputfield or line of a multi-select-box	tracker	da	Antal af rækker for et multi-linie felt eller linier i en multi-select box
 open(status)	tracker	da	Åben
 order	tracker	da	Rækkefølge
 overdue	tracker	da	Forfalden
+re-open closed tickets when a comment is added	tracker	da	Genåbne lukkede sager, når der tilføjes en kommentar
 read	tracker	da	Læst
 read / unread	tracker	da	Læst / Ulæst
 read only filemanager directory	tracker	da	Skrivebeskyttet filhåndteringsmappe
@@ -187,5 +188,8 @@ yes, add mailheader to comments	tracker	da	Ja, tilføj mailheader til kommentare
 yes, add mailheader to description	tracker	da	Ja, tilføj mailheader til beskrivelse
 yes, always	tracker	da	Ja, altid
 you need to enter a name	tracker	da	Du skal indtaste et navn
+[fwd]	tracker	da	[FWD]
 ♦ closed	tracker	da	♦ Lukket
 ♦ not closed	tracker	da	♦ Ikke lukket
+♦ not closed or pending	tracker	da	♦ Ikke lukket eller afventer
+♦ without reply not closed	tracker	da	♦ Uden svar ikke lukket

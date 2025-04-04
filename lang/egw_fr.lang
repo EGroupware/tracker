@@ -16,7 +16,6 @@
 3 years ago	tracker	fr	Il y a 3 ans
 5 - medium	tracker	fr	5 - moyenne
 9 - highest	tracker	fr	9 - haute
-[fwd]	tracker	fr	[FWD]
 accepted	tracker	fr	Accepté
 acl	tracker	fr	Listes de contrôle d'accès (ACL)
 activate users queue access control	tracker	fr	Activer le contrôle d'accès aux files des utilisateurs
@@ -119,7 +118,6 @@ custom fields	tracker	fr	Champs personnalisés
 custom notifications	tracker	fr	Notifications personnalisées
 custom tracker priorities	tracker	fr	Priorités personnalisées
 customfield	tracker	fr	Champ personnalisé
-data exchange settings	tracker	fr	Paramètres d'échange de données
 date filter	tracker	fr	Filtre de date
 date opened	tracker	fr	Date d'ouverture
 default document to insert entries	tracker	fr	Document par défaut pour insérer les entrées.
@@ -402,7 +400,6 @@ started	tracker	fr	Débuté
 starting	tracker	fr	Début
 state	tracker	fr	Région
 stati	tracker	fr	Statut
-status	tracker	fr	Statut
 store as	tracker	fr	Enregistrer comme
 success message	tracker	fr	Message de succès
 sum	tracker	fr	Somme
@@ -501,8 +498,10 @@ you need to select some entries first	tracker	fr	Vous devez sélectionner des en
 you need to select something to change and some tracker items!	tracker	fr	Vous devez sélectionner quelque chose à modifier et un élément de traqueur !
 you need to specify amount, donators name and email address!	tracker	fr	Vous devez spécifier le montant, le nom du donateur ET son adresse email !
 you voted %1.	tracker	fr	Vous avez voté %1.
+[fwd]	tracker	fr	[FWD]
 ♦ closed	tracker	fr	♦ Fermé
 ♦ not closed	tracker	fr	♦ Non fermés
+♦ not closed or pending	tracker	fr	♦ Non fermé ou en attente
 ♦ own not closed	tracker	fr	♦ Mes traqueurs non fermés
 ♦ own or assigned not closed	tracker	fr	♦ Mes traqueurs ou traqueurs assignés non fermés
 ♦ own without reply not closed	tracker	fr	♦ Mes traqueurs sans réponse non fermés

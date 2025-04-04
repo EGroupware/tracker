@@ -16,7 +16,6 @@
 3 years ago	tracker	pt	3 anos atrás
 5 - medium	tracker	pt	5 - médio
 9 - highest	tracker	pt	9 - mais alto
-[fwd]	tracker	pt	[FWD]
 accepted	tracker	pt	Aceite
 acl	tracker	pt	Lista de controlo de acesso
 activate users queue access control	tracker	pt	Ativar o controlo de acesso à fila de utilizadores
@@ -63,6 +62,7 @@ change group when updating	tracker	pt	Alterar grupo ao atualizar
 change owner when updating	tracker	pt	Alterar proprietário ao atualizar
 check all	tracker	pt	Marcar todas
 choose 'creator' of imported data	tracker	pt	Selecionar o "criador" dos dados importados
+close pending	tracker	pt	Fechar pendente
 closed	tracker	pt	Fechado
 closed date	tracker	pt	Data de fecho
 color	tracker	pt	Cor
@@ -85,7 +85,6 @@ creator	tracker	pt	Criador
 custom fields	tracker	pt	Personalizar campos
 custom notifications	tracker	pt	Notificações personalizadas
 customfield	tracker	pt	Campo personalizado
-data exchange settings	tracker	pt	Configurações de troca de dados
 date filter	tracker	pt	Filtro de datas
 default document to insert entries	tracker	pt	Documento padrão para inserir entradas
 default group	tracker	pt	Grupo predefinido
@@ -181,6 +180,7 @@ list of files linked to the current record	tracker	pt	Lista de arquivos vinculad
 manage mapping	tracker	pt	Gerenciar mapeamento
 max length of the input [, length of the inputfield (optional)]	tracker	pt	comprimento máximo [, comprimento do campo (opcional)]
 new %1	tracker	pt	Nova %1
+not-closed	tracker	pt	Não fechado
 notification settings	tracker	pt	Configurações de notificação
 number of row for a multiline inputfield or line of a multi-select-box	tracker	pt	Número de linhas para um campo multi-linha ou linhas de uma caixa de selecção múltipla.
 old fixed definition	tracker	pt	Definição fixa Velho
@@ -195,6 +195,7 @@ pop3	tracker	pt	POP3
 port number	tracker	pt	Número do porto
 process	tracker	pt	Processar
 projects	tracker	pt	Projectos
+re-open closed tickets when a comment is added	tracker	pt	Reabrir bilhetes fechados quando é adicionado um comentário
 read	tracker	pt	Lido
 read / unread	tracker	pt	Lido / Não lido
 read only filemanager directory	tracker	pt	Diretório do Gestor de Ficheiros só de leitura
@@ -246,8 +247,10 @@ yesterday	tracker	pt	Ontem
 you can respond by visiting:	tracker	pt	Você pode responder, visitando
 you need to select an entry for linking.	tracker	pt	Você precisa selecionar uma entrada para a ligação.
 you need to select some entries first	tracker	pt	Você precisa selecionar algumas entradas em primeiro lugar.
+[fwd]	tracker	pt	[FWD]
 ♦ closed	tracker	pt	♦ Fechado
 ♦ not closed	tracker	pt	♦ Não encerrado
+♦ not closed or pending	tracker	pt	♦ Não fechado ou pendente
 ♦ own not closed	tracker	pt	♦ Não fechado
 ♦ own or assigned not closed	tracker	pt	♦ Próprio ou atribuído, não encerrado
 ♦ own without reply not closed	tracker	pt	♦ Propriedade sem resposta não encerrada

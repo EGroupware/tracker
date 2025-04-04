@@ -12,7 +12,7 @@
             <vfs-select method_id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing" onchange="app.tracker.comment_add_vfs"/>
             <vfs-upload id="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" label="" path="tracker:{$cont[tr_id]}:comments/{$cont[reply_id]}/" onchange="app.tracker.comment_add_vfs"/>
         </et2-hbox>
-        <et2-link-list id="attachments" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
+        <et2-link-list id="attachments" application="tracker" entryId="{$cont[tr_id]}:comments/{$cont[reply_id]}/"></et2-link-list>
         <htmlarea id="reply_message" mode="@tr_edit_mode" imageUpload="link_to"></htmlarea>
     </template>
     <template id="tracker.edit.comment_row">
@@ -54,8 +54,8 @@
 			<rows>
 				<row class="th" valign="top">
                     <et2-hbox align="left" class="et2_link_to et2_toolbar" disabled="@no_reply">
-                        <vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true"/>
-                        <vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" button_label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing"/>
+                        <et2-vfs-upload id="tracker:$cont[id]:comments/.new/" label="" multiple="true" display="list" inline="true"/>
+                        <vfs-select method_id="tracker:{$cont['id']}:comments/.new/" button_caption="" Label="Link" dialog_title="Link" multiple="true" method="EGroupware\Api\Etemplate\Widget\Link::ajax_link_existing"/>
                     </et2-hbox>
                     <et2-hbox class="add_comment_header">
                         <et2-hbox disabled="@no_canned">
@@ -111,7 +111,7 @@
 					<et2-number  id="new[bounty_amount]"></et2-number>
 					<et2-textbox  statustext="Donator name to show" id="new[bounty_name]" maxlength="64" placeholder="@user_name"></et2-textbox>
 					<et2-textbox  statustext="Email address to contact you" id="new[bounty_email]" maxlength="64" placeholder="@user_email"></et2-textbox>
-					<et2-button  statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="et2_dialog.confirm(widget,'Confirm that you pay the specified bounty to implement or fix the issue','Confirmation')" span="all"></et2-button>
+                    <et2-button statustext="If this item is important for you, please consider to set a bounty for it!" label="Set bounty" id="bounty" onclick="Et2Dialog.confirm(widget,'Confirm that you pay the specified bounty to implement or fix the issue','Confirmation')" span="all"></et2-button>
 				</row>
 				<row class="th">
 					<et2-description  value="Datum"></et2-description>
@@ -129,8 +129,8 @@
 					<et2-description  id="${row}[bounty_email]" noLang="1"></et2-description>
 					<et2-hbox  align="center">
 						<et2-date-time  id="${row}[bounty_confirmed]" readonly="true"></et2-date-time>
-						<et2-button  align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"></et2-button>
-						<et2-button  align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="et2_dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"></et2-button>
+                        <et2-button align="center" statustext="Confirm the receipt of money for this bounty" label="Confirm" id="confirm[$row_cont[bounty_id]]" onclick="Et2Dialog.confirm(widget,'Confirm the receipt of money for this bounty','Confirmation')" image="edit"></et2-button>
+                        <et2-button align="center" statustext="Delete this bounty" label="Delete" id="delete[$row_cont[bounty_id]]" onclick="Et2Dialog.confirm(widget,'Delete this bounty','Delete')" image="delete"></et2-button>
 					</et2-hbox>
 				</row>
 			</rows>
@@ -260,7 +260,7 @@
 						<et2-button  label="Cancel" id="button[cancel]" onclick="@on_cancel"></et2-button>
 						<et2-checkbox  label="Do not notify" id="no_notifications" statustext="Do not notify of these changes"></et2-checkbox>
 						<et2-vbox  align="right">
-                            <et2-button  align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="et2_dialog.confirm(widget,'Do you want to vote for this item','Vote');" hideOnReadonly="true"></et2-button>
+                            <et2-button align="right" statustext="If this item is important for you, please vote for it." label="Vote for it!" id="button[vote]" onclick="Et2Dialog.confirm(widget,'Do you want to vote for this item','Vote');" hideOnReadonly="true"></et2-button>
                             <et2-description  align="right" id="no_vote" class="redItalic" noLang="1"></et2-description>
                         </et2-vbox>
 					</et2-hbox>

@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	nl	%1 melding(en) zijn geconverteerd
 (beware of mailloops, check the help!)	tracker	nl	(Pas på mailloops!)
 (new tickets as	tracker	nl	Nieuwe tickets als
---> choose a project from the drop-down list	tracker	nl	--> kies een project van de drop-down lijst
 --> enter new name	tracker	nl	--> geef nieuwe naam
 1 - lowest	tracker	nl	1 - laagste
 2 days in advance	tracker	nl	2 dage i forvejen
@@ -17,7 +16,6 @@
 3 years ago	tracker	nl	3 jaar geleden
 5 - medium	tracker	nl	5 - gemiddeld
 9 - highest	tracker	nl	9 - hoogste
-[fwd]	tracker	nl	[FWD]
 accepted	tracker	nl	Geaccepteerd
 acl	tracker	nl	Toegangscontrolelijst
 activate users queue access control	tracker	nl	Activeer gebruikers toegang reeksen
@@ -266,6 +264,7 @@ no change	tracker	nl	Geen wijziging
 no trackers found, aborting	tracker	nl	Geen tracker reeks gevonden, afgebroken
 non-anonymous users	tracker	nl	Niet anonieme gebruikers
 noone	tracker	nl	Niemand
+not-closed	tracker	nl	Niet gesloten
 notification	tracker	nl	Notificatie
 number of row for a multiline inputfield or line of a multi-select-box	tracker	nl	aantal rijen voor een meer-regelig invoerveld of regel in een meervoudige selectie veld
 one day after	tracker	nl	Een dag na
@@ -290,8 +289,9 @@ process	tracker	nl	Proces
 project selection	tracker	nl	Project selectie
 projects	tracker	nl	Projecten
 queue	tracker	nl	Reeks
+re-open closed tickets when a comment is added	tracker	nl	Heropen gesloten tickets wanneer een opmerking is toegevoegd
 read	tracker	nl	Lezen
-read / unread	tracker	nl	Gelezen / Ongelezen
+read / unread	tracker	nl	Lezen / Niet gelezen
 read mail address	tracker	nl	Lees mail adres
 read only filemanager directory	tracker	nl	Alleen-lezen map Bestandsbeheer
 receive notifications about assigned tracker-items	tracker	nl	Ontvang notificatie van toegewezen meldingen
@@ -335,7 +335,6 @@ staff	tracker	nl	Medewerkers
 start date from email	tracker	nl	Begindatum van e-mail
 state	tracker	nl	Status
 stati	tracker	nl	Stati
-status	tracker	nl	Status
 store as	tracker	nl	Opslaan als
 sum	tracker	nl	Som
 summary	tracker	nl	Samenvatting
@@ -407,8 +406,10 @@ you need to select some entries first	tracker	nl	Je moet eerst een aantal items 
 you need to select something to change and some tracker items!	tracker	nl	U moet iets selecteren om te wijzigen EN enkele meldingen!
 you need to specify amount, donators name and email address!	tracker	nl	U moet het bedrag specificeren, de naam van de donateur EN het email adres!
 you voted %1.	tracker	nl	U heeft %1 gestemd.
+[fwd]	tracker	nl	[FWD]
 ♦ closed	tracker	nl	♦ Gesloten
 ♦ not closed	tracker	nl	♦ Niet gesloten
+♦ not closed or pending	tracker	nl	♦ Niet gesloten of in behandeling
 ♦ own not closed	tracker	nl	♦ Mijn, niet gesloten
 ♦ own or assigned not closed	tracker	nl	♦ Eigen of toegewezen, niet afgesloten
 ♦ own without reply not closed	tracker	nl	♦ Mijn, geen antwoord, niet gesloten

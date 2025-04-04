@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	sk	%1 kariet bolo skonvertovaných.
 (beware of mailloops, check the help!)	tracker	sk	(Pozor na nekonečné poštové slučky, konzultujte manuál!)
 (new tickets as	tracker	sk	Nové lístky ako
---> choose a project from the drop-down list	tracker	sk	--> zadajte projekt z rozbaľovacieho zoznamu
 --> enter new name	tracker	sk	--> zadajte nový názov
 1 - lowest	tracker	sk	1 - najnižšia
 2 days in advance	tracker	sk	2 dni vopred
@@ -17,7 +16,6 @@
 3 years ago	tracker	sk	3 roky späť
 5 - medium	tracker	sk	5 - priemerná
 9 - highest	tracker	sk	9 - najvyššia
-[fwd]	tracker	sk	[FWD]
 accepted	tracker	sk	Prijaté
 acl	tracker	sk	ACL
 activate users queue access control	tracker	sk	Zapnúť používateľskú kontrolu prístupu k frontám
@@ -120,7 +118,6 @@ custom fields	tracker	sk	Používateľské polia
 custom notifications	tracker	sk	Používateľské pripomienky
 custom tracker priorities	tracker	sk	Používateľské priority Sledovača
 customfield	tracker	sk	Používateľské pole
-data exchange settings	tracker	sk	Nastavenia výmeny údajov
 date filter	tracker	sk	Filter dátumu
 date opened	tracker	sk	Dátum otvorenia
 default document to insert entries	tracker	sk	Predvolený dokument pre vkladanie položiek
@@ -199,7 +196,6 @@ export definition to use for nextmatch export	tracker	sk	Exportná definícia pr
 export definitition to use for nextmatch export	tracker	sk	Exportná definícia pre použitie v exporte
 exports a list of tracker tickets to a csv file.	tracker	sk	Exportovať zoznam záznamov Sledovača do súboru CSV.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	sk	otvorenie schránky zlyhalo: %1 -> vyradená z automatického spracovania e-mailov!
-favorites	tracker	sk	Obľúbené
 field	tracker	sk	Pole
 fixed	tracker	sk	Vyriešené
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	sk	Pre hromadnú správu použite túto značku. Obsah, ktorý chcete opakovať, umiestnite medzi dve takéto značky.
@@ -404,7 +400,6 @@ started	tracker	sk	Začaté
 starting	tracker	sk	Začína
 state	tracker	sk	Stav
 stati	tracker	sk	Stanovisko
-status	tracker	sk	Stav
 store as	tracker	sk	Uložiť ako
 success message	tracker	sk	Správa o úspechu
 sum	tracker	sk	Suma
@@ -503,8 +498,10 @@ you need to select some entries first	tracker	sk	Najprv musíte vybrať nejakú 
 you need to select something to change and some tracker items!	tracker	sk	Mali by ste vybrať, čo chcete zmeniť, a tiež niektoré záležitosti Sledovača!
 you need to specify amount, donators name and email address!	tracker	sk	Musíte zadať obnos, meno darcu A E-mailovú adresu!
 you voted %1.	tracker	sk	Hlasovali ste %1.
+[fwd]	tracker	sk	[FWD]
 ♦ closed	tracker	sk	♦ Zatvorené
 ♦ not closed	tracker	sk	♦ Neuzavreté
+♦ not closed or pending	tracker	sk	♦ Nie je uzavretý alebo čakajúci
 ♦ own not closed	tracker	sk	♦ Moje neuzavreté
 ♦ own or assigned not closed	tracker	sk	♦ Vlastné alebo priradené, neuzavreté
 ♦ own without reply not closed	tracker	sk	♦ Moje bez odpovede neuzavreté

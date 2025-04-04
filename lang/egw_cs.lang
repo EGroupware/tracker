@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	cs	%1 ohlášení bylo zkonvertováno
 (beware of mailloops, check the help!)	tracker	cs	(Pozor na mailové smyčky!)
 (new tickets as	tracker	cs	Nové tipy jako
---> choose a project from the drop-down list	tracker	cs	--> vyberte projekt z rozevíracího seznamu
 --> enter new name	tracker	cs	--> zadejte nové jméno
 1 - lowest	tracker	cs	1 - nejnižší
 2 days in advance	tracker	cs	2 dny předem
@@ -17,7 +16,6 @@
 3 years ago	tracker	cs	Před 3 roky
 5 - medium	tracker	cs	5 - střední
 9 - highest	tracker	cs	9 - nejvyšší
-[fwd]	tracker	cs	[FWD]
 accepted	tracker	cs	Přijato
 acl	tracker	cs	Seznam řízení přístupu
 activate users queue access control	tracker	cs	Aktivovat přístupovou kontrolu uživatelských front
@@ -331,7 +329,7 @@ projects	tracker	cs	Projekty
 queue	tracker	cs	Fronta
 re-open closed tickets when a comment is added	tracker	cs	Znovu otevřít uzavřené tipy po přidání komentáře
 read	tracker	cs	Číst
-read / unread	tracker	cs	Přečteno / Nepřečteno
+read / unread	tracker	cs	Přečíst / Nepřečteno
 read mail address	tracker	cs	Přečíst e-mailovou adresu
 read only filemanager directory	tracker	cs	Adresář Správce souborů pouze pro čtení
 receive notifications about assigned tracker-items	tracker	cs	Přijímat upozornění na položky přidělené ve sled. systému
@@ -403,7 +401,6 @@ started	tracker	cs	Založeno
 starting	tracker	cs	Začínáme na adrese
 state	tracker	cs	Stav
 stati	tracker	cs	Stavy
-status	tracker	cs	Stav
 store as	tracker	cs	Uložit jako
 success message	tracker	cs	Zpráva o úspěchu
 sum	tracker	cs	Celkem
@@ -502,8 +499,10 @@ you need to select some entries first	tracker	cs	Nejprve je třeba vybrat někte
 you need to select something to change and some tracker items!	tracker	cs	Musíte vybrat něco, co chcete změnit A ZÁROVEŇ nějaké položky sledovacího systému!
 you need to specify amount, donators name and email address!	tracker	cs	Musíte specifikovat množství, dárce A ZÁROVEŇ e-mailovou adresu!
 you voted %1.	tracker	cs	Hlasoval(a) jste %1.
+[fwd]	tracker	cs	[FWD]
 ♦ closed	tracker	cs	Zavřeno
 ♦ not closed	tracker	cs	Neuzavřené
+♦ not closed or pending	tracker	cs	♦ Není uzavřen nebo čeká na uzavření
 ♦ own not closed	tracker	cs	Vlastní neuzavřené
 ♦ own or assigned not closed	tracker	cs	Vlastní nebo přiřazené, neuzavřené
 ♦ own without reply not closed	tracker	cs	Vlastní bez odpovědi neuzavřené

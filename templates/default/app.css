@@ -15,6 +15,7 @@
 /* give comments NM full height of the tab */
 et2-tab-panel#tracker-edit_comments {
 	padding-top: 0;
+	overflow: hidden;
 }
 div#tracker-edit_replies {
 	height: 100%;

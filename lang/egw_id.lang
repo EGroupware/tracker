@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	id	%1 tiket telah dikonversi.
 (beware of mailloops, check the help!)	tracker	id	(Waspadalah terhadap mailloops!)
 (new tickets as	tracker	id	Tiket baru sebagai
---> choose a project from the drop-down list	tracker	id	--> pilih proyek dari daftar drop-down
 --> enter new name	tracker	id	--> masukan nama baru
 1 - lowest	tracker	id	1 - terendah
 2 days in advance	tracker	id	2 hari sebelumnya
@@ -17,7 +16,6 @@
 3 years ago	tracker	id	3 tahun yang lalu
 5 - medium	tracker	id	5 - sedang
 9 - highest	tracker	id	9 - tertinggi
-[fwd]	tracker	id	[FWD]
 accepted	tracker	id	Diterima
 acl	tracker	id	Daftar Kontrol Akses
 activate users queue access control	tracker	id	Mengaktifkan kontrol akses antrean pengguna
@@ -102,7 +100,6 @@ creator	tracker	id	Pembuat
 custom fields	tracker	id	Bidang khusus
 custom notifications	tracker	id	Pemberitahuan khusus
 customfield	tracker	id	Bidang khusus
-data exchange settings	tracker	id	Pengaturan pertukaran data
 date filter	tracker	id	Filter tanggal
 date opened	tracker	id	Date opened
 default document to insert entries	tracker	id	Dokumen default untuk memasukkan entri
@@ -209,6 +206,7 @@ new ticket submitted by %1 at %2	tracker	id	Tiket baru dikirimkan oleh %1 pada %
 no change	tracker	id	No change
 non-anonymous users	tracker	id	Non-anonymous users
 noone	tracker	id	Noone
+not-closed	tracker	id	Tidak ditutup
 notification	tracker	id	Notification
 number of row for a multiline inputfield or line of a multi-select-box	tracker	id	number of row for a multiline inputfield or line of a multi-select-box
 one day after	tracker	id	Sehari setelah
@@ -227,6 +225,7 @@ process	tracker	id	Proses
 project selection	tracker	id	Project selection
 projects	tracker	id	Projects
 queue	tracker	id	Queue
+re-open closed tickets when a comment is added	tracker	id	Buka kembali tiket yang ditutup ketika ada komentar yang ditambahkan
 read	tracker	id	Baca
 read / unread	tracker	id	Baca / Belum dibaca
 read only filemanager directory	tracker	id	Direktori Manajer File hanya-baca
@@ -286,5 +285,8 @@ yes, add mailheader to description	tracker	id	Ya, tambahkan kop surat ke deskrip
 yes, always	tracker	id	Ya, selalu
 yesterday	tracker	id	Kemarin
 you can respond by visiting:	tracker	id	Untuk melihatnya, kunjungi:
+[fwd]	tracker	id	[FWD]
 ♦ closed	tracker	id	♦ Ditutup
 ♦ not closed	tracker	id	♦ Tidak ditutup
+♦ not closed or pending	tracker	id	♦ Tidak ditutup atau tertunda
+♦ without reply not closed	tracker	id	♦ Tanpa balasan tidak ditutup

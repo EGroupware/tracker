@@ -1,6 +1,5 @@
 %1 days in advance	tracker	zh-tw	%1 天提出
 %1 entries updated.	tracker	zh-tw	%1 筆資料更新了。
---> choose a project from the drop-down list	tracker	zh-tw	--> 選擇一個專案
 --> enter new name	tracker	zh-tw	--> 輸入新名稱
 1 - lowest	tracker	zh-tw	1 - 最低
 2 years ago	tracker	zh-tw	兩年前
@@ -41,7 +40,6 @@ categories, versions, canned responses	tracker	zh-tw	類別、版本、制式回
 change assigned	tracker	zh-tw	指定更改
 change group when updating	tracker	zh-tw	更新时更改组
 change owner when updating	tracker	zh-tw	更新时更改所有者
-check all	tracker	zh-tw	全選
 choose a project from the drop-down list	tracker	zh-tw	選擇一個專案
 close pending	tracker	zh-tw	關閉等待的
 closed	tracker	zh-tw	關閉的
@@ -204,7 +202,6 @@ yes, add mailheader to description	tracker	zh-tw	是，在描述中添加邮件�
 yes, always	tracker	zh-tw	是，始终
 yes, display groups first	tracker	zh-tw	是的，先顯示群組
 yes, display users first	tracker	zh-tw	是的，先顯示使用者
-yes, with larger fontsize	tracker	zh-tw	是，使用較大的字體
 yesterday	tracker	zh-tw	昨天
 you can respond by visiting:	tracker	zh-tw	您可以透過網址回應：
 you need to enter a name	tracker	zh-tw	您必須輸入名稱

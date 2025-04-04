@@ -16,7 +16,6 @@
 3 years ago	tracker	ro	Acum 3 ani
 5 - medium	tracker	ro	5 - mediu
 9 - highest	tracker	ro	9 - cel mai mare
-[fwd]	tracker	ro	[FWD]
 accepted	tracker	ro	Acceptat
 acl	tracker	ro	Lista de control al accesului
 activate users queue access control	tracker	ro	Activați controlul accesului la coada utilizatorilor
@@ -68,7 +67,6 @@ created by	tracker	ro	Creat de
 created on	tracker	ro	Creat pe
 custom notifications	tracker	ro	Notificări personalizate
 customfield	tracker	ro	Câmpul personalizat
-data exchange settings	tracker	ro	Setări privind schimbul de date
 date filter	tracker	ro	Filtru de date
 default document to insert entries	tracker	ro	Document implicit pentru a insera intrări
 default group	tracker	ro	Grup implicit
@@ -121,9 +119,11 @@ language	tracker	ro	Limba
 last modified	tracker	ro	Ultima modificare
 last modified by	tracker	ro	Modificat ultima dată de
 later	tracker	ro	Mai târziu
+not-closed	tracker	ro	Neînchis
 open(status)	tracker	ro	Deschideți
 pop3	tracker	ro	POP3
 port number	tracker	ro	Numărul portului
+re-open closed tickets when a comment is added	tracker	ro	Redeschideți tichetele închise atunci când este adăugat un comentariu
 read	tracker	ro	Citiți
 read / unread	tracker	ro	Citit / Necitit
 read only filemanager directory	tracker	ro	Directorul Manager de fișiere numai pentru citire
@@ -142,5 +142,8 @@ yes, add mailheader to comments	tracker	ro	Da, adăugați antetul de e-mail la c
 yes, add mailheader to description	tracker	ro	Da, adăugați antetul de e-mail la descriere
 yes, always	tracker	ro	Da, întotdeauna
 you need to select some entries first	tracker	ro	Trebuie să selectați mai întâi câteva intrări.
+[fwd]	tracker	ro	[FWD]
 ♦ closed	tracker	ro	♦ Închis
 ♦ not closed	tracker	ro	♦ Neînchis
+♦ not closed or pending	tracker	ro	♦ Neînchis sau în așteptare
+♦ without reply not closed	tracker	ro	♦ Fără răspuns, nu sunt închise
