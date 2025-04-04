@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	lv	%1 biļetes ir konvertētas.
 (beware of mailloops, check the help!)	tracker	lv	(Uzmanieties no mailloops!)
 (new tickets as	tracker	lv	Jaunas biļetes kā
---> choose a project from the drop-down list	tracker	lv	--> no izlaižamā saraksta izvēlieties projektu
 --> enter new name	tracker	lv	--> ievadiet jaunu nosaukumu
 1 - lowest	tracker	lv	1 - zemākais
 2 days in advance	tracker	lv	2 dienas iepriekš
@@ -17,7 +16,6 @@
 3 years ago	tracker	lv	pirms 3 gadiem
 5 - medium	tracker	lv	5 - vidējs
 9 - highest	tracker	lv	9 - augstākais
-[fwd]	tracker	lv	[FWD]
 accepted	tracker	lv	Akceptēts
 acl	tracker	lv	Piekļuves kontroles saraksts
 activate users queue access control	tracker	lv	Aktivizēt lietotāju rindas piekļuves kontroli
@@ -60,6 +58,7 @@ change group when updating	tracker	lv	Mainīt grupu atjaunināšanas laikā
 change owner when updating	tracker	lv	Atjaunināšanas laikā mainīt īpašnieku
 check all	tracker	lv	Parbaudīt visu
 choose 'creator' of imported data	tracker	lv	Izvēlieties importēto datu "radītāju
+close pending	tracker	lv	Aizvērt gaidāmo
 closed date	tracker	lv	Slēgšanas datums
 color	tracker	lv	Krāsa
 comments	tracker	lv	Komentāri
@@ -79,7 +78,6 @@ creation date	tracker	lv	Izveiodšanas datums
 custom fields	tracker	lv	Mainīti lauki
 custom notifications	tracker	lv	Pielāgotie paziņojumi
 customfield	tracker	lv	Pielāgotais lauks
-data exchange settings	tracker	lv	Datu apmaiņas iestatījumi
 date filter	tracker	lv	Datuma filtrs
 default document to insert entries	tracker	lv	Noklusējuma dokuments ierakstu ievietošanai
 default group	tracker	lv	Noklusējuma grupa
@@ -146,10 +144,12 @@ leaves without saveing	tracker	lv	aiziet bez saglabāšanas
 length<br>rows	tracker	lv	Garums<br>Rindas
 links	tracker	lv	Saites
 max length of the input [, length of the inputfield (optional)]	tracker	lv	ievades datu maksimālais garums[, ievades lauka garums (pēc izvēles)]
+not-closed	tracker	lv	Nav slēgts
 open(status)	tracker	lv	Atvērt
 order	tracker	lv	Kārtība
 permission denied !!!	tracker	lv	Atļauja liegta!
 process	tracker	lv	Process
+re-open closed tickets when a comment is added	tracker	lv	Atkārtot slēgto biļešu atvēršanu, kad tiek pievienots komentārs
 read	tracker	lv	Lasīt
 read / unread	tracker	lv	Lasīt / Neizlasīts
 read only filemanager directory	tracker	lv	Tikai lasīšanai File Manager direktorija
@@ -179,5 +179,8 @@ yes, add mailheader to both (description and comments)	tracker	lv	Jā, pievienot
 yes, add mailheader to comments	tracker	lv	Jā, komentāriem pievienot e-pasta galveni
 yes, add mailheader to description	tracker	lv	Jā, pievienot nosaukuma virsrakstu aprakstam
 yes, always	tracker	lv	Jā, vienmēr
+[fwd]	tracker	lv	[FWD]
 ♦ closed	tracker	lv	♦ Slēgts
 ♦ not closed	tracker	lv	♦ Nav slēgts
+♦ not closed or pending	tracker	lv	♦ Nav slēgta vai gaida izskatīšanu
+♦ without reply not closed	tracker	lv	♦ Bez atbildes nav slēgta

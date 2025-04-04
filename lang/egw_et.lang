@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	et	%1 piletid on teisendatud.
 (beware of mailloops, check the help!)	tracker	et	(Ettevaatust mailloopide suhtes!)
 (new tickets as	tracker	et	Uued piletid kui
---> choose a project from the drop-down list	tracker	et	--> valige projekt rippmenüüst
 --> enter new name	tracker	et	--> Sisesta uus nimi
 1 - lowest	tracker	et	1 - madalaim
 2 days in advance	tracker	et	2 päeva ette
@@ -17,7 +16,6 @@
 3 years ago	tracker	et	3 aastat tagasi
 5 - medium	tracker	et	5 - keskmine
 9 - highest	tracker	et	9 - kõrgeim
-[fwd]	tracker	et	[FWD]
 accepted	tracker	et	Kinnitatud
 acl	tracker	et	Juurdepääsu kontrollnimekiri
 activate users queue access control	tracker	et	Aktiveeri kasutajate järjekorra juurdepääsukontroll
@@ -195,6 +193,7 @@ new items	tracker	et	Uued asjad
 no change	tracker	et	Ära muuda
 non-anonymous users	tracker	et	Mitte-anonüümsed kasutajad
 noone	tracker	et	Mittekeegi
+not-closed	tracker	et	Ei ole suletud
 notification	tracker	et	Meeldetuletus
 one day after	tracker	et	Üks päev pärast
 one day in advance	tracker	et	Üks päev enne
@@ -209,6 +208,7 @@ pop3	tracker	et	POP3
 port number	tracker	et	Pordi number
 project selection	tracker	et	Projekti valik
 projects	tracker	et	Projektid
+re-open closed tickets when a comment is added	tracker	et	Suletud piletite taasavamine, kui kommentaar on lisatud
 read	tracker	et	Loetud
 read / unread	tracker	et	Loetud / Lugemata
 read only filemanager directory	tracker	et	Ainult lugemiseks mõeldud failihalduri kataloog
@@ -266,5 +266,8 @@ you can respond by visiting:	tracker	et	Sa saad vastata külastates:
 you need to enter a name	tracker	et	Pead sisestama nime
 you need to login to vote!	tracker	et	Pead sisse logima, et hääletada!
 you voted %1.	tracker	et	Sa hääletasid %1.
+[fwd]	tracker	et	[FWD]
 ♦ closed	tracker	et	♦ Suletud
 ♦ not closed	tracker	et	♦ Ei ole suletud
+♦ not closed or pending	tracker	et	♦ Ei ole suletud ega ootel
+♦ without reply not closed	tracker	et	♦ Ilma vastuseta ei ole suletud

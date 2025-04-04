@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	no	%1 billetter har blitt konvertert.
 (beware of mailloops, check the help!)	tracker	no	(Se opp for mailloops!)
 (new tickets as	tracker	no	Nye billetter som
---> choose a project from the drop-down list	tracker	no	--> velg et prosjekt fra nedtrekkslisten
 --> enter new name	tracker	no	--> skriv inn nytt navn
 1 - lowest	tracker	no	1 - laveste
 2 days in advance	tracker	no	2 dager i forveien
@@ -17,7 +16,6 @@
 3 years ago	tracker	no	3 år siden
 5 - medium	tracker	no	5 - middels
 9 - highest	tracker	no	9 - høyest
-[fwd]	tracker	no	[FWD]
 accepted	tracker	no	Godkjent
 acl	tracker	no	Liste over tilgangskontroller
 activate users queue access control	tracker	no	Aktiver tilgangskontroll for brukerkøen
@@ -60,6 +58,7 @@ change group when updating	tracker	no	Endre gruppe ved oppdatering
 change owner when updating	tracker	no	Endre eier ved oppdatering
 check all	tracker	no	Kontroller alle
 choose 'creator' of imported data	tracker	no	Velg "oppretter" av importerte data
+close pending	tracker	no	Avslutt i påvente
 closed date	tracker	no	Avsluttet dato
 color	tracker	no	Farge
 comments	tracker	no	Kommentarer
@@ -80,7 +79,6 @@ creation date	tracker	no	Først opprettet
 custom fields	tracker	no	Egendefinerte Felter
 custom notifications	tracker	no	Egendefinerte varsler
 customfield	tracker	no	Tilpasset felt
-data exchange settings	tracker	no	Innstillinger for datautveksling
 date filter	tracker	no	Datofilter
 default document to insert entries	tracker	no	Standarddokument for å legge inn oppføringer
 default group	tracker	no	Standard gruppe
@@ -152,6 +150,7 @@ leaves without saveing	tracker	no	avslutt uten å lagre
 length<br>rows	tracker	no	Lengde<br>Kolonner
 links	tracker	no	Lenker
 max length of the input [, length of the inputfield (optional)]	tracker	no	maks. lengde på innslag [,feltlengde (valgfri)]
+not-closed	tracker	no	Ikke lukket
 number of row for a multiline inputfield or line of a multi-select-box	tracker	no	antall rekker i multi-linje felter eller linjer i multi-valg bokser
 open(status)	tracker	no	Åpent
 order	tracker	no	Ordre
@@ -160,6 +159,7 @@ permission denied !!!	tracker	no	Adgang nektet!
 pop3	tracker	no	POP3
 port number	tracker	no	Portnummer
 process	tracker	no	Prosess
+re-open closed tickets when a comment is added	tracker	no	Gjenåpne lukkede saker når en kommentar er lagt til
 read	tracker	no	Lest
 read / unread	tracker	no	Lest / Ulest
 read only filemanager directory	tracker	no	Skrivebeskyttet filbehandlingskatalog
@@ -192,6 +192,9 @@ yes, add mailheader to comments	tracker	no	Ja, legg til posthode i kommentarer
 yes, add mailheader to description	tracker	no	Ja, legg til posthode i beskrivelse
 yes, always	tracker	no	Ja, alltid
 yesterday	tracker	no	I går
+[fwd]	tracker	no	[FWD]
 ♦ closed	tracker	no	♦ Stengt
 ♦ not closed	tracker	no	♦ Ikke lukket
+♦ not closed or pending	tracker	no	♦ Ikke lukket eller ventende
 ♦ own not closed	tracker	no	♦ Egen ikke lukket
+♦ without reply not closed	tracker	no	♦ Uten svar ikke lukket

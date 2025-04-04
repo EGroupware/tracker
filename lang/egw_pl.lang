@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	pl	%1 zgłoszeń zostało przekonwertowanych.
 (beware of mailloops, check the help!)	tracker	pl	(Uwaga na mailloops!)
 (new tickets as	tracker	pl	Nowe bilety jako
---> choose a project from the drop-down list	tracker	pl	--> wybierz projekt z listy rozwijanej
 --> enter new name	tracker	pl	--> podaj nową nazwę
 1 - lowest	tracker	pl	1 - w ogóle nie warto się przejmować
 2 days in advance	tracker	pl	2 dni wcześniej
@@ -17,7 +16,6 @@
 3 years ago	tracker	pl	2 lata temu
 5 - medium	tracker	pl	5 - typowy problem, trudno określić priorytet
 9 - highest	tracker	pl	9 - nie żartuję, NAPRAWDĘ ma być na wczoraj
-[fwd]	tracker	pl	[FWD]
 accepted	tracker	pl	Zaakceptowany
 acl	tracker	pl	Lista kontroli dostępu
 activate users queue access control	tracker	pl	Aktywuj kontrolę dostępu kolejki użytkowników
@@ -114,7 +112,6 @@ custom fields	tracker	pl	Pola użytkownika
 custom notifications	tracker	pl	Powiadomienia niestandardowe
 custom tracker priorities	tracker	pl	Własne priorytety dla systemu śledzenia
 customfield	tracker	pl	Pole niestandardowe
-data exchange settings	tracker	pl	Ustawienia wymiany danych
 date filter	tracker	pl	Filtr daty
 date opened	tracker	pl	Data utworzenia
 default document to insert entries	tracker	pl	Domyślny dokument do wstawiania wpisów
@@ -253,6 +250,7 @@ no change	tracker	pl	Brak zmian
 no trackers found, aborting	tracker	pl	Nie znaleziono Systemów Śledzenia, anulowanie
 non-anonymous users	tracker	pl	Użytkownik nie anonimowy
 noone	tracker	pl	Nikt
+not-closed	tracker	pl	Nie zamknięte
 notification	tracker	pl	Powiadomienie
 notification settings	tracker	pl	Ustawienia powiadomień
 number of row for a multiline inputfield or line of a multi-select-box	tracker	pl	ilość linii dla danych obszaru tekstu albo ilość linii dla listy wielokrotnego wyboru
@@ -396,8 +394,10 @@ you need to select some entries first	tracker	pl	Najpierw należy wybrać niekt�
 you need to select something to change and some tracker items!	tracker	pl	Musisz wybrać coś do zmiany ORAZ jakieś zgłoszenia systemu śledzenia!
 you need to specify amount, donators name and email address!	tracker	pl	Musisz określić kwotę, nazwisko ofiarodawcy ORAZ adres poczty elektronicznej!
 you voted %1.	tracker	pl	Zagłosowano %1
+[fwd]	tracker	pl	[FWD]
 ♦ closed	tracker	pl	♦ Zamknięte
 ♦ not closed	tracker	pl	♦ Nie zamknięty
+♦ not closed or pending	tracker	pl	♦ Nie zamknięte lub oczekujące
 ♦ own not closed	tracker	pl	♦ Własny nie zamknięty
 ♦ own or assigned not closed	tracker	pl	♦ Własny lub przypisany, niezamknięty
 ♦ own without reply not closed	tracker	pl	♦ Własny bez odpowiedzi nie zamknięty

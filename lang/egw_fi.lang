@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	fi	%1 merkintää muutettu.
 (beware of mailloops, check the help!)	tracker	fi	Varoitus! Huomioi luupit.
 (new tickets as	tracker	fi	Omistaja uudelle merkinnälle
---> choose a project from the drop-down list	tracker	fi	--> valitse projekti pudotusvalikosta
 --> enter new name	tracker	fi	--> anna uusi nimi
 1 - lowest	tracker	fi	1 - alhainen
 2 days in advance	tracker	fi	2 päivää etukäteen
@@ -17,7 +16,6 @@
 3 years ago	tracker	fi	3 vuotta sitten
 5 - medium	tracker	fi	5 - normaali
 9 - highest	tracker	fi	9 - korkea
-[fwd]	tracker	fi	[FWD]
 accepted	tracker	fi	Hyväksytty
 acl	tracker	fi	Käyttäjäoikeudet
 activate users queue access control	tracker	fi	Aktivoi ketjukohtaiset käyttöoikeudet
@@ -396,7 +394,6 @@ started	tracker	fi	Aloitettu
 starting	tracker	fi	Alkamassa
 state	tracker	fi	Tila
 stati	tracker	fi	Tila
-status	tracker	fi	Tila
 store as	tracker	fi	Varastoi
 success message	tracker	fi	Menestysviesti
 sum	tracker	fi	Summa
@@ -490,8 +487,10 @@ you need to select some entries first	tracker	fi	Valitse ensin merkinnät.
 you need to select something to change and some tracker items!	tracker	fi	Sinun pitää valita jotain muutettavaa JA joku merkintä!
 you need to specify amount, donators name and email address!	tracker	fi	Sinun pitää antaa summa, lahjoittajan nimi JA sähköpostiosoite!
 you voted %1.	tracker	fi	Annoit äänesi %1.
+[fwd]	tracker	fi	[FWD]
 ♦ closed	tracker	fi	♦ Suljettu
 ♦ not closed	tracker	fi	♦ Ei suljetut
+♦ not closed or pending	tracker	fi	♦ Ei suljettu tai vireillä
 ♦ own not closed	tracker	fi	♦ Omat, ei suljetut
 ♦ own or assigned not closed	tracker	fi	♦ Oma tai osoitettu, ei suljettu
 ♦ own without reply not closed	tracker	fi	♦ Omat, ei suljetut, ilman vastausta

@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	km	សំបុត្រ %1 ត្រូវបានបំប្លែង
 (beware of mailloops, check the help!)	tracker	km	(ប្រយ័ត្នប្រយែង!)
 (new tickets as	tracker	km	សំបុត្រថ្មីដូចជា
---> choose a project from the drop-down list	tracker	km	--> ជ្រើសរើសគម្រោងពីបញ្ជីទម្លាក់ចុះ
 --> enter new name	tracker	km	--> បញ្ចូលឈ្មោះថ្មី
 1 - lowest	tracker	km	1 - ទាបបំផុត
 2 days in advance	tracker	km	2 ថ្ងៃជាមុន
@@ -17,7 +16,6 @@
 3 years ago	tracker	km	3 ឆ្នាំមុន
 5 - medium	tracker	km	5 - មធ្យម
 9 - highest	tracker	km	9 - ខ្ពស់បំផុត
-[fwd]	tracker	km	[FWD]
 accepted	tracker	km	ទទួលយក
 acl	tracker	km	បញ្ជីត្រួតពិនិត្យការចូលប្រើ
 activate users queue access control	tracker	km	បើកដំណើរការការគ្រប់គ្រងការចូលប្រើជួរអ្នកប្រើប្រាស់
@@ -119,7 +117,6 @@ custom fields	tracker	km	វាលផ្ទាល់ខ្លួន
 custom notifications	tracker	km	ការជូនដំណឹងផ្ទាល់ខ្លួន
 custom tracker priorities	tracker	km	អាទិភាពកម្មវិធីតាមដានផ្ទាល់ខ្លួន
 customfield	tracker	km	វាលផ្ទាល់ខ្លួន
-data exchange settings	tracker	km	ការកំណត់ការផ្លាស់ប្តូរទិន្នន័យ
 date filter	tracker	km	តម្រងកាលបរិច្ឆេទ
 date opened	tracker	km	កាលបរិច្ឆេទបើក
 default document to insert entries	tracker	km	ឯកសារលំនាំដើមដើម្បីបញ្ចូលធាតុ
@@ -196,7 +193,6 @@ export definition to use for nextmatch export	tracker	km	នាំចេញន�
 export definitition to use for nextmatch export	tracker	km	នាំចេញនិយមន័យដែលត្រូវប្រើសម្រាប់ការនាំចេញការប្រកួតបន្ទាប់
 exports a list of tracker tickets to a csv file.	tracker	km	នាំចេញបញ្ជីសំបុត្រតាមដានទៅឯកសារ CSV
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	km	បរាជ័យក្នុងការបើកប្រអប់សំបុត្រ៖ %1 -> ត្រូវបានបិទសម្រាប់ការដំណើរការសំបុត្រដោយស្វ័យប្រវត្តិ!
-favorites	tracker	km	ចំណូលចិត្ត
 field	tracker	km	វាល
 fixed	tracker	km	ជួសជុល
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	km	សម្រាប់អក្សរសៀរៀលប្រើស្លាកនេះ ដាក់មាតិកាដែលអ្នកចង់ធ្វើម្តងទៀតរវាងស្លាកពីរ
@@ -394,7 +390,6 @@ started	tracker	km	បានចាប់ផ្តើម
 starting	tracker	km	ចាប់ផ្តើម
 state	tracker	km	រដ្ឋ
 stati	tracker	km	រដ្ឋ
-status	tracker	km	ស្ថានភាព
 store as	tracker	km	រក្សាទុកជា
 success message	tracker	km	សារជោគជ័យ
 sum	tracker	km	ផលបូក
@@ -492,6 +487,7 @@ you need to select some entries first	tracker	km	អ្នកត្រូវជ�
 you need to select something to change and some tracker items!	tracker	km	អ្នកត្រូវជ្រើសរើសអ្វីមួយដើម្បីផ្លាស់ប្តូរ និងធាតុតាមដានមួយចំនួន!
 you need to specify amount, donators name and email address!	tracker	km	អ្នកត្រូវបញ្ជាក់ចំនួនទឹកប្រាក់ ឈ្មោះម្ចាស់ជំនួយ និងអាសយដ្ឋានអ៊ីមែល!
 you voted %1.	tracker	km	អ្នកបានបោះឆ្នោត%1
+[fwd]	tracker	km	[FWD]
 ♦ not closed	tracker	km	♦ មិនបានបិទ
 ♦ own not closed	tracker	km	♦ ខ្លួនឯងមិនបិទ
 ♦ own or assigned not closed	tracker	km	♦ កាន់កាប់ ឬចាត់ចែង មិនបានបិទ

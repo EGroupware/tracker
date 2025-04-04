@@ -16,7 +16,6 @@
 3 years ago	tracker	pt-br	3 anos atrás
 5 - medium	tracker	pt-br	5 - média
 9 - highest	tracker	pt-br	9 - maior
-[fwd]	tracker	pt-br	[FWD]
 accepted	tracker	pt-br	Aceito
 acl	tracker	pt-br	Lista de controle de acesso
 activate users queue access control	tracker	pt-br	Ativar acesso de controle aos elementos dos usuários
@@ -254,6 +253,7 @@ no notifications	tracker	pt-br	Nenhuma notificação
 no trackers found, aborting	tracker	pt-br	Nenhum Elemento do Sistema de Tickets encontrato, abortando.
 non-anonymous users	tracker	pt-br	Usuários não anônimos
 noone	tracker	pt-br	Nenhum
+not-closed	tracker	pt-br	Não fechado
 notification	tracker	pt-br	Notificação
 notification settings	tracker	pt-br	Configurações de notificação
 number of row for a multiline inputfield or line of a multi-select-box	tracker	pt-br	número de linhas para um campo de entrada ou linhas para uma caixa de seleção
@@ -282,6 +282,7 @@ process	tracker	pt-br	Processar
 project selection	tracker	pt-br	Seleção de projeto
 projects	tracker	pt-br	Projetos
 queue	tracker	pt-br	Elementos
+re-open closed tickets when a comment is added	tracker	pt-br	Reabrir tíquetes fechados quando um comentário é adicionado
 read	tracker	pt-br	Lido
 read / unread	tracker	pt-br	Lido / Não lido
 read mail address	tracker	pt-br	Ler endereço de email
@@ -396,8 +397,10 @@ you need to select some entries first	tracker	pt-br	Você precisa selecionar alg
 you need to select something to change and some tracker items!	tracker	pt-br	Você precisa selecionar algo para alterar E alguns tickets!
 you need to specify amount, donators name and email address!	tracker	pt-br	Você precisa especificar valor, nome do doador E e-mail
 you voted %1.	tracker	pt-br	Você votou %1.
+[fwd]	tracker	pt-br	[FWD]
 ♦ closed	tracker	pt-br	Fechado
 ♦ not closed	tracker	pt-br	Não fechados
+♦ not closed or pending	tracker	pt-br	♦ Não fechado ou pendente
 ♦ own not closed	tracker	pt-br	Meus / Não fechados
 ♦ own or assigned not closed	tracker	pt-br	Próprio ou atribuído, não fechado
 ♦ own without reply not closed	tracker	pt-br	Meus / Sem resposta / Não fechados

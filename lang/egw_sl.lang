@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	sl	%1 zahtevki so bili pretvorjeni.
 (beware of mailloops, check the help!)	tracker	sl	(Pazite na mailloops, preverite pomoč!)
 (new tickets as	tracker	sl	Nove zahteve kot
---> choose a project from the drop-down list	tracker	sl	-> izberite projekt s spustnega seznama
 --> enter new name	tracker	sl	--> vnesite novo ime
 1 - lowest	tracker	sl	1 - najnižja
 2 days in advance	tracker	sl	2 dni vnaprej
@@ -17,7 +16,6 @@
 3 years ago	tracker	sl	3 leta nazaj
 5 - medium	tracker	sl	5 - srednja
 9 - highest	tracker	sl	9 - najvišja
-[fwd]	tracker	sl	[FWD]
 accepted	tracker	sl	Sprejeto
 acl	tracker	sl	Seznam za nadzor dostopa
 activate users queue access control	tracker	sl	Aktiviranje uporabnikov za nadzor dostopa do čakalne vrste
@@ -120,7 +118,6 @@ custom fields	tracker	sl	Lastna polja
 custom notifications	tracker	sl	Obvestila po meri
 custom tracker priorities	tracker	sl	Prednostne naloge sledilnika
 customfield	tracker	sl	Lastno polje
-data exchange settings	tracker	sl	Nastavitve za izmenjavo podatkov
 date filter	tracker	sl	Filter Datuma
 date opened	tracker	sl	Datum odprtja
 default document to insert entries	tracker	sl	Privzeti dokument za vstavljanje
@@ -199,7 +196,6 @@ export definition to use for nextmatch export	tracker	sl	Izvozna definicija, ki 
 export definitition to use for nextmatch export	tracker	sl	Izvozna definicija, ki jo je treba uporabiti za izvoz naslednjega računa
 exports a list of tracker tickets to a csv file.	tracker	sl	Izvozi seznam kartic za sledenje v datoteko CSV.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	sl	ni uspelo odpreti nabiralnika: %1 -> onemogočeno za samodejno obdelavo pošte!
-favorites	tracker	sl	Priljubljene
 field	tracker	sl	Polje
 fixed	tracker	sl	Popravljeno
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	sl	Za tipska pisma uporabite značko. Vsebino, ki jo želite imeti v vseh dokumentih, vnesite med značke.
@@ -404,7 +400,6 @@ started	tracker	sl	Začelo se je
 starting	tracker	sl	Začetek
 state	tracker	sl	Stanje
 stati	tracker	sl	Statistika
-status	tracker	sl	Stanje
 store as	tracker	sl	Shrani kot
 success message	tracker	sl	Sporočilo o uspehu
 sum	tracker	sl	Vsota
@@ -503,8 +498,10 @@ you need to select some entries first	tracker	sl	Najprej morate izbrati nekaj vn
 you need to select something to change and some tracker items!	tracker	sl	Izbrati morate nekaj za spremeniti IN nekaj elementov!
 you need to specify amount, donators name and email address!	tracker	sl	Določiti morate vrednost, ime donatorja IN elektronski naslov!
 you voted %1.	tracker	sl	Glasovali ste %1.
+[fwd]	tracker	sl	[FWD]
 ♦ closed	tracker	sl	♦ Zaprto
 ♦ not closed	tracker	sl	♦ Ni zaprto
+♦ not closed or pending	tracker	sl	♦ Ni zaprto ali čaka na obravnavo
 ♦ own not closed	tracker	sl	♦ Lastnik ni zaprt
 ♦ own or assigned not closed	tracker	sl	♦ lasten ali dodeljen, ni zaprt
 ♦ own without reply not closed	tracker	sl	♦ Lastna brez odgovora ni zaprta

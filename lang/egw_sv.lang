@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	sv	%1 ärenden har konverterats.
 (beware of mailloops, check the help!)	tracker	sv	(Se upp för mailloops!)
 (new tickets as	tracker	sv	Nya ärenden som
---> choose a project from the drop-down list	tracker	sv	--> välj ett projekt från rullgardinsmenyn
 --> enter new name	tracker	sv	--> ange nytt namn
 1 - lowest	tracker	sv	1 - Lägst
 2 days in advance	tracker	sv	2 dagar i förväg
@@ -17,7 +16,6 @@
 3 years ago	tracker	sv	3 år sedan
 5 - medium	tracker	sv	5 - Medium
 9 - highest	tracker	sv	9 - Högst
-[fwd]	tracker	sv	[FWD]
 accepted	tracker	sv	Accepterad
 acl	tracker	sv	Åtkomstkontrollista
 activate users queue access control	tracker	sv	Aktivera åtkomstkontroll för användarkö
@@ -102,7 +100,6 @@ creation date	tracker	sv	Skapat datum
 custom fields	tracker	sv	Anpassade fält
 custom notifications	tracker	sv	Anpassade aviseringar
 customfield	tracker	sv	Anpassat fält
-data exchange settings	tracker	sv	Inställningar för datautbyte
 date filter	tracker	sv	Datumfilter
 date opened	tracker	sv	Datum öppnat
 default document to insert entries	tracker	sv	Standarddokument för att infoga poster
@@ -206,6 +203,7 @@ new tracker item submitted by %1 at %2	tracker	sv	Nytt Tracker ärende skapat av
 no change	tracker	sv	Ingen ändring
 non-anonymous users	tracker	sv	Inloggade användare
 noone	tracker	sv	Ingen
+not-closed	tracker	sv	Inte stängt
 notification	tracker	sv	Meddelande
 notification settings	tracker	sv	Inställningar för notifieringar
 number of row for a multiline inputfield or line of a multi-select-box	tracker	sv	Antal rader för flerraders indatafält eller flervalsruta
@@ -303,6 +301,10 @@ you need to select some entries first	tracker	sv	Du måste välja några poster 
 you need to select something to change and some tracker items!	tracker	sv	Du måste välja något att ändra och något Tracker ärende!
 you need to specify amount, donators name and email address!	tracker	sv	Du måste ange summan, donatörens namn och e-postadress!
 you voted %1.	tracker	sv	Du röstade %1
+[fwd]	tracker	sv	[FWD]
 ♦ closed	tracker	sv	♦ Stängt
 ♦ not closed	tracker	sv	♦ Ej stängt
+♦ not closed or pending	tracker	sv	♦ Ej stängt eller avvaktande
 ♦ own not closed	tracker	sv	♦ Egen inte stängd
+♦ own or assigned not closed	tracker	sv	♦ Egen eller tilldelad, ej stängd
+♦ without reply not closed	tracker	sv	♦ Utan svar ej stängt

@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	bg	Преобразувани са %1 билети.
 (beware of mailloops, check the help!)	tracker	bg	(Внимавайте за mailloops, проверете помощта!)
 (new tickets as	tracker	bg	Нови билети като
---> choose a project from the drop-down list	tracker	bg	-> изберете проект от падащия списък
 --> enter new name	tracker	bg	-> въведете ново име
 1 - lowest	tracker	bg	1 - най-ниско
 2 days in advance	tracker	bg	2 дни предварително
@@ -17,7 +16,6 @@
 3 years ago	tracker	bg	Преди 3 години
 5 - medium	tracker	bg	5 - средно
 9 - highest	tracker	bg	9 - най-високо
-[fwd]	tracker	bg	[FWD]
 accepted	tracker	bg	Приет
 acl	tracker	bg	Списък за контрол на достъпа
 activate users queue access control	tracker	bg	Активиране контрола за достъп на опашката на потребителите
@@ -199,7 +197,6 @@ export definition to use for nextmatch export	tracker	bg	Дефиниция за
 export definitition to use for nextmatch export	tracker	bg	Дефиниция за експорт, която да се използва за nextmatch експорт
 exports a list of tracker tickets to a csv file.	tracker	bg	Експортира списък с билети за проследяване в CSV файл.
 failed to open mailbox: %1 -> disabled for automatic mailprocessing!	tracker	bg	не успя да отвори пощенската кутия: %1 -> деактивирана за автоматична обработка на поща!
-favorites	tracker	bg	Любими
 field	tracker	bg	Поле
 fixed	tracker	bg	Фиксиран
 for serial letter use this tag. put the content, you want to repeat between two tags.	tracker	bg	За последователно писмо използвайте този маркер. Поставете съдържанието, което искате да повторите, в рамките на двата тага.
@@ -327,7 +324,7 @@ project selection	tracker	bg	Избор на проект
 projects	tracker	bg	Проекти
 re-open closed tickets when a comment is added	tracker	bg	Отворете отново затворени билети, когато бъде добавен нов коментар
 read	tracker	bg	Прочетете
-read / unread	tracker	bg	Прочетено / непрочетено
+read / unread	tracker	bg	Прочетено / Непрочетено
 read mail address	tracker	bg	Филтриране на пощенската кутия за този имейл адрес
 read only filemanager directory	tracker	bg	Директорията на Filemanger само за четене
 receive notifications about assigned tracker-items	tracker	bg	Получаване на известия за зададени елементи на проследяване
@@ -396,7 +393,6 @@ started	tracker	bg	Започнат
 starting	tracker	bg	Стартиране
 state	tracker	bg	Състояние
 stati	tracker	bg	Състояние
-status	tracker	bg	Статус
 store as	tracker	bg	Съхранявайте като
 sum	tracker	bg	Сума
 summary	tracker	bg	Обобщение
@@ -491,8 +487,10 @@ you need to select some entries first	tracker	bg	Първо трябва да и
 you need to select something to change and some tracker items!	tracker	bg	Трябва да изберете нещо, което да промените, както и проследяващи елементи!
 you need to specify amount, donators name and email address!	tracker	bg	Трябва да посочите сума, име на дарителите и имейл адрес!
 you voted %1.	tracker	bg	Гласувахте %1.
+[fwd]	tracker	bg	[FWD]
 ♦ closed	tracker	bg	♦ Затворено
 ♦ not closed	tracker	bg	♦ Не е затворен
+♦ not closed or pending	tracker	bg	♦ Не е затворен или е в очакване
 ♦ own not closed	tracker	bg	♦ Собствен, не е затворен
 ♦ own or assigned not closed	tracker	bg	♦ Собствен или възложен на някого, не е затворен
 ♦ own without reply not closed	tracker	bg	♦ Собствен без отговор, не е затворен

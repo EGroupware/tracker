@@ -2,7 +2,6 @@ accepted	tracker	ca	Acceptat
 add timesheet entry	tracker	ca	Afegeix entrada d'horari
 applies the changes	tracker	ca	aplica els canvis
 attention: no contact with address %1 found.	tracker	ca	Atenció: No s'ha trobat el contacte amb l'adreça %1
-check all	tracker	ca	Comprova-ho tot
 comments	tracker	ca	Comentaris
 completed	tracker	ca	Complet
 configuration	tracker	ca	Configuració

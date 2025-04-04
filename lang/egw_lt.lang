@@ -8,7 +8,6 @@
 %1 tickets have been converted	tracker	lt	%1 bilietai buvo konvertuoti.
 (beware of mailloops, check the help!)	tracker	lt	(Saugokitės mailloops!)
 (new tickets as	tracker	lt	Nauji bilietai kaip
---> choose a project from the drop-down list	tracker	lt	--> pasirinkite projektą iš išskleidžiamojo sąrašo
 --> enter new name	tracker	lt	--> įveskite naują pavadinimą
 1 - lowest	tracker	lt	1 - mažiausias
 2 days in advance	tracker	lt	Prieš 2 dienas
@@ -17,7 +16,6 @@
 3 years ago	tracker	lt	prieš 3 metus
 5 - medium	tracker	lt	5 - vidutinis
 9 - highest	tracker	lt	9 - didžiausias
-[fwd]	tracker	lt	[FWD]
 accepted	tracker	lt	Priimta
 acl	tracker	lt	Prieigos kontrolės sąrašas
 activate users queue access control	tracker	lt	Įjungti naudotojų eilės prieigos kontrolę
@@ -59,6 +57,7 @@ change color	tracker	lt	Pakeisti spalvą
 change group when updating	tracker	lt	Pakeisti grupę atnaujinant
 change owner when updating	tracker	lt	Atnaujinant pakeisti savininką
 choose 'creator' of imported data	tracker	lt	Pasirinkite importuojamų duomenų "kūrėją"
+close pending	tracker	lt	Uždaryti laukiančius
 closed date	tracker	lt	Uždarymo data
 color	tracker	lt	Spalva
 configuration, notifications	tracker	lt	Konfigūracija, Pranešimai
@@ -69,7 +68,6 @@ created by	tracker	lt	Sukūrė
 created on	tracker	lt	Sukurta
 custom notifications	tracker	lt	Pasirinktiniai pranešimai
 customfield	tracker	lt	Pasirinktinis laukas
-data exchange settings	tracker	lt	Keitimosi duomenimis nustatymai
 date filter	tracker	lt	Datos filtras
 default document to insert entries	tracker	lt	Numatytasis dokumentas įrašams įterpti
 default group	tracker	lt	Numatytoji grupė
@@ -120,11 +118,13 @@ imports entries into the tracker from a csv file. csv means 'comma separated val
 incomplete server profile for mailhandling provided; disabling mailhandling for queue %1	tracker	lt	Pateiktas nepilnas serverio profilis pašto tvarkymui; Išjungti pašto tvarkymą eilei %1
 language	tracker	lt	Kalba
 last 3 months	tracker	lt	Paskutiniai 3 mėnesiai
+not-closed	tracker	lt	Neuždaryta
 open(status)	tracker	lt	Atviras
 pop3	tracker	lt	POP3
 port number	tracker	lt	Prievado numeris
+re-open closed tickets when a comment is added	tracker	lt	Vėl atidaryti uždarytus bilietus, kai pridedamas komentaras
 read	tracker	lt	Skaityti
-read / unread	tracker	lt	Perskaityta / Neperskaityta
+read / unread	tracker	lt	Skaityti / Neperskaityta
 read only filemanager directory	tracker	lt	Tik skaitymui skirtas failų tvarkyklės katalogas
 rejected	tracker	lt	Atmesta
 remind	tracker	lt	Priminti
@@ -143,5 +143,8 @@ yes, add mailheader to both (description and comments)	tracker	lt	Taip, pridėki
 yes, add mailheader to comments	tracker	lt	Taip, pridėti pašto antraštę prie komentarų
 yes, add mailheader to description	tracker	lt	Taip, prie aprašymo pridėti antraštę
 yes, always	tracker	lt	Taip, visada
+[fwd]	tracker	lt	[FWD]
 ♦ closed	tracker	lt	♦ Uždaryta
 ♦ not closed	tracker	lt	♦ Neuždaryta
+♦ not closed or pending	tracker	lt	♦ Neuždarytas arba laukiantis
+♦ without reply not closed	tracker	lt	♦ Be atsakymo neuždarytas
