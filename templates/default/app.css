@@ -146,7 +146,7 @@ label.tracker_trIdEdit:before { content: "#"; }
 	flex: 1 1 auto;
 }
 
-#tracker-edit-comment_edit > div {
+#tracker-edit-comment_edit et2-template::part(base) {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
