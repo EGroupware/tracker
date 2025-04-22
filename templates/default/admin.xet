@@ -624,7 +624,7 @@
         </styles>
     </template>
     <template id="tracker.admin" template="" lang="" group="0" version="1.9.004">
-        <et2-vbox>
+        <et2-vbox height="100%">
             <et2-description  align="center" id="msg" class="message" disabled="!@msg" noLang="1"></et2-description>
             <et2-hbox>
                 <et2-description  disabled="true" for="tracker" value="tracker" class="bold"></et2-description>
@@ -642,7 +642,7 @@
                     <et2-button  align="right" label="Change color" id="button[change_color]"></et2-button>
                 </et2-hbox>
             </et2-hbox>
-            <et2-tabbox id="tabs" cfDisabled="true">
+            <et2-tabbox id="tabs" cfDisabled="true" tabHeight="auto">
                 <tabs>
                     <tab id="tracker.admin.cats" label="Categories"
                          statustext="Categories, versions, canned responses"/>
