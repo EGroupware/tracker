@@ -270,9 +270,14 @@ class tracker_tracking extends Api\Storage\Tracking
 					return array();	// no copies for private entries
 				}
 				$config = $config ? preg_split('/, ?/',$config) : array();
-				if ($data['tr_cc'])
+				// do NOT include the mailhandler username / email, as it would create a mail-loop
+				$mailhandler_email = strtolower($this->tracker->mailhandling[$tracker]['username'] ?? $this->tracker->mailhandling[0]['username'] ?? '');
+				foreach(!empty($data['tr_cc']) ? preg_split('/, ?/',$data['tr_cc']) : [] as $cc)
 				{
-					$config = array_merge($config,preg_split('/, ?/',$data['tr_cc']));
+					if (strtolower($cc) !== $mailhandler_email)
+					{
+						$config[] = $cc;
+					}
 				}
 				break;
 			case 'skip_notify':
