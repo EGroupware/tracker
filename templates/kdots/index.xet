@@ -125,7 +125,7 @@
     </template>
     <template id="tracker.index.header" template="" lang="" group="0" version="1.7.001">
         <et2-button-icon  statustext="Add" image="add" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button-icon>
-        <template template="api.seach-button" ></template>
+        <template template="api.search-button" ></template>
     </template>
     <template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
         <et2-hbox>
