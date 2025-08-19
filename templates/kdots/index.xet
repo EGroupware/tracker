@@ -139,6 +139,7 @@
     </template>
     <template id="tracker.index" template="" lang="" group="0" version="1.9.003">
         <template template="tracker.index.header" slot="main-header"></template>
+        <nextmatch id="nm" template="tracker.index.rows" span="all" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
         <grid width="100%" class="tracker-index">
             <columns>
                 <column/>
@@ -147,9 +148,6 @@
             <rows>
                 <row disabled="!@css" class="hideme">
                     <html id="css" span="all"/>
-                </row>
-                <row>
-                    <nextmatch id="nm" template="tracker.index.rows" span="all" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
                 </row>
                 <row>
                     <et2-box>
