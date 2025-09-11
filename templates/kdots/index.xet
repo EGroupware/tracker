@@ -118,28 +118,27 @@
             </rows>
         </grid>
     </template>
-    <template id="tracker.index.queue" template="" lang="" group="0" version="1.9.001">
-        <et2-select id="col_filter[tr_tracker]" multiple="true" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass=""
-                    onchange="widget.getRoot().getWidgetById('tr_assigned').firstChild.tracker = widget.value;"
-        ></et2-select>
-    </template>
     <template id="tracker.index.header" template="" lang="" group="0" version="1.7.001">
         <et2-button-icon  statustext="Add" image="add" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button-icon>
-        <template template="api.search-button" ></template>
+        <et2-template template="api.search-button"></et2-template>
+        <et2-toolbar id="toolbar">
+            <et2-select id="col_filter[tr_tracker]" multiple="true" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass=""
+                onchange="widget.getRoot().getWidgetById('tr_assigned').firstChild.tracker = widget.value;"></et2-select>
+            <et2-select id="tr_status" ariaLabel="Status" emptyLabel="All" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select id="cat_id" ariaLabel="Category" emptyLabel="All categories" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select id="filter" ariaLabel="Date filter" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select id="filter2" ariaLabel="Version" onchange="app.tracker.changeNmFilter"></et2-select>
+        </et2-toolbar>
     </template>
     <template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
-        <et2-hbox>
-            <et2-description  value="Start"></et2-description>
-            <et2-date id="startdate"
-                      onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
-            <et2-description  value="End"></et2-description>
-            <et2-date id="enddate"
-                      onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
-        </et2-hbox>
+        <et2-date id="startdate" label="Start" class="et2-label-fixed" style="padding-bottom: .3rem"
+            onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
+        <et2-date id="enddate" label="End" class="et2-label-fixed"
+            onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
     </template>
     <template id="tracker.index" template="" lang="" group="0" version="1.9.003">
         <template template="tracker.index.header" slot="main-header"></template>
-        <nextmatch id="nm" template="tracker.index.rows" span="all" header_row="tracker.index.queue" header_right="tracker.index.dates"/>
+        <nextmatch id="nm" template="tracker.index.rows" span="all"/>
         <grid width="100%" class="tracker-index">
             <columns>
                 <column/>

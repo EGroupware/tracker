@@ -23,6 +23,7 @@ import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount
 import "./Et2TrackerAssigned.ts";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {LitElement} from "lit";
+import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 
 /**
  * UI for tracker
@@ -152,24 +153,49 @@ import {LitElement} from "lit";
 	}
 
 	/**
-	 * Tracker list filter change, used to toggle date fields
+	 * Enable or disable the date filter
+	 *
+	 * If the filter is set to something that needs dates, we open the
+	 * filter-box and show start- and endtime.
+	 *
+	 * @param ev
+	 * @param filter
 	 */
-	filter_change() : boolean
+	filter_change(ev : Event, filter : Et2Select)
 	{
-		let filter = <et2_selectbox>this.et2.getWidgetById('filter');
-		let dates = <et2_template>this.et2.getWidgetById('tracker.index.dates');
-
+		const dates = this.et2.getWidgetById('tracker.index.dates');
 		if (filter && dates)
 		{
-			dates.set_disabled(filter.getValue() !== "custom");
-			if (filter.value == "custom")
+			dates.set_disabled(filter.value !== "custom");
+			if (!filter.value) this.nm.activeFilters.startdate = null;
+			if (filter.value === "custom")
 			{
-				window.setTimeout(function() {
-					jQuery(this.et2.getWidgetById('startdate').getDOMNode()).find('input').focus();
-				}.bind(this), 100);
+				const filterDrawer = filter.closest('egw-app').filtersDrawer;
+				if (filterDrawer && !filterDrawer.open)
+				{
+					filterDrawer.open = true;
+				}
+				window.setTimeout(() => dates.getWidgetById('startdate').focus());
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Check if any NM filter or search in app-toolbar needs to be updated to reflect NM internal state
+	 *
+	 * @param app_toolbar
+	 * @param id
+	 * @param value
+	 */
+	checkNmFilterChanged(app_toolbar, id : string, value : string)
+	{
+		super.checkNmFilterChanged(app_toolbar, id, value);
+
+		if (id === 'filter')
+		{
+			this.filter_change(null, this.et2.getWidgetById(id));
+		}
 	}
 
 	/**
