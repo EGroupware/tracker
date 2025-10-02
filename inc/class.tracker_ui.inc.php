@@ -1302,7 +1302,7 @@ class tracker_ui extends tracker_bo
 
 		$rows['sel_options']['tr_status'] = $this->filters+$statis;
 		$rows['sel_options']['cat_id'] = $cats;
-		$rows['sel_options']['filter2'] = array(lang('All versions'))+$versions;
+		$rows['sel_options']['filter2'] = array(''=>lang('All versions'))+$versions;
 		$rows['sel_options']['tr_version'] =& $versions;
 		$rows['sel_options']['tr_resolution'] =& $resolutions;
 
@@ -1559,7 +1559,7 @@ class tracker_ui extends tracker_bo
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			// Still need to provide options for the column filter
 			'tr_private'  => array('No', 'Yes'),
-			'read' => array('Unread', 'Read')
+			'read' => array('Unread', 'Read'),
 		);
 		if (($escalations = ExecMethod2('tracker.tracker_escalations.query_list','esc_title','esc_id')))
 		{
@@ -1589,7 +1589,7 @@ class tracker_ui extends tracker_bo
 
 		if (!is_array($content['nm']) || !$content['nm']['get_rows'])
 		{
-			$date_filters = array(lang('Date filter'));
+			$date_filters = array('' => lang('Date filter'));
 			foreach(array_keys($this->date_filters) as $name)
 			{
 				$date_filters[$name] = lang($name);
@@ -1598,12 +1598,12 @@ class tracker_ui extends tracker_bo
 			$content['nm'] = array(
 				'get_rows'       =>	'tracker.tracker_ui.get_rrows',
 				'cat_is_select'  => 'no_lang',
-				'filter'         => 0,  // all
+				'filter'         => '',  // all
 				'options-filter' => $date_filters,
 				'filter_onchange' => "app.tracker.filter_change",
 				'filter_aria_label'   => lang('Date filter'),
 				'filter_no_lang'=> true,
-				'filter2'        => 0,	// all
+				'filter2'        => '',	// all
 				'filter2_tags'	=> true,
 				'filter2_aria_label'  => lang('Version'),
 				'filter2_no_lang'=> true,
