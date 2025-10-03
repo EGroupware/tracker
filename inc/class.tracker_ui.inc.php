@@ -1657,7 +1657,11 @@ class tracker_ui extends tracker_bo
 			$content['nm']['no_bounties'] = !$this->allow_bounties;
 			$content['nm']['no_tr_sum_timesheets'] = false;
 		}
-		if (!$content['nm']['session_for'] && $this->called_by) $content['nm']['session_for'] = $this->called_by;
+		else
+		{
+			$content['nm']['have_sort_state'] = true;
+		}
+		if (empty($content['nm']['session_for']) && $this->called_by) $content['nm']['session_for'] = $this->called_by;
 		if($_GET['search'])
 		{
 			$content['nm']['search'] = $_GET['search'];

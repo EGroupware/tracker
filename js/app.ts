@@ -153,6 +153,24 @@ import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 	}
 
 	/**
+	 * Overwritten to fix previously used "0" instead of "" for filter and filter2
+	 *
+	 * @param {{name: string, state: object}|string} state Object (or JSON string) for a state.
+	 *	Only state is required, and its contents are application specific.
+	 * @return {{name: string, state: object}} state Object (or JSON string) for a state.
+	 */
+	fixState(state): { name: string, state: object, group: number|false }
+	{
+		state = super.fixState(state);
+
+		// fix old state uses '0' instead of '' for all/empty
+		if (state.state?.filter === '0') state.state.filter = '';
+		if (state.state?.filter2 === '0') state.state.filter2 = '';
+
+		return state;
+	}
+
+	/**
 	 * Enable or disable the date filter
 	 *
 	 * If the filter is set to something that needs dates, we open the
