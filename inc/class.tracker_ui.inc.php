@@ -958,7 +958,6 @@ class tracker_ui extends tracker_bo
 			'filter2'    => $query['filter2'],	// version
 			'order'      => $query['order'],
 			'sort'       => $query['sort'],
-			'num_rows'   => $query['num_rows'],
 			'col_filter' => array(
 				'tr_tracker'  => $query['col_filter']['tr_tracker'],
 				'tr_creator'  => $query['col_filter']['tr_creator'],
@@ -1631,9 +1630,9 @@ class tracker_ui extends tracker_bo
 				default:
 			}
 			// use the state of the last session stored in the user prefs
-			if (!$this->called_by && ($state = @unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])))
+			if (!$this->called_by && ($state = unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'], ['allowed_classes' => false])))
 			{
-				unset($state['header_left']); unset($state['header_right']);
+				unset($state['header_left'], $state['header_right'], $state['num_rows']);
 				$content['nm'] = array_merge($content['nm'],$state);
 				$tracker = $content['nm']['col_filter']['tr_tracker'];
 			}
