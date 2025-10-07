@@ -21,6 +21,14 @@
   min-height: 150px !important;
   overflow-y: hidden;
 }
+/* give comments NM full height of the tab */
+et2-tab-panel#tracker-edit_comments {
+  padding-top: 0;
+  overflow: hidden;
+}
+div#tracker-edit_replies {
+  height: 100%;
+}
 .tracker_overdue,
 .bold {
   font-weight: bold;
@@ -99,14 +107,12 @@ label.tracker_trIdEdit:before {
 }
 /* Restricted access replies */
 .reply_visible_1 {
-  border: 1px dashed gray;
-  background: beige;
+  background: var(--sl-color-amber-50, beige);
   width: 100%;
-  display: inline-block;
-  overflow: hidden;
 }
-.reply_visible_0 {
-  overflow: hidden;
+.egwGridView_scrollarea tr.row_category.reply_visible_1 > td:first-child {
+  border-left-color: var(--sl-color-amber-200);
+  --category-color: var(--sl-color-amber-200);
 }
 #tracker-edit_tr_creator {
   white-space: nowrap;
@@ -133,11 +139,25 @@ label.tracker_trIdEdit:before {
   width: auto;
 }
 /* Add comment file buttons */
+#tracker-edit_tracker-edit-add_comment td.add_comment_header {
+  padding-bottom: 0px;
+}
+#tracker-edit_tracker-edit-add_comment .add_comment_header::part(base),
+#tracker-edit_tracker-edit-add_comment .add_comment_header et2-hbox::part(base) {
+  align-items: center;
+}
+#tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar {
+  padding: 0;
+}
 #tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar * {
   vertical-align: top;
 }
 #tracker-edit_tracker-edit-add_comment .et2_hbox .et2_label[for="canned_response"] {
   padding-top: 6px;
+}
+#tracker-edit_tracker-edit-add_comment et2-vfs-select::part(base),
+#tracker-edit-comment-dialog et2-vfs-select::part(base) {
+  border-color: transparent;
 }
 /* Turn off edit cursor, use context menu instead */
 #tracker-edit_tracker-edit-comments .et2_editable {
@@ -168,12 +188,34 @@ label.tracker_trIdEdit:before {
 #tracker-edit_tracker-edit-comments .et2_vfs .progress {
   display: none;
 }
-#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons et2-button,
-#tracker-edit_tracker-edit-comments .et2_toolbar.hide_buttons *::part(button) {
-  display: none !important;
+#tracker-edit-comment-dialog::part(panel) {
+  min-width: 40em;
+  min-height: 20em;
 }
-#tracker-edit_tracker-edit-comments et2-button .et2_vfs_btn {
-  float: left;
+#tracker-edit-comment-dialog::part(body) {
+  display: flex;
+  align-items: stretch;
+}
+#tracker-edit-comment_edit {
+  flex: 1 1 auto;
+}
+#tracker-edit-comment_edit et2-template::part(base) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#tracker-edit-comment_edit #_reply_message {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  flex: 1 0 10em;
+}
+/* HTML comment edit */
+#tracker-edit-comment_edit #_reply_message + div {
+  flex: 1 0 15em;
+}
+#tracker-edit-comment_edit .et2_toolbar > * {
+  flex: 0 0;
 }
 #tracker-index_tracker-index-queue {
   position: relative;
@@ -202,10 +244,8 @@ label.tracker_trIdEdit:before {
   }
   #tracker-index table.egwGridView_outer tbody label[id^='tracker-index'][id$='tr_created]'] > time {
     font-weight: normal;
-    font-size: 10pt;
   }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_status]'] {
-    font-size: 10pt;
     text-align: right;
     width: 80px;
     float: right;
@@ -221,14 +261,7 @@ label.tracker_trIdEdit:before {
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='prio_label]']::first-letter {
     font-weight: normal;
   }
-  #tracker-index table.egwGridView_outer tbody .tracker1Col {
-    font-size: 10pt;
-  }
-  #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_description]'] {
-    font-size: 10pt;
-  }
   #tracker-index table.egwGridView_outer tbody span[id^='tracker-index'][id$='tr_summary]'] {
-    font-size: 12pt;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
