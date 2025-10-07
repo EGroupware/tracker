@@ -110,22 +110,12 @@ class tracker_hooks
 		{
 			// Magic etemplate2 favorites menu (from nextmatch widget)
 			display_sidebox($appname, lang('Favorites'), Framework\Favorites::list_favorites($appname));
-
-			$file = array(
-				'Tracker list' => Egw::link('/index.php',array(
-					'menuaction' => 'tracker.tracker_ui.index',
-					'ajax' => 'true')
-				),
-				array(
-					'text' => lang('Add %1',lang(Link::get_registry($appname, 'entry'))),
-					'no_lang' => true,
-					'link' => "javascript:egw.open('','$appname','add')"
-				),
-			);
-
-			$file[] = ['text'=>'--'];
-			$file['Placeholders'] = Egw::link('/index.php','menuaction=tracker.tracker_merge.show_replacements');
-			display_sidebox($appname,$GLOBALS['egw_info']['apps'][$appname]['title'].' '.lang('Menu'),$file);
+			display_sidebox($appname, lang('Placeholders'), [
+				[
+					'text' => 'placeholders', 'icon' => 'braces',
+					'link' => Egw::link('/index.php', 'menuaction=tracker.tracker_merge.show_replacements')
+				]
+			]);
 		}
 
 		if ($GLOBALS['egw_info']['user']['apps']['admin'])
