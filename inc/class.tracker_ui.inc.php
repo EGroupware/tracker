@@ -2009,10 +2009,10 @@ width:100%;
 	/**
 	 * imports a mail as Tracker
 	 *
-	 * @param array $mailContent = null mail content
+	 * @param ?array $mailContent = null mail content
 	 * @return  array
 	 */
-	function mail_import(array $mailContent=null)
+	function mail_import(?array $mailContent=null)
 	{
 		// It would get called from compose as a popup with egw_data
 		if (!is_array($mailContent) && ($_GET['egw_data']))

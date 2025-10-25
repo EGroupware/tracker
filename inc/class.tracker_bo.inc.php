@@ -1083,11 +1083,11 @@ class tracker_bo extends tracker_so
 	/**
 	 * Check if given or current ticket is private and user is not creator, assignee or admin
 	 *
-	 * @param array $data = null array with ticket or null for $this->data
+	 * @param ?array $data = null array with ticket or null for $this->data
 	 * @param int $user = null account_id or null for current user
 	 * @return boolean true = deny access to private ticket, false grant access (ticket not private or access allowed)
 	 */
-	function deny_private(array $data=null,$user=null)
+	function deny_private(?array $data=null, $user=null)
 	{
 		if (!$user) $user = $this->user;
 		if (!$data) $data = $this->data;

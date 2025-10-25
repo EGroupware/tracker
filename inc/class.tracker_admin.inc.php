@@ -752,10 +752,10 @@ class tracker_admin extends tracker_bo
 	/**
 	 * Define escalations
 	 *
-	 * @param array $_content
+	 * @param ?array $_content
 	 * @param string $msg
 	 */
-	function escalations(array $_content=null,$msg='')
+	function escalations(?array $_content=null, $msg='')
 	{
 		$escalations = new tracker_escalations();
 

@@ -48,7 +48,7 @@ class tracker_import_csv extends importexport_basic_import_csv
 	 * @param importexport_definition $definition
 	 * @param ?importexport_import_csv $import_csv
 	 */
-	public function init(importexport_definition $definition, importexport_import_csv $import_csv=null)
+	public function init(importexport_definition $definition, ?importexport_import_csv $import_csv=null)
 	{
 		// fetch the bo
 		$this->bo = new tracker_bo();
