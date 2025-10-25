@@ -112,7 +112,7 @@
                                 noLang="1"></et2-number>
                     <et2-date-since id="${row}[esc_start]"></et2-date-since>
                     <customfields-list id="$row"/>
-                    <et2-link-string entryId="${row_cont[tr_id]}" application="tracker"
+                    <et2-link-string entryId="$row_cont[tr_id]" application="tracker"
                                      onlyApp="kanban"></et2-link-string>
                 </row>
             </rows>
