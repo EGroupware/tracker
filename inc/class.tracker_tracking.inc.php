@@ -462,7 +462,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			);
 		}
 */
-		$timezone = $data['user_timezone_read'] ? new DateTimeZone($data['user_timezone_read']) : null;
+		$timezone = !empty($data['user_timezone_read']) ? new DateTimeZone($data['user_timezone_read']) : null;
 		$detail_fields = array(
 			'tr_tracker'     => $this->tracker->trackers[$data['tr_tracker']],
 			'cat_id'         => $cats[$data['cat_id']],
@@ -528,7 +528,7 @@ class tracker_tracking extends Api\Storage\Tracking
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
 		);
-		if($data['num_replies'])
+		if (!empty($data['num_replies']))
 		{
 			$replies = new tracker_comments();
 			foreach($replies->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) as $reply_index => $reply)
