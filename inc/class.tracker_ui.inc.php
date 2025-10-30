@@ -88,7 +88,7 @@ class tracker_ui extends tracker_bo
 	function tprint()
 	{
 		// Check if exists
-		if ((int)$_GET['tr_id'])
+		if (!empty($_GET['tr_id']) && (int)$_GET['tr_id'])
 		{
 			if (!$this->read($_GET['tr_id']))
 			{
@@ -139,10 +139,10 @@ class tracker_ui extends tracker_bo
 		//_debug_array($content);
 		if (!is_array($content))
 		{
-			if ($_GET['msg']) $msg = strip_tags($_GET['msg']);
+			if (!empty($_GET['msg'])) $msg = strip_tags($_GET['msg']);
 
 			// edit or new?
-			if ((int)$_GET['tr_id'])
+			if (!empty($_GET['tr_id']) && (int)$_GET['tr_id'])
 			{
 				$own_referer = Api\Header\Referer::get();
 				if (!$this->read($_GET['tr_id'], '', '', null, Api\Header\UserAgent::mobile()))
@@ -168,7 +168,7 @@ class tracker_ui extends tracker_bo
 					//echo "<p>data[tr_edit_mode]={$this->data['tr_edit_mode']}, this->htmledit=".array2string($this->htmledit)."</p>\n";
 					// Ascii Replies are converted to html, if htmledit is disabled (default), we allways convert, as this detection is weak
 					// Conversion must be based on ticket setting, since it persists after the config setting is changed
-					foreach ($this->data['replies'] as &$reply)
+					foreach ($this->data['replies'] ?? [] as &$reply)
 					{
 						if (!($this->data['tr_edit_mode'] == 'html')|| (strlen($reply['reply_message'])==strlen(strip_tags($reply['reply_message'])))) //(stripos($reply['reply_message'], '<br') === false && stripos($reply['reply_message'], '<p>') === false))
 						{
@@ -177,10 +177,11 @@ class tracker_ui extends tracker_bo
 					}
 					//// Make sure add comment file directory is empty, in case someone closed
 					// it without saving after selecting or uploading a file
+					/* $tr_id is never defined, WTF
 					if($this->file_access($tr_id, Acl::DELETE))
 					{
 						$this->remove_comment_dir($tr_id);
-					}
+					}*/
 				}
 				$needInit = false;
 			}
@@ -196,14 +197,14 @@ class tracker_ui extends tracker_bo
 					'tr_tracker' => $this->data['tr_tracker']
 				);
 				if(($state = Api\Cache::getSession('tracker', 'index' .
-															(isset($this->trackers[(int)$_GET['only_tracker']]) ? '-' . $_GET['only_tracker'] : '')
+					(!empty($_GET['only_tracker']) && isset($this->trackers[(int)$_GET['only_tracker']]) ? '-' . $_GET['only_tracker'] : '')
 				)))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = $state['col_filter']['tr_tracker'] ? $state['col_filter']['tr_tracker'] : $this->data['tr_tracker'];
 					$this->data['cat_id'] = $regardInInit['cat_id'] = $state['cat_id'] ? $state['cat_id'] : '';
 					$this->data['tr_version'] = $regardInInit['tr_version'] = $state['filter2'] ? $state['filter2'] : $GLOBALS['egw_info']['user']['preferences']['tracker']['default_version'];
 				}
-				if($_GET['tracker'] && is_array($_GET['tracker']))
+				if(!empty($_GET['tracker']) && is_array($_GET['tracker']))
 				{
 					// Prefer default, if it's there, otherwise just pick the first
 					if($this->default_tracker && in_array($this->default_tracker, $_GET['tracker']))
@@ -215,7 +216,7 @@ class tracker_ui extends tracker_bo
 						$_GET['tracker'] = array_pop($_GET['tracker']);
 					}
 				}
-				if(isset($this->trackers[(int)$_GET['tracker']]))
+				if(!empty($_GET['tracker']) && isset($this->trackers[(int)$_GET['tracker']]))
 				{
 					$this->data['tr_tracker'] = $regardInInit['tr_tracker'] = (int)$_GET['tracker'];
 				}
@@ -233,7 +234,7 @@ class tracker_ui extends tracker_bo
 
 
 			// Copy
-			if($_GET['tr_id'] && $_GET['makecp'])
+			if(!empty($_GET['tr_id']) && !empty($_GET['makecp']))
 			{
 				$this->copy($this->data);
 			}
@@ -242,7 +243,7 @@ class tracker_ui extends tracker_bo
 			{
 				$this->init($regardInInit);
 			}
-			if ($_GET['no_popup'] || $_GET['nopopup']) $popup = false;
+			if (!empty($_GET['no_popup']) || !empty($_GET['nopopup'])) $popup = false;
 
 			// check if user has rights to create new entries and fail if not
 			if (!$this->data['tr_id'] && !$this->check_rights($this->field_acl['add'],null,null,null,'add'))
@@ -361,7 +362,7 @@ class tracker_ui extends tracker_bo
 					$ret = $this->save();
 
 					$this->comment_files($this->data['tr_id'],
-						$this->data['replies'][0]['reply_id'],
+						$this->data['replies'][0]['reply_id'] ?? null,
 						$this->data
 					);
 
@@ -406,7 +407,7 @@ class tracker_ui extends tracker_bo
 								}
 							}
 						}
-						if (is_array($content['link_to']['to_id']) && count($content['link_to']['to_id']))
+						if (is_array($content['link_to']['to_id'] ?? null) && count($content['link_to']['to_id']))
 						{
 							Link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
 
@@ -561,7 +562,7 @@ class tracker_ui extends tracker_bo
 			reset($this->trackers);
 			$tracker = @key($this->trackers);
 		}
-		if (!$readonlys) $readonlys = $this->readonlys_from_acl();
+		if (empty($readonlys)) $readonlys = $this->readonlys_from_acl();
 
 		$preserv = $content = $this->data;
 		$content['id'] = $tr_id;
@@ -944,10 +945,10 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		$query = $query_in;
-		$old_query = Api\Cache::getSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''));
-		if (!$query['csv_export'])	// do not store query for csv-export in session
+		$old_query = Api\Cache::getSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''));
+		if (empty($query['csv_export']))	// do not store query for csv-export in session
 		{
-			Api\Cache::setSession('tracker',$query['session_for'] ? $query['session_for'] : 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
+			Api\Cache::setSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
 				array_diff_key ($query, array_flip(array('rows','actions','action_links','placeholder_actions'))));
 		}
 		// save the state of the index page (filters) in the user prefs
@@ -965,7 +966,7 @@ class tracker_ui extends tracker_bo
 				'tr_status'   => $query['col_filter']['tr_status'],
 			),
 		));
-		if (!$query['csv_export'] && !$query['action'] && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
+		if (empty($query['csv_export']) && empty($query['action']) && $GLOBALS['egw']->session->session_flags != 'A' &&	// store the current state of non-anonymous users in the prefs
 			$state != $GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'])
 		{
 			//$msg .= "save the index state <br>";
@@ -990,13 +991,13 @@ class tracker_ui extends tracker_bo
 		// handle action and linked filter (show only entries linked to a certain other entry)
 		$link_filters = array();
 		$links = array();
-		if ($query['col_filter']['linked'])
+		if (!empty($query['col_filter']['linked']))
 		{
 			$link_filters['linked'] = $query['col_filter']['linked'];
 			$links['linked'] = array();
 			unset($query['col_filter']['linked']);
 		}
-		if($query['action'] && in_array($query['action'], array_keys($GLOBALS['egw_info']['apps'])) && $query['action_id'])
+		if(!empty($query['action']) && in_array($query['action'], array_keys($GLOBALS['egw_info']['apps'])) && $query['action_id'])
 		{
 			$link_filters['action'] = array('app'=>$query['action'], 'id' => $query['action_id']);
 			$links['action'] = array();
@@ -1453,7 +1454,7 @@ class tracker_ui extends tracker_bo
 		//_debug_array($this->trackers);
 		if (!is_array($content))
 		{
-			if ($_GET['tr_id'])
+			if (!empty($_GET['tr_id']))
 			{
 				if (!$this->read($_GET['tr_id']))
 				{
@@ -1464,7 +1465,7 @@ class tracker_ui extends tracker_bo
 					return $this->edit(null,'',false);	// false = use no popup
 				}
 			}
-			if (!$msg && $_GET['msg']) $msg = $_GET['msg'];
+			if (!$msg && !empty($_GET['msg'])) $msg = $_GET['msg'];
 			if ($only_tracker && isset($this->trackers[$only_tracker]))
 			{
 				$tracker = $only_tracker;
@@ -1474,7 +1475,7 @@ class tracker_ui extends tracker_bo
 				$only_tracker = null;
 			}
 			// if there is no tracker specified, try the tracker submitted
-			if (!$tracker && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
+			if (!$tracker && !empty($_GET['tracker']) && (int)$_GET['tracker']) $tracker = $_GET['tracker'];
 			// if there is still no tracker, use the last tracker that was applied and saved to/with the view with the appsession
 			if (!$tracker && ($state=  Api\Cache::getSession('tracker','index'.($only_tracker ? '-'.$only_tracker : ''))))
 			{
@@ -1554,7 +1555,7 @@ class tracker_ui extends tracker_bo
 		$sel_options = array(
 			'tr_tracker'  => $this->trackers,
 			'tr_status'   => $this->filters + $this->get_tracker_stati($tracker),
-			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']),
+			'tr_priority' => $this->get_tracker_priorities($tracker,$content['cat_id']??null),
 			'tr_resolution' => $this->get_tracker_labels('resolution',$tracker),
 			// Still need to provide options for the column filter
 			'tr_private'  => array('No', 'Yes'),
@@ -1662,7 +1663,7 @@ class tracker_ui extends tracker_bo
 			$content['nm']['have_sort_state'] = true;
 		}
 		if (empty($content['nm']['session_for']) && $this->called_by) $content['nm']['session_for'] = $this->called_by;
-		if($_GET['search'])
+		if(!empty($_GET['search']))
 		{
 			$content['nm']['search'] = $_GET['search'];
 		}
@@ -1684,7 +1685,7 @@ class tracker_ui extends tracker_bo
 
 		//
 		// disable favories dropdown button, if not running as infolog
-		if($this->called_as || $content['nm']['session_for'])
+		if($this->called_as || !empty($content['nm']['session_for']))
 		{
 			$content['nm']['favorites'] = false;
 		}
@@ -1715,7 +1716,7 @@ class tracker_ui extends tracker_bo
 			$content['nm'] = array_merge($content['nm'], Api\Cache::getSession('tracker', $this->called_by));
 		}
 
-		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']);
+		$content['nm']['actions'] = $this->get_actions($tracker, $content['cat_id']??null);
 
 		// disable filemanager icon, if user has no access to it
 		$readonlys['filemanager/navbar'] = !isset($GLOBALS['egw_info']['user']['apps']['filemanager']);
@@ -1741,8 +1742,8 @@ class tracker_ui extends tracker_bo
 		*/
 		{
 			$content['css'] .= '<style type="text/css">@media screen { .trackerDes {  '.
-				($this->prefs['limit_des_width']?'max-width:'.$this->prefs['limit_des_width'].'em;':'').' max-height: '.
-				(($this->prefs['limit_des_lines'] ? $this->prefs['limit_des_lines'] : 5) * 1.35).	// dono why em is not real lines
+				(!empty($this->prefs['limit_des_width'])?'max-width:'.$this->prefs['limit_des_width'].'em;':'').' max-height: '.
+				(($this->prefs['limit_des_lines'] ?? 5) * 1.35).	// dono why em is not real lines
 				'em; overflow: auto; }}
 @media screen { .colfullWidth {
 width:100%;
@@ -1928,7 +1929,7 @@ width:100%;
 			),
 		);
 		++$group;	// integration with other apps
-		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
+		if (!empty($GLOBALS['egw_info']['user']['apps']['filemanager']))
 		{
 			$actions['filemanager'] = array(
 				'icon' => 'filemanager/navbar',
@@ -1938,7 +1939,7 @@ width:100%;
 				'group' => $group,
 			);
 		}
-		if ($GLOBALS['egw_info']['user']['apps']['timesheet'])
+		if (!empty($GLOBALS['egw_info']['user']['apps']['timesheet']))
 		{
 			$actions['timesheet'] = [	// interactive add for a single event
 				'icon' => 'timesheet/navbar',
@@ -1972,7 +1973,7 @@ width:100%;
 				];
 			}
 		}
-		if ($GLOBALS['egw_info']['user']['apps']['infolog'] && $this->allow_infolog)
+		if (!empty($GLOBALS['egw_info']['user']['apps']['infolog']) && $this->allow_infolog)
 		{
 			$actions['infolog'] = array(
 				'icon' => 'infolog/navbar',
@@ -1999,7 +2000,7 @@ width:100%;
 
 		$actions['documents'] = tracker_merge::document_action(
 			$this->prefs['document_dir'], ++$group, 'Insert in document', 'document_',
-			$this->prefs['default_document']
+			$this->prefs['default_document'] ?? null
 		);
 
 		//echo "<p>".__METHOD__."($do_email, $tid_filter, $org_view)</p>\n"; _debug_array($actions);
@@ -2015,7 +2016,7 @@ width:100%;
 	function mail_import(?array $mailContent=null)
 	{
 		// It would get called from compose as a popup with egw_data
-		if (!is_array($mailContent) && ($_GET['egw_data']))
+		if (!is_array($mailContent) && !empty($_GET['egw_data']))
 		{
 			// get the mail raw data
 			Link::get_data ($_GET['egw_data']);

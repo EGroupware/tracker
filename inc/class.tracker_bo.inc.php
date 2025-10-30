@@ -731,7 +731,7 @@ class tracker_bo extends tracker_so
 			}
 			$this->tracking->html_content_allow = true;
 			$notification_copy = $this->notification[$this->data['tr_tracker']]['copy'] ?: $this->notification[0]['copy'];
-			$no_notification = $autoreply['reply_text'] && !$notification_copy ? !($old) : $this->data['no_notifications'];
+			$no_notification = !empty($autoreply['reply_text']) && !$notification_copy ? !$old : !empty($this->data['no_notifications']);
 			if (!$this->tracking->track($this->data,$old,$this->user,null,null,$no_notification))
 			{
 				return $err == 0 && empty($this->tracking->errors) || !is_array($this->tracking->errors)?
@@ -776,7 +776,7 @@ class tracker_bo extends tracker_so
 		{
 			$groups[$gid['account_id']] = $gid['account_lid'];
 		}
-		$primary_group[$GLOBALS['egw']->accounts->data['account_primary_group']] = $groups[$GLOBALS['egw']->accounts->data['account_primary_group']];
+		$primary_group[$GLOBALS['egw']->accounts->data['account_primary_group']] = $groups[$GLOBALS['egw']->accounts->data['account_primary_group']] ?? null;
 
 		if ($primary)
 		{
