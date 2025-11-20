@@ -257,7 +257,7 @@ last year	tracker	sl	Lansko leto
 later	tracker	sl	Pozneje
 leaves without saveing	tracker	sl	Zapre brez shranjevanja
 length<br>rows	tracker	sl	Dolžina<br>Vrstic
-limit number of description lines (default 5, 0 for no limit)	tracker	sl	Omejite število opisnih vrstic. Privzeto = 5, 0 = brez omejitve.
+limit number of description lines (default 5)	tracker	sl	Omejite število opisnih vrstic. Privzeto = 5.
 link to ticket	tracker	sl	Povezava do zahteve
 linked to %1	tracker	sl	Povezano z %1
 links	tracker	sl	Povezave

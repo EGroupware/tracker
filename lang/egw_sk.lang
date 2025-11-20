@@ -257,7 +257,7 @@ last year	tracker	sk	Posledný rok
 later	tracker	sk	Neskôr
 leaves without saveing	tracker	sk	odchod bez uloženia
 length<br>rows	tracker	sk	Dĺžka/<br>Riadkov
-limit number of description lines (default 5, 0 for no limit)	tracker	sk	Obmedziť počet riadkov opisu. 0 = bez obmedzenia, predvolené = 5.
+limit number of description lines (default 5)	tracker	sk	Obmedziť počet riadkov opisu. 0 = bez obmedzenia, predvolené = 5.
 link to ticket	tracker	sk	Odkaz na kartu
 linked to %1	tracker	sk	Pripojené na %1
 links	tracker	sk	Odkazy

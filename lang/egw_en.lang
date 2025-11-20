@@ -258,7 +258,7 @@ last year	tracker	en	Last year
 later	tracker	en	Later
 leaves without saveing	tracker	en	leaves without saveing
 length<br>rows	tracker	en	Length<br>Rows
-limit number of description lines (default 5, 0 for no limit)	tracker	en	Limit number of description lines. Default = 5, 0 = no limit.
+limit number of description lines (default 5)	tracker	en	Limit number of description lines. (default = 5).
 link to ticket	tracker	en	Link to ticket
 linked to %1	tracker	en	Linked to %1
 links	tracker	en	Links

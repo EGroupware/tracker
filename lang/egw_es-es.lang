@@ -258,7 +258,7 @@ last year	tracker	es-es	Último año
 later	tracker	es-es	Más tarde
 leaves without saveing	tracker	es-es	sale sin guardar
 length<br>rows	tracker	es-es	Longitud<br>Filas
-limit number of description lines (default 5, 0 for no limit)	tracker	es-es	Limitar el número de líneas de la descripción (predeterminado: 5, 0 para ilimitadas)
+limit number of description lines (default 5)	tracker	es-es	Limitar el número de líneas de la descripción (predeterminado: 5)
 link to ticket	tracker	es-es	Enlazar a entrada
 linked to %1	tracker	es-es	Enlazado a %1
 links	tracker	es-es	Enlaces

@@ -220,7 +220,7 @@ class tracker_hooks
 			'limit_des_lines' => array(
 				'type'   => 'input',
 				'size'   => 5,
-				'label'  => 'Limit number of description lines (default 5, 0 for no limit)',
+				'label' => 'Limit number of description lines (default 5)',
 				'name'   => 'limit_des_lines',
 				'help'   => 'How many description lines should be directly visible. Further lines are available via a scrollbar.',
 				'xmlrpc' => True,

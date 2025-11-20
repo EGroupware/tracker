@@ -1743,7 +1743,7 @@ class tracker_ui extends tracker_bo
 		{
 			$content['css'] .= '<style type="text/css">@media screen { .trackerDes {  '.
 				(!empty($this->prefs['limit_des_width'])?'max-width:'.$this->prefs['limit_des_width'].'em;':'').' max-height: '.
-				(($this->prefs['limit_des_lines'] ?? 5) * 1.35).	// dono why em is not real lines
+				(($this->prefs['limit_des_lines'] ? $this->prefs['limit_des_lines'] : 5) * 1.35) .    // dono why em is not real lines
 				'em; overflow: auto; }}
 @media screen { .colfullWidth {
 width:100%;
