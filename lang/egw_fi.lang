@@ -258,7 +258,7 @@ last year	tracker	fi	Viime vuosi
 later	tracker	fi	Jälkeen
 leaves without saveing	tracker	fi	Poistuu tallentamatta
 length<br>rows	tracker	fi	Pituus<br>Rivit
-limit number of description lines (default 5, 0 for no limit)	tracker	fi	Kuvausrivien maksimimäärä listanäkymässä. Oletus=5, 0=Ei rajoitusta.
+limit number of description lines (default 5)	tracker	fi	Kuvausrivien maksimimäärä listanäkymässä. Oletus=5.
 link to ticket	tracker	fi	Linkki merkintään
 linked to %1	tracker	fi	Linkki: %1
 links	tracker	fi	Linkit

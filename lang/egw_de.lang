@@ -258,7 +258,7 @@ last year	tracker	de	Letztes Jahr
 later	tracker	de	Später
 leaves without saveing	tracker	de	ohne Speichern verlassen
 length<br>rows	tracker	de	Länge<br>Zeilen
-limit number of description lines (default 5, 0 for no limit)	tracker	de	Begrenze Anzahl Beschreibungszeilen (Vorgabe 5, 0 für keine Beschränkung)
+limit number of description lines (default 5)	tracker	de	Begrenze Anzahl Beschreibungszeilen (Vorgabe 5)
 link to ticket	tracker	de	Verknüpfungen zu einem Ticket
 linked to %1	tracker	de	Verknüpft mit %1
 links	tracker	de	Verknüpfungen

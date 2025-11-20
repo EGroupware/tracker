@@ -254,7 +254,7 @@ last year	tracker	ru	Прошлый год
 later	tracker	ru	Позже
 leaves without saveing	tracker	ru	Выйти без сохранения
 length<br>rows	tracker	ru	Длина<br>Строк
-limit number of description lines (default 5, 0 for no limit)	tracker	ru	Количество строк описания. По умолчанию = 5, 0 = без ограничений.
+limit number of description lines (default 5)	tracker	ru	Количество строк описания. По умолчанию = 5
 link to ticket	tracker	ru	Ссылка на запись Трекера
 linked to %1	tracker	ru	Ссылка на %1
 links	tracker	ru	Ссылки

@@ -182,7 +182,7 @@ last year	tracker	hu	Korábbi év
 later	tracker	hu	Később
 leaves without saveing	tracker	hu	kilépés mentés nélkül
 length<br>rows	tracker	hu	Sorok<br>Hossza
-limit number of description lines (default 5, 0 for no limit)	tracker	hu	A leírás sorainak felső határa (5 alapértelmezésben, 0 korlátlan számú sorhoz)
+limit number of description lines (default 5)	tracker	hu	A leírás sorainak felső határa (5 alapértelmezésben)
 links	tracker	hu	Hivatkozások
 max length of the input [, length of the inputfield (optional)]	tracker	hu	a beviteli mező maximális hossza (opcionális)
 new %1	tracker	hu	Új %1

@@ -257,7 +257,7 @@ last year	tracker	fr	L'année dernière
 later	tracker	fr	Plus tard
 leaves without saveing	tracker	fr	Quitter sans enregistrer
 length<br>rows	tracker	fr	Longueur<br>lignes
-limit number of description lines (default 5, 0 for no limit)	tracker	fr	Limiter le nombre de lignes de description. Défaut = 5, 0 = pas de limite.
+limit number of description lines (default 5)	tracker	fr	Limiter le nombre de lignes de description. Défaut = 5.
 link to ticket	tracker	fr	Lien au ticket
 linked to %1	tracker	fr	Lié à %1
 links	tracker	fr	Liens

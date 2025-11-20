@@ -257,7 +257,7 @@ last year	tracker	it	L'anno scorso
 later	tracker	it	Più tardi
 leaves without saveing	tracker	it	esce senza salvare
 length<br>rows	tracker	it	Lunghezza<br>Righe
-limit number of description lines (default 5, 0 for no limit)	tracker	it	Limita il numero di righe di descrizione. Predefinito = 5, 0 = nessun limite
+limit number of description lines (default 5)	tracker	it	Limita il numero di righe di descrizione. Predefinito = 5
 link to ticket	tracker	it	Collegamento al ticket
 linked to %1	tracker	it	Collegato a %1
 links	tracker	it	Collegamenti
