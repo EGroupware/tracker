@@ -120,18 +120,16 @@
 		</grid>
 	</template>
 	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
+        <et2-hbox  span="all" width="100%" slot="label">
+            <et2-button-icon  statustext="Apply the changes" id="button[apply]" image="apply"></et2-button-icon>
+            <et2-button-toggle label="notifications" id="no_notifications" class="notification_check" onIcon="bell-fill" offIcon="bell-slash"/>
+        </et2-hbox>
 		<grid border="1" width="100%">
 			<columns>
 				<column width = "120"/>
 				<column/>
 			</columns>
 			<rows>
-				<row disabled="@hidebuttons" class="dialogHeadbar" >
-					<et2-hbox  span="all" width="100%">
-						<et2-button-icon  statustext="Apply the changes" id="button[apply]" image="apply"></et2-button-icon>
-                        <et2-button-toggle label="notifications" id="no_notifications" class="notification_check" onIcon="bell-fill" offIcon="bell-slash"/>
-                    </et2-hbox>
-				</row>
 				<row disabled="!@showsearchbuttons" class="dialogHeadbar">
 					<et2-hbox  span="all" width="100%">
 						<et2-button  label="Search" id="button[search]" image="search"></et2-button>

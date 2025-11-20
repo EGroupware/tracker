@@ -70,11 +70,6 @@
 				<column/>
 			</columns>
 			<rows>
-				<row disabled="@hidebuttons" class="dialogHeadbar" >
-					<et2-box>
-						<et2-textbox  align="right" type="integer" id="tr_id" readonly="true" class="entry_id"></et2-textbox>
-					</et2-box>
-				</row>
 				<row>
 					<et2-description  for="tr_summary" value="Summary"></et2-description>
 					<et2-textbox  id="tr_summary" maxlength="80" span="4" tabindex="1" required="1"></et2-textbox>
