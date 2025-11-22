@@ -300,8 +300,19 @@ class tracker_so extends Api\Storage
 		}
 		if(is_string($criteria) && $criteria)
 		{
-			$criteria = $this->search2criteria($criteria, $wildcard, $op);
-			$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
+			if ($criteria[0] === '&' && class_exists($rag='EGroupware\\Rag\\Embedding'))
+			{
+				$rag = new $rag;
+				$ids = $rag->search(substr($criteria,1), 'tracker');
+				$extra_cols[] = EGroupware\Rag\Embedding::distanceById($ids, self::TRACKER_TABLE . '.tr_id').' AS distance';
+				$filter[] = self::TRACKER_TABLE . '.tr_id IN (' . implode(',', array_keys($ids)) . ')';
+				$criteria=null;
+			}
+			else
+			{
+				$criteria = $this->search2criteria($criteria, $wildcard, $op);
+				$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
+			}
 		}
 		elseif(isset($criteria['tr_id']))
 		{
