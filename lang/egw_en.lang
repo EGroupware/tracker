@@ -118,7 +118,7 @@ custom fields	tracker	en	Custom fields
 custom notifications	tracker	en	Custom notifications
 custom tracker priorities	tracker	en	Custom tracker priorities
 customfield	tracker	en	Customfield
-data exchange settings	tracker	en	Data exchange settings
+data exchange settings	common	en	Data exchange settings
 date filter	tracker	en	Date filter
 date opened	tracker	en	Date opened
 default document to insert entries	tracker	en	Default document to insert entries
@@ -286,6 +286,7 @@ new ticket submitted by %1 at %2	tracker	en	New ticket submitted by %1 at %2
 new tickets as	tracker	en	New tickets as
 new tracker item submitted by %1 at %2	tracker	en	New tracker item submitted by %1 at %2
 no change	tracker	en	No change
+no filter	tracker	en	No filter
 no notifications	tracker	en	No notifications
 no trackers found, aborting	tracker	en	No Trackers found, aborting.
 no, no additional mailheader to description and comments	tracker	en	No, no additional mailheader to description and comments
@@ -432,6 +433,7 @@ ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
 tickets	common	en	Tickets
 times	tracker	en	Times
 titles of any entries linked to the current record, excluding attached files	tracker	en	Titles of any entries linked to the current record, excluding attached files
+toggle unread	tracker	en	Toggle unread
 total:	tracker	en	Total:
 tracker	common	en	Tracking System
 tracker added	tracker	en	Tracker queue added.

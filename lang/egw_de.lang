@@ -118,7 +118,7 @@ custom fields	tracker	de	Benutzerdefinierte Felder
 custom notifications	tracker	de	Benutzerdefinierte Benachrichtigungen
 custom tracker priorities	tracker	de	Benutzerdefinierte Prioritäten
 customfield	tracker	de	Benutzerdefiniertes Feld
-data exchange settings	tracker	de	Einstellungen für den Datenaustausch
+data exchange settings	common	de	Einstellungen für den Datenaustausch
 date filter	tracker	de	Filter nach Datum
 date opened	tracker	de	Datum angelegt
 default document to insert entries	tracker	de	Standarddokument zum Einfügen von Daten
@@ -286,6 +286,7 @@ new ticket submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
 new tickets as	tracker	de	Neue Tickets erstellen als
 new tracker item submitted by %1 at %2	tracker	de	Neues Ticket erstellt von %1 am %2
 no change	tracker	de	Keine Änderung
+no filter	tracker	de	Kein Filter
 no notifications	tracker	de	Keine Benachrichtigungen
 no trackers found, aborting	tracker	de	Abbruch, keine Verfolgungssystem gefunden
 no, no additional mailheader to description and comments	tracker	de	nein, keine Mailheaderinformationen
@@ -371,6 +372,7 @@ select how autoreplies should be sent when mails are received	tracker	de	Auswäh
 select multiple	tracker	de	Mehrere Auswählen
 select one...	tracker	de	Eintrag auswählen
 select tracker queue	tracker	de	Verfolgungssystem-Queue auswählen
+select tracker queues	tracker	de	Queue auswählen
 select users or groups	tracker	de	Benutzer bzw. Gruppen auswählen
 select which categories should be used in tracker for the tts categories	tracker	de	Welche Kategorien sollen im Verfolgungssystem für die TTS Kategorien verwendet werden
 select which username should be used when unrecognized mails are handled.	tracker	de	Auswählen, welcher Benutzer für nicht zuordenbare E-Mails verwendet wird
@@ -417,6 +419,7 @@ the following document-types are supported:	tracker	de	folgende Dokument-Typen w
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	de	Interne Bezeichnung (<= 20 Zeichen), Achtung, eine Änderung führt zum Verlust bestehender Daten
 the text displayed to the user	tracker	de	Der angezeigte Text. der  für den Benutzer sichtbar ist
 there already an escalation for that filter!	tracker	de	Es gibt bereits eine Eskalation für diesen Filter!
+this message was forwarded to you from egroupware-tracker	tracker	de	Diese Nachricht wurde Ihnen vom EGroupware-Verfolgungssystem weitergeleitet
 this module allows to add a ticket.	tracker	de	Dieses Modul erlaubt ein Ticket hinzuzufügen.
 this module displays information from the tracker.	tracker	de	Dieses Modul zeigt Informationen des Verfolgungssystems an.
 this month	tracker	de	Diesen Monat
@@ -430,6 +433,7 @@ ticket modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
 tickets	common	de	Tickets
 times	tracker	de	Zeiten
 titles of any entries linked to the current record, excluding attached files	tracker	de	Titel der Einträge, die zu diesem aktuellen Datensatz verknüpft sind, ausser angefügte Dateien.
+toggle unread	tracker	de	Ungelesen umschalten
 total:	tracker	de	Insgesamt:
 tracker	common	de	Verfolgungssystem
 tracker added	tracker	de	Verfolgungssystem-Queue hinzugefügt

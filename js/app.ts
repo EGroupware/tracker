@@ -24,6 +24,7 @@ import "./Et2TrackerAssigned.ts";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {LitElement} from "lit";
 import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
+import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonToggle";
 
 /**
  * UI for tracker
@@ -200,6 +201,14 @@ import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 	}
 
 	/**
+	 * Show only unread has been clicked
+	 */
+	toggleUnread(_ev : Event, _widget : Et2ButtonToggle)
+	{
+		this.nm && this.nm.applyFilters({col_filter: {read: _widget.value ? '0' : ''}});
+	}
+
+	/**
 	 * Check if any NM filter or search in app-toolbar needs to be updated to reflect NM internal state
 	 *
 	 * @param app_toolbar
@@ -210,9 +219,17 @@ import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 	{
 		super.checkNmFilterChanged(app_toolbar, id, value);
 
-		if (id === 'filter')
+		switch (id)
 		{
-			this.filter_change(null, this.et2.getWidgetById(id));
+			case 'read':
+				const unread_toggle = this.et2.getWidgetById('read');
+				if (unread_toggle && unread_toggle.value != (value === '0')) {
+					unread_toggle.value = value === '0';
+				}
+				break;
+			case 'filter':
+				this.filter_change(null, this.et2.getWidgetById(id));
+				break;
 		}
 	}
 
