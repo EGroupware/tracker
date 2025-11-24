@@ -123,8 +123,8 @@
             <et2-button-icon  statustext="Add" image="add" id="add" slot="prefix"
                 onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button-icon>
             <et2-template template="api.search-button" slot="prefix"></et2-template>
-            <et2-select id="col_filter[tr_tracker]" multiple="true" rows="1" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass=""
-                onchange="widget.getRoot().getWidgetById('col_filter[tr_assigned]').tracker = widget.value;"></et2-select>
+            <et2-select id="tr_tracker" multiple="true" rows="1" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass=""
+                        onchange="widget.getRoot().getWidgetById('col_filter[tr_assigned]').tracker = widget.value; app.tracker.changeNmFilter(ev,widget)"></et2-select>
             <et2-select id="tr_status" ariaLabel="Status" emptyLabel="All" onchange="app.tracker.changeNmFilter"></et2-select>
             <et2-select id="cat_id" ariaLabel="Category" emptyLabel="All categories" onchange="app.tracker.changeNmFilter"></et2-select>
             <et2-select id="filter" ariaLabel="Date filter" onchange="app.tracker.changeNmFilter"></et2-select>
