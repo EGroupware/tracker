@@ -885,6 +885,9 @@ class tracker_ui extends tracker_bo
 		{
 			$content['replies'] = array(
 				'get_rows'              => 'tracker.tracker_ui.get_comment_rows',
+				// seems NM in a popup now needs num_rows to be set, as client-side does not request rows,
+				// if num_rows is not set (and got set to 0 by Api\Etemplate\Widget\Nextmatch::beforeSendToClient)
+				'num_rows'              => 25,
 				'no_cat'                => true,
 				'no_filter'             => true,
 				'no_filter2'            => true,
