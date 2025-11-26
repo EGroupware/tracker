@@ -58,7 +58,7 @@
   height: 16px;
 }
 #tracker-index [id*="tr_summary"] a {
-  color: var(--label-color);
+  color: inherit;
 }
 /* Header classes*/
 #tracker-index_tracker-index-left_multiqueue {
