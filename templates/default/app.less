@@ -1,4 +1,23 @@
-/* $Id$ */
+
+#tracker-index {
+  .tracker_overdue,.bold { font-weight: bold; }
+  .tracker_unseen { font-weight: bold; }
+  .tracker_seen { font-weight: normal; }
+  .low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
+  .low,.low_done { color:#606060; }
+  .normal,.normal_done { color:black }
+  .high { color:#cc0000; }
+  .high_done { color:#800000; }
+  .urgent { color:#ff00ff; }
+  .urgent_done { color:#800080; }
+  .tracker_overdue { color:#cc0000; font-weight:bold; }
+  .private { font-style:italic; }
+  .planned { font-style:italic; }
+  .fixedHeight { line-height: 12px; }
+  .tracker_indexPrio:first-letter { font-weight: bold; }
+  .tracker_image16 img { height: 16px; }
+  [id*="tr_summary"] a { color: var(--label-color);}
+}
 /* Header classes*/
 #tracker-index_tracker-index-left_multiqueue {
 	/* This prevents the multi-select from pushing down the add button */
@@ -9,9 +28,7 @@
 	min-height: 150px !important;
 	overflow-y: hidden;
 }
-#tracker-edit.et2_container
-{
-}
+
 /* give comments NM full height of the tab */
 et2-tab-panel#tracker-edit_comments {
 	padding-top: 0;
@@ -20,27 +37,11 @@ et2-tab-panel#tracker-edit_comments {
 div#tracker-edit_replies {
 	height: 100%;
 }
-.tracker_overdue,.bold { font-weight: bold; }
-.tracker_unseen { font-weight: bold; }
-.tracker_seen { font-weight: normal; }
 .tracker_leftPad5 { padding-left: 5px; }
 label.tracker_trIdEdit:before { content: "#"; }
 .headertext { color: black; font-size: 120%; }
 .lpadding5 { padding-left: 5px; }
 .redItalic { color: red; font-style: italic; }
-.low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
-.low,.low_done { color:#606060; }
-.normal,.normal_done { color:black }
-.high { color:#cc0000; }
-.high_done { color:#800000; }
-.urgent { color:#ff00ff; }
-.urgent_done { color:#800080; }
-.tracker_overdue { color:#cc0000; font-weight:bold; }
-.private { font-style:italic; }
-.planned { font-style:italic; }
-.fixedHeight { line-height: 12px; }
-.tracker_indexPrio:first-letter { font-weight: bold; }
-.tracker_image16 img { height: 16px; }
 
 /* Restricted access replies */
 .reply_visible_1 {
@@ -51,8 +52,6 @@ label.tracker_trIdEdit:before { content: "#"; }
 .egwGridView_scrollarea tr.row_category.reply_visible_1 > td:first-child {
 	border-left-color: var(--sl-color-amber-200);
 	--category-color: var(--sl-color-amber-200);
-}
-.reply_visible_0 {
 }
 #tracker-edit_tr_creator {
 	white-space: nowrap;
@@ -188,18 +187,6 @@ label.tracker_trIdEdit:before { content: "#"; }
 	  flex: 0 0;
 	}
   }
-}
-
-
-#tracker-index_tracker-index-queue {
-  position: relative;
-  flex: 2 1 auto;
-  width: 400px;
-}
-
-#tracker-index_tracker-index-queue > * {
-  flex: 1 1 auto;
-  max-width: initial;
 }
 
 #tracker-admin .jPicker {
