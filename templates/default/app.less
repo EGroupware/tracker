@@ -1,0 +1,211 @@
+/* $Id$ */
+/* Header classes*/
+#tracker-index_tracker-index-left_multiqueue {
+	/* This prevents the multi-select from pushing down the add button */
+	max-width: 95%;
+}
+/* Assigned context dialog */
+.action_popup-content.assigned_popup {
+	min-height: 150px !important;
+	overflow-y: hidden;
+}
+#tracker-edit.et2_container
+{
+}
+/* give comments NM full height of the tab */
+et2-tab-panel#tracker-edit_comments {
+	padding-top: 0;
+	overflow: hidden;
+}
+div#tracker-edit_replies {
+	height: 100%;
+}
+.tracker_overdue,.bold { font-weight: bold; }
+.tracker_unseen { font-weight: bold; }
+.tracker_seen { font-weight: normal; }
+.tracker_leftPad5 { padding-left: 5px; }
+label.tracker_trIdEdit:before { content: "#"; }
+.headertext { color: black; font-size: 120%; }
+.lpadding5 { padding-left: 5px; }
+.redItalic { color: red; font-style: italic; }
+.low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
+.low,.low_done { color:#606060; }
+.normal,.normal_done { color:black }
+.high { color:#cc0000; }
+.high_done { color:#800000; }
+.urgent { color:#ff00ff; }
+.urgent_done { color:#800080; }
+.tracker_overdue { color:#cc0000; font-weight:bold; }
+.private { font-style:italic; }
+.planned { font-style:italic; }
+.fixedHeight { line-height: 12px; }
+.tracker_indexPrio:first-letter { font-weight: bold; }
+.tracker_image16 img { height: 16px; }
+
+/* Restricted access replies */
+.reply_visible_1 {
+	background: var(--sl-color-amber-50, beige);
+	width: 100%;
+}
+
+.egwGridView_scrollarea tr.row_category.reply_visible_1 > td:first-child {
+	border-left-color: var(--sl-color-amber-200);
+	--category-color: var(--sl-color-amber-200);
+}
+.reply_visible_0 {
+}
+#tracker-edit_tr_creator {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 50%;
+	overflow: hidden;
+}
+.trackerDes {
+}
+/* Add border to ACL's table for more reading convenient*/
+#tracker-admin_tracker-admin-acl tr.row {
+	border-bottom: 1px solid silver;
+}
+/* Nicer sizine for escalation selectboxes */
+.tracker_escalation_action select {
+    width: 150px;
+}
+#tracker-edit_tr_assigned + .chzn-container .chzn-results {
+	max-height: 215px;
+}
+
+#tracker-edit_tracker-edit-add_comment {
+  /* Add comment file buttons */
+  td.add_comment_header {
+	padding-bottom: 0px;
+  }
+
+  .add_comment_header::part(base), #tracker-edit_tracker-edit-add_comment .add_comment_header et2-hbox::part(base) {
+	align-items: center;
+  }
+
+  .et2_link_to.et2_toolbar {
+	padding: 0;
+  }
+
+  .et2_link_to.et2_toolbar * {
+	vertical-align: top
+  }
+
+  .et2_hbox .et2_label[for="canned_response"] {
+	padding-top: 6px;
+  }
+
+  et2-vfs-select::part(base), #tracker-edit-comment-dialog et2-vfs-select::part(base) {
+	border-color: transparent;
+  }
+
+  .et2_file.et2_vfs table {
+	width: 300px;
+  }
+
+  .et2_hbox .et2_checkbox_label {
+	margin-top: 10px;
+  }
+}
+
+#tracker-edit_tracker-edit-comments {
+  /* Limit image sizes */
+  img {
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+	width: auto;
+  }
+
+  /* Turn off edit cursor, use context menu instead */
+  .et2_editable {
+	cursor: default;
+  }
+
+  /* Files linked to comments */
+  .et2_link_to.et2_toolbar * {
+	vertical-align: top;
+  }
+
+  .et2_link_to.et2_toolbar div.et2_file {
+	width: 95%;
+  }
+
+  .et2_file.et2_vfs tr:first-child {
+	border-collapse: separate;
+	border-spacing: 30px;
+  }
+
+  .et2_file.et2_vfs tbody, .et2_file.et2_vfs td {
+	border: none;
+  }
+
+  .et2_vfs td.icon, .et2_vfs .progress {
+	display: none
+  }
+}
+
+#tracker-edit-comment-dialog {
+  /* Dialog sizing restrictions */
+  &::part(panel) {
+	min-width: 40em;
+	min-height: 20em;
+  }
+
+  &::part(body) {
+	display: flex;
+	align-items: stretch;
+  }
+
+  #tracker-edit-comment_edit {
+	flex: 1 1 auto;
+
+	et2-template {
+	  height: 100%;
+	}
+
+	et2-template::part(base) {
+	  height: 100%;
+	  display: flex;
+	  flex-direction: column;
+	}
+
+	#tracker-edit-comment_edit_reply_message {
+	  width: 100%;
+	  height: 100%;
+	  padding: 0;
+	  flex: 1 0 10em;
+	}
+
+	/* HTML comment edit */
+
+	#tracker-edit-comment_edit_reply_message + div {
+	  flex: 1 0 15em;
+	}
+
+	.et2_toolbar > * {
+	  flex: 0 0;
+	}
+  }
+}
+
+
+#tracker-index_tracker-index-queue {
+  position: relative;
+  flex: 2 1 auto;
+  width: 400px;
+}
+
+#tracker-index_tracker-index-queue > * {
+  flex: 1 1 auto;
+  max-width: initial;
+}
+
+#tracker-admin .jPicker {
+  vertical-align: middle
+}
+
+.et2_editable, .et2_editable_readonly {
+  width: 100%;
+}
