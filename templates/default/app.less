@@ -4,19 +4,24 @@
   .tracker_unseen { font-weight: bold; }
   .tracker_seen { font-weight: normal; }
   .low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
-  .low,.low_done { color:#606060; }
-  .normal,.normal_done { color:black }
-  .high { color:#cc0000; }
-  .high_done { color:#800000; }
-  .urgent { color:#ff00ff; }
-  .urgent_done { color:#800080; }
-  .tracker_overdue { color:#cc0000; font-weight:bold; }
+  .low,.low_done { color:var(--sl-color-neutral-800); }
+  .normal,.normal_done { color:var(--sl-color-neutral-1000); }
+  .high { color:var(--sl-color-red-600); }
+  .high_done { color:var(--sl-color-red-800); }
+  .urgent { color:var(--sl-color-fuchsia-500); }
+  .urgent_done { color:var(--sl-color-fuchsia-800); }
+  .tracker_overdue { color:var(--sl-color-red-600); font-weight:bold; }
   .private { font-style:italic; }
   .planned { font-style:italic; }
   .fixedHeight { line-height: 12px; }
   .tracker_indexPrio:first-letter { font-weight: bold; }
   .tracker_image16 img { height: 16px; }
-  [id*="tr_summary"] a { color: inherit;}
+  [id*="tr_summary"] a {
+	color: inherit; text-decoration: none;
+	&:hover{
+	  text-decoration: underline;
+	}
+  }
 }
 /* Header classes*/
 #tracker-index_tracker-index-left_multiqueue {
