@@ -1093,6 +1093,12 @@ class tracker_ui extends tracker_bo
 		$timesheet_bo = new timesheet_bo();
 		foreach($rows as $n => $row)
 		{
+			// Avoid non-integer keys
+			if(!is_int($n))
+			{
+				continue;
+			}
+
 			// Check if this is a new (unseen) ticket for the current user
 			if(self::seen($row, false))
 			{
