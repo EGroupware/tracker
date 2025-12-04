@@ -397,6 +397,12 @@ class tracker_bo extends tracker_so
 		$this->load_config();
 
 		$this->trackers = $this->get_tracker_labels();
+
+		// Make sure default_tracker is valid & user has access to it
+		if($this->default_tracker && !in_array($this->default_tracker, array_keys($this->trackers)))
+		{
+			$this->default_tracker = key($this->trackers);
+		}
 	}
 
 	/**
