@@ -300,18 +300,17 @@ class tracker_so extends Api\Storage
 		}
 		if(is_string($criteria) && $criteria)
 		{
-			if ($criteria[0] === '&' && class_exists($rag='EGroupware\\Rag\\Embedding'))
+			if (preg_match('/^#\d+$/', $criteria) ||
+				!class_exists('EGroupware\\Rag\\Embedding') ||
+				!EGroupware\Rag\Embedding::search2criteria($this->app, $criteria, $order_by, $extra_cols, $filter))
 			{
-				$rag = new $rag;
-				$ids = $rag->search(substr($criteria,1), 'tracker');
-				$extra_cols[] = EGroupware\Rag\Embedding::distanceById($ids, self::TRACKER_TABLE . '.tr_id').' AS distance';
-				$filter[] = self::TRACKER_TABLE . '.tr_id IN (' . implode(',', array_keys($ids)) . ')';
-				$criteria=null;
+				// legacy search
+				$criteria = $this->search2criteria($criteria, $wildcard, $op);
+				$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
 			}
 			else
 			{
-				$criteria = $this->search2criteria($criteria, $wildcard, $op);
-				$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
+				$this->sanitize_order_by = false;   // no need to sanitize the generated order_by, it will only remove it
 			}
 		}
 		elseif(isset($criteria['tr_id']))
