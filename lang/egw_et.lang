@@ -95,7 +95,6 @@ creates a new field	tracker	et	teeb uue välja
 creation date	tracker	et	Tegemise kuupäev
 custom notifications	tracker	et	Kohandatud teated
 customfield	tracker	et	Customfield
-data exchange settings	tracker	et	Andmevahetuse seaded
 date filter	tracker	et	Kuupäeva filter
 date opened	tracker	et	Kuupäev avatud
 default document to insert entries	tracker	et	Standardne dokument kirjete sisestamiseks

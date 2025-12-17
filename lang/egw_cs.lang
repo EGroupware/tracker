@@ -118,7 +118,6 @@ custom fields	tracker	cs	Uživatelsky definované položky
 custom notifications	tracker	cs	Vlastní oznámení
 custom tracker priorities	tracker	cs	Uživatelsky definované priority sledovacího systému
 customfield	tracker	cs	Vlastní pole
-data exchange settings	tracker	cs	Nastavení výměny dat
 date filter	tracker	cs	Filtr data
 date opened	tracker	cs	Datum otevření
 default document to insert entries	tracker	cs	Výchozí dokument pro vkládání záznamů
