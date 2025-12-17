@@ -118,7 +118,6 @@ custom fields	tracker	fi	Lisäkentät
 custom notifications	tracker	fi	Muokattavat huomautusviestit
 custom tracker priorities	tracker	fi	Muokattavat prioriteetit
 customfield	tracker	fi	Muokattavat kentät
-data exchange settings	tracker	fi	Tiedonvaihtoasetukset
 date filter	tracker	fi	Suodatin
 date opened	tracker	fi	Avauspäivä
 default document to insert entries	tracker	fi	Merkintöjen oletusasiakirja

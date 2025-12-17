@@ -80,7 +80,6 @@ creation date	tracker	da	Dato for oprettelse
 custom fields	tracker	da	Valgfri Felter
 custom notifications	tracker	da	Brugerdefinerede meddelelser
 customfield	tracker	da	Brugerdefineret felt
-data exchange settings	tracker	da	Indstillinger for dataudveksling
 date filter	tracker	da	Dato filter
 default document to insert entries	tracker	da	Standarddokument til indsættelse af poster
 default group	tracker	da	Standardgruppe
