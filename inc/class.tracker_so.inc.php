@@ -300,6 +300,7 @@ class tracker_so extends Api\Storage
 		}
 		if(is_string($criteria) && $criteria)
 		{
+			$order_by_was = $order_by;
 			if (preg_match('/^#\d+$/', $criteria) ||
 				!class_exists('EGroupware\\Rag\\Embedding') ||
 				!EGroupware\Rag\Embedding::search2criteria($this->app, $criteria, $order_by, $extra_cols, $filter))
@@ -308,7 +309,8 @@ class tracker_so extends Api\Storage
 				$criteria = $this->search2criteria($criteria, $wildcard, $op);
 				$join .= ' LEFT JOIN ' . self::REPLIES_TABLE . ' ON ' . self::TRACKER_TABLE . '.tr_id=' . self::REPLIES_TABLE . '.tr_id';
 			}
-			else
+			// check if RAG-search changed order
+			elseif ($order_by !== $order_by_was)
 			{
 				$this->sanitize_order_by = false;   // no need to sanitize the generated order_by, it will only remove it
 			}
