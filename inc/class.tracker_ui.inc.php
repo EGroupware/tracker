@@ -2485,11 +2485,6 @@ width:100%;
 		$readonlys = $this->readonlys_from_acl();
 		$content['tr_creator'] = $readonlys['tr_creator'] ? $this->user : $content['tr_creator'];
 
-		if (!empty($content['tr_summary']))
-		{
-			$content['tr_summary'] = lang('Copy of:').' '.$content['tr_summary'];
-		}
-
 		$content['msg'] .= ($content['msg']?"\n":'').lang('%1 copied - the copy can now be edited', lang(Link::get_registry('tracker','entry')));
 	}
 
