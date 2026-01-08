@@ -248,6 +248,7 @@ new items	tracker	pt-br	Novos tickets
 new ticket submitted by %1 at %2	tracker	pt-br	Novo ticket adicionado por %1 em %2
 new tracker item submitted by %1 at %2	tracker	pt-br	Novo ticket adicionado por %1 em %2
 no change	tracker	pt-br	Sem alteração
+no filter	tracker	pt-br	Sem filtro
 no notifications	tracker	pt-br	Nenhuma notificação
 no trackers found, aborting	tracker	pt-br	Nenhum Elemento do Sistema de Tickets encontrato, abortando.
 non-anonymous users	tracker	pt-br	Usuários não anônimos

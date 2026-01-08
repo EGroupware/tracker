@@ -282,6 +282,7 @@ new ticket submitted by %1 at %2	tracker	bg	Нов билет, предоста�
 new tickets as	tracker	bg	Нови билети като
 new tracker item submitted by %1 at %2	tracker	bg	Нов елемент за проследяване, изпратен от %1 в %2
 no change	tracker	bg	Няма промяна
+no filter	tracker	bg	Без филтър
 no notifications	tracker	bg	Без известия
 no trackers found, aborting	tracker	bg	Неуспех при намирането на Тракери (Системи за проследяване).
 no, no additional mailheader to description and comments	tracker	bg	не, без допълнителен Mailheader за описание и коментари
@@ -406,6 +407,7 @@ the document can contain placeholder like {{%3}}, to be replaced with the data (
 the following document-types are supported:	tracker	bg	Поддържат се следните типове документи:
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	bg	Промяната на името, използвано вътрешно (<= 20 знака), прави съществуващите данни недостъпни
 the text displayed to the user	tracker	bg	текстът, показан на потребителя
+there already an escalation for that filter!	tracker	bg	Вече има ескалация за този филтър!
 this module allows to add a ticket.	tracker	bg	Този модул позволява да добавите билет.
 this module displays information from the tracker.	tracker	bg	Този модул показва информация от Тракера
 this month	tracker	bg	Този месец
