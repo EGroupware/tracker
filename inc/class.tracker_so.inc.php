@@ -301,8 +301,7 @@ class tracker_so extends Api\Storage
 		if(is_string($criteria) && $criteria)
 		{
 			$order_by_was = $order_by;
-			if (preg_match('/^#\d+$/', $criteria) ||
-				!class_exists('EGroupware\\Rag\\Embedding') ||
+			if (!class_exists('EGroupware\\Rag\\Embedding') ||
 				!EGroupware\Rag\Embedding::search2criteria($this->app, $criteria, $order_by, $extra_cols, $filter))
 			{
 				// legacy search
