@@ -90,6 +90,7 @@ label.tracker_trIdEdit:before { content: "#"; }
 
   .et2_link_to.et2_toolbar {
 	padding: 0;
+	flex-grow: 0;
   }
 
   .et2_link_to.et2_toolbar * {
@@ -110,6 +111,10 @@ label.tracker_trIdEdit:before { content: "#"; }
 
   .et2_hbox .et2_checkbox_label {
 	margin-top: 10px;
+  }
+
+  et2-vbox > :last-child {
+	flex: 1 1 100%;
   }
 }
 
@@ -167,13 +172,18 @@ label.tracker_trIdEdit:before { content: "#"; }
 
 	et2-template {
 	  height: 100%;
+
+
+	  &::part(base) {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	  }
+	  > :last-child {
+		flex-grow: 1;
+	  }
 	}
 
-	et2-template::part(base) {
-	  height: 100%;
-	  display: flex;
-	  flex-direction: column;
-	}
 
 	#tracker-edit-comment_edit_reply_message {
 	  width: 100%;

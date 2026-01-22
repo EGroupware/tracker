@@ -137,6 +137,7 @@ label.tracker_trIdEdit:before {
 }
 #tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar {
   padding: 0;
+  flex-grow: 0;
 }
 #tracker-edit_tracker-edit-add_comment .et2_link_to.et2_toolbar * {
   vertical-align: top;
@@ -153,6 +154,9 @@ label.tracker_trIdEdit:before {
 }
 #tracker-edit_tracker-edit-add_comment .et2_hbox .et2_checkbox_label {
   margin-top: 10px;
+}
+#tracker-edit_tracker-edit-add_comment et2-vbox > :last-child {
+  flex: 1 1 100%;
 }
 #tracker-edit_tracker-edit-comments {
   /* Limit image sizes */
@@ -208,6 +212,9 @@ label.tracker_trIdEdit:before {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+#tracker-edit-comment-dialog #tracker-edit-comment_edit et2-template > :last-child {
+  flex-grow: 1;
 }
 #tracker-edit-comment-dialog #tracker-edit-comment_edit #tracker-edit-comment_edit_reply_message {
   width: 100%;
