@@ -945,3 +945,15 @@ function tracker_upgrade23_1_002()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.003';
 }
+
+function tracker_upgrade23_1_003()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_tracker','tr_summary',array(
+		'type' => 'varchar',
+		'precision' => '255',
+		'nullable' => False,
+		'comment' => 'summary of the ticket'
+	));
+
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.004';
+}

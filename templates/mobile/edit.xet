@@ -138,7 +138,7 @@
 				</row>
 				<row>
 					<et2-description  for="tr_summary" value="Summary"></et2-description>
-					<et2-textbox  id="tr_summary" maxlength="80" span="4" tabindex="1" required="1"></et2-textbox>
+					<et2-textbox  id="tr_summary" maxlength="255" span="4" tabindex="1" required="1"></et2-textbox>
 				</row>
 				<row>
 					<et2-description  for="tr_tracker" value="Tracker Queue"></et2-description>
