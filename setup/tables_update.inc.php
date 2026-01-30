@@ -957,3 +957,13 @@ function tracker_upgrade23_1_003()
 
 	return $GLOBALS['setup_info']['tracker']['currentver'] = '23.1.004';
 }
+
+/**
+ * Bump version to 26.1
+ *
+ * @return string
+ */
+function tracker_upgrade23_1_004()
+{
+	return $GLOBALS['setup_info']['tracker']['currentver'] = '26.1';
+}
