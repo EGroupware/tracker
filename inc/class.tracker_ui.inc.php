@@ -1081,6 +1081,8 @@ class tracker_ui extends tracker_bo
 			$trackers = array();
 		}
 
+		if (empty($query['col_filter']['tr_status'])) unset($query['col_filter']['tr_status']);
+
 		//echo "<p align=right>uitracker::get_rows() order='$query[order]', sort='$query[sort]', search='$query[search]', start=$query[start], num_rows=$query[num_rows], col_filter=".print_r($query['col_filter'],true)."</p>\n";
 		$total = parent::get_rrows($query, $rows, $readonlys, $this->allow_voting || $this->allow_bounties || $join, $need_full_no_count, $only_keys, $extra_cols);    // true = count votes and/or bounties
 		$prio_labels = $prio_tracker = $prio_cat = null;
