@@ -19,11 +19,14 @@
 namespace Egroupware\Tracker;
 
 require_once realpath(__DIR__.'/../../notifications/tests/MockedNotifications.php');
+require_once realpath(__DIR__ . '/../../api/tests/AppTest.php');
+require_once realpath(__DIR__ . '/../../api/src/Config.php');
 
+use EGroupware\Api\AppTest;
 use EGroupware\Notifications\MockedNotifications;
 use EGroupware\Api\Config;
 
-class NotificationBodyTest extends \EGroupware\Api\AppTest
+class NotificationBodyTest extends AppTest
 {
 
 	/**
@@ -48,7 +51,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 	{
 		// Test works on its own with this, but fails with the rest.
 		// There's no good reason commenting this out should work.
-		//parent::setUpBeforeClass();
+		parent::setUpBeforeClass();
 
 		// Change configuration
 		$config = Config::read('tracker');
@@ -75,7 +78,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 		$this->bo = new \tracker_bo();
 
 		// Notification fails if user has no email address, so try to add one
-		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw']->accounts,'account_email');
+		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw_info']['user']['account_id'], 'account_email');
 		if(!$email && $GLOBALS['egw_info']['user']['person_id'])
 		{
 			$account = array(
@@ -85,7 +88,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 			$GLOBALS['egw']->contacts->save($account, true);
 			\EGroupware\Api\Accounts::cache_invalidate($GLOBALS['egw_info']['user']['account_id']);
 		}
-		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw']->accounts,'account_email');
+		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw_info']['user']['account_id'], 'account_email');
 		if(!$email)
 		{
 			$this->markTestSkipped('User account needs email address');
@@ -112,7 +115,7 @@ class NotificationBodyTest extends \EGroupware\Api\AppTest
 
 		// User account requires an email or we don't do any notifications
 		$email = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw_info']['user']['account_id'],'account_email');
-		$this->assertInternalType('string', $email, 'User account needs email address');
+		$this->assertIsString($email, 'User account needs email address');
 	}
 
 	/**
