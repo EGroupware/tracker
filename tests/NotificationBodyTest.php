@@ -128,8 +128,8 @@ class NotificationBodyTest extends AppTest
 	 * @param String $expected Expected ticket description [fragment]
 	 *
 	 * @ticket 24188
-	 * @dataProvider ticketProvider
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('ticketProvider')]
 	public function testNotificationsForDescriptionWithHTMLAndText($mode_config, $mode, $ticket, $expected)
 	{
 		// Set the config
