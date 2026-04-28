@@ -20,7 +20,7 @@
 						<et2-date-time  id="replies[$row][reply_created]" readonly="true"></et2-date-time>
 						<et2-select-account  id="replies[$row][reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
-					<htmlarea id="replies[$row][reply_message]" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
+                    <htmlarea id="replies[$row][reply_message]" noAiTools="true" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
 				</row>
 			</rows>
 		</grid>
