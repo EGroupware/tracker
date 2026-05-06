@@ -256,7 +256,7 @@ last week	tracker	cs	Minulý týden
 last year	tracker	cs	Minulý rok
 later	tracker	cs	Později
 leaves without saveing	tracker	cs	ukončí bez ukládání
-length<br>rows	tracker	cs	Délka<br>Řádky
+length<br>rows	tracker	cs	Délka\nŘádky
 limit number of description lines (default 5)	tracker	cs	Omezit počet řádek popisu (výchozí 5, pro zrušení limitu 0)
 link to ticket	tracker	cs	Odkaz na tiket
 linked to %1	tracker	cs	Souvisí s %1

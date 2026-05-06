@@ -153,7 +153,7 @@ incomplete server profile for mailhandling provided; disabling mailhandling for 
 language	tracker	da	Sprog
 last modified	tracker	da	Sidst opdateret
 leaves without saveing	tracker	da	forlad uden at gemme
-length<br>rows	tracker	da	Længde<br>række
+length<br>rows	tracker	da	Længde\nrække
 links	tracker	da	Links
 max length of the input [, length of the inputfield (optional)]	tracker	da	maks længde af inputtet [længde af input feltet (valg frit)]
 not-closed	tracker	da	Ikke lukket

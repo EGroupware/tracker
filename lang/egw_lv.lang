@@ -141,7 +141,7 @@ incomplete server profile for mailhandling provided; disabling mailhandling for 
 language	tracker	lv	Valoda
 last modified	tracker	lv	Pēdējo reizi pārveidots
 leaves without saveing	tracker	lv	aiziet bez saglabāšanas
-length<br>rows	tracker	lv	Garums<br>Rindas
+length<br>rows	tracker	lv	Garums\nRindas
 links	tracker	lv	Saites
 max length of the input [, length of the inputfield (optional)]	tracker	lv	ievades datu maksimālais garums[, ievades lauka garums (pēc izvēles)]
 not-closed	tracker	lv	Nav slēgts

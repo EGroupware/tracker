@@ -256,7 +256,7 @@ last week	tracker	it	Settimana scorsa
 last year	tracker	it	L'anno scorso
 later	tracker	it	Più tardi
 leaves without saveing	tracker	it	esce senza salvare
-length<br>rows	tracker	it	Lunghezza<br>Righe
+length<br>rows	tracker	it	Lunghezza\nRighe
 limit number of description lines (default 5)	tracker	it	Limita il numero di righe di descrizione. Predefinito = 5
 link to ticket	tracker	it	Collegamento al ticket
 linked to %1	tracker	it	Collegato a %1

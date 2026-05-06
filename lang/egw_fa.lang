@@ -35,7 +35,7 @@ last month	tracker	fa	ماه گذشته
 last week	tracker	fa	هفته گذشته
 last year	tracker	fa	سال گذشته
 leaves without saveing	tracker	fa	ترک بدون ذخیره
-length<br>rows	tracker	fa	طول <br> سطور
+length<br>rows	tracker	fa	طول \n سطور
 links	tracker	fa	پیوندها
 max length of the input [, length of the inputfield (optional)]	tracker	fa	حداکثر اندازه ورودی [طول فیلد ورودی] (دلخواه)
 number of row for a multiline inputfield or line of a multi-select-box	tracker	fa	تعداد سطور یک فیلد چند خطی یا خط چند انتخابی
