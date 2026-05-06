@@ -19,7 +19,7 @@ exists	tracker	lo	ມີຢູ່ແລ້ວ
 history	tracker	lo	ປະຫວັດສາດ
 id	tracker	lo	ລະຫັດ
 leaves without saveing	tracker	lo	ອອກໂດຍບໍ່ໄກ້ບັນທຶກ
-length<br>rows	tracker	lo	ຄວາມຍາວ <br> ແຖວ
+length<br>rows	tracker	lo	ຄວາມຍາວ \n ແຖວ
 links	tracker	lo	ເຊື່ອມຕໍ່
 max length of the input [, length of the inputfield (optional)]	tracker	lo	ຄວາມຍາວສູງສຸດຂອງການປ້ອນຂໍ້ຄວາມ[, ຄວາມຍາວຂອງພື້ນທີ່ຂໍ້ຄວາມ(ຖ້າມີ)]
 number of row for a multiline inputfield or line of a multi-select-box	tracker	lo	ຈໍານວນແຖວສໍາລັບຂອບເຂດຂອງການປ້ອນຂໍ້ມູນຫຼາຍໆແຖວ ຫຼື ຕົວເລືອກຫຼາຍໆຕົວ

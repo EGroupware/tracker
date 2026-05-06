@@ -21,7 +21,7 @@ history	tracker	hr	povijest
 id	tracker	hr	identitet
 last modified	tracker	hr	Zadnja izmjena
 leaves without saveing	tracker	hr	napusti bez spremanja
-length<br>rows	tracker	hr	Duljina<br>Retci
+length<br>rows	tracker	hr	Duljina\nRetci
 links	tracker	hr	Links
 max length of the input [, length of the inputfield (optional)]	tracker	hr	max length of the input [, length of the inputfield (optional)]
 number of row for a multiline inputfield or line of a multi-select-box	tracker	hr	number of row for a multiline inputfield or line of a multi-select-box

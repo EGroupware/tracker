@@ -253,8 +253,7 @@ last week	tracker	km	សប្ដាហ៍​មុន
 last year	tracker	km	ឆ្នាំមុន
 later	tracker	km	ពេលក្រោយ
 leaves without saveing	tracker	km	ទុកដោយមិនរក្សាទុក
-length<br>rows	tracker	km	ប្រវែង<br>ជួរដេក
-limit number of description lines (default 5)	tracker	km	កំណត់ចំនួនបន្ទាត់ពិពណ៌នា លំនាំដើម = 5
+length<br>rows	tracker	km	ប្រវែង\nជួរដេក
 link to ticket	tracker	km	ភ្ជាប់ទៅសំបុត្រ
 linked to %1	tracker	km	បានភ្ជាប់ទៅ%1
 links	tracker	km	តំណភ្ជាប់

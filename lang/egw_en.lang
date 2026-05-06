@@ -433,7 +433,7 @@ ticket modified by %1 at %2	tracker	en	Ticket modified by %1 at %2
 tickets	common	en	Tickets
 times	tracker	en	Times
 titles of any entries linked to the current record, excluding attached files	tracker	en	Titles of any entries linked to the current record, excluding attached files
-toggle unread	tracker	en	Toggle unread
+toggle unread	common	en	Toggle unread
 total:	tracker	en	Total:
 tracker	common	en	Tracking System
 tracker added	tracker	en	Tracker queue added.

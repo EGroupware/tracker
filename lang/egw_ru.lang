@@ -253,7 +253,7 @@ last week	tracker	ru	Прошлая неделя
 last year	tracker	ru	Прошлый год
 later	tracker	ru	Позже
 leaves without saveing	tracker	ru	Выйти без сохранения
-length<br>rows	tracker	ru	Длина<br>Строк
+length<br>rows	tracker	ru	Длина\nСтрок
 limit number of description lines (default 5)	tracker	ru	Количество строк описания. По умолчанию = 5
 link to ticket	tracker	ru	Ссылка на запись Трекера
 linked to %1	tracker	ru	Ссылка на %1

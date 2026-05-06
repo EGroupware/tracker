@@ -433,7 +433,7 @@ ticket modified by %1 at %2	tracker	de	Ticket geändert von %1 am %2
 tickets	common	de	Tickets
 times	tracker	de	Zeiten
 titles of any entries linked to the current record, excluding attached files	tracker	de	Titel der Einträge, die zu diesem aktuellen Datensatz verknüpft sind, ausser angefügte Dateien.
-toggle unread	tracker	de	Ungelesen umschalten
+toggle unread	common	de	Ungelesen umschalten
 total:	tracker	de	Insgesamt:
 tracker	common	de	Verfolgungssystem
 tracker added	tracker	de	Verfolgungssystem-Queue hinzugefügt

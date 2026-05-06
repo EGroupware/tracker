@@ -255,7 +255,7 @@ last week	tracker	bg	Миналата седмица
 last year	tracker	bg	Миналата година
 later	tracker	bg	По - късно
 leaves without saveing	tracker	bg	напусни без да запазиш
-length<br>rows	tracker	bg	Дължина<br>Редове
+length<br>rows	tracker	bg	Дължина\nРедове
 limit number of description lines (default 5)	tracker	bg	Ограничете броя на видовете редове. По подразбиране = 5, 0 = няма ограничение.
 link to ticket	tracker	bg	Връзка (линк) към билет
 linked to %1	tracker	bg	Свързан с %1

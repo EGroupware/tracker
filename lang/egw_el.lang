@@ -161,7 +161,7 @@ last month	tracker	el	Τελευταίος μήνας
 last week	tracker	el	Τελευταία εβδομάδα
 last year	tracker	el	Πέρυσι
 leaves without saveing	tracker	el	αποχώρηση χωρίς αποθήκευση
-length<br>rows	tracker	el	Μήκος<br>Γραμμές
+length<br>rows	tracker	el	Μήκος\nΓραμμές
 links	tracker	el	Σύνδεσμοι
 max length of the input [, length of the inputfield (optional)]	tracker	el	μέγιστο μήκος για την εισαγωγή, [μήκος του πεδίου εισαγωγής (κατ'επιλογήν)]
 new %1	tracker	el	Νέο %1

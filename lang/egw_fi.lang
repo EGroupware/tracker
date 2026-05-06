@@ -256,7 +256,7 @@ last week	tracker	fi	Viime viikko
 last year	tracker	fi	Viime vuosi
 later	tracker	fi	Jälkeen
 leaves without saveing	tracker	fi	Poistuu tallentamatta
-length<br>rows	tracker	fi	Pituus<br>Rivit
+length<br>rows	tracker	fi	Pituus\nRivit
 limit number of description lines (default 5)	tracker	fi	Kuvausrivien maksimimäärä listanäkymässä. Oletus=5.
 link to ticket	tracker	fi	Linkki merkintään
 linked to %1	tracker	fi	Linkki: %1

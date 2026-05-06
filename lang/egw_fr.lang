@@ -256,7 +256,7 @@ last week	tracker	fr	La semaine dernière
 last year	tracker	fr	L'année dernière
 later	tracker	fr	Plus tard
 leaves without saveing	tracker	fr	Quitter sans enregistrer
-length<br>rows	tracker	fr	Longueur<br>lignes
+length<br>rows	tracker	fr	Longueur\nlignes
 limit number of description lines (default 5)	tracker	fr	Limiter le nombre de lignes de description. Défaut = 5.
 link to ticket	tracker	fr	Lien au ticket
 linked to %1	tracker	fr	Lié à %1
@@ -429,6 +429,7 @@ ticket modified by %1 at %2	tracker	fr	Ticket modifié par %1 à %2
 tickets	common	fr	Tickets
 times	tracker	fr	Heures
 titles of any entries linked to the current record, excluding attached files	tracker	fr	Titres de toutes les entrées liées à l'enregistrement courant, à l'exception des fichiers
+toggle unread	common	fr	Afficher/Masquer les éléments non lus
 total:	tracker	fr	Total :
 tracker	common	fr	Traqueur
 tracker added	tracker	fr	Traqueur ajouté.

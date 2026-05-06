@@ -23,7 +23,7 @@ history	tracker	iw	היסטוריה
 id	tracker	iw	זיהוי
 last modified	tracker	iw	שונה לאחרונה
 leaves without saveing	tracker	iw	יוצא בלי לשמור
-length<br>rows	tracker	iw	אורך<br>שורות
+length<br>rows	tracker	iw	אורך\nשורות
 links	tracker	iw	קישורים
 max length of the input [, length of the inputfield (optional)]	tracker	iw	([אורך הקלט המירבי [, אורך שדה הקלט (אופציונאלי
 number of row for a multiline inputfield or line of a multi-select-box	tracker	iw	מספר השורה של שדה קלט רב-שורות או של תיבת רבי-בחירה
