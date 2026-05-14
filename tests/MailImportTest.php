@@ -76,8 +76,20 @@ class MailImportTest extends AppTest
 			$contact = array_merge($contact, $account);
 			$contact_bo->save($contact, true);
 		}
-		// Set the last one as tracker tech
-		self::$bo->users[0][] = static::$tech_account = $command->account;
+		// Set the last one as tracker staff for all trackers and reset cached staff list.
+		// prepare_import_mail() resolves sender against get_staff(), which uses instance cache.
+		static::$tech_account = (int)$command->account;
+		if(!is_array(self::$bo->users) || self::$bo->users === 'NULL')
+		{
+			self::$bo->users = [];
+		}
+		if(!is_array(self::$bo->technicians) || self::$bo->technicians === 'NULL')
+		{
+			self::$bo->technicians = [];
+		}
+		self::$bo->users[0] = array_values(array_unique(array_merge((array)self::$bo->users[0], [static::$tech_account])));
+		self::$bo->technicians[0] = array_values(array_unique(array_merge((array)self::$bo->technicians[0], [static::$tech_account])));
+		\EGroupware\Api\Cache::unsetInstance('tracker', 'staff_cache');
 
 		foreach(self::$contacts as $contact)
 		{
@@ -134,8 +146,8 @@ class MailImportTest extends AppTest
 
 		// Sent from tech user -> owned by sending account
 		$this->assertEquals(
-			$content['tr_creator'],
 			static::$tech_account,
+			$content['tr_creator'],
 			'Ticket from user with access should be owned by that user'
 		);
 	}
@@ -172,8 +184,8 @@ class MailImportTest extends AppTest
 		);
 		// Sent from non-tech user -> owned by current user
 		$this->assertEquals(
-			$content['tr_creator'],
 			$GLOBALS['egw_info']['user']['account_id'],
+			$content['tr_creator'],
 			'Ticket from no access user should be owned by current user'
 		);
 
@@ -209,8 +221,8 @@ class MailImportTest extends AppTest
 		);
 		// Sent from non-tech user -> owned by current user
 		$this->assertEquals(
-			$content['tr_creator'],
 			$GLOBALS['egw_info']['user']['account_id'],
+			$content['tr_creator'],
 			'Ticket from contact should be owned by current user'
 		);
 
