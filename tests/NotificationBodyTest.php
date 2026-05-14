@@ -119,8 +119,27 @@ class NotificationBodyTest extends AppTest
 	}
 
 	/**
-	 * Test the notifications with the HTML Edit site configuration setting
+	 * Validate the notifications with the HTML Edit site configuration setting
 	 * turned off.
+	 *
+	 * Behaviour under test:
+	 * - tracker notifications should preserve expected text/HTML semantics for
+	 *   ticket descriptions, based on tr_edit_mode and site html-edit setting.
+	 *
+	 * Setup strategy:
+	 * - data provider builds tickets for text/html/malicious/tricky descriptions
+	 *   in both edit modes.
+	 * - test toggles tracker htmledit config and captures notification payload via
+	 *   MockedNotifications callback.
+	 * - update to tr_duedate triggers notification generation.
+	 *
+	 * Pass criteria:
+	 * - expected description fragment is present in the selected notification body
+	 *   variant (ascii/html) for each case.
+	 *
+	 * Environment-sensitive constraints:
+	 * - requires a valid user email and working tracker notification stack.
+	 * - depends on content sanitization behaviour configured in the active install.
 	 *
 	 * @param Boolean $mode_config Setting for the Site Configuration HTML editing
 	 * @param String $mode Notification type, 'ascii' or 'html'
@@ -178,7 +197,7 @@ class NotificationBodyTest extends AppTest
 		$base = array(
 			'tr_summary'     => 'Test tracker ',
 			'tr_status'      => \tracker_bo::STATUS_OPEN,
-			'tr_creator'     => $GLOBALS['egw_info']['user']['account_id'],
+			'tr_creator' => $GLOBALS['egw_info']['user']['account_id'] ?? null,
 		);
 
 		// Different for each, expectation is for the different edit mode *on the ticket*

@@ -20,7 +20,7 @@ use Egroupware\Api;
  * Test for extracting and matching mail subjects with existing tickets
  *
  */
-class MailSubjectMatchTest extends \EGroupware\Api\AppTest
+class MailSubjectTest extends \EGroupware\Api\AppTest
 {
 
 	protected static $bo;
@@ -89,8 +89,22 @@ class MailSubjectMatchTest extends \EGroupware\Api\AppTest
 		}
 	}
 	/**
-	 * Test various subject strings match (or not) an existing ticket
+	 * Validate subject-to-ticket matching for reply detection.
 	 *
+	 * Behaviour under test:
+	 * - tracker_bo::get_ticketId() should return the existing ticket id only for
+	 *   subjects that match the expected "reply to tracker" formats.
+	 *
+	 * Setup strategy:
+	 * - setUpBeforeClass() creates one tracker entry per subject pattern and
+	 *   injects each generated id into its test subject variants.
+	 *
+	 * Pass criteria:
+	 * - matching subjects resolve to their expected tracker id.
+	 * - non-matching subjects resolve to 0.
+	 *
+	 * Environment-sensitive constraints:
+	 * - relies on a logged-in EGroupware session and working tracker persistence.
 	 */
 	public function testSubject()
 	{

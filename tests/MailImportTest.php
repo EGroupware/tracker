@@ -101,7 +101,22 @@ class MailImportTest extends AppTest
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from staff with tracker access
+	 * Ensure import assigns creator to tracker staff when sender has tracker access.
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() should map sender address to an internal account and
+	 *   keep that account as tr_creator when the sender is a tracker technician.
+	 *
+	 * Setup strategy:
+	 * - setUpBeforeClass() creates two internal users and configures one as
+	 *   tracker technician, plus contact fixtures.
+	 *
+	 * Pass criteria:
+	 * - returned content contains tr_creator equal to the configured tech account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - depends on account/contact creation rights and tracker configuration in
+	 *   the active test instance.
 	 */
 	public function testCreatorFromAccountMail()
 	{
@@ -126,7 +141,21 @@ class MailImportTest extends AppTest
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from staff without tracker access
+	 * Ensure creator is correctly determined from mail address if mail is from staff without tracker access
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() must not assign tr_creator to a known internal user
+	 *   who is not a tracker technician.
+	 *
+	 * Setup strategy:
+	 * - reuse fixture users from setUpBeforeClass(), with sender set to the
+	 *   non-tech account.
+	 *
+	 * Pass criteria:
+	 * - returned content has tr_creator equal to the currently logged-in account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - requires stable logged-in user context from LoggedInTest/AppTest.
 	 */
 	public function testCreatorNonTechUser()
 	{
@@ -151,7 +180,20 @@ class MailImportTest extends AppTest
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from a known contact
+	 * Ensure creator is correctly determined from mail address if mail is from a known contact
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() should not map external contact email to a tracker
+	 *   staff account for tr_creator.
+	 *
+	 * Setup strategy:
+	 * - setUpBeforeClass() creates a known contact email used as sender.
+	 *
+	 * Pass criteria:
+	 * - returned content has tr_creator equal to the current logged-in account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - contact search and addressbook backend must be available in the test run.
 	 */
 	public function testCreatorContact()
 	{
