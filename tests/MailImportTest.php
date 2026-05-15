@@ -76,19 +76,22 @@ class MailImportTest extends AppTest
 			$contact = array_merge($contact, $account);
 			$contact_bo->save($contact, true);
 		}
-		// Set the last one as tracker staff for all trackers and reset cached staff list.
-		// prepare_import_mail() resolves sender against get_staff(), which uses instance cache.
+		// Set the last one as the only tracker staff account for this test class.
+		// prepare_import_mail() resolves sender via get_staff(), which merges queue-specific
+		// and global (0) staff and may use instance cache.
 		static::$tech_account = (int)$command->account;
-		if(!is_array(self::$bo->users) || self::$bo->users === 'NULL')
+		$trackers = array_keys((array)self::$bo->get_tracker_labels());
+		array_unshift($trackers, 0);
+		$trackers = array_unique(array_map('intval', $trackers));
+		self::$bo->users = [];
+		self::$bo->technicians = [];
+		self::$bo->admins = [];
+		foreach($trackers as $queue_id)
 		{
-			self::$bo->users = [];
+			self::$bo->users[$queue_id] = [];
+			self::$bo->technicians[$queue_id] = [static::$tech_account];
+			self::$bo->admins[$queue_id] = [];
 		}
-		if(!is_array(self::$bo->technicians) || self::$bo->technicians === 'NULL')
-		{
-			self::$bo->technicians = [];
-		}
-		self::$bo->users[0] = array_values(array_unique(array_merge((array)self::$bo->users[0], [static::$tech_account])));
-		self::$bo->technicians[0] = array_values(array_unique(array_merge((array)self::$bo->technicians[0], [static::$tech_account])));
 		\EGroupware\Api\Cache::unsetInstance('tracker', 'staff_cache');
 
 		foreach(self::$contacts as $contact)
