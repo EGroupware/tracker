@@ -266,7 +266,7 @@ class ApiHandler extends Api\CalDAV\Handler
 
 		if ($sync_collection_report)
 		{
-			$this->sync_collection_token = $sync_token . '_' . $sync_token_offset;
+			$this->sync_collection_token = $sync_token . self::SYNC_TOKEN_OFFSET_DELIMITER . $sync_token_offset;
 			if ($this->bo->total > $yielded + $initial_offset)
 			{
 				$this->more_results = true;
