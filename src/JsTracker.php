@@ -26,6 +26,8 @@ class JsTracker extends Api\CalDAV\JsBase
 
 	const TYPE_TICKET = 'Ticket';
 
+	const TYPE_REPLY = 'Reply';
+
 	/**
 	 * Status integer → label map (mirrors tracker_so constants)
 	 */
@@ -93,6 +95,17 @@ class JsTracker extends Api\CalDAV\JsBase
 		// @type and private must always be present even when falsy
 		$data[self::AT_TYPE] = self::TYPE_TICKET;
 		$data['private']     = (bool)$ticket['private'];
+
+		// Include replies when loaded via read_extra($read_replies=true)
+		if (!empty($ticket['replies']))
+		{
+			$replies_map = [];
+			foreach ($ticket['replies'] as $reply)
+			{
+				$replies_map[(string)$reply['reply_id']] = self::JsReply($reply, false);
+			}
+			$data['replies'] = $replies_map;
+		}
 
 		if ($encode)
 		{
@@ -235,6 +248,88 @@ class JsTracker extends Api\CalDAV\JsBase
 		}
 
 		return $ticket;
+	}
+
+	/**
+	 * Build the JSON representation of a single reply.
+	 *
+	 * @param array         $reply  row from egw_tracker_replies (reply_* keys, reply_created in user-TZ)
+	 * @param bool|"pretty" $encode true = JSON string, false = raw array
+	 * @return string|array
+	 */
+	public static function JsReply(array $reply, $encode = true)
+	{
+		$data = [
+			self::AT_TYPE => self::TYPE_REPLY,
+			'id'          => (int)$reply['reply_id'],
+			'message'     => (string)$reply['reply_message'],
+			'creator'     => self::account((int)$reply['reply_creator']),
+			'created'     => !empty($reply['reply_created'])
+				? self::UTCDateTime($reply['reply_created'], true)
+				: null,
+			'restricted'  => (bool)$reply['reply_visible'],
+		];
+
+		if ($encode)
+		{
+			return Api\CalDAV::json_encode($data, $encode === 'pretty');
+		}
+		return $data;
+	}
+
+	/**
+	 * Parse a reply JSON body (POST / PUT / PATCH request body).
+	 *
+	 * @param string $json   raw request body
+	 * @param array  $old    existing reply row for PATCH merging (reply_* keys)
+	 * @param string $method POST / PUT / PATCH
+	 * @return array  reply_* prefixed fields ready for save_comment()
+	 * @throws Api\CalDAV\JsParseException
+	 */
+	public static function parseJsReply(string $json, array $old = [], string $method = 'POST'): array
+	{
+		$name = $value = null;
+		try
+		{
+			$data = json_decode($json, true, 5, JSON_THROW_ON_ERROR);
+
+			if ($method !== 'PATCH' && empty($data['message']))
+			{
+				throw new Api\CalDAV\JsParseException("Required field 'message' missing");
+			}
+
+			$reply = [];
+			foreach ($data as $name => $value)
+			{
+				switch ($name)
+				{
+					case 'message':
+						$reply['reply_message'] = (string)$value;
+						break;
+
+					case 'restricted':
+						$reply['reply_visible'] = $value ? 1 : 0;
+						break;
+
+					// read-only fields — silently ignore
+					case self::AT_TYPE:
+					case 'id':
+					case 'creator':
+					case 'created':
+						break;
+
+					default:
+						error_log(__METHOD__ . "() unknown field $name=" . json_encode($value, self::JSON_OPTIONS_ERROR) . ' --> ignored');
+						break;
+				}
+			}
+		}
+		catch (\Throwable $e)
+		{
+			self::handleExceptions($e, 'JsReply', $name ?? '', $value ?? null);
+		}
+
+		return $reply;
 	}
 
 	/**

@@ -439,10 +439,25 @@ class ApiHandler extends Api\CalDAV\Handler
 	{
 		header('Content-Type: application/json');
 
+		// ── Reply sub-resource ─────────────────────────────────────────────────
+		if (preg_match('#/tracker/\d+/replies(?:/(\d+))?/?$#', $options['path'], $m))
+		{
+			return $this->getReplies($options, (int)$id, isset($m[1]) ? (int)$m[1] : null);
+		}
+		// ──────────────────────────────────────────────────────────────────────
+
 		if (!is_array($ticket = $this->_common_get_put_delete('GET', $options, $id)))
 		{
 			return $ticket;
 		}
+
+		// Load replies so JsTicket() includes the reply map
+		$this->bo->read_extra(
+			$this->bo->is_admin($this->bo->data['tr_tracker']),
+			$this->bo->is_technician($this->bo->data['tr_tracker']),
+			null, true
+		);
+		$ticket = Api\Db::strip_array_keys($this->bo->data, 'tr_');
 
 		try
 		{
@@ -481,6 +496,15 @@ class ApiHandler extends Api\CalDAV\Handler
 	 */
 	public function put(&$options, $id, $user = null, $prefix = null, string $method = 'PUT', ?string $content_type = null)
 	{
+		// ── Reply sub-resource ─────────────────────────────────────────────────
+		if (preg_match('#/tracker/\d+/replies(?:/(\d+))?/?$#', $options['path'], $m))
+		{
+			if ($method === 'POST')  return $this->createReply($options, (int)$id);
+			if (isset($m[1]))        return $this->updateReply($options, (int)$id, (int)$m[1], $method);
+			return '405 Method Not Allowed';
+		}
+		// ──────────────────────────────────────────────────────────────────────
+
 		$old = $this->_common_get_put_delete($method, $options, $id);
 		if (!is_null($old) && !is_array($old))
 		{
@@ -569,6 +593,13 @@ class ApiHandler extends Api\CalDAV\Handler
 	 */
 	public function delete(&$options, $id, $user)
 	{
+		// ── Reply sub-resource ─────────────────────────────────────────────────
+		if (preg_match('#/tracker/\d+/replies/(\d+)/?$#', $options['path'], $m))
+		{
+			return $this->deleteReply($options, (int)$id, (int)$m[1]);
+		}
+		// ──────────────────────────────────────────────────────────────────────
+
 		if (!is_array($ticket = $this->_common_get_put_delete('DELETE', $options, $id)))
 		{
 			return $ticket;
@@ -659,6 +690,240 @@ class ApiHandler extends Api\CalDAV\Handler
 		}
 
 		return $this->bo->check_rights($needed, null, $data);
+	}
+
+	// ─────────────────────────────────────────────────────────────────────────
+	// Reply sub-resource handlers
+	// ─────────────────────────────────────────────────────────────────────────
+
+	/**
+	 * GET /tracker/{id}/replies[/{reply_id}]
+	 *
+	 * Without reply_id: returns all visible replies as `{ "<reply_id>": {…}, … }`.
+	 * With reply_id:    returns the single Reply object.
+	 *
+	 * @param array    &$options
+	 * @param int      $ticket_id
+	 * @param int|null $reply_id  null = list all
+	 * @return bool|string  true (body in $options['data']) or HTTP status string
+	 */
+	protected function getReplies(array &$options, int $ticket_id, ?int $reply_id)
+	{
+		$tid          = $ticket_id;
+		$ticket_check = $this->_common_get_put_delete('GET', $options, $tid);
+		if (!is_array($ticket_check))
+		{
+			return is_string($ticket_check) ? $ticket_check : '404 Not found';
+		}
+
+		$this->bo->read_extra(
+			$this->bo->is_admin($this->bo->data['tr_tracker']),
+			$this->bo->is_technician($this->bo->data['tr_tracker']),
+			null, true
+		);
+		$replies = $this->bo->data['replies'] ?? [];
+
+		if ($reply_id !== null)
+		{
+			foreach ($replies as $reply)
+			{
+				if ((int)$reply['reply_id'] === $reply_id)
+				{
+					$options['data']     = JsTracker::JsReply($reply);
+					$options['mimetype'] = 'application/json';
+					header('Content-Encoding: identity');
+					return true;
+				}
+			}
+			return '404 Not found';
+		}
+
+		$map = [];
+		foreach ($replies as $reply)
+		{
+			$map[(string)$reply['reply_id']] = JsTracker::JsReply($reply, false);
+		}
+		$options['data']     = Api\CalDAV::json_encode($map);
+		$options['mimetype'] = 'application/json';
+		header('Content-Encoding: identity');
+		return true;
+	}
+
+	/**
+	 * POST /tracker/{id}/replies/
+	 *
+	 * Creates a new reply on the given ticket.
+	 * Returns 201 Created with a Location header pointing to the new reply.
+	 *
+	 * @param array &$options
+	 * @param int   $ticket_id
+	 * @return string  HTTP status string
+	 */
+	protected function createReply(array &$options, int $ticket_id): string
+	{
+		$tid          = $ticket_id;
+		$ticket_check = $this->_common_get_put_delete('GET', $options, $tid);
+		if (!is_array($ticket_check))
+		{
+			return is_string($ticket_check) ? $ticket_check : '403 Forbidden';
+		}
+
+		try
+		{
+			$parsed = JsTracker::parseJsReply($options['content'], [], 'POST');
+		}
+		catch (\Throwable $e)
+		{
+			return $this->handleException($e);
+		}
+
+		$this->bo->data['reply_message'] = $parsed['reply_message'];
+		$this->bo->data['reply_visible']  = $parsed['reply_visible'] ?? 0;
+		// reply_creator and reply_created are set automatically by tracker_bo::save()
+
+		$err = $this->bo->save();
+		if ($err)
+		{
+			return '403 Forbidden';
+		}
+
+		// tracker_bo::save() prepends the new reply via array_unshift
+		$reply_id = (int)$this->bo->data['replies'][0]['reply_id'];
+		$base     = preg_replace('#/replies.*$#', '', rtrim($options['path'], '/'));
+		header('Location: ' . $this->base_uri . $base . '/replies/' . $reply_id);
+
+		return '201 Created';
+	}
+
+	/**
+	 * PUT / PATCH /tracker/{id}/replies/{reply_id}
+	 *
+	 * Replaces or partially updates a reply.  Only `message` and `restricted`
+	 * can be changed; all other fields are read-only.  Admin/technicians may
+	 * edit any reply; regular users may only edit their own replies.
+	 *
+	 * @param array  &$options
+	 * @param int    $ticket_id
+	 * @param int    $reply_id
+	 * @param string $method   PUT or PATCH
+	 * @return string  HTTP status string
+	 */
+	protected function updateReply(array &$options, int $ticket_id, int $reply_id, string $method): string
+	{
+		$tid          = $ticket_id;
+		$ticket_check = $this->_common_get_put_delete('GET', $options, $tid);
+		if (!is_array($ticket_check))
+		{
+			return is_string($ticket_check) ? $ticket_check : '404 Not found';
+		}
+
+		$this->bo->read_extra(
+			$this->bo->is_admin($this->bo->data['tr_tracker']),
+			$this->bo->is_technician($this->bo->data['tr_tracker']),
+			null, true
+		);
+
+		$reply = null;
+		foreach ($this->bo->data['replies'] ?? [] as $r)
+		{
+			if ((int)$r['reply_id'] === $reply_id)
+			{
+				$reply = $r;
+				break;
+			}
+		}
+		if ($reply === null) return '404 Not found';
+
+		$uid = (int)$GLOBALS['egw_info']['user']['account_id'];
+		if ((int)$reply['reply_creator'] !== $uid &&
+			!$this->bo->check_rights(TRACKER_ADMIN | TRACKER_TECHNICIAN, null, $this->bo->data))
+		{
+			return '403 Forbidden';
+		}
+
+		try
+		{
+			$parsed = JsTracker::parseJsReply($options['content'], $reply, $method);
+		}
+		catch (\Throwable $e)
+		{
+			return $this->handleException($e);
+		}
+
+		$update = ['reply_id' => $reply_id, 'tr_id' => $ticket_id];
+		$update['reply_message'] = $parsed['reply_message'] ?? $reply['reply_message'];
+		if (array_key_exists('reply_visible', $parsed))
+		{
+			$update['reply_visible'] = $parsed['reply_visible'];
+		}
+		elseif ($method !== 'PATCH')
+		{
+			$update['reply_visible'] = (int)$reply['reply_visible'];
+		}
+
+		try
+		{
+			$this->bo->save_comment($update);
+		}
+		catch (\Throwable $e)
+		{
+			return $this->handleException($e);
+		}
+
+		return '204 No Content';
+	}
+
+	/**
+	 * DELETE /tracker/{id}/replies/{reply_id}
+	 *
+	 * Deletes a single reply.  Admin/technicians may delete any reply; regular
+	 * users may only delete their own replies.
+	 *
+	 * @param array &$options
+	 * @param int   $ticket_id
+	 * @param int   $reply_id
+	 * @return string  HTTP status string
+	 */
+	protected function deleteReply(array &$options, int $ticket_id, int $reply_id): string
+	{
+		$tid          = $ticket_id;
+		$ticket_check = $this->_common_get_put_delete('GET', $options, $tid);
+		if (!is_array($ticket_check))
+		{
+			return is_string($ticket_check) ? $ticket_check : '404 Not found';
+		}
+
+		$this->bo->read_extra(
+			$this->bo->is_admin($this->bo->data['tr_tracker']),
+			$this->bo->is_technician($this->bo->data['tr_tracker']),
+			null, true
+		);
+
+		$reply = null;
+		foreach ($this->bo->data['replies'] ?? [] as $r)
+		{
+			if ((int)$r['reply_id'] === $reply_id)
+			{
+				$reply = $r;
+				break;
+			}
+		}
+		if ($reply === null) return '404 Not found';
+
+		$uid = (int)$GLOBALS['egw_info']['user']['account_id'];
+		if ((int)$reply['reply_creator'] !== $uid &&
+			!$this->bo->check_rights(TRACKER_ADMIN | TRACKER_TECHNICIAN, null, $this->bo->data))
+		{
+			return '403 Forbidden';
+		}
+
+		$GLOBALS['egw']->db->delete(
+			\tracker_so::REPLIES_TABLE,
+			['reply_id' => $reply_id, 'tr_id' => $ticket_id],
+			__LINE__, __FILE__, 'tracker'
+		);
+
+		return '204 No Content';
 	}
 
 	// ─────────────────────────────────────────────────────────────────────────
