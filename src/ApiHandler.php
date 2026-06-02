@@ -246,14 +246,14 @@ class ApiHandler extends Api\CalDAV\Handler
 					continue;
 				}
 
+				$response_content = Api\CalDAV::isJSON() || !is_array($content) ? $content : Api\CalDAV::json_encode($content);
+
 				$props = [
 					'getcontenttype'  => Api\CalDAV::mkprop('getcontenttype', 'application/json'),
 					'getlastmodified' => Api\DateTime::user2server($ticket['tr_modified'] ?? $ticket['tr_created'], 'utc'),
 					'displayname'     => $ticket['tr_summary'],
-					'getcontentlength' => bytes(is_array($content) ? Api\CalDAV::json_encode(json_encode($content)) : $content),
-					'data'             => Api\CalDAV::mkprop('data',
-						Api\CalDAV::isJSON() || !is_array($content) ? $content : Api\CalDAV::json_encode($content)
-					),
+					'getcontentlength' => bytes($response_content),
+					'data'             => Api\CalDAV::mkprop('data', $response_content),
 				];
 
 				yield $this->add_resource($path, $entry, $props);
