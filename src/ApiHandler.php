@@ -200,11 +200,13 @@ class ApiHandler extends Api\CalDAV\Handler
 		$criteria = $filter['__search__'] ?? '';
 		unset($filter['__search__']);
 
+		$page_size = isset($nresults) ? min($nresults, self::CHUNK_SIZE) : self::CHUNK_SIZE;
+
 		for (
 			$chunk = 0;
 			($tickets = $this->bo->search(
 				$criteria, false, $order, '', '', false, 'AND',
-				[$initial_offset + $chunk * self::CHUNK_SIZE, $nresults ?: self::CHUNK_SIZE],
+				[$initial_offset + $chunk * $page_size, $page_size],
 				$filter, false
 			));
 			++$chunk
@@ -229,7 +231,7 @@ class ApiHandler extends Api\CalDAV\Handler
 				}
 
 				// sync-collection: deleted items have no properties
-				if ((string)$ticket['tr_status'] === \tracker_so::STATUS_DELETED)
+				if ($sync_collection_report && (string)$ticket['tr_status'] === \tracker_so::STATUS_DELETED)
 				{
 					yield ['path' => $path . urldecode($this->get_path($entry))];
 					if (++$yielded && isset($nresults) && $yielded >= $nresults) break 2;
