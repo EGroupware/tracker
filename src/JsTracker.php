@@ -147,6 +147,20 @@ class JsTracker extends Api\CalDAV\JsBase
 		{
 			$data = json_decode($json, true, 10, JSON_THROW_ON_ERROR);
 
+			if (!is_array($data))
+			{
+				if ($method !== 'PATCH')
+				{
+					throw new Api\CalDAV\JsParseException('Invalid JSON body, expected an object');
+				}
+				$data = [];
+			}
+
+			if ($method !== 'PATCH' && $data === [])
+			{
+				throw new Api\CalDAV\JsParseException('Empty request body');
+			}
+
 			// For PATCH: only parse what's in the request body.
 			// Do NOT re-serialize $old and merge — that converts raw IDs to display names
 			// and causes lookup failures.  so_sql::save() will merge the partial update
