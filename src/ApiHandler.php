@@ -62,21 +62,6 @@ class ApiHandler extends Api\CalDAV\Handler
 		parent::__construct('tracker', $caldav);
 		self::$path_extension = '';
 		$this->bo = new \tracker_bo();
-
-		// Tracker requires at least one queue (category) to search/list tickets.
-		// Auto-create a "Default" queue on first REST API use if none exist.
-		if (empty($this->bo->trackers))
-		{
-			$cats = new Api\Categories(0, 'tracker');
-			$cats->add([
-				'name'   => 'Default',
-				'owner'  => 0,
-				'access' => 'public',
-				'data'   => ['type' => 'tracker'],
-			]);
-			// Reload after creation so search() finds the new queue.
-			$this->bo->trackers = $this->bo->get_tracker_labels();
-		}
 	}
 
 	// ─────────────────────────────────────────────────────────────────────────
@@ -95,6 +80,11 @@ class ApiHandler extends Api\CalDAV\Handler
 	 */
 	public function propfind($path, &$options, &$files, $user, $id = '')
 	{
+		if (empty($this->bo->trackers))
+		{
+			return '403 Forbidden';
+		}
+
 		$filter = [];
 
 		// Restrict to a specific owner when user prefix is present in the URL.
@@ -545,6 +535,10 @@ class ApiHandler extends Api\CalDAV\Handler
 		else
 		{
 			// new ticket
+			if (empty($this->bo->trackers))
+			{
+				return '403 Forbidden';
+			}
 			if (!isset($ticket['tr_tracker']))
 			{
 				// use the first available tracker queue the user has access to

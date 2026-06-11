@@ -115,7 +115,12 @@ class JsTracker extends Api\CalDAV\JsBase
 	}
 
 	/**
-	 * Format the assigned list (array of account-ids) as JSON.
+	 * Format the assigned list as a JMAP-style map keyed by account-id string.
+	 *
+	 * Returns { "123": <account-object>, … } so that a PATCH can add or remove
+	 * individual assignees without replacing the whole list:
+	 *   PATCH  {"assigned": {"123": null}}   → removes user 123
+	 *   PATCH  {"assigned": {"456": true}}   → adds user 456
 	 *
 	 * @param array|int $assigned
 	 * @return array|null
@@ -126,7 +131,7 @@ class JsTracker extends Api\CalDAV\JsBase
 		$result = [];
 		foreach ((array)$assigned as $uid)
 		{
-			if ($uid) $result[] = self::account($uid);
+			if ($uid) $result[(string)(int)$uid] = self::account($uid);
 		}
 		return $result ?: null;
 	}
@@ -225,7 +230,7 @@ class JsTracker extends Api\CalDAV\JsBase
 						break;
 
 					case 'assigned':
-						$ticket['tr_assigned'] = self::parseAssigned($value);
+						$ticket['tr_assigned'] = self::parseAssigned($value, (array)($old['assigned'] ?? []), $method);
 						break;
 
 					case 'cc':
@@ -380,22 +385,55 @@ class JsTracker extends Api\CalDAV\JsBase
 	}
 
 	/**
-	 * Parse the assigned field: accepts a single account-object or an array of them.
+	 * Parse the assigned field.
 	 *
-	 * @param mixed $value
+	 * Preferred format is a JMAP map keyed by account-id string:
+	 *   { "123": <account-object>|true }  → add/keep user 123
+	 *   { "123": null }                    → remove user 123 (PATCH only)
+	 *
+	 * For PATCH the map is applied as a delta on top of $old.
+	 * For PUT/POST only non-null entries form the new list.
+	 *
+	 * Legacy format (array of account-objects) is still accepted.
+	 *
+	 * @param mixed  $value
+	 * @param array  $old    current account_id list, used for PATCH merging
+	 * @param string $method PUT / POST / PATCH
 	 * @return array  flat array of account_ids
 	 */
-	protected static function parseAssigned($value): array
+	protected static function parseAssigned($value, array $old = [], string $method = 'PUT'): array
 	{
 		if (!$value) return [];
-		if (isset($value['uid'])) $value = [$value]; // single object
-		$ids = [];
-		foreach ($value as $item)
+
+		// Map format: associative, not a single account-object or sequential list
+		if (is_array($value) && !isset($value['uid']) && !array_is_list($value))
 		{
-			if (($uid = self::parseAccount($item)))
+			// PATCH starts from existing ids; PUT/POST replaces entirely
+			$ids = $method === 'PATCH' ? array_flip(array_filter($old)) : [];
+
+			foreach ($value as $key => $entry)
 			{
-				$ids[] = $uid;
+				$uid = is_numeric($key) ? (int)$key : self::parseAccount($key);
+				if (!$uid) continue;
+
+				if ($entry === null)
+				{
+					unset($ids[$uid]);
+				}
+				else
+				{
+					$ids[$uid] = true;
+				}
 			}
+			return array_keys($ids);
+		}
+
+		// Legacy: single account-object or sequential array of account-objects
+		if (isset($value['uid'])) $value = [$value];
+		$ids = [];
+		foreach ((array)$value as $item)
+		{
+			if (($uid = self::parseAccount($item))) $ids[] = $uid;
 		}
 		return $ids;
 	}
