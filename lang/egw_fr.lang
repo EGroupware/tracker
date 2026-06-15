@@ -118,6 +118,7 @@ custom fields	tracker	fr	Champs personnalisés
 custom notifications	tracker	fr	Notifications personnalisées
 custom tracker priorities	tracker	fr	Priorités personnalisées
 customfield	tracker	fr	Champ personnalisé
+data exchange settings	common	fr	Paramètres d'échange de données
 date filter	tracker	fr	Filtre de date
 date opened	tracker	fr	Date d'ouverture
 default document to insert entries	tracker	fr	Document par défaut pour insérer les entrées.
@@ -285,6 +286,7 @@ new ticket submitted by %1 at %2	tracker	fr	Nouveau ticket soumis par %1 à %2
 new tickets as	tracker	fr	Nouveaux tickets comme
 new tracker item submitted by %1 at %2	tracker	fr	Nouvel élément de traqueur soumis par %1 à %2
 no change	tracker	fr	Aucune modification
+no filter	tracker	fr	Aucun filtre
 no notifications	tracker	fr	Aucune notification
 no trackers found, aborting	tracker	fr	Aucun traqueur trouvé, abandon.
 no, no additional mailheader to description and comments	tracker	fr	Non, pas d'entête de mails supplémentaire dans les descriptions ou les commentaires
@@ -339,7 +341,6 @@ receive notifications about starting entries you created or are assigned to	trac
 receive notifications in html	tracker	fr	Recevoir les notifications en HTML
 refused to open mailbox therefore changed interval from %1 to %2	tracker	fr	Refusé à ouvrir la boîte email, donc l'intervalle est changée de %1 à %2
 refused to open mailbox: %1	tracker	fr	Ouverture de boîte email refusée : %1
-rejected	tracker	fr	Rejeté
 remind	tracker	fr	Rappeler
 replacements for inserting entries into documents	tracker	fr	Remplacements pour insertion d'entrées dans des documents
 reply also to unknown addresses	tracker	fr	Répondre aussi aux adresses inconnues
@@ -370,6 +371,7 @@ select how autoreplies should be sent when mails are received	tracker	fr	Choisir
 select multiple	tracker	fr	Sélectionner plusieurs
 select one...	tracker	fr	sélectionnez un ...
 select tracker queue	tracker	fr	Sélectionner un traqueur
+select tracker queues	tracker	fr	Sélectionner des files de traqueurs
 select users or groups	tracker	fr	Sélectionner des utilisateurs et groupes
 select which categories should be used in tracker for the tts categories	tracker	fr	Sélectionner quelles catégories à utiliser dans le Traqueur pour les catégories TTS.
 select which username should be used when unrecognized mails are handled.	tracker	fr	Sélectionner le nom d'utilisateur à utiliser lors du traitement de courriers non reconnus.
@@ -416,6 +418,7 @@ the following document-types are supported:	tracker	fr	Les types de documents su
 the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	fr	Nom utilisé en interne (<= 20 caractères), le changer rendra certaines données inaccessibles
 the text displayed to the user	tracker	fr	le texte montré à l'utilisateur
 there already an escalation for that filter!	tracker	fr	Il y a déjà une escalade pour ce filtre !
+this message was forwarded to you from egroupware-tracker	tracker	fr	Ce message vous est transféré depuis le traqueur eGroupware
 this module allows to add a ticket.	tracker	fr	Ce module permet d'ajouter un ticket.
 this module displays information from the tracker.	tracker	fr	Ce module affiche les informations du Traqueur
 this month	tracker	fr	Ce mois

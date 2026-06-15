@@ -19,10 +19,11 @@ namespace Egroupware\Tracker;
 
 require_once realpath(__DIR__.'/../../api/tests/AppTest.php');	// Application test base
 
+use EGroupware\Api\AppTest;
 use Egroupware\Api\Categories;
-use Egroupware\Api\Etemplate;
+use EGroupware\Api\Etemplate;
 
-class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
+class DefaultCategoryPrecidenceTest extends AppTest
 {
 	/**
 	 * Hold on to the previous global default, so it can be restored after
@@ -124,7 +125,9 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		parent::setUp();
 
 		$this->ui = new \tracker_ui();
-		$this->ui->template = $this->createPartialMock(Etemplate::class, array('exec'));
+		$this->ui->template = $this->createPartialMock(Etemplate::class, array('exec', 'read', 'set_cell_attribute'));
+		$this->ui->template->method('read')->willReturn(true);
+		$this->ui->template->method('set_cell_attribute')->willReturn(null);
 
 		// Create testing options
 		$this->createTestOptions();
@@ -159,7 +162,24 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 	}
 
 	/**
-	 * No default set, should go to the first defined category
+	 * Verify fallback category selection when no defaults are configured.
+	 *
+	 * Behaviour under test:
+	 * - tracker edit initialization should present available categories without
+	 *   applying tracker/global/preference/filter defaults.
+	 *
+	 * Setup strategy:
+	 * - test setup clears all default category sources and prepares test
+	 *   categories/trackers.
+	 * - ui->edit() is executed with mocked etemplate callbacks to inspect content.
+	 *
+	 * Pass criteria:
+	 * - content exposes the category option list expected from
+	 *   get_tracker_labels('cat').
+	 *
+	 * Environment-sensitive constraints:
+	 * - category ordering may depend on tracker/category backend state; assertions
+	 *   compare against labels fetched during the same run.
 	 */
 	public function testNoDefault()
 	{
@@ -170,21 +190,34 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		// Mock the etemplate call to check the results
 		$this->ui->template->expects($this->once())
 			->method('exec')
-			->will(
-				$this->returnCallback(function($method, $content) {
+			->willReturnCallback(function ($method, $content)
+			{
 					$this->assertEquals($cats, $content[$this->field],
 							$this->makeMessage($cats, $content[$this->field])
 					);
 					return true;
-				})
-			);
+			});
 
 		// Make a call to edit, looks like initial load
 		$this->ui->edit();
 	}
 
 	/**
-	 * Test that global default works
+	 * Verify global tracker default is used when no higher-priority value exists.
+	 *
+	 * Behaviour under test:
+	 * - a global default category should be selected for multiple trackers unless
+	 *   overridden by tracker-specific/default state.
+	 *
+	 * Setup strategy:
+	 * - configure global default via set_default_category(false, ...).
+	 * - run ui->edit() once per tracker and inspect outgoing content.
+	 *
+	 * Pass criteria:
+	 * - selected category equals static::$admin_all for both tracker contexts.
+	 *
+	 * Environment-sensitive constraints:
+	 * - assumes stable category ids created in createTestOptions().
 	 */
 	public function testAllTrackersDefault()
 	{
@@ -194,14 +227,13 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		// Mock the etemplate call to check the results
 		$this->ui->template->expects($this->exactly(2))
 			->method('exec')
-			->will(
-				$this->returnCallback(function($method, $content) {
+			->willReturnCallback(function ($method, $content)
+			{
 					$this->assertEquals(static::$admin_all, $content[$this->field],
 							$this->makeMessage(static::$admin_all, $content[$this->field])
 					);
 					return true;
-				})
-			);
+			});
 
 		// Set up to use the tracker with global default
 		$this->ui->data['tr_tracker'] = $this->global_tracker;
@@ -215,7 +247,22 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 	}
 
 	/**
-	 * Check that tracker specific default overrides global default
+	 * Verify tracker-specific default overrides global default.
+	 *
+	 * Behaviour under test:
+	 * - default precedence should choose tracker-specific category over global
+	 *   default for that tracker only.
+	 *
+	 * Setup strategy:
+	 * - set both global and tracker-specific defaults.
+	 * - execute edit flow for global tracker and tracker-specific queue.
+	 *
+	 * Pass criteria:
+	 * - global tracker keeps static::$admin_all.
+	 * - tracker-specific queue uses static::$admin_tracker.
+	 *
+	 * Environment-sensitive constraints:
+	 * - depends on tracker id to category parent mapping created at runtime.
 	 */
 	public function testTrackerSpecificDefault()
 	{
@@ -228,8 +275,8 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		// Check can only call expects once, so callback needs an if
 		$this->ui->template->expects($this->exactly(2))
 			->method('exec')
-			->will(
-				$this->returnCallback(function($method, $content) {
+			->willReturnCallback(function ($method, $content)
+			{
 					if($content['tr_tracker'] == $this->global_tracker)
 					{
 						// Global default
@@ -245,8 +292,7 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 						);
 					}
 					return true;
-				})
-			);
+			});
 
 		// Set up to use the tracker with global default
 		$this->ui->data['tr_tracker'] = $this->global_tracker;
@@ -262,7 +308,22 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 	}
 
 	/**
-	 * Check that preference overrides global default & tracker specific default
+	 * Verify user preference default overrides admin-configured defaults.
+	 *
+	 * Behaviour under test:
+	 * - user tracker preference should override global and tracker-specific admin
+	 *   defaults for the same queue.
+	 *
+	 * Setup strategy:
+	 * - configure global + tracker defaults, then set user preference.
+	 * - run edit for both tracker contexts and validate selected category.
+	 *
+	 * Pass criteria:
+	 * - global tracker still uses static::$admin_all.
+	 * - preferred tracker uses static::$preference.
+	 *
+	 * Environment-sensitive constraints:
+	 * - preference state is mutated in globals and reset during tearDown().
 	 */
 	public function testPreferenceDefault()
 	{
@@ -276,8 +337,8 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		// Check can only call expects once, so callback needs an if
 		$this->ui->template->expects($this->exactly(2))
 			->method('exec')
-			->will(
-				$this->returnCallback(function($method, $content) {
+			->willReturnCallback(function ($method, $content)
+			{
 					if($content['tr_tracker'] == $this->global_tracker)
 					{
 						// Global default
@@ -293,8 +354,7 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 						);
 					}
 					return true;
-				})
-			);
+			});
 
 		// Set up to use the tracker with global default
 		$this->ui->data['tr_tracker'] = $this->global_tracker;
@@ -310,7 +370,21 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 	}
 
 	/**
-	 * Check that the current filter (in nextmatch) overrides all
+	 * Verify current nextmatch filter overrides defaults and preferences.
+	 *
+	 * Behaviour under test:
+	 * - session state filter should have highest precedence when initializing
+	 *   category selection in edit.
+	 *
+	 * Setup strategy:
+	 * - set global default, tracker default, preference, then session filter.
+	 * - execute edit for both tracker contexts.
+	 *
+	 * Pass criteria:
+	 * - selected category equals static::$filter_setting for both trackers.
+	 *
+	 * Environment-sensitive constraints:
+	 * - relies on session cache backend used by Api\Cache::setSession().
 	 */
 	public function testFilterDefault()
 	{
@@ -326,8 +400,8 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 		// Check can only call expects once, so callback needs an if
 		$this->ui->template->expects($this->exactly(2))
 			->method('exec')
-			->will(
-				$this->returnCallback(function($method, $content) {
+			->willReturnCallback(function ($method, $content)
+			{
 					if($content['tr_tracker'] == $this->global_tracker)
 					{
 						// Global default overridden
@@ -343,8 +417,7 @@ class DefaultCategoryPrecidenceTest extends \EGroupware\Api\AppTest
 						);
 					}
 					return true;
-				})
-			);
+			});
 
 		// Set up to use the tracker with global default
 		$this->ui->data['tr_tracker'] = $this->global_tracker;

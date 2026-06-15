@@ -76,8 +76,23 @@ class MailImportTest extends AppTest
 			$contact = array_merge($contact, $account);
 			$contact_bo->save($contact, true);
 		}
-		// Set the last one as tracker tech
-		self::$bo->users[0][] = static::$tech_account = $command->account;
+		// Set the last one as the only tracker staff account for this test class.
+		// prepare_import_mail() resolves sender via get_staff(), which merges queue-specific
+		// and global (0) staff and may use instance cache.
+		static::$tech_account = (int)$command->account;
+		$trackers = array_keys((array)self::$bo->get_tracker_labels());
+		array_unshift($trackers, 0);
+		$trackers = array_unique(array_map('intval', $trackers));
+		self::$bo->users = [];
+		self::$bo->technicians = [];
+		self::$bo->admins = [];
+		foreach($trackers as $queue_id)
+		{
+			self::$bo->users[$queue_id] = [];
+			self::$bo->technicians[$queue_id] = [static::$tech_account];
+			self::$bo->admins[$queue_id] = [];
+		}
+		\EGroupware\Api\Cache::unsetInstance('tracker', 'staff_cache');
 
 		foreach(self::$contacts as $contact)
 		{
@@ -101,7 +116,22 @@ class MailImportTest extends AppTest
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from staff with tracker access
+	 * Ensure import assigns creator to tracker staff when sender has tracker access.
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() should map sender address to an internal account and
+	 *   keep that account as tr_creator when the sender is a tracker technician.
+	 *
+	 * Setup strategy:
+	 * - setUpBeforeClass() creates two internal users and configures one as
+	 *   tracker technician, plus contact fixtures.
+	 *
+	 * Pass criteria:
+	 * - returned content contains tr_creator equal to the configured tech account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - depends on account/contact creation rights and tracker configuration in
+	 *   the active test instance.
 	 */
 	public function testCreatorFromAccountMail()
 	{
@@ -119,14 +149,28 @@ class MailImportTest extends AppTest
 
 		// Sent from tech user -> owned by sending account
 		$this->assertEquals(
-			$content['tr_creator'],
 			static::$tech_account,
+			$content['tr_creator'],
 			'Ticket from user with access should be owned by that user'
 		);
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from staff without tracker access
+	 * Ensure creator is correctly determined from mail address if mail is from staff without tracker access
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() must not assign tr_creator to a known internal user
+	 *   who is not a tracker technician.
+	 *
+	 * Setup strategy:
+	 * - reuse fixture users from setUpBeforeClass(), with sender set to the
+	 *   non-tech account.
+	 *
+	 * Pass criteria:
+	 * - returned content has tr_creator equal to the currently logged-in account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - requires stable logged-in user context from LoggedInTest/AppTest.
 	 */
 	public function testCreatorNonTechUser()
 	{
@@ -143,15 +187,28 @@ class MailImportTest extends AppTest
 		);
 		// Sent from non-tech user -> owned by current user
 		$this->assertEquals(
-			$content['tr_creator'],
 			$GLOBALS['egw_info']['user']['account_id'],
+			$content['tr_creator'],
 			'Ticket from no access user should be owned by current user'
 		);
 
 	}
 
 	/**
-	 * Test creator is correctly determined from mail address if mail is from a known contact
+	 * Ensure creator is correctly determined from mail address if mail is from a known contact
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() should not map external contact email to a tracker
+	 *   staff account for tr_creator.
+	 *
+	 * Setup strategy:
+	 * - setUpBeforeClass() creates a known contact email used as sender.
+	 *
+	 * Pass criteria:
+	 * - returned content has tr_creator equal to the current logged-in account.
+	 *
+	 * Environment-sensitive constraints:
+	 * - contact search and addressbook backend must be available in the test run.
 	 */
 	public function testCreatorContact()
 	{
@@ -167,8 +224,8 @@ class MailImportTest extends AppTest
 		);
 		// Sent from non-tech user -> owned by current user
 		$this->assertEquals(
-			$content['tr_creator'],
 			$GLOBALS['egw_info']['user']['account_id'],
+			$content['tr_creator'],
 			'Ticket from contact should be owned by current user'
 		);
 

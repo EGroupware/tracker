@@ -257,7 +257,7 @@ last week	tracker	de	Letzte Woche
 last year	tracker	de	Letztes Jahr
 later	tracker	de	Später
 leaves without saveing	tracker	de	ohne Speichern verlassen
-length<br>rows	tracker	de	Länge<br>Zeilen
+length<br>rows	tracker	de	Länge\nZeilen
 limit number of description lines (default 5)	tracker	de	Begrenze Anzahl Beschreibungszeilen (Vorgabe 5)
 link to ticket	tracker	de	Verknüpfungen zu einem Ticket
 linked to %1	tracker	de	Verknüpft mit %1
@@ -341,7 +341,6 @@ receive notifications about starting entries you created or are assigned to	trac
 receive notifications in html	tracker	de	Empfange Benachrichtigungen als HTML E-Mail
 refused to open mailbox therefore changed interval from %1 to %2	tracker	de	Die Verbindung zu dem Postfach war nicht Möglich. Deshalb wurde das Abfrageintervall von %1 zu %2 geändert.
 refused to open mailbox: %1	tracker	de	Verbindung zu dem Postfach %1 wurde abgewiesen.
-rejected	tracker	de	Zurückgewiesen
 remind	tracker	de	Erinnern
 replacements for inserting entries into documents	tracker	de	komplette Liste der Platzhalter zum Einfügen in ein Dokument
 reply also to unknown addresses	tracker	de	Auch unbekannten Adressen antworten

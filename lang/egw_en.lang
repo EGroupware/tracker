@@ -257,7 +257,7 @@ last week	tracker	en	Last week
 last year	tracker	en	Last year
 later	tracker	en	Later
 leaves without saveing	tracker	en	leaves without saveing
-length<br>rows	tracker	en	Length<br>Rows
+length<br>rows	tracker	en	Length\nRows
 limit number of description lines (default 5)	tracker	en	Limit number of description lines. (default = 5).
 link to ticket	tracker	en	Link to ticket
 linked to %1	tracker	en	Linked to %1
@@ -341,7 +341,6 @@ receive notifications about starting entries you created or are assigned to	trac
 receive notifications in html	tracker	en	Receive notifications in HTML
 refused to open mailbox therefore changed interval from %1 to %2	tracker	en	Refused to open mailbox therefore changed interval from %1 to %2
 refused to open mailbox: %1	tracker	en	Refused to open mailbox: %1
-rejected	tracker	en	Rejected
 remind	tracker	en	Remind
 replacements for inserting entries into documents	tracker	en	Replacements for inserting entries into documents
 reply also to unknown addresses	tracker	en	Reply also to unknown addresses
