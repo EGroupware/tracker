@@ -1,12 +1,17 @@
 <?php
 /**
- * Tracker REST API tests: PATCH assigned field using JMAP-style map
+ * Tracker REST API tests: PATCH the JSCalendar "participants" object
+ *
+ * Tracker tickets reuse the standardized JsTask vocabulary, so assignees and CC
+ * are exposed through a single "participants" object (JsCalendar::Responsible()):
+ *   - the ticket creator is the participant with role "owner"
+ *   - assigned accounts are participants with role "attendee"
+ *   - CC e-mail addresses are participants with role "informational"
  *
  * Verifies that:
- *  - GET returns assigned as a map  { "$numeric_id": <account-info> }
- *  - PATCH { "assigned": { "$login": true } }  adds an assignee
- *  - PATCH { "assigned": { "$numeric_id": null } }  removes a single assignee
- *    without touching the rest of the list
+ *  - GET returns participants as a map keyed by uid, with the creator as owner
+ *  - PATCH { "participants": { "<uid>": { …, roles:{attendee:true} } } } assigns a user
+ *  - PATCH { "participants": { "<uid>": null } } removes that assignee again
  *
  * @link https://www.egroupware.org
  * @package tracker
@@ -23,14 +28,14 @@ use EGroupware\Api\RestTest;
 use GuzzleHttp\RequestOptions;
 
 /**
- * Tests for the JMAP-style map format of the "assigned" field.
+ * Tests for the JSCalendar "participants" object on tracker tickets.
  *
  * Test order:
- *   testCreate            – POST a new ticket (no assignees)
- *   testAssignedIsNull    – verify assigned is absent/null on a fresh ticket
- *   testPatchAddAssignee  – PATCH adds an assignee; response is a map, not an array
- *   testPatchRemoveAssignee – PATCH with null removes the assignee
- *   testDelete            – clean up
+ *   testCreate                – POST a new ticket (creator only)
+ *   testParticipantsOwnerOnly – fresh ticket has exactly one participant: the owner
+ *   testPatchAddAssignee      – PATCH assigns a user → participant gains the attendee role
+ *   testPatchRemoveAssignee   – PATCH with null removes the assignee → owner role only
+ *   testDelete                – clean up
  */
 class TrackerRestAssignedPatch extends RestTest
 {
@@ -42,9 +47,9 @@ class TrackerRestAssignedPatch extends RestTest
 	protected static ?string $ticketUrl = null;
 
 	/**
-	 * The numeric account-id key captured from the assigned map (set after testPatchAddAssignee).
+	 * The owner participant captured from GET: ['uid' => string, 'name' => ?string, 'email' => ?string].
 	 */
-	protected static ?string $assignedKey = null;
+	protected static ?array $owner = null;
 
 	// -------------------------------------------------------------------------
 	// Skip guard
@@ -71,8 +76,8 @@ class TrackerRestAssignedPatch extends RestTest
 		$probe = $client->post("$base/$user/tracker/", [
 			RequestOptions::HEADERS => ['Content-Type' => 'application/json'],
 			RequestOptions::BODY    => json_encode([
-				'@type'   => 'Ticket',
-				'summary' => 'Probe ticket (auto-deleted)',
+				'@type' => 'Ticket',
+				'title' => 'Probe ticket (auto-deleted)',
 			]),
 		]);
 
@@ -85,10 +90,16 @@ class TrackerRestAssignedPatch extends RestTest
 			);
 		}
 
-		// Clean up probe ticket
+		// Clean up probe ticket. The Location header is a server-relative path
+		// (e.g. /egroupware/groupdav.php/admin/tracker/3), so prepend the origin
+		// from $base to get an absolute URL Guzzle can DELETE.
 		$location = $probe->getHeaderLine('Location');
 		if ($location)
 		{
+			if ($location[0] === '/' && preg_match('#^(https?://[^/]+)#', $base, $m))
+			{
+				$location = $m[1].$location;
+			}
 			$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
 		}
 	}
@@ -107,7 +118,7 @@ class TrackerRestAssignedPatch extends RestTest
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Create a fresh ticket with no assignees via POST.
+	 * Create a fresh ticket (creator only) via POST.
 	 * Captures the Location header so subsequent tests know the URL.
 	 */
 	public function testCreate()
@@ -115,8 +126,8 @@ class TrackerRestAssignedPatch extends RestTest
 		$response = $this->getClient()->post($this->appUrl('tracker'), [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
 			RequestOptions::BODY    => json_encode([
-				'@type'   => 'Ticket',
-				'summary' => 'Assigned PATCH map test',
+				'@type' => 'Ticket',
+				'title' => 'Participants PATCH test',
 			]),
 		]);
 
@@ -124,15 +135,18 @@ class TrackerRestAssignedPatch extends RestTest
 		$location = $this->locationPath($response);
 		$this->assertNotEmpty($location, 'POST must return a Location header');
 
-		self::$ticketUrl = $this->url($location);
+		// Strip the /egroupware/groupdav.php prefix and rebuild a full URL via url()
+		$path = preg_replace('#^.*/groupdav\.php#', '', $location);
+		self::$ticketUrl = $this->url($path);
 	}
 
 	/**
-	 * A freshly created ticket with no assignees must return null / no assigned field.
+	 * A freshly created ticket has exactly one participant — the creator as owner.
+	 * Captures that participant so the assignee PATCH can reference the same account.
 	 *
 	 * @depends testCreate
 	 */
-	public function testAssignedIsNull()
+	public function testParticipantsOwnerOnly()
 	{
 		$response = $this->getClient()->get($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
@@ -140,70 +154,93 @@ class TrackerRestAssignedPatch extends RestTest
 		$this->assertHttpStatus(200, $response);
 
 		$body = json_decode((string)$response->getBody(), true);
-		$this->assertEmpty($body['assigned'] ?? null,
-			'assigned must be absent or null on a ticket created without assignees');
+		$participants = $body['participants'] ?? null;
+		$this->assertNotEmpty($participants, 'A ticket always has the creator as owner participant');
+		$this->assertIsArray($participants);
+		$this->assertFalse(array_is_list($participants),
+			'participants must be a map keyed by uid, not a sequential array');
+
+		$uid   = (string)array_key_first($participants);
+		$owner = $participants[$uid];
+		$this->assertSame(true, $owner['roles']['owner'] ?? null,
+			'The only participant on a fresh ticket must have the owner role');
+		$this->assertArrayNotHasKey('attendee', $owner['roles'],
+			'A fresh ticket must not have any attendee/assignee yet');
+
+		self::$owner = [
+			'uid'   => $uid,
+			'name'  => $owner['name']  ?? null,
+			'email' => $owner['email'] ?? null,
+		];
 	}
 
 	/**
-	 * PATCH { "assigned": { "$login": true } } must add the user.
-	 * The response assigned field must be a map (string keys), not a sequential array.
+	 * PATCH a participant with the attendee role to assign a user.
+	 * Read back: the participant must now carry the attendee role.
 	 *
-	 * @depends testAssignedIsNull
+	 * @depends testParticipantsOwnerOnly
 	 */
 	public function testPatchAddAssignee()
 	{
-		$login = $GLOBALS['EGW_USER'] ?? 'demo';
+		$this->assertNotNull(self::$owner, 'testParticipantsOwnerOnly must run first');
+
+		$participant = array_filter([
+			'@type' => 'Participant',
+			'name'  => self::$owner['name'],
+			'email' => self::$owner['email'],
+			'roles' => ['attendee' => true],
+		]);
 
 		$response = $this->getClient()->patch($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
-			RequestOptions::BODY    => json_encode(['assigned' => [$login => true]]),
+			RequestOptions::BODY    => json_encode([
+				'participants' => [self::$owner['uid'] => $participant],
+			]),
 		]);
-		$this->assertHttpStatus([200, 204], $response, 'PATCH to add assignee');
+		$this->assertHttpStatus([200, 204], $response, 'PATCH to assign a user');
 
-		// Read back and verify map format
+		// Read back and verify the assignee carries the attendee role
 		$get = $this->getClient()->get($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $get);
 		$body = json_decode((string)$get->getBody(), true);
 
-		$assigned = $body['assigned'] ?? null;
-		$this->assertNotNull($assigned, 'assigned must not be null after adding an assignee');
-		$this->assertIsArray($assigned, 'assigned must be an array');
-		$this->assertFalse(array_is_list($assigned),
-			'assigned must be a JMAP-style map with account-id string keys, not a sequential array');
-
-		// Capture the numeric key for the remove test
-		self::$assignedKey = (string)array_key_first($assigned);
-		$this->assertIsNumeric(self::$assignedKey,
-			'assigned map keys must be numeric account-id strings');
+		$assignee = $body['participants'][self::$owner['uid']] ?? null;
+		$this->assertNotNull($assignee, 'assigned participant must still be present');
+		$this->assertSame(true, $assignee['roles']['attendee'] ?? null,
+			'assigned user must carry the attendee role after PATCH');
 	}
 
 	/**
-	 * PATCH { "assigned": { "$numeric_id": null } } must remove that single assignee.
-	 * The rest of the assigned list must be unchanged (here: resulting in an empty map).
+	 * PATCH { "participants": { "<uid>": null } } must remove that assignee.
+	 * The creator stays as owner, but the attendee role is gone.
 	 *
 	 * @depends testPatchAddAssignee
 	 */
 	public function testPatchRemoveAssignee()
 	{
-		$this->assertNotNull(self::$assignedKey, 'testPatchAddAssignee must run first');
+		$this->assertNotNull(self::$owner, 'testPatchAddAssignee must run first');
 
 		$response = $this->getClient()->patch($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
-			RequestOptions::BODY    => json_encode(['assigned' => [self::$assignedKey => null]]),
+			RequestOptions::BODY    => json_encode([
+				'participants' => [self::$owner['uid'] => null],
+			]),
 		]);
 		$this->assertHttpStatus([200, 204], $response, 'PATCH to remove assignee');
 
-		// Read back and verify the assignee is gone
+		// Read back and verify the attendee role is gone (owner remains)
 		$get = $this->getClient()->get($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $get);
 		$body = json_decode((string)$get->getBody(), true);
 
-		$this->assertEmpty($body['assigned'] ?? null,
-			'assigned must be empty after removing the only assignee via PATCH null');
+		$owner = $body['participants'][self::$owner['uid']] ?? null;
+		$this->assertNotNull($owner, 'creator must remain as owner participant');
+		$this->assertArrayNotHasKey('attendee', $owner['roles'] ?? [],
+			'attendee role must be gone after removing the assignee');
 	}
 
 	/**

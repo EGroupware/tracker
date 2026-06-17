@@ -15,12 +15,16 @@ use EGroupware\Api;
 /**
  * Render and parse tracker items as JSON for the REST API.
  *
+ * Field names follow the standardized JSCalendar Task (JsTask) vocabulary where
+ * an equivalent attribute exists, so tracker tickets stay close to InfoLog tasks
+ * (the exception being replies, which are tracker-specific).
+ *
  * JSON representation fields:
- *   @type, id, summary, description, tracker, status, priority, completion,
- *   startDate, dueDate, closed, private, category, version, creator, created,
- *   modified, modifier, assigned, cc, group, egroupware.org:customfields, etag
+ *   @type, id, title, description, tracker, status, priority, percentComplete,
+ *   start, due, closed, privacy, categories, version, creator, created,
+ *   updated, modifier, participants, group, egroupware.org:customfields, etag
  */
-class JsTracker extends Api\CalDAV\JsBase
+class JsTracker extends Api\CalDAV\JsCalendar
 {
 	const APP = 'tracker';
 
@@ -69,32 +73,36 @@ class JsTracker extends Api\CalDAV\JsBase
 		$data = array_filter([
 			self::AT_TYPE   => self::TYPE_TICKET,
 			'id'            => (int)$ticket['id'],
-			'summary'       => $ticket['summary'],
+			'title'         => $ticket['summary'],
 			'description'   => $ticket['description'] ?: null,
 			'tracker'       => (int)$ticket['tracker'] ?: null,
 			'status'        => $status_label,
 			'priority'      => (int)$ticket['priority'],
-			'completion'    => (int)$ticket['completion'],
-			'startDate'     => !empty($ticket['startdate']) ? self::UTCDateTime($ticket['startdate'], true) : null,
-			'dueDate'       => !empty($ticket['duedate'])   ? self::UTCDateTime($ticket['duedate'], true)   : null,
+			'percentComplete' => (int)$ticket['completion'],
+			'start'         => !empty($ticket['startdate']) ? self::UTCDateTime($ticket['startdate'], true) : null,
+			'due'           => !empty($ticket['duedate'])   ? self::UTCDateTime($ticket['duedate'], true)   : null,
 			'closed'        => !empty($ticket['closed'])    ? self::UTCDateTime($ticket['closed'], true)    : null,
-			'private'       => (bool)$ticket['private'],
-			'category'      => self::categories($ticket['cat_id']),
+			'categories'    => self::categories($ticket['cat_id']),
 			'version'       => $ticket['version'] ? self::categories($ticket['version']) : null,
 			'creator'       => self::account($ticket['creator']),
 			'created'       => self::UTCDateTime($ticket['created'], true),
-			'modified'      => !empty($ticket['modified']) ? self::UTCDateTime($ticket['modified'], true) : null,
+			'updated'       => !empty($ticket['modified']) ? self::UTCDateTime($ticket['modified'], true) : null,
 			'modifier'      => !empty($ticket['modifier'])  ? self::account($ticket['modifier'])  : null,
-			'assigned'      => !empty($ticket['assigned'])  ? self::assigned($ticket['assigned']) : null,
-			'cc'            => $ticket['cc'] ?: null,
+			// assigned + cc are merged into a single JSCalendar "participants" object (owner=creator,
+			// attendees=assigned accounts, informational=cc emails) using JsCalendar::Responsible()
+			'participants'  => self::Responsible([
+				'info_owner'       => $ticket['creator'] ?? null,
+				'info_responsible' => array_filter((array)($ticket['assigned'] ?? [])),
+				'info_cc'          => $ticket['cc'] ?? '',
+			]) ?: null,
 			'group'         => !empty($ticket['group'])     ? self::account($ticket['group'])     : null,
 			'egroupware.org:customfields' => self::customfields($ticket),
 			'etag'          => ApiHandler::etag($ticket),
 		]);
 
-		// @type and private must always be present even when falsy
+		// @type and privacy must always be present even when falsy
 		$data[self::AT_TYPE] = self::TYPE_TICKET;
-		$data['private']     = (bool)$ticket['private'];
+		$data['privacy']     = $ticket['private'] ? 'private' : 'public';
 
 		// Include replies when loaded via read_extra($read_replies=true)
 		if (!empty($ticket['replies']))
@@ -112,28 +120,6 @@ class JsTracker extends Api\CalDAV\JsBase
 			return Api\CalDAV::json_encode($data, $encode === 'pretty');
 		}
 		return $data;
-	}
-
-	/**
-	 * Format the assigned list as a JMAP-style map keyed by account-id string.
-	 *
-	 * Returns { "123": <account-object>, … } so that a PATCH can add or remove
-	 * individual assignees without replacing the whole list:
-	 *   PATCH  {"assigned": {"123": null}}   → removes user 123
-	 *   PATCH  {"assigned": {"456": true}}   → adds user 456
-	 *
-	 * @param array|int $assigned
-	 * @return array|null
-	 */
-	protected static function assigned($assigned)
-	{
-		if (!$assigned) return null;
-		$result = [];
-		foreach ((array)$assigned as $uid)
-		{
-			if ($uid) $result[(string)(int)$uid] = self::account($uid);
-		}
-		return $result ?: null;
 	}
 
 	/**
@@ -170,9 +156,9 @@ class JsTracker extends Api\CalDAV\JsBase
 			// Do NOT re-serialize $old and merge — that converts raw IDs to display names
 			// and causes lookup failures.  so_sql::save() will merge the partial update
 			// with the existing $this->bo->data that was already loaded by read().
-			if ($method !== 'PATCH' && empty($data['summary']))
+			if ($method !== 'PATCH' && empty($data['title']))
 			{
-				throw new Api\CalDAV\JsParseException("Required field 'summary' missing");
+				throw new Api\CalDAV\JsParseException("Required field 'title' missing");
 			}
 
 			$ticket = [];
@@ -181,7 +167,7 @@ class JsTracker extends Api\CalDAV\JsBase
 			{
 				switch ($name)
 				{
-					case 'summary':
+					case 'title':
 						$ticket['tr_summary'] = $value;
 						break;
 
@@ -201,23 +187,23 @@ class JsTracker extends Api\CalDAV\JsBase
 						$ticket['tr_priority'] = self::parseInt($value);
 						break;
 
-					case 'completion':
+					case 'percentComplete':
 						$ticket['tr_completion'] = min(100, max(0, self::parseInt($value)));
 						break;
 
-					case 'startDate':
+					case 'start':
 						$ticket['tr_startdate'] = $value ? self::parseDateTime($value) : null;
 						break;
 
-					case 'dueDate':
+					case 'due':
 						$ticket['tr_duedate'] = $value ? self::parseDateTime($value) : null;
 						break;
 
-					case 'private':
-						$ticket['tr_private'] = $value ? 1 : 0;
+					case 'privacy':
+						$ticket['tr_private'] = self::parsePrivacy($value) === 'private' ? 1 : 0;
 						break;
 
-					case 'category':
+					case 'categories':
 						$ticket['cat_id'] = self::parseCategories($value, false);
 						break;
 
@@ -229,12 +215,11 @@ class JsTracker extends Api\CalDAV\JsBase
 						$ticket['tr_creator'] = self::parseAccount($value);
 						break;
 
-					case 'assigned':
-						$ticket['tr_assigned'] = self::parseAssigned($value, (array)($old['assigned'] ?? []), $method);
-						break;
-
-					case 'cc':
-						$ticket['tr_cc'] = $value;
+					case 'participants':
+						// JSCalendar participants → tracker assigned (responsible accounts) + cc (informational emails)
+						$responsible = self::parseResponsible((array)$value, false);
+						$ticket['tr_assigned'] = $responsible['info_responsible'];
+						$ticket['tr_cc']       = $responsible['info_cc'];
 						break;
 
 					case 'group':
@@ -250,7 +235,7 @@ class JsTracker extends Api\CalDAV\JsBase
 					case 'id':
 					case 'etag':
 					case 'created':
-					case 'modified':
+					case 'updated':
 					case 'modifier':
 					case 'closed':
 						break;
@@ -385,56 +370,37 @@ class JsTracker extends Api\CalDAV\JsBase
 	}
 
 	/**
-	 * Parse the assigned field.
+	 * Parse a categories object into a comma-separated list of tracker cat_id's.
 	 *
-	 * Preferred format is a JMAP map keyed by account-id string:
-	 *   { "123": <account-object>|true }  → add/keep user 123
-	 *   { "123": null }                    → remove user 123 (PATCH only)
+	 * JsCalendar overrides parseCategories() to add categories in the calendar or
+	 * InfoLog app; we override it again so tracker categories are resolved/created
+	 * in the *tracker* app (static::APP), mirroring the generic JsBase behaviour.
 	 *
-	 * For PATCH the map is applied as a delta on top of $old.
-	 * For PUT/POST only non-null entries form the new list.
-	 *
-	 * Legacy format (array of account-objects) is still accepted.
-	 *
-	 * @param mixed  $value
-	 * @param array  $old    current account_id list, used for PATCH merging
-	 * @param string $method PUT / POST / PATCH
-	 * @return array  flat array of account_ids
+	 * @param array $categories  category-name => true pairs
+	 * @param bool  $multiple    false: only a single category is allowed (tracker default)
+	 * @return ?string comma-separated cat_id's
+	 * @throws Api\CalDAV\JsParseException
 	 */
-	protected static function parseAssigned($value, array $old = [], string $method = 'PUT'): array
+	protected static function parseCategories(array $categories, bool $multiple = false)
 	{
-		if (!$value) return [];
-
-		// Map format: associative, not a single account-object or sequential list
-		if (is_array($value) && !isset($value['uid']) && !array_is_list($value))
+		static $bo = null;
+		$cat_ids = [];
+		if ($categories)
 		{
-			// PATCH starts from existing ids; PUT/POST replaces entirely
-			$ids = $method === 'PATCH' ? array_flip(array_filter($old)) : [];
-
-			foreach ($value as $key => $entry)
+			if (count($categories) > 1 && !$multiple)
 			{
-				$uid = is_numeric($key) ? (int)$key : self::parseAccount($key);
-				if (!$uid) continue;
-
-				if ($entry === null)
-				{
-					unset($ids[$uid]);
-				}
-				else
-				{
-					$ids[$uid] = true;
-				}
+				throw new Api\CalDAV\JsParseException("Only a single category is supported!");
 			}
-			return array_keys($ids);
+			if (!isset($bo)) $bo = new Api\Categories($GLOBALS['egw_info']['user']['account_id'], static::APP);
+			foreach ($categories as $name => $true)
+			{
+				if (!($cat_id = $bo->name2id($name)))
+				{
+					$cat_id = $bo->add(['name' => $name, 'descr' => $name, 'access' => 'private']);
+				}
+				$cat_ids[] = $cat_id;
+			}
 		}
-
-		// Legacy: single account-object or sequential array of account-objects
-		if (isset($value['uid'])) $value = [$value];
-		$ids = [];
-		foreach ((array)$value as $item)
-		{
-			if (($uid = self::parseAccount($item))) $ids[] = $uid;
-		}
-		return $ids;
+		return $cat_ids ? implode(',', $cat_ids) : null;
 	}
 }

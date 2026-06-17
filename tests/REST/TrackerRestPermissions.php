@@ -72,6 +72,13 @@ class TrackerRestPermissions extends RestTest
 		// Create users with groupdav run-rights so they can reach the endpoint
 		self::createUsersACL(self::$users, 'tracker');
 
+		// Grant manager full tracker admin rights (used by check_access DELETE)
+		$manager_id = self::$users['manager']['id'] ?? null;
+		if ($manager_id)
+		{
+			self::addAcl('tracker', 'admin', $manager_id, 1);
+		}
+
 		// Verify the tracker REST endpoint exists; skip if not yet implemented
 		$client = new \GuzzleHttp\Client([
 			RequestOptions::HTTP_ERRORS      => false,
@@ -313,7 +320,7 @@ class TrackerRestPermissions extends RestTest
 			'description' => 'Only visible to creator and manager',
 			'status'      => 'open',
 			'priority'    => 7,
-			'private'     => true,
+			'privacy'     => 'private',
 		]);
 
 		$create = $this->getClient('reporter')->put($reporterUrl, [
