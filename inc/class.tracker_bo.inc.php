@@ -340,6 +340,11 @@ class tracker_bo extends tracker_so
 	 */
 	var $allow_bounties = false;
 	/**
+	 * @var int|null default tracker of current user
+	 */
+	var $default_tracker;
+	var $show_dates;
+	/**
 	 * Currency used by the bounties
 	 *
 	 * @var string
