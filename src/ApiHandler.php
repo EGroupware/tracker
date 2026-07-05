@@ -244,7 +244,7 @@ class ApiHandler extends Api\CalDAV\Handler
 					'getcontenttype'  => Api\CalDAV::mkprop('getcontenttype', 'application/json'),
 					'getlastmodified' => Api\DateTime::user2server($ticket['tr_modified'] ?? $ticket['tr_created'], 'utc'),
 					'displayname'     => $ticket['tr_summary'],
-					'getcontentlength' => bytes($response_content),
+					'getcontentlength' => bytes(is_array($response_content) ? Api\CalDAV::json_encode($response_content) : $response_content),
 					'data'             => Api\CalDAV::mkprop('data', $response_content),
 				];
 
