@@ -1,21 +1,21 @@
 <?php
 /**
  * Tracker REST API tests: create, read, update and delete tickets via JSON
- * 
- * These tests target the groupdav.php endpoint at:
- *   /{user}/tracker/{uid}
  *
- * PREREQUISITE: A tracker_groupdav handler class must be implemented following
- * the same pattern as calendar_groupdav and infolog_groupdav.  Until that class
- * exists the tests will return 404 for all /tracker/ paths and will be skipped
- * automatically (see setUpBeforeClass).
+ * These tests target the live \EGroupware\Tracker\ApiHandler REST endpoint at:
+ *   /{user}/tracker/{id}
  *
- * JSON payload convention used here:
+ * Tickets are addressed by their numeric tr_id only - unlike calendar/infolog,
+ * ApiHandler has no concept of a client-supplied stable UID. Every test that
+ * needs to reference a ticket after creating it therefore POSTs first and
+ * captures the numeric id from the Location header, then chains the rest of
+ * the lifecycle with @depends.
+ *
+ * JSON payload convention used here (see doc/Tracker.md for the full contract):
  *   - "@type"       => "Ticket"      (identifies the resource type)
- *   - "uid"         => string        (stable cross-system identifier)
  *   - "title"       => string        (maps to tr_summary)
  *   - "description" => string        (maps to tr_description)
- *   - "status"      => "open" | "closed" | "pending"   (maps to tr_status)
+ *   - "status"      => "Open" | "Closed" | "Pending" | "Deleted"  (maps to tr_status)
  *   - "priority"    => 1..9          (maps to tr_priority; 5 = medium)
  *
  * @link http://www.egroupware.org
@@ -36,46 +36,32 @@ use GuzzleHttp\RequestOptions;
 /**
  * Basic CRUD lifecycle for Tracker tickets via the JSON REST API.
  *
- * @covers tracker_groupdav::get()
- * @covers tracker_groupdav::put()
- * @covers tracker_groupdav::delete()
+ * @covers \EGroupware\Tracker\ApiHandler::get
+ * @covers \EGroupware\Tracker\ApiHandler::put
+ * @covers \EGroupware\Tracker\ApiHandler::delete
  */
 class TrackerRestCreateReadDelete extends RestTest
 {
 	/**
 	 * MIME type used for tracker ticket resources.
-	 * "application/json" is the generic fallback; once a tracker_groupdav
-	 * handler is implemented it may define a specific subtype such as
-	 * "application/egw-tracker+json".
 	 */
 	const MIME_TYPE_TICKET = 'application/json';
 
 	/**
-	 * UID of the test ticket — full path is built dynamically using EGW_USER.
+	 * Full URL of the ticket created by testCreate(); every @depends test in the
+	 * lifecycle chain reads/writes this same ticket.
 	 */
-	const TICKET_UID = 'rest-api-test-ticket-11223344';
-
-	/**
-	 * Build the path for the test ticket using the configured EGW_USER.
-	 */
-	protected function ticketUrl(): string
-	{
-		return $this->appUrl('tracker', self::TICKET_UID);
-	}
+	protected static ?string $ticketUrl = null;
 
 	/**
 	 * Minimal JSON body for a new tracker ticket.
-	 *
-	 * The uid must match the last path segment of TICKET_UID so the server can
-	 * map a PUT to a stable record (same convention as calendar events).
 	 */
 	const TICKET_JSON = <<<EOJSON
 {
     "@type": "Ticket",
-    "uid": "rest-api-test-ticket-11223344",
     "title": "REST API Test Ticket",
     "description": "Created by TrackerRestCreateReadDelete test suite",
-    "status": "open",
+    "status": "Open",
     "priority": 5
 }
 EOJSON;
@@ -85,9 +71,9 @@ EOJSON;
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Probe the tracker collection before running any test.  If the server
-	 * returns 404 the tracker REST API is not yet implemented and the whole
-	 * class is skipped rather than failing.
+	 * Probe the tracker collection before running any test. If the server
+	 * doesn't accept a POST-created ticket, the tracker REST API isn't
+	 * available and the whole class is skipped rather than failing.
 	 */
 	public static function setUpBeforeClass(): void
 	{
@@ -108,36 +94,38 @@ EOJSON;
 		$base = rtrim($base, '/') . (strpos($base, 'groupdav.php') === false ? '/groupdav.php' : '');
 		$user = $GLOBALS['EGW_USER'] ?? 'demo';
 
-		// Probe with a PUT to detect whether the tracker REST handler is implemented.
-		// A generic CalDAV collection returns 200 on GET but 403/405/501 on PUT.
-		// Only 201 or 204 confirms that the handler can actually create tickets.
-		$probeUid = 'tracker-probe-skip-check-00000000';
-		$probe = $client->put("$base/$user/tracker/$probeUid", [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => 'application/json',
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => json_encode([
-				'@type'  => 'Ticket',
-				'uid'    => $probeUid,
-				'title'  => 'Probe ticket (auto-deleted)',
-				'status' => 'open',
+		// Probe with a POST to the collection; tickets are always server-assigned
+		// numeric ids, so creation (not a PUT to a guessed path) is the only
+		// reliable way to detect whether the handler is available.
+		$probe = $client->post("$base/$user/tracker/", [
+			RequestOptions::HEADERS => ['Content-Type' => 'application/json'],
+			RequestOptions::BODY    => json_encode([
+				'@type' => 'Ticket',
+				'title' => 'Probe ticket (auto-deleted)',
 			]),
 		]);
 
-		if (!in_array($probe->getStatusCode(), [201, 204], true))
+		if ($probe->getStatusCode() !== 201)
 		{
 			self::markTestSkipped(
-				'Tracker REST API (tracker_groupdav) is not yet implemented '
-				.'(PUT probe returned HTTP '.$probe->getStatusCode().'). '
-				.'Implement tracker_groupdav following the calendar_groupdav pattern, '
-				.'then re-run these tests.'
+				'Tracker REST API is not available on this server '
+				.'(POST probe returned HTTP '.$probe->getStatusCode().'). '
+				.'Check that EGroupware\Tracker\ApiHandler is loaded, then re-run these tests.'
 			);
 		}
 
-		// Clean up probe ticket
-		$location = $probe->getHeaderLine('Location') ?: "$base/$user/tracker/$probeUid";
-		$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
+		// Clean up probe ticket. The Location header is a server-relative path
+		// (e.g. /egroupware/groupdav.php/admin/tracker/3); prepend the origin
+		// from $base to get an absolute URL Guzzle can DELETE.
+		$location = $probe->getHeaderLine('Location');
+		if ($location)
+		{
+			if ($location[0] === '/' && preg_match('#^(https?://[^/]+)#', $base, $m))
+			{
+				$location = $m[1].$location;
+			}
+			$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
+		}
 	}
 
 	// -------------------------------------------------------------------------
@@ -175,49 +163,57 @@ EOJSON;
 	// -------------------------------------------------------------------------
 
 	/**
-	 * PUT a new ticket as JSON.  The server must respond with 201 Created.
+	 * POST a new ticket as JSON. The server must respond with 201 Created and a
+	 * Location header pointing at the server-assigned numeric id.
 	 */
 	public function testCreate()
 	{
-		$response = $this->getClient()->put($this->ticketUrl(), [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => self::TICKET_JSON,
+		$response = $this->getClient()->post($this->appUrl('tracker'), [
+			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
+			RequestOptions::BODY    => self::TICKET_JSON,
 		]);
 
 		$this->assertHttpStatus(201, $response, 'Creating a new tracker ticket');
+
+		$location = $this->locationPath($response);
+		$this->assertNotEmpty($location, 'POST must return a Location header');
+
+		// Strip the /egroupware/groupdav.php prefix and rebuild a full URL via url()
+		$path = preg_replace('#^.*/groupdav\.php#', '', $location);
+		self::$ticketUrl = $this->url($path);
 	}
 
 	/**
 	 * GET the just-created ticket; the response must include the fields we sent.
+	 *
+	 * @depends testCreate
 	 */
 	public function testRead()
 	{
-		$response = $this->getClient()->get($this->ticketUrl(), [
+		$response = $this->getClient()->get(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 
 		$this->assertHttpStatus(200, $response, 'Reading the created ticket');
 		$this->assertJsonFields([
-			'@type'       => 'Ticket',
-			'uid'         => 'rest-api-test-ticket-11223344',
-			'title'       => 'REST API Test Ticket',
-			'status'      => 'open',
-			'priority'    => 5,
+			'@type'    => 'Ticket',
+			'title'    => 'REST API Test Ticket',
+			'status'   => 'Open',
+			'priority' => 5,
 		], $response, 'Ticket fields after create');
 	}
 
 	/**
-	 * PATCH the ticket to change its status to "pending".
+	 * PATCH the ticket to change its status to "Pending".
 	 * The server must respond 200 (with updated body) or 204.
+	 *
+	 * @depends testRead
 	 */
 	public function testUpdateStatus()
 	{
-		$patch = json_encode(['status' => 'pending']);
+		$patch = json_encode(['status' => 'Pending']);
 
-		$response = $this->getClient()->patch($this->ticketUrl(), [
+		$response = $this->getClient()->patch(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
 			RequestOptions::BODY    => $patch,
 		]);
@@ -225,35 +221,36 @@ EOJSON;
 		$this->assertHttpStatus([200, 204], $response, 'Patching ticket status to pending');
 
 		// Read back to verify
-		$get = $this->getClient()->get($this->ticketUrl(), [
+		$get = $this->getClient()->get(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $get);
-		$this->assertJsonFields(['status' => 'pending'], $get, 'Status must be persisted');
+		$this->assertJsonFields(['status' => 'Pending'], $get, 'Status must be persisted');
 	}
 
 	/**
 	 * Full PUT to update multiple fields at once (title + priority + description).
+	 *
+	 * @depends testUpdateStatus
 	 */
 	public function testUpdateFull()
 	{
 		$updated = json_encode([
 			'@type'       => 'Ticket',
-			'uid'         => 'rest-api-test-ticket-11223344',
 			'title'       => 'REST API Test Ticket (updated)',
 			'description' => 'Updated by testUpdateFull',
-			'status'      => 'open',
+			'status'      => 'Open',
 			'priority'    => 8,
 		]);
 
-		$response = $this->getClient()->put($this->ticketUrl(), [
+		$response = $this->getClient()->put(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
 			RequestOptions::BODY    => $updated,
 		]);
 
 		$this->assertHttpStatus([200, 204], $response, 'Full PUT update of ticket');
 
-		$get = $this->getClient()->get($this->ticketUrl(), [
+		$get = $this->getClient()->get(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertJsonFields([
@@ -263,35 +260,39 @@ EOJSON;
 	}
 
 	/**
-	 * Close a ticket via PATCH; the status must become "closed" and a closed
+	 * Close a ticket via PATCH; the status must become "Closed" and a closed
 	 * timestamp should be present in the response.
+	 *
+	 * @depends testUpdateFull
 	 */
 	public function testClose()
 	{
-		$response = $this->getClient()->patch($this->ticketUrl(), [
+		$response = $this->getClient()->patch(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
-			RequestOptions::BODY    => json_encode(['status' => 'closed']),
+			RequestOptions::BODY    => json_encode(['status' => 'Closed']),
 		]);
 
 		$this->assertHttpStatus([200, 204], $response, 'Closing ticket');
 
-		$get = $this->getClient()->get($this->ticketUrl(), [
+		$get = $this->getClient()->get(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $get);
 
 		$body = json_decode((string)$get->getBody(), true);
-		$this->assertEquals('closed', $body['status'] ?? null, 'Ticket status must be closed');
+		$this->assertEquals('Closed', $body['status'] ?? null, 'Ticket status must be closed');
 		$this->assertNotEmpty($body['closed'] ?? null,
 			'A closed timestamp must be present when status is closed');
 	}
 
 	/**
 	 * DELETE the ticket; the server must respond with 204 No Content.
+	 *
+	 * @depends testClose
 	 */
 	public function testDelete()
 	{
-		$response = $this->getClient()->delete($this->ticketUrl(), [
+		$response = $this->getClient()->delete(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 
@@ -300,10 +301,12 @@ EOJSON;
 
 	/**
 	 * After deletion, a GET must return 404 Not Found.
+	 *
+	 * @depends testDelete
 	 */
 	public function testReadAfterDelete()
 	{
-		$response = $this->getClient()->get($this->ticketUrl(), [
+		$response = $this->getClient()->get(self::$ticketUrl, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 
@@ -315,17 +318,16 @@ EOJSON;
 	// -------------------------------------------------------------------------
 
 	/**
-	 * POST a new ticket to the collection.  The server must respond with 201
-	 * and a Location header.  We clean up afterwards.
+	 * POST a new ticket to the collection. The server must respond with 201
+	 * and a Location header. We clean up afterwards.
 	 */
 	public function testCreateViaPost()
 	{
 		$ticket = [
 			'@type'       => 'Ticket',
-			'uid'         => 'rest-api-post-ticket-99887766',
 			'title'       => 'POST-created ticket',
 			'description' => 'Created via POST to the tracker collection',
-			'status'      => 'open',
+			'status'      => 'Open',
 			'priority'    => 3,
 		];
 
@@ -338,11 +340,13 @@ EOJSON;
 		$this->assertNotEmpty($response->getHeaderLine('Location'),
 			'POST must return a Location header');
 
-		// Clean up
+		// Clean up. locationPath() returns a path that already includes
+		// /groupdav.php, so strip it before handing the path back to url().
 		$location = $this->locationPath($response);
 		if ($location)
 		{
-			$this->getClient()->delete($this->url($location));
+			$path = preg_replace('#^.*/groupdav\.php#', '', $location);
+			$this->getClient()->delete($this->url($path));
 		}
 	}
 

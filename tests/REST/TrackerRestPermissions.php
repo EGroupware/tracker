@@ -19,8 +19,11 @@
  *   technician – TRACKER_TECHNICIAN rights
  *   reporter   – TRACKER_USER rights (can submit and read own tickets)
  *
- * PREREQUISITE: tracker_groupdav must be implemented.  Until then the
- * class is auto-skipped.
+ * Tickets are addressed by their server-assigned numeric tr_id only - there is
+ * no client-supplied stable UID. Every test therefore creates its ticket via
+ * createTicket() (POSTs to the actor's own collection so tr_creator ends up
+ * right, then captures the real resource URL from the Location header) instead
+ * of guessing a path.
  *
  * @link http://www.egroupware.org
  * @author Amir Dehestani <amir@egroupware.org>
@@ -41,9 +44,9 @@ use GuzzleHttp\RequestOptions;
 /**
  * ACL / permission scenarios for the Tracker JSON REST API.
  *
- * @covers tracker_groupdav::get()
- * @covers tracker_groupdav::put()
- * @covers tracker_groupdav::delete()
+ * @covers \EGroupware\Tracker\ApiHandler::get
+ * @covers \EGroupware\Tracker\ApiHandler::put
+ * @covers \EGroupware\Tracker\ApiHandler::delete
  */
 class TrackerRestPermissions extends RestTest
 {
@@ -93,33 +96,28 @@ class TrackerRestPermissions extends RestTest
 		$base = rtrim($base, '/') . (strpos($base, 'groupdav.php') === false ? '/groupdav.php' : '');
 		$user = $GLOBALS['EGW_USER'] ?? 'demo';
 
-		// Probe with a PUT to detect whether the tracker REST handler is implemented.
-		// A generic CalDAV collection returns 200 on GET but 403/405/501 on PUT.
-		$probeUid = 'tracker-probe-perms-skip-00000000';
-		$probe = $client->put("$base/$user/tracker/$probeUid", [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => 'application/json',
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => json_encode([
-				'@type'  => 'Ticket',
-				'uid'    => $probeUid,
-				'title'  => 'Probe ticket (auto-deleted)',
-				'status' => 'open',
+		// Probe with a POST; tickets are always server-assigned numeric ids, so
+		// creation (not a PUT to a guessed path) is the only reliable way to
+		// detect whether the handler is available.
+		$probe = $client->post("$base/$user/tracker/", [
+			RequestOptions::HEADERS => ['Content-Type' => 'application/json'],
+			RequestOptions::BODY    => json_encode([
+				'@type' => 'Ticket',
+				'title' => 'Probe ticket (auto-deleted)',
 			]),
 		]);
 
-		if (!in_array($probe->getStatusCode(), [201, 204], true))
+		if (!in_array($probe->getStatusCode(), [201], true))
 		{
 			self::markTestSkipped(
-				'Tracker REST API (tracker_groupdav) is not yet implemented '
-				.'(PUT probe returned HTTP '.$probe->getStatusCode().'). '
-				.'See tracker/inc/class.tracker_groupdav.inc.php.'
+				'Tracker REST API is not available on this server '
+				.'(POST probe returned HTTP '.$probe->getStatusCode().'). '
+				.'Check that EGroupware\Tracker\ApiHandler is loaded, then re-run these tests.'
 			);
 		}
 
 		// Clean up probe ticket
-		$location = $probe->getHeaderLine('Location') ?: "$base/$user/tracker/$probeUid";
+		$location = $probe->getHeaderLine('Location') ?: "$base/$user/tracker/";
 		$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
 	}
 
@@ -128,36 +126,46 @@ class TrackerRestPermissions extends RestTest
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Build a minimal tracker ticket JSON body.
+	 * Create a ticket as $actor and return the full URL of the created resource.
 	 *
-	 * @param string $uid
+	 * POSTs into $actor's own collection (not the global default test user's)
+	 * so the server derives tr_creator from $actor, matching what these ACL
+	 * tests are meant to exercise. The resource's real, server-assigned URL is
+	 * then read back from the Location header - tracker has no client-supplied
+	 * UID to address it by, unlike calendar/infolog.
+	 *
+	 * @param string $actor
 	 * @param string $title
 	 * @param int    $priority  1–9
-	 * @param string $status    open|pending|closed
-	 * @return string JSON
+	 * @param string $status    'Open' | 'Pending' | 'Closed'
+	 * @param array  $extra     additional JSON fields merged into the body (e.g. 'privacy')
+	 * @return string  full URL of the created ticket
 	 */
-	private function makeTicketJson(
-		string $uid,
+	private function createTicket(
+		string $actor,
 		string $title = 'Test Ticket',
 		int    $priority = 5,
-		string $status = 'open'
+		string $status = 'Open',
+		array  $extra = []
 	): string {
-		return json_encode([
+		$body = array_merge([
 			'@type'       => 'Ticket',
-			'uid'         => $uid,
 			'title'       => $title,
-			'description' => "Ticket created for test uid=$uid",
+			'description' => "Ticket created for test actor=$actor",
 			'status'      => $status,
 			'priority'    => $priority,
-		], JSON_PRETTY_PRINT);
-	}
+		], $extra);
 
-	/**
-	 * URL of a ticket in a specific user's tracker collection view.
-	 */
-	private function ticketUrl(string $user, string $uid): string
-	{
-		return $this->url("/$user/tracker/$uid");
+		$response = $this->getClient($actor)->post($this->url("/$actor/tracker/"), [
+			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
+			RequestOptions::BODY    => json_encode($body, JSON_PRETTY_PRINT),
+		]);
+		$this->assertHttpStatus(201, $response, "'$actor' creates ticket '$title'");
+
+		$location = $this->locationPath($response);
+		$this->assertNotEmpty($location, 'POST must return a Location header');
+
+		return $this->url(preg_replace('#^.*/groupdav\.php#', '', $location));
 	}
 
 	// -------------------------------------------------------------------------
@@ -189,23 +197,13 @@ class TrackerRestPermissions extends RestTest
 	 */
 	public function testReporterCreateAndRead()
 	{
-		$uid = 'rest-perm-reporter-create-11001100';
-		$url = $this->ticketUrl('reporter', $uid);
-
-		$create = $this->getClient('reporter')->put($url, [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => $this->makeTicketJson($uid, 'Reporter\'s bug report'),
-		]);
-		$this->assertHttpStatus(201, $create, 'Reporter creates ticket');
+		$url = $this->createTicket('reporter', 'Reporter\'s bug report');
 
 		$read = $this->getClient('reporter')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $read, 'Reporter reads own ticket');
-		$this->assertJsonFields(['uid' => $uid, 'status' => 'open'], $read);
+		$this->assertJsonFields(['status' => 'Open'], $read);
 
 		// Clean up
 		$this->getClient('manager')->delete($url, [
@@ -223,42 +221,32 @@ class TrackerRestPermissions extends RestTest
 	 */
 	public function testTechnicianCanUpdateButNotDelete()
 	{
-		$uid         = 'rest-perm-tech-update-22002200';
-		$managerUrl  = $this->ticketUrl('manager', $uid);
-		$techUrl     = $this->ticketUrl('technician', $uid);
-
 		// Manager creates the ticket
-		$this->getClient('manager')->put($managerUrl, [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => $this->makeTicketJson($uid, 'Ticket for technician tests'),
-		]);
+		$url = $this->createTicket('manager', 'Ticket for technician tests');
 
-		// Technician changes status to "pending"
-		$update = $this->getClient('technician')->patch($techUrl, [
+		// Technician changes status to "Pending"
+		$update = $this->getClient('technician')->patch($url, [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
-			RequestOptions::BODY    => json_encode(['status' => 'pending']),
+			RequestOptions::BODY    => json_encode(['status' => 'Pending']),
 		]);
 		$this->assertHttpStatus([200, 204], $update,
 			'Technician must be allowed to update ticket status');
 
 		// Technician must NOT be allowed to delete
-		$delete = $this->getClient('technician')->delete($techUrl, [
+		$delete = $this->getClient('technician')->delete($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus([403, 405], $delete,
 			'Technician must not be allowed to delete tickets');
 
 		// Ticket must still exist
-		$stillThere = $this->getClient('manager')->get($managerUrl, [
+		$stillThere = $this->getClient('manager')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $stillThere, 'Ticket must still exist after failed delete');
 
 		// Clean up
-		$this->getClient('manager')->delete($managerUrl, [
+		$this->getClient('manager')->delete($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 	}
@@ -272,27 +260,17 @@ class TrackerRestPermissions extends RestTest
 	 */
 	public function testManagerCanDeleteAnyTicket()
 	{
-		$uid        = 'rest-perm-manager-delete-33003300';
-		$reporterUrl = $this->ticketUrl('reporter', $uid);
-		$managerUrl  = $this->ticketUrl('manager', $uid);
-
 		// Reporter creates the ticket
-		$this->getClient('reporter')->put($reporterUrl, [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => $this->makeTicketJson($uid, 'Ticket to be deleted by manager'),
-		]);
+		$url = $this->createTicket('reporter', 'Ticket to be deleted by manager');
 
 		// Manager deletes it
-		$delete = $this->getClient('manager')->delete($managerUrl, [
+		$delete = $this->getClient('manager')->delete($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(204, $delete, 'Manager must be able to delete any ticket');
 
 		// Confirm it is gone
-		$gone = $this->getClient('reporter')->get($reporterUrl, [
+		$gone = $this->getClient('reporter')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(404, $gone, 'Ticket must be gone after manager deletes it');
@@ -308,51 +286,31 @@ class TrackerRestPermissions extends RestTest
 	 */
 	public function testPrivateTicketHiddenFromOthers()
 	{
-		$uid       = 'rest-perm-private-44004400';
-		$reporterUrl = $this->ticketUrl('reporter', $uid);
-		$techUrl     = $this->ticketUrl('technician', $uid);
-
 		// Reporter creates a private ticket
-		$privateTicket = json_encode([
-			'@type'       => 'Ticket',
-			'uid'         => $uid,
-			'title'       => 'Private bug – restricted access',
-			'description' => 'Only visible to creator and manager',
-			'status'      => 'open',
-			'priority'    => 7,
-			'privacy'     => 'private',
-		]);
-
-		$create = $this->getClient('reporter')->put($reporterUrl, [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => $privateTicket,
-		]);
-		$this->assertHttpStatus(201, $create, 'Reporter creates private ticket');
+		$url = $this->createTicket('reporter', 'Private bug – restricted access', 7, 'Open',
+			['privacy' => 'private']);
 
 		// Reporter can read their own private ticket
-		$selfRead = $this->getClient('reporter')->get($reporterUrl, [
+		$selfRead = $this->getClient('reporter')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $selfRead, 'Reporter can read own private ticket');
 
 		// Technician (not assigned, not creator) must NOT see the private ticket
-		$techRead = $this->getClient('technician')->get($techUrl, [
+		$techRead = $this->getClient('technician')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus([403, 404], $techRead,
 			'Technician must not see private ticket they are not assigned to');
 
 		// Manager (admin) must still see it
-		$managerRead = $this->getClient('manager')->get($this->ticketUrl('manager', $uid), [
+		$managerRead = $this->getClient('manager')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		$this->assertHttpStatus(200, $managerRead, 'Manager must see private tickets');
 
 		// Clean up
-		$this->getClient('manager')->delete($this->ticketUrl('manager', $uid), [
+		$this->getClient('manager')->delete($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 	}
@@ -368,26 +326,17 @@ class TrackerRestPermissions extends RestTest
 	 */
 	public function testCreatorCanCloseOwnTicket()
 	{
-		$uid         = 'rest-perm-creator-close-55005500';
-		$reporterUrl = $this->ticketUrl('reporter', $uid);
-
-		$this->getClient('reporter')->put($reporterUrl, [
-			RequestOptions::HEADERS => [
-				'Content-Type'  => self::MIME_TYPE_TICKET,
-				'If-None-Match' => '*',
-			],
-			RequestOptions::BODY => $this->makeTicketJson($uid, 'Ticket to be closed by creator'),
-		]);
+		$url = $this->createTicket('reporter', 'Ticket to be closed by creator');
 
 		// Creator closes own ticket
-		$close = $this->getClient('reporter')->patch($reporterUrl, [
+		$close = $this->getClient('reporter')->patch($url, [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
-			RequestOptions::BODY    => json_encode(['status' => 'closed']),
+			RequestOptions::BODY    => json_encode(['status' => 'Closed']),
 		]);
 		$this->assertHttpStatus([200, 204], $close, 'Creator must be able to close own ticket');
 
 		// Creator tries to delete — depends on queue ACL (reporter typically can't)
-		$delete = $this->getClient('reporter')->delete($reporterUrl, [
+		$delete = $this->getClient('reporter')->delete($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		// Accept either "forbidden" (correct ACL enforcement) or "no content" (if
@@ -396,12 +345,12 @@ class TrackerRestPermissions extends RestTest
 			'Creator delete attempt must return 204 (allowed) or 403/405 (blocked by ACL)');
 
 		// If the ticket still exists, clean up as manager
-		$check = $this->getClient('manager')->get($this->ticketUrl('manager', $uid), [
+		$check = $this->getClient('manager')->get($url, [
 			RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 		]);
 		if ($check->getStatusCode() === 200)
 		{
-			$this->getClient('manager')->delete($this->ticketUrl('manager', $uid), [
+			$this->getClient('manager')->delete($url, [
 				RequestOptions::HEADERS => ['Accept' => self::MIME_TYPE_TICKET],
 			]);
 		}

@@ -306,6 +306,9 @@ class ApiHandler extends Api\CalDAV\Handler
 	protected function filter2col_filter(array $filter): array
 	{
 		$cols = [];
+		// resolve the queue first - a "status" filter naming a custom status may be queue-specific
+		$tracker = isset($filter['tracker']) ? (int)$filter['tracker'] : null;
+
 		foreach ($filter as $name => $value)
 		{
 			switch ($name)
@@ -318,7 +321,7 @@ class ApiHandler extends Api\CalDAV\Handler
 				case 'status':
 					try
 					{
-						$cols['tr_status'] = JsTracker::parseStatus($value);
+						$cols['tr_status'] = JsTracker::parseStatus($value, $tracker);
 					}
 					catch (\Throwable $e)
 					{
@@ -503,9 +506,23 @@ class ApiHandler extends Api\CalDAV\Handler
 			return $old;
 		}
 
+		// For a new ticket without an explicit "tracker" in the body, resolve the queue
+		// it will land in up front: category/version/status/resolution are queue-scoped
+		// and must be validated against the *actual* queue inside parseJsTicket(), not
+		// whatever queue happens to be picked afterwards.
+		$default_tracker = null;
+		if (!is_array($old))
+		{
+			if (empty($this->bo->trackers))
+			{
+				return '403 Forbidden';
+			}
+			$default_tracker = $this->bo->default_tracker ?: key($this->bo->trackers);
+		}
+
 		try
 		{
-			$ticket = JsTracker::parseJsTicket($options['content'], $old ?: [], $content_type, $method);
+			$ticket = JsTracker::parseJsTicket($options['content'], $old ?: [], $content_type, $method, $default_tracker);
 		}
 		catch (\Throwable $e)
 		{
@@ -535,14 +552,9 @@ class ApiHandler extends Api\CalDAV\Handler
 		else
 		{
 			// new ticket
-			if (empty($this->bo->trackers))
-			{
-				return '403 Forbidden';
-			}
 			if (!isset($ticket['tr_tracker']))
 			{
-				// use the first available tracker queue the user has access to
-				$ticket['tr_tracker'] = key($this->bo->trackers);
+				$ticket['tr_tracker'] = $default_tracker;
 			}
 			if (!isset($ticket['tr_creator']))
 			{
