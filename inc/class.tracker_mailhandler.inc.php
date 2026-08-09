@@ -342,7 +342,11 @@ class tracker_mailhandler extends tracker_bo
 			}
 			$_reverse=1;
 			$_rByUid = true;
-			$_sortResult = $mailobject->getSortedList($_folderName, $_sort=0, $_reverse, $_filter, $_rByUid, false);
+			// explicit opt-in to the JMAP-native path for Stalwart-backed accounts (real IMAP
+			// search+fetch otherwise, unchanged) - safe here because every uid found below only
+			// ever flows into process_message2()'s getHeaders()/flagMessages()/deleteMessages()
+			// calls, which all recognize an opaque JMAP id themselves (see Api\Mail::jmapMessageIds())
+			$_sortResult = $mailobject->jmapAwareSortedList($_folderName, $_sort=0, $_reverse, $_filter, $_rByUid, false);
 			$sortResult = $_sortResult['match']->ids;
 			if (self::LOG_LEVEL>1 && $sortResult) error_log(__METHOD__.__LINE__.'#'.array2string($sortResult));
 			$deletedCounter = 0;
