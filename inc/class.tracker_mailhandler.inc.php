@@ -478,13 +478,14 @@ class tracker_mailhandler extends tracker_bo
 	 * @param string subject the messages subject
 	 * @param array msgHeaders full headers retrieved for message
 	 * @param int queue the queue we are in
+	 * @param string folder the folder the message resides in, for delete/flag actions below
 	 * @return boolean status
 	 */
-	function is_automail2($mailobject, $uid, $subject, $msgHeaders, $queue=0)
+	function is_automail2($mailobject, $uid, $subject, $msgHeaders, $queue=0, $folder='INBOX')
 	{
 		// This array can be filled with checks that should be made.
 		// 'bounces' and 'autoreplies' (level 1) are the keys coded below, the level 2 arrays
-		// must match $msgHeader properties.
+		// must match $msgHeaders properties.
 		//
 		$autoMails = array(
 			 'bounces' => array(
@@ -512,17 +513,17 @@ class tracker_mailhandler extends tracker_bo
 				continue;
 			}
 			$_re = '/(' . implode('|', $_v) . ')/i';
-			if (preg_match($_re, $msgHeader[strtoupper($_k)])) {
+			if (preg_match($_re, $msgHeaders[strtoupper($_k)] ?? '')) {
 				switch ($this->mailhandling[0]['bounces']) {
 					case 'delete' :		// Delete, whatever the overall delete setting is
-						$returnVal = $mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+						$returnVal = $mailobject->deleteMessages($uid, $folder, 'move_to_trash');
 						break;
 					case 'forward' :	// Return the status of the forward attempt
-						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (bounces) are configured to be forwarded"), $queue);
+						$returnVal = $this->forward_message2($mailobject, $uid, $subject, lang("automatic mails (bounces) are configured to be forwarded"), $queue);
 						if ($returnVal)
 						{
-							$mailobject->flagMessages('seen', $uid, $_folderName);
-							$mailobject->flagMessages('forwarded', $uid, $_folderName);
+							$mailobject->flagMessages('seen', $uid, $folder);
+							$mailobject->flagMessages('forwarded', $uid, $folder);
 						}
 					default :			// default: 'ignore'
 						break;
@@ -537,17 +538,17 @@ class tracker_mailhandler extends tracker_bo
 				continue;
 			}
 			$_re = '/(' . implode('|', $_v) . ')/i';
-			if (preg_match($_re, $msgHeader[strtoupper($_k)])) {
+			if (preg_match($_re, $msgHeaders[strtoupper($_k)] ?? '')) {
 				switch ($this->mailhandling[0]['autoreplies']) {
 					case 'delete' :		// Delete, whatever the overall delete setting is
-						$returnVal = $mailobject->deleteMessages($uid, $_folderName, 'move_to_trash');
+						$returnVal = $mailobject->deleteMessages($uid, $folder, 'move_to_trash');
 						break;
 					case 'forward' :	// Return the status of the forward attempt
-						$returnVal = $this->forward_message2($mailobject, $uid, $mailcontent['subject'], lang("automatic mails (replies) are configured to be forwarded"), $queue);
+						$returnVal = $this->forward_message2($mailobject, $uid, $subject, lang("automatic mails (replies) are configured to be forwarded"), $queue);
 						if ($returnVal)
 						{
-							$mailobject->flagMessages('seen', $uid, $_folderName);
-							$mailobject->flagMessages('forwarded', $uid, $_folderName);
+							$mailobject->flagMessages('seen', $uid, $folder);
+							$mailobject->flagMessages('forwarded', $uid, $folder);
 						}
 						break;
 					case 'process' :	// Process normally...
@@ -682,7 +683,7 @@ class tracker_mailhandler extends tracker_bo
 		if (self::LOG_LEVEL>1) error_log(__METHOD__.__LINE__.':'.$this->mailhandling[$queue]['unrecognized_mails'].':'.($this->data['tr_id']?$this->data['reply_creator']:$this->data['tr_creator']).' vs. '.array2string($this->user).' Ticket:'.$this->data['tr_id'].' Message:'.$this->data['msg']);
 
 		// handle auto - mails
-		if ($this->is_automail2($mailobject, $uid, $mailcontent['subject'], $mailcontent['headers'], $queue)) {
+		if ($this->is_automail2($mailobject, $uid, $mailcontent['subject'], $mailcontent['headers'], $queue, $_folderName)) {
 			if (self::LOG_LEVEL>1) error_log(__METHOD__.' Automails will not be processed.');
 			return false;
 		}
