@@ -66,6 +66,15 @@ class MailImportTest extends AppTest
 		self::$bo = new \tracker_bo();
 		$contact_bo = new \addressbook_bo();
 
+		// admin_cmd_edit_user requires the CURRENT session to be a real admin - this is a static
+		// method, so switchUser()'s instance method isn't available; replicate it directly.
+		// IMPORTANT: call \EGroupware\Api\LoggedInTest::tearDownAfterClass() explicitly, NOT
+		// self::tearDownAfterClass() - this class OVERRIDES tearDownAfterClass() with destructive
+		// account/contact cleanup, and self:: here would resolve to THAT override (deleting
+		// everything created so far) rather than the harmless base session-logout logic.
+		\EGroupware\Api\LoggedInTest::tearDownAfterClass();
+		static::load_egw($GLOBALS['EGW_ADMIN_USER'], $GLOBALS['EGW_ADMIN_PASSWORD']);
+
 		foreach(self::$accounts as $account)
 		{
 			$command = new \admin_cmd_edit_user(false, $account);
@@ -76,6 +85,10 @@ class MailImportTest extends AppTest
 			$contact = array_merge($contact, $account);
 			$contact_bo->save($contact, true);
 		}
+
+		// restore the base test session (same fallback identity used everywhere else)
+		\EGroupware\Api\LoggedInTest::tearDownAfterClass();
+		static::load_egw($GLOBALS['EGW_USER'], $GLOBALS['EGW_PASSWORD']);
 		// Set the last one as the only tracker staff account for this test class.
 		// prepare_import_mail() resolves sender via get_staff(), which merges queue-specific
 		// and global (0) staff and may use instance cache.
