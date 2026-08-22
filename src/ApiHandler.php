@@ -176,7 +176,11 @@ class ApiHandler extends Api\CalDAV\Handler
 			yield $resource;
 		}
 
-		$order = $filter['order'] ?? 'COALESCE(egw_tracker.tr_modified,egw_tracker.tr_created) DESC';
+		// tracker_so::search() rewrites any order-by referencing "tr_modified" into
+		// COALESCE(tr_modified,tr_created), but only recognizes its OWN unqualified form as
+		// already-applied - a table-qualified default here would get double-wrapped into invalid
+		// SQL like "COALESCE(egw_tracker.COALESCE(tr_modified,tr_created),egw_tracker.tr_created)"
+		$order = $filter['order'] ?? 'COALESCE(tr_modified,tr_created) DESC';
 		unset($filter['order']);
 
 		$sync_collection_report = $filter['sync-collection'] ?? false;
@@ -635,9 +639,17 @@ class ApiHandler extends Api\CalDAV\Handler
 		if (is_array($ret))
 		{
 			// strip prefix so Handler base can work with 'id', 'modified', etc.
-			$ret = Api\Db::strip_array_keys($this->bo->data, 'tr_');
+			return Api\Db::strip_array_keys($this->bo->data, 'tr_');
 		}
-		return $ret;
+		// tracker_bo::read() returns false both when the id genuinely doesn't exist AND when it
+		// does but deny_private() hides it - the base Handler needs null vs. false to tell 404
+		// from 403 apart, so check raw existence (bypassing the privacy filter) to distinguish them
+		if (!$GLOBALS['egw']->db->select(\tracker_so::TRACKER_TABLE, 'tr_id', ['tr_id' => $id],
+			__LINE__, __FILE__, false, '', 'tracker')->fetchColumn())
+		{
+			return null;
+		}
+		return false;
 	}
 
 	/**

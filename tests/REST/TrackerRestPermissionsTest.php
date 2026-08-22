@@ -35,20 +35,33 @@
 
 namespace EGroupware\Tracker;
 
-require_once __DIR__.'/../../../api/tests/RestTest.php';
+require_once __DIR__.'/../../../api/tests/RestBase.php';
 
-use EGroupware\Api\RestTest;
+use EGroupware\Api\RestBase;
 use EGroupware\Api\Acl;
 use GuzzleHttp\RequestOptions;
 
 /**
  * ACL / permission scenarios for the Tracker JSON REST API.
  *
+ * KNOWN UNRESOLVED ISSUE: every test that has a freshly `createUser()`-created actor (manager/
+ * technician/reporter) POST a new ticket currently fails with 403, even after granting that
+ * account an explicit "tracker" run-right (see setUpBeforeClass()) and a matching primary_group.
+ * Root cause investigation so far: ApiHandler::put()'s "empty($this->bo->trackers)" guard is what
+ * fires; tracker_bo::trackers (the queue/category list the user can see, populated via
+ * get_tracker_labels()/Api\Categories) comes back empty for these accounts specifically, even
+ * though the "Bugs" queue category is a public/global one (cat_owner=0) that a hand-built,
+ * throwaway `new Api\Categories($account_id, 'tracker')` for the SAME account_id correctly reports
+ * as visible. Neither `tracker_bo::reload_labels()` nor fixing get_tracker_labels()'s
+ * `$GLOBALS['egw']->categories` reuse-check to also compare `account_id` changed the outcome, so
+ * the actual mechanism is still unidentified - flagged here rather than guessed at further. Only
+ * testPrincipals() and testNoAuth() (which don't need queue visibility) currently pass.
+ *
  * @covers \EGroupware\Tracker\ApiHandler::get
  * @covers \EGroupware\Tracker\ApiHandler::put
  * @covers \EGroupware\Tracker\ApiHandler::delete
  */
-class TrackerRestPermissions extends RestTest
+class TrackerRestPermissionsTest extends RestBase
 {
 	const MIME_TYPE_TICKET = 'application/json';
 
@@ -63,9 +76,12 @@ class TrackerRestPermissions extends RestTest
 	 * @var array
 	 */
 	protected static $users = [
-		'manager'    => [],  // TRACKER_ADMIN set in setUpBeforeClass
-		'technician' => [],  // TRACKER_TECHNICIAN set in setUpBeforeClass
-		'reporter'   => [],  // TRACKER_USER (default for any logged-in user)
+		// "NoGroup" (createUser()'s own default) has NO tracker queue/category visibility at all
+		// on this install (tracker's "Bugs" queue category is only visible to real groups); use
+		// "Default" (demo's own primary group) instead, so the created users can see it too.
+		'manager'    => ['primary_group' => 'Default'],  // TRACKER_ADMIN set in setUpBeforeClass
+		'technician' => ['primary_group' => 'Default'],  // TRACKER_TECHNICIAN set in setUpBeforeClass
+		'reporter'   => ['primary_group' => 'Default'],  // TRACKER_USER (default for any logged-in user)
 	];
 
 	public static function setUpBeforeClass(): void
@@ -74,6 +90,18 @@ class TrackerRestPermissions extends RestTest
 
 		// Create users with groupdav run-rights so they can reach the endpoint
 		self::createUsersACL(self::$users, 'tracker');
+
+		// createUser()/createUsersACL() only grant run-rights for groupdav/calendar/infolog/
+		// addressbook, never the app passed to createUsersACL() - the tracker REST endpoint gates
+		// even ticket creation on the "tracker" app right (Api\CalDAV\Handler::_common_get_put_delete()),
+		// so every actor here needs it explicitly.
+		foreach (self::$users as $data)
+		{
+			if (!empty($data['id']))
+			{
+				self::addAcl('tracker', 'run', $data['id'], 1);
+			}
+		}
 
 		// Grant manager full tracker admin rights (used by check_access DELETE)
 		$manager_id = self::$users['manager']['id'] ?? null;
@@ -116,8 +144,14 @@ class TrackerRestPermissions extends RestTest
 			);
 		}
 
-		// Clean up probe ticket
+		// Clean up probe ticket. The Location header is a server-relative path
+		// (e.g. /egroupware/groupdav.php/admin/tracker/3); prepend the origin
+		// from $base to get an absolute URL Guzzle can DELETE.
 		$location = $probe->getHeaderLine('Location') ?: "$base/$user/tracker/";
+		if ($location[0] === '/' && preg_match('#^(https?://[^/]+)#', $base, $m))
+		{
+			$location = $m[1].$location;
+		}
 		$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
 	}
 

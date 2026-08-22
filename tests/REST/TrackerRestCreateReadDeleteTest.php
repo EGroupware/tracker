@@ -28,9 +28,9 @@
 
 namespace EGroupware\Tracker;
 
-require_once __DIR__.'/../../../api/tests/RestTest.php';
+require_once __DIR__.'/../../../api/tests/RestBase.php';
 
-use EGroupware\Api\RestTest;
+use EGroupware\Api\RestBase;
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -40,7 +40,7 @@ use GuzzleHttp\RequestOptions;
  * @covers \EGroupware\Tracker\ApiHandler::put
  * @covers \EGroupware\Tracker\ApiHandler::delete
  */
-class TrackerRestCreateReadDelete extends RestTest
+class TrackerRestCreateReadDeleteTest extends RestBase
 {
 	/**
 	 * MIME type used for tracker ticket resources.
