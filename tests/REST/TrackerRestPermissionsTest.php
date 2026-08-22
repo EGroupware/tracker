@@ -37,6 +37,7 @@ namespace EGroupware\Tracker;
 
 require_once __DIR__.'/../../../api/tests/RestBase.php';
 
+use EGroupware\Api;
 use EGroupware\Api\RestBase;
 use EGroupware\Api\Acl;
 use GuzzleHttp\RequestOptions;
@@ -44,18 +45,24 @@ use GuzzleHttp\RequestOptions;
 /**
  * ACL / permission scenarios for the Tracker JSON REST API.
  *
- * KNOWN UNRESOLVED ISSUE: every test that has a freshly `createUser()`-created actor (manager/
- * technician/reporter) POST a new ticket currently fails with 403, even after granting that
- * account an explicit "tracker" run-right (see setUpBeforeClass()) and a matching primary_group.
- * Root cause investigation so far: ApiHandler::put()'s "empty($this->bo->trackers)" guard is what
- * fires; tracker_bo::trackers (the queue/category list the user can see, populated via
- * get_tracker_labels()/Api\Categories) comes back empty for these accounts specifically, even
- * though the "Bugs" queue category is a public/global one (cat_owner=0) that a hand-built,
- * throwaway `new Api\Categories($account_id, 'tracker')` for the SAME account_id correctly reports
- * as visible. Neither `tracker_bo::reload_labels()` nor fixing get_tracker_labels()'s
- * `$GLOBALS['egw']->categories` reuse-check to also compare `account_id` changed the outcome, so
- * the actual mechanism is still unidentified - flagged here rather than guessed at further. Only
- * testPrincipals() and testNoAuth() (which don't need queue visibility) currently pass.
+ * Manager/technician queue-level roles are granted directly via tracker_bo's own config-based
+ * staff lists in setUpBeforeClass() (Api\Acl grants do NOT control this - see
+ * tracker_bo::is_admin()/is_technician(), and note get_staff() caches the merged admin/technician/
+ * user lists for 24h in Api\Cache, so a grant made this way needs that cache invalidated too or
+ * it's invisible for a day). testManagerAndTechnicianGrants() checks this setup directly.
+ *
+ * KNOWN ENVIRONMENT-SPECIFIC ISSUE (does not reproduce in CI): on at least one local dev install,
+ * a freshly `createUser()`-created actor (manager/technician/reporter) POSTing a new ticket fails
+ * with 403 from ApiHandler::put()'s "empty($this->bo->trackers)" guard - tracker_bo::trackers (the
+ * queue/category list the user can see) comes back empty for these accounts specifically, even
+ * though the queue category is a public/global one (cat_owner=0) that a hand-built, throwaway
+ * `new Api\Categories($account_id, 'tracker')` for the SAME account_id correctly reports as
+ * visible, and even a plain `new \tracker_bo()` in the SAME PHPUnit process for the CLI's own
+ * bootstrapped user shows the same empty result. Neither `tracker_bo::reload_labels()` nor fixing
+ * get_tracker_labels()'s `$GLOBALS['egw']->categories` reuse-check to also compare `account_id`
+ * changed the outcome. CI creates tickets successfully for all three actors (see the "EGroupware
+ * Testing" workflow), so this looks specific to this install's category/queue configuration rather
+ * than the REST API or this test suite - flagged here rather than guessed at further.
  *
  * @covers \EGroupware\Tracker\ApiHandler::get
  * @covers \EGroupware\Tracker\ApiHandler::put
@@ -103,11 +110,37 @@ class TrackerRestPermissionsTest extends RestBase
 			}
 		}
 
-		// Grant manager full tracker admin rights (used by check_access DELETE)
+		// Grant manager/technician their queue-level roles. This is NOT governed by Api\Acl at all:
+		// tracker_bo::is_admin()/is_technician() check $this->admins[$tracker]/$this->technicians[$tracker],
+		// which are Api\Config('tracker') values (queue id => account_id => ...) managed via the
+		// Tracker admin UI, and get_staff() caches the merged result for 24h in Api\Cache - so both
+		// need to be set directly and the cache invalidated, or the grant is invisible for a day.
 		$manager_id = self::$users['manager']['id'] ?? null;
-		if ($manager_id)
+		$technician_id = self::$users['technician']['id'] ?? null;
+		if ($manager_id || $technician_id)
 		{
-			self::addAcl('tracker', 'admin', $manager_id, 1);
+			// use Api\Categories::GLOBAL_ACCOUNT (bypasses ACL entirely) to enumerate ALL tracker
+			// queues, same as tracker_admin.inc.php's own admin-UI code does - tracker_bo::$trackers
+			// is unreliable here (ACL-filtered for the CURRENT session, and empty in this CLI
+			// bootstrap context regardless of user - a separate, already-documented issue)
+			$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT, 'tracker');
+			$tracker_ids = array_map(static fn($cat) => $cat['id'], array_filter($cats->return_array('all', 0, false),
+				static fn($cat) => is_array($cat['data']) && ($cat['data']['type'] ?? null) === 'tracker'));
+
+			$bo = new \tracker_bo();
+			foreach ($tracker_ids as $tracker_id)
+			{
+				if ($manager_id)
+				{
+					$bo->admins[$tracker_id][$manager_id] = $manager_id;
+				}
+				if ($technician_id)
+				{
+					$bo->technicians[$tracker_id][$technician_id] = $technician_id;
+				}
+			}
+			$bo->save_config();
+			Api\Cache::unsetInstance('tracker', 'staff_cache');
 		}
 
 		// Verify the tracker REST endpoint exists; skip if not yet implemented
@@ -218,6 +251,28 @@ class TrackerRestPermissionsTest extends RestBase
 				[RequestOptions::HEADERS => ['Depth' => '0']]
 			);
 			$this->assertHttpStatus(207, $response, "Principal for '$user' must exist");
+		}
+	}
+
+	/**
+	 * Sanity check for setUpBeforeClass()'s queue-level grants themselves, independent of the REST
+	 * API - if this fails, every test below that depends on manager/technician actually having
+	 * their role will fail for the wrong reason (missing setup, not a REST API bug).
+	 */
+	public function testManagerAndTechnicianGrants()
+	{
+		$bo = new \tracker_bo();
+		$manager_id = self::$users['manager']['id'];
+		$technician_id = self::$users['technician']['id'];
+		$cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT, 'tracker');
+		$tracker_ids = array_map(static fn($cat) => $cat['id'], array_filter($cats->return_array('all', 0, false),
+			static fn($cat) => is_array($cat['data']) && ($cat['data']['type'] ?? null) === 'tracker'));
+		$this->assertNotEmpty($tracker_ids, 'This install must have at least one tracker queue configured');
+
+		foreach ($tracker_ids as $tracker_id)
+		{
+			$this->assertTrue($bo->is_admin($tracker_id, $manager_id), "manager must be admin of tracker $tracker_id");
+			$this->assertTrue($bo->is_technician($tracker_id, $technician_id), "technician must be technician of tracker $tracker_id");
 		}
 	}
 
