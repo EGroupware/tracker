@@ -51,18 +51,16 @@ use GuzzleHttp\RequestOptions;
  * user lists for 24h in Api\Cache, so a grant made this way needs that cache invalidated too or
  * it's invisible for a day). testManagerAndTechnicianGrants() checks this setup directly.
  *
- * KNOWN ENVIRONMENT-SPECIFIC ISSUE (does not reproduce in CI): on at least one local dev install,
- * a freshly `createUser()`-created actor (manager/technician/reporter) POSTing a new ticket fails
- * with 403 from ApiHandler::put()'s "empty($this->bo->trackers)" guard - tracker_bo::trackers (the
- * queue/category list the user can see) comes back empty for these accounts specifically, even
- * though the queue category is a public/global one (cat_owner=0) that a hand-built, throwaway
- * `new Api\Categories($account_id, 'tracker')` for the SAME account_id correctly reports as
- * visible, and even a plain `new \tracker_bo()` in the SAME PHPUnit process for the CLI's own
- * bootstrapped user shows the same empty result. Neither `tracker_bo::reload_labels()` nor fixing
- * get_tracker_labels()'s `$GLOBALS['egw']->categories` reuse-check to also compare `account_id`
- * changed the outcome. CI creates tickets successfully for all three actors (see the "EGroupware
- * Testing" workflow), so this looks specific to this install's category/queue configuration rather
- * than the REST API or this test suite - flagged here rather than guessed at further.
+ * That Api\Cache::INSTANCE invalidation itself needs to happen in the process actually serving
+ * these REST requests, not the PHPUnit CLI process - see clearServerInstanceCache() and the comment
+ * in setUpBeforeClass() for why (CI runs the REST server and phpunit as two separate processes, and
+ * Api\Cache::INSTANCE defaults to a per-process APCu arena for CLI SAPI).
+ *
+ * A previously-flagged "environment-specific" failure (fresh actors unable to even create a ticket,
+ * seemingly due to an empty tracker_bo::trackers/all_cats) turned out to be the SAME root cause -
+ * stale, process-isolated Api\Cache::INSTANCE data (categories are cached the same way) rather than
+ * a genuine ACL/config bug. clearServerInstanceCache() fixed it too; all tests in this class now
+ * pass locally as well as in CI.
  *
  * @covers \EGroupware\Tracker\ApiHandler::get
  * @covers \EGroupware\Tracker\ApiHandler::put
@@ -141,6 +139,17 @@ class TrackerRestPermissionsTest extends RestBase
 			}
 			$bo->save_config();
 			Api\Cache::unsetInstance('tracker', 'staff_cache');
+
+			// save_config()/unsetInstance() above run in *this* PHPUnit CLI process - a separate
+			// process from the "php -S" built-in server actually handling the REST calls below
+			// (see .github/workflows/testing.yml: the server is started in the background, phpunit
+			// runs as a second, independent process). Api\Cache::INSTANCE defaults to APCu when
+			// available, which is a private per-process shared-memory arena for CLI SAPI - so
+			// unsetInstance() here never reaches the server process, which keeps serving whatever
+			// (possibly staff-less) get_staff() result an earlier REST call in this test run already
+			// cached for it, for the full 24h TTL. Force the invalidation to happen *inside* that
+			// server process instead, via the real "Admin >> Clear cache and register hooks" action.
+			self::clearServerInstanceCache();
 		}
 
 		// Verify the tracker REST endpoint exists; skip if not yet implemented
@@ -186,6 +195,28 @@ class TrackerRestPermissionsTest extends RestBase
 			$location = $m[1].$location;
 		}
 		$client->delete($location, [RequestOptions::HEADERS => ['Accept' => 'application/json']]);
+	}
+
+	/**
+	 * Invalidate Api\Cache::INSTANCE in the process actually serving REST requests (see comment
+	 * in setUpBeforeClass()), by calling the real admin "clear cache" ajax action over HTTP as
+	 * the sysop admin user - json.php accepts HTTP Basic Auth directly (login_redirect() in
+	 * json.php), same as groupdav.php does for the REST clients elsewhere in this suite.
+	 */
+	private static function clearServerInstanceCache(): void
+	{
+		$base = $_ENV['EGW_URL'] ?? getenv('EGW_URL') ?: self::CALDAV_BASE;
+		$root = rtrim(preg_replace('#/groupdav\.php$#', '', rtrim($base, '/')), '/');
+
+		$client = new \GuzzleHttp\Client([
+			RequestOptions::HTTP_ERRORS => false,
+			RequestOptions::VERIFY      => false,
+			RequestOptions::AUTH        => [
+				$GLOBALS['EGW_ADMIN_USER'] ?? 'sysop',
+				$GLOBALS['EGW_ADMIN_PASSWORD'] ?? '',
+			],
+		]);
+		$client->get("$root/json.php?menuaction=admin.admin_hooks.ajax_clear_cache");
 	}
 
 	// -------------------------------------------------------------------------
