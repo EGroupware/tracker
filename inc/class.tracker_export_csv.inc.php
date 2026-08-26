@@ -36,7 +36,10 @@ class tracker_export_csv implements importexport_iface_export_plugin
 
 
 		$selection = array();
-		$query_key = 'index'.($options['tracker'] ? '-'.$options['tracker'] : '');
+		// Not the specific only_tracker-scoped session key the search may have run under (the export
+		// dialog has no way to know which queue that was) - the scope-independent key tracker_ui::get_rrows()
+		// always additionally stores the current search under, regardless of only_tracker.
+		$query_key = tracker_ui::LAST_SEARCH_SESSION_KEY;
 		$query = $old_query = Api\Cache::getSession('tracker',$query_key);
 		switch($options['selection'])
 		{
@@ -130,7 +133,9 @@ class tracker_export_csv implements importexport_iface_export_plugin
 				// Implode arrays, so they don't say 'Array'
 				foreach($_record->get_record_array() as $key => $value)
 				{
-					if(in_array($key, array('replies', 'bounties')))
+					// 'bounties'/'votes' can also be a plain summed number (from the nextmatch join),
+					// not the array of individual entries only $this->ui->read() above populates
+					if(in_array($key, array('replies', 'bounties')) && is_array($value))
 					{
 						$_record->$key = count($value) > 0 ? serialize($value) : null;
 						continue;

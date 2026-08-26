@@ -23,6 +23,13 @@ use EGroupware\Api\Etemplate;
 class tracker_ui extends tracker_bo
 {
 	/**
+	 * Session key the most recently run index/list query is additionally stored under
+	 * (regardless of only_tracker scope), so exporting "search results" can find it without
+	 * having to know which specific tracker queue the search happened in.
+	 */
+	const LAST_SEARCH_SESSION_KEY = 'index-last-search';
+
+	/**
 	 * Functions callable via menuaction
 	 *
 	 * @var array
@@ -966,8 +973,12 @@ class tracker_ui extends tracker_bo
 		unset($query['implicit_default_sort']);
 		if (empty($query['csv_export']))	// do not store query for csv-export in session
 		{
+			$stored_query = array_diff_key($query, array_flip(array('rows','actions','action_links','placeholder_actions')));
 			Api\Cache::setSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
-				array_diff_key ($query, array_flip(array('rows','actions','action_links','placeholder_actions'))));
+				$stored_query);
+			// also remember it under a scope-independent key, so "export search results" can find
+			// the current search regardless of which (or whether an) only_tracker queue it ran in
+			Api\Cache::setSession('tracker', self::LAST_SEARCH_SESSION_KEY, $stored_query);
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats

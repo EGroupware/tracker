@@ -1694,6 +1694,27 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
+	 * Alias for get_rrows(), for generic callers (eg. Api\Storage\RowsIterator) that only know
+	 * about a get_rows() method and would otherwise silently fall back to the inherited generic
+	 * Api\Storage\Base::get_rows(), missing tracker's own query building (date/version/linked
+	 * filters, default trackers, ...) that get_rrows() (and tracker_ui's override of it) does.
+	 *
+	 * Note: $query is intentionally not taken by reference here (unlike get_rrows()), to keep
+	 * this method's signature compatible with the inherited Api\Storage\Base::get_rows() it aliases.
+	 *
+	 * @param array $query with keys 'start', 'search', 'order', 'sort', 'col_filter'
+	 * @param array &$rows returned rows/competitions
+	 * @param array &$readonlys eg. to disable buttons based on Acl
+	 * @param string $join = true see get_rrows()
+	 * @param boolean $need_full_no_count = false see get_rrows()
+	 * @return int total number of rows
+	 */
+	function get_rows($query, &$rows, &$readonlys, $join=true, $need_full_no_count=false, $only_keys=false, $extra_cols=array())
+	{
+		return $this->get_rrows($query,$rows,$readonlys,$join,$need_full_no_count,$only_keys,$extra_cols);
+	}
+
+	/**
 	 * Add a new tracker-queue
 	 *
 	 * @param string $name
