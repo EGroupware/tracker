@@ -949,6 +949,21 @@ class tracker_ui extends tracker_bo
 
 		$query = $query_in;
 		$old_query = Api\Cache::getSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''));
+		// on the very first request of a session, do NOT let the class' hardcoded fallback sort
+		// ('bounties'/'votes'/'tr_id', used only when there was no cached or stored state yet) overwrite
+		// a sort the user already had stored in their prefs - that permanently overwrote it before (Ralf's
+		// partial fix in 50b971463588f introduced 'have_sort_state' for this, but never consumed it here)
+		if (empty($old_query) && !empty($query['implicit_default_sort']) &&
+			!empty($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state']))
+		{
+			$prev_state = unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'], ['allowed_classes' => false]);
+			if (is_array($prev_state) && !empty($prev_state['order']))
+			{
+				$query['order'] = $prev_state['order'];
+				$query['sort']  = $prev_state['sort'];
+			}
+		}
+		unset($query['implicit_default_sort']);
 		if (empty($query['csv_export']))	// do not store query for csv-export in session
 		{
 			Api\Cache::setSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
@@ -1620,6 +1635,9 @@ class tracker_ui extends tracker_bo
 				'filter2_no_lang'=> true,
 				'order'          =>	$this->allow_bounties ? 'bounties' : ($this->allow_voting ? 'votes' : 'tr_id'),// IO name of the column to sort after (optional for the sortheaders)
 				'sort'           =>	'DESC',// IO direction of the sort: 'ASC' or 'DESC'
+				// true as long as 'order'/'sort' above are just this hardcoded fallback, not a real
+				// stored preference or session state; cleared below if restored from index_state
+				'implicit_default_sort' => true,
 				'options-tr_assigned' => array('not' => lang('Noone')),
 				'col_filter'     => array(
 					'tr_status'  => 'not-closed',	// default filter: not closed
@@ -1646,6 +1664,7 @@ class tracker_ui extends tracker_bo
 			{
 				unset($state['header_left'], $state['header_right'], $state['num_rows']);
 				$content['nm'] = array_merge($content['nm'],$state);
+				$content['nm']['implicit_default_sort'] = false;	// order/sort is now real restored state
 				$tracker = $content['nm']['col_filter']['tr_tracker'];
 			}
 			elseif (!$this->called_by && !$tracker)
@@ -1668,10 +1687,6 @@ class tracker_ui extends tracker_bo
 			$content['nm']['no_votes'] = !$this->allow_voting;
 			$content['nm']['no_bounties'] = !$this->allow_bounties;
 			$content['nm']['no_tr_sum_timesheets'] = false;
-		}
-		else
-		{
-			$content['nm']['have_sort_state'] = true;
 		}
 		if (empty($content['nm']['session_for']) && $this->called_by) $content['nm']['session_for'] = $this->called_by;
 		if(!empty($_GET['search']))
