@@ -10,21 +10,29 @@
  */
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
+// et2_nextmatch/et2_button/et2_selectbox are real, distinct legacy widget implementations (not
+// zero-member shims over an Et2* class) AND are passed as runtime instanceof-filter values to
+// iterateOver() below - swapping them for their web-component namesakes would broaden the match
+// (eg. Et2Select matches every select subclass, not just plain "selectbox"-tagged ones), a real
+// behavior change - so these stay as value imports, unconverted. See app-ts-modernization.md.
 import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
-import {egw} from "../../api/js/jsapi/egw_global";
-import {et2_template} from "../../api/js/etemplate/et2_widget_template";
-import {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
-import {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
-import {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
+import type {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
+import type {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
+import type {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
 import "./Et2TrackerAssigned.ts";
+import type {Et2TrackerAssigned} from "./Et2TrackerAssigned";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
-import {LitElement} from "lit";
+import type {LitElement} from "lit";
 import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonToggle";
+import type {EgwFrameworkApp} from "../../kdots/js/EgwFrameworkApp";
+import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
+// egw/app are ambient globals (declare global {} in egw_global.d.ts, unconditionally included
+// via tsconfig's "**/*.d.ts") - no import needed or possible.
 
 /**
  * UI for tracker
@@ -77,19 +85,23 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 			case 'tracker.index':
 				this.filter_change();
 				if (this.et2.getArrayMgr('content').getEntry('nm[only_tracker]'))
+				{
 					// there's no this.et2.getWidgetById('colfilter[tr_tracker]').hide() and
-					// jQuery(this.et2.getWidgetById('colfilter[tr_tracker]').getDOMNode()).hide()
-					// hides already hiden selectbox and not the choosen container :(
-					jQuery('#tracker_index_col_filter_tr_tracker__chzn').hide();
+					// document.getElementById(...).style.display = 'none' hides already hidden
+					// selectbox and not the choosen container :(
+					const chznNode = document.getElementById('tracker_index_col_filter_tr_tracker__chzn');
+					if(chznNode) chznNode.style.display = 'none';
+				}
 				break;
 			case 'tracker.escalations':
 				// Set any filters with multiple values to multiple
-				_et2.widgetContainer.getWidgetById('escalation').iterateOver(function(widget) {
+				_et2.widgetContainer.getWidgetById('escalation').iterateOver((widget) =>
+				{
 					if( typeof widget.options.value === 'object' && widget.options.value.length > 1)
 					{
 						let button = null;
 						// Find associated expand button
-						widget.getParent().getParent().iterateOver(function(widget) {button = widget;}, this, et2_button);
+						widget.getParent().getParent().iterateOver((widget) => {button = widget;}, this, et2_button);
 						this.multiple_assigned(false, button);
 						widget.set_value(widget.options.value);
 					}
@@ -144,9 +156,9 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 		let state = {};
 
 		// Try and find a nextmatch widget, and set its filters
-		let et2 = etemplate2.getById('tracker-index');
+		const et2 = etemplate2.getById('tracker-index');
 		if(!et2) return {};
-		et2.widgetContainer.iterateOver(function(_widget) {
+		et2.widgetContainer.iterateOver((_widget) => {
 				state = _widget.getValue();
 			}, this, et2_nextmatch);
 
@@ -180,16 +192,19 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 	 * @param ev
 	 * @param filter
 	 */
-	filter_change(ev : Event, filter : Et2Select)
+	filter_change(ev? : Event, filter? : Et2Select)
 	{
 		const dates = this.et2.getWidgetById('tracker.index.dates');
 		if (filter && dates)
 		{
 			dates.set_disabled(filter.value !== "custom");
-			if (!filter.value) this.nm.activeFilters.startdate = null;
+			// this.nm's "ActiveFilters" type (legacy et2_nextmatch) has no "startdate" field - tracker
+			// hasn't been converted to Et2Nextmatch (see viewEntry()'s getController()/jQuery usage
+			// below), so this can't be cast to Et2Nextmatch like other already-converted apps do.
+			if (!filter.value) (<any>this.nm).activeFilters.startdate = null;
 			if (filter.value === "custom")
 			{
-				const filterDrawer = filter.closest('egw-app').filtersDrawer;
+				const filterDrawer = (<EgwFrameworkApp>filter.closest('egw-app'))?.filtersDrawer;
 				if (filterDrawer && !filterDrawer.open)
 				{
 					filterDrawer.open = true;
@@ -284,8 +299,8 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 		let id = _senders[0].id.split('::');
 		if (_action.id === 'print')
 		{
-			let popup : any = egw().open_link('/index.php?menuaction=tracker.tracker_ui.tprint&tr_id='+id[1],'', <string>egw().link_get_registry('tracker','add_popup'),'tracker');
-			popup.onload = function (){this.print();};
+			const popup : any = egw().open_link('/index.php?menuaction=tracker.tracker_ui.tprint&tr_id='+id[1],'', <string>egw().link_get_registry('tracker','add_popup'),'tracker');
+			popup.onload = () => popup.print();
 		}
 	}
 
@@ -294,16 +309,16 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 	 */
 	edit_popup()
 	{
-		if (typeof this.et2.node !='undefined' && typeof this.et2.node.baseURI != 'undefined')
+		// this.et2 (Et2Template) IS the DOM node/element itself (extends LitElement, an HTMLElement) -
+		// there's no separate ".node" sub-property. The old ".node" access always silently evaluated
+		// to undefined, meaning this whole method has been dead code; fixed to use this.et2 directly.
+		if (typeof this.et2?.baseURI != 'undefined' && !this.et2.baseURI.match(/no_?popup/))
 		{
-			if (!this.et2.node.baseURI.match(/no_?popup/))
-			{
-				window.focus();
+			window.focus();
 
-				if (this.et2.node.baseURI.match('composeid')) //tracker created by mail application
-				{
-					window.resizeTo(750,550);
-				}
+			if (this.et2.baseURI.match('composeid')) //tracker created by mail application
+			{
+				window.resizeTo(750,550);
 			}
 		}
 	}
@@ -314,12 +329,12 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 	 */
 	canned_comment_requst()
 	{
-		let editor = this.et2.getWidgetById('reply_message');
-		let id = this.et2.getValueById('canned_response');
+		const editor = this.et2.getWidgetById('reply_message');
+		const id = this.et2.getValueById('canned_response');
 		if (id && editor)
 		{
 			// Need to specify the popup's egw
-			this.et2.egw().json('tracker.tracker_ui.ajax_canned_comment',[id,document.getElementById('tracker-edit_reply_message').style.display == 'none']).sendRequest(true);
+			this.et2.egw().request('tracker.tracker_ui.ajax_canned_comment',[id,document.getElementById('tracker-edit_reply_message').style.display == 'none']);
 		}
 	}
 	/**
@@ -353,7 +368,7 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 		});
 
 		// Update link list widgets (including on links tab)
-		this.et2.querySelectorAll('et2-link-list').forEach(link =>
+		this.et2.querySelectorAll<Et2LinkList>('et2-link-list').forEach(link =>
 		{
 			link.get_links();
 			wait.push(link.updateComplete)
@@ -440,7 +455,10 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 	 */
 	viewEntry(_action, _senders)
 	{
-		super.viewEntry(_action, _senders);
+		// Returning the promise (instead of just calling and discarding it) keeps this override's
+		// inferred return type assignable to EgwApp.viewEntry()'s Promise<Et2Dialog> - execution order
+		// is unchanged, since `return` doesn't await it.
+		const promise = super.viewEntry(_action, _senders);
 		let nm : et2_nextmatch = <et2_nextmatch>this.et2.getWidgetById('nm');
 		let nm_indexes = nm.getController()._indexMap;
 		let node : JQuery = null;
@@ -456,6 +474,7 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 		{
 			node.removeClass('tracker_unseen');
 		}
+		return promise;
 	}
 
 	/**
@@ -480,8 +499,9 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 		});
 		dialog.updateComplete.then(() => {dialog.querySelector('textarea')?.focus();});
 
-		// Update reply
-		dialog.getComplete().then(async([button, value]) =>
+		// Update reply - getComplete()'s "value" is typed as a generic Object, not the dialog's
+		// actual content shape
+		dialog.getComplete().then(async([button, value] : [number, any]) =>
 		{
 			if(!button)
 			{
@@ -537,18 +557,17 @@ import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonTo
 	 */
 	timesheet_list(_action, _selected)
 	{
-		var extras = {
+		const extras = {
 			link_app: 'tracker',
-			link_id: false
+			link_id: <string|boolean>false
 		};
-		for(var i = 0; i < _selected.length; i++)
+		for(let i = 0; i < _selected.length; i++)
 		{
 			// Remove UID prefix for just contact_id
-			var ids = _selected[i].id.split('::');
+			const ids = _selected[i].id.split('::');
 			ids.shift();
-			ids = ids.join('::');
 
-			extras.link_id = ids;
+			extras.link_id = ids.join('::');
 			break;
 		}
 
