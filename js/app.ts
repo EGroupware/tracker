@@ -17,12 +17,12 @@ import {EgwApp} from "../../api/js/jsapi/egw_app";
 // behavior change - so these stay as value imports, unconverted. See app-ts-modernization.md.
 import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
-import {et2_selectbox} from "../../api/js/etemplate/et2_widget_selectbox";
+import {et2_selectbox} from "../../api/js/etemplate/legacy-shims/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
-import type {et2_htmlarea} from "../../api/js/etemplate/et2_widget_htmlarea";
-import type {et2_checkbox} from "../../api/js/etemplate/et2_widget_checkbox";
-import type {et2_selectAccount} from "../../api/js/etemplate/et2_widget_selectAccount";
+import type {et2_htmlarea} from "../../api/js/etemplate/legacy-shims/et2_widget_htmlarea";
+import type {et2_checkbox} from "../../api/js/etemplate/legacy-shims/et2_widget_checkbox";
+import type {et2_selectAccount} from "../../api/js/etemplate/legacy-shims/et2_widget_selectAccount";
 import "./Et2TrackerAssigned.ts";
 import type {Et2TrackerAssigned} from "./Et2TrackerAssigned";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
