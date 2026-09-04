@@ -18,17 +18,17 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<nextmatch-sortheader label="Title" id="esc_title"/>
+					<et2-nextmatch-sortheader label="Title" id="esc_title"/>
 					<et2-nextmatch-header-filter  id="tr_tracker" emptyLabel="Queue"/>
-					<nextmatch-header label="Resolution" id="tr_resolution"/>
-					<nextmatch-header label="Category" id="cat_id"/>
-					<nextmatch-header label="Version" id="tr_version"/>
-					<nextmatch-header label="Status" id="tr_status"/>
-					<nextmatch-sortheader label="Priority" id="tr_priority"/>
-					<nextmatch-header label="Action" id="esc_action_label"/>
-					<nextmatch-sortheader label="Time" id="esc_time"/>
-					<nextmatch-sortheader label="Match again after" id="esc_match_repeat"/>
-					<nextmatch-header label="Actions" id="actions"/>
+					<et2-nextmatch-header label="Resolution" id="tr_resolution"/>
+					<et2-nextmatch-header label="Category" id="cat_id"/>
+					<et2-nextmatch-header label="Version" id="tr_version"/>
+					<et2-nextmatch-header label="Status" id="tr_status"/>
+					<et2-nextmatch-sortheader label="Priority" id="tr_priority"/>
+					<et2-nextmatch-header label="Action" id="esc_action_label"/>
+					<et2-nextmatch-sortheader label="Time" id="esc_time"/>
+					<et2-nextmatch-sortheader label="Match again after" id="esc_match_repeat"/>
+					<et2-nextmatch-header label="Actions" id="actions"/>
 				</row>
 				<row class="row">
 					<et2-description  id="${row}[esc_title]" noLang="1"></et2-description>
@@ -61,7 +61,7 @@
             </columns>
             <rows>
                 <row>
-                    <nextmatch id="nm" template="tracker.escalations.rows" span="all"/>
+                    <et2-nextmatch id="nm" template="tracker.escalations.rows" span="all"></et2-nextmatch>
                 </row>
                 <row>
                     <hrule span="all"/>

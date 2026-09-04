@@ -1,26 +1,28 @@
 
-#tracker-index {
-  .tracker_overdue,.bold { font-weight: bold; }
-  .tracker_unseen { font-weight: bold; }
-  .tracker_seen { font-weight: normal; }
-  .low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
-  .low,.low_done { color:var(--sl-color-neutral-800); }
-  .normal,.normal_done { color:var(--sl-color-neutral-1000); }
-  .high { color:var(--sl-color-red-600); }
-  .high_done { color:var(--sl-color-red-800); }
-  .urgent { color:var(--sl-color-fuchsia-500); }
-  .urgent_done { color:var(--sl-color-fuchsia-800); }
-  .tracker_overdue { color:var(--sl-color-red-600); font-weight:bold; }
-  .private { font-style:italic; }
-  .planned { font-style:italic; }
-  .fixedHeight { line-height: 12px; }
-  .tracker_indexPrio:first-letter { font-weight: bold; }
-  .tracker_image16 img { height: 16px; }
-  [id*="tr_summary"] a {
-	color: inherit; text-decoration: none;
-	&:hover{
-	  text-decoration: underline;
-	}
+// Was scoped under "#tracker-index" so these only matched inside the light-DOM index page. Since
+// Et2Nextmatch renders row content inside Et2Datagrid's shadow root (a separate tree with no
+// #tracker-index ancestor to match against), that scoping silently stopped matching anything -
+// the shadow root already isolates these from the rest of the page, so no id-scope is needed here.
+.tracker_overdue,.bold { font-weight: bold; }
+.tracker_unseen { font-weight: bold; }
+.tracker_seen { font-weight: normal; }
+.low,.low_done,.normal,.normal_done,.high,.high_done,.urgent,.urgent_done { font-weight: bold; }
+.low,.low_done { color:var(--sl-color-neutral-800); }
+.normal,.normal_done { color:var(--sl-color-neutral-1000); }
+.high { color:var(--sl-color-red-600); }
+.high_done { color:var(--sl-color-red-800); }
+.urgent { color:var(--sl-color-fuchsia-500); }
+.urgent_done { color:var(--sl-color-fuchsia-800); }
+.tracker_overdue { color:var(--sl-color-red-600); font-weight:bold; }
+.private { font-style:italic; }
+.planned { font-style:italic; }
+.fixedHeight { line-height: 12px; }
+.tracker_indexPrio:first-letter { font-weight: bold; }
+.tracker_image16 img { height: 16px; }
+[id*="tr_summary"] a {
+  color: inherit; text-decoration: none;
+  &:hover{
+	text-decoration: underline;
   }
 }
 /* Header classes*/
@@ -29,7 +31,7 @@
 	max-width: 95%;
 }
 /* Assigned context dialog */
-.action_popup-content.assigned_popup {
+.assigned_popup {
 	min-height: 150px !important;
 	overflow-y: hidden;
 }

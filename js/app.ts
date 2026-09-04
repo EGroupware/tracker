@@ -10,16 +10,14 @@
  */
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
-// et2_nextmatch/et2_button/et2_selectbox are real, distinct legacy widget implementations (not
-// zero-member shims over an Et2* class) AND are passed as runtime instanceof-filter values to
-// iterateOver() below - swapping them for their web-component namesakes would broaden the match
-// (eg. Et2Select matches every select subclass, not just plain "selectbox"-tagged ones), a real
-// behavior change - so these stay as value imports, unconverted. See app-ts-modernization.md.
-import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
+// et2_button/et2_selectbox are real, distinct legacy widget implementations (not zero-member
+// shims over an Et2* class) AND are passed as runtime instanceof-filter values to iterateOver()
+// below - swapping them for their web-component namesakes would broaden the match (eg. Et2Select
+// matches every select subclass, not just plain "selectbox"-tagged ones), a real behavior change
+// - so these stay as value imports, unconverted. See app-ts-modernization.md.
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {et2_selectbox} from "../../api/js/etemplate/legacy-shims/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {nm_open_popup} from "../../api/js/etemplate/et2_extension_nextmatch_actions.js";
 import type {et2_htmlarea} from "../../api/js/etemplate/legacy-shims/et2_widget_htmlarea";
 import type {et2_checkbox} from "../../api/js/etemplate/legacy-shims/et2_widget_checkbox";
 import type {et2_selectAccount} from "../../api/js/etemplate/legacy-shims/et2_widget_selectAccount";
@@ -31,6 +29,8 @@ import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonToggle";
 import type {EgwFrameworkApp} from "../../kdots/js/EgwFrameworkApp";
 import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
+import type {Et2Nextmatch} from "../../api/js/etemplate/Et2Nextmatch/Et2Nextmatch";
+import type {Et2Datagrid} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid";
 // egw/app are ambient globals (declare global {} in egw_global.d.ts, unconditionally included
 // via tsconfig's "**/*.d.ts") - no import needed or possible.
 
@@ -83,7 +83,11 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 				break;
 
 			case 'tracker.index':
-				this.filter_change();
+				// Called with the real widget (not the no-arg call this used to be), so the
+				// start/end date range widgets are correctly enabled/disabled from the actual,
+				// already-restored "filter" value on first load - see et2-nextmatch-conversion.md's
+				// "toolbar control that mirrors an nm filter" startup pitfall.
+				this.filter_change(null, this.et2.getWidgetById('filter'));
 				if (this.et2.getArrayMgr('content').getEntry('nm[only_tracker]'))
 				{
 					// there's no this.et2.getWidgetById('colfilter[tr_tracker]').hide() and
@@ -132,7 +136,7 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 		{
 			if (_app === 'timesheet')
 			{
-				let nm = this.et2 ? <et2_nextmatch>this.et2.getWidgetById('nm') : null;
+				let nm = this.et2 ? <Et2Nextmatch>this.et2.getWidgetById('nm') : null;
 				if (nm) nm.applyFilters();
 			}
 		}
@@ -155,12 +159,13 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 	{
 		let state = {};
 
-		// Try and find a nextmatch widget, and set its filters
+		// Try and find the nextmatch widget, and set its filters
 		const et2 = etemplate2.getById('tracker-index');
-		if(!et2) return {};
-		et2.widgetContainer.iterateOver((_widget) => {
-				state = _widget.getValue();
-			}, this, et2_nextmatch);
+		const nm = et2?.widgetContainer?.getWidgetById('nm');
+		if(nm)
+		{
+			state = nm.getValue();
+		}
 
 		return state;
 	}
@@ -198,10 +203,7 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 		if (filter && dates)
 		{
 			dates.set_disabled(filter.value !== "custom");
-			// this.nm's "ActiveFilters" type (legacy et2_nextmatch) has no "startdate" field - tracker
-			// hasn't been converted to Et2Nextmatch (see viewEntry()'s getController()/jQuery usage
-			// below), so this can't be cast to Et2Nextmatch like other already-converted apps do.
-			if (!filter.value) (<any>this.nm).activeFilters.startdate = null;
+			if (!filter.value) (<Et2Nextmatch>this.nm).activeFilters.startdate = null;
 			if (filter.value === "custom")
 			{
 				const filterDrawer = (<EgwFrameworkApp>filter.closest('egw-app'))?.filtersDrawer;
@@ -244,6 +246,15 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 				break;
 			case 'filter':
 				this.filter_change(null, this.et2.getWidgetById(id));
+				break;
+			case 'tr_tracker':
+				// Keep the "Assigned to" filter's account-search scoped to the current queue
+				// regardless of which control changed it (toolbar or drawer) - checkNmFilterChanged()
+				// fires for every col_filter change via the et2-filter event, not just the toolbar's
+				// own onchange, so this also covers the drawer's Tracker Queue filter that onchange
+				// never sees.
+				const assignedFilter = <Et2TrackerAssigned>this.et2.getWidgetById('col_filter[tr_assigned]');
+				if(assignedFilter) assignedFilter.tracker = value;
 				break;
 		}
 	}
@@ -419,16 +430,17 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 	 */
 	change_assigned(_action, _selected)
 	{
-		let et2 = _selected[0].manager.data.nextmatch.getInstanceManager();
+		const nm = <Et2Nextmatch>_selected[0].manager.data.nextmatch;
+		let et2 = nm.getInstanceManager();
 		let assigned = <Et2TrackerAssigned>et2.widgetContainer.getWidgetById('assigned');
 		if(assigned)
 		{
 			assigned.set_value([]);
 			et2.widgetContainer.getWidgetById('assigned_action[title]').set_value('');
 			et2.widgetContainer.getWidgetById('assigned_action[title]').set_class('');
-			et2.widgetContainer.getWidgetById('assigned_action[ok]').set_disabled(_selected.length !== 1);
-			et2.widgetContainer.getWidgetById('assigned_action[add]').set_disabled(_selected.length === 1);
-			et2.widgetContainer.getWidgetById('assigned_action[delete]').set_disabled(_selected.length === 1);
+			et2.widgetContainer.getWidgetById('assigned_popup[assigned_action][ok]').set_disabled(_selected.length !== 1);
+			et2.widgetContainer.getWidgetById('assigned_popup[assigned_action][add]').set_disabled(_selected.length === 1);
+			et2.widgetContainer.getWidgetById('assigned_popup[assigned_action][delete]').set_disabled(_selected.length === 1);
 		}
 
 		if(_selected.length === 1)
@@ -443,7 +455,52 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 			}
 		}
 
-		nm_open_popup(_action, _selected);
+		// Field pre-population above is app-specific and stays here; actually finding/showing
+		// the popup is Et2NextmatchActionController's job (executeAction's "open_popup" case) -
+		// no direct dependency on the legacy et2_extension_nextmatch_actions.js helper needed.
+		nm.executeAction(_action.id, {ids: _selected.map(s => s.id), all: false}, {nmAction: "open_popup"});
+	}
+
+	/**
+	 * Submit one of the index nextmatch action popups (admin / link / assigned / group).
+	 *
+	 * Replaces the legacy nm_submit_popup() + window.nm_popup_action/nm_popup_ids globals - the
+	 * popups are real <et2-dialog>s now, so Et2NextmatchActionController.openActionPopup() takes
+	 * the "already a dialog" fast path (sets .selectedIds, calls .show()) and none of
+	 * nm_open_popup()'s runtime button-wrapping (which used to set those globals) happens any more.
+	 *
+	 * ButtonMixin._handleClick() has already set the clicked button's own `clicked = true` before
+	 * this onclick runs, so the button's own id (eg. "admin_popup[update]") lands in the submitted
+	 * content - that's what tells the server which button was pressed, see tracker_ui::process()'s
+	 * `key($action[$multi_action . '_action'] ?? [])`. executeAction() triggers the normal
+	 * whole-template submit, with the nextmatch payload (action id, selected, select_all,
+	 * checkboxes) merged in by Et2Nextmatch's own value getter. Returning false stops the button
+	 * from also running its own default (would-be second) submit.
+	 *
+	 * @param _event
+	 * @param _widget the button that was clicked
+	 * @param _action_id the nm action id this popup was opened for ("admin"/"assigned"/"group")
+	 *  - the same for every button inside one popup, matching the legacy
+	 *  nm_popup_action's behaviour; the button's own id/value is what varies.
+	 */
+	submit_popup(_event : Event, _widget, _action_id : string) : boolean
+	{
+		const dialog = _widget.closest('et2-dialog');
+		const nm = <Et2Nextmatch>_widget.getInstanceManager()?.widgetContainer?.getWidgetById('nm');
+		if(!nm)
+		{
+			return false;
+		}
+		// Prefer the live selection - it still carries "select all", which the dialog's own
+		// .selectedIds (a plain array of ids set by openActionPopup()) does not.
+		const selection = nm.getSelection();
+		if(!selection.all && dialog?.selectedIds?.length)
+		{
+			selection.ids = dialog.selectedIds;
+		}
+		nm.executeAction(_action_id, selection, {nmAction: "submit"});
+		dialog?.hide();
+		return false;
 	}
 
 	/**
@@ -459,21 +516,17 @@ import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 		// inferred return type assignable to EgwApp.viewEntry()'s Promise<Et2Dialog> - execution order
 		// is unchanged, since `return` doesn't await it.
 		const promise = super.viewEntry(_action, _senders);
-		let nm : et2_nextmatch = <et2_nextmatch>this.et2.getWidgetById('nm');
-		let nm_indexes = nm.getController()._indexMap;
-		let node : JQuery = null;
-		for (let i in nm_indexes)
-		{
-			if (nm_indexes[i]['uid'] == _senders[0]['id'])
-			{
-				node = nm_indexes[i].row._nodes[0].find('.tracker_unseen');
-			}
-		}
 
-		if (node)
-		{
-			node.removeClass('tracker_unseen');
-		}
+		// Et2Nextmatch has no public API to find a rendered row's DOM node by uid (the legacy
+		// nm.getController()._indexMap this replaces has no public replacement either - see
+		// et2-nextmatch-conversion.md's legacy API replacement table). Reach into Et2Datagrid's own
+		// internal row lookup instead, the same way Addressbook's CRM.ts reaches into its live row
+		// list - a real DOM query past a private-in-TS-only boundary, not a sanctioned API.
+		let nm = <Et2Nextmatch>this.et2.getWidgetById('nm');
+		let datagrid = <Et2Datagrid>nm?.shadowRoot?.querySelector('et2-datagrid');
+		let row = datagrid?._findRenderedRowElement(_senders[0]['id']);
+		row?.querySelector('.tracker_unseen')?.classList.remove('tracker_unseen');
+
 		return promise;
 	}
 

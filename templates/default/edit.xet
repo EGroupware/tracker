@@ -5,7 +5,7 @@
 		<htmlarea id="tr_description" needed="1" span="all" width="99%" height="274" imageUpload="link_to"/>
 	</template>
 	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
-        <nextmatch id="replies" template="tracker.edit.comment_row"/>
+        <et2-nextmatch id="replies" template="tracker.edit.comment_row" lazy="true"></et2-nextmatch>
     </template>
     <template id="tracker.edit.comment_edit">
         <et2-hbox align="left" class="et2_link_to et2_toolbar">
@@ -22,21 +22,22 @@
                 <column width="*"/>
 			</columns>
 			<rows>
-                <row>
+                <row class="th">
                     <et2-hbox>
-                        <et2-nextmatch-header-account id="reply_creator" placeholder="Username"></et2-nextmatch-header-account>
+                        <et2-nextmatch-header-account id="reply_creator" emptyLabel="Creator"></et2-nextmatch-header-account>
                     </et2-hbox>
                     <et2-hbox>
-                        <nextmatch-header id="reply_message" label="Comment"></nextmatch-header>
+                        <et2-nextmatch-header id="reply_message" label="Comment"></et2-nextmatch-header>
                     </et2-hbox>
                 </row>
                 <row class="row $row_cont[class] $row_cont[reply_visible_class]" valign="top">
 					<et2-vbox>
 						<et2-date-time  id="${row}[reply_created]" readonly="true"></et2-date-time>
-						<et2-select-account  id="${row}[reply_creator]" readonly="true"></et2-select-account>
+						<et2-select-account  id="${row}[reply_creator]" readonly="true" disabled="!$row_cont[reply_creator]"></et2-select-account>
+						<et2-description value="Tracker" disabled="$row_cont[reply_creator]"></et2-description>
 					</et2-vbox>
 					<et2-vbox>
-                        <html id="${row}[reply_message]" class="@@replies[$row][reply_visible_class]" disabled="!@@tr_edit_mode=html"/>
+                        <et2-htmlarea id="${row}[reply_message]" readonly="true" noAiTools="true" class="$row_cont[reply_visible_class]" disabled="!@@tr_edit_mode=html"></et2-htmlarea>
                         <et2-description id="${row}[reply_message]" disabled="@@tr_edit_mode=html"></et2-description>
                         <et2-link-string id="${row}[attachments]"></et2-link-string>
                     </et2-vbox>
