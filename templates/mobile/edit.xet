@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<et2-template  id="tracker.edit.description" template="" lang="" group="0" version="1.9.005"><et2-ai  span="3"><et2-htmlarea  options="@tr_description_options" id="tr_description" width="99%" imageUpload="link_to" required="1"></et2-htmlarea></et2-ai>
