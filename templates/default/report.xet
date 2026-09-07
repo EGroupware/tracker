@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.report" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="tracker.report" template="" lang="" group="0" version="1.9.001">
 		<grid>
 			<columns>
 				<column/>
 			</columns>
 			<rows>
 				<row disabled="!@msg">
-					<html align="center" id="msg" span="all" class="redItalic"/>
+					<et2-html  align="center" id="msg" span="all" class="redItalic"></et2-html>
 				</row>
 				<row>
-					<groupbox class="noPrint">
-						<caption label="Reports"/>
+					<et2-groupbox  class="noPrint" summary="Reports">
 						<grid>
 							<columns>
 								<column width="80%"/>
@@ -29,11 +28,10 @@
 								</row>
 							</rows>
 						</grid>
-					</groupbox>
+					</et2-groupbox>
 				</row>
 				<row>
-					<groupbox>
-						<caption label="Report parameter"/>
+					<et2-groupbox  summary="Report parameter">
 						<grid>
 							<columns>
 								<column/>
@@ -84,13 +82,13 @@
 								</row>
 							</rows>
 						</grid>
-					</groupbox>
+					</et2-groupbox>
 				</row>
 				<row valign="bottom" height="30">
 					<et2-description  align="center" value="Report as bar chart by the selected criterias" span="all"></et2-description>
 				</row>
 				<row>
-					<html id="map"/>
+					<et2-html  id="map"></et2-html>
 				</row>
 				<row>
 					<et2-image  src="reportchart" imagemap="reportchart"></et2-image>
@@ -134,5 +132,5 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
+	</et2-template>
 </overlay>

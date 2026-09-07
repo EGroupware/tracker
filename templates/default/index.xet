@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-    <template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
+    <et2-template  id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
         <grid width="100%">
             <columns>
                 <column width="65"/>
@@ -28,48 +28,48 @@
             <rows>
                 <row class="th">
                     <et2-vbox>
-                        <et2-nextmatch-sortheader label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
-                        <et2-nextmatch-header-filter id="tr_private" ariaLabel="Private" emptyLabel="All"/>
+                        <et2-nextmatch-sortheader  label="ID" id="tr_id" class="tracker-id" sortmode="DESC"/>
+                        <et2-nextmatch-header-filter  id="tr_private" ariaLabel="Private" emptyLabel="All"></et2-nextmatch-header-filter>
                     </et2-vbox>
                     <et2-vbox>
-                        <et2-nextmatch-sortheader label="Tracker Queue" id="tr_tracker" class="tracker"/>
-                        <et2-nextmatch-header-filter id="tr_tracker" ariaLabel="Tracker Queue" emptyLabel="All"/>
+                        <et2-nextmatch-sortheader  label="Tracker Queue" id="tr_tracker" class="tracker"/>
+                        <et2-nextmatch-header-filter  id="tr_tracker" ariaLabel="Tracker Queue" emptyLabel="All"></et2-nextmatch-header-filter>
                     </et2-vbox>
-                    <et2-nextmatch-sortheader label="Category" id="cat_id" class="tracker-cat"/>
-                    <et2-nextmatch-sortheader label="Version" id="tr_version" class="tracker"/>
+                    <et2-nextmatch-sortheader  label="Category" id="cat_id" class="tracker-cat"/>
+                    <et2-nextmatch-sortheader  label="Version" id="tr_version" class="tracker"/>
                     <et2-vbox>
-                        <et2-nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
-                        <et2-nextmatch-header-filter ariaLabel="Read / unread" emptyLabel="All" id="read"></et2-nextmatch-header-filter>
-                    </et2-vbox>
-                    <et2-vbox>
-                        <et2-nextmatch-sortheader label="Summary" id="tr_summary" class="tracker-summary"/>
-                        <et2-nextmatch-header label="Description" id="tr_description" class="tracker-summary"/>
+                        <et2-nextmatch-sortheader  label="Summary" id="tr_summary" class="tracker-summary"/>
+                        <et2-nextmatch-header-filter  ariaLabel="Read / unread" emptyLabel="All" id="read"></et2-nextmatch-header-filter>
                     </et2-vbox>
                     <et2-vbox>
-                        <et2-nextmatch-sortheader label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
-                        <et2-nextmatch-sortheader label="Last modified" id="tr_modified" sortmode="DESC"/>
+                        <et2-nextmatch-sortheader  label="Summary" id="tr_summary" class="tracker-summary"/>
+                        <et2-nextmatch-header  label="Description" id="tr_description" class="tracker-summary"></et2-nextmatch-header>
                     </et2-vbox>
                     <et2-vbox>
-                        <et2-nextmatch-sortheader label="Start date" id="tr_startdate" sortmode="DESC"/>
-                        <et2-nextmatch-sortheader label="Due date" id="tr_duedate" sortmode="DESC"/>
+                        <et2-nextmatch-sortheader  label="Date opened" id="tr_created" class="tracker-created" sortmode="DESC"/>
+                        <et2-nextmatch-sortheader  label="Last modified" id="tr_modified" sortmode="DESC"/>
                     </et2-vbox>
-                    <et2-nextmatch-sortheader label="Closed date" id="tr_closed" sortmode="DESC"/>
-                    <et2-nextmatch-sortheader align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
                     <et2-vbox>
-                        <et2-nextmatch-header-filter label="Status" id="tr_status" class="tracker_status_filter" emptyLabel="All"/>
+                        <et2-nextmatch-sortheader  label="Start date" id="tr_startdate" sortmode="DESC"/>
+                        <et2-nextmatch-sortheader  label="Due date" id="tr_duedate" sortmode="DESC"/>
                     </et2-vbox>
-                    <et2-nextmatch-header-filter label="Resolution" id="tr_resolution" class="tracker_status_filter" emptyLabel="All"/>
-                    <et2-nextmatch-sortheader align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
+                    <et2-nextmatch-sortheader  label="Closed date" id="tr_closed" sortmode="DESC"/>
+                    <et2-nextmatch-sortheader  align="center" label="Priority" id="tr_priority" class="tracker-priority" sortmode="DESC"/>
                     <et2-vbox>
-                        <et2-nextmatch-header-account  id="tr_creator" class="tracker_user_filter" emptyLabel="Created by"/>
-                        <et2-nextmatch-header-custom id="tr_assigned" class="tracker_user_filter" emptyLabel="Assigned to" widgetType="et2-tracker-assigned" tracker="@col_filter[tr_tracker]"/>
+                        <et2-nextmatch-header-filter  label="Status" id="tr_status" class="tracker_status_filter" emptyLabel="All"></et2-nextmatch-header-filter>
                     </et2-vbox>
-                    <et2-nextmatch-header align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"/>
-                    <et2-nextmatch-sortheader label="Votes" id="votes" class="tracker-votes" sortmode="DESC"/>
-                    <et2-nextmatch-sortheader label="Bounties" id="bounties" class="tracker-bounties" sortmode="DESC"/>
-                    <et2-nextmatch-header-filter  id="esc_id" emptyLabel="Escalation"/>
-                    <et2-nextmatch-header-customfields id="customfields"/>
-                    <et2-nextmatch-header label="Kanban" id="kanban"/>
+                    <et2-nextmatch-header-filter  label="Resolution" id="tr_resolution" class="tracker_status_filter" emptyLabel="All"></et2-nextmatch-header-filter>
+                    <et2-nextmatch-sortheader  align="center" label="Completed" id="tr_completion" class="tracker-completion"/>
+                    <et2-vbox>
+                        <et2-nextmatch-header-account  id="tr_creator" class="tracker_user_filter" emptyLabel="Created by"></et2-nextmatch-header-account>
+                        <et2-nextmatch-header-custom  id="tr_assigned" class="tracker_user_filter" emptyLabel="Assigned to" widgetType="" tracker="@col_filter[tr_tracker]"></et2-nextmatch-header-custom>
+                    </et2-vbox>
+                    <et2-nextmatch-header  align="center" label="Times" id="tr_sum_timesheets" class="tracker-times"></et2-nextmatch-header>
+                    <et2-nextmatch-sortheader  label="Votes" id="votes" class="tracker-votes" sortmode="DESC"/>
+                    <et2-nextmatch-sortheader  label="Bounties" id="bounties" class="tracker-bounties" sortmode="DESC"/>
+                    <et2-nextmatch-header-filter  id="esc_id" emptyLabel="Escalation"></et2-nextmatch-header-filter>
+                    <et2-nextmatch-header-customfields  id="customfields"/>
+                    <et2-nextmatch-header  label="Kanban" id="kanban"></et2-nextmatch-header>
                 </row>
                 <row class="$row_cont[enabled_color_code] $row_cont[class]" valign="top">
                     <et2-vbox  noLang="1">
@@ -79,13 +79,11 @@
                     <et2-select  id="${row}[tr_tracker]" readonly="true" noLang="1"></et2-select>
                     <et2-select  id="${row}[cat_id]" readonly="true" emptyLabel="None"></et2-select>
                     <et2-select  id="${row}[tr_version]" readonly="true" emptyLabel="None"></et2-select>
-                    <et2-description id="${row}[tr_summary]" class="$row_cont[seen_class] et2_link" noLang="1" style="display: inline-flex"
-                                     href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
+                    <et2-description  id="${row}[tr_summary]" class="$row_cont[seen_class] et2_link" noLang="1" style="display: inline-flex" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
                     <et2-vbox  class="colfullWidth" noLang="1">
-                        <et2-description id="${row}[tr_summary]" class="$row_cont[seen_class] et2_link" noLang="1" style="display: inline-flex"
-                                         href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
+                        <et2-description  id="${row}[tr_summary]" class="$row_cont[seen_class] et2_link" noLang="1" style="display: inline-flex" href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" extraLinkPopup="780x720" extraLinkTarget="_blank"></et2-description>
                         <et2-box  class="trackerDes" noLang="1">
-                            <et2-htmlarea id="${row}[tr_description]" readonly="true" noAiTools="true"></et2-htmlarea>
+                            <et2-htmlarea  id="${row}[tr_description]" readonly="true" noAiTools="true"></et2-htmlarea>
                         </et2-box>
                     </et2-vbox>
                     <et2-vbox  readonly="true">
@@ -103,48 +101,38 @@
                     <et2-select  id="${row}[tr_resolution]" readonly="true" emptyLabel="None"></et2-select>
                     <progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
                     <et2-vbox>
-                        <et2-select-account class="tracker_leftPad5" id="${row}[tr_creator]"
-                                            readonly="true"></et2-select-account>
-                        <et2-select-account class="tracker_leftPad5" id="${row}[tr_assigned]"
-                                            readonly="true"></et2-select-account>
+                        <et2-select-account  class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"></et2-select-account>
+                        <et2-select-account  class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"></et2-select-account>
                     </et2-vbox>
-                    <et2-date-duration align="center" id="${row}[tr_sum_timesheets]" readonly="true" selectUnit="true"
-                                       displayFormat="@@duration_format"></et2-date-duration>
-                    <et2-number align="center" id="${row}[votes]" readonly="true" precision="0"></et2-number>
-                    <et2-number align="center" label="$row_cont[currency]" id="${row}[bounties]" readonly="true"
-                                noLang="1"></et2-number>
-                    <et2-date-since id="${row}[esc_start]"></et2-date-since>
-                    <et2-customfields-list id="$row"/>
-                    <et2-link-string entryId="$row_cont[tr_id]" application="tracker"
-                                     onlyApp="kanban"></et2-link-string>
+                    <et2-date-duration  align="center" id="${row}[tr_sum_timesheets]" readonly="true" selectUnit="true" displayFormat="@@duration_format"></et2-date-duration>
+                    <et2-number  align="center" id="${row}[votes]" readonly="true" precision="0"></et2-number>
+                    <et2-number  align="center" label="$row_cont[currency]" id="${row}[bounties]" readonly="true" noLang="1"></et2-number>
+                    <et2-date-since  id="${row}[esc_start]"></et2-date-since>
+                    <et2-customfields-list  id="$row"/>
+                    <et2-link-string  entryId="$row_cont[tr_id]" application="tracker" onlyApp="kanban"></et2-link-string>
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.index.header" template="" lang="" group="0" version="1.7.001">
-        <et2-toolbar id="toolbar">
-            <et2-button-icon  statustext="Add" image="add" id="add" slot="prefix"
-                onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button-icon>
-            <et2-template template="api.search-button" slot="prefix"></et2-template>
-            <et2-select id="tr_tracker" multiple="true" rows="1" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass=""
-                        onchange="widget.getRoot().getWidgetById('col_filter[tr_assigned]').tracker = widget.value; app.tracker.changeNmFilter(ev,widget)"></et2-select>
-            <et2-select id="tr_status" ariaLabel="Status" emptyLabel="All" onchange="app.tracker.changeNmFilter"></et2-select>
-            <et2-select id="cat_id" ariaLabel="Category" emptyLabel="All categories" onchange="app.tracker.changeNmFilter"></et2-select>
-            <et2-select id="filter" ariaLabel="Date filter" onchange="app.tracker.changeNmFilter"></et2-select>
-            <et2-select id="filter2" ariaLabel="Version" onchange="app.tracker.changeNmFilter"></et2-select>
-            <et2-button-toggle id="unread" icon="asterisk" statustext="Toggle unread" slot="suffix"
-                onchange="app.tracker.toggleUnread"></et2-button-toggle>
+    </et2-template>
+    <et2-template  id="tracker.index.header" template="" lang="" group="0" version="1.7.001">
+        <et2-toolbar  id="toolbar">
+            <et2-button-icon  statustext="Add" image="add" id="add" slot="prefix" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button-icon>
+            <et2-template  template="api.search-button" slot="prefix"></et2-template>
+            <et2-select  id="tr_tracker" multiple="true" rows="1" class="tracker_queue" placeholder="Select tracker queue" noLang="1" valueClass="" onchange="widget.getRoot().getWidgetById('col_filter[tr_assigned]').tracker = widget.value; app.tracker.changeNmFilter(ev,widget)"></et2-select>
+            <et2-select  id="tr_status" ariaLabel="Status" emptyLabel="All" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select  id="cat_id" ariaLabel="Category" emptyLabel="All categories" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select  id="filter" ariaLabel="Date filter" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-select  id="filter2" ariaLabel="Version" onchange="app.tracker.changeNmFilter"></et2-select>
+            <et2-button-toggle  id="unread" icon="asterisk" statustext="Toggle unread" slot="suffix" onchange="app.tracker.toggleUnread"></et2-button-toggle>
         </et2-toolbar>
-    </template>
-    <template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
-        <et2-date id="startdate" label="Start" class="et2-label-fixed" style="padding-bottom: .3rem"
-            onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
-        <et2-date id="enddate" label="End" class="et2-label-fixed"
-            onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
-    </template>
-    <template id="tracker.index" template="" lang="" group="0" version="1.9.003">
-        <template template="tracker.index.header" slot="main-header"></template>
-        <et2-nextmatch id="nm" template="tracker.index.rows" span="all"></et2-nextmatch>
+    </et2-template>
+    <et2-template  id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
+        <et2-date  id="startdate" label="Start" class="et2-label-fixed" style="padding-bottom: .3rem" onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
+        <et2-date  id="enddate" label="End" class="et2-label-fixed" onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
+    </et2-template>
+    <et2-template  id="tracker.index" template="" lang="" group="0" version="1.9.003">
+        <et2-template  template="tracker.index.header" slot="main-header"></et2-template>
+        <et2-nextmatch  id="nm" template="tracker.index.rows" span="all"></et2-nextmatch>
         <grid width="100%" class="tracker-index">
             <columns>
                 <column/>
@@ -152,12 +140,12 @@
             </columns>
             <rows>
                 <row disabled="!@css" class="hideme">
-                    <html id="css" span="all"/>
+                    <et2-html  id="css" span="all"></et2-html>
                 </row>
             </rows>
         </grid>
-        <et2-dialog id="admin_popup_dialog" title="Multiple changes" open="false" buttons="" destroyOnClose="false">
-            <et2-box id="admin_popup">
+        <et2-dialog  id="admin_popup_dialog" title="Multiple changes" open="false" buttons="" destroyOnClose="false">
+            <et2-box  id="admin_popup">
                 <grid width="500px">
                     <columns>
                         <column/>
@@ -196,50 +184,41 @@
                             <et2-select  statustext="The canned response will be prefix the text you type." id="canned_response" noLang="1" emptyLabel="Select one"></et2-select>
                         </row>
                         <row valign="top">
-                            <et2-description  for="reply_message" value="Comment"></et2-description>
-                            <et2-textarea  id="reply_message" rows="5" cols="60"></et2-textarea>
+                            <et2-description  for="reply_message" value="Comment"></et2-description><et2-ai><et2-textarea  id="reply_message" rows="5" cols="60"></et2-textarea></et2-ai>
                         </row>
                     </rows>
                 </grid>
             </et2-box>
-            <et2-button slot="footer" variant="primary" label="Update" id="admin_popup[update]" image="check"
-                        onclick="return app.tracker.submit_popup(ev, widget, 'admin');"></et2-button>
-            <et2-button slot="footer" label="Cancel" id="cancel" image="cancelled" noSubmit="true"
-                        onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
+            <et2-button  slot="footer" variant="primary" label="Update" id="admin_popup[update]" image="check" onclick="return app.tracker.submit_popup(ev, widget, 'admin');"></et2-button>
+            <et2-button  slot="footer" label="Cancel" id="cancel" image="cancelled" noSubmit="true" onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
         </et2-dialog>
-        <et2-dialog id="assigned_popup_dialog" title="Change assigned" open="false" buttons="" destroyOnClose="false">
-            <et2-box id="assigned_popup">
+        <et2-dialog  id="assigned_popup_dialog" title="Change assigned" open="false" buttons="" destroyOnClose="false">
+            <et2-box  id="assigned_popup">
                 <et2-vbox  class="assigned_popup">
                     <et2-description  id="assigned_action[title]"></et2-description>
                     <et2-description  value="Select users or groups"></et2-description>
                     <et2-select  class="tracker_user_select" id="assigned" rows="5" multiple="1" placeholder="User or group" noLang="1"></et2-select>
                 </et2-vbox>
             </et2-box>
-            <et2-button slot="footer" variant="primary" label="Ok" id="assigned_popup[assigned_action][ok]" image="check"
-                        onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
-            <et2-button slot="footer" label="Add" id="assigned_popup[assigned_action][add]"
-                        onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
-            <et2-button slot="footer" label="Delete" id="assigned_popup[assigned_action][delete]"
-                        onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
-            <et2-button slot="footer" label="Cancel" id="assigned_action_cancel" image="cancelled" noSubmit="true"
-                        onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
+            <et2-button  slot="footer" variant="primary" label="Ok" id="assigned_popup[assigned_action][ok]" image="check" onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
+            <et2-button  slot="footer" label="Add" id="assigned_popup[assigned_action][add]" onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
+            <et2-button  slot="footer" label="Delete" id="assigned_popup[assigned_action][delete]" onclick="return app.tracker.submit_popup(ev, widget, 'assigned');"></et2-button>
+            <et2-button  slot="footer" label="Cancel" id="assigned_action_cancel" image="cancelled" noSubmit="true" onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
         </et2-dialog>
-        <et2-dialog id="group_popup_dialog" title="Change group" open="false" buttons="" destroyOnClose="false">
-            <et2-box id="group_popup">
+        <et2-dialog  id="group_popup_dialog" title="Change group" open="false" buttons="" destroyOnClose="false">
+            <et2-box  id="group_popup">
                 <et2-vbox>
                     <et2-description  value="Select group"></et2-description>
                     <et2-select-account  id="group" accountType="groups"></et2-select-account>
                 </et2-vbox>
             </et2-box>
-            <et2-button slot="footer" variant="primary" label="Ok" id="group_popup[group_set]" image="check"
-                        onclick="return app.tracker.submit_popup(ev, widget, 'group');"></et2-button>
-            <et2-button slot="footer" label="Cancel" id="group_cancel" image="cancelled" noSubmit="true"
-                        onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
+            <et2-button  slot="footer" variant="primary" label="Ok" id="group_popup[group_set]" image="check" onclick="return app.tracker.submit_popup(ev, widget, 'group');"></et2-button>
+            <et2-button  slot="footer" label="Cancel" id="group_cancel" image="cancelled" noSubmit="true" onclick="widget.closest('et2-dialog').hide(); return false;"></et2-button>
         </et2-dialog>
-        <styles>
+        <et2-styles>
             .action_select {
             width: 100%
             }
-        </styles>
-    </template>
+        </et2-styles>
+    </et2-template>
 </overlay>

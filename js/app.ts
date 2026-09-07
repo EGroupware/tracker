@@ -10,13 +10,13 @@
  */
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
-// et2_button/et2_selectbox are now shims (`class et2_X extends Et2Y {}`) and are passed as
-// runtime instanceof-filter values to iterateOver() below; since production templates are
-// already unconditionally preprocessor-rewritten to <et2-button>/<et2-select>, real widgets
-// are instances of Et2Button/Et2Select directly, never of these never-instantiated shim
-// subclasses - so these filters already match nothing in practice (kept as-is, not this
-// deletion's concern to fix). See app-ts-modernization.md and widget-migration-status.md.
-import {et2_button} from "../../api/js/etemplate/legacy-shims/et2_widget_button";
+// et2_selectbox is now a shim (`class et2_selectbox extends Et2Select {}`) and is passed as a
+// runtime instanceof-filter value to iterateOver() below; since production templates are already
+// unconditionally preprocessor-rewritten to <et2-select>, real widgets are instances of Et2Select
+// directly, never of this never-instantiated shim subclass - so that filter already matches
+// nothing in practice (kept as-is, not this deletion's concern to fix). See
+// app-ts-modernization.md and widget-migration-status.md.
+import {Et2Button} from "../../api/js/etemplate/Et2Button/Et2Button";
 import {et2_selectbox} from "../../api/js/etemplate/legacy-shims/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import type {et2_htmlarea} from "../../api/js/etemplate/legacy-shims/et2_widget_htmlarea";
@@ -106,7 +106,7 @@ import type {Et2Datagrid} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid";
 					{
 						let button = null;
 						// Find associated expand button
-						widget.getParent().getParent().iterateOver((widget) => {button = widget;}, this, et2_button);
+						widget.getParent().getParent().iterateOver((widget) => {button = widget;}, this, Et2Button);
 						this.multiple_assigned(false, button);
 						widget.set_value(widget.options.value);
 					}

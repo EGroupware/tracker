@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.view.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240"/>
-	</template>
-	<template id="tracker.view.custom" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="tracker.view.description" template="" lang="" group="0" version="1.9.005"><et2-ai  span="3"><et2-htmlarea  options="@tr_description_options" id="tr_description" width="99%" required="1"></et2-htmlarea></et2-ai>
+	</et2-template>
+	<et2-template  id="tracker.view.custom" template="" lang="" group="0" version="1.9.001">
 		<customfields type_filter="$cont[tr_tracker]"/>
-	</template>
-	<template id="tracker.view.details" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.view.details" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
 				<column width = "120"/>
@@ -36,8 +35,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.view.ownership" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.view.ownership" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
 				<column width = "120"/>
@@ -62,8 +61,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.view" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.view" template="" lang="" group="0" version="1.9.008">
 		<grid border="1" width="100%">
 			<columns>
 				<column width = "120"/>
@@ -103,7 +102,7 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-                    <et2-tabbox id="tabs" span="all" tabHeight="290">
+                    <et2-tabbox  id="tabs" span="all" tabHeight="290">
                         <tabs>
                             <tab id="description" label="Description" statustext="Description"/>
                             <tab id="details" label="Details" statustext="Details"/>
@@ -111,14 +110,14 @@
                             <tab id="ownership" label="Ownership" statustext="Ownership"/>
                         </tabs>
                         <tabpanels>
-                            <template id="tracker.view.description"/>
-                            <template id="tracker.view.details"/>
-                            <template id="tracker.view.custom"/>
-                            <template id="tracker.view.ownership"/>
+                            <et2-template  id="tracker.view.description"></et2-template>
+                            <et2-template  id="tracker.view.details"></et2-template>
+                            <et2-template  id="tracker.view.custom"></et2-template>
+                            <et2-template  id="tracker.view.ownership"></et2-template>
                         </tabpanels>
                     </et2-tabbox>
                 </row>
 			</rows>
 		</grid>
-	</template>
+	</et2-template>
 </overlay>
