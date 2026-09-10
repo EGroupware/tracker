@@ -100,7 +100,7 @@
                     <et2-description  align="center" id="${row}[prio_label]" class="tracker_indexPrio"></et2-description>
                     <et2-select  id="${row}[tr_status]" readonly="true"></et2-select>
                     <et2-select  id="${row}[tr_resolution]" readonly="true" emptyLabel="None"></et2-select>
-                    <progress align="center" label="$row_cont[tr_completion]" id="${row}[tr_completion]" no_lang="1"/>
+                    <progress align="center" class="tracker-completion" title="$row_cont[tr_completion]%" value="$row_cont[tr_completion]" max="100"/>
                     <et2-vbox>
                         <et2-select-account  class="tracker_leftPad5" id="${row}[tr_creator]" readonly="true"></et2-select-account>
                         <et2-select-account  class="tracker_leftPad5" id="${row}[tr_assigned]" readonly="true"></et2-select-account>
