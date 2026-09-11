@@ -32,6 +32,7 @@ import type {EgwFrameworkApp} from "../../kdots/js/EgwFrameworkApp";
 import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 import type {Et2Nextmatch} from "../../api/js/etemplate/Et2Nextmatch/Et2Nextmatch";
 import type {Et2Datagrid} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid";
+import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid.types";
 // egw/app are ambient globals (declare global {} in egw_global.d.ts, unconditionally included
 // via tsconfig's "**/*.d.ts") - no import needed or possible.
 
@@ -565,8 +566,14 @@ import type {Et2Datagrid} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid";
 				[value.reply_message, data.tr_id, data.reply_id]
 			);
 
-			// Update the row
-			this.egw.dataRefreshUID(_entries[0].id);
+			// Update the row.  egw.dataRefreshUID() cannot be used here: it re-fetches the row with
+			// whatever filters it finds on the registered callback's context, a shape only the legacy
+			// nextmatch controller has, so for an Et2Nextmatch it sends none at all.  Nextmatch's
+			// ajax_get_rows then replaces the stored col_filter with the empty one it got, losing the
+			// tr_id get_comment_rows() needs, and answers "no such row" - blanking the comment instead
+			// of updating it.  The nextmatch's own refresh() sends its current filters.
+			const nm = <Et2Nextmatch>instance.widgetContainer.getWidgetById('replies');
+			nm?.refresh(_entries[0].id, Et2DatagridUpdateTypes.UPDATE_IN_PLACE);
 		});
 	}
 

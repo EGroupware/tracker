@@ -909,7 +909,11 @@ class tracker_ui extends tracker_bo
 				'col_filter'            => ['tr_id' => $content['tr_id']],
 				'row_id'                => 'reply_id',
 				'dataStorePrefix'       => 'tracker_reply',
-				'row_modified'          => 'reply_created',
+				// No 'row_modified': comments have no modification column, and reply_created is a
+				// creation timestamp that does not move when a comment is edited. Declaring it as
+				// one makes Nextmatch's "unchanged since lastModified" check withhold an edited
+				// comment's new text from any fetch that sends known uids, leaving the stale one
+				// rendered. Re-sending every row of a single ticket's comment list is cheap.
 				'add_on_top_sort_field' => 'reply_created',
 				'no_columnselection' => true,
 			);
