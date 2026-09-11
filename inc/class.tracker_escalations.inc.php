@@ -371,6 +371,14 @@ class tracker_escalations extends Api\Storage\Base2
 							$ticket['tr_duedate'] = $due_date->format('ts');
 						}
 						break;
+					case 'reply_message':
+						// An escalation's comment is authored in a plain textarea, so it is always
+						// plain text - but a html ticket renders its comments as html, which would
+						// interpret any markup in it and collapse the line breaks whoever wrote the
+						// escalation typed. Store it in the format the ticket uses.
+						$ticket[$name] = ($ticket['tr_edit_mode'] ?? '') == 'html' ?
+							nl2br(Api\Html::htmlspecialchars($value)) : $value;
+						break;
 					case 'tr_assigned':
 						if($this->set['add_assigned'])
 						{
