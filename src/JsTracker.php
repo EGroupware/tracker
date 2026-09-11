@@ -21,8 +21,16 @@ use EGroupware\Api;
  *
  * JSON representation fields:
  *   @type, id, title, description, tracker, status, priority, percentComplete,
- *   start, due, closed, privacy, categories, version, creator, created,
+ *   start, due, closed, privacy, category, version, resolution, creator, created,
  *   updated, modifier, participants, group, egroupware.org:customfields, etag
+ *
+ * category, version, status and resolution are all internally stored as an
+ * integer cat_id, BUT unlike ordinary (JSCalendar) categories they are not
+ * arbitrary values a user can assign: they are admin-managed, single-valued
+ * and scoped to the ticket's tracker (queue). Values are therefore resolved
+ * via tracker_bo::get_tracker_labels()/get_tracker_stati() - never through the
+ * generic Api\Categories class - and an unknown label is a hard error rather
+ * than being silently created.
  */
 class JsTracker extends Api\CalDAV\JsCalendar
 {
@@ -66,9 +74,10 @@ class JsTracker extends Api\CalDAV\JsCalendar
 			$ticket = Api\Db::strip_array_keys($ticket, 'tr_');
 		}
 
-		// resolve any custom tracker stati stored in $bo->estat
+		// built-in stati are global; custom ones are admin-created per tracker (queue)
 		$status_label = self::STATUS_LABELS[$ticket['status']] ??
-			($bo->estat[$ticket['tracker']][$ticket['status']] ?? (string)$ticket['status']);
+			self::trackerLabel('stati', $ticket['status'], $ticket['tracker'] ?? null) ??
+			(string)$ticket['status'];
 
 		$data = array_filter([
 			self::AT_TYPE   => self::TYPE_TICKET,
@@ -82,8 +91,9 @@ class JsTracker extends Api\CalDAV\JsCalendar
 			'start'         => !empty($ticket['startdate']) ? self::UTCDateTime($ticket['startdate'], true) : null,
 			'due'           => !empty($ticket['duedate'])   ? self::UTCDateTime($ticket['duedate'], true)   : null,
 			'closed'        => !empty($ticket['closed'])    ? self::UTCDateTime($ticket['closed'], true)    : null,
-			'categories'    => self::categories($ticket['cat_id']),
-			'version'       => $ticket['version'] ? self::categories($ticket['version']) : null,
+			'category'      => self::trackerLabel('cat', $ticket['cat_id'] ?? null, $ticket['tracker'] ?? null),
+			'version'       => self::trackerLabel('version', $ticket['version'] ?? null, $ticket['tracker'] ?? null),
+			'resolution'    => self::trackerLabel('resolution', $ticket['resolution'] ?? null, $ticket['tracker'] ?? null),
 			'creator'       => self::account($ticket['creator']),
 			'created'       => self::UTCDateTime($ticket['created'], true),
 			'updated'       => !empty($ticket['modified']) ? self::UTCDateTime($ticket['modified'], true) : null,
@@ -129,11 +139,15 @@ class JsTracker extends Api\CalDAV\JsCalendar
 	 * @param array  $old          existing record for PATCH merging
 	 * @param ?string $content_type
 	 * @param string $method       PUT / POST / PATCH
+	 * @param ?int $default_tracker  queue a new ticket will be created in if the
+	 *      body doesn't specify one - needed here (not just afterwards) because
+	 *      category/version/status/resolution are validated against that queue
 	 * @return array  with tr_* keys ready for tracker_bo::save()
 	 * @throws Api\CalDAV\JsParseException
 	 */
-	public static function parseJsTicket(string $json, array $old = [], ?string $content_type = null, string $method = 'PUT'): array
+	public static function parseJsTicket(string $json, array $old = [], ?string $content_type = null, string $method = 'PUT', ?int $default_tracker = null): array
 	{
+		$name = $value = null;
 		try
 		{
 			$data = json_decode($json, true, 10, JSON_THROW_ON_ERROR);
@@ -161,6 +175,16 @@ class JsTracker extends Api\CalDAV\JsCalendar
 				throw new Api\CalDAV\JsParseException("Required field 'title' missing");
 			}
 
+			// category, version, status and resolution are scoped to the ticket's tracker
+			// (queue) — resolve it up front so those fields validate correctly no matter
+			// where 'tracker' itself appears in the JSON object.
+			$tracker = $old['tracker'] ?? $default_tracker;
+			if (array_key_exists('tracker', $data) && $data['tracker'] !== null)
+			{
+				$name = 'tracker'; $value = $data['tracker'];
+				$tracker = self::parseInt($value);
+			}
+
 			$ticket = [];
 
 			foreach ($data as $name => $value)
@@ -176,11 +200,11 @@ class JsTracker extends Api\CalDAV\JsCalendar
 						break;
 
 					case 'tracker':
-						$ticket['tr_tracker'] = self::parseInt($value);
+						$ticket['tr_tracker'] = $tracker;
 						break;
 
 					case 'status':
-						$ticket['tr_status'] = self::parseStatus($value);
+						$ticket['tr_status'] = self::parseStatus($value, $tracker);
 						break;
 
 					case 'priority':
@@ -203,12 +227,16 @@ class JsTracker extends Api\CalDAV\JsCalendar
 						$ticket['tr_private'] = self::parsePrivacy($value) === 'private' ? 1 : 0;
 						break;
 
-					case 'categories':
-						$ticket['cat_id'] = self::parseCategories($value, false);
+					case 'category':
+						$ticket['cat_id'] = $value !== null ? self::parseTrackerLabel('cat', 'category', (string)$value, $tracker) : null;
 						break;
 
 					case 'version':
-						$ticket['tr_version'] = $value ? self::parseInt($value) : null;
+						$ticket['tr_version'] = $value !== null ? self::parseTrackerLabel('version', 'version', (string)$value, $tracker) : null;
+						break;
+
+					case 'resolution':
+						$ticket['tr_resolution'] = $value !== null ? self::parseTrackerLabel('resolution', 'resolution', (string)$value, $tracker) : null;
 						break;
 
 					case 'creator':
@@ -339,68 +367,78 @@ class JsTracker extends Api\CalDAV\JsCalendar
 	/**
 	 * Parse a status label back to its integer value.
 	 *
-	 * Accepts both the built-in labels (Open / Closed / Deleted / Pending) and
-	 * any custom queue stati stored in tracker config.
+	 * Accepts both the built-in labels (Open / Closed / Deleted / Pending), which
+	 * are global, and any custom status created by an admin for the given tracker
+	 * (queue) via tracker_bo::get_tracker_labels('stati', ...).
 	 *
 	 * @param string $value
+	 * @param ?int $tracker  queue the ticket belongs to; custom stati can be queue-specific
 	 * @return int
 	 * @throws Api\CalDAV\JsParseException
 	 */
-	public static function parseStatus(string $value): int
+	public static function parseStatus(string $value, ?int $tracker = null): int
 	{
-		// built-in stati
+		// built-in stati are global
 		if (($id = array_search($value, self::STATUS_LABELS, true)) !== false)
 		{
 			return (int)$id;
 		}
 
-		// custom tracker-specific stati
-		static $bo = null;
-		if (!isset($bo)) $bo = new \tracker_bo();
-
-		foreach ((array)$bo->estat as $tracker_stati)
-		{
-			if (($id = array_search($value, (array)$tracker_stati, true)) !== false)
-			{
-				return (int)$id;
-			}
-		}
-
-		throw new Api\CalDAV\JsParseException("Invalid status '$value'");
+		// custom, queue-specific stati created by an admin
+		return self::parseTrackerLabel('stati', 'status', $value, $tracker);
 	}
 
 	/**
-	 * Parse a categories object into a comma-separated list of tracker cat_id's.
+	 * Resolve a tracker cat_id to its label, scoped to the ticket's tracker (queue).
 	 *
-	 * JsCalendar overrides parseCategories() to add categories in the calendar or
-	 * InfoLog app; we override it again so tracker categories are resolved/created
-	 * in the *tracker* app (static::APP), mirroring the generic JsBase behaviour.
+	 * category, version, status and resolution are all stored as cat_id's in
+	 * egw_categories, distinguished by their "type" (cat_data['type']) and possibly
+	 * restricted to a single tracker (queue). They are therefore looked up via
+	 * tracker_bo::get_tracker_labels(), never through the generic Api\Categories
+	 * class, so the queue-specific scoping tracker_bo implements is respected.
 	 *
-	 * @param array $categories  category-name => true pairs
-	 * @param bool  $multiple    false: only a single category is allowed (tracker default)
-	 * @return ?string comma-separated cat_id's
-	 * @throws Api\CalDAV\JsParseException
+	 * @param string $type  'cat', 'version', 'resolution' or 'stati'
+	 * @param int|string|null $cat_id
+	 * @param ?int $tracker  queue the ticket belongs to
+	 * @return ?string
 	 */
-	protected static function parseCategories(array $categories, bool $multiple = false)
+	protected static function trackerLabel(string $type, $cat_id, ?int $tracker): ?string
+	{
+		if (empty($cat_id))
+		{
+			return null;
+		}
+		static $bo = null;
+		if (!isset($bo)) $bo = new \tracker_bo();
+
+		return $bo->get_tracker_labels($type, $tracker)[$cat_id] ?? null;
+	}
+
+	/**
+	 * Resolve a label back to its cat_id, scoped to the ticket's tracker (queue).
+	 *
+	 * Unlike ordinary (JSCalendar) categories, category/version/status/resolution
+	 * values are not arbitrary values a user can assign: they are admin-managed
+	 * per tracker (queue), so an unknown label is a hard error rather than being
+	 * silently created - see trackerLabel() for why tracker_bo is used here.
+	 *
+	 * @param string $type   'cat', 'version', 'resolution' or 'stati'
+	 * @param string $field  JSON field name, only used for the error message
+	 * @param string $value  label to resolve
+	 * @param ?int $tracker  queue the ticket belongs to
+	 * @return int
+	 * @throws Api\CalDAV\JsParseException if no matching $type label exists for $tracker
+	 */
+	protected static function parseTrackerLabel(string $type, string $field, string $value, ?int $tracker): int
 	{
 		static $bo = null;
-		$cat_ids = [];
-		if ($categories)
+		if (!isset($bo)) $bo = new \tracker_bo();
+
+		if (($cat_id = array_search($value, $bo->get_tracker_labels($type, $tracker), true)) === false)
 		{
-			if (count($categories) > 1 && !$multiple)
-			{
-				throw new Api\CalDAV\JsParseException("Only a single category is supported!");
-			}
-			if (!isset($bo)) $bo = new Api\Categories($GLOBALS['egw_info']['user']['account_id'], static::APP);
-			foreach ($categories as $name => $true)
-			{
-				if (!($cat_id = $bo->name2id($name)))
-				{
-					$cat_id = $bo->add(['name' => $name, 'descr' => $name, 'access' => 'private']);
-				}
-				$cat_ids[] = $cat_id;
-			}
+			throw new Api\CalDAV\JsParseException("Invalid $field '$value'" .
+				(isset($tracker) ? ' for this tracker/queue' : ''));
 		}
-		return $cat_ids ? implode(',', $cat_ids) : null;
+		return (int)$cat_id;
 	}
 }

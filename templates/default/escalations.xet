@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.escalations.rows" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="tracker.escalations.rows" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%">
 			<columns>
 				<column width="20%"/>
@@ -18,17 +19,17 @@
 			</columns>
 			<rows>
 				<row class="th">
-					<nextmatch-sortheader label="Title" id="esc_title"/>
-					<et2-nextmatch-header-filter  id="tr_tracker" emptyLabel="Queue"/>
-					<nextmatch-header label="Resolution" id="tr_resolution"/>
-					<nextmatch-header label="Category" id="cat_id"/>
-					<nextmatch-header label="Version" id="tr_version"/>
-					<nextmatch-header label="Status" id="tr_status"/>
-					<nextmatch-sortheader label="Priority" id="tr_priority"/>
-					<nextmatch-header label="Action" id="esc_action_label"/>
-					<nextmatch-sortheader label="Time" id="esc_time"/>
-					<nextmatch-sortheader label="Match again after" id="esc_match_repeat"/>
-					<nextmatch-header label="Actions" id="actions"/>
+					<et2-nextmatch-sortheader  label="Title" id="esc_title"/>
+					<et2-nextmatch-header-filter  id="tr_tracker" emptyLabel="Queue"></et2-nextmatch-header-filter>
+					<et2-nextmatch-header  label="Resolution" id="tr_resolution"></et2-nextmatch-header>
+					<et2-nextmatch-header  label="Category" id="cat_id"></et2-nextmatch-header>
+					<et2-nextmatch-header  label="Version" id="tr_version"></et2-nextmatch-header>
+					<et2-nextmatch-header  label="Status" id="tr_status"></et2-nextmatch-header>
+					<et2-nextmatch-sortheader  label="Priority" id="tr_priority"/>
+					<et2-nextmatch-header  label="Action" id="esc_action_label"></et2-nextmatch-header>
+					<et2-nextmatch-sortheader  label="Time" id="esc_time"/>
+					<et2-nextmatch-sortheader  label="Match again after" id="esc_match_repeat"/>
+					<et2-nextmatch-header  label="Actions" id="actions"></et2-nextmatch-header>
 				</row>
 				<row class="row">
 					<et2-description  id="${row}[esc_title]" noLang="1"></et2-description>
@@ -37,8 +38,7 @@
 					<et2-select-cat  id="${row}[cat_id]" readonly="true" emptyLabel="All"></et2-select-cat>
 					<et2-select  id="${row}[tr_version]" readonly="true" emptyLabel="All"></et2-select>
 					<et2-select  id="${row}[tr_status]" readonly="true" emptyLabel="All"></et2-select>
-					<et2-description  id="${row}[prio_label]"></et2-description>
-					<et2-textarea  id="${row}[esc_action_label]" readonly="true"></et2-textarea>
+					<et2-description  id="${row}[prio_label]"></et2-description><et2-ai><et2-textarea  id="${row}[esc_action_label]" readonly="true"></et2-textarea></et2-ai>
 					<et2-hbox  readonly="true">
 						<et2-date-duration  id="${row}[esc_time]" readonly="true" ></et2-date-duration>
 						<et2-select  id="${row}[esc_before_after]" readonly="true" noLang="1"></et2-select>
@@ -51,8 +51,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.escalations" template="" lang="" group="0" version="1.9.004">
+	</et2-template>
+	<et2-template  id="tracker.escalations" template="" lang="" group="0" version="1.9.004">
         <grid width="100%">
             <columns>
                 <column width="100"/>
@@ -61,7 +61,7 @@
             </columns>
             <rows>
                 <row>
-                    <nextmatch id="nm" template="tracker.escalations.rows" span="all"/>
+                    <et2-nextmatch  id="nm" template="tracker.escalations.rows" span="all"></et2-nextmatch>
                 </row>
                 <row>
                     <hrule span="all"/>
@@ -76,37 +76,36 @@
             </columns>
             <rows>
                 <row>
-                    <et2-description id="msg" span="all" class="message"></et2-description>
+                    <et2-description  id="msg" span="all" class="message"></et2-description>
                     <et2-description></et2-description>
                     <et2-description></et2-description>
                     <et2-description></et2-description>
                     <et2-description></et2-description>
                 </row>
                 <row>
-                    <et2-description value="Title"></et2-description>
-                    <et2-textbox id="esc_title" maxlength="128" span="all"></et2-textbox>
+                    <et2-description  value="Title"></et2-description>
+                    <et2-textbox  id="esc_title" maxlength="128" span="all"></et2-textbox>
                 </row>
                 <row>
-                    <et2-description value="Time"></et2-description>
+                    <et2-description  value="Time"></et2-description>
                     <et2-hbox>
-                        <et2-date-duration id="esc_time"></et2-date-duration>
-                        <et2-select id="esc_before_after"></et2-select>
-                        <et2-select class="tracker_leftPad5" id="esc_type"></et2-select>
+                        <et2-date-duration  id="esc_time"></et2-date-duration>
+                        <et2-select  id="esc_before_after"></et2-select>
+                        <et2-select  class="tracker_leftPad5" id="esc_type"></et2-select>
                     </et2-hbox>
                     <et2-description></et2-description>
                 </row>
                 <row>
-                    <et2-description value="Match again after"></et2-description>
+                    <et2-description  value="Match again after"></et2-description>
                     <et2-hbox>
-                        <et2-date-duration statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat"></et2-date-duration>
-                        <et2-number label="maximum %s times" id="esc_limit" min="0" max="255" precision="0"></et2-number>
+                        <et2-date-duration  statustext="If a ticket has matched before, should the actions be taken again?" id="esc_match_repeat"></et2-date-duration>
+                        <et2-number  label="maximum %s times" id="esc_limit" min="0" max="255" precision="0"></et2-number>
                     </et2-hbox>
                     <et2-description></et2-description>
                 </row>
                 <row>
                     <et2-box>
-                        <groupbox>
-                            <caption label="Filter"/>
+                        <et2-groupbox  summary="Filter">
                             <grid class="big_boxes" width="100%">
                                 <columns>
                                     <column width="87"/>
@@ -117,31 +116,30 @@
                                 </columns>
                                 <rows>
                                     <row valign="top">
-                                        <et2-description value="Queue"></et2-description>
-                                        <et2-select id="tr_tracker" onchange="1" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Queue"></et2-description>
+                                        <et2-select  id="tr_tracker" onchange="1" placeholder="All" multiple="true"></et2-select>
                                         <et2-description></et2-description>
-                                        <et2-description value="Category"></et2-description>
-                                        <et2-select id="cat_id" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Category"></et2-description>
+                                        <et2-select  id="cat_id" placeholder="All" multiple="true"></et2-select>
                                     </row>
                                     <row valign="top">
-                                        <et2-description value="Version"></et2-description>
-                                        <et2-select id="tr_version" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Version"></et2-description>
+                                        <et2-select  id="tr_version" placeholder="All" multiple="true"></et2-select>
                                         <et2-description></et2-description>
-                                        <et2-description value="Priority"></et2-description>
-                                        <et2-select id="tr_priority" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Priority"></et2-description>
+                                        <et2-select  id="tr_priority" placeholder="All" multiple="true"></et2-select>
                                     </row>
                                     <row valign="top">
-                                        <et2-description value="Status"></et2-description>
-                                        <et2-select id="tr_status" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Status"></et2-description>
+                                        <et2-select  id="tr_status" placeholder="All" multiple="true"></et2-select>
                                         <et2-description></et2-description>
-                                        <et2-description value="Resolution"></et2-description>
-                                        <et2-select id="tr_resolution" placeholder="All" multiple="true"></et2-select>
+                                        <et2-description  value="Resolution"></et2-description>
+                                        <et2-select  id="tr_resolution" placeholder="All" multiple="true"></et2-select>
                                     </row>
                                 </rows>
                             </grid>
-                        </groupbox>
-                        <groupbox>
-                            <caption label="Action"/>
+                        </et2-groupbox>
+                        <et2-groupbox  summary="Action">
                             <grid width="100%">
                                 <columns>
                                     <column width="87"/>
@@ -151,75 +149,74 @@
                                 </columns>
                                 <rows>
                                     <row>
-                                        <et2-description value="Queue"></et2-description>
-                                        <et2-select id="set[tr_tracker]" onchange="1" emptyLabel="Unchanged"></et2-select>
-                                        <et2-description value="Category"></et2-description>
-                                        <et2-select id="set[cat_id]" width="150" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Queue"></et2-description>
+                                        <et2-select  id="set[tr_tracker]" onchange="1" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Category"></et2-description>
+                                        <et2-select  id="set[cat_id]" width="150" emptyLabel="Unchanged"></et2-select>
                                     </row>
                                     <row>
-                                        <et2-description value="Version"></et2-description>
-                                        <et2-select id="set[tr_version]" width="150" emptyLabel="Unchanged"></et2-select>
-                                        <et2-description value="Priority"></et2-description>
-                                        <et2-select id="set[tr_priority]" width="150" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Version"></et2-description>
+                                        <et2-select  id="set[tr_version]" width="150" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Priority"></et2-description>
+                                        <et2-select  id="set[tr_priority]" width="150" emptyLabel="Unchanged"></et2-select>
                                     </row>
                                     <row>
-                                        <et2-description value="Status"></et2-description>
-                                        <et2-select id="set[tr_status]" width="150" emptyLabel="Unchanged"></et2-select>
-                                        <et2-description value="Resolution"></et2-description>
-                                        <et2-select id="set[tr_resolution]" width="150px" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Status"></et2-description>
+                                        <et2-select  id="set[tr_status]" width="150" emptyLabel="Unchanged"></et2-select>
+                                        <et2-description  value="Resolution"></et2-description>
+                                        <et2-select  id="set[tr_resolution]" width="150px" emptyLabel="Unchanged"></et2-select>
                                     </row>
                                     <row>
-                                        <et2-description value="Due date" for="tr_duedate"></et2-description>
-                                        <et2-number id="set[tr_duedate]" precision="0">
-                                            <et2-description value="days" slot="suffix" statustext="Set due date this many days after escalation runs"></et2-description>
+                                        <et2-description  value="Due date" for="tr_duedate"></et2-description>
+                                        <et2-number  id="set[tr_duedate]" precision="0">
+                                            <et2-description  value="days" slot="suffix" statustext="Set due date this many days after escalation runs"></et2-description>
                                         </et2-number>
                                         <et2-description></et2-description>
                                         <et2-description></et2-description>
                                     </row>
                                     <row>
-                                        <et2-description value="Assigned to"></et2-description>
-                                        <et2-hbox span="all">
-                                            <et2-select id="set[tr_assigned]" placeholder="Unchanged" multiple="true"></et2-select>
-                                            <et2-checkbox label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"></et2-checkbox>
+                                        <et2-description  value="Assigned to"></et2-description>
+                                        <et2-hbox  span="all">
+                                            <et2-select  id="set[tr_assigned]" placeholder="Unchanged" multiple="true"></et2-select>
+                                            <et2-checkbox  label="add additionally" id="set[add_assigned]" class="tracker_leftPad5"></et2-checkbox>
                                         </et2-hbox>
                                     </row>
                                     <row valign="top">
-                                        <et2-description value="Comment"></et2-description>
-                                        <et2-textarea id="set[reply_message]" rows="3" span="all" class="reply"></et2-textarea>
+                                        <et2-description  value="Comment"></et2-description><et2-ai  span="all"><et2-textarea  id="set[reply_message]" rows="3" class="reply"></et2-textarea></et2-ai>
                                         <et2-description></et2-description>
                                         <et2-description></et2-description>
                                     </row>
                                     <row disabled="@no_comment_visibility">
                                         <et2-description></et2-description>
-                                        <et2-checkbox label="Only for admins, technicians or assigned" id="set[reply_visible]" span="all"></et2-checkbox>
+                                        <et2-checkbox  label="Only for admins, technicians or assigned" id="set[reply_visible]" span="all"></et2-checkbox>
                                     </row>
                                     <row>
-                                        <et2-description value="Notification"></et2-description>
-                                        <et2-select id="set[notify]"></et2-select>
+                                        <et2-description  value="Notification"></et2-description>
+                                        <et2-select  id="set[notify]"></et2-select>
                                         <et2-description></et2-description>
                                         <et2-description></et2-description>
                                     </row>
                                 </rows>
                             </grid>
-                        </groupbox>
+                        </et2-groupbox>
                     </et2-box>
                 </row>
                 <row class="dialogFooterToolbar">
-                    <et2-hbox span="all">
-                        <et2-button label="Save" id="button[save]"></et2-button>
-                        <et2-button label="Apply" id="button[apply]"></et2-button>
-                        <et2-button label="Cancel" id="button[cancel]"></et2-button>
-                        <et2-checkbox statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"></et2-checkbox>
+                    <et2-hbox  span="all">
+                        <et2-button  label="Save" id="button[save]"></et2-button>
+                        <et2-button  label="Apply" id="button[apply]"></et2-button>
+                        <et2-button  label="Cancel" id="button[cancel]"></et2-button>
+                        <et2-checkbox  statustext="If left unchecked, marks every existing, matching ticket as already escalated, without taking the action." label="Run on existing tickets" id="esc_run_on_existing"></et2-checkbox>
                     </et2-hbox>
                 </row>
             </rows>
         </grid>
-        <styles>
+        <et2-styles>
             #tracker-escalations_escalation et2-select {min-width: 15rem;}
             #tracker-escalations_escalation et2-box::part(base) {flex-wrap: wrap;}
             .reply, .reply&gt;textarea { width: 100%; }
             .mStatus, .mStatus img { width: 16px; height: 16px; padding-left: 5px; }
             fieldset&gt;table&gt;tbody&gt;tr&gt;td&gt;table {width: 100%;}
-        </styles>
-    </template>
+        </et2-styles>
+    </et2-template>
 </overlay>

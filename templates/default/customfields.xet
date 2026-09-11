@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.customfields.fields" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="tracker.customfields.fields" template="" lang="" group="0" version="1.9.001">
 		<grid>
 			<columns>
 				<column/>
@@ -37,11 +38,10 @@
 						<et2-description  id="${row}[label]"></et2-description>
 					</et2-vbox>
 					<et2-vbox  cellpadding="0" cellspacing="0" >
-						<customfields-types statustext="Type of customfield" id="{$row}[type]"/>
+						<customfields-types statustext="Type of customfield" id="${row}[type]"/>
 						<et2-checkbox  label="required" id="${row}[needed]"></et2-checkbox>
 					</et2-vbox>
-					<et2-select-account  statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" multiple="1" accountType="both"></et2-select-account>
-					<et2-textarea  statustext="each value is a line like id[=label]" id="${row}[values]" rows="4" cols="30"></et2-textarea>
+					<et2-select-account  statustext="Select accounts for which the custom field should be visible" id="${row}[private]" rows="3" multiple="1" accountType="both"></et2-select-account><et2-ai><et2-textarea  statustext="each value is a line like id[=label]" id="${row}[values]" rows="4" cols="30"></et2-textarea></et2-ai>
 					<et2-vbox>
 						<et2-textbox  statustext="max length of the input [, length of the inputfield (optional)]" id="${row}[len]"></et2-textbox>
 						<et2-number  statustext="number of row for a multiline inputfield or line of a multi-select-box" id="${row}[rows]" min="0" max="10" precision="0" placeholder="1"></et2-number>
@@ -54,8 +54,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.customfields" template="" lang="" group="0" version="1.9.001">
+	</et2-template>
+	<et2-template  id="tracker.customfields" template="" lang="" group="0" version="1.9.001">
 		<grid>
 			<columns>
 				<column/>
@@ -80,7 +80,7 @@
 					<et2-description  span="all"></et2-description>
 				</row>
 				<row>
-					<template id="tracker.customfields.fields" content="fields" span="all"/>
+					<et2-template  id="tracker.customfields.fields" content="fields" span="all"></et2-template>
 				</row>
 				<row>
 					<et2-hbox  span="all">
@@ -91,5 +91,5 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
+	</et2-template>
 </overlay>

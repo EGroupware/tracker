@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
+	<et2-template  id="tracker.index.rows" template="" lang="" group="0" version="1.9.009">
 		<grid width="100%">
 			<columns>
 				<column width="90%" />
@@ -13,7 +14,7 @@
 				</row>
 				<row class="$row_cont[cat_id] $row_cont[class] trackerRow" valign="top">
 					<et2-vbox  class="tracker1Col" noLang="1">
-						<customfields-list id="$row" class="customfields" app="tracker" disabled="true"/>
+						<et2-customfields-list  id="$row" class="customfields" app="tracker" disabled="true"/>
 						<et2-description  id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1"></et2-description>
 						<et2-hbox>
 							<et2-select  id="${row}[tr_tracker]" readonly="true" noLang="1"></et2-select>
@@ -31,21 +32,15 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.index.header" template="" lang="" group="0" version="1.9.001">
-		<et2-select  id="col_filter[tr_tracker]" multiple="true" height="32px" width="200px" class="tracker_queue" placeholder="Select tracker queues" noLang="1"></et2-select>
-	</template>
-	<template id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
-		<et2-date id="startdate" label="Start" class="et2-label-fixed" style="padding-bottom: .3rem"
-				  onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
-		<et2-date id="enddate" label="End" class="et2-label-fixed"
-				  onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
-	</template>
-	<template id="tracker.index" template="" lang="" group="0" version="1.9.003">
-		<template template="tracker.index.header" slot="main-header"></template>
-		<nextmatch id="nm" template="tracker.index.rows"/>
+	</et2-template>
+	<et2-template  id="tracker.index.dates" template="" lang="" group="0" version="16.1.001" >
+		<et2-date  id="startdate" label="Start" class="et2-label-fixed" style="padding-bottom: .3rem" onchange="widget.getParent().getWidgetById('enddate').set_min(this.getValue());return true;"></et2-date>
+		<et2-date  id="enddate" label="End" class="et2-label-fixed" onchange="widget.getParent().getWidgetById('startdate').set_max(this.getValue());return true;"></et2-date>
+	</et2-template>
+	<et2-template  id="tracker.index" template="" lang="" group="0" version="1.9.003">
+		<et2-nextmatch  id="nm" template="tracker.index.rows"></et2-nextmatch>
 		<et2-hbox>
-			<et2-button  class="plus_button" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true"></et2-button>
+			<et2-button-icon  class="plus_button" id="add" onclick="egw.open('', 'tracker', 'add', {tracker:widget.getRoot().getWidgetById('nm').activeFilters.col_filter.tr_tracker});" noSubmit="true" image="plus-lg"></et2-button-icon>
 		</et2-hbox>
-	</template>
+	</et2-template>
 </overlay>

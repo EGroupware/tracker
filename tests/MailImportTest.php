@@ -66,16 +66,22 @@ class MailImportTest extends AppTest
 		self::$bo = new \tracker_bo();
 		$contact_bo = new \addressbook_bo();
 
-		foreach(self::$accounts as $account)
+		// admin_cmd_edit_user requires the CURRENT session to be a real admin - this is a static
+		// method, so switchUser()'s instance method isn't available, hence asAdminStatic().
+		$command = self::asAdminStatic(function() use ($contact_bo)
 		{
-			$command = new \admin_cmd_edit_user(false, $account);
-			$command->comment = 'Needed for unit test ' . __CLASS__;
-			$command->run();
-			self::$account_ids[] = $command->account;
-			$contact = $contact_bo->read('account:' . $command->account);
-			$contact = array_merge($contact, $account);
-			$contact_bo->save($contact, true);
-		}
+			foreach(self::$accounts as $account)
+			{
+				$command = new \admin_cmd_edit_user(false, $account);
+				$command->comment = 'Needed for unit test ' . __CLASS__;
+				$command->run();
+				self::$account_ids[] = $command->account;
+				$contact = $contact_bo->read('account:' . $command->account);
+				$contact = array_merge($contact, $account);
+				$contact_bo->save($contact, true);
+			}
+			return $command;
+		});
 		// Set the last one as the only tracker staff account for this test class.
 		// prepare_import_mail() resolves sender via get_staff(), which merges queue-specific
 		// and global (0) staff and may use instance cache.

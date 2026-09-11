@@ -22,9 +22,9 @@
 
 namespace EGroupware\Tracker;
 
-require_once __DIR__.'/../../../api/tests/RestTest.php';
+require_once __DIR__.'/../../../api/tests/RestBase.php';
 
-use EGroupware\Api\RestTest;
+use EGroupware\Api\RestBase;
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -37,7 +37,7 @@ use GuzzleHttp\RequestOptions;
  *   testPatchRemoveAssignee   – PATCH with null removes the assignee → owner role only
  *   testDelete                – clean up
  */
-class TrackerRestAssignedPatch extends RestTest
+class TrackerRestAssignedPatchTest extends RestBase
 {
 	const MIME_TYPE_TICKET = 'application/json';
 
@@ -111,6 +111,21 @@ class TrackerRestAssignedPatch extends RestTest
 	protected function ticketUrl(): string
 	{
 		return self::$ticketUrl ?? $this->appUrl('tracker');
+	}
+
+	/**
+	 * Client authenticated as EGW_ADMIN_USER.
+	 *
+	 * Reassigning a ticket (tr_assigned) is gated by this queue's configured field_acl, which on
+	 * this install requires TRACKER_ITEM_ASSIGNEE (already being assigned) rather than
+	 * TRACKER_ITEM_CREATOR - so the ticket's own creator (the default EGW_USER session) cannot
+	 * self-assign a fresh, unassigned ticket. A real admin always has the TRACKER_ADMIN bit.
+	 */
+	protected function adminClient(): \GuzzleHttp\Client
+	{
+		return $this->getClient([
+			RequestOptions::AUTH => [$GLOBALS['EGW_ADMIN_USER'], $GLOBALS['EGW_ADMIN_PASSWORD']],
+		]);
 	}
 
 	// -------------------------------------------------------------------------
@@ -191,7 +206,7 @@ class TrackerRestAssignedPatch extends RestTest
 			'roles' => ['attendee' => true],
 		]);
 
-		$response = $this->getClient()->patch($this->ticketUrl(), [
+		$response = $this->adminClient()->patch($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
 			RequestOptions::BODY    => json_encode([
 				'participants' => [self::$owner['uid'] => $participant],
@@ -222,7 +237,7 @@ class TrackerRestAssignedPatch extends RestTest
 	{
 		$this->assertNotNull(self::$owner, 'testPatchAddAssignee must run first');
 
-		$response = $this->getClient()->patch($this->ticketUrl(), [
+		$response = $this->adminClient()->patch($this->ticketUrl(), [
 			RequestOptions::HEADERS => ['Content-Type' => self::MIME_TYPE_TICKET],
 			RequestOptions::BODY    => json_encode([
 				'participants' => [self::$owner['uid'] => null],

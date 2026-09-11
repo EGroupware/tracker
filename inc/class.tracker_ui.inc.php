@@ -23,6 +23,13 @@ use EGroupware\Api\Etemplate;
 class tracker_ui extends tracker_bo
 {
 	/**
+	 * Session key the most recently run index/list query is additionally stored under
+	 * (regardless of only_tracker scope), so exporting "search results" can find it without
+	 * having to know which specific tracker queue the search happened in.
+	 */
+	const LAST_SEARCH_SESSION_KEY = 'index-last-search';
+
+	/**
 	 * Functions callable via menuaction
 	 *
 	 * @var array
@@ -880,14 +887,20 @@ class tracker_ui extends tracker_bo
 				array_unshift($preserve['replies'],false);
 			}
 		}
-		// this is used for desktop, if we have replies
-		elseif ($content['num_replies'])
+		// this is used for desktop - always configure it, even with zero replies so far
+		// (a brand new ticket), so Et2Nextmatch has a valid row template/get_rows to work with;
+		// the legacy nextmatch widget tolerated an unconfigured "replies" nm silently, Et2Nextmatch
+		// shows a "No row template configured" warning instead if this is skipped
+		else
 		{
 			$content['replies'] = array(
 				'get_rows'              => 'tracker.tracker_ui.get_comment_rows',
-				// seems NM in a popup now needs num_rows to be set, as client-side does not request rows,
-				// if num_rows is not set (and got set to 0 by Api\Etemplate\Widget\Nextmatch::beforeSendToClient)
-				'num_rows'              => 25,
+				// 0 = don't fetch/ship rows with the page itself - the "replies" et2-nextmatch has
+				// lazy="true" (edit.xet) and only fetches once its Comments tab is actually shown,
+				// so comments never need to be read/formatted for a ticket the user never opens
+				// that tab on. (The old note here about a legacy popup quirk requiring num_rows>0
+				// was about et2_extension_nextmatch, not Et2Nextmatch's own lazy-aware reload().)
+				'num_rows'              => 0,
 				'no_cat'                => true,
 				'no_filter'             => true,
 				'no_filter2'            => true,
@@ -966,8 +979,12 @@ class tracker_ui extends tracker_bo
 		unset($query['implicit_default_sort']);
 		if (empty($query['csv_export']))	// do not store query for csv-export in session
 		{
+			$stored_query = array_diff_key($query, array_flip(array('rows','actions','action_links','placeholder_actions')));
 			Api\Cache::setSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
-				array_diff_key ($query, array_flip(array('rows','actions','action_links','placeholder_actions'))));
+				$stored_query);
+			// also remember it under a scope-independent key, so "export search results" can find
+			// the current search regardless of which (or whether an) only_tracker queue it ran in
+			Api\Cache::setSession('tracker', self::LAST_SEARCH_SESSION_KEY, $stored_query);
 		}
 		// save the state of the index page (filters) in the user prefs
 		// need to save state, before resolving diverse col-filters, eg. to all group-members or sub-cats
@@ -1536,10 +1553,10 @@ class tracker_ui extends tracker_bo
 				}
 				else
 				{
-					// Some processing to add values in for links and cats
+					// Some processing to add values in for cats
 					$multi_action = $content['nm']['action'];
 					// Action has an additional action - add / delete, etc.  Buttons named <multi-action>_action[action_name]
-					if(in_array($multi_action, array('link', 'assigned','group')))
+					if(in_array($multi_action, array('assigned','group')))
 					{
 						$action = $content[$multi_action.'_popup'];
 						$content['nm']['action'] .= '_' . key($action[$multi_action . '_action'] ?? []);
@@ -1547,14 +1564,7 @@ class tracker_ui extends tracker_bo
 						// Action handling function wants a single string value, so mush it together
 						if(is_array($action[$multi_action]))
 						{
-							if($multi_action == 'link')
-							{
-								$action[$multi_action] = $action[$multi_action]['app'] . ':' . $action[$multi_action]['id'];
-							}
-							else
-							{
-								$action[$multi_action] = implode(',',$action[$multi_action]);
-							}
+							$action[$multi_action] = implode(',',$action[$multi_action]);
 						}
 						$content['nm']['action'] .= '_' . $action[$multi_action];
 						unset($content[$multi_action]);
@@ -1923,10 +1933,6 @@ width:100%;
 						'nm_action' => 'open_popup',
 						'enableClass' => 'group_action',
 					),
-					'link' => array(
-						'caption' => 'Links',
-						'nm_action' => 'open_popup',
-					),
 				),
 				'hideOnMobile' => true
 			),
@@ -2273,44 +2279,6 @@ width:100%;
 						}
 					}
 					break;
-
-				case 'link':
-					list($add_remove, $link) = explode('_', $settings, 2);
-					list($app, $link_id) = explode(':', $link);
-					if(!$link_id)
-					{
-						$msg = lang('You need to select an entry for linking.');
-						break;
-					}
-					error_log("APp: $app ID: $link_id");
-					$title = Link::title($app, $link_id);
-					foreach($checked as $id)
-					{
-						if (!$this->read($id))
-						{
-							$failed++;
-							continue;
-						}
-						if($add_remove == 'add')
-						{
-							$action_msg = lang('linked to %1', $title);
-							if(Link::link('tracker', $id, $app, $link_id))
-							{
-								$success++;
-							}
-							else
-							{
-								$failed++;
-							}
-						}
-						else
-						{
-							$action_msg = lang('unlinked from %1', $title);
-							$count = Link::unlink(0, 'tracker', $id, '', $app, $link_id);
-							$success += $count;
-						}
-					}
-					return $failed == 0;
 
 				case 'document':
 					if (!$settings) $settings = $GLOBALS['egw_info']['user']['preferences']['tracker']['default_document'];

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-    <template id="tracker.admin.cats" template="" lang="" group="0" version="1.9.003">
+    <et2-template  id="tracker.admin.cats" template="" lang="" group="0" version="1.9.003">
         <grid width="100%" overflow="auto">
             <columns>
                 <column width="100"/>
@@ -37,7 +38,7 @@
                                 <et2-colorpicker  id="${row}[cat_color]"></et2-colorpicker>
                                 <radio align="center" id="isdefaultcategory" set_value="$row_cont[id]" />
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this category','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this category" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this category','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -62,7 +63,7 @@
                                 <et2-textbox  id="${row}[name]" maxlength="150" placeholder="--&gt; enter new name"></et2-textbox>
                                 <et2-colorpicker  id="${row}[version_color]"></et2-colorpicker>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker"></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this version','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this version" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this version','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -87,7 +88,7 @@
                                 <et2-textbox  id="${row}[name]" maxlength="150" placeholder="--&gt; enter new name"></et2-textbox>
                                 <et2-checkbox  align="center" id="${row}[closed]"></et2-checkbox>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -115,7 +116,7 @@
                                 </et2-hbox>
                                 <radio align="center" id="isdefaultresolution" set_value="$row_cont[id]" />
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this status" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this status','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -137,10 +138,9 @@
                                 <et2-description  value="Actions"></et2-description>
                             </row>
                             <row class="row" valign="top">
-                                <et2-textbox  id="${row}[name]" placeholder="--&gt; enter new name"></et2-textbox>
-                                <et2-textarea  id="${row}[description]"></et2-textarea>
+                                <et2-textbox  id="${row}[name]" placeholder="--&gt; enter new name"></et2-textbox><et2-ai><et2-textarea  id="${row}[description]"></et2-textarea></et2-ai>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this canned response" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this canned response','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
@@ -166,15 +166,15 @@
                                 <projectmanager-select id="${row}[projectlist]" no_lang="1"
                                                        options="--&gt; choose a project from the drop-down list"/>
                                 <et2-checkbox  align="center" id="${row}[denyglobal]" selectedValue="@@tracker" ></et2-checkbox>
-                                <et2-button align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this entry','Delete')" image="delete"></et2-button>
+                                <et2-button  align="center" statustext="Delete this entry" label="Delete" id="delete[$row_cont[id]]" onclick="Et2Dialog.confirm(widget,'Delete this entry','Delete')" image="delete"></et2-button>
                             </row>
                         </rows>
                     </grid>
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.admin.priorities" template="" lang="" group="0" version="1.5.001">
+    </et2-template>
+    <et2-template  id="tracker.admin.priorities" template="" lang="" group="0" version="1.5.001">
         <grid width="100%" id="priorities">
             <columns>
                 <column/>
@@ -203,8 +203,8 @@
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.admin.staff" template="" lang="" group="0" version="1.5.001">
+    </et2-template>
+    <et2-template  id="tracker.admin.staff" template="" lang="" group="0" version="1.5.001">
         <grid width="100%" overflow="auto">
             <columns>
                 <column width="100"/>
@@ -229,8 +229,8 @@
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.admin.config" template="" lang="" group="0" version="1.9.004">
+    </et2-template>
+    <et2-template  id="tracker.admin.config" template="" lang="" group="0" version="1.9.004">
         <grid width="100%" overflow="auto">
             <columns>
                 <column width="150"/>
@@ -267,16 +267,16 @@
                     <et2-checkbox  statustext="Activate users queue access control" label="only explicitly named users have read access (otherwise everyone)" id="enabled_queue_acl_access" onchange="app.tracker.acl_queue_access()"></et2-checkbox>
                 </row>
                 <row class="row" disabled="@tracker">
-                    <et2-description for="default_tracker" value="Default tracker queue"></et2-description>
-                    <et2-select id="default_tracker"></et2-select>
+                    <et2-description  for="default_tracker" value="Default tracker queue"></et2-description>
+                    <et2-select  id="default_tracker"></et2-select>
                     <et2-description></et2-description>
                     <et2-description></et2-description>
                 </row>
                 <row class="row">
-                    <et2-description for="default_group" value="Default group"></et2-description>
-                    <et2-select id="default_group"></et2-select>
-                    <et2-description for="enabled_color_code_for" value="Enable color code for"></et2-description>
-                    <et2-select id="enabled_color_code_for">
+                    <et2-description  for="default_group" value="Default group"></et2-description>
+                    <et2-select  id="default_group"></et2-select>
+                    <et2-description  for="enabled_color_code_for" value="Enable color code for"></et2-description>
+                    <et2-select  id="enabled_color_code_for">
                         <option value="">None</option>
                         <option value="tracker">Tracker queues</option>
                         <option value="cat">Categories</option>
@@ -322,29 +322,29 @@
                 </row>
                 <row class="row" disabled="@tracker">
                     <et2-checkbox  statustext="Allow creation of infolog entries from tracker tickets" id="allow_infolog"></et2-checkbox>
-                    <et2-description value="Allow creation of infolog entries from tracker tickets" span="3"></et2-description>
+                    <et2-description  value="Allow creation of infolog entries from tracker tickets" span="3"></et2-description>
                 </row>
                 <row disabled="@tracker">
-                    <et2-checkbox id="allow_restricted_comments"></et2-checkbox>
-                    <et2-description value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"></et2-description>
+                    <et2-checkbox  id="allow_restricted_comments"></et2-checkbox>
+                    <et2-description  value="Allow creating of restricted comments which are only visible for admins, technicians and assigned users" span="all"></et2-description>
                 </row>
                 <row disabled="@tracker">
-                    <et2-checkbox id="comment_reopens"></et2-checkbox>
-                    <et2-description value="Re-open closed tickets when a comment is added" span="all"></et2-description>
+                    <et2-checkbox  id="comment_reopens"></et2-checkbox>
+                    <et2-description  value="Re-open closed tickets when a comment is added" span="all"></et2-description>
                 </row>
                 <row disabled="@tracker">
-                    <et2-checkbox id="respect_timesheet_rights"></et2-checkbox>
-                    <et2-description value="Respect timesheet run and read permissions for time totals" span="all" labelFor="respect_timesheet_rights"></et2-description>
+                    <et2-checkbox  id="respect_timesheet_rights"></et2-checkbox>
+                    <et2-description  value="Respect timesheet run and read permissions for time totals" span="all" labelFor="respect_timesheet_rights"></et2-description>
                 </row>
                 <row class="th">
-                    <et2-description value="E-Mail notifications" span="all"></et2-description>
+                    <et2-description  value="E-Mail notifications" span="all"></et2-description>
                 </row>
                 <row class="row">
-                    <et2-description for="notification_sender" value="Sender address"></et2-description>
-                    <et2-textbox statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]"></et2-textbox>
-                    <et2-description for="notification_link" value="URL of the tracker"></et2-description>
+                    <et2-description  for="notification_sender" value="Sender address"></et2-description>
+                    <et2-textbox  statustext="Sender address for all notifications, eg. noreply@egroupware.org" id="notification[sender]"></et2-textbox>
+                    <et2-description  for="notification_link" value="URL of the tracker"></et2-description>
                     <et2-textbox
-                            statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]"></et2-textbox>
+ statustext="URL to be included in the notification, eg. to the page with the SiteMgr module, default tracker inside eGW" id="notification[link]"></et2-textbox>
                 </row>
                 <row class="row">
                     <et2-description  value="Copy to"></et2-description>
@@ -354,8 +354,8 @@
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.admin.acl" template="" lang="" group="0" version="1.9.002">
+    </et2-template>
+    <et2-template  id="tracker.admin.acl" template="" lang="" group="0" version="1.9.002">
         <grid width="100%">
             <columns>
                 <column width="100"/>
@@ -409,8 +409,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.admin.mail" template="" lang="" group="0" version="1.9.003">
+	</et2-template>
+	<et2-template  id="tracker.admin.mail" template="" lang="" group="0" version="1.9.003">
 		<grid>
 			<columns>
 				<column width="200"/>
@@ -453,9 +453,9 @@
 					<et2-select  statustext="Select a default tracker for new tickets or 'Reject' to disallow ticket creation via mail." id="mailhandling[default_tracker]" emptyLabel="Reject"></et2-select>
 				</row>
 				<row class="row">
-                    <et2-description value="Start date from email"></et2-description>
-                    <et2-checkbox id="mailhandling[startdate_from_email]" statustext="Set the ticket start date to the email received date"></et2-checkbox>
-                    <et2-box span="2">
+                    <et2-description  value="Start date from email"></et2-description>
+                    <et2-checkbox  id="mailhandling[startdate_from_email]" statustext="Set the ticket start date to the email received date"></et2-checkbox>
+                    <et2-box  span="2">
                         <grid>
                             <columns>
                                 <column width="199"/>
@@ -463,17 +463,17 @@
                             </columns>
                             <rows>
                                 <row>
-                                    <et2-description value="Category for new tickets"></et2-description>
-                                    <et2-select class="tracker_cat_select" id="mailhandling[default_cat]" emptyLabel="select one"></et2-select>
+                                    <et2-description  value="Category for new tickets"></et2-description>
+                                    <et2-select  class="tracker_cat_select" id="mailhandling[default_cat]" emptyLabel="select one"></et2-select>
                                 </row>
                                 <row>
-                                    <et2-description value="Version for new tickets"></et2-description>
-                                    <et2-select class="tracker_cat_select" id="mailhandling[default_version]" emptyLabel="select one"></et2-select>
+                                    <et2-description  value="Version for new tickets"></et2-description>
+                                    <et2-select  class="tracker_cat_select" id="mailhandling[default_version]" emptyLabel="select one"></et2-select>
                                 </row>
                                 <row>
-                                    <et2-description value="Due date for new tickets" for="mailhandling[due_date]"></et2-description>
-                                    <et2-number id="mailhandling[due_date]" precision="0">
-                                        <et2-description value="days" slot="suffix"></et2-description>
+                                    <et2-description  value="Due date for new tickets" for="mailhandling[due_date]"></et2-description>
+                                    <et2-number  id="mailhandling[due_date]" precision="0">
+                                        <et2-description  value="days" slot="suffix"></et2-description>
                                     </et2-number>
                                 </row>
                             </rows>
@@ -581,8 +581,8 @@
                 </row>
             </rows>
         </grid>
-    </template>
-    <template id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.002">
+    </et2-template>
+    <et2-template  id="tracker.admin.notifications" template="" lang="" group="0" version="1.9.002">
         <grid width="100%" id="notification">
             <columns>
                 <column/>
@@ -600,8 +600,7 @@
                     <et2-description  value="Notification message"></et2-description>
                     <et2-checkbox  label="Use custom notification message" id="use_custom"></et2-checkbox>
                 </row>
-                <row>
-                    <htmlarea height="200" mode="advanced" id="message" span="all" toolbar="false" width="100%"/>
+                <row><et2-ai  span="all"><et2-htmlarea  mode="advanced" id="message" width="100%" noToolbar="true"></et2-htmlarea></et2-ai>
                 </row>
                 <row>
                     <et2-description  href="tracker.tracker_merge.show_replacements" value="Full list of placeholder names" span="all" extraLinkTarget="_blank"></et2-description>
@@ -610,21 +609,20 @@
                     <et2-description  value="Signature"></et2-description>
                     <et2-checkbox  label="Use custom signature" id="use_signature"></et2-checkbox>
                 </row>
-                <row>
-                    <htmlarea height="200" mode="advanced" id="signature" span="all" toolbar="false" width="100%"/>
+                <row><et2-ai  span="all"><et2-htmlarea  mode="advanced" id="signature" width="100%" noToolbar="true"></et2-htmlarea></et2-ai>
                 </row>
             </rows>
         </grid>
-        <styles>
+        <et2-styles>
             textarea {
             padding-right: 2ex;
             width:99%;
             height: 20ex;
             }
-        </styles>
-    </template>
-    <template id="tracker.admin" template="" lang="" group="0" version="1.9.004">
-        <et2-vbox height="100%">
+        </et2-styles>
+    </et2-template>
+    <et2-template  id="tracker.admin" template="" lang="" group="0" version="1.9.004">
+        <et2-vbox  height="100%">
             <et2-description  align="center" id="msg" class="message" disabled="!@msg" noLang="1"></et2-description>
             <et2-hbox>
                 <et2-description  disabled="true" for="tracker" value="tracker" class="bold"></et2-description>
@@ -642,7 +640,7 @@
                     <et2-button  align="right" label="Change color" id="button[change_color]"></et2-button>
                 </et2-hbox>
             </et2-hbox>
-            <et2-tabbox id="tabs" cfDisabled="true" tabHeight="auto">
+            <et2-tabbox  id="tabs" cfDisabled="true" tabHeight="auto">
                 <tabs>
                     <tab id="tracker.admin.cats" label="Categories"
                          statustext="Categories, versions, canned responses"/>
@@ -654,24 +652,24 @@
                     <tab id="tracker.admin.notifications" label="Notifications" statustext="Custom notifications"/>
                 </tabs>
                 <tabpanels>
-                    <template id="tracker.admin.cats"/>
-                    <template id="tracker.admin.priorities"/>
-                    <template id="tracker.admin.staff"/>
-                    <template id="tracker.admin.config"/>
-                    <template id="tracker.admin.acl"/>
-                    <template id="tracker.admin.mail"/>
-                    <template id="tracker.admin.notifications"/>
+                    <et2-template  id="tracker.admin.cats"></et2-template>
+                    <et2-template  id="tracker.admin.priorities"></et2-template>
+                    <et2-template  id="tracker.admin.staff"></et2-template>
+                    <et2-template  id="tracker.admin.config"></et2-template>
+                    <et2-template  id="tracker.admin.acl"></et2-template>
+                    <et2-template  id="tracker.admin.mail"></et2-template>
+                    <et2-template  id="tracker.admin.notifications"></et2-template>
                 </tabpanels>
             </et2-tabbox>
             <et2-hbox  span="2">
                 <et2-button  label="Save" id="button[save]"></et2-button>
                 <et2-button  label="Apply" id="button[apply]"></et2-button>
                 <et2-button  label="Cancel" id="button[cancel]"></et2-button>
-                <et2-button align="right" label="Delete" id="button[delete]" onclick="Et2Dialog.confirm(widget,'Delete this tracker including all its items and categories','Delete')" span="all"></et2-button>
+                <et2-button  align="right" label="Delete" id="button[delete]" onclick="Et2Dialog.confirm(widget,'Delete this tracker including all its items and categories','Delete')" span="all"></et2-button>
 
             </et2-hbox>
         </et2-vbox>
-        <styles>
+        <et2-styles>
             #tracker-admin > div > et2-vbox {
             height: 100%;
             }
@@ -682,6 +680,6 @@
             et2-tab-panel > div {
             height: 100%;
             }
-        </styles>
-    </template>
+        </et2-styles>
+    </et2-template>
 </overlay>

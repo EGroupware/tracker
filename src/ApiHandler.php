@@ -176,7 +176,11 @@ class ApiHandler extends Api\CalDAV\Handler
 			yield $resource;
 		}
 
-		$order = $filter['order'] ?? 'COALESCE(egw_tracker.tr_modified,egw_tracker.tr_created) DESC';
+		// tracker_so::search() rewrites any order-by referencing "tr_modified" into
+		// COALESCE(tr_modified,tr_created), but only recognizes its OWN unqualified form as
+		// already-applied - a table-qualified default here would get double-wrapped into invalid
+		// SQL like "COALESCE(egw_tracker.COALESCE(tr_modified,tr_created),egw_tracker.tr_created)"
+		$order = $filter['order'] ?? 'COALESCE(tr_modified,tr_created) DESC';
 		unset($filter['order']);
 
 		$sync_collection_report = $filter['sync-collection'] ?? false;
@@ -306,6 +310,9 @@ class ApiHandler extends Api\CalDAV\Handler
 	protected function filter2col_filter(array $filter): array
 	{
 		$cols = [];
+		// resolve the queue first - a "status" filter naming a custom status may be queue-specific
+		$tracker = isset($filter['tracker']) ? (int)$filter['tracker'] : null;
+
 		foreach ($filter as $name => $value)
 		{
 			switch ($name)
@@ -318,7 +325,7 @@ class ApiHandler extends Api\CalDAV\Handler
 				case 'status':
 					try
 					{
-						$cols['tr_status'] = JsTracker::parseStatus($value);
+						$cols['tr_status'] = JsTracker::parseStatus($value, $tracker);
 					}
 					catch (\Throwable $e)
 					{
@@ -503,9 +510,23 @@ class ApiHandler extends Api\CalDAV\Handler
 			return $old;
 		}
 
+		// For a new ticket without an explicit "tracker" in the body, resolve the queue
+		// it will land in up front: category/version/status/resolution are queue-scoped
+		// and must be validated against the *actual* queue inside parseJsTicket(), not
+		// whatever queue happens to be picked afterwards.
+		$default_tracker = null;
+		if (!is_array($old))
+		{
+			if (empty($this->bo->trackers))
+			{
+				return '403 Forbidden';
+			}
+			$default_tracker = $this->bo->default_tracker ?: key($this->bo->trackers);
+		}
+
 		try
 		{
-			$ticket = JsTracker::parseJsTicket($options['content'], $old ?: [], $content_type, $method);
+			$ticket = JsTracker::parseJsTicket($options['content'], $old ?: [], $content_type, $method, $default_tracker);
 		}
 		catch (\Throwable $e)
 		{
@@ -535,14 +556,9 @@ class ApiHandler extends Api\CalDAV\Handler
 		else
 		{
 			// new ticket
-			if (empty($this->bo->trackers))
-			{
-				return '403 Forbidden';
-			}
 			if (!isset($ticket['tr_tracker']))
 			{
-				// use the first available tracker queue the user has access to
-				$ticket['tr_tracker'] = key($this->bo->trackers);
+				$ticket['tr_tracker'] = $default_tracker;
 			}
 			if (!isset($ticket['tr_creator']))
 			{
@@ -623,9 +639,17 @@ class ApiHandler extends Api\CalDAV\Handler
 		if (is_array($ret))
 		{
 			// strip prefix so Handler base can work with 'id', 'modified', etc.
-			$ret = Api\Db::strip_array_keys($this->bo->data, 'tr_');
+			return Api\Db::strip_array_keys($this->bo->data, 'tr_');
 		}
-		return $ret;
+		// tracker_bo::read() returns false both when the id genuinely doesn't exist AND when it
+		// does but deny_private() hides it - the base Handler needs null vs. false to tell 404
+		// from 403 apart, so check raw existence (bypassing the privacy filter) to distinguish them
+		if (!$GLOBALS['egw']->db->select(\tracker_so::TRACKER_TABLE, 'tr_id', ['tr_id' => $id],
+			__LINE__, __FILE__, false, '', 'tracker')->fetchColumn())
+		{
+			return null;
+		}
+		return false;
 	}
 
 	/**

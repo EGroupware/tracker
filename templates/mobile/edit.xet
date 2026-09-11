@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../doc/etemplate2/etemplate2.0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="tracker.edit.description" template="" lang="" group="0" version="1.9.005">
-		<htmlarea options="@tr_description_options" id="tr_description" needed="1" span="3" width="99%" height="240" imageUpload="link_to"/>
-	</template>
-	<template id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="tracker.edit.description" template="" lang="" group="0" version="1.9.005"><et2-ai  span="3"><et2-htmlarea  options="@tr_description_options" id="tr_description" width="99%" imageUpload="link_to" required="1"></et2-htmlarea></et2-ai>
+	</et2-template>
+	<et2-template  id="tracker.edit.comments" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" class="egwGridView_grid">
 			<columns>
 				<column width = "120"/>
@@ -20,12 +20,12 @@
 						<et2-date-time  id="replies[$row][reply_created]" readonly="true"></et2-date-time>
 						<et2-select-account  id="replies[$row][reply_creator]" readonly="true"></et2-select-account>
 					</et2-vbox>
-                    <htmlarea id="replies[$row][reply_message]" noAiTools="true" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"/>
+                    <et2-htmlarea  id="replies[$row][reply_message]" noAiTools="true" readonly="true" span="3" class="@replies[$row][reply_visible_class]" imageUpload="link_to"></et2-htmlarea>
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit.add_comment" template="" lang="" group="0" version="1.9.001">
+	</et2-template>
+	<et2-template  id="tracker.edit.add_comment" template="" lang="" group="0" version="1.9.001">
 		<grid width="100%" resize_radio="0">
 			<columns>
 				<column width = "120"/>
@@ -39,13 +39,12 @@
 				<row disabled="@no_comment_visibility">
 					<et2-checkbox  label="Only for admins, technicians or assigned" id="reply_visible"></et2-checkbox>
 				</row>
-				<row class="row" valign="top" disabled="@no_reply">
-					<htmlarea id="reply_message" options="@tr_reply_options" height="200" resize_reatio="0" imageUpload="link_to" toggle_readonly="false"/>
+				<row class="row" valign="top" disabled="@no_reply"><et2-ai><et2-htmlarea  id="reply_message" options="@tr_reply_options" imageUpload="link_to" resizeReatio="0" toggleReadonly="false"></et2-htmlarea></et2-ai>
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit.links" template="" lang="" group="0" version="0.1.002">
+	</et2-template>
+	<et2-template  id="tracker.edit.links" template="" lang="" group="0" version="0.1.002">
 		<grid width="100%">
 			<columns>
 				<column/>
@@ -62,8 +61,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.edit.details" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
 				<column width = "120"/>
@@ -72,7 +71,7 @@
 			<rows>
 				<row>
 					<et2-description  statustext="List of coma separated email address" value="Cc"></et2-description>
-					<et2-email  id="tr_cc" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Taglist::ajax_email" placeholder="Add email-address"></et2-email>
+					<et2-email  id="tr_cc" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Select::ajax_email" placeholder="Add email-address"></et2-email>
 				</row>
 				<row>
 					<et2-description  for="tr_assigned" value="Assigned to"></et2-description>
@@ -92,8 +91,8 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit.ownership" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.edit.ownership" template="" lang="" group="0" version="1.9.008">
 		<grid width="100%">
 			<columns>
 				<column width = "120"/>
@@ -118,11 +117,11 @@
 				</row>
 			</rows>
 		</grid>
-	</template>
-	<template id="tracker.edit" template="" lang="" group="0" version="1.9.008">
+	</et2-template>
+	<et2-template  id="tracker.edit" template="" lang="" group="0" version="1.9.008">
         <et2-hbox  span="all" width="100%" slot="label">
             <et2-button-icon  statustext="Apply the changes" id="button[apply]" image="apply"></et2-button-icon>
-            <et2-button-toggle label="notifications" id="no_notifications" class="notification_check" onIcon="bell-fill" offIcon="bell-slash"/>
+            <et2-button-toggle  label="notifications" id="no_notifications" class="notification_check" onIcon="bell-fill" offIcon="bell-slash"/>
         </et2-hbox>
 		<grid border="1" width="100%">
 			<columns>
@@ -144,7 +143,7 @@
 					<et2-description  for="tr_tracker" value="Tracker Queue"></et2-description>
 					<et2-hbox>
 						<et2-select  id="tr_tracker" onchange="widget.getInstanceManager().submit(null,false,true); return false;" noLang="1"></et2-select>
-						<et2-textbox  align="right" type="integer" id="tr_id" readonly="true" class="tracker_trIdEdit"></et2-textbox>
+						<et2-number  align="right" id="tr_id" readonly="true" class="tracker_trIdEdit" precision="0"></et2-number>
 					</et2-hbox>
 				</row>
 				<row>
@@ -180,7 +179,7 @@
 					<et2-select-percent  id="tr_completion"></et2-select-percent>
 				</row>
 				<row>
-                    <et2-tabbox id="tabs" span="all" tabHeight="290" cfTypeFilter="$cont[tr_tracker]">
+                    <et2-tabbox  id="tabs" span="all" tabHeight="290" cfTypeFilter="$cont[tr_tracker]">
                         <tabs>
                             <tab id="description" label="Description" statustext="Description"/>
                             <tab id="details" label="Details" statustext="Details"/>
@@ -190,16 +189,16 @@
                             <tab id="ownership" label="Ownership" statustext="Ownership"/>
                         </tabs>
                         <tabpanels>
-                            <template id="tracker.edit.description"/>
-                            <template id="tracker.edit.details"/>
-                            <template id="tracker.edit.comments"/>
-                            <template id="tracker.edit.add_comment"/>
-                            <template id="tracker.edit.links"/>
-                            <template id="tracker.edit.ownership"/>
+                            <et2-template  id="tracker.edit.description"></et2-template>
+                            <et2-template  id="tracker.edit.details"></et2-template>
+                            <et2-template  id="tracker.edit.comments"></et2-template>
+                            <et2-template  id="tracker.edit.add_comment"></et2-template>
+                            <et2-template  id="tracker.edit.links"></et2-template>
+                            <et2-template  id="tracker.edit.ownership"></et2-template>
                         </tabpanels>
                     </et2-tabbox>
                 </row>
 			</rows>
 		</grid>
-	</template>
+	</et2-template>
 </overlay>
