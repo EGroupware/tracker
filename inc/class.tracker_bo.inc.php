@@ -15,6 +15,7 @@ use EGroupware\Api\Cache;
 use EGroupware\Api\Link;
 use EGroupware\Api\Acl;
 use EGroupware\Api\Vfs;
+use EGroupware\Mail\Ui;
 
 /**
  * Some constants for the check_rights function
@@ -712,8 +713,8 @@ class tracker_bo extends tracker_so
 					};
 					foreach(array('src','url','background') as $type)
 					{
-						$this->data['tr_description'] = mail_ui::resolve_inline_image_byType($this->data['tr_description'], null, null, null, $type, $link_callback);
-						$this->data['reply_message'] = mail_ui::resolve_inline_image_byType($this->data['reply_message'], null, null, null, $type, $link_callback);
+						$this->data['tr_description'] = Ui::resolve_inline_image_byType($this->data['tr_description'], null, null, null, $type, $link_callback);
+						$this->data['reply_message'] = Ui::resolve_inline_image_byType($this->data['reply_message'], null, null, null, $type, $link_callback);
 					}
 					$replaced = true;
 				}
