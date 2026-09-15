@@ -415,37 +415,20 @@ class tracker_mailhandler extends tracker_bo
 	 */
 	function extract_latestReply ($mailBody)
 	{
-		$mailCntArray = preg_split("/(\r\n|\n|\r)/",$mailBody);
-		$oMInx = 0;
-		$noReplyMatch = true;
-		foreach (array_keys($mailCntArray) as $key)
+		// The "-----<original message>-----" marker is injected by EGroupware's own outgoing
+		// notification email (Api\Storage\Tracking) right before the quoted ticket content, so in
+		// a normal top-posted reply everything the user actually typed comes BEFORE it. Truncate
+		// there directly instead of the previous per-line-array approach (find the marker's line,
+		// then delete lines up to the next ">" or "</blockquote>" line) - that broke whenever a
+		// mail client (eg. iPhone Mail) emits HTML with few or no real line breaks, which can put
+		// both the marker and the user's own reply text on the same split "line": the deletion
+		// then wiped the whole line, reply text included, leaving only the mail-header block
+		// mailheaderhandling had separately prepended (ticket #124401).
+		if (preg_match("/-----.*(".lang("original message")."|"."original message".")---.*/i", $mailBody, $matches, PREG_OFFSET_CAPTURE))
 		{
-			if (preg_match("/-----.*(".lang("original message")."|"."original message".")---.*/i", $mailCntArray[$key]) && $oMInx === 0)
-			{
-				$oMInx = $key;
-			}
-			if (preg_match("/^>.*|\<\/blockquote\>/",$mailCntArray[$key]))
-			{
-				$noReplyMatch = false;
-				if ($oMInx > 0)
-				{
-					for ($i =  $oMInx; $i<$key; $i++)
-					{
-						unset ($mailCntArray[$i]);
-					}
-					unset ($mailCntArray[$i]);
-				}
-			}
+			$mailBody = substr($mailBody, 0, $matches[0][1]);
 		}
-		// try to cleanup original part even if not finding ">" or "blockquote"
-		if ($noReplyMatch && $oMInx > 0)
-		{
-			foreach (array_keys($mailCntArray) as $key)
-			{
-				if ($key >= $oMInx) unset ($mailCntArray[$key]);
-			}
-		}
-		return join("\n", $mailCntArray);
+		return trim($mailBody);
 	}
 
 	/**

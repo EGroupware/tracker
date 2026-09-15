@@ -281,4 +281,83 @@ class MailHandlerTest extends AppTest
 
 		$this->assertFalse($this->handler->forward_message2($mailobject, 56, 'Original subject', 'unrecognized sender', 0));
 	}
+
+	// --- extract_latestReply(): strip the quoted original ticket notification from a reply ---
+
+	/**
+	 * Regression test for ticket #124401: a reply sent from an iPhone came back as an EMPTY
+	 * comment - only the mail-header block mailheaderhandling separately prepends survived, the
+	 * user's actual reply text was gone.
+	 *
+	 * Root cause: the previous implementation split the body into an array by real line breaks,
+	 * found the "-----original message-----" marker EGroupware's own outgoing notification
+	 * embeds ahead of the quoted content, then looked for the next line matching "^>" or
+	 * "</blockquote>" to know where to stop deleting. iPhone Mail's HTML export commonly has
+	 * few or no real line breaks at all, so the marker and the reply text end up on the exact
+	 * same split "line" as the "</blockquote>" that closes the quote - the deletion range then
+	 * collapses to zero-length, and the code fell through to unconditionally deleting that one
+	 * line outright, taking the reply text down with the quote.
+	 *
+	 * This constructs that exact shape: a multi-line mail-header block (real line breaks, as
+	 * mailheaderhandling produces) followed by a single unbroken "line" containing the reply
+	 * text, the marker, and the quoted content all run together with plain spaces instead of
+	 * line breaks - the failure mode is not specific to any one of those pieces, it is the
+	 * "marker and reply text on the same split line" shape itself. Fixture data below is
+	 * synthetic, not the real reporter's details/message.
+	 */
+	public function testExtractLatestReplyKeepsReplyTextWithNoLineBreaksAroundMarker() : void
+	{
+		$headerBlock = implode("\n", [
+			'--------------------------------------------------------',
+			'Subject: Re: Test-System #999999: Sample ticket subject',
+			'From: "Test Reporter" [reporter@example.invalid]',
+			'To: tracker@example.invalid',
+			'Date: Tue, 15 Sep 2026 14:38:37 +0200',
+			'--------------------------------------------------------',
+		]);
+		$replyText = 'Sure, will look into it once back at my desk. Sent from my iPhone Am 15.09.2026 um 13:38 schrieb Support Team:';
+		$quotedOriginal = '-----original message----- Ticket modified by EGroupware, Test Agent at 15.09.2026 14:38 Test-System </blockquote>';
+		$mailBody = $headerBlock."\n".$replyText.' '.$quotedOriginal;
+
+		$result = $this->handler->extract_latestReply($mailBody);
+
+		$this->assertStringContainsString('Sure, will look into it once back at my desk', $result,
+			'The user\'s actual reply text was stripped along with the quoted original');
+		$this->assertStringNotContainsString('Ticket modified by EGroupware', $result,
+			'The quoted original ticket notification should have been stripped');
+	}
+
+	/**
+	 * The normal, previously-working case (a properly line-wrapped plain-text reply, eg. from a
+	 * desktop mail client), followed by the "-----original message-----" marker on its own
+	 * line, followed by ">"-quoted original content. Must still work after the fix for the
+	 * no-line-breaks case above.
+	 */
+	public function testExtractLatestReplyStripsWellFormedMultiLineQuote() : void
+	{
+		$mailBody = implode("\n", [
+			'I spent the whole day fighting various oddities and had to reload',
+			'eGroupware several times as a result.',
+			'',
+			'-----original message-----',
+			'> Ticket modified by EGroupware, Test Agent at 15.09.2026 14:38',
+			'> Test-System',
+		]);
+
+		$result = $this->handler->extract_latestReply($mailBody);
+
+		$this->assertStringContainsString('I spent the whole day fighting', $result);
+		$this->assertStringNotContainsString('Ticket modified by EGroupware', $result);
+	}
+
+	/**
+	 * No marker at all (eg. the user deleted the quoted content, or it was never added) -
+	 * the body must be returned unchanged rather than mangled.
+	 */
+	public function testExtractLatestReplyNoMarkerReturnsBodyUnchanged() : void
+	{
+		$mailBody = "Just a plain reply with no quoted content at all.";
+
+		$this->assertSame($mailBody, $this->handler->extract_latestReply($mailBody));
+	}
 }
