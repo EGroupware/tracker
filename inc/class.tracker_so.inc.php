@@ -250,7 +250,12 @@ class tracker_so extends Api\Storage
 		{
 			$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
 		}
-		$order_by = self::sanitizeOrderBy($order_by);
+		// we sanitize here ourselves, as we modify $order_by below - but honor a caller which already
+		// opted out via disableSanitizeOrderBy(), eg. to pass a fixed, server-generated GROUP BY
+		if ($this->sanitize_order_by)
+		{
+			$order_by = self::sanitizeOrderBy($order_by);
+		}
 		$this->sanitize_order_by = false;
 		// check if we order by tr_id, replace it with egr_tracker.tr_id, as tr_id is ambigues
 		if (strpos($order_by,'tr_id') !== false && strpos($order_by,self::TRACKER_TABLE.'.tr_id') === false)
