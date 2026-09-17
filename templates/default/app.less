@@ -47,6 +47,12 @@ et2-tab-panel#tracker-edit_comments {
 div#tracker-edit_replies {
 	height: 100%;
 }
+/* A comment is prose, not a table cell: the datagrid's default 10em cap per row cell turned every
+   longer comment into its own little scrollbox nested inside the (already scrolling) comment list.
+   Drop the cap so each row is as tall as its comment and only the list itself scrolls. */
+et2-nextmatch#tracker-edit_replies {
+	--row-cell-max-height: none;
+}
 .tracker_leftPad5 { padding-left: 5px; }
 label.tracker_trIdEdit:before { content: "#"; }
 .headertext { color: black; font-size: 120%; }
