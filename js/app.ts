@@ -208,12 +208,19 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 			if (!filter.value) (<Et2Nextmatch>this.nm).activeFilters.startdate = null;
 			if (filter.value === "custom")
 			{
-				const filterDrawer = (<EgwFrameworkApp>filter.closest('egw-app'))?.filtersDrawer;
-				if (filterDrawer && !filterDrawer.open)
+				// Only for a filter the user actually picked (see checkNmFilterChanged() below):
+				// without this the drawer opens and the date-picker pops up on every page load.
+				// Opening the drawer on load when the filter matches no rows is handled centrally,
+				// by EgwApp.nmFilterChange().
+				if (ev)
 				{
-					filterDrawer.open = true;
+					const filterDrawer = (<EgwFrameworkApp>filter.closest('egw-app'))?.filtersDrawer;
+					if (filterDrawer && !filterDrawer.open)
+					{
+						filterDrawer.open = true;
+					}
+					window.setTimeout(() => dates.getWidgetById('startdate').focus());
 				}
-				window.setTimeout(() => dates.getWidgetById('startdate').focus());
 			}
 		}
 		return true;
@@ -234,9 +241,9 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 	 * @param id
 	 * @param value
 	 */
-	checkNmFilterChanged(app_toolbar, id : string, value : string)
+	checkNmFilterChanged(app_toolbar, id : string, value : string, _ev? : Event)
 	{
-		super.checkNmFilterChanged(app_toolbar, id, value);
+		super.checkNmFilterChanged(app_toolbar, id, value, _ev);
 
 		switch (id)
 		{
@@ -247,7 +254,10 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 				}
 				break;
 			case 'filter':
-				this.filter_change(null, this.et2.getWidgetById(id));
+				// pass the event on only for a real et2-filter (those always carry oldFilters), so
+				// the handler can tell a user picking the filter from the one-off sync
+				// EgwApp.et2_ready() fires to seed the toolbar on load
+				this.filter_change((<CustomEvent>_ev)?.detail?.oldFilters ? _ev : null, this.et2.getWidgetById(id));
 				break;
 			case 'tr_tracker':
 				// Keep the "Assigned to" filter's account-search scoped to the current queue
