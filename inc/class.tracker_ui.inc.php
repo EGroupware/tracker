@@ -1871,10 +1871,12 @@ width:100%;
 					'seen' => array(
 						'caption' => 'Mark as read',
 						'group' => 1,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'unseen' => array(
 						'caption' => 'Mark as unread',
 						'group' => 1,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'tracker' => array(
 						'caption' => 'Tracker Queue',
@@ -1883,6 +1885,7 @@ width:100%;
 						'enabled' => count($this->trackers) >= 1,
 						'hideOnDisabled' => true,
 						'icon' => 'tracker/navbar',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'cat' => array(
 						'caption' => 'Category',
@@ -1897,6 +1900,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('version',$tracker),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'assigned' => array(
 						'caption' => 'Assigned to',
@@ -1910,6 +1914,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_priorities($tracker,$cat_id),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'status' => array(
 						'caption' => 'Status',
@@ -1918,6 +1923,7 @@ width:100%;
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
 						'icon' => 'check',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'resolution' => array(
 						'caption' => 'Resolution',
@@ -1925,12 +1931,14 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('resolution',$tracker), // ToDo: get tracker specific solutions as well, have them available only when applicable
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'completion' => array(
 						'caption' => 'Completed',
 						'prefix' => 'completion_',
 						'children' => $percent,
 						'icon' => 'completed',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'group' => array(
 						'caption' => 'Group',
@@ -1946,6 +1954,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 				'confirm_mass_selection' => true,
+				'onExecute' => 'javaScript:app.tracker.ajax_action',
 			),
 			'close_100_'.$resolution_fixed => array(
 				'caption' => lang('Close') . ' - 100% ' . lang('fixed'),
@@ -1953,6 +1962,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 				'confirm_mass_selection' => true,
+				'onExecute' => 'javaScript:app.tracker.ajax_action',
 			),
 
 			'admin' => array(
@@ -2101,6 +2111,39 @@ width:100%;
 		// Make sure to open as popup
 		$ticket['popup'] = true;
 		$this->edit($ticket);
+	}
+
+	/**
+	 * Apply an action to multiple tracker entries, but called via AJAX instead of submit
+	 *
+	 * Unlike a submit this leaves the list standing, so it keeps its scroll position, selection
+	 * and row state - egw.refresh() below updates only the rows that changed.
+	 *
+	 * @param string $action
+	 * @param string[] $selected
+	 * @param bool $all_selected All entries matching the current filters are selected, not just $selected
+	 * @param array $checkboxes values of the checkbox actions in the same menu, eg. no_notifications
+	 */
+	public function ajax_action($action, $selected, $all_selected, array $checkboxes = [])
+	{
+		$success = $failed = 0;
+		$action_msg = $msg = null;
+
+		if ($this->action($action, $selected, $all_selected, $success, $failed, $action_msg, 'index', $msg,
+			!empty($checkboxes['no_notifications'])))
+		{
+			$msg = lang('%1 entries %2', $success, $action_msg);
+		}
+		elseif (empty($msg))
+		{
+			$msg = lang('%1 entries %2, %3 failed because of insufficent rights !!!', $success, $action_msg, $failed);
+		}
+		// the sentinel belongs in the 2nd argument only: egw.refresh() resolves its 5th
+		// (_targetapp) before the msg-only early-return, and a name that is not an app throws
+		$push_app = Api\Json\Push::onlyFallback() || $all_selected ? 'tracker' : 'msg-only-push-refresh';
+		Api\Json\Response::get()->call('egw.refresh', $msg, $push_app, $selected[0] ?? null,
+			$all_selected || count($selected) > 1 ? null : ($action === 'delete' ? 'delete' : 'update'),
+			'tracker', null, null, $failed ? 'error' : 'success');
 	}
 
 	/**
