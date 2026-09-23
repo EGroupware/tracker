@@ -498,7 +498,8 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 	submit_popup(_event : Event, _widget, _action_id : string) : boolean
 	{
 		const dialog = _widget.closest('et2-dialog');
-		const nm = <Et2Nextmatch>_widget.getInstanceManager()?.widgetContainer?.getWidgetById('nm');
+		const et2 = _widget.getInstanceManager()?.widgetContainer;
+		const nm = <Et2Nextmatch>et2?.getWidgetById('nm');
 		if(!nm)
 		{
 			return false;
@@ -510,9 +511,52 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 		{
 			selection.ids = dialog.selectedIds;
 		}
-		nm.executeAction(_action_id, selection, {nmAction: "submit"});
+		const ids = (selection.ids || []).map(uid => String(uid).split("::").pop()).filter(Boolean);
+
+		const checkboxes = {};
+		// actionManager is private-in-TS-only on the controller; reach it the same way the rest of
+		// this file reaches past that boundary
+		for(const checkbox of ((<any>nm)["_actionController"]?.actionManager?.getActionsByAttr?.("checkbox", true) || []))
+		{
+			checkboxes[checkbox.id] = (<any>checkbox).checked || false;
+		}
+
 		dialog?.hide();
-		return false;
+		return this.egw.request('tracker.tracker_ui.ajax_action',
+			[this._popup_action(_widget, _action_id, et2), ids, selection.all === true, checkboxes]) && false;
+	}
+
+	/**
+	 * Turn an action popup's contents into what tracker_ui::action() expects.
+	 *
+	 * This used to be done by submitting the whole eTemplate and letting index() assemble it out
+	 * of $content - which rebuilt the list and lost its scroll position and selection to change
+	 * one field. The assembly is small enough to do here instead, and needs no server change.
+	 *
+	 * Two shapes, because action() takes two:
+	 * - "Multiple changes" hands over the popup's whole set of fields as an array, which action()
+	 *   applies one by one (its `is_array($action) && $action['update']` branch);
+	 * - the others build the composite id `<action>_<verb>_<value>`.
+	 *
+	 * The verb has to be a single token: action()'s `list(,$settings) = explode('_', $settings)`
+	 * takes only the second element, so a verb containing an underscore would be read as the
+	 * value. "assigned" is the only one whose verb means anything (ok/add/delete, from the
+	 * button's own id); "group" ignores it, so it gets a plain "set".
+	 */
+	private _popup_action(_widget, _action_id : string, et2) : any
+	{
+		if(_action_id === 'admin')
+		{
+			const popup = et2?.getWidgetById('admin_popup');
+			const values = popup ? _widget.getInstanceManager()?.getValues(popup) : {};
+			return Object.assign({update: true}, values?.['admin_popup'] ?? values ?? {});
+		}
+		const widget = <any>et2?.getWidgetById(_action_id);
+		const value = [].concat(widget?.get_value ? widget.get_value() : widget?.value ?? []).join(',');
+		// eg. "assigned_popup[assigned_action][ok]" -> "ok"
+		const verb = _action_id === 'assigned' ?
+					 (/\[([^\[\]]*)\]\s*$/.exec(_widget?.id || '')?.[1] || 'ok') : 'set';
+		return _action_id + '_' + verb + '_' + value;
 	}
 
 	/**

@@ -156,6 +156,81 @@ class AjaxActionTest extends LoggedInTest
 	}
 
 	/**
+	 * The popup actions (Change group, Change assigned, Multiple changes) show a small form whose
+	 * OK button used to submit the whole eTemplate, just so index() could assemble $content into
+	 * something action() understands. That assembly now happens client-side, so these pin the two
+	 * shapes action() accepts - no server change was made for either.
+	 */
+	public function testGroupPopupCompositeIdSetsTheGroup()
+	{
+		$this->makeTicket();
+		$group = $this->aGroupId();
+		if (!$group)
+		{
+			$this->markTestSkipped('no group to assign');
+		}
+		// tracker_bo::save() validates tr_group against the queue's own configuration, which has
+		// nothing to do with the action id being tested. If this instance will not take the group
+		// at all, skip rather than report a red that is about the fixture.
+		$this->bo->read($this->tr_id);
+		$this->bo->data['tr_group'] = $group;
+		if ($this->bo->save() !== 0)
+		{
+			$this->markTestSkipped('this instance does not accept tr_group=' . $group);
+		}
+		$this->bo->read($this->tr_id);
+		$this->bo->data['tr_group'] = null;
+		$this->bo->save();
+
+		// action() strips the verb: list(,$settings) = explode('_', $settings)
+		(new \tracker_ui())->ajax_action('group_set_' . $group, [$this->tr_id], false, []);
+
+		$this->assertEquals($group, $this->readTicket()['tr_group'],
+			'group_<verb>_<id> must set the group, whatever the verb');
+	}
+
+	public function testAssignedPopupCompositeIdSetsAssigned()
+	{
+		$this->makeTicket();
+		$me = $GLOBALS['egw_info']['user']['account_id'];
+
+		(new \tracker_ui())->ajax_action('assigned_ok_' . $me, [$this->tr_id], false, []);
+
+		$this->assertContains((string)$me, array_map('strval', (array)$this->readTicket()['tr_assigned']),
+			'assigned_ok_<ids> must set who it is assigned to');
+	}
+
+	/**
+	 * "Multiple changes" is the other shape: the whole popup as an array, which action() applies
+	 * field by field via its is_array($action) && $action['update'] branch.
+	 */
+	public function testMultipleChangesArrayShapeAppliesFields()
+	{
+		$this->makeTicket();
+		$this->assertNotEquals(50, $this->readTicket()['tr_completion']);
+
+		(new \tracker_ui())->ajax_action(['update' => true, 'tr_completion' => 50],
+			[$this->tr_id], false, []);
+
+		$this->assertEquals(50, $this->readTicket()['tr_completion'],
+			'the array shape must apply each field given');
+	}
+
+	/**
+	 * A group the ticket can actually be given.
+	 *
+	 * tracker_bo::save() validates tr_group and rejects an arbitrary group - it has to be one of
+	 * the user's own memberships (see tracker_so's own tr_group filter). Using any group id at
+	 * all made this fail on a save() error that has nothing to do with the action id.
+	 */
+	protected function aGroupId() : ?int
+	{
+		$memberships = (array)$GLOBALS['egw']->accounts->memberships(
+			$GLOBALS['egw_info']['user']['account_id'], true);
+		return $memberships ? (int)reset($memberships) : null;
+	}
+
+	/**
 	 * "Select all" re-runs the list query to expand the selection; with nothing cached that used
 	 * to run unfiltered, ie. every ticket the user can see.
 	 */
