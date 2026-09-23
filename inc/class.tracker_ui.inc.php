@@ -1893,6 +1893,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('cat',$tracker),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'version' => array(
 						'caption' => 'Version',
