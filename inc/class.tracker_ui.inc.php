@@ -2130,6 +2130,16 @@ width:100%;
 		$success = $failed = 0;
 		$action_msg = $msg = null;
 
+		// "select all" makes action() re-run get_rrows() with the query get_rows() itself cached.
+		// With no cached query that falls through to no filter at all - ie. EVERY entry the user
+		// can see - so refuse rather than guess what "all" meant.
+		if ($all_selected && !is_array(Api\Cache::getSession('tracker', 'index')))
+		{
+			Api\Json\Response::get()->call('egw.message',
+				lang('Could not determine the current selection, please try again.'), 'error');
+			return;
+		}
+
 		if ($this->action($action, $selected, $all_selected, $success, $failed, $action_msg, 'index', $msg,
 			!empty($checkboxes['no_notifications'])))
 		{
