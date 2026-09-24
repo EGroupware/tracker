@@ -61,6 +61,19 @@ class AjaxActionTest extends LoggedInTest
 		}
 	}
 
+	/**
+	 * A real eTemplate request id, the way the browser sends one along - the endpoint refuses
+	 * without it, see Nextmatch::validateExecId().  Writing to the request is what persists it.
+	 */
+	protected function execId() : string
+	{
+		$request = \EGroupware\Api\Etemplate\Request::read();
+		$id = $request->id();
+		$request->content = ['nm' => []];
+		unset($request);
+		return $id;
+	}
+
 	protected function refreshCall() : ?array
 	{
 		$response = Api\Json\Response::get();
@@ -104,7 +117,7 @@ class AjaxActionTest extends LoggedInTest
 		$this->makeTicket();
 		$this->assertNotSame(\tracker_bo::STATUS_CLOSED, $this->readTicket()['tr_status']);
 
-		(new \tracker_ui())->ajax_action('close', [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'close', [$this->tr_id], false, []);
 
 		$this->assertSame(\tracker_bo::STATUS_CLOSED, $this->readTicket()['tr_status'],
 			'close must set the status to closed');
@@ -119,7 +132,7 @@ class AjaxActionTest extends LoggedInTest
 	{
 		$this->makeTicket();
 
-		(new \tracker_ui())->ajax_action('close_100', [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'close_100', [$this->tr_id], false, []);
 
 		$ticket = $this->readTicket();
 		$this->assertSame(\tracker_bo::STATUS_CLOSED, $ticket['tr_status']);
@@ -133,7 +146,7 @@ class AjaxActionTest extends LoggedInTest
 	{
 		$this->makeTicket();
 
-		(new \tracker_ui())->ajax_action('completion_50', [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'completion_50', [$this->tr_id], false, []);
 
 		$this->assertEquals(50, $this->readTicket()['tr_completion']);
 	}
@@ -147,7 +160,7 @@ class AjaxActionTest extends LoggedInTest
 	{
 		$this->makeTicket();
 
-		(new \tracker_ui())->ajax_action('close', [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'close', [$this->tr_id], false, []);
 
 		$parms = $this->refreshCall();
 		$this->assertNotNull($parms);
@@ -183,7 +196,7 @@ class AjaxActionTest extends LoggedInTest
 		$this->bo->save();
 
 		// action() strips the verb: list(,$settings) = explode('_', $settings)
-		(new \tracker_ui())->ajax_action('group_set_' . $group, [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'group_set_' . $group, [$this->tr_id], false, []);
 
 		$this->assertEquals($group, $this->readTicket()['tr_group'],
 			'group_<verb>_<id> must set the group, whatever the verb');
@@ -194,7 +207,7 @@ class AjaxActionTest extends LoggedInTest
 		$this->makeTicket();
 		$me = $GLOBALS['egw_info']['user']['account_id'];
 
-		(new \tracker_ui())->ajax_action('assigned_ok_' . $me, [$this->tr_id], false, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'assigned_ok_' . $me, [$this->tr_id], false, []);
 
 		$this->assertContains((string)$me, array_map('strval', (array)$this->readTicket()['tr_assigned']),
 			'assigned_ok_<ids> must set who it is assigned to');
@@ -209,7 +222,7 @@ class AjaxActionTest extends LoggedInTest
 		$this->makeTicket();
 		$this->assertNotEquals(50, $this->readTicket()['tr_completion']);
 
-		(new \tracker_ui())->ajax_action(['update' => true, 'tr_completion' => 50],
+		(new \tracker_ui())->ajax_action($this->execId(), ['update' => true, 'tr_completion' => 50],
 			[$this->tr_id], false, []);
 
 		$this->assertEquals(50, $this->readTicket()['tr_completion'],
@@ -230,7 +243,7 @@ class AjaxActionTest extends LoggedInTest
 		$before = $this->readTicket();
 		$this->assertNotEquals(50, $before['tr_completion']);
 
-		(new \tracker_ui())->ajax_action([
+		(new \tracker_ui())->ajax_action($this->execId(), [
 			'update'        => true,
 			'tr_completion' => 50,          // declared in the popup - must apply
 			'tr_creator'    => 1,           // not declared - must NOT apply
@@ -268,7 +281,7 @@ class AjaxActionTest extends LoggedInTest
 		$this->makeTicket();
 		Api\Cache::unsetSession('tracker', 'index');
 
-		(new \tracker_ui())->ajax_action('close', [], true, []);
+		(new \tracker_ui())->ajax_action($this->execId(), 'close', [], true, []);
 
 		$this->assertNotSame(\tracker_bo::STATUS_CLOSED, $this->readTicket()['tr_status'],
 			'select-all with no cached query must NOT fall back to acting on everything');

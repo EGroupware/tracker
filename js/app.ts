@@ -522,8 +522,10 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 		}
 
 		dialog?.hide();
+		// the endpoint refuses without it, see Nextmatch::validateExecId()
+		const exec_id = nm.getInstanceManager()?.etemplate_exec_id ?? "";
 		return this.egw.request('tracker.tracker_ui.ajax_action',
-			[this._popup_action(_widget, _action_id, et2), ids, selection.all === true, checkboxes]) && false;
+			[exec_id, this._popup_action(_widget, _action_id, et2), ids, selection.all === true, checkboxes]) && false;
 	}
 
 	/**
