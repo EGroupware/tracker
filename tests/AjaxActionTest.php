@@ -217,6 +217,35 @@ class AjaxActionTest extends LoggedInTest
 	}
 
 	/**
+	 * "Multiple changes" is the one action whose payload is a whole field map rather than an id,
+	 * and ajax_action() has no eTemplate behind it to validate that map.  On the submit path the
+	 * array arrived as process_exec()'s validated $content['admin_popup'], so it could only ever
+	 * hold the widgets index.xet declares; reaching action() directly, it could hold anything, and
+	 * every key is written onto $this->data before save().  Pin that the field set is bounded
+	 * server-side, or a crafted request rewrites columns the popup never offered.
+	 */
+	public function testMultipleChangesIgnoresFieldsThePopupDoesNotOffer()
+	{
+		$this->makeTicket();
+		$before = $this->readTicket();
+		$this->assertNotEquals(50, $before['tr_completion']);
+
+		(new \tracker_ui())->ajax_action([
+			'update'        => true,
+			'tr_completion' => 50,          // declared in the popup - must apply
+			'tr_creator'    => 1,           // not declared - must NOT apply
+			'tr_private'    => 1,           // not declared - must NOT apply
+		], [$this->tr_id], false, []);
+
+		$after = $this->readTicket();
+		$this->assertEquals(50, $after['tr_completion'], 'a field the popup offers must still apply');
+		$this->assertEquals($before['tr_creator'], $after['tr_creator'],
+			'tr_creator is not in the popup, so the action must not be able to set it');
+		$this->assertEquals($before['tr_private'], $after['tr_private'],
+			'tr_private is not in the popup, so the action must not be able to set it');
+	}
+
+	/**
 	 * A group the ticket can actually be given.
 	 *
 	 * tracker_bo::save() validates tr_group and rejects an arbitrary group - it has to be one of

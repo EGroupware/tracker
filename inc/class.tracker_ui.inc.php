@@ -30,6 +30,16 @@ class tracker_ui extends tracker_bo
 	const LAST_SEARCH_SESSION_KEY = 'index-last-search';
 
 	/**
+	 * Fields the "Multiple changes" popup offers, and therefore the only ones its action may set.
+	 *
+	 * Mirrors the widget ids inside <et2-box id="admin_popup"> in templates/default/index.xet -
+	 * keep the two in step when a field is added to that popup, or the new field will silently
+	 * not apply.
+	 */
+	const MULTI_CHANGE_FIELDS = ['cat_id', 'tr_version', 'tr_priority', 'tr_status_admin',
+		'tr_resolution', 'tr_completion', 'tr_assigned', 'canned_response', 'reply_message'];
+
+	/**
 	 * Functions callable via menuaction
 	 *
 	 * @var array
@@ -2201,6 +2211,14 @@ width:100%;
 		if (is_array($action) && $action['update'])
 		{
 			unset($action['update']);
+			// Every remaining key is written straight onto $this->data below, so the set of
+			// fields this can reach has to be bounded HERE.  It used to be bounded by the
+			// eTemplate: the array arrived as the validated content of the "Multiple changes"
+			// popup, and process_exec() drops any key with no widget declared in index.xet.
+			// The context menu now calls ajax_action() directly, which has no template and so no
+			// such validation - without this, a crafted request could set ANY egw_tracker column
+			// (tr_creator, tr_private, ...) on every ticket the caller may save.
+			$action = array_intersect_key($action, array_flip(self::MULTI_CHANGE_FIELDS));
 			// remove all 'No change'
 			foreach($action as $name => $value)
 			{
