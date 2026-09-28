@@ -573,6 +573,16 @@ class ApiHandler extends Api\CalDAV\Handler
 			$ticket['etag'] = self::etag2value($this->http_if_match);
 		}
 
+		// "notify": false in the request suppresses notifications - gated by the same
+		// field_acl role restriction as the classic UI (only assignee/technician/admin
+		// may set it), independent of the readonlys_from_acl() filtering above, which
+		// only ran when updating an existing ticket
+		if (array_key_exists('no_notifications', $ticket) &&
+			!empty($this->bo->readonlys_from_acl()['no_notifications']))
+		{
+			unset($ticket['no_notifications']);
+		}
+
 		$err = $this->bo->save($ticket);
 		if ($err)
 		{
@@ -800,6 +810,16 @@ class ApiHandler extends Api\CalDAV\Handler
 		$this->bo->data['reply_message'] = $parsed['reply_message'];
 		$this->bo->data['reply_visible']  = $parsed['reply_visible'] ?? 0;
 		// reply_creator and reply_created are set automatically by tracker_bo::save()
+
+		// "notify": false in the request suppresses notifications - gated by the same
+		// field_acl role restriction as the classic UI (only assignee/technician/admin
+		// may set it); silently ignored otherwise, same as any other field this caller
+		// isn't allowed to change
+		if (array_key_exists('no_notifications', $parsed) &&
+			empty($this->bo->readonlys_from_acl()['no_notifications']))
+		{
+			$this->bo->data['no_notifications'] = $parsed['no_notifications'];
+		}
 
 		$err = $this->bo->save();
 		if ($err)

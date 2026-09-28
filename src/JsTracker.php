@@ -258,6 +258,13 @@ class JsTracker extends Api\CalDAV\JsCalendar
 						$ticket = array_merge($ticket, self::parseCustomfields($value));
 						break;
 
+					case 'notify':
+						// false suppresses notifications for this save (maps to tracker_bo's
+						// no_notifications flag); only assignees/technicians/admins may set it,
+						// ApiHandler enforces that via field_acl same as any other field
+						$ticket['no_notifications'] = !$value;
+						break;
+
 					// read-only / auto-set fields — silently ignore
 					case self::AT_TYPE:
 					case 'id':
@@ -341,6 +348,13 @@ class JsTracker extends Api\CalDAV\JsCalendar
 
 					case 'restricted':
 						$reply['reply_visible'] = $value ? 1 : 0;
+						break;
+
+					case 'notify':
+						// false suppresses notifications for this reply (maps to tracker_bo's
+						// no_notifications flag); only assignees/technicians/admins may set it,
+						// ApiHandler enforces that via field_acl same as any other field
+						$reply['no_notifications'] = !$value;
 						break;
 
 					// read-only fields — silently ignore
