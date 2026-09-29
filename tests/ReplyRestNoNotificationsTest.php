@@ -225,4 +225,80 @@ class ReplyRestNoNotificationsTest extends AppTest
 			'a caller without assignee/technician/admin rights must not be able to suppress notifications '.
 			'via "notify": false');
 	}
+
+	/**
+	 * field_acl is fully admin-configurable per queue (Tracker config -> Field ACL),
+	 * not a fixed set of roles - a site that broadened "no_notifications" to
+	 * TRACKER_EVERYBODY must let even a plain, unassigned caller suppress
+	 * notifications via "notify": false.
+	 */
+	public function testReplyWithNotifyFalseHonorsFieldAclGrantedToRegularUser()
+	{
+		$cc = 'external-cc-124831-configured-grant@example.invalid';
+
+		// Simulate an admin having broadened this queue's "no_notifications" field
+		// ACL to TRACKER_EVERYBODY via Tracker config
+		$this->bo->field_acl['no_notifications'] = TRACKER_EVERYBODY;
+
+		$this->bo->data['tr_summary'] = 'Ticket #124831 test ('.__METHOD__.')';
+		$this->bo->data['tr_status']  = \tracker_bo::STATUS_OPEN;
+		$this->bo->data['tr_tracker'] = $this->bo->default_tracker ?: key($this->bo->trackers);
+		// deliberately NOT assigned to self - only the reconfigured field_acl grants the right
+		$this->bo->save();
+		$this->tr_id = $this->bo->data['tr_id'];
+
+		$this->assertEmpty($this->bo->readonlys_from_acl()['no_notifications'] ?? null,
+			'sanity: TRACKER_EVERYBODY should grant the right regardless of role');
+
+		$this->bo->data['tr_cc'] = $cc;
+		$this->bo->save();
+		$this->notified = [];
+
+		$json = json_encode(['message' => 'Reply from REST API client', 'notify' => false]);
+		$parsed = JsTracker::parseJsReply($json, [], 'POST');
+		$this->applyReplyLikeApiHandler($parsed);
+
+		$this->assertNotContains($cc, $this->notified,
+			'a site that configured "no_notifications" field ACL to TRACKER_EVERYBODY must let any caller '.
+			'suppress notifications');
+	}
+
+	/**
+	 * The inverse: a site that restricts "no_notifications" to admins only must
+	 * ignore "notify": false from a mere assignee, even though the default
+	 * field_acl would normally allow assignees.
+	 */
+	public function testReplyWithNotifyFalseHonorsFieldAclRestrictedToAdminOnly()
+	{
+		$cc = 'external-cc-124831-configured-restrict@example.invalid';
+
+		// Simulate an admin having restricted this queue's "no_notifications" field
+		// ACL to TRACKER_ADMIN only via Tracker config
+		$this->bo->field_acl['no_notifications'] = TRACKER_ADMIN;
+
+		$this->bo->data['tr_summary']  = 'Ticket #124831 test ('.__METHOD__.')';
+		$this->bo->data['tr_status']   = \tracker_bo::STATUS_OPEN;
+		$this->bo->data['tr_tracker']  = $this->bo->default_tracker ?: key($this->bo->trackers);
+		$this->bo->data['tr_assigned'] = [$this->bo->user]; // assignee - would normally be enough
+		$this->bo->save();
+		$this->tr_id = $this->bo->data['tr_id'];
+
+		if (empty($this->bo->readonlys_from_acl()['no_notifications']))
+		{
+			$this->markTestSkipped('Current test user is a tracker admin - cannot exercise the '.
+				'"restricted further" branch');
+		}
+
+		$this->bo->data['tr_cc'] = $cc;
+		$this->bo->save();
+		$this->notified = [];
+
+		$json = json_encode(['message' => 'Reply from REST API client', 'notify' => false]);
+		$parsed = JsTracker::parseJsReply($json, [], 'POST');
+		$this->applyReplyLikeApiHandler($parsed);
+
+		$this->assertContains($cc, $this->notified,
+			'a site that restricted "no_notifications" field ACL to admins only must ignore "notify": false '.
+			'from a mere assignee');
+	}
 }
