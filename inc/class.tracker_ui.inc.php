@@ -1962,6 +1962,7 @@ width:100%;
 				'hideOnDisabled' => true,
 				'nm_action' => 'open_popup',
 				'icon' => 'user',
+				'hideOnMobile' => true
 			),
 		);
 		++$group;	// integration with other apps
