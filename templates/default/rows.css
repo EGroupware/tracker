@@ -21,6 +21,14 @@
   color: var(--sl-color-red-600);
   font-weight: bold;
 }
+/* Linked ticket title takes the row's colour */
+[id*="tr_summary"] a {
+  color: inherit;
+  text-decoration: none;
+}
+[id*="tr_summary"] a:hover {
+  text-decoration: underline;
+}
 .tracker_indexPrio:first-letter {
   font-weight: bold;
 }
