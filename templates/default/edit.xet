@@ -15,6 +15,7 @@
         <et2-link-list  id="attachments" application="tracker" entryId="$cont[tr_id]:comments/$cont[reply_id]/"></et2-link-list><et2-ai><et2-htmlarea  id="reply_message" mode="@tr_edit_mode" imageUpload="link_to"></et2-htmlarea></et2-ai>
     </et2-template>
     <et2-template  id="tracker.edit.comment_row">
+		<et2-styles  src="rows.css"></et2-styles>
 		<grid width="100%" class="egwGridView_grid" id="replies">
 			<columns>
                 <column width="200"/>
