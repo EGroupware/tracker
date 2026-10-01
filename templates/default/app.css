@@ -1,12 +1,5 @@
-.tracker_overdue,
 .bold {
   font-weight: bold;
-}
-.tracker_unseen {
-  font-weight: bold;
-}
-.tracker_seen {
-  font-weight: normal;
 }
 .low,
 .low_done,
@@ -38,10 +31,6 @@
 .urgent_done {
   color: var(--sl-color-fuchsia-800);
 }
-.tracker_overdue {
-  color: var(--sl-color-red-600);
-  font-weight: bold;
-}
 .private {
   font-style: italic;
 }
@@ -51,16 +40,8 @@
 .fixedHeight {
   line-height: 12px;
 }
-.tracker_indexPrio:first-letter {
-  font-weight: bold;
-}
 .tracker_image16 img {
   height: 16px;
-}
-/* Completion column: a native <progress> is ~140px wide by default, which overflows the narrow
-   column and gets clipped, making every bar look (nearly) full whatever its value. */
-progress.tracker-completion {
-  width: 100%;
 }
 [id*="tr_summary"] a {
   color: inherit;
