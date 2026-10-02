@@ -1,0 +1,47 @@
+/**
+ * EGroupware - Tracker - Row styles for the nextmatch lists
+ *
+ * Loaded into each datagrid row's shadow root via <et2-styles src="rows.css"> in the row
+ * templates; app.css does not reach rows.  Keyed off classes, the page's ids do not exist in there.
+ *
+ * Please do NOT change rows.css directly, instead change rows.less and compile it!
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @package tracker
+ * @link http://www.egroupware.org
+ */
+/* Unread / read state and overdue tickets */
+.tracker_unseen {
+  font-weight: bold;
+}
+.tracker_seen {
+  font-weight: normal;
+}
+.tracker_overdue {
+  color: var(--sl-color-red-600);
+  font-weight: bold;
+}
+/* Linked ticket title takes the row's colour */
+[id*="tr_summary"] a {
+  color: inherit;
+  text-decoration: none;
+}
+[id*="tr_summary"] a:hover {
+  text-decoration: underline;
+}
+.tracker_indexPrio:first-letter {
+  font-weight: bold;
+}
+/* Completion column: a native <progress> is ~140px wide by default, which overflows the narrow
+   column and gets clipped, making every bar look (nearly) full whatever its value. */
+progress.tracker-completion {
+  width: 100%;
+}
+.tracker_leftPad5 {
+  padding-left: 5px;
+}
+/* Restricted access replies */
+.reply_visible_1 {
+  background: var(--sl-color-amber-50, beige);
+  width: 100%;
+}

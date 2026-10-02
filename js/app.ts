@@ -28,7 +28,7 @@ import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import type {LitElement} from "lit";
 import type {Et2Select} from "../../api/js/etemplate/Et2Select/Et2Select";
 import type {Et2ButtonToggle} from "../../api/js/etemplate/Et2Button/Et2ButtonToggle";
-import type {EgwFrameworkApp} from "../../kdots/js/EgwFrameworkApp";
+import type {EgwFrameworkApp, FilterInfo} from "../../kdots/js/EgwFrameworkApp";
 import type {Et2LinkList} from "../../api/js/etemplate/Et2Link/Et2LinkList";
 import type {Et2Nextmatch} from "../../api/js/etemplate/Et2Nextmatch/Et2Nextmatch";
 import type {Et2Datagrid} from "../../api/js/etemplate/Et2Datagrid/Et2Datagrid";
@@ -51,6 +51,24 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 	constructor()
 	{
 		super('tracker');
+	}
+
+	/**
+	 * Neither the tracker the list is for nor the default "not closed" status are filters the user set
+	 *
+	 * @param filterValues
+	 * @param fwApp
+	 */
+	getFilterInfo(filterValues : { [id : string] : any }, fwApp : EgwFrameworkApp) : FilterInfo
+	{
+		const values = {...(filterValues ?? {})};
+		values.col_filter = {...(values.col_filter ?? {})};
+		delete values.col_filter.tr_tracker;
+		if(values.col_filter.tr_status == 'not-closed')
+		{
+			delete values.col_filter.tr_status;
+		}
+		return fwApp.filterInfo(values);
 	}
 
 	/**
