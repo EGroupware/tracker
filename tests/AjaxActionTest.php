@@ -98,6 +98,12 @@ class AjaxActionTest extends LoggedInTest
 			'tr_tracker' => $this->tracker,
 			'tr_status'  => \tracker_bo::STATUS_OPEN,
 			'tr_creator' => $GLOBALS['egw_info']['user']['account_id'],
+			// tr_completion is a rights-gated field: tracker_bo's field map requires
+			// TRACKER_ITEM_ASSIGNEE|TRACKER_ADMIN to write it, so a ticket the test user merely
+			// created has its completion silently dropped on save wherever that user is not a
+			// tracker admin. Assigning it to them makes the completion tests independent of how
+			// the instance's tracker happens to be configured.
+			'tr_assigned' => [$GLOBALS['egw_info']['user']['account_id']],
 			'tr_description' => 'created by tracker/tests/AjaxActionTest.php',
 		];
 		$this->assertSame(0, $this->bo->save(), 'could not create the test ticket');
