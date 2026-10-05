@@ -110,6 +110,35 @@ class AjaxActionTest extends LoggedInTest
 	}
 
 	/**
+	 * The refusal is the half that silently does nothing when it regresses: an endpoint that
+	 * stops validating still passes every test about what it does on success.
+	 */
+	public function testABogusExecIdClosesNothing()
+	{
+		$this->makeTicket();
+		$before = $this->readTicket()['tr_status'];
+		$this->assertNotSame(\tracker_bo::STATUS_CLOSED, $before);
+
+		(new \tracker_ui())->ajax_action('tracker_nobody_not-a-real-request-id', 'close',
+			[$this->tr_id], false, []);
+
+		$this->assertSame($before, $this->readTicket()['tr_status'],
+			'a rejected request must not run the action');
+		$this->assertNull($this->refreshCall(), 'and must not answer with egw.refresh either');
+	}
+
+	public function testAnEmptyExecIdClosesNothing()
+	{
+		$this->makeTicket();
+		$before = $this->readTicket()['tr_status'];
+
+		(new \tracker_ui())->ajax_action('', 'close', [$this->tr_id], false, []);
+
+		$this->assertSame($before, $this->readTicket()['tr_status'],
+			'no exec id at all is refused the same way');
+	}
+
+	/**
 	 * The regression shape: the endpoint has to reach action()'s body and persist.
 	 */
 	public function testCloseSetsTheStatusToClosed()
