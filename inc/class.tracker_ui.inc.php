@@ -30,6 +30,16 @@ class tracker_ui extends tracker_bo
 	const LAST_SEARCH_SESSION_KEY = 'index-last-search';
 
 	/**
+	 * Fields the "Multiple changes" popup offers, and therefore the only ones its action may set.
+	 *
+	 * Mirrors the widget ids inside <et2-box id="admin_popup"> in templates/default/index.xet -
+	 * keep the two in step when a field is added to that popup, or the new field will silently
+	 * not apply.
+	 */
+	const MULTI_CHANGE_FIELDS = ['cat_id', 'tr_version', 'tr_priority', 'tr_status_admin',
+		'tr_resolution', 'tr_completion', 'tr_assigned', 'canned_response', 'reply_message'];
+
+	/**
 	 * Functions callable via menuaction
 	 *
 	 * @var array
@@ -1871,10 +1881,12 @@ width:100%;
 					'seen' => array(
 						'caption' => 'Mark as read',
 						'group' => 1,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'unseen' => array(
 						'caption' => 'Mark as unread',
 						'group' => 1,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'tracker' => array(
 						'caption' => 'Tracker Queue',
@@ -1883,6 +1895,7 @@ width:100%;
 						'enabled' => count($this->trackers) >= 1,
 						'hideOnDisabled' => true,
 						'icon' => 'tracker/navbar',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'cat' => array(
 						'caption' => 'Category',
@@ -1890,6 +1903,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('cat',$tracker),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'version' => array(
 						'caption' => 'Version',
@@ -1897,6 +1911,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('version',$tracker),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'assigned' => array(
 						'caption' => 'Assigned to',
@@ -1910,6 +1925,7 @@ width:100%;
 						'children' => $items=$this->get_tracker_priorities($tracker,$cat_id),
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'status' => array(
 						'caption' => 'Status',
@@ -1918,6 +1934,7 @@ width:100%;
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
 						'icon' => 'check',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'resolution' => array(
 						'caption' => 'Resolution',
@@ -1925,12 +1942,14 @@ width:100%;
 						'children' => $items=$this->get_tracker_labels('resolution',$tracker), // ToDo: get tracker specific solutions as well, have them available only when applicable
 						'enabled' => count($items) >= 1,
 						'hideOnDisabled' => true,
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'completion' => array(
 						'caption' => 'Completed',
 						'prefix' => 'completion_',
 						'children' => $percent,
 						'icon' => 'completed',
+						'onExecute' => 'javaScript:app.tracker.ajax_action',
 					),
 					'group' => array(
 						'caption' => 'Group',
@@ -1946,6 +1965,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 				'confirm_mass_selection' => true,
+				'onExecute' => 'javaScript:app.tracker.ajax_action',
 			),
 			'close_100_'.$resolution_fixed => array(
 				'caption' => lang('Close') . ' - 100% ' . lang('fixed'),
@@ -1953,6 +1973,7 @@ width:100%;
 				'group' => $group,
 				'disableClass' => 'rowNoClose',
 				'confirm_mass_selection' => true,
+				'onExecute' => 'javaScript:app.tracker.ajax_action',
 			),
 
 			'admin' => array(
@@ -2105,6 +2126,55 @@ width:100%;
 	}
 
 	/**
+	 * Apply an action to multiple tracker entries, but called via AJAX instead of submit
+	 *
+	 * Unlike a submit this leaves the list standing, so it keeps its scroll position, selection
+	 * and row state - egw.refresh() below updates only the rows that changed.
+	 *
+	 * @param string $action
+	 * @param string[] $selected
+	 * @param bool $all_selected All entries matching the current filters are selected, not just $selected
+	 * @param array $checkboxes values of the checkbox actions in the same menu, eg. no_notifications
+	 */
+	public function ajax_action($exec_id, $action, $selected, $all_selected, array $checkboxes = [])
+	{
+		// The context menu calls this directly, so the eTemplate's exec id is the only thing
+		// saying the caller had one of our pages open - see Nextmatch::validateExecId()
+		if (!Api\Etemplate\Widget\Nextmatch::validateExecId($exec_id))
+		{
+			return;
+		}
+		$success = $failed = 0;
+		$action_msg = $msg = null;
+
+		// "select all" makes action() re-run get_rrows() with the query get_rows() itself cached.
+		// With no cached query that falls through to no filter at all - ie. EVERY entry the user
+		// can see - so refuse rather than guess what "all" meant.
+		if ($all_selected && !is_array(Api\Cache::getSession('tracker', 'index')))
+		{
+			Api\Json\Response::get()->call('egw.message',
+				lang('Could not determine the current selection, please try again.'), 'error');
+			return;
+		}
+
+		if ($this->action($action, $selected, $all_selected, $success, $failed, $action_msg, 'index', $msg,
+			!empty($checkboxes['no_notifications'])))
+		{
+			$msg = lang('%1 entries %2', $success, $action_msg);
+		}
+		elseif (empty($msg))
+		{
+			$msg = lang('%1 entries %2, %3 failed because of insufficent rights !!!', $success, $action_msg, $failed);
+		}
+		// the sentinel belongs in the 2nd argument only: egw.refresh() resolves its 5th
+		// (_targetapp) before the msg-only early-return, and a name that is not an app throws
+		$push_app = Api\Json\Push::onlyFallback() || $all_selected ? 'tracker' : 'msg-only-push-refresh';
+		Api\Json\Response::get()->call('egw.refresh', $msg, $push_app, $selected[0] ?? null,
+			$all_selected || count($selected) > 1 ? null : ($action === 'delete' ? 'delete' : 'update'),
+			'tracker', null, null, $failed ? 'error' : 'success');
+	}
+
+	/**
 	 * apply an action to multiple tracker entries
 	 *
 	 * @param string|int $action 'status_to',set status of entries
@@ -2148,6 +2218,14 @@ width:100%;
 		if (is_array($action) && $action['update'])
 		{
 			unset($action['update']);
+			// Every remaining key is written straight onto $this->data below, so the set of
+			// fields this can reach has to be bounded HERE.  It used to be bounded by the
+			// eTemplate: the array arrived as the validated content of the "Multiple changes"
+			// popup, and process_exec() drops any key with no widget declared in index.xet.
+			// The context menu now calls ajax_action() directly, which has no template and so no
+			// such validation - without this, a crafted request could set ANY egw_tracker column
+			// (tr_creator, tr_private, ...) on every ticket the caller may save.
+			$action = array_intersect_key($action, array_flip(self::MULTI_CHANGE_FIELDS));
 			// remove all 'No change'
 			foreach($action as $name => $value)
 			{
