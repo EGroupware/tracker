@@ -576,10 +576,16 @@ class ApiHandler extends Api\CalDAV\Handler
 		// "notify": false in the request suppresses notifications - gated by the same
 		// field_acl role restriction as the classic UI (only assignee/technician/admin
 		// may set it), independent of the readonlys_from_acl() filtering above, which
-		// only ran when updating an existing ticket
-		if (array_key_exists('no_notifications', $ticket) &&
-			!empty($this->bo->readonlys_from_acl()['no_notifications']))
+		// only ran when updating an existing ticket.
+		// It is no ticket column: tracker_bo::save($keys) merges only columns (data_merge()) and silently
+		// dropped it, so the notification was sent anyway (ticket #124831) - set it in the bo's data directly,
+		// like createReply() does
+		if (array_key_exists('no_notifications', $ticket))
 		{
+			if (empty($this->bo->readonlys_from_acl()['no_notifications']))
+			{
+				$this->bo->data['no_notifications'] = $ticket['no_notifications'];
+			}
 			unset($ticket['no_notifications']);
 		}
 
