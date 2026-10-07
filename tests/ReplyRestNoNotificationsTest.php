@@ -77,6 +77,10 @@ class ReplyRestNoNotificationsTest extends AppTest
 
 	protected function tearDown() : void
 	{
+		while($this->handlers-- > 0)
+		{
+			restore_exception_handler();
+		}
 		if (isset($this->restore_async_flag))
 		{
 			$GLOBALS['egw_info']['flags']['async-service'] = $this->restore_async_flag;
@@ -300,5 +304,133 @@ class ReplyRestNoNotificationsTest extends AppTest
 		$this->assertContains($cc, $this->notified,
 			'a site that restricted "no_notifications" field ACL to admins only must ignore "notify": false '.
 			'from a mere assignee');
+	}
+
+	public static function ticketBodyProvider() : array
+	{
+		return [
+			'PUT, replacing the ticket'    => ['PUT',   ['title' => 'Ticket', 'notify' => false], true],
+			'POST, creating a ticket'      => ['POST',  ['title' => 'Ticket', 'notify' => false], true],
+			'PATCH of just one field'      => ['PATCH', ['percentComplete' => 50, 'notify' => false], true],
+			'PATCH, notify: true'          => ['PATCH', ['percentComplete' => 50, 'notify' => true], false],
+		];
+	}
+
+	/**
+	 * ticket #124831, the reporter's case: a PUT/PATCH/POST of a TICKET (not a reply) has to understand "notify" too
+	 *
+	 * Pass criteria: "notify": false is mapped to no_notifications=true (and "notify": true to false), for all methods
+	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('ticketBodyProvider')]
+	public function testTicketBodyNotifyIsMapped(string $method, array $body, bool $expected_no_notifications)
+	{
+		$parsed = JsTracker::parseJsTicket(json_encode($body), [], null, $method, 1);
+
+		$this->assertArrayHasKey('no_notifications', $parsed);
+		$this->assertSame($expected_no_notifications, $parsed['no_notifications']);
+	}
+
+	/**
+	 * Pass criteria: without "notify" in the request nothing is set, the ticket is saved as before (with notification)
+	 */
+	public function testTicketBodyWithoutNotifyLeavesFlagAlone()
+	{
+		$parsed = JsTracker::parseJsTicket(json_encode(['title' => 'Ticket']), [], null, 'PUT', 1);
+
+		$this->assertArrayNotHasKey('no_notifications', $parsed);
+	}
+
+	/**
+	 * Pass criteria: the field the reporter tried ("no_notifications", also noNotifications) is NOT the field name, it is ignored,
+	 * so it must not accidentally suppress anything - the documented name is "notify"
+	 */
+	public function testTicketBodyOtherSpellingsAreIgnored()
+	{
+		foreach(['no_notifications', 'noNotifications', 'egroupware.org:no_notifications'] as $name)
+		{
+			$parsed = JsTracker::parseJsTicket(json_encode(['title' => 'Ticket', $name => true]), [], null, 'PUT', 1);
+			$this->assertArrayNotHasKey('no_notifications', $parsed, "'$name' is not a supported field");
+		}
+	}
+
+	/**
+	 * Call the REAL ApiHandler::put() (not a mirror of it: the ticket path lost the flag in tracker_bo::save()'s data_merge())
+	 *
+	 * @param array $body JSON body
+	 * @param string $method PATCH or PUT
+	 * @return bool|string result of put()
+	 */
+	protected function putTicket(array $body, string $method = 'PATCH')
+	{
+		$handler = new ApiHandler('tracker', new \EGroupware\Api\CalDAV());
+		// CalDAV's constructor installs an exception handler, the test must remove it again
+		$this->handlers++;
+		// the handler works with its own bo (protected): same capturing of the notifications as in setUp()
+		$bo = (new \ReflectionProperty($handler, 'bo'))->getValue($handler);
+		$bo->tracking = new \tracker_tracking($bo, MockedNotifications::class);
+		$bo->tracking->notify_current_user = true;
+
+		$options = ['path' => '/'.$GLOBALS['egw_info']['user']['account_lid'].'/tracker/'.$this->tr_id, 'content' => json_encode($body)];
+		$id = (string)$this->tr_id;
+		return $handler->put($options, $id, $GLOBALS['egw_info']['user']['account_id'], '/'.$GLOBALS['egw_info']['user']['account_lid'], $method, 'application/json');
+	}
+
+	/** @var int number of ApiHandlers created, each constructing Api\CalDAV, which sets an exception handler */
+	protected $handlers = 0;
+
+	/**
+	 * The customer writes a field of a ticket via PATCH with "notify": false: the external "Kopie" address must not get an email
+	 */
+	public function testTicketPatchWithNotifyFalseSuppressesExternalCc()
+	{
+		$cc = 'external-cc-124831-ticket@example.invalid';
+		$this->createAssignedTicketWithCc($cc);
+
+		$result = $this->putTicket(['title' => 'Changed by REST: accounting text', 'notify' => false]);
+
+		$this->assertTrue($result, 'PATCH failed: '.var_export($result, true));
+		$this->assertNotContains($cc, $this->notified,
+			'ticket #124831: external "Kopie" address was notified for a REST ticket update with "notify": false');
+	}
+
+	/**
+	 * Same for PUT, which replaces the ticket
+	 */
+	public function testTicketPutWithNotifyFalseSuppressesExternalCc()
+	{
+		$cc = 'external-cc-124831-ticket-put@example.invalid';
+		$this->createAssignedTicketWithCc($cc);
+
+		$result = $this->putTicket(['title' => 'Replaced by REST', 'notify' => false], 'PUT');
+
+		$this->assertTrue($result, 'PUT failed: '.var_export($result, true));
+		$this->assertNotContains($cc, $this->notified);
+	}
+
+	/**
+	 * Regression guard: without "notify" a ticket update still notifies the external cc address as before
+	 */
+	public function testTicketPatchWithoutNotifyStillNotifiesExternalCc()
+	{
+		$cc = 'external-cc-124831-ticket-default@example.invalid';
+		$this->createAssignedTicketWithCc($cc);
+
+		$result = $this->putTicket(['title' => 'Changed by REST']);
+
+		$this->assertTrue($result, 'PATCH failed: '.var_export($result, true));
+		$this->assertContains($cc, $this->notified, 'default behaviour must keep notifying the external "Kopie" address');
+	}
+
+	/**
+	 * A caller without the right to suppress notifications (not assignee/technician/admin) can not do it with "notify": false
+	 */
+	public function testTicketPatchWithNotifyFalseIgnoredWithoutRights()
+	{
+		$cc = 'external-cc-124831-ticket-norights@example.invalid';
+		$this->createUnassignedTicketWithCc($cc);
+
+		$this->putTicket(['title' => 'Changed by REST', 'notify' => false]);
+
+		$this->assertContains($cc, $this->notified, 'a caller without the role must not be able to suppress notifications');
 	}
 }
