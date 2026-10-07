@@ -1192,11 +1192,13 @@ class tracker_ui extends tracker_bo
 			}
 			if (isset($rows[$n]['tr_description']))
 			{
-				if($rows[$n]['tr_edit_mode'] == 'ascii')
-				{
-					$rows[$n]['tr_description'] = htmlspecialchars($rows[$n]['tr_description']);
-				}
-				$rows[$n]['tr_description'] = nl2br(trim($rows[$n]['tr_description']));
+				// Neither escaped nor nl2br'd, in either mode: the row widget is given the entry's
+				// own tr_edit_mode (see index.xet) and renders the value the way that mode means it.
+				// "ascii" holds plain text, possibly markdown, which the widget parses itself - a
+				// pre-converted copy would never be parsed.  "html" holds editor output, where a
+				// line break is already a <br> or a block tag, so the only "\n" left in it is
+				// formatting between tags - nl2br turned every one of those into a blank line.
+				$rows[$n]['tr_description'] = trim($rows[$n]['tr_description']);
 			}
 			if ($row['overdue'] && !$row['tr_closed']) $rows[$n]['overdue_class'] = 'tracker_overdue';
 			if ($row['bounties']) $rows[$n]['currency'] = $this->currency;

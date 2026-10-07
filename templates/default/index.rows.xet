@@ -82,7 +82,7 @@
                     <et2-vbox  class="colfullWidth" noLang="1">
                         <et2-description  href="tracker.tracker_ui.edit&amp;tr_id=$row_cont[tr_id]" id="${row}[tr_summary]" class="$row_cont[seen_class]" extraLinkPopup="780x535" extraLinkTarget="_blank" noLang="1"></et2-description>
                         <et2-box  class="trackerDes" noLang="1">
-                            <et2-html  id="${row}[tr_description]" noLang="1"></et2-html>
+                            <et2-htmlarea  id="${row}[tr_description]" mode="$row_cont[tr_edit_mode]" readonly="true" noAiTools="true" noLang="1"></et2-htmlarea>
                         </et2-box>
                     </et2-vbox>
                     <et2-vbox  readonly="true">
