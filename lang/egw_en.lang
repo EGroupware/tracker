@@ -3,6 +3,7 @@
 %1 entries %2	tracker	en	%1 entries %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	en	%1 entries %2, %3 failed because of insufficient rights!
 %1 entries updated.	tracker	en	%1 entries updated.
+%1 is %2	tracker	en	%1 is %2
 %1 is due %2	tracker	en	%1 is due %2
 %1 is starting %2	tracker	en	%1 is starting %2
 %1 tickets have been converted	tracker	en	%1 tickets have been converted.
@@ -273,6 +274,7 @@ manage mapping	tracker	en	Manage mapping
 mark as read	tracker	en	Mark as read
 mark as unread	tracker	en	Mark as unread
 match again after	tracker	en	Match again after
+matches all tickets	tracker	en	Matches all tickets
 matching filter	tracker	en	Matching filter
 max length of the input [, length of the inputfield (optional)]	tracker	en	max length of the input [, length of the inputfield (optional)]
 maximum %1 times	tracker	en	maximum %1 times

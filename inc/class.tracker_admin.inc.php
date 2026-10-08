@@ -721,6 +721,9 @@ class tracker_admin extends tracker_bo
 			$prio_labels = $prio_tracker = $prio_cat = null;
 			foreach($rows as &$row)
 			{
+				// Row ids are "tracker::<id>", which would collide with the tickets' own rows in the client's cache
+				$row['esc_row_id'] = 'esc'.$row['esc_id'];
+
 				// Show before / after
 				$row['esc_before_after'] = ($row['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
 				$row['esc_time'] = abs($row['esc_time']);
@@ -742,6 +745,7 @@ class tracker_admin extends tracker_bo
 					$row['prio_label'] = implode(',',$row['prio_label']);
 				}
 
+				$row['filter_label'] = $this->get_escalation_filter_label($row);
 				// Show repeat limit, if set
 				if($row['esc_limit']) $row['esc_limit_label'] = lang('maximum %1 times', $row['esc_limit']);
 			}
@@ -758,6 +762,8 @@ class tracker_admin extends tracker_bo
 	function escalations(?array $_content=null, $msg='')
 	{
 		$escalations = new tracker_escalations();
+		// Whether the edit form (right side) is wanted: only for a new or selected escalation
+		$editing = false;
 
 		if (!is_array($_content))
 		{
@@ -768,7 +774,7 @@ class tracker_admin extends tracker_bo
 				'no_filter' => true,
 				'order'          =>	'esc_time',
 				'sort'           =>	'ASC',// IO direction of the sort: 'ASC' or 'DESC'
-				'row_id'	=>	'esc_id',
+				'row_id'	=>	'esc_row_id',
 				'placeholder_actions' => array(),
 				'actions'	=>	array(
 					'edit' => array(
@@ -785,37 +791,39 @@ class tracker_admin extends tracker_bo
 		}
 		else
 		{
-			$button = key($_content['escalation']['button'] ?? []);
-			unset($_content['escalation']['button']);
+			$button = key($_content['button'] ?? []);
+			unset($_content['button']);
 			$escalations->init($_content);
 
 			switch($button)
 			{
 				case 'save':
 				case 'apply':
+					$editing = true;
 					// 'Before' only valid for start & due dates
-					if($_content['escalation']['esc_before_after'] == tracker_escalations::BEFORE &&
-						!in_array($_content['escalation']['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
+					if($_content['esc_before_after'] == tracker_escalations::BEFORE &&
+						!in_array($_content['esc_type'],array(tracker_escalations::START,tracker_escalations::DUE)))
 					{
 						$msg = lang('"%2" only valid for start date and due date.  Use "%1".',lang('after'),lang('before'));
 						$escalations->data['esc_before_after'] = tracker_escalations::AFTER;
 						break;
 					}
 					// Handle before time
-					$escalations->data['esc_time'] *= ($_content['escalation']['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
+					$escalations->data['esc_time'] *= ($_content['esc_before_after'] == tracker_escalations::BEFORE ? -1 : 1);
 
 					if (($err = $escalations->not_unique()))
 					{
 						$msg = lang('There already an escalation for that filter!');
 						$button = '';
 					}
-					elseif (($err = $escalations->save(null,null,!$_content['escalation']['esc_run_on_existing'])) == 0)
+					elseif (($err = $escalations->save(null,null,!$_content['esc_run_on_existing'])) == 0)
 					{
-						$msg = $_content['escalation']['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
+						$msg = $_content['esc_id'] ? lang('Escalation saved.') : lang('Escalation added.');
 					}
 					if ($button == 'apply' || $err) break;
 					// fall-through
 				case 'cancel':
+					$editing = false;
 					$escalations->init();
 					break;
 			}
@@ -828,7 +836,7 @@ class tracker_admin extends tracker_bo
 			{
 				$action = $_content['nm']['action'];
 				list($_id) = $_content['nm']['selected'];
-				$id = (int)$_id;
+				$id = (int)preg_replace('/^\D+/', '', $_id);
 				unset($_content['nm']['action']);
 				unset($_content['nm']['selected']);
 				switch($action)
@@ -838,6 +846,10 @@ class tracker_admin extends tracker_bo
 						{
 							$msg = lang('Escalation not found!');
 							$escalations->init();
+						}
+						else
+						{
+							$editing = true;
 						}
 						break;
 					case 'delete':
@@ -853,17 +865,18 @@ class tracker_admin extends tracker_bo
 				}
 			}
 		}
-		$content = array('escalation' => $escalations->data) + array(
+		$content = array(
 			'nm' => $_content['nm'],
 			'msg' => $msg,
+			'editing' => $editing,
 		);
-
-		// Handle before time
-		$content['escalation']['esc_before_after'] = ($content['escalation']['esc_time'] < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
-		$content['escalation']['esc_time'] = abs($content['escalation']['esc_time'] ?: 0);
+		if ($editing)
+		{
+			// the client loads this into the edit template, see app.tracker.escalation_show_form()
+			[$content['editform']['content'], $content['editform']['sel_options']] = $this->get_escalation_form($escalations->data);
+		}
 
 		$readonlys = $preserv = array();
-		$preserv['escalation']['esc_id'] = $content['escalation']['esc_id'];
 		$preserv['nm'] = $content['nm'];
 
 		// These two are not categories, and are needed for the list
@@ -876,8 +889,72 @@ class tracker_admin extends tracker_bo
 			$sel_options['tr_status']		+= $this->get_tracker_stati($tracker);
 		}
 
-		$sel_options['escalation'] = array(
-			'tr_tracker'  => &$this->trackers,
+		$sel_options['nm'] = $this->get_escalation_type_options();
+
+		// The edit form gets its options loaded by the client, the server still needs to know them to validate the
+		// submitted values: all possible options, as the queue (and with it the options) can be changed in the form
+		$sel_options += $this->get_escalation_form([])[1];
+
+		$tpl = new Etemplate('tracker.escalations');
+		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
+		//_debug_array($content);
+		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);
+	}
+
+	/**
+	 * Describe the filter of an escalation as a sentence, eg. "Queue is Support, Status is Open"
+	 *
+	 * Only filters which are set (not "All") are named.
+	 *
+	 * @param array $row escalation, as read from the database
+	 * @return string
+	 */
+	protected function get_escalation_filter_label(array $row) : string
+	{
+		static $options = [];
+
+		$trackers = !empty($row['tr_tracker']) ? (array)$row['tr_tracker'] : array_keys($this->trackers);
+		$key = implode(',', $trackers);
+		if (!isset($options[$key]))
+		{
+			$options[$key] = ['tr_tracker' => $this->trackers, 'cat_id' => [], 'tr_version' => [], 'tr_status' => [],
+				'tr_priority' => [], 'tr_resolution' => []];
+			foreach($trackers as $tracker)
+			{
+				$options[$key]['cat_id']        += $this->get_tracker_labels('cat', $tracker);
+				$options[$key]['tr_version']    += $this->get_tracker_labels('version', $tracker);
+				$options[$key]['tr_resolution'] += $this->get_tracker_labels('resolution', $tracker);
+				$options[$key]['tr_priority']   += $this->get_tracker_priorities($tracker);
+				$options[$key]['tr_status']     += $this->get_tracker_stati($tracker);
+			}
+		}
+		$parts = [];
+		foreach(['tr_tracker' => 'Queue', 'cat_id' => 'Category', 'tr_version' => 'Version', 'tr_status' => 'Status',
+			'tr_priority' => 'Priority', 'tr_resolution' => 'Resolution'] as $name => $label)
+		{
+			$values = is_array($row[$name] ?? null) ? $row[$name] : explode(',', (string)($row[$name] ?? ''));
+			$labels = [];
+			foreach($values as $value)
+			{
+				if ($value === '' || $value === '0' || $value === 0) continue;	// all
+				$labels[] = lang($options[$key][$name][$value] ?? (string)$value);
+			}
+			if ($labels)
+			{
+				$parts[] = lang('%1 is %2', lang($label), implode(', ', $labels));
+			}
+		}
+		return $parts ? implode(', ', $parts) : lang('matches all tickets');
+	}
+
+	/**
+	 * Select options for the "before / after" and type of an escalation
+	 *
+	 * @return array[]
+	 */
+	protected function get_escalation_type_options() : array
+	{
+		return array(
 			'esc_before_after' => array(
 				tracker_escalations::AFTER => lang('after'),
 				tracker_escalations::BEFORE => lang('before'),
@@ -892,6 +969,33 @@ class tracker_admin extends tracker_bo
 				tracker_escalations::REPLIED_ASSIGNED => lang('last reply by assigned'),
 				tracker_escalations::REPLIED_NOT_CREATOR => lang('last reply by anyone but creator'),
 			),
+		);
+	}
+
+	/**
+	 * Content and select options of the escalation edit form
+	 *
+	 * @param array $data escalation data, as in tracker_escalations::$data
+	 * @return array[] [content, sel_options], for the edit template
+	 */
+	protected function get_escalation_form(array $data) : array
+	{
+		// Handle before time
+		$data['esc_before_after'] = (($data['esc_time'] ?? 0) < 0 ? tracker_escalations::BEFORE : tracker_escalations::AFTER);
+		$data['esc_time'] = abs($data['esc_time'] ?? 0);
+
+		if (!empty($data['set']['tr_assigned']) && !is_array($data['set']['tr_assigned']))
+		{
+			$data['set']['tr_assigned'] = explode(',', $data['set']['tr_assigned']);
+		}
+		if (!empty($data['tr_status']) && !is_array($data['tr_status']))
+		{
+			$data['tr_status'] = explode(',', $data['tr_status']);
+		}
+		$data['no_comment_visibility'] = !$this->allow_restricted_comments;
+
+		$sel_options = $this->get_escalation_type_options() + array(
+			'tr_tracker'  => $this->trackers,
 			'notify' => tracker_escalations::$notification,
 			'cat_id' => array(),
 			'tr_version' => array(),
@@ -900,44 +1004,60 @@ class tracker_admin extends tracker_bo
 			'tr_status' => array(),
 			'tr_assigned' => array()
 		);
-
-		if ($content['escalation']['set']['tr_assigned'] && !is_array($content['escalation']['set']['tr_assigned']))
-		{
-			$content['escalation']['set']['tr_assigned'] = explode(',',$content['escalation']['set']['tr_assigned']);
-		}
-		$sel_options['escalation']['set'] = $sel_options['escalation'];
-		$sel_options['nm']['esc_before_after'] = $sel_options['escalation']['esc_before_after'];
-		$sel_options['nm']['esc_type'] = $sel_options['escalation']['esc_type'];
+		$sel_options['set'] = $sel_options;
 
 		$this->get_escalation_sel_options(
-				$sel_options['escalation'],
-				($content['escalation']['tr_tracker'] ? (array)$content['escalation']['tr_tracker'] : array_keys($this->trackers))
+			$sel_options,
+			($data['tr_tracker'] ? (array)$data['tr_tracker'] : array_keys($this->trackers))
 		);
 		$this->get_escalation_sel_options(
-				$sel_options['escalation']['set'],
-				($content['escalation']['set']['tr_tracker'] ? (array)$content['escalation']['set']['tr_tracker'] : (
-					$content['escalation']['tr_tracker'] ? (array)$content['escalation']['tr_tracker'] : array_keys($this->trackers)))
+			$sel_options['set'],
+			(!empty($data['set']['tr_tracker']) ? (array)$data['set']['tr_tracker'] : (
+				$data['tr_tracker'] ? (array)$data['tr_tracker'] : array_keys($this->trackers)))
 		);
+		return [$data, $sel_options];
+	}
 
+	/**
+	 * Load an escalation (or an empty one) into the edit form without reloading the page
+	 *
+	 * @param int $id escalation id, 0 for a new escalation
+	 * Answers with an array with keys "content" and "sel_options", both relative to the "escalation" namespace of the form
+	 */
+	public function ajax_escalation($id = 0) : void
+	{
+		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
+		{
+			throw new Api\Exception\NoPermission();
+		}
+		$escalations = new tracker_escalations();
+		if ($id && !$escalations->read((int)$id))
+		{
+			throw new Api\Exception\NotFound();
+		}
+		[$content, $sel_options] = $this->get_escalation_form($escalations->data);
+		Api\Json\Response::get()->data(['content' => $content, 'sel_options' => $sel_options]);
+	}
 
-		$tpl = new Etemplate('tracker.escalations');
-		if ($content['escalation']['tr_status'] && !is_array($content['escalation']['tr_status']))
+	/**
+	 * Select options of the edit form for the queues chosen in it, as the options of the other selects depend on the queue
+	 *
+	 * Answers with the same sel_options as ajax_escalation().
+	 *
+	 * @param int|int[] $queues queues of the filter, empty for all
+	 * @param int|int[] $set_queues queue to set, empty for the ones of the filter
+	 */
+	public function ajax_escalation_options($queues = [], $set_queues = []) : void
+	{
+		if (!$GLOBALS['egw_info']['user']['apps']['admin'])
 		{
-			$content['escalation']['tr_status'] = explode(',',$content['escalation']['tr_status']);
+			throw new Api\Exception\NoPermission();
 		}
-		foreach(array('tr_status', 'tr_tracker','cat_id','tr_version','tr_priority','tr_resolution') as $array)
-		{
-			if(!empty($content['escalation'][$array]) && is_array($content['escalation'][$array]) && count($content['escalation'][$array]) > 1)
-			{
-				$tpl->setElementAttribute($array, 'empty_label', 'all');
-				$tpl->setElementAttribute($array, 'rows', '3');
-				$tpl->setElementAttribute($array, 'tags', true);
-			}
-		}
-		$content['escalation']['set']['no_comment_visibility'] = !$this->allow_restricted_comments;
-		$GLOBALS['egw_info']['flags']['app_header'] = lang('Tracker').' - '.lang('Define escalations');
-		//_debug_array($content);
-		return $tpl->exec('tracker.tracker_admin.escalations',$content,$sel_options,$readonlys,$preserv);
+		[, $sel_options] = $this->get_escalation_form([
+			'tr_tracker' => array_values(array_filter((array)$queues)),
+			'set' => ['tr_tracker' => array_values(array_filter((array)$set_queues))],
+		]);
+		Api\Json\Response::get()->data($sel_options);
 	}
 
 	/**
