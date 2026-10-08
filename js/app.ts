@@ -17,6 +17,7 @@ import {EgwApp} from "../../api/js/jsapi/egw_app";
 // nothing in practice (kept as-is, not this deletion's concern to fix). See
 // app-ts-modernization.md and widget-migration-status.md.
 import {Et2Button} from "../../api/js/etemplate/Et2Button/Et2Button";
+import type {Et2Template} from "../../api/js/etemplate/Et2Template/Et2Template";
 import {et2_selectbox} from "../../api/js/etemplate/legacy-shims/et2_widget_selectbox";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import type {et2_htmlarea} from "../../api/js/etemplate/legacy-shims/et2_widget_htmlarea";
@@ -118,19 +119,209 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 				}
 				break;
 			case 'tracker.escalations':
-				// Set any filters with multiple values to multiple
-				_et2.widgetContainer.getWidgetById('escalation').iterateOver((widget) =>
-				{
-					if( typeof widget.options.value === 'object' && widget.options.value.length > 1)
-					{
-						let button = null;
-						// Find associated expand button
-						widget.getParent().getParent().iterateOver((widget) => {button = widget;}, this, Et2Button);
-						this.multiple_assigned(false, button);
-						widget.set_value(widget.options.value);
-					}
-				},this,et2_selectbox);
+				this.escalation_show_form(_et2);
 				break;
+		}
+	}
+
+	/** Set while the selection is restored after a reload, so that onselect doesn't reload again */
+	private _escalation_restoring = false;
+
+	/** etemplate of the escalations page currently shown */
+	private _escalation_et2 : etemplate2 = null;
+
+	/**
+	 * After the escalations page (re)loads, open the right slot holding the edit form and re-select the
+	 * escalation being edited, as the reload loses both.
+	 *
+	 * The framework can re-collapse the side while the new content settles, so the panel is checked again
+	 * a moment later.
+	 *
+	 * @param {etemplate2} _et2
+	 */
+	protected escalation_show_form(_et2 : etemplate2)
+	{
+		this._escalation_et2 = _et2;
+		const frameworkApp = _et2.DOMContainer.closest("egw-app") as any;
+
+		// In Admin the page is loaded into a box inside admin's own template, not directly into the app, so
+		// the framework does not slot the right side for us.  Move it up to the app ourselves, and let
+		// admin treat the header as its app toolbar.
+		if(frameworkApp && frameworkApp.name !== this.appname)
+		{
+			_et2.DOMContainer.parentNode?.querySelectorAll(":scope > [slot=right]").forEach((node : HTMLElement) =>
+			{
+				frameworkApp.appendChild(node);
+			});
+			(window as any).app?.admin?.enableAppToolbar?.(_et2, _et2.name);
+		}
+
+		// Nothing to edit yet: keep the right side closed until Add or a row is chosen
+		if(!_et2.widgetContainer.getArrayMgr("content").getEntry("editing"))
+		{
+			frameworkApp?.updateComplete.then(() => frameworkApp.hideRight?.());
+			return;
+		}
+
+		// The server sends the form to show (after Save / Apply / Cancel the page is reloaded)
+		const editform = _et2.widgetContainer.getArrayMgr("content").getEntry("editform");
+		if(editform && frameworkApp)
+		{
+			this.escalation_form(frameworkApp, editform.content, editform.sel_options);
+		}
+
+		const open = async() =>
+		{
+			await frameworkApp?.updateComplete;
+			if(frameworkApp?.rightCollapsed)
+			{
+				await frameworkApp.showRight();
+			}
+		};
+		open();
+		window.setTimeout(open, 500);
+		window.setTimeout(open, 1500);
+
+		const escId = _et2.widgetContainer.getArrayMgr("content").getEntry("editform[content][esc_id]");
+		const nm = _et2.widgetContainer.getWidgetById("nm") as any;
+		if(!escId || !nm)
+		{
+			return;
+		}
+		// Rows arrive asynchronously, wait for ours before selecting it
+		let tries = 0;
+		const select = () =>
+		{
+			const grid = nm._datagrid;
+			const rowId = "tracker::esc" + escId;
+			if(grid?.rows?.some?.((row) => row.id === rowId))
+			{
+				// Selecting fires onselect, which would just reload the escalation again
+				this._escalation_restoring = true;
+				try
+				{
+					grid.selectSingleRow(rowId);
+				}
+				finally
+				{
+					this._escalation_restoring = false;
+				}
+			}
+			else if(++tries < 30)
+			{
+				window.setTimeout(select, 100);
+			}
+		};
+		select();
+	}
+
+	/**
+	 * Selecting a single escalation loads it into the edit form in the right slot
+	 *
+	 * @param {string[]} _ids selected row ids
+	 * @param {Et2Nextmatch} _nm
+	 */
+	escalation_select(_ids : string[], _nm : any)
+	{
+		if(_ids?.length === 1 && !this._escalation_restoring)
+		{
+			this.escalation_load(_ids[0].split("::").pop().replace(/\D/g, ""));
+		}
+	}
+
+	/**
+	 * Cancel in the edit form: forget the escalation being edited and close the form, nothing is sent to the server
+	 */
+	escalation_cancel()
+	{
+		(this._escalation_et2?.widgetContainer.getWidgetById("nm") as any)?._datagrid?.clearSelection?.(false);
+		(this._escalation_et2?.DOMContainer.closest("egw-app") as any)?.hideRight?.();
+	}
+
+	/**
+	 * Add button: show an empty edit form
+	 */
+	escalation_add()
+	{
+		(this._escalation_et2?.widgetContainer.getWidgetById("nm") as any)?._datagrid?.clearSelection?.(false);
+		this.escalation_load(0);
+	}
+
+	/**
+	 * Load content and select options into the edit template in the right slot
+	 *
+	 * @param {HTMLElement} _frameworkApp egw-app holding the edit template
+	 * @param {object} _content
+	 * @param {object} _sel_options
+	 */
+	protected async escalation_form(_frameworkApp : any, _content : object, _sel_options : object)
+	{
+		const template = _frameworkApp.querySelector(":scope > et2-template.escalation_edit") as Et2Template;
+		if(!template)
+		{
+			return;
+		}
+		// A load still running (the first one, as the page is built) would ignore ours
+		await template.loading;
+		await template.load(_content, _sel_options);
+	}
+
+	/**
+	 * The queue of the filter or of the action was changed: the options of the other selects depend on it,
+	 * so ask for the ones that fit and put them into the form.  The values are kept, the selects drop the ones
+	 * that no longer fit.
+	 */
+	async escalation_queue_change()
+	{
+		const frameworkApp = this._escalation_et2?.DOMContainer.closest("egw-app") as any;
+		const form = frameworkApp?.querySelector(":scope > et2-template.escalation_edit") as HTMLElement;
+		if(!form)
+		{
+			return;
+		}
+		const widgets = Array.from(form.querySelectorAll("*")).filter((el : any) =>
+			el.localName.startsWith("et2-") && typeof el.id === "string" && el.id && "select_options" in el) as any[];
+		const queues = widgets.find(w => w.id === "tr_tracker")?.value;
+		const set_queue = widgets.find(w => w.id === "set[tr_tracker]")?.value;
+
+		const options = await this.egw.request("tracker.tracker_admin.ajax_escalation_options", [queues, set_queue]);
+		if(!options)
+		{
+			return;
+		}
+		const lookup = (data : object, id : string) => id.split(/[\[\]]+/).filter(Boolean).reduce((o, k) => o?.[k], data);
+		widgets.filter(w => w.id !== "tr_tracker" && w.id !== "set[tr_tracker]").forEach(w =>
+		{
+			const these = lookup(options, w.id);
+			if(typeof these !== "undefined")
+			{
+				w.select_options = these;
+			}
+		});
+	}
+
+	/**
+	 * Load an escalation (or an empty one for id 0) into the edit form, without reloading the page
+	 *
+	 * @param {string|number} _id escalation id
+	 */
+	async escalation_load(_id : string | number)
+	{
+		const et2 = this._escalation_et2;
+		const frameworkApp = et2?.DOMContainer.closest("egw-app") as any;
+		if(!frameworkApp)
+		{
+			return;
+		}
+		const result = await this.egw.request("tracker.tracker_admin.ajax_escalation", [_id]);
+		if(!result)
+		{
+			return;
+		}
+		await this.escalation_form(frameworkApp, result.content, result.sel_options);
+		if(frameworkApp.rightCollapsed)
+		{
+			await frameworkApp.showRight();
 		}
 	}
 

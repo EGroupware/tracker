@@ -3,6 +3,7 @@
 %1 entries %2	tracker	de	%1 Einträge %2
 %1 entries %2, %3 failed because of insufficent rights !!!	tracker	de	%1 Einträge %2, %3 fehlgeschlagen wegen fehlender Rechte!
 %1 entries updated.	tracker	de	%1 Einträge aktualisiert.
+%1 is %2	tracker	de	%1 ist %2
 %1 is due %2	tracker	de	%1 ist fällig %2
 %1 is starting %2	tracker	de	%1 startet %2
 %1 tickets have been converted	tracker	de	%1 Tickets geändert
@@ -273,6 +274,7 @@ manage mapping	tracker	de	Feldzuordnungen bearbeiten
 mark as read	tracker	de	Als gelesen markieren
 mark as unread	tracker	de	Als ungelesen markieren
 match again after	tracker	de	zutreffend nach
+matches all tickets	tracker	de	Betrifft alle Tickets
 matching filter	tracker	de	Filter zutreffend
 max length of the input [, length of the inputfield (optional)]	tracker	de	max. Länge des Textfeldes [, Länge des Textfeldes (optional)]
 maximum %1 times	tracker	de	Maximum %1 Zeiten
