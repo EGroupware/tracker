@@ -713,6 +713,15 @@ class tracker_admin extends tracker_bo
 	 */
 	function get_rows($query,&$rows,&$readonlys,$join='',$need_full_no_count=false,$only_keys=false,$extra_cols=array())
 	{
+		// esc_row_id is computed, not a column: map filters on it (refresh, known-uids check) back to esc_id
+		if (isset($query['col_filter']['esc_row_id']))
+		{
+			$query['col_filter']['esc_id'] = array_map(static function($row_id)
+			{
+				return (int)preg_replace('/^esc/', '', $row_id);
+			}, (array)$query['col_filter']['esc_row_id']);
+			unset($query['col_filter']['esc_row_id']);
+		}
 		$escalations = new tracker_escalations();
 		$Ok = $escalations->get_rows($query,$rows,$readonlys, $join, $need_full_no_count, $only_keys, $extra_cols);
 
