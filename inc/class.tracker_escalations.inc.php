@@ -335,6 +335,9 @@ class tracker_escalations extends Api\Storage\Base2
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
+		// $now is user-timezone based and fixed at construction, but the shared instance may outlive
+		// a timezone change (eg. preference_notifications()), so refresh it before stamping modified/closed/reply times
+		self::$tracker->set_times();
 		if(!is_object(self::$tracker->tracking))
 		{
 			self::$tracker->tracking = new tracker_tracking(self::$tracker);
@@ -755,5 +758,7 @@ class tracker_escalations extends Api\Storage\Base2
 		// Restore
 		$GLOBALS['egw_info']['user']['account_id']  = $save_account_id;
 		$GLOBALS['egw_info']['user']['preferences'] = $save_prefs;
+		// the loop above switched Api\DateTime to each user's timezone, switch back
+		Api\DateTime::init();
 	}
 }
