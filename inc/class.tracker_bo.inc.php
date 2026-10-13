@@ -39,7 +39,7 @@ class tracker_bo extends tracker_so
 	 *
 	 * @var array
 	 */
-	var $timestamps = array('tr_created', 'tr_modified', 'tr_closed', 'reply_created', 'tr_startdate', 'tr_duedate');
+	var $timestamps = array('tr_created', 'tr_modified', 'tr_closed', 'reply_created', 'tr_startdate', 'tr_duedate', 'esc_start');
 	/**
 	 * Current user
 	 *
