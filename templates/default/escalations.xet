@@ -36,7 +36,7 @@
 					</et2-vbox>
 					<et2-textarea  id="${row}[esc_action_label]" readonly="true"></et2-textarea>
 					<et2-box  class="escalation_time" readonly="true">
-						<et2-date-duration  id="${row}[esc_time]" readonly="true" unitDisplay="long"></et2-date-duration>
+						<et2-date-duration  id="${row}[esc_time]" readonly="true" unitDisplay="long" hoursPerDay="24"></et2-date-duration>
 						<et2-select  id="${row}[esc_before_after]" readonly="true" noLang="1"></et2-select>
 						<et2-select  id="${row}[esc_type]" readonly="true" noLang="1"></et2-select>
 						<et2-date-duration  id="${row}[esc_match_repeat]" readonly="true" unitDisplay="long" label="Match again after"></et2-date-duration>
@@ -69,7 +69,7 @@
 		</et2-hbox>
 
 		<et2-hbox  class="escalation_wide">
-			<et2-date-duration  label="Time" id="esc_time"></et2-date-duration>
+			<et2-date-duration  label="Time" id="esc_time" hoursPerDay="24"></et2-date-duration>
 			<et2-select  id="esc_before_after"></et2-select>
 			<et2-select  id="esc_type"></et2-select>
 		</et2-hbox>
