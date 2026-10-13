@@ -13,7 +13,7 @@
 				<row class="th">
 
 				</row>
-				<row class="$row_cont[cat_id] $row_cont[class] trackerRow" valign="top">
+				<row class="$row_cont[enabled_color_code] $row_cont[class] trackerRow" valign="top">
 					<et2-vbox  class="tracker1Col" noLang="1">
 						<et2-customfields-list  id="$row" class="customfields" app="tracker" disabled="true"/>
 						<et2-description  id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1"></et2-description>
