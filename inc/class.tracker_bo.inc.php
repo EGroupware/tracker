@@ -1272,6 +1272,46 @@ class tracker_bo extends tracker_so
 	}
 
 	/**
+	 * Read what file_access() needs for several tickets at once
+	 *
+	 * Registered as 'file_access_rows', so Api\Link::file_access_multiple() can answer a whole
+	 * directory listing's worth of access checks without reading one ticket per query. It returns
+	 * rows only - every verdict still comes from file_access()/check_rights() above, which takes
+	 * such a row in place of a tr_id.
+	 *
+	 * These are the full ticket rows plus the assignees, which is what the access check reads:
+	 * check_rights() looks at tr_creator, tr_group and tr_tracker, and deny_private() additionally
+	 * at tr_private and tr_assigned. What read() fetches beyond that - the bounties, the replies
+	 * and the see_restricted_replies flag they decide - costs a query per ticket each and is never
+	 * consulted by either, so it is left out. Do not use these rows for anything but that check.
+	 *
+	 * @param int[] $ids
+	 * @return array tr_id => ticket pairs, tickets that do not exist are left out
+	 */
+	function file_access_rows(array $ids)
+	{
+		if (!($rows = parent::readRows($ids)))
+		{
+			return $rows;
+		}
+		foreach($rows as &$row)
+		{
+			$row['tr_assigned'] = array();
+		}
+		unset($row);
+
+		foreach($this->db->select(self::ASSIGNEE_TABLE, 'tr_id,tr_assigned',
+			array('tr_id' => array_keys($rows)), __LINE__, __FILE__, false, '', 'tracker') as $assignee)
+		{
+			if (isset($rows[$assignee['tr_id']]))
+			{
+				$rows[$assignee['tr_id']]['tr_assigned'][] = $assignee['tr_assigned'];
+			}
+		}
+		return $rows;
+	}
+
+	/**
 	 * Check if users is allowed to vote - has not already voted
 	 *
 	 * @param int $tr_id tracker-id

@@ -47,6 +47,7 @@ class tracker_hooks
 			'add_id'     => 'link_id',
 			'add_popup'  => '780x720',
 			'file_access' => 'tracker.tracker_bo.file_access',
+			'file_access_rows' => 'tracker.tracker_bo.file_access_rows',
 			'file_access_user' => true,	// file_access supports 4th parameter $user
 			'merge' => true,
 			'entry' => 'Ticket',
