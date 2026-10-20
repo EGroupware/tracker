@@ -2567,7 +2567,7 @@ OR tr_duedate IS NULL AND
 
 		$where = array(
 			'tr_status' => array_keys($this->get_tracker_stati(null, false)),
-			"(tr_duedate IS NOT NULL and ABS(tr_duedate - {$this->now}) < {$four_days}
+			Api\Db\SqlFragment::raw("(tr_duedate IS NOT NULL and ABS(tr_duedate - {$this->now}) < {$four_days}
 OR tr_startdate IS NOT NULL AND ABS(tr_startdate - {$this->now}) < $four_days
 OR tr_duedate IS NULL AND
     CASE
@@ -2577,7 +2577,7 @@ OR tr_duedate IS NULL AND
         ELSE
             ABS(tr_modified - $config_limit) < $four_days
     END
-                        ) "
+                        ) "),
 		);
 
 		// Creator

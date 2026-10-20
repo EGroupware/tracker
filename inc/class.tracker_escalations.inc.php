@@ -261,23 +261,23 @@ class tracker_escalations extends Api\Storage\Base2
 		if ($this->tr_resolution) $filter['tr_resolution'] = $this->tr_resolution;
 		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
 		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
-		if ($this->esc_limit)	$filter[] = '(match_count < ' . $this->esc_limit .' OR match_count IS NULL)';
+		if ($this->esc_limit)	$filter[] = Api\Db\SqlFragment::raw('(match_count < ' . $this->esc_limit .' OR match_count IS NULL)');
 
 		if ($due)
 		{
 			//echo "<p>time=".time()."=".date('Y-m-d H:i:s').", esc_time=$this->esc_time, time()-esc_time*60=".(time()-$this->esc_time*60).'='.date('Y-m-d H:i:s',time()-$this->esc_time*60)."</p>\n";
-			$filter[] = $this->get_time_col().' < '.(time()-$this->esc_time*60);
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col().' < '.(time()-$this->esc_time*60));
 		}
 		else if ($this->esc_time < 0)
 		{
 			// Not actually running, limit to a week to prevent everything showing
-			$filter[] = $this->get_time_col() . ' < ' . strtotime("+1 week", time());
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col() . ' < ' . strtotime("+1 week", time()));
 		}
 		//echo $this->get_time_col() . ' < ' . date('Y-m-d H:i',time() - $this->esc_time*60  ) . "\n";
 		if($this->esc_type == self::START && $this->esc_time < 0)
 		{
 			// 'Before start date' only matches start dates in the future
-			$filter[] = $this->get_time_col() . ' > ' . time();
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col() . ' > ' . time());
 			//echo $this->get_time_col() . ' > ' . date('Y-m-d H:i',time()) . "\n";
 		}
 		return $filter;
@@ -522,9 +522,9 @@ class tracker_escalations extends Api\Storage\Base2
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
 		$join = null;
-		$filter[] = self::$tracker->escalated_filter($this->id,$join,
+		$filter[] = Api\Db\SqlFragment::raw(self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
-		);
+		));
 
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
@@ -612,9 +612,9 @@ class tracker_escalations extends Api\Storage\Base2
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
 		$join = null;
-		$filter[] = self::$tracker->escalated_filter($this->id,$join,
+		$filter[] = Api\Db\SqlFragment::raw(self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
-		);
+		));
 
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
