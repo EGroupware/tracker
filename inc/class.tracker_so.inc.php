@@ -73,6 +73,13 @@ class tracker_so extends Api\Storage
 		$this->columns_to_search = array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','tr_budget','reply_message');
 		parent::__construct('tracker',self::TRACKER_TABLE,self::EXTRA_TABLE,'','tr_extra_name','tr_extra_value','tr_id');
 
+		// TEMPORARY per-instance opt-in (doc/ai/projects/sql-fragment-type-safety.md): own clone
+		// (not the shared global instance) so this only affects tracker's own queries - every raw
+		// SQL fragment tracker builds itself now uses Api\Db\SqlFragment. Once
+		// requireSqlFragmentObjects() becomes the default (opt-out) for Api\Db generally, remove
+		// this clone again - Api\Storage::__construct() already defaults $no_clone=true.
+		$this->db = (clone $this->db)->requireSqlFragmentObjects(true);
+
 		if ($this->customfields)	// add custom fields, if configured
 		{
 			$this->columns_to_search[] = self::EXTRA_TABLE.'.tr_extra_value';

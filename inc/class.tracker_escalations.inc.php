@@ -73,6 +73,14 @@ class tracker_escalations extends Api\Storage\Base2
 	function __construct($id = null)
 	{
 		parent::__construct('tracker',self::ESCALATIONS_TABLE,null,'',true);
+
+		// TEMPORARY per-instance opt-in (doc/ai/projects/sql-fragment-type-safety.md): own clone
+		// (not the shared global instance) so this only affects tracker's own queries - every raw
+		// SQL fragment this class builds itself now uses Api\Db\SqlFragment. Once
+		// requireSqlFragmentObjects() becomes the default (opt-out) for Api\Db generally, remove
+		// this clone again and restore the $no_clone=true behaviour above.
+		$this->db = (clone $this->db)->requireSqlFragmentObjects(true);
+
 		$uni_cols = array('esc_time','esc_type','tr_tracker','cat_id','tr_status','tr_resolution','tr_version');
 		$this->db_uni_cols = array(array_combine($uni_cols,$uni_cols));
 
