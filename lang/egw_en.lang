@@ -94,6 +94,7 @@ color	tracker	en	Colour
 comment by %1 at %2:	tracker	en	Comment by %1 at %2:
 comments	tracker	en	Comments
 completed	tracker	en	Completed
+completion	tracker	en	Completion
 configuration	tracker	en	Configuration
 configuration for all trackers	tracker	en	Configuration for all queues
 configuration updated.	tracker	en	Configuration updated

@@ -87,12 +87,6 @@ label.tracker_trIdEdit:before {
   border-left-color: var(--sl-color-amber-200);
   --category-color: var(--sl-color-amber-200);
 }
-#tracker-edit_tr_creator {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 50%;
-  overflow: hidden;
-}
 /* Add border to ACL's table for more reading convenient*/
 #tracker-admin_tracker-admin-acl tr.row {
   border-bottom: 1px solid silver;
