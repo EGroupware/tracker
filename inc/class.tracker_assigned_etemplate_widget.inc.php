@@ -63,7 +63,14 @@ class tracker_assigned_etemplate_widget extends Etemplate\Widget\Select
 		$bo = new tracker_bo();
 		$query = strtolower($search_text ?? $_REQUEST['query']);
 		$results = [];
-		$staff = $bo->get_staff($search_options['tracker'] ?? 0, 2, $bo->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
+		// the client sends no queue (all queues) or a comma-separated list, get_staff() wants a queue id or an array of them
+		$trackers = $search_options['tracker'] ?? 0;
+		if(!is_array($trackers))
+		{
+			$trackers = array_filter(explode(',', (string)$trackers));
+		}
+		$trackers = array_filter($trackers) ?: array_keys($bo->trackers);
+		$staff = $bo->get_staff($trackers, 2, $bo->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
 
 		foreach($staff as $account_id => $name)
 		{
