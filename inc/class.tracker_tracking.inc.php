@@ -534,17 +534,25 @@ class tracker_tracking extends Api\Storage\Tracking
 			foreach($replies->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) as $reply_index => $reply)
 			{
 				if (empty($reply['reply_message'])) continue;
+				// heading of all comments, like the one of the description
+				if (empty($comments_heading))
+				{
+					$details['comments_heading'] = $comments_heading = array(
+						'value' => lang('Comments'),
+						'type'  => 'summary',
+					);
+				}
 				$reply['reply_message'] = $data['tr_edit_mode'] == 'ascii' ?
 						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
 						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message']);
-				$msg = array(	// first reply need to be checked against old to marked modified for new
+				$msg = array(	// first reply is keyed num_replies, so an increased number of replies marks it as new
 					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
 						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
 				);
 				if(!$reply_index)
 				{
-					$details['replies'] = $msg;
+					$details['num_replies'] = $msg;
 				}
 				else
 				{
