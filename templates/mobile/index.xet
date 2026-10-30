@@ -6,6 +6,7 @@
 		<et2-styles  src="/tracker/templates/default/rows.css"></et2-styles>
 		<grid width="100%">
 			<columns>
+				<column width="14" minWidth="14"/>
 				<column width="90%" />
 				<column width="90"/>
 			</columns>
@@ -14,10 +15,13 @@
 
 				</row>
 				<row class="$row_cont[enabled_color_code] $row_cont[class] trackerRow" valign="top">
+					<et2-hbox height="100%">
+						<et2-image src="circle-fill" class="status_img $row_cont[seen_class]"></et2-image>
+					</et2-hbox>
 					<et2-vbox  class="tracker1Col" noLang="1">
 						<et2-customfields-list  id="$row" class="customfields" app="tracker" disabled="true"/>
 						<et2-description  id="${row}[tr_summary]" class="$row_cont[seen_class]" noLang="1"></et2-description>
-						<et2-hbox>
+						<et2-hbox class="tracker_meta">
 							<et2-select  id="${row}[tr_tracker]" readonly="true" noLang="1"></et2-select>
 							<et2-select  id="${row}[cat_id]" readonly="true" emptyLabel="None"></et2-select>
 						</et2-hbox>

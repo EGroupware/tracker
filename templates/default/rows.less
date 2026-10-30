@@ -16,6 +16,24 @@
 .tracker_seen { font-weight: normal; }
 .tracker_overdue { color: var(--sl-color-red-600); font-weight: bold; }
 
+/* Mobile list: unread dot as in mail, shown only for unseen tickets. */
+.status_img {
+	display: none;
+	&.tracker_unseen {
+		display: block;
+		align-self: center;
+		color: var(--tracker-color, var(--default-color, var(--sl-color-primary-600)));
+	}
+}
+/* Narrow dot column without the datagrid's cell padding, the dot column already spaces the entry */
+tr.trackerRow > td:has(> et2-hbox > .status_img) {
+	padding: 0;
+}
+.tracker_meta {
+	font-size: var(--sl-font-size-small);
+	color: var(--sl-color-neutral-600);
+}
+
 /* Linked ticket title takes the row's colour */
 [id*="tr_summary"] a {
 	color: inherit;
