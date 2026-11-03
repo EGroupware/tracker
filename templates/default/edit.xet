@@ -130,10 +130,10 @@
 	<et2-template  id="tracker.edit.details" template="" lang="" group="0" version="1.9.009" layout="2-column">
 		<et2-email  label="Cc" id="tr_cc" statustext="List of coma separated email address" allowFreeEntries="true" multiple="true" searchUrl="EGroupware\Api\Etemplate\Widget\Select::ajax_email" placeholder="Add email-address"></et2-email>
 		<et2-select  label="Group" statustext="Ownership of the ticket" id="tr_group" noLang="1"></et2-select>
-		<et2-tracker-assigned  label="Assigned to" class="tracker_assign" id="tr_assigned" multiple="true" placeholder="User or group" noLang="1" tracker="@tr_tracker"></et2-tracker-assigned>
+        <et2-date-time  label="Closed date" id="tr_closed"></et2-date-time>
 		<et2-checkbox  label="Private" id="tr_private" unselectedValue="0"></et2-checkbox>
-		<et2-date-time  label="Closed date" id="tr_closed"></et2-date-time>
-	</et2-template>
+        <et2-tracker-assigned  label="Assigned to" class="tracker_assign" id="tr_assigned" multiple="true" placeholder="User or group" noLang="1" tracker="@tr_tracker"></et2-tracker-assigned>
+    </et2-template>
 	<et2-template  id="tracker.edit" template="" lang="" group="0" version="1.9.009" layout="edit">
 		<et2-hbox  class="dialogHeader">
 			<et2-textbox  label="Summary" id="tr_summary" maxlength="255" tabindex="1" required="1" class="et2-label-fixed"></et2-textbox>
