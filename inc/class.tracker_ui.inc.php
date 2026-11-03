@@ -1205,27 +1205,12 @@ class tracker_ui extends tracker_bo
 
 			if (isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
 			{
-				unset($links);
-				if(($links = Link::get_links('tracker', $row['tr_id'])))
+				// only the timesheet links are needed: asking for all links would also list the attachments, which
+				// costs a VFS lookup per ticket, incl. a stat of the target of symlinked files, eg. on a remote mount
+				if(($timesheets = array_values(Link::get_links('tracker', $row['tr_id'], 'timesheet'))))
 				{
-					// loop through all links of the entries
-					$timesheets = array();
-					foreach($links as $link)
-					{
-						if($link['app'] == 'projectmanager')
-						{
-							//$info['pm_id'] = $link['id'];
-						}
-						if($link['app'] == 'timesheet')
-						{
-							$timesheets[] = $link['id'];
-						}
-					}
-					if(isset($GLOBALS['egw_info']['user']['apps']['timesheet']))
-					{
-						$sum = $timesheet_bo->sum($timesheets, !$this->respect_timesheet_rights);
-						$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
-					}
+					$sum = $timesheet_bo->sum($timesheets, !$this->respect_timesheet_rights);
+					$rows[$n]['tr_sum_timesheets'] = $sum['duration'];
 				}
 			}
 			// do NOT display public tickets with "No", just display "Yes" for private ticktes
