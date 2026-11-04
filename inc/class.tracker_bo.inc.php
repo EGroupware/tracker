@@ -1703,7 +1703,7 @@ class tracker_bo extends tracker_so
 		if($options['start'] || $options['num_rows']) {
 			$limit = array($options['start'], $options['num_rows']);
 		}
-		$filter[]=array('tr_status != '. self::STATUS_DELETED);
+		$filter[]=Api\Db\SqlFragment::raw('tr_status != '. self::STATUS_DELETED);
 		$filter['tr_tracker']=array_keys($this->trackers);
 		foreach((array) $this->search($pattern,false,'tr_modified DESC','','%',false,'OR',$limit,$filter) as $item )
 		{
