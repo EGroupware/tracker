@@ -2220,6 +2220,25 @@ class tracker_bo extends tracker_so
 	 */
 	function prepare_import_mail($_addresses, $_subject, $_message, $_attachments, $_ticket_id, $_queue = 0)
 	{
+		// Plain-text tickets get a "[cid:...]" placeholder where an inline image was (left by the
+		// mail body's HTML->text conversion), instead of an <img>. Unlike the HTML case, we can
+		// swap in the attachment's name right away without needing to know its eventual WebDAV
+		// path first, since it's no more than a plain-text label here, not a working link.
+		if (!$this->htmledit && is_array($_attachments))
+		{
+			foreach ($_attachments as $attachment)
+			{
+				if (!empty($attachment['cid']) && !empty($attachment['name']))
+				{
+					$_message = preg_replace(
+						'/\[cid:\s*'.preg_quote($attachment['cid'], '/').'\s*\]/i',
+						'['.$attachment['name'].']',
+						$_message
+					);
+				}
+			}
+		}
+
 		foreach((array)$_addresses as $address)
 		{
 			if (is_array($address) && isset($address['email']))

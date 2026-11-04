@@ -360,18 +360,33 @@ class tracker_ui extends tracker_bo
 						$this->htmledit ? $this->data['tr_edit_mode'] = 'html' : $this->data['tr_edit_mode'] = 'ascii';
 					}
 
-					if ($this->htmledit && $this->data['tr_id'] && is_array($content['link_to']['to_id']))
-					{
-						mail_integration::fix_inline_images('tracker', $this->data['tr_id'], $content['link_to']['to_id'], $content['reply_message']);
-						$this->data['reply_message'] = $content['reply_message'];
-					}
-
 					$ret = $this->save();
 
+					$reply_id = $this->data['replies'][0]['reply_id'] ?? null;
+
 					$this->comment_files($this->data['tr_id'],
-						$this->data['replies'][0]['reply_id'] ?? null,
+						$reply_id,
 						$this->data
 					);
+
+					// Resolve any inline images from mail (attachments land under comments/$reply_id/
+					// for a reply, directly under the entry for its own description) - only possible
+					// now that comment_files() has moved them to their final location.
+					if ($this->htmledit && $ret === 0 && !is_string($ret))
+					{
+						if (mail_integration::fix_inline_images('tracker', $this->data['tr_id'], $this->data['tr_description']))
+						{
+							$this->update(array('tr_description' => $this->data['tr_description']));
+						}
+						// reply_message lives in the replies table, not the main one update() targets
+						if ($reply_id && mail_integration::fix_inline_images('tracker', $this->data['tr_id'], $this->data['reply_message'], "comments/$reply_id/"))
+						{
+							$this->save_comment(array(
+								'reply_id' => $reply_id,
+								'reply_message' => $this->data['reply_message'],
+							));
+						}
+					}
 
 					if ($ret === false)
 					{
@@ -417,15 +432,6 @@ class tracker_ui extends tracker_bo
 						if (is_array($content['link_to']['to_id'] ?? null) && count($content['link_to']['to_id']))
 						{
 							Link::link('tracker',$this->data['tr_id'],$content['link_to']['to_id']);
-
-							// Check if we have inline images from mail
-							if($this->htmledit && mail_integration::fix_inline_images('tracker', $this->data['tr_id'],
-									$content['link_to']['to_id'], $content['tr_description']))
-							{
-								$this->update(array(
-									'tr_description' => $content['tr_description'],
-								));
-							}
 
 							// check if we have dragged in images and fix their image urls
 							if (Etemplate\Widget\Vfs::fix_html_dragins('tracker', $this->data['tr_id'],
