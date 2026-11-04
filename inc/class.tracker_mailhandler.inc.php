@@ -17,6 +17,7 @@ use EGroupware\Api;
 use EGroupware\Api\Link;
 
 use EGroupware\Api\Mail;
+use EGroupware\Mail\Ui;
 
 class tracker_mailhandler extends tracker_bo
 {
@@ -845,10 +846,50 @@ class tracker_mailhandler extends tracker_bo
 					Link::attach_file('tracker',$this->data['tr_id'],$attachment);
 				}
 			}
+			$reply_id = $this->data['replies'][0]['reply_id'] ?? null;
+
 			$this->comment_files($this->data['tr_id'],
-				$this->data['replies'][0]['reply_id'],
+				$reply_id,
 				$this->data
 			);
+
+			// Resolve any inline <img src="cid:...">: tracker_bo::save() already does this for a
+			// brand-new ticket (its attachments are still a staged link_to array at that point),
+			// but a reply/comment's attachments are linked here, after save(), only once the real
+			// comments/$reply_id/ location (used below) is known.
+			if ($this->htmledit && $this->ticketId && $reply_id)
+			{
+				$changed = false;
+				foreach (array('src', 'url', 'background') as $type)
+				{
+					$this->data['reply_message'] = Ui::resolve_inline_image_byType(
+						$this->data['reply_message'], null, null, null, $type,
+						function($cid) use ($mailcontent, $reply_id, &$changed)
+						{
+							foreach ($mailcontent['attachments'] as $attachment)
+							{
+								if (!empty($attachment['cid']) && $attachment['cid'] == $cid)
+								{
+									$changed = true;
+									return Api\Egw::link(Api\Vfs::download_url(Api\Link::vfs_path(
+										'tracker', $this->data['tr_id'],
+										"comments/$reply_id/".Api\Vfs::basename($attachment['name'])
+									)));
+								}
+							}
+							return "cid:".$cid;
+						}
+					);
+				}
+				if ($changed)
+				{
+					// reply_message lives in the replies table, not the main one update() targets
+					$this->save_comment(array(
+						'reply_id' => $reply_id,
+						'reply_message' => $this->data['reply_message'],
+					));
+				}
+			}
 		}
 
 		return !$saverv;
