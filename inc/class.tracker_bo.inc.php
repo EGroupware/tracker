@@ -2279,6 +2279,27 @@ class tracker_bo extends tracker_so
 			}
 		}
 
+		// A plain "http://" external image would hit the viewing browser's own mixed-content
+		// handling once the ticket is shown over https - tracker has no equivalent to mail's own
+		// live "block external images"/https-upgrade display-time gate (Ui::image_proxy(), used by
+		// mail's own message preview, mail/js/jmap.ts). Rewrite it the same way, but permanently
+		// here, since converting a mail into a ticket is itself the decision that the images are
+		// wanted (ticket #126501) - reading the same Ui::image_proxy() config means a hosting's own
+		// override (eg. a real "https://proxy.egroupware.org/..." image proxy, not just the default
+		// bare https upgrade) applies here too, not just in mail's own preview.
+		if ($this->htmledit && is_string($_message) && $_message !== '')
+		{
+			$image_proxy = Ui::image_proxy();
+			$_message = preg_replace_callback(
+				'/(\bsrc=["\']|\burl\(|\bbackground=["\'])http:\/\//i',
+				static function($matches) use ($image_proxy)
+				{
+					return $matches[1].$image_proxy;
+				},
+				$_message
+			);
+		}
+
 		foreach((array)$_addresses as $address)
 		{
 			if (is_array($address) && isset($address['email']))
