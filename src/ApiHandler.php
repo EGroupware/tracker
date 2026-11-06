@@ -408,7 +408,7 @@ class ApiHandler extends Api\CalDAV\Handler
 			{
 				$parts                        = explode('/', $option['data']);
 				$filters['sync_token_offset'] = explode(self::SYNC_TOKEN_OFFSET_DELIMITER, array_pop($parts)) + [null, 0];
-				$filters[]                    = 'COALESCE(tr_modified,tr_created)>=' . (int)$filters['sync_token_offset'][0];
+				$filters[]                    = Api\Db\SqlFragment::raw('COALESCE(tr_modified,tr_created)>=' . (int)$filters['sync_token_offset'][0]);
 				$filters['tr_status']         = 'all';
 			}
 		}

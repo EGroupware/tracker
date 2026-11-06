@@ -94,6 +94,7 @@ color	tracker	de	Farbe
 comment by %1 at %2:	tracker	de	Kommentar von %1 am %2:
 comments	tracker	de	Kommentare
 completed	tracker	de	Erledigt zu
+completion	tracker	de	Fortschritt
 configuration	tracker	de	Konfiguration
 configuration for all trackers	tracker	de	Konfiguration für alle Queues
 configuration updated.	tracker	de	Konfiguration aktualisiert.

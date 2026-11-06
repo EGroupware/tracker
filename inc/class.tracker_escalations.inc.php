@@ -73,6 +73,14 @@ class tracker_escalations extends Api\Storage\Base2
 	function __construct($id = null)
 	{
 		parent::__construct('tracker',self::ESCALATIONS_TABLE,null,'',true);
+
+		// TEMPORARY per-instance opt-in (doc/ai/projects/sql-fragment-type-safety.md): own clone
+		// (not the shared global instance) so this only affects tracker's own queries - every raw
+		// SQL fragment this class builds itself now uses Api\Db\SqlFragment. Once
+		// requireSqlFragmentObjects() becomes the default (opt-out) for Api\Db generally, remove
+		// this clone again and restore the $no_clone=true behaviour above.
+		$this->db = (clone $this->db)->requireSqlFragmentObjects(true);
+
 		$uni_cols = array('esc_time','esc_type','tr_tracker','cat_id','tr_status','tr_resolution','tr_version');
 		$this->db_uni_cols = array(array_combine($uni_cols,$uni_cols));
 
@@ -261,23 +269,23 @@ class tracker_escalations extends Api\Storage\Base2
 		if ($this->tr_resolution) $filter['tr_resolution'] = $this->tr_resolution;
 		if ($this->cat_id)      $filter['cat_id'] = $this->cat_id;
 		if ($this->tr_version)  $filter['tr_version'] = $this->tr_version;
-		if ($this->esc_limit)	$filter[] = '(match_count < ' . $this->esc_limit .' OR match_count IS NULL)';
+		if ($this->esc_limit)	$filter[] = Api\Db\SqlFragment::raw('(match_count < ' . $this->esc_limit .' OR match_count IS NULL)');
 
 		if ($due)
 		{
 			//echo "<p>time=".time()."=".date('Y-m-d H:i:s').", esc_time=$this->esc_time, time()-esc_time*60=".(time()-$this->esc_time*60).'='.date('Y-m-d H:i:s',time()-$this->esc_time*60)."</p>\n";
-			$filter[] = $this->get_time_col().' < '.(time()-$this->esc_time*60);
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col().' < '.(time()-$this->esc_time*60));
 		}
 		else if ($this->esc_time < 0)
 		{
 			// Not actually running, limit to a week to prevent everything showing
-			$filter[] = $this->get_time_col() . ' < ' . strtotime("+1 week", time());
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col() . ' < ' . strtotime("+1 week", time()));
 		}
 		//echo $this->get_time_col() . ' < ' . date('Y-m-d H:i',time() - $this->esc_time*60  ) . "\n";
 		if($this->esc_type == self::START && $this->esc_time < 0)
 		{
 			// 'Before start date' only matches start dates in the future
-			$filter[] = $this->get_time_col() . ' > ' . time();
+			$filter[] = Api\Db\SqlFragment::raw($this->get_time_col() . ' > ' . time());
 			//echo $this->get_time_col() . ' > ' . date('Y-m-d H:i',time()) . "\n";
 		}
 		return $filter;
@@ -335,6 +343,9 @@ class tracker_escalations extends Api\Storage\Base2
 			self::$tracker = new tracker_bo();
 			self::$tracker->user = 0;
 		}
+		// $now is user-timezone based and fixed at construction, but the shared instance may outlive
+		// a timezone change (eg. preference_notifications()), so refresh it before stamping modified/closed/reply times
+		self::$tracker->set_times();
 		if(!is_object(self::$tracker->tracking))
 		{
 			self::$tracker->tracking = new tracker_tracking(self::$tracker);
@@ -519,9 +530,9 @@ class tracker_escalations extends Api\Storage\Base2
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
 		$join = null;
-		$filter[] = self::$tracker->escalated_filter($this->id,$join,
+		$filter[] = Api\Db\SqlFragment::raw(self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
-		);
+		));
 
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
@@ -609,9 +620,9 @@ class tracker_escalations extends Api\Storage\Base2
 		$filter = $this->get_filter(true);
 		// not having this escalation already done
 		$join = null;
-		$filter[] = self::$tracker->escalated_filter($this->id,$join,
+		$filter[] = Api\Db\SqlFragment::raw(self::$tracker->escalated_filter($this->id,$join,
 			$this->data['esc_match_repeat'] ? time() - $this->data['esc_match_repeat']*60 : false
-		);
+		));
 
 		if (($due_tickets = self::$tracker->search(array(),false,'esc_start',$this->get_time_col().' AS esc_start',
 			'',false,'AND',false,$filter,$join)))
@@ -755,5 +766,7 @@ class tracker_escalations extends Api\Storage\Base2
 		// Restore
 		$GLOBALS['egw_info']['user']['account_id']  = $save_account_id;
 		$GLOBALS['egw_info']['user']['preferences'] = $save_prefs;
+		// the loop above switched Api\DateTime to each user's timezone, switch back
+		Api\DateTime::init();
 	}
 }

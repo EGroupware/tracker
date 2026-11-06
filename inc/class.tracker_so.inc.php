@@ -73,6 +73,13 @@ class tracker_so extends Api\Storage
 		$this->columns_to_search = array(self::TRACKER_TABLE.'.tr_id','tr_summary','tr_description','tr_budget','reply_message');
 		parent::__construct('tracker',self::TRACKER_TABLE,self::EXTRA_TABLE,'','tr_extra_name','tr_extra_value','tr_id');
 
+		// TEMPORARY per-instance opt-in (doc/ai/projects/sql-fragment-type-safety.md): own clone
+		// (not the shared global instance) so this only affects tracker's own queries - every raw
+		// SQL fragment tracker builds itself now uses Api\Db\SqlFragment. Once
+		// requireSqlFragmentObjects() becomes the default (opt-out) for Api\Db generally, remove
+		// this clone again - Api\Storage::__construct() already defaults $no_clone=true.
+		$this->db = (clone $this->db)->requireSqlFragmentObjects(true);
+
 		if ($this->customfields)	// add custom fields, if configured
 		{
 			$this->columns_to_search[] = self::EXTRA_TABLE.'.tr_extra_value';
@@ -100,7 +107,7 @@ class tracker_so extends Api\Storage
 		$bounty_where = array('tr_id' => $this->data['tr_id']);
 		if (!$is_admin)
 		{
-			$bounty_where[] = 'bounty_confirmed IS NOT NULL';
+			$bounty_where[] = Api\Db\SqlFragment::raw('bounty_confirmed IS NOT NULL');
 		}
 		$this->data['bounties'] = $this->read_bounties($bounty_where);
 
@@ -237,7 +244,7 @@ class tracker_so extends Api\Storage
 			if (is_null($filter['tr_assigned']))
 			{
 				$join .= ' LEFT JOIN '.self::ASSIGNEE_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::ASSIGNEE_TABLE.'.tr_id';
-				$filter[] = 'tr_assigned IS NULL';
+				$filter[] = Api\Db\SqlFragment::raw('tr_assigned IS NULL');
 			}
 			else
 			{
@@ -277,7 +284,7 @@ class tracker_so extends Api\Storage
 			if ($filter['esc_id'])
 			{
 				// we left join with the escalated timestamp table, to check if the escalation is not alread done
-				$filter[] = self::escalated_filter(abs($filter['esc_id']),$join,$filter['esc_id'] > 0);
+				$filter[] = Api\Db\SqlFragment::raw(self::escalated_filter(abs($filter['esc_id']),$join,$filter['esc_id'] > 0));
 				if($filter['esc_id'] > 0)
 				{
 					$extra_cols[] = self::ESCALATED_TABLE . '.esc_created AS esc_start';
@@ -285,7 +292,7 @@ class tracker_so extends Api\Storage
 				else
 				{
 					$escalation = new tracker_escalations(abs($filter['esc_id']));
-					$filter[] = $fs = $this->db->expression(self::TRACKER_TABLE, $f = $escalation->get_filter());
+					$filter[] = $fs = Api\Db\SqlFragment::raw($this->db->expression(self::TRACKER_TABLE, $f = $escalation->get_filter()));
 					//echo "filter($filter[esc_id])='$fs'="; _debug_array($f);
 					$extra_cols[] = $escalation->get_time_col() . ' AS esc_start';
 				}
@@ -294,14 +301,14 @@ class tracker_so extends Api\Storage
 		}
 		if(is_array($filter) && array_key_exists('read', $filter) && $filter['read'] !== '')
 		{
-			$filter[] = 'tr_seen ' . (!$filter['read'] ? ' NOT ' : '') . $this->db->capabilities['case_insensitive_like'] .
-				' "%i:' . $this->user . ';%"';
+			$filter[] = Api\Db\SqlFragment::raw('tr_seen ' . (!$filter['read'] ? ' NOT ' : '') . $this->db->capabilities['case_insensitive_like'] .
+				' "%i:' . $this->user . ';%"');
 			unset($filter['read']);
 		}
 		if($need_private_acl)
 		{
-			$filter[] = '(tr_private=0 OR tr_creator=' . $this->user . ' OR tr_assigned IN (' . $this->user . ',' .
-				implode(',', $GLOBALS['egw']->accounts->memberships($this->user, true)) . '))';
+			$filter[] = Api\Db\SqlFragment::raw('(tr_private=0 OR tr_creator=' . $this->user . ' OR tr_assigned IN (' . $this->user . ',' .
+				implode(',', $GLOBALS['egw']->accounts->memberships($this->user, true)) . '))');
 		}
 		if(is_string($criteria) && $criteria)
 		{
@@ -387,9 +394,9 @@ class tracker_so extends Api\Storage
 			{
 				if ($no_access)
 				{
-					$filter[] = $this->db->expression(self::TRACKER_TABLE,'NOT ',array(
+					$filter[] = Api\Db\SqlFragment::raw($this->db->expression(self::TRACKER_TABLE,'NOT ',array(
 						'tr_tracker' => $no_access,
-					));
+					)));
 				}
 				$to_or = array();
 				if ($no_restrictions)
@@ -420,7 +427,7 @@ class tracker_so extends Api\Storage
 				}
 				if ($to_or)
 				{
-					$filter[] = '('.implode(' OR ',$to_or).')';
+					$filter[] = Api\Db\SqlFragment::raw('('.implode(' OR ',$to_or).')');
 				}
 				//_debug_array($filter);
 			}
@@ -445,32 +452,32 @@ class tracker_so extends Api\Storage
 		{
 			case 'closed':
 				unset($filter['tr_status']);
-				$filter[] = str_replace(array('!=', 'AND'), array('=','OR'),$not_closed);
+				$filter[] = Api\Db\SqlFragment::raw(str_replace(array('!=', 'AND'), array('=','OR'),$not_closed));
 				break;
 			case 'not-closed':
 				unset($filter['tr_status']);
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'not-closed-or-pending':
 				unset($filter['tr_status']);
-				$filter[] = substr($not_closed, 0, -1).' AND tr_status <> '.$this->db->quote(self::STATUS_PENDING).')';
+				$filter[] = Api\Db\SqlFragment::raw(substr($not_closed, 0, -1).' AND tr_status <> '.$this->db->quote(self::STATUS_PENDING).')');
 				break;
 			case 'own-not-closed':
 				unset($filter['tr_status']);
 				$filter['tr_creator'] = $this->user;
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'ownorassigned-not-closed':
 				unset($filter['tr_status']);
-				$filter[] = '('.$this->db->expression(self::TRACKER_TABLE,array('tr_creator' => $this->user)).' OR '.
-					self::TRACKER_TABLE.'.tr_id in (SELECT tr_id from '.self::ASSIGNEE_TABLE.' WHERE '. $this->db->expression(self::ASSIGNEE_TABLE,'tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')').'))';
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw('('.$this->db->expression(self::TRACKER_TABLE,array('tr_creator' => $this->user)).' OR '.
+					self::TRACKER_TABLE.'.tr_id in (SELECT tr_id from '.self::ASSIGNEE_TABLE.' WHERE '. $this->db->expression(self::ASSIGNEE_TABLE,'tr_assigned IN ('.$this->user.','.implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).')').'))');
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'without-reply-not-closed':
 				unset($filter['tr_status']);
 				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
 				{
-					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)';
+					$filter[] = Api\Db\SqlFragment::raw('((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)');
 				}
 				else    // MySQL < 4.1
 				{
@@ -480,15 +487,15 @@ class tracker_so extends Api\Storage
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = 'replies=0';
+					$filter[] = Api\Db\SqlFragment::raw('replies=0');
 				}
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'own-without-reply-not-closed':
 				unset($filter['tr_status']);
 				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
 				{
-					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)';
+					$filter[] = Api\Db\SqlFragment::raw('((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id) = 0)');
 				}
 				else    // MySQL < 4.1
 				{
@@ -498,16 +505,16 @@ class tracker_so extends Api\Storage
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = 'replies=0';
+					$filter[] = Api\Db\SqlFragment::raw('replies=0');
 				}
 				$filter['tr_creator'] = $this->user;
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'without-30-days-reply-not-closed':
 				unset($filter['tr_status']);
 				if ($this->db->capabilities['sub_queries'])     // everything, but old MySQL
 				{
-					$filter[] = '((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id and reply_created > '.mktime(0, 0, 0, date('m')-1, date('d'),date('Y')).') = 0)';
+					$filter[] = Api\Db\SqlFragment::raw('((SELECT COUNT(*) FROM '.self::REPLIES_TABLE.' WHERE '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id and reply_created > '.mktime(0, 0, 0, date('m')-1, date('d'),date('Y')).') = 0)');
 				}
 				else    // MySQL < 4.1
 				{
@@ -517,9 +524,9 @@ class tracker_so extends Api\Storage
 						$join .= ' LEFT JOIN '.self::REPLIES_TABLE.' ON '.self::TRACKER_TABLE.'.tr_id='.self::REPLIES_TABLE.'.tr_id';
 					}
 					$extra_cols[] = 'COUNT(reply_id) AS replies';
-					$filter[] = 'replies=0';
+					$filter[] = Api\Db\SqlFragment::raw('replies=0');
 				}
-				$filter[] = $not_closed;
+				$filter[] = Api\Db\SqlFragment::raw($not_closed);
 				break;
 			case 'open':
 				$filter['tr_status'] = self::STATUS_OPEN;
