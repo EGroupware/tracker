@@ -1729,7 +1729,9 @@ class tracker_bo extends tracker_so
 	{
 		if($query['filter'])
 		{
-			$query['col_filter'][] = $this->date_filter($query['filter'],$query['startdate'],$query['enddate'],$query['order']);
+			$query['col_filter'][] = Api\Db\SqlFragment::raw(
+				$this->date_filter($query['filter'],$query['startdate'],$query['enddate'],$query['order'])
+			);
 		}
 		return parent::get_rows($query,$rows,$readonlys,$join,$need_full_no_count,$only_keys,$extra_cols);
 	}
