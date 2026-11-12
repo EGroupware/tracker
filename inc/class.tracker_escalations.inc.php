@@ -710,7 +710,8 @@ class tracker_escalations extends Api\Storage\Base2
 
 				$pref_time= mktime(0,0,0,date('m'),date('d'), date('Y')) + 24*60*60*(int)$pref_value;
 				$_filter = array(
-					"($filter >= $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')',
+					// $filter is one of the literals of $preferences above, $pref_time an int
+					Api\Db\SqlFragment::raw("($filter >= $pref_time) AND ($filter < " . ($pref_time + 24*60*60).')'),
 					'tr_tracker'	=> array_keys(self::$tracker->trackers),
 					'tr_status'	=> 'ownorassigned-not-closed'
 				);

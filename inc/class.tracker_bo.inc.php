@@ -1995,7 +1995,7 @@ class tracker_bo extends tracker_so
 
 		if (($ids = $this->query_list('tr_id','tr_id',array(
 			'tr_status' => self::STATUS_PENDING,
-			'tr_modified < '.(time()-$this->pending_close_days*24*60*60),
+			Api\Db\SqlFragment::raw('tr_modified < '.(int)(time()-$this->pending_close_days*24*60*60)),
 		))))
 		{
 			if (($default_lang = $GLOBALS['egw']->preferences->default_prefs('common','lang')) &&	// load the system default language
