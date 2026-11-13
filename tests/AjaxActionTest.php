@@ -65,11 +65,11 @@ class AjaxActionTest extends LoggedInTest
 	 * A real eTemplate request id, the way the browser sends one along - the endpoint refuses
 	 * without it, see Nextmatch::validateExecId().  Writing to the request is what persists it.
 	 */
-	protected function execId() : string
+	protected function execId(array $nm = []) : string
 	{
 		$request = \EGroupware\Api\Etemplate\Request::read();
 		$id = $request->id();
-		$request->content = ['nm' => []];
+		$request->content = ['nm' => $nm];
 		unset($request);
 		return $id;
 	}
@@ -320,5 +320,48 @@ class AjaxActionTest extends LoggedInTest
 
 		$this->assertNotSame(\tracker_bo::STATUS_CLOSED, $this->readTicket()['tr_status'],
 			'select-all with no cached query must NOT fall back to acting on everything');
+	}
+
+	/**
+	 * The query a list stores, narrowed to one ticket id - or to none, with an id that is no ticket
+	 */
+	protected function storeQuery(string $name, int $tr_id, array $extra = []) : void
+	{
+		Api\Cache::setSession('tracker', $name, $extra + [
+			'start' => 0, 'order' => 'tr_id', 'sort' => 'DESC', 'search' => '',
+			'col_filter' => ['tr_id' => $tr_id],
+		]);
+	}
+
+	/**
+	 * A single-queue list and a list embedded in another app store their query under their own
+	 * name, and send their actions to this same endpoint. "Select all" has to re-run the query
+	 * of the list it came from - which the endpoint can only tell from the settings the page was
+	 * rendered with - and not the main list's.
+	 *
+	 * The main list's query here matches nothing, so reading it would close nothing. The count
+	 * sent along (1) is a safety net: should a query ever not be narrowed to this test's ticket,
+	 * the server refuses to act instead of closing other tickets.
+	 */
+	public function testSelectAllUsesTheQueryOfTheListItCameFrom()
+	{
+		foreach([
+			'single-queue list' => [['only_tracker' => $this->tracker], 'index-'.$this->tracker],
+			'list embedded in another app' => [['session_for' => 'phpunit-embedded'], 'phpunit-embedded'],
+		] as $which => [$settings, $name])
+		{
+			$this->makeTicket();
+			$this->storeQuery('index', 0);
+			$this->storeQuery($name, $this->tr_id, $settings);
+
+			(new \tracker_ui())->ajax_action($this->execId($settings), 'close', [], 1, []);
+
+			$this->assertSame(\tracker_bo::STATUS_CLOSED, $this->readTicket()['tr_status'],
+				"$which: select all must act on the ticket its own list showed");
+			$this->bo->delete(['tr_id' => $this->tr_id]);
+			Api\Cache::unsetSession('tracker', $name);
+		}
+		$this->tr_id = null;
+		Api\Cache::unsetSession('tracker', 'index');
 	}
 }
