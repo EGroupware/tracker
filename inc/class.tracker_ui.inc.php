@@ -981,7 +981,7 @@ class tracker_ui extends tracker_bo
 			!$this->allow_bounties && $query_in['order'] == 'bounties') $query_in['order'] = 'tr_id';
 
 		$query = $query_in;
-		$old_query = Api\Cache::getSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''));
+		$old_query = Api\Cache::getSession('tracker', self::listSessionName($query['session_for'] ?? null, $query_in['only_tracker'] ?? null));
 		// on the very first request of a session, do NOT let the class' hardcoded fallback sort
 		// ('bounties'/'votes'/'tr_id', used only when there was no cached or stored state yet) overwrite
 		// a sort the user already had stored in their prefs - that permanently overwrote it before (Ralf's
@@ -1000,7 +1000,7 @@ class tracker_ui extends tracker_bo
 		if (empty($query['csv_export']))	// do not store query for csv-export in session
 		{
 			$stored_query = array_diff_key($query, array_flip(array('rows','actions','action_links','placeholder_actions')));
-			Api\Cache::setSession('tracker',$query['session_for'] ?? 'index'.($query_in['only_tracker'] ? '-'.$query_in['only_tracker'] : ''),
+			Api\Cache::setSession('tracker', self::listSessionName($query['session_for'] ?? null, $query_in['only_tracker'] ?? null),
 				$stored_query);
 			// also remember it under a scope-independent key, so "export search results" can find
 			// the current search regardless of which (or whether an) only_tracker queue it ran in
@@ -2055,7 +2055,9 @@ width:100%;
 		);
 
 		//echo "<p>".__METHOD__."($do_email, $tid_filter, $org_view)</p>\n"; _debug_array($actions);
-		return $actions;
+		// with "select all" action() expands the selection itself from the list's query, so the
+		// client does not have to fetch the ids of all rows first
+		return Api\Etemplate\Widget\Nextmatch::flagServerSelectAll($actions, ['javaScript:app.tracker.ajax_action']);
 	}
 
 	/**
@@ -2140,17 +2142,24 @@ width:100%;
 		$success = $failed = 0;
 		$action_msg = $msg = null;
 
+		// Each list stores its query under its own name: the main list, a single-queue list and
+		// a list embedded in another app all send their actions here, so which one this is has
+		// to come from the settings the page was rendered with.
+		$session_name = self::listSessionName(
+			Api\Etemplate\Widget\Nextmatch::listSetting($exec_id, 'session_for'),
+			Api\Etemplate\Widget\Nextmatch::listSetting($exec_id, 'only_tracker'));
+
 		// "select all" makes action() re-run get_rrows() with the query get_rows() itself cached.
 		// With no cached query that falls through to no filter at all - ie. EVERY entry the user
 		// can see - so refuse rather than guess what "all" meant.
-		if ($all_selected && !is_array(Api\Cache::getSession('tracker', 'index')))
+		if ($all_selected && !is_array(Api\Cache::getSession('tracker', $session_name)))
 		{
 			Api\Json\Response::get()->call('egw.message',
-				lang('Could not determine the current selection, please try again.'), 'error');
+				lang('Could not determine the current selection. Nothing was changed, please reload the list and try again.'), 'error');
 			return;
 		}
 
-		if ($this->action($action, $selected, $all_selected, $success, $failed, $action_msg, 'index', $msg,
+		if ($this->action($action, $selected, $all_selected, $success, $failed, $action_msg, $session_name, $msg,
 			!empty($checkboxes['no_notifications'])))
 		{
 			$msg = lang('%1 entries %2', $success, $action_msg);
@@ -2165,6 +2174,19 @@ width:100%;
 		Api\Json\Response::get()->call('egw.refresh', $msg, $push_app, $selected[0] ?? null,
 			$all_selected || count($selected) > 1 ? null : ($action === 'delete' ? 'delete' : 'update'),
 			'tracker', null, null, $failed ? 'error' : 'success');
+	}
+
+	/**
+	 * Name under which a list stores its query in the session
+	 *
+	 * @param ?string $session_for name of a list embedded in another app or a Home portlet
+	 * @param int|string|null $only_tracker queue of a single-queue list
+	 * @return string
+	 */
+	protected static function listSessionName($session_for, $only_tracker) : string
+	{
+		return !empty($session_for) && is_string($session_for) ? $session_for :
+			'index'.($only_tracker ? '-'.$only_tracker : '');
 	}
 
 	/**
@@ -2194,6 +2216,7 @@ width:100%;
 			{
 				@set_time_limit(0);			// switch off the execution time limit, as it's for big selections to small
 				$query['num_rows'] = -1;	// all
+				$query['csv_export'] = true;	// do not store this query as what the list shows
 				$readonlys = null;
 				$this->get_rrows($query,$checked,$readonlys);
 				// $this->get_rows gives some extra data.
@@ -2205,6 +2228,8 @@ width:100%;
 						unset($checked[$row]);
 					}
 				}
+				// refuse to act on a different number of entries than the list showed the user
+				Api\Etemplate\Widget\Nextmatch::checkSelectAllCount($use_all, count($checked));
 			}
 		}
 

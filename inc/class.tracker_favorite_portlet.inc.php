@@ -80,21 +80,21 @@ class tracker_favorite_portlet extends home_favorite_portlet
 	}
 
 	/**
-	 * Override from tracker to clear the app header
+	 * Fetch the rows of the portlet's list
 	 *
-	 * @param type $query
-	 * @param type $rows
-	 * @param type $readonlys
-	 * @return integer Total rows found
+	 * @param array $query
+	 * @param array $rows
+	 * @param array $readonlys
+	 * @return int total rows found
 	 */
-	public static function get_rows(&$query, &$rows, &$readonlys)
+	protected static function rows(&$query, &$rows, &$readonlys)
 	{
 		$ui = new tracker_ui();
-		// Don't save in session, it causes problems with real tracker
+		// tracker_ui is told not to store anything: it would also save the portlet's filters as
+		// the user's state of the real tracker list
 		$query['csv_export'] = true;
-		$total = $ui->get_rrows($query, $rows, $readonlys);
-		unset($GLOBALS['egw_info']['flags']['app_header']);
-		return $total;
+
+		return $ui->get_rrows($query, $rows, $readonlys);
 	}
 
 	/**

@@ -10,6 +10,7 @@
  */
 
 import {EgwApp} from "../../api/js/jsapi/egw_app";
+import {selectAllFlag} from "../../api/js/etemplate/Et2Nextmatch/selectAllFlag";
 // et2_selectbox is now a shim (`class et2_selectbox extends Et2Select {}`) and is passed as a
 // runtime instanceof-filter value to iterateOver() below; since production templates are already
 // unconditionally preprocessor-rewritten to <et2-select>, real widgets are instances of Et2Select
@@ -734,7 +735,10 @@ import {Et2DatagridUpdateTypes} from "../../api/js/etemplate/Et2Datagrid/Et2Data
 		// the endpoint refuses without it, see Nextmatch::validateExecId()
 		const exec_id = nm.getInstanceManager()?.etemplate_exec_id ?? "";
 		return this.egw.request('tracker.tracker_ui.ajax_action',
-			[exec_id, this._popup_action(_widget, _action_id, et2), ids, selection.all === true, checkboxes]) && false;
+			// with "select all" the ids are just the rows loaded when it was ticked, and the
+			// server expands the selection itself: tell it the list's total, so it can refuse
+			// when its expansion comes out different
+			[exec_id, this._popup_action(_widget, _action_id, et2), ids, selectAllFlag(nm), checkboxes]) && false;
 	}
 
 	/**
