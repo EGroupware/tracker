@@ -2302,6 +2302,7 @@ class tracker_bo extends tracker_so
 			);
 		}
 
+		$emails = array();
 		foreach((array)$_addresses as $address)
 		{
 			if (is_array($address) && isset($address['email']))
@@ -2317,6 +2318,9 @@ class tracker_bo extends tracker_so
 				}
 			}
 		}
+		// An address can be given more than once, eg. a sender who also put themselves in Cc.
+		// Keep the first spelling of each, compared case-insensitive, so it ends up in tr_cc once.
+		$emails = array_values(array_intersect_key($emails, array_unique(array_map('strtolower', $emails))));
 
 		$ticketId = $_ticket_id? $_ticket_id: $this->get_ticketId($_subject);
 		//_debug_array('TickedId found:'.$ticketId);

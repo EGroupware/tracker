@@ -236,4 +236,45 @@ class MailImportTest extends AppTest
 		);
 
 	}
+
+	/**
+	 * Ensure an address given more than once ends up in the ticket's Cc only once
+	 *
+	 * Behaviour under test:
+	 * - prepare_import_mail() fills tr_cc from all given addresses, eg. sender plus the Cc
+	 *   header, where a sender who also put themselves in Cc is listed twice.
+	 *
+	 * Setup strategy:
+	 * - "Cc of mail to ticket" (auto_cc) is switched on for the test, as tr_cc is dropped
+	 *   without it.
+	 * - addresses unknown to tracker and addressbook, repeated in the same and a different case.
+	 *
+	 * Pass criteria:
+	 * - tr_cc lists each address once, in its first spelling and the original order.
+	 */
+	public function testDuplicateAddressesOnlyOnceInCc()
+	{
+		$original_mailhandling = self::$bo->mailhandling;
+		self::$bo->mailhandling[0]['auto_cc'] = true;
+		try
+		{
+			$content = self::$bo->prepare_import_mail(
+				'Unknown Sender <unknown_sender@example.org>,Unknown_Sender@Example.org,' .
+				'Other <unknown_other@example.org>, unknown_other@example.org',
+				'Test ticket emailed from an unknown sender who is also in Cc',
+				'Hey, the thing is broken again',
+				[],
+				null
+			);
+		}
+		finally
+		{
+			self::$bo->mailhandling = $original_mailhandling;
+		}
+		$this->assertEquals(
+			'unknown_sender@example.org,unknown_other@example.org',
+			$content['tr_cc'],
+			'Each address should be in Cc only once'
+		);
+	}
 }
