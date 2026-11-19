@@ -144,8 +144,8 @@
 		<et2-select  label="Category" id="cat_id" required="1" noLang="1" emptyLabel="Select one"></et2-select>
 		<et2-select  label="Version" id="tr_version" required="1" noLang="1" emptyLabel="Select one"></et2-select>
 		<et2-select  label="Priority" id="tr_priority"></et2-select>
-		<et2-date-time  label="Start date" id="tr_startdate" hidden="!@show_dates"></et2-date-time>
-		<et2-date-time  label="Due date" id="tr_duedate" hidden="!@show_dates"></et2-date-time>
+		<et2-date-time  label="Start date" id="tr_startdate" hidden="!@show_dates" disabled="!@show_dates"></et2-date-time>
+		<et2-date-time  label="Due date" id="tr_duedate" hidden="!@show_dates" disabled="!@show_dates"></et2-date-time>
 		<et2-tabbox  id="tabs" tabHeight="auto" cfTypeFilter="$cont[tr_tracker]">
 			<tabs>
 				<tab id="description" label="Description" statustext="Description"/>
@@ -166,9 +166,9 @@
 				<et2-template  id="tracker.edit.bounties"></et2-template>
 			</tabpanels>
 		</et2-tabbox>
-		<et2-select  label="Status" statustext="@status_help" id="tr_status" placement="top" hidden="!@tr_id"></et2-select>
-		<et2-select  label="Resolution" id="tr_resolution" placement="top" hidden="!@tr_id"></et2-select>
-		<et2-select-percent  label="Completion" id="tr_completion" hidden="!@tr_id"></et2-select-percent>
+		<et2-select  label="Status" statustext="@status_help" id="tr_status" placement="top" hidden="!@tr_id" disabled="!@tr_id"></et2-select>
+		<et2-select  label="Resolution" id="tr_resolution" placement="top" hidden="!@tr_id" disabled="!@tr_id"></et2-select>
+		<et2-select-percent  label="Completion" id="tr_completion" hidden="!@tr_id" disabled="!@tr_id"></et2-select-percent>
 		<et2-select  label="Created by" id="tr_creator" noLang="1" placement="top"></et2-select>
 		<et2-hbox  class="dialogMeta">
 			<et2-description  value="Created" for="tr_created"></et2-description>
