@@ -121,9 +121,12 @@ class tracker_assigned_etemplate_widget extends Etemplate\Widget\Select
 				self::expand_name($this->attrs['tracker'] ?? 0, $expand['c'] ?? '', $expand['row'] ?? '', 0, 0, $expand['cont'] ?? []);
 			$staff = $bo->get_staff($tracker, 2, $bo->allow_assign_users ? 'usersANDtechnicians' : 'technicians');
 
-			$value = array_intersect($value, array_keys($staff));
+			// beside the staff, whatever else the application offers as an option of this widget is
+			// valid too, eg. "not" for "Not assigned" in the filter of the list
+			$value = array_intersect($value, array_merge(array_keys($staff), self::selOptions($form_name, true)));
 
-			if(!$multiple && is_array($value) && count($value) > 1)
+			// a single selection is a single value, not a list of one: that is what a filter gets compared with
+			if(!$multiple)
 			{
 				$value = array_shift($value);
 			}
