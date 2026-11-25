@@ -67,7 +67,7 @@ class MailHandlerTestDouble extends Mail
 		return $this->sentFolder;
 	}
 
-	function flagMessages($_flag, $_messageUID, $_folder = null)
+	function flagMessages($_flag, $_messageUID, $_folder = null, ?string $_folderID = null)
 	{
 		$this->flagCalls[] = [$_flag, $_messageUID, $_folder];
 		return true;
