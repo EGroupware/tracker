@@ -1679,7 +1679,8 @@ class tracker_ui extends tracker_bo
 			// use the state of the last session stored in the user prefs
 			if (!$this->called_by && ($state = unserialize($GLOBALS['egw_info']['user']['preferences']['tracker']['index_state'], ['allowed_classes' => false])))
 			{
-				unset($state['header_left'], $state['header_right'], $state['num_rows']);
+				// get_rows must always come from server-side widget content, never a user preference
+				unset($state['header_left'], $state['header_right'], $state['num_rows'], $state['get_rows']);
 				$content['nm'] = array_merge($content['nm'],$state);
 				$content['nm']['implicit_default_sort'] = false;	// order/sort is now real restored state
 				$tracker = $content['nm']['col_filter']['tr_tracker'];
