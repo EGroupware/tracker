@@ -116,12 +116,31 @@ class tracker_tracking extends Api\Storage\Tracking
 		{
 			$changes = true;
 		}
+		// do_notifications2() removes the replies, so remember the comment just added
+		$data['new_reply_id'] = self::new_reply_id($data, $old);
+
 		// do not run do_notifications if we have no changes, unless there was a restricted comment just made
 		if (($changes || ($data['reply_visible'] != 0)) && !$skip_notification && !$this->do_notifications2($data,$old,$deleted,$changes))
 		{
 			$changes = false;
 		}
 		return $changes;
+	}
+
+	/**
+	 * Get the id of the comment just added, which get_details() marks as new
+	 *
+	 * Marking it by its id, and not by a changed number of comments, marks a restricted comment too,
+	 * as get_details() only shows it to receivers who can see restricted comments.
+	 *
+	 * @param array $data current entry, tracker_so::save() puts a comment just added first in replies
+	 * @param ?array $old old/last state of the entry or null for a new entry
+	 * @return ?int
+	 */
+	protected static function new_reply_id(array $data, ?array $old=null) : ?int
+	{
+		return $old && !empty($data['reply_message']) && !empty($data['replies'][0]['reply_id']) ?
+			(int)$data['replies'][0]['reply_id'] : null;
 	}
 
 	/**
@@ -158,6 +177,8 @@ class tracker_tracking extends Api\Storage\Tracking
 			$data['reply_text'] = $autoreply['reply_text'];
 			$this->ClearBodyCache();
 		}
+		$data['new_reply_id'] = self::new_reply_id($data, $old);
+
 		// Send notification to the creator only; assignee, CC etc have been notified already
 		$this->send_notification($data,$old,$email,(is_integer($autoreply['reply_to'])?$data[$this->creator_field]:$this->get_config('lang',$data)));
 	}
@@ -528,10 +549,12 @@ class tracker_tracking extends Api\Storage\Tracking
 			'value' => $data['tr_edit_mode'] == 'ascii' ? htmlspecialchars_decode($data['tr_description']) : $data['tr_description'],
 			'type'  => 'multiline',
 		);
-		if (!empty($data['num_replies']))
+		// not checking num_replies, as track() reduces it by the restricted comments,
+		// so it is 0 for a first comment, which is restricted
+		if (!empty($data['tr_id']))
 		{
 			$replies = new tracker_comments();
-			foreach($replies->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) as $reply_index => $reply)
+			foreach($replies->get_tracker_comments($data['tr_id'], $data['see_restricted_replies']) as $reply)
 			{
 				if (empty($reply['reply_message'])) continue;
 				// heading of all comments, like the one of the description
@@ -545,14 +568,14 @@ class tracker_tracking extends Api\Storage\Tracking
 				$reply['reply_message'] = $data['tr_edit_mode'] == 'ascii' ?
 						preg_replace("@\n\n+@", "\n", $reply['reply_message']) :
 						preg_replace("@\n\n+|<br ?/?>\n?<br ?/?>@", "<br>", $reply['reply_message']);
-				$msg = array(	// first reply is keyed num_replies, so an increased number of replies marks it as new
+				$msg = array(	// the comment just added is keyed new_reply_id, which $old never has, so it is marked as new
 					'value' => lang('Comment by %1 at %2:',$reply['reply_creator'] ? Api\Accounts::username($reply['reply_creator']) : lang('Tracker'),
 						$this->datetime($reply['reply_servertime'])),
 					'type'  => 'reply',
 				);
-				if(!$reply_index)
+				if (!empty($data['new_reply_id']) && (int)$reply['reply_id'] === (int)$data['new_reply_id'])
 				{
-					$details['num_replies'] = $msg;
+					$details['new_reply_id'] = $msg;
 				}
 				else
 				{
