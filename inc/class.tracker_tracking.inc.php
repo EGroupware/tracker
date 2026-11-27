@@ -93,6 +93,10 @@ class tracker_tracking extends Api\Storage\Tracking
 	{
 		$this->user = !is_null($user) ? $user : $GLOBALS['egw_info']['user']['account_id'];
 
+		// the body cache is by entry, but a body from an earlier save, eg. of the mailhandler or an escalation
+		// in the same request, misses the comment just added
+		$this->ClearBodyCache();
+
 		$changes = true;
 
 		// Hide restricted comments from reply count
@@ -211,7 +215,9 @@ class tracker_tracking extends Api\Storage\Tracking
 	public function do_notifications2($data,$old,$deleted, $changes)
 	{
 		$skip = $this->get_config('skip_notify',$data,$old);
-		$email_notified = $skip ? $skip : array();
+		// old assignees, who can no longer see restricted comments, only get the notification without them
+		$no_restricted = array_values(array_diff($this->old_assignees_without_restricted($data, $old), (array)$skip));
+		$email_notified = array_merge($skip ? $skip : array(), $no_restricted);
 
 		// Send all to others
 		$creator = $data[$this->creator_field];
@@ -243,6 +249,9 @@ class tracker_tracking extends Api\Storage\Tracking
 		// clears the cached notifications body
 		$this->ClearBodyCache();
 
+		// let the old assignees get the notification without restricted comments
+		$email_notified = array_values(array_diff($email_notified, $no_restricted));
+
 		// Restrict replies
 		$data['see_restricted_replies'] = false;
 
@@ -257,6 +266,44 @@ class tracker_tracking extends Api\Storage\Tracking
 		//error_log(__METHOD__.__LINE__." email notified, restricted comments removed:".array2string(array_diff($email_notified,$already_notified)));
 
 		return $ret;
+	}
+
+	/**
+	 * Get the email addresses of old assignees, who can no longer see restricted comments
+	 *
+	 * Api\Storage\Tracking::do_notifications() notifies old assignees too,
+	 * but only assignees (directly or as member of an assigned group)
+	 * and tracker admins or technicians can see restricted comments, see tracker_so::read_extra().
+	 *
+	 * @param array $data current entry
+	 * @param ?array $old old/last state of the entry or null for a new entry
+	 * @return string[]
+	 */
+	protected function old_assignees_without_restricted(array $data, ?array $old) : array
+	{
+		$accounts = $GLOBALS['egw']->accounts;
+		$users = static function($assigned) use ($accounts) : array
+		{
+			$users = [];
+			foreach(is_array($assigned) ? $assigned : explode(',', (string)$assigned) as $account_id)
+			{
+				if (!$account_id) continue;
+				$users = array_merge($users, $accounts->get_type($account_id) === 'g' ?
+					(array)$accounts->members($account_id, true) : [$account_id]);
+			}
+			return array_map('intval', $users);
+		};
+		$emails = [];
+		foreach(array_diff($users($old[$this->assigned_field] ?? []), $users($data[$this->assigned_field] ?? [])) as $account_id)
+		{
+			if (!$this->tracker->is_admin($data['tr_tracker'], $account_id, true) &&
+				!$this->tracker->is_technician($data['tr_tracker'], $account_id) &&
+				($email = $accounts->id2name($account_id, 'account_email')))
+			{
+				$emails[] = $email;
+			}
+		}
+		return $emails;
 	}
 
 	/**
